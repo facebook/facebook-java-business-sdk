@@ -1,0 +1,401 @@
+/**
+ * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+ *
+ * You are hereby granted a non-exclusive, worldwide, royalty-free license to
+ * use, copy, modify, and distribute this software in source code or binary
+ * form for use in connection with the web services and APIs provided by
+ * Facebook.
+ *
+ * As with any software that integrates with the Facebook platform, your use
+ * of this software is subject to the Facebook Developer Principles and
+ * Policies [http://developers.facebook.com/policy/]. This copyright notice
+ * shall be included in all copies or substantial portions of the software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+package com.facebook.ads.sdk;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
+import java.lang.IllegalArgumentException;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParseException;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.FieldNamingStrategy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
+
+public class AppLinks extends APINode {
+  @SerializedName("id")
+  private String mId = null;
+  @SerializedName("ios")
+  private List<IosAppLink> mIos = null;
+  @SerializedName("iphone")
+  private List<IosAppLink> mIphone = null;
+  @SerializedName("ipad")
+  private List<IosAppLink> mIpad = null;
+  @SerializedName("android")
+  private List<AndroidAppLink> mAndroid = null;
+  @SerializedName("windows_phone")
+  private List<WindowsPhoneAppLink> mWindowsPhone = null;
+  @SerializedName("windows")
+  private List<WindowsAppLink> mWindows = null;
+  @SerializedName("windows_universal")
+  private List<WindowsAppLink> mWindowsUniversal = null;
+  @SerializedName("web")
+  private WebAppLink mWeb = null;
+  protected static Gson gson = null;
+
+  AppLinks() {
+  }
+
+  public AppLinks(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AppLinks(String id, APIContext context) {
+    this.mId = id;
+    this.mContext = context;
+  }
+
+  public AppLinks fetch() throws APIException{
+    AppLinks newInstance = fetchById(this.getPrefixedId().toString(), this.mContext);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AppLinks fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static AppLinks fetchById(String id, APIContext context) throws APIException {
+    AppLinks appLinks =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .call();
+    return appLinks;
+  }
+
+  private String getPrefixedId() {
+    return mId.toString();
+  }
+
+  public String getId() {
+    return getFieldId().toString();
+  }
+  public static AppLinks loadJSON(String json, APIContext context) {
+    AppLinks appLinks = getGson().fromJson(json, AppLinks.class);
+    if (context.isDebug()) {
+      JsonParser parser = new JsonParser();
+      JsonElement o1 = parser.parse(json);
+      JsonElement o2 = parser.parse(appLinks.toString());
+      if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
+        o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
+      }
+      if(!o1.equals(o2)) {
+        context.log("[Warning] When parsing response, object is not consistent with JSON:");
+        context.log("[JSON]" + o1);
+        context.log("[Object]" + o2);
+      };
+    }
+    appLinks.mContext = context;
+    appLinks.rawValue = json;
+    return appLinks;
+  }
+
+  public static APINodeList<AppLinks> parseResponse(String json, APIContext context, APIRequest request) {
+    APINodeList<AppLinks> appLinkss = new APINodeList<AppLinks>(request);
+    JsonArray arr;
+    JsonObject obj;
+    JsonParser parser = new JsonParser();
+    try{
+      JsonElement result = parser.parse(json);
+      if (result.isJsonArray()) {
+        // First, check if it's a pure JSON Array
+        arr = result.getAsJsonArray();
+        for (int i = 0; i < arr.size(); i++) {
+          appLinkss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+        };
+        return appLinkss;
+      } else if (result.isJsonObject()) {
+        obj = result.getAsJsonObject();
+        if (obj.has("data")) {
+          try {
+            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
+            appLinkss.setPaging(paging.get("before").getAsString(), paging.get("after").getAsString());
+          } catch (Exception ignored) {
+          }
+          if (obj.get("data").isJsonArray()) {
+            // Second, check if it's a JSON array with "data"
+            arr = obj.get("data").getAsJsonArray();
+            for (int i = 0; i < arr.size(); i++) {
+              appLinkss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+            };
+          } else if (obj.get("data").isJsonObject()) {
+            // Third, check if it's a JSON object with "data"
+            obj = obj.get("data").getAsJsonObject();
+            appLinkss.add(loadJSON(obj.toString(), context));
+          }
+          return appLinkss;
+        } else if (obj.has("images")) {
+          // Fourth, check if it's a map of image objects
+          obj = obj.get("images").getAsJsonObject();
+          for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+              appLinkss.add(loadJSON(entry.getValue().toString(), context));
+          }
+          return appLinkss;
+        } else {
+          // Fifth, check if it's pure JsonObject
+          appLinkss.add(loadJSON(json, context));
+          return appLinkss;
+        }
+      }
+    } catch (Exception e) {
+    }
+    return null;
+  }
+
+  @Override
+  public APIContext getContext() {
+    return mContext;
+  }
+
+  @Override
+  public void setContext(APIContext context) {
+    mContext = context;
+  }
+
+  @Override
+  public String toString() {
+    return getGson().toJson(this);
+  }
+
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), mContext);
+  }
+
+
+  public String getFieldId() {
+    return mId;
+  }
+
+  public List<IosAppLink> getFieldIos() {
+    return mIos;
+  }
+
+  public List<IosAppLink> getFieldIphone() {
+    return mIphone;
+  }
+
+  public List<IosAppLink> getFieldIpad() {
+    return mIpad;
+  }
+
+  public List<AndroidAppLink> getFieldAndroid() {
+    return mAndroid;
+  }
+
+  public List<WindowsPhoneAppLink> getFieldWindowsPhone() {
+    return mWindowsPhone;
+  }
+
+  public List<WindowsAppLink> getFieldWindows() {
+    return mWindows;
+  }
+
+  public List<WindowsAppLink> getFieldWindowsUniversal() {
+    return mWindowsUniversal;
+  }
+
+  public WebAppLink getFieldWeb() {
+    return mWeb;
+  }
+
+
+
+  public static class APIRequestGet extends APIRequest<AppLinks> {
+
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "ios",
+      "iphone",
+      "ipad",
+      "android",
+      "windows_phone",
+      "windows",
+      "windows_universal",
+      "web",
+    };
+
+    @Override
+    public AppLinks call() throws APIException {
+      return call(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AppLinks call(Map<String, Object> extraParams) throws APIException {
+      return AppLinks.parseResponse(callInternal(extraParams), getContext(), this).head();
+    }
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIosField () {
+      return this.requestIosField(true);
+    }
+    public APIRequestGet requestIosField (boolean value) {
+      this.requestField("ios", value);
+      return this;
+    }
+    public APIRequestGet requestIphoneField () {
+      return this.requestIphoneField(true);
+    }
+    public APIRequestGet requestIphoneField (boolean value) {
+      this.requestField("iphone", value);
+      return this;
+    }
+    public APIRequestGet requestIpadField () {
+      return this.requestIpadField(true);
+    }
+    public APIRequestGet requestIpadField (boolean value) {
+      this.requestField("ipad", value);
+      return this;
+    }
+    public APIRequestGet requestAndroidField () {
+      return this.requestAndroidField(true);
+    }
+    public APIRequestGet requestAndroidField (boolean value) {
+      this.requestField("android", value);
+      return this;
+    }
+    public APIRequestGet requestWindowsPhoneField () {
+      return this.requestWindowsPhoneField(true);
+    }
+    public APIRequestGet requestWindowsPhoneField (boolean value) {
+      this.requestField("windows_phone", value);
+      return this;
+    }
+    public APIRequestGet requestWindowsField () {
+      return this.requestWindowsField(true);
+    }
+    public APIRequestGet requestWindowsField (boolean value) {
+      this.requestField("windows", value);
+      return this;
+    }
+    public APIRequestGet requestWindowsUniversalField () {
+      return this.requestWindowsUniversalField(true);
+    }
+    public APIRequestGet requestWindowsUniversalField (boolean value) {
+      this.requestField("windows_universal", value);
+      return this;
+    }
+    public APIRequestGet requestWebField () {
+      return this.requestWebField(true);
+    }
+    public APIRequestGet requestWebField (boolean value) {
+      this.requestField("web", value);
+      return this;
+    }
+
+  }
+
+
+  synchronized /*package*/ static Gson getGson() {
+    if (gson != null) {
+      return gson;
+    } else {
+      gson = new GsonBuilder()
+        .excludeFieldsWithModifiers(Modifier.STATIC)
+        .excludeFieldsWithModifiers(Modifier.PROTECTED)
+        .disableHtmlEscaping()
+        .create();
+    }
+    return gson;
+  }
+
+  public AppLinks copyFrom(AppLinks instance) {
+    this.mId = instance.mId;
+    this.mIos = instance.mIos;
+    this.mIphone = instance.mIphone;
+    this.mIpad = instance.mIpad;
+    this.mAndroid = instance.mAndroid;
+    this.mWindowsPhone = instance.mWindowsPhone;
+    this.mWindows = instance.mWindows;
+    this.mWindowsUniversal = instance.mWindowsUniversal;
+    this.mWeb = instance.mWeb;
+    this.mContext = instance.mContext;
+    this.rawValue = instance.rawValue;
+    return this;
+  }
+}

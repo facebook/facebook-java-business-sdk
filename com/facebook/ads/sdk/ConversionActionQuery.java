@@ -1,0 +1,456 @@
+/**
+ * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+ *
+ * You are hereby granted a non-exclusive, worldwide, royalty-free license to
+ * use, copy, modify, and distribute this software in source code or binary
+ * form for use in connection with the web services and APIs provided by
+ * Facebook.
+ *
+ * As with any software that integrates with the Facebook platform, your use
+ * of this software is subject to the Facebook Developer Principles and
+ * Policies [http://developers.facebook.com/policy/]. This copyright notice
+ * shall be included in all copies or substantial portions of the software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+package com.facebook.ads.sdk;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
+import java.lang.IllegalArgumentException;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParseException;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.FieldNamingStrategy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
+
+public class ConversionActionQuery extends APINode {
+  @SerializedName("action.type")
+  private List<String> mActionType = null;
+  @SerializedName("application")
+  private List<String> mApplication = null;
+  @SerializedName("conversion_id")
+  private List<String> mConversionId = null;
+  @SerializedName("event_type")
+  private List<String> mEventType = null;
+  @SerializedName("event")
+  private List<String> mEvent = null;
+  @SerializedName("event.creator")
+  private List<String> mEventCreator = null;
+  @SerializedName("fb_pixel")
+  private List<String> mFbPixel = null;
+  @SerializedName("fb_pixel_event")
+  private List<String> mFbPixelEvent = null;
+  @SerializedName("object")
+  private List<String> mObject = null;
+  @SerializedName("object.domain")
+  private List<String> mObjectDomain = null;
+  @SerializedName("offer")
+  private List<String> mOffer = null;
+  @SerializedName("offer.creator")
+  private List<String> mOfferCreator = null;
+  @SerializedName("offsite_pixel")
+  private List<String> mOffsitePixel = null;
+  @SerializedName("page")
+  private List<String> mPage = null;
+  @SerializedName("page.parent")
+  private List<String> mPageParent = null;
+  @SerializedName("post")
+  private List<String> mPost = null;
+  @SerializedName("post.object")
+  private List<String> mPostObject = null;
+  @SerializedName("post.object.wall")
+  private List<String> mPostObjectWall = null;
+  @SerializedName("post.wall")
+  private List<String> mPostWall = null;
+  @SerializedName("product_set_id")
+  private List<String> mProductSetId = null;
+  @SerializedName("question")
+  private List<String> mQuestion = null;
+  @SerializedName("question.creator")
+  private List<String> mQuestionCreator = null;
+  @SerializedName("response")
+  private List<String> mResponse = null;
+  @SerializedName("subtype")
+  private List<String> mSubtype = null;
+  protected static Gson gson = null;
+
+  public ConversionActionQuery() {
+  }
+
+  public String getId() {
+    return null;
+  }
+  public static ConversionActionQuery loadJSON(String json, APIContext context) {
+    ConversionActionQuery conversionActionQuery = getGson().fromJson(json, ConversionActionQuery.class);
+    if (context.isDebug()) {
+      JsonParser parser = new JsonParser();
+      JsonElement o1 = parser.parse(json);
+      JsonElement o2 = parser.parse(conversionActionQuery.toString());
+      if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
+        o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
+      }
+      if(!o1.equals(o2)) {
+        context.log("[Warning] When parsing response, object is not consistent with JSON:");
+        context.log("[JSON]" + o1);
+        context.log("[Object]" + o2);
+      };
+    }
+    conversionActionQuery.mContext = context;
+    conversionActionQuery.rawValue = json;
+    return conversionActionQuery;
+  }
+
+  public static APINodeList<ConversionActionQuery> parseResponse(String json, APIContext context, APIRequest request) {
+    APINodeList<ConversionActionQuery> conversionActionQuerys = new APINodeList<ConversionActionQuery>(request);
+    JsonArray arr;
+    JsonObject obj;
+    JsonParser parser = new JsonParser();
+    try{
+      JsonElement result = parser.parse(json);
+      if (result.isJsonArray()) {
+        // First, check if it's a pure JSON Array
+        arr = result.getAsJsonArray();
+        for (int i = 0; i < arr.size(); i++) {
+          conversionActionQuerys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+        };
+        return conversionActionQuerys;
+      } else if (result.isJsonObject()) {
+        obj = result.getAsJsonObject();
+        if (obj.has("data")) {
+          try {
+            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
+            conversionActionQuerys.setPaging(paging.get("before").getAsString(), paging.get("after").getAsString());
+          } catch (Exception ignored) {
+          }
+          if (obj.get("data").isJsonArray()) {
+            // Second, check if it's a JSON array with "data"
+            arr = obj.get("data").getAsJsonArray();
+            for (int i = 0; i < arr.size(); i++) {
+              conversionActionQuerys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+            };
+          } else if (obj.get("data").isJsonObject()) {
+            // Third, check if it's a JSON object with "data"
+            obj = obj.get("data").getAsJsonObject();
+            conversionActionQuerys.add(loadJSON(obj.toString(), context));
+          }
+          return conversionActionQuerys;
+        } else if (obj.has("images")) {
+          // Fourth, check if it's a map of image objects
+          obj = obj.get("images").getAsJsonObject();
+          for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+              conversionActionQuerys.add(loadJSON(entry.getValue().toString(), context));
+          }
+          return conversionActionQuerys;
+        } else {
+          // Fifth, check if it's pure JsonObject
+          conversionActionQuerys.add(loadJSON(json, context));
+          return conversionActionQuerys;
+        }
+      }
+    } catch (Exception e) {
+    }
+    return null;
+  }
+
+  @Override
+  public APIContext getContext() {
+    return mContext;
+  }
+
+  @Override
+  public void setContext(APIContext context) {
+    mContext = context;
+  }
+
+  @Override
+  public String toString() {
+    return getGson().toJson(this);
+  }
+
+
+  public List<String> getFieldActionType() {
+    return mActionType;
+  }
+
+  public ConversionActionQuery setFieldActionType(List<String> value) {
+    this.mActionType = value;
+    return this;
+  }
+
+  public List<String> getFieldApplication() {
+    return mApplication;
+  }
+
+  public ConversionActionQuery setFieldApplication(List<String> value) {
+    this.mApplication = value;
+    return this;
+  }
+
+  public List<String> getFieldConversionId() {
+    return mConversionId;
+  }
+
+  public ConversionActionQuery setFieldConversionId(List<String> value) {
+    this.mConversionId = value;
+    return this;
+  }
+
+  public List<String> getFieldEventType() {
+    return mEventType;
+  }
+
+  public ConversionActionQuery setFieldEventType(List<String> value) {
+    this.mEventType = value;
+    return this;
+  }
+
+  public List<String> getFieldEvent() {
+    return mEvent;
+  }
+
+  public ConversionActionQuery setFieldEvent(List<String> value) {
+    this.mEvent = value;
+    return this;
+  }
+
+  public List<String> getFieldEventCreator() {
+    return mEventCreator;
+  }
+
+  public ConversionActionQuery setFieldEventCreator(List<String> value) {
+    this.mEventCreator = value;
+    return this;
+  }
+
+  public List<String> getFieldFbPixel() {
+    return mFbPixel;
+  }
+
+  public ConversionActionQuery setFieldFbPixel(List<String> value) {
+    this.mFbPixel = value;
+    return this;
+  }
+
+  public List<String> getFieldFbPixelEvent() {
+    return mFbPixelEvent;
+  }
+
+  public ConversionActionQuery setFieldFbPixelEvent(List<String> value) {
+    this.mFbPixelEvent = value;
+    return this;
+  }
+
+  public List<String> getFieldObject() {
+    return mObject;
+  }
+
+  public ConversionActionQuery setFieldObject(List<String> value) {
+    this.mObject = value;
+    return this;
+  }
+
+  public List<String> getFieldObjectDomain() {
+    return mObjectDomain;
+  }
+
+  public ConversionActionQuery setFieldObjectDomain(List<String> value) {
+    this.mObjectDomain = value;
+    return this;
+  }
+
+  public List<String> getFieldOffer() {
+    return mOffer;
+  }
+
+  public ConversionActionQuery setFieldOffer(List<String> value) {
+    this.mOffer = value;
+    return this;
+  }
+
+  public List<String> getFieldOfferCreator() {
+    return mOfferCreator;
+  }
+
+  public ConversionActionQuery setFieldOfferCreator(List<String> value) {
+    this.mOfferCreator = value;
+    return this;
+  }
+
+  public List<String> getFieldOffsitePixel() {
+    return mOffsitePixel;
+  }
+
+  public ConversionActionQuery setFieldOffsitePixel(List<String> value) {
+    this.mOffsitePixel = value;
+    return this;
+  }
+
+  public List<String> getFieldPage() {
+    return mPage;
+  }
+
+  public ConversionActionQuery setFieldPage(List<String> value) {
+    this.mPage = value;
+    return this;
+  }
+
+  public List<String> getFieldPageParent() {
+    return mPageParent;
+  }
+
+  public ConversionActionQuery setFieldPageParent(List<String> value) {
+    this.mPageParent = value;
+    return this;
+  }
+
+  public List<String> getFieldPost() {
+    return mPost;
+  }
+
+  public ConversionActionQuery setFieldPost(List<String> value) {
+    this.mPost = value;
+    return this;
+  }
+
+  public List<String> getFieldPostObject() {
+    return mPostObject;
+  }
+
+  public ConversionActionQuery setFieldPostObject(List<String> value) {
+    this.mPostObject = value;
+    return this;
+  }
+
+  public List<String> getFieldPostObjectWall() {
+    return mPostObjectWall;
+  }
+
+  public ConversionActionQuery setFieldPostObjectWall(List<String> value) {
+    this.mPostObjectWall = value;
+    return this;
+  }
+
+  public List<String> getFieldPostWall() {
+    return mPostWall;
+  }
+
+  public ConversionActionQuery setFieldPostWall(List<String> value) {
+    this.mPostWall = value;
+    return this;
+  }
+
+  public List<String> getFieldProductSetId() {
+    return mProductSetId;
+  }
+
+  public ConversionActionQuery setFieldProductSetId(List<String> value) {
+    this.mProductSetId = value;
+    return this;
+  }
+
+  public List<String> getFieldQuestion() {
+    return mQuestion;
+  }
+
+  public ConversionActionQuery setFieldQuestion(List<String> value) {
+    this.mQuestion = value;
+    return this;
+  }
+
+  public List<String> getFieldQuestionCreator() {
+    return mQuestionCreator;
+  }
+
+  public ConversionActionQuery setFieldQuestionCreator(List<String> value) {
+    this.mQuestionCreator = value;
+    return this;
+  }
+
+  public List<String> getFieldResponse() {
+    return mResponse;
+  }
+
+  public ConversionActionQuery setFieldResponse(List<String> value) {
+    this.mResponse = value;
+    return this;
+  }
+
+  public List<String> getFieldSubtype() {
+    return mSubtype;
+  }
+
+  public ConversionActionQuery setFieldSubtype(List<String> value) {
+    this.mSubtype = value;
+    return this;
+  }
+
+
+
+
+  synchronized /*package*/ static Gson getGson() {
+    if (gson != null) {
+      return gson;
+    } else {
+      gson = new GsonBuilder()
+        .excludeFieldsWithModifiers(Modifier.STATIC)
+        .excludeFieldsWithModifiers(Modifier.PROTECTED)
+        .disableHtmlEscaping()
+        .create();
+    }
+    return gson;
+  }
+
+  public ConversionActionQuery copyFrom(ConversionActionQuery instance) {
+    this.mActionType = instance.mActionType;
+    this.mApplication = instance.mApplication;
+    this.mConversionId = instance.mConversionId;
+    this.mEventType = instance.mEventType;
+    this.mEvent = instance.mEvent;
+    this.mEventCreator = instance.mEventCreator;
+    this.mFbPixel = instance.mFbPixel;
+    this.mFbPixelEvent = instance.mFbPixelEvent;
+    this.mObject = instance.mObject;
+    this.mObjectDomain = instance.mObjectDomain;
+    this.mOffer = instance.mOffer;
+    this.mOfferCreator = instance.mOfferCreator;
+    this.mOffsitePixel = instance.mOffsitePixel;
+    this.mPage = instance.mPage;
+    this.mPageParent = instance.mPageParent;
+    this.mPost = instance.mPost;
+    this.mPostObject = instance.mPostObject;
+    this.mPostObjectWall = instance.mPostObjectWall;
+    this.mPostWall = instance.mPostWall;
+    this.mProductSetId = instance.mProductSetId;
+    this.mQuestion = instance.mQuestion;
+    this.mQuestionCreator = instance.mQuestionCreator;
+    this.mResponse = instance.mResponse;
+    this.mSubtype = instance.mSubtype;
+    this.mContext = instance.mContext;
+    this.rawValue = instance.rawValue;
+    return this;
+  }
+}
