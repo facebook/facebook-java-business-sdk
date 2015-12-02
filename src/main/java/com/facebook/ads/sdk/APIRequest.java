@@ -39,7 +39,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.Random;
 
-import org.json.JSONObject;
+import com.google.gson.Gson;
 
 abstract public class APIRequest<T> {
   protected APIContext context;
@@ -302,7 +302,8 @@ abstract public class APIRequest<T> {
     if (input == null) {
       return "null";
     } else if (input instanceof Map) {
-      return new JSONObject((Map) input).toString();
+      Gson gson = new Gson();
+      return gson.toJson((Map)input);
     } else {
       return input.toString();
     }
