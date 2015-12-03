@@ -1374,13 +1374,6 @@ public class AdsPixel extends APINode {
       this.requestField("primary_page", value);
       return this;
     }
-    public APIRequestGetSharedAgencies requestPaymentAccountIdField () {
-      return this.requestPaymentAccountIdField(true);
-    }
-    public APIRequestGetSharedAgencies requestPaymentAccountIdField (boolean value) {
-      this.requestField("payment_account_id", value);
-      return this;
-    }
 
   }
 

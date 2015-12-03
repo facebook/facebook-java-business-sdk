@@ -600,13 +600,6 @@ public class ProductCatalog extends APINode {
       this.requestField("primary_page", value);
       return this;
     }
-    public APIRequestGetAgencies requestPaymentAccountIdField () {
-      return this.requestPaymentAccountIdField(true);
-    }
-    public APIRequestGetAgencies requestPaymentAccountIdField (boolean value) {
-      this.requestField("payment_account_id", value);
-      return this;
-    }
 
   }
 

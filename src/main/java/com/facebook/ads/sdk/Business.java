@@ -385,13 +385,6 @@ public class Business extends APINode {
       this.requestField("primary_page", value);
       return this;
     }
-    public APIRequestGet requestPaymentAccountIdField () {
-      return this.requestPaymentAccountIdField(true);
-    }
-    public APIRequestGet requestPaymentAccountIdField (boolean value) {
-      this.requestField("payment_account_id", value);
-      return this;
-    }
 
   }
 
