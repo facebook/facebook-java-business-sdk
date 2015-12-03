@@ -8864,6 +8864,7 @@ public class AdAccount extends APINode {
       "adlabels",
       "bid_amount",
       "redownload",
+      "file",
     };
 
     public static final String[] FIELDS = {
@@ -8893,6 +8894,10 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAd setUploadFile (File file) {
+      this.setParam("file", file);
+      return this;
+    }
 
     public APIRequestCreateAd setId (String id) {
       this.setParam("id", id);
@@ -9693,7 +9698,6 @@ public class AdAccount extends APINode {
       "id",
       "title",
       "description",
-      "source",
       "unpublished_content_type",
       "file_url",
       "thumb",
@@ -9707,6 +9711,7 @@ public class AdAccount extends APINode {
       "slideshow_spec",
       "name",
       "chunk_session_id",
+      "file",
     };
 
     public static final String[] FIELDS = {
@@ -9736,6 +9741,10 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdVideo setUploadFile (File file) {
+      this.setParam("file", file);
+      return this;
+    }
 
     public APIRequestCreateAdVideo setId (String id) {
       this.setParam("id", id);
@@ -9751,12 +9760,6 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdVideo setDescription (String description) {
       this.setParam("description", description);
-      return this;
-    }
-
-
-    public APIRequestCreateAdVideo setSource (String source) {
-      this.setParam("source", source);
       return this;
     }
 

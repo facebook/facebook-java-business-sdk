@@ -525,7 +525,6 @@ public class ProductCatalog extends APINode {
       "id",
       "name",
       "primary_page",
-      "payment_account_id",
     };
 
     @Override
