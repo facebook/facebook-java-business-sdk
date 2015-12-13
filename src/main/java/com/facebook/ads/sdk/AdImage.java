@@ -106,7 +106,7 @@ public class AdImage extends APINode {
     AdImage adImage =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return adImage;
   }
 
@@ -273,6 +273,11 @@ public class AdImage extends APINode {
 
   public static class APIRequestGet extends APIRequest<AdImage> {
 
+    AdImage lastResponse = null;
+    @Override
+    public AdImage getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -295,13 +300,19 @@ public class AdImage extends APINode {
     };
 
     @Override
-    public AdImage call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public AdImage parseResponse(String response) throws APIException {
+      return AdImage.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public AdImage call(Map<String, Object> extraParams) throws APIException {
-      return AdImage.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public AdImage execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdImage execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {

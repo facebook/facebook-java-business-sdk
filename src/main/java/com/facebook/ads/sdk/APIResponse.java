@@ -22,6 +22,7 @@
  */
 package com.facebook.ads.sdk;
 
-public interface IAPINodeOrNodeList {
+public interface APIResponse {
     public APINode head();
+    public APIException getException();
 }

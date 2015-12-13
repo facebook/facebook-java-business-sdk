@@ -102,7 +102,7 @@ public class AdReportRun extends APINode {
     AdReportRun adReportRun =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return adReportRun;
   }
 
@@ -265,6 +265,11 @@ public class AdReportRun extends APINode {
 
   public static class APIRequestGet extends APIRequest<AdReportRun> {
 
+    AdReportRun lastResponse = null;
+    @Override
+    public AdReportRun getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -285,13 +290,19 @@ public class AdReportRun extends APINode {
     };
 
     @Override
-    public AdReportRun call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public AdReportRun parseResponse(String response) throws APIException {
+      return AdReportRun.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public AdReportRun call(Map<String, Object> extraParams) throws APIException {
-      return AdReportRun.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public AdReportRun execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdReportRun execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {
@@ -432,6 +443,11 @@ public class AdReportRun extends APINode {
 
   public static class APIRequestGetInsights extends APIRequest<AdsInsights> {
 
+    APINodeList<AdsInsights> lastResponse = null;
+    @Override
+    public APINodeList<AdsInsights> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "default_summary",
       "fields",
@@ -444,13 +460,19 @@ public class AdReportRun extends APINode {
     };
 
     @Override
-    public APINodeList<AdsInsights> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<AdsInsights> parseResponse(String response) throws APIException {
+      return AdsInsights.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<AdsInsights> call(Map<String, Object> extraParams) throws APIException {
-      return AdsInsights.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<AdsInsights> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdsInsights> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetInsights(String nodeId, APIContext context) {

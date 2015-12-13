@@ -150,7 +150,7 @@ public class ProductItem extends APINode {
     ProductItem productItem =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return productItem;
   }
 
@@ -419,6 +419,11 @@ public class ProductItem extends APINode {
 
   public static class APIRequestGet extends APIRequest<ProductItem> {
 
+    ProductItem lastResponse = null;
+    @Override
+    public ProductItem getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -463,13 +468,19 @@ public class ProductItem extends APINode {
     };
 
     @Override
-    public ProductItem call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public ProductItem parseResponse(String response) throws APIException {
+      return ProductItem.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public ProductItem call(Map<String, Object> extraParams) throws APIException {
-      return ProductItem.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public ProductItem execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductItem execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {
@@ -778,6 +789,11 @@ public class ProductItem extends APINode {
 
   public static class APIRequestUpdate extends APIRequest<APINode> {
 
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "availability",
       "category",
@@ -829,13 +845,19 @@ public class ProductItem extends APINode {
     };
 
     @Override
-    public APINode call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestUpdate(String nodeId, APIContext context) {
@@ -1201,6 +1223,11 @@ public class ProductItem extends APINode {
 
   public static class APIRequestGetProductSets extends APIRequest<ProductSet> {
 
+    APINodeList<ProductSet> lastResponse = null;
+    @Override
+    public APINodeList<ProductSet> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -1212,13 +1239,19 @@ public class ProductItem extends APINode {
     };
 
     @Override
-    public APINodeList<ProductSet> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<ProductSet> parseResponse(String response) throws APIException {
+      return ProductSet.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<ProductSet> call(Map<String, Object> extraParams) throws APIException {
-      return ProductSet.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<ProductSet> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductSet> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetProductSets(String nodeId, APIContext context) {

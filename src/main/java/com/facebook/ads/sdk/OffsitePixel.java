@@ -88,7 +88,7 @@ public class OffsitePixel extends APINode {
     OffsitePixel offsitePixel =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return offsitePixel;
   }
 
@@ -239,6 +239,11 @@ public class OffsitePixel extends APINode {
 
   public static class APIRequestGet extends APIRequest<OffsitePixel> {
 
+    OffsitePixel lastResponse = null;
+    @Override
+    public OffsitePixel getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -252,13 +257,19 @@ public class OffsitePixel extends APINode {
     };
 
     @Override
-    public OffsitePixel call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public OffsitePixel parseResponse(String response) throws APIException {
+      return OffsitePixel.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public OffsitePixel call(Map<String, Object> extraParams) throws APIException {
-      return OffsitePixel.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public OffsitePixel execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public OffsitePixel execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {
@@ -350,6 +361,11 @@ public class OffsitePixel extends APINode {
 
   public static class APIRequestUpdate extends APIRequest<APINode> {
 
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
       "name",
@@ -362,13 +378,19 @@ public class OffsitePixel extends APINode {
     };
 
     @Override
-    public APINode call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestUpdate(String nodeId, APIContext context) {
@@ -456,6 +478,11 @@ public class OffsitePixel extends APINode {
 
   public static class APIRequestDelete extends APIRequest<APINode> {
 
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
     };
@@ -464,13 +491,19 @@ public class OffsitePixel extends APINode {
     };
 
     @Override
-    public APINode call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestDelete(String nodeId, APIContext context) {
@@ -526,6 +559,11 @@ public class OffsitePixel extends APINode {
 
   public static class APIRequestGetAdAccounts extends APIRequest<AdAccount> {
 
+    APINodeList<AdAccount> lastResponse = null;
+    @Override
+    public APINodeList<AdAccount> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -586,13 +624,19 @@ public class OffsitePixel extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<AdAccount> call(Map<String, Object> extraParams) throws APIException {
-      return AdAccount.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<AdAccount> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetAdAccounts(String nodeId, APIContext context) {
@@ -1013,6 +1057,11 @@ public class OffsitePixel extends APINode {
 
   public static class APIRequestCreateAdAccount extends APIRequest<AdAccount> {
 
+    AdAccount lastResponse = null;
+    @Override
+    public AdAccount getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "adaccounts",
     };
@@ -1021,13 +1070,19 @@ public class OffsitePixel extends APINode {
     };
 
     @Override
-    public AdAccount call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public AdAccount parseResponse(String response) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public AdAccount call(Map<String, Object> extraParams) throws APIException {
-      return AdAccount.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public AdAccount execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAccount execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestCreateAdAccount(String nodeId, APIContext context) {
@@ -1087,6 +1142,11 @@ public class OffsitePixel extends APINode {
 
   public static class APIRequestDeleteAdAccounts extends APIRequest<AdAccount> {
 
+    APINodeList<AdAccount> lastResponse = null;
+    @Override
+    public APINodeList<AdAccount> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "adaccounts",
     };
@@ -1095,13 +1155,19 @@ public class OffsitePixel extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<AdAccount> call(Map<String, Object> extraParams) throws APIException {
-      return AdAccount.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<AdAccount> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestDeleteAdAccounts(String nodeId, APIContext context) {

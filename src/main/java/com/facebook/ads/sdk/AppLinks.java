@@ -94,7 +94,7 @@ public class AppLinks extends APINode {
     AppLinks appLinks =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return appLinks;
   }
 
@@ -237,6 +237,11 @@ public class AppLinks extends APINode {
 
   public static class APIRequestGet extends APIRequest<AppLinks> {
 
+    AppLinks lastResponse = null;
+    @Override
+    public AppLinks getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -253,13 +258,19 @@ public class AppLinks extends APINode {
     };
 
     @Override
-    public AppLinks call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public AppLinks parseResponse(String response) throws APIException {
+      return AppLinks.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public AppLinks call(Map<String, Object> extraParams) throws APIException {
-      return AppLinks.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public AppLinks execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AppLinks execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {

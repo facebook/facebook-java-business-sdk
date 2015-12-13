@@ -86,7 +86,7 @@ public class AdPlacePageSet extends APINode {
     AdPlacePageSet adPlacePageSet =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return adPlacePageSet;
   }
 
@@ -217,6 +217,11 @@ public class AdPlacePageSet extends APINode {
 
   public static class APIRequestGet extends APIRequest<AdPlacePageSet> {
 
+    AdPlacePageSet lastResponse = null;
+    @Override
+    public AdPlacePageSet getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -229,13 +234,19 @@ public class AdPlacePageSet extends APINode {
     };
 
     @Override
-    public AdPlacePageSet call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public AdPlacePageSet parseResponse(String response) throws APIException {
+      return AdPlacePageSet.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public AdPlacePageSet call(Map<String, Object> extraParams) throws APIException {
-      return AdPlacePageSet.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public AdPlacePageSet execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdPlacePageSet execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {
@@ -320,6 +331,11 @@ public class AdPlacePageSet extends APINode {
 
   public static class APIRequestUpdate extends APIRequest<APINode> {
 
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
       "name",
@@ -329,13 +345,19 @@ public class AdPlacePageSet extends APINode {
     };
 
     @Override
-    public APINode call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestUpdate(String nodeId, APIContext context) {

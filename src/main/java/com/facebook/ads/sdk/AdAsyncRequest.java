@@ -92,7 +92,7 @@ public class AdAsyncRequest extends APINode {
     AdAsyncRequest adAsyncRequest =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return adAsyncRequest;
   }
 
@@ -234,6 +234,11 @@ public class AdAsyncRequest extends APINode {
 
   public static class APIRequestGet extends APIRequest<AdAsyncRequest> {
 
+    AdAsyncRequest lastResponse = null;
+    @Override
+    public AdAsyncRequest getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -249,13 +254,19 @@ public class AdAsyncRequest extends APINode {
     };
 
     @Override
-    public AdAsyncRequest call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public AdAsyncRequest parseResponse(String response) throws APIException {
+      return AdAsyncRequest.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public AdAsyncRequest call(Map<String, Object> extraParams) throws APIException {
-      return AdAsyncRequest.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public AdAsyncRequest execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAsyncRequest execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {

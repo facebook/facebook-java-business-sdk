@@ -86,7 +86,7 @@ public class ProductCatalog extends APINode {
     ProductCatalog productCatalog =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return productCatalog;
   }
 
@@ -268,6 +268,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestGet extends APIRequest<ProductCatalog> {
 
+    ProductCatalog lastResponse = null;
+    @Override
+    public ProductCatalog getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -280,13 +285,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public ProductCatalog call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public ProductCatalog parseResponse(String response) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public ProductCatalog call(Map<String, Object> extraParams) throws APIException {
-      return ProductCatalog.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public ProductCatalog execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {
@@ -371,6 +382,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestUpdate extends APIRequest<APINode> {
 
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
       "name",
@@ -380,13 +396,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public APINode call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestUpdate(String nodeId, APIContext context) {
@@ -448,6 +470,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestDelete extends APIRequest<APINode> {
 
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
     };
@@ -456,13 +483,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public APINode call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestDelete(String nodeId, APIContext context) {
@@ -518,6 +551,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestGetAgencies extends APIRequest<Business> {
 
+    APINodeList<Business> lastResponse = null;
+    @Override
+    public APINodeList<Business> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -528,13 +566,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public APINodeList<Business> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<Business> parseResponse(String response) throws APIException {
+      return Business.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<Business> call(Map<String, Object> extraParams) throws APIException {
-      return Business.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<Business> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Business> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetAgencies(String nodeId, APIContext context) {
@@ -605,6 +649,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestGetExternalEventSources extends APIRequest<ExternalEventSource> {
 
+    APINodeList<ExternalEventSource> lastResponse = null;
+    @Override
+    public APINodeList<ExternalEventSource> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -614,13 +663,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public APINodeList<ExternalEventSource> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<ExternalEventSource> parseResponse(String response) throws APIException {
+      return ExternalEventSource.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<ExternalEventSource> call(Map<String, Object> extraParams) throws APIException {
-      return ExternalEventSource.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<ExternalEventSource> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ExternalEventSource> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetExternalEventSources(String nodeId, APIContext context) {
@@ -684,6 +739,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestGetProducts extends APIRequest<ProductItem> {
 
+    APINodeList<ProductItem> lastResponse = null;
+    @Override
+    public APINodeList<ProductItem> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "filter",
     };
@@ -729,13 +789,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public APINodeList<ProductItem> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<ProductItem> parseResponse(String response) throws APIException {
+      return ProductItem.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<ProductItem> call(Map<String, Object> extraParams) throws APIException {
-      return ProductItem.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<ProductItem> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductItem> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetProducts(String nodeId, APIContext context) {
@@ -1050,6 +1116,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestGetProductGroups extends APIRequest<ProductGroup> {
 
+    APINodeList<ProductGroup> lastResponse = null;
+    @Override
+    public APINodeList<ProductGroup> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -1060,13 +1131,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public APINodeList<ProductGroup> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<ProductGroup> parseResponse(String response) throws APIException {
+      return ProductGroup.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<ProductGroup> call(Map<String, Object> extraParams) throws APIException {
-      return ProductGroup.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<ProductGroup> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductGroup> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetProductGroups(String nodeId, APIContext context) {
@@ -1137,6 +1214,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestGetProductFeeds extends APIRequest<ProductFeed> {
 
+    APINodeList<ProductFeed> lastResponse = null;
+    @Override
+    public APINodeList<ProductFeed> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -1156,13 +1238,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public APINodeList<ProductFeed> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<ProductFeed> parseResponse(String response) throws APIException {
+      return ProductFeed.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<ProductFeed> call(Map<String, Object> extraParams) throws APIException {
-      return ProductFeed.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<ProductFeed> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductFeed> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetProductFeeds(String nodeId, APIContext context) {
@@ -1296,6 +1384,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestGetProductSets extends APIRequest<ProductSet> {
 
+    APINodeList<ProductSet> lastResponse = null;
+    @Override
+    public APINodeList<ProductSet> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -1307,13 +1400,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public APINodeList<ProductSet> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<ProductSet> parseResponse(String response) throws APIException {
+      return ProductSet.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<ProductSet> call(Map<String, Object> extraParams) throws APIException {
-      return ProductSet.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<ProductSet> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductSet> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetProductSets(String nodeId, APIContext context) {
@@ -1391,6 +1490,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestCreateExternalEventSource extends APIRequest<ExternalEventSource> {
 
+    ExternalEventSource lastResponse = null;
+    @Override
+    public ExternalEventSource getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
       "external_event_sources",
@@ -1400,13 +1504,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public ExternalEventSource call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public ExternalEventSource parseResponse(String response) throws APIException {
+      return ExternalEventSource.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public ExternalEventSource call(Map<String, Object> extraParams) throws APIException {
-      return ExternalEventSource.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public ExternalEventSource execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ExternalEventSource execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestCreateExternalEventSource(String nodeId, APIContext context) {
@@ -1472,6 +1582,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestCreateProductGroup extends APIRequest<ProductGroup> {
 
+    ProductGroup lastResponse = null;
+    @Override
+    public ProductGroup getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
       "retailer_id",
@@ -1482,13 +1597,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public ProductGroup call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public ProductGroup parseResponse(String response) throws APIException {
+      return ProductGroup.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public ProductGroup call(Map<String, Object> extraParams) throws APIException {
-      return ProductGroup.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public ProductGroup execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductGroup execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestCreateProductGroup(String nodeId, APIContext context) {
@@ -1560,6 +1681,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestCreateProductFeed extends APIRequest<ProductFeed> {
 
+    ProductFeed lastResponse = null;
+    @Override
+    public ProductFeed getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
       "country",
@@ -1577,13 +1703,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public ProductFeed call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public ProductFeed parseResponse(String response) throws APIException {
+      return ProductFeed.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public ProductFeed call(Map<String, Object> extraParams) throws APIException {
-      return ProductFeed.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public ProductFeed execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductFeed execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestCreateProductFeed(String nodeId, APIContext context) {
@@ -1709,6 +1841,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestCreateProductSet extends APIRequest<ProductSet> {
 
+    ProductSet lastResponse = null;
+    @Override
+    public ProductSet getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "filter",
       "id",
@@ -1719,13 +1856,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public ProductSet call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public ProductSet parseResponse(String response) throws APIException {
+      return ProductSet.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public ProductSet call(Map<String, Object> extraParams) throws APIException {
-      return ProductSet.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public ProductSet execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductSet execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestCreateProductSet(String nodeId, APIContext context) {
@@ -1793,6 +1936,11 @@ public class ProductCatalog extends APINode {
 
   public static class APIRequestDeleteExternalEventSources extends APIRequest<ExternalEventSource> {
 
+    APINodeList<ExternalEventSource> lastResponse = null;
+    @Override
+    public APINodeList<ExternalEventSource> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
       "external_event_sources",
@@ -1802,13 +1950,19 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public APINodeList<ExternalEventSource> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<ExternalEventSource> parseResponse(String response) throws APIException {
+      return ExternalEventSource.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<ExternalEventSource> call(Map<String, Object> extraParams) throws APIException {
-      return ExternalEventSource.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<ExternalEventSource> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ExternalEventSource> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestDeleteExternalEventSources(String nodeId, APIContext context) {

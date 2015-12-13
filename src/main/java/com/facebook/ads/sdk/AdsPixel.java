@@ -90,7 +90,7 @@ public class AdsPixel extends APINode {
     AdsPixel adsPixel =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return adsPixel;
   }
 
@@ -251,6 +251,11 @@ public class AdsPixel extends APINode {
 
   public static class APIRequestGet extends APIRequest<AdsPixel> {
 
+    AdsPixel lastResponse = null;
+    @Override
+    public AdsPixel getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -265,13 +270,19 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public AdsPixel call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public AdsPixel parseResponse(String response) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public AdsPixel call(Map<String, Object> extraParams) throws APIException {
-      return AdsPixel.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public AdsPixel execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {
@@ -370,6 +381,11 @@ public class AdsPixel extends APINode {
 
   public static class APIRequestUpdate extends APIRequest<APINode> {
 
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "name",
     };
@@ -378,13 +394,19 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINode call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestUpdate(String nodeId, APIContext context) {
@@ -440,6 +462,11 @@ public class AdsPixel extends APINode {
 
   public static class APIRequestGetStats extends APIRequest<AdsPixelStatsResult> {
 
+    APINodeList<AdsPixelStatsResult> lastResponse = null;
+    @Override
+    public APINodeList<AdsPixelStatsResult> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "start_time",
       "end_time",
@@ -454,13 +481,19 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<AdsPixelStatsResult> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<AdsPixelStatsResult> parseResponse(String response) throws APIException {
+      return AdsPixelStatsResult.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<AdsPixelStatsResult> call(Map<String, Object> extraParams) throws APIException {
-      return AdsPixelStatsResult.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<AdsPixelStatsResult> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdsPixelStatsResult> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetStats(String nodeId, APIContext context) {
@@ -559,6 +592,11 @@ public class AdsPixel extends APINode {
 
   public static class APIRequestGetAudiences extends APIRequest<CustomAudience> {
 
+    APINodeList<CustomAudience> lastResponse = null;
+    @Override
+    public APINodeList<CustomAudience> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -588,13 +626,19 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<CustomAudience> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<CustomAudience> parseResponse(String response) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<CustomAudience> call(Map<String, Object> extraParams) throws APIException {
-      return CustomAudience.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<CustomAudience> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CustomAudience> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetAudiences(String nodeId, APIContext context) {
@@ -798,6 +842,11 @@ public class AdsPixel extends APINode {
 
   public static class APIRequestGetSharedAccounts extends APIRequest<AdAccount> {
 
+    APINodeList<AdAccount> lastResponse = null;
+    @Override
+    public APINodeList<AdAccount> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "business",
     };
@@ -859,13 +908,19 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<AdAccount> call(Map<String, Object> extraParams) throws APIException {
-      return AdAccount.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<AdAccount> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetSharedAccounts(String nodeId, APIContext context) {
@@ -1292,6 +1347,11 @@ public class AdsPixel extends APINode {
 
   public static class APIRequestGetSharedAgencies extends APIRequest<Business> {
 
+    APINodeList<Business> lastResponse = null;
+    @Override
+    public APINodeList<Business> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -1302,13 +1362,19 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<Business> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<Business> parseResponse(String response) throws APIException {
+      return Business.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<Business> call(Map<String, Object> extraParams) throws APIException {
-      return Business.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<Business> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Business> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetSharedAgencies(String nodeId, APIContext context) {

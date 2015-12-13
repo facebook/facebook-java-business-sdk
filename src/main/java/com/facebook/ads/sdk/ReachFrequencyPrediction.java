@@ -134,7 +134,7 @@ public class ReachFrequencyPrediction extends APINode {
     ReachFrequencyPrediction reachFrequencyPrediction =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return reachFrequencyPrediction;
   }
 
@@ -357,6 +357,11 @@ public class ReachFrequencyPrediction extends APINode {
 
   public static class APIRequestGet extends APIRequest<ReachFrequencyPrediction> {
 
+    ReachFrequencyPrediction lastResponse = null;
+    @Override
+    public ReachFrequencyPrediction getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -393,13 +398,19 @@ public class ReachFrequencyPrediction extends APINode {
     };
 
     @Override
-    public ReachFrequencyPrediction call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public ReachFrequencyPrediction parseResponse(String response) throws APIException {
+      return ReachFrequencyPrediction.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public ReachFrequencyPrediction call(Map<String, Object> extraParams) throws APIException {
-      return ReachFrequencyPrediction.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public ReachFrequencyPrediction execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ReachFrequencyPrediction execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {

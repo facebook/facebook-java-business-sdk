@@ -108,7 +108,7 @@ public class AdAsyncRequestSet extends APINode {
     AdAsyncRequestSet adAsyncRequestSet =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return adAsyncRequestSet;
   }
 
@@ -283,6 +283,11 @@ public class AdAsyncRequestSet extends APINode {
 
   public static class APIRequestGet extends APIRequest<AdAsyncRequestSet> {
 
+    AdAsyncRequestSet lastResponse = null;
+    @Override
+    public AdAsyncRequestSet getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -306,13 +311,19 @@ public class AdAsyncRequestSet extends APINode {
     };
 
     @Override
-    public AdAsyncRequestSet call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public AdAsyncRequestSet parseResponse(String response) throws APIException {
+      return AdAsyncRequestSet.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public AdAsyncRequestSet call(Map<String, Object> extraParams) throws APIException {
-      return AdAsyncRequestSet.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public AdAsyncRequestSet execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAsyncRequestSet execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {
@@ -474,6 +485,11 @@ public class AdAsyncRequestSet extends APINode {
 
   public static class APIRequestGetRequests extends APIRequest<AdAsyncRequest> {
 
+    APINodeList<AdAsyncRequest> lastResponse = null;
+    @Override
+    public APINodeList<AdAsyncRequest> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "statuses",
     };
@@ -490,13 +506,19 @@ public class AdAsyncRequestSet extends APINode {
     };
 
     @Override
-    public APINodeList<AdAsyncRequest> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<AdAsyncRequest> parseResponse(String response) throws APIException {
+      return AdAsyncRequest.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<AdAsyncRequest> call(Map<String, Object> extraParams) throws APIException {
-      return AdAsyncRequest.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<AdAsyncRequest> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdAsyncRequest> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetRequests(String nodeId, APIContext context) {

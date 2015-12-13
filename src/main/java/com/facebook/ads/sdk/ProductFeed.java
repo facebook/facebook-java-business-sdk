@@ -100,7 +100,7 @@ public class ProductFeed extends APINode {
     ProductFeed productFeed =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return productFeed;
   }
 
@@ -278,6 +278,11 @@ public class ProductFeed extends APINode {
 
   public static class APIRequestGet extends APIRequest<ProductFeed> {
 
+    ProductFeed lastResponse = null;
+    @Override
+    public ProductFeed getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -297,13 +302,19 @@ public class ProductFeed extends APINode {
     };
 
     @Override
-    public ProductFeed call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public ProductFeed parseResponse(String response) throws APIException {
+      return ProductFeed.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public ProductFeed call(Map<String, Object> extraParams) throws APIException {
-      return ProductFeed.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public ProductFeed execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductFeed execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {
@@ -437,6 +448,11 @@ public class ProductFeed extends APINode {
 
   public static class APIRequestUpdate extends APIRequest<APINode> {
 
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
       "name",
@@ -451,13 +467,19 @@ public class ProductFeed extends APINode {
     };
 
     @Override
-    public APINode call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestUpdate(String nodeId, APIContext context) {
@@ -565,6 +587,11 @@ public class ProductFeed extends APINode {
 
   public static class APIRequestDelete extends APIRequest<APINode> {
 
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
     };
@@ -573,13 +600,19 @@ public class ProductFeed extends APINode {
     };
 
     @Override
-    public APINode call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestDelete(String nodeId, APIContext context) {
@@ -635,6 +668,11 @@ public class ProductFeed extends APINode {
 
   public static class APIRequestGetProducts extends APIRequest<ProductItem> {
 
+    APINodeList<ProductItem> lastResponse = null;
+    @Override
+    public APINodeList<ProductItem> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -679,13 +717,19 @@ public class ProductFeed extends APINode {
     };
 
     @Override
-    public APINodeList<ProductItem> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<ProductItem> parseResponse(String response) throws APIException {
+      return ProductItem.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<ProductItem> call(Map<String, Object> extraParams) throws APIException {
-      return ProductItem.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<ProductItem> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductItem> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetProducts(String nodeId, APIContext context) {
@@ -994,6 +1038,11 @@ public class ProductFeed extends APINode {
 
   public static class APIRequestGetUploads extends APIRequest<ProductFeedUpload> {
 
+    APINodeList<ProductFeedUpload> lastResponse = null;
+    @Override
+    public APINodeList<ProductFeedUpload> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -1006,13 +1055,19 @@ public class ProductFeed extends APINode {
     };
 
     @Override
-    public APINodeList<ProductFeedUpload> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<ProductFeedUpload> parseResponse(String response) throws APIException {
+      return ProductFeedUpload.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<ProductFeedUpload> call(Map<String, Object> extraParams) throws APIException {
-      return ProductFeedUpload.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<ProductFeedUpload> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductFeedUpload> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetUploads(String nodeId, APIContext context) {
@@ -1097,6 +1152,11 @@ public class ProductFeed extends APINode {
 
   public static class APIRequestCreateUpload extends APIRequest<ProductFeedUpload> {
 
+    ProductFeedUpload lastResponse = null;
+    @Override
+    public ProductFeedUpload getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
       "password",
@@ -1109,13 +1169,19 @@ public class ProductFeed extends APINode {
     };
 
     @Override
-    public ProductFeedUpload call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public ProductFeedUpload parseResponse(String response) throws APIException {
+      return ProductFeedUpload.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public ProductFeedUpload call(Map<String, Object> extraParams) throws APIException {
-      return ProductFeedUpload.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public ProductFeedUpload execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductFeedUpload execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestCreateUpload(String nodeId, APIContext context) {
@@ -1132,8 +1198,8 @@ public class ProductFeed extends APINode {
       return this;
     }
 
-    public APIRequestCreateUpload setUploadFile (File file) {
-      this.setParam("file", file);
+    public APIRequestCreateUpload addUploadFile (String uploadName, File file) {
+      this.setParam(uploadName, file);
       return this;
     }
 

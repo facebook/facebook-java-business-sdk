@@ -80,7 +80,7 @@ public class ExternalEventSource extends APINode {
     ExternalEventSource externalEventSource =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return externalEventSource;
   }
 
@@ -195,6 +195,11 @@ public class ExternalEventSource extends APINode {
 
   public static class APIRequestGet extends APIRequest<ExternalEventSource> {
 
+    ExternalEventSource lastResponse = null;
+    @Override
+    public ExternalEventSource getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -204,13 +209,19 @@ public class ExternalEventSource extends APINode {
     };
 
     @Override
-    public ExternalEventSource call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public ExternalEventSource parseResponse(String response) throws APIException {
+      return ExternalEventSource.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public ExternalEventSource call(Map<String, Object> extraParams) throws APIException {
-      return ExternalEventSource.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public ExternalEventSource execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ExternalEventSource execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {

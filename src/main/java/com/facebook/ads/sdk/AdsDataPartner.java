@@ -82,7 +82,7 @@ public class AdsDataPartner extends APINode {
     AdsDataPartner adsDataPartner =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return adsDataPartner;
   }
 
@@ -201,6 +201,11 @@ public class AdsDataPartner extends APINode {
 
   public static class APIRequestGet extends APIRequest<AdsDataPartner> {
 
+    AdsDataPartner lastResponse = null;
+    @Override
+    public AdsDataPartner getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -211,13 +216,19 @@ public class AdsDataPartner extends APINode {
     };
 
     @Override
-    public AdsDataPartner call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public AdsDataPartner parseResponse(String response) throws APIException {
+      return AdsDataPartner.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public AdsDataPartner call(Map<String, Object> extraParams) throws APIException {
-      return AdsDataPartner.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public AdsDataPartner execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdsDataPartner execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {

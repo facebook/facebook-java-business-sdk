@@ -28,32 +28,53 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
 
 public class APIContext {
   public static final String DEFAULT_API_BASE = APIConfig.DEFAULT_API_BASE;
   public static final String DEFAULT_API_VERSION = APIConfig.DEFAULT_API_VERSION;
   private String endpointBase;
-  private String authToken;
+  private String accessToken;
+  private String appSecret;
   private String version;
   protected boolean isDebug = false;
-  protected PrintStream logger = null;
+  protected PrintStream logger = System.out;
 
-  public APIContext(String endpointBase, String version, String authToken) {
+  protected APIContext(String endpointBase, String version, String accessToken, String appSecret) {
     this.version = version;
     this.endpointBase = endpointBase;
-    this.authToken = authToken;
+    this.accessToken = accessToken;
+    this.appSecret = appSecret;
   }
 
-  public APIContext(String authToken) {
-    this(DEFAULT_API_BASE, DEFAULT_API_VERSION, authToken);
+  public APIContext(String accessToken) {
+    this(DEFAULT_API_BASE, DEFAULT_API_VERSION, accessToken, null);
+  }
+
+  public APIContext(String accessToken, String appSecret) {
+    this(DEFAULT_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret);
   }
 
   public String getEndpointBase() {
     return this.endpointBase;
   }
 
-  public String getAuthToken() {
-    return this.authToken;
+  public String getAccessToken() {
+    return this.accessToken;
+  }
+
+  public String getAppSecret() {
+    return this.appSecret;
+  }
+
+  public boolean hasAppSecret() {
+    return appSecret != null;
+  }
+
+  public String getAppSecretProof() {
+    return sha256(appSecret, accessToken);
   }
 
   public String getVersion() {
@@ -61,35 +82,44 @@ public class APIContext {
   }
 
   public boolean isDebug() {
-    return isDebug;
+    return this.isDebug;
+  }
+
+  public APIContext enableDebug(boolean isDebug) {
+    this.isDebug = isDebug;
+    return this;
   }
 
   public PrintStream getLogger() {
-    return logger;
+    return this.logger;
+  }
+
+  public APIContext setLogger(PrintStream logger) {
+    this.logger = logger;
+    return this;
   }
 
   public void log(String s) {
     if (isDebug && logger != null) logger.println(s);
   }
 
-  public static class DebugContext extends APIContext {
-
-    public DebugContext(String endpointBase, String version, String authToken, PrintStream logger) {
-      super(endpointBase, version, authToken);
-      this.isDebug = true;
-      this.logger = logger;
+  public static String sha256(String secret, String message) {
+    try {
+      Mac sha256HMAC = Mac.getInstance("HmacSHA256");
+      SecretKeySpec secretKey = new SecretKeySpec(secret.getBytes(), "HmacSHA256");
+      sha256HMAC.init(secretKey);
+      byte[] bytes = sha256HMAC.doFinal(message.getBytes());
+      return toHex(bytes);
+    } catch(Exception e){
+      return null;
     }
+  }
 
-    public DebugContext(String endpointBase, String version, String authToken) {
-      this(endpointBase, version, authToken, System.out);
+  public static String toHex(byte[] bytes) {
+    StringBuilder sb = new StringBuilder();
+    for (byte b : bytes) {
+        sb.append(String.format("%1$02x", b));
     }
-
-    public DebugContext(String authToken, PrintStream logger) {
-      this(DEFAULT_API_BASE, DEFAULT_API_VERSION, authToken, logger);
-    }
-
-    public DebugContext(String authToken) {
-      this(authToken, System.out);
-    }
+    return sb.toString();
   }
 }

@@ -116,7 +116,7 @@ public class Ad extends APINode {
     Ad ad =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return ad;
   }
 
@@ -346,6 +346,11 @@ public class Ad extends APINode {
 
   public static class APIRequestGet extends APIRequest<Ad> {
 
+    Ad lastResponse = null;
+    @Override
+    public Ad getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -373,13 +378,19 @@ public class Ad extends APINode {
     };
 
     @Override
-    public Ad call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public Ad parseResponse(String response) throws APIException {
+      return Ad.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public Ad call(Map<String, Object> extraParams) throws APIException {
-      return Ad.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public Ad execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Ad execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {
@@ -569,6 +580,11 @@ public class Ad extends APINode {
 
   public static class APIRequestUpdate extends APIRequest<APINode> {
 
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
       "adset_id",
@@ -588,13 +604,19 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINode call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestUpdate(String nodeId, APIContext context) {
@@ -756,6 +778,11 @@ public class Ad extends APINode {
 
   public static class APIRequestDelete extends APIRequest<APINode> {
 
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
     };
@@ -764,13 +791,19 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINode call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestDelete(String nodeId, APIContext context) {
@@ -826,6 +859,11 @@ public class Ad extends APINode {
 
   public static class APIRequestGetLeads extends APIRequest<APINode> {
 
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -833,13 +871,19 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<APINode> call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetLeads(String nodeId, APIContext context) {
@@ -889,6 +933,11 @@ public class Ad extends APINode {
 
   public static class APIRequestGetAdCreatives extends APIRequest<AdCreative> {
 
+    APINodeList<AdCreative> lastResponse = null;
+    @Override
+    public APINodeList<AdCreative> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -924,13 +973,19 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<AdCreative> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<AdCreative> parseResponse(String response) throws APIException {
+      return AdCreative.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<AdCreative> call(Map<String, Object> extraParams) throws APIException {
-      return AdCreative.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<AdCreative> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdCreative> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetAdCreatives(String nodeId, APIContext context) {
@@ -1176,6 +1231,11 @@ public class Ad extends APINode {
 
   public static class APIRequestGetInsights extends APIRequest<AdsInsights> {
 
+    APINodeList<AdsInsights> lastResponse = null;
+    @Override
+    public APINodeList<AdsInsights> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "default_summary",
       "fields",
@@ -1199,13 +1259,19 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<AdsInsights> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<AdsInsights> parseResponse(String response) throws APIException {
+      return AdsInsights.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<AdsInsights> call(Map<String, Object> extraParams) throws APIException {
-      return AdsInsights.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<AdsInsights> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdsInsights> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetInsights(String nodeId, APIContext context) {
@@ -1407,6 +1473,11 @@ public class Ad extends APINode {
 
   public static class APIRequestGetKeywordStats extends APIRequest<AdKeywordStats> {
 
+    APINodeList<AdKeywordStats> lastResponse = null;
+    @Override
+    public APINodeList<AdKeywordStats> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "date",
     };
@@ -1435,13 +1506,19 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<AdKeywordStats> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<AdKeywordStats> parseResponse(String response) throws APIException {
+      return AdKeywordStats.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<AdKeywordStats> call(Map<String, Object> extraParams) throws APIException {
-      return AdKeywordStats.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<AdKeywordStats> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdKeywordStats> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetKeywordStats(String nodeId, APIContext context) {
@@ -1637,6 +1714,11 @@ public class Ad extends APINode {
 
   public static class APIRequestGetPreviews extends APIRequest<AdPreview> {
 
+    APINodeList<AdPreview> lastResponse = null;
+    @Override
+    public APINodeList<AdPreview> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "ad_format",
       "post",
@@ -1651,13 +1733,19 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<AdPreview> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<AdPreview> parseResponse(String response) throws APIException {
+      return AdPreview.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<AdPreview> call(Map<String, Object> extraParams) throws APIException {
-      return AdPreview.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<AdPreview> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdPreview> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetPreviews(String nodeId, APIContext context) {
@@ -1770,6 +1858,11 @@ public class Ad extends APINode {
 
   public static class APIRequestGetReachEstimate extends APIRequest<ReachEstimate> {
 
+    APINodeList<ReachEstimate> lastResponse = null;
+    @Override
+    public APINodeList<ReachEstimate> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "targeting_spec",
       "currency",
@@ -1788,13 +1881,19 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<ReachEstimate> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<ReachEstimate> parseResponse(String response) throws APIException {
+      return ReachEstimate.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<ReachEstimate> call(Map<String, Object> extraParams) throws APIException {
-      return ReachEstimate.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<ReachEstimate> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ReachEstimate> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetReachEstimate(String nodeId, APIContext context) {
@@ -1922,6 +2021,11 @@ public class Ad extends APINode {
 
   public static class APIRequestGetTargetingSentenceLines extends APIRequest<TargetingSentenceLine> {
 
+    APINodeList<TargetingSentenceLine> lastResponse = null;
+    @Override
+    public APINodeList<TargetingSentenceLine> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -1932,13 +2036,19 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<TargetingSentenceLine> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<TargetingSentenceLine> parseResponse(String response) throws APIException {
+      return TargetingSentenceLine.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<TargetingSentenceLine> call(Map<String, Object> extraParams) throws APIException {
-      return TargetingSentenceLine.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<TargetingSentenceLine> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<TargetingSentenceLine> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetTargetingSentenceLines(String nodeId, APIContext context) {
@@ -2009,6 +2119,11 @@ public class Ad extends APINode {
 
   public static class APIRequestDeleteAdLabels extends APIRequest<APINode> {
 
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
       "adlabels",
@@ -2019,13 +2134,19 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<APINode> call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestDeleteAdLabels(String nodeId, APIContext context) {

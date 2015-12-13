@@ -82,7 +82,7 @@ public class ProductGroup extends APINode {
     ProductGroup productGroup =
       new APIRequestGet(id, context)
       .requestAllFields()
-      .call();
+      .execute();
     return productGroup;
   }
 
@@ -213,6 +213,11 @@ public class ProductGroup extends APINode {
 
   public static class APIRequestGet extends APIRequest<ProductGroup> {
 
+    ProductGroup lastResponse = null;
+    @Override
+    public ProductGroup getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -223,13 +228,19 @@ public class ProductGroup extends APINode {
     };
 
     @Override
-    public ProductGroup call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public ProductGroup parseResponse(String response) throws APIException {
+      return ProductGroup.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public ProductGroup call(Map<String, Object> extraParams) throws APIException {
-      return ProductGroup.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public ProductGroup execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductGroup execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGet(String nodeId, APIContext context) {
@@ -300,6 +311,11 @@ public class ProductGroup extends APINode {
 
   public static class APIRequestUpdate extends APIRequest<APINode> {
 
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
       "id",
       "variants",
@@ -309,13 +325,19 @@ public class ProductGroup extends APINode {
     };
 
     @Override
-    public APINode call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode call(Map<String, Object> extraParams) throws APIException {
-      return APINode.parseResponse(callInternal(extraParams), getContext(), this).head();
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestUpdate(String nodeId, APIContext context) {
@@ -381,6 +403,11 @@ public class ProductGroup extends APINode {
 
   public static class APIRequestGetProducts extends APIRequest<ProductItem> {
 
+    APINodeList<ProductItem> lastResponse = null;
+    @Override
+    public APINodeList<ProductItem> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -425,13 +452,19 @@ public class ProductGroup extends APINode {
     };
 
     @Override
-    public APINodeList<ProductItem> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<ProductItem> parseResponse(String response) throws APIException {
+      return ProductItem.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<ProductItem> call(Map<String, Object> extraParams) throws APIException {
-      return ProductItem.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<ProductItem> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductItem> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetProducts(String nodeId, APIContext context) {
@@ -740,6 +773,11 @@ public class ProductGroup extends APINode {
 
   public static class APIRequestGetProductSets extends APIRequest<ProductSet> {
 
+    APINodeList<ProductSet> lastResponse = null;
+    @Override
+    public APINodeList<ProductSet> getLastResponse() {
+      return lastResponse;
+    }
     public static final String[] PARAMS = {
     };
 
@@ -751,13 +789,19 @@ public class ProductGroup extends APINode {
     };
 
     @Override
-    public APINodeList<ProductSet> call() throws APIException {
-      return call(new HashMap<String, Object>());
+    public APINodeList<ProductSet> parseResponse(String response) throws APIException {
+      return ProductSet.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<ProductSet> call(Map<String, Object> extraParams) throws APIException {
-      return ProductSet.parseResponse(callInternal(extraParams), getContext(), this);
+    public APINodeList<ProductSet> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductSet> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
     public APIRequestGetProductSets(String nodeId, APIContext context) {

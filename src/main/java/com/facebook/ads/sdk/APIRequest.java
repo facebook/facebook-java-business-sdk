@@ -47,7 +47,7 @@ abstract public class APIRequest<T> {
   protected String endpoint;
   protected String method;
   protected List<String> paramNames;
-  protected Map<String, Object> params;
+  protected Map<String, Object> params = new HashMap<String, Object>();
   protected List<String> returnFields;
   public static final String USER_AGENT = APIConfig.USER_AGENT;
   public static Map<String, String> fileToContentTypeMap = new HashMap<String, String>();
@@ -67,8 +67,10 @@ abstract public class APIRequest<T> {
     this.paramNames = paramNames;
   }
 
-  abstract protected IAPINodeOrNodeList call() throws APIException;
-  abstract protected IAPINodeOrNodeList call(Map<String, Object> extraParams) throws APIException;
+  abstract protected APIResponse getLastResponse();
+  abstract protected APIResponse parseResponse(String response) throws APIException;
+  abstract protected APIResponse execute() throws APIException;
+  abstract protected APIResponse execute(Map<String, Object> extraParams) throws APIException;
 
   protected String callInternal() throws APIException {
     return callInternal(null);
@@ -80,10 +82,10 @@ abstract public class APIRequest<T> {
     String response = null;
     try {
       context.log("========Start of API Call========");
-      if("GET" == method) response = sendGet(getAllParams(extraParams));
-      else if("POST" == method) response = sendPost(getAllParams(extraParams));
-      else if("DELETE" == method) response = sendDelete(getAllParams(extraParams));
-      else throw new APIException();
+      if("GET".equals(method)) response = sendGet(getApiUrl(), getAllParams(extraParams), context);
+      else if("POST".equals(method)) response = sendPost(getApiUrl(), getAllParams(extraParams), context);
+      else if("DELETE".equals(method)) response = sendDelete(getApiUrl(), getAllParams(extraParams), context);
+      else throw new APIException(new IllegalArgumentException("Unsupported http method. Currently only GET, POST, and DELETE are supported"));
       context.log("Response:");
       context.log(response);
       context.log("========End of API Call========");
@@ -102,7 +104,6 @@ abstract public class APIRequest<T> {
   }
 
   protected void setParamInternal(String param, Object value) {
-    if (params == null) params = new HashMap<String, Object>();
     params.put(param, value);
   }
 
@@ -117,9 +118,9 @@ abstract public class APIRequest<T> {
   }
 
   // HTTP GET request
-  protected String sendGet(Map<String, Object> allParams) throws APIException, IOException {
+  public static String sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
 
-    StringBuilder urlString = new StringBuilder(getApiUrl());
+    StringBuilder urlString = new StringBuilder(apiUrl);
     boolean firstEntry = true;
     for(Map.Entry entry : allParams.entrySet()) {
       urlString.append((firstEntry ? "?" : "&") + URLEncoder.encode(entry.getKey().toString(), "UTF-8") + "=" + URLEncoder.encode(toString(entry.getValue()), "UTF-8"));
@@ -139,10 +140,9 @@ abstract public class APIRequest<T> {
   }
 
   // HTTP POST request
-  protected String sendPost(Map<String, Object> allParams) throws APIException, IOException {
+  public static String sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
     String boundary = "--------------------------" + new Random().nextLong();
-    List<File> files = new ArrayList<File>();
-    URL url = new URL(getApiUrl());
+    URL url = new URL(apiUrl);
     context.log("Post: " + url.toString());
     HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 
@@ -152,7 +152,7 @@ abstract public class APIRequest<T> {
     con.setRequestProperty("Content-Type","multipart/form-data; boundary=" + boundary);
     con.setDoOutput(true);
 
-    int contentLength = getContentLength(allParams, boundary);
+    int contentLength = getContentLength(allParams, boundary, context);
 
     con.setRequestProperty("Content-Length", "" + contentLength);
 
@@ -189,9 +189,9 @@ abstract public class APIRequest<T> {
     return readResponse(con);
   }
 
-  protected String sendDelete(Map<String, Object> allParams) throws APIException, IOException {
+  public static String sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
 
-    StringBuilder urlString = new StringBuilder(getApiUrl());
+    StringBuilder urlString = new StringBuilder(apiUrl);
     boolean firstEntry = true;
     for(Map.Entry entry : allParams.entrySet()) {
       urlString.append((firstEntry ? "?" : "&") + URLEncoder.encode(entry.getKey().toString(), "UTF-8") + "=" + URLEncoder.encode(toString(entry.getValue()), "UTF-8"));
@@ -224,16 +224,17 @@ abstract public class APIRequest<T> {
   }
 
   private Map<String, Object> getAllParams(Map<String, Object> extraParams) {
-    Map<String, Object> allParams;
-    if (params != null) allParams = new HashMap<String, Object>(params);
-    else allParams = new HashMap<String, Object>();
+    Map<String, Object> allParams = new HashMap<String, Object>(params);
     if (extraParams != null) allParams.putAll(extraParams);
-    allParams.put("access_token", context.getAuthToken());
+    allParams.put("access_token", context.getAccessToken());
+    if (context.hasAppSecret()) {
+      allParams.put("appsecret_proof", context.getAppSecretProof());
+    }
     if (returnFields != null) allParams.put("fields", joinStringList(returnFields));
     return allParams;
   }
 
-  private String readResponse(HttpsURLConnection con) throws APIException, IOException {
+  private static String readResponse(HttpsURLConnection con) throws APIException, IOException {
     try {
       int responseCode = con.getResponseCode();
 
@@ -269,31 +270,31 @@ abstract public class APIRequest<T> {
     return null;
   }
 
-  private int getContentLength(Map<String, Object> allParams, String boundary) {
+  private static int getContentLength(Map<String, Object> allParams, String boundary, APIContext context) {
     int contentLength = 0;
     for(Map.Entry entry : allParams.entrySet()) {
       contentLength += ("--" + boundary + "\r\n").length();
       if(entry.getValue() instanceof File) {
         File file = (File) entry.getValue();
         String contentType = getContentTypeForFile(file);
-        contentLength += getLength("Content-Disposition: form-data; name=\"" + entry.getKey() + "\"; filename=\"" + file.getName() + "\"\r\n");
+        contentLength += getLengthAndLog(context, "Content-Disposition: form-data; name=\"" + entry.getKey() + "\"; filename=\"" + file.getName() + "\"\r\n");
         if (contentType != null) {
-          contentLength += getLength("Content-Type: " + contentType + "\r\n");
+          contentLength += getLengthAndLog(context, "Content-Type: " + contentType + "\r\n");
         }
-        contentLength += getLength("\r\n");
+        contentLength += getLengthAndLog(context, "\r\n");
         contentLength += file.length();
-        contentLength += getLength("\r\n");
+        contentLength += getLengthAndLog(context, "\r\n");
       } else {
-        contentLength += getLength("Content-Disposition: form-data; name=\"" + entry.getKey() + "\"");
-        contentLength += getLength(toString(entry.getValue()));
-        contentLength += getLength("\r\n");
+        contentLength += getLengthAndLog(context, "Content-Disposition: form-data; name=\"" + entry.getKey() + "\"");
+        contentLength += getLengthAndLog(context, toString(entry.getValue()));
+        contentLength += getLengthAndLog(context, "\r\n");
       }
     }
-    contentLength += getLength("--" + boundary + "--\r\n");
+    contentLength += getLengthAndLog(context, "--" + boundary + "--\r\n");
     return contentLength;
   }
 
-  private int getLength(String input) {
+  private static int getLengthAndLog(APIContext context, String input) {
     context.log(input);
     return input.length();
   }
@@ -307,5 +308,46 @@ abstract public class APIRequest<T> {
     } else {
       return input.toString();
     }
+  }
+
+  public APIRequest addToBatch(BatchRequest batch) {
+    batch.addRequest(this);
+    return this;
+  }
+
+  public APIRequest addToBatch(BatchRequest batch, String name) {
+    batch.addRequest(name, this);
+    return this;
+  }
+
+  BatchRequest.BatchModeRequestInfo getBatchModeRequestInfo() throws IOException {
+    BatchRequest.BatchModeRequestInfo info = new BatchRequest.BatchModeRequestInfo();
+    Map<String, Object> allParams = new HashMap<String, Object>(params);
+    if (returnFields != null) allParams.put("fields", joinStringList(returnFields));
+    info.method = this.method;
+    StringBuilder relativeUrl = new StringBuilder(context.getVersion() + "/" + nodeId + endpoint);
+    if (this.method.equals("POST")) {
+      info.files = new HashMap<String, File>();
+      info.relativeUrl = relativeUrl.toString();
+      StringBuilder body = new StringBuilder();
+      boolean firstEntry = true;
+      for(Map.Entry entry : allParams.entrySet()) {
+        if(entry.getValue() instanceof File) {
+          info.files.put((String)entry.getKey(), (File) entry.getValue());
+        } else {
+          body.append((firstEntry ? "" : "&") + entry.getKey() + "=" + toString(entry.getValue()));
+          firstEntry = false;
+        }
+      }
+      info.body = body.toString();
+    } else {
+      boolean firstEntry = true;
+      for(Map.Entry entry : allParams.entrySet()) {
+        relativeUrl.append((firstEntry ? "?" : "&") + URLEncoder.encode(entry.getKey().toString(), "UTF-8") + "=" + URLEncoder.encode(toString(entry.getValue()), "UTF-8"));
+        firstEntry = false;
+      }
+      info.relativeUrl = relativeUrl.toString();
+    }
+    return info;
   }
 }

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
-public class APINodeList<T extends APINode> extends ArrayList<T> implements IAPINodeOrNodeList {
+public class APINodeList<T extends APINode> extends ArrayList<T> implements APIResponse {
     private String before;
     private String after;
     private APIRequest<T> request;
@@ -45,7 +45,7 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements IAPI
       Map<String, Object> extraParams = new HashMap<String, Object>();
       if (limit > 0) extraParams.put("limit", limit);
       extraParams.put("after", after);
-      return (APINodeList<T>) request.call(extraParams);
+      return (APINodeList<T>) request.execute(extraParams);
     }
 
     public void setPaging(String before, String after) {
@@ -55,5 +55,10 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements IAPI
 
     public T head() {
       return this.size() > 0 ? this.get(0) : null;
+    }
+
+    @Override
+    public APIException getException() {
+      return null;
     }
 }

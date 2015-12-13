@@ -32,7 +32,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class APINode implements IAPINodeOrNodeList {
+public class APINode implements APIResponse {
 
   protected APIContext mContext = null;
   protected String rawValue = null;
@@ -123,6 +123,11 @@ public class APINode implements IAPINodeOrNodeList {
       }
     } catch (Exception e) {
     }
+    return null;
+  }
+
+  @Override
+  public APIException getException() {
     return null;
   }
 }

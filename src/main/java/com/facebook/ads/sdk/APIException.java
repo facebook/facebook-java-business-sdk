@@ -22,7 +22,7 @@
  */
 package com.facebook.ads.sdk;
 
-public class APIException extends Exception {
+public class APIException extends Exception implements APIResponse {
 
   public APIException () {
     super();
@@ -32,8 +32,21 @@ public class APIException extends Exception {
     super(e);
   }
 
+  public APIException (String message) {
+    super(message);
+  }
 
   public APIException (String message, Throwable e) {
     super(message, e);
+  }
+
+  @Override
+  public APINode head() {
+    return null;
+  }
+
+  @Override
+  public APIException getException() {
+    return this;
   }
 }
