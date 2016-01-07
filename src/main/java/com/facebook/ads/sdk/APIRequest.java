@@ -305,6 +305,9 @@ abstract public class APIRequest<T> {
     } else if (input instanceof Map) {
       Gson gson = new Gson();
       return gson.toJson((Map)input);
+    } else if (input instanceof List) {
+      Gson gson = new Gson();
+      return gson.toJson((List)input);
     } else {
       return input.toString();
     }
