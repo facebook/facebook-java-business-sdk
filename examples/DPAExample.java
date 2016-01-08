@@ -175,7 +175,7 @@ public class DPAExample {
     }
     creative.getPreviews()
     .setAdFormat(EnumAdFormat.VALUE_DESKTOP_FEED_STANDARD)
-    .setProductItemIds(Arrays.asList(new String[]{"\"catalog:" + catalog.getId() + ":" + "REJfMQ==" /*base64_encode of 'DB_1'*/ + "\""}))
+    .setProductItemIds(Arrays.asList(new String[]{"catalog:" + catalog.getId() + ":" + "REJfMQ==" /*base64_encode of 'DB_1'*/}))
     .execute();
   }
 }
