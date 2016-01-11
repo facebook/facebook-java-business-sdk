@@ -160,28 +160,28 @@ abstract public class APIRequest<T> {
     byte[] buffer = new byte[1024];
     int count = 0;
     for(Map.Entry entry : allParams.entrySet()) {
-      wr.writeBytes("--" + boundary + "\r\n");
+      writeStringInUTF8Bytes(wr, "--" + boundary + "\r\n");
       if(entry.getValue() instanceof File) {
         File file = (File) entry.getValue();
         String contentType = getContentTypeForFile(file);
-        wr.writeBytes("Content-Disposition: form-data; name=\"" + entry.getKey() + "\"; filename=\"" + file.getName() + "\"\r\n");
+        writeStringInUTF8Bytes(wr, "Content-Disposition: form-data; name=\"" + entry.getKey() + "\"; filename=\"" + file.getName() + "\"\r\n");
         if (contentType != null) {
-          wr.writeBytes("Content-Type: " + contentType + "\r\n");
+          writeStringInUTF8Bytes(wr, "Content-Type: " + contentType + "\r\n");
         }
-        wr.writeBytes("\r\n");
+        writeStringInUTF8Bytes(wr, "\r\n");
         FileInputStream fileInputStream = new FileInputStream(file);
         while ((count = fileInputStream.read(buffer)) >= 0) {
           wr.write(buffer, 0, count);
         }
-        wr.writeBytes("\r\n");
+        writeStringInUTF8Bytes(wr, "\r\n");
         fileInputStream.close();
       } else {
-        wr.writeBytes("Content-Disposition: form-data; name=\"" + entry.getKey() + "\"\r\n\r\n");
-        wr.writeBytes(toString(entry.getValue()));
-        wr.writeBytes("\r\n");
+        writeStringInUTF8Bytes(wr, "Content-Disposition: form-data; name=\"" + entry.getKey() + "\"\r\n\r\n");
+        writeStringInUTF8Bytes(wr, toString(entry.getValue()));
+        writeStringInUTF8Bytes(wr, "\r\n");
       }
     }
-    wr.writeBytes("--" + boundary + "--\r\n");
+    writeStringInUTF8Bytes(wr, "--" + boundary + "--\r\n");
 
     wr.flush();
     wr.close();
@@ -270,7 +270,7 @@ abstract public class APIRequest<T> {
     return null;
   }
 
-  private static int getContentLength(Map<String, Object> allParams, String boundary, APIContext context) {
+  private static int getContentLength(Map<String, Object> allParams, String boundary, APIContext context) throws IOException {
     int contentLength = 0;
     for(Map.Entry entry : allParams.entrySet()) {
       contentLength += ("--" + boundary + "\r\n").length();
@@ -285,7 +285,7 @@ abstract public class APIRequest<T> {
         contentLength += file.length();
         contentLength += getLengthAndLog(context, "\r\n");
       } else {
-        contentLength += getLengthAndLog(context, "Content-Disposition: form-data; name=\"" + entry.getKey() + "\"");
+        contentLength += getLengthAndLog(context, "Content-Disposition: form-data; name=\"" + entry.getKey() + "\"\r\n\r\n");
         contentLength += getLengthAndLog(context, toString(entry.getValue()));
         contentLength += getLengthAndLog(context, "\r\n");
       }
@@ -294,9 +294,9 @@ abstract public class APIRequest<T> {
     return contentLength;
   }
 
-  private static int getLengthAndLog(APIContext context, String input) {
+  private static int getLengthAndLog(APIContext context, String input) throws IOException {
     context.log(input);
-    return input.length();
+    return input.getBytes("UTF-8").length;
   }
 
   private static String toString(Object input) {
@@ -311,6 +311,10 @@ abstract public class APIRequest<T> {
     } else {
       return input.toString();
     }
+  }
+
+  private static void writeStringInUTF8Bytes(DataOutputStream wr, String input) throws IOException {
+    wr.write(input.getBytes("UTF-8"));
   }
 
   public APIRequest addToBatch(BatchRequest batch) {
