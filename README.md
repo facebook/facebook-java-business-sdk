@@ -206,3 +206,5 @@ Example:
       List<APIResponse> responses = batch.execute();
       // responses contains the result of each API call in order. However, if the API calls have dependency, then some result could be null.
 
+### Error Handling
+Currently all the errors are wrapped in ``APIException``. The error message can be obtained with getMessage(), which returns a json string of the error code and details. We have plan to improve this by adding more details and providing convenient function to get the error code.
