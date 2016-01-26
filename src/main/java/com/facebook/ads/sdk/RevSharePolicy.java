@@ -81,7 +81,7 @@ public class RevSharePolicy extends APINode {
   }
 
   public static APINodeList<RevSharePolicy> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<RevSharePolicy> revSharePolicys = new APINodeList<RevSharePolicy>(request);
+    APINodeList<RevSharePolicy> revSharePolicys = new APINodeList<RevSharePolicy>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -188,5 +188,13 @@ public class RevSharePolicy extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<RevSharePolicy> getParser() {
+    return new APIRequest.ResponseParser<RevSharePolicy>() {
+      public APINodeList<RevSharePolicy> parseResponse(String response, APIContext context, APIRequest<RevSharePolicy> request) {
+        return RevSharePolicy.parseResponse(response, context, request);
+      }
+    };
   }
 }

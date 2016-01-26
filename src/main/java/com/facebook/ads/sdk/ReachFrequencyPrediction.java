@@ -166,7 +166,7 @@ public class ReachFrequencyPrediction extends APINode {
   }
 
   public static APINodeList<ReachFrequencyPrediction> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ReachFrequencyPrediction> reachFrequencyPredictions = new APINodeList<ReachFrequencyPrediction>(request);
+    APINodeList<ReachFrequencyPrediction> reachFrequencyPredictions = new APINodeList<ReachFrequencyPrediction>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -450,6 +450,11 @@ public class ReachFrequencyPrediction extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -708,5 +713,13 @@ public class ReachFrequencyPrediction extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ReachFrequencyPrediction> getParser() {
+    return new APIRequest.ResponseParser<ReachFrequencyPrediction>() {
+      public APINodeList<ReachFrequencyPrediction> parseResponse(String response, APIContext context, APIRequest<ReachFrequencyPrediction> request) {
+        return ReachFrequencyPrediction.parseResponse(response, context, request);
+      }
+    };
   }
 }

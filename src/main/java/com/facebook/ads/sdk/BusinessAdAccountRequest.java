@@ -83,7 +83,7 @@ public class BusinessAdAccountRequest extends APINode {
   }
 
   public static APINodeList<BusinessAdAccountRequest> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<BusinessAdAccountRequest> businessAdAccountRequests = new APINodeList<BusinessAdAccountRequest>(request);
+    APINodeList<BusinessAdAccountRequest> businessAdAccountRequests = new APINodeList<BusinessAdAccountRequest>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -208,5 +208,13 @@ public class BusinessAdAccountRequest extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<BusinessAdAccountRequest> getParser() {
+    return new APIRequest.ResponseParser<BusinessAdAccountRequest>() {
+      public APINodeList<BusinessAdAccountRequest> parseResponse(String response, APIContext context, APIRequest<BusinessAdAccountRequest> request) {
+        return BusinessAdAccountRequest.parseResponse(response, context, request);
+      }
+    };
   }
 }

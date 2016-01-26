@@ -83,7 +83,7 @@ public class ProductItemCommerceInsights extends APINode {
   }
 
   public static APINodeList<ProductItemCommerceInsights> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ProductItemCommerceInsights> productItemCommerceInsightss = new APINodeList<ProductItemCommerceInsights>(request);
+    APINodeList<ProductItemCommerceInsights> productItemCommerceInsightss = new APINodeList<ProductItemCommerceInsights>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -200,5 +200,13 @@ public class ProductItemCommerceInsights extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ProductItemCommerceInsights> getParser() {
+    return new APIRequest.ResponseParser<ProductItemCommerceInsights>() {
+      public APINodeList<ProductItemCommerceInsights> parseResponse(String response, APIContext context, APIRequest<ProductItemCommerceInsights> request) {
+        return ProductItemCommerceInsights.parseResponse(response, context, request);
+      }
+    };
   }
 }

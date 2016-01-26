@@ -97,7 +97,7 @@ public class TargetingGeoLocationCustomLocation extends APINode {
   }
 
   public static APINodeList<TargetingGeoLocationCustomLocation> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<TargetingGeoLocationCustomLocation> targetingGeoLocationCustomLocations = new APINodeList<TargetingGeoLocationCustomLocation>(request);
+    APINodeList<TargetingGeoLocationCustomLocation> targetingGeoLocationCustomLocations = new APINodeList<TargetingGeoLocationCustomLocation>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -284,5 +284,13 @@ public class TargetingGeoLocationCustomLocation extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<TargetingGeoLocationCustomLocation> getParser() {
+    return new APIRequest.ResponseParser<TargetingGeoLocationCustomLocation>() {
+      public APINodeList<TargetingGeoLocationCustomLocation> parseResponse(String response, APIContext context, APIRequest<TargetingGeoLocationCustomLocation> request) {
+        return TargetingGeoLocationCustomLocation.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -81,7 +81,7 @@ public class RoasCohortsPerCohortIntervalUnit extends APINode {
   }
 
   public static APINodeList<RoasCohortsPerCohortIntervalUnit> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<RoasCohortsPerCohortIntervalUnit> roasCohortsPerCohortIntervalUnits = new APINodeList<RoasCohortsPerCohortIntervalUnit>(request);
+    APINodeList<RoasCohortsPerCohortIntervalUnit> roasCohortsPerCohortIntervalUnits = new APINodeList<RoasCohortsPerCohortIntervalUnit>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -188,5 +188,13 @@ public class RoasCohortsPerCohortIntervalUnit extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<RoasCohortsPerCohortIntervalUnit> getParser() {
+    return new APIRequest.ResponseParser<RoasCohortsPerCohortIntervalUnit>() {
+      public APINodeList<RoasCohortsPerCohortIntervalUnit> parseResponse(String response, APIContext context, APIRequest<RoasCohortsPerCohortIntervalUnit> request) {
+        return RoasCohortsPerCohortIntervalUnit.parseResponse(response, context, request);
+      }
+    };
   }
 }

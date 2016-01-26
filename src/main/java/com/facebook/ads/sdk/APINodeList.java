@@ -31,9 +31,11 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
     private String before;
     private String after;
     private APIRequest<T> request;
+    private String rawValue;
 
-    public APINodeList(APIRequest<T> request) {
+    public APINodeList(APIRequest<T> request, String rawValue) {
       this.request = request;
+      this.rawValue = rawValue;
     }
 
     public APINodeList<T> nextPage() throws APIException {
@@ -53,6 +55,12 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
       this.after = after;
     }
 
+    @Override
+    public String getRawResponse() {
+      return rawValue;
+    }
+
+    @Override
     public T head() {
       return this.size() > 0 ? this.get(0) : null;
     }

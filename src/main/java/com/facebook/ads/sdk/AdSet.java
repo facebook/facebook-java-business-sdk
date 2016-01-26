@@ -176,7 +176,7 @@ public class AdSet extends APINode {
   }
 
   public static APINodeList<AdSet> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdSet> adSets = new APINodeList<AdSet>(request);
+    APINodeList<AdSet> adSets = new APINodeList<AdSet>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -522,6 +522,11 @@ public class AdSet extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1113,6 +1118,11 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1198,6 +1208,11 @@ public class AdSet extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1344,6 +1359,11 @@ public class AdSet extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetActivities requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1523,6 +1543,11 @@ public class AdSet extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAdCreatives requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1874,6 +1899,11 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestGetAds requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetAds requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -2104,6 +2134,11 @@ public class AdSet extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAsyncAdRequests requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -2405,6 +2440,11 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetInsights requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -2479,6 +2519,11 @@ public class AdSet extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetTargetingSentenceLines requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -2606,6 +2651,11 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestDeleteAdLabels requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestDeleteAdLabels requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -2706,6 +2756,11 @@ public class AdSet extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestCreateAdLabel requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -3561,5 +3616,13 @@ public class AdSet extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdSet> getParser() {
+    return new APIRequest.ResponseParser<AdSet>() {
+      public APINodeList<AdSet> parseResponse(String response, APIContext context, APIRequest<AdSet> request) {
+        return AdSet.parseResponse(response, context, request);
+      }
+    };
   }
 }

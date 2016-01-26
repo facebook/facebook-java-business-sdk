@@ -91,7 +91,7 @@ public class AdCreativeVideoData extends APINode {
   }
 
   public static APINodeList<AdCreativeVideoData> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdCreativeVideoData> adCreativeVideoDatas = new APINodeList<AdCreativeVideoData>(request);
+    APINodeList<AdCreativeVideoData> adCreativeVideoDatas = new APINodeList<AdCreativeVideoData>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -258,5 +258,13 @@ public class AdCreativeVideoData extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdCreativeVideoData> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeVideoData>() {
+      public APINodeList<AdCreativeVideoData> parseResponse(String response, APIContext context, APIRequest<AdCreativeVideoData> request) {
+        return AdCreativeVideoData.parseResponse(response, context, request);
+      }
+    };
   }
 }

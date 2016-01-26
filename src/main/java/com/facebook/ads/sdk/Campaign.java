@@ -136,7 +136,7 @@ public class Campaign extends APINode {
   }
 
   public static APINodeList<Campaign> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<Campaign> campaigns = new APINodeList<Campaign>(request);
+    APINodeList<Campaign> campaigns = new APINodeList<Campaign>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -370,6 +370,11 @@ public class Campaign extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -607,6 +612,11 @@ public class Campaign extends APINode {
       return this;
     }
 
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -685,6 +695,11 @@ public class Campaign extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -837,6 +852,11 @@ public class Campaign extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAds requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1132,6 +1152,11 @@ public class Campaign extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAdSets requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1615,6 +1640,11 @@ public class Campaign extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetInsights requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1718,6 +1748,11 @@ public class Campaign extends APINode {
       return this;
     }
 
+    public APIRequestDeleteAdLabels requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestDeleteAdLabels requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1818,6 +1853,11 @@ public class Campaign extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestCreateAdLabel requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -2509,5 +2549,13 @@ public class Campaign extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<Campaign> getParser() {
+    return new APIRequest.ResponseParser<Campaign>() {
+      public APINodeList<Campaign> parseResponse(String response, APIContext context, APIRequest<Campaign> request) {
+        return Campaign.parseResponse(response, context, request);
+      }
+    };
   }
 }

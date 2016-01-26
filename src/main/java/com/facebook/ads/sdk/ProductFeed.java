@@ -132,7 +132,7 @@ public class ProductFeed extends APINode {
   }
 
   public static APINodeList<ProductFeed> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ProductFeed> productFeeds = new APINodeList<ProductFeed>(request);
+    APINodeList<ProductFeed> productFeeds = new APINodeList<ProductFeed>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -351,6 +351,11 @@ public class ProductFeed extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -577,6 +582,11 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -655,6 +665,11 @@ public class ProductFeed extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -766,6 +781,11 @@ public class ProductFeed extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetProducts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1107,6 +1127,11 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    public APIRequestGetUploads requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetUploads requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1246,6 +1271,11 @@ public class ProductFeed extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestCreateUpload requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1391,5 +1421,13 @@ public class ProductFeed extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ProductFeed> getParser() {
+    return new APIRequest.ResponseParser<ProductFeed>() {
+      public APINodeList<ProductFeed> parseResponse(String response, APIContext context, APIRequest<ProductFeed> request) {
+        return ProductFeed.parseResponse(response, context, request);
+      }
+    };
   }
 }

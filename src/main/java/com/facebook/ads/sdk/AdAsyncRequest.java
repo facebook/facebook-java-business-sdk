@@ -124,7 +124,7 @@ public class AdAsyncRequest extends APINode {
   }
 
   public static APINodeList<AdAsyncRequest> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdAsyncRequest> adAsyncRequests = new APINodeList<AdAsyncRequest>(request);
+    APINodeList<AdAsyncRequest> adAsyncRequests = new APINodeList<AdAsyncRequest>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -306,6 +306,11 @@ public class AdAsyncRequest extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -428,5 +433,13 @@ public class AdAsyncRequest extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdAsyncRequest> getParser() {
+    return new APIRequest.ResponseParser<AdAsyncRequest>() {
+      public APINodeList<AdAsyncRequest> parseResponse(String response, APIContext context, APIRequest<AdAsyncRequest> request) {
+        return AdAsyncRequest.parseResponse(response, context, request);
+      }
+    };
   }
 }

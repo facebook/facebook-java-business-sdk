@@ -95,7 +95,7 @@ public class AdPromotedObject extends APINode {
   }
 
   public static APINodeList<AdPromotedObject> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdPromotedObject> adPromotedObjects = new APINodeList<AdPromotedObject>(request);
+    APINodeList<AdPromotedObject> adPromotedObjects = new APINodeList<AdPromotedObject>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -318,5 +318,13 @@ public class AdPromotedObject extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdPromotedObject> getParser() {
+    return new APIRequest.ResponseParser<AdPromotedObject>() {
+      public APINodeList<AdPromotedObject> parseResponse(String response, APIContext context, APIRequest<AdPromotedObject> request) {
+        return AdPromotedObject.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -81,7 +81,7 @@ public class AdgroupReviewFeedback extends APINode {
   }
 
   public static APINodeList<AdgroupReviewFeedback> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdgroupReviewFeedback> adgroupReviewFeedbacks = new APINodeList<AdgroupReviewFeedback>(request);
+    APINodeList<AdgroupReviewFeedback> adgroupReviewFeedbacks = new APINodeList<AdgroupReviewFeedback>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -193,5 +193,13 @@ public class AdgroupReviewFeedback extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdgroupReviewFeedback> getParser() {
+    return new APIRequest.ResponseParser<AdgroupReviewFeedback>() {
+      public APINodeList<AdgroupReviewFeedback> parseResponse(String response, APIContext context, APIRequest<AdgroupReviewFeedback> request) {
+        return AdgroupReviewFeedback.parseResponse(response, context, request);
+      }
+    };
   }
 }

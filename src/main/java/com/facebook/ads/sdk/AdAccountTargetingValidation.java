@@ -95,7 +95,7 @@ public class AdAccountTargetingValidation extends APINode {
   }
 
   public static APINodeList<AdAccountTargetingValidation> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdAccountTargetingValidation> adAccountTargetingValidations = new APINodeList<AdAccountTargetingValidation>(request);
+    APINodeList<AdAccountTargetingValidation> adAccountTargetingValidations = new APINodeList<AdAccountTargetingValidation>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -420,5 +420,13 @@ public class AdAccountTargetingValidation extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdAccountTargetingValidation> getParser() {
+    return new APIRequest.ResponseParser<AdAccountTargetingValidation>() {
+      public APINodeList<AdAccountTargetingValidation> parseResponse(String response, APIContext context, APIRequest<AdAccountTargetingValidation> request) {
+        return AdAccountTargetingValidation.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -152,7 +152,7 @@ public class CustomAudience extends APINode {
   }
 
   public static APINodeList<CustomAudience> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<CustomAudience> customAudiences = new APINodeList<CustomAudience>(request);
+    APINodeList<CustomAudience> customAudiences = new APINodeList<CustomAudience>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -453,6 +453,11 @@ public class CustomAudience extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -763,6 +768,11 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -848,6 +858,11 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestDelete requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -920,6 +935,11 @@ public class CustomAudience extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetCapabilities requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1004,6 +1024,11 @@ public class CustomAudience extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetPrefills requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1130,6 +1155,11 @@ public class CustomAudience extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAds requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1348,6 +1378,11 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestGetAdAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetAdAccounts requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1445,6 +1480,11 @@ public class CustomAudience extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetSessions requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1592,6 +1632,11 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestCreateCapabilitie requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateCapabilitie requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1695,6 +1740,11 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdAccount requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateAdAccount requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1787,6 +1837,11 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestDeleteCapabilities requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestDeleteCapabilities requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1876,6 +1931,11 @@ public class CustomAudience extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestDeleteAdAccounts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1982,6 +2042,11 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestCreateUser requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateUser requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -2085,6 +2150,11 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestDeleteUsers requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestDeleteUsers requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -2133,5 +2203,13 @@ public class CustomAudience extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<CustomAudience> getParser() {
+    return new APIRequest.ResponseParser<CustomAudience>() {
+      public APINodeList<CustomAudience> parseResponse(String response, APIContext context, APIRequest<CustomAudience> request) {
+        return CustomAudience.parseResponse(response, context, request);
+      }
+    };
   }
 }

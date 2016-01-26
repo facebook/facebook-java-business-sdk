@@ -85,7 +85,7 @@ public class AdgroupRelevanceScore extends APINode {
   }
 
   public static APINodeList<AdgroupRelevanceScore> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdgroupRelevanceScore> adgroupRelevanceScores = new APINodeList<AdgroupRelevanceScore>(request);
+    APINodeList<AdgroupRelevanceScore> adgroupRelevanceScores = new APINodeList<AdgroupRelevanceScore>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -212,5 +212,13 @@ public class AdgroupRelevanceScore extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdgroupRelevanceScore> getParser() {
+    return new APIRequest.ResponseParser<AdgroupRelevanceScore>() {
+      public APINodeList<AdgroupRelevanceScore> parseResponse(String response, APIContext context, APIRequest<AdgroupRelevanceScore> request) {
+        return AdgroupRelevanceScore.parseResponse(response, context, request);
+      }
+    };
   }
 }

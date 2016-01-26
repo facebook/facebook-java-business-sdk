@@ -79,7 +79,7 @@ public class AdPreview extends APINode {
   }
 
   public static APINodeList<AdPreview> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdPreview> adPreviews = new APINodeList<AdPreview>(request);
+    APINodeList<AdPreview> adPreviews = new APINodeList<AdPreview>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -176,5 +176,13 @@ public class AdPreview extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdPreview> getParser() {
+    return new APIRequest.ResponseParser<AdPreview>() {
+      public APINodeList<AdPreview> parseResponse(String response, APIContext context, APIRequest<AdPreview> request) {
+        return AdPreview.parseResponse(response, context, request);
+      }
+    };
   }
 }

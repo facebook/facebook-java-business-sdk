@@ -93,7 +93,7 @@ public class ProfilePictureSource extends APINode {
   }
 
   public static APINodeList<ProfilePictureSource> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ProfilePictureSource> profilePictureSources = new APINodeList<ProfilePictureSource>(request);
+    APINodeList<ProfilePictureSource> profilePictureSources = new APINodeList<ProfilePictureSource>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -260,5 +260,13 @@ public class ProfilePictureSource extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ProfilePictureSource> getParser() {
+    return new APIRequest.ResponseParser<ProfilePictureSource>() {
+      public APINodeList<ProfilePictureSource> parseResponse(String response, APIContext context, APIRequest<ProfilePictureSource> request) {
+        return ProfilePictureSource.parseResponse(response, context, request);
+      }
+    };
   }
 }

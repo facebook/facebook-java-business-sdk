@@ -99,7 +99,7 @@ public class PartnerCategory extends APINode {
   }
 
   public static APINodeList<PartnerCategory> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<PartnerCategory> partnerCategorys = new APINodeList<PartnerCategory>(request);
+    APINodeList<PartnerCategory> partnerCategorys = new APINodeList<PartnerCategory>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -296,5 +296,13 @@ public class PartnerCategory extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<PartnerCategory> getParser() {
+    return new APIRequest.ResponseParser<PartnerCategory>() {
+      public APINodeList<PartnerCategory> parseResponse(String response, APIContext context, APIRequest<PartnerCategory> request) {
+        return PartnerCategory.parseResponse(response, context, request);
+      }
+    };
   }
 }

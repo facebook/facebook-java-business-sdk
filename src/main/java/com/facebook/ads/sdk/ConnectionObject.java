@@ -127,7 +127,7 @@ public class ConnectionObject extends APINode {
   }
 
   public static APINodeList<ConnectionObject> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ConnectionObject> connectionObjects = new APINodeList<ConnectionObject>(request);
+    APINodeList<ConnectionObject> connectionObjects = new APINodeList<ConnectionObject>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -474,5 +474,13 @@ public class ConnectionObject extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ConnectionObject> getParser() {
+    return new APIRequest.ResponseParser<ConnectionObject>() {
+      public APINodeList<ConnectionObject> parseResponse(String response, APIContext context, APIRequest<ConnectionObject> request) {
+        return ConnectionObject.parseResponse(response, context, request);
+      }
+    };
   }
 }

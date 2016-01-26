@@ -83,7 +83,7 @@ public class DeliveryCheckExtraInfo extends APINode {
   }
 
   public static APINodeList<DeliveryCheckExtraInfo> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<DeliveryCheckExtraInfo> deliveryCheckExtraInfos = new APINodeList<DeliveryCheckExtraInfo>(request);
+    APINodeList<DeliveryCheckExtraInfo> deliveryCheckExtraInfos = new APINodeList<DeliveryCheckExtraInfo>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -200,5 +200,13 @@ public class DeliveryCheckExtraInfo extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<DeliveryCheckExtraInfo> getParser() {
+    return new APIRequest.ResponseParser<DeliveryCheckExtraInfo>() {
+      public APINodeList<DeliveryCheckExtraInfo> parseResponse(String response, APIContext context, APIRequest<DeliveryCheckExtraInfo> request) {
+        return DeliveryCheckExtraInfo.parseResponse(response, context, request);
+      }
+    };
   }
 }

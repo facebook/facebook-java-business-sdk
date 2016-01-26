@@ -81,7 +81,7 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
   }
 
   public static APINodeList<AdAsyncRequestSetNotificationResult> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdAsyncRequestSetNotificationResult> adAsyncRequestSetNotificationResults = new APINodeList<AdAsyncRequestSetNotificationResult>(request);
+    APINodeList<AdAsyncRequestSetNotificationResult> adAsyncRequestSetNotificationResults = new APINodeList<AdAsyncRequestSetNotificationResult>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -188,5 +188,13 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdAsyncRequestSetNotificationResult> getParser() {
+    return new APIRequest.ResponseParser<AdAsyncRequestSetNotificationResult>() {
+      public APINodeList<AdAsyncRequestSetNotificationResult> parseResponse(String response, APIContext context, APIRequest<AdAsyncRequestSetNotificationResult> request) {
+        return AdAsyncRequestSetNotificationResult.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -70,12 +70,18 @@ public class APINode implements APIResponse {
     return rawValue;
   }
 
+  @Override
+  public String getRawResponse() {
+    return rawValue;
+  }
+
+  @Override
   public APINode head() {
     return this;
   }
 
   public static APINodeList<APINode> parseResponse(String json, APIContext context, APIRequest<APINode> request) {
-    APINodeList<APINode> nodes = new APINodeList<APINode>(request);
+    APINodeList<APINode> nodes = new APINodeList<APINode>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();

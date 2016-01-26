@@ -85,7 +85,7 @@ public class AdAccountRoasCohorts extends APINode {
   }
 
   public static APINodeList<AdAccountRoasCohorts> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdAccountRoasCohorts> adAccountRoasCohortss = new APINodeList<AdAccountRoasCohorts>(request);
+    APINodeList<AdAccountRoasCohorts> adAccountRoasCohortss = new APINodeList<AdAccountRoasCohorts>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -217,5 +217,13 @@ public class AdAccountRoasCohorts extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdAccountRoasCohorts> getParser() {
+    return new APIRequest.ResponseParser<AdAccountRoasCohorts>() {
+      public APINodeList<AdAccountRoasCohorts> parseResponse(String response, APIContext context, APIRequest<AdAccountRoasCohorts> request) {
+        return AdAccountRoasCohorts.parseResponse(response, context, request);
+      }
+    };
   }
 }

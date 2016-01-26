@@ -99,7 +99,7 @@ public class AdActivity extends APINode {
   }
 
   public static APINodeList<AdActivity> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdActivity> adActivitys = new APINodeList<AdActivity>(request);
+    APINodeList<AdActivity> adActivitys = new APINodeList<AdActivity>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -412,5 +412,13 @@ public class AdActivity extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdActivity> getParser() {
+    return new APIRequest.ResponseParser<AdActivity>() {
+      public APINodeList<AdActivity> parseResponse(String response, APIContext context, APIRequest<AdActivity> request) {
+        return AdActivity.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -85,7 +85,7 @@ public class AdCreativeLinkDataAppLinkSpec extends APINode {
   }
 
   public static APINodeList<AdCreativeLinkDataAppLinkSpec> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdCreativeLinkDataAppLinkSpec> adCreativeLinkDataAppLinkSpecs = new APINodeList<AdCreativeLinkDataAppLinkSpec>(request);
+    APINodeList<AdCreativeLinkDataAppLinkSpec> adCreativeLinkDataAppLinkSpecs = new APINodeList<AdCreativeLinkDataAppLinkSpec>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -232,5 +232,13 @@ public class AdCreativeLinkDataAppLinkSpec extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdCreativeLinkDataAppLinkSpec> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeLinkDataAppLinkSpec>() {
+      public APINodeList<AdCreativeLinkDataAppLinkSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeLinkDataAppLinkSpec> request) {
+        return AdCreativeLinkDataAppLinkSpec.parseResponse(response, context, request);
+      }
+    };
   }
 }

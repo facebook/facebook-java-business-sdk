@@ -87,7 +87,7 @@ public class ProductFeedSchedule extends APINode {
   }
 
   public static APINodeList<ProductFeedSchedule> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ProductFeedSchedule> productFeedSchedules = new APINodeList<ProductFeedSchedule>(request);
+    APINodeList<ProductFeedSchedule> productFeedSchedules = new APINodeList<ProductFeedSchedule>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -244,5 +244,13 @@ public class ProductFeedSchedule extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ProductFeedSchedule> getParser() {
+    return new APIRequest.ResponseParser<ProductFeedSchedule>() {
+      public APINodeList<ProductFeedSchedule> parseResponse(String response, APIContext context, APIRequest<ProductFeedSchedule> request) {
+        return ProductFeedSchedule.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -125,7 +125,7 @@ public class ConversionActionQuery extends APINode {
   }
 
   public static APINodeList<ConversionActionQuery> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ConversionActionQuery> conversionActionQuerys = new APINodeList<ConversionActionQuery>(request);
+    APINodeList<ConversionActionQuery> conversionActionQuerys = new APINodeList<ConversionActionQuery>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -452,5 +452,13 @@ public class ConversionActionQuery extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ConversionActionQuery> getParser() {
+    return new APIRequest.ResponseParser<ConversionActionQuery>() {
+      public APINodeList<ConversionActionQuery> parseResponse(String response, APIContext context, APIRequest<ConversionActionQuery> request) {
+        return ConversionActionQuery.parseResponse(response, context, request);
+      }
+    };
   }
 }

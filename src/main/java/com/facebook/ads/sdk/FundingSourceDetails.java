@@ -85,7 +85,7 @@ public class FundingSourceDetails extends APINode {
   }
 
   public static APINodeList<FundingSourceDetails> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<FundingSourceDetails> fundingSourceDetailss = new APINodeList<FundingSourceDetails>(request);
+    APINodeList<FundingSourceDetails> fundingSourceDetailss = new APINodeList<FundingSourceDetails>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -217,5 +217,13 @@ public class FundingSourceDetails extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<FundingSourceDetails> getParser() {
+    return new APIRequest.ResponseParser<FundingSourceDetails>() {
+      public APINodeList<FundingSourceDetails> parseResponse(String response, APIContext context, APIRequest<FundingSourceDetails> request) {
+        return FundingSourceDetails.parseResponse(response, context, request);
+      }
+    };
   }
 }

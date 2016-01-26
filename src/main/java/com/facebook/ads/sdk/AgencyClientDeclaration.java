@@ -101,7 +101,7 @@ public class AgencyClientDeclaration extends APINode {
   }
 
   public static APINodeList<AgencyClientDeclaration> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AgencyClientDeclaration> agencyClientDeclarations = new APINodeList<AgencyClientDeclaration>(request);
+    APINodeList<AgencyClientDeclaration> agencyClientDeclarations = new APINodeList<AgencyClientDeclaration>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -308,5 +308,13 @@ public class AgencyClientDeclaration extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AgencyClientDeclaration> getParser() {
+    return new APIRequest.ResponseParser<AgencyClientDeclaration>() {
+      public APINodeList<AgencyClientDeclaration> parseResponse(String response, APIContext context, APIRequest<AgencyClientDeclaration> request) {
+        return AgencyClientDeclaration.parseResponse(response, context, request);
+      }
+    };
   }
 }

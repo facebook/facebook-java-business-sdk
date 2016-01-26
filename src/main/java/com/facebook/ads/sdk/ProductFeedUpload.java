@@ -118,7 +118,7 @@ public class ProductFeedUpload extends APINode {
   }
 
   public static APINodeList<ProductFeedUpload> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ProductFeedUpload> productFeedUploads = new APINodeList<ProductFeedUpload>(request);
+    APINodeList<ProductFeedUpload> productFeedUploads = new APINodeList<ProductFeedUpload>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -286,6 +286,11 @@ public class ProductFeedUpload extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -402,6 +407,11 @@ public class ProductFeedUpload extends APINode {
       return this;
     }
 
+    public APIRequestGetErrors requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetErrors requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -500,5 +510,13 @@ public class ProductFeedUpload extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ProductFeedUpload> getParser() {
+    return new APIRequest.ResponseParser<ProductFeedUpload>() {
+      public APINodeList<ProductFeedUpload> parseResponse(String response, APIContext context, APIRequest<ProductFeedUpload> request) {
+        return ProductFeedUpload.parseResponse(response, context, request);
+      }
+    };
   }
 }

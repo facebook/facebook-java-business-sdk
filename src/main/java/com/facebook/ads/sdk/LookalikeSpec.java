@@ -89,7 +89,7 @@ public class LookalikeSpec extends APINode {
   }
 
   public static APINodeList<LookalikeSpec> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<LookalikeSpec> lookalikeSpecs = new APINodeList<LookalikeSpec>(request);
+    APINodeList<LookalikeSpec> lookalikeSpecs = new APINodeList<LookalikeSpec>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -236,5 +236,13 @@ public class LookalikeSpec extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<LookalikeSpec> getParser() {
+    return new APIRequest.ResponseParser<LookalikeSpec>() {
+      public APINodeList<LookalikeSpec> parseResponse(String response, APIContext context, APIRequest<LookalikeSpec> request) {
+        return LookalikeSpec.parseResponse(response, context, request);
+      }
+    };
   }
 }

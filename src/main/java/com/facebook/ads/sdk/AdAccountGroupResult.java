@@ -83,7 +83,7 @@ public class AdAccountGroupResult extends APINode {
   }
 
   public static APINodeList<AdAccountGroupResult> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdAccountGroupResult> adAccountGroupResults = new APINodeList<AdAccountGroupResult>(request);
+    APINodeList<AdAccountGroupResult> adAccountGroupResults = new APINodeList<AdAccountGroupResult>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -200,5 +200,13 @@ public class AdAccountGroupResult extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdAccountGroupResult> getParser() {
+    return new APIRequest.ResponseParser<AdAccountGroupResult>() {
+      public APINodeList<AdAccountGroupResult> parseResponse(String response, APIContext context, APIRequest<AdAccountGroupResult> request) {
+        return AdAccountGroupResult.parseResponse(response, context, request);
+      }
+    };
   }
 }

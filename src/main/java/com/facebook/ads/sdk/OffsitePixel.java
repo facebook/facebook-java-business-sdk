@@ -120,7 +120,7 @@ public class OffsitePixel extends APINode {
   }
 
   public static APINodeList<OffsitePixel> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<OffsitePixel> offsitePixels = new APINodeList<OffsitePixel>(request);
+    APINodeList<OffsitePixel> offsitePixels = new APINodeList<OffsitePixel>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -309,6 +309,11 @@ public class OffsitePixel extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -468,6 +473,11 @@ public class OffsitePixel extends APINode {
       return this;
     }
 
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -546,6 +556,11 @@ public class OffsitePixel extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -673,6 +688,11 @@ public class OffsitePixel extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAdAccounts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1132,6 +1152,11 @@ public class OffsitePixel extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdAccount requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateAdAccount requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1217,6 +1242,11 @@ public class OffsitePixel extends APINode {
       return this;
     }
 
+    public APIRequestDeleteAdAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestDeleteAdAccounts requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1275,5 +1305,13 @@ public class OffsitePixel extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<OffsitePixel> getParser() {
+    return new APIRequest.ResponseParser<OffsitePixel>() {
+      public APINodeList<OffsitePixel> parseResponse(String response, APIContext context, APIRequest<OffsitePixel> request) {
+        return OffsitePixel.parseResponse(response, context, request);
+      }
+    };
   }
 }

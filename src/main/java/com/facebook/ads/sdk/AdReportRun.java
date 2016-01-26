@@ -134,7 +134,7 @@ public class AdReportRun extends APINode {
   }
 
   public static APINodeList<AdReportRun> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdReportRun> adReportRuns = new APINodeList<AdReportRun>(request);
+    APINodeList<AdReportRun> adReportRuns = new APINodeList<AdReportRun>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -339,6 +339,11 @@ public class AdReportRun extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -562,6 +567,11 @@ public class AdReportRun extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetInsights requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -765,5 +775,13 @@ public class AdReportRun extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdReportRun> getParser() {
+    return new APIRequest.ResponseParser<AdReportRun>() {
+      public APINodeList<AdReportRun> parseResponse(String response, APIContext context, APIRequest<AdReportRun> request) {
+        return AdReportRun.parseResponse(response, context, request);
+      }
+    };
   }
 }

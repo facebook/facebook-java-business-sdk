@@ -83,7 +83,7 @@ public class TargetingSentenceLine extends APINode {
   }
 
   public static APINodeList<TargetingSentenceLine> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<TargetingSentenceLine> targetingSentenceLines = new APINodeList<TargetingSentenceLine>(request);
+    APINodeList<TargetingSentenceLine> targetingSentenceLines = new APINodeList<TargetingSentenceLine>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -205,5 +205,13 @@ public class TargetingSentenceLine extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<TargetingSentenceLine> getParser() {
+    return new APIRequest.ResponseParser<TargetingSentenceLine>() {
+      public APINodeList<TargetingSentenceLine> parseResponse(String response, APIContext context, APIRequest<TargetingSentenceLine> request) {
+        return TargetingSentenceLine.parseResponse(response, context, request);
+      }
+    };
   }
 }

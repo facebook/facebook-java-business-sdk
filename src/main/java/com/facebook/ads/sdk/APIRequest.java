@@ -41,14 +41,16 @@ import java.util.Random;
 
 import com.google.gson.Gson;
 
-abstract public class APIRequest<T> {
+public class APIRequest<T extends APINode> {
   protected APIContext context;
   protected String nodeId;
   protected String endpoint;
   protected String method;
   protected List<String> paramNames;
+  protected ResponseParser<T> parser;
   protected Map<String, Object> params = new HashMap<String, Object>();
   protected List<String> returnFields;
+  private APIResponse lastResponse = null;
   public static final String USER_AGENT = APIConfig.USER_AGENT;
   public static Map<String, String> fileToContentTypeMap = new HashMap<String, String>();
   static {
@@ -59,18 +61,78 @@ abstract public class APIRequest<T> {
     fileToContentTypeMap.put(".txt", "text/plain");
   }
 
+  public APIRequest (APIContext context, String nodeId, String endpoint, String method) {
+    this(context, nodeId, endpoint, method, null, null);
+  }
+
+  public APIRequest (APIContext context, String nodeId, String endpoint, String method, ResponseParser<T> parser) {
+    this(context, nodeId, endpoint, method, null, parser);
+  }
+
   public APIRequest (APIContext context, String nodeId, String endpoint, String method, List<String> paramNames) {
+    this(context, nodeId, endpoint, method, paramNames, null);
+  }
+
+  public APIRequest (APIContext context, String nodeId, String endpoint, String method, List<String> paramNames, ResponseParser<T> parser) {
     this.context = context;
     this.nodeId = nodeId;
     this.endpoint = endpoint;
     this.method = method;
     this.paramNames = paramNames;
+    this.parser = parser;
   }
 
-  abstract protected APIResponse getLastResponse();
-  abstract protected APIResponse parseResponse(String response) throws APIException;
-  abstract protected APIResponse execute() throws APIException;
-  abstract protected APIResponse execute(Map<String, Object> extraParams) throws APIException;
+  public APIResponse getLastResponse() {
+    return lastResponse;
+  };
+
+  public APIResponse parseResponse(String response) throws APIException {
+    if (parser != null) {
+      return parser.parseResponse(response, context, this);
+    } else {
+      return APINode.parseResponse(response, context, new APIRequest<APINode>(context, nodeId, endpoint, method, paramNames));
+    }
+  };
+
+  public APIResponse execute() throws APIException {
+    return execute(new HashMap<String, Object>());
+  };
+
+  public APIResponse execute(Map<String, Object> extraParams) throws APIException {
+    lastResponse = parseResponse(callInternal(extraParams));
+    return lastResponse;
+  };
+
+  public APIRequest setParam(String param, Object value) {
+    setParamInternal(param, value);
+    return this;
+  }
+
+  public APIRequest setParams(Map<String, Object> params) {
+    setParamsInternal(params);
+    return this;
+  }
+
+  public APIRequest requestFields (List<String> fields) {
+    return this.requestFields(fields, true);
+  }
+
+  public APIRequest requestFields (List<String> fields, boolean value) {
+    for (String field : fields) {
+      this.requestField(field, value);
+    }
+    return this;
+  }
+
+  public APIRequest requestField (String field) {
+    this.requestField(field, true);
+    return this;
+  }
+
+  public APIRequest requestField (String field, boolean value) {
+    this.requestFieldInternal(field, value);
+    return this;
+  }
 
   protected String callInternal() throws APIException {
     return callInternal(null);
@@ -357,4 +419,9 @@ abstract public class APIRequest<T> {
     }
     return info;
   }
+
+  public static interface ResponseParser<T extends APINode> {
+    public APINodeList<T> parseResponse(String response, APIContext context, APIRequest<T> request);
+  }
+
 }

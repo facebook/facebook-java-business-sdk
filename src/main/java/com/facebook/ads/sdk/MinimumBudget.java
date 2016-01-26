@@ -85,7 +85,7 @@ public class MinimumBudget extends APINode {
   }
 
   public static APINodeList<MinimumBudget> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<MinimumBudget> minimumBudgets = new APINodeList<MinimumBudget>(request);
+    APINodeList<MinimumBudget> minimumBudgets = new APINodeList<MinimumBudget>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -212,5 +212,13 @@ public class MinimumBudget extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<MinimumBudget> getParser() {
+    return new APIRequest.ResponseParser<MinimumBudget>() {
+      public APINodeList<MinimumBudget> parseResponse(String response, APIContext context, APIRequest<MinimumBudget> request) {
+        return MinimumBudget.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -87,7 +87,7 @@ public class AdsImageCrops extends APINode {
   }
 
   public static APINodeList<AdsImageCrops> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdsImageCrops> adsImageCropss = new APINodeList<AdsImageCrops>(request);
+    APINodeList<AdsImageCrops> adsImageCropss = new APINodeList<AdsImageCrops>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -224,5 +224,13 @@ public class AdsImageCrops extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdsImageCrops> getParser() {
+    return new APIRequest.ResponseParser<AdsImageCrops>() {
+      public APINodeList<AdsImageCrops> parseResponse(String response, APIContext context, APIRequest<AdsImageCrops> request) {
+        return AdsImageCrops.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -133,7 +133,7 @@ public class FlexibleTargeting extends APINode {
   }
 
   public static APINodeList<FlexibleTargeting> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<FlexibleTargeting> flexibleTargetings = new APINodeList<FlexibleTargeting>(request);
+    APINodeList<FlexibleTargeting> flexibleTargetings = new APINodeList<FlexibleTargeting>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -620,5 +620,13 @@ public class FlexibleTargeting extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<FlexibleTargeting> getParser() {
+    return new APIRequest.ResponseParser<FlexibleTargeting>() {
+      public APINodeList<FlexibleTargeting> parseResponse(String response, APIContext context, APIRequest<FlexibleTargeting> request) {
+        return FlexibleTargeting.parseResponse(response, context, request);
+      }
+    };
   }
 }

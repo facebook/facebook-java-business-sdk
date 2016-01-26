@@ -81,7 +81,7 @@ public class IDName extends APINode {
   }
 
   public static APINodeList<IDName> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<IDName> IDNames = new APINodeList<IDName>(request);
+    APINodeList<IDName> IDNames = new APINodeList<IDName>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -188,5 +188,13 @@ public class IDName extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<IDName> getParser() {
+    return new APIRequest.ResponseParser<IDName>() {
+      public APINodeList<IDName> parseResponse(String response, APIContext context, APIRequest<IDName> request) {
+        return IDName.parseResponse(response, context, request);
+      }
+    };
   }
 }

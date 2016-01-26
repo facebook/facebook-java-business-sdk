@@ -81,7 +81,7 @@ public class KeyValue extends APINode {
   }
 
   public static APINodeList<KeyValue> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<KeyValue> keyValues = new APINodeList<KeyValue>(request);
+    APINodeList<KeyValue> keyValues = new APINodeList<KeyValue>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -188,5 +188,13 @@ public class KeyValue extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<KeyValue> getParser() {
+    return new APIRequest.ResponseParser<KeyValue>() {
+      public APINodeList<KeyValue> parseResponse(String response, APIContext context, APIRequest<KeyValue> request) {
+        return KeyValue.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -135,7 +135,7 @@ public class AdAccountRoas extends APINode {
   }
 
   public static APINodeList<AdAccountRoas> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdAccountRoas> adAccountRoass = new APINodeList<AdAccountRoas>(request);
+    APINodeList<AdAccountRoas> adAccountRoass = new APINodeList<AdAccountRoas>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -512,5 +512,13 @@ public class AdAccountRoas extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdAccountRoas> getParser() {
+    return new APIRequest.ResponseParser<AdAccountRoas>() {
+      public APINodeList<AdAccountRoas> parseResponse(String response, APIContext context, APIRequest<AdAccountRoas> request) {
+        return AdAccountRoas.parseResponse(response, context, request);
+      }
+    };
   }
 }

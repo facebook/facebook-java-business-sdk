@@ -93,7 +93,7 @@ public class TargetingDynamicRule extends APINode {
   }
 
   public static APINodeList<TargetingDynamicRule> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<TargetingDynamicRule> targetingDynamicRules = new APINodeList<TargetingDynamicRule>(request);
+    APINodeList<TargetingDynamicRule> targetingDynamicRules = new APINodeList<TargetingDynamicRule>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -260,5 +260,13 @@ public class TargetingDynamicRule extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<TargetingDynamicRule> getParser() {
+    return new APIRequest.ResponseParser<TargetingDynamicRule>() {
+      public APINodeList<TargetingDynamicRule> parseResponse(String response, APIContext context, APIRequest<TargetingDynamicRule> request) {
+        return TargetingDynamicRule.parseResponse(response, context, request);
+      }
+    };
   }
 }

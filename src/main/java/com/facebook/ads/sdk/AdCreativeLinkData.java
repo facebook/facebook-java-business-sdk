@@ -113,7 +113,7 @@ public class AdCreativeLinkData extends APINode {
   }
 
   public static APINodeList<AdCreativeLinkData> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdCreativeLinkData> adCreativeLinkDatas = new APINodeList<AdCreativeLinkData>(request);
+    APINodeList<AdCreativeLinkData> adCreativeLinkDatas = new APINodeList<AdCreativeLinkData>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -418,5 +418,13 @@ public class AdCreativeLinkData extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdCreativeLinkData> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeLinkData>() {
+      public APINodeList<AdCreativeLinkData> parseResponse(String response, APIContext context, APIRequest<AdCreativeLinkData> request) {
+        return AdCreativeLinkData.parseResponse(response, context, request);
+      }
+    };
   }
 }

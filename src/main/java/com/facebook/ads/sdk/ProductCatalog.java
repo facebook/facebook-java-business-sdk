@@ -118,7 +118,7 @@ public class ProductCatalog extends APINode {
   }
 
   public static APINodeList<ProductCatalog> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ProductCatalog> productCatalogs = new APINodeList<ProductCatalog>(request);
+    APINodeList<ProductCatalog> productCatalogs = new APINodeList<ProductCatalog>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -337,6 +337,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -460,6 +465,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -541,6 +551,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestDelete requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -615,6 +630,11 @@ public class ProductCatalog extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAgencies requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -712,6 +732,11 @@ public class ProductCatalog extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetExternalEventSources requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -844,6 +869,11 @@ public class ProductCatalog extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetProducts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1183,6 +1213,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestGetProductGroups requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetProductGroups requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1287,6 +1322,11 @@ public class ProductCatalog extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetProductFeeds requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1452,6 +1492,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestGetProductSets requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetProductSets requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1572,6 +1617,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateExternalEventSource requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateExternalEventSource requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1668,6 +1718,11 @@ public class ProductCatalog extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestCreateProductGroup requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1831,6 +1886,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProductFeed requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateProductFeed requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1926,6 +1986,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProductSet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateProductSet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -2018,6 +2083,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestDeleteExternalEventSources requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestDeleteExternalEventSources requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -2101,5 +2171,13 @@ public class ProductCatalog extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ProductCatalog> getParser() {
+    return new APIRequest.ResponseParser<ProductCatalog>() {
+      public APINodeList<ProductCatalog> parseResponse(String response, APIContext context, APIRequest<ProductCatalog> request) {
+        return ProductCatalog.parseResponse(response, context, request);
+      }
+    };
   }
 }

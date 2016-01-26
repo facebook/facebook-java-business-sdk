@@ -114,7 +114,7 @@ public class ProductGroup extends APINode {
   }
 
   public static APINodeList<ProductGroup> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ProductGroup> productGroups = new APINodeList<ProductGroup>(request);
+    APINodeList<ProductGroup> productGroups = new APINodeList<ProductGroup>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -280,6 +280,11 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -393,6 +398,11 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -501,6 +511,11 @@ public class ProductGroup extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetProducts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -841,6 +856,11 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestGetProductSets requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetProductSets requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -898,5 +918,13 @@ public class ProductGroup extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ProductGroup> getParser() {
+    return new APIRequest.ResponseParser<ProductGroup>() {
+      public APINodeList<ProductGroup> parseResponse(String response, APIContext context, APIRequest<ProductGroup> request) {
+        return ProductGroup.parseResponse(response, context, request);
+      }
+    };
   }
 }

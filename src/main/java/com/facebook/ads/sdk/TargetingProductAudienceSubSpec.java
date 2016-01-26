@@ -81,7 +81,7 @@ public class TargetingProductAudienceSubSpec extends APINode {
   }
 
   public static APINodeList<TargetingProductAudienceSubSpec> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<TargetingProductAudienceSubSpec> targetingProductAudienceSubSpecs = new APINodeList<TargetingProductAudienceSubSpec>(request);
+    APINodeList<TargetingProductAudienceSubSpec> targetingProductAudienceSubSpecs = new APINodeList<TargetingProductAudienceSubSpec>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -188,5 +188,13 @@ public class TargetingProductAudienceSubSpec extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<TargetingProductAudienceSubSpec> getParser() {
+    return new APIRequest.ResponseParser<TargetingProductAudienceSubSpec>() {
+      public APINodeList<TargetingProductAudienceSubSpec> parseResponse(String response, APIContext context, APIRequest<TargetingProductAudienceSubSpec> request) {
+        return TargetingProductAudienceSubSpec.parseResponse(response, context, request);
+      }
+    };
   }
 }

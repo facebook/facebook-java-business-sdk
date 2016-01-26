@@ -85,7 +85,7 @@ public class FundingSourceDetailsCoupon extends APINode {
   }
 
   public static APINodeList<FundingSourceDetailsCoupon> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<FundingSourceDetailsCoupon> fundingSourceDetailsCoupons = new APINodeList<FundingSourceDetailsCoupon>(request);
+    APINodeList<FundingSourceDetailsCoupon> fundingSourceDetailsCoupons = new APINodeList<FundingSourceDetailsCoupon>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -212,5 +212,13 @@ public class FundingSourceDetailsCoupon extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<FundingSourceDetailsCoupon> getParser() {
+    return new APIRequest.ResponseParser<FundingSourceDetailsCoupon>() {
+      public APINodeList<FundingSourceDetailsCoupon> parseResponse(String response, APIContext context, APIRequest<FundingSourceDetailsCoupon> request) {
+        return FundingSourceDetailsCoupon.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -118,7 +118,7 @@ public class AdPlacePageSet extends APINode {
   }
 
   public static APINodeList<AdPlacePageSet> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdPlacePageSet> adPlacePageSets = new APINodeList<AdPlacePageSet>(request);
+    APINodeList<AdPlacePageSet> adPlacePageSets = new APINodeList<AdPlacePageSet>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -286,6 +286,11 @@ public class AdPlacePageSet extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -409,6 +414,11 @@ public class AdPlacePageSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -440,5 +450,13 @@ public class AdPlacePageSet extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdPlacePageSet> getParser() {
+    return new APIRequest.ResponseParser<AdPlacePageSet>() {
+      public APINodeList<AdPlacePageSet> parseResponse(String response, APIContext context, APIRequest<AdPlacePageSet> request) {
+        return AdPlacePageSet.parseResponse(response, context, request);
+      }
+    };
   }
 }

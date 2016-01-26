@@ -83,7 +83,7 @@ public class RateCard extends APINode {
   }
 
   public static APINodeList<RateCard> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<RateCard> rateCards = new APINodeList<RateCard>(request);
+    APINodeList<RateCard> rateCards = new APINodeList<RateCard>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -200,5 +200,13 @@ public class RateCard extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<RateCard> getParser() {
+    return new APIRequest.ResponseParser<RateCard>() {
+      public APINodeList<RateCard> parseResponse(String response, APIContext context, APIRequest<RateCard> request) {
+        return RateCard.parseResponse(response, context, request);
+      }
+    };
   }
 }

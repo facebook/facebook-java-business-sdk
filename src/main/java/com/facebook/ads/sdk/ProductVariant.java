@@ -83,7 +83,7 @@ public class ProductVariant extends APINode {
   }
 
   public static APINodeList<ProductVariant> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ProductVariant> productVariants = new APINodeList<ProductVariant>(request);
+    APINodeList<ProductVariant> productVariants = new APINodeList<ProductVariant>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -200,5 +200,13 @@ public class ProductVariant extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ProductVariant> getParser() {
+    return new APIRequest.ResponseParser<ProductVariant>() {
+      public APINodeList<ProductVariant> parseResponse(String response, APIContext context, APIRequest<ProductVariant> request) {
+        return ProductVariant.parseResponse(response, context, request);
+      }
+    };
   }
 }

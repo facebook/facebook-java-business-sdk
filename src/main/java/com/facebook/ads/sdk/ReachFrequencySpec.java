@@ -87,7 +87,7 @@ public class ReachFrequencySpec extends APINode {
   }
 
   public static APINodeList<ReachFrequencySpec> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ReachFrequencySpec> reachFrequencySpecs = new APINodeList<ReachFrequencySpec>(request);
+    APINodeList<ReachFrequencySpec> reachFrequencySpecs = new APINodeList<ReachFrequencySpec>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -224,5 +224,13 @@ public class ReachFrequencySpec extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ReachFrequencySpec> getParser() {
+    return new APIRequest.ResponseParser<ReachFrequencySpec>() {
+      public APINodeList<ReachFrequencySpec> parseResponse(String response, APIContext context, APIRequest<ReachFrequencySpec> request) {
+        return ReachFrequencySpec.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -216,7 +216,7 @@ public class AdAccount extends APINode {
   }
 
   public static APINodeList<AdAccount> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdAccount> adAccounts = new APINodeList<AdAccount>(request);
+    APINodeList<AdAccount> adAccounts = new APINodeList<AdAccount>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -862,6 +862,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1426,6 +1431,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1601,6 +1611,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetActivities requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetActivities requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1757,6 +1772,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAdLabels requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetAdLabels requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1891,6 +1911,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAdCreatives requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -2211,6 +2236,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAdCreativesByLabels requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -2562,6 +2592,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAds requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetAds requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -2831,6 +2866,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAdImages requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetAdImages requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -3023,6 +3063,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAdReportRuns requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetAdReportRuns requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -3185,6 +3230,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAdReportSchedules requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -3351,6 +3401,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAdSets requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -3708,6 +3763,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAdsByLabels requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetAdsByLabels requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -3975,6 +4035,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAdSetsByLabels requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -4351,6 +4416,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetCampaigns requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetCampaigns requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -4559,6 +4629,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetCampaignsByLabels requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetCampaignsByLabels requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -4741,6 +4816,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetTargetingBrowse requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -4936,6 +5016,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetTargetingSearch requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetTargetingSearch requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -5090,6 +5175,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetTargetingSuggestions requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -5272,6 +5362,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetTargetingValidation requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetTargetingValidation requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -5443,6 +5538,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetTransactions requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetTransactions requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -5608,6 +5708,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAdsPixels requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetAdsPixels requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -5736,6 +5841,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAdPlacePageSets requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetAdPlacePageSets requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -5845,6 +5955,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetPartners requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -5976,6 +6091,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetPartnerCategories requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -6204,6 +6324,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetGeneratePreviews requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetGeneratePreviews requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -6285,6 +6410,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetRateCard requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -6380,6 +6510,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAdVideos requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -6481,6 +6616,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAsyncAdRequestSets requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -6757,6 +6897,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetConnectionObjects requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetConnectionObjects requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -7028,6 +7173,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetBroadTargetingCategories requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetBroadTargetingCategories requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -7208,6 +7358,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetCustomAudiences requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetCustomAudiences requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -7282,6 +7437,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetCustomAudiencesTos requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -7548,6 +7708,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetInsights requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -7705,6 +7870,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetReachEstimate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetReachEstimate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -7833,6 +8003,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetReachFrequencyPredictions requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -8149,6 +8324,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetTargetingSentenceLines requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetTargetingSentenceLines requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -8245,6 +8425,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetUsers requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -8353,6 +8538,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetOffsitePixels requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -8472,6 +8662,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetApplications requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetApplications requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -8560,6 +8755,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetAdvertisableApplications requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetAdvertisableApplications requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -8631,6 +8831,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetInstagramAccounts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -8748,6 +8953,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetRoas requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetRoas requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -8856,6 +9066,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetRoasCohorts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -8972,6 +9187,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestCreateAdLabel requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -9335,6 +9555,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdCreative requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateAdCreative requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -9545,6 +9770,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAd requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateAd requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -9628,6 +9858,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestCreateAdImage requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -9985,6 +10220,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdSet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateAdSet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -10139,6 +10379,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateCampaign requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateCampaign requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -10231,6 +10476,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestCreateAdPlacePageSet requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -10453,6 +10703,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdVideo requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateAdVideo requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -10567,6 +10822,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestCreateAsyncAdRequestSet requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -10767,6 +11027,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -11012,6 +11277,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateReachFrequencyPrediction requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateReachFrequencyPrediction requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -11111,6 +11381,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateOffsitePixel requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateOffsitePixel requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -11189,6 +11464,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestDeleteAdImages requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -11299,6 +11579,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestDeleteCampaigns requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -11433,6 +11718,11 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateCustomConversion requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateCustomConversion requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -11536,6 +11826,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestCreateOfflineConversion requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -11689,6 +11984,11 @@ public class AdAccount extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestCreateProductAudience requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -13411,5 +13711,13 @@ public class AdAccount extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdAccount> getParser() {
+    return new APIRequest.ResponseParser<AdAccount>() {
+      public APINodeList<AdAccount> parseResponse(String response, APIContext context, APIRequest<AdAccount> request) {
+        return AdAccount.parseResponse(response, context, request);
+      }
+    };
   }
 }

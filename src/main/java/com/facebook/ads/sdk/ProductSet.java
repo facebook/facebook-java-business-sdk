@@ -116,7 +116,7 @@ public class ProductSet extends APINode {
   }
 
   public static APINodeList<ProductSet> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ProductSet> productSets = new APINodeList<ProductSet>(request);
+    APINodeList<ProductSet> productSets = new APINodeList<ProductSet>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -291,6 +291,11 @@ public class ProductSet extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -414,6 +419,11 @@ public class ProductSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -492,6 +502,11 @@ public class ProductSet extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -603,6 +618,11 @@ public class ProductSet extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetProducts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -942,6 +962,11 @@ public class ProductSet extends APINode {
       return this;
     }
 
+    public APIRequestGetProductGroups requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetProductGroups requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -993,5 +1018,13 @@ public class ProductSet extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ProductSet> getParser() {
+    return new APIRequest.ResponseParser<ProductSet>() {
+      public APINodeList<ProductSet> parseResponse(String response, APIContext context, APIRequest<ProductSet> request) {
+        return ProductSet.parseResponse(response, context, request);
+      }
+    };
   }
 }

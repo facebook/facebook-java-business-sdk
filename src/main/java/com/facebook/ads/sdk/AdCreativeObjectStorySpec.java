@@ -93,7 +93,7 @@ public class AdCreativeObjectStorySpec extends APINode {
   }
 
   public static APINodeList<AdCreativeObjectStorySpec> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdCreativeObjectStorySpec> adCreativeObjectStorySpecs = new APINodeList<AdCreativeObjectStorySpec>(request);
+    APINodeList<AdCreativeObjectStorySpec> adCreativeObjectStorySpecs = new APINodeList<AdCreativeObjectStorySpec>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -290,5 +290,13 @@ public class AdCreativeObjectStorySpec extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdCreativeObjectStorySpec> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeObjectStorySpec>() {
+      public APINodeList<AdCreativeObjectStorySpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeObjectStorySpec> request) {
+        return AdCreativeObjectStorySpec.parseResponse(response, context, request);
+      }
+    };
   }
 }

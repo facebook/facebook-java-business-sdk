@@ -83,7 +83,7 @@ public class DayPart extends APINode {
   }
 
   public static APINodeList<DayPart> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<DayPart> dayParts = new APINodeList<DayPart>(request);
+    APINodeList<DayPart> dayParts = new APINodeList<DayPart>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -200,5 +200,13 @@ public class DayPart extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<DayPart> getParser() {
+    return new APIRequest.ResponseParser<DayPart>() {
+      public APINodeList<DayPart> parseResponse(String response, APIContext context, APIRequest<DayPart> request) {
+        return DayPart.parseResponse(response, context, request);
+      }
+    };
   }
 }

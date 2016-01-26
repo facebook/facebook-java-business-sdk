@@ -85,7 +85,7 @@ public class ConnectionObjectOpenGraphAction extends APINode {
   }
 
   public static APINodeList<ConnectionObjectOpenGraphAction> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<ConnectionObjectOpenGraphAction> connectionObjectOpenGraphActions = new APINodeList<ConnectionObjectOpenGraphAction>(request);
+    APINodeList<ConnectionObjectOpenGraphAction> connectionObjectOpenGraphActions = new APINodeList<ConnectionObjectOpenGraphAction>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -217,5 +217,13 @@ public class ConnectionObjectOpenGraphAction extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<ConnectionObjectOpenGraphAction> getParser() {
+    return new APIRequest.ResponseParser<ConnectionObjectOpenGraphAction>() {
+      public APINodeList<ConnectionObjectOpenGraphAction> parseResponse(String response, APIContext context, APIRequest<ConnectionObjectOpenGraphAction> request) {
+        return ConnectionObjectOpenGraphAction.parseResponse(response, context, request);
+      }
+    };
   }
 }

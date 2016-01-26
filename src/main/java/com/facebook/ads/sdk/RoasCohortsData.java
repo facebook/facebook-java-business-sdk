@@ -87,7 +87,7 @@ public class RoasCohortsData extends APINode {
   }
 
   public static APINodeList<RoasCohortsData> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<RoasCohortsData> roasCohortsDatas = new APINodeList<RoasCohortsData>(request);
+    APINodeList<RoasCohortsData> roasCohortsDatas = new APINodeList<RoasCohortsData>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -229,5 +229,13 @@ public class RoasCohortsData extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<RoasCohortsData> getParser() {
+    return new APIRequest.ResponseParser<RoasCohortsData>() {
+      public APINodeList<RoasCohortsData> parseResponse(String response, APIContext context, APIRequest<RoasCohortsData> request) {
+        return RoasCohortsData.parseResponse(response, context, request);
+      }
+    };
   }
 }

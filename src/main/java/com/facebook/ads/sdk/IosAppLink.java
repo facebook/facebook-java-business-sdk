@@ -83,7 +83,7 @@ public class IosAppLink extends APINode {
   }
 
   public static APINodeList<IosAppLink> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<IosAppLink> iosAppLinks = new APINodeList<IosAppLink>(request);
+    APINodeList<IosAppLink> iosAppLinks = new APINodeList<IosAppLink>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -200,5 +200,13 @@ public class IosAppLink extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<IosAppLink> getParser() {
+    return new APIRequest.ResponseParser<IosAppLink>() {
+      public APINodeList<IosAppLink> parseResponse(String response, APIContext context, APIRequest<IosAppLink> request) {
+        return IosAppLink.parseResponse(response, context, request);
+      }
+    };
   }
 }

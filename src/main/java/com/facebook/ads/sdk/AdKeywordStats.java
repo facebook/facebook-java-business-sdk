@@ -117,7 +117,7 @@ public class AdKeywordStats extends APINode {
   }
 
   public static APINodeList<AdKeywordStats> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdKeywordStats> adKeywordStatss = new APINodeList<AdKeywordStats>(request);
+    APINodeList<AdKeywordStats> adKeywordStatss = new APINodeList<AdKeywordStats>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -414,5 +414,13 @@ public class AdKeywordStats extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdKeywordStats> getParser() {
+    return new APIRequest.ResponseParser<AdKeywordStats>() {
+      public APINodeList<AdKeywordStats> parseResponse(String response, APIContext context, APIRequest<AdKeywordStats> request) {
+        return AdKeywordStats.parseResponse(response, context, request);
+      }
+    };
   }
 }

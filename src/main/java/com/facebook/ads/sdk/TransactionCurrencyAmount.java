@@ -83,7 +83,7 @@ public class TransactionCurrencyAmount extends APINode {
   }
 
   public static APINodeList<TransactionCurrencyAmount> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<TransactionCurrencyAmount> transactionCurrencyAmounts = new APINodeList<TransactionCurrencyAmount>(request);
+    APINodeList<TransactionCurrencyAmount> transactionCurrencyAmounts = new APINodeList<TransactionCurrencyAmount>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -200,5 +200,13 @@ public class TransactionCurrencyAmount extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<TransactionCurrencyAmount> getParser() {
+    return new APIRequest.ResponseParser<TransactionCurrencyAmount>() {
+      public APINodeList<TransactionCurrencyAmount> parseResponse(String response, APIContext context, APIRequest<TransactionCurrencyAmount> request) {
+        return TransactionCurrencyAmount.parseResponse(response, context, request);
+      }
+    };
   }
 }

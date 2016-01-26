@@ -169,7 +169,7 @@ public class AdCreative extends APINode {
   }
 
   public static APINodeList<AdCreative> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdCreative> adCreatives = new APINodeList<AdCreative>(request);
+    APINodeList<AdCreative> adCreatives = new APINodeList<AdCreative>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -624,6 +624,11 @@ public class AdCreative extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -937,6 +942,11 @@ public class AdCreative extends APINode {
       return this;
     }
 
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1051,6 +1061,11 @@ public class AdCreative extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1191,6 +1206,11 @@ public class AdCreative extends APINode {
       return this;
     }
 
+    public APIRequestGetPreviews requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetPreviews requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1290,6 +1310,11 @@ public class AdCreative extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdLabel requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateAdLabel requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1379,6 +1404,11 @@ public class AdCreative extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestDeleteAdLabels requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1615,5 +1645,13 @@ public class AdCreative extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdCreative> getParser() {
+    return new APIRequest.ResponseParser<AdCreative>() {
+      public APINodeList<AdCreative> parseResponse(String response, APIContext context, APIRequest<AdCreative> request) {
+        return AdCreative.parseResponse(response, context, request);
+      }
+    };
   }
 }

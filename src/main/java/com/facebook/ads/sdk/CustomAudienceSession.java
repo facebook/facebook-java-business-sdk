@@ -93,7 +93,7 @@ public class CustomAudienceSession extends APINode {
   }
 
   public static APINodeList<CustomAudienceSession> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<CustomAudienceSession> customAudienceSessions = new APINodeList<CustomAudienceSession>(request);
+    APINodeList<CustomAudienceSession> customAudienceSessions = new APINodeList<CustomAudienceSession>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -260,5 +260,13 @@ public class CustomAudienceSession extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<CustomAudienceSession> getParser() {
+    return new APIRequest.ResponseParser<CustomAudienceSession>() {
+      public APINodeList<CustomAudienceSession> parseResponse(String response, APIContext context, APIRequest<CustomAudienceSession> request) {
+        return CustomAudienceSession.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -118,7 +118,7 @@ public class AdLabel extends APINode {
   }
 
   public static APINodeList<AdLabel> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdLabel> adLabels = new APINodeList<AdLabel>(request);
+    APINodeList<AdLabel> adLabels = new APINodeList<AdLabel>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -309,6 +309,11 @@ public class AdLabel extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -432,6 +437,11 @@ public class AdLabel extends APINode {
       return this;
     }
 
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -510,6 +520,11 @@ public class AdLabel extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -604,6 +619,11 @@ public class AdLabel extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAds requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -852,6 +872,11 @@ public class AdLabel extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAdSets requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1181,6 +1206,11 @@ public class AdLabel extends APINode {
       return this;
     }
 
+    public APIRequestGetCampaigns requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetCampaigns requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1378,6 +1408,11 @@ public class AdLabel extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAdCreatives requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1608,5 +1643,13 @@ public class AdLabel extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdLabel> getParser() {
+    return new APIRequest.ResponseParser<AdLabel>() {
+      public APINodeList<AdLabel> parseResponse(String response, APIContext context, APIRequest<AdLabel> request) {
+        return AdLabel.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -85,7 +85,7 @@ public class AndroidAppLink extends APINode {
   }
 
   public static APINodeList<AndroidAppLink> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AndroidAppLink> androidAppLinks = new APINodeList<AndroidAppLink>(request);
+    APINodeList<AndroidAppLink> androidAppLinks = new APINodeList<AndroidAppLink>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -212,5 +212,13 @@ public class AndroidAppLink extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AndroidAppLink> getParser() {
+    return new APIRequest.ResponseParser<AndroidAppLink>() {
+      public APINodeList<AndroidAppLink> parseResponse(String response, APIContext context, APIRequest<AndroidAppLink> request) {
+        return AndroidAppLink.parseResponse(response, context, request);
+      }
+    };
   }
 }

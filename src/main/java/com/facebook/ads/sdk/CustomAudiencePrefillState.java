@@ -83,7 +83,7 @@ public class CustomAudiencePrefillState extends APINode {
   }
 
   public static APINodeList<CustomAudiencePrefillState> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<CustomAudiencePrefillState> customAudiencePrefillStates = new APINodeList<CustomAudiencePrefillState>(request);
+    APINodeList<CustomAudiencePrefillState> customAudiencePrefillStates = new APINodeList<CustomAudiencePrefillState>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -200,5 +200,13 @@ public class CustomAudiencePrefillState extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<CustomAudiencePrefillState> getParser() {
+    return new APIRequest.ResponseParser<CustomAudiencePrefillState>() {
+      public APINodeList<CustomAudiencePrefillState> parseResponse(String response, APIContext context, APIRequest<CustomAudiencePrefillState> request) {
+        return CustomAudiencePrefillState.parseResponse(response, context, request);
+      }
+    };
   }
 }

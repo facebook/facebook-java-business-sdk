@@ -227,7 +227,7 @@ public class AdsInsights extends APINode {
   }
 
   public static APINodeList<AdsInsights> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdsInsights> adsInsightss = new APINodeList<AdsInsights>(request);
+    APINodeList<AdsInsights> adsInsightss = new APINodeList<AdsInsights>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -1159,5 +1159,13 @@ public class AdsInsights extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdsInsights> getParser() {
+    return new APIRequest.ResponseParser<AdsInsights>() {
+      public APINodeList<AdsInsights> parseResponse(String response, APIContext context, APIRequest<AdsInsights> request) {
+        return AdsInsights.parseResponse(response, context, request);
+      }
+    };
   }
 }

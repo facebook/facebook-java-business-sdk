@@ -122,7 +122,7 @@ public class AdsPixel extends APINode {
   }
 
   public static APINodeList<AdsPixel> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdsPixel> adsPixels = new APINodeList<AdsPixel>(request);
+    APINodeList<AdsPixel> adsPixels = new APINodeList<AdsPixel>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -322,6 +322,11 @@ public class AdsPixel extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -452,6 +457,11 @@ public class AdsPixel extends APINode {
       return this;
     }
 
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestUpdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -558,6 +568,11 @@ public class AdsPixel extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetStats requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -675,6 +690,11 @@ public class AdsPixel extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAudiences requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -963,6 +983,11 @@ public class AdsPixel extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetSharedAccounts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1414,6 +1439,11 @@ public class AdsPixel extends APINode {
       return this;
     }
 
+    public APIRequestGetSharedAgencies requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetSharedAgencies requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1500,5 +1530,13 @@ public class AdsPixel extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdsPixel> getParser() {
+    return new APIRequest.ResponseParser<AdsPixel>() {
+      public APINodeList<AdsPixel> parseResponse(String response, APIContext context, APIRequest<AdsPixel> request) {
+        return AdsPixel.parseResponse(response, context, request);
+      }
+    };
   }
 }

@@ -99,7 +99,7 @@ public class BroadTargetingCategories extends APINode {
   }
 
   public static APINodeList<BroadTargetingCategories> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<BroadTargetingCategories> broadTargetingCategoriess = new APINodeList<BroadTargetingCategories>(request);
+    APINodeList<BroadTargetingCategories> broadTargetingCategoriess = new APINodeList<BroadTargetingCategories>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -296,5 +296,13 @@ public class BroadTargetingCategories extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<BroadTargetingCategories> getParser() {
+    return new APIRequest.ResponseParser<BroadTargetingCategories>() {
+      public APINodeList<BroadTargetingCategories> parseResponse(String response, APIContext context, APIRequest<BroadTargetingCategories> request) {
+        return BroadTargetingCategories.parseResponse(response, context, request);
+      }
+    };
   }
 }

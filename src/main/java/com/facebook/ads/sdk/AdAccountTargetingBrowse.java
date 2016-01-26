@@ -103,7 +103,7 @@ public class AdAccountTargetingBrowse extends APINode {
   }
 
   public static APINodeList<AdAccountTargetingBrowse> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdAccountTargetingBrowse> adAccountTargetingBrowses = new APINodeList<AdAccountTargetingBrowse>(request);
+    APINodeList<AdAccountTargetingBrowse> adAccountTargetingBrowses = new APINodeList<AdAccountTargetingBrowse>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -468,5 +468,13 @@ public class AdAccountTargetingBrowse extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdAccountTargetingBrowse> getParser() {
+    return new APIRequest.ResponseParser<AdAccountTargetingBrowse>() {
+      public APINodeList<AdAccountTargetingBrowse> parseResponse(String response, APIContext context, APIRequest<AdAccountTargetingBrowse> request) {
+        return AdAccountTargetingBrowse.parseResponse(response, context, request);
+      }
+    };
   }
 }

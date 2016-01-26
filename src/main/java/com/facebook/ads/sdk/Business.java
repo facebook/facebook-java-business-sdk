@@ -116,7 +116,7 @@ public class Business extends APINode {
   }
 
   public static APINodeList<Business> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<Business> businesss = new APINodeList<Business>(request);
+    APINodeList<Business> businesss = new APINodeList<Business>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -370,6 +370,11 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -465,6 +470,11 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetSystemUsers requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetSystemUsers requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -541,6 +551,11 @@ public class Business extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetProductCatalogs requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -657,6 +672,11 @@ public class Business extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAdsPixels requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -851,6 +871,11 @@ public class Business extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAssignedAdAccounts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1317,6 +1342,11 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetAssignedPages requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetAssignedPages requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -1411,6 +1441,11 @@ public class Business extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetAssignedProductCatalogs requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -1573,6 +1608,11 @@ public class Business extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetClientAdAccounts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -2024,6 +2064,11 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetClientAdAccountRequests requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetClientAdAccountRequests requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -2119,6 +2164,11 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetClientPages requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetClientPages requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -2192,6 +2242,11 @@ public class Business extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetClientPageRequests requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -2333,6 +2388,11 @@ public class Business extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetOwnedAdAccounts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -2784,6 +2844,11 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetOwnedAdAccountRequests requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetOwnedAdAccountRequests requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -2879,6 +2944,11 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetOwnedPages requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetOwnedPages requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -2952,6 +3022,11 @@ public class Business extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetOwnedPageRequests requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -3047,6 +3122,11 @@ public class Business extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetOwnedPixels requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -3225,6 +3305,11 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetPicture requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetPicture requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -3355,6 +3440,11 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetInstagramAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGetInstagramAccounts requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -3426,6 +3516,11 @@ public class Business extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetOwnedInstagramAccounts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -3540,6 +3635,11 @@ public class Business extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestGetGrpPlans requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -3834,6 +3934,11 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestCreateProductCatalog requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateProductCatalog requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -3997,6 +4102,11 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdAccount requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateAdAccount requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -4086,6 +4196,11 @@ public class Business extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestDeleteApps requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -4199,6 +4314,11 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestCreateUserPermission requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestCreateUserPermission requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -4306,6 +4426,11 @@ public class Business extends APINode {
       for (String field : fields) {
         this.requestField(field, value);
       }
+      return this;
+    }
+
+    public APIRequestCreateAdAccounts requestField (String field) {
+      this.requestField(field, true);
       return this;
     }
 
@@ -4461,5 +4586,13 @@ public class Business extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<Business> getParser() {
+    return new APIRequest.ResponseParser<Business>() {
+      public APINodeList<Business> parseResponse(String response, APIContext context, APIRequest<Business> request) {
+        return Business.parseResponse(response, context, request);
+      }
+    };
   }
 }

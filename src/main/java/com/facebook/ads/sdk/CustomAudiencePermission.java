@@ -85,7 +85,7 @@ public class CustomAudiencePermission extends APINode {
   }
 
   public static APINodeList<CustomAudiencePermission> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<CustomAudiencePermission> customAudiencePermissions = new APINodeList<CustomAudiencePermission>(request);
+    APINodeList<CustomAudiencePermission> customAudiencePermissions = new APINodeList<CustomAudiencePermission>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -212,5 +212,13 @@ public class CustomAudiencePermission extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<CustomAudiencePermission> getParser() {
+    return new APIRequest.ResponseParser<CustomAudiencePermission>() {
+      public APINodeList<CustomAudiencePermission> parseResponse(String response, APIContext context, APIRequest<CustomAudiencePermission> request) {
+        return CustomAudiencePermission.parseResponse(response, context, request);
+      }
+    };
   }
 }

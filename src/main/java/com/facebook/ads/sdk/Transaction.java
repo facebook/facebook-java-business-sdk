@@ -101,7 +101,7 @@ public class Transaction extends APINode {
   }
 
   public static APINodeList<Transaction> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<Transaction> transactions = new APINodeList<Transaction>(request);
+    APINodeList<Transaction> transactions = new APINodeList<Transaction>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -336,5 +336,13 @@ public class Transaction extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<Transaction> getParser() {
+    return new APIRequest.ResponseParser<Transaction>() {
+      public APINodeList<Transaction> parseResponse(String response, APIContext context, APIRequest<Transaction> request) {
+        return Transaction.parseResponse(response, context, request);
+      }
+    };
   }
 }

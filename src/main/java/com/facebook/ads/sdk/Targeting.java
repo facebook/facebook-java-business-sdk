@@ -201,7 +201,7 @@ public class Targeting extends APINode {
   }
 
   public static APINodeList<Targeting> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<Targeting> targetings = new APINodeList<Targeting>(request);
+    APINodeList<Targeting> targetings = new APINodeList<Targeting>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -1088,5 +1088,13 @@ public class Targeting extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<Targeting> getParser() {
+    return new APIRequest.ResponseParser<Targeting>() {
+      public APINodeList<Targeting> parseResponse(String response, APIContext context, APIRequest<Targeting> request) {
+        return Targeting.parseResponse(response, context, request);
+      }
+    };
   }
 }

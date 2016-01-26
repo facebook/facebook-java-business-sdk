@@ -95,7 +95,7 @@ public class AdAccountTargetingSearch extends APINode {
   }
 
   public static APINodeList<AdAccountTargetingSearch> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdAccountTargetingSearch> adAccountTargetingSearchs = new APINodeList<AdAccountTargetingSearch>(request);
+    APINodeList<AdAccountTargetingSearch> adAccountTargetingSearchs = new APINodeList<AdAccountTargetingSearch>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -420,5 +420,13 @@ public class AdAccountTargetingSearch extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdAccountTargetingSearch> getParser() {
+    return new APIRequest.ResponseParser<AdAccountTargetingSearch>() {
+      public APINodeList<AdAccountTargetingSearch> parseResponse(String response, APIContext context, APIRequest<AdAccountTargetingSearch> request) {
+        return AdAccountTargetingSearch.parseResponse(response, context, request);
+      }
+    };
   }
 }

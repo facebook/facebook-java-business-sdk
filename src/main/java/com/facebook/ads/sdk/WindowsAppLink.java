@@ -85,7 +85,7 @@ public class WindowsAppLink extends APINode {
   }
 
   public static APINodeList<WindowsAppLink> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<WindowsAppLink> windowsAppLinks = new APINodeList<WindowsAppLink>(request);
+    APINodeList<WindowsAppLink> windowsAppLinks = new APINodeList<WindowsAppLink>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -212,5 +212,13 @@ public class WindowsAppLink extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<WindowsAppLink> getParser() {
+    return new APIRequest.ResponseParser<WindowsAppLink>() {
+      public APINodeList<WindowsAppLink> parseResponse(String response, APIContext context, APIRequest<WindowsAppLink> request) {
+        return WindowsAppLink.parseResponse(response, context, request);
+      }
+    };
   }
 }

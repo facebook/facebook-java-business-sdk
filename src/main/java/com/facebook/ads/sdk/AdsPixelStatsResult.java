@@ -83,7 +83,7 @@ public class AdsPixelStatsResult extends APINode {
   }
 
   public static APINodeList<AdsPixelStatsResult> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdsPixelStatsResult> adsPixelStatsResults = new APINodeList<AdsPixelStatsResult>(request);
+    APINodeList<AdsPixelStatsResult> adsPixelStatsResults = new APINodeList<AdsPixelStatsResult>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -237,5 +237,13 @@ public class AdsPixelStatsResult extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdsPixelStatsResult> getParser() {
+    return new APIRequest.ResponseParser<AdsPixelStatsResult>() {
+      public APINodeList<AdsPixelStatsResult> parseResponse(String response, APIContext context, APIRequest<AdsPixelStatsResult> request) {
+        return AdsPixelStatsResult.parseResponse(response, context, request);
+      }
+    };
   }
 }

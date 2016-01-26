@@ -49,4 +49,9 @@ public class APIException extends Exception implements APIResponse {
   public APIException getException() {
     return this;
   }
+
+  @Override
+  public String getRawResponse() {
+    return this.getMessage();
+  }
 }

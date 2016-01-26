@@ -126,7 +126,7 @@ public class AppLinks extends APINode {
   }
 
   public static APINodeList<AppLinks> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AppLinks> appLinkss = new APINodeList<AppLinks>(request);
+    APINodeList<AppLinks> appLinkss = new APINodeList<AppLinks>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -310,6 +310,11 @@ public class AppLinks extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -408,5 +413,13 @@ public class AppLinks extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AppLinks> getParser() {
+    return new APIRequest.ResponseParser<AppLinks>() {
+      public APINodeList<AppLinks> parseResponse(String response, APIContext context, APIRequest<AppLinks> request) {
+        return AppLinks.parseResponse(response, context, request);
+      }
+    };
   }
 }

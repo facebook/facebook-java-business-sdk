@@ -81,7 +81,7 @@ public class BusinessPageRequest extends APINode {
   }
 
   public static APINodeList<BusinessPageRequest> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<BusinessPageRequest> businessPageRequests = new APINodeList<BusinessPageRequest>(request);
+    APINodeList<BusinessPageRequest> businessPageRequests = new APINodeList<BusinessPageRequest>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -188,5 +188,13 @@ public class BusinessPageRequest extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<BusinessPageRequest> getParser() {
+    return new APIRequest.ResponseParser<BusinessPageRequest>() {
+      public APINodeList<BusinessPageRequest> parseResponse(String response, APIContext context, APIRequest<BusinessPageRequest> request) {
+        return BusinessPageRequest.parseResponse(response, context, request);
+      }
+    };
   }
 }

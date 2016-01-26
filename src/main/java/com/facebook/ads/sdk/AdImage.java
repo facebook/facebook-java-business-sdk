@@ -138,7 +138,7 @@ public class AdImage extends APINode {
   }
 
   public static APINodeList<AdImage> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdImage> adImages = new APINodeList<AdImage>(request);
+    APINodeList<AdImage> adImages = new APINodeList<AdImage>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -352,6 +352,11 @@ public class AdImage extends APINode {
       return this;
     }
 
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
     public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
@@ -516,5 +521,13 @@ public class AdImage extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdImage> getParser() {
+    return new APIRequest.ResponseParser<AdImage>() {
+      public APINodeList<AdImage> parseResponse(String response, APIContext context, APIRequest<AdImage> request) {
+        return AdImage.parseResponse(response, context, request);
+      }
+    };
   }
 }

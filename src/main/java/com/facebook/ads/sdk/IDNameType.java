@@ -83,7 +83,7 @@ public class IDNameType extends APINode {
   }
 
   public static APINodeList<IDNameType> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<IDNameType> IDNameTypes = new APINodeList<IDNameType>(request);
+    APINodeList<IDNameType> IDNameTypes = new APINodeList<IDNameType>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -200,5 +200,13 @@ public class IDNameType extends APINode {
     this.mContext = instance.mContext;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<IDNameType> getParser() {
+    return new APIRequest.ResponseParser<IDNameType>() {
+      public APINodeList<IDNameType> parseResponse(String response, APIContext context, APIRequest<IDNameType> request) {
+        return IDNameType.parseResponse(response, context, request);
+      }
+    };
   }
 }
