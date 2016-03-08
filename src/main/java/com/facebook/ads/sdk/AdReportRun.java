@@ -23,32 +23,18 @@
 
 package com.facebook.ads.sdk;
 
-import java.io.File;
-import java.lang.reflect.Field;
+import com.google.gson.*;
+import com.google.gson.annotations.SerializedName;
+
 import java.lang.reflect.Modifier;
-import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
 
 public class AdReportRun extends APINode {
-  @SerializedName("id")
+  @SerializedName(value = "id", alternate = {"report_run_id"})
   private String mId = null;
   @SerializedName("async_status")
   private String mAsyncStatus = null;
