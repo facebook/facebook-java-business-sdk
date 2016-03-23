@@ -23,28 +23,14 @@
 
 package com.facebook.ads.sdk;
 
-import java.io.File;
-import java.lang.reflect.Field;
+import com.google.gson.*;
+import com.google.gson.annotations.SerializedName;
+
 import java.lang.reflect.Modifier;
-import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 
 
 public class Ad extends APINode {
@@ -236,6 +222,10 @@ public class Ad extends APINode {
 
   public APIRequestGetInsights getInsights() {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), mContext);
+  }
+
+  public APIRequestGetInsightsAsync getInsightsAsync() {
+    return new APIRequestGetInsightsAsync(this.getPrefixedId().toString(), mContext);
   }
 
   public APIRequestGetKeywordStats getKeywordStats() {
@@ -1254,11 +1244,11 @@ public class Ad extends APINode {
 
   }
 
-  public static class APIRequestGetInsights extends APIRequest<AdsInsights> {
+  public abstract static class APIRequestGetInsightsBase<T extends APINode> extends APIRequest<T> {
 
-    APINodeList<AdsInsights> lastResponse = null;
+    APINodeList<T> lastResponse = null;
     @Override
-    public APINodeList<AdsInsights> getLastResponse() {
+    public APINodeList<T> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -1283,6 +1273,209 @@ public class Ad extends APINode {
     public static final String[] FIELDS = {
     };
 
+    public APIRequestGetInsightsBase(String nodeId, APIContext context, String method) {
+      super(context, nodeId, "/insights", method, Arrays.asList(PARAMS));
+    }
+
+    public APIRequestGetInsightsBase setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInsightsBase setDefaultSummary (Boolean defaultSummary) {
+      this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setDefaultSummary (String defaultSummary) {
+      this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setFields (List<EnumFields> fields) {
+      this.setParam("fields", fields);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setFields (String fields) {
+      this.setParam("fields", fields);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setFiltering (List<Object> filtering) {
+      this.setParam("filtering", filtering);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setFiltering (String filtering) {
+      this.setParam("filtering", filtering);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setSummary (List<EnumFields> summary) {
+      this.setParam("summary", summary);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setSummary (String summary) {
+      this.setParam("summary", summary);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setSort (List<String> sort) {
+      this.setParam("sort", sort);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setSort (String sort) {
+      this.setParam("sort", sort);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setActionAttributionWindows (List<EnumActionAttributionWindows> actionAttributionWindows) {
+      this.setParam("action_attribution_windows", actionAttributionWindows);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setActionAttributionWindows (String actionAttributionWindows) {
+      this.setParam("action_attribution_windows", actionAttributionWindows);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setActionBreakdowns (List<EnumActionBreakdowns> actionBreakdowns) {
+      this.setParam("action_breakdowns", actionBreakdowns);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setActionBreakdowns (String actionBreakdowns) {
+      this.setParam("action_breakdowns", actionBreakdowns);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setActionReportTime (EnumActionReportTime actionReportTime) {
+      this.setParam("action_report_time", actionReportTime);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setActionReportTime (String actionReportTime) {
+      this.setParam("action_report_time", actionReportTime);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setBreakdowns (List<EnumBreakdowns> breakdowns) {
+      this.setParam("breakdowns", breakdowns);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setBreakdowns (String breakdowns) {
+      this.setParam("breakdowns", breakdowns);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setDatePreset (EnumDatePreset datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setDatePreset (String datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setLevel (EnumLevel level) {
+      this.setParam("level", level);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setLevel (String level) {
+      this.setParam("level", level);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setProductIdLimit (Long productIdLimit) {
+      this.setParam("product_id_limit", productIdLimit);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setProductIdLimit (String productIdLimit) {
+      this.setParam("product_id_limit", productIdLimit);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setSummaryActionBreakdowns (List<EnumSummaryActionBreakdowns> summaryActionBreakdowns) {
+      this.setParam("summary_action_breakdowns", summaryActionBreakdowns);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setSummaryActionBreakdowns (String summaryActionBreakdowns) {
+      this.setParam("summary_action_breakdowns", summaryActionBreakdowns);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setTimeIncrement (String timeIncrement) {
+      this.setParam("time_increment", timeIncrement);
+      return this;
+    }
+
+
+    public APIRequestGetInsightsBase setTimeRange (String timeRange) {
+      this.setParam("time_range", timeRange);
+      return this;
+    }
+
+
+    public APIRequestGetInsightsBase setTimeRanges (List<String> timeRanges) {
+      this.setParam("time_ranges", timeRanges);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase setTimeRanges (String timeRanges) {
+      this.setParam("time_ranges", timeRanges);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInsightsBase requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    public APIRequestGetInsightsBase requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    public APIRequestGetInsightsBase requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    public APIRequestGetInsightsBase requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    public APIRequestGetInsightsBase requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+
+  }
+
+  public static class APIRequestGetInsights extends APIRequestGetInsightsBase<AdsInsights> {
     @Override
     public APINodeList<AdsInsights> parseResponse(String response) throws APIException {
       return AdsInsights.parseResponse(response, getContext(), this);
@@ -1300,205 +1493,30 @@ public class Ad extends APINode {
     }
 
     public APIRequestGetInsights(String nodeId, APIContext context) {
-      super(context, nodeId, "/insights", "GET", Arrays.asList(PARAMS));
+      super(nodeId, context, "GET");
+    }
+  }
+
+  public static class APIRequestGetInsightsAsync extends APIRequestGetInsightsBase<AdReportRun> {
+    @Override
+    public APINodeList<AdReportRun> parseResponse(String response) throws APIException {
+      return AdReportRun.parseResponse(response, getContext(), this);
     }
 
-    public APIRequestGetInsights setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
+    @Override
+    public APINodeList<AdReportRun> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
     }
 
-    public APIRequestGetInsights setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
+    @Override
+    public APINodeList<AdReportRun> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(callInternal(extraParams));
+      return lastResponse;
     }
 
-
-    public APIRequestGetInsights setDefaultSummary (Boolean defaultSummary) {
-      this.setParam("default_summary", defaultSummary);
-      return this;
+    public APIRequestGetInsightsAsync(String nodeId, APIContext context) {
+      super(nodeId, context, "POST");
     }
-
-    public APIRequestGetInsights setDefaultSummary (String defaultSummary) {
-      this.setParam("default_summary", defaultSummary);
-      return this;
-    }
-
-    public APIRequestGetInsights setFields (List<EnumFields> fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-
-    public APIRequestGetInsights setFields (String fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-
-    public APIRequestGetInsights setFiltering (List<Object> filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-
-    public APIRequestGetInsights setFiltering (String filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-
-    public APIRequestGetInsights setSummary (List<EnumFields> summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
-
-    public APIRequestGetInsights setSummary (String summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
-
-    public APIRequestGetInsights setSort (List<String> sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-
-    public APIRequestGetInsights setSort (String sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-
-    public APIRequestGetInsights setActionAttributionWindows (List<EnumActionAttributionWindows> actionAttributionWindows) {
-      this.setParam("action_attribution_windows", actionAttributionWindows);
-      return this;
-    }
-
-    public APIRequestGetInsights setActionAttributionWindows (String actionAttributionWindows) {
-      this.setParam("action_attribution_windows", actionAttributionWindows);
-      return this;
-    }
-
-    public APIRequestGetInsights setActionBreakdowns (List<EnumActionBreakdowns> actionBreakdowns) {
-      this.setParam("action_breakdowns", actionBreakdowns);
-      return this;
-    }
-
-    public APIRequestGetInsights setActionBreakdowns (String actionBreakdowns) {
-      this.setParam("action_breakdowns", actionBreakdowns);
-      return this;
-    }
-
-    public APIRequestGetInsights setActionReportTime (EnumActionReportTime actionReportTime) {
-      this.setParam("action_report_time", actionReportTime);
-      return this;
-    }
-
-    public APIRequestGetInsights setActionReportTime (String actionReportTime) {
-      this.setParam("action_report_time", actionReportTime);
-      return this;
-    }
-
-    public APIRequestGetInsights setBreakdowns (List<EnumBreakdowns> breakdowns) {
-      this.setParam("breakdowns", breakdowns);
-      return this;
-    }
-
-    public APIRequestGetInsights setBreakdowns (String breakdowns) {
-      this.setParam("breakdowns", breakdowns);
-      return this;
-    }
-
-    public APIRequestGetInsights setDatePreset (EnumDatePreset datePreset) {
-      this.setParam("date_preset", datePreset);
-      return this;
-    }
-
-    public APIRequestGetInsights setDatePreset (String datePreset) {
-      this.setParam("date_preset", datePreset);
-      return this;
-    }
-
-    public APIRequestGetInsights setLevel (EnumLevel level) {
-      this.setParam("level", level);
-      return this;
-    }
-
-    public APIRequestGetInsights setLevel (String level) {
-      this.setParam("level", level);
-      return this;
-    }
-
-    public APIRequestGetInsights setProductIdLimit (Long productIdLimit) {
-      this.setParam("product_id_limit", productIdLimit);
-      return this;
-    }
-
-    public APIRequestGetInsights setProductIdLimit (String productIdLimit) {
-      this.setParam("product_id_limit", productIdLimit);
-      return this;
-    }
-
-    public APIRequestGetInsights setSummaryActionBreakdowns (List<EnumSummaryActionBreakdowns> summaryActionBreakdowns) {
-      this.setParam("summary_action_breakdowns", summaryActionBreakdowns);
-      return this;
-    }
-
-    public APIRequestGetInsights setSummaryActionBreakdowns (String summaryActionBreakdowns) {
-      this.setParam("summary_action_breakdowns", summaryActionBreakdowns);
-      return this;
-    }
-
-    public APIRequestGetInsights setTimeIncrement (String timeIncrement) {
-      this.setParam("time_increment", timeIncrement);
-      return this;
-    }
-
-
-    public APIRequestGetInsights setTimeRange (String timeRange) {
-      this.setParam("time_range", timeRange);
-      return this;
-    }
-
-
-    public APIRequestGetInsights setTimeRanges (List<String> timeRanges) {
-      this.setParam("time_ranges", timeRanges);
-      return this;
-    }
-
-    public APIRequestGetInsights setTimeRanges (String timeRanges) {
-      this.setParam("time_ranges", timeRanges);
-      return this;
-    }
-
-    public APIRequestGetInsights requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetInsights requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    public APIRequestGetInsights requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    public APIRequestGetInsights requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    public APIRequestGetInsights requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    public APIRequestGetInsights requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-
   }
 
   public static class APIRequestGetKeywordStats extends APIRequest<AdKeywordStats> {
