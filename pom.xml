@@ -7,6 +7,22 @@
   <version>0.1.0</version>
   <name>facebook-java-ads-sdk</name>
   <url>https://developers.facebook.com/docs/marketing-api/sdks</url>
+  <build>
+  <plugins>
+    <plugin>  <!-- Create sources.jar -->
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-source-plugin</artifactId>
+      <executions>
+        <execution>
+          <id>attach-sources</id>
+          <goals>
+            <goal>jar</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+</plugins>
+</build>
   <dependencies>
     <dependency>
       <groupId>com.google.code.gson</groupId>
