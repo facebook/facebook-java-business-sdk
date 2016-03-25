@@ -80,7 +80,7 @@ public class APINode implements APIResponse {
     return this;
   }
 
-  public static APINodeList<APINode> parseResponse(String json, APIContext context, APIRequest<APINode> request) {
+  public static APINodeList parseResponse(String json, APIContext context, APIRequest<APINode> request) {
     APINodeList<APINode> nodes = new APINodeList<APINode>(request, json);
     JsonArray arr;
     JsonObject obj;
