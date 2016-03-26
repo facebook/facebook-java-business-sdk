@@ -23,28 +23,14 @@
 
 package com.facebook.ads.sdk;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Map;
 
 
 public class AdsInsights extends APINode {
@@ -198,6 +184,64 @@ public class AdsInsights extends APINode {
   private String mCampaignId = null;
   @SerializedName("campaign_name")
   private String mCampaignName = null;
+  @SerializedName("objective")
+  private String mObjective = null;
+  @SerializedName("action_carousel_card_id")
+  private String mActionCarouselCardId = null;
+  @SerializedName("action_carousel_card_name")
+  private String mActionCarouselCardName = null;
+  @SerializedName("clicks")
+  private String mClicks = null;
+  @SerializedName("unique_inline_link_clicks")
+  private String mUniqueInlineLinkClicks = null;
+  @SerializedName("cost_per_unique_inline_link_click")
+  private String mCostPerUniqueInlineLinkClick = null;
+  @SerializedName("inline_link_click_ctr")
+  private String mInlineLinkClickCtr = null;
+  @SerializedName("unique_inline_link_click_ctr")
+  private String mUniqueInlineLinkClickCtr = null;
+  @SerializedName("cpc")
+  private String mCpc = null;
+  @SerializedName("estimated_ad_recallers")
+  private String mEstimatedAdRecallers = null;
+  @SerializedName("estimated_ad_recallers_lower_bound")
+  private String mEstimatedAdRecallersLowerBound = null;
+  @SerializedName("estimated_ad_recallers_upper_bound")
+  private String mEstimatedAdRecallersUpperBound = null;
+  @SerializedName("estimated_ad_recall_rate")
+  private String mEstimatedAdRecallRate = null;
+  @SerializedName("estimated_ad_recall_rate_lower_bound")
+  private String mEstimatedAdRecallRateLowerBound = null;
+  @SerializedName("estimated_ad_recall_rate_upper_bound")
+  private String mEstimatedAdRecallRateUpperBound = null;
+  @SerializedName("cost_per_estimated_ad_recallers")
+  private String mCostPerEstimatedAdRecallers = null;
+  @SerializedName("canvas_avg_view_time")
+  private String mCanvasAvgViewTime = null;
+  @SerializedName("canvas_avg_view_percent")
+  private String mCanvasAvgViewPercent = null;
+  @SerializedName("place_page_name")
+  private String mPlacePageName = null;
+  @SerializedName("ad_bid_type")
+  private String mAdBidType = null;
+  @SerializedName("ad_bid_value")
+  private String mAdBidValue = null;
+  @SerializedName("ad_delivery")
+  private String mAdDelivery = null;
+  @SerializedName("adset_bid_type")
+  private String mAdsetBidType = null;
+  @SerializedName("adset_bid_value")
+  private String mAdsetBidValue = null;
+  @SerializedName("adset_budget_type")
+  private String mAdsetBudgetType = null;
+  @SerializedName("adset_budget_value")
+  private String mAdsetBudgetValue = null;
+  @SerializedName("adset_delivery")
+  private String mAdsetDelivery = null;
+  @SerializedName("adset_start")
+  private String mAdsetStart = null;
+  @SerializedName("adset_end")
+  private String mAdsetEnd = null;
   protected static Gson gson = null;
 
   public AdsInsights() {
@@ -1064,7 +1108,266 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldObjective() {
+    return mObjective;
+  }
 
+  public AdsInsights setFieldObjective(String value) {
+    this.mObjective = value;
+    return this;
+  }
+
+  public String getFieldActionCarouselCardId() {
+    return mActionCarouselCardId;
+  }
+
+  public AdsInsights setFieldActionCarouselCardId(String value) {
+    this.mActionCarouselCardId = value;
+    return this;
+  }
+
+  public String getFieldActionCarouselCardName() {
+    return mActionCarouselCardName;
+  }
+
+  public AdsInsights setFieldActionCarouselCardName(String value) {
+    this.mActionCarouselCardName = value;
+    return this;
+  }
+
+  public String getFieldClicks() {
+    return mClicks;
+  }
+
+  public AdsInsights setFieldClicks(String value) {
+    this.mClicks = value;
+    return this;
+  }
+
+  public String getFieldUniqueInlineLinkClicks() {
+    return mUniqueInlineLinkClicks;
+  }
+
+  public AdsInsights setFieldUniqueInlineLinkClicks(String value) {
+    this.mUniqueInlineLinkClicks = value;
+    return this;
+  }
+
+  public String getFieldCostPerUniqueInlineLinkClick() {
+    return mCostPerUniqueInlineLinkClick;
+  }
+
+  public AdsInsights setFieldCostPerUniqueInlineLinkClick(String value) {
+    this.mCostPerUniqueInlineLinkClick = value;
+    return this;
+  }
+
+  public String getFieldInlineLinkClickCtr() {
+    return mInlineLinkClickCtr;
+  }
+
+  public AdsInsights setFieldInlineLinkClickCtr(String value) {
+    this.mInlineLinkClickCtr = value;
+    return this;
+  }
+
+  public String getFieldUniqueInlineLinkClickCtr() {
+    return mUniqueInlineLinkClickCtr;
+  }
+
+  public AdsInsights setFieldUniqueInlineLinkClickCtr(String value) {
+    this.mUniqueInlineLinkClickCtr = value;
+    return this;
+  }
+
+  public String getFieldCpc() {
+    return mCpc;
+  }
+
+  public AdsInsights setFieldCpc(String value) {
+    this.mCpc = value;
+    return this;
+  }
+
+  public String getFieldEstimatedAdRecallers() {
+    return mEstimatedAdRecallers;
+  }
+
+  public AdsInsights setFieldEstimatedAdRecallers(String value) {
+    this.mEstimatedAdRecallers = value;
+    return this;
+  }
+
+  public String getFieldEstimatedAdRecallersLowerBound() {
+    return mEstimatedAdRecallersLowerBound;
+  }
+
+  public AdsInsights setFieldEstimatedAdRecallersLowerBound(String value) {
+    this.mEstimatedAdRecallersLowerBound = value;
+    return this;
+  }
+
+  public String getFieldEstimatedAdRecallersUpperBound() {
+    return mEstimatedAdRecallersUpperBound;
+  }
+
+  public AdsInsights setFieldEstimatedAdRecallersUpperBound(String value) {
+    this.mEstimatedAdRecallersUpperBound = value;
+    return this;
+  }
+
+  public String getFieldEstimatedAdRecallRate() {
+    return mEstimatedAdRecallRate;
+  }
+
+  public AdsInsights setFieldEstimatedAdRecallRate(String value) {
+    this.mEstimatedAdRecallRate = value;
+    return this;
+  }
+
+  public String getFieldEstimatedAdRecallRateLowerBound() {
+    return mEstimatedAdRecallRateLowerBound;
+  }
+
+  public AdsInsights setFieldEstimatedAdRecallRateLowerBound(String value) {
+    this.mEstimatedAdRecallRateLowerBound = value;
+    return this;
+  }
+
+  public String getFieldEstimatedAdRecallRateUpperBound() {
+    return mEstimatedAdRecallRateUpperBound;
+  }
+
+  public AdsInsights setFieldEstimatedAdRecallRateUpperBound(String value) {
+    this.mEstimatedAdRecallRateUpperBound = value;
+    return this;
+  }
+
+  public String getFieldCostPerEstimatedAdRecallers() {
+    return mCostPerEstimatedAdRecallers;
+  }
+
+  public AdsInsights setFieldCostPerEstimatedAdRecallers(String value) {
+    this.mCostPerEstimatedAdRecallers = value;
+    return this;
+  }
+
+  public String getFieldCanvasAvgViewTime() {
+    return mCanvasAvgViewTime;
+  }
+
+  public AdsInsights setFieldCanvasAvgViewTime(String value) {
+    this.mCanvasAvgViewTime = value;
+    return this;
+  }
+
+  public String getFieldCanvasAvgViewPercent() {
+    return mCanvasAvgViewPercent;
+  }
+
+  public AdsInsights setFieldCanvasAvgViewPercent(String value) {
+    this.mCanvasAvgViewPercent = value;
+    return this;
+  }
+
+  public String getFieldPlacePageName() {
+    return mPlacePageName;
+  }
+
+  public AdsInsights setFieldPlacePageName(String value) {
+    this.mPlacePageName = value;
+    return this;
+  }
+
+  public String getFieldAdBidType() {
+    return mAdBidType;
+  }
+
+  public AdsInsights setFieldAdBidType(String value) {
+    this.mAdBidType = value;
+    return this;
+  }
+
+  public String getFieldAdBidValue() {
+    return mAdBidValue;
+  }
+
+  public AdsInsights setFieldAdBidValue(String value) {
+    this.mAdBidValue = value;
+    return this;
+  }
+
+  public String getFieldAdDelivery() {
+    return mAdDelivery;
+  }
+
+  public AdsInsights setFieldAdDelivery(String value) {
+    this.mAdDelivery = value;
+    return this;
+  }
+
+  public String getFieldAdsetBidType() {
+    return mAdsetBidType;
+  }
+
+  public AdsInsights setFieldAdsetBidType(String value) {
+    this.mAdsetBidType = value;
+    return this;
+  }
+
+  public String getFieldAdsetBidValue() {
+    return mAdsetBidValue;
+  }
+
+  public AdsInsights setFieldAdsetBidValue(String value) {
+    this.mAdsetBidValue = value;
+    return this;
+  }
+
+  public String getFieldAdsetBudgetType() {
+    return mAdsetBudgetType;
+  }
+
+  public AdsInsights setFieldAdsetBudgetType(String value) {
+    this.mAdsetBudgetType = value;
+    return this;
+  }
+
+  public String getFieldAdsetBudgetValue() {
+    return mAdsetBudgetValue;
+  }
+
+  public AdsInsights setFieldAdsetBudgetValue(String value) {
+    this.mAdsetBudgetValue = value;
+    return this;
+  }
+
+  public String getFieldAdsetDelivery() {
+    return mAdsetDelivery;
+  }
+
+  public AdsInsights setFieldAdsetDelivery(String value) {
+    this.mAdsetDelivery = value;
+    return this;
+  }
+
+  public String getFieldAdsetStart() {
+    return mAdsetStart;
+  }
+
+  public AdsInsights setFieldAdsetStart(String value) {
+    this.mAdsetStart = value;
+    return this;
+  }
+
+  public String getFieldAdsetEnd() {
+    return mAdsetEnd;
+  }
+
+  public AdsInsights setFieldAdsetEnd(String value) {
+    this.mAdsetEnd = value;
+    return this;
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -1157,6 +1460,35 @@ public class AdsInsights extends APINode {
     this.mCampaignId = instance.mCampaignId;
     this.mCampaignName = instance.mCampaignName;
     this.mContext = instance.mContext;
+    this.mObjective = instance.mObjective;
+    this.mActionCarouselCardId = instance.mActionCarouselCardId;
+    this.mActionCarouselCardName = instance.mActionCarouselCardName;
+    this.mClicks = instance.mClicks;
+    this.mUniqueInlineLinkClicks = instance.mUniqueInlineLinkClicks;
+    this.mCostPerUniqueInlineLinkClick = instance.mCostPerUniqueInlineLinkClick;
+    this.mInlineLinkClickCtr = instance.mInlineLinkClickCtr;
+    this.mUniqueInlineLinkClickCtr = instance.mUniqueInlineLinkClickCtr;
+    this.mCpc = instance.mCpc;
+    this.mEstimatedAdRecallers = instance.mEstimatedAdRecallers;
+    this.mEstimatedAdRecallersLowerBound = instance.mEstimatedAdRecallersLowerBound;
+    this.mEstimatedAdRecallersUpperBound = instance.mEstimatedAdRecallersUpperBound;
+    this.mEstimatedAdRecallRate = instance.mEstimatedAdRecallRate;
+    this.mEstimatedAdRecallRateLowerBound = instance.mEstimatedAdRecallRateLowerBound;
+    this.mEstimatedAdRecallRateUpperBound = instance.mEstimatedAdRecallRateUpperBound;
+    this.mCostPerEstimatedAdRecallers = instance.mCostPerEstimatedAdRecallers;
+    this.mCanvasAvgViewTime = instance.mCanvasAvgViewTime;
+    this.mCanvasAvgViewPercent = instance.mCanvasAvgViewPercent;
+    this.mPlacePageName = instance.mPlacePageName;
+    this.mAdBidType = instance.mAdBidType;
+    this.mAdBidValue = instance.mAdBidValue;
+    this.mAdDelivery = instance.mAdDelivery;
+    this.mAdsetBidType = instance.mAdsetBidType;
+    this.mAdsetBidValue = instance.mAdsetBidValue;
+    this.mAdsetBudgetType = instance.mAdsetBudgetType;
+    this.mAdsetBudgetValue = instance.mAdsetBudgetValue;
+    this.mAdsetDelivery = instance.mAdsetDelivery;
+    this.mAdsetStart = instance.mAdsetStart;
+    this.mAdsetEnd = instance.mAdsetEnd;
     this.rawValue = instance.rawValue;
     return this;
   }

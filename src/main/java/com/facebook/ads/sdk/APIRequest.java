@@ -22,24 +22,13 @@
  */
 package com.facebook.ads.sdk;
 
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.google.gson.Gson;
+
+import javax.net.ssl.HttpsURLConnection;
+import java.io.*;
 import java.net.URL;
 import java.net.URLEncoder;
-import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
-import java.lang.StringBuilder;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.util.Random;
-
-import com.google.gson.Gson;
+import java.util.*;
 
 public class APIRequest<T extends APINode> {
   protected APIContext context;
@@ -166,6 +155,10 @@ public class APIRequest<T extends APINode> {
   }
 
   protected void setParamInternal(String param, Object value) {
+    if (value == null) {
+        params.remove(param);
+        return;
+    }
     params.put(param, value);
   }
 

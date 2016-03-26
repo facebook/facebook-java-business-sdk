@@ -23,6 +23,7 @@
 
 package com.facebook.ads.sdk;
 
+import com.facebook.ads.sdk.insights.*;
 import com.google.gson.*;
 import com.google.gson.annotations.SerializedName;
 
@@ -1450,7 +1451,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsBase setFields (List<EnumFields> fields) {
+    public APIRequestGetInsightsBase setFields (List<InsightsFieldsEnum> fields) {
       this.setParam("fields", fields);
       return this;
     }
@@ -1470,7 +1471,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsBase setSummary (List<EnumFields> summary) {
+    public APIRequestGetInsightsBase setSummary (List<InsightsFieldsEnum> summary) {
       this.setParam("summary", summary);
       return this;
     }
@@ -1490,7 +1491,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsBase setActionAttributionWindows (List<EnumActionAttributionWindows> actionAttributionWindows) {
+    public APIRequestGetInsightsBase setActionAttributionWindows (List<InsightsActionAttributionWindowsEnum> actionAttributionWindows) {
       this.setParam("action_attribution_windows", actionAttributionWindows);
       return this;
     }
@@ -1500,7 +1501,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsBase setActionBreakdowns (List<EnumActionBreakdowns> actionBreakdowns) {
+    public APIRequestGetInsightsBase setActionBreakdowns (List<InsightsActionBreakdownsEnum> actionBreakdowns) {
       this.setParam("action_breakdowns", actionBreakdowns);
       return this;
     }
@@ -1510,7 +1511,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsBase setActionReportTime (EnumActionReportTime actionReportTime) {
+    public APIRequestGetInsightsBase setActionReportTime (InsightsActionReportTimeEnum actionReportTime) {
       this.setParam("action_report_time", actionReportTime);
       return this;
     }
@@ -1520,7 +1521,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsBase setBreakdowns (List<EnumBreakdowns> breakdowns) {
+    public APIRequestGetInsightsBase setBreakdowns (List<InsightsBreakdownsEnum> breakdowns) {
       this.setParam("breakdowns", breakdowns);
       return this;
     }
@@ -1530,7 +1531,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsBase setDatePreset (EnumAdsInsightsDatePreset datePreset) {
+    public APIRequestGetInsightsBase setDatePreset (InsightsDatePresetEnum datePreset) {
       this.setParam("date_preset", datePreset);
       return this;
     }
@@ -1540,7 +1541,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsBase setLevel (EnumLevel level) {
+    public APIRequestGetInsightsBase setLevel (InsightsLevelEnum level) {
       this.setParam("level", level);
       return this;
     }
@@ -1560,7 +1561,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsBase setSummaryActionBreakdowns (List<EnumSummaryActionBreakdowns> summaryActionBreakdowns) {
+    public APIRequestGetInsightsBase setSummaryActionBreakdowns (List<InsightsSummaryActionBreakdownsEnum> summaryActionBreakdowns) {
       this.setParam("summary_action_breakdowns", summaryActionBreakdowns);
       return this;
     }
@@ -2094,374 +2095,7 @@ public class Campaign extends APINode {
       return value;
     }
   }
-  public static enum EnumFields {
-    @SerializedName("frequency_value")
-    VALUE_FREQUENCY_VALUE("frequency_value"),
-    @SerializedName("age")
-    VALUE_AGE("age"),
-    @SerializedName("country")
-    VALUE_COUNTRY("country"),
-    @SerializedName("gender")
-    VALUE_GENDER("gender"),
-    @SerializedName("impression_device")
-    VALUE_IMPRESSION_DEVICE("impression_device"),
-    @SerializedName("place_page_id")
-    VALUE_PLACE_PAGE_ID("place_page_id"),
-    @SerializedName("placement")
-    VALUE_PLACEMENT("placement"),
-    @SerializedName("product_id")
-    VALUE_PRODUCT_ID("product_id"),
-    @SerializedName("region")
-    VALUE_REGION("region"),
-    @SerializedName("hourly_stats_aggregated_by_advertiser_time_zone")
-    VALUE_HOURLY_STATS_AGGREGATED_BY_ADVERTISER_TIME_ZONE("hourly_stats_aggregated_by_advertiser_time_zone"),
-    @SerializedName("hourly_stats_aggregated_by_audience_time_zone")
-    VALUE_HOURLY_STATS_AGGREGATED_BY_AUDIENCE_TIME_ZONE("hourly_stats_aggregated_by_audience_time_zone"),
-    @SerializedName("account_id")
-    VALUE_ACCOUNT_ID("account_id"),
-    @SerializedName("account_name")
-    VALUE_ACCOUNT_NAME("account_name"),
-    @SerializedName("action_values")
-    VALUE_ACTION_VALUES("action_values"),
-    @SerializedName("actions")
-    VALUE_ACTIONS("actions"),
-    @SerializedName("unique_actions")
-    VALUE_UNIQUE_ACTIONS("unique_actions"),
-    @SerializedName("app_store_clicks")
-    VALUE_APP_STORE_CLICKS("app_store_clicks"),
-    @SerializedName("buying_type")
-    VALUE_BUYING_TYPE("buying_type"),
-    @SerializedName("call_to_action_clicks")
-    VALUE_CALL_TO_ACTION_CLICKS("call_to_action_clicks"),
-    @SerializedName("card_views")
-    VALUE_CARD_VIEWS("card_views"),
-    @SerializedName("unique_clicks")
-    VALUE_UNIQUE_CLICKS("unique_clicks"),
-    @SerializedName("cost_per_action_type")
-    VALUE_COST_PER_ACTION_TYPE("cost_per_action_type"),
-    @SerializedName("cost_per_unique_action_type")
-    VALUE_COST_PER_UNIQUE_ACTION_TYPE("cost_per_unique_action_type"),
-    @SerializedName("cost_per_inline_post_engagement")
-    VALUE_COST_PER_INLINE_POST_ENGAGEMENT("cost_per_inline_post_engagement"),
-    @SerializedName("cost_per_inline_link_click")
-    VALUE_COST_PER_INLINE_LINK_CLICK("cost_per_inline_link_click"),
-    @SerializedName("cost_per_total_action")
-    VALUE_COST_PER_TOTAL_ACTION("cost_per_total_action"),
-    @SerializedName("cost_per_10_sec_video_view")
-    VALUE_COST_PER_10_SEC_VIDEO_VIEW("cost_per_10_sec_video_view"),
-    @SerializedName("cost_per_unique_click")
-    VALUE_COST_PER_UNIQUE_CLICK("cost_per_unique_click"),
-    @SerializedName("cpm")
-    VALUE_CPM("cpm"),
-    @SerializedName("cpp")
-    VALUE_CPP("cpp"),
-    @SerializedName("ctr")
-    VALUE_CTR("ctr"),
-    @SerializedName("unique_ctr")
-    VALUE_UNIQUE_CTR("unique_ctr"),
-    @SerializedName("unique_link_clicks_ctr")
-    VALUE_UNIQUE_LINK_CLICKS_CTR("unique_link_clicks_ctr"),
-    @SerializedName("date_start")
-    VALUE_DATE_START("date_start"),
-    @SerializedName("date_stop")
-    VALUE_DATE_STOP("date_stop"),
-    @SerializedName("deeplink_clicks")
-    VALUE_DEEPLINK_CLICKS("deeplink_clicks"),
-    @SerializedName("frequency")
-    VALUE_FREQUENCY("frequency"),
-    @SerializedName("impressions")
-    VALUE_IMPRESSIONS("impressions"),
-    @SerializedName("unique_impressions")
-    VALUE_UNIQUE_IMPRESSIONS("unique_impressions"),
-    @SerializedName("inline_link_clicks")
-    VALUE_INLINE_LINK_CLICKS("inline_link_clicks"),
-    @SerializedName("inline_post_engagement")
-    VALUE_INLINE_POST_ENGAGEMENT("inline_post_engagement"),
-    @SerializedName("newsfeed_avg_position")
-    VALUE_NEWSFEED_AVG_POSITION("newsfeed_avg_position"),
-    @SerializedName("newsfeed_clicks")
-    VALUE_NEWSFEED_CLICKS("newsfeed_clicks"),
-    @SerializedName("newsfeed_impressions")
-    VALUE_NEWSFEED_IMPRESSIONS("newsfeed_impressions"),
-    @SerializedName("reach")
-    VALUE_REACH("reach"),
-    @SerializedName("relevance_score")
-    VALUE_RELEVANCE_SCORE("relevance_score"),
-    @SerializedName("social_clicks")
-    VALUE_SOCIAL_CLICKS("social_clicks"),
-    @SerializedName("unique_social_clicks")
-    VALUE_UNIQUE_SOCIAL_CLICKS("unique_social_clicks"),
-    @SerializedName("social_impressions")
-    VALUE_SOCIAL_IMPRESSIONS("social_impressions"),
-    @SerializedName("unique_social_impressions")
-    VALUE_UNIQUE_SOCIAL_IMPRESSIONS("unique_social_impressions"),
-    @SerializedName("social_reach")
-    VALUE_SOCIAL_REACH("social_reach"),
-    @SerializedName("social_spend")
-    VALUE_SOCIAL_SPEND("social_spend"),
-    @SerializedName("spend")
-    VALUE_SPEND("spend"),
-    @SerializedName("total_action_value")
-    VALUE_TOTAL_ACTION_VALUE("total_action_value"),
-    @SerializedName("total_actions")
-    VALUE_TOTAL_ACTIONS("total_actions"),
-    @SerializedName("total_unique_actions")
-    VALUE_TOTAL_UNIQUE_ACTIONS("total_unique_actions"),
-    @SerializedName("video_avg_pct_watched_actions")
-    VALUE_VIDEO_AVG_PCT_WATCHED_ACTIONS("video_avg_pct_watched_actions"),
-    @SerializedName("video_avg_sec_watched_actions")
-    VALUE_VIDEO_AVG_SEC_WATCHED_ACTIONS("video_avg_sec_watched_actions"),
-    @SerializedName("video_complete_watched_actions")
-    VALUE_VIDEO_COMPLETE_WATCHED_ACTIONS("video_complete_watched_actions"),
-    @SerializedName("video_p25_watched_actions")
-    VALUE_VIDEO_P25_WATCHED_ACTIONS("video_p25_watched_actions"),
-    @SerializedName("video_p50_watched_actions")
-    VALUE_VIDEO_P50_WATCHED_ACTIONS("video_p50_watched_actions"),
-    @SerializedName("video_p75_watched_actions")
-    VALUE_VIDEO_P75_WATCHED_ACTIONS("video_p75_watched_actions"),
-    @SerializedName("video_p95_watched_actions")
-    VALUE_VIDEO_P95_WATCHED_ACTIONS("video_p95_watched_actions"),
-    @SerializedName("video_p100_watched_actions")
-    VALUE_VIDEO_P100_WATCHED_ACTIONS("video_p100_watched_actions"),
-    @SerializedName("video_10_sec_watched_actions")
-    VALUE_VIDEO_10_SEC_WATCHED_ACTIONS("video_10_sec_watched_actions"),
-    @SerializedName("video_15_sec_watched_actions")
-    VALUE_VIDEO_15_SEC_WATCHED_ACTIONS("video_15_sec_watched_actions"),
-    @SerializedName("video_30_sec_watched_actions")
-    VALUE_VIDEO_30_SEC_WATCHED_ACTIONS("video_30_sec_watched_actions"),
-    @SerializedName("website_clicks")
-    VALUE_WEBSITE_CLICKS("website_clicks"),
-    @SerializedName("website_ctr")
-    VALUE_WEBSITE_CTR("website_ctr"),
-    @SerializedName("ad_id")
-    VALUE_AD_ID("ad_id"),
-    @SerializedName("ad_name")
-    VALUE_AD_NAME("ad_name"),
-    @SerializedName("adset_id")
-    VALUE_ADSET_ID("adset_id"),
-    @SerializedName("adset_name")
-    VALUE_ADSET_NAME("adset_name"),
-    @SerializedName("campaign_id")
-    VALUE_CAMPAIGN_ID("campaign_id"),
-    @SerializedName("campaign_name")
-    VALUE_CAMPAIGN_NAME("campaign_name"),
-    NULL(null);
 
-    private String value;
-
-    private EnumFields(String value) {
-      this.value = value;
-    }
-
-    @Override
-    public String toString() {
-      return value;
-    }
-  }
-  public static enum EnumActionAttributionWindows {
-    @SerializedName("1d_view")
-    VALUE_1D_VIEW("1d_view"),
-    @SerializedName("7d_view")
-    VALUE_7D_VIEW("7d_view"),
-    @SerializedName("28d_view")
-    VALUE_28D_VIEW("28d_view"),
-    @SerializedName("1d_click")
-    VALUE_1D_CLICK("1d_click"),
-    @SerializedName("7d_click")
-    VALUE_7D_CLICK("7d_click"),
-    @SerializedName("28d_click")
-    VALUE_28D_CLICK("28d_click"),
-    @SerializedName("default")
-    VALUE_DEFAULT("default"),
-    NULL(null);
-
-    private String value;
-
-    private EnumActionAttributionWindows(String value) {
-      this.value = value;
-    }
-
-    @Override
-    public String toString() {
-      return value;
-    }
-  }
-  public static enum EnumActionBreakdowns {
-    @SerializedName("action_carousel_card_id")
-    VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
-    @SerializedName("action_carousel_card_name")
-    VALUE_ACTION_CAROUSEL_CARD_NAME("action_carousel_card_name"),
-    @SerializedName("action_destination")
-    VALUE_ACTION_DESTINATION("action_destination"),
-    @SerializedName("action_device")
-    VALUE_ACTION_DEVICE("action_device"),
-    @SerializedName("action_target_id")
-    VALUE_ACTION_TARGET_ID("action_target_id"),
-    @SerializedName("action_type")
-    VALUE_ACTION_TYPE("action_type"),
-    @SerializedName("action_video_type")
-    VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-    NULL(null);
-
-    private String value;
-
-    private EnumActionBreakdowns(String value) {
-      this.value = value;
-    }
-
-    @Override
-    public String toString() {
-      return value;
-    }
-  }
-  public static enum EnumActionReportTime {
-    @SerializedName("impression")
-    VALUE_IMPRESSION("impression"),
-    @SerializedName("conversion")
-    VALUE_CONVERSION("conversion"),
-    NULL(null);
-
-    private String value;
-
-    private EnumActionReportTime(String value) {
-      this.value = value;
-    }
-
-    @Override
-    public String toString() {
-      return value;
-    }
-  }
-  public static enum EnumBreakdowns {
-    @SerializedName("age")
-    VALUE_AGE("age"),
-    @SerializedName("country")
-    VALUE_COUNTRY("country"),
-    @SerializedName("gender")
-    VALUE_GENDER("gender"),
-    @SerializedName("frequency_value")
-    VALUE_FREQUENCY_VALUE("frequency_value"),
-    @SerializedName("hourly_stats_aggregated_by_advertiser_time_zone")
-    VALUE_HOURLY_STATS_AGGREGATED_BY_ADVERTISER_TIME_ZONE("hourly_stats_aggregated_by_advertiser_time_zone"),
-    @SerializedName("hourly_stats_aggregated_by_audience_time_zone")
-    VALUE_HOURLY_STATS_AGGREGATED_BY_AUDIENCE_TIME_ZONE("hourly_stats_aggregated_by_audience_time_zone"),
-    @SerializedName("impression_device")
-    VALUE_IMPRESSION_DEVICE("impression_device"),
-    @SerializedName("place_page_id")
-    VALUE_PLACE_PAGE_ID("place_page_id"),
-    @SerializedName("placement")
-    VALUE_PLACEMENT("placement"),
-    @SerializedName("placement_merge_rhc")
-    VALUE_PLACEMENT_MERGE_RHC("placement_merge_rhc"),
-    @SerializedName("product_id")
-    VALUE_PRODUCT_ID("product_id"),
-    @SerializedName("region")
-    VALUE_REGION("region"),
-    NULL(null);
-
-    private String value;
-
-    private EnumBreakdowns(String value) {
-      this.value = value;
-    }
-
-    @Override
-    public String toString() {
-      return value;
-    }
-  }
-  public static enum EnumAdsInsightsDatePreset {
-    @SerializedName("today")
-    VALUE_TODAY("today"),
-    @SerializedName("yesterday")
-    VALUE_YESTERDAY("yesterday"),
-    @SerializedName("last_3_days")
-    VALUE_LAST_3_DAYS("last_3_days"),
-    @SerializedName("this_week")
-    VALUE_THIS_WEEK("this_week"),
-    @SerializedName("last_week")
-    VALUE_LAST_WEEK("last_week"),
-    @SerializedName("last_7_days")
-    VALUE_LAST_7_DAYS("last_7_days"),
-    @SerializedName("last_14_days")
-    VALUE_LAST_14_DAYS("last_14_days"),
-    @SerializedName("last_28_days")
-    VALUE_LAST_28_DAYS("last_28_days"),
-    @SerializedName("last_30_days")
-    VALUE_LAST_30_DAYS("last_30_days"),
-    @SerializedName("last_90_days")
-    VALUE_LAST_90_DAYS("last_90_days"),
-    @SerializedName("this_month")
-    VALUE_THIS_MONTH("this_month"),
-    @SerializedName("last_month")
-    VALUE_LAST_MONTH("last_month"),
-    @SerializedName("this_quarter")
-    VALUE_THIS_QUARTER("this_quarter"),
-    @SerializedName("last_3_months")
-    VALUE_LAST_3_MONTHS("last_3_months"),
-    @SerializedName("lifetime")
-    VALUE_LIFETIME("lifetime"),
-    NULL(null);
-
-    private String value;
-
-    private EnumAdsInsightsDatePreset(String value) {
-      this.value = value;
-    }
-
-    @Override
-    public String toString() {
-      return value;
-    }
-  }
-  public static enum EnumLevel {
-    @SerializedName("ad")
-    VALUE_AD("ad"),
-    @SerializedName("adset")
-    VALUE_ADSET("adset"),
-    @SerializedName("campaign")
-    VALUE_CAMPAIGN("campaign"),
-    NULL(null);
-
-    private String value;
-
-    private EnumLevel(String value) {
-      this.value = value;
-    }
-
-    @Override
-    public String toString() {
-      return value;
-    }
-  }
-  public static enum EnumSummaryActionBreakdowns {
-    @SerializedName("action_carousel_card_id")
-    VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
-    @SerializedName("action_carousel_card_name")
-    VALUE_ACTION_CAROUSEL_CARD_NAME("action_carousel_card_name"),
-    @SerializedName("action_destination")
-    VALUE_ACTION_DESTINATION("action_destination"),
-    @SerializedName("action_device")
-    VALUE_ACTION_DEVICE("action_device"),
-    @SerializedName("action_target_id")
-    VALUE_ACTION_TARGET_ID("action_target_id"),
-    @SerializedName("action_type")
-    VALUE_ACTION_TYPE("action_type"),
-    @SerializedName("action_video_type")
-    VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-    NULL(null);
-
-    private String value;
-
-    private EnumSummaryActionBreakdowns(String value) {
-      this.value = value;
-    }
-
-    @Override
-    public String toString() {
-      return value;
-    }
-  }
   public static enum EnumExecutionOptions {
     @SerializedName("VALIDATE_ONLY")
     VALUE_VALIDATE_ONLY("VALIDATE_ONLY"),

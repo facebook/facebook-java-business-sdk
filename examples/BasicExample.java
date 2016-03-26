@@ -101,6 +101,12 @@ public class BasicExample {
       System.out.println(campaign);
       System.out.println(adset);
       System.out.println("Get after creation done!");
+
+      // get all available ad accounts
+      for (AdAccount adAccountAll : AdAccount.fetchAll(100, context)) {
+        System.out.println(adAccountAll);
+      }
+      System.out.println("Getting all ad accounts done!");
       
       // call edge to get adsets
       for(AdSet as : campaign.getAdSets().requestAllFields().execute()) {
