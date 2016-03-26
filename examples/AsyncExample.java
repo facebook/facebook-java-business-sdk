@@ -22,6 +22,7 @@
  */
 
 import com.facebook.ads.sdk.*;
+import com.facebook.ads.sdk.insights.InsightsBreakdownsEnum;
 
 import java.io.File;
 import java.util.Collections;
@@ -41,7 +42,7 @@ public class AsyncExample {
           .setParam("limit", 1).execute().head();
       Ad.APIRequestGetInsightsAsync adInsights = ad.getInsightsAsync();
       adInsights.setFields("cpm,cpp");
-      adInsights.setBreakdowns(Collections.singletonList(Ad.EnumBreakdowns.VALUE_AGE));
+      adInsights.setBreakdowns(Collections.singletonList(InsightsBreakdownsEnum.VALUE_AGE));
       adInsights.setTimeRange("{\"since\":\"2016-01-01\",\"until\":\"2016-02-02\"}");
       AdReportRun adReportRun = adInsights.execute().head();
       // get actual data
@@ -63,7 +64,7 @@ public class AsyncExample {
           .setParam("limit", 1).execute().head();
       Campaign.APIRequestGetInsightsAsync campaignInsights = campaign.getInsightsAsync();
       adInsights.setFields("cpm,cpp");
-      adInsights.setBreakdowns(Collections.singletonList(Ad.EnumBreakdowns.VALUE_COUNTRY));
+      adInsights.setBreakdowns(Collections.singletonList(InsightsBreakdownsEnum.VALUE_COUNTRY));
       adInsights.setTimeRange("{\"since\":\"2016-01-01\",\"until\":\"2016-02-02\"}");
       adReportRun = campaignInsights.execute().head();
       // get actual data
