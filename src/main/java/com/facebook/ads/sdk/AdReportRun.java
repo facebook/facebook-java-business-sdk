@@ -101,6 +101,9 @@ public class AdReportRun extends APINode {
   }
   public static AdReportRun loadJSON(String json, APIContext context) {
     AdReportRun adReportRun = getGson().fromJson(json, AdReportRun.class);
+    if ("Job completed".equalsIgnoreCase(adReportRun.getFieldAsyncStatus())) {
+      adReportRun.mIsRunning = false;
+    }
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
