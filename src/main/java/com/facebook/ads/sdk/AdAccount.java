@@ -23,28 +23,12 @@
 
 package com.facebook.ads.sdk;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
+import com.google.gson.*;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+
+import java.io.File;
+import java.lang.reflect.Modifier;
+import java.util.*;
 
 
 public class AdAccount extends APINode {
@@ -185,6 +169,10 @@ public class AdAccount extends APINode {
       .requestAllFields()
       .execute();
     return adAccount;
+  }
+
+  public static APINodeList<AdAccount> fetchAll(int limit, APIContext context) throws APIException {
+    return new APIRequestList(context).setParam("limit", limit).execute();
   }
 
   private String getPrefixedId() {
@@ -745,7 +733,45 @@ public class AdAccount extends APINode {
     return mAssetScore;
   }
 
+  public static class APIRequestList extends APIRequest<AdAccount> {
+      APINodeList<AdAccount> lastResponse = null;
+      protected static final List<String> PARAMS = Collections.emptyList();
 
+      @Override
+      public APINodeList<AdAccount> getLastResponse() {
+          return lastResponse;
+      }
+
+      public APIRequestList(APIContext context) {
+          super(context, "", "/me/adaccounts", "GET", PARAMS);
+      }
+
+      @Override
+      public APINodeList<AdAccount> parseResponse(String response) throws APIException {
+          return AdAccount.parseResponse(response, getContext(), this);
+      }
+
+      @Override
+      public APINodeList<AdAccount> execute() throws APIException {
+          return execute(new HashMap<String, Object>());
+      }
+
+      @Override
+      public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
+          lastResponse = parseResponse(callInternal(extraParams));
+          return lastResponse;
+      }
+
+      public APIRequestList setParam(String param, Object value) {
+          setParamInternal(param, value);
+          return this;
+      }
+
+      public APIRequestList setParams(Map<String, Object> params) {
+          setParamsInternal(params);
+          return this;
+      }
+  }
 
   public static class APIRequestGet extends APIRequest<AdAccount> {
 
