@@ -35,30 +35,37 @@ import javax.crypto.spec.SecretKeySpec;
 public class APIContext {
   public static final String DEFAULT_API_BASE = APIConfig.DEFAULT_API_BASE;
   public static final String DEFAULT_API_VERSION = APIConfig.DEFAULT_API_VERSION;
+  public static final String DEFAULT_VIDEO_API_BASE = APIConfig.DEFAULT_VIDEO_API_BASE;
   private String endpointBase;
+  private String videoEndpointBase;
   private String accessToken;
   private String appSecret;
   private String version;
   protected boolean isDebug = false;
   protected PrintStream logger = System.out;
 
-  protected APIContext(String endpointBase, String version, String accessToken, String appSecret) {
+  public APIContext(String endpointBase, String videoEndpointBase, String version, String accessToken, String appSecret) {
     this.version = version;
     this.endpointBase = endpointBase;
+    this.videoEndpointBase = videoEndpointBase;
     this.accessToken = accessToken;
     this.appSecret = appSecret;
   }
 
   public APIContext(String accessToken) {
-    this(DEFAULT_API_BASE, DEFAULT_API_VERSION, accessToken, null);
+    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, null);
   }
 
   public APIContext(String accessToken, String appSecret) {
-    this(DEFAULT_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret);
+    this(DEFAULT_API_BASE, DEFAULT_VIDEO_API_BASE, DEFAULT_API_VERSION, accessToken, appSecret);
   }
 
   public String getEndpointBase() {
     return this.endpointBase;
+  }
+
+  public String getVideoEndpointBase() {
+    return this.videoEndpointBase;
   }
 
   public String getAccessToken() {
@@ -111,7 +118,9 @@ public class APIContext {
       byte[] bytes = sha256HMAC.doFinal(message.getBytes());
       return toHex(bytes);
     } catch(Exception e){
-      return null;
+      throw new IllegalArgumentException(
+        "The provided app secret or access token is invalid!"
+      );
     }
   }
 

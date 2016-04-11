@@ -24,46 +24,55 @@
 package com.facebook.ads.sdk;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
+/**
+ * This class is auto-genereated.
+ *
+ * For any issues or feature requests related to this class, please let us know
+ * on github and we'll fix in our codegen framework. We'll not be able to accept
+ * pull request for this class.
+ *
+ */
 public class ConversionActionQuery extends APINode {
   @SerializedName("action.type")
-  private List<String> mActionType = null;
+  private List<Object> mActionType = null;
   @SerializedName("application")
-  private List<String> mApplication = null;
+  private List<Object> mApplication = null;
   @SerializedName("conversion_id")
   private List<String> mConversionId = null;
-  @SerializedName("event_type")
-  private List<String> mEventType = null;
+  @SerializedName("creative")
+  private List<Object> mCreative = null;
+  @SerializedName("dataset")
+  private List<String> mDataset = null;
   @SerializedName("event")
   private List<String> mEvent = null;
   @SerializedName("event.creator")
   private List<String> mEventCreator = null;
+  @SerializedName("event_type")
+  private List<String> mEventType = null;
   @SerializedName("fb_pixel")
   private List<String> mFbPixel = null;
   @SerializedName("fb_pixel_event")
   private List<String> mFbPixelEvent = null;
+  @SerializedName("leadgen")
+  private List<String> mLeadgen = null;
   @SerializedName("object")
   private List<String> mObject = null;
   @SerializedName("object.domain")
@@ -113,22 +122,23 @@ public class ConversionActionQuery extends APINode {
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
-      if(!o1.equals(o2)) {
+      if (!o1.equals(o2)) {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
       };
     }
-    conversionActionQuery.mContext = context;
+    conversionActionQuery.context = context;
     conversionActionQuery.rawValue = json;
     return conversionActionQuery;
   }
 
-  public static APINodeList<ConversionActionQuery> parseResponse(String json, APIContext context, APIRequest request) {
+  public static APINodeList<ConversionActionQuery> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
     APINodeList<ConversionActionQuery> conversionActionQuerys = new APINodeList<ConversionActionQuery>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
+    Exception exception = null;
     try{
       JsonElement result = parser.parse(json);
       if (result.isJsonArray()) {
@@ -141,10 +151,11 @@ public class ConversionActionQuery extends APINode {
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
-          try {
+          if (obj.has("paging")) {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            conversionActionQuerys.setPaging(paging.get("before").getAsString(), paging.get("after").getAsString());
-          } catch (Exception ignored) {
+            String before = paging.has("before") ? paging.get("before").getAsString() : null;
+            String after = paging.has("after") ? paging.get("after").getAsString() : null;
+            conversionActionQuerys.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -155,7 +166,20 @@ public class ConversionActionQuery extends APINode {
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
-            conversionActionQuerys.add(loadJSON(obj.toString(), context));
+            boolean isRedownload = false;
+            for (String s : new String[]{"campaigns", "adsets", "ads"}) {
+              if (obj.has(s)) {
+                isRedownload = true;
+                obj = obj.getAsJsonObject(s);
+                for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+                  conversionActionQuerys.add(loadJSON(entry.getValue().toString(), context));
+                }
+                break;
+              }
+            }
+            if (!isRedownload) {
+              conversionActionQuerys.add(loadJSON(obj.toString(), context));
+            }
           }
           return conversionActionQuerys;
         } else if (obj.has("images")) {
@@ -166,24 +190,54 @@ public class ConversionActionQuery extends APINode {
           }
           return conversionActionQuerys;
         } else {
-          // Fifth, check if it's pure JsonObject
+          // Fifth, check if it's an array of objects indexed by id
+          boolean isIdIndexedArray = true;
+          for (Map.Entry entry : obj.entrySet()) {
+            String key = (String) entry.getKey();
+            if (key.equals("__fb_trace_id__")) {
+              continue;
+            }
+            JsonElement value = (JsonElement) entry.getValue();
+            if (
+              value != null &&
+              value.isJsonObject() &&
+              value.getAsJsonObject().has("id") &&
+              value.getAsJsonObject().get("id") != null &&
+              value.getAsJsonObject().get("id").getAsString().equals(key)
+            ) {
+              conversionActionQuerys.add(loadJSON(value.toString(), context));
+            } else {
+              isIdIndexedArray = false;
+              break;
+            }
+          }
+          if (isIdIndexedArray) {
+            return conversionActionQuerys;
+          }
+
+          // Sixth, check if it's pure JsonObject
+          conversionActionQuerys.clear();
           conversionActionQuerys.add(loadJSON(json, context));
           return conversionActionQuerys;
         }
       }
     } catch (Exception e) {
+      exception = e;
     }
-    return null;
+    throw new MalformedResponseException(
+      "Invalid response string: " + json,
+      exception
+    );
   }
 
   @Override
   public APIContext getContext() {
-    return mContext;
+    return context;
   }
 
   @Override
   public void setContext(APIContext context) {
-    mContext = context;
+    this.context = context;
   }
 
   @Override
@@ -192,20 +246,20 @@ public class ConversionActionQuery extends APINode {
   }
 
 
-  public List<String> getFieldActionType() {
+  public List<Object> getFieldActionType() {
     return mActionType;
   }
 
-  public ConversionActionQuery setFieldActionType(List<String> value) {
+  public ConversionActionQuery setFieldActionType(List<Object> value) {
     this.mActionType = value;
     return this;
   }
 
-  public List<String> getFieldApplication() {
+  public List<Object> getFieldApplication() {
     return mApplication;
   }
 
-  public ConversionActionQuery setFieldApplication(List<String> value) {
+  public ConversionActionQuery setFieldApplication(List<Object> value) {
     this.mApplication = value;
     return this;
   }
@@ -219,12 +273,21 @@ public class ConversionActionQuery extends APINode {
     return this;
   }
 
-  public List<String> getFieldEventType() {
-    return mEventType;
+  public List<Object> getFieldCreative() {
+    return mCreative;
   }
 
-  public ConversionActionQuery setFieldEventType(List<String> value) {
-    this.mEventType = value;
+  public ConversionActionQuery setFieldCreative(List<Object> value) {
+    this.mCreative = value;
+    return this;
+  }
+
+  public List<String> getFieldDataset() {
+    return mDataset;
+  }
+
+  public ConversionActionQuery setFieldDataset(List<String> value) {
+    this.mDataset = value;
     return this;
   }
 
@@ -246,6 +309,15 @@ public class ConversionActionQuery extends APINode {
     return this;
   }
 
+  public List<String> getFieldEventType() {
+    return mEventType;
+  }
+
+  public ConversionActionQuery setFieldEventType(List<String> value) {
+    this.mEventType = value;
+    return this;
+  }
+
   public List<String> getFieldFbPixel() {
     return mFbPixel;
   }
@@ -261,6 +333,15 @@ public class ConversionActionQuery extends APINode {
 
   public ConversionActionQuery setFieldFbPixelEvent(List<String> value) {
     this.mFbPixelEvent = value;
+    return this;
+  }
+
+  public List<String> getFieldLeadgen() {
+    return mLeadgen;
+  }
+
+  public ConversionActionQuery setFieldLeadgen(List<String> value) {
+    this.mLeadgen = value;
     return this;
   }
 
@@ -428,11 +509,14 @@ public class ConversionActionQuery extends APINode {
     this.mActionType = instance.mActionType;
     this.mApplication = instance.mApplication;
     this.mConversionId = instance.mConversionId;
-    this.mEventType = instance.mEventType;
+    this.mCreative = instance.mCreative;
+    this.mDataset = instance.mDataset;
     this.mEvent = instance.mEvent;
     this.mEventCreator = instance.mEventCreator;
+    this.mEventType = instance.mEventType;
     this.mFbPixel = instance.mFbPixel;
     this.mFbPixelEvent = instance.mFbPixelEvent;
+    this.mLeadgen = instance.mLeadgen;
     this.mObject = instance.mObject;
     this.mObjectDomain = instance.mObjectDomain;
     this.mOffer = instance.mOffer;
@@ -449,14 +533,14 @@ public class ConversionActionQuery extends APINode {
     this.mQuestionCreator = instance.mQuestionCreator;
     this.mResponse = instance.mResponse;
     this.mSubtype = instance.mSubtype;
-    this.mContext = instance.mContext;
+    this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
   public static APIRequest.ResponseParser<ConversionActionQuery> getParser() {
     return new APIRequest.ResponseParser<ConversionActionQuery>() {
-      public APINodeList<ConversionActionQuery> parseResponse(String response, APIContext context, APIRequest<ConversionActionQuery> request) {
+      public APINodeList<ConversionActionQuery> parseResponse(String response, APIContext context, APIRequest<ConversionActionQuery> request) throws MalformedResponseException {
         return ConversionActionQuery.parseResponse(response, context, request);
       }
     };

@@ -22,6 +22,9 @@
  */
 package com.facebook.ads.sdk;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 public class APIException extends Exception implements APIResponse {
 
   public APIException () {
@@ -53,5 +56,47 @@ public class APIException extends Exception implements APIResponse {
   @Override
   public String getRawResponse() {
     return this.getMessage();
+  }
+
+  @Override
+  public JsonObject getRawResponseAsJsonObject() {
+    JsonParser parser = new JsonParser();
+    return parser.parse(this.getMessage()).getAsJsonObject();
+  }
+
+  public static class MalformedResponseException extends APIException {
+    public MalformedResponseException () {
+      super();
+    }
+
+    public MalformedResponseException (Throwable e) {
+      super(e);
+    }
+
+    public MalformedResponseException (String message) {
+      super(message);
+    }
+
+    public MalformedResponseException (String message, Throwable e) {
+      super(message, e);
+    }
+  }
+
+  public static class FailedRequestException extends APIException {
+    public FailedRequestException () {
+      super();
+    }
+
+    public FailedRequestException (Throwable e) {
+      super(e);
+    }
+
+    public FailedRequestException (String message) {
+      super(message);
+    }
+
+    public FailedRequestException (String message, Throwable e) {
+      super(message, e);
+    }
   }
 }

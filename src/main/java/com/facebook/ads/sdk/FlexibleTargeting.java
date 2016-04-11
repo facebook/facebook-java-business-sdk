@@ -24,44 +24,41 @@
 package com.facebook.ads.sdk;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
+/**
+ * This class is auto-genereated.
+ *
+ * For any issues or feature requests related to this class, please let us know
+ * on github and we'll fix in our codegen framework. We'll not be able to accept
+ * pull request for this class.
+ *
+ */
 public class FlexibleTargeting extends APINode {
-  @SerializedName("custom_audiences")
-  private List<IDName> mCustomAudiences = null;
-  @SerializedName("connections")
-  private List<IDName> mConnections = null;
-  @SerializedName("friends_of_connections")
-  private List<IDName> mFriendsOfConnections = null;
-  @SerializedName("interests")
-  private List<IDName> mInterests = null;
-  @SerializedName("user_adclusters")
-  private List<IDName> mUserAdclusters = null;
   @SerializedName("behaviors")
   private List<IDName> mBehaviors = null;
   @SerializedName("college_years")
   private List<Long> mCollegeYears = null;
+  @SerializedName("connections")
+  private List<IDName> mConnections = null;
+  @SerializedName("custom_audiences")
+  private List<IDName> mCustomAudiences = null;
   @SerializedName("education_majors")
   private List<IDName> mEducationMajors = null;
   @SerializedName("education_schools")
@@ -72,6 +69,8 @@ public class FlexibleTargeting extends APINode {
   private List<IDName> mEthnicAffinity = null;
   @SerializedName("family_statuses")
   private List<IDName> mFamilyStatuses = null;
+  @SerializedName("friends_of_connections")
+  private List<IDName> mFriendsOfConnections = null;
   @SerializedName("generation")
   private List<IDName> mGeneration = null;
   @SerializedName("home_ownership")
@@ -88,6 +87,8 @@ public class FlexibleTargeting extends APINode {
   private List<IDName> mIndustries = null;
   @SerializedName("interested_in")
   private List<Long> mInterestedIn = null;
+  @SerializedName("interests")
+  private List<IDName> mInterests = null;
   @SerializedName("life_events")
   private List<IDName> mLifeEvents = null;
   @SerializedName("moms")
@@ -100,6 +101,8 @@ public class FlexibleTargeting extends APINode {
   private List<IDName> mPolitics = null;
   @SerializedName("relationship_statuses")
   private List<Long> mRelationshipStatuses = null;
+  @SerializedName("user_adclusters")
+  private List<IDName> mUserAdclusters = null;
   @SerializedName("work_employers")
   private List<IDName> mWorkEmployers = null;
   @SerializedName("work_positions")
@@ -121,22 +124,23 @@ public class FlexibleTargeting extends APINode {
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
-      if(!o1.equals(o2)) {
+      if (!o1.equals(o2)) {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
       };
     }
-    flexibleTargeting.mContext = context;
+    flexibleTargeting.context = context;
     flexibleTargeting.rawValue = json;
     return flexibleTargeting;
   }
 
-  public static APINodeList<FlexibleTargeting> parseResponse(String json, APIContext context, APIRequest request) {
+  public static APINodeList<FlexibleTargeting> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
     APINodeList<FlexibleTargeting> flexibleTargetings = new APINodeList<FlexibleTargeting>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
+    Exception exception = null;
     try{
       JsonElement result = parser.parse(json);
       if (result.isJsonArray()) {
@@ -149,10 +153,11 @@ public class FlexibleTargeting extends APINode {
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
-          try {
+          if (obj.has("paging")) {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            flexibleTargetings.setPaging(paging.get("before").getAsString(), paging.get("after").getAsString());
-          } catch (Exception ignored) {
+            String before = paging.has("before") ? paging.get("before").getAsString() : null;
+            String after = paging.has("after") ? paging.get("after").getAsString() : null;
+            flexibleTargetings.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -163,7 +168,20 @@ public class FlexibleTargeting extends APINode {
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
-            flexibleTargetings.add(loadJSON(obj.toString(), context));
+            boolean isRedownload = false;
+            for (String s : new String[]{"campaigns", "adsets", "ads"}) {
+              if (obj.has(s)) {
+                isRedownload = true;
+                obj = obj.getAsJsonObject(s);
+                for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+                  flexibleTargetings.add(loadJSON(entry.getValue().toString(), context));
+                }
+                break;
+              }
+            }
+            if (!isRedownload) {
+              flexibleTargetings.add(loadJSON(obj.toString(), context));
+            }
           }
           return flexibleTargetings;
         } else if (obj.has("images")) {
@@ -174,24 +192,54 @@ public class FlexibleTargeting extends APINode {
           }
           return flexibleTargetings;
         } else {
-          // Fifth, check if it's pure JsonObject
+          // Fifth, check if it's an array of objects indexed by id
+          boolean isIdIndexedArray = true;
+          for (Map.Entry entry : obj.entrySet()) {
+            String key = (String) entry.getKey();
+            if (key.equals("__fb_trace_id__")) {
+              continue;
+            }
+            JsonElement value = (JsonElement) entry.getValue();
+            if (
+              value != null &&
+              value.isJsonObject() &&
+              value.getAsJsonObject().has("id") &&
+              value.getAsJsonObject().get("id") != null &&
+              value.getAsJsonObject().get("id").getAsString().equals(key)
+            ) {
+              flexibleTargetings.add(loadJSON(value.toString(), context));
+            } else {
+              isIdIndexedArray = false;
+              break;
+            }
+          }
+          if (isIdIndexedArray) {
+            return flexibleTargetings;
+          }
+
+          // Sixth, check if it's pure JsonObject
+          flexibleTargetings.clear();
           flexibleTargetings.add(loadJSON(json, context));
           return flexibleTargetings;
         }
       }
     } catch (Exception e) {
+      exception = e;
     }
-    return null;
+    throw new MalformedResponseException(
+      "Invalid response string: " + json,
+      exception
+    );
   }
 
   @Override
   public APIContext getContext() {
-    return mContext;
+    return context;
   }
 
   @Override
   public void setContext(APIContext context) {
-    mContext = context;
+    this.context = context;
   }
 
   @Override
@@ -200,76 +248,6 @@ public class FlexibleTargeting extends APINode {
   }
 
 
-  public List<IDName> getFieldCustomAudiences() {
-    return mCustomAudiences;
-  }
-
-  public FlexibleTargeting setFieldCustomAudiences(List<IDName> value) {
-    this.mCustomAudiences = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldCustomAudiences(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mCustomAudiences = IDName.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<IDName> getFieldConnections() {
-    return mConnections;
-  }
-
-  public FlexibleTargeting setFieldConnections(List<IDName> value) {
-    this.mConnections = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldConnections(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mConnections = IDName.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<IDName> getFieldFriendsOfConnections() {
-    return mFriendsOfConnections;
-  }
-
-  public FlexibleTargeting setFieldFriendsOfConnections(List<IDName> value) {
-    this.mFriendsOfConnections = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldFriendsOfConnections(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mFriendsOfConnections = IDName.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<IDName> getFieldInterests() {
-    return mInterests;
-  }
-
-  public FlexibleTargeting setFieldInterests(List<IDName> value) {
-    this.mInterests = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldInterests(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mInterests = IDName.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<IDName> getFieldUserAdclusters() {
-    return mUserAdclusters;
-  }
-
-  public FlexibleTargeting setFieldUserAdclusters(List<IDName> value) {
-    this.mUserAdclusters = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldUserAdclusters(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mUserAdclusters = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldBehaviors() {
     return mBehaviors;
   }
@@ -293,6 +271,34 @@ public class FlexibleTargeting extends APINode {
     return this;
   }
 
+  public List<IDName> getFieldConnections() {
+    return mConnections;
+  }
+
+  public FlexibleTargeting setFieldConnections(List<IDName> value) {
+    this.mConnections = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldConnections(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mConnections = IDName.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<IDName> getFieldCustomAudiences() {
+    return mCustomAudiences;
+  }
+
+  public FlexibleTargeting setFieldCustomAudiences(List<IDName> value) {
+    this.mCustomAudiences = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldCustomAudiences(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mCustomAudiences = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldEducationMajors() {
     return mEducationMajors;
   }
@@ -356,6 +362,20 @@ public class FlexibleTargeting extends APINode {
   public FlexibleTargeting setFieldFamilyStatuses(String value) {
     Type type = new TypeToken<List<IDName>>(){}.getType();
     this.mFamilyStatuses = IDName.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<IDName> getFieldFriendsOfConnections() {
+    return mFriendsOfConnections;
+  }
+
+  public FlexibleTargeting setFieldFriendsOfConnections(List<IDName> value) {
+    this.mFriendsOfConnections = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldFriendsOfConnections(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mFriendsOfConnections = IDName.getGson().fromJson(value, type);
     return this;
   }
   public List<IDName> getFieldGeneration() {
@@ -465,6 +485,20 @@ public class FlexibleTargeting extends APINode {
     return this;
   }
 
+  public List<IDName> getFieldInterests() {
+    return mInterests;
+  }
+
+  public FlexibleTargeting setFieldInterests(List<IDName> value) {
+    this.mInterests = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldInterests(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mInterests = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldLifeEvents() {
     return mLifeEvents;
   }
@@ -544,6 +578,20 @@ public class FlexibleTargeting extends APINode {
     return this;
   }
 
+  public List<IDName> getFieldUserAdclusters() {
+    return mUserAdclusters;
+  }
+
+  public FlexibleTargeting setFieldUserAdclusters(List<IDName> value) {
+    this.mUserAdclusters = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldUserAdclusters(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mUserAdclusters = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldWorkEmployers() {
     return mWorkEmployers;
   }
@@ -589,18 +637,16 @@ public class FlexibleTargeting extends APINode {
   }
 
   public FlexibleTargeting copyFrom(FlexibleTargeting instance) {
-    this.mCustomAudiences = instance.mCustomAudiences;
-    this.mConnections = instance.mConnections;
-    this.mFriendsOfConnections = instance.mFriendsOfConnections;
-    this.mInterests = instance.mInterests;
-    this.mUserAdclusters = instance.mUserAdclusters;
     this.mBehaviors = instance.mBehaviors;
     this.mCollegeYears = instance.mCollegeYears;
+    this.mConnections = instance.mConnections;
+    this.mCustomAudiences = instance.mCustomAudiences;
     this.mEducationMajors = instance.mEducationMajors;
     this.mEducationSchools = instance.mEducationSchools;
     this.mEducationStatuses = instance.mEducationStatuses;
     this.mEthnicAffinity = instance.mEthnicAffinity;
     this.mFamilyStatuses = instance.mFamilyStatuses;
+    this.mFriendsOfConnections = instance.mFriendsOfConnections;
     this.mGeneration = instance.mGeneration;
     this.mHomeOwnership = instance.mHomeOwnership;
     this.mHomeType = instance.mHomeType;
@@ -609,22 +655,24 @@ public class FlexibleTargeting extends APINode {
     this.mIncome = instance.mIncome;
     this.mIndustries = instance.mIndustries;
     this.mInterestedIn = instance.mInterestedIn;
+    this.mInterests = instance.mInterests;
     this.mLifeEvents = instance.mLifeEvents;
     this.mMoms = instance.mMoms;
     this.mNetWorth = instance.mNetWorth;
     this.mOfficeType = instance.mOfficeType;
     this.mPolitics = instance.mPolitics;
     this.mRelationshipStatuses = instance.mRelationshipStatuses;
+    this.mUserAdclusters = instance.mUserAdclusters;
     this.mWorkEmployers = instance.mWorkEmployers;
     this.mWorkPositions = instance.mWorkPositions;
-    this.mContext = instance.mContext;
+    this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
   public static APIRequest.ResponseParser<FlexibleTargeting> getParser() {
     return new APIRequest.ResponseParser<FlexibleTargeting>() {
-      public APINodeList<FlexibleTargeting> parseResponse(String response, APIContext context, APIRequest<FlexibleTargeting> request) {
+      public APINodeList<FlexibleTargeting> parseResponse(String response, APIContext context, APIRequest<FlexibleTargeting> request) throws MalformedResponseException {
         return FlexibleTargeting.parseResponse(response, context, request);
       }
     };

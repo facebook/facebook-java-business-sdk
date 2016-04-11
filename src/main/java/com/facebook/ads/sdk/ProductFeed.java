@@ -24,52 +24,57 @@
 package com.facebook.ads.sdk;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
+/**
+ * This class is auto-genereated.
+ *
+ * For any issues or feature requests related to this class, please let us know
+ * on github and we'll fix in our codegen framework. We'll not be able to accept
+ * pull request for this class.
+ *
+ */
 public class ProductFeed extends APINode {
-  @SerializedName("id")
-  private String mId = null;
   @SerializedName("country")
   private String mCountry = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
+  @SerializedName("default_currency")
+  private String mDefaultCurrency = null;
   @SerializedName("deletion_enabled")
   private Boolean mDeletionEnabled = null;
   @SerializedName("delimiter")
-  private EnumProductFeedDelimiter mDelimiter = null;
+  private EnumDelimiter mDelimiter = null;
   @SerializedName("encoding")
-  private EnumProductFeedEncoding mEncoding = null;
+  private EnumEncoding mEncoding = null;
   @SerializedName("file_name")
   private String mFileName = null;
+  @SerializedName("id")
+  private String mId = null;
   @SerializedName("latest_upload")
   private ProductFeedUpload mLatestUpload = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("product_count")
   private Long mProductCount = null;
-  @SerializedName("quoted_fields")
-  private Boolean mQuotedFields = null;
+  @SerializedName("quoted_fields_mode")
+  private EnumQuotedFieldsMode mQuotedFieldsMode = null;
   @SerializedName("schedule")
   private ProductFeedSchedule mSchedule = null;
   protected static Gson gson = null;
@@ -83,11 +88,11 @@ public class ProductFeed extends APINode {
 
   public ProductFeed(String id, APIContext context) {
     this.mId = id;
-    this.mContext = context;
+    this.context = context;
   }
 
   public ProductFeed fetch() throws APIException{
-    ProductFeed newInstance = fetchById(this.getPrefixedId().toString(), this.mContext);
+    ProductFeed newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
@@ -104,8 +109,17 @@ public class ProductFeed extends APINode {
     return productFeed;
   }
 
+  public static APINodeList<ProductFeed> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ProductFeed>)(
+      new APIRequest<ProductFeed>(context, "", "/", "GET", ProductFeed.getParser())
+        .setParam("ids", String.join(",", ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
   private String getPrefixedId() {
-    return mId.toString();
+    return getId();
   }
 
   public String getId() {
@@ -120,22 +134,23 @@ public class ProductFeed extends APINode {
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
-      if(!o1.equals(o2)) {
+      if (!o1.equals(o2)) {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
       };
     }
-    productFeed.mContext = context;
+    productFeed.context = context;
     productFeed.rawValue = json;
     return productFeed;
   }
 
-  public static APINodeList<ProductFeed> parseResponse(String json, APIContext context, APIRequest request) {
+  public static APINodeList<ProductFeed> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
     APINodeList<ProductFeed> productFeeds = new APINodeList<ProductFeed>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
+    Exception exception = null;
     try{
       JsonElement result = parser.parse(json);
       if (result.isJsonArray()) {
@@ -148,10 +163,11 @@ public class ProductFeed extends APINode {
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
-          try {
+          if (obj.has("paging")) {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            productFeeds.setPaging(paging.get("before").getAsString(), paging.get("after").getAsString());
-          } catch (Exception ignored) {
+            String before = paging.has("before") ? paging.get("before").getAsString() : null;
+            String after = paging.has("after") ? paging.get("after").getAsString() : null;
+            productFeeds.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -162,7 +178,20 @@ public class ProductFeed extends APINode {
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
-            productFeeds.add(loadJSON(obj.toString(), context));
+            boolean isRedownload = false;
+            for (String s : new String[]{"campaigns", "adsets", "ads"}) {
+              if (obj.has(s)) {
+                isRedownload = true;
+                obj = obj.getAsJsonObject(s);
+                for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+                  productFeeds.add(loadJSON(entry.getValue().toString(), context));
+                }
+                break;
+              }
+            }
+            if (!isRedownload) {
+              productFeeds.add(loadJSON(obj.toString(), context));
+            }
           }
           return productFeeds;
         } else if (obj.has("images")) {
@@ -173,24 +202,54 @@ public class ProductFeed extends APINode {
           }
           return productFeeds;
         } else {
-          // Fifth, check if it's pure JsonObject
+          // Fifth, check if it's an array of objects indexed by id
+          boolean isIdIndexedArray = true;
+          for (Map.Entry entry : obj.entrySet()) {
+            String key = (String) entry.getKey();
+            if (key.equals("__fb_trace_id__")) {
+              continue;
+            }
+            JsonElement value = (JsonElement) entry.getValue();
+            if (
+              value != null &&
+              value.isJsonObject() &&
+              value.getAsJsonObject().has("id") &&
+              value.getAsJsonObject().get("id") != null &&
+              value.getAsJsonObject().get("id").getAsString().equals(key)
+            ) {
+              productFeeds.add(loadJSON(value.toString(), context));
+            } else {
+              isIdIndexedArray = false;
+              break;
+            }
+          }
+          if (isIdIndexedArray) {
+            return productFeeds;
+          }
+
+          // Sixth, check if it's pure JsonObject
+          productFeeds.clear();
           productFeeds.add(loadJSON(json, context));
           return productFeeds;
         }
       }
     } catch (Exception e) {
+      exception = e;
     }
-    return null;
+    throw new MalformedResponseException(
+      "Invalid response string: " + json,
+      exception
+    );
   }
 
   @Override
   public APIContext getContext() {
-    return mContext;
+    return context;
   }
 
   @Override
   public void setContext(APIContext context) {
-    mContext = context;
+    this.context = context;
   }
 
   @Override
@@ -198,34 +257,30 @@ public class ProductFeed extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), mContext);
-  }
-
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), mContext);
-  }
-
-  public APIRequestDelete delete() {
-    return new APIRequestDelete(this.getPrefixedId().toString(), mContext);
-  }
-
   public APIRequestGetProducts getProducts() {
-    return new APIRequestGetProducts(this.getPrefixedId().toString(), mContext);
+    return new APIRequestGetProducts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetUploads getUploads() {
-    return new APIRequestGetUploads(this.getPrefixedId().toString(), mContext);
+    return new APIRequestGetUploads(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateUpload createUpload() {
-    return new APIRequestCreateUpload(this.getPrefixedId().toString(), mContext);
+    return new APIRequestCreateUpload(this.getPrefixedId().toString(), context);
   }
 
-
-  public String getFieldId() {
-    return mId;
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
+
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldCountry() {
     return mCountry;
@@ -235,15 +290,19 @@ public class ProductFeed extends APINode {
     return mCreatedTime;
   }
 
+  public String getFieldDefaultCurrency() {
+    return mDefaultCurrency;
+  }
+
   public Boolean getFieldDeletionEnabled() {
     return mDeletionEnabled;
   }
 
-  public EnumProductFeedDelimiter getFieldDelimiter() {
+  public EnumDelimiter getFieldDelimiter() {
     return mDelimiter;
   }
 
-  public EnumProductFeedEncoding getFieldEncoding() {
+  public EnumEncoding getFieldEncoding() {
     return mEncoding;
   }
 
@@ -251,9 +310,13 @@ public class ProductFeed extends APINode {
     return mFileName;
   }
 
+  public String getFieldId() {
+    return mId;
+  }
+
   public ProductFeedUpload getFieldLatestUpload() {
     if (mLatestUpload != null) {
-      mLatestUpload.mContext = getContext();
+      mLatestUpload.context = getContext();
     }
     return mLatestUpload;
   }
@@ -266,8 +329,8 @@ public class ProductFeed extends APINode {
     return mProductCount;
   }
 
-  public Boolean getFieldQuotedFields() {
-    return mQuotedFields;
+  public EnumQuotedFieldsMode getFieldQuotedFieldsMode() {
+    return mQuotedFieldsMode;
   }
 
   public ProductFeedSchedule getFieldSchedule() {
@@ -275,411 +338,6 @@ public class ProductFeed extends APINode {
   }
 
 
-
-  public static class APIRequestGet extends APIRequest<ProductFeed> {
-
-    ProductFeed lastResponse = null;
-    @Override
-    public ProductFeed getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-      "country",
-      "created_time",
-      "deletion_enabled",
-      "delimiter",
-      "encoding",
-      "file_name",
-      "latest_upload",
-      "name",
-      "product_count",
-      "quoted_fields",
-      "schedule",
-    };
-
-    @Override
-    public ProductFeed parseResponse(String response) throws APIException {
-      return ProductFeed.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ProductFeed execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductFeed execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(callInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestCountryField () {
-      return this.requestCountryField(true);
-    }
-    public APIRequestGet requestCountryField (boolean value) {
-      this.requestField("country", value);
-      return this;
-    }
-    public APIRequestGet requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGet requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGet requestDeletionEnabledField () {
-      return this.requestDeletionEnabledField(true);
-    }
-    public APIRequestGet requestDeletionEnabledField (boolean value) {
-      this.requestField("deletion_enabled", value);
-      return this;
-    }
-    public APIRequestGet requestDelimiterField () {
-      return this.requestDelimiterField(true);
-    }
-    public APIRequestGet requestDelimiterField (boolean value) {
-      this.requestField("delimiter", value);
-      return this;
-    }
-    public APIRequestGet requestEncodingField () {
-      return this.requestEncodingField(true);
-    }
-    public APIRequestGet requestEncodingField (boolean value) {
-      this.requestField("encoding", value);
-      return this;
-    }
-    public APIRequestGet requestFileNameField () {
-      return this.requestFileNameField(true);
-    }
-    public APIRequestGet requestFileNameField (boolean value) {
-      this.requestField("file_name", value);
-      return this;
-    }
-    public APIRequestGet requestLatestUploadField () {
-      return this.requestLatestUploadField(true);
-    }
-    public APIRequestGet requestLatestUploadField (boolean value) {
-      this.requestField("latest_upload", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestProductCountField () {
-      return this.requestProductCountField(true);
-    }
-    public APIRequestGet requestProductCountField (boolean value) {
-      this.requestField("product_count", value);
-      return this;
-    }
-    public APIRequestGet requestQuotedFieldsField () {
-      return this.requestQuotedFieldsField(true);
-    }
-    public APIRequestGet requestQuotedFieldsField (boolean value) {
-      this.requestField("quoted_fields", value);
-      return this;
-    }
-    public APIRequestGet requestScheduleField () {
-      return this.requestScheduleField(true);
-    }
-    public APIRequestGet requestScheduleField (boolean value) {
-      this.requestField("schedule", value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestUpdate extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "id",
-      "name",
-      "encoding",
-      "delimiter",
-      "schedule",
-      "quoted_fields",
-      "deletion_enabled",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(callInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
-
-
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-
-    public APIRequestUpdate setEncoding (EnumUpdateEncoding encoding) {
-      this.setParam("encoding", encoding);
-      return this;
-    }
-
-    public APIRequestUpdate setEncoding (String encoding) {
-      this.setParam("encoding", encoding);
-      return this;
-    }
-
-    public APIRequestUpdate setDelimiter (EnumUpdateDelimiter delimiter) {
-      this.setParam("delimiter", delimiter);
-      return this;
-    }
-
-    public APIRequestUpdate setDelimiter (String delimiter) {
-      this.setParam("delimiter", delimiter);
-      return this;
-    }
-
-    public APIRequestUpdate setSchedule (String schedule) {
-      this.setParam("schedule", schedule);
-      return this;
-    }
-
-
-    public APIRequestUpdate setQuotedFields (Boolean quotedFields) {
-      this.setParam("quoted_fields", quotedFields);
-      return this;
-    }
-
-    public APIRequestUpdate setQuotedFields (String quotedFields) {
-      this.setParam("quoted_fields", quotedFields);
-      return this;
-    }
-
-    public APIRequestUpdate setDeletionEnabled (Boolean deletionEnabled) {
-      this.setParam("deletion_enabled", deletionEnabled);
-      return this;
-    }
-
-    public APIRequestUpdate setDeletionEnabled (String deletionEnabled) {
-      this.setParam("deletion_enabled", deletionEnabled);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-
-  }
-
-  public static class APIRequestDelete extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(callInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestDelete(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    public APIRequestDelete setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    public APIRequestDelete setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDelete setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
-
-
-    public APIRequestDelete requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDelete requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    public APIRequestDelete requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    public APIRequestDelete requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    public APIRequestDelete requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    public APIRequestDelete requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-
-  }
 
   public static class APIRequestGetProducts extends APIRequest<ProductItem> {
 
@@ -692,10 +350,9 @@ public class ProductFeed extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "id",
       "additional_image_urls",
-      "applinks",
       "age_group",
+      "applinks",
       "availability",
       "brand",
       "category",
@@ -703,32 +360,38 @@ public class ProductFeed extends APINode {
       "commerce_insights",
       "condition",
       "custom_data",
+      "custom_label_0",
+      "custom_label_1",
+      "custom_label_2",
+      "custom_label_3",
+      "custom_label_4",
       "description",
       "expiration_date",
       "gender",
       "gtin",
+      "id",
       "image_url",
-      "material",
       "manufacturer_part_number",
+      "material",
       "name",
       "ordering_index",
       "pattern",
       "price",
+      "product_feed",
       "product_type",
       "retailer_id",
       "retailer_product_group_id",
       "review_rejection_reasons",
       "review_status",
       "sale_price",
-      "sale_price_start_date",
       "sale_price_end_date",
-      "shipping_weight_value",
+      "sale_price_start_date",
       "shipping_weight_unit",
+      "shipping_weight_value",
       "size",
       "start_date",
       "url",
       "visibility",
-      "product_feed",
     };
 
     @Override
@@ -743,7 +406,7 @@ public class ProductFeed extends APINode {
 
     @Override
     public APINodeList<ProductItem> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(callInternal(extraParams));
+      lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
@@ -751,11 +414,13 @@ public class ProductFeed extends APINode {
       super(context, nodeId, "/products", "GET", Arrays.asList(PARAMS));
     }
 
+    @Override
     public APIRequestGetProducts setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
+    @Override
     public APIRequestGetProducts setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
@@ -773,10 +438,12 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    @Override
     public APIRequestGetProducts requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
+    @Override
     public APIRequestGetProducts requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
@@ -784,23 +451,18 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    @Override
     public APIRequestGetProducts requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
+    @Override
     public APIRequestGetProducts requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetProducts requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetProducts requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
     public APIRequestGetProducts requestAdditionalImageUrlsField () {
       return this.requestAdditionalImageUrlsField(true);
     }
@@ -808,18 +470,18 @@ public class ProductFeed extends APINode {
       this.requestField("additional_image_urls", value);
       return this;
     }
-    public APIRequestGetProducts requestApplinksField () {
-      return this.requestApplinksField(true);
-    }
-    public APIRequestGetProducts requestApplinksField (boolean value) {
-      this.requestField("applinks", value);
-      return this;
-    }
     public APIRequestGetProducts requestAgeGroupField () {
       return this.requestAgeGroupField(true);
     }
     public APIRequestGetProducts requestAgeGroupField (boolean value) {
       this.requestField("age_group", value);
+      return this;
+    }
+    public APIRequestGetProducts requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetProducts requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
       return this;
     }
     public APIRequestGetProducts requestAvailabilityField () {
@@ -871,6 +533,41 @@ public class ProductFeed extends APINode {
       this.requestField("custom_data", value);
       return this;
     }
+    public APIRequestGetProducts requestCustomLabel0Field () {
+      return this.requestCustomLabel0Field(true);
+    }
+    public APIRequestGetProducts requestCustomLabel0Field (boolean value) {
+      this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCustomLabel1Field () {
+      return this.requestCustomLabel1Field(true);
+    }
+    public APIRequestGetProducts requestCustomLabel1Field (boolean value) {
+      this.requestField("custom_label_1", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCustomLabel2Field () {
+      return this.requestCustomLabel2Field(true);
+    }
+    public APIRequestGetProducts requestCustomLabel2Field (boolean value) {
+      this.requestField("custom_label_2", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCustomLabel3Field () {
+      return this.requestCustomLabel3Field(true);
+    }
+    public APIRequestGetProducts requestCustomLabel3Field (boolean value) {
+      this.requestField("custom_label_3", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCustomLabel4Field () {
+      return this.requestCustomLabel4Field(true);
+    }
+    public APIRequestGetProducts requestCustomLabel4Field (boolean value) {
+      this.requestField("custom_label_4", value);
+      return this;
+    }
     public APIRequestGetProducts requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -899,6 +596,13 @@ public class ProductFeed extends APINode {
       this.requestField("gtin", value);
       return this;
     }
+    public APIRequestGetProducts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetProducts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
     public APIRequestGetProducts requestImageUrlField () {
       return this.requestImageUrlField(true);
     }
@@ -906,18 +610,18 @@ public class ProductFeed extends APINode {
       this.requestField("image_url", value);
       return this;
     }
-    public APIRequestGetProducts requestMaterialField () {
-      return this.requestMaterialField(true);
-    }
-    public APIRequestGetProducts requestMaterialField (boolean value) {
-      this.requestField("material", value);
-      return this;
-    }
     public APIRequestGetProducts requestManufacturerPartNumberField () {
       return this.requestManufacturerPartNumberField(true);
     }
     public APIRequestGetProducts requestManufacturerPartNumberField (boolean value) {
       this.requestField("manufacturer_part_number", value);
+      return this;
+    }
+    public APIRequestGetProducts requestMaterialField () {
+      return this.requestMaterialField(true);
+    }
+    public APIRequestGetProducts requestMaterialField (boolean value) {
+      this.requestField("material", value);
       return this;
     }
     public APIRequestGetProducts requestNameField () {
@@ -946,6 +650,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestPriceField (boolean value) {
       this.requestField("price", value);
+      return this;
+    }
+    public APIRequestGetProducts requestProductFeedField () {
+      return this.requestProductFeedField(true);
+    }
+    public APIRequestGetProducts requestProductFeedField (boolean value) {
+      this.requestField("product_feed", value);
       return this;
     }
     public APIRequestGetProducts requestProductTypeField () {
@@ -990,13 +701,6 @@ public class ProductFeed extends APINode {
       this.requestField("sale_price", value);
       return this;
     }
-    public APIRequestGetProducts requestSalePriceStartDateField () {
-      return this.requestSalePriceStartDateField(true);
-    }
-    public APIRequestGetProducts requestSalePriceStartDateField (boolean value) {
-      this.requestField("sale_price_start_date", value);
-      return this;
-    }
     public APIRequestGetProducts requestSalePriceEndDateField () {
       return this.requestSalePriceEndDateField(true);
     }
@@ -1004,11 +708,11 @@ public class ProductFeed extends APINode {
       this.requestField("sale_price_end_date", value);
       return this;
     }
-    public APIRequestGetProducts requestShippingWeightValueField () {
-      return this.requestShippingWeightValueField(true);
+    public APIRequestGetProducts requestSalePriceStartDateField () {
+      return this.requestSalePriceStartDateField(true);
     }
-    public APIRequestGetProducts requestShippingWeightValueField (boolean value) {
-      this.requestField("shipping_weight_value", value);
+    public APIRequestGetProducts requestSalePriceStartDateField (boolean value) {
+      this.requestField("sale_price_start_date", value);
       return this;
     }
     public APIRequestGetProducts requestShippingWeightUnitField () {
@@ -1016,6 +720,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestShippingWeightUnitField (boolean value) {
       this.requestField("shipping_weight_unit", value);
+      return this;
+    }
+    public APIRequestGetProducts requestShippingWeightValueField () {
+      return this.requestShippingWeightValueField(true);
+    }
+    public APIRequestGetProducts requestShippingWeightValueField (boolean value) {
+      this.requestField("shipping_weight_value", value);
       return this;
     }
     public APIRequestGetProducts requestSizeField () {
@@ -1046,14 +757,6 @@ public class ProductFeed extends APINode {
       this.requestField("visibility", value);
       return this;
     }
-    public APIRequestGetProducts requestProductFeedField () {
-      return this.requestProductFeedField(true);
-    }
-    public APIRequestGetProducts requestProductFeedField (boolean value) {
-      this.requestField("product_feed", value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetUploads extends APIRequest<ProductFeedUpload> {
@@ -1067,8 +770,8 @@ public class ProductFeed extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "id",
       "end_time",
+      "id",
       "input_method",
       "start_time",
       "url",
@@ -1086,7 +789,7 @@ public class ProductFeed extends APINode {
 
     @Override
     public APINodeList<ProductFeedUpload> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(callInternal(extraParams));
+      lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
@@ -1094,11 +797,13 @@ public class ProductFeed extends APINode {
       super(context, nodeId, "/uploads", "GET", Arrays.asList(PARAMS));
     }
 
+    @Override
     public APIRequestGetUploads setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
+    @Override
     public APIRequestGetUploads setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
@@ -1116,10 +821,12 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    @Override
     public APIRequestGetUploads requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
+    @Override
     public APIRequestGetUploads requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
@@ -1127,28 +834,30 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    @Override
     public APIRequestGetUploads requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
+    @Override
     public APIRequestGetUploads requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetUploads requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetUploads requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
     public APIRequestGetUploads requestEndTimeField () {
       return this.requestEndTimeField(true);
     }
     public APIRequestGetUploads requestEndTimeField (boolean value) {
       this.requestField("end_time", value);
+      return this;
+    }
+    public APIRequestGetUploads requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetUploads requestIdField (boolean value) {
+      this.requestField("id", value);
       return this;
     }
     public APIRequestGetUploads requestInputMethodField () {
@@ -1172,7 +881,6 @@ public class ProductFeed extends APINode {
       this.requestField("url", value);
       return this;
     }
-
   }
 
   public static class APIRequestCreateUpload extends APIRequest<ProductFeedUpload> {
@@ -1205,7 +913,7 @@ public class ProductFeed extends APINode {
 
     @Override
     public ProductFeedUpload execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(callInternal(extraParams));
+      lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
@@ -1213,11 +921,13 @@ public class ProductFeed extends APINode {
       super(context, nodeId, "/uploads", "POST", Arrays.asList(PARAMS));
     }
 
+    @Override
     public APIRequestCreateUpload setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
+    @Override
     public APIRequestCreateUpload setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
@@ -1228,29 +938,30 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    public APIRequestCreateUpload setUseVideoEndpoint(boolean useVideoEndpoint) {
+      this.useVideoEndpoint = useVideoEndpoint;
+      return this;
+    }
+
     public APIRequestCreateUpload setId (String id) {
       this.setParam("id", id);
       return this;
     }
-
 
     public APIRequestCreateUpload setPassword (String password) {
       this.setParam("password", password);
       return this;
     }
 
-
     public APIRequestCreateUpload setUrl (String url) {
       this.setParam("url", url);
       return this;
     }
 
-
     public APIRequestCreateUpload setUsername (String username) {
       this.setParam("username", username);
       return this;
     }
-
 
     public APIRequestCreateUpload requestAllFields () {
       return this.requestAllFields(true);
@@ -1263,10 +974,12 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    @Override
     public APIRequestCreateUpload requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
+    @Override
     public APIRequestCreateUpload requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
@@ -1274,123 +987,523 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    @Override
     public APIRequestCreateUpload requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
+    @Override
     public APIRequestCreateUpload requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-
   }
 
-  public static enum EnumUpdateEncoding {
-    @SerializedName("AUTODETECT")
-    VALUE_AUTODETECT("AUTODETECT"),
-    @SerializedName("LATIN1")
-    VALUE_LATIN1("LATIN1"),
-    @SerializedName("UTF8")
-    VALUE_UTF8("UTF8"),
-    @SerializedName("UTF16LE")
-    VALUE_UTF16LE("UTF16LE"),
-    @SerializedName("UTF16BE")
-    VALUE_UTF16BE("UTF16BE"),
-    @SerializedName("UTF32LE")
-    VALUE_UTF32LE("UTF32LE"),
-    @SerializedName("UTF32BE")
-    VALUE_UTF32BE("UTF32BE"),
-    NULL(null);
+  public static class APIRequestDelete extends APIRequest<APINode> {
 
-    private String value;
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "id",
+    };
 
-    private EnumUpdateEncoding(String value) {
-      this.value = value;
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public String toString() {
-      return value;
-    }
-  }
-  public static enum EnumUpdateDelimiter {
-    @SerializedName("AUTODETECT")
-    VALUE_AUTODETECT("AUTODETECT"),
-    @SerializedName("BAR")
-    VALUE_BAR("BAR"),
-    @SerializedName("COMMA")
-    VALUE_COMMA("COMMA"),
-    @SerializedName("TAB")
-    VALUE_TAB("TAB"),
-    @SerializedName("TILDE")
-    VALUE_TILDE("TILDE"),
-    NULL(null);
-
-    private String value;
-
-    private EnumUpdateDelimiter(String value) {
-      this.value = value;
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public String toString() {
-      return value;
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
     }
-  }
-  public static enum EnumProductFeedDelimiter {
-    @SerializedName("AUTODETECT")
-    VALUE_AUTODETECT("AUTODETECT"),
-    @SerializedName("BAR")
-    VALUE_BAR("BAR"),
-    @SerializedName("COMMA")
-    VALUE_COMMA("COMMA"),
-    @SerializedName("TAB")
-    VALUE_TAB("TAB"),
-    @SerializedName("TILDE")
-    VALUE_TILDE("TILDE"),
-    NULL(null);
 
-    private String value;
-
-    private EnumProductFeedDelimiter(String value) {
-      this.value = value;
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
     @Override
-    public String toString() {
-      return value;
-    }
-  }
-  public static enum EnumProductFeedEncoding {
-    @SerializedName("AUTODETECT")
-    VALUE_AUTODETECT("AUTODETECT"),
-    @SerializedName("LATIN1")
-    VALUE_LATIN1("LATIN1"),
-    @SerializedName("UTF8")
-    VALUE_UTF8("UTF8"),
-    @SerializedName("UTF16LE")
-    VALUE_UTF16LE("UTF16LE"),
-    @SerializedName("UTF16BE")
-    VALUE_UTF16BE("UTF16BE"),
-    @SerializedName("UTF32LE")
-    VALUE_UTF32LE("UTF32LE"),
-    @SerializedName("UTF32BE")
-    VALUE_UTF32BE("UTF32BE"),
-    NULL(null);
-
-    private String value;
-
-    private EnumProductFeedEncoding(String value) {
-      this.value = value;
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
     }
 
     @Override
-    public String toString() {
-      return value;
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete setId (String id) {
+      this.setParam("id", id);
+      return this;
+    }
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGet extends APIRequest<ProductFeed> {
+
+    ProductFeed lastResponse = null;
+    @Override
+    public ProductFeed getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "country",
+      "created_time",
+      "default_currency",
+      "deletion_enabled",
+      "delimiter",
+      "encoding",
+      "file_name",
+      "id",
+      "latest_upload",
+      "name",
+      "product_count",
+      "quoted_fields_mode",
+      "schedule",
+    };
+
+    @Override
+    public ProductFeed parseResponse(String response) throws APIException {
+      return ProductFeed.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public ProductFeed execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductFeed execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestCountryField () {
+      return this.requestCountryField(true);
+    }
+    public APIRequestGet requestCountryField (boolean value) {
+      this.requestField("country", value);
+      return this;
+    }
+    public APIRequestGet requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGet requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGet requestDefaultCurrencyField () {
+      return this.requestDefaultCurrencyField(true);
+    }
+    public APIRequestGet requestDefaultCurrencyField (boolean value) {
+      this.requestField("default_currency", value);
+      return this;
+    }
+    public APIRequestGet requestDeletionEnabledField () {
+      return this.requestDeletionEnabledField(true);
+    }
+    public APIRequestGet requestDeletionEnabledField (boolean value) {
+      this.requestField("deletion_enabled", value);
+      return this;
+    }
+    public APIRequestGet requestDelimiterField () {
+      return this.requestDelimiterField(true);
+    }
+    public APIRequestGet requestDelimiterField (boolean value) {
+      this.requestField("delimiter", value);
+      return this;
+    }
+    public APIRequestGet requestEncodingField () {
+      return this.requestEncodingField(true);
+    }
+    public APIRequestGet requestEncodingField (boolean value) {
+      this.requestField("encoding", value);
+      return this;
+    }
+    public APIRequestGet requestFileNameField () {
+      return this.requestFileNameField(true);
+    }
+    public APIRequestGet requestFileNameField (boolean value) {
+      this.requestField("file_name", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestLatestUploadField () {
+      return this.requestLatestUploadField(true);
+    }
+    public APIRequestGet requestLatestUploadField (boolean value) {
+      this.requestField("latest_upload", value);
+      return this;
+    }
+    public APIRequestGet requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGet requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestProductCountField () {
+      return this.requestProductCountField(true);
+    }
+    public APIRequestGet requestProductCountField (boolean value) {
+      this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGet requestQuotedFieldsModeField () {
+      return this.requestQuotedFieldsModeField(true);
+    }
+    public APIRequestGet requestQuotedFieldsModeField (boolean value) {
+      this.requestField("quoted_fields_mode", value);
+      return this;
+    }
+    public APIRequestGet requestScheduleField () {
+      return this.requestScheduleField(true);
+    }
+    public APIRequestGet requestScheduleField (boolean value) {
+      this.requestField("schedule", value);
+      return this;
     }
   }
+
+  public static class APIRequestUpdate extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "default_currency",
+      "deletion_enabled",
+      "delimiter",
+      "encoding",
+      "id",
+      "name",
+      "quoted_fields",
+      "schedule",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setDefaultCurrency (String defaultCurrency) {
+      this.setParam("default_currency", defaultCurrency);
+      return this;
+    }
+
+    public APIRequestUpdate setDeletionEnabled (Boolean deletionEnabled) {
+      this.setParam("deletion_enabled", deletionEnabled);
+      return this;
+    }
+    public APIRequestUpdate setDeletionEnabled (String deletionEnabled) {
+      this.setParam("deletion_enabled", deletionEnabled);
+      return this;
+    }
+
+    public APIRequestUpdate setDelimiter (ProductFeed.EnumDelimiter delimiter) {
+      this.setParam("delimiter", delimiter);
+      return this;
+    }
+    public APIRequestUpdate setDelimiter (String delimiter) {
+      this.setParam("delimiter", delimiter);
+      return this;
+    }
+
+    public APIRequestUpdate setEncoding (ProductFeed.EnumEncoding encoding) {
+      this.setParam("encoding", encoding);
+      return this;
+    }
+    public APIRequestUpdate setEncoding (String encoding) {
+      this.setParam("encoding", encoding);
+      return this;
+    }
+
+    public APIRequestUpdate setId (String id) {
+      this.setParam("id", id);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setQuotedFields (Boolean quotedFields) {
+      this.setParam("quoted_fields", quotedFields);
+      return this;
+    }
+    public APIRequestUpdate setQuotedFields (String quotedFields) {
+      this.setParam("quoted_fields", quotedFields);
+      return this;
+    }
+
+    public APIRequestUpdate setSchedule (String schedule) {
+      this.setParam("schedule", schedule);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static enum EnumDelimiter {
+      @SerializedName("AUTODETECT")
+      VALUE_AUTODETECT("AUTODETECT"),
+      @SerializedName("BAR")
+      VALUE_BAR("BAR"),
+      @SerializedName("COMMA")
+      VALUE_COMMA("COMMA"),
+      @SerializedName("TAB")
+      VALUE_TAB("TAB"),
+      @SerializedName("TILDE")
+      VALUE_TILDE("TILDE"),
+      @SerializedName("SEMICOLON")
+      VALUE_SEMICOLON("SEMICOLON"),
+      NULL(null);
+
+      private String value;
+
+      private EnumDelimiter(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumEncoding {
+      @SerializedName("AUTODETECT")
+      VALUE_AUTODETECT("AUTODETECT"),
+      @SerializedName("LATIN1")
+      VALUE_LATIN1("LATIN1"),
+      @SerializedName("UTF8")
+      VALUE_UTF8("UTF8"),
+      @SerializedName("UTF16LE")
+      VALUE_UTF16LE("UTF16LE"),
+      @SerializedName("UTF16BE")
+      VALUE_UTF16BE("UTF16BE"),
+      @SerializedName("UTF32LE")
+      VALUE_UTF32LE("UTF32LE"),
+      @SerializedName("UTF32BE")
+      VALUE_UTF32BE("UTF32BE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumEncoding(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumQuotedFieldsMode {
+      @SerializedName("AUTODETECT")
+      VALUE_AUTODETECT("AUTODETECT"),
+      @SerializedName("ON")
+      VALUE_ON("ON"),
+      @SerializedName("OFF")
+      VALUE_OFF("OFF"),
+      NULL(null);
+
+      private String value;
+
+      private EnumQuotedFieldsMode(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -1406,26 +1519,27 @@ public class ProductFeed extends APINode {
   }
 
   public ProductFeed copyFrom(ProductFeed instance) {
-    this.mId = instance.mId;
     this.mCountry = instance.mCountry;
     this.mCreatedTime = instance.mCreatedTime;
+    this.mDefaultCurrency = instance.mDefaultCurrency;
     this.mDeletionEnabled = instance.mDeletionEnabled;
     this.mDelimiter = instance.mDelimiter;
     this.mEncoding = instance.mEncoding;
     this.mFileName = instance.mFileName;
+    this.mId = instance.mId;
     this.mLatestUpload = instance.mLatestUpload;
     this.mName = instance.mName;
     this.mProductCount = instance.mProductCount;
-    this.mQuotedFields = instance.mQuotedFields;
+    this.mQuotedFieldsMode = instance.mQuotedFieldsMode;
     this.mSchedule = instance.mSchedule;
-    this.mContext = instance.mContext;
+    this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
   public static APIRequest.ResponseParser<ProductFeed> getParser() {
     return new APIRequest.ResponseParser<ProductFeed>() {
-      public APINodeList<ProductFeed> parseResponse(String response, APIContext context, APIRequest<ProductFeed> request) {
+      public APINodeList<ProductFeed> parseResponse(String response, APIContext context, APIRequest<ProductFeed> request) throws MalformedResponseException {
         return ProductFeed.parseResponse(response, context, request);
       }
     };

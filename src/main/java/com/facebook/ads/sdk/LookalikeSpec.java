@@ -24,42 +24,45 @@
 package com.facebook.ads.sdk;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
+/**
+ * This class is auto-genereated.
+ *
+ * For any issues or feature requests related to this class, please let us know
+ * on github and we'll fix in our codegen framework. We'll not be able to accept
+ * pull request for this class.
+ *
+ */
 public class LookalikeSpec extends APINode {
   @SerializedName("country")
   private String mCountry = null;
-  @SerializedName("origin")
-  private List<Object> mOrigin = null;
-  @SerializedName("starting_ratio")
-  private Double mStartingRatio = null;
-  @SerializedName("ratio")
-  private Double mRatio = null;
-  @SerializedName("type")
-  private String mType = null;
   @SerializedName("is_financial_service")
   private Boolean mIsFinancialService = null;
+  @SerializedName("origin")
+  private List<Object> mOrigin = null;
+  @SerializedName("ratio")
+  private Double mRatio = null;
+  @SerializedName("starting_ratio")
+  private Double mStartingRatio = null;
+  @SerializedName("type")
+  private String mType = null;
   protected static Gson gson = null;
 
   public LookalikeSpec() {
@@ -77,22 +80,23 @@ public class LookalikeSpec extends APINode {
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
-      if(!o1.equals(o2)) {
+      if (!o1.equals(o2)) {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
       };
     }
-    lookalikeSpec.mContext = context;
+    lookalikeSpec.context = context;
     lookalikeSpec.rawValue = json;
     return lookalikeSpec;
   }
 
-  public static APINodeList<LookalikeSpec> parseResponse(String json, APIContext context, APIRequest request) {
+  public static APINodeList<LookalikeSpec> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
     APINodeList<LookalikeSpec> lookalikeSpecs = new APINodeList<LookalikeSpec>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
+    Exception exception = null;
     try{
       JsonElement result = parser.parse(json);
       if (result.isJsonArray()) {
@@ -105,10 +109,11 @@ public class LookalikeSpec extends APINode {
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
-          try {
+          if (obj.has("paging")) {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            lookalikeSpecs.setPaging(paging.get("before").getAsString(), paging.get("after").getAsString());
-          } catch (Exception ignored) {
+            String before = paging.has("before") ? paging.get("before").getAsString() : null;
+            String after = paging.has("after") ? paging.get("after").getAsString() : null;
+            lookalikeSpecs.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -119,7 +124,20 @@ public class LookalikeSpec extends APINode {
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
-            lookalikeSpecs.add(loadJSON(obj.toString(), context));
+            boolean isRedownload = false;
+            for (String s : new String[]{"campaigns", "adsets", "ads"}) {
+              if (obj.has(s)) {
+                isRedownload = true;
+                obj = obj.getAsJsonObject(s);
+                for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+                  lookalikeSpecs.add(loadJSON(entry.getValue().toString(), context));
+                }
+                break;
+              }
+            }
+            if (!isRedownload) {
+              lookalikeSpecs.add(loadJSON(obj.toString(), context));
+            }
           }
           return lookalikeSpecs;
         } else if (obj.has("images")) {
@@ -130,24 +148,54 @@ public class LookalikeSpec extends APINode {
           }
           return lookalikeSpecs;
         } else {
-          // Fifth, check if it's pure JsonObject
+          // Fifth, check if it's an array of objects indexed by id
+          boolean isIdIndexedArray = true;
+          for (Map.Entry entry : obj.entrySet()) {
+            String key = (String) entry.getKey();
+            if (key.equals("__fb_trace_id__")) {
+              continue;
+            }
+            JsonElement value = (JsonElement) entry.getValue();
+            if (
+              value != null &&
+              value.isJsonObject() &&
+              value.getAsJsonObject().has("id") &&
+              value.getAsJsonObject().get("id") != null &&
+              value.getAsJsonObject().get("id").getAsString().equals(key)
+            ) {
+              lookalikeSpecs.add(loadJSON(value.toString(), context));
+            } else {
+              isIdIndexedArray = false;
+              break;
+            }
+          }
+          if (isIdIndexedArray) {
+            return lookalikeSpecs;
+          }
+
+          // Sixth, check if it's pure JsonObject
+          lookalikeSpecs.clear();
           lookalikeSpecs.add(loadJSON(json, context));
           return lookalikeSpecs;
         }
       }
     } catch (Exception e) {
+      exception = e;
     }
-    return null;
+    throw new MalformedResponseException(
+      "Invalid response string: " + json,
+      exception
+    );
   }
 
   @Override
   public APIContext getContext() {
-    return mContext;
+    return context;
   }
 
   @Override
   public void setContext(APIContext context) {
-    mContext = context;
+    this.context = context;
   }
 
   @Override
@@ -165,21 +213,21 @@ public class LookalikeSpec extends APINode {
     return this;
   }
 
+  public Boolean getFieldIsFinancialService() {
+    return mIsFinancialService;
+  }
+
+  public LookalikeSpec setFieldIsFinancialService(Boolean value) {
+    this.mIsFinancialService = value;
+    return this;
+  }
+
   public List<Object> getFieldOrigin() {
     return mOrigin;
   }
 
   public LookalikeSpec setFieldOrigin(List<Object> value) {
     this.mOrigin = value;
-    return this;
-  }
-
-  public Double getFieldStartingRatio() {
-    return mStartingRatio;
-  }
-
-  public LookalikeSpec setFieldStartingRatio(Double value) {
-    this.mStartingRatio = value;
     return this;
   }
 
@@ -192,21 +240,21 @@ public class LookalikeSpec extends APINode {
     return this;
   }
 
+  public Double getFieldStartingRatio() {
+    return mStartingRatio;
+  }
+
+  public LookalikeSpec setFieldStartingRatio(Double value) {
+    this.mStartingRatio = value;
+    return this;
+  }
+
   public String getFieldType() {
     return mType;
   }
 
   public LookalikeSpec setFieldType(String value) {
     this.mType = value;
-    return this;
-  }
-
-  public Boolean getFieldIsFinancialService() {
-    return mIsFinancialService;
-  }
-
-  public LookalikeSpec setFieldIsFinancialService(Boolean value) {
-    this.mIsFinancialService = value;
     return this;
   }
 
@@ -228,19 +276,19 @@ public class LookalikeSpec extends APINode {
 
   public LookalikeSpec copyFrom(LookalikeSpec instance) {
     this.mCountry = instance.mCountry;
-    this.mOrigin = instance.mOrigin;
-    this.mStartingRatio = instance.mStartingRatio;
-    this.mRatio = instance.mRatio;
-    this.mType = instance.mType;
     this.mIsFinancialService = instance.mIsFinancialService;
-    this.mContext = instance.mContext;
+    this.mOrigin = instance.mOrigin;
+    this.mRatio = instance.mRatio;
+    this.mStartingRatio = instance.mStartingRatio;
+    this.mType = instance.mType;
+    this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
   public static APIRequest.ResponseParser<LookalikeSpec> getParser() {
     return new APIRequest.ResponseParser<LookalikeSpec>() {
-      public APINodeList<LookalikeSpec> parseResponse(String response, APIContext context, APIRequest<LookalikeSpec> request) {
+      public APINodeList<LookalikeSpec> parseResponse(String response, APIContext context, APIRequest<LookalikeSpec> request) throws MalformedResponseException {
         return LookalikeSpec.parseResponse(response, context, request);
       }
     };

@@ -22,6 +22,8 @@
  */
 package com.facebook.ads.sdk;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -58,6 +60,12 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
     @Override
     public String getRawResponse() {
       return rawValue;
+    }
+
+    @Override
+    public JsonObject getRawResponseAsJsonObject() {
+      JsonParser parser = new JsonParser();
+      return parser.parse(rawValue).getAsJsonObject();
     }
 
     @Override
