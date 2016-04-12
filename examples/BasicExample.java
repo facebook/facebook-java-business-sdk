@@ -22,59 +22,52 @@
  */
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.Ad;
 import com.facebook.ads.sdk.AdAccount;
 import com.facebook.ads.sdk.AdCreative;
 import com.facebook.ads.sdk.AdImage;
-import com.facebook.ads.sdk.AdAccount.EnumBillingEvent;
-import com.facebook.ads.sdk.AdAccount.EnumCampaignStatus;
-import com.facebook.ads.sdk.AdAccount.EnumAdSetStatus;
-import com.facebook.ads.sdk.AdAccount.EnumCampaignObjective;
-import com.facebook.ads.sdk.AdAccount.EnumOptimizationGoal;
 import com.facebook.ads.sdk.Campaign;
 import com.facebook.ads.sdk.AdSet;
-import com.facebook.ads.sdk.AdsInsights;
 import com.facebook.ads.sdk.Targeting;
 import com.facebook.ads.sdk.TargetingGeoLocation;
-import com.facebook.ads.sdk.TargetingGeoLocationZip;
 import com.facebook.ads.sdk.APIException;
-import com.facebook.ads.sdk.APINodeList;
 
 public class BasicExample {
 
-  public static final String ACCESS_TOKEN = "[Your access token]";
-  public static final Long ACCOUNT_ID = [Your ad account id];
-  public static final String APP_SECRET = "[Your app secret]";
-  public static final File imageFile = new File("[path to image file for test]");
+  public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
+  public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
+  public static final String APP_SECRET = ExampleConfig.APP_SECRET;
+  public static final File imageFile = new File(ExampleConfig.IMAGE_FILE);
   
-  public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET);
+  public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
   public static void main(String[] args) {
     try {
-      Targeting targeting = new Targeting().setFieldGeoLocations(new TargetingGeoLocation().setFieldCountries(Arrays.asList(new String[]{"US"})));
+      Targeting targeting = new Targeting().setFieldGeoLocations(new TargetingGeoLocation().setFieldCountries(Arrays.asList("US")));
       AdAccount account = new AdAccount(ACCOUNT_ID, context);
-      
+
       // Creation
       Campaign campaign = account.createCampaign()
         .setName("Java SDK Test Campaign")
-        .setObjective(EnumCampaignObjective.VALUE_LINK_CLICKS)
+        .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
         .setSpendCap(10000L)
-        .setStatus(EnumCampaignStatus.VALUE_PAUSED)
+        .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
         .execute();
+      System.out.println(campaign);
       AdSet adset = account.createAdSet()
         .setName("Java SDK Test AdSet")
         .setCampaignId(campaign.getFieldId())
-        .setStatus(EnumAdSetStatus.VALUE_PAUSED)
-        .setBillingEvent(EnumBillingEvent.VALUE_IMPRESSIONS)
-        .setDailyBudget(1000L)
+        .setStatus(AdSet.EnumStatus.VALUE_PAUSED)
+        .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
+        .setDailyBudget(500L)
         .setBidAmount(100L)
-        .setOptimizationGoal(EnumOptimizationGoal.VALUE_IMPRESSIONS)
+        .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_IMPRESSIONS)
         .setTargeting(targeting)
+        .setRedownload(true)
         .execute();
+      System.out.println(adset);
       AdImage image = account.createAdImage()
         .addUploadFile("file", imageFile)
         .execute();
@@ -91,6 +84,7 @@ public class BasicExample {
         .setCreative(creative)
         .setStatus("PAUSED")
         .setBidAmount(100L)
+        .setRedownload(true)
         .execute();
       System.out.println("Creation done!");
       
@@ -100,10 +94,14 @@ public class BasicExample {
       ad.fetch();
       System.out.println(campaign);
       System.out.println(adset);
+      System.out.println(ad);
       System.out.println("Get after creation done!");
       
       // call edge to get adsets
       for(AdSet as : campaign.getAdSets().requestAllFields().execute()) {
+        for(Ad a : as.getAds().requestAllFields().execute()) {
+          System.out.println(a);
+        }
         System.out.println(as);
       }
       System.out.println("Get from edge done!");
@@ -143,7 +141,6 @@ public class BasicExample {
         System.out.println(as);
       }
       System.out.println("Get after deletion done!");
-
     } catch (APIException e) {
       e.printStackTrace();
     }

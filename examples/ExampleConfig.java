@@ -21,30 +21,14 @@
  *
  */
 
-import com.facebook.ads.sdk.APIContext;
-import com.facebook.ads.sdk.AdAccount;
-import com.facebook.ads.sdk.Campaign;
-import com.facebook.ads.sdk.APIException;
-
-public class QuickStartExample {
-
-  public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
-  public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
-  public static final String APP_SECRET = ExampleConfig.APP_SECRET;
-  public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
- 
-  public static void main(String[] args) {
-    try {
-      AdAccount account = new AdAccount(ACCOUNT_ID, context);
-      Campaign campaign = account.createCampaign()
-        .setName("Java SDK Test Campaign")
-        .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
-        .setSpendCap(10000L)
-        .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
-        .execute();
-      System.out.println(campaign.fetch());
-    } catch (APIException e) {
-      e.printStackTrace();
-    }
-  }
+public class ExampleConfig {
+  public static final String ACCESS_TOKEN = "Your Access Token";
+  public static final Long ACCOUNT_ID = "Your Account ID";
+  public static final String APP_SECRET = "Your app secret";
+  public static final String IMAGE_FILE = "image.png";
+  public static final String VIDEO_FILE = "video.mp4";
+  public static final String PAGE_ID = "Your Page ID";
+  public static final Long BUSINESS_ID = "Your Business ID";
+  public static final String DPA_FEED_FILE_PATH = "dpa-feed-example.xml";
+  public static final String CAMPAIGN_ID = "Your campaign ID";
 }

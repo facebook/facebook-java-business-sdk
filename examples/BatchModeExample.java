@@ -28,11 +28,6 @@ import java.util.List;
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.Ad;
 import com.facebook.ads.sdk.AdAccount;
-import com.facebook.ads.sdk.AdAccount.EnumBillingEvent;
-import com.facebook.ads.sdk.AdAccount.EnumCampaignStatus;
-import com.facebook.ads.sdk.AdAccount.EnumAdSetStatus;
-import com.facebook.ads.sdk.AdAccount.EnumCampaignObjective;
-import com.facebook.ads.sdk.AdAccount.EnumOptimizationGoal;
 import com.facebook.ads.sdk.Campaign;
 import com.facebook.ads.sdk.AdSet;
 import com.facebook.ads.sdk.BatchRequest;
@@ -43,32 +38,34 @@ import com.facebook.ads.sdk.APIResponse;
 
 public class BatchModeExample {
 
-  public static final String ACCESS_TOKEN = "[Your access token]";
-  public static final Long ACCOUNT_ID = [Your ad account id];
-  public static final File imageFile = new File("[Path to test image file for ads creation]");
+
+  public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
+  public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
+  public static final String APP_SECRET = ExampleConfig.APP_SECRET;
+  public static final File imageFile = new File(ExampleConfig.IMAGE_FILE);
   
-  public static final APIContext context = new APIContext(ACCESS_TOKEN).enableDebug(true);
+  public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
   public static void main(String[] args) {
     try {
-      Targeting targeting = new Targeting().setFieldGeoLocations(new TargetingGeoLocation().setFieldCountries(Arrays.asList(new String[]{"US"})));
+      Targeting targeting = new Targeting().setFieldGeoLocations(new TargetingGeoLocation().setFieldCountries(Arrays.asList("US")));
       AdAccount account = new AdAccount(ACCOUNT_ID, context);
       
       // Creation of Ad
       BatchRequest batch = new BatchRequest(context);
       account.createCampaign()
         .setName("Java SDK Batch Test Campaign")
-        .setObjective(EnumCampaignObjective.VALUE_LINK_CLICKS)
+        .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
         .setSpendCap(10000L)
-        .setStatus(EnumCampaignStatus.VALUE_PAUSED)
+        .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
         .addToBatch(batch, "campaignRequest");
       account.createAdSet()
         .setName("Java SDK Batch Test AdSet")
         .setCampaignId("{result=campaignRequest:$.id}")
-        .setStatus(EnumAdSetStatus.VALUE_PAUSED)
-        .setBillingEvent(EnumBillingEvent.VALUE_IMPRESSIONS)
+        .setStatus(AdSet.EnumStatus.VALUE_PAUSED)
+        .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
         .setDailyBudget(1000L)
         .setBidAmount(100L)
-        .setOptimizationGoal(EnumOptimizationGoal.VALUE_IMPRESSIONS)
+        .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_IMPRESSIONS)
         .setTargeting(targeting)
         .addToBatch(batch, "adsetRequest");
       account.createAdImage()

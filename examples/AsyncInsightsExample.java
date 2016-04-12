@@ -21,28 +21,43 @@
  *
  */
 
+import java.util.Arrays;
+
 import com.facebook.ads.sdk.APIContext;
-import com.facebook.ads.sdk.AdAccount;
+import com.facebook.ads.sdk.AdReportRun;
+import com.facebook.ads.sdk.AdsInsights;
+import com.facebook.ads.sdk.AdsInsights.EnumDatePreset;
 import com.facebook.ads.sdk.Campaign;
 import com.facebook.ads.sdk.APIException;
+import com.facebook.ads.sdk.APINodeList;
 
-public class QuickStartExample {
-
+public class AsyncInsightsExample {
+  
   public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
   public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
   public static final String APP_SECRET = ExampleConfig.APP_SECRET;
+  public static final String CAMPAIGN_ID = ExampleConfig.CAMPAIGN_ID;
   public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
- 
+
   public static void main(String[] args) {
     try {
-      AdAccount account = new AdAccount(ACCOUNT_ID, context);
-      Campaign campaign = account.createCampaign()
-        .setName("Java SDK Test Campaign")
-        .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
-        .setSpendCap(10000L)
-        .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
-        .execute();
-      System.out.println(campaign.fetch());
+      AdReportRun report = new Campaign(CAMPAIGN_ID, context).getInsightsAsync()
+          .setDatePreset(EnumDatePreset.VALUE_LAST_90_DAYS)
+          .setActionBreakdowns(Arrays.asList(AdsInsights.EnumActionBreakdowns.VALUE_ACTION_TYPE))
+          .setBreakdowns(Arrays.asList(AdsInsights.EnumBreakdowns.VALUE_GENDER))
+          .requestAllFields()
+          .execute()
+          .head();
+      try {
+        while (report.fetch().getFieldAsyncPercentCompletion() != 100) {
+          System.out.println("Waiting for async insights..." + report.getFieldAsyncPercentCompletion() + "%");
+          Thread.sleep(3000);
+        }
+        APINodeList<AdsInsights> insights = report.getInsights().execute();
+        System.out.println(insights);
+      } catch(InterruptedException e) {
+        System.out.println("Interrupted!");
+      }
     } catch (APIException e) {
       e.printStackTrace();
     }
