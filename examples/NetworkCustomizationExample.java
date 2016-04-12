@@ -37,12 +37,13 @@ public class NetworkCustomizationExample {
   public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
   public static final String APP_SECRET = ExampleConfig.APP_SECRET;
   public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
- 
+
   public static void main(String[] args) {
     try {
       // IMPORTANT NOTE:
       // This is an over-simplified code example.
-      // In real products, please log the error and determine whether a retry is needed to prevent duplicated API calls.  
+      // In real products, please log the error and determine
+      // whether a retry is needed to prevent duplicated API calls.
       APIRequest.changeRequestExecutor(new APIRequest.DefaultRequestExecutor(){
         public static final int MAX_RETRY = 3;
         @Override
@@ -78,7 +79,7 @@ public class NetworkCustomizationExample {
           return response;
         }
       });
-      
+
       AdAccount account = new AdAccount(ACCOUNT_ID, context);
       Campaign campaign = account.createCampaign()
         .setName("Java SDK Test Campaign")

@@ -54,7 +54,7 @@ public class DPAExample {
   public static final String FEED_FILE_PATH = ExampleConfig.DPA_FEED_FILE_PATH;
   public static final Long BUSINESS_ID = ExampleConfig.BUSINESS_ID;
   public static final String pageId = ExampleConfig.PAGE_ID;
-  
+
   APIContext context = new APIContext(ACCESS_TOKEN).enableDebug(true);
   AdAccount account = new AdAccount(ACCOUNT_ID, context);
   Business business = new Business(BUSINESS_ID, context);
@@ -151,11 +151,11 @@ public class DPAExample {
     Ad ad = account.createAd()
         .setCreative(creative)
         .setAdsetId(adset.getId())
-        .setStatus(Ad.EnumStatus.VALUE_PAUSED)        
+        .setStatus(Ad.EnumStatus.VALUE_PAUSED)
         .setName("SDK Test ad")
         .setBidAmount(100L)
         .execute();
-    
+
     ProductItem productItem = null;
     // After feed upload, it takes a few seconds for server to parse the file and actually load the product items
     try {

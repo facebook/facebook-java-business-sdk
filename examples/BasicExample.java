@@ -41,7 +41,7 @@ public class BasicExample {
   public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
   public static final String APP_SECRET = ExampleConfig.APP_SECRET;
   public static final File imageFile = new File(ExampleConfig.IMAGE_FILE);
-  
+
   public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
   public static void main(String[] args) {
     try {
@@ -87,7 +87,7 @@ public class BasicExample {
         .setRedownload(true)
         .execute();
       System.out.println("Creation done!");
-      
+
       // Get after creation
       campaign.fetch(); // fetch() is just a shortcut for *.get().requestAllFields().execute()
       adset.fetch();
@@ -96,7 +96,7 @@ public class BasicExample {
       System.out.println(adset);
       System.out.println(ad);
       System.out.println("Get after creation done!");
-      
+
       // call edge to get adsets
       for(AdSet as : campaign.getAdSets().requestAllFields().execute()) {
         for(Ad a : as.getAds().requestAllFields().execute()) {
@@ -105,12 +105,12 @@ public class BasicExample {
         System.out.println(as);
       }
       System.out.println("Get from edge done!");
-      
+
       // Get with static methods
       System.out.println(Campaign.fetchById(campaign.getFieldId(), context));
       System.out.println(AdSet.fetchById(adset.getFieldId(), context));
       System.out.println("Get with static methods done!");
-      
+
       // Update
       campaign.update()
         .setName("Updated Java SDK Test Campaign")
@@ -119,14 +119,14 @@ public class BasicExample {
         .setName("Updated Java SDK Test AdSet")
         .execute();
       System.out.println("Update done!");
-      
+
       // Get after update
       campaign.fetch();
       adset.fetch();
       System.out.println(campaign);
       System.out.println(adset);
       System.out.println("Get after update done!");
-      
+
       // Delete
       campaign.delete().execute();
       adset.delete().execute();

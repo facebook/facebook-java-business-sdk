@@ -32,7 +32,7 @@ import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.APINodeList;
 
 public class AsyncInsightsExample {
-  
+
   public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
   public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
   public static final String APP_SECRET = ExampleConfig.APP_SECRET;

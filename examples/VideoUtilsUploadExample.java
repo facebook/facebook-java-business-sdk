@@ -53,7 +53,7 @@ public class VideoUtilsUploadExample {
   public static final String DEFAULT_API_BASE = APIConfig.DEFAULT_API_BASE;
   public static final String DEFAULT_API_VERSION = APIConfig.DEFAULT_API_VERSION;
   public static final String DEFAULT_VIDEO_API_BASE = APIConfig.DEFAULT_VIDEO_API_BASE;
-  
+
   public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
   public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
   public static final String APP_SECRET = ExampleConfig.APP_SECRET;
@@ -68,10 +68,10 @@ public class VideoUtilsUploadExample {
     try {
       // NOT RECOMMENDED: Upload in one API call
       String videoId0 = VideoUtils.uploadSmallVideoFile(account, videoFile);
-      
+
       // RECOMMENDED: Upload in chunks
       String videoId1 = VideoUtils.uploadVideoFileInChunks(account, videoFile);
-      
+
       // NOT RECOMMENDED: Upload in one API call with callback
       String videoId2 = VideoUtils.uploadSmallVideoFile(account, videoFile, true, new ProgressCallback(){
         @Override
@@ -93,7 +93,7 @@ public class VideoUtilsUploadExample {
           }
           System.out.println("Event: " + eventName + "; Progress: " + progress);
         }});
-      
+
       // RECOMMENDED: Upload in chunks with callback
       String videoId3 = VideoUtils.uploadVideoFileInChunks(account, videoFile, 5, true, new ProgressCallback(){
 
@@ -116,7 +116,7 @@ public class VideoUtilsUploadExample {
           }
           System.out.println("Event: " + eventName + "; Progress: " + progress);
         }});
-      
+
       // Creating video ads
       Campaign campaign = account.createCampaign()
           .setName("Java SDK Test Video Campaign")
@@ -139,7 +139,7 @@ public class VideoUtilsUploadExample {
       AdImage image = account.createAdImage()
         .addUploadFile("file", imageFile)
         .execute();
-      
+
       AdCreative creative = account.createAdCreative()
           .setTitle("Java SDK Test Video Creative")
           .setBody("Java SDK Test Video Creative")

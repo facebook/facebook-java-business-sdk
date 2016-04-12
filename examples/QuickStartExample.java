@@ -32,7 +32,7 @@ public class QuickStartExample {
   public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
   public static final String APP_SECRET = ExampleConfig.APP_SECRET;
   public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
- 
+
   public static void main(String[] args) {
     try {
       AdAccount account = new AdAccount(ACCOUNT_ID, context);

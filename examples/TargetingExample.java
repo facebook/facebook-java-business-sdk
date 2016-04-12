@@ -32,29 +32,29 @@ import com.facebook.ads.sdk.TargetingGeoLocation;
 import com.facebook.ads.sdk.APIException;
 
 public class TargetingExample {
-  
+
   public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
   public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
   public static final String APP_SECRET = ExampleConfig.APP_SECRET;
   public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
-  
+
   public static void main(String[] args) {
     try {
       AdAccount account = new AdAccount(ACCOUNT_ID, context);
-      
+
       Targeting targeting = new Targeting()
           .setFieldGeoLocations(new TargetingGeoLocation().setFieldCountries(Arrays.asList("US")))
           .setFieldAgeMin(18L)
           .setFieldAgeMax(30L)
           .setFieldUserOs(Arrays.asList("Android", "iOS"));
-      
+
       Campaign campaign = account.createCampaign()
         .setName("Java SDK Test Campaign")
         .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
         .setSpendCap(10000L)
         .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
         .execute();
-      
+
       AdSet adset = account.createAdSet()
         .setName("Java SDK Test AdSet")
         .setCampaignId(campaign.getFieldId())

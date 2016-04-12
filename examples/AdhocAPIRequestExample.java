@@ -37,11 +37,11 @@ public class AdhocAPIRequestExample {
   public static final String APP_SECRET = ExampleConfig.APP_SECRET;
   public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
   public static final File imageFile = new File(ExampleConfig.IMAGE_FILE);
-  
+
   public static void main(String[] args) {
     try {
       APIRequest<AdAccount> request = new APIRequest<AdAccount>(context, "me", "/adaccounts", "GET", AdAccount.getParser());
-      APINodeList<AdAccount> accounts = (APINodeList<AdAccount>)(request.execute()); 
+      APINodeList<AdAccount> accounts = (APINodeList<AdAccount>)(request.execute());
       for (AdAccount account : accounts) {
         System.out.println("account: " + account);
         APIRequest<Campaign> campaigns_request = new APIRequest<Campaign>(context, "act_" + account.getId(), "/campaigns", "GET", null, Campaign.getParser())
@@ -52,7 +52,6 @@ public class AdhocAPIRequestExample {
           System.out.println("campaign: " + campaign);
         }
       };
-
     } catch (APIException e) {
       e.printStackTrace();
     }

@@ -41,31 +41,30 @@ import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.Ad;
 
 public class CarouselAdsExample {
-  
+
   public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
   public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
   public static final String APP_SECRET = ExampleConfig.APP_SECRET;
   public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
   public static final File imageFile = new File(ExampleConfig.IMAGE_FILE);
   public static final String pageId = ExampleConfig.PAGE_ID;
-  
+
   public static void main(String[] args) {
     try {
       AdAccount account = new AdAccount(ACCOUNT_ID, context);
-      
       Targeting targeting = new Targeting()
           .setFieldGeoLocations(new TargetingGeoLocation().setFieldCountries(Arrays.asList("US")))
           .setFieldAgeMin(18L)
           .setFieldAgeMax(30L)
           .setFieldUserOs(Arrays.asList("Android", "iOS"));
-      
+
       Campaign campaign = account.createCampaign()
         .setName("Java SDK Test Carousel Campaign")
         .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
         .setSpendCap(10000L)
         .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
         .execute();
-      
+
       AdSet adset = account.createAdSet()
         .setName("Java SDK Test Carousel AdSet")
         .setCampaignId(campaign.getFieldId())
@@ -96,7 +95,7 @@ public class CarouselAdsExample {
       attachment3.addProperty("description", "www.example.com");
       attachment3.addProperty("picture", "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png");
       childAttachments.add(attachment3);
-      
+
       AdCreative creative = account.createAdCreative()
           .setTitle("Java SDK Test Carousel Creative")
           .setBody("Java SDK Test Carousel Creative")
@@ -108,7 +107,7 @@ public class CarouselAdsExample {
           )
           .setLinkUrl("www.example.com")
           .execute();
-      
+
       Ad ad = account.createAd()
           .setName("Java SDK Test Carousel ad")
           .setAdsetId(Long.parseLong(adset.getId()))

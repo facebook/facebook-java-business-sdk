@@ -41,7 +41,7 @@ import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.Ad;
 
 public class CustomAudienceExample {
-  
+
   public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
   public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
   public static final String APP_SECRET = ExampleConfig.APP_SECRET;
@@ -51,18 +51,18 @@ public class CustomAudienceExample {
   public static void main(String[] args) {
     try {
       AdAccount account = new AdAccount(ACCOUNT_ID, context);
-      
+
       CustomAudience audience = account.createCustomAudience()
         .setName("Java SDK Test Custom Audience")
         .setDescription("Test Audience")
         .setSubtype(EnumSubtype.VALUE_CUSTOM)
         .execute();
-      
+
       // Audience payload schema
       JsonArray schema = new JsonArray();
       schema.add(new JsonPrimitive("EMAIL_SHA256"));
       schema.add(new JsonPrimitive("PHONE_SHA256"));
-      
+
       // Audience payload data
       JsonArray personA = new JsonArray();
       personA.add(new JsonPrimitive(sha256("aaa@example.com")));
@@ -73,7 +73,7 @@ public class CustomAudienceExample {
       JsonArray personC = new JsonArray();
       personC.add(new JsonPrimitive(sha256("ccc@example.com")));
       personC.add(new JsonPrimitive(sha256("1234567890")));
-      
+
       JsonArray data = new JsonArray();
       data.add(personA);
       data.add(personB);
@@ -82,15 +82,15 @@ public class CustomAudienceExample {
       JsonObject payload = new JsonObject();
       payload.add("schema", schema);
       payload.add("data", data);
-      
+
       audience.createUser()
         .setPayload(payload.toString())
         .execute();
-      
+
       System.out.println(audience.fetch());
-      
+
       Targeting targeting = new Targeting().setFieldCustomAudiences("[{id:" + audience.getId() + "}]");
-      
+
       Campaign campaign = account.createCampaign()
           .setName("Java SDK Test Campaign")
           .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
@@ -132,7 +132,7 @@ public class CustomAudienceExample {
       e.printStackTrace();
     }
   }
-  
+
   public static String sha256(String message) {
     try {
       MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -142,7 +142,7 @@ public class CustomAudienceExample {
       return null;
     }
   }
-  
+
   public static String toHex(byte[] bytes) {
     StringBuilder sb = new StringBuilder();
     for (byte b : bytes) {

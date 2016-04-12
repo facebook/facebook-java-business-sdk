@@ -35,7 +35,7 @@ import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.APINodeList;
 
 public class FetchByIdsExample {
-  
+
   public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
   public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
   public static final String APP_SECRET = ExampleConfig.APP_SECRET;
@@ -89,17 +89,17 @@ public class FetchByIdsExample {
           .execute();
       APINodeList<AdSet> allAdSets = AdSet.fetchByIds(
           Arrays.asList(
-              adset1.getId(), 
-              adset2.getId(), 
-              adset3.getId()
-          ), 
-          Arrays.asList(
-              "id", 
-              "name"
-          ), 
-          context
-      ); 
-      System.out.println(allAdSets);
+             adset1.getId(),
+             adset2.getId(),
+             adset3.getId()
+          ),
+         Arrays.asList(
+              "id",
+             "name"
+          ),
+         context
+      );
+     System.out.println(allAdSets);
     } catch (APIException e) {
       e.printStackTrace();
     }

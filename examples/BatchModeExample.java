@@ -38,18 +38,17 @@ import com.facebook.ads.sdk.APIResponse;
 
 public class BatchModeExample {
 
-
   public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
   public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
   public static final String APP_SECRET = ExampleConfig.APP_SECRET;
   public static final File imageFile = new File(ExampleConfig.IMAGE_FILE);
-  
+
   public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
   public static void main(String[] args) {
     try {
       Targeting targeting = new Targeting().setFieldGeoLocations(new TargetingGeoLocation().setFieldCountries(Arrays.asList("US")));
       AdAccount account = new AdAccount(ACCOUNT_ID, context);
-      
+
       // Creation of Ad
       BatchRequest batch = new BatchRequest(context);
       account.createCampaign()
@@ -86,23 +85,23 @@ public class BatchModeExample {
         .setBidAmount(100L)
         .addToBatch(batch);
       List<APIResponse> responses = batch.execute();
-      
+
       // Obtain the IDs of the newly created objects
       Ad ad = ((Ad)responses.get(4)).fetch();
       AdSet adSet = new AdSet(ad.getFieldAdsetId(), context).fetch();
       Campaign campaign = new Campaign(adSet.getFieldCampaignId(), context);
-      
+
       // Load
       batch = new BatchRequest(context);
       ad.get().requestAllFields().addToBatch(batch);
       adSet.get().requestAllFields().addToBatch(batch);
       campaign.get().requestAllFields().addToBatch(batch);
       responses = batch.execute();
-      
+
       System.out.println((Ad) responses.get(0));
       System.out.println((AdSet) responses.get(1));
       System.out.println((Campaign) responses.get(2));
-      
+
       // Delete
       batch = new BatchRequest(context);
       //ad.delete().addToBatch(batch); // Deleting campaign automatically deletes ad and adset.
@@ -110,7 +109,6 @@ public class BatchModeExample {
       campaign.delete().addToBatch(batch);
       responses = batch.execute();
       System.out.println(responses.get(0));
-      
     } catch (APIException e) {
       e.printStackTrace();
     }
