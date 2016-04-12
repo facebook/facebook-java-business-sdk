@@ -9,8 +9,9 @@ fields/params/endpoints. Please refer to <a href="https://developers.facebook.co
 
 * **Enum Handling Improvement:** In previous version, we place enum type definition in the classes wherever the enum is referred. This caused duplicated definition of the same enum type and confusion for developers. In new release, enums are moved to their proper nesting classes.
 	
-	For example, instead of using:
+	For example, the following change is needed:
  	
+```java
  	  // This is deprecated code
       Campaign campaign = account.createCampaign()
         .setName("Java SDK Test Campaign")
@@ -18,8 +19,10 @@ fields/params/endpoints. Please refer to <a href="https://developers.facebook.co
         .setSpendCap(10000L)
         .setStatus(AdAccount.EnumCampaignStatus.VALUE_PAUSED) // old way
         .execute();	
-	In new version, we use:
+```
 
+	
+```java
 	  // This is new code
       Campaign campaign = account.createCampaign()
         .setName("Java SDK Test Campaign")
@@ -27,7 +30,7 @@ fields/params/endpoints. Please refer to <a href="https://developers.facebook.co
         .setSpendCap(10000L)
         .setStatus(Campaign.EnumStatus.VALUE_PAUSED) // new way
         .execute();
-
+```
 	
 
 ## Introduction
@@ -75,7 +78,7 @@ The SDK also has dependency on <a href="https://github.com/google/gson">gson</a>
 ### Run Sample code
 Here is the minimal code to create a campaign in your ad account. If your app and build environments are set up correctly, this code should compile and run without error. You can verify the created campaign in <a href="https://www.facebook.com/ads/manager/">Ads Manager</a>.
 
-```
+```java
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.AdAccount;
 import com.facebook.ads.sdk.AdAccount.EnumCampaignStatus;
@@ -114,12 +117,12 @@ The SDK is consistent with the documentation of <a href="https://developers.face
 ### Get an object
 You always need to create an APIContext before making any API calls. APIContext includes your access token and app secret:
 
-```
+```java
 APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET);
 ```
 To fetch an campaign object:
 
-```
+```java
 Campaign campaign = new Campaign(CAMPAIGN_ID, context); // this only creates a new empty object
 campaign = campaign.get().requestAllFields().execute(); 
 // 1. get() is the API call name to get the object; 
@@ -129,13 +132,13 @@ campaign = campaign.get().requestAllFields().execute();
 
 Or, you can use an equivalent shortcut:
 
-```
+```java
 Campaign campaign = Campaign.fetchById(CAMPAIGN_ID, context);
 ```
 
 After fetching the object, you can read the data inside:
 
-```
+```java
 String id = campaign.getFieldId();
 String name = campaign.getFieldName();
 // Note that the methods to read field data are getFieldXXX(). This is to distinguish method names of field data from method names of API GET calls.
@@ -144,7 +147,7 @@ String name = campaign.getFieldName();
 ### Update and Delete
 **Update**:
 
-```
+```java
 campaign.update()
         .setName("Updated Java SDK Test Campaign") // set parameter for the API call
         .execute();
@@ -152,7 +155,7 @@ campaign.update()
 
 **Delete**:
 
-```
+```java
 campaign.delete().execute();
 ```
 
@@ -165,7 +168,7 @@ Or, if you want to create a new campaign under this account, then you call POST 
 
 #### Read:
 
-```
+```java
 AdAccount account = new AdAccount(ACCOUNT_ID, context);
 APINodeList<Campaign> campaigns = account.getCampaigns().requestAllFields().execute();
 for(Campaign campaign : campaigns) {
@@ -176,7 +179,7 @@ for(Campaign campaign : campaigns) {
 ** Important **: Handling pagination:
 Most edge APIs have default pagination, which returns a limited number of objects (~30 objects) instead of the entire list. If you want to load more, you need to make a separate API call. In our SDK, you can call to ``nextPage()`` get next page:
 
-```
+```java
 campaigns = campaigns.nextPage();
 ```
 
@@ -184,7 +187,7 @@ campaigns = campaigns.nextPage();
 
 Most objects are under ad account. So you may always want to try account.createXXX() to create an object.
 
-```
+```java
 AdAccount account = new AdAccount(ACCOUNT_ID, context);
 Campaign campaign = account.createCampaign()
         .setName("Java SDK Test Campaign")
@@ -206,7 +209,7 @@ Every execute() is an HTTP request, which takes a network round trip. Facebook A
 In this SDK, you can simply replace execute() with addToBatch() to prepare a batch API call. When it's ready, you call batch.execute().
 
 Example:
-
+```java
       BatchRequest batch = new BatchRequest(context);
       account.createCampaign()
         .setName("Java SDK Batch Test Campaign")
@@ -243,6 +246,7 @@ Example:
         .addToBatch(batch);
       List<APIResponse> responses = batch.execute();
       // responses contains the result of each API call in order. However, if the API calls have dependency, then some result could be null.
+```
 
 ### Error Handling
 Currently all the errors are wrapped in ``APIException`` and its subclasses.
@@ -269,20 +273,24 @@ Currently this is a static method because it is likely to be a global setting. I
 
 The executor needs to implement ``IRequestExecutor`` interface:
 
+```java
     public static interface IRequestExecutor {
         public String execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
         public String sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
         public String sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
         public String sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
     }
-    
+```
+
 ``DefaultRequestExecutor`` is used by default, and it is also a good starting point for Customisation.
 
 ####Missing or Incorrect Request Params/Fields
 It is recommended to use setXXX() or requestXXXField() to construct a proper APIRequest, which prevents mis-spelling of parameter/field names. However, if you believe that some needed params/fields are missing from these methods, you can call:
 
+```java
     APIRequest.setParam(param, value)
     APIRequest.setParam.requestField(field, true)
+```
 
 This also works if you believe the type of the param is not correct in SDK. 
 
@@ -298,8 +306,10 @@ This situation can occasionally happen if new fields are added to server respons
 ####Ad-hoc APIRequest
 Most of Marketing API can be found in SDK classes. If you don't find the one you want to access, it is possible to construct an Ad-hoc APIRequest:
 
+```java
     APIRequest<AdAccount> request = new APIRequest<AdAccount>(context, "me", "/adaccounts", "GET", AdAccount.getParser());
     APINodeList<AdAccount> accounts = (APINodeList<AdAccount>)(request.execute()); 
+```
 
 When constructing the APIRequest, you need to provide
 
