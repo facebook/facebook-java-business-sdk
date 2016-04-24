@@ -24,30 +24,45 @@
 package com.facebook.ads.sdk;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
+/**
+ * This class is auto-genereated.
+ *
+ * For any issues or feature requests related to this class, please let us know
+ * on github and we'll fix in our codegen framework. We'll not be able to accept
+ * pull request for this class.
+ *
+ */
 public class AdsActionStats extends APINode {
+  @SerializedName("1d_click")
+  private Double m1dClick = null;
+  @SerializedName("1d_view")
+  private Double m1dView = null;
+  @SerializedName("28d_click")
+  private Double m28dClick = null;
+  @SerializedName("28d_view")
+  private Double m28dView = null;
+  @SerializedName("7d_click")
+  private Double m7dClick = null;
+  @SerializedName("7d_view")
+  private Double m7dView = null;
   @SerializedName("action_carousel_card_id")
   private String mActionCarouselCardId = null;
   @SerializedName("action_carousel_card_name")
@@ -64,18 +79,6 @@ public class AdsActionStats extends APINode {
   private String mActionVideoType = null;
   @SerializedName("value")
   private Double mValue = null;
-  @SerializedName("1d_view")
-  private Double m1dView = null;
-  @SerializedName("7d_view")
-  private Double m7dView = null;
-  @SerializedName("28d_view")
-  private Double m28dView = null;
-  @SerializedName("1d_click")
-  private Double m1dClick = null;
-  @SerializedName("7d_click")
-  private Double m7dClick = null;
-  @SerializedName("28d_click")
-  private Double m28dClick = null;
   protected static Gson gson = null;
 
   public AdsActionStats() {
@@ -93,22 +96,23 @@ public class AdsActionStats extends APINode {
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
-      if(!o1.equals(o2)) {
+      if (!o1.equals(o2)) {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
       };
     }
-    adsActionStats.mContext = context;
+    adsActionStats.context = context;
     adsActionStats.rawValue = json;
     return adsActionStats;
   }
 
-  public static APINodeList<AdsActionStats> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdsActionStats> adsActionStatss = new APINodeList<AdsActionStats>(request);
+  public static APINodeList<AdsActionStats> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<AdsActionStats> adsActionStatss = new APINodeList<AdsActionStats>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
+    Exception exception = null;
     try{
       JsonElement result = parser.parse(json);
       if (result.isJsonArray()) {
@@ -121,10 +125,11 @@ public class AdsActionStats extends APINode {
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
-          try {
+          if (obj.has("paging")) {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            adsActionStatss.setPaging(paging.get("before").getAsString(), paging.get("after").getAsString());
-          } catch (Exception ignored) {
+            String before = paging.has("before") ? paging.get("before").getAsString() : null;
+            String after = paging.has("after") ? paging.get("after").getAsString() : null;
+            adsActionStatss.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -135,7 +140,20 @@ public class AdsActionStats extends APINode {
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
-            adsActionStatss.add(loadJSON(obj.toString(), context));
+            boolean isRedownload = false;
+            for (String s : new String[]{"campaigns", "adsets", "ads"}) {
+              if (obj.has(s)) {
+                isRedownload = true;
+                obj = obj.getAsJsonObject(s);
+                for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+                  adsActionStatss.add(loadJSON(entry.getValue().toString(), context));
+                }
+                break;
+              }
+            }
+            if (!isRedownload) {
+              adsActionStatss.add(loadJSON(obj.toString(), context));
+            }
           }
           return adsActionStatss;
         } else if (obj.has("images")) {
@@ -146,24 +164,54 @@ public class AdsActionStats extends APINode {
           }
           return adsActionStatss;
         } else {
-          // Fifth, check if it's pure JsonObject
+          // Fifth, check if it's an array of objects indexed by id
+          boolean isIdIndexedArray = true;
+          for (Map.Entry entry : obj.entrySet()) {
+            String key = (String) entry.getKey();
+            if (key.equals("__fb_trace_id__")) {
+              continue;
+            }
+            JsonElement value = (JsonElement) entry.getValue();
+            if (
+              value != null &&
+              value.isJsonObject() &&
+              value.getAsJsonObject().has("id") &&
+              value.getAsJsonObject().get("id") != null &&
+              value.getAsJsonObject().get("id").getAsString().equals(key)
+            ) {
+              adsActionStatss.add(loadJSON(value.toString(), context));
+            } else {
+              isIdIndexedArray = false;
+              break;
+            }
+          }
+          if (isIdIndexedArray) {
+            return adsActionStatss;
+          }
+
+          // Sixth, check if it's pure JsonObject
+          adsActionStatss.clear();
           adsActionStatss.add(loadJSON(json, context));
           return adsActionStatss;
         }
       }
     } catch (Exception e) {
+      exception = e;
     }
-    return null;
+    throw new MalformedResponseException(
+      "Invalid response string: " + json,
+      exception
+    );
   }
 
   @Override
   public APIContext getContext() {
-    return mContext;
+    return context;
   }
 
   @Override
   public void setContext(APIContext context) {
-    mContext = context;
+    this.context = context;
   }
 
   @Override
@@ -171,6 +219,60 @@ public class AdsActionStats extends APINode {
     return getGson().toJson(this);
   }
 
+
+  public Double getField1dClick() {
+    return m1dClick;
+  }
+
+  public AdsActionStats setField1dClick(Double value) {
+    this.m1dClick = value;
+    return this;
+  }
+
+  public Double getField1dView() {
+    return m1dView;
+  }
+
+  public AdsActionStats setField1dView(Double value) {
+    this.m1dView = value;
+    return this;
+  }
+
+  public Double getField28dClick() {
+    return m28dClick;
+  }
+
+  public AdsActionStats setField28dClick(Double value) {
+    this.m28dClick = value;
+    return this;
+  }
+
+  public Double getField28dView() {
+    return m28dView;
+  }
+
+  public AdsActionStats setField28dView(Double value) {
+    this.m28dView = value;
+    return this;
+  }
+
+  public Double getField7dClick() {
+    return m7dClick;
+  }
+
+  public AdsActionStats setField7dClick(Double value) {
+    this.m7dClick = value;
+    return this;
+  }
+
+  public Double getField7dView() {
+    return m7dView;
+  }
+
+  public AdsActionStats setField7dView(Double value) {
+    this.m7dView = value;
+    return this;
+  }
 
   public String getFieldActionCarouselCardId() {
     return mActionCarouselCardId;
@@ -244,60 +346,6 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
-  public Double getField1dView() {
-    return m1dView;
-  }
-
-  public AdsActionStats setField1dView(Double value) {
-    this.m1dView = value;
-    return this;
-  }
-
-  public Double getField7dView() {
-    return m7dView;
-  }
-
-  public AdsActionStats setField7dView(Double value) {
-    this.m7dView = value;
-    return this;
-  }
-
-  public Double getField28dView() {
-    return m28dView;
-  }
-
-  public AdsActionStats setField28dView(Double value) {
-    this.m28dView = value;
-    return this;
-  }
-
-  public Double getField1dClick() {
-    return m1dClick;
-  }
-
-  public AdsActionStats setField1dClick(Double value) {
-    this.m1dClick = value;
-    return this;
-  }
-
-  public Double getField7dClick() {
-    return m7dClick;
-  }
-
-  public AdsActionStats setField7dClick(Double value) {
-    this.m7dClick = value;
-    return this;
-  }
-
-  public Double getField28dClick() {
-    return m28dClick;
-  }
-
-  public AdsActionStats setField28dClick(Double value) {
-    this.m28dClick = value;
-    return this;
-  }
-
 
 
 
@@ -315,6 +363,12 @@ public class AdsActionStats extends APINode {
   }
 
   public AdsActionStats copyFrom(AdsActionStats instance) {
+    this.m1dClick = instance.m1dClick;
+    this.m1dView = instance.m1dView;
+    this.m28dClick = instance.m28dClick;
+    this.m28dView = instance.m28dView;
+    this.m7dClick = instance.m7dClick;
+    this.m7dView = instance.m7dView;
     this.mActionCarouselCardId = instance.mActionCarouselCardId;
     this.mActionCarouselCardName = instance.mActionCarouselCardName;
     this.mActionDestination = instance.mActionDestination;
@@ -323,14 +377,16 @@ public class AdsActionStats extends APINode {
     this.mActionType = instance.mActionType;
     this.mActionVideoType = instance.mActionVideoType;
     this.mValue = instance.mValue;
-    this.m1dView = instance.m1dView;
-    this.m7dView = instance.m7dView;
-    this.m28dView = instance.m28dView;
-    this.m1dClick = instance.m1dClick;
-    this.m7dClick = instance.m7dClick;
-    this.m28dClick = instance.m28dClick;
-    this.mContext = instance.mContext;
+    this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdsActionStats> getParser() {
+    return new APIRequest.ResponseParser<AdsActionStats>() {
+      public APINodeList<AdsActionStats> parseResponse(String response, APIContext context, APIRequest<AdsActionStats> request) throws MalformedResponseException {
+        return AdsActionStats.parseResponse(response, context, request);
+      }
+    };
   }
 }

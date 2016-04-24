@@ -22,16 +22,10 @@
  */
 
 import com.facebook.ads.sdk.AdAccount;
-import com.facebook.ads.sdk.AdAccount.EnumAdStatus;
-import com.facebook.ads.sdk.AdAccount.EnumBillingEvent;
-import com.facebook.ads.sdk.AdAccount.EnumCampaignObjective;
-import com.facebook.ads.sdk.AdAccount.EnumCampaignStatus;
-import com.facebook.ads.sdk.AdAccount.EnumOptimizationGoal;
-import com.facebook.ads.sdk.AdAccount.EnumProductAudienceSubtype;
 import com.facebook.ads.sdk.AdCreative;
-import com.facebook.ads.sdk.AdCreative.EnumAdFormat;
 import com.facebook.ads.sdk.AdCreativeLinkData;
 import com.facebook.ads.sdk.AdCreativeObjectStorySpec;
+import com.facebook.ads.sdk.AdPreview;
 import com.facebook.ads.sdk.AdSet;
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.APIException;
@@ -53,13 +47,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DPAExample {
-  public static final String FEED_FILE_PATH = "[Path to DPA feed example (can be found in /example folder)]";
-  public static final Long BUSINESS_ID = [Your Business ID];
-  public static final Long ACCOUNT_ID = [Your Ad Account ID];
-  public static final String TEST_TOKEN = "[Your Access Token]";
-  public static final String pageId = [Your Page ID];
-  
-  APIContext context = new APIContext(TEST_TOKEN).enableDebug(true);
+  public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
+  public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
+  public static final String APP_SECRET = ExampleConfig.APP_SECRET;
+  public static final File imageFile = new File(ExampleConfig.IMAGE_FILE);
+  public static final String FEED_FILE_PATH = ExampleConfig.DPA_FEED_FILE_PATH;
+  public static final Long BUSINESS_ID = ExampleConfig.BUSINESS_ID;
+  public static final String pageId = ExampleConfig.PAGE_ID;
+
+  APIContext context = new APIContext(ACCESS_TOKEN).enableDebug(true);
   AdAccount account = new AdAccount(ACCOUNT_ID, context);
   Business business = new Business(BUSINESS_ID, context);
   ProductCatalog catalog = null;
@@ -107,7 +103,7 @@ public class DPAExample {
         .setName("JAVA SDK Test Product Audience")
         .setProductSetId(productSet.getFieldId())
         .setInclusions("[{\"retention_seconds\":86400,\"rule\":{\"event\":{\"eq\":\"AddToCart\"}}}]")
-        .setSubtype(EnumProductAudienceSubtype.VALUE_WEBSITE)
+        .setSubtype(AdAccount.EnumSubtype.VALUE_WEBSITE)
         .execute();
     audience = new CustomAudience(productAudience.getId(), context).fetch();
   }
@@ -115,16 +111,16 @@ public class DPAExample {
   public void createDPA() throws APIException {
     Campaign dpaCampaign = account.createCampaign()
         .setName("JAVA SDK DPA Test Campaign")
-        .setStatus(EnumCampaignStatus.VALUE_PAUSED)
-        .setObjective(EnumCampaignObjective.VALUE_PRODUCT_CATALOG_SALES)
+        .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+        .setObjective(Campaign.EnumObjective.VALUE_PRODUCT_CATALOG_SALES)
         .setPromotedObject("{\"product_catalog_id\": \"" + catalog.getFieldId() + "\", \"product_set_id\":\"" + productSet.getFieldId() + "\"}")
         .execute();
     AdSet adset = account.createAdSet()
         .setCampaignId(dpaCampaign.getFieldId())
         .setName("JAVA SDK DPA Test AdSet")
-        .setBillingEvent(EnumBillingEvent.VALUE_IMPRESSIONS)
+        .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
         .setBidAmount(500L)
-        .setOptimizationGoal(EnumOptimizationGoal.VALUE_OFFSITE_CONVERSIONS)
+        .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_OFFSITE_CONVERSIONS)
         .setDailyBudget(2500L)
         .setPromotedObject("{\"pixel_id\": " + pixel.getFieldId() + ", \"product_set_id\":\"" + productSet.getFieldId() + "\"}")
         .setTargeting(
@@ -132,7 +128,7 @@ public class DPAExample {
             .setFieldAgeMin(60L)
             .setFieldAgeMax(65L)
             .setFieldGeoLocations("{\"countries\": [\"US\"]}")
-            .setFieldDynamicAudienceIds(Arrays.asList(new String[] {audience.getFieldId()}))
+            .setFieldDynamicAudienceIds(Arrays.asList(audience.getFieldId()))
             )
         .execute();
     AdCreative creative = account
@@ -146,7 +142,6 @@ public class DPAExample {
                 .setFieldLink("www.pandaparadise.net")
                 .setFieldDescription("Description {{product.description}}")
                 .setFieldMessage("Message {{product.name | titleize}}")
-                .setFieldMaxProductCount(3L)
                 )
             )
         .setName("Java SDK DPA Test Creative")
@@ -156,11 +151,11 @@ public class DPAExample {
     Ad ad = account.createAd()
         .setCreative(creative)
         .setAdsetId(adset.getId())
-        .setStatus(EnumAdStatus.VALUE_PAUSED)        
+        .setStatus(Ad.EnumStatus.VALUE_PAUSED)
         .setName("SDK Test ad")
         .setBidAmount(100L)
         .execute();
-    
+
     ProductItem productItem = null;
     // After feed upload, it takes a few seconds for server to parse the file and actually load the product items
     try {
@@ -174,8 +169,8 @@ public class DPAExample {
       e.printStackTrace();
     }
     creative.getPreviews()
-    .setAdFormat(EnumAdFormat.VALUE_DESKTOP_FEED_STANDARD)
-    .setProductItemIds(Arrays.asList(new String[]{"catalog:" + catalog.getId() + ":" + "REJfMQ==" /*base64_encode of 'DB_1'*/}))
+    .setAdFormat(AdPreview.EnumAdFormat.VALUE_DESKTOP_FEED_STANDARD)
+    .setProductItemIds(Arrays.asList("catalog:" + catalog.getId() + ":" + "REJfMQ==" /*base64_encode of 'DB_1'*/))
     .execute();
   }
 }

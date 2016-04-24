@@ -22,7 +22,11 @@
  */
 package com.facebook.ads.sdk;
 
+import com.google.gson.JsonObject;
+
 public interface APIResponse {
-    public APINode head();
-    public APIException getException();
+  public String getRawResponse();
+  public JsonObject getRawResponseAsJsonObject();
+  public APINode head();
+  public APIException getException();
 }

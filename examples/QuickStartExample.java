@@ -23,26 +23,24 @@
 
 import com.facebook.ads.sdk.APIContext;
 import com.facebook.ads.sdk.AdAccount;
-import com.facebook.ads.sdk.AdAccount.EnumCampaignStatus;
-import com.facebook.ads.sdk.AdAccount.EnumCampaignObjective;
 import com.facebook.ads.sdk.Campaign;
 import com.facebook.ads.sdk.APIException;
 
 public class QuickStartExample {
 
-  public static final String ACCESS_TOKEN = "[Your Access Token]";
-  public static final Long ACCOUNT_ID = [Your Ad Account ID];
-  public static final String APP_SECRET = "[Your App Secret]";
-  
-  public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET);
+  public static final String ACCESS_TOKEN = ExampleConfig.ACCESS_TOKEN;
+  public static final Long ACCOUNT_ID = ExampleConfig.ACCOUNT_ID;
+  public static final String APP_SECRET = ExampleConfig.APP_SECRET;
+  public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true);
+
   public static void main(String[] args) {
     try {
       AdAccount account = new AdAccount(ACCOUNT_ID, context);
       Campaign campaign = account.createCampaign()
         .setName("Java SDK Test Campaign")
-        .setObjective(EnumCampaignObjective.VALUE_LINK_CLICKS)
+        .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
         .setSpendCap(10000L)
-        .setStatus(EnumCampaignStatus.VALUE_PAUSED)
+        .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
         .execute();
       System.out.println(campaign.fetch());
     } catch (APIException e) {

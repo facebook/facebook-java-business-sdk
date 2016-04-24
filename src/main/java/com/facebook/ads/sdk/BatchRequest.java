@@ -77,7 +77,7 @@ public class BatchRequest {
       context.log(batchResponse);
       JsonArray jsonArray = new JsonParser().parse(batchResponse).getAsJsonArray();
       if (jsonArray.size() != requests.size()) {
-        throw new APIException("Batch request size is " + requests.size() + ", but response size is " + jsonArray.size());
+        throw new APIException.MalformedResponseException("Batch request size is " + requests.size() + ", but response size is " + jsonArray.size());
       }
       for (int i = 0; i< jsonArray.size(); i++) {
         if (jsonArray.get(i).isJsonNull()) {
@@ -94,12 +94,12 @@ public class BatchRequest {
           APIRequest request = requests.get(i).request;
           responses.add(request.parseResponse(body));
         } else {
-          responses.add(new APIException(response.toString()));
+          responses.add(new APIException.FailedRequestException(response.toString()));
         }
       }
       return responses;
     } catch (IOException e) {
-      throw new APIException(e);
+      throw new APIException.FailedRequestException(e);
     }
   }
 
@@ -127,7 +127,7 @@ public class BatchRequest {
 
       if (info.files != null) {
         JsonObject attachedFiles = new JsonObject();
-        for(Map.Entry entry : info.files.entrySet()) {
+        for (Map.Entry entry : info.files.entrySet()) {
           File file = (File)entry.getValue();
           attachedFiles.addProperty("File" + files.size(), (String)entry.getKey());
           files.put("File" + files.size(), file);
@@ -139,7 +139,7 @@ public class BatchRequest {
     }
     params.put("batch", batch.toString());
     params.putAll(files);
-    return APIRequest.sendPost(context.getEndpointBase() + "/", params, context);
+    return APIRequest.getExecutor().sendPost(context.getEndpointBase() + "/", params, context);
   }
 
   public static class BatchModeRequestInfo {

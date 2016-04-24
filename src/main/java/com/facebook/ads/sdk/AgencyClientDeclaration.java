@@ -24,54 +24,57 @@
 package com.facebook.ads.sdk;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
+/**
+ * This class is auto-genereated.
+ *
+ * For any issues or feature requests related to this class, please let us know
+ * on github and we'll fix in our codegen framework. We'll not be able to accept
+ * pull request for this class.
+ *
+ */
 public class AgencyClientDeclaration extends APINode {
   @SerializedName("agency_representing_client")
   private Long mAgencyRepresentingClient = null;
   @SerializedName("client_based_in_france")
   private Long mClientBasedInFrance = null;
-  @SerializedName("has_written_mandate_from_advertiser")
-  private Long mHasWrittenMandateFromAdvertiser = null;
-  @SerializedName("is_client_paying_invoices")
-  private Long mIsClientPayingInvoices = null;
-  @SerializedName("client_name")
-  private String mClientName = null;
+  @SerializedName("client_city")
+  private String mClientCity = null;
+  @SerializedName("client_country_code")
+  private String mClientCountryCode = null;
   @SerializedName("client_email_address")
   private String mClientEmailAddress = null;
+  @SerializedName("client_name")
+  private String mClientName = null;
+  @SerializedName("client_postal_code")
+  private String mClientPostalCode = null;
+  @SerializedName("client_province")
+  private String mClientProvince = null;
   @SerializedName("client_street")
   private String mClientStreet = null;
   @SerializedName("client_street2")
   private String mClientStreet2 = null;
-  @SerializedName("client_city")
-  private String mClientCity = null;
-  @SerializedName("client_province")
-  private String mClientProvince = null;
-  @SerializedName("client_postal_code")
-  private String mClientPostalCode = null;
-  @SerializedName("client_country_code")
-  private String mClientCountryCode = null;
+  @SerializedName("has_written_mandate_from_advertiser")
+  private Long mHasWrittenMandateFromAdvertiser = null;
+  @SerializedName("is_client_paying_invoices")
+  private Long mIsClientPayingInvoices = null;
   protected static Gson gson = null;
 
   public AgencyClientDeclaration() {
@@ -89,22 +92,23 @@ public class AgencyClientDeclaration extends APINode {
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
-      if(!o1.equals(o2)) {
+      if (!o1.equals(o2)) {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
       };
     }
-    agencyClientDeclaration.mContext = context;
+    agencyClientDeclaration.context = context;
     agencyClientDeclaration.rawValue = json;
     return agencyClientDeclaration;
   }
 
-  public static APINodeList<AgencyClientDeclaration> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AgencyClientDeclaration> agencyClientDeclarations = new APINodeList<AgencyClientDeclaration>(request);
+  public static APINodeList<AgencyClientDeclaration> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<AgencyClientDeclaration> agencyClientDeclarations = new APINodeList<AgencyClientDeclaration>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
+    Exception exception = null;
     try{
       JsonElement result = parser.parse(json);
       if (result.isJsonArray()) {
@@ -117,10 +121,11 @@ public class AgencyClientDeclaration extends APINode {
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
-          try {
+          if (obj.has("paging")) {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            agencyClientDeclarations.setPaging(paging.get("before").getAsString(), paging.get("after").getAsString());
-          } catch (Exception ignored) {
+            String before = paging.has("before") ? paging.get("before").getAsString() : null;
+            String after = paging.has("after") ? paging.get("after").getAsString() : null;
+            agencyClientDeclarations.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -131,7 +136,20 @@ public class AgencyClientDeclaration extends APINode {
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
-            agencyClientDeclarations.add(loadJSON(obj.toString(), context));
+            boolean isRedownload = false;
+            for (String s : new String[]{"campaigns", "adsets", "ads"}) {
+              if (obj.has(s)) {
+                isRedownload = true;
+                obj = obj.getAsJsonObject(s);
+                for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+                  agencyClientDeclarations.add(loadJSON(entry.getValue().toString(), context));
+                }
+                break;
+              }
+            }
+            if (!isRedownload) {
+              agencyClientDeclarations.add(loadJSON(obj.toString(), context));
+            }
           }
           return agencyClientDeclarations;
         } else if (obj.has("images")) {
@@ -142,24 +160,54 @@ public class AgencyClientDeclaration extends APINode {
           }
           return agencyClientDeclarations;
         } else {
-          // Fifth, check if it's pure JsonObject
+          // Fifth, check if it's an array of objects indexed by id
+          boolean isIdIndexedArray = true;
+          for (Map.Entry entry : obj.entrySet()) {
+            String key = (String) entry.getKey();
+            if (key.equals("__fb_trace_id__")) {
+              continue;
+            }
+            JsonElement value = (JsonElement) entry.getValue();
+            if (
+              value != null &&
+              value.isJsonObject() &&
+              value.getAsJsonObject().has("id") &&
+              value.getAsJsonObject().get("id") != null &&
+              value.getAsJsonObject().get("id").getAsString().equals(key)
+            ) {
+              agencyClientDeclarations.add(loadJSON(value.toString(), context));
+            } else {
+              isIdIndexedArray = false;
+              break;
+            }
+          }
+          if (isIdIndexedArray) {
+            return agencyClientDeclarations;
+          }
+
+          // Sixth, check if it's pure JsonObject
+          agencyClientDeclarations.clear();
           agencyClientDeclarations.add(loadJSON(json, context));
           return agencyClientDeclarations;
         }
       }
     } catch (Exception e) {
+      exception = e;
     }
-    return null;
+    throw new MalformedResponseException(
+      "Invalid response string: " + json,
+      exception
+    );
   }
 
   @Override
   public APIContext getContext() {
-    return mContext;
+    return context;
   }
 
   @Override
   public void setContext(APIContext context) {
-    mContext = context;
+    this.context = context;
   }
 
   @Override
@@ -186,21 +234,30 @@ public class AgencyClientDeclaration extends APINode {
     return this;
   }
 
-  public Long getFieldHasWrittenMandateFromAdvertiser() {
-    return mHasWrittenMandateFromAdvertiser;
+  public String getFieldClientCity() {
+    return mClientCity;
   }
 
-  public AgencyClientDeclaration setFieldHasWrittenMandateFromAdvertiser(Long value) {
-    this.mHasWrittenMandateFromAdvertiser = value;
+  public AgencyClientDeclaration setFieldClientCity(String value) {
+    this.mClientCity = value;
     return this;
   }
 
-  public Long getFieldIsClientPayingInvoices() {
-    return mIsClientPayingInvoices;
+  public String getFieldClientCountryCode() {
+    return mClientCountryCode;
   }
 
-  public AgencyClientDeclaration setFieldIsClientPayingInvoices(Long value) {
-    this.mIsClientPayingInvoices = value;
+  public AgencyClientDeclaration setFieldClientCountryCode(String value) {
+    this.mClientCountryCode = value;
+    return this;
+  }
+
+  public String getFieldClientEmailAddress() {
+    return mClientEmailAddress;
+  }
+
+  public AgencyClientDeclaration setFieldClientEmailAddress(String value) {
+    this.mClientEmailAddress = value;
     return this;
   }
 
@@ -213,12 +270,21 @@ public class AgencyClientDeclaration extends APINode {
     return this;
   }
 
-  public String getFieldClientEmailAddress() {
-    return mClientEmailAddress;
+  public String getFieldClientPostalCode() {
+    return mClientPostalCode;
   }
 
-  public AgencyClientDeclaration setFieldClientEmailAddress(String value) {
-    this.mClientEmailAddress = value;
+  public AgencyClientDeclaration setFieldClientPostalCode(String value) {
+    this.mClientPostalCode = value;
+    return this;
+  }
+
+  public String getFieldClientProvince() {
+    return mClientProvince;
+  }
+
+  public AgencyClientDeclaration setFieldClientProvince(String value) {
+    this.mClientProvince = value;
     return this;
   }
 
@@ -240,39 +306,21 @@ public class AgencyClientDeclaration extends APINode {
     return this;
   }
 
-  public String getFieldClientCity() {
-    return mClientCity;
+  public Long getFieldHasWrittenMandateFromAdvertiser() {
+    return mHasWrittenMandateFromAdvertiser;
   }
 
-  public AgencyClientDeclaration setFieldClientCity(String value) {
-    this.mClientCity = value;
+  public AgencyClientDeclaration setFieldHasWrittenMandateFromAdvertiser(Long value) {
+    this.mHasWrittenMandateFromAdvertiser = value;
     return this;
   }
 
-  public String getFieldClientProvince() {
-    return mClientProvince;
+  public Long getFieldIsClientPayingInvoices() {
+    return mIsClientPayingInvoices;
   }
 
-  public AgencyClientDeclaration setFieldClientProvince(String value) {
-    this.mClientProvince = value;
-    return this;
-  }
-
-  public String getFieldClientPostalCode() {
-    return mClientPostalCode;
-  }
-
-  public AgencyClientDeclaration setFieldClientPostalCode(String value) {
-    this.mClientPostalCode = value;
-    return this;
-  }
-
-  public String getFieldClientCountryCode() {
-    return mClientCountryCode;
-  }
-
-  public AgencyClientDeclaration setFieldClientCountryCode(String value) {
-    this.mClientCountryCode = value;
+  public AgencyClientDeclaration setFieldIsClientPayingInvoices(Long value) {
+    this.mIsClientPayingInvoices = value;
     return this;
   }
 
@@ -295,18 +343,26 @@ public class AgencyClientDeclaration extends APINode {
   public AgencyClientDeclaration copyFrom(AgencyClientDeclaration instance) {
     this.mAgencyRepresentingClient = instance.mAgencyRepresentingClient;
     this.mClientBasedInFrance = instance.mClientBasedInFrance;
-    this.mHasWrittenMandateFromAdvertiser = instance.mHasWrittenMandateFromAdvertiser;
-    this.mIsClientPayingInvoices = instance.mIsClientPayingInvoices;
-    this.mClientName = instance.mClientName;
+    this.mClientCity = instance.mClientCity;
+    this.mClientCountryCode = instance.mClientCountryCode;
     this.mClientEmailAddress = instance.mClientEmailAddress;
+    this.mClientName = instance.mClientName;
+    this.mClientPostalCode = instance.mClientPostalCode;
+    this.mClientProvince = instance.mClientProvince;
     this.mClientStreet = instance.mClientStreet;
     this.mClientStreet2 = instance.mClientStreet2;
-    this.mClientCity = instance.mClientCity;
-    this.mClientProvince = instance.mClientProvince;
-    this.mClientPostalCode = instance.mClientPostalCode;
-    this.mClientCountryCode = instance.mClientCountryCode;
-    this.mContext = instance.mContext;
+    this.mHasWrittenMandateFromAdvertiser = instance.mHasWrittenMandateFromAdvertiser;
+    this.mIsClientPayingInvoices = instance.mIsClientPayingInvoices;
+    this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AgencyClientDeclaration> getParser() {
+    return new APIRequest.ResponseParser<AgencyClientDeclaration>() {
+      public APINodeList<AgencyClientDeclaration> parseResponse(String response, APIContext context, APIRequest<AgencyClientDeclaration> request) throws MalformedResponseException {
+        return AgencyClientDeclaration.parseResponse(response, context, request);
+      }
+    };
   }
 }

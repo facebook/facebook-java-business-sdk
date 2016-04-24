@@ -24,44 +24,47 @@
 package com.facebook.ads.sdk;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
+/**
+ * This class is auto-genereated.
+ *
+ * For any issues or feature requests related to this class, please let us know
+ * on github and we'll fix in our codegen framework. We'll not be able to accept
+ * pull request for this class.
+ *
+ */
 public class TargetingDynamicRule extends APINode {
   @SerializedName("action.type")
   private String mActionType = null;
-  @SerializedName("post")
-  private String mPost = null;
-  @SerializedName("page_id")
-  private String mPageId = null;
+  @SerializedName("ad_group_id")
+  private String mAdGroupId = null;
   @SerializedName("campaign_group_id")
   private String mCampaignGroupId = null;
   @SerializedName("campaign_id")
   private String mCampaignId = null;
-  @SerializedName("ad_group_id")
-  private String mAdGroupId = null;
   @SerializedName("impression_count")
   private String mImpressionCount = null;
+  @SerializedName("page_id")
+  private String mPageId = null;
+  @SerializedName("post")
+  private String mPost = null;
   @SerializedName("retention_seconds")
   private String mRetentionSeconds = null;
   protected static Gson gson = null;
@@ -81,22 +84,23 @@ public class TargetingDynamicRule extends APINode {
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
-      if(!o1.equals(o2)) {
+      if (!o1.equals(o2)) {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
       };
     }
-    targetingDynamicRule.mContext = context;
+    targetingDynamicRule.context = context;
     targetingDynamicRule.rawValue = json;
     return targetingDynamicRule;
   }
 
-  public static APINodeList<TargetingDynamicRule> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<TargetingDynamicRule> targetingDynamicRules = new APINodeList<TargetingDynamicRule>(request);
+  public static APINodeList<TargetingDynamicRule> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<TargetingDynamicRule> targetingDynamicRules = new APINodeList<TargetingDynamicRule>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
+    Exception exception = null;
     try{
       JsonElement result = parser.parse(json);
       if (result.isJsonArray()) {
@@ -109,10 +113,11 @@ public class TargetingDynamicRule extends APINode {
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
-          try {
+          if (obj.has("paging")) {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            targetingDynamicRules.setPaging(paging.get("before").getAsString(), paging.get("after").getAsString());
-          } catch (Exception ignored) {
+            String before = paging.has("before") ? paging.get("before").getAsString() : null;
+            String after = paging.has("after") ? paging.get("after").getAsString() : null;
+            targetingDynamicRules.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -123,7 +128,20 @@ public class TargetingDynamicRule extends APINode {
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
-            targetingDynamicRules.add(loadJSON(obj.toString(), context));
+            boolean isRedownload = false;
+            for (String s : new String[]{"campaigns", "adsets", "ads"}) {
+              if (obj.has(s)) {
+                isRedownload = true;
+                obj = obj.getAsJsonObject(s);
+                for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+                  targetingDynamicRules.add(loadJSON(entry.getValue().toString(), context));
+                }
+                break;
+              }
+            }
+            if (!isRedownload) {
+              targetingDynamicRules.add(loadJSON(obj.toString(), context));
+            }
           }
           return targetingDynamicRules;
         } else if (obj.has("images")) {
@@ -134,24 +152,54 @@ public class TargetingDynamicRule extends APINode {
           }
           return targetingDynamicRules;
         } else {
-          // Fifth, check if it's pure JsonObject
+          // Fifth, check if it's an array of objects indexed by id
+          boolean isIdIndexedArray = true;
+          for (Map.Entry entry : obj.entrySet()) {
+            String key = (String) entry.getKey();
+            if (key.equals("__fb_trace_id__")) {
+              continue;
+            }
+            JsonElement value = (JsonElement) entry.getValue();
+            if (
+              value != null &&
+              value.isJsonObject() &&
+              value.getAsJsonObject().has("id") &&
+              value.getAsJsonObject().get("id") != null &&
+              value.getAsJsonObject().get("id").getAsString().equals(key)
+            ) {
+              targetingDynamicRules.add(loadJSON(value.toString(), context));
+            } else {
+              isIdIndexedArray = false;
+              break;
+            }
+          }
+          if (isIdIndexedArray) {
+            return targetingDynamicRules;
+          }
+
+          // Sixth, check if it's pure JsonObject
+          targetingDynamicRules.clear();
           targetingDynamicRules.add(loadJSON(json, context));
           return targetingDynamicRules;
         }
       }
     } catch (Exception e) {
+      exception = e;
     }
-    return null;
+    throw new MalformedResponseException(
+      "Invalid response string: " + json,
+      exception
+    );
   }
 
   @Override
   public APIContext getContext() {
-    return mContext;
+    return context;
   }
 
   @Override
   public void setContext(APIContext context) {
-    mContext = context;
+    this.context = context;
   }
 
   @Override
@@ -169,21 +217,12 @@ public class TargetingDynamicRule extends APINode {
     return this;
   }
 
-  public String getFieldPost() {
-    return mPost;
+  public String getFieldAdGroupId() {
+    return mAdGroupId;
   }
 
-  public TargetingDynamicRule setFieldPost(String value) {
-    this.mPost = value;
-    return this;
-  }
-
-  public String getFieldPageId() {
-    return mPageId;
-  }
-
-  public TargetingDynamicRule setFieldPageId(String value) {
-    this.mPageId = value;
+  public TargetingDynamicRule setFieldAdGroupId(String value) {
+    this.mAdGroupId = value;
     return this;
   }
 
@@ -205,21 +244,30 @@ public class TargetingDynamicRule extends APINode {
     return this;
   }
 
-  public String getFieldAdGroupId() {
-    return mAdGroupId;
-  }
-
-  public TargetingDynamicRule setFieldAdGroupId(String value) {
-    this.mAdGroupId = value;
-    return this;
-  }
-
   public String getFieldImpressionCount() {
     return mImpressionCount;
   }
 
   public TargetingDynamicRule setFieldImpressionCount(String value) {
     this.mImpressionCount = value;
+    return this;
+  }
+
+  public String getFieldPageId() {
+    return mPageId;
+  }
+
+  public TargetingDynamicRule setFieldPageId(String value) {
+    this.mPageId = value;
+    return this;
+  }
+
+  public String getFieldPost() {
+    return mPost;
+  }
+
+  public TargetingDynamicRule setFieldPost(String value) {
+    this.mPost = value;
     return this;
   }
 
@@ -250,15 +298,23 @@ public class TargetingDynamicRule extends APINode {
 
   public TargetingDynamicRule copyFrom(TargetingDynamicRule instance) {
     this.mActionType = instance.mActionType;
-    this.mPost = instance.mPost;
-    this.mPageId = instance.mPageId;
+    this.mAdGroupId = instance.mAdGroupId;
     this.mCampaignGroupId = instance.mCampaignGroupId;
     this.mCampaignId = instance.mCampaignId;
-    this.mAdGroupId = instance.mAdGroupId;
     this.mImpressionCount = instance.mImpressionCount;
+    this.mPageId = instance.mPageId;
+    this.mPost = instance.mPost;
     this.mRetentionSeconds = instance.mRetentionSeconds;
-    this.mContext = instance.mContext;
+    this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<TargetingDynamicRule> getParser() {
+    return new APIRequest.ResponseParser<TargetingDynamicRule>() {
+      public APINodeList<TargetingDynamicRule> parseResponse(String response, APIContext context, APIRequest<TargetingDynamicRule> request) throws MalformedResponseException {
+        return TargetingDynamicRule.parseResponse(response, context, request);
+      }
+    };
   }
 }

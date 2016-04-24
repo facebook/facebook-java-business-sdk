@@ -24,34 +24,33 @@
 package com.facebook.ads.sdk;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
+/**
+ * This class is auto-genereated.
+ *
+ * For any issues or feature requests related to this class, please let us know
+ * on github and we'll fix in our codegen framework. We'll not be able to accept
+ * pull request for this class.
+ *
+ */
 public class AdActivity extends APINode {
-  @SerializedName("event_type")
-  private EnumEventType mEventType = null;
-  @SerializedName("translated_event_type")
-  private String mTranslatedEventType = null;
   @SerializedName("actor_id")
   private String mActorId = null;
   @SerializedName("actor_name")
@@ -60,16 +59,20 @@ public class AdActivity extends APINode {
   private String mApplicationId = null;
   @SerializedName("application_name")
   private String mApplicationName = null;
+  @SerializedName("date_time_in_timezone")
+  private String mDateTimeInTimezone = null;
+  @SerializedName("event_time")
+  private String mEventTime = null;
+  @SerializedName("event_type")
+  private EnumEventType mEventType = null;
+  @SerializedName("extra_data")
+  private String mExtraData = null;
   @SerializedName("object_id")
   private String mObjectId = null;
   @SerializedName("object_name")
   private String mObjectName = null;
-  @SerializedName("event_time")
-  private String mEventTime = null;
-  @SerializedName("extra_data")
-  private String mExtraData = null;
-  @SerializedName("date_time_in_timezone")
-  private String mDateTimeInTimezone = null;
+  @SerializedName("translated_event_type")
+  private String mTranslatedEventType = null;
   protected static Gson gson = null;
 
   public AdActivity() {
@@ -87,22 +90,23 @@ public class AdActivity extends APINode {
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
-      if(!o1.equals(o2)) {
+      if (!o1.equals(o2)) {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
       };
     }
-    adActivity.mContext = context;
+    adActivity.context = context;
     adActivity.rawValue = json;
     return adActivity;
   }
 
-  public static APINodeList<AdActivity> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<AdActivity> adActivitys = new APINodeList<AdActivity>(request);
+  public static APINodeList<AdActivity> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<AdActivity> adActivitys = new APINodeList<AdActivity>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
+    Exception exception = null;
     try{
       JsonElement result = parser.parse(json);
       if (result.isJsonArray()) {
@@ -115,10 +119,11 @@ public class AdActivity extends APINode {
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
-          try {
+          if (obj.has("paging")) {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            adActivitys.setPaging(paging.get("before").getAsString(), paging.get("after").getAsString());
-          } catch (Exception ignored) {
+            String before = paging.has("before") ? paging.get("before").getAsString() : null;
+            String after = paging.has("after") ? paging.get("after").getAsString() : null;
+            adActivitys.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -129,7 +134,20 @@ public class AdActivity extends APINode {
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
-            adActivitys.add(loadJSON(obj.toString(), context));
+            boolean isRedownload = false;
+            for (String s : new String[]{"campaigns", "adsets", "ads"}) {
+              if (obj.has(s)) {
+                isRedownload = true;
+                obj = obj.getAsJsonObject(s);
+                for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+                  adActivitys.add(loadJSON(entry.getValue().toString(), context));
+                }
+                break;
+              }
+            }
+            if (!isRedownload) {
+              adActivitys.add(loadJSON(obj.toString(), context));
+            }
           }
           return adActivitys;
         } else if (obj.has("images")) {
@@ -140,24 +158,54 @@ public class AdActivity extends APINode {
           }
           return adActivitys;
         } else {
-          // Fifth, check if it's pure JsonObject
+          // Fifth, check if it's an array of objects indexed by id
+          boolean isIdIndexedArray = true;
+          for (Map.Entry entry : obj.entrySet()) {
+            String key = (String) entry.getKey();
+            if (key.equals("__fb_trace_id__")) {
+              continue;
+            }
+            JsonElement value = (JsonElement) entry.getValue();
+            if (
+              value != null &&
+              value.isJsonObject() &&
+              value.getAsJsonObject().has("id") &&
+              value.getAsJsonObject().get("id") != null &&
+              value.getAsJsonObject().get("id").getAsString().equals(key)
+            ) {
+              adActivitys.add(loadJSON(value.toString(), context));
+            } else {
+              isIdIndexedArray = false;
+              break;
+            }
+          }
+          if (isIdIndexedArray) {
+            return adActivitys;
+          }
+
+          // Sixth, check if it's pure JsonObject
+          adActivitys.clear();
           adActivitys.add(loadJSON(json, context));
           return adActivitys;
         }
       }
     } catch (Exception e) {
+      exception = e;
     }
-    return null;
+    throw new MalformedResponseException(
+      "Invalid response string: " + json,
+      exception
+    );
   }
 
   @Override
   public APIContext getContext() {
-    return mContext;
+    return context;
   }
 
   @Override
   public void setContext(APIContext context) {
-    mContext = context;
+    this.context = context;
   }
 
   @Override
@@ -165,24 +213,6 @@ public class AdActivity extends APINode {
     return getGson().toJson(this);
   }
 
-
-  public EnumEventType getFieldEventType() {
-    return mEventType;
-  }
-
-  public AdActivity setFieldEventType(EnumEventType value) {
-    this.mEventType = value;
-    return this;
-  }
-
-  public String getFieldTranslatedEventType() {
-    return mTranslatedEventType;
-  }
-
-  public AdActivity setFieldTranslatedEventType(String value) {
-    this.mTranslatedEventType = value;
-    return this;
-  }
 
   public String getFieldActorId() {
     return mActorId;
@@ -220,6 +250,42 @@ public class AdActivity extends APINode {
     return this;
   }
 
+  public String getFieldDateTimeInTimezone() {
+    return mDateTimeInTimezone;
+  }
+
+  public AdActivity setFieldDateTimeInTimezone(String value) {
+    this.mDateTimeInTimezone = value;
+    return this;
+  }
+
+  public String getFieldEventTime() {
+    return mEventTime;
+  }
+
+  public AdActivity setFieldEventTime(String value) {
+    this.mEventTime = value;
+    return this;
+  }
+
+  public EnumEventType getFieldEventType() {
+    return mEventType;
+  }
+
+  public AdActivity setFieldEventType(EnumEventType value) {
+    this.mEventType = value;
+    return this;
+  }
+
+  public String getFieldExtraData() {
+    return mExtraData;
+  }
+
+  public AdActivity setFieldExtraData(String value) {
+    this.mExtraData = value;
+    return this;
+  }
+
   public String getFieldObjectId() {
     return mObjectId;
   }
@@ -238,151 +304,179 @@ public class AdActivity extends APINode {
     return this;
   }
 
-  public String getFieldEventTime() {
-    return mEventTime;
+  public String getFieldTranslatedEventType() {
+    return mTranslatedEventType;
   }
 
-  public AdActivity setFieldEventTime(String value) {
-    this.mEventTime = value;
-    return this;
-  }
-
-  public String getFieldExtraData() {
-    return mExtraData;
-  }
-
-  public AdActivity setFieldExtraData(String value) {
-    this.mExtraData = value;
-    return this;
-  }
-
-  public String getFieldDateTimeInTimezone() {
-    return mDateTimeInTimezone;
-  }
-
-  public AdActivity setFieldDateTimeInTimezone(String value) {
-    this.mDateTimeInTimezone = value;
+  public AdActivity setFieldTranslatedEventType(String value) {
+    this.mTranslatedEventType = value;
     return this;
   }
 
 
 
   public static enum EnumEventType {
-    @SerializedName("ad_account_update_spend_limit")
-    VALUE_AD_ACCOUNT_UPDATE_SPEND_LIMIT("ad_account_update_spend_limit"),
-    @SerializedName("ad_account_reset_spend_limit")
-    VALUE_AD_ACCOUNT_RESET_SPEND_LIMIT("ad_account_reset_spend_limit"),
-    @SerializedName("ad_account_remove_spend_limit")
-    VALUE_AD_ACCOUNT_REMOVE_SPEND_LIMIT("ad_account_remove_spend_limit"),
-    @SerializedName("ad_account_set_business_information")
-    VALUE_AD_ACCOUNT_SET_BUSINESS_INFORMATION("ad_account_set_business_information"),
-    @SerializedName("ad_account_update_status")
-    VALUE_AD_ACCOUNT_UPDATE_STATUS("ad_account_update_status"),
-    @SerializedName("ad_account_add_user_to_role")
-    VALUE_AD_ACCOUNT_ADD_USER_TO_ROLE("ad_account_add_user_to_role"),
-    @SerializedName("ad_account_remove_user_from_role")
-    VALUE_AD_ACCOUNT_REMOVE_USER_FROM_ROLE("ad_account_remove_user_from_role"),
-    @SerializedName("add_images")
-    VALUE_ADD_IMAGES("add_images"),
-    @SerializedName("edit_images")
-    VALUE_EDIT_IMAGES("edit_images"),
-    @SerializedName("delete_images")
-    VALUE_DELETE_IMAGES("delete_images"),
-    @SerializedName("ad_account_billing_charge")
-    VALUE_AD_ACCOUNT_BILLING_CHARGE("ad_account_billing_charge"),
-    @SerializedName("ad_account_billing_charge_failed")
-    VALUE_AD_ACCOUNT_BILLING_CHARGE_FAILED("ad_account_billing_charge_failed"),
-    @SerializedName("ad_account_billing_chargeback")
-    VALUE_AD_ACCOUNT_BILLING_CHARGEBACK("ad_account_billing_chargeback"),
-    @SerializedName("ad_account_billing_chargeback_reversal")
-    VALUE_AD_ACCOUNT_BILLING_CHARGEBACK_REVERSAL("ad_account_billing_chargeback_reversal"),
-    @SerializedName("ad_account_billing_decline")
-    VALUE_AD_ACCOUNT_BILLING_DECLINE("ad_account_billing_decline"),
-    @SerializedName("ad_account_billing_refund")
-    VALUE_AD_ACCOUNT_BILLING_REFUND("ad_account_billing_refund"),
-    @SerializedName("billing_event")
-    VALUE_BILLING_EVENT("billing_event"),
-    @SerializedName("add_funding_source")
-    VALUE_ADD_FUNDING_SOURCE("add_funding_source"),
-    @SerializedName("remove_funding_source")
-    VALUE_REMOVE_FUNDING_SOURCE("remove_funding_source"),
-    @SerializedName("create_campaign_group")
-    VALUE_CREATE_CAMPAIGN_GROUP("create_campaign_group"),
-    @SerializedName("update_campaign_name")
-    VALUE_UPDATE_CAMPAIGN_NAME("update_campaign_name"),
-    @SerializedName("update_campaign_run_status")
-    VALUE_UPDATE_CAMPAIGN_RUN_STATUS("update_campaign_run_status"),
-    @SerializedName("update_campaign_group_spend_cap")
-    VALUE_UPDATE_CAMPAIGN_GROUP_SPEND_CAP("update_campaign_group_spend_cap"),
-    @SerializedName("create_campaign")
-    VALUE_CREATE_CAMPAIGN("create_campaign"),
-    @SerializedName("create_campaign_legacy")
-    VALUE_CREATE_CAMPAIGN_LEGACY("create_campaign_legacy"),
-    @SerializedName("update_campaign_budget")
-    VALUE_UPDATE_CAMPAIGN_BUDGET("update_campaign_budget"),
-    @SerializedName("update_campaign_duration")
-    VALUE_UPDATE_CAMPAIGN_DURATION("update_campaign_duration"),
-    @SerializedName("create_ad_set")
-    VALUE_CREATE_AD_SET("create_ad_set"),
-    @SerializedName("update_ad_set_bidding")
-    VALUE_UPDATE_AD_SET_BIDDING("update_ad_set_bidding"),
-    @SerializedName("update_ad_set_budget")
-    VALUE_UPDATE_AD_SET_BUDGET("update_ad_set_budget"),
-    @SerializedName("update_ad_set_duration")
-    VALUE_UPDATE_AD_SET_DURATION("update_ad_set_duration"),
-    @SerializedName("update_ad_set_run_status")
-    VALUE_UPDATE_AD_SET_RUN_STATUS("update_ad_set_run_status"),
-    @SerializedName("update_ad_set_name")
-    VALUE_UPDATE_AD_SET_NAME("update_ad_set_name"),
-    @SerializedName("create_ad")
-    VALUE_CREATE_AD("create_ad"),
-    @SerializedName("update_ad_creative")
-    VALUE_UPDATE_AD_CREATIVE("update_ad_creative"),
-    @SerializedName("edit_and_update_ad_creative")
-    VALUE_EDIT_AND_UPDATE_AD_CREATIVE("edit_and_update_ad_creative"),
-    @SerializedName("update_ad_bid_info")
-    VALUE_UPDATE_AD_BID_INFO("update_ad_bid_info"),
-    @SerializedName("update_ad_bid_type")
-    VALUE_UPDATE_AD_BID_TYPE("update_ad_bid_type"),
-    @SerializedName("update_ad_run_status")
-    VALUE_UPDATE_AD_RUN_STATUS("update_ad_run_status"),
-    @SerializedName("update_ad_friendly_name")
-    VALUE_UPDATE_AD_FRIENDLY_NAME("update_ad_friendly_name"),
-    @SerializedName("update_ad_targets_spec")
-    VALUE_UPDATE_AD_TARGETS_SPEC("update_ad_targets_spec"),
-    @SerializedName("update_ad_set_target_spec")
-    VALUE_UPDATE_AD_SET_TARGET_SPEC("update_ad_set_target_spec"),
-    @SerializedName("ad_review_approved")
-    VALUE_AD_REVIEW_APPROVED("ad_review_approved"),
-    @SerializedName("ad_review_declined")
-    VALUE_AD_REVIEW_DECLINED("ad_review_declined"),
-    @SerializedName("first_delivery_event")
-    VALUE_FIRST_DELIVERY_EVENT("first_delivery_event"),
-    @SerializedName("create_audience")
-    VALUE_CREATE_AUDIENCE("create_audience"),
-    @SerializedName("update_audience")
-    VALUE_UPDATE_AUDIENCE("update_audience"),
-    @SerializedName("delete_audience")
-    VALUE_DELETE_AUDIENCE("delete_audience"),
-    @SerializedName("unknown")
-    VALUE_UNKNOWN("unknown"),
-    @SerializedName("funding_event_initiated")
-    VALUE_FUNDING_EVENT_INITIATED("funding_event_initiated"),
-    @SerializedName("funding_event_successful")
-    VALUE_FUNDING_EVENT_SUCCESSFUL("funding_event_successful"),
-    NULL(null);
+      @SerializedName("ad_account_update_spend_limit")
+      VALUE_AD_ACCOUNT_UPDATE_SPEND_LIMIT("ad_account_update_spend_limit"),
+      @SerializedName("ad_account_reset_spend_limit")
+      VALUE_AD_ACCOUNT_RESET_SPEND_LIMIT("ad_account_reset_spend_limit"),
+      @SerializedName("ad_account_remove_spend_limit")
+      VALUE_AD_ACCOUNT_REMOVE_SPEND_LIMIT("ad_account_remove_spend_limit"),
+      @SerializedName("ad_account_set_business_information")
+      VALUE_AD_ACCOUNT_SET_BUSINESS_INFORMATION("ad_account_set_business_information"),
+      @SerializedName("ad_account_update_status")
+      VALUE_AD_ACCOUNT_UPDATE_STATUS("ad_account_update_status"),
+      @SerializedName("ad_account_add_user_to_role")
+      VALUE_AD_ACCOUNT_ADD_USER_TO_ROLE("ad_account_add_user_to_role"),
+      @SerializedName("ad_account_remove_user_from_role")
+      VALUE_AD_ACCOUNT_REMOVE_USER_FROM_ROLE("ad_account_remove_user_from_role"),
+      @SerializedName("add_images")
+      VALUE_ADD_IMAGES("add_images"),
+      @SerializedName("edit_images")
+      VALUE_EDIT_IMAGES("edit_images"),
+      @SerializedName("delete_images")
+      VALUE_DELETE_IMAGES("delete_images"),
+      @SerializedName("ad_account_billing_charge")
+      VALUE_AD_ACCOUNT_BILLING_CHARGE("ad_account_billing_charge"),
+      @SerializedName("ad_account_billing_charge_failed")
+      VALUE_AD_ACCOUNT_BILLING_CHARGE_FAILED("ad_account_billing_charge_failed"),
+      @SerializedName("ad_account_billing_chargeback")
+      VALUE_AD_ACCOUNT_BILLING_CHARGEBACK("ad_account_billing_chargeback"),
+      @SerializedName("ad_account_billing_chargeback_reversal")
+      VALUE_AD_ACCOUNT_BILLING_CHARGEBACK_REVERSAL("ad_account_billing_chargeback_reversal"),
+      @SerializedName("ad_account_billing_decline")
+      VALUE_AD_ACCOUNT_BILLING_DECLINE("ad_account_billing_decline"),
+      @SerializedName("ad_account_billing_refund")
+      VALUE_AD_ACCOUNT_BILLING_REFUND("ad_account_billing_refund"),
+      @SerializedName("billing_event")
+      VALUE_BILLING_EVENT("billing_event"),
+      @SerializedName("add_funding_source")
+      VALUE_ADD_FUNDING_SOURCE("add_funding_source"),
+      @SerializedName("remove_funding_source")
+      VALUE_REMOVE_FUNDING_SOURCE("remove_funding_source"),
+      @SerializedName("create_campaign_group")
+      VALUE_CREATE_CAMPAIGN_GROUP("create_campaign_group"),
+      @SerializedName("update_campaign_name")
+      VALUE_UPDATE_CAMPAIGN_NAME("update_campaign_name"),
+      @SerializedName("update_campaign_run_status")
+      VALUE_UPDATE_CAMPAIGN_RUN_STATUS("update_campaign_run_status"),
+      @SerializedName("update_campaign_group_spend_cap")
+      VALUE_UPDATE_CAMPAIGN_GROUP_SPEND_CAP("update_campaign_group_spend_cap"),
+      @SerializedName("create_campaign")
+      VALUE_CREATE_CAMPAIGN("create_campaign"),
+      @SerializedName("create_campaign_legacy")
+      VALUE_CREATE_CAMPAIGN_LEGACY("create_campaign_legacy"),
+      @SerializedName("update_campaign_budget")
+      VALUE_UPDATE_CAMPAIGN_BUDGET("update_campaign_budget"),
+      @SerializedName("update_campaign_duration")
+      VALUE_UPDATE_CAMPAIGN_DURATION("update_campaign_duration"),
+      @SerializedName("create_ad_set")
+      VALUE_CREATE_AD_SET("create_ad_set"),
+      @SerializedName("update_ad_set_bidding")
+      VALUE_UPDATE_AD_SET_BIDDING("update_ad_set_bidding"),
+      @SerializedName("update_ad_set_budget")
+      VALUE_UPDATE_AD_SET_BUDGET("update_ad_set_budget"),
+      @SerializedName("update_ad_set_duration")
+      VALUE_UPDATE_AD_SET_DURATION("update_ad_set_duration"),
+      @SerializedName("update_ad_set_run_status")
+      VALUE_UPDATE_AD_SET_RUN_STATUS("update_ad_set_run_status"),
+      @SerializedName("update_ad_set_name")
+      VALUE_UPDATE_AD_SET_NAME("update_ad_set_name"),
+      @SerializedName("create_ad")
+      VALUE_CREATE_AD("create_ad"),
+      @SerializedName("update_ad_creative")
+      VALUE_UPDATE_AD_CREATIVE("update_ad_creative"),
+      @SerializedName("edit_and_update_ad_creative")
+      VALUE_EDIT_AND_UPDATE_AD_CREATIVE("edit_and_update_ad_creative"),
+      @SerializedName("update_ad_bid_info")
+      VALUE_UPDATE_AD_BID_INFO("update_ad_bid_info"),
+      @SerializedName("update_ad_bid_type")
+      VALUE_UPDATE_AD_BID_TYPE("update_ad_bid_type"),
+      @SerializedName("update_ad_run_status")
+      VALUE_UPDATE_AD_RUN_STATUS("update_ad_run_status"),
+      @SerializedName("update_ad_friendly_name")
+      VALUE_UPDATE_AD_FRIENDLY_NAME("update_ad_friendly_name"),
+      @SerializedName("update_ad_targets_spec")
+      VALUE_UPDATE_AD_TARGETS_SPEC("update_ad_targets_spec"),
+      @SerializedName("update_ad_set_target_spec")
+      VALUE_UPDATE_AD_SET_TARGET_SPEC("update_ad_set_target_spec"),
+      @SerializedName("ad_review_approved")
+      VALUE_AD_REVIEW_APPROVED("ad_review_approved"),
+      @SerializedName("ad_review_declined")
+      VALUE_AD_REVIEW_DECLINED("ad_review_declined"),
+      @SerializedName("first_delivery_event")
+      VALUE_FIRST_DELIVERY_EVENT("first_delivery_event"),
+      @SerializedName("create_audience")
+      VALUE_CREATE_AUDIENCE("create_audience"),
+      @SerializedName("update_audience")
+      VALUE_UPDATE_AUDIENCE("update_audience"),
+      @SerializedName("delete_audience")
+      VALUE_DELETE_AUDIENCE("delete_audience"),
+      @SerializedName("share_audience")
+      VALUE_SHARE_AUDIENCE("share_audience"),
+      @SerializedName("receive_audience")
+      VALUE_RECEIVE_AUDIENCE("receive_audience"),
+      @SerializedName("unshare_audience")
+      VALUE_UNSHARE_AUDIENCE("unshare_audience"),
+      @SerializedName("remove_shared_audience")
+      VALUE_REMOVE_SHARED_AUDIENCE("remove_shared_audience"),
+      @SerializedName("unknown")
+      VALUE_UNKNOWN("unknown"),
+      @SerializedName("funding_event_initiated")
+      VALUE_FUNDING_EVENT_INITIATED("funding_event_initiated"),
+      @SerializedName("funding_event_successful")
+      VALUE_FUNDING_EVENT_SUCCESSFUL("funding_event_successful"),
+      @SerializedName("update_ad_labels")
+      VALUE_UPDATE_AD_LABELS("update_ad_labels"),
+      NULL(null);
 
-    private String value;
+      private String value;
 
-    private EnumEventType(String value) {
-      this.value = value;
-    }
+      private EnumEventType(String value) {
+        this.value = value;
+      }
 
-    @Override
-    public String toString() {
-      return value;
-    }
+      @Override
+      public String toString() {
+        return value;
+      }
   }
+
+  public static enum EnumCategory {
+      @SerializedName("ACCOUNT")
+      VALUE_ACCOUNT("ACCOUNT"),
+      @SerializedName("AD")
+      VALUE_AD("AD"),
+      @SerializedName("AD_SET")
+      VALUE_AD_SET("AD_SET"),
+      @SerializedName("AUDIENCE")
+      VALUE_AUDIENCE("AUDIENCE"),
+      @SerializedName("BID")
+      VALUE_BID("BID"),
+      @SerializedName("BUDGET")
+      VALUE_BUDGET("BUDGET"),
+      @SerializedName("CAMPAIGN")
+      VALUE_CAMPAIGN("CAMPAIGN"),
+      @SerializedName("DATE")
+      VALUE_DATE("DATE"),
+      @SerializedName("STATUS")
+      VALUE_STATUS("STATUS"),
+      @SerializedName("TARGETING")
+      VALUE_TARGETING("TARGETING"),
+      NULL(null);
+
+      private String value;
+
+      private EnumCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -398,19 +492,27 @@ public class AdActivity extends APINode {
   }
 
   public AdActivity copyFrom(AdActivity instance) {
-    this.mEventType = instance.mEventType;
-    this.mTranslatedEventType = instance.mTranslatedEventType;
     this.mActorId = instance.mActorId;
     this.mActorName = instance.mActorName;
     this.mApplicationId = instance.mApplicationId;
     this.mApplicationName = instance.mApplicationName;
+    this.mDateTimeInTimezone = instance.mDateTimeInTimezone;
+    this.mEventTime = instance.mEventTime;
+    this.mEventType = instance.mEventType;
+    this.mExtraData = instance.mExtraData;
     this.mObjectId = instance.mObjectId;
     this.mObjectName = instance.mObjectName;
-    this.mEventTime = instance.mEventTime;
-    this.mExtraData = instance.mExtraData;
-    this.mDateTimeInTimezone = instance.mDateTimeInTimezone;
-    this.mContext = instance.mContext;
+    this.mTranslatedEventType = instance.mTranslatedEventType;
+    this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<AdActivity> getParser() {
+    return new APIRequest.ResponseParser<AdActivity>() {
+      public APINodeList<AdActivity> parseResponse(String response, APIContext context, APIRequest<AdActivity> request) throws MalformedResponseException {
+        return AdActivity.parseResponse(response, context, request);
+      }
+    };
   }
 }

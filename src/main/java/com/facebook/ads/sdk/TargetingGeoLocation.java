@@ -24,46 +24,53 @@
 package com.facebook.ads.sdk;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
+/**
+ * This class is auto-genereated.
+ *
+ * For any issues or feature requests related to this class, please let us know
+ * on github and we'll fix in our codegen framework. We'll not be able to accept
+ * pull request for this class.
+ *
+ */
 public class TargetingGeoLocation extends APINode {
-  @SerializedName("countries")
-  private List<String> mCountries = null;
   @SerializedName("cities")
   private List<TargetingGeoLocationCity> mCities = null;
-  @SerializedName("regions")
-  private List<TargetingGeoLocationRegion> mRegions = null;
-  @SerializedName("zips")
-  private List<TargetingGeoLocationZip> mZips = null;
+  @SerializedName("countries")
+  private List<String> mCountries = null;
+  @SerializedName("country_groups")
+  private List<String> mCountryGroups = null;
   @SerializedName("custom_locations")
   private List<TargetingGeoLocationCustomLocation> mCustomLocations = null;
-  @SerializedName("places")
-  private List<TargetingGeoLocationPlace> mPlaces = null;
+  @SerializedName("electoral_districts")
+  private List<Object> mElectoralDistricts = null;
   @SerializedName("geo_markets")
   private List<TargetingGeoLocationMarket> mGeoMarkets = null;
   @SerializedName("location_types")
   private List<String> mLocationTypes = null;
+  @SerializedName("places")
+  private List<TargetingGeoLocationPlace> mPlaces = null;
+  @SerializedName("regions")
+  private List<TargetingGeoLocationRegion> mRegions = null;
+  @SerializedName("zips")
+  private List<TargetingGeoLocationZip> mZips = null;
   protected static Gson gson = null;
 
   public TargetingGeoLocation() {
@@ -81,22 +88,23 @@ public class TargetingGeoLocation extends APINode {
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
-      if(!o1.equals(o2)) {
+      if (!o1.equals(o2)) {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
       };
     }
-    targetingGeoLocation.mContext = context;
+    targetingGeoLocation.context = context;
     targetingGeoLocation.rawValue = json;
     return targetingGeoLocation;
   }
 
-  public static APINodeList<TargetingGeoLocation> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<TargetingGeoLocation> targetingGeoLocations = new APINodeList<TargetingGeoLocation>(request);
+  public static APINodeList<TargetingGeoLocation> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<TargetingGeoLocation> targetingGeoLocations = new APINodeList<TargetingGeoLocation>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
+    Exception exception = null;
     try{
       JsonElement result = parser.parse(json);
       if (result.isJsonArray()) {
@@ -109,10 +117,11 @@ public class TargetingGeoLocation extends APINode {
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
-          try {
+          if (obj.has("paging")) {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            targetingGeoLocations.setPaging(paging.get("before").getAsString(), paging.get("after").getAsString());
-          } catch (Exception ignored) {
+            String before = paging.has("before") ? paging.get("before").getAsString() : null;
+            String after = paging.has("after") ? paging.get("after").getAsString() : null;
+            targetingGeoLocations.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -123,7 +132,20 @@ public class TargetingGeoLocation extends APINode {
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
-            targetingGeoLocations.add(loadJSON(obj.toString(), context));
+            boolean isRedownload = false;
+            for (String s : new String[]{"campaigns", "adsets", "ads"}) {
+              if (obj.has(s)) {
+                isRedownload = true;
+                obj = obj.getAsJsonObject(s);
+                for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+                  targetingGeoLocations.add(loadJSON(entry.getValue().toString(), context));
+                }
+                break;
+              }
+            }
+            if (!isRedownload) {
+              targetingGeoLocations.add(loadJSON(obj.toString(), context));
+            }
           }
           return targetingGeoLocations;
         } else if (obj.has("images")) {
@@ -134,24 +156,54 @@ public class TargetingGeoLocation extends APINode {
           }
           return targetingGeoLocations;
         } else {
-          // Fifth, check if it's pure JsonObject
+          // Fifth, check if it's an array of objects indexed by id
+          boolean isIdIndexedArray = true;
+          for (Map.Entry entry : obj.entrySet()) {
+            String key = (String) entry.getKey();
+            if (key.equals("__fb_trace_id__")) {
+              continue;
+            }
+            JsonElement value = (JsonElement) entry.getValue();
+            if (
+              value != null &&
+              value.isJsonObject() &&
+              value.getAsJsonObject().has("id") &&
+              value.getAsJsonObject().get("id") != null &&
+              value.getAsJsonObject().get("id").getAsString().equals(key)
+            ) {
+              targetingGeoLocations.add(loadJSON(value.toString(), context));
+            } else {
+              isIdIndexedArray = false;
+              break;
+            }
+          }
+          if (isIdIndexedArray) {
+            return targetingGeoLocations;
+          }
+
+          // Sixth, check if it's pure JsonObject
+          targetingGeoLocations.clear();
           targetingGeoLocations.add(loadJSON(json, context));
           return targetingGeoLocations;
         }
       }
     } catch (Exception e) {
+      exception = e;
     }
-    return null;
+    throw new MalformedResponseException(
+      "Invalid response string: " + json,
+      exception
+    );
   }
 
   @Override
   public APIContext getContext() {
-    return mContext;
+    return context;
   }
 
   @Override
   public void setContext(APIContext context) {
-    mContext = context;
+    this.context = context;
   }
 
   @Override
@@ -159,15 +211,6 @@ public class TargetingGeoLocation extends APINode {
     return getGson().toJson(this);
   }
 
-
-  public List<String> getFieldCountries() {
-    return mCountries;
-  }
-
-  public TargetingGeoLocation setFieldCountries(List<String> value) {
-    this.mCountries = value;
-    return this;
-  }
 
   public List<TargetingGeoLocationCity> getFieldCities() {
     return mCities;
@@ -181,6 +224,84 @@ public class TargetingGeoLocation extends APINode {
   public TargetingGeoLocation setFieldCities(String value) {
     Type type = new TypeToken<List<TargetingGeoLocationCity>>(){}.getType();
     this.mCities = TargetingGeoLocationCity.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<String> getFieldCountries() {
+    return mCountries;
+  }
+
+  public TargetingGeoLocation setFieldCountries(List<String> value) {
+    this.mCountries = value;
+    return this;
+  }
+
+  public List<String> getFieldCountryGroups() {
+    return mCountryGroups;
+  }
+
+  public TargetingGeoLocation setFieldCountryGroups(List<String> value) {
+    this.mCountryGroups = value;
+    return this;
+  }
+
+  public List<TargetingGeoLocationCustomLocation> getFieldCustomLocations() {
+    return mCustomLocations;
+  }
+
+  public TargetingGeoLocation setFieldCustomLocations(List<TargetingGeoLocationCustomLocation> value) {
+    this.mCustomLocations = value;
+    return this;
+  }
+
+  public TargetingGeoLocation setFieldCustomLocations(String value) {
+    Type type = new TypeToken<List<TargetingGeoLocationCustomLocation>>(){}.getType();
+    this.mCustomLocations = TargetingGeoLocationCustomLocation.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<Object> getFieldElectoralDistricts() {
+    return mElectoralDistricts;
+  }
+
+  public TargetingGeoLocation setFieldElectoralDistricts(List<Object> value) {
+    this.mElectoralDistricts = value;
+    return this;
+  }
+
+  public List<TargetingGeoLocationMarket> getFieldGeoMarkets() {
+    return mGeoMarkets;
+  }
+
+  public TargetingGeoLocation setFieldGeoMarkets(List<TargetingGeoLocationMarket> value) {
+    this.mGeoMarkets = value;
+    return this;
+  }
+
+  public TargetingGeoLocation setFieldGeoMarkets(String value) {
+    Type type = new TypeToken<List<TargetingGeoLocationMarket>>(){}.getType();
+    this.mGeoMarkets = TargetingGeoLocationMarket.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<String> getFieldLocationTypes() {
+    return mLocationTypes;
+  }
+
+  public TargetingGeoLocation setFieldLocationTypes(List<String> value) {
+    this.mLocationTypes = value;
+    return this;
+  }
+
+  public List<TargetingGeoLocationPlace> getFieldPlaces() {
+    return mPlaces;
+  }
+
+  public TargetingGeoLocation setFieldPlaces(List<TargetingGeoLocationPlace> value) {
+    this.mPlaces = value;
+    return this;
+  }
+
+  public TargetingGeoLocation setFieldPlaces(String value) {
+    Type type = new TypeToken<List<TargetingGeoLocationPlace>>(){}.getType();
+    this.mPlaces = TargetingGeoLocationPlace.getGson().fromJson(value, type);
     return this;
   }
   public List<TargetingGeoLocationRegion> getFieldRegions() {
@@ -211,57 +332,6 @@ public class TargetingGeoLocation extends APINode {
     this.mZips = TargetingGeoLocationZip.getGson().fromJson(value, type);
     return this;
   }
-  public List<TargetingGeoLocationCustomLocation> getFieldCustomLocations() {
-    return mCustomLocations;
-  }
-
-  public TargetingGeoLocation setFieldCustomLocations(List<TargetingGeoLocationCustomLocation> value) {
-    this.mCustomLocations = value;
-    return this;
-  }
-
-  public TargetingGeoLocation setFieldCustomLocations(String value) {
-    Type type = new TypeToken<List<TargetingGeoLocationCustomLocation>>(){}.getType();
-    this.mCustomLocations = TargetingGeoLocationCustomLocation.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<TargetingGeoLocationPlace> getFieldPlaces() {
-    return mPlaces;
-  }
-
-  public TargetingGeoLocation setFieldPlaces(List<TargetingGeoLocationPlace> value) {
-    this.mPlaces = value;
-    return this;
-  }
-
-  public TargetingGeoLocation setFieldPlaces(String value) {
-    Type type = new TypeToken<List<TargetingGeoLocationPlace>>(){}.getType();
-    this.mPlaces = TargetingGeoLocationPlace.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<TargetingGeoLocationMarket> getFieldGeoMarkets() {
-    return mGeoMarkets;
-  }
-
-  public TargetingGeoLocation setFieldGeoMarkets(List<TargetingGeoLocationMarket> value) {
-    this.mGeoMarkets = value;
-    return this;
-  }
-
-  public TargetingGeoLocation setFieldGeoMarkets(String value) {
-    Type type = new TypeToken<List<TargetingGeoLocationMarket>>(){}.getType();
-    this.mGeoMarkets = TargetingGeoLocationMarket.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<String> getFieldLocationTypes() {
-    return mLocationTypes;
-  }
-
-  public TargetingGeoLocation setFieldLocationTypes(List<String> value) {
-    this.mLocationTypes = value;
-    return this;
-  }
-
 
 
 
@@ -279,16 +349,26 @@ public class TargetingGeoLocation extends APINode {
   }
 
   public TargetingGeoLocation copyFrom(TargetingGeoLocation instance) {
-    this.mCountries = instance.mCountries;
     this.mCities = instance.mCities;
-    this.mRegions = instance.mRegions;
-    this.mZips = instance.mZips;
+    this.mCountries = instance.mCountries;
+    this.mCountryGroups = instance.mCountryGroups;
     this.mCustomLocations = instance.mCustomLocations;
-    this.mPlaces = instance.mPlaces;
+    this.mElectoralDistricts = instance.mElectoralDistricts;
     this.mGeoMarkets = instance.mGeoMarkets;
     this.mLocationTypes = instance.mLocationTypes;
-    this.mContext = instance.mContext;
+    this.mPlaces = instance.mPlaces;
+    this.mRegions = instance.mRegions;
+    this.mZips = instance.mZips;
+    this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<TargetingGeoLocation> getParser() {
+    return new APIRequest.ResponseParser<TargetingGeoLocation>() {
+      public APINodeList<TargetingGeoLocation> parseResponse(String response, APIContext context, APIRequest<TargetingGeoLocation> request) throws MalformedResponseException {
+        return TargetingGeoLocation.parseResponse(response, context, request);
+      }
+    };
   }
 }

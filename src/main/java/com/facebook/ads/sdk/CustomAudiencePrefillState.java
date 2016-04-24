@@ -24,36 +24,39 @@
 package com.facebook.ads.sdk;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.lang.IllegalArgumentException;
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
+/**
+ * This class is auto-genereated.
+ *
+ * For any issues or feature requests related to this class, please let us know
+ * on github and we'll fix in our codegen framework. We'll not be able to accept
+ * pull request for this class.
+ *
+ */
 public class CustomAudiencePrefillState extends APINode {
-  @SerializedName("status")
-  private String mStatus = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("num_added")
   private Long mNumAdded = null;
+  @SerializedName("status")
+  private String mStatus = null;
   protected static Gson gson = null;
 
   public CustomAudiencePrefillState() {
@@ -71,22 +74,23 @@ public class CustomAudiencePrefillState extends APINode {
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
-      if(!o1.equals(o2)) {
+      if (!o1.equals(o2)) {
         context.log("[Warning] When parsing response, object is not consistent with JSON:");
         context.log("[JSON]" + o1);
         context.log("[Object]" + o2);
       };
     }
-    customAudiencePrefillState.mContext = context;
+    customAudiencePrefillState.context = context;
     customAudiencePrefillState.rawValue = json;
     return customAudiencePrefillState;
   }
 
-  public static APINodeList<CustomAudiencePrefillState> parseResponse(String json, APIContext context, APIRequest request) {
-    APINodeList<CustomAudiencePrefillState> customAudiencePrefillStates = new APINodeList<CustomAudiencePrefillState>(request);
+  public static APINodeList<CustomAudiencePrefillState> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<CustomAudiencePrefillState> customAudiencePrefillStates = new APINodeList<CustomAudiencePrefillState>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
+    Exception exception = null;
     try{
       JsonElement result = parser.parse(json);
       if (result.isJsonArray()) {
@@ -99,10 +103,11 @@ public class CustomAudiencePrefillState extends APINode {
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
-          try {
+          if (obj.has("paging")) {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            customAudiencePrefillStates.setPaging(paging.get("before").getAsString(), paging.get("after").getAsString());
-          } catch (Exception ignored) {
+            String before = paging.has("before") ? paging.get("before").getAsString() : null;
+            String after = paging.has("after") ? paging.get("after").getAsString() : null;
+            customAudiencePrefillStates.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -113,7 +118,20 @@ public class CustomAudiencePrefillState extends APINode {
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
-            customAudiencePrefillStates.add(loadJSON(obj.toString(), context));
+            boolean isRedownload = false;
+            for (String s : new String[]{"campaigns", "adsets", "ads"}) {
+              if (obj.has(s)) {
+                isRedownload = true;
+                obj = obj.getAsJsonObject(s);
+                for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+                  customAudiencePrefillStates.add(loadJSON(entry.getValue().toString(), context));
+                }
+                break;
+              }
+            }
+            if (!isRedownload) {
+              customAudiencePrefillStates.add(loadJSON(obj.toString(), context));
+            }
           }
           return customAudiencePrefillStates;
         } else if (obj.has("images")) {
@@ -124,24 +142,54 @@ public class CustomAudiencePrefillState extends APINode {
           }
           return customAudiencePrefillStates;
         } else {
-          // Fifth, check if it's pure JsonObject
+          // Fifth, check if it's an array of objects indexed by id
+          boolean isIdIndexedArray = true;
+          for (Map.Entry entry : obj.entrySet()) {
+            String key = (String) entry.getKey();
+            if (key.equals("__fb_trace_id__")) {
+              continue;
+            }
+            JsonElement value = (JsonElement) entry.getValue();
+            if (
+              value != null &&
+              value.isJsonObject() &&
+              value.getAsJsonObject().has("id") &&
+              value.getAsJsonObject().get("id") != null &&
+              value.getAsJsonObject().get("id").getAsString().equals(key)
+            ) {
+              customAudiencePrefillStates.add(loadJSON(value.toString(), context));
+            } else {
+              isIdIndexedArray = false;
+              break;
+            }
+          }
+          if (isIdIndexedArray) {
+            return customAudiencePrefillStates;
+          }
+
+          // Sixth, check if it's pure JsonObject
+          customAudiencePrefillStates.clear();
           customAudiencePrefillStates.add(loadJSON(json, context));
           return customAudiencePrefillStates;
         }
       }
     } catch (Exception e) {
+      exception = e;
     }
-    return null;
+    throw new MalformedResponseException(
+      "Invalid response string: " + json,
+      exception
+    );
   }
 
   @Override
   public APIContext getContext() {
-    return mContext;
+    return context;
   }
 
   @Override
   public void setContext(APIContext context) {
-    mContext = context;
+    this.context = context;
   }
 
   @Override
@@ -149,15 +197,6 @@ public class CustomAudiencePrefillState extends APINode {
     return getGson().toJson(this);
   }
 
-
-  public String getFieldStatus() {
-    return mStatus;
-  }
-
-  public CustomAudiencePrefillState setFieldStatus(String value) {
-    this.mStatus = value;
-    return this;
-  }
 
   public String getFieldDescription() {
     return mDescription;
@@ -174,6 +213,15 @@ public class CustomAudiencePrefillState extends APINode {
 
   public CustomAudiencePrefillState setFieldNumAdded(Long value) {
     this.mNumAdded = value;
+    return this;
+  }
+
+  public String getFieldStatus() {
+    return mStatus;
+  }
+
+  public CustomAudiencePrefillState setFieldStatus(String value) {
+    this.mStatus = value;
     return this;
   }
 
@@ -194,11 +242,19 @@ public class CustomAudiencePrefillState extends APINode {
   }
 
   public CustomAudiencePrefillState copyFrom(CustomAudiencePrefillState instance) {
-    this.mStatus = instance.mStatus;
     this.mDescription = instance.mDescription;
     this.mNumAdded = instance.mNumAdded;
-    this.mContext = instance.mContext;
+    this.mStatus = instance.mStatus;
+    this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
+  }
+
+  public static APIRequest.ResponseParser<CustomAudiencePrefillState> getParser() {
+    return new APIRequest.ResponseParser<CustomAudiencePrefillState>() {
+      public APINodeList<CustomAudiencePrefillState> parseResponse(String response, APIContext context, APIRequest<CustomAudiencePrefillState> request) throws MalformedResponseException {
+        return CustomAudiencePrefillState.parseResponse(response, context, request);
+      }
+    };
   }
 }
