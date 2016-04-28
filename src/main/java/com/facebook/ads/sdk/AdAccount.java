@@ -7610,11 +7610,11 @@ public class AdAccount extends APINode {
     }
   }
 
-  public static class APIRequestCreateCustomConversion extends APIRequest<APINode> {
+  public static class APIRequestCreateCustomConversion extends APIRequest<CustomConversion> {
 
-    APINode lastResponse = null;
+    CustomConversion lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public CustomConversion getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -7631,17 +7631,17 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public CustomConversion parseResponse(String response) throws APIException {
+      return CustomConversion.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public CustomConversion execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public CustomConversion execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }

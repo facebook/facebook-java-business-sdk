@@ -1465,11 +1465,11 @@ public class User extends APINode {
     }
   }
 
-  public static class APIRequestCreateBusinesse extends APIRequest<APINode> {
+  public static class APIRequestCreateBusinesse extends APIRequest<Business> {
 
-    APINode lastResponse = null;
+    Business lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public Business getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -1488,17 +1488,17 @@ public class User extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public Business parseResponse(String response) throws APIException {
+      return Business.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public Business execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public Business execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }

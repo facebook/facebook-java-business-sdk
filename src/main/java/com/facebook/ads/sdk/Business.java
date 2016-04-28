@@ -382,11 +382,11 @@ public class Business extends APINode {
 
 
 
-  public static class APIRequestCreateAdAccount extends APIRequest<APINode> {
+  public static class APIRequestCreateAdAccount extends APIRequest<AdAccount> {
 
-    APINode lastResponse = null;
+    AdAccount lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public AdAccount getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -407,17 +407,17 @@ public class Business extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public AdAccount execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public AdAccount execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
