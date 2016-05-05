@@ -91,8 +91,6 @@ public class Targeting extends APINode {
   private List<EnumEffectiveDevicePlatforms> mEffectiveDevicePlatforms = null;
   @SerializedName("effective_facebook_positions")
   private List<String> mEffectiveFacebookPositions = null;
-  @SerializedName("effective_platforms")
-  private List<EnumEffectivePlatforms> mEffectivePlatforms = null;
   @SerializedName("engagement_specs")
   private List<TargetingDynamicRule> mEngagementSpecs = null;
   @SerializedName("ethnic_affinity")
@@ -547,15 +545,6 @@ public class Targeting extends APINode {
 
   public Targeting setFieldEffectiveFacebookPositions(List<String> value) {
     this.mEffectiveFacebookPositions = value;
-    return this;
-  }
-
-  public List<EnumEffectivePlatforms> getFieldEffectivePlatforms() {
-    return mEffectivePlatforms;
-  }
-
-  public Targeting setFieldEffectivePlatforms(List<EnumEffectivePlatforms> value) {
-    this.mEffectivePlatforms = value;
     return this;
   }
 
@@ -1226,27 +1215,6 @@ public class Targeting extends APINode {
       }
   }
 
-  public static enum EnumEffectivePlatforms {
-      @SerializedName("FACEBOOK")
-      VALUE_FACEBOOK("FACEBOOK"),
-      @SerializedName("INSTAGRAM")
-      VALUE_INSTAGRAM("INSTAGRAM"),
-      @SerializedName("AUDIENCE_NETWORK")
-      VALUE_AUDIENCE_NETWORK("AUDIENCE_NETWORK"),
-      NULL(null);
-
-      private String value;
-
-      private EnumEffectivePlatforms(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -1282,7 +1250,6 @@ public class Targeting extends APINode {
     this.mEducationStatuses = instance.mEducationStatuses;
     this.mEffectiveDevicePlatforms = instance.mEffectiveDevicePlatforms;
     this.mEffectiveFacebookPositions = instance.mEffectiveFacebookPositions;
-    this.mEffectivePlatforms = instance.mEffectivePlatforms;
     this.mEngagementSpecs = instance.mEngagementSpecs;
     this.mEthnicAffinity = instance.mEthnicAffinity;
     this.mExcludeReachedSince = instance.mExcludeReachedSince;
