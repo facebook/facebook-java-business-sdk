@@ -50,31 +50,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CustomAudiencePermission extends APINode {
-  @SerializedName("can_edit")
-  private Boolean mCanEdit = null;
-  @SerializedName("can_see_insight")
-  private Boolean mCanSeeInsight = null;
-  @SerializedName("can_share")
-  private Boolean mCanShare = null;
-  @SerializedName("subtype_supports_lookalike")
-  private Boolean mSubtypeSupportsLookalike = null;
-  @SerializedName("supports_recipient_lookalike")
-  private Boolean mSupportsRecipientLookalike = null;
+public class UserLeadGenFieldData extends APINode {
+  @SerializedName("name")
+  private String mName = null;
+  @SerializedName("values")
+  private List<String> mValues = null;
   protected static Gson gson = null;
 
-  public CustomAudiencePermission() {
+  public UserLeadGenFieldData() {
   }
 
   public String getId() {
     return null;
   }
-  public static CustomAudiencePermission loadJSON(String json, APIContext context) {
-    CustomAudiencePermission customAudiencePermission = getGson().fromJson(json, CustomAudiencePermission.class);
+  public static UserLeadGenFieldData loadJSON(String json, APIContext context) {
+    UserLeadGenFieldData userLeadGenFieldData = getGson().fromJson(json, UserLeadGenFieldData.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(customAudiencePermission.toString());
+      JsonElement o2 = parser.parse(userLeadGenFieldData.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,13 +78,13 @@ public class CustomAudiencePermission extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    customAudiencePermission.context = context;
-    customAudiencePermission.rawValue = json;
-    return customAudiencePermission;
+    userLeadGenFieldData.context = context;
+    userLeadGenFieldData.rawValue = json;
+    return userLeadGenFieldData;
   }
 
-  public static APINodeList<CustomAudiencePermission> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CustomAudiencePermission> customAudiencePermissions = new APINodeList<CustomAudiencePermission>(request, json);
+  public static APINodeList<UserLeadGenFieldData> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<UserLeadGenFieldData> userLeadGenFieldDatas = new APINodeList<UserLeadGenFieldData>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,9 +95,9 @@ public class CustomAudiencePermission extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          customAudiencePermissions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userLeadGenFieldDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return customAudiencePermissions;
+        return userLeadGenFieldDatas;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -111,13 +105,13 @@ public class CustomAudiencePermission extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            customAudiencePermissions.setPaging(before, after);
+            userLeadGenFieldDatas.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              customAudiencePermissions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userLeadGenFieldDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -128,23 +122,23 @@ public class CustomAudiencePermission extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  customAudiencePermissions.add(loadJSON(entry.getValue().toString(), context));
+                  userLeadGenFieldDatas.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              customAudiencePermissions.add(loadJSON(obj.toString(), context));
+              userLeadGenFieldDatas.add(loadJSON(obj.toString(), context));
             }
           }
-          return customAudiencePermissions;
+          return userLeadGenFieldDatas;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              customAudiencePermissions.add(loadJSON(entry.getValue().toString(), context));
+              userLeadGenFieldDatas.add(loadJSON(entry.getValue().toString(), context));
           }
-          return customAudiencePermissions;
+          return userLeadGenFieldDatas;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -161,20 +155,20 @@ public class CustomAudiencePermission extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              customAudiencePermissions.add(loadJSON(value.toString(), context));
+              userLeadGenFieldDatas.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return customAudiencePermissions;
+            return userLeadGenFieldDatas;
           }
 
           // Sixth, check if it's pure JsonObject
-          customAudiencePermissions.clear();
-          customAudiencePermissions.add(loadJSON(json, context));
-          return customAudiencePermissions;
+          userLeadGenFieldDatas.clear();
+          userLeadGenFieldDatas.add(loadJSON(json, context));
+          return userLeadGenFieldDatas;
         }
       }
     } catch (Exception e) {
@@ -202,48 +196,21 @@ public class CustomAudiencePermission extends APINode {
   }
 
 
-  public Boolean getFieldCanEdit() {
-    return mCanEdit;
+  public String getFieldName() {
+    return mName;
   }
 
-  public CustomAudiencePermission setFieldCanEdit(Boolean value) {
-    this.mCanEdit = value;
+  public UserLeadGenFieldData setFieldName(String value) {
+    this.mName = value;
     return this;
   }
 
-  public Boolean getFieldCanSeeInsight() {
-    return mCanSeeInsight;
+  public List<String> getFieldValues() {
+    return mValues;
   }
 
-  public CustomAudiencePermission setFieldCanSeeInsight(Boolean value) {
-    this.mCanSeeInsight = value;
-    return this;
-  }
-
-  public Boolean getFieldCanShare() {
-    return mCanShare;
-  }
-
-  public CustomAudiencePermission setFieldCanShare(Boolean value) {
-    this.mCanShare = value;
-    return this;
-  }
-
-  public Boolean getFieldSubtypeSupportsLookalike() {
-    return mSubtypeSupportsLookalike;
-  }
-
-  public CustomAudiencePermission setFieldSubtypeSupportsLookalike(Boolean value) {
-    this.mSubtypeSupportsLookalike = value;
-    return this;
-  }
-
-  public Boolean getFieldSupportsRecipientLookalike() {
-    return mSupportsRecipientLookalike;
-  }
-
-  public CustomAudiencePermission setFieldSupportsRecipientLookalike(Boolean value) {
-    this.mSupportsRecipientLookalike = value;
+  public UserLeadGenFieldData setFieldValues(List<String> value) {
+    this.mValues = value;
     return this;
   }
 
@@ -263,21 +230,18 @@ public class CustomAudiencePermission extends APINode {
     return gson;
   }
 
-  public CustomAudiencePermission copyFrom(CustomAudiencePermission instance) {
-    this.mCanEdit = instance.mCanEdit;
-    this.mCanSeeInsight = instance.mCanSeeInsight;
-    this.mCanShare = instance.mCanShare;
-    this.mSubtypeSupportsLookalike = instance.mSubtypeSupportsLookalike;
-    this.mSupportsRecipientLookalike = instance.mSupportsRecipientLookalike;
+  public UserLeadGenFieldData copyFrom(UserLeadGenFieldData instance) {
+    this.mName = instance.mName;
+    this.mValues = instance.mValues;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CustomAudiencePermission> getParser() {
-    return new APIRequest.ResponseParser<CustomAudiencePermission>() {
-      public APINodeList<CustomAudiencePermission> parseResponse(String response, APIContext context, APIRequest<CustomAudiencePermission> request) throws MalformedResponseException {
-        return CustomAudiencePermission.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<UserLeadGenFieldData> getParser() {
+    return new APIRequest.ResponseParser<UserLeadGenFieldData>() {
+      public APINodeList<UserLeadGenFieldData> parseResponse(String response, APIContext context, APIRequest<UserLeadGenFieldData> request) throws MalformedResponseException {
+        return UserLeadGenFieldData.parseResponse(response, context, request);
       }
     };
   }

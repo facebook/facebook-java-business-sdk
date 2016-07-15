@@ -45,34 +45,38 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 /**
  * This class is auto-genereated.
  *
- * For any issues or feature requests related to this class, please tell us
+ * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
  * pull request for this class.
  *
  */
-public class AdAccountRoasCohorts extends APINode {
-  @SerializedName("adgroup_id")
-  private String mAdgroupId = null;
-  @SerializedName("campaign_group_id")
-  private String mCampaignGroupId = null;
-  @SerializedName("campaign_id")
-  private String mCampaignId = null;
-  @SerializedName("cohorts_data")
-  private List<RoasCohortsData> mCohortsData = null;
+public class AdCreativePlaceData extends APINode {
+  @SerializedName("address_string")
+  private String mAddressString = null;
+  @SerializedName("label")
+  private String mLabel = null;
+  @SerializedName("latitude")
+  private Double mLatitude = null;
+  @SerializedName("longitude")
+  private Double mLongitude = null;
+  @SerializedName("phone_number")
+  private String mPhoneNumber = null;
+  @SerializedName("type")
+  private String mType = null;
   protected static Gson gson = null;
 
-  public AdAccountRoasCohorts() {
+  public AdCreativePlaceData() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdAccountRoasCohorts loadJSON(String json, APIContext context) {
-    AdAccountRoasCohorts adAccountRoasCohorts = getGson().fromJson(json, AdAccountRoasCohorts.class);
+  public static AdCreativePlaceData loadJSON(String json, APIContext context) {
+    AdCreativePlaceData adCreativePlaceData = getGson().fromJson(json, AdCreativePlaceData.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAccountRoasCohorts.toString());
+      JsonElement o2 = parser.parse(adCreativePlaceData.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -82,13 +86,13 @@ public class AdAccountRoasCohorts extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adAccountRoasCohorts.context = context;
-    adAccountRoasCohorts.rawValue = json;
-    return adAccountRoasCohorts;
+    adCreativePlaceData.context = context;
+    adCreativePlaceData.rawValue = json;
+    return adCreativePlaceData;
   }
 
-  public static APINodeList<AdAccountRoasCohorts> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAccountRoasCohorts> adAccountRoasCohortss = new APINodeList<AdAccountRoasCohorts>(request, json);
+  public static APINodeList<AdCreativePlaceData> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<AdCreativePlaceData> adCreativePlaceDatas = new APINodeList<AdCreativePlaceData>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,9 +103,9 @@ public class AdAccountRoasCohorts extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountRoasCohortss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCreativePlaceDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return adAccountRoasCohortss;
+        return adCreativePlaceDatas;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -109,13 +113,13 @@ public class AdAccountRoasCohorts extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adAccountRoasCohortss.setPaging(before, after);
+            adCreativePlaceDatas.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountRoasCohortss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCreativePlaceDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -126,23 +130,23 @@ public class AdAccountRoasCohorts extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountRoasCohortss.add(loadJSON(entry.getValue().toString(), context));
+                  adCreativePlaceDatas.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountRoasCohortss.add(loadJSON(obj.toString(), context));
+              adCreativePlaceDatas.add(loadJSON(obj.toString(), context));
             }
           }
-          return adAccountRoasCohortss;
+          return adCreativePlaceDatas;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountRoasCohortss.add(loadJSON(entry.getValue().toString(), context));
+              adCreativePlaceDatas.add(loadJSON(entry.getValue().toString(), context));
           }
-          return adAccountRoasCohortss;
+          return adCreativePlaceDatas;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -159,20 +163,20 @@ public class AdAccountRoasCohorts extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountRoasCohortss.add(loadJSON(value.toString(), context));
+              adCreativePlaceDatas.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adAccountRoasCohortss;
+            return adCreativePlaceDatas;
           }
 
           // Sixth, check if it's pure JsonObject
-          adAccountRoasCohortss.clear();
-          adAccountRoasCohortss.add(loadJSON(json, context));
-          return adAccountRoasCohortss;
+          adCreativePlaceDatas.clear();
+          adCreativePlaceDatas.add(loadJSON(json, context));
+          return adCreativePlaceDatas;
         }
       }
     } catch (Exception e) {
@@ -200,47 +204,60 @@ public class AdAccountRoasCohorts extends APINode {
   }
 
 
-  public String getFieldAdgroupId() {
-    return mAdgroupId;
+  public String getFieldAddressString() {
+    return mAddressString;
   }
 
-  public AdAccountRoasCohorts setFieldAdgroupId(String value) {
-    this.mAdgroupId = value;
+  public AdCreativePlaceData setFieldAddressString(String value) {
+    this.mAddressString = value;
     return this;
   }
 
-  public String getFieldCampaignGroupId() {
-    return mCampaignGroupId;
+  public String getFieldLabel() {
+    return mLabel;
   }
 
-  public AdAccountRoasCohorts setFieldCampaignGroupId(String value) {
-    this.mCampaignGroupId = value;
+  public AdCreativePlaceData setFieldLabel(String value) {
+    this.mLabel = value;
     return this;
   }
 
-  public String getFieldCampaignId() {
-    return mCampaignId;
+  public Double getFieldLatitude() {
+    return mLatitude;
   }
 
-  public AdAccountRoasCohorts setFieldCampaignId(String value) {
-    this.mCampaignId = value;
+  public AdCreativePlaceData setFieldLatitude(Double value) {
+    this.mLatitude = value;
     return this;
   }
 
-  public List<RoasCohortsData> getFieldCohortsData() {
-    return mCohortsData;
+  public Double getFieldLongitude() {
+    return mLongitude;
   }
 
-  public AdAccountRoasCohorts setFieldCohortsData(List<RoasCohortsData> value) {
-    this.mCohortsData = value;
+  public AdCreativePlaceData setFieldLongitude(Double value) {
+    this.mLongitude = value;
     return this;
   }
 
-  public AdAccountRoasCohorts setFieldCohortsData(String value) {
-    Type type = new TypeToken<List<RoasCohortsData>>(){}.getType();
-    this.mCohortsData = RoasCohortsData.getGson().fromJson(value, type);
+  public String getFieldPhoneNumber() {
+    return mPhoneNumber;
+  }
+
+  public AdCreativePlaceData setFieldPhoneNumber(String value) {
+    this.mPhoneNumber = value;
     return this;
   }
+
+  public String getFieldType() {
+    return mType;
+  }
+
+  public AdCreativePlaceData setFieldType(String value) {
+    this.mType = value;
+    return this;
+  }
+
 
 
 
@@ -257,20 +274,22 @@ public class AdAccountRoasCohorts extends APINode {
     return gson;
   }
 
-  public AdAccountRoasCohorts copyFrom(AdAccountRoasCohorts instance) {
-    this.mAdgroupId = instance.mAdgroupId;
-    this.mCampaignGroupId = instance.mCampaignGroupId;
-    this.mCampaignId = instance.mCampaignId;
-    this.mCohortsData = instance.mCohortsData;
+  public AdCreativePlaceData copyFrom(AdCreativePlaceData instance) {
+    this.mAddressString = instance.mAddressString;
+    this.mLabel = instance.mLabel;
+    this.mLatitude = instance.mLatitude;
+    this.mLongitude = instance.mLongitude;
+    this.mPhoneNumber = instance.mPhoneNumber;
+    this.mType = instance.mType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdAccountRoasCohorts> getParser() {
-    return new APIRequest.ResponseParser<AdAccountRoasCohorts>() {
-      public APINodeList<AdAccountRoasCohorts> parseResponse(String response, APIContext context, APIRequest<AdAccountRoasCohorts> request) throws MalformedResponseException {
-        return AdAccountRoasCohorts.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<AdCreativePlaceData> getParser() {
+    return new APIRequest.ResponseParser<AdCreativePlaceData>() {
+      public APINodeList<AdCreativePlaceData> parseResponse(String response, APIContext context, APIRequest<AdCreativePlaceData> request) throws MalformedResponseException {
+        return AdCreativePlaceData.parseResponse(response, context, request);
       }
     };
   }

@@ -60,7 +60,7 @@ public class TargetingGeoLocation extends APINode {
   @SerializedName("custom_locations")
   private List<TargetingGeoLocationCustomLocation> mCustomLocations = null;
   @SerializedName("electoral_districts")
-  private List<Object> mElectoralDistricts = null;
+  private List<TargetingGeoLocationElectoralDistrict> mElectoralDistricts = null;
   @SerializedName("geo_markets")
   private List<TargetingGeoLocationMarket> mGeoMarkets = null;
   @SerializedName("location_types")
@@ -258,15 +258,20 @@ public class TargetingGeoLocation extends APINode {
     this.mCustomLocations = TargetingGeoLocationCustomLocation.getGson().fromJson(value, type);
     return this;
   }
-  public List<Object> getFieldElectoralDistricts() {
+  public List<TargetingGeoLocationElectoralDistrict> getFieldElectoralDistricts() {
     return mElectoralDistricts;
   }
 
-  public TargetingGeoLocation setFieldElectoralDistricts(List<Object> value) {
+  public TargetingGeoLocation setFieldElectoralDistricts(List<TargetingGeoLocationElectoralDistrict> value) {
     this.mElectoralDistricts = value;
     return this;
   }
 
+  public TargetingGeoLocation setFieldElectoralDistricts(String value) {
+    Type type = new TypeToken<List<TargetingGeoLocationElectoralDistrict>>(){}.getType();
+    this.mElectoralDistricts = TargetingGeoLocationElectoralDistrict.getGson().fromJson(value, type);
+    return this;
+  }
   public List<TargetingGeoLocationMarket> getFieldGeoMarkets() {
     return mGeoMarkets;
   }

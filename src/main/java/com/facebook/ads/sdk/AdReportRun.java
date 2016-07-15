@@ -681,6 +681,8 @@ public class AdReportRun extends APINode {
   }
 
   public static enum EnumActionBreakdowns {
+      @SerializedName("canvas_component_id")
+      VALUE_CANVAS_COMPONENT_ID("canvas_component_id"),
       @SerializedName("action_carousel_card_id")
       VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
       @SerializedName("action_carousel_card_name")
@@ -693,6 +695,8 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_TARGET_ID("action_target_id"),
       @SerializedName("action_type")
       VALUE_ACTION_TYPE("action_type"),
+      @SerializedName("action_video_sound")
+      VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
       NULL(null);
@@ -747,8 +751,6 @@ public class AdReportRun extends APINode {
       VALUE_PLACE_PAGE_ID("place_page_id"),
       @SerializedName("placement")
       VALUE_PLACEMENT("placement"),
-      @SerializedName("placement_merge_rhc")
-      VALUE_PLACEMENT_MERGE_RHC("placement_merge_rhc"),
       @SerializedName("product_id")
       VALUE_PRODUCT_ID("product_id"),
       @SerializedName("region")
@@ -877,6 +879,8 @@ public class AdReportRun extends APINode {
   }
 
   public static enum EnumSummaryActionBreakdowns {
+      @SerializedName("canvas_component_id")
+      VALUE_CANVAS_COMPONENT_ID("canvas_component_id"),
       @SerializedName("action_carousel_card_id")
       VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
       @SerializedName("action_carousel_card_name")
@@ -889,6 +893,8 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_TARGET_ID("action_target_id"),
       @SerializedName("action_type")
       VALUE_ACTION_TYPE("action_type"),
+      @SerializedName("action_video_sound")
+      VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
       NULL(null);

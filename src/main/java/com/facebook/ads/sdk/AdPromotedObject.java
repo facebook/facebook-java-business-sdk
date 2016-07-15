@@ -294,8 +294,6 @@ public class AdPromotedObject extends APINode {
 
 
   public static enum EnumCustomEventType {
-      @SerializedName("ACTIVATE_APP")
-      VALUE_ACTIVATE_APP("ACTIVATE_APP"),
       @SerializedName("COMPLETE_REGISTRATION")
       VALUE_COMPLETE_REGISTRATION("COMPLETE_REGISTRATION"),
       @SerializedName("CONTENT_VIEW")

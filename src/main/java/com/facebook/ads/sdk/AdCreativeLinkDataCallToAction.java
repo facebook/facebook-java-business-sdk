@@ -54,7 +54,7 @@ public class AdCreativeLinkDataCallToAction extends APINode {
   @SerializedName("type")
   private EnumType mType = null;
   @SerializedName("value")
-  private Object mValue = null;
+  private AdCreativeLinkDataCallToActionValue mValue = null;
   protected static Gson gson = null;
 
   public AdCreativeLinkDataCallToAction() {
@@ -205,15 +205,20 @@ public class AdCreativeLinkDataCallToAction extends APINode {
     return this;
   }
 
-  public Object getFieldValue() {
+  public AdCreativeLinkDataCallToActionValue getFieldValue() {
     return mValue;
   }
 
-  public AdCreativeLinkDataCallToAction setFieldValue(Object value) {
+  public AdCreativeLinkDataCallToAction setFieldValue(AdCreativeLinkDataCallToActionValue value) {
     this.mValue = value;
     return this;
   }
 
+  public AdCreativeLinkDataCallToAction setFieldValue(String value) {
+    Type type = new TypeToken<AdCreativeLinkDataCallToActionValue>(){}.getType();
+    this.mValue = AdCreativeLinkDataCallToActionValue.getGson().fromJson(value, type);
+    return this;
+  }
 
 
   public static enum EnumType {

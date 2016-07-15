@@ -416,6 +416,7 @@ public class ProductGroup extends APINode {
       "color",
       "commerce_insights",
       "condition",
+      "currency",
       "custom_data",
       "custom_label_0",
       "custom_label_1",
@@ -581,6 +582,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestConditionField (boolean value) {
       this.requestField("condition", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetProducts requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
       return this;
     }
     public APIRequestGetProducts requestCustomDataField () {
@@ -846,7 +854,6 @@ public class ProductGroup extends APINode {
       "expiration_date",
       "gender",
       "gtin",
-      "id",
       "image_url",
       "inventory",
       "ios_app_name",
@@ -1040,11 +1047,6 @@ public class ProductGroup extends APINode {
 
     public APIRequestCreateProduct setGtin (String gtin) {
       this.setParam("gtin", gtin);
-      return this;
-    }
-
-    public APIRequestCreateProduct setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -1370,15 +1372,14 @@ public class ProductGroup extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<APINode> {
+  public static class APIRequestUpdate extends APIRequest<ProductGroup> {
 
-    APINode lastResponse = null;
+    ProductGroup lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public ProductGroup getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
       "variants",
     };
 
@@ -1386,17 +1387,17 @@ public class ProductGroup extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public ProductGroup parseResponse(String response) throws APIException {
+      return ProductGroup.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public ProductGroup execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public ProductGroup execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -1417,11 +1418,6 @@ public class ProductGroup extends APINode {
       return this;
     }
 
-
-    public APIRequestUpdate setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
 
     public APIRequestUpdate setVariants (List<Object> variants) {
       this.setParam("variants", variants);

@@ -463,7 +463,6 @@ public class CustomConversion extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -501,11 +500,6 @@ public class CustomConversion extends APINode {
       return this;
     }
 
-
-    public APIRequestDelete setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);
@@ -725,11 +719,11 @@ public class CustomConversion extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<APINode> {
+  public static class APIRequestUpdate extends APIRequest<CustomConversion> {
 
-    APINode lastResponse = null;
+    CustomConversion lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public CustomConversion getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -742,17 +736,17 @@ public class CustomConversion extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public CustomConversion parseResponse(String response) throws APIException {
+      return CustomConversion.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public CustomConversion execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public CustomConversion execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -832,38 +826,26 @@ public class CustomConversion extends APINode {
   }
 
   public static enum EnumCustomEventType {
-      @SerializedName("ACTIVATE_APP")
-      VALUE_ACTIVATE_APP("ACTIVATE_APP"),
-      @SerializedName("COMPLETE_REGISTRATION")
-      VALUE_COMPLETE_REGISTRATION("COMPLETE_REGISTRATION"),
-      @SerializedName("CONTENT_VIEW")
-      VALUE_CONTENT_VIEW("CONTENT_VIEW"),
-      @SerializedName("SEARCH")
-      VALUE_SEARCH("SEARCH"),
-      @SerializedName("RATE")
-      VALUE_RATE("RATE"),
-      @SerializedName("TUTORIAL_COMPLETION")
-      VALUE_TUTORIAL_COMPLETION("TUTORIAL_COMPLETION"),
+      @SerializedName("ADD_PAYMENT_INFO")
+      VALUE_ADD_PAYMENT_INFO("ADD_PAYMENT_INFO"),
       @SerializedName("ADD_TO_CART")
       VALUE_ADD_TO_CART("ADD_TO_CART"),
       @SerializedName("ADD_TO_WISHLIST")
       VALUE_ADD_TO_WISHLIST("ADD_TO_WISHLIST"),
+      @SerializedName("COMPLETE_REGISTRATION")
+      VALUE_COMPLETE_REGISTRATION("COMPLETE_REGISTRATION"),
+      @SerializedName("CONTENT_VIEW")
+      VALUE_CONTENT_VIEW("CONTENT_VIEW"),
       @SerializedName("INITIATED_CHECKOUT")
       VALUE_INITIATED_CHECKOUT("INITIATED_CHECKOUT"),
-      @SerializedName("ADD_PAYMENT_INFO")
-      VALUE_ADD_PAYMENT_INFO("ADD_PAYMENT_INFO"),
-      @SerializedName("PURCHASE")
-      VALUE_PURCHASE("PURCHASE"),
       @SerializedName("LEAD")
       VALUE_LEAD("LEAD"),
-      @SerializedName("LEVEL_ACHIEVED")
-      VALUE_LEVEL_ACHIEVED("LEVEL_ACHIEVED"),
-      @SerializedName("ACHIEVEMENT_UNLOCKED")
-      VALUE_ACHIEVEMENT_UNLOCKED("ACHIEVEMENT_UNLOCKED"),
-      @SerializedName("SPENT_CREDITS")
-      VALUE_SPENT_CREDITS("SPENT_CREDITS"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
+      @SerializedName("PURCHASE")
+      VALUE_PURCHASE("PURCHASE"),
+      @SerializedName("SEARCH")
+      VALUE_SEARCH("SEARCH"),
       NULL(null);
 
       private String value;

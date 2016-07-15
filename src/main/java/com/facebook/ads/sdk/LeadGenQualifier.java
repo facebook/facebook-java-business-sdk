@@ -50,29 +50,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ConnectionObjectOpenGraphAction extends APINode {
-  @SerializedName("connected_objects")
-  private List<String> mConnectedObjects = null;
-  @SerializedName("display_name")
-  private String mDisplayName = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("properties")
-  private List<ConnectionObjectOpenGraphObjectProperty> mProperties = null;
+public class LeadGenQualifier extends APINode {
+  @SerializedName("category")
+  private String mCategory = null;
+  @SerializedName("field_key")
+  private String mFieldKey = null;
+  @SerializedName("id")
+  private String mId = null;
+  @SerializedName("label")
+  private String mLabel = null;
+  @SerializedName("question")
+  private String mQuestion = null;
   protected static Gson gson = null;
 
-  public ConnectionObjectOpenGraphAction() {
+  public LeadGenQualifier() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static ConnectionObjectOpenGraphAction loadJSON(String json, APIContext context) {
-    ConnectionObjectOpenGraphAction connectionObjectOpenGraphAction = getGson().fromJson(json, ConnectionObjectOpenGraphAction.class);
+  public static LeadGenQualifier loadJSON(String json, APIContext context) {
+    LeadGenQualifier leadGenQualifier = getGson().fromJson(json, LeadGenQualifier.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(connectionObjectOpenGraphAction.toString());
+      JsonElement o2 = parser.parse(leadGenQualifier.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -82,13 +84,13 @@ public class ConnectionObjectOpenGraphAction extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    connectionObjectOpenGraphAction.context = context;
-    connectionObjectOpenGraphAction.rawValue = json;
-    return connectionObjectOpenGraphAction;
+    leadGenQualifier.context = context;
+    leadGenQualifier.rawValue = json;
+    return leadGenQualifier;
   }
 
-  public static APINodeList<ConnectionObjectOpenGraphAction> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ConnectionObjectOpenGraphAction> connectionObjectOpenGraphActions = new APINodeList<ConnectionObjectOpenGraphAction>(request, json);
+  public static APINodeList<LeadGenQualifier> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<LeadGenQualifier> leadGenQualifiers = new APINodeList<LeadGenQualifier>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,9 +101,9 @@ public class ConnectionObjectOpenGraphAction extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          connectionObjectOpenGraphActions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          leadGenQualifiers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return connectionObjectOpenGraphActions;
+        return leadGenQualifiers;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -109,13 +111,13 @@ public class ConnectionObjectOpenGraphAction extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            connectionObjectOpenGraphActions.setPaging(before, after);
+            leadGenQualifiers.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              connectionObjectOpenGraphActions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              leadGenQualifiers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -126,23 +128,23 @@ public class ConnectionObjectOpenGraphAction extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  connectionObjectOpenGraphActions.add(loadJSON(entry.getValue().toString(), context));
+                  leadGenQualifiers.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              connectionObjectOpenGraphActions.add(loadJSON(obj.toString(), context));
+              leadGenQualifiers.add(loadJSON(obj.toString(), context));
             }
           }
-          return connectionObjectOpenGraphActions;
+          return leadGenQualifiers;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              connectionObjectOpenGraphActions.add(loadJSON(entry.getValue().toString(), context));
+              leadGenQualifiers.add(loadJSON(entry.getValue().toString(), context));
           }
-          return connectionObjectOpenGraphActions;
+          return leadGenQualifiers;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -159,20 +161,20 @@ public class ConnectionObjectOpenGraphAction extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              connectionObjectOpenGraphActions.add(loadJSON(value.toString(), context));
+              leadGenQualifiers.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return connectionObjectOpenGraphActions;
+            return leadGenQualifiers;
           }
 
           // Sixth, check if it's pure JsonObject
-          connectionObjectOpenGraphActions.clear();
-          connectionObjectOpenGraphActions.add(loadJSON(json, context));
-          return connectionObjectOpenGraphActions;
+          leadGenQualifiers.clear();
+          leadGenQualifiers.add(loadJSON(json, context));
+          return leadGenQualifiers;
         }
       }
     } catch (Exception e) {
@@ -200,47 +202,51 @@ public class ConnectionObjectOpenGraphAction extends APINode {
   }
 
 
-  public List<String> getFieldConnectedObjects() {
-    return mConnectedObjects;
+  public String getFieldCategory() {
+    return mCategory;
   }
 
-  public ConnectionObjectOpenGraphAction setFieldConnectedObjects(List<String> value) {
-    this.mConnectedObjects = value;
+  public LeadGenQualifier setFieldCategory(String value) {
+    this.mCategory = value;
     return this;
   }
 
-  public String getFieldDisplayName() {
-    return mDisplayName;
+  public String getFieldFieldKey() {
+    return mFieldKey;
   }
 
-  public ConnectionObjectOpenGraphAction setFieldDisplayName(String value) {
-    this.mDisplayName = value;
+  public LeadGenQualifier setFieldFieldKey(String value) {
+    this.mFieldKey = value;
     return this;
   }
 
-  public String getFieldName() {
-    return mName;
+  public String getFieldId() {
+    return mId;
   }
 
-  public ConnectionObjectOpenGraphAction setFieldName(String value) {
-    this.mName = value;
+  public LeadGenQualifier setFieldId(String value) {
+    this.mId = value;
     return this;
   }
 
-  public List<ConnectionObjectOpenGraphObjectProperty> getFieldProperties() {
-    return mProperties;
+  public String getFieldLabel() {
+    return mLabel;
   }
 
-  public ConnectionObjectOpenGraphAction setFieldProperties(List<ConnectionObjectOpenGraphObjectProperty> value) {
-    this.mProperties = value;
+  public LeadGenQualifier setFieldLabel(String value) {
+    this.mLabel = value;
     return this;
   }
 
-  public ConnectionObjectOpenGraphAction setFieldProperties(String value) {
-    Type type = new TypeToken<List<ConnectionObjectOpenGraphObjectProperty>>(){}.getType();
-    this.mProperties = ConnectionObjectOpenGraphObjectProperty.getGson().fromJson(value, type);
+  public String getFieldQuestion() {
+    return mQuestion;
+  }
+
+  public LeadGenQualifier setFieldQuestion(String value) {
+    this.mQuestion = value;
     return this;
   }
+
 
 
 
@@ -257,20 +263,21 @@ public class ConnectionObjectOpenGraphAction extends APINode {
     return gson;
   }
 
-  public ConnectionObjectOpenGraphAction copyFrom(ConnectionObjectOpenGraphAction instance) {
-    this.mConnectedObjects = instance.mConnectedObjects;
-    this.mDisplayName = instance.mDisplayName;
-    this.mName = instance.mName;
-    this.mProperties = instance.mProperties;
+  public LeadGenQualifier copyFrom(LeadGenQualifier instance) {
+    this.mCategory = instance.mCategory;
+    this.mFieldKey = instance.mFieldKey;
+    this.mId = instance.mId;
+    this.mLabel = instance.mLabel;
+    this.mQuestion = instance.mQuestion;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ConnectionObjectOpenGraphAction> getParser() {
-    return new APIRequest.ResponseParser<ConnectionObjectOpenGraphAction>() {
-      public APINodeList<ConnectionObjectOpenGraphAction> parseResponse(String response, APIContext context, APIRequest<ConnectionObjectOpenGraphAction> request) throws MalformedResponseException {
-        return ConnectionObjectOpenGraphAction.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<LeadGenQualifier> getParser() {
+    return new APIRequest.ResponseParser<LeadGenQualifier>() {
+      public APINodeList<LeadGenQualifier> parseResponse(String response, APIContext context, APIRequest<LeadGenQualifier> request) throws MalformedResponseException {
+        return LeadGenQualifier.parseResponse(response, context, request);
       }
     };
   }

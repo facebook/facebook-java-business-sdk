@@ -398,6 +398,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_FRIENDLY_NAME("update_ad_friendly_name"),
       @SerializedName("update_ad_targets_spec")
       VALUE_UPDATE_AD_TARGETS_SPEC("update_ad_targets_spec"),
+      @SerializedName("update_adgroup_stop_delivery")
+      VALUE_UPDATE_ADGROUP_STOP_DELIVERY("update_adgroup_stop_delivery"),
       @SerializedName("update_ad_set_target_spec")
       VALUE_UPDATE_AD_SET_TARGET_SPEC("update_ad_set_target_spec"),
       @SerializedName("ad_review_approved")

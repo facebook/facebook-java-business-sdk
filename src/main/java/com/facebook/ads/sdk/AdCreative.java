@@ -67,6 +67,8 @@ public class AdCreative extends APINode {
   private String mBody = null;
   @SerializedName("call_to_action_type")
   private EnumCallToActionType mCallToActionType = null;
+  @SerializedName("effective_object_story_id")
+  private String mEffectiveObjectStoryId = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_crops")
@@ -398,6 +400,15 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public String getFieldEffectiveObjectStoryId() {
+    return mEffectiveObjectStoryId;
+  }
+
+  public AdCreative setFieldEffectiveObjectStoryId(String value) {
+    this.mEffectiveObjectStoryId = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -618,7 +629,6 @@ public class AdCreative extends APINode {
     }
     public static final String[] PARAMS = {
       "adlabels",
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -666,11 +676,6 @@ public class AdCreative extends APINode {
       return this;
     }
 
-    public APIRequestDeleteAdLabels setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
-
     public APIRequestDeleteAdLabels requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -709,33 +714,32 @@ public class AdCreative extends APINode {
 
   }
 
-  public static class APIRequestCreateAdLabel extends APIRequest<APINode> {
+  public static class APIRequestCreateAdLabel extends APIRequest<AdLabel> {
 
-    APINode lastResponse = null;
+    AdLabel lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public AdLabel getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "adlabels",
-      "id",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public AdLabel parseResponse(String response) throws APIException {
+      return AdLabel.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public AdLabel execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public AdLabel execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -763,11 +767,6 @@ public class AdCreative extends APINode {
     }
     public APIRequestCreateAdLabel setAdlabels (String adlabels) {
       this.setParam("adlabels", adlabels);
-      return this;
-    }
-
-    public APIRequestCreateAdLabel setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -818,7 +817,9 @@ public class AdCreative extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_format",
+      "dynamic_creative_spec",
       "height",
+      "interactive",
       "locale",
       "post",
       "product_item_ids",
@@ -871,12 +872,30 @@ public class AdCreative extends APINode {
       return this;
     }
 
+    public APIRequestGetPreviews setDynamicCreativeSpec (Object dynamicCreativeSpec) {
+      this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
+      return this;
+    }
+    public APIRequestGetPreviews setDynamicCreativeSpec (String dynamicCreativeSpec) {
+      this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
+      return this;
+    }
+
     public APIRequestGetPreviews setHeight (Long height) {
       this.setParam("height", height);
       return this;
     }
     public APIRequestGetPreviews setHeight (String height) {
       this.setParam("height", height);
+      return this;
+    }
+
+    public APIRequestGetPreviews setInteractive (Boolean interactive) {
+      this.setParam("interactive", interactive);
+      return this;
+    }
+    public APIRequestGetPreviews setInteractive (String interactive) {
+      this.setParam("interactive", interactive);
       return this;
     }
 
@@ -967,7 +986,6 @@ public class AdCreative extends APINode {
     public static final String[] PARAMS = {
       "account_id",
       "adlabels",
-      "id",
       "name",
       "run_status",
     };
@@ -1019,11 +1037,6 @@ public class AdCreative extends APINode {
     }
     public APIRequestDelete setAdlabels (String adlabels) {
       this.setParam("adlabels", adlabels);
-      return this;
-    }
-
-    public APIRequestDelete setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -1087,6 +1100,8 @@ public class AdCreative extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "thumbnail_height",
+      "thumbnail_width",
     };
 
     public static final String[] FIELDS = {
@@ -1098,6 +1113,7 @@ public class AdCreative extends APINode {
       "applink_treatment",
       "body",
       "call_to_action_type",
+      "effective_object_story_id",
       "id",
       "image_crops",
       "image_hash",
@@ -1154,6 +1170,24 @@ public class AdCreative extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setThumbnailHeight (Long thumbnailHeight) {
+      this.setParam("thumbnail_height", thumbnailHeight);
+      return this;
+    }
+    public APIRequestGet setThumbnailHeight (String thumbnailHeight) {
+      this.setParam("thumbnail_height", thumbnailHeight);
+      return this;
+    }
+
+    public APIRequestGet setThumbnailWidth (Long thumbnailWidth) {
+      this.setParam("thumbnail_width", thumbnailWidth);
+      return this;
+    }
+    public APIRequestGet setThumbnailWidth (String thumbnailWidth) {
+      this.setParam("thumbnail_width", thumbnailWidth);
+      return this;
+    }
 
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);
@@ -1245,6 +1279,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestCallToActionTypeField (boolean value) {
       this.requestField("call_to_action_type", value);
+      return this;
+    }
+    public APIRequestGet requestEffectiveObjectStoryIdField () {
+      return this.requestEffectiveObjectStoryIdField(true);
+    }
+    public APIRequestGet requestEffectiveObjectStoryIdField (boolean value) {
+      this.requestField("effective_object_story_id", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -1403,17 +1444,16 @@ public class AdCreative extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<APINode> {
+  public static class APIRequestUpdate extends APIRequest<AdCreative> {
 
-    APINode lastResponse = null;
+    AdCreative lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public AdCreative getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "account_id",
       "adlabels",
-      "id",
       "name",
       "run_status",
     };
@@ -1422,17 +1462,17 @@ public class AdCreative extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public AdCreative parseResponse(String response) throws APIException {
+      return AdCreative.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public AdCreative execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public AdCreative execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -1465,11 +1505,6 @@ public class AdCreative extends APINode {
     }
     public APIRequestUpdate setAdlabels (String adlabels) {
       this.setParam("adlabels", adlabels);
-      return this;
-    }
-
-    public APIRequestUpdate setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -1644,10 +1679,6 @@ public class AdCreative extends APINode {
       VALUE_VIDEO("VIDEO"),
       @SerializedName("INVALID")
       VALUE_INVALID("INVALID"),
-      @SerializedName("ACTION_SPEC")
-      VALUE_ACTION_SPEC("ACTION_SPEC"),
-      @SerializedName("INSTAGRAM_MEDIA")
-      VALUE_INSTAGRAM_MEDIA("INSTAGRAM_MEDIA"),
       NULL(null);
 
       private String value;
@@ -1742,6 +1773,7 @@ public class AdCreative extends APINode {
     this.mApplinkTreatment = instance.mApplinkTreatment;
     this.mBody = instance.mBody;
     this.mCallToActionType = instance.mCallToActionType;
+    this.mEffectiveObjectStoryId = instance.mEffectiveObjectStoryId;
     this.mId = instance.mId;
     this.mImageCrops = instance.mImageCrops;
     this.mImageHash = instance.mImageHash;

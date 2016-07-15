@@ -50,25 +50,41 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ConnectionObjectOpenGraphObjectProperty extends APINode {
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("type")
-  private String mType = null;
+public class AdCreativeLinkDataCallToActionValue extends APINode {
+  @SerializedName("app_link")
+  private String mAppLink = null;
+  @SerializedName("application")
+  private String mApplication = null;
+  @SerializedName("event_id")
+  private String mEventId = null;
+  @SerializedName("lead_gen_form_id")
+  private String mLeadGenFormId = null;
+  @SerializedName("link")
+  private String mLink = null;
+  @SerializedName("link_caption")
+  private String mLinkCaption = null;
+  @SerializedName("link_description")
+  private String mLinkDescription = null;
+  @SerializedName("link_title")
+  private String mLinkTitle = null;
+  @SerializedName("page")
+  private String mPage = null;
+  @SerializedName("product_link")
+  private String mProductLink = null;
   protected static Gson gson = null;
 
-  public ConnectionObjectOpenGraphObjectProperty() {
+  public AdCreativeLinkDataCallToActionValue() {
   }
 
   public String getId() {
     return null;
   }
-  public static ConnectionObjectOpenGraphObjectProperty loadJSON(String json, APIContext context) {
-    ConnectionObjectOpenGraphObjectProperty connectionObjectOpenGraphObjectProperty = getGson().fromJson(json, ConnectionObjectOpenGraphObjectProperty.class);
+  public static AdCreativeLinkDataCallToActionValue loadJSON(String json, APIContext context) {
+    AdCreativeLinkDataCallToActionValue adCreativeLinkDataCallToActionValue = getGson().fromJson(json, AdCreativeLinkDataCallToActionValue.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(connectionObjectOpenGraphObjectProperty.toString());
+      JsonElement o2 = parser.parse(adCreativeLinkDataCallToActionValue.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -78,13 +94,13 @@ public class ConnectionObjectOpenGraphObjectProperty extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    connectionObjectOpenGraphObjectProperty.context = context;
-    connectionObjectOpenGraphObjectProperty.rawValue = json;
-    return connectionObjectOpenGraphObjectProperty;
+    adCreativeLinkDataCallToActionValue.context = context;
+    adCreativeLinkDataCallToActionValue.rawValue = json;
+    return adCreativeLinkDataCallToActionValue;
   }
 
-  public static APINodeList<ConnectionObjectOpenGraphObjectProperty> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ConnectionObjectOpenGraphObjectProperty> connectionObjectOpenGraphObjectPropertys = new APINodeList<ConnectionObjectOpenGraphObjectProperty>(request, json);
+  public static APINodeList<AdCreativeLinkDataCallToActionValue> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<AdCreativeLinkDataCallToActionValue> adCreativeLinkDataCallToActionValues = new APINodeList<AdCreativeLinkDataCallToActionValue>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -95,9 +111,9 @@ public class ConnectionObjectOpenGraphObjectProperty extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          connectionObjectOpenGraphObjectPropertys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCreativeLinkDataCallToActionValues.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return connectionObjectOpenGraphObjectPropertys;
+        return adCreativeLinkDataCallToActionValues;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -105,13 +121,13 @@ public class ConnectionObjectOpenGraphObjectProperty extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            connectionObjectOpenGraphObjectPropertys.setPaging(before, after);
+            adCreativeLinkDataCallToActionValues.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              connectionObjectOpenGraphObjectPropertys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCreativeLinkDataCallToActionValues.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -122,23 +138,23 @@ public class ConnectionObjectOpenGraphObjectProperty extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  connectionObjectOpenGraphObjectPropertys.add(loadJSON(entry.getValue().toString(), context));
+                  adCreativeLinkDataCallToActionValues.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              connectionObjectOpenGraphObjectPropertys.add(loadJSON(obj.toString(), context));
+              adCreativeLinkDataCallToActionValues.add(loadJSON(obj.toString(), context));
             }
           }
-          return connectionObjectOpenGraphObjectPropertys;
+          return adCreativeLinkDataCallToActionValues;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              connectionObjectOpenGraphObjectPropertys.add(loadJSON(entry.getValue().toString(), context));
+              adCreativeLinkDataCallToActionValues.add(loadJSON(entry.getValue().toString(), context));
           }
-          return connectionObjectOpenGraphObjectPropertys;
+          return adCreativeLinkDataCallToActionValues;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -155,20 +171,20 @@ public class ConnectionObjectOpenGraphObjectProperty extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              connectionObjectOpenGraphObjectPropertys.add(loadJSON(value.toString(), context));
+              adCreativeLinkDataCallToActionValues.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return connectionObjectOpenGraphObjectPropertys;
+            return adCreativeLinkDataCallToActionValues;
           }
 
           // Sixth, check if it's pure JsonObject
-          connectionObjectOpenGraphObjectPropertys.clear();
-          connectionObjectOpenGraphObjectPropertys.add(loadJSON(json, context));
-          return connectionObjectOpenGraphObjectPropertys;
+          adCreativeLinkDataCallToActionValues.clear();
+          adCreativeLinkDataCallToActionValues.add(loadJSON(json, context));
+          return adCreativeLinkDataCallToActionValues;
         }
       }
     } catch (Exception e) {
@@ -196,21 +212,93 @@ public class ConnectionObjectOpenGraphObjectProperty extends APINode {
   }
 
 
-  public String getFieldName() {
-    return mName;
+  public String getFieldAppLink() {
+    return mAppLink;
   }
 
-  public ConnectionObjectOpenGraphObjectProperty setFieldName(String value) {
-    this.mName = value;
+  public AdCreativeLinkDataCallToActionValue setFieldAppLink(String value) {
+    this.mAppLink = value;
     return this;
   }
 
-  public String getFieldType() {
-    return mType;
+  public String getFieldApplication() {
+    return mApplication;
   }
 
-  public ConnectionObjectOpenGraphObjectProperty setFieldType(String value) {
-    this.mType = value;
+  public AdCreativeLinkDataCallToActionValue setFieldApplication(String value) {
+    this.mApplication = value;
+    return this;
+  }
+
+  public String getFieldEventId() {
+    return mEventId;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldEventId(String value) {
+    this.mEventId = value;
+    return this;
+  }
+
+  public String getFieldLeadGenFormId() {
+    return mLeadGenFormId;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldLeadGenFormId(String value) {
+    this.mLeadGenFormId = value;
+    return this;
+  }
+
+  public String getFieldLink() {
+    return mLink;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldLink(String value) {
+    this.mLink = value;
+    return this;
+  }
+
+  public String getFieldLinkCaption() {
+    return mLinkCaption;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldLinkCaption(String value) {
+    this.mLinkCaption = value;
+    return this;
+  }
+
+  public String getFieldLinkDescription() {
+    return mLinkDescription;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldLinkDescription(String value) {
+    this.mLinkDescription = value;
+    return this;
+  }
+
+  public String getFieldLinkTitle() {
+    return mLinkTitle;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldLinkTitle(String value) {
+    this.mLinkTitle = value;
+    return this;
+  }
+
+  public String getFieldPage() {
+    return mPage;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldPage(String value) {
+    this.mPage = value;
+    return this;
+  }
+
+  public String getFieldProductLink() {
+    return mProductLink;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldProductLink(String value) {
+    this.mProductLink = value;
     return this;
   }
 
@@ -230,18 +318,26 @@ public class ConnectionObjectOpenGraphObjectProperty extends APINode {
     return gson;
   }
 
-  public ConnectionObjectOpenGraphObjectProperty copyFrom(ConnectionObjectOpenGraphObjectProperty instance) {
-    this.mName = instance.mName;
-    this.mType = instance.mType;
+  public AdCreativeLinkDataCallToActionValue copyFrom(AdCreativeLinkDataCallToActionValue instance) {
+    this.mAppLink = instance.mAppLink;
+    this.mApplication = instance.mApplication;
+    this.mEventId = instance.mEventId;
+    this.mLeadGenFormId = instance.mLeadGenFormId;
+    this.mLink = instance.mLink;
+    this.mLinkCaption = instance.mLinkCaption;
+    this.mLinkDescription = instance.mLinkDescription;
+    this.mLinkTitle = instance.mLinkTitle;
+    this.mPage = instance.mPage;
+    this.mProductLink = instance.mProductLink;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ConnectionObjectOpenGraphObjectProperty> getParser() {
-    return new APIRequest.ResponseParser<ConnectionObjectOpenGraphObjectProperty>() {
-      public APINodeList<ConnectionObjectOpenGraphObjectProperty> parseResponse(String response, APIContext context, APIRequest<ConnectionObjectOpenGraphObjectProperty> request) throws MalformedResponseException {
-        return ConnectionObjectOpenGraphObjectProperty.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<AdCreativeLinkDataCallToActionValue> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeLinkDataCallToActionValue>() {
+      public APINodeList<AdCreativeLinkDataCallToActionValue> parseResponse(String response, APIContext context, APIRequest<AdCreativeLinkDataCallToActionValue> request) throws MalformedResponseException {
+        return AdCreativeLinkDataCallToActionValue.parseResponse(response, context, request);
       }
     };
   }

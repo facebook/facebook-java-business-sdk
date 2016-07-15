@@ -50,23 +50,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CustomAudienceCapabilities extends APINode {
-  @SerializedName("capabilities")
-  private Map<String, String> mCapabilities = null;
+public class UserLeadGenDisclaimerResponse extends APINode {
+  @SerializedName("checkbox_key")
+  private String mCheckboxKey = null;
+  @SerializedName("is_checked")
+  private String mIsChecked = null;
   protected static Gson gson = null;
 
-  public CustomAudienceCapabilities() {
+  public UserLeadGenDisclaimerResponse() {
   }
 
   public String getId() {
     return null;
   }
-  public static CustomAudienceCapabilities loadJSON(String json, APIContext context) {
-    CustomAudienceCapabilities customAudienceCapabilities = getGson().fromJson(json, CustomAudienceCapabilities.class);
+  public static UserLeadGenDisclaimerResponse loadJSON(String json, APIContext context) {
+    UserLeadGenDisclaimerResponse userLeadGenDisclaimerResponse = getGson().fromJson(json, UserLeadGenDisclaimerResponse.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(customAudienceCapabilities.toString());
+      JsonElement o2 = parser.parse(userLeadGenDisclaimerResponse.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -76,13 +78,13 @@ public class CustomAudienceCapabilities extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    customAudienceCapabilities.context = context;
-    customAudienceCapabilities.rawValue = json;
-    return customAudienceCapabilities;
+    userLeadGenDisclaimerResponse.context = context;
+    userLeadGenDisclaimerResponse.rawValue = json;
+    return userLeadGenDisclaimerResponse;
   }
 
-  public static APINodeList<CustomAudienceCapabilities> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CustomAudienceCapabilities> customAudienceCapabilitiess = new APINodeList<CustomAudienceCapabilities>(request, json);
+  public static APINodeList<UserLeadGenDisclaimerResponse> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<UserLeadGenDisclaimerResponse> userLeadGenDisclaimerResponses = new APINodeList<UserLeadGenDisclaimerResponse>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -93,9 +95,9 @@ public class CustomAudienceCapabilities extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          customAudienceCapabilitiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userLeadGenDisclaimerResponses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return customAudienceCapabilitiess;
+        return userLeadGenDisclaimerResponses;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -103,13 +105,13 @@ public class CustomAudienceCapabilities extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            customAudienceCapabilitiess.setPaging(before, after);
+            userLeadGenDisclaimerResponses.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              customAudienceCapabilitiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userLeadGenDisclaimerResponses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +122,23 @@ public class CustomAudienceCapabilities extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  customAudienceCapabilitiess.add(loadJSON(entry.getValue().toString(), context));
+                  userLeadGenDisclaimerResponses.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              customAudienceCapabilitiess.add(loadJSON(obj.toString(), context));
+              userLeadGenDisclaimerResponses.add(loadJSON(obj.toString(), context));
             }
           }
-          return customAudienceCapabilitiess;
+          return userLeadGenDisclaimerResponses;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              customAudienceCapabilitiess.add(loadJSON(entry.getValue().toString(), context));
+              userLeadGenDisclaimerResponses.add(loadJSON(entry.getValue().toString(), context));
           }
-          return customAudienceCapabilitiess;
+          return userLeadGenDisclaimerResponses;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +155,20 @@ public class CustomAudienceCapabilities extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              customAudienceCapabilitiess.add(loadJSON(value.toString(), context));
+              userLeadGenDisclaimerResponses.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return customAudienceCapabilitiess;
+            return userLeadGenDisclaimerResponses;
           }
 
           // Sixth, check if it's pure JsonObject
-          customAudienceCapabilitiess.clear();
-          customAudienceCapabilitiess.add(loadJSON(json, context));
-          return customAudienceCapabilitiess;
+          userLeadGenDisclaimerResponses.clear();
+          userLeadGenDisclaimerResponses.add(loadJSON(json, context));
+          return userLeadGenDisclaimerResponses;
         }
       }
     } catch (Exception e) {
@@ -194,12 +196,21 @@ public class CustomAudienceCapabilities extends APINode {
   }
 
 
-  public Map<String, String> getFieldCapabilities() {
-    return mCapabilities;
+  public String getFieldCheckboxKey() {
+    return mCheckboxKey;
   }
 
-  public CustomAudienceCapabilities setFieldCapabilities(Map<String, String> value) {
-    this.mCapabilities = value;
+  public UserLeadGenDisclaimerResponse setFieldCheckboxKey(String value) {
+    this.mCheckboxKey = value;
+    return this;
+  }
+
+  public String getFieldIsChecked() {
+    return mIsChecked;
+  }
+
+  public UserLeadGenDisclaimerResponse setFieldIsChecked(String value) {
+    this.mIsChecked = value;
     return this;
   }
 
@@ -219,17 +230,18 @@ public class CustomAudienceCapabilities extends APINode {
     return gson;
   }
 
-  public CustomAudienceCapabilities copyFrom(CustomAudienceCapabilities instance) {
-    this.mCapabilities = instance.mCapabilities;
+  public UserLeadGenDisclaimerResponse copyFrom(UserLeadGenDisclaimerResponse instance) {
+    this.mCheckboxKey = instance.mCheckboxKey;
+    this.mIsChecked = instance.mIsChecked;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CustomAudienceCapabilities> getParser() {
-    return new APIRequest.ResponseParser<CustomAudienceCapabilities>() {
-      public APINodeList<CustomAudienceCapabilities> parseResponse(String response, APIContext context, APIRequest<CustomAudienceCapabilities> request) throws MalformedResponseException {
-        return CustomAudienceCapabilities.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<UserLeadGenDisclaimerResponse> getParser() {
+    return new APIRequest.ResponseParser<UserLeadGenDisclaimerResponse>() {
+      public APINodeList<UserLeadGenDisclaimerResponse> parseResponse(String response, APIContext context, APIRequest<UserLeadGenDisclaimerResponse> request) throws MalformedResponseException {
+        return UserLeadGenDisclaimerResponse.parseResponse(response, context, request);
       }
     };
   }

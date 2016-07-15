@@ -88,7 +88,7 @@ public class User extends APINode {
   @SerializedName("inspirational_people")
   private List<Object> mInspirationalPeople = null;
   @SerializedName("install_type")
-  private EnumInstallType mInstallType = null;
+  private String mInstallType = null;
   @SerializedName("installed")
   private Boolean mInstalled = null;
   @SerializedName("interested_in")
@@ -142,7 +142,7 @@ public class User extends APINode {
   @SerializedName("third_party_id")
   private String mThirdPartyId = null;
   @SerializedName("timezone")
-  private Object mTimezone = null;
+  private Double mTimezone = null;
   @SerializedName("token_for_business")
   private String mTokenForBusiness = null;
   @SerializedName("updated_time")
@@ -353,12 +353,12 @@ public class User extends APINode {
     return new APIRequestGetAdAccounts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateBusinesse createBusinesse() {
-    return new APIRequestCreateBusinesse(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetLeadGenForms getLeadGenForms() {
     return new APIRequestGetLeadGenForms(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetPicture getPicture() {
+    return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPromotableDomains getPromotableDomains() {
@@ -446,7 +446,7 @@ public class User extends APINode {
     return mInspirationalPeople;
   }
 
-  public EnumInstallType getFieldInstallType() {
+  public String getFieldInstallType() {
     return mInstallType;
   }
 
@@ -557,7 +557,7 @@ public class User extends APINode {
     return mThirdPartyId;
   }
 
-  public Object getFieldTimezone() {
+  public Double getFieldTimezone() {
     return mTimezone;
   }
 
@@ -852,7 +852,6 @@ public class User extends APINode {
     }
     public static final String[] PARAMS = {
       "accounts",
-      "id",
       "name",
       "redownload",
       "users",
@@ -900,15 +899,6 @@ public class User extends APINode {
     }
     public APIRequestCreateAdAccountGroup setAccounts (String accounts) {
       this.setParam("accounts", accounts);
-      return this;
-    }
-
-    public APIRequestCreateAdAccountGroup setId (Long id) {
-      this.setParam("id", id);
-      return this;
-    }
-    public APIRequestCreateAdAccountGroup setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -1465,168 +1455,6 @@ public class User extends APINode {
     }
   }
 
-  public static class APIRequestCreateBusinesse extends APIRequest<Business> {
-
-    Business lastResponse = null;
-    @Override
-    public Business getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "id",
-      "name",
-      "primary_page",
-      "sales_rep_email",
-      "survey_business_type",
-      "survey_num_assets",
-      "survey_num_people",
-      "timezone_id",
-      "vertical",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Business parseResponse(String response) throws APIException {
-      return Business.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public Business execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Business execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestCreateBusinesse(String nodeId, APIContext context) {
-      super(context, nodeId, "/businesses", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateBusinesse setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBusinesse setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateBusinesse setId (Long id) {
-      this.setParam("id", id);
-      return this;
-    }
-    public APIRequestCreateBusinesse setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
-
-    public APIRequestCreateBusinesse setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateBusinesse setPrimaryPage (String primaryPage) {
-      this.setParam("primary_page", primaryPage);
-      return this;
-    }
-
-    public APIRequestCreateBusinesse setSalesRepEmail (String salesRepEmail) {
-      this.setParam("sales_rep_email", salesRepEmail);
-      return this;
-    }
-
-    public APIRequestCreateBusinesse setSurveyBusinessType (Business.EnumSurveyBusinessType surveyBusinessType) {
-      this.setParam("survey_business_type", surveyBusinessType);
-      return this;
-    }
-    public APIRequestCreateBusinesse setSurveyBusinessType (String surveyBusinessType) {
-      this.setParam("survey_business_type", surveyBusinessType);
-      return this;
-    }
-
-    public APIRequestCreateBusinesse setSurveyNumAssets (Long surveyNumAssets) {
-      this.setParam("survey_num_assets", surveyNumAssets);
-      return this;
-    }
-    public APIRequestCreateBusinesse setSurveyNumAssets (String surveyNumAssets) {
-      this.setParam("survey_num_assets", surveyNumAssets);
-      return this;
-    }
-
-    public APIRequestCreateBusinesse setSurveyNumPeople (Long surveyNumPeople) {
-      this.setParam("survey_num_people", surveyNumPeople);
-      return this;
-    }
-    public APIRequestCreateBusinesse setSurveyNumPeople (String surveyNumPeople) {
-      this.setParam("survey_num_people", surveyNumPeople);
-      return this;
-    }
-
-    public APIRequestCreateBusinesse setTimezoneId (Long timezoneId) {
-      this.setParam("timezone_id", timezoneId);
-      return this;
-    }
-    public APIRequestCreateBusinesse setTimezoneId (String timezoneId) {
-      this.setParam("timezone_id", timezoneId);
-      return this;
-    }
-
-    public APIRequestCreateBusinesse setVertical (Business.EnumVertical vertical) {
-      this.setParam("vertical", vertical);
-      return this;
-    }
-    public APIRequestCreateBusinesse setVertical (String vertical) {
-      this.setParam("vertical", vertical);
-      return this;
-    }
-
-    public APIRequestCreateBusinesse requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateBusinesse requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBusinesse requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateBusinesse requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBusinesse requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateBusinesse requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetLeadGenForms extends APIRequest<LeadgenForm> {
 
     APINodeList<LeadgenForm> lastResponse = null;
@@ -1640,6 +1468,7 @@ public class User extends APINode {
 
     public static final String[] FIELDS = {
       "created_time",
+      "creator",
       "cusomized_tcpa_content",
       "expired_leads_count",
       "follow_up_action_text",
@@ -1654,6 +1483,7 @@ public class User extends APINode {
       "page_id",
       "privacy_policy_url",
       "qualifiers",
+      "status",
       "tcpa_compliance",
     };
 
@@ -1736,6 +1566,13 @@ public class User extends APINode {
     }
     public APIRequestGetLeadGenForms requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestCreatorField () {
+      return this.requestCreatorField(true);
+    }
+    public APIRequestGetLeadGenForms requestCreatorField (boolean value) {
+      this.requestField("creator", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestCusomizedTcpaContentField () {
@@ -1836,11 +1673,206 @@ public class User extends APINode {
       this.requestField("qualifiers", value);
       return this;
     }
+    public APIRequestGetLeadGenForms requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetLeadGenForms requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
     public APIRequestGetLeadGenForms requestTcpaComplianceField () {
       return this.requestTcpaComplianceField(true);
     }
     public APIRequestGetLeadGenForms requestTcpaComplianceField (boolean value) {
       this.requestField("tcpa_compliance", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetPicture extends APIRequest<ProfilePictureSource> {
+
+    APINodeList<ProfilePictureSource> lastResponse = null;
+    @Override
+    public APINodeList<ProfilePictureSource> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "height",
+      "redirect",
+      "type",
+      "width",
+    };
+
+    public static final String[] FIELDS = {
+      "bottom",
+      "height",
+      "is_silhouette",
+      "left",
+      "right",
+      "top",
+      "url",
+      "width",
+    };
+
+    @Override
+    public APINodeList<ProfilePictureSource> parseResponse(String response) throws APIException {
+      return ProfilePictureSource.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<ProfilePictureSource> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProfilePictureSource> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetPicture(String nodeId, APIContext context) {
+      super(context, nodeId, "/picture", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPicture setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPicture setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPicture setHeight (Long height) {
+      this.setParam("height", height);
+      return this;
+    }
+    public APIRequestGetPicture setHeight (String height) {
+      this.setParam("height", height);
+      return this;
+    }
+
+    public APIRequestGetPicture setRedirect (Boolean redirect) {
+      this.setParam("redirect", redirect);
+      return this;
+    }
+    public APIRequestGetPicture setRedirect (String redirect) {
+      this.setParam("redirect", redirect);
+      return this;
+    }
+
+    public APIRequestGetPicture setType (ProfilePictureSource.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestGetPicture setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestGetPicture setWidth (Long width) {
+      this.setParam("width", width);
+      return this;
+    }
+    public APIRequestGetPicture setWidth (String width) {
+      this.setParam("width", width);
+      return this;
+    }
+
+    public APIRequestGetPicture requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPicture requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPicture requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPicture requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPicture requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPicture requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPicture requestBottomField () {
+      return this.requestBottomField(true);
+    }
+    public APIRequestGetPicture requestBottomField (boolean value) {
+      this.requestField("bottom", value);
+      return this;
+    }
+    public APIRequestGetPicture requestHeightField () {
+      return this.requestHeightField(true);
+    }
+    public APIRequestGetPicture requestHeightField (boolean value) {
+      this.requestField("height", value);
+      return this;
+    }
+    public APIRequestGetPicture requestIsSilhouetteField () {
+      return this.requestIsSilhouetteField(true);
+    }
+    public APIRequestGetPicture requestIsSilhouetteField (boolean value) {
+      this.requestField("is_silhouette", value);
+      return this;
+    }
+    public APIRequestGetPicture requestLeftField () {
+      return this.requestLeftField(true);
+    }
+    public APIRequestGetPicture requestLeftField (boolean value) {
+      this.requestField("left", value);
+      return this;
+    }
+    public APIRequestGetPicture requestRightField () {
+      return this.requestRightField(true);
+    }
+    public APIRequestGetPicture requestRightField (boolean value) {
+      this.requestField("right", value);
+      return this;
+    }
+    public APIRequestGetPicture requestTopField () {
+      return this.requestTopField(true);
+    }
+    public APIRequestGetPicture requestTopField (boolean value) {
+      this.requestField("top", value);
+      return this;
+    }
+    public APIRequestGetPicture requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetPicture requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetPicture requestWidthField () {
+      return this.requestWidthField(true);
+    }
+    public APIRequestGetPicture requestWidthField (boolean value) {
+      this.requestField("width", value);
       return this;
     }
   }
@@ -1975,6 +2007,7 @@ public class User extends APINode {
       "guest_list_enabled",
       "id",
       "interested_count",
+      "is_canceled",
       "is_page_owned",
       "is_viewer_admin",
       "maybe_count",
@@ -2136,6 +2169,13 @@ public class User extends APINode {
     }
     public APIRequestGetPromotableEvents requestInterestedCountField (boolean value) {
       this.requestField("interested_count", value);
+      return this;
+    }
+    public APIRequestGetPromotableEvents requestIsCanceledField () {
+      return this.requestIsCanceledField(true);
+    }
+    public APIRequestGetPromotableEvents requestIsCanceledField (boolean value) {
+      this.requestField("is_canceled", value);
       return this;
     }
     public APIRequestGetPromotableEvents requestIsPageOwnedField () {
@@ -2737,33 +2777,6 @@ public class User extends APINode {
       this.requestField("work", value);
       return this;
     }
-  }
-
-  public static enum EnumInstallType {
-      @SerializedName("UNKNOWN")
-      VALUE_UNKNOWN("UNKNOWN"),
-      @SerializedName("AUTH_DIALOG")
-      VALUE_AUTH_DIALOG("AUTH_DIALOG"),
-      @SerializedName("AUTH_REFERRAL")
-      VALUE_AUTH_REFERRAL("AUTH_REFERRAL"),
-      @SerializedName("INSTANT_PERSONALIZATION")
-      VALUE_INSTANT_PERSONALIZATION("INSTANT_PERSONALIZATION"),
-      @SerializedName("START_NOW")
-      VALUE_START_NOW("START_NOW"),
-      @SerializedName("START_NOW_V2")
-      VALUE_START_NOW_V2("START_NOW_V2"),
-      NULL(null);
-
-      private String value;
-
-      private EnumInstallType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
 

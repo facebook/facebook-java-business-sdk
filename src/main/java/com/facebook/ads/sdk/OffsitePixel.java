@@ -294,11 +294,11 @@ public class OffsitePixel extends APINode {
 
 
 
-  public static class APIRequestDeleteAdAccounts extends APIRequest<AdAccount> {
+  public static class APIRequestDeleteAdAccounts extends APIRequest<APINode> {
 
-    APINodeList<AdAccount> lastResponse = null;
+    APINodeList<APINode> lastResponse = null;
     @Override
-    public APINodeList<AdAccount> getLastResponse() {
+    public APINodeList<APINode> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -309,17 +309,17 @@ public class OffsitePixel extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<AdAccount> execute() throws APIException {
+    public APINodeList<APINode> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -982,7 +982,6 @@ public class OffsitePixel extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -1020,11 +1019,6 @@ public class OffsitePixel extends APINode {
       return this;
     }
 
-
-    public APIRequestDelete setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);
@@ -1072,6 +1066,7 @@ public class OffsitePixel extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "value",
     };
 
     public static final String[] FIELDS = {
@@ -1115,6 +1110,15 @@ public class OffsitePixel extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setValue (Long value) {
+      this.setParam("value", value);
+      return this;
+    }
+    public APIRequestGet setValue (String value) {
+      this.setParam("value", value);
+      return this;
+    }
 
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);
@@ -1196,17 +1200,16 @@ public class OffsitePixel extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<APINode> {
+  public static class APIRequestUpdate extends APIRequest<OffsitePixel> {
 
-    APINode lastResponse = null;
+    OffsitePixel lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public OffsitePixel getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "app_event",
       "app_id_for_app_event_firing",
-      "id",
       "name",
       "tag",
     };
@@ -1215,17 +1218,17 @@ public class OffsitePixel extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public OffsitePixel parseResponse(String response) throws APIException {
+      return OffsitePixel.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public OffsitePixel execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public OffsitePixel execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -1258,11 +1261,6 @@ public class OffsitePixel extends APINode {
     }
     public APIRequestUpdate setAppIdForAppEventFiring (String appIdForAppEventFiring) {
       this.setParam("app_id_for_app_event_firing", appIdForAppEventFiring);
-      return this;
-    }
-
-    public APIRequestUpdate setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 

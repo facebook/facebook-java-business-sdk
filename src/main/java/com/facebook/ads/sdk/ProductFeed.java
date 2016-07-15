@@ -359,6 +359,7 @@ public class ProductFeed extends APINode {
       "color",
       "commerce_insights",
       "condition",
+      "currency",
       "custom_data",
       "custom_label_0",
       "custom_label_1",
@@ -524,6 +525,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestConditionField (boolean value) {
       this.requestField("condition", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetProducts requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
       return this;
     }
     public APIRequestGetProducts requestCustomDataField () {
@@ -891,8 +899,8 @@ public class ProductFeed extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
       "password",
+      "update_only",
       "url",
       "username",
       "file",
@@ -943,13 +951,17 @@ public class ProductFeed extends APINode {
       return this;
     }
 
-    public APIRequestCreateUpload setId (String id) {
-      this.setParam("id", id);
+    public APIRequestCreateUpload setPassword (String password) {
+      this.setParam("password", password);
       return this;
     }
 
-    public APIRequestCreateUpload setPassword (String password) {
-      this.setParam("password", password);
+    public APIRequestCreateUpload setUpdateOnly (Boolean updateOnly) {
+      this.setParam("update_only", updateOnly);
+      return this;
+    }
+    public APIRequestCreateUpload setUpdateOnly (String updateOnly) {
+      this.setParam("update_only", updateOnly);
       return this;
     }
 
@@ -1009,7 +1021,6 @@ public class ProductFeed extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -1047,11 +1058,6 @@ public class ProductFeed extends APINode {
       return this;
     }
 
-
-    public APIRequestDelete setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);
@@ -1279,11 +1285,11 @@ public class ProductFeed extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<APINode> {
+  public static class APIRequestUpdate extends APIRequest<ProductFeed> {
 
-    APINode lastResponse = null;
+    ProductFeed lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public ProductFeed getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -1291,7 +1297,6 @@ public class ProductFeed extends APINode {
       "deletion_enabled",
       "delimiter",
       "encoding",
-      "id",
       "name",
       "quoted_fields",
       "schedule",
@@ -1301,17 +1306,17 @@ public class ProductFeed extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public ProductFeed parseResponse(String response) throws APIException {
+      return ProductFeed.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public ProductFeed execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public ProductFeed execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -1362,11 +1367,6 @@ public class ProductFeed extends APINode {
     }
     public APIRequestUpdate setEncoding (String encoding) {
       this.setParam("encoding", encoding);
-      return this;
-    }
-
-    public APIRequestUpdate setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 

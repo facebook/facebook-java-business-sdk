@@ -322,10 +322,8 @@ public class AdsPixel extends APINode {
       "data_source",
       "delivery_status",
       "description",
-      "excluded_custom_audiences",
       "external_event_source",
       "id",
-      "included_custom_audiences",
       "last_used_time",
       "lookalike_audience_ids",
       "lookalike_spec",
@@ -447,13 +445,6 @@ public class AdsPixel extends APINode {
       this.requestField("description", value);
       return this;
     }
-    public APIRequestGetAudiences requestExcludedCustomAudiencesField () {
-      return this.requestExcludedCustomAudiencesField(true);
-    }
-    public APIRequestGetAudiences requestExcludedCustomAudiencesField (boolean value) {
-      this.requestField("excluded_custom_audiences", value);
-      return this;
-    }
     public APIRequestGetAudiences requestExternalEventSourceField () {
       return this.requestExternalEventSourceField(true);
     }
@@ -466,13 +457,6 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAudiences requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAudiences requestIncludedCustomAudiencesField () {
-      return this.requestIncludedCustomAudiencesField(true);
-    }
-    public APIRequestGetAudiences requestIncludedCustomAudiencesField (boolean value) {
-      this.requestField("included_custom_audiences", value);
       return this;
     }
     public APIRequestGetAudiences requestLastUsedTimeField () {
@@ -1464,11 +1448,11 @@ public class AdsPixel extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<APINode> {
+  public static class APIRequestUpdate extends APIRequest<AdsPixel> {
 
-    APINode lastResponse = null;
+    AdsPixel lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public AdsPixel getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -1479,17 +1463,17 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public AdsPixel parseResponse(String response) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public AdsPixel execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }

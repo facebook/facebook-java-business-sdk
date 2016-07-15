@@ -50,52 +50,62 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdPlacePageSet extends APINode {
-  @SerializedName("account_id")
-  private String mAccountId = null;
+public class HotelRoom extends APINode {
+  @SerializedName("applinks")
+  private AppLinks mApplinks = null;
+  @SerializedName("base_price")
+  private String mBasePrice = null;
+  @SerializedName("currency")
+  private String mCurrency = null;
+  @SerializedName("description")
+  private String mDescription = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("images")
+  private List<String> mImages = null;
+  @SerializedName("margin_level")
+  private String mMarginLevel = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("pages_count")
-  private Long mPagesCount = null;
-  @SerializedName("parent_page")
-  private Object mParentPage = null;
+  @SerializedName("room_id")
+  private String mRoomId = null;
+  @SerializedName("url")
+  private String mUrl = null;
   protected static Gson gson = null;
 
-  AdPlacePageSet() {
+  HotelRoom() {
   }
 
-  public AdPlacePageSet(Long id, APIContext context) {
+  public HotelRoom(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public AdPlacePageSet(String id, APIContext context) {
+  public HotelRoom(String id, APIContext context) {
     this.mId = id;
     this.context = context;
   }
 
-  public AdPlacePageSet fetch() throws APIException{
-    AdPlacePageSet newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public HotelRoom fetch() throws APIException{
+    HotelRoom newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static AdPlacePageSet fetchById(Long id, APIContext context) throws APIException {
+  public static HotelRoom fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static AdPlacePageSet fetchById(String id, APIContext context) throws APIException {
-    AdPlacePageSet adPlacePageSet =
+  public static HotelRoom fetchById(String id, APIContext context) throws APIException {
+    HotelRoom hotelRoom =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return adPlacePageSet;
+    return hotelRoom;
   }
 
-  public static APINodeList<AdPlacePageSet> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdPlacePageSet>)(
-      new APIRequest<AdPlacePageSet>(context, "", "/", "GET", AdPlacePageSet.getParser())
+  public static APINodeList<HotelRoom> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<HotelRoom>)(
+      new APIRequest<HotelRoom>(context, "", "/", "GET", HotelRoom.getParser())
         .setParam("ids", String.join(",", ids))
         .requestFields(fields)
         .execute()
@@ -109,12 +119,12 @@ public class AdPlacePageSet extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdPlacePageSet loadJSON(String json, APIContext context) {
-    AdPlacePageSet adPlacePageSet = getGson().fromJson(json, AdPlacePageSet.class);
+  public static HotelRoom loadJSON(String json, APIContext context) {
+    HotelRoom hotelRoom = getGson().fromJson(json, HotelRoom.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adPlacePageSet.toString());
+      JsonElement o2 = parser.parse(hotelRoom.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -124,13 +134,13 @@ public class AdPlacePageSet extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adPlacePageSet.context = context;
-    adPlacePageSet.rawValue = json;
-    return adPlacePageSet;
+    hotelRoom.context = context;
+    hotelRoom.rawValue = json;
+    return hotelRoom;
   }
 
-  public static APINodeList<AdPlacePageSet> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdPlacePageSet> adPlacePageSets = new APINodeList<AdPlacePageSet>(request, json);
+  public static APINodeList<HotelRoom> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<HotelRoom> hotelRooms = new APINodeList<HotelRoom>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -141,9 +151,9 @@ public class AdPlacePageSet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adPlacePageSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          hotelRooms.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return adPlacePageSets;
+        return hotelRooms;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -151,13 +161,13 @@ public class AdPlacePageSet extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adPlacePageSets.setPaging(before, after);
+            hotelRooms.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adPlacePageSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              hotelRooms.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -168,23 +178,23 @@ public class AdPlacePageSet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adPlacePageSets.add(loadJSON(entry.getValue().toString(), context));
+                  hotelRooms.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adPlacePageSets.add(loadJSON(obj.toString(), context));
+              hotelRooms.add(loadJSON(obj.toString(), context));
             }
           }
-          return adPlacePageSets;
+          return hotelRooms;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adPlacePageSets.add(loadJSON(entry.getValue().toString(), context));
+              hotelRooms.add(loadJSON(entry.getValue().toString(), context));
           }
-          return adPlacePageSets;
+          return hotelRooms;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -201,20 +211,20 @@ public class AdPlacePageSet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adPlacePageSets.add(loadJSON(value.toString(), context));
+              hotelRooms.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adPlacePageSets;
+            return hotelRooms;
           }
 
           // Sixth, check if it's pure JsonObject
-          adPlacePageSets.clear();
-          adPlacePageSets.add(loadJSON(json, context));
-          return adPlacePageSets;
+          hotelRooms.clear();
+          hotelRooms.add(loadJSON(json, context));
+          return hotelRooms;
         }
       }
     } catch (Exception e) {
@@ -250,58 +260,86 @@ public class AdPlacePageSet extends APINode {
   }
 
 
-  public String getFieldAccountId() {
-    return mAccountId;
+  public AppLinks getFieldApplinks() {
+    if (mApplinks != null) {
+      mApplinks.context = getContext();
+    }
+    return mApplinks;
+  }
+
+  public String getFieldBasePrice() {
+    return mBasePrice;
+  }
+
+  public String getFieldCurrency() {
+    return mCurrency;
+  }
+
+  public String getFieldDescription() {
+    return mDescription;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public List<String> getFieldImages() {
+    return mImages;
+  }
+
+  public String getFieldMarginLevel() {
+    return mMarginLevel;
+  }
+
   public String getFieldName() {
     return mName;
   }
 
-  public Long getFieldPagesCount() {
-    return mPagesCount;
+  public String getFieldRoomId() {
+    return mRoomId;
   }
 
-  public Object getFieldParentPage() {
-    return mParentPage;
+  public String getFieldUrl() {
+    return mUrl;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<AdPlacePageSet> {
+  public static class APIRequestGet extends APIRequest<HotelRoom> {
 
-    AdPlacePageSet lastResponse = null;
+    HotelRoom lastResponse = null;
     @Override
-    public AdPlacePageSet getLastResponse() {
+    public HotelRoom getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "account_id",
+      "applinks",
+      "base_price",
+      "currency",
+      "description",
       "id",
+      "images",
+      "margin_level",
       "name",
-      "pages_count",
-      "parent_page",
+      "room_id",
+      "url",
     };
 
     @Override
-    public AdPlacePageSet parseResponse(String response) throws APIException {
-      return AdPlacePageSet.parseResponse(response, getContext(), this).head();
+    public HotelRoom parseResponse(String response) throws APIException {
+      return HotelRoom.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public AdPlacePageSet execute() throws APIException {
+    public HotelRoom execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdPlacePageSet execute(Map<String, Object> extraParams) throws APIException {
+    public HotelRoom execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -359,11 +397,32 @@ public class AdPlacePageSet extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAccountIdField () {
-      return this.requestAccountIdField(true);
+    public APIRequestGet requestApplinksField () {
+      return this.requestApplinksField(true);
     }
-    public APIRequestGet requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
+    public APIRequestGet requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGet requestBasePriceField () {
+      return this.requestBasePriceField(true);
+    }
+    public APIRequestGet requestBasePriceField (boolean value) {
+      this.requestField("base_price", value);
+      return this;
+    }
+    public APIRequestGet requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGet requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGet requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGet requestDescriptionField (boolean value) {
+      this.requestField("description", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -373,6 +432,20 @@ public class AdPlacePageSet extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGet requestImagesField (boolean value) {
+      this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGet requestMarginLevelField () {
+      return this.requestMarginLevelField(true);
+    }
+    public APIRequestGet requestMarginLevelField (boolean value) {
+      this.requestField("margin_level", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -380,48 +453,56 @@ public class AdPlacePageSet extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestPagesCountField () {
-      return this.requestPagesCountField(true);
+    public APIRequestGet requestRoomIdField () {
+      return this.requestRoomIdField(true);
     }
-    public APIRequestGet requestPagesCountField (boolean value) {
-      this.requestField("pages_count", value);
+    public APIRequestGet requestRoomIdField (boolean value) {
+      this.requestField("room_id", value);
       return this;
     }
-    public APIRequestGet requestParentPageField () {
-      return this.requestParentPageField(true);
+    public APIRequestGet requestUrlField () {
+      return this.requestUrlField(true);
     }
-    public APIRequestGet requestParentPageField (boolean value) {
-      this.requestField("parent_page", value);
+    public APIRequestGet requestUrlField (boolean value) {
+      this.requestField("url", value);
       return this;
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<AdPlacePageSet> {
+  public static class APIRequestUpdate extends APIRequest<HotelRoom> {
 
-    AdPlacePageSet lastResponse = null;
+    HotelRoom lastResponse = null;
     @Override
-    public AdPlacePageSet getLastResponse() {
+    public HotelRoom getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "applinks",
+      "base_price",
+      "currency",
+      "description",
+      "images",
+      "margin_level",
       "name",
+      "pricing_variables",
+      "url",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public AdPlacePageSet parseResponse(String response) throws APIException {
-      return AdPlacePageSet.parseResponse(response, getContext(), this).head();
+    public HotelRoom parseResponse(String response) throws APIException {
+      return HotelRoom.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public AdPlacePageSet execute() throws APIException {
+    public HotelRoom execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdPlacePageSet execute(Map<String, Object> extraParams) throws APIException {
+    public HotelRoom execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -443,8 +524,68 @@ public class AdPlacePageSet extends APINode {
     }
 
 
+    public APIRequestUpdate setApplinks (Object applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+    public APIRequestUpdate setApplinks (String applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+
+    public APIRequestUpdate setBasePrice (Double basePrice) {
+      this.setParam("base_price", basePrice);
+      return this;
+    }
+    public APIRequestUpdate setBasePrice (String basePrice) {
+      this.setParam("base_price", basePrice);
+      return this;
+    }
+
+    public APIRequestUpdate setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestUpdate setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestUpdate setMarginLevel (Long marginLevel) {
+      this.setParam("margin_level", marginLevel);
+      return this;
+    }
+    public APIRequestUpdate setMarginLevel (String marginLevel) {
+      this.setParam("margin_level", marginLevel);
+      return this;
+    }
+
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setPricingVariables (List<Object> pricingVariables) {
+      this.setParam("pricing_variables", pricingVariables);
+      return this;
+    }
+    public APIRequestUpdate setPricingVariables (String pricingVariables) {
+      this.setParam("pricing_variables", pricingVariables);
+      return this;
+    }
+
+    public APIRequestUpdate setUrl (String url) {
+      this.setParam("url", url);
       return this;
     }
 
@@ -500,21 +641,26 @@ public class AdPlacePageSet extends APINode {
     return gson;
   }
 
-  public AdPlacePageSet copyFrom(AdPlacePageSet instance) {
-    this.mAccountId = instance.mAccountId;
+  public HotelRoom copyFrom(HotelRoom instance) {
+    this.mApplinks = instance.mApplinks;
+    this.mBasePrice = instance.mBasePrice;
+    this.mCurrency = instance.mCurrency;
+    this.mDescription = instance.mDescription;
     this.mId = instance.mId;
+    this.mImages = instance.mImages;
+    this.mMarginLevel = instance.mMarginLevel;
     this.mName = instance.mName;
-    this.mPagesCount = instance.mPagesCount;
-    this.mParentPage = instance.mParentPage;
+    this.mRoomId = instance.mRoomId;
+    this.mUrl = instance.mUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdPlacePageSet> getParser() {
-    return new APIRequest.ResponseParser<AdPlacePageSet>() {
-      public APINodeList<AdPlacePageSet> parseResponse(String response, APIContext context, APIRequest<AdPlacePageSet> request) throws MalformedResponseException {
-        return AdPlacePageSet.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<HotelRoom> getParser() {
+    return new APIRequest.ResponseParser<HotelRoom>() {
+      public APINodeList<HotelRoom> parseResponse(String response, APIContext context, APIRequest<HotelRoom> request) throws MalformedResponseException {
+        return HotelRoom.parseResponse(response, context, request);
       }
     };
   }

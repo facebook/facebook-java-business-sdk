@@ -376,7 +376,6 @@ public class Campaign extends APINode {
     public static final String[] PARAMS = {
       "adlabels",
       "execution_options",
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -433,11 +432,6 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestDeleteAdLabels setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
-
     public APIRequestDeleteAdLabels requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -476,34 +470,33 @@ public class Campaign extends APINode {
 
   }
 
-  public static class APIRequestCreateAdLabel extends APIRequest<APINode> {
+  public static class APIRequestCreateAdLabel extends APIRequest<AdLabel> {
 
-    APINode lastResponse = null;
+    AdLabel lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public AdLabel getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "adlabels",
       "execution_options",
-      "id",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public AdLabel parseResponse(String response) throws APIException {
+      return AdLabel.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public AdLabel execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public AdLabel execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -540,11 +533,6 @@ public class Campaign extends APINode {
     }
     public APIRequestCreateAdLabel setExecutionOptions (String executionOptions) {
       this.setParam("execution_options", executionOptions);
-      return this;
-    }
-
-    public APIRequestCreateAdLabel setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -921,6 +909,7 @@ public class Campaign extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
+      "attribution_window_days",
       "bid_amount",
       "bid_info",
       "billing_event",
@@ -951,6 +940,8 @@ public class Campaign extends APINode {
       "start_time",
       "status",
       "targeting",
+      "time_based_ad_rotation_id_blocks",
+      "time_based_ad_rotation_intervals",
       "updated_time",
       "use_new_app_click",
     };
@@ -1084,6 +1075,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestAttributionWindowDaysField () {
+      return this.requestAttributionWindowDaysField(true);
+    }
+    public APIRequestGetAdSets requestAttributionWindowDaysField (boolean value) {
+      this.requestField("attribution_window_days", value);
       return this;
     }
     public APIRequestGetAdSets requestBidAmountField () {
@@ -1296,6 +1294,20 @@ public class Campaign extends APINode {
       this.requestField("targeting", value);
       return this;
     }
+    public APIRequestGetAdSets requestTimeBasedAdRotationIdBlocksField () {
+      return this.requestTimeBasedAdRotationIdBlocksField(true);
+    }
+    public APIRequestGetAdSets requestTimeBasedAdRotationIdBlocksField (boolean value) {
+      this.requestField("time_based_ad_rotation_id_blocks", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestTimeBasedAdRotationIntervalsField () {
+      return this.requestTimeBasedAdRotationIntervalsField(true);
+    }
+    public APIRequestGetAdSets requestTimeBasedAdRotationIntervalsField (boolean value) {
+      this.requestField("time_based_ad_rotation_intervals", value);
+      return this;
+    }
     public APIRequestGetAdSets requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -1326,6 +1338,9 @@ public class Campaign extends APINode {
       "breakdowns",
       "date_preset",
       "default_summary",
+      "export_columns",
+      "export_format",
+      "export_name",
       "fields",
       "filtering",
       "level",
@@ -1425,6 +1440,25 @@ public class Campaign extends APINode {
     }
     public APIRequestGetInsights setDefaultSummary (String defaultSummary) {
       this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+
+    public APIRequestGetInsights setExportColumns (List<String> exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+    public APIRequestGetInsights setExportColumns (String exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+
+    public APIRequestGetInsights setExportFormat (String exportFormat) {
+      this.setParam("export_format", exportFormat);
+      return this;
+    }
+
+    public APIRequestGetInsights setExportName (String exportName) {
+      this.setParam("export_name", exportName);
       return this;
     }
 
@@ -1566,6 +1600,9 @@ public class Campaign extends APINode {
       "breakdowns",
       "date_preset",
       "default_summary",
+      "export_columns",
+      "export_format",
+      "export_name",
       "fields",
       "filtering",
       "level",
@@ -1665,6 +1702,25 @@ public class Campaign extends APINode {
     }
     public APIRequestGetInsightsAsync setDefaultSummary (String defaultSummary) {
       this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setExportColumns (List<String> exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setExportColumns (String exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setExportFormat (String exportFormat) {
+      this.setParam("export_format", exportFormat);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setExportName (String exportName) {
+      this.setParam("export_name", exportName);
       return this;
     }
 
@@ -1800,7 +1856,6 @@ public class Campaign extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -1838,11 +1893,6 @@ public class Campaign extends APINode {
       return this;
     }
 
-
-    public APIRequestDelete setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);
@@ -2094,11 +2144,11 @@ public class Campaign extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<APINode> {
+  public static class APIRequestUpdate extends APIRequest<Campaign> {
 
-    APINode lastResponse = null;
+    Campaign lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public Campaign getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -2115,17 +2165,17 @@ public class Campaign extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public Campaign parseResponse(String response) throws APIException {
+      return Campaign.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public Campaign execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public Campaign execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -2392,12 +2442,10 @@ public class Campaign extends APINode {
   }
 
   public static enum EnumExecutionOptions {
-      @SerializedName("VALIDATE_ONLY")
-      VALUE_VALIDATE_ONLY("VALIDATE_ONLY"),
-      @SerializedName("SYNCHRONOUS_AD_REVIEW")
-      VALUE_SYNCHRONOUS_AD_REVIEW("SYNCHRONOUS_AD_REVIEW"),
-      @SerializedName("INCLUDE_RECOMMENDATIONS")
-      VALUE_INCLUDE_RECOMMENDATIONS("INCLUDE_RECOMMENDATIONS"),
+      @SerializedName("validate_only")
+      VALUE_VALIDATE_ONLY("validate_only"),
+      @SerializedName("include_recommendations")
+      VALUE_INCLUDE_RECOMMENDATIONS("include_recommendations"),
       NULL(null);
 
       private String value;
@@ -2443,6 +2491,8 @@ public class Campaign extends APINode {
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
       @SerializedName("PRODUCT_CATALOG_SALES")
       VALUE_PRODUCT_CATALOG_SALES("PRODUCT_CATALOG_SALES"),
+      @SerializedName("REACH")
+      VALUE_REACH("REACH"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       NULL(null);

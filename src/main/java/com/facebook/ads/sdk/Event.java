@@ -71,6 +71,8 @@ public class Event extends APINode {
   private String mId = null;
   @SerializedName("interested_count")
   private Long mInterestedCount = null;
+  @SerializedName("is_canceled")
+  private Boolean mIsCanceled = null;
   @SerializedName("is_page_owned")
   private Boolean mIsPageOwned = null;
   @SerializedName("is_viewer_admin")
@@ -277,6 +279,10 @@ public class Event extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetPicture getPicture() {
+    return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -320,6 +326,10 @@ public class Event extends APINode {
 
   public Long getFieldInterestedCount() {
     return mInterestedCount;
+  }
+
+  public Boolean getFieldIsCanceled() {
+    return mIsCanceled;
   }
 
   public Boolean getFieldIsPageOwned() {
@@ -376,6 +386,194 @@ public class Event extends APINode {
 
 
 
+  public static class APIRequestGetPicture extends APIRequest<ProfilePictureSource> {
+
+    APINodeList<ProfilePictureSource> lastResponse = null;
+    @Override
+    public APINodeList<ProfilePictureSource> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "height",
+      "redirect",
+      "type",
+      "width",
+    };
+
+    public static final String[] FIELDS = {
+      "bottom",
+      "height",
+      "is_silhouette",
+      "left",
+      "right",
+      "top",
+      "url",
+      "width",
+    };
+
+    @Override
+    public APINodeList<ProfilePictureSource> parseResponse(String response) throws APIException {
+      return ProfilePictureSource.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<ProfilePictureSource> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProfilePictureSource> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetPicture(String nodeId, APIContext context) {
+      super(context, nodeId, "/picture", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPicture setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPicture setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPicture setHeight (Long height) {
+      this.setParam("height", height);
+      return this;
+    }
+    public APIRequestGetPicture setHeight (String height) {
+      this.setParam("height", height);
+      return this;
+    }
+
+    public APIRequestGetPicture setRedirect (Boolean redirect) {
+      this.setParam("redirect", redirect);
+      return this;
+    }
+    public APIRequestGetPicture setRedirect (String redirect) {
+      this.setParam("redirect", redirect);
+      return this;
+    }
+
+    public APIRequestGetPicture setType (ProfilePictureSource.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestGetPicture setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestGetPicture setWidth (Long width) {
+      this.setParam("width", width);
+      return this;
+    }
+    public APIRequestGetPicture setWidth (String width) {
+      this.setParam("width", width);
+      return this;
+    }
+
+    public APIRequestGetPicture requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPicture requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPicture requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPicture requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPicture requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPicture requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPicture requestBottomField () {
+      return this.requestBottomField(true);
+    }
+    public APIRequestGetPicture requestBottomField (boolean value) {
+      this.requestField("bottom", value);
+      return this;
+    }
+    public APIRequestGetPicture requestHeightField () {
+      return this.requestHeightField(true);
+    }
+    public APIRequestGetPicture requestHeightField (boolean value) {
+      this.requestField("height", value);
+      return this;
+    }
+    public APIRequestGetPicture requestIsSilhouetteField () {
+      return this.requestIsSilhouetteField(true);
+    }
+    public APIRequestGetPicture requestIsSilhouetteField (boolean value) {
+      this.requestField("is_silhouette", value);
+      return this;
+    }
+    public APIRequestGetPicture requestLeftField () {
+      return this.requestLeftField(true);
+    }
+    public APIRequestGetPicture requestLeftField (boolean value) {
+      this.requestField("left", value);
+      return this;
+    }
+    public APIRequestGetPicture requestRightField () {
+      return this.requestRightField(true);
+    }
+    public APIRequestGetPicture requestRightField (boolean value) {
+      this.requestField("right", value);
+      return this;
+    }
+    public APIRequestGetPicture requestTopField () {
+      return this.requestTopField(true);
+    }
+    public APIRequestGetPicture requestTopField (boolean value) {
+      this.requestField("top", value);
+      return this;
+    }
+    public APIRequestGetPicture requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetPicture requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetPicture requestWidthField () {
+      return this.requestWidthField(true);
+    }
+    public APIRequestGetPicture requestWidthField (boolean value) {
+      this.requestField("width", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGet extends APIRequest<Event> {
 
     Event lastResponse = null;
@@ -397,6 +595,7 @@ public class Event extends APINode {
       "guest_list_enabled",
       "id",
       "interested_count",
+      "is_canceled",
       "is_page_owned",
       "is_viewer_admin",
       "maybe_count",
@@ -549,6 +748,13 @@ public class Event extends APINode {
     }
     public APIRequestGet requestInterestedCountField (boolean value) {
       this.requestField("interested_count", value);
+      return this;
+    }
+    public APIRequestGet requestIsCanceledField () {
+      return this.requestIsCanceledField(true);
+    }
+    public APIRequestGet requestIsCanceledField (boolean value) {
+      this.requestField("is_canceled", value);
       return this;
     }
     public APIRequestGet requestIsPageOwnedField () {
@@ -718,8 +924,6 @@ public class Event extends APINode {
       VALUE_GROUP("group"),
       @SerializedName("community")
       VALUE_COMMUNITY("community"),
-      @SerializedName("legacy")
-      VALUE_LEGACY("legacy"),
       NULL(null);
 
       private String value;
@@ -759,6 +963,7 @@ public class Event extends APINode {
     this.mGuestListEnabled = instance.mGuestListEnabled;
     this.mId = instance.mId;
     this.mInterestedCount = instance.mInterestedCount;
+    this.mIsCanceled = instance.mIsCanceled;
     this.mIsPageOwned = instance.mIsPageOwned;
     this.mIsViewerAdmin = instance.mIsViewerAdmin;
     this.mMaybeCount = instance.mMaybeCount;

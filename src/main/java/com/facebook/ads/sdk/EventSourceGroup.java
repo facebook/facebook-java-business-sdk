@@ -50,48 +50,48 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ExternalEventSource extends APINode {
+public class EventSourceGroup extends APINode {
+  @SerializedName("event_sources")
+  private List<ExternalEventSource> mEventSources = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("source_type")
-  private String mSourceType = null;
   protected static Gson gson = null;
 
-  ExternalEventSource() {
+  EventSourceGroup() {
   }
 
-  public ExternalEventSource(Long id, APIContext context) {
+  public EventSourceGroup(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public ExternalEventSource(String id, APIContext context) {
+  public EventSourceGroup(String id, APIContext context) {
     this.mId = id;
     this.context = context;
   }
 
-  public ExternalEventSource fetch() throws APIException{
-    ExternalEventSource newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public EventSourceGroup fetch() throws APIException{
+    EventSourceGroup newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static ExternalEventSource fetchById(Long id, APIContext context) throws APIException {
+  public static EventSourceGroup fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ExternalEventSource fetchById(String id, APIContext context) throws APIException {
-    ExternalEventSource externalEventSource =
+  public static EventSourceGroup fetchById(String id, APIContext context) throws APIException {
+    EventSourceGroup eventSourceGroup =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return externalEventSource;
+    return eventSourceGroup;
   }
 
-  public static APINodeList<ExternalEventSource> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ExternalEventSource>)(
-      new APIRequest<ExternalEventSource>(context, "", "/", "GET", ExternalEventSource.getParser())
+  public static APINodeList<EventSourceGroup> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<EventSourceGroup>)(
+      new APIRequest<EventSourceGroup>(context, "", "/", "GET", EventSourceGroup.getParser())
         .setParam("ids", String.join(",", ids))
         .requestFields(fields)
         .execute()
@@ -105,12 +105,12 @@ public class ExternalEventSource extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ExternalEventSource loadJSON(String json, APIContext context) {
-    ExternalEventSource externalEventSource = getGson().fromJson(json, ExternalEventSource.class);
+  public static EventSourceGroup loadJSON(String json, APIContext context) {
+    EventSourceGroup eventSourceGroup = getGson().fromJson(json, EventSourceGroup.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(externalEventSource.toString());
+      JsonElement o2 = parser.parse(eventSourceGroup.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -120,13 +120,13 @@ public class ExternalEventSource extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    externalEventSource.context = context;
-    externalEventSource.rawValue = json;
-    return externalEventSource;
+    eventSourceGroup.context = context;
+    eventSourceGroup.rawValue = json;
+    return eventSourceGroup;
   }
 
-  public static APINodeList<ExternalEventSource> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ExternalEventSource> externalEventSources = new APINodeList<ExternalEventSource>(request, json);
+  public static APINodeList<EventSourceGroup> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<EventSourceGroup> eventSourceGroups = new APINodeList<EventSourceGroup>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -137,9 +137,9 @@ public class ExternalEventSource extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          externalEventSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          eventSourceGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return externalEventSources;
+        return eventSourceGroups;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -147,13 +147,13 @@ public class ExternalEventSource extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            externalEventSources.setPaging(before, after);
+            eventSourceGroups.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              externalEventSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              eventSourceGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -164,23 +164,23 @@ public class ExternalEventSource extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  externalEventSources.add(loadJSON(entry.getValue().toString(), context));
+                  eventSourceGroups.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              externalEventSources.add(loadJSON(obj.toString(), context));
+              eventSourceGroups.add(loadJSON(obj.toString(), context));
             }
           }
-          return externalEventSources;
+          return eventSourceGroups;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              externalEventSources.add(loadJSON(entry.getValue().toString(), context));
+              eventSourceGroups.add(loadJSON(entry.getValue().toString(), context));
           }
-          return externalEventSources;
+          return eventSourceGroups;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -197,20 +197,20 @@ public class ExternalEventSource extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              externalEventSources.add(loadJSON(value.toString(), context));
+              eventSourceGroups.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return externalEventSources;
+            return eventSourceGroups;
           }
 
           // Sixth, check if it's pure JsonObject
-          externalEventSources.clear();
-          externalEventSources.add(loadJSON(json, context));
-          return externalEventSources;
+          eventSourceGroups.clear();
+          eventSourceGroups.add(loadJSON(json, context));
+          return eventSourceGroups;
         }
       }
     } catch (Exception e) {
@@ -242,6 +242,10 @@ public class ExternalEventSource extends APINode {
   }
 
 
+  public List<ExternalEventSource> getFieldEventSources() {
+    return mEventSources;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -250,40 +254,36 @@ public class ExternalEventSource extends APINode {
     return mName;
   }
 
-  public String getFieldSourceType() {
-    return mSourceType;
-  }
 
 
+  public static class APIRequestGet extends APIRequest<EventSourceGroup> {
 
-  public static class APIRequestGet extends APIRequest<ExternalEventSource> {
-
-    ExternalEventSource lastResponse = null;
+    EventSourceGroup lastResponse = null;
     @Override
-    public ExternalEventSource getLastResponse() {
+    public EventSourceGroup getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "event_sources",
       "id",
       "name",
-      "source_type",
     };
 
     @Override
-    public ExternalEventSource parseResponse(String response) throws APIException {
-      return ExternalEventSource.parseResponse(response, getContext(), this).head();
+    public EventSourceGroup parseResponse(String response) throws APIException {
+      return EventSourceGroup.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public ExternalEventSource execute() throws APIException {
+    public EventSourceGroup execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public ExternalEventSource execute(Map<String, Object> extraParams) throws APIException {
+    public EventSourceGroup execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -341,6 +341,13 @@ public class ExternalEventSource extends APINode {
       return this;
     }
 
+    public APIRequestGet requestEventSourcesField () {
+      return this.requestEventSourcesField(true);
+    }
+    public APIRequestGet requestEventSourcesField (boolean value) {
+      this.requestField("event_sources", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -353,13 +360,6 @@ public class ExternalEventSource extends APINode {
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestSourceTypeField () {
-      return this.requestSourceTypeField(true);
-    }
-    public APIRequestGet requestSourceTypeField (boolean value) {
-      this.requestField("source_type", value);
       return this;
     }
   }
@@ -378,19 +378,19 @@ public class ExternalEventSource extends APINode {
     return gson;
   }
 
-  public ExternalEventSource copyFrom(ExternalEventSource instance) {
+  public EventSourceGroup copyFrom(EventSourceGroup instance) {
+    this.mEventSources = instance.mEventSources;
     this.mId = instance.mId;
     this.mName = instance.mName;
-    this.mSourceType = instance.mSourceType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ExternalEventSource> getParser() {
-    return new APIRequest.ResponseParser<ExternalEventSource>() {
-      public APINodeList<ExternalEventSource> parseResponse(String response, APIContext context, APIRequest<ExternalEventSource> request) throws MalformedResponseException {
-        return ExternalEventSource.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<EventSourceGroup> getParser() {
+    return new APIRequest.ResponseParser<EventSourceGroup>() {
+      public APINodeList<EventSourceGroup> parseResponse(String response, APIContext context, APIRequest<EventSourceGroup> request) throws MalformedResponseException {
+        return EventSourceGroup.parseResponse(response, context, request);
       }
     };
   }

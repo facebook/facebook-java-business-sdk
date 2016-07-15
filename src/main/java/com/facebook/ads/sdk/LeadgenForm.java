@@ -53,6 +53,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class LeadgenForm extends APINode {
   @SerializedName("created_time")
   private String mCreatedTime = null;
+  @SerializedName("creator")
+  private User mCreator = null;
   @SerializedName("cusomized_tcpa_content")
   private String mCusomizedTcpaContent = null;
   @SerializedName("expired_leads_count")
@@ -80,7 +82,9 @@ public class LeadgenForm extends APINode {
   @SerializedName("privacy_policy_url")
   private String mPrivacyPolicyUrl = null;
   @SerializedName("qualifiers")
-  private List<Object> mQualifiers = null;
+  private List<LeadGenQualifier> mQualifiers = null;
+  @SerializedName("status")
+  private String mStatus = null;
   @SerializedName("tcpa_compliance")
   private Boolean mTcpaCompliance = null;
   protected static Gson gson = null;
@@ -267,6 +271,14 @@ public class LeadgenForm extends APINode {
     return new APIRequestGetLeads(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateTestLead createTestLead() {
+    return new APIRequestCreateTestLead(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -274,6 +286,13 @@ public class LeadgenForm extends APINode {
 
   public String getFieldCreatedTime() {
     return mCreatedTime;
+  }
+
+  public User getFieldCreator() {
+    if (mCreator != null) {
+      mCreator.context = getContext();
+    }
+    return mCreator;
   }
 
   public String getFieldCusomizedTcpaContent() {
@@ -328,8 +347,12 @@ public class LeadgenForm extends APINode {
     return mPrivacyPolicyUrl;
   }
 
-  public List<Object> getFieldQualifiers() {
+  public List<LeadGenQualifier> getFieldQualifiers() {
     return mQualifiers;
+  }
+
+  public String getFieldStatus() {
+    return mStatus;
   }
 
   public Boolean getFieldTcpaCompliance() {
@@ -526,6 +549,194 @@ public class LeadgenForm extends APINode {
     }
   }
 
+  public static class APIRequestCreateTestLead extends APIRequest<LeadgenForm> {
+
+    LeadgenForm lastResponse = null;
+    @Override
+    public LeadgenForm getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "custom_disclaimer_responses",
+      "field_data",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public LeadgenForm parseResponse(String response) throws APIException {
+      return LeadgenForm.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public LeadgenForm execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public LeadgenForm execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestCreateTestLead(String nodeId, APIContext context) {
+      super(context, nodeId, "/test_leads", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateTestLead setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateTestLead setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateTestLead setCustomDisclaimerResponses (List<Object> customDisclaimerResponses) {
+      this.setParam("custom_disclaimer_responses", customDisclaimerResponses);
+      return this;
+    }
+    public APIRequestCreateTestLead setCustomDisclaimerResponses (String customDisclaimerResponses) {
+      this.setParam("custom_disclaimer_responses", customDisclaimerResponses);
+      return this;
+    }
+
+    public APIRequestCreateTestLead setFieldData (List<Object> fieldData) {
+      this.setParam("field_data", fieldData);
+      return this;
+    }
+    public APIRequestCreateTestLead setFieldData (String fieldData) {
+      this.setParam("field_data", fieldData);
+      return this;
+    }
+
+    public APIRequestCreateTestLead requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateTestLead requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateTestLead requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateTestLead requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateTestLead requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateTestLead requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<LeadgenForm> {
 
     LeadgenForm lastResponse = null;
@@ -538,6 +749,7 @@ public class LeadgenForm extends APINode {
 
     public static final String[] FIELDS = {
       "created_time",
+      "creator",
       "cusomized_tcpa_content",
       "expired_leads_count",
       "follow_up_action_text",
@@ -552,6 +764,7 @@ public class LeadgenForm extends APINode {
       "page_id",
       "privacy_policy_url",
       "qualifiers",
+      "status",
       "tcpa_compliance",
     };
 
@@ -629,6 +842,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGet requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGet requestCreatorField () {
+      return this.requestCreatorField(true);
+    }
+    public APIRequestGet requestCreatorField (boolean value) {
+      this.requestField("creator", value);
       return this;
     }
     public APIRequestGet requestCusomizedTcpaContentField () {
@@ -729,6 +949,13 @@ public class LeadgenForm extends APINode {
       this.requestField("qualifiers", value);
       return this;
     }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
     public APIRequestGet requestTcpaComplianceField () {
       return this.requestTcpaComplianceField(true);
     }
@@ -754,6 +981,7 @@ public class LeadgenForm extends APINode {
 
   public LeadgenForm copyFrom(LeadgenForm instance) {
     this.mCreatedTime = instance.mCreatedTime;
+    this.mCreator = instance.mCreator;
     this.mCusomizedTcpaContent = instance.mCusomizedTcpaContent;
     this.mExpiredLeadsCount = instance.mExpiredLeadsCount;
     this.mFollowUpActionText = instance.mFollowUpActionText;
@@ -768,6 +996,7 @@ public class LeadgenForm extends APINode {
     this.mPageId = instance.mPageId;
     this.mPrivacyPolicyUrl = instance.mPrivacyPolicyUrl;
     this.mQualifiers = instance.mQualifiers;
+    this.mStatus = instance.mStatus;
     this.mTcpaCompliance = instance.mTcpaCompliance;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

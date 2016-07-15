@@ -311,7 +311,6 @@ public class AdAccountGroup extends APINode {
     }
     public static final String[] PARAMS = {
       "account_id",
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -352,11 +351,6 @@ public class AdAccountGroup extends APINode {
 
     public APIRequestDeleteAdAccounts setAccountId (String accountId) {
       this.setParam("account_id", accountId);
-      return this;
-    }
-
-    public APIRequestDeleteAdAccounts setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -491,7 +485,6 @@ public class AdAccountGroup extends APINode {
     }
     public static final String[] PARAMS = {
       "account_ids",
-      "id",
       "redownload",
     };
 
@@ -537,11 +530,6 @@ public class AdAccountGroup extends APINode {
     }
     public APIRequestCreateAdAccount setAccountIds (String accountIds) {
       this.setParam("account_ids", accountIds);
-      return this;
-    }
-
-    public APIRequestCreateAdAccount setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -600,7 +588,6 @@ public class AdAccountGroup extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
       "redownload",
       "uid",
     };
@@ -640,11 +627,6 @@ public class AdAccountGroup extends APINode {
       return this;
     }
 
-
-    public APIRequestDeleteUsers setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
 
     public APIRequestDeleteUsers setRedownload (Boolean redownload) {
       this.setParam("redownload", redownload);
@@ -711,7 +693,6 @@ public class AdAccountGroup extends APINode {
     }
     public static final String[] PARAMS = {
       "account_group_roles",
-      "id",
       "redownload",
     };
 
@@ -757,11 +738,6 @@ public class AdAccountGroup extends APINode {
     }
     public APIRequestCreateUser setAccountGroupRoles (String accountGroupRoles) {
       this.setParam("account_group_roles", accountGroupRoles);
-      return this;
-    }
-
-    public APIRequestCreateUser setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -820,7 +796,6 @@ public class AdAccountGroup extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -858,11 +833,6 @@ public class AdAccountGroup extends APINode {
       return this;
     }
 
-
-    public APIRequestDelete setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);
@@ -1043,7 +1013,6 @@ public class AdAccountGroup extends APINode {
     }
     public static final String[] PARAMS = {
       "accounts",
-      "id",
       "name",
       "redownload",
       "status",
@@ -1092,11 +1061,6 @@ public class AdAccountGroup extends APINode {
     }
     public APIRequestUpdate setAccounts (String accounts) {
       this.setParam("accounts", accounts);
-      return this;
-    }
-
-    public APIRequestUpdate setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 

@@ -283,6 +283,14 @@ public class Business extends APINode {
     return new APIRequestGetClientPages(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetEventSourceGroups getEventSourceGroups() {
+    return new APIRequestGetEventSourceGroups(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateEventSourceGroup createEventSourceGroup() {
+    return new APIRequestCreateEventSourceGroup(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetGrpPlans getGrpPlans() {
     return new APIRequestGetGrpPlans(this.getPrefixedId().toString(), context);
   }
@@ -393,7 +401,6 @@ public class Business extends APINode {
       "currency",
       "end_advertiser",
       "funding_id",
-      "id",
       "invoice",
       "io",
       "media_agency",
@@ -444,10 +451,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdAccount setEndAdvertiser (Object endAdvertiser) {
-      this.setParam("end_advertiser", endAdvertiser);
-      return this;
-    }
     public APIRequestCreateAdAccount setEndAdvertiser (String endAdvertiser) {
       this.setParam("end_advertiser", endAdvertiser);
       return this;
@@ -455,11 +458,6 @@ public class Business extends APINode {
 
     public APIRequestCreateAdAccount setFundingId (String fundingId) {
       this.setParam("funding_id", fundingId);
-      return this;
-    }
-
-    public APIRequestCreateAdAccount setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -548,17 +546,16 @@ public class Business extends APINode {
 
   }
 
-  public static class APIRequestCreateAdAccounts extends APIRequest<APINode> {
+  public static class APIRequestCreateAdAccounts extends APIRequest<AdAccount> {
 
-    APINode lastResponse = null;
+    AdAccount lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public AdAccount getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "access_type",
       "adaccount_id",
-      "id",
       "permitted_roles",
     };
 
@@ -566,17 +563,17 @@ public class Business extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public AdAccount execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public AdAccount execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -609,11 +606,6 @@ public class Business extends APINode {
 
     public APIRequestCreateAdAccounts setAdaccountId (String adaccountId) {
       this.setParam("adaccount_id", adaccountId);
-      return this;
-    }
-
-    public APIRequestCreateAdAccounts setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -813,7 +805,6 @@ public class Business extends APINode {
     }
     public static final String[] PARAMS = {
       "app_id",
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -858,11 +849,6 @@ public class Business extends APINode {
     }
     public APIRequestDeleteApps setAppId (String appId) {
       this.setParam("app_id", appId);
-      return this;
-    }
-
-    public APIRequestDeleteApps setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -1528,8 +1514,11 @@ public class Business extends APINode {
       "business",
       "feed_count",
       "id",
+      "image_padding_landscape",
+      "image_padding_square",
       "name",
       "product_count",
+      "vertical",
     };
 
     @Override
@@ -1636,6 +1625,20 @@ public class Business extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetAssignedProductCatalogs requestImagePaddingLandscapeField () {
+      return this.requestImagePaddingLandscapeField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestImagePaddingLandscapeField (boolean value) {
+      this.requestField("image_padding_landscape", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestImagePaddingSquareField () {
+      return this.requestImagePaddingSquareField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestImagePaddingSquareField (boolean value) {
+      this.requestField("image_padding_square", value);
+      return this;
+    }
     public APIRequestGetAssignedProductCatalogs requestNameField () {
       return this.requestNameField(true);
     }
@@ -1648,6 +1651,13 @@ public class Business extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestProductCountField (boolean value) {
       this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestVerticalField () {
+      return this.requestVerticalField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestVerticalField (boolean value) {
+      this.requestField("vertical", value);
       return this;
     }
   }
@@ -2436,6 +2446,214 @@ public class Business extends APINode {
 
   }
 
+  public static class APIRequestGetEventSourceGroups extends APIRequest<EventSourceGroup> {
+
+    APINodeList<EventSourceGroup> lastResponse = null;
+    @Override
+    public APINodeList<EventSourceGroup> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "event_sources",
+      "id",
+      "name",
+    };
+
+    @Override
+    public APINodeList<EventSourceGroup> parseResponse(String response) throws APIException {
+      return EventSourceGroup.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<EventSourceGroup> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<EventSourceGroup> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetEventSourceGroups(String nodeId, APIContext context) {
+      super(context, nodeId, "/event_source_groups", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetEventSourceGroups setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetEventSourceGroups setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetEventSourceGroups requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetEventSourceGroups requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetEventSourceGroups requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetEventSourceGroups requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetEventSourceGroups requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetEventSourceGroups requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetEventSourceGroups requestEventSourcesField () {
+      return this.requestEventSourcesField(true);
+    }
+    public APIRequestGetEventSourceGroups requestEventSourcesField (boolean value) {
+      this.requestField("event_sources", value);
+      return this;
+    }
+    public APIRequestGetEventSourceGroups requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetEventSourceGroups requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetEventSourceGroups requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetEventSourceGroups requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateEventSourceGroup extends APIRequest<EventSourceGroup> {
+
+    EventSourceGroup lastResponse = null;
+    @Override
+    public EventSourceGroup getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "event_sources",
+      "name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public EventSourceGroup parseResponse(String response) throws APIException {
+      return EventSourceGroup.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public EventSourceGroup execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public EventSourceGroup execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestCreateEventSourceGroup(String nodeId, APIContext context) {
+      super(context, nodeId, "/event_source_groups", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateEventSourceGroup setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEventSourceGroup setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateEventSourceGroup setEventSources (List<String> eventSources) {
+      this.setParam("event_sources", eventSources);
+      return this;
+    }
+    public APIRequestCreateEventSourceGroup setEventSources (String eventSources) {
+      this.setParam("event_sources", eventSources);
+      return this;
+    }
+
+    public APIRequestCreateEventSourceGroup setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateEventSourceGroup requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateEventSourceGroup requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEventSourceGroup requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateEventSourceGroup requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEventSourceGroup requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateEventSourceGroup requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetGrpPlans extends APIRequest<ReachFrequencyPrediction> {
 
     APINodeList<ReachFrequencyPrediction> lastResponse = null;
@@ -2472,6 +2690,7 @@ public class Business extends APINode {
       "instagram_destination_id",
       "interval_frequency_cap_reset_period",
       "name",
+      "pause_periods",
       "prediction_mode",
       "prediction_progress",
       "reservation_status",
@@ -2727,6 +2946,13 @@ public class Business extends APINode {
     }
     public APIRequestGetGrpPlans requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetGrpPlans requestPausePeriodsField () {
+      return this.requestPausePeriodsField(true);
+    }
+    public APIRequestGetGrpPlans requestPausePeriodsField (boolean value) {
+      this.requestField("pause_periods", value);
       return this;
     }
     public APIRequestGetGrpPlans requestPredictionModeField () {
@@ -2990,7 +3216,6 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
       "metadata",
       "report_type",
     };
@@ -3030,15 +3255,6 @@ public class Business extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateMeasurementReport setId (Object id) {
-      this.setParam("id", id);
-      return this;
-    }
-    public APIRequestCreateMeasurementReport setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
 
     public APIRequestCreateMeasurementReport setMetadata (String metadata) {
       this.setParam("metadata", metadata);
@@ -4482,8 +4698,11 @@ public class Business extends APINode {
       "business",
       "feed_count",
       "id",
+      "image_padding_landscape",
+      "image_padding_square",
       "name",
       "product_count",
+      "vertical",
     };
 
     @Override
@@ -4576,6 +4795,20 @@ public class Business extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetProductCatalogs requestImagePaddingLandscapeField () {
+      return this.requestImagePaddingLandscapeField(true);
+    }
+    public APIRequestGetProductCatalogs requestImagePaddingLandscapeField (boolean value) {
+      this.requestField("image_padding_landscape", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestImagePaddingSquareField () {
+      return this.requestImagePaddingSquareField(true);
+    }
+    public APIRequestGetProductCatalogs requestImagePaddingSquareField (boolean value) {
+      this.requestField("image_padding_square", value);
+      return this;
+    }
     public APIRequestGetProductCatalogs requestNameField () {
       return this.requestNameField(true);
     }
@@ -4590,6 +4823,13 @@ public class Business extends APINode {
       this.requestField("product_count", value);
       return this;
     }
+    public APIRequestGetProductCatalogs requestVerticalField () {
+      return this.requestVerticalField(true);
+    }
+    public APIRequestGetProductCatalogs requestVerticalField (boolean value) {
+      this.requestField("vertical", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateProductCatalog extends APIRequest<ProductCatalog> {
@@ -4600,8 +4840,8 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
       "name",
+      "vertical",
     };
 
     public static final String[] FIELDS = {
@@ -4640,13 +4880,17 @@ public class Business extends APINode {
     }
 
 
-    public APIRequestCreateProductCatalog setId (String id) {
-      this.setParam("id", id);
+    public APIRequestCreateProductCatalog setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
-    public APIRequestCreateProductCatalog setName (String name) {
-      this.setParam("name", name);
+    public APIRequestCreateProductCatalog setVertical (ProductCatalog.EnumVertical vertical) {
+      this.setParam("vertical", vertical);
+      return this;
+    }
+    public APIRequestCreateProductCatalog setVertical (String vertical) {
+      this.setParam("vertical", vertical);
       return this;
     }
 
@@ -4961,7 +5205,6 @@ public class Business extends APINode {
     }
     public static final String[] PARAMS = {
       "email",
-      "id",
       "role",
       "user",
     };
@@ -5004,11 +5247,6 @@ public class Business extends APINode {
 
     public APIRequestCreateUserPermission setEmail (String email) {
       this.setParam("email", email);
-      return this;
-    }
-
-    public APIRequestCreateUserPermission setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -5176,84 +5414,6 @@ public class Business extends APINode {
     }
   }
 
-  public static enum EnumSurveyBusinessType {
-      @SerializedName("AGENCY")
-      VALUE_AGENCY("AGENCY"),
-      @SerializedName("ADVERTISER")
-      VALUE_ADVERTISER("ADVERTISER"),
-      @SerializedName("APP_DEVELOPER")
-      VALUE_APP_DEVELOPER("APP_DEVELOPER"),
-      @SerializedName("PUBLISHER")
-      VALUE_PUBLISHER("PUBLISHER"),
-      NULL(null);
-
-      private String value;
-
-      private EnumSurveyBusinessType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumVertical {
-      @SerializedName("ADVERTISING")
-      VALUE_ADVERTISING("ADVERTISING"),
-      @SerializedName("AUTOMOTIVE")
-      VALUE_AUTOMOTIVE("AUTOMOTIVE"),
-      @SerializedName("CONSUMER_PACKAGED_GOODS")
-      VALUE_CONSUMER_PACKAGED_GOODS("CONSUMER_PACKAGED_GOODS"),
-      @SerializedName("ECOMMERCE")
-      VALUE_ECOMMERCE("ECOMMERCE"),
-      @SerializedName("EDUCATION")
-      VALUE_EDUCATION("EDUCATION"),
-      @SerializedName("ENERGY_AND_UTILITIES")
-      VALUE_ENERGY_AND_UTILITIES("ENERGY_AND_UTILITIES"),
-      @SerializedName("ENTERTAINMENT_AND_MEDIA")
-      VALUE_ENTERTAINMENT_AND_MEDIA("ENTERTAINMENT_AND_MEDIA"),
-      @SerializedName("FINANCIAL_SERVICES")
-      VALUE_FINANCIAL_SERVICES("FINANCIAL_SERVICES"),
-      @SerializedName("GAMING")
-      VALUE_GAMING("GAMING"),
-      @SerializedName("GOVERNMENT_AND_POLITICS")
-      VALUE_GOVERNMENT_AND_POLITICS("GOVERNMENT_AND_POLITICS"),
-      @SerializedName("MARKETING")
-      VALUE_MARKETING("MARKETING"),
-      @SerializedName("ORGANIZATIONS_AND_ASSOCIATIONS")
-      VALUE_ORGANIZATIONS_AND_ASSOCIATIONS("ORGANIZATIONS_AND_ASSOCIATIONS"),
-      @SerializedName("PROFESSIONAL_SERVICES")
-      VALUE_PROFESSIONAL_SERVICES("PROFESSIONAL_SERVICES"),
-      @SerializedName("RETAIL")
-      VALUE_RETAIL("RETAIL"),
-      @SerializedName("TECHNOLOGY")
-      VALUE_TECHNOLOGY("TECHNOLOGY"),
-      @SerializedName("TELECOM")
-      VALUE_TELECOM("TELECOM"),
-      @SerializedName("TRAVEL")
-      VALUE_TRAVEL("TRAVEL"),
-      @SerializedName("NON_PROFIT")
-      VALUE_NON_PROFIT("NON_PROFIT"),
-      @SerializedName("RESTAURANT")
-      VALUE_RESTAURANT("RESTAURANT"),
-      @SerializedName("OTHER")
-      VALUE_OTHER("OTHER"),
-      NULL(null);
-
-      private String value;
-
-      private EnumVertical(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumReportType {
       @SerializedName("multi_channel_report")
       VALUE_MULTI_CHANNEL_REPORT("multi_channel_report"),
@@ -5261,6 +5421,8 @@ public class Business extends APINode {
       VALUE_VIDEO_METRICS_REPORT("video_metrics_report"),
       @SerializedName("fruit_rollup_report")
       VALUE_FRUIT_ROLLUP_REPORT("fruit_rollup_report"),
+      @SerializedName("third_party_mta_report")
+      VALUE_THIRD_PARTY_MTA_REPORT("third_party_mta_report"),
       NULL(null);
 
       private String value;

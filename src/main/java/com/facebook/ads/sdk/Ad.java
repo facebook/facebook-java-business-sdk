@@ -440,6 +440,7 @@ public class Ad extends APINode {
       "applink_treatment",
       "body",
       "call_to_action_type",
+      "effective_object_story_id",
       "id",
       "image_crops",
       "image_hash",
@@ -587,6 +588,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestCallToActionTypeField (boolean value) {
       this.requestField("call_to_action_type", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestEffectiveObjectStoryIdField () {
+      return this.requestEffectiveObjectStoryIdField(true);
+    }
+    public APIRequestGetAdCreatives requestEffectiveObjectStoryIdField (boolean value) {
+      this.requestField("effective_object_story_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestIdField () {
@@ -755,7 +763,6 @@ public class Ad extends APINode {
     public static final String[] PARAMS = {
       "adlabels",
       "execution_options",
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -812,11 +819,6 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestDeleteAdLabels setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
-
     public APIRequestDeleteAdLabels requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -855,34 +857,33 @@ public class Ad extends APINode {
 
   }
 
-  public static class APIRequestCreateAdLabel extends APIRequest<APINode> {
+  public static class APIRequestCreateAdLabel extends APIRequest<AdLabel> {
 
-    APINode lastResponse = null;
+    AdLabel lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public AdLabel getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "adlabels",
       "execution_options",
-      "id",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public AdLabel parseResponse(String response) throws APIException {
+      return AdLabel.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public AdLabel execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public AdLabel execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -919,11 +920,6 @@ public class Ad extends APINode {
     }
     public APIRequestCreateAdLabel setExecutionOptions (String executionOptions) {
       this.setParam("execution_options", executionOptions);
-      return this;
-    }
-
-    public APIRequestCreateAdLabel setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -979,6 +975,9 @@ public class Ad extends APINode {
       "breakdowns",
       "date_preset",
       "default_summary",
+      "export_columns",
+      "export_format",
+      "export_name",
       "fields",
       "filtering",
       "level",
@@ -1078,6 +1077,25 @@ public class Ad extends APINode {
     }
     public APIRequestGetInsights setDefaultSummary (String defaultSummary) {
       this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+
+    public APIRequestGetInsights setExportColumns (List<String> exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+    public APIRequestGetInsights setExportColumns (String exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+
+    public APIRequestGetInsights setExportFormat (String exportFormat) {
+      this.setParam("export_format", exportFormat);
+      return this;
+    }
+
+    public APIRequestGetInsights setExportName (String exportName) {
+      this.setParam("export_name", exportName);
       return this;
     }
 
@@ -1219,6 +1237,9 @@ public class Ad extends APINode {
       "breakdowns",
       "date_preset",
       "default_summary",
+      "export_columns",
+      "export_format",
+      "export_name",
       "fields",
       "filtering",
       "level",
@@ -1318,6 +1339,25 @@ public class Ad extends APINode {
     }
     public APIRequestGetInsightsAsync setDefaultSummary (String defaultSummary) {
       this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setExportColumns (List<String> exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setExportColumns (String exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setExportFormat (String exportFormat) {
+      this.setParam("export_format", exportFormat);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setExportName (String exportName) {
+      this.setParam("export_name", exportName);
       return this;
     }
 
@@ -1892,7 +1932,9 @@ public class Ad extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_format",
+      "dynamic_creative_spec",
       "height",
+      "interactive",
       "locale",
       "post",
       "product_item_ids",
@@ -1945,12 +1987,30 @@ public class Ad extends APINode {
       return this;
     }
 
+    public APIRequestGetPreviews setDynamicCreativeSpec (Object dynamicCreativeSpec) {
+      this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
+      return this;
+    }
+    public APIRequestGetPreviews setDynamicCreativeSpec (String dynamicCreativeSpec) {
+      this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
+      return this;
+    }
+
     public APIRequestGetPreviews setHeight (Long height) {
       this.setParam("height", height);
       return this;
     }
     public APIRequestGetPreviews setHeight (String height) {
       this.setParam("height", height);
+      return this;
+    }
+
+    public APIRequestGetPreviews setInteractive (Boolean interactive) {
+      this.setParam("interactive", interactive);
+      return this;
+    }
+    public APIRequestGetPreviews setInteractive (String interactive) {
+      this.setParam("interactive", interactive);
       return this;
     }
 
@@ -1968,7 +2028,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetPreviews setProductItemIds (List<Long> productItemIds) {
+    public APIRequestGetPreviews setProductItemIds (List<String> productItemIds) {
       this.setParam("product_item_ids", productItemIds);
       return this;
     }
@@ -2625,11 +2685,11 @@ public class Ad extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<APINode> {
+  public static class APIRequestUpdate extends APIRequest<Ad> {
 
-    APINode lastResponse = null;
+    Ad lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public Ad getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -2649,17 +2709,17 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public Ad parseResponse(String response) throws APIException {
+      return Ad.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public Ad execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public Ad execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -2957,12 +3017,12 @@ public class Ad extends APINode {
   }
 
   public static enum EnumExecutionOptions {
-      @SerializedName("VALIDATE_ONLY")
-      VALUE_VALIDATE_ONLY("VALIDATE_ONLY"),
-      @SerializedName("SYNCHRONOUS_AD_REVIEW")
-      VALUE_SYNCHRONOUS_AD_REVIEW("SYNCHRONOUS_AD_REVIEW"),
-      @SerializedName("INCLUDE_RECOMMENDATIONS")
-      VALUE_INCLUDE_RECOMMENDATIONS("INCLUDE_RECOMMENDATIONS"),
+      @SerializedName("validate_only")
+      VALUE_VALIDATE_ONLY("validate_only"),
+      @SerializedName("synchronous_ad_review")
+      VALUE_SYNCHRONOUS_AD_REVIEW("synchronous_ad_review"),
+      @SerializedName("include_recommendations")
+      VALUE_INCLUDE_RECOMMENDATIONS("include_recommendations"),
       NULL(null);
 
       private String value;

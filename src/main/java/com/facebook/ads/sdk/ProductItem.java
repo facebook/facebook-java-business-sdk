@@ -69,6 +69,8 @@ public class ProductItem extends APINode {
   private ProductItemCommerceInsights mCommerceInsights = null;
   @SerializedName("condition")
   private EnumCondition mCondition = null;
+  @SerializedName("currency")
+  private String mCurrency = null;
   @SerializedName("custom_data")
   private List<Object> mCustomData = null;
   @SerializedName("custom_label_0")
@@ -114,7 +116,7 @@ public class ProductItem extends APINode {
   @SerializedName("retailer_product_group_id")
   private String mRetailerProductGroupId = null;
   @SerializedName("review_rejection_reasons")
-  private List<EnumReviewRejectionReasons> mReviewRejectionReasons = null;
+  private List<String> mReviewRejectionReasons = null;
   @SerializedName("review_status")
   private EnumReviewStatus mReviewStatus = null;
   @SerializedName("sale_price")
@@ -371,6 +373,10 @@ public class ProductItem extends APINode {
     return mCondition;
   }
 
+  public String getFieldCurrency() {
+    return mCurrency;
+  }
+
   public List<Object> getFieldCustomData() {
     return mCustomData;
   }
@@ -462,7 +468,7 @@ public class ProductItem extends APINode {
     return mRetailerProductGroupId;
   }
 
-  public List<EnumReviewRejectionReasons> getFieldReviewRejectionReasons() {
+  public List<String> getFieldReviewRejectionReasons() {
     return mReviewRejectionReasons;
   }
 
@@ -640,7 +646,6 @@ public class ProductItem extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -678,11 +683,6 @@ public class ProductItem extends APINode {
       return this;
     }
 
-
-    public APIRequestDelete setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);
@@ -730,6 +730,8 @@ public class ProductItem extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "image_height",
+      "image_width",
     };
 
     public static final String[] FIELDS = {
@@ -742,6 +744,7 @@ public class ProductItem extends APINode {
       "color",
       "commerce_insights",
       "condition",
+      "currency",
       "custom_data",
       "custom_label_0",
       "custom_label_1",
@@ -809,6 +812,24 @@ public class ProductItem extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setImageHeight (Long imageHeight) {
+      this.setParam("image_height", imageHeight);
+      return this;
+    }
+    public APIRequestGet setImageHeight (String imageHeight) {
+      this.setParam("image_height", imageHeight);
+      return this;
+    }
+
+    public APIRequestGet setImageWidth (Long imageWidth) {
+      this.setParam("image_width", imageWidth);
+      return this;
+    }
+    public APIRequestGet setImageWidth (String imageWidth) {
+      this.setParam("image_width", imageWidth);
+      return this;
+    }
 
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);
@@ -907,6 +928,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestConditionField (boolean value) {
       this.requestField("condition", value);
+      return this;
+    }
+    public APIRequestGet requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGet requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
       return this;
     }
     public APIRequestGet requestCustomDataField () {
@@ -1142,11 +1170,11 @@ public class ProductItem extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<APINode> {
+  public static class APIRequestUpdate extends APIRequest<ProductItem> {
 
-    APINode lastResponse = null;
+    ProductItem lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public ProductItem getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -1172,7 +1200,6 @@ public class ProductItem extends APINode {
       "expiration_date",
       "gender",
       "gtin",
-      "id",
       "image_url",
       "inventory",
       "ios_app_name",
@@ -1206,17 +1233,17 @@ public class ProductItem extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public ProductItem parseResponse(String response) throws APIException {
+      return ProductItem.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public ProductItem execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public ProductItem execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -1365,11 +1392,6 @@ public class ProductItem extends APINode {
 
     public APIRequestUpdate setGtin (String gtin) {
       this.setParam("gtin", gtin);
-      return this;
-    }
-
-    public APIRequestUpdate setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -1737,307 +1759,6 @@ public class ProductItem extends APINode {
       }
   }
 
-  public static enum EnumReviewRejectionReasons {
-      @SerializedName("UNKNOWN")
-      VALUE_UNKNOWN("UNKNOWN"),
-      @SerializedName("IRREGULAR_APP_INSTALL")
-      VALUE_IRREGULAR_APP_INSTALL("IRREGULAR_APP_INSTALL"),
-      @SerializedName("TEXT_OVERLAY")
-      VALUE_TEXT_OVERLAY("TEXT_OVERLAY"),
-      @SerializedName("ADULT_CONTENT")
-      VALUE_ADULT_CONTENT("ADULT_CONTENT"),
-      @SerializedName("ADULT_HEALTH")
-      VALUE_ADULT_HEALTH("ADULT_HEALTH"),
-      @SerializedName("ALCOHOL")
-      VALUE_ALCOHOL("ALCOHOL"),
-      @SerializedName("ANIMATED_IMAGE")
-      VALUE_ANIMATED_IMAGE("ANIMATED_IMAGE"),
-      @SerializedName("BEFORE_AND_AFTER")
-      VALUE_BEFORE_AND_AFTER("BEFORE_AND_AFTER"),
-      @SerializedName("CASUAL_DATING")
-      VALUE_CASUAL_DATING("CASUAL_DATING"),
-      @SerializedName("DATING")
-      VALUE_DATING("DATING"),
-      @SerializedName("FACEBOOK_REFERENCE")
-      VALUE_FACEBOOK_REFERENCE("FACEBOOK_REFERENCE"),
-      @SerializedName("FINANCIAL")
-      VALUE_FINANCIAL("FINANCIAL"),
-      @SerializedName("GAMBLING")
-      VALUE_GAMBLING("GAMBLING"),
-      @SerializedName("IDEALIZED_BODY")
-      VALUE_IDEALIZED_BODY("IDEALIZED_BODY"),
-      @SerializedName("LANGUAGE")
-      VALUE_LANGUAGE("LANGUAGE"),
-      @SerializedName("LANDING_PAGE_FAIL")
-      VALUE_LANDING_PAGE_FAIL("LANDING_PAGE_FAIL"),
-      @SerializedName("SEXUAL")
-      VALUE_SEXUAL("SEXUAL"),
-      @SerializedName("TEST")
-      VALUE_TEST("TEST"),
-      @SerializedName("TOBACCO_SALE")
-      VALUE_TOBACCO_SALE("TOBACCO_SALE"),
-      @SerializedName("TRAPPING")
-      VALUE_TRAPPING("TRAPPING"),
-      @SerializedName("UNSUBSTANTIATED_CLAIM")
-      VALUE_UNSUBSTANTIATED_CLAIM("UNSUBSTANTIATED_CLAIM"),
-      @SerializedName("OTHER")
-      VALUE_OTHER("OTHER"),
-      @SerializedName("WEAPON_SALE")
-      VALUE_WEAPON_SALE("WEAPON_SALE"),
-      @SerializedName("WORK_FROM_HOME")
-      VALUE_WORK_FROM_HOME("WORK_FROM_HOME"),
-      @SerializedName("CASH_ADVANCE")
-      VALUE_CASH_ADVANCE("CASH_ADVANCE"),
-      @SerializedName("SHOCK_AND_SCARE")
-      VALUE_SHOCK_AND_SCARE("SHOCK_AND_SCARE"),
-      @SerializedName("SPY_CAMERA")
-      VALUE_SPY_CAMERA("SPY_CAMERA"),
-      @SerializedName("BAD_HEALTH_PRODUCT")
-      VALUE_BAD_HEALTH_PRODUCT("BAD_HEALTH_PRODUCT"),
-      @SerializedName("GRAMMAR")
-      VALUE_GRAMMAR("GRAMMAR"),
-      @SerializedName("ILLEGAL")
-      VALUE_ILLEGAL("ILLEGAL"),
-      @SerializedName("MISUSE_OF_LIKE")
-      VALUE_MISUSE_OF_LIKE("MISUSE_OF_LIKE"),
-      @SerializedName("NON_EXISTENT_FUNCTIONALITY")
-      VALUE_NON_EXISTENT_FUNCTIONALITY("NON_EXISTENT_FUNCTIONALITY"),
-      @SerializedName("ONLINE_PHARMACY")
-      VALUE_ONLINE_PHARMACY("ONLINE_PHARMACY"),
-      @SerializedName("PENNY_AUCTION")
-      VALUE_PENNY_AUCTION("PENNY_AUCTION"),
-      @SerializedName("PORN")
-      VALUE_PORN("PORN"),
-      @SerializedName("COPYRIGHT")
-      VALUE_COPYRIGHT("COPYRIGHT"),
-      @SerializedName("TRADEMARK")
-      VALUE_TRADEMARK("TRADEMARK"),
-      @SerializedName("COUNTERFEIT")
-      VALUE_COUNTERFEIT("COUNTERFEIT"),
-      @SerializedName("SYSTEM_ISSUE")
-      VALUE_SYSTEM_ISSUE("SYSTEM_ISSUE"),
-      @SerializedName("Q_BLURRY_PIXELATED")
-      VALUE_Q_BLURRY_PIXELATED("Q_BLURRY_PIXELATED"),
-      @SerializedName("Q_BORDERLINE_SEXUAL")
-      VALUE_Q_BORDERLINE_SEXUAL("Q_BORDERLINE_SEXUAL"),
-      @SerializedName("Q_BORDER_BACKGROUND")
-      VALUE_Q_BORDER_BACKGROUND("Q_BORDER_BACKGROUND"),
-      @SerializedName("Q_GRAMMAR_CAPITALIZATION")
-      VALUE_Q_GRAMMAR_CAPITALIZATION("Q_GRAMMAR_CAPITALIZATION"),
-      @SerializedName("Q_IRRELEVANT_IMAGE_COPY")
-      VALUE_Q_IRRELEVANT_IMAGE_COPY("Q_IRRELEVANT_IMAGE_COPY"),
-      @SerializedName("Q_MISLEADING")
-      VALUE_Q_MISLEADING("Q_MISLEADING"),
-      @SerializedName("Q_MULTIPLE_IMAGES")
-      VALUE_Q_MULTIPLE_IMAGES("Q_MULTIPLE_IMAGES"),
-      @SerializedName("Q_HOT_BUTTON")
-      VALUE_Q_HOT_BUTTON("Q_HOT_BUTTON"),
-      @SerializedName("Q_ZOOM_IN_BODY_PARTS")
-      VALUE_Q_ZOOM_IN_BODY_PARTS("Q_ZOOM_IN_BODY_PARTS"),
-      @SerializedName("Q_ZOOM_IN_FOOD")
-      VALUE_Q_ZOOM_IN_FOOD("Q_ZOOM_IN_FOOD"),
-      @SerializedName("QUALITY_LOW")
-      VALUE_QUALITY_LOW("QUALITY_LOW"),
-      @SerializedName("LEAD_AD_FROM_AGGREGATOR")
-      VALUE_LEAD_AD_FROM_AGGREGATOR("LEAD_AD_FROM_AGGREGATOR"),
-      @SerializedName("UNSUITABLE_QUESTION")
-      VALUE_UNSUITABLE_QUESTION("UNSUITABLE_QUESTION"),
-      @SerializedName("FRAUD_ASSOCIATED")
-      VALUE_FRAUD_ASSOCIATED("FRAUD_ASSOCIATED"),
-      @SerializedName("MYSTERY_IMAGE")
-      VALUE_MYSTERY_IMAGE("MYSTERY_IMAGE"),
-      @SerializedName("APP_SCAM")
-      VALUE_APP_SCAM("APP_SCAM"),
-      @SerializedName("TEXT_PENALTY_HIGH")
-      VALUE_TEXT_PENALTY_HIGH("TEXT_PENALTY_HIGH"),
-      @SerializedName("TEXT_PENALTY_MEDIUM")
-      VALUE_TEXT_PENALTY_MEDIUM("TEXT_PENALTY_MEDIUM"),
-      @SerializedName("TEXT_PENALTY_LOW")
-      VALUE_TEXT_PENALTY_LOW("TEXT_PENALTY_LOW"),
-      @SerializedName("BAD_SUBSCRIPTION")
-      VALUE_BAD_SUBSCRIPTION("BAD_SUBSCRIPTION"),
-      @SerializedName("FACEBOOK_WORD_MANIPULATED")
-      VALUE_FACEBOOK_WORD_MANIPULATED("FACEBOOK_WORD_MANIPULATED"),
-      @SerializedName("FACEBOOK_ICONS")
-      VALUE_FACEBOOK_ICONS("FACEBOOK_ICONS"),
-      @SerializedName("FACEBOOK_PAGE_LOOKALIKE")
-      VALUE_FACEBOOK_PAGE_LOOKALIKE("FACEBOOK_PAGE_LOOKALIKE"),
-      @SerializedName("FACEBOOK_LOGO_FOCUS")
-      VALUE_FACEBOOK_LOGO_FOCUS("FACEBOOK_LOGO_FOCUS"),
-      @SerializedName("FACEBOOK_LOGO_OVERLAP")
-      VALUE_FACEBOOK_LOGO_OVERLAP("FACEBOOK_LOGO_OVERLAP"),
-      @SerializedName("FACEBOOK_LOGO")
-      VALUE_FACEBOOK_LOGO("FACEBOOK_LOGO"),
-      @SerializedName("FACEBOOK_LOGO_THUMBS_UP")
-      VALUE_FACEBOOK_LOGO_THUMBS_UP("FACEBOOK_LOGO_THUMBS_UP"),
-      @SerializedName("FACEBOOK_SCREENSHOT_PROD")
-      VALUE_FACEBOOK_SCREENSHOT_PROD("FACEBOOK_SCREENSHOT_PROD"),
-      @SerializedName("FACEBOOK_WORDMARK")
-      VALUE_FACEBOOK_WORDMARK("FACEBOOK_WORDMARK"),
-      @SerializedName("FACEBOOK_ZUCKPIC")
-      VALUE_FACEBOOK_ZUCKPIC("FACEBOOK_ZUCKPIC"),
-      @SerializedName("HIGHLIGHTED_PAIN_POINTS")
-      VALUE_HIGHLIGHTED_PAIN_POINTS("HIGHLIGHTED_PAIN_POINTS"),
-      @SerializedName("PERFECT_BODY")
-      VALUE_PERFECT_BODY("PERFECT_BODY"),
-      @SerializedName("SCALES")
-      VALUE_SCALES("SCALES"),
-      @SerializedName("TAPE_MEASURE")
-      VALUE_TAPE_MEASURE("TAPE_MEASURE"),
-      @SerializedName("UNDESIRABLE_BODY")
-      VALUE_UNDESIRABLE_BODY("UNDESIRABLE_BODY"),
-      @SerializedName("ZOOM_BODY_PART")
-      VALUE_ZOOM_BODY_PART("ZOOM_BODY_PART"),
-      @SerializedName("HARRASSMENT")
-      VALUE_HARRASSMENT("HARRASSMENT"),
-      @SerializedName("USER_ATTRIBUTES_CALLOUT")
-      VALUE_USER_ATTRIBUTES_CALLOUT("USER_ATTRIBUTES_CALLOUT"),
-      @SerializedName("USER_FINANICAL_CALLOUT")
-      VALUE_USER_FINANICAL_CALLOUT("USER_FINANICAL_CALLOUT"),
-      @SerializedName("USER_HEALTH_ATTRIBUTES")
-      VALUE_USER_HEALTH_ATTRIBUTES("USER_HEALTH_ATTRIBUTES"),
-      @SerializedName("USER_WEIGHT_ATTRIBUTES")
-      VALUE_USER_WEIGHT_ATTRIBUTES("USER_WEIGHT_ATTRIBUTES"),
-      @SerializedName("PROFANITY")
-      VALUE_PROFANITY("PROFANITY"),
-      @SerializedName("FAKE_FORM_ELEMENTS")
-      VALUE_FAKE_FORM_ELEMENTS("FAKE_FORM_ELEMENTS"),
-      @SerializedName("FAKE_NOTIFICATIONS")
-      VALUE_FAKE_NOTIFICATIONS("FAKE_NOTIFICATIONS"),
-      @SerializedName("MOUSE_CURSOR")
-      VALUE_MOUSE_CURSOR("MOUSE_CURSOR"),
-      @SerializedName("PLAY_BUTTON")
-      VALUE_PLAY_BUTTON("PLAY_BUTTON"),
-      @SerializedName("QR_CODES")
-      VALUE_QR_CODES("QR_CODES"),
-      @SerializedName("EXCESSIVE_SKIN")
-      VALUE_EXCESSIVE_SKIN("EXCESSIVE_SKIN"),
-      @SerializedName("INDIRECT_NUDITY")
-      VALUE_INDIRECT_NUDITY("INDIRECT_NUDITY"),
-      @SerializedName("INDIRECT_SEXUAL_ACT")
-      VALUE_INDIRECT_SEXUAL_ACT("INDIRECT_SEXUAL_ACT"),
-      @SerializedName("SEXUAL_OTHER")
-      VALUE_SEXUAL_OTHER("SEXUAL_OTHER"),
-      @SerializedName("ZOOM_SEXUAL_IMAGE")
-      VALUE_ZOOM_SEXUAL_IMAGE("ZOOM_SEXUAL_IMAGE"),
-      @SerializedName("BREASTENLARGEMENT")
-      VALUE_BREASTENLARGEMENT("BREASTENLARGEMENT"),
-      @SerializedName("GENITALSURGERY")
-      VALUE_GENITALSURGERY("GENITALSURGERY"),
-      @SerializedName("LIBIDO")
-      VALUE_LIBIDO("LIBIDO"),
-      @SerializedName("NUDITY_NOTPORN")
-      VALUE_NUDITY_NOTPORN("NUDITY_NOTPORN"),
-      @SerializedName("PHEROMONE")
-      VALUE_PHEROMONE("PHEROMONE"),
-      @SerializedName("SCHEME_HOTGIRLPAGE")
-      VALUE_SCHEME_HOTGIRLPAGE("SCHEME_HOTGIRLPAGE"),
-      @SerializedName("SERVICES_SEDUCTION")
-      VALUE_SERVICES_SEDUCTION("SERVICES_SEDUCTION"),
-      @SerializedName("SEXPUBLICATIONS")
-      VALUE_SEXPUBLICATIONS("SEXPUBLICATIONS"),
-      @SerializedName("SEXTOYS")
-      VALUE_SEXTOYS("SEXTOYS"),
-      @SerializedName("SEXUALPLEASURE")
-      VALUE_SEXUALPLEASURE("SEXUALPLEASURE"),
-      @SerializedName("STRIPCLUBS")
-      VALUE_STRIPCLUBS("STRIPCLUBS"),
-      @SerializedName("MENTION_BOTOX")
-      VALUE_MENTION_BOTOX("MENTION_BOTOX"),
-      @SerializedName("MENTION_DIETPRODUCT")
-      VALUE_MENTION_DIETPRODUCT("MENTION_DIETPRODUCT"),
-      @SerializedName("MENTION_LASERS")
-      VALUE_MENTION_LASERS("MENTION_LASERS"),
-      @SerializedName("MENTION_SEXUALHEALTH")
-      VALUE_MENTION_SEXUALHEALTH("MENTION_SEXUALHEALTH"),
-      @SerializedName("MENTION_SUPPLEMENT")
-      VALUE_MENTION_SUPPLEMENT("MENTION_SUPPLEMENT"),
-      @SerializedName("MENTION_SURGERY")
-      VALUE_MENTION_SURGERY("MENTION_SURGERY"),
-      @SerializedName("MENTION_BRAND_ALCOHOL")
-      VALUE_MENTION_BRAND_ALCOHOL("MENTION_BRAND_ALCOHOL"),
-      @SerializedName("MENTION_CONSUMPTION_ALCOHOL")
-      VALUE_MENTION_CONSUMPTION_ALCOHOL("MENTION_CONSUMPTION_ALCOHOL"),
-      @SerializedName("MENTION_SALES_ALCOHOL")
-      VALUE_MENTION_SALES_ALCOHOL("MENTION_SALES_ALCOHOL"),
-      @SerializedName("SPONSORSHIP")
-      VALUE_SPONSORSHIP("SPONSORSHIP"),
-      @SerializedName("MENTION_SALES_BADHEALTHPRODUCT")
-      VALUE_MENTION_SALES_BADHEALTHPRODUCT("MENTION_SALES_BADHEALTHPRODUCT"),
-      @SerializedName("UNCLEAR_CANCELLATION_SUBSCRIPTION")
-      VALUE_UNCLEAR_CANCELLATION_SUBSCRIPTION("UNCLEAR_CANCELLATION_SUBSCRIPTION"),
-      @SerializedName("UNCLEAR_PRICING_SUBSCRIPTION")
-      VALUE_UNCLEAR_PRICING_SUBSCRIPTION("UNCLEAR_PRICING_SUBSCRIPTION"),
-      @SerializedName("BA_HAIRLOSS")
-      VALUE_BA_HAIRLOSS("BA_HAIRLOSS"),
-      @SerializedName("BA_MEDICAL")
-      VALUE_BA_MEDICAL("BA_MEDICAL"),
-      @SerializedName("BA_SKIN")
-      VALUE_BA_SKIN("BA_SKIN"),
-      @SerializedName("BA_TEETH")
-      VALUE_BA_TEETH("BA_TEETH"),
-      @SerializedName("BA_WEIGHTLOSS")
-      VALUE_BA_WEIGHTLOSS("BA_WEIGHTLOSS"),
-      @SerializedName("GIBBERISH")
-      VALUE_GIBBERISH("GIBBERISH"),
-      @SerializedName("RANDOMCHARACTERS")
-      VALUE_RANDOMCHARACTERS("RANDOMCHARACTERS"),
-      @SerializedName("DRUGS_ILLEGAL")
-      VALUE_DRUGS_ILLEGAL("DRUGS_ILLEGAL"),
-      @SerializedName("HUMAN_TRAFFICKING")
-      VALUE_HUMAN_TRAFFICKING("HUMAN_TRAFFICKING"),
-      @SerializedName("SERVICES_ESCORT")
-      VALUE_SERVICES_ESCORT("SERVICES_ESCORT"),
-      @SerializedName("IMAGE_ANIMALCRUELTY")
-      VALUE_IMAGE_ANIMALCRUELTY("IMAGE_ANIMALCRUELTY"),
-      @SerializedName("IMAGE_MEDICAL")
-      VALUE_IMAGE_MEDICAL("IMAGE_MEDICAL"),
-      @SerializedName("IMAGE_OFFENSIVEGESTURE")
-      VALUE_IMAGE_OFFENSIVEGESTURE("IMAGE_OFFENSIVEGESTURE"),
-      @SerializedName("IMAGE_VEHICLECOLLISION")
-      VALUE_IMAGE_VEHICLECOLLISION("IMAGE_VEHICLECOLLISION"),
-      @SerializedName("IMAGE_WEAPONATUSER")
-      VALUE_IMAGE_WEAPONATUSER("IMAGE_WEAPONATUSER"),
-      @SerializedName("MENTION_IMAGE_VIOLENCE_GORE")
-      VALUE_MENTION_IMAGE_VIOLENCE_GORE("MENTION_IMAGE_VIOLENCE_GORE"),
-      @SerializedName("MENTION_ACCESSORY_CONSUMPTION_TOBACCO")
-      VALUE_MENTION_ACCESSORY_CONSUMPTION_TOBACCO("MENTION_ACCESSORY_CONSUMPTION_TOBACCO"),
-      @SerializedName("MENTION_BRAND_TOBACCO")
-      VALUE_MENTION_BRAND_TOBACCO("MENTION_BRAND_TOBACCO"),
-      @SerializedName("FALSENOTIFICATION")
-      VALUE_FALSENOTIFICATION("FALSENOTIFICATION"),
-      @SerializedName("IMPOSSIBLECURES")
-      VALUE_IMPOSSIBLECURES("IMPOSSIBLECURES"),
-      @SerializedName("MENTION_NUMERIC_CLAIM")
-      VALUE_MENTION_NUMERIC_CLAIM("MENTION_NUMERIC_CLAIM"),
-      @SerializedName("MENTION_TRICKSTIPS")
-      VALUE_MENTION_TRICKSTIPS("MENTION_TRICKSTIPS"),
-      @SerializedName("SPECIFICINDIVIDUALCLAIM")
-      VALUE_SPECIFICINDIVIDUALCLAIM("SPECIFICINDIVIDUALCLAIM"),
-      @SerializedName("UNREALISTIC_EBOOKPROMISE")
-      VALUE_UNREALISTIC_EBOOKPROMISE("UNREALISTIC_EBOOKPROMISE"),
-      @SerializedName("VIDEOSEXUAL")
-      VALUE_VIDEOSEXUAL("VIDEOSEXUAL"),
-      @SerializedName("VIDEOSCHOCKANDSCARE")
-      VALUE_VIDEOSCHOCKANDSCARE("VIDEOSCHOCKANDSCARE"),
-      @SerializedName("VIDEOLANGUAGE")
-      VALUE_VIDEOLANGUAGE("VIDEOLANGUAGE"),
-      @SerializedName("NOT_DATING_PARTNER")
-      VALUE_NOT_DATING_PARTNER("NOT_DATING_PARTNER"),
-      NULL(null);
-
-      private String value;
-
-      private EnumReviewRejectionReasons(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -2062,6 +1783,7 @@ public class ProductItem extends APINode {
     this.mColor = instance.mColor;
     this.mCommerceInsights = instance.mCommerceInsights;
     this.mCondition = instance.mCondition;
+    this.mCurrency = instance.mCurrency;
     this.mCustomData = instance.mCustomData;
     this.mCustomLabel0 = instance.mCustomLabel0;
     this.mCustomLabel1 = instance.mCustomLabel1;

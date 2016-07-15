@@ -415,6 +415,7 @@ public class ProductSet extends APINode {
       "color",
       "commerce_insights",
       "condition",
+      "currency",
       "custom_data",
       "custom_label_0",
       "custom_label_1",
@@ -580,6 +581,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestConditionField (boolean value) {
       this.requestField("condition", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetProducts requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
       return this;
     }
     public APIRequestGetProducts requestCustomDataField () {
@@ -823,7 +831,6 @@ public class ProductSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -861,11 +868,6 @@ public class ProductSet extends APINode {
       return this;
     }
 
-
-    public APIRequestDelete setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);
@@ -1029,16 +1031,15 @@ public class ProductSet extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<APINode> {
+  public static class APIRequestUpdate extends APIRequest<ProductSet> {
 
-    APINode lastResponse = null;
+    ProductSet lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public ProductSet getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "filter",
-      "id",
       "name",
     };
 
@@ -1046,17 +1047,17 @@ public class ProductSet extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public ProductSet parseResponse(String response) throws APIException {
+      return ProductSet.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public ProductSet execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public ProductSet execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -1084,11 +1085,6 @@ public class ProductSet extends APINode {
     }
     public APIRequestUpdate setFilter (String filter) {
       this.setParam("filter", filter);
-      return this;
-    }
-
-    public APIRequestUpdate setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 

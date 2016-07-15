@@ -233,8 +233,6 @@ public class AdsPixelStatsResult extends APINode {
 
 
   public static enum EnumAggregation {
-      @SerializedName("browser_type")
-      VALUE_BROWSER_TYPE("browser_type"),
       @SerializedName("custom_data_field")
       VALUE_CUSTOM_DATA_FIELD("custom_data_field"),
       @SerializedName("device_os")

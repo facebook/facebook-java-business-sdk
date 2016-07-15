@@ -57,10 +57,16 @@ public class ProductCatalog extends APINode {
   private Long mFeedCount = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("image_padding_landscape")
+  private Boolean mImagePaddingLandscape = null;
+  @SerializedName("image_padding_square")
+  private Boolean mImagePaddingSquare = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("product_count")
   private Long mProductCount = null;
+  @SerializedName("vertical")
+  private String mVertical = null;
   protected static Gson gson = null;
 
   ProductCatalog() {
@@ -245,16 +251,32 @@ public class ProductCatalog extends APINode {
     return new APIRequestGetAgencies(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteExternalEventSources deleteExternalEventSources() {
-    return new APIRequestDeleteExternalEventSources(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetExternalEventSources getExternalEventSources() {
     return new APIRequestGetExternalEventSources(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateExternalEventSource createExternalEventSource() {
     return new APIRequestCreateExternalEventSource(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetHotelRoomsBatch getHotelRoomsBatch() {
+    return new APIRequestGetHotelRoomsBatch(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateHotelRoomsBatch createHotelRoomsBatch() {
+    return new APIRequestCreateHotelRoomsBatch(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetHotels getHotels() {
+    return new APIRequestGetHotels(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateHotel createHotel() {
+    return new APIRequestCreateHotel(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetPricingVariablesBatch getPricingVariablesBatch() {
+    return new APIRequestGetPricingVariablesBatch(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetProductFeeds getProductFeeds() {
@@ -281,12 +303,20 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateProductSet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetProductSetsBatch getProductSetsBatch() {
+    return new APIRequestGetProductSetsBatch(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetProducts getProducts() {
     return new APIRequestGetProducts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateProduct createProduct() {
     return new APIRequestCreateProduct(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateVideo createVideo() {
+    return new APIRequestCreateVideo(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDelete delete() {
@@ -317,12 +347,24 @@ public class ProductCatalog extends APINode {
     return mId;
   }
 
+  public Boolean getFieldImagePaddingLandscape() {
+    return mImagePaddingLandscape;
+  }
+
+  public Boolean getFieldImagePaddingSquare() {
+    return mImagePaddingSquare;
+  }
+
   public String getFieldName() {
     return mName;
   }
 
   public Long getFieldProductCount() {
     return mProductCount;
+  }
+
+  public String getFieldVertical() {
+    return mVertical;
   }
 
 
@@ -435,106 +477,6 @@ public class ProductCatalog extends APINode {
     }
   }
 
-  public static class APIRequestDeleteExternalEventSources extends APIRequest<ExternalEventSource> {
-
-    APINodeList<ExternalEventSource> lastResponse = null;
-    @Override
-    public APINodeList<ExternalEventSource> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "external_event_sources",
-      "id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<ExternalEventSource> parseResponse(String response) throws APIException {
-      return ExternalEventSource.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<ExternalEventSource> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<ExternalEventSource> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestDeleteExternalEventSources(String nodeId, APIContext context) {
-      super(context, nodeId, "/external_event_sources", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteExternalEventSources setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteExternalEventSources setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteExternalEventSources setExternalEventSources (List<String> externalEventSources) {
-      this.setParam("external_event_sources", externalEventSources);
-      return this;
-    }
-    public APIRequestDeleteExternalEventSources setExternalEventSources (String externalEventSources) {
-      this.setParam("external_event_sources", externalEventSources);
-      return this;
-    }
-
-    public APIRequestDeleteExternalEventSources setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
-
-    public APIRequestDeleteExternalEventSources requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteExternalEventSources requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteExternalEventSources requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteExternalEventSources requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteExternalEventSources requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteExternalEventSources requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetExternalEventSources extends APIRequest<ExternalEventSource> {
 
     APINodeList<ExternalEventSource> lastResponse = null;
@@ -547,6 +489,7 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "id",
+      "name",
       "source_type",
     };
 
@@ -626,6 +569,13 @@ public class ProductCatalog extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetExternalEventSources requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetExternalEventSources requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
     public APIRequestGetExternalEventSources requestSourceTypeField () {
       return this.requestSourceTypeField(true);
     }
@@ -644,7 +594,6 @@ public class ProductCatalog extends APINode {
     }
     public static final String[] PARAMS = {
       "external_event_sources",
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -692,11 +641,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateExternalEventSource setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
-
     public APIRequestCreateExternalEventSource requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -729,6 +673,690 @@ public class ProductCatalog extends APINode {
 
     @Override
     public APIRequestCreateExternalEventSource requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetHotelRoomsBatch extends APIRequest<ProductCatalogHotelRoomsBatch> {
+
+    APINodeList<ProductCatalogHotelRoomsBatch> lastResponse = null;
+    @Override
+    public APINodeList<ProductCatalogHotelRoomsBatch> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "handle",
+    };
+
+    public static final String[] FIELDS = {
+      "errors",
+      "errors_total_count",
+      "handle",
+      "status",
+    };
+
+    @Override
+    public APINodeList<ProductCatalogHotelRoomsBatch> parseResponse(String response) throws APIException {
+      return ProductCatalogHotelRoomsBatch.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<ProductCatalogHotelRoomsBatch> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductCatalogHotelRoomsBatch> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetHotelRoomsBatch(String nodeId, APIContext context) {
+      super(context, nodeId, "/hotel_rooms_batch", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetHotelRoomsBatch setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHotelRoomsBatch setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetHotelRoomsBatch setHandle (String handle) {
+      this.setParam("handle", handle);
+      return this;
+    }
+
+    public APIRequestGetHotelRoomsBatch requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetHotelRoomsBatch requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHotelRoomsBatch requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetHotelRoomsBatch requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHotelRoomsBatch requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHotelRoomsBatch requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetHotelRoomsBatch requestErrorsField () {
+      return this.requestErrorsField(true);
+    }
+    public APIRequestGetHotelRoomsBatch requestErrorsField (boolean value) {
+      this.requestField("errors", value);
+      return this;
+    }
+    public APIRequestGetHotelRoomsBatch requestErrorsTotalCountField () {
+      return this.requestErrorsTotalCountField(true);
+    }
+    public APIRequestGetHotelRoomsBatch requestErrorsTotalCountField (boolean value) {
+      this.requestField("errors_total_count", value);
+      return this;
+    }
+    public APIRequestGetHotelRoomsBatch requestHandleField () {
+      return this.requestHandleField(true);
+    }
+    public APIRequestGetHotelRoomsBatch requestHandleField (boolean value) {
+      this.requestField("handle", value);
+      return this;
+    }
+    public APIRequestGetHotelRoomsBatch requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetHotelRoomsBatch requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateHotelRoomsBatch extends APIRequest<ProductCatalogHotelRoomsBatch> {
+
+    ProductCatalogHotelRoomsBatch lastResponse = null;
+    @Override
+    public ProductCatalogHotelRoomsBatch getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "standard",
+      "update_only",
+      "file",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ProductCatalogHotelRoomsBatch parseResponse(String response) throws APIException {
+      return ProductCatalogHotelRoomsBatch.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public ProductCatalogHotelRoomsBatch execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalogHotelRoomsBatch execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestCreateHotelRoomsBatch(String nodeId, APIContext context) {
+      super(context, nodeId, "/hotel_rooms_batch", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateHotelRoomsBatch setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateHotelRoomsBatch setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+    public APIRequestCreateHotelRoomsBatch addUploadFile (String uploadName, File file) {
+      this.setParam(uploadName, file);
+      return this;
+    }
+
+    public APIRequestCreateHotelRoomsBatch setUseVideoEndpoint(boolean useVideoEndpoint) {
+      this.useVideoEndpoint = useVideoEndpoint;
+      return this;
+    }
+
+    public APIRequestCreateHotelRoomsBatch setStandard (ProductCatalogHotelRoomsBatch.EnumStandard standard) {
+      this.setParam("standard", standard);
+      return this;
+    }
+    public APIRequestCreateHotelRoomsBatch setStandard (String standard) {
+      this.setParam("standard", standard);
+      return this;
+    }
+
+    public APIRequestCreateHotelRoomsBatch setUpdateOnly (Boolean updateOnly) {
+      this.setParam("update_only", updateOnly);
+      return this;
+    }
+    public APIRequestCreateHotelRoomsBatch setUpdateOnly (String updateOnly) {
+      this.setParam("update_only", updateOnly);
+      return this;
+    }
+
+    public APIRequestCreateHotelRoomsBatch requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateHotelRoomsBatch requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateHotelRoomsBatch requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateHotelRoomsBatch requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateHotelRoomsBatch requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateHotelRoomsBatch requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetHotels extends APIRequest<Hotel> {
+
+    APINodeList<Hotel> lastResponse = null;
+    @Override
+    public APINodeList<Hotel> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "address",
+      "applinks",
+      "brand",
+      "description",
+      "guest_ratings",
+      "hotel_id",
+      "id",
+      "images",
+      "lowest_base_price",
+      "name",
+      "phone",
+      "star_rating",
+      "url",
+    };
+
+    @Override
+    public APINodeList<Hotel> parseResponse(String response) throws APIException {
+      return Hotel.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<Hotel> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Hotel> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetHotels(String nodeId, APIContext context) {
+      super(context, nodeId, "/hotels", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetHotels setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHotels setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetHotels requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetHotels requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHotels requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetHotels requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHotels requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHotels requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetHotels requestAddressField () {
+      return this.requestAddressField(true);
+    }
+    public APIRequestGetHotels requestAddressField (boolean value) {
+      this.requestField("address", value);
+      return this;
+    }
+    public APIRequestGetHotels requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetHotels requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGetHotels requestBrandField () {
+      return this.requestBrandField(true);
+    }
+    public APIRequestGetHotels requestBrandField (boolean value) {
+      this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGetHotels requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetHotels requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetHotels requestGuestRatingsField () {
+      return this.requestGuestRatingsField(true);
+    }
+    public APIRequestGetHotels requestGuestRatingsField (boolean value) {
+      this.requestField("guest_ratings", value);
+      return this;
+    }
+    public APIRequestGetHotels requestHotelIdField () {
+      return this.requestHotelIdField(true);
+    }
+    public APIRequestGetHotels requestHotelIdField (boolean value) {
+      this.requestField("hotel_id", value);
+      return this;
+    }
+    public APIRequestGetHotels requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetHotels requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetHotels requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetHotels requestImagesField (boolean value) {
+      this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetHotels requestLowestBasePriceField () {
+      return this.requestLowestBasePriceField(true);
+    }
+    public APIRequestGetHotels requestLowestBasePriceField (boolean value) {
+      this.requestField("lowest_base_price", value);
+      return this;
+    }
+    public APIRequestGetHotels requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetHotels requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetHotels requestPhoneField () {
+      return this.requestPhoneField(true);
+    }
+    public APIRequestGetHotels requestPhoneField (boolean value) {
+      this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetHotels requestStarRatingField () {
+      return this.requestStarRatingField(true);
+    }
+    public APIRequestGetHotels requestStarRatingField (boolean value) {
+      this.requestField("star_rating", value);
+      return this;
+    }
+    public APIRequestGetHotels requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetHotels requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateHotel extends APIRequest<Hotel> {
+
+    Hotel lastResponse = null;
+    @Override
+    public Hotel getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "address",
+      "applinks",
+      "brand",
+      "description",
+      "guest_ratings",
+      "hotel_id",
+      "images",
+      "name",
+      "phone",
+      "star_rating",
+      "url",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Hotel parseResponse(String response) throws APIException {
+      return Hotel.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public Hotel execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Hotel execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestCreateHotel(String nodeId, APIContext context) {
+      super(context, nodeId, "/hotels", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateHotel setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateHotel setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateHotel setAddress (Object address) {
+      this.setParam("address", address);
+      return this;
+    }
+    public APIRequestCreateHotel setAddress (String address) {
+      this.setParam("address", address);
+      return this;
+    }
+
+    public APIRequestCreateHotel setApplinks (Object applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+    public APIRequestCreateHotel setApplinks (String applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+
+    public APIRequestCreateHotel setBrand (String brand) {
+      this.setParam("brand", brand);
+      return this;
+    }
+
+    public APIRequestCreateHotel setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateHotel setGuestRatings (List<Object> guestRatings) {
+      this.setParam("guest_ratings", guestRatings);
+      return this;
+    }
+    public APIRequestCreateHotel setGuestRatings (String guestRatings) {
+      this.setParam("guest_ratings", guestRatings);
+      return this;
+    }
+
+    public APIRequestCreateHotel setHotelId (String hotelId) {
+      this.setParam("hotel_id", hotelId);
+      return this;
+    }
+
+    public APIRequestCreateHotel setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestCreateHotel setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestCreateHotel setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateHotel setPhone (String phone) {
+      this.setParam("phone", phone);
+      return this;
+    }
+
+    public APIRequestCreateHotel setStarRating (Double starRating) {
+      this.setParam("star_rating", starRating);
+      return this;
+    }
+    public APIRequestCreateHotel setStarRating (String starRating) {
+      this.setParam("star_rating", starRating);
+      return this;
+    }
+
+    public APIRequestCreateHotel setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestCreateHotel requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateHotel requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateHotel requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateHotel requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateHotel requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateHotel requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetPricingVariablesBatch extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "handle",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetPricingVariablesBatch(String nodeId, APIContext context) {
+      super(context, nodeId, "/pricing_variables_batch", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPricingVariablesBatch setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPricingVariablesBatch setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPricingVariablesBatch setHandle (String handle) {
+      this.setParam("handle", handle);
+      return this;
+    }
+
+    public APIRequestGetPricingVariablesBatch requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPricingVariablesBatch requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPricingVariablesBatch requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPricingVariablesBatch requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPricingVariablesBatch requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPricingVariablesBatch requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -937,7 +1565,6 @@ public class ProductCatalog extends APINode {
       "delimiter",
       "encoding",
       "file_name",
-      "id",
       "name",
       "quoted_fields_mode",
       "schedule",
@@ -1018,11 +1645,6 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProductFeed setFileName (String fileName) {
       this.setParam("file_name", fileName);
-      return this;
-    }
-
-    public APIRequestCreateProductFeed setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -1199,7 +1821,6 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
       "retailer_id",
       "variants",
     };
@@ -1239,11 +1860,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateProductGroup setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
 
     public APIRequestCreateProductGroup setRetailerId (String retailerId) {
       this.setParam("retailer_id", retailerId);
@@ -1308,6 +1924,7 @@ public class ProductCatalog extends APINode {
       "ancestor_id",
       "has_children",
       "parent_id",
+      "retailer_id",
     };
 
     public static final String[] FIELDS = {
@@ -1367,6 +1984,11 @@ public class ProductCatalog extends APINode {
 
     public APIRequestGetProductSets setParentId (String parentId) {
       this.setParam("parent_id", parentId);
+      return this;
+    }
+
+    public APIRequestGetProductSets setRetailerId (String retailerId) {
+      this.setParam("retailer_id", retailerId);
       return this;
     }
 
@@ -1452,7 +2074,6 @@ public class ProductCatalog extends APINode {
     }
     public static final String[] PARAMS = {
       "filter",
-      "id",
       "name",
     };
 
@@ -1501,11 +2122,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateProductSet setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
-
     public APIRequestCreateProductSet setName (String name) {
       this.setParam("name", name);
       return this;
@@ -1549,6 +2165,96 @@ public class ProductCatalog extends APINode {
 
   }
 
+  public static class APIRequestGetProductSetsBatch extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "handle",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetProductSetsBatch(String nodeId, APIContext context) {
+      super(context, nodeId, "/product_sets_batch", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetProductSetsBatch setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetProductSetsBatch setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetProductSetsBatch setHandle (String handle) {
+      this.setParam("handle", handle);
+      return this;
+    }
+
+    public APIRequestGetProductSetsBatch requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetProductSetsBatch requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetProductSetsBatch requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetProductSetsBatch requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetProductSetsBatch requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetProductSetsBatch requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetProducts extends APIRequest<ProductItem> {
 
     APINodeList<ProductItem> lastResponse = null;
@@ -1570,6 +2276,7 @@ public class ProductCatalog extends APINode {
       "color",
       "commerce_insights",
       "condition",
+      "currency",
       "custom_data",
       "custom_label_0",
       "custom_label_1",
@@ -1744,6 +2451,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestConditionField (boolean value) {
       this.requestField("condition", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetProducts requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
       return this;
     }
     public APIRequestGetProducts requestCustomDataField () {
@@ -2009,7 +2723,6 @@ public class ProductCatalog extends APINode {
       "expiration_date",
       "gender",
       "gtin",
-      "id",
       "image_url",
       "inventory",
       "ios_app_name",
@@ -2204,11 +2917,6 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProduct setGtin (String gtin) {
       this.setParam("gtin", gtin);
-      return this;
-    }
-
-    public APIRequestCreateProduct setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -2431,6 +3139,212 @@ public class ProductCatalog extends APINode {
 
   }
 
+  public static class APIRequestCreateVideo extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "content_category",
+      "description",
+      "embeddable",
+      "file_size",
+      "file_url",
+      "referenced_sticker_id",
+      "slideshow_spec",
+      "source",
+      "start_offset",
+      "thumb",
+      "title",
+      "unpublished_content_type",
+      "upload_phase",
+      "upload_session_id",
+      "video_file_chunk",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestCreateVideo(String nodeId, APIContext context) {
+      super(context, nodeId, "/videos", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateVideo setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVideo setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateVideo setContentCategory (EnumContentCategory contentCategory) {
+      this.setParam("content_category", contentCategory);
+      return this;
+    }
+    public APIRequestCreateVideo setContentCategory (String contentCategory) {
+      this.setParam("content_category", contentCategory);
+      return this;
+    }
+
+    public APIRequestCreateVideo setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateVideo setEmbeddable (Boolean embeddable) {
+      this.setParam("embeddable", embeddable);
+      return this;
+    }
+    public APIRequestCreateVideo setEmbeddable (String embeddable) {
+      this.setParam("embeddable", embeddable);
+      return this;
+    }
+
+    public APIRequestCreateVideo setFileSize (Long fileSize) {
+      this.setParam("file_size", fileSize);
+      return this;
+    }
+    public APIRequestCreateVideo setFileSize (String fileSize) {
+      this.setParam("file_size", fileSize);
+      return this;
+    }
+
+    public APIRequestCreateVideo setFileUrl (String fileUrl) {
+      this.setParam("file_url", fileUrl);
+      return this;
+    }
+
+    public APIRequestCreateVideo setReferencedStickerId (String referencedStickerId) {
+      this.setParam("referenced_sticker_id", referencedStickerId);
+      return this;
+    }
+
+    public APIRequestCreateVideo setSlideshowSpec (Map<String, String> slideshowSpec) {
+      this.setParam("slideshow_spec", slideshowSpec);
+      return this;
+    }
+    public APIRequestCreateVideo setSlideshowSpec (String slideshowSpec) {
+      this.setParam("slideshow_spec", slideshowSpec);
+      return this;
+    }
+
+    public APIRequestCreateVideo setSource (String source) {
+      this.setParam("source", source);
+      return this;
+    }
+
+    public APIRequestCreateVideo setStartOffset (Long startOffset) {
+      this.setParam("start_offset", startOffset);
+      return this;
+    }
+    public APIRequestCreateVideo setStartOffset (String startOffset) {
+      this.setParam("start_offset", startOffset);
+      return this;
+    }
+
+    public APIRequestCreateVideo setThumb (File thumb) {
+      this.setParam("thumb", thumb);
+      return this;
+    }
+    public APIRequestCreateVideo setThumb (String thumb) {
+      this.setParam("thumb", thumb);
+      return this;
+    }
+
+    public APIRequestCreateVideo setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestCreateVideo setUnpublishedContentType (EnumUnpublishedContentType unpublishedContentType) {
+      this.setParam("unpublished_content_type", unpublishedContentType);
+      return this;
+    }
+    public APIRequestCreateVideo setUnpublishedContentType (String unpublishedContentType) {
+      this.setParam("unpublished_content_type", unpublishedContentType);
+      return this;
+    }
+
+    public APIRequestCreateVideo setUploadPhase (EnumUploadPhase uploadPhase) {
+      this.setParam("upload_phase", uploadPhase);
+      return this;
+    }
+    public APIRequestCreateVideo setUploadPhase (String uploadPhase) {
+      this.setParam("upload_phase", uploadPhase);
+      return this;
+    }
+
+    public APIRequestCreateVideo setUploadSessionId (String uploadSessionId) {
+      this.setParam("upload_session_id", uploadSessionId);
+      return this;
+    }
+
+    public APIRequestCreateVideo setVideoFileChunk (String videoFileChunk) {
+      this.setParam("video_file_chunk", videoFileChunk);
+      return this;
+    }
+
+    public APIRequestCreateVideo requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateVideo requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVideo requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateVideo requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVideo requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVideo requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestDelete extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -2439,7 +3353,6 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -2477,11 +3390,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-
-    public APIRequestDelete setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);
@@ -2535,8 +3443,11 @@ public class ProductCatalog extends APINode {
       "business",
       "feed_count",
       "id",
+      "image_padding_landscape",
+      "image_padding_square",
       "name",
       "product_count",
+      "vertical",
     };
 
     @Override
@@ -2629,6 +3540,20 @@ public class ProductCatalog extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestImagePaddingLandscapeField () {
+      return this.requestImagePaddingLandscapeField(true);
+    }
+    public APIRequestGet requestImagePaddingLandscapeField (boolean value) {
+      this.requestField("image_padding_landscape", value);
+      return this;
+    }
+    public APIRequestGet requestImagePaddingSquareField () {
+      return this.requestImagePaddingSquareField(true);
+    }
+    public APIRequestGet requestImagePaddingSquareField (boolean value) {
+      this.requestField("image_padding_square", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -2643,17 +3568,23 @@ public class ProductCatalog extends APINode {
       this.requestField("product_count", value);
       return this;
     }
+    public APIRequestGet requestVerticalField () {
+      return this.requestVerticalField(true);
+    }
+    public APIRequestGet requestVerticalField (boolean value) {
+      this.requestField("vertical", value);
+      return this;
+    }
   }
 
-  public static class APIRequestUpdate extends APIRequest<APINode> {
+  public static class APIRequestUpdate extends APIRequest<ProductCatalog> {
 
-    APINode lastResponse = null;
+    ProductCatalog lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public ProductCatalog getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "id",
       "name",
     };
 
@@ -2661,17 +3592,17 @@ public class ProductCatalog extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public ProductCatalog parseResponse(String response) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public ProductCatalog execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -2692,11 +3623,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-
-    public APIRequestUpdate setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
 
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
@@ -2741,6 +3667,120 @@ public class ProductCatalog extends APINode {
 
   }
 
+  public static enum EnumVertical {
+      @SerializedName("commerce")
+      VALUE_COMMERCE("commerce"),
+      @SerializedName("hotels")
+      VALUE_HOTELS("hotels"),
+      NULL(null);
+
+      private String value;
+
+      private EnumVertical(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumContentCategory {
+      @SerializedName("BEAUTY_FASHION")
+      VALUE_BEAUTY_FASHION("BEAUTY_FASHION"),
+      @SerializedName("BUSINESS")
+      VALUE_BUSINESS("BUSINESS"),
+      @SerializedName("CARS_TRUCKS")
+      VALUE_CARS_TRUCKS("CARS_TRUCKS"),
+      @SerializedName("COMEDY")
+      VALUE_COMEDY("COMEDY"),
+      @SerializedName("CUTE_ANIMALS")
+      VALUE_CUTE_ANIMALS("CUTE_ANIMALS"),
+      @SerializedName("ENTERTAINMENT")
+      VALUE_ENTERTAINMENT("ENTERTAINMENT"),
+      @SerializedName("FAMILY")
+      VALUE_FAMILY("FAMILY"),
+      @SerializedName("FOOD_HEALTH")
+      VALUE_FOOD_HEALTH("FOOD_HEALTH"),
+      @SerializedName("HOME")
+      VALUE_HOME("HOME"),
+      @SerializedName("LIFESTYLE")
+      VALUE_LIFESTYLE("LIFESTYLE"),
+      @SerializedName("MUSIC")
+      VALUE_MUSIC("MUSIC"),
+      @SerializedName("NEWS")
+      VALUE_NEWS("NEWS"),
+      @SerializedName("POLITICS")
+      VALUE_POLITICS("POLITICS"),
+      @SerializedName("SCIENCE")
+      VALUE_SCIENCE("SCIENCE"),
+      @SerializedName("SPORTS")
+      VALUE_SPORTS("SPORTS"),
+      @SerializedName("TECHNOLOGY")
+      VALUE_TECHNOLOGY("TECHNOLOGY"),
+      @SerializedName("VIDEO_GAMING")
+      VALUE_VIDEO_GAMING("VIDEO_GAMING"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      NULL(null);
+
+      private String value;
+
+      private EnumContentCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumUnpublishedContentType {
+      @SerializedName("SCHEDULED")
+      VALUE_SCHEDULED("SCHEDULED"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
+      @SerializedName("ADS_POST")
+      VALUE_ADS_POST("ADS_POST"),
+      NULL(null);
+
+      private String value;
+
+      private EnumUnpublishedContentType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumUploadPhase {
+      @SerializedName("start")
+      VALUE_START("start"),
+      @SerializedName("transfer")
+      VALUE_TRANSFER("transfer"),
+      @SerializedName("finish")
+      VALUE_FINISH("finish"),
+      @SerializedName("cancel")
+      VALUE_CANCEL("cancel"),
+      NULL(null);
+
+      private String value;
+
+      private EnumUploadPhase(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -2759,8 +3799,11 @@ public class ProductCatalog extends APINode {
     this.mBusiness = instance.mBusiness;
     this.mFeedCount = instance.mFeedCount;
     this.mId = instance.mId;
+    this.mImagePaddingLandscape = instance.mImagePaddingLandscape;
+    this.mImagePaddingSquare = instance.mImagePaddingSquare;
     this.mName = instance.mName;
     this.mProductCount = instance.mProductCount;
+    this.mVertical = instance.mVertical;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

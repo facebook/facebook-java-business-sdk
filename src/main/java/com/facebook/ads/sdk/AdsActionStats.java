@@ -75,8 +75,12 @@ public class AdsActionStats extends APINode {
   private String mActionTargetId = null;
   @SerializedName("action_type")
   private String mActionType = null;
+  @SerializedName("action_video_sound")
+  private String mActionVideoSound = null;
   @SerializedName("action_video_type")
   private String mActionVideoType = null;
+  @SerializedName("canvas_component_id")
+  private String mCanvasComponentId = null;
   @SerializedName("value")
   private Double mValue = null;
   protected static Gson gson = null;
@@ -328,12 +332,30 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldActionVideoSound() {
+    return mActionVideoSound;
+  }
+
+  public AdsActionStats setFieldActionVideoSound(String value) {
+    this.mActionVideoSound = value;
+    return this;
+  }
+
   public String getFieldActionVideoType() {
     return mActionVideoType;
   }
 
   public AdsActionStats setFieldActionVideoType(String value) {
     this.mActionVideoType = value;
+    return this;
+  }
+
+  public String getFieldCanvasComponentId() {
+    return mCanvasComponentId;
+  }
+
+  public AdsActionStats setFieldCanvasComponentId(String value) {
+    this.mCanvasComponentId = value;
     return this;
   }
 
@@ -375,7 +397,9 @@ public class AdsActionStats extends APINode {
     this.mActionDevice = instance.mActionDevice;
     this.mActionTargetId = instance.mActionTargetId;
     this.mActionType = instance.mActionType;
+    this.mActionVideoSound = instance.mActionVideoSound;
     this.mActionVideoType = instance.mActionVideoType;
+    this.mCanvasComponentId = instance.mCanvasComponentId;
     this.mValue = instance.mValue;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

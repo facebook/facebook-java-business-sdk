@@ -50,31 +50,29 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CustomAudiencePermission extends APINode {
-  @SerializedName("can_edit")
-  private Boolean mCanEdit = null;
-  @SerializedName("can_see_insight")
-  private Boolean mCanSeeInsight = null;
-  @SerializedName("can_share")
-  private Boolean mCanShare = null;
-  @SerializedName("subtype_supports_lookalike")
-  private Boolean mSubtypeSupportsLookalike = null;
-  @SerializedName("supports_recipient_lookalike")
-  private Boolean mSupportsRecipientLookalike = null;
+public class ProductCatalogHotelRoomsBatch extends APINode {
+  @SerializedName("errors")
+  private List<Object> mErrors = null;
+  @SerializedName("errors_total_count")
+  private Long mErrorsTotalCount = null;
+  @SerializedName("handle")
+  private String mHandle = null;
+  @SerializedName("status")
+  private String mStatus = null;
   protected static Gson gson = null;
 
-  public CustomAudiencePermission() {
+  public ProductCatalogHotelRoomsBatch() {
   }
 
   public String getId() {
     return null;
   }
-  public static CustomAudiencePermission loadJSON(String json, APIContext context) {
-    CustomAudiencePermission customAudiencePermission = getGson().fromJson(json, CustomAudiencePermission.class);
+  public static ProductCatalogHotelRoomsBatch loadJSON(String json, APIContext context) {
+    ProductCatalogHotelRoomsBatch productCatalogHotelRoomsBatch = getGson().fromJson(json, ProductCatalogHotelRoomsBatch.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(customAudiencePermission.toString());
+      JsonElement o2 = parser.parse(productCatalogHotelRoomsBatch.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,13 +82,13 @@ public class CustomAudiencePermission extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    customAudiencePermission.context = context;
-    customAudiencePermission.rawValue = json;
-    return customAudiencePermission;
+    productCatalogHotelRoomsBatch.context = context;
+    productCatalogHotelRoomsBatch.rawValue = json;
+    return productCatalogHotelRoomsBatch;
   }
 
-  public static APINodeList<CustomAudiencePermission> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CustomAudiencePermission> customAudiencePermissions = new APINodeList<CustomAudiencePermission>(request, json);
+  public static APINodeList<ProductCatalogHotelRoomsBatch> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<ProductCatalogHotelRoomsBatch> productCatalogHotelRoomsBatchs = new APINodeList<ProductCatalogHotelRoomsBatch>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,9 +99,9 @@ public class CustomAudiencePermission extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          customAudiencePermissions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          productCatalogHotelRoomsBatchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return customAudiencePermissions;
+        return productCatalogHotelRoomsBatchs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -111,13 +109,13 @@ public class CustomAudiencePermission extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            customAudiencePermissions.setPaging(before, after);
+            productCatalogHotelRoomsBatchs.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              customAudiencePermissions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              productCatalogHotelRoomsBatchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -128,23 +126,23 @@ public class CustomAudiencePermission extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  customAudiencePermissions.add(loadJSON(entry.getValue().toString(), context));
+                  productCatalogHotelRoomsBatchs.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              customAudiencePermissions.add(loadJSON(obj.toString(), context));
+              productCatalogHotelRoomsBatchs.add(loadJSON(obj.toString(), context));
             }
           }
-          return customAudiencePermissions;
+          return productCatalogHotelRoomsBatchs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              customAudiencePermissions.add(loadJSON(entry.getValue().toString(), context));
+              productCatalogHotelRoomsBatchs.add(loadJSON(entry.getValue().toString(), context));
           }
-          return customAudiencePermissions;
+          return productCatalogHotelRoomsBatchs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -161,20 +159,20 @@ public class CustomAudiencePermission extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              customAudiencePermissions.add(loadJSON(value.toString(), context));
+              productCatalogHotelRoomsBatchs.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return customAudiencePermissions;
+            return productCatalogHotelRoomsBatchs;
           }
 
           // Sixth, check if it's pure JsonObject
-          customAudiencePermissions.clear();
-          customAudiencePermissions.add(loadJSON(json, context));
-          return customAudiencePermissions;
+          productCatalogHotelRoomsBatchs.clear();
+          productCatalogHotelRoomsBatchs.add(loadJSON(json, context));
+          return productCatalogHotelRoomsBatchs;
         }
       }
     } catch (Exception e) {
@@ -202,52 +200,60 @@ public class CustomAudiencePermission extends APINode {
   }
 
 
-  public Boolean getFieldCanEdit() {
-    return mCanEdit;
+  public List<Object> getFieldErrors() {
+    return mErrors;
   }
 
-  public CustomAudiencePermission setFieldCanEdit(Boolean value) {
-    this.mCanEdit = value;
+  public ProductCatalogHotelRoomsBatch setFieldErrors(List<Object> value) {
+    this.mErrors = value;
     return this;
   }
 
-  public Boolean getFieldCanSeeInsight() {
-    return mCanSeeInsight;
+  public Long getFieldErrorsTotalCount() {
+    return mErrorsTotalCount;
   }
 
-  public CustomAudiencePermission setFieldCanSeeInsight(Boolean value) {
-    this.mCanSeeInsight = value;
+  public ProductCatalogHotelRoomsBatch setFieldErrorsTotalCount(Long value) {
+    this.mErrorsTotalCount = value;
     return this;
   }
 
-  public Boolean getFieldCanShare() {
-    return mCanShare;
+  public String getFieldHandle() {
+    return mHandle;
   }
 
-  public CustomAudiencePermission setFieldCanShare(Boolean value) {
-    this.mCanShare = value;
+  public ProductCatalogHotelRoomsBatch setFieldHandle(String value) {
+    this.mHandle = value;
     return this;
   }
 
-  public Boolean getFieldSubtypeSupportsLookalike() {
-    return mSubtypeSupportsLookalike;
+  public String getFieldStatus() {
+    return mStatus;
   }
 
-  public CustomAudiencePermission setFieldSubtypeSupportsLookalike(Boolean value) {
-    this.mSubtypeSupportsLookalike = value;
-    return this;
-  }
-
-  public Boolean getFieldSupportsRecipientLookalike() {
-    return mSupportsRecipientLookalike;
-  }
-
-  public CustomAudiencePermission setFieldSupportsRecipientLookalike(Boolean value) {
-    this.mSupportsRecipientLookalike = value;
+  public ProductCatalogHotelRoomsBatch setFieldStatus(String value) {
+    this.mStatus = value;
     return this;
   }
 
 
+
+  public static enum EnumStandard {
+      @SerializedName("google")
+      VALUE_GOOGLE("google"),
+      NULL(null);
+
+      private String value;
+
+      private EnumStandard(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -263,21 +269,20 @@ public class CustomAudiencePermission extends APINode {
     return gson;
   }
 
-  public CustomAudiencePermission copyFrom(CustomAudiencePermission instance) {
-    this.mCanEdit = instance.mCanEdit;
-    this.mCanSeeInsight = instance.mCanSeeInsight;
-    this.mCanShare = instance.mCanShare;
-    this.mSubtypeSupportsLookalike = instance.mSubtypeSupportsLookalike;
-    this.mSupportsRecipientLookalike = instance.mSupportsRecipientLookalike;
+  public ProductCatalogHotelRoomsBatch copyFrom(ProductCatalogHotelRoomsBatch instance) {
+    this.mErrors = instance.mErrors;
+    this.mErrorsTotalCount = instance.mErrorsTotalCount;
+    this.mHandle = instance.mHandle;
+    this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CustomAudiencePermission> getParser() {
-    return new APIRequest.ResponseParser<CustomAudiencePermission>() {
-      public APINodeList<CustomAudiencePermission> parseResponse(String response, APIContext context, APIRequest<CustomAudiencePermission> request) throws MalformedResponseException {
-        return CustomAudiencePermission.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<ProductCatalogHotelRoomsBatch> getParser() {
+    return new APIRequest.ResponseParser<ProductCatalogHotelRoomsBatch>() {
+      public APINodeList<ProductCatalogHotelRoomsBatch> parseResponse(String response, APIContext context, APIRequest<ProductCatalogHotelRoomsBatch> request) throws MalformedResponseException {
+        return ProductCatalogHotelRoomsBatch.parseResponse(response, context, request);
       }
     };
   }

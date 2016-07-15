@@ -59,8 +59,6 @@ public class Targeting extends APINode {
   private Long mAgeMin = null;
   @SerializedName("app_install_state")
   private String mAppInstallState = null;
-  @SerializedName("audience_network_positions")
-  private List<String> mAudienceNetworkPositions = null;
   @SerializedName("behaviors")
   private List<IDName> mBehaviors = null;
   @SerializedName("cities")
@@ -91,6 +89,8 @@ public class Targeting extends APINode {
   private List<EnumEffectiveDevicePlatforms> mEffectiveDevicePlatforms = null;
   @SerializedName("effective_facebook_positions")
   private List<String> mEffectiveFacebookPositions = null;
+  @SerializedName("effective_publisher_platforms")
+  private List<String> mEffectivePublisherPlatforms = null;
   @SerializedName("engagement_specs")
   private List<TargetingDynamicRule> mEngagementSpecs = null;
   @SerializedName("ethnic_affinity")
@@ -107,12 +107,16 @@ public class Targeting extends APINode {
   private List<TargetingDynamicRule> mExcludedEngagementSpecs = null;
   @SerializedName("excluded_geo_locations")
   private TargetingGeoLocation mExcludedGeoLocations = null;
+  @SerializedName("excluded_mobile_device_model")
+  private List<String> mExcludedMobileDeviceModel = null;
   @SerializedName("excluded_product_audience_specs")
   private List<TargetingProductAudienceSpec> mExcludedProductAudienceSpecs = null;
   @SerializedName("excluded_publisher_categories")
   private List<String> mExcludedPublisherCategories = null;
   @SerializedName("excluded_publisher_list_ids")
   private List<String> mExcludedPublisherListIds = null;
+  @SerializedName("excluded_user_device")
+  private List<String> mExcludedUserDevice = null;
   @SerializedName("exclusions")
   private FlexibleTargeting mExclusions = null;
   @SerializedName("facebook_positions")
@@ -120,7 +124,7 @@ public class Targeting extends APINode {
   @SerializedName("family_statuses")
   private List<IDName> mFamilyStatuses = null;
   @SerializedName("fb_deal_id")
-  private Long mFbDealId = null;
+  private String mFbDealId = null;
   @SerializedName("flexible_spec")
   private List<FlexibleTargeting> mFlexibleSpec = null;
   @SerializedName("friends_of_connections")
@@ -161,14 +165,16 @@ public class Targeting extends APINode {
   private List<IDName> mOfficeType = null;
   @SerializedName("page_types")
   private List<String> mPageTypes = null;
-  @SerializedName("platforms")
-  private List<String> mPlatforms = null;
+  @SerializedName("place_page_set_id")
+  private String mPlacePageSetId = null;
   @SerializedName("political_views")
   private List<Long> mPoliticalViews = null;
   @SerializedName("politics")
   private List<IDName> mPolitics = null;
   @SerializedName("product_audience_specs")
   private List<TargetingProductAudienceSpec> mProductAudienceSpecs = null;
+  @SerializedName("publisher_platforms")
+  private List<String> mPublisherPlatforms = null;
   @SerializedName("radius")
   private String mRadius = null;
   @SerializedName("regions")
@@ -374,15 +380,6 @@ public class Targeting extends APINode {
     return this;
   }
 
-  public List<String> getFieldAudienceNetworkPositions() {
-    return mAudienceNetworkPositions;
-  }
-
-  public Targeting setFieldAudienceNetworkPositions(List<String> value) {
-    this.mAudienceNetworkPositions = value;
-    return this;
-  }
-
   public List<IDName> getFieldBehaviors() {
     return mBehaviors;
   }
@@ -548,6 +545,15 @@ public class Targeting extends APINode {
     return this;
   }
 
+  public List<String> getFieldEffectivePublisherPlatforms() {
+    return mEffectivePublisherPlatforms;
+  }
+
+  public Targeting setFieldEffectivePublisherPlatforms(List<String> value) {
+    this.mEffectivePublisherPlatforms = value;
+    return this;
+  }
+
   public List<TargetingDynamicRule> getFieldEngagementSpecs() {
     return mEngagementSpecs;
   }
@@ -650,6 +656,15 @@ public class Targeting extends APINode {
     this.mExcludedGeoLocations = TargetingGeoLocation.getGson().fromJson(value, type);
     return this;
   }
+  public List<String> getFieldExcludedMobileDeviceModel() {
+    return mExcludedMobileDeviceModel;
+  }
+
+  public Targeting setFieldExcludedMobileDeviceModel(List<String> value) {
+    this.mExcludedMobileDeviceModel = value;
+    return this;
+  }
+
   public List<TargetingProductAudienceSpec> getFieldExcludedProductAudienceSpecs() {
     return mExcludedProductAudienceSpecs;
   }
@@ -679,6 +694,15 @@ public class Targeting extends APINode {
 
   public Targeting setFieldExcludedPublisherListIds(List<String> value) {
     this.mExcludedPublisherListIds = value;
+    return this;
+  }
+
+  public List<String> getFieldExcludedUserDevice() {
+    return mExcludedUserDevice;
+  }
+
+  public Targeting setFieldExcludedUserDevice(List<String> value) {
+    this.mExcludedUserDevice = value;
     return this;
   }
 
@@ -719,11 +743,11 @@ public class Targeting extends APINode {
     this.mFamilyStatuses = IDName.getGson().fromJson(value, type);
     return this;
   }
-  public Long getFieldFbDealId() {
+  public String getFieldFbDealId() {
     return mFbDealId;
   }
 
-  public Targeting setFieldFbDealId(Long value) {
+  public Targeting setFieldFbDealId(String value) {
     this.mFbDealId = value;
     return this;
   }
@@ -983,12 +1007,12 @@ public class Targeting extends APINode {
     return this;
   }
 
-  public List<String> getFieldPlatforms() {
-    return mPlatforms;
+  public String getFieldPlacePageSetId() {
+    return mPlacePageSetId;
   }
 
-  public Targeting setFieldPlatforms(List<String> value) {
-    this.mPlatforms = value;
+  public Targeting setFieldPlacePageSetId(String value) {
+    this.mPlacePageSetId = value;
     return this;
   }
 
@@ -1029,6 +1053,15 @@ public class Targeting extends APINode {
     this.mProductAudienceSpecs = TargetingProductAudienceSpec.getGson().fromJson(value, type);
     return this;
   }
+  public List<String> getFieldPublisherPlatforms() {
+    return mPublisherPlatforms;
+  }
+
+  public Targeting setFieldPublisherPlatforms(List<String> value) {
+    this.mPublisherPlatforms = value;
+    return this;
+  }
+
   public String getFieldRadius() {
     return mRadius;
   }
@@ -1178,10 +1211,10 @@ public class Targeting extends APINode {
 
 
   public static enum EnumDevicePlatforms {
-      @SerializedName("MOBILE")
-      VALUE_MOBILE("MOBILE"),
-      @SerializedName("DESKTOP")
-      VALUE_DESKTOP("DESKTOP"),
+      @SerializedName("mobile")
+      VALUE_MOBILE("mobile"),
+      @SerializedName("desktop")
+      VALUE_DESKTOP("desktop"),
       NULL(null);
 
       private String value;
@@ -1197,10 +1230,10 @@ public class Targeting extends APINode {
   }
 
   public static enum EnumEffectiveDevicePlatforms {
-      @SerializedName("MOBILE")
-      VALUE_MOBILE("MOBILE"),
-      @SerializedName("DESKTOP")
-      VALUE_DESKTOP("DESKTOP"),
+      @SerializedName("mobile")
+      VALUE_MOBILE("mobile"),
+      @SerializedName("desktop")
+      VALUE_DESKTOP("desktop"),
       NULL(null);
 
       private String value;
@@ -1234,7 +1267,6 @@ public class Targeting extends APINode {
     this.mAgeMax = instance.mAgeMax;
     this.mAgeMin = instance.mAgeMin;
     this.mAppInstallState = instance.mAppInstallState;
-    this.mAudienceNetworkPositions = instance.mAudienceNetworkPositions;
     this.mBehaviors = instance.mBehaviors;
     this.mCities = instance.mCities;
     this.mCollegeYears = instance.mCollegeYears;
@@ -1250,6 +1282,7 @@ public class Targeting extends APINode {
     this.mEducationStatuses = instance.mEducationStatuses;
     this.mEffectiveDevicePlatforms = instance.mEffectiveDevicePlatforms;
     this.mEffectiveFacebookPositions = instance.mEffectiveFacebookPositions;
+    this.mEffectivePublisherPlatforms = instance.mEffectivePublisherPlatforms;
     this.mEngagementSpecs = instance.mEngagementSpecs;
     this.mEthnicAffinity = instance.mEthnicAffinity;
     this.mExcludeReachedSince = instance.mExcludeReachedSince;
@@ -1258,9 +1291,11 @@ public class Targeting extends APINode {
     this.mExcludedDynamicAudienceIds = instance.mExcludedDynamicAudienceIds;
     this.mExcludedEngagementSpecs = instance.mExcludedEngagementSpecs;
     this.mExcludedGeoLocations = instance.mExcludedGeoLocations;
+    this.mExcludedMobileDeviceModel = instance.mExcludedMobileDeviceModel;
     this.mExcludedProductAudienceSpecs = instance.mExcludedProductAudienceSpecs;
     this.mExcludedPublisherCategories = instance.mExcludedPublisherCategories;
     this.mExcludedPublisherListIds = instance.mExcludedPublisherListIds;
+    this.mExcludedUserDevice = instance.mExcludedUserDevice;
     this.mExclusions = instance.mExclusions;
     this.mFacebookPositions = instance.mFacebookPositions;
     this.mFamilyStatuses = instance.mFamilyStatuses;
@@ -1285,10 +1320,11 @@ public class Targeting extends APINode {
     this.mNetWorth = instance.mNetWorth;
     this.mOfficeType = instance.mOfficeType;
     this.mPageTypes = instance.mPageTypes;
-    this.mPlatforms = instance.mPlatforms;
+    this.mPlacePageSetId = instance.mPlacePageSetId;
     this.mPoliticalViews = instance.mPoliticalViews;
     this.mPolitics = instance.mPolitics;
     this.mProductAudienceSpecs = instance.mProductAudienceSpecs;
+    this.mPublisherPlatforms = instance.mPublisherPlatforms;
     this.mRadius = instance.mRadius;
     this.mRegions = instance.mRegions;
     this.mRelationshipStatuses = instance.mRelationshipStatuses;

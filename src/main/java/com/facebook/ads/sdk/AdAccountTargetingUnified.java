@@ -50,39 +50,35 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdAccountTargetingInsights extends APINode {
+public class AdAccountTargetingUnified extends APINode {
   @SerializedName("audience_size")
   private Long mAudienceSize = null;
-  @SerializedName("exploration_ratio")
-  private Double mExplorationRatio = null;
+  @SerializedName("description")
+  private String mDescription = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("path")
   private List<String> mPath = null;
-  @SerializedName("performance_rating")
-  private Long mPerformanceRating = null;
-  @SerializedName("recommendation_rating")
-  private Long mRecommendationRating = null;
-  @SerializedName("tags")
-  private List<String> mTags = null;
   @SerializedName("type")
-  private EnumType mType = null;
+  private String mType = null;
+  @SerializedName("valid")
+  private Boolean mValid = null;
   protected static Gson gson = null;
 
-  public AdAccountTargetingInsights() {
+  public AdAccountTargetingUnified() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdAccountTargetingInsights loadJSON(String json, APIContext context) {
-    AdAccountTargetingInsights adAccountTargetingInsights = getGson().fromJson(json, AdAccountTargetingInsights.class);
+  public static AdAccountTargetingUnified loadJSON(String json, APIContext context) {
+    AdAccountTargetingUnified adAccountTargetingUnified = getGson().fromJson(json, AdAccountTargetingUnified.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAccountTargetingInsights.toString());
+      JsonElement o2 = parser.parse(adAccountTargetingUnified.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -92,13 +88,13 @@ public class AdAccountTargetingInsights extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adAccountTargetingInsights.context = context;
-    adAccountTargetingInsights.rawValue = json;
-    return adAccountTargetingInsights;
+    adAccountTargetingUnified.context = context;
+    adAccountTargetingUnified.rawValue = json;
+    return adAccountTargetingUnified;
   }
 
-  public static APINodeList<AdAccountTargetingInsights> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAccountTargetingInsights> adAccountTargetingInsightss = new APINodeList<AdAccountTargetingInsights>(request, json);
+  public static APINodeList<AdAccountTargetingUnified> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<AdAccountTargetingUnified> adAccountTargetingUnifieds = new APINodeList<AdAccountTargetingUnified>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -109,9 +105,9 @@ public class AdAccountTargetingInsights extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountTargetingInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAccountTargetingUnifieds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return adAccountTargetingInsightss;
+        return adAccountTargetingUnifieds;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -119,13 +115,13 @@ public class AdAccountTargetingInsights extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adAccountTargetingInsightss.setPaging(before, after);
+            adAccountTargetingUnifieds.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountTargetingInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAccountTargetingUnifieds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -136,23 +132,23 @@ public class AdAccountTargetingInsights extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountTargetingInsightss.add(loadJSON(entry.getValue().toString(), context));
+                  adAccountTargetingUnifieds.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountTargetingInsightss.add(loadJSON(obj.toString(), context));
+              adAccountTargetingUnifieds.add(loadJSON(obj.toString(), context));
             }
           }
-          return adAccountTargetingInsightss;
+          return adAccountTargetingUnifieds;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountTargetingInsightss.add(loadJSON(entry.getValue().toString(), context));
+              adAccountTargetingUnifieds.add(loadJSON(entry.getValue().toString(), context));
           }
-          return adAccountTargetingInsightss;
+          return adAccountTargetingUnifieds;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -169,20 +165,20 @@ public class AdAccountTargetingInsights extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountTargetingInsightss.add(loadJSON(value.toString(), context));
+              adAccountTargetingUnifieds.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adAccountTargetingInsightss;
+            return adAccountTargetingUnifieds;
           }
 
           // Sixth, check if it's pure JsonObject
-          adAccountTargetingInsightss.clear();
-          adAccountTargetingInsightss.add(loadJSON(json, context));
-          return adAccountTargetingInsightss;
+          adAccountTargetingUnifieds.clear();
+          adAccountTargetingUnifieds.add(loadJSON(json, context));
+          return adAccountTargetingUnifieds;
         }
       }
     } catch (Exception e) {
@@ -214,17 +210,17 @@ public class AdAccountTargetingInsights extends APINode {
     return mAudienceSize;
   }
 
-  public AdAccountTargetingInsights setFieldAudienceSize(Long value) {
+  public AdAccountTargetingUnified setFieldAudienceSize(Long value) {
     this.mAudienceSize = value;
     return this;
   }
 
-  public Double getFieldExplorationRatio() {
-    return mExplorationRatio;
+  public String getFieldDescription() {
+    return mDescription;
   }
 
-  public AdAccountTargetingInsights setFieldExplorationRatio(Double value) {
-    this.mExplorationRatio = value;
+  public AdAccountTargetingUnified setFieldDescription(String value) {
+    this.mDescription = value;
     return this;
   }
 
@@ -232,7 +228,7 @@ public class AdAccountTargetingInsights extends APINode {
     return mId;
   }
 
-  public AdAccountTargetingInsights setFieldId(String value) {
+  public AdAccountTargetingUnified setFieldId(String value) {
     this.mId = value;
     return this;
   }
@@ -241,7 +237,7 @@ public class AdAccountTargetingInsights extends APINode {
     return mName;
   }
 
-  public AdAccountTargetingInsights setFieldName(String value) {
+  public AdAccountTargetingUnified setFieldName(String value) {
     this.mName = value;
     return this;
   }
@@ -250,50 +246,32 @@ public class AdAccountTargetingInsights extends APINode {
     return mPath;
   }
 
-  public AdAccountTargetingInsights setFieldPath(List<String> value) {
+  public AdAccountTargetingUnified setFieldPath(List<String> value) {
     this.mPath = value;
     return this;
   }
 
-  public Long getFieldPerformanceRating() {
-    return mPerformanceRating;
-  }
-
-  public AdAccountTargetingInsights setFieldPerformanceRating(Long value) {
-    this.mPerformanceRating = value;
-    return this;
-  }
-
-  public Long getFieldRecommendationRating() {
-    return mRecommendationRating;
-  }
-
-  public AdAccountTargetingInsights setFieldRecommendationRating(Long value) {
-    this.mRecommendationRating = value;
-    return this;
-  }
-
-  public List<String> getFieldTags() {
-    return mTags;
-  }
-
-  public AdAccountTargetingInsights setFieldTags(List<String> value) {
-    this.mTags = value;
-    return this;
-  }
-
-  public EnumType getFieldType() {
+  public String getFieldType() {
     return mType;
   }
 
-  public AdAccountTargetingInsights setFieldType(EnumType value) {
+  public AdAccountTargetingUnified setFieldType(String value) {
     this.mType = value;
     return this;
   }
 
+  public Boolean getFieldValid() {
+    return mValid;
+  }
+
+  public AdAccountTargetingUnified setFieldValid(Boolean value) {
+    this.mValid = value;
+    return this;
+  }
 
 
-  public static enum EnumType {
+
+  public static enum EnumLimitType {
       @SerializedName("adgroup_id")
       VALUE_ADGROUP_ID("adgroup_id"),
       @SerializedName("genders")
@@ -358,10 +336,10 @@ public class AdAccountTargetingInsights extends APINode {
       VALUE_USER_EVENT("user_event"),
       @SerializedName("page_types")
       VALUE_PAGE_TYPES("page_types"),
-      @SerializedName("platforms")
-      VALUE_PLATFORMS("platforms"),
-      @SerializedName("effective_platforms")
-      VALUE_EFFECTIVE_PLATFORMS("effective_platforms"),
+      @SerializedName("publisher_platforms")
+      VALUE_PUBLISHER_PLATFORMS("publisher_platforms"),
+      @SerializedName("effective_publisher_platforms")
+      VALUE_EFFECTIVE_PUBLISHER_PLATFORMS("effective_publisher_platforms"),
       @SerializedName("facebook_positions")
       VALUE_FACEBOOK_POSITIONS("facebook_positions"),
       @SerializedName("effective_facebook_positions")
@@ -378,6 +356,8 @@ public class AdAccountTargetingInsights extends APINode {
       VALUE_RTB_FLAG("rtb_flag"),
       @SerializedName("user_device")
       VALUE_USER_DEVICE("user_device"),
+      @SerializedName("excluded_user_device")
+      VALUE_EXCLUDED_USER_DEVICE("excluded_user_device"),
       @SerializedName("user_os")
       VALUE_USER_OS("user_os"),
       @SerializedName("wireless_carrier")
@@ -390,6 +370,8 @@ public class AdAccountTargetingInsights extends APINode {
       VALUE_EXCLUDED_GEO_LOCATIONS("excluded_geo_locations"),
       @SerializedName("timezones")
       VALUE_TIMEZONES("timezones"),
+      @SerializedName("place_page_set_id")
+      VALUE_PLACE_PAGE_SET_ID("place_page_set_id"),
       @SerializedName("family_statuses")
       VALUE_FAMILY_STATUSES("family_statuses"),
       @SerializedName("industries")
@@ -450,6 +432,8 @@ public class AdAccountTargetingInsights extends APINode {
       VALUE_FB_DEAL_ID("fb_deal_id"),
       @SerializedName("audience_network_positions")
       VALUE_AUDIENCE_NETWORK_POSITIONS("audience_network_positions"),
+      @SerializedName("effective_audience_network_positions")
+      VALUE_EFFECTIVE_AUDIENCE_NETWORK_POSITIONS("effective_audience_network_positions"),
       @SerializedName("interest_defaults_source")
       VALUE_INTEREST_DEFAULTS_SOURCE("interest_defaults_source"),
       @SerializedName("excluded_mobile_device_model")
@@ -458,80 +442,7 @@ public class AdAccountTargetingInsights extends APINode {
 
       private String value;
 
-      private EnumType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumMode {
-      @SerializedName("ALL")
-      VALUE_ALL("ALL"),
-      @SerializedName("FREQUENTLY_USED")
-      VALUE_FREQUENTLY_USED("FREQUENTLY_USED"),
-      NULL(null);
-
-      private String value;
-
-      private EnumMode(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumObjective {
-      @SerializedName("PAGE_LIKES")
-      VALUE_PAGE_LIKES("PAGE_LIKES"),
-      @SerializedName("POST_ENGAGEMENT")
-      VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
-      @SerializedName("WEBSITE_CONVERSIONS")
-      VALUE_WEBSITE_CONVERSIONS("WEBSITE_CONVERSIONS"),
-      @SerializedName("MOBILE_APP_INSTALLS")
-      VALUE_MOBILE_APP_INSTALLS("MOBILE_APP_INSTALLS"),
-      @SerializedName("WEBSITE_CLICKS")
-      VALUE_WEBSITE_CLICKS("WEBSITE_CLICKS"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
-
-      private String value;
-
-      private EnumObjective(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumRankMode {
-      @SerializedName("MOST_EXPLORED")
-      VALUE_MOST_EXPLORED("MOST_EXPLORED"),
-      @SerializedName("LEAST_EXPLORED")
-      VALUE_LEAST_EXPLORED("LEAST_EXPLORED"),
-      @SerializedName("BEST_PERFORMING")
-      VALUE_BEST_PERFORMING("BEST_PERFORMING"),
-      @SerializedName("WORST_PERFORMING")
-      VALUE_WORST_PERFORMING("WORST_PERFORMING"),
-      @SerializedName("RECOMMEND_INCLUSION")
-      VALUE_RECOMMEND_INCLUSION("RECOMMEND_INCLUSION"),
-      @SerializedName("RECOMMEND_EXCLUSION")
-      VALUE_RECOMMEND_EXCLUSION("RECOMMEND_EXCLUSION"),
-      NULL(null);
-
-      private String value;
-
-      private EnumRankMode(String value) {
+      private EnumLimitType(String value) {
         this.value = value;
       }
 
@@ -555,25 +466,23 @@ public class AdAccountTargetingInsights extends APINode {
     return gson;
   }
 
-  public AdAccountTargetingInsights copyFrom(AdAccountTargetingInsights instance) {
+  public AdAccountTargetingUnified copyFrom(AdAccountTargetingUnified instance) {
     this.mAudienceSize = instance.mAudienceSize;
-    this.mExplorationRatio = instance.mExplorationRatio;
+    this.mDescription = instance.mDescription;
     this.mId = instance.mId;
     this.mName = instance.mName;
     this.mPath = instance.mPath;
-    this.mPerformanceRating = instance.mPerformanceRating;
-    this.mRecommendationRating = instance.mRecommendationRating;
-    this.mTags = instance.mTags;
     this.mType = instance.mType;
+    this.mValid = instance.mValid;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdAccountTargetingInsights> getParser() {
-    return new APIRequest.ResponseParser<AdAccountTargetingInsights>() {
-      public APINodeList<AdAccountTargetingInsights> parseResponse(String response, APIContext context, APIRequest<AdAccountTargetingInsights> request) throws MalformedResponseException {
-        return AdAccountTargetingInsights.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<AdAccountTargetingUnified> getParser() {
+    return new APIRequest.ResponseParser<AdAccountTargetingUnified>() {
+      public APINodeList<AdAccountTargetingUnified> parseResponse(String response, APIContext context, APIRequest<AdAccountTargetingUnified> request) throws MalformedResponseException {
+        return AdAccountTargetingUnified.parseResponse(response, context, request);
       }
     };
   }

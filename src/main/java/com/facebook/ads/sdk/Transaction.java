@@ -57,6 +57,8 @@ public class Transaction extends APINode {
   private TransactionCurrencyAmount mAppAmount = null;
   @SerializedName("billing_end_time")
   private Long mBillingEndTime = null;
+  @SerializedName("billing_reason")
+  private String mBillingReason = null;
   @SerializedName("billing_start_time")
   private Long mBillingStartTime = null;
   @SerializedName("charge_type")
@@ -250,6 +252,15 @@ public class Transaction extends APINode {
     return this;
   }
 
+  public String getFieldBillingReason() {
+    return mBillingReason;
+  }
+
+  public Transaction setFieldBillingReason(String value) {
+    this.mBillingReason = value;
+    return this;
+  }
+
   public Long getFieldBillingStartTime() {
     return mBillingStartTime;
   }
@@ -384,6 +395,7 @@ public class Transaction extends APINode {
     this.mAccountId = instance.mAccountId;
     this.mAppAmount = instance.mAppAmount;
     this.mBillingEndTime = instance.mBillingEndTime;
+    this.mBillingReason = instance.mBillingReason;
     this.mBillingStartTime = instance.mBillingStartTime;
     this.mChargeType = instance.mChargeType;
     this.mFaturaId = instance.mFaturaId;

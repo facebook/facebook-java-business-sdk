@@ -57,6 +57,12 @@ public class AdSet extends APINode {
   private List<AdLabel> mAdlabels = null;
   @SerializedName("adset_schedule")
   private List<DayPart> mAdsetSchedule = null;
+  @SerializedName("asset_feed_id")
+  private String mAssetFeedId = null;
+  @SerializedName("attribution_window_days")
+  private Long mAttributionWindowDays = null;
+  @SerializedName("best_creative")
+  private Object mBestCreative = null;
   @SerializedName("bid_amount")
   private Long mBidAmount = null;
   @SerializedName("bid_info")
@@ -117,6 +123,10 @@ public class AdSet extends APINode {
   private EnumStatus mStatus = null;
   @SerializedName("targeting")
   private Targeting mTargeting = null;
+  @SerializedName("time_based_ad_rotation_id_blocks")
+  private List<List<Long>> mTimeBasedAdRotationIdBlocks = null;
+  @SerializedName("time_based_ad_rotation_intervals")
+  private List<Long> mTimeBasedAdRotationIntervals = null;
   @SerializedName("updated_time")
   private String mUpdatedTime = null;
   @SerializedName("use_new_app_click")
@@ -362,6 +372,18 @@ public class AdSet extends APINode {
     return mAdsetSchedule;
   }
 
+  public String getFieldAssetFeedId() {
+    return mAssetFeedId;
+  }
+
+  public Long getFieldAttributionWindowDays() {
+    return mAttributionWindowDays;
+  }
+
+  public Object getFieldBestCreative() {
+    return mBestCreative;
+  }
+
   public Long getFieldBidAmount() {
     return mBidAmount;
   }
@@ -482,6 +504,14 @@ public class AdSet extends APINode {
     return mTargeting;
   }
 
+  public List<List<Long>> getFieldTimeBasedAdRotationIdBlocks() {
+    return mTimeBasedAdRotationIdBlocks;
+  }
+
+  public List<Long> getFieldTimeBasedAdRotationIntervals() {
+    return mTimeBasedAdRotationIntervals;
+  }
+
   public String getFieldUpdatedTime() {
     return mUpdatedTime;
   }
@@ -500,10 +530,8 @@ public class AdSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "after",
       "business_id",
       "category",
-      "limit",
       "since",
       "uid",
       "until",
@@ -556,11 +584,6 @@ public class AdSet extends APINode {
     }
 
 
-    public APIRequestGetActivities setAfter (String after) {
-      this.setParam("after", after);
-      return this;
-    }
-
     public APIRequestGetActivities setBusinessId (String businessId) {
       this.setParam("business_id", businessId);
       return this;
@@ -572,15 +595,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetActivities setCategory (String category) {
       this.setParam("category", category);
-      return this;
-    }
-
-    public APIRequestGetActivities setLimit (Long limit) {
-      this.setParam("limit", limit);
-      return this;
-    }
-    public APIRequestGetActivities setLimit (String limit) {
-      this.setParam("limit", limit);
       return this;
     }
 
@@ -737,6 +751,7 @@ public class AdSet extends APINode {
       "applink_treatment",
       "body",
       "call_to_action_type",
+      "effective_object_story_id",
       "id",
       "image_crops",
       "image_hash",
@@ -884,6 +899,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestCallToActionTypeField (boolean value) {
       this.requestField("call_to_action_type", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestEffectiveObjectStoryIdField () {
+      return this.requestEffectiveObjectStoryIdField(true);
+    }
+    public APIRequestGetAdCreatives requestEffectiveObjectStoryIdField (boolean value) {
+      this.requestField("effective_object_story_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestIdField () {
@@ -1052,7 +1074,6 @@ public class AdSet extends APINode {
     public static final String[] PARAMS = {
       "adlabels",
       "execution_options",
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -1109,11 +1130,6 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestDeleteAdLabels setId (String id) {
-      this.setParam("id", id);
-      return this;
-    }
-
     public APIRequestDeleteAdLabels requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -1152,34 +1168,33 @@ public class AdSet extends APINode {
 
   }
 
-  public static class APIRequestCreateAdLabel extends APIRequest<APINode> {
+  public static class APIRequestCreateAdLabel extends APIRequest<AdLabel> {
 
-    APINode lastResponse = null;
+    AdLabel lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public AdLabel getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "adlabels",
       "execution_options",
-      "id",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public AdLabel parseResponse(String response) throws APIException {
+      return AdLabel.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public AdLabel execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public AdLabel execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -1216,11 +1231,6 @@ public class AdSet extends APINode {
     }
     public APIRequestCreateAdLabel setExecutionOptions (String executionOptions) {
       this.setParam("execution_options", executionOptions);
-      return this;
-    }
-
-    public APIRequestCreateAdLabel setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -1750,6 +1760,9 @@ public class AdSet extends APINode {
       "breakdowns",
       "date_preset",
       "default_summary",
+      "export_columns",
+      "export_format",
+      "export_name",
       "fields",
       "filtering",
       "level",
@@ -1849,6 +1862,25 @@ public class AdSet extends APINode {
     }
     public APIRequestGetInsights setDefaultSummary (String defaultSummary) {
       this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+
+    public APIRequestGetInsights setExportColumns (List<String> exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+    public APIRequestGetInsights setExportColumns (String exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+
+    public APIRequestGetInsights setExportFormat (String exportFormat) {
+      this.setParam("export_format", exportFormat);
+      return this;
+    }
+
+    public APIRequestGetInsights setExportName (String exportName) {
+      this.setParam("export_name", exportName);
       return this;
     }
 
@@ -1990,6 +2022,9 @@ public class AdSet extends APINode {
       "breakdowns",
       "date_preset",
       "default_summary",
+      "export_columns",
+      "export_format",
+      "export_name",
       "fields",
       "filtering",
       "level",
@@ -2089,6 +2124,25 @@ public class AdSet extends APINode {
     }
     public APIRequestGetInsightsAsync setDefaultSummary (String defaultSummary) {
       this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setExportColumns (List<String> exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setExportColumns (String exportColumns) {
+      this.setParam("export_columns", exportColumns);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setExportFormat (String exportFormat) {
+      this.setParam("export_format", exportFormat);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setExportName (String exportName) {
+      this.setParam("export_name", exportName);
       return this;
     }
 
@@ -2333,7 +2387,6 @@ public class AdSet extends APINode {
     }
     public static final String[] PARAMS = {
       "account_id",
-      "id",
     };
 
     public static final String[] FIELDS = {
@@ -2374,11 +2427,6 @@ public class AdSet extends APINode {
 
     public APIRequestDelete setAccountId (String accountId) {
       this.setParam("account_id", accountId);
-      return this;
-    }
-
-    public APIRequestDelete setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -2434,6 +2482,7 @@ public class AdSet extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
+      "attribution_window_days",
       "bid_amount",
       "bid_info",
       "billing_event",
@@ -2464,6 +2513,8 @@ public class AdSet extends APINode {
       "start_time",
       "status",
       "targeting",
+      "time_based_ad_rotation_id_blocks",
+      "time_based_ad_rotation_intervals",
       "updated_time",
       "use_new_app_click",
     };
@@ -2556,6 +2607,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestAdsetScheduleField (boolean value) {
       this.requestField("adset_schedule", value);
+      return this;
+    }
+    public APIRequestGet requestAttributionWindowDaysField () {
+      return this.requestAttributionWindowDaysField(true);
+    }
+    public APIRequestGet requestAttributionWindowDaysField (boolean value) {
+      this.requestField("attribution_window_days", value);
       return this;
     }
     public APIRequestGet requestBidAmountField () {
@@ -2768,6 +2826,20 @@ public class AdSet extends APINode {
       this.requestField("targeting", value);
       return this;
     }
+    public APIRequestGet requestTimeBasedAdRotationIdBlocksField () {
+      return this.requestTimeBasedAdRotationIdBlocksField(true);
+    }
+    public APIRequestGet requestTimeBasedAdRotationIdBlocksField (boolean value) {
+      this.requestField("time_based_ad_rotation_id_blocks", value);
+      return this;
+    }
+    public APIRequestGet requestTimeBasedAdRotationIntervalsField () {
+      return this.requestTimeBasedAdRotationIntervalsField(true);
+    }
+    public APIRequestGet requestTimeBasedAdRotationIntervalsField (boolean value) {
+      this.requestField("time_based_ad_rotation_intervals", value);
+      return this;
+    }
     public APIRequestGet requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -2784,17 +2856,18 @@ public class AdSet extends APINode {
     }
   }
 
-  public static class APIRequestUpdate extends APIRequest<APINode> {
+  public static class APIRequestUpdate extends APIRequest<AdSet> {
 
-    APINode lastResponse = null;
+    AdSet lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public AdSet getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "account_id",
       "adlabels",
       "adset_schedule",
+      "attribution_window_days",
       "bid_amount",
       "billing_event",
       "creative_sequence",
@@ -2802,7 +2875,6 @@ public class AdSet extends APINode {
       "daily_imps",
       "end_time",
       "execution_options",
-      "id",
       "is_autobid",
       "lifetime_budget",
       "lifetime_imps",
@@ -2815,23 +2887,25 @@ public class AdSet extends APINode {
       "start_time",
       "status",
       "targeting",
+      "time_based_ad_rotation_id_blocks",
+      "time_based_ad_rotation_intervals",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public AdSet parseResponse(String response) throws APIException {
+      return AdSet.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public AdSet execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public AdSet execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -2873,6 +2947,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setAdsetSchedule (String adsetSchedule) {
       this.setParam("adset_schedule", adsetSchedule);
+      return this;
+    }
+
+    public APIRequestUpdate setAttributionWindowDays (Long attributionWindowDays) {
+      this.setParam("attribution_window_days", attributionWindowDays);
+      return this;
+    }
+    public APIRequestUpdate setAttributionWindowDays (String attributionWindowDays) {
+      this.setParam("attribution_window_days", attributionWindowDays);
       return this;
     }
 
@@ -2932,11 +3015,6 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setExecutionOptions (String executionOptions) {
       this.setParam("execution_options", executionOptions);
-      return this;
-    }
-
-    public APIRequestUpdate setId (String id) {
-      this.setParam("id", id);
       return this;
     }
 
@@ -3033,6 +3111,24 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setTargeting (String targeting) {
       this.setParam("targeting", targeting);
+      return this;
+    }
+
+    public APIRequestUpdate setTimeBasedAdRotationIdBlocks (List<List<Long>> timeBasedAdRotationIdBlocks) {
+      this.setParam("time_based_ad_rotation_id_blocks", timeBasedAdRotationIdBlocks);
+      return this;
+    }
+    public APIRequestUpdate setTimeBasedAdRotationIdBlocks (String timeBasedAdRotationIdBlocks) {
+      this.setParam("time_based_ad_rotation_id_blocks", timeBasedAdRotationIdBlocks);
+      return this;
+    }
+
+    public APIRequestUpdate setTimeBasedAdRotationIntervals (List<Long> timeBasedAdRotationIntervals) {
+      this.setParam("time_based_ad_rotation_intervals", timeBasedAdRotationIntervals);
+      return this;
+    }
+    public APIRequestUpdate setTimeBasedAdRotationIntervals (String timeBasedAdRotationIntervals) {
+      this.setParam("time_based_ad_rotation_intervals", timeBasedAdRotationIntervals);
       return this;
     }
 
@@ -3283,12 +3379,10 @@ public class AdSet extends APINode {
   }
 
   public static enum EnumExecutionOptions {
-      @SerializedName("VALIDATE_ONLY")
-      VALUE_VALIDATE_ONLY("VALIDATE_ONLY"),
-      @SerializedName("SYNCHRONOUS_AD_REVIEW")
-      VALUE_SYNCHRONOUS_AD_REVIEW("SYNCHRONOUS_AD_REVIEW"),
-      @SerializedName("INCLUDE_RECOMMENDATIONS")
-      VALUE_INCLUDE_RECOMMENDATIONS("INCLUDE_RECOMMENDATIONS"),
+      @SerializedName("validate_only")
+      VALUE_VALIDATE_ONLY("validate_only"),
+      @SerializedName("include_recommendations")
+      VALUE_INCLUDE_RECOMMENDATIONS("include_recommendations"),
       NULL(null);
 
       private String value;
@@ -3340,6 +3434,9 @@ public class AdSet extends APINode {
     this.mAccountId = instance.mAccountId;
     this.mAdlabels = instance.mAdlabels;
     this.mAdsetSchedule = instance.mAdsetSchedule;
+    this.mAssetFeedId = instance.mAssetFeedId;
+    this.mAttributionWindowDays = instance.mAttributionWindowDays;
+    this.mBestCreative = instance.mBestCreative;
     this.mBidAmount = instance.mBidAmount;
     this.mBidInfo = instance.mBidInfo;
     this.mBillingEvent = instance.mBillingEvent;
@@ -3370,6 +3467,8 @@ public class AdSet extends APINode {
     this.mStartTime = instance.mStartTime;
     this.mStatus = instance.mStatus;
     this.mTargeting = instance.mTargeting;
+    this.mTimeBasedAdRotationIdBlocks = instance.mTimeBasedAdRotationIdBlocks;
+    this.mTimeBasedAdRotationIntervals = instance.mTimeBasedAdRotationIntervals;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mUseNewAppClick = instance.mUseNewAppClick;
     this.context = instance.context;

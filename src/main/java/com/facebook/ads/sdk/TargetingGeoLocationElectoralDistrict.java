@@ -50,27 +50,29 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ConnectionObjectOpenGraphObject extends APINode {
-  @SerializedName("display_name")
-  private String mDisplayName = null;
+public class TargetingGeoLocationElectoralDistrict extends APINode {
+  @SerializedName("country")
+  private String mCountry = null;
+  @SerializedName("electoral_district")
+  private String mElectoralDistrict = null;
+  @SerializedName("key")
+  private String mKey = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("properties")
-  private List<ConnectionObjectOpenGraphObjectProperty> mProperties = null;
   protected static Gson gson = null;
 
-  public ConnectionObjectOpenGraphObject() {
+  public TargetingGeoLocationElectoralDistrict() {
   }
 
   public String getId() {
     return null;
   }
-  public static ConnectionObjectOpenGraphObject loadJSON(String json, APIContext context) {
-    ConnectionObjectOpenGraphObject connectionObjectOpenGraphObject = getGson().fromJson(json, ConnectionObjectOpenGraphObject.class);
+  public static TargetingGeoLocationElectoralDistrict loadJSON(String json, APIContext context) {
+    TargetingGeoLocationElectoralDistrict targetingGeoLocationElectoralDistrict = getGson().fromJson(json, TargetingGeoLocationElectoralDistrict.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(connectionObjectOpenGraphObject.toString());
+      JsonElement o2 = parser.parse(targetingGeoLocationElectoralDistrict.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -80,13 +82,13 @@ public class ConnectionObjectOpenGraphObject extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    connectionObjectOpenGraphObject.context = context;
-    connectionObjectOpenGraphObject.rawValue = json;
-    return connectionObjectOpenGraphObject;
+    targetingGeoLocationElectoralDistrict.context = context;
+    targetingGeoLocationElectoralDistrict.rawValue = json;
+    return targetingGeoLocationElectoralDistrict;
   }
 
-  public static APINodeList<ConnectionObjectOpenGraphObject> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ConnectionObjectOpenGraphObject> connectionObjectOpenGraphObjects = new APINodeList<ConnectionObjectOpenGraphObject>(request, json);
+  public static APINodeList<TargetingGeoLocationElectoralDistrict> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<TargetingGeoLocationElectoralDistrict> targetingGeoLocationElectoralDistricts = new APINodeList<TargetingGeoLocationElectoralDistrict>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -97,9 +99,9 @@ public class ConnectionObjectOpenGraphObject extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          connectionObjectOpenGraphObjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          targetingGeoLocationElectoralDistricts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return connectionObjectOpenGraphObjects;
+        return targetingGeoLocationElectoralDistricts;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -107,13 +109,13 @@ public class ConnectionObjectOpenGraphObject extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            connectionObjectOpenGraphObjects.setPaging(before, after);
+            targetingGeoLocationElectoralDistricts.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              connectionObjectOpenGraphObjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              targetingGeoLocationElectoralDistricts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +126,23 @@ public class ConnectionObjectOpenGraphObject extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  connectionObjectOpenGraphObjects.add(loadJSON(entry.getValue().toString(), context));
+                  targetingGeoLocationElectoralDistricts.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              connectionObjectOpenGraphObjects.add(loadJSON(obj.toString(), context));
+              targetingGeoLocationElectoralDistricts.add(loadJSON(obj.toString(), context));
             }
           }
-          return connectionObjectOpenGraphObjects;
+          return targetingGeoLocationElectoralDistricts;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              connectionObjectOpenGraphObjects.add(loadJSON(entry.getValue().toString(), context));
+              targetingGeoLocationElectoralDistricts.add(loadJSON(entry.getValue().toString(), context));
           }
-          return connectionObjectOpenGraphObjects;
+          return targetingGeoLocationElectoralDistricts;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +159,20 @@ public class ConnectionObjectOpenGraphObject extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              connectionObjectOpenGraphObjects.add(loadJSON(value.toString(), context));
+              targetingGeoLocationElectoralDistricts.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return connectionObjectOpenGraphObjects;
+            return targetingGeoLocationElectoralDistricts;
           }
 
           // Sixth, check if it's pure JsonObject
-          connectionObjectOpenGraphObjects.clear();
-          connectionObjectOpenGraphObjects.add(loadJSON(json, context));
-          return connectionObjectOpenGraphObjects;
+          targetingGeoLocationElectoralDistricts.clear();
+          targetingGeoLocationElectoralDistricts.add(loadJSON(json, context));
+          return targetingGeoLocationElectoralDistricts;
         }
       }
     } catch (Exception e) {
@@ -198,12 +200,30 @@ public class ConnectionObjectOpenGraphObject extends APINode {
   }
 
 
-  public String getFieldDisplayName() {
-    return mDisplayName;
+  public String getFieldCountry() {
+    return mCountry;
   }
 
-  public ConnectionObjectOpenGraphObject setFieldDisplayName(String value) {
-    this.mDisplayName = value;
+  public TargetingGeoLocationElectoralDistrict setFieldCountry(String value) {
+    this.mCountry = value;
+    return this;
+  }
+
+  public String getFieldElectoralDistrict() {
+    return mElectoralDistrict;
+  }
+
+  public TargetingGeoLocationElectoralDistrict setFieldElectoralDistrict(String value) {
+    this.mElectoralDistrict = value;
+    return this;
+  }
+
+  public String getFieldKey() {
+    return mKey;
+  }
+
+  public TargetingGeoLocationElectoralDistrict setFieldKey(String value) {
+    this.mKey = value;
     return this;
   }
 
@@ -211,25 +231,11 @@ public class ConnectionObjectOpenGraphObject extends APINode {
     return mName;
   }
 
-  public ConnectionObjectOpenGraphObject setFieldName(String value) {
+  public TargetingGeoLocationElectoralDistrict setFieldName(String value) {
     this.mName = value;
     return this;
   }
 
-  public List<ConnectionObjectOpenGraphObjectProperty> getFieldProperties() {
-    return mProperties;
-  }
-
-  public ConnectionObjectOpenGraphObject setFieldProperties(List<ConnectionObjectOpenGraphObjectProperty> value) {
-    this.mProperties = value;
-    return this;
-  }
-
-  public ConnectionObjectOpenGraphObject setFieldProperties(String value) {
-    Type type = new TypeToken<List<ConnectionObjectOpenGraphObjectProperty>>(){}.getType();
-    this.mProperties = ConnectionObjectOpenGraphObjectProperty.getGson().fromJson(value, type);
-    return this;
-  }
 
 
 
@@ -246,19 +252,20 @@ public class ConnectionObjectOpenGraphObject extends APINode {
     return gson;
   }
 
-  public ConnectionObjectOpenGraphObject copyFrom(ConnectionObjectOpenGraphObject instance) {
-    this.mDisplayName = instance.mDisplayName;
+  public TargetingGeoLocationElectoralDistrict copyFrom(TargetingGeoLocationElectoralDistrict instance) {
+    this.mCountry = instance.mCountry;
+    this.mElectoralDistrict = instance.mElectoralDistrict;
+    this.mKey = instance.mKey;
     this.mName = instance.mName;
-    this.mProperties = instance.mProperties;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ConnectionObjectOpenGraphObject> getParser() {
-    return new APIRequest.ResponseParser<ConnectionObjectOpenGraphObject>() {
-      public APINodeList<ConnectionObjectOpenGraphObject> parseResponse(String response, APIContext context, APIRequest<ConnectionObjectOpenGraphObject> request) throws MalformedResponseException {
-        return ConnectionObjectOpenGraphObject.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<TargetingGeoLocationElectoralDistrict> getParser() {
+    return new APIRequest.ResponseParser<TargetingGeoLocationElectoralDistrict>() {
+      public APINodeList<TargetingGeoLocationElectoralDistrict> parseResponse(String response, APIContext context, APIRequest<TargetingGeoLocationElectoralDistrict> request) throws MalformedResponseException {
+        return TargetingGeoLocationElectoralDistrict.parseResponse(response, context, request);
       }
     };
   }
