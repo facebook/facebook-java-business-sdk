@@ -2,36 +2,11 @@
 
 **IMPORTANT**: This SDK is in beta version. Please help us make improvement by reporting any issues you found.
 
-**BREAKING CHANGES NOTES (v0.2.0)**: New Release for the Java SDK (v0.2.0) includes following breaking changes compared with previous version (v0.1.0). These breaking changes results in compilation errors, which will help you identify places where changes are needed.
+**BREAKING CHANGES NOTES (v0.3.0)**: New Release for the Java SDK (v0.3.0) includes following breaking changes:
 
-* **API version upgrade:** New SDK version calls Facebook Marketing API v2.6 endpoints. Classes are modified to use new fields/params/endpoints and remove deprecated
+* **API version upgrade:** New SDK version calls Facebook Marketing API v2.7 endpoints. Classes are modified to use new fields/params/endpoints and to remove deprecated
 fields/params/endpoints. Please refer to <a href="https://developers.facebook.com/docs/marketing-api/changelog">Marketing API Changelog</a> for details.
 
-* **Enum Handling Improvement:** In previous version, we place enum type definition in the classes wherever the enum is referred. This caused duplicated definition of the same enum type and confusion for developers. In new release, enums are moved to their proper nesting classes.
-	
-	For example, the following change is needed:
- 	
-```java
- 	  // This is deprecated code
-      Campaign campaign = account.createCampaign()
-        .setName("Java SDK Test Campaign")
-        .setObjective(AdAccount.EnumCampaignObjective.VALUE_LINK_CLICKS) // old way
-        .setSpendCap(10000L)
-        .setStatus(AdAccount.EnumCampaignStatus.VALUE_PAUSED) // old way
-        .execute();	
-```
-
-	
-```java
-	  // This is new code
-      Campaign campaign = account.createCampaign()
-        .setName("Java SDK Test Campaign")
-        .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS) // new way
-        .setSpendCap(10000L)
-        .setStatus(Campaign.EnumStatus.VALUE_PAUSED) // new way
-        .execute();
-```
-	
 
 ## Introduction
 The Facebook Ads SDK for Java provides an easy interface and abstraction to the Marketing API.
