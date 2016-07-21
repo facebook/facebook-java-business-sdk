@@ -280,7 +280,7 @@ public class APIRequest<T extends APINode> {
         if (entry.getValue() instanceof File) {
           info.files.put((String)entry.getKey(), (File) entry.getValue());
         } else {
-          body.append((firstEntry ? "" : "&") + entry.getKey() + "=" + convertToString(entry.getValue()));
+          body.append((firstEntry ? "" : "&") + URLEncoder.encode(entry.getKey().toString(), "UTF-8") + "=" + URLEncoder.encode(convertToString(entry.getValue()), "UTF-8"));
           firstEntry = false;
         }
       }
