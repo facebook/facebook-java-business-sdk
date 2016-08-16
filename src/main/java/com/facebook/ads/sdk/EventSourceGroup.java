@@ -237,6 +237,10 @@ public class EventSourceGroup extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateSharedAccount createSharedAccount() {
+    return new APIRequestCreateSharedAccount(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -255,6 +259,100 @@ public class EventSourceGroup extends APINode {
   }
 
 
+
+  public static class APIRequestCreateSharedAccount extends APIRequest<EventSourceGroup> {
+
+    EventSourceGroup lastResponse = null;
+    @Override
+    public EventSourceGroup getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "accounts",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public EventSourceGroup parseResponse(String response) throws APIException {
+      return EventSourceGroup.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public EventSourceGroup execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public EventSourceGroup execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestCreateSharedAccount(String nodeId, APIContext context) {
+      super(context, nodeId, "/shared_accounts", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateSharedAccount setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSharedAccount setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateSharedAccount setAccounts (List<String> accounts) {
+      this.setParam("accounts", accounts);
+      return this;
+    }
+    public APIRequestCreateSharedAccount setAccounts (String accounts) {
+      this.setParam("accounts", accounts);
+      return this;
+    }
+
+    public APIRequestCreateSharedAccount requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateSharedAccount requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSharedAccount requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateSharedAccount requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSharedAccount requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSharedAccount requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGet extends APIRequest<EventSourceGroup> {
 

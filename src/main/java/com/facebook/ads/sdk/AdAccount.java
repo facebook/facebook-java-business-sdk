@@ -9704,11 +9704,11 @@ public class AdAccount extends APINode {
     }
   }
 
-  public static class APIRequestCreateProductAudience extends APIRequest<APINode> {
+  public static class APIRequestCreateProductAudience extends APIRequest<CustomAudience> {
 
-    APINode lastResponse = null;
+    CustomAudience lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public CustomAudience getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -9729,17 +9729,17 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public CustomAudience parseResponse(String response) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public CustomAudience execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public CustomAudience execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }

@@ -279,6 +279,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestGetPricingVariablesBatch(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreatePricingVariablesBatch createPricingVariablesBatch() {
+    return new APIRequestCreatePricingVariablesBatch(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetProductFeeds getProductFeeds() {
     return new APIRequestGetProductFeeds(this.getPrefixedId().toString(), context);
   }
@@ -1273,11 +1277,11 @@ public class ProductCatalog extends APINode {
 
   }
 
-  public static class APIRequestGetPricingVariablesBatch extends APIRequest<APINode> {
+  public static class APIRequestGetPricingVariablesBatch extends APIRequest<ProductCatalogPricingVariablesBatch> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<ProductCatalogPricingVariablesBatch> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<ProductCatalogPricingVariablesBatch> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -1285,20 +1289,24 @@ public class ProductCatalog extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "errors",
+      "errors_total_count",
+      "handle",
+      "status",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<ProductCatalogPricingVariablesBatch> parseResponse(String response) throws APIException {
+      return ProductCatalogPricingVariablesBatch.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<ProductCatalogPricingVariablesBatch> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<ProductCatalogPricingVariablesBatch> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -1357,6 +1365,148 @@ public class ProductCatalog extends APINode {
 
     @Override
     public APIRequestGetPricingVariablesBatch requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPricingVariablesBatch requestErrorsField () {
+      return this.requestErrorsField(true);
+    }
+    public APIRequestGetPricingVariablesBatch requestErrorsField (boolean value) {
+      this.requestField("errors", value);
+      return this;
+    }
+    public APIRequestGetPricingVariablesBatch requestErrorsTotalCountField () {
+      return this.requestErrorsTotalCountField(true);
+    }
+    public APIRequestGetPricingVariablesBatch requestErrorsTotalCountField (boolean value) {
+      this.requestField("errors_total_count", value);
+      return this;
+    }
+    public APIRequestGetPricingVariablesBatch requestHandleField () {
+      return this.requestHandleField(true);
+    }
+    public APIRequestGetPricingVariablesBatch requestHandleField (boolean value) {
+      this.requestField("handle", value);
+      return this;
+    }
+    public APIRequestGetPricingVariablesBatch requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetPricingVariablesBatch requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreatePricingVariablesBatch extends APIRequest<ProductCatalogPricingVariablesBatch> {
+
+    ProductCatalogPricingVariablesBatch lastResponse = null;
+    @Override
+    public ProductCatalogPricingVariablesBatch getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "standard",
+      "update_only",
+      "file",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ProductCatalogPricingVariablesBatch parseResponse(String response) throws APIException {
+      return ProductCatalogPricingVariablesBatch.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public ProductCatalogPricingVariablesBatch execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalogPricingVariablesBatch execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestCreatePricingVariablesBatch(String nodeId, APIContext context) {
+      super(context, nodeId, "/pricing_variables_batch", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePricingVariablesBatch setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePricingVariablesBatch setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+    public APIRequestCreatePricingVariablesBatch addUploadFile (String uploadName, File file) {
+      this.setParam(uploadName, file);
+      return this;
+    }
+
+    public APIRequestCreatePricingVariablesBatch setUseVideoEndpoint(boolean useVideoEndpoint) {
+      this.useVideoEndpoint = useVideoEndpoint;
+      return this;
+    }
+
+    public APIRequestCreatePricingVariablesBatch setStandard (ProductCatalogPricingVariablesBatch.EnumStandard standard) {
+      this.setParam("standard", standard);
+      return this;
+    }
+    public APIRequestCreatePricingVariablesBatch setStandard (String standard) {
+      this.setParam("standard", standard);
+      return this;
+    }
+
+    public APIRequestCreatePricingVariablesBatch setUpdateOnly (Boolean updateOnly) {
+      this.setParam("update_only", updateOnly);
+      return this;
+    }
+    public APIRequestCreatePricingVariablesBatch setUpdateOnly (String updateOnly) {
+      this.setParam("update_only", updateOnly);
+      return this;
+    }
+
+    public APIRequestCreatePricingVariablesBatch requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePricingVariablesBatch requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePricingVariablesBatch requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePricingVariablesBatch requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePricingVariablesBatch requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePricingVariablesBatch requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

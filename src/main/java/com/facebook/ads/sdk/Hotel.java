@@ -261,8 +261,16 @@ public class Hotel extends APINode {
     return new APIRequestCreateHotelRoom(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -487,6 +495,90 @@ public class Hotel extends APINode {
 
   }
 
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<Hotel> {
 
     Hotel lastResponse = null;
@@ -673,6 +765,170 @@ public class Hotel extends APINode {
       this.requestField("url", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<Hotel> {
+
+    Hotel lastResponse = null;
+    @Override
+    public Hotel getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "address",
+      "applinks",
+      "brand",
+      "description",
+      "guest_ratings",
+      "images",
+      "name",
+      "phone",
+      "star_rating",
+      "url",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Hotel parseResponse(String response) throws APIException {
+      return Hotel.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public Hotel execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Hotel execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setAddress (Object address) {
+      this.setParam("address", address);
+      return this;
+    }
+    public APIRequestUpdate setAddress (String address) {
+      this.setParam("address", address);
+      return this;
+    }
+
+    public APIRequestUpdate setApplinks (Object applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+    public APIRequestUpdate setApplinks (String applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+
+    public APIRequestUpdate setBrand (String brand) {
+      this.setParam("brand", brand);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setGuestRatings (List<Object> guestRatings) {
+      this.setParam("guest_ratings", guestRatings);
+      return this;
+    }
+    public APIRequestUpdate setGuestRatings (String guestRatings) {
+      this.setParam("guest_ratings", guestRatings);
+      return this;
+    }
+
+    public APIRequestUpdate setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestUpdate setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setPhone (String phone) {
+      this.setParam("phone", phone);
+      return this;
+    }
+
+    public APIRequestUpdate setStarRating (Double starRating) {
+      this.setParam("star_rating", starRating);
+      return this;
+    }
+    public APIRequestUpdate setStarRating (String starRating) {
+      this.setParam("star_rating", starRating);
+      return this;
+    }
+
+    public APIRequestUpdate setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
 
