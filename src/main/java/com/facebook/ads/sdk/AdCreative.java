@@ -182,7 +182,7 @@ public class AdCreative extends APINode {
     }
     adCreative.context = context;
     adCreative.rawValue = json;
-    adCreative.mCreativeId = adCreative.mId.toString();
+    adCreative.mCreativeId = adCreative.mId;
     return adCreative;
   }
 
@@ -415,7 +415,7 @@ public class AdCreative extends APINode {
 
   public AdCreative setFieldId(String value) {
     this.mId = value;
-    this.mCreativeId = this.mId.toString();
+    this.mCreativeId = this.mId;
     return this;
   }
 
