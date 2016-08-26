@@ -31,6 +31,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
+import java.lang.reflect.Modifier;
 import java.lang.StringBuilder;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -40,6 +41,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class APIRequest<T extends APINode> {
 
@@ -245,10 +247,18 @@ public class APIRequest<T extends APINode> {
     if (input == null) {
       return "null";
     } else if (input instanceof Map) {
-      Gson gson = new Gson();
+      Gson gson = new GsonBuilder()
+          .excludeFieldsWithModifiers(Modifier.STATIC)
+          .excludeFieldsWithModifiers(Modifier.PROTECTED)
+          .disableHtmlEscaping()
+          .create();
       return gson.toJson((Map)input);
     } else if (input instanceof List) {
-      Gson gson = new Gson();
+      Gson gson = new GsonBuilder()
+          .excludeFieldsWithModifiers(Modifier.STATIC)
+          .excludeFieldsWithModifiers(Modifier.PROTECTED)
+          .disableHtmlEscaping()
+          .create();
       return gson.toJson((List)input);
     } else {
       return input.toString();
