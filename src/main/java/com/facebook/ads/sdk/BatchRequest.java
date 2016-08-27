@@ -22,35 +22,22 @@
  */
 package com.facebook.ads.sdk;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
-import java.lang.StringBuilder;
-import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.Random;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
 
 public class BatchRequest {
-  List<Pair> requests = new ArrayList<Pair>();
-  APIContext context = null;
+  private final List<Pair> requests = new ArrayList<Pair>();
+  private final APIContext context;
 
   public BatchRequest(APIContext context) {
     this.context = context;
@@ -139,7 +126,7 @@ public class BatchRequest {
     }
     params.put("batch", batch.toString());
     params.putAll(files);
-    return APIRequest.getExecutor().sendPost(context.getEndpointBase() + "/", params, context);
+    return context.getRequestExecutor().sendPost(context.getEndpointBase() + "/", params, context);
   }
 
   public static class BatchModeRequestInfo {

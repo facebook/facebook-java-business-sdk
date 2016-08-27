@@ -23,24 +23,20 @@
 package com.facebook.ads.sdk;
 
 import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-
 
 public class APIContext {
   public static final String DEFAULT_API_BASE = APIConfig.DEFAULT_API_BASE;
   public static final String DEFAULT_API_VERSION = APIConfig.DEFAULT_API_VERSION;
   public static final String DEFAULT_VIDEO_API_BASE = APIConfig.DEFAULT_VIDEO_API_BASE;
-  private String endpointBase;
-  private String videoEndpointBase;
-  private String accessToken;
-  private String appSecret;
-  private String version;
+  private static final IRequestExecutor DEFAULT_REQUEST_EXECUTOR = new DefaultRequestExecutor();
+  private final String endpointBase;
+  private final String videoEndpointBase;
+  private final String accessToken;
+  private final String appSecret;
+  private final String version;
+  private IRequestExecutor requestExecutor = DEFAULT_REQUEST_EXECUTOR;
   protected boolean isDebug = false;
   protected PrintStream logger = System.out;
 
@@ -104,6 +100,14 @@ public class APIContext {
   public APIContext setLogger(PrintStream logger) {
     this.logger = logger;
     return this;
+  }
+
+  public void setRequestExecutor(IRequestExecutor requestExecutor) {
+    this.requestExecutor = requestExecutor;
+  }
+
+  public IRequestExecutor getRequestExecutor() {
+    return requestExecutor;
   }
 
   public void log(String s) {
