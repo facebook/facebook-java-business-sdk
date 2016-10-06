@@ -52,17 +52,17 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class AdsActionStats extends APINode {
   @SerializedName("1d_click")
-  private Double m1dClick = null;
+  private String m1dClick = null;
   @SerializedName("1d_view")
-  private Double m1dView = null;
+  private String m1dView = null;
   @SerializedName("28d_click")
-  private Double m28dClick = null;
+  private String m28dClick = null;
   @SerializedName("28d_view")
-  private Double m28dView = null;
+  private String m28dView = null;
   @SerializedName("7d_click")
-  private Double m7dClick = null;
+  private String m7dClick = null;
   @SerializedName("7d_view")
-  private Double m7dView = null;
+  private String m7dView = null;
   @SerializedName("action_carousel_card_id")
   private String mActionCarouselCardId = null;
   @SerializedName("action_carousel_card_name")
@@ -71,6 +71,8 @@ public class AdsActionStats extends APINode {
   private String mActionDestination = null;
   @SerializedName("action_device")
   private String mActionDevice = null;
+  @SerializedName("action_reaction")
+  private String mActionReaction = null;
   @SerializedName("action_target_id")
   private String mActionTargetId = null;
   @SerializedName("action_type")
@@ -79,10 +81,8 @@ public class AdsActionStats extends APINode {
   private String mActionVideoSound = null;
   @SerializedName("action_video_type")
   private String mActionVideoType = null;
-  @SerializedName("canvas_component_id")
-  private String mCanvasComponentId = null;
   @SerializedName("value")
-  private Double mValue = null;
+  private String mValue = null;
   protected static Gson gson = null;
 
   public AdsActionStats() {
@@ -224,56 +224,56 @@ public class AdsActionStats extends APINode {
   }
 
 
-  public Double getField1dClick() {
+  public String getField1dClick() {
     return m1dClick;
   }
 
-  public AdsActionStats setField1dClick(Double value) {
+  public AdsActionStats setField1dClick(String value) {
     this.m1dClick = value;
     return this;
   }
 
-  public Double getField1dView() {
+  public String getField1dView() {
     return m1dView;
   }
 
-  public AdsActionStats setField1dView(Double value) {
+  public AdsActionStats setField1dView(String value) {
     this.m1dView = value;
     return this;
   }
 
-  public Double getField28dClick() {
+  public String getField28dClick() {
     return m28dClick;
   }
 
-  public AdsActionStats setField28dClick(Double value) {
+  public AdsActionStats setField28dClick(String value) {
     this.m28dClick = value;
     return this;
   }
 
-  public Double getField28dView() {
+  public String getField28dView() {
     return m28dView;
   }
 
-  public AdsActionStats setField28dView(Double value) {
+  public AdsActionStats setField28dView(String value) {
     this.m28dView = value;
     return this;
   }
 
-  public Double getField7dClick() {
+  public String getField7dClick() {
     return m7dClick;
   }
 
-  public AdsActionStats setField7dClick(Double value) {
+  public AdsActionStats setField7dClick(String value) {
     this.m7dClick = value;
     return this;
   }
 
-  public Double getField7dView() {
+  public String getField7dView() {
     return m7dView;
   }
 
-  public AdsActionStats setField7dView(Double value) {
+  public AdsActionStats setField7dView(String value) {
     this.m7dView = value;
     return this;
   }
@@ -314,6 +314,15 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldActionReaction() {
+    return mActionReaction;
+  }
+
+  public AdsActionStats setFieldActionReaction(String value) {
+    this.mActionReaction = value;
+    return this;
+  }
+
   public String getFieldActionTargetId() {
     return mActionTargetId;
   }
@@ -350,20 +359,11 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
-  public String getFieldCanvasComponentId() {
-    return mCanvasComponentId;
-  }
-
-  public AdsActionStats setFieldCanvasComponentId(String value) {
-    this.mCanvasComponentId = value;
-    return this;
-  }
-
-  public Double getFieldValue() {
+  public String getFieldValue() {
     return mValue;
   }
 
-  public AdsActionStats setFieldValue(Double value) {
+  public AdsActionStats setFieldValue(String value) {
     this.mValue = value;
     return this;
   }
@@ -395,11 +395,11 @@ public class AdsActionStats extends APINode {
     this.mActionCarouselCardName = instance.mActionCarouselCardName;
     this.mActionDestination = instance.mActionDestination;
     this.mActionDevice = instance.mActionDevice;
+    this.mActionReaction = instance.mActionReaction;
     this.mActionTargetId = instance.mActionTargetId;
     this.mActionType = instance.mActionType;
     this.mActionVideoSound = instance.mActionVideoSound;
     this.mActionVideoType = instance.mActionVideoType;
-    this.mCanvasComponentId = instance.mCanvasComponentId;
     this.mValue = instance.mValue;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

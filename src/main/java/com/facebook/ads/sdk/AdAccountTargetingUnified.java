@@ -334,6 +334,22 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_FRIENDS_OF_CONNECTIONS("friends_of_connections"),
       @SerializedName("user_event")
       VALUE_USER_EVENT("user_event"),
+      @SerializedName("dynamic_audience_ids")
+      VALUE_DYNAMIC_AUDIENCE_IDS("dynamic_audience_ids"),
+      @SerializedName("excluded_dynamic_audience_ids")
+      VALUE_EXCLUDED_DYNAMIC_AUDIENCE_IDS("excluded_dynamic_audience_ids"),
+      @SerializedName("rtb_flag")
+      VALUE_RTB_FLAG("rtb_flag"),
+      @SerializedName("site_category")
+      VALUE_SITE_CATEGORY("site_category"),
+      @SerializedName("geo_locations")
+      VALUE_GEO_LOCATIONS("geo_locations"),
+      @SerializedName("excluded_geo_locations")
+      VALUE_EXCLUDED_GEO_LOCATIONS("excluded_geo_locations"),
+      @SerializedName("timezones")
+      VALUE_TIMEZONES("timezones"),
+      @SerializedName("place_page_set_ids")
+      VALUE_PLACE_PAGE_SET_IDS("place_page_set_ids"),
       @SerializedName("page_types")
       VALUE_PAGE_TYPES("page_types"),
       @SerializedName("publisher_platforms")
@@ -348,30 +364,28 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_DEVICE_PLATFORMS("device_platforms"),
       @SerializedName("effective_device_platforms")
       VALUE_EFFECTIVE_DEVICE_PLATFORMS("effective_device_platforms"),
-      @SerializedName("dynamic_audience_ids")
-      VALUE_DYNAMIC_AUDIENCE_IDS("dynamic_audience_ids"),
-      @SerializedName("excluded_dynamic_audience_ids")
-      VALUE_EXCLUDED_DYNAMIC_AUDIENCE_IDS("excluded_dynamic_audience_ids"),
-      @SerializedName("rtb_flag")
-      VALUE_RTB_FLAG("rtb_flag"),
+      @SerializedName("audience_network_positions")
+      VALUE_AUDIENCE_NETWORK_POSITIONS("audience_network_positions"),
+      @SerializedName("effective_audience_network_positions")
+      VALUE_EFFECTIVE_AUDIENCE_NETWORK_POSITIONS("effective_audience_network_positions"),
+      @SerializedName("excluded_publisher_categories")
+      VALUE_EXCLUDED_PUBLISHER_CATEGORIES("excluded_publisher_categories"),
+      @SerializedName("excluded_publisher_list_ids")
+      VALUE_EXCLUDED_PUBLISHER_LIST_IDS("excluded_publisher_list_ids"),
+      @SerializedName("excluded_publisher_domains")
+      VALUE_EXCLUDED_PUBLISHER_DOMAINS("excluded_publisher_domains"),
+      @SerializedName("publisher_visibility_categories")
+      VALUE_PUBLISHER_VISIBILITY_CATEGORIES("publisher_visibility_categories"),
       @SerializedName("user_device")
       VALUE_USER_DEVICE("user_device"),
       @SerializedName("excluded_user_device")
       VALUE_EXCLUDED_USER_DEVICE("excluded_user_device"),
+      @SerializedName("excluded_mobile_device_model")
+      VALUE_EXCLUDED_MOBILE_DEVICE_MODEL("excluded_mobile_device_model"),
       @SerializedName("user_os")
       VALUE_USER_OS("user_os"),
       @SerializedName("wireless_carrier")
       VALUE_WIRELESS_CARRIER("wireless_carrier"),
-      @SerializedName("site_category")
-      VALUE_SITE_CATEGORY("site_category"),
-      @SerializedName("geo_locations")
-      VALUE_GEO_LOCATIONS("geo_locations"),
-      @SerializedName("excluded_geo_locations")
-      VALUE_EXCLUDED_GEO_LOCATIONS("excluded_geo_locations"),
-      @SerializedName("timezones")
-      VALUE_TIMEZONES("timezones"),
-      @SerializedName("place_page_set_id")
-      VALUE_PLACE_PAGE_SET_ID("place_page_set_id"),
       @SerializedName("family_statuses")
       VALUE_FAMILY_STATUSES("family_statuses"),
       @SerializedName("industries")
@@ -424,20 +438,12 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_EXCLUDE_PREVIOUS_DAYS("exclude_previous_days"),
       @SerializedName("app_install_state")
       VALUE_APP_INSTALL_STATE("app_install_state"),
-      @SerializedName("excluded_publisher_categories")
-      VALUE_EXCLUDED_PUBLISHER_CATEGORIES("excluded_publisher_categories"),
-      @SerializedName("excluded_publisher_list_ids")
-      VALUE_EXCLUDED_PUBLISHER_LIST_IDS("excluded_publisher_list_ids"),
       @SerializedName("fb_deal_id")
       VALUE_FB_DEAL_ID("fb_deal_id"),
-      @SerializedName("audience_network_positions")
-      VALUE_AUDIENCE_NETWORK_POSITIONS("audience_network_positions"),
-      @SerializedName("effective_audience_network_positions")
-      VALUE_EFFECTIVE_AUDIENCE_NETWORK_POSITIONS("effective_audience_network_positions"),
       @SerializedName("interest_defaults_source")
       VALUE_INTEREST_DEFAULTS_SOURCE("interest_defaults_source"),
-      @SerializedName("excluded_mobile_device_model")
-      VALUE_EXCLUDED_MOBILE_DEVICE_MODEL("excluded_mobile_device_model"),
+      @SerializedName("alternate_auto_targeting_option")
+      VALUE_ALTERNATE_AUTO_TARGETING_OPTION("alternate_auto_targeting_option"),
       NULL(null);
 
       private String value;

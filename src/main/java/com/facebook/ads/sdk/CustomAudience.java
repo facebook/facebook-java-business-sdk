@@ -65,8 +65,6 @@ public class CustomAudience extends APINode {
   private AdsPixel mExternalEventSource = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("last_used_time")
-  private String mLastUsedTime = null;
   @SerializedName("lookalike_audience_ids")
   private List<String> mLookalikeAudienceIds = null;
   @SerializedName("lookalike_spec")
@@ -77,8 +75,6 @@ public class CustomAudience extends APINode {
   private CustomAudienceStatus mOperationStatus = null;
   @SerializedName("opt_out_link")
   private String mOptOutLink = null;
-  @SerializedName("owner_business")
-  private Business mOwnerBusiness = null;
   @SerializedName("permission_for_actions")
   private CustomAudiencePermission mPermissionForActions = null;
   @SerializedName("pixel_id")
@@ -351,10 +347,6 @@ public class CustomAudience extends APINode {
     return mId;
   }
 
-  public String getFieldLastUsedTime() {
-    return mLastUsedTime;
-  }
-
   public List<String> getFieldLookalikeAudienceIds() {
     return mLookalikeAudienceIds;
   }
@@ -373,13 +365,6 @@ public class CustomAudience extends APINode {
 
   public String getFieldOptOutLink() {
     return mOptOutLink;
-  }
-
-  public Business getFieldOwnerBusiness() {
-    if (mOwnerBusiness != null) {
-      mOwnerBusiness.context = getContext();
-    }
-    return mOwnerBusiness;
   }
 
   public CustomAudiencePermission getFieldPermissionForActions() {
@@ -522,7 +507,6 @@ public class CustomAudience extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "account_groups",
       "account_id",
       "account_status",
       "age",
@@ -553,7 +537,6 @@ public class CustomAudience extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
-      "last_used_time",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -561,7 +544,6 @@ public class CustomAudience extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
-      "owner_business",
       "partner",
       "rf_spec",
       "spend_cap",
@@ -649,13 +631,6 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestGetAdAccounts requestAccountGroupsField () {
-      return this.requestAccountGroupsField(true);
-    }
-    public APIRequestGetAdAccounts requestAccountGroupsField (boolean value) {
-      this.requestField("account_groups", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestAccountIdField () {
       return this.requestAccountIdField(true);
     }
@@ -866,13 +841,6 @@ public class CustomAudience extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestLastUsedTimeField () {
-      return this.requestLastUsedTimeField(true);
-    }
-    public APIRequestGetAdAccounts requestLastUsedTimeField (boolean value) {
-      this.requestField("last_used_time", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -920,13 +888,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestOwnerField (boolean value) {
       this.requestField("owner", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestOwnerBusinessField () {
-      return this.requestOwnerBusinessField(true);
-    }
-    public APIRequestGetAdAccounts requestOwnerBusinessField (boolean value) {
-      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetAdAccounts requestPartnerField () {
@@ -1127,6 +1088,7 @@ public class CustomAudience extends APINode {
     }
     public static final String[] PARAMS = {
       "effective_status",
+      "status",
     };
 
     public static final String[] FIELDS = {
@@ -1193,6 +1155,15 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds setEffectiveStatus (String effectiveStatus) {
       this.setParam("effective_status", effectiveStatus);
+      return this;
+    }
+
+    public APIRequestGetAds setStatus (List<String> status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestGetAds setStatus (String status) {
+      this.setParam("status", status);
       return this;
     }
 
@@ -1662,6 +1633,7 @@ public class CustomAudience extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "namespace",
       "payload",
       "session",
     };
@@ -1701,6 +1673,11 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+
+    public APIRequestDeleteUsers setNamespace (String namespace) {
+      this.setParam("namespace", namespace);
+      return this;
+    }
 
     public APIRequestDeleteUsers setPayload (Object payload) {
       this.setParam("payload", payload);
@@ -1766,6 +1743,7 @@ public class CustomAudience extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "namespace",
       "payload",
       "session",
     };
@@ -1805,6 +1783,11 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateUser setNamespace (String namespace) {
+      this.setParam("namespace", namespace);
+      return this;
+    }
 
     public APIRequestCreateUser setPayload (Object payload) {
       this.setParam("payload", payload);
@@ -1964,13 +1947,11 @@ public class CustomAudience extends APINode {
       "description",
       "external_event_source",
       "id",
-      "last_used_time",
       "lookalike_audience_ids",
       "lookalike_spec",
       "name",
       "operation_status",
       "opt_out_link",
-      "owner_business",
       "permission_for_actions",
       "pixel_id",
       "retention_days",
@@ -2099,13 +2080,6 @@ public class CustomAudience extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestLastUsedTimeField () {
-      return this.requestLastUsedTimeField(true);
-    }
-    public APIRequestGet requestLastUsedTimeField (boolean value) {
-      this.requestField("last_used_time", value);
-      return this;
-    }
     public APIRequestGet requestLookalikeAudienceIdsField () {
       return this.requestLookalikeAudienceIdsField(true);
     }
@@ -2139,13 +2113,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestOptOutLinkField (boolean value) {
       this.requestField("opt_out_link", value);
-      return this;
-    }
-    public APIRequestGet requestOwnerBusinessField () {
-      return this.requestOwnerBusinessField(true);
-    }
-    public APIRequestGet requestOwnerBusinessField (boolean value) {
-      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGet requestPermissionForActionsField () {
@@ -2382,10 +2349,12 @@ public class CustomAudience extends APINode {
   }
 
   public static enum EnumContentType {
-      @SerializedName("HOTEL")
-      VALUE_HOTEL("HOTEL"),
+      @SerializedName("DESTINATION")
+      VALUE_DESTINATION("DESTINATION"),
       @SerializedName("FLIGHT")
       VALUE_FLIGHT("FLIGHT"),
+      @SerializedName("HOTEL")
+      VALUE_HOTEL("HOTEL"),
       NULL(null);
 
       private String value;
@@ -2407,8 +2376,8 @@ public class CustomAudience extends APINode {
       VALUE_WEBSITE("WEBSITE"),
       @SerializedName("APP")
       VALUE_APP("APP"),
-      @SerializedName("OFFLINE")
-      VALUE_OFFLINE("OFFLINE"),
+      @SerializedName("OFFLINE_CONVERSION")
+      VALUE_OFFLINE_CONVERSION("OFFLINE_CONVERSION"),
       @SerializedName("CLAIM")
       VALUE_CLAIM("CLAIM"),
       @SerializedName("PARTNER")
@@ -2425,6 +2394,8 @@ public class CustomAudience extends APINode {
       VALUE_DATA_SET("DATA_SET"),
       @SerializedName("BAG_OF_ACCOUNTS")
       VALUE_BAG_OF_ACCOUNTS("BAG_OF_ACCOUNTS"),
+      @SerializedName("STUDY_RULE_AUDIENCE")
+      VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
       NULL(null);
 
       private String value;
@@ -2454,8 +2425,6 @@ public class CustomAudience extends APINode {
       VALUE_DESCRIPTION("description"),
       @SerializedName("external_event_source")
       VALUE_EXTERNAL_EVENT_SOURCE("external_event_source"),
-      @SerializedName("last_used_time")
-      VALUE_LAST_USED_TIME("last_used_time"),
       @SerializedName("lookalike_audience_ids")
       VALUE_LOOKALIKE_AUDIENCE_IDS("lookalike_audience_ids"),
       @SerializedName("lookalike_spec")
@@ -2466,8 +2435,6 @@ public class CustomAudience extends APINode {
       VALUE_OPERATION_STATUS("operation_status"),
       @SerializedName("opt_out_link")
       VALUE_OPT_OUT_LINK("opt_out_link"),
-      @SerializedName("owner_business")
-      VALUE_OWNER_BUSINESS("owner_business"),
       @SerializedName("permission_for_actions")
       VALUE_PERMISSION_FOR_ACTIONS("permission_for_actions"),
       @SerializedName("pixel_id")
@@ -2520,13 +2487,11 @@ public class CustomAudience extends APINode {
     this.mDescription = instance.mDescription;
     this.mExternalEventSource = instance.mExternalEventSource;
     this.mId = instance.mId;
-    this.mLastUsedTime = instance.mLastUsedTime;
     this.mLookalikeAudienceIds = instance.mLookalikeAudienceIds;
     this.mLookalikeSpec = instance.mLookalikeSpec;
     this.mName = instance.mName;
     this.mOperationStatus = instance.mOperationStatus;
     this.mOptOutLink = instance.mOptOutLink;
-    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mPermissionForActions = instance.mPermissionForActions;
     this.mPixelId = instance.mPixelId;
     this.mRetentionDays = instance.mRetentionDays;

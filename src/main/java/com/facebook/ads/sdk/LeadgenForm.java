@@ -51,10 +51,18 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class LeadgenForm extends APINode {
+  @SerializedName("allow_organic_lead")
+  private Boolean mAllowOrganicLead = null;
+  @SerializedName("context_card")
+  private Object mContextCard = null;
+  @SerializedName("continued_flow_request_method")
+  private String mContinuedFlowRequestMethod = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("creator")
   private User mCreator = null;
+  @SerializedName("creator_id")
+  private Long mCreatorId = null;
   @SerializedName("cusomized_tcpa_content")
   private String mCusomizedTcpaContent = null;
   @SerializedName("expired_leads_count")
@@ -71,8 +79,12 @@ public class LeadgenForm extends APINode {
   private String mLeadgenExportCsvUrl = null;
   @SerializedName("leads_count")
   private Long mLeadsCount = null;
+  @SerializedName("legal_content")
+  private Object mLegalContent = null;
   @SerializedName("locale")
   private String mLocale = null;
+  @SerializedName("messenger_welcome_message")
+  private String mMessengerWelcomeMessage = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("page")
@@ -83,6 +95,8 @@ public class LeadgenForm extends APINode {
   private String mPrivacyPolicyUrl = null;
   @SerializedName("qualifiers")
   private List<LeadGenQualifier> mQualifiers = null;
+  @SerializedName("questions")
+  private List<LeadGenQuestion> mQuestions = null;
   @SerializedName("status")
   private String mStatus = null;
   @SerializedName("tcpa_compliance")
@@ -284,6 +298,18 @@ public class LeadgenForm extends APINode {
   }
 
 
+  public Boolean getFieldAllowOrganicLead() {
+    return mAllowOrganicLead;
+  }
+
+  public Object getFieldContextCard() {
+    return mContextCard;
+  }
+
+  public String getFieldContinuedFlowRequestMethod() {
+    return mContinuedFlowRequestMethod;
+  }
+
   public String getFieldCreatedTime() {
     return mCreatedTime;
   }
@@ -293,6 +319,10 @@ public class LeadgenForm extends APINode {
       mCreator.context = getContext();
     }
     return mCreator;
+  }
+
+  public Long getFieldCreatorId() {
+    return mCreatorId;
   }
 
   public String getFieldCusomizedTcpaContent() {
@@ -327,8 +357,16 @@ public class LeadgenForm extends APINode {
     return mLeadsCount;
   }
 
+  public Object getFieldLegalContent() {
+    return mLegalContent;
+  }
+
   public String getFieldLocale() {
     return mLocale;
+  }
+
+  public String getFieldMessengerWelcomeMessage() {
+    return mMessengerWelcomeMessage;
   }
 
   public String getFieldName() {
@@ -349,6 +387,10 @@ public class LeadgenForm extends APINode {
 
   public List<LeadGenQualifier> getFieldQualifiers() {
     return mQualifiers;
+  }
+
+  public List<LeadGenQuestion> getFieldQuestions() {
+    return mQuestions;
   }
 
   public String getFieldStatus() {
@@ -748,8 +790,12 @@ public class LeadgenForm extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "allow_organic_lead",
+      "context_card",
+      "continued_flow_request_method",
       "created_time",
       "creator",
+      "creator_id",
       "cusomized_tcpa_content",
       "expired_leads_count",
       "follow_up_action_text",
@@ -758,12 +804,15 @@ public class LeadgenForm extends APINode {
       "is_continued_flow",
       "leadgen_export_csv_url",
       "leads_count",
+      "legal_content",
       "locale",
+      "messenger_welcome_message",
       "name",
       "page",
       "page_id",
       "privacy_policy_url",
       "qualifiers",
+      "questions",
       "status",
       "tcpa_compliance",
     };
@@ -837,6 +886,27 @@ public class LeadgenForm extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAllowOrganicLeadField () {
+      return this.requestAllowOrganicLeadField(true);
+    }
+    public APIRequestGet requestAllowOrganicLeadField (boolean value) {
+      this.requestField("allow_organic_lead", value);
+      return this;
+    }
+    public APIRequestGet requestContextCardField () {
+      return this.requestContextCardField(true);
+    }
+    public APIRequestGet requestContextCardField (boolean value) {
+      this.requestField("context_card", value);
+      return this;
+    }
+    public APIRequestGet requestContinuedFlowRequestMethodField () {
+      return this.requestContinuedFlowRequestMethodField(true);
+    }
+    public APIRequestGet requestContinuedFlowRequestMethodField (boolean value) {
+      this.requestField("continued_flow_request_method", value);
+      return this;
+    }
     public APIRequestGet requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -849,6 +919,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGet requestCreatorField (boolean value) {
       this.requestField("creator", value);
+      return this;
+    }
+    public APIRequestGet requestCreatorIdField () {
+      return this.requestCreatorIdField(true);
+    }
+    public APIRequestGet requestCreatorIdField (boolean value) {
+      this.requestField("creator_id", value);
       return this;
     }
     public APIRequestGet requestCusomizedTcpaContentField () {
@@ -907,11 +984,25 @@ public class LeadgenForm extends APINode {
       this.requestField("leads_count", value);
       return this;
     }
+    public APIRequestGet requestLegalContentField () {
+      return this.requestLegalContentField(true);
+    }
+    public APIRequestGet requestLegalContentField (boolean value) {
+      this.requestField("legal_content", value);
+      return this;
+    }
     public APIRequestGet requestLocaleField () {
       return this.requestLocaleField(true);
     }
     public APIRequestGet requestLocaleField (boolean value) {
       this.requestField("locale", value);
+      return this;
+    }
+    public APIRequestGet requestMessengerWelcomeMessageField () {
+      return this.requestMessengerWelcomeMessageField(true);
+    }
+    public APIRequestGet requestMessengerWelcomeMessageField (boolean value) {
+      this.requestField("messenger_welcome_message", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -949,6 +1040,13 @@ public class LeadgenForm extends APINode {
       this.requestField("qualifiers", value);
       return this;
     }
+    public APIRequestGet requestQuestionsField () {
+      return this.requestQuestionsField(true);
+    }
+    public APIRequestGet requestQuestionsField (boolean value) {
+      this.requestField("questions", value);
+      return this;
+    }
     public APIRequestGet requestStatusField () {
       return this.requestStatusField(true);
     }
@@ -980,8 +1078,12 @@ public class LeadgenForm extends APINode {
   }
 
   public LeadgenForm copyFrom(LeadgenForm instance) {
+    this.mAllowOrganicLead = instance.mAllowOrganicLead;
+    this.mContextCard = instance.mContextCard;
+    this.mContinuedFlowRequestMethod = instance.mContinuedFlowRequestMethod;
     this.mCreatedTime = instance.mCreatedTime;
     this.mCreator = instance.mCreator;
+    this.mCreatorId = instance.mCreatorId;
     this.mCusomizedTcpaContent = instance.mCusomizedTcpaContent;
     this.mExpiredLeadsCount = instance.mExpiredLeadsCount;
     this.mFollowUpActionText = instance.mFollowUpActionText;
@@ -990,12 +1092,15 @@ public class LeadgenForm extends APINode {
     this.mIsContinuedFlow = instance.mIsContinuedFlow;
     this.mLeadgenExportCsvUrl = instance.mLeadgenExportCsvUrl;
     this.mLeadsCount = instance.mLeadsCount;
+    this.mLegalContent = instance.mLegalContent;
     this.mLocale = instance.mLocale;
+    this.mMessengerWelcomeMessage = instance.mMessengerWelcomeMessage;
     this.mName = instance.mName;
     this.mPage = instance.mPage;
     this.mPageId = instance.mPageId;
     this.mPrivacyPolicyUrl = instance.mPrivacyPolicyUrl;
     this.mQualifiers = instance.mQualifiers;
+    this.mQuestions = instance.mQuestions;
     this.mStatus = instance.mStatus;
     this.mTcpaCompliance = instance.mTcpaCompliance;
     this.context = instance.context;

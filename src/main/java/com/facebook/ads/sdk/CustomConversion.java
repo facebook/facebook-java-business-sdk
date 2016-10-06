@@ -73,8 +73,12 @@ public class CustomConversion extends APINode {
   private String mName = null;
   @SerializedName("pixel")
   private AdsPixel mPixel = null;
+  @SerializedName("pixel_aggregation_rule")
+  private String mPixelAggregationRule = null;
   @SerializedName("pixel_rule")
   private String mPixelRule = null;
+  @SerializedName("retention_days")
+  private Long mRetentionDays = null;
   protected static Gson gson = null;
 
   CustomConversion() {
@@ -255,6 +259,10 @@ public class CustomConversion extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetActivities getActivities() {
+    return new APIRequestGetActivities(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetStats getStats() {
     return new APIRequestGetStats(this.getPrefixedId().toString(), context);
   }
@@ -319,11 +327,125 @@ public class CustomConversion extends APINode {
     return mPixel;
   }
 
+  public String getFieldPixelAggregationRule() {
+    return mPixelAggregationRule;
+  }
+
   public String getFieldPixelRule() {
     return mPixelRule;
   }
 
+  public Long getFieldRetentionDays() {
+    return mRetentionDays;
+  }
 
+
+
+  public static class APIRequestGetActivities extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "end_time",
+      "event_type",
+      "start_time",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetActivities(String nodeId, APIContext context) {
+      super(context, nodeId, "/activities", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetActivities setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetActivities setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetActivities setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestGetActivities setEventType (EnumEventType eventType) {
+      this.setParam("event_type", eventType);
+      return this;
+    }
+    public APIRequestGetActivities setEventType (String eventType) {
+      this.setParam("event_type", eventType);
+      return this;
+    }
+
+    public APIRequestGetActivities setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestGetActivities requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetActivities requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetActivities requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetActivities requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetActivities requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetActivities requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGetStats extends APIRequest<AdsPixelStatsResult> {
 
@@ -561,7 +683,9 @@ public class CustomConversion extends APINode {
       "last_fired_time",
       "name",
       "pixel",
+      "pixel_aggregation_rule",
       "pixel_rule",
+      "retention_days",
     };
 
     @Override
@@ -710,11 +834,25 @@ public class CustomConversion extends APINode {
       this.requestField("pixel", value);
       return this;
     }
+    public APIRequestGet requestPixelAggregationRuleField () {
+      return this.requestPixelAggregationRuleField(true);
+    }
+    public APIRequestGet requestPixelAggregationRuleField (boolean value) {
+      this.requestField("pixel_aggregation_rule", value);
+      return this;
+    }
     public APIRequestGet requestPixelRuleField () {
       return this.requestPixelRuleField(true);
     }
     public APIRequestGet requestPixelRuleField (boolean value) {
       this.requestField("pixel_rule", value);
+      return this;
+    }
+    public APIRequestGet requestRetentionDaysField () {
+      return this.requestRetentionDaysField(true);
+    }
+    public APIRequestGet requestRetentionDaysField (boolean value) {
+      this.requestField("retention_days", value);
       return this;
     }
   }
@@ -860,6 +998,27 @@ public class CustomConversion extends APINode {
       }
   }
 
+  public static enum EnumEventType {
+      @SerializedName("conversion_create")
+      VALUE_CONVERSION_CREATE("conversion_create"),
+      @SerializedName("conversion_delete")
+      VALUE_CONVERSION_DELETE("conversion_delete"),
+      @SerializedName("conversion_update")
+      VALUE_CONVERSION_UPDATE("conversion_update"),
+      NULL(null);
+
+      private String value;
+
+      private EnumEventType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -886,7 +1045,9 @@ public class CustomConversion extends APINode {
     this.mLastFiredTime = instance.mLastFiredTime;
     this.mName = instance.mName;
     this.mPixel = instance.mPixel;
+    this.mPixelAggregationRule = instance.mPixelAggregationRule;
     this.mPixelRule = instance.mPixelRule;
+    this.mRetentionDays = instance.mRetentionDays;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

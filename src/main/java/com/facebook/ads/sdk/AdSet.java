@@ -57,12 +57,8 @@ public class AdSet extends APINode {
   private List<AdLabel> mAdlabels = null;
   @SerializedName("adset_schedule")
   private List<DayPart> mAdsetSchedule = null;
-  @SerializedName("asset_feed_id")
-  private String mAssetFeedId = null;
   @SerializedName("attribution_window_days")
   private Long mAttributionWindowDays = null;
-  @SerializedName("best_creative")
-  private Object mBestCreative = null;
   @SerializedName("bid_amount")
   private Long mBidAmount = null;
   @SerializedName("bid_info")
@@ -97,6 +93,8 @@ public class AdSet extends APINode {
   private String mId = null;
   @SerializedName("is_autobid")
   private Boolean mIsAutobid = null;
+  @SerializedName("is_average_price_pacing")
+  private Boolean mIsAveragePricePacing = null;
   @SerializedName("lifetime_budget")
   private String mLifetimeBudget = null;
   @SerializedName("lifetime_frequency_cap")
@@ -113,6 +111,8 @@ public class AdSet extends APINode {
   private AdPromotedObject mPromotedObject = null;
   @SerializedName("recommendations")
   private List<AdRecommendation> mRecommendations = null;
+  @SerializedName("recurring_budget_semantics")
+  private Boolean mRecurringBudgetSemantics = null;
   @SerializedName("rf_prediction_id")
   private String mRfPredictionId = null;
   @SerializedName("rtb_flag")
@@ -372,16 +372,8 @@ public class AdSet extends APINode {
     return mAdsetSchedule;
   }
 
-  public String getFieldAssetFeedId() {
-    return mAssetFeedId;
-  }
-
   public Long getFieldAttributionWindowDays() {
     return mAttributionWindowDays;
-  }
-
-  public Object getFieldBestCreative() {
-    return mBestCreative;
   }
 
   public Long getFieldBidAmount() {
@@ -452,6 +444,10 @@ public class AdSet extends APINode {
     return mIsAutobid;
   }
 
+  public Boolean getFieldIsAveragePricePacing() {
+    return mIsAveragePricePacing;
+  }
+
   public String getFieldLifetimeBudget() {
     return mLifetimeBudget;
   }
@@ -482,6 +478,10 @@ public class AdSet extends APINode {
 
   public List<AdRecommendation> getFieldRecommendations() {
     return mRecommendations;
+  }
+
+  public Boolean getFieldRecurringBudgetSemantics() {
+    return mRecurringBudgetSemantics;
   }
 
   public String getFieldRfPredictionId() {
@@ -743,14 +743,11 @@ public class AdSet extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "actor_id",
-      "actor_image_hash",
-      "actor_image_url",
-      "actor_name",
       "adlabels",
       "applink_treatment",
       "body",
       "call_to_action_type",
+      "effective_instagram_story_id",
       "effective_object_story_id",
       "id",
       "image_crops",
@@ -774,6 +771,7 @@ public class AdSet extends APINode {
       "thumbnail_url",
       "title",
       "url_tags",
+      "use_page_actor_override",
     };
 
     @Override
@@ -845,34 +843,6 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetAdCreatives requestActorIdField () {
-      return this.requestActorIdField(true);
-    }
-    public APIRequestGetAdCreatives requestActorIdField (boolean value) {
-      this.requestField("actor_id", value);
-      return this;
-    }
-    public APIRequestGetAdCreatives requestActorImageHashField () {
-      return this.requestActorImageHashField(true);
-    }
-    public APIRequestGetAdCreatives requestActorImageHashField (boolean value) {
-      this.requestField("actor_image_hash", value);
-      return this;
-    }
-    public APIRequestGetAdCreatives requestActorImageUrlField () {
-      return this.requestActorImageUrlField(true);
-    }
-    public APIRequestGetAdCreatives requestActorImageUrlField (boolean value) {
-      this.requestField("actor_image_url", value);
-      return this;
-    }
-    public APIRequestGetAdCreatives requestActorNameField () {
-      return this.requestActorNameField(true);
-    }
-    public APIRequestGetAdCreatives requestActorNameField (boolean value) {
-      this.requestField("actor_name", value);
-      return this;
-    }
     public APIRequestGetAdCreatives requestAdlabelsField () {
       return this.requestAdlabelsField(true);
     }
@@ -899,6 +869,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestCallToActionTypeField (boolean value) {
       this.requestField("call_to_action_type", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestEffectiveInstagramStoryIdField () {
+      return this.requestEffectiveInstagramStoryIdField(true);
+    }
+    public APIRequestGetAdCreatives requestEffectiveInstagramStoryIdField (boolean value) {
+      this.requestField("effective_instagram_story_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestEffectiveObjectStoryIdField () {
@@ -1060,6 +1037,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestUrlTagsField (boolean value) {
       this.requestField("url_tags", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestUsePageActorOverrideField () {
+      return this.requestUsePageActorOverrideField(true);
+    }
+    public APIRequestGetAdCreatives requestUsePageActorOverrideField (boolean value) {
+      this.requestField("use_page_actor_override", value);
       return this;
     }
   }
@@ -1378,7 +1362,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetAds setTimeRange (Map<String, String> timeRange) {
+    public APIRequestGetAds setTimeRange (Object timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -1952,7 +1936,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRange (Map<String, String> timeRange) {
+    public APIRequestGetInsights setTimeRange (Object timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -1961,7 +1945,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRanges (List<Map<String, String>> timeRanges) {
+    public APIRequestGetInsights setTimeRanges (List<Object> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -2214,7 +2198,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRange (Map<String, String> timeRange) {
+    public APIRequestGetInsightsAsync setTimeRange (Object timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -2223,7 +2207,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRanges (List<Map<String, String>> timeRanges) {
+    public APIRequestGetInsightsAsync setTimeRanges (List<Object> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -2386,7 +2370,6 @@ public class AdSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "account_id",
     };
 
     public static final String[] FIELDS = {
@@ -2424,11 +2407,6 @@ public class AdSet extends APINode {
       return this;
     }
 
-
-    public APIRequestDelete setAccountId (String accountId) {
-      this.setParam("account_id", accountId);
-      return this;
-    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);
@@ -2500,6 +2478,7 @@ public class AdSet extends APINode {
       "frequency_control_specs",
       "id",
       "is_autobid",
+      "is_average_price_pacing",
       "lifetime_budget",
       "lifetime_frequency_cap",
       "lifetime_imps",
@@ -2508,6 +2487,7 @@ public class AdSet extends APINode {
       "pacing_type",
       "promoted_object",
       "recommendations",
+      "recurring_budget_semantics",
       "rf_prediction_id",
       "rtb_flag",
       "start_time",
@@ -2735,6 +2715,13 @@ public class AdSet extends APINode {
       this.requestField("is_autobid", value);
       return this;
     }
+    public APIRequestGet requestIsAveragePricePacingField () {
+      return this.requestIsAveragePricePacingField(true);
+    }
+    public APIRequestGet requestIsAveragePricePacingField (boolean value) {
+      this.requestField("is_average_price_pacing", value);
+      return this;
+    }
     public APIRequestGet requestLifetimeBudgetField () {
       return this.requestLifetimeBudgetField(true);
     }
@@ -2789,6 +2776,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGet requestRecurringBudgetSemanticsField () {
+      return this.requestRecurringBudgetSemanticsField(true);
+    }
+    public APIRequestGet requestRecurringBudgetSemanticsField (boolean value) {
+      this.requestField("recurring_budget_semantics", value);
       return this;
     }
     public APIRequestGet requestRfPredictionIdField () {
@@ -2876,6 +2870,7 @@ public class AdSet extends APINode {
       "end_time",
       "execution_options",
       "is_autobid",
+      "is_average_price_pacing",
       "lifetime_budget",
       "lifetime_imps",
       "name",
@@ -3024,6 +3019,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setIsAutobid (String isAutobid) {
       this.setParam("is_autobid", isAutobid);
+      return this;
+    }
+
+    public APIRequestUpdate setIsAveragePricePacing (Boolean isAveragePricePacing) {
+      this.setParam("is_average_price_pacing", isAveragePricePacing);
+      return this;
+    }
+    public APIRequestUpdate setIsAveragePricePacing (String isAveragePricePacing) {
+      this.setParam("is_average_price_pacing", isAveragePricePacing);
       return this;
     }
 
@@ -3434,9 +3438,7 @@ public class AdSet extends APINode {
     this.mAccountId = instance.mAccountId;
     this.mAdlabels = instance.mAdlabels;
     this.mAdsetSchedule = instance.mAdsetSchedule;
-    this.mAssetFeedId = instance.mAssetFeedId;
     this.mAttributionWindowDays = instance.mAttributionWindowDays;
-    this.mBestCreative = instance.mBestCreative;
     this.mBidAmount = instance.mBidAmount;
     this.mBidInfo = instance.mBidInfo;
     this.mBillingEvent = instance.mBillingEvent;
@@ -3454,6 +3456,7 @@ public class AdSet extends APINode {
     this.mFrequencyControlSpecs = instance.mFrequencyControlSpecs;
     this.mId = instance.mId;
     this.mIsAutobid = instance.mIsAutobid;
+    this.mIsAveragePricePacing = instance.mIsAveragePricePacing;
     this.mLifetimeBudget = instance.mLifetimeBudget;
     this.mLifetimeFrequencyCap = instance.mLifetimeFrequencyCap;
     this.mLifetimeImps = instance.mLifetimeImps;
@@ -3462,6 +3465,7 @@ public class AdSet extends APINode {
     this.mPacingType = instance.mPacingType;
     this.mPromotedObject = instance.mPromotedObject;
     this.mRecommendations = instance.mRecommendations;
+    this.mRecurringBudgetSemantics = instance.mRecurringBudgetSemantics;
     this.mRfPredictionId = instance.mRfPredictionId;
     this.mRtbFlag = instance.mRtbFlag;
     this.mStartTime = instance.mStartTime;

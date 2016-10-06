@@ -61,8 +61,6 @@ public class AdCreativeLinkData extends APINode {
   private String mBrandedContentSponsorPageId = null;
   @SerializedName("call_to_action")
   private AdCreativeLinkDataCallToAction mCallToAction = null;
-  @SerializedName("canvas_enabled")
-  private Boolean mCanvasEnabled = null;
   @SerializedName("caption")
   private String mCaption = null;
   @SerializedName("child_attachments")
@@ -87,6 +85,8 @@ public class AdCreativeLinkData extends APINode {
   private Boolean mMultiShareOptimized = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("offer_id")
+  private String mOfferId = null;
   @SerializedName("picture")
   private String mPicture = null;
   protected static Gson gson = null;
@@ -285,15 +285,6 @@ public class AdCreativeLinkData extends APINode {
     this.mCallToAction = AdCreativeLinkDataCallToAction.getGson().fromJson(value, type);
     return this;
   }
-  public Boolean getFieldCanvasEnabled() {
-    return mCanvasEnabled;
-  }
-
-  public AdCreativeLinkData setFieldCanvasEnabled(Boolean value) {
-    this.mCanvasEnabled = value;
-    return this;
-  }
-
   public String getFieldCaption() {
     return mCaption;
   }
@@ -412,6 +403,15 @@ public class AdCreativeLinkData extends APINode {
     return this;
   }
 
+  public String getFieldOfferId() {
+    return mOfferId;
+  }
+
+  public AdCreativeLinkData setFieldOfferId(String value) {
+    this.mOfferId = value;
+    return this;
+  }
+
   public String getFieldPicture() {
     return mPicture;
   }
@@ -462,7 +462,6 @@ public class AdCreativeLinkData extends APINode {
     this.mAttachmentStyle = instance.mAttachmentStyle;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
     this.mCallToAction = instance.mCallToAction;
-    this.mCanvasEnabled = instance.mCanvasEnabled;
     this.mCaption = instance.mCaption;
     this.mChildAttachments = instance.mChildAttachments;
     this.mDescription = instance.mDescription;
@@ -475,6 +474,7 @@ public class AdCreativeLinkData extends APINode {
     this.mMultiShareEndCard = instance.mMultiShareEndCard;
     this.mMultiShareOptimized = instance.mMultiShareOptimized;
     this.mName = instance.mName;
+    this.mOfferId = instance.mOfferId;
     this.mPicture = instance.mPicture;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

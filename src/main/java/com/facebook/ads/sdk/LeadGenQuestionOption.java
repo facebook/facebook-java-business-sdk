@@ -50,25 +50,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCreativeLinkDataCallToAction extends APINode {
-  @SerializedName("type")
-  private EnumType mType = null;
+public class LeadGenQuestionOption extends APINode {
+  @SerializedName("key")
+  private String mKey = null;
   @SerializedName("value")
-  private AdCreativeLinkDataCallToActionValue mValue = null;
+  private String mValue = null;
   protected static Gson gson = null;
 
-  public AdCreativeLinkDataCallToAction() {
+  public LeadGenQuestionOption() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdCreativeLinkDataCallToAction loadJSON(String json, APIContext context) {
-    AdCreativeLinkDataCallToAction adCreativeLinkDataCallToAction = getGson().fromJson(json, AdCreativeLinkDataCallToAction.class);
+  public static LeadGenQuestionOption loadJSON(String json, APIContext context) {
+    LeadGenQuestionOption leadGenQuestionOption = getGson().fromJson(json, LeadGenQuestionOption.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCreativeLinkDataCallToAction.toString());
+      JsonElement o2 = parser.parse(leadGenQuestionOption.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -78,13 +78,13 @@ public class AdCreativeLinkDataCallToAction extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adCreativeLinkDataCallToAction.context = context;
-    adCreativeLinkDataCallToAction.rawValue = json;
-    return adCreativeLinkDataCallToAction;
+    leadGenQuestionOption.context = context;
+    leadGenQuestionOption.rawValue = json;
+    return leadGenQuestionOption;
   }
 
-  public static APINodeList<AdCreativeLinkDataCallToAction> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCreativeLinkDataCallToAction> adCreativeLinkDataCallToActions = new APINodeList<AdCreativeLinkDataCallToAction>(request, json);
+  public static APINodeList<LeadGenQuestionOption> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<LeadGenQuestionOption> leadGenQuestionOptions = new APINodeList<LeadGenQuestionOption>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -95,9 +95,9 @@ public class AdCreativeLinkDataCallToAction extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeLinkDataCallToActions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          leadGenQuestionOptions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return adCreativeLinkDataCallToActions;
+        return leadGenQuestionOptions;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -105,13 +105,13 @@ public class AdCreativeLinkDataCallToAction extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adCreativeLinkDataCallToActions.setPaging(before, after);
+            leadGenQuestionOptions.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeLinkDataCallToActions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              leadGenQuestionOptions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -122,23 +122,23 @@ public class AdCreativeLinkDataCallToAction extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeLinkDataCallToActions.add(loadJSON(entry.getValue().toString(), context));
+                  leadGenQuestionOptions.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeLinkDataCallToActions.add(loadJSON(obj.toString(), context));
+              leadGenQuestionOptions.add(loadJSON(obj.toString(), context));
             }
           }
-          return adCreativeLinkDataCallToActions;
+          return leadGenQuestionOptions;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeLinkDataCallToActions.add(loadJSON(entry.getValue().toString(), context));
+              leadGenQuestionOptions.add(loadJSON(entry.getValue().toString(), context));
           }
-          return adCreativeLinkDataCallToActions;
+          return leadGenQuestionOptions;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -155,20 +155,20 @@ public class AdCreativeLinkDataCallToAction extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeLinkDataCallToActions.add(loadJSON(value.toString(), context));
+              leadGenQuestionOptions.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCreativeLinkDataCallToActions;
+            return leadGenQuestionOptions;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCreativeLinkDataCallToActions.clear();
-          adCreativeLinkDataCallToActions.add(loadJSON(json, context));
-          return adCreativeLinkDataCallToActions;
+          leadGenQuestionOptions.clear();
+          leadGenQuestionOptions.add(loadJSON(json, context));
+          return leadGenQuestionOptions;
         }
       }
     } catch (Exception e) {
@@ -196,105 +196,25 @@ public class AdCreativeLinkDataCallToAction extends APINode {
   }
 
 
-  public EnumType getFieldType() {
-    return mType;
+  public String getFieldKey() {
+    return mKey;
   }
 
-  public AdCreativeLinkDataCallToAction setFieldType(EnumType value) {
-    this.mType = value;
+  public LeadGenQuestionOption setFieldKey(String value) {
+    this.mKey = value;
     return this;
   }
 
-  public AdCreativeLinkDataCallToActionValue getFieldValue() {
+  public String getFieldValue() {
     return mValue;
   }
 
-  public AdCreativeLinkDataCallToAction setFieldValue(AdCreativeLinkDataCallToActionValue value) {
+  public LeadGenQuestionOption setFieldValue(String value) {
     this.mValue = value;
     return this;
   }
 
-  public AdCreativeLinkDataCallToAction setFieldValue(String value) {
-    Type type = new TypeToken<AdCreativeLinkDataCallToActionValue>(){}.getType();
-    this.mValue = AdCreativeLinkDataCallToActionValue.getGson().fromJson(value, type);
-    return this;
-  }
 
-
-  public static enum EnumType {
-      @SerializedName("OPEN_LINK")
-      VALUE_OPEN_LINK("OPEN_LINK"),
-      @SerializedName("LIKE_PAGE")
-      VALUE_LIKE_PAGE("LIKE_PAGE"),
-      @SerializedName("SHOP_NOW")
-      VALUE_SHOP_NOW("SHOP_NOW"),
-      @SerializedName("PLAY_GAME")
-      VALUE_PLAY_GAME("PLAY_GAME"),
-      @SerializedName("INSTALL_APP")
-      VALUE_INSTALL_APP("INSTALL_APP"),
-      @SerializedName("USE_APP")
-      VALUE_USE_APP("USE_APP"),
-      @SerializedName("INSTALL_MOBILE_APP")
-      VALUE_INSTALL_MOBILE_APP("INSTALL_MOBILE_APP"),
-      @SerializedName("USE_MOBILE_APP")
-      VALUE_USE_MOBILE_APP("USE_MOBILE_APP"),
-      @SerializedName("BOOK_TRAVEL")
-      VALUE_BOOK_TRAVEL("BOOK_TRAVEL"),
-      @SerializedName("LISTEN_MUSIC")
-      VALUE_LISTEN_MUSIC("LISTEN_MUSIC"),
-      @SerializedName("LEARN_MORE")
-      VALUE_LEARN_MORE("LEARN_MORE"),
-      @SerializedName("SIGN_UP")
-      VALUE_SIGN_UP("SIGN_UP"),
-      @SerializedName("DOWNLOAD")
-      VALUE_DOWNLOAD("DOWNLOAD"),
-      @SerializedName("WATCH_MORE")
-      VALUE_WATCH_MORE("WATCH_MORE"),
-      @SerializedName("NO_BUTTON")
-      VALUE_NO_BUTTON("NO_BUTTON"),
-      @SerializedName("CALL_NOW")
-      VALUE_CALL_NOW("CALL_NOW"),
-      @SerializedName("BUY_NOW")
-      VALUE_BUY_NOW("BUY_NOW"),
-      @SerializedName("GET_OFFER")
-      VALUE_GET_OFFER("GET_OFFER"),
-      @SerializedName("GET_OFFER_VIEW")
-      VALUE_GET_OFFER_VIEW("GET_OFFER_VIEW"),
-      @SerializedName("GET_DIRECTIONS")
-      VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
-      @SerializedName("MESSAGE_PAGE")
-      VALUE_MESSAGE_PAGE("MESSAGE_PAGE"),
-      @SerializedName("SUBSCRIBE")
-      VALUE_SUBSCRIBE("SUBSCRIBE"),
-      @SerializedName("SELL_NOW")
-      VALUE_SELL_NOW("SELL_NOW"),
-      @SerializedName("DONATE_NOW")
-      VALUE_DONATE_NOW("DONATE_NOW"),
-      @SerializedName("GET_QUOTE")
-      VALUE_GET_QUOTE("GET_QUOTE"),
-      @SerializedName("CONTACT_US")
-      VALUE_CONTACT_US("CONTACT_US"),
-      @SerializedName("RECORD_NOW")
-      VALUE_RECORD_NOW("RECORD_NOW"),
-      @SerializedName("VOTE_NOW")
-      VALUE_VOTE_NOW("VOTE_NOW"),
-      @SerializedName("REGISTER_NOW")
-      VALUE_REGISTER_NOW("REGISTER_NOW"),
-      @SerializedName("OPEN_MOVIES")
-      VALUE_OPEN_MOVIES("OPEN_MOVIES"),
-      NULL(null);
-
-      private String value;
-
-      private EnumType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -310,18 +230,18 @@ public class AdCreativeLinkDataCallToAction extends APINode {
     return gson;
   }
 
-  public AdCreativeLinkDataCallToAction copyFrom(AdCreativeLinkDataCallToAction instance) {
-    this.mType = instance.mType;
+  public LeadGenQuestionOption copyFrom(LeadGenQuestionOption instance) {
+    this.mKey = instance.mKey;
     this.mValue = instance.mValue;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCreativeLinkDataCallToAction> getParser() {
-    return new APIRequest.ResponseParser<AdCreativeLinkDataCallToAction>() {
-      public APINodeList<AdCreativeLinkDataCallToAction> parseResponse(String response, APIContext context, APIRequest<AdCreativeLinkDataCallToAction> request) throws MalformedResponseException {
-        return AdCreativeLinkDataCallToAction.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<LeadGenQuestionOption> getParser() {
+    return new APIRequest.ResponseParser<LeadGenQuestionOption>() {
+      public APINodeList<LeadGenQuestionOption> parseResponse(String response, APIContext context, APIRequest<LeadGenQuestionOption> request) throws MalformedResponseException {
+        return LeadGenQuestionOption.parseResponse(response, context, request);
       }
     };
   }

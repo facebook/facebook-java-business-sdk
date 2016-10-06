@@ -69,6 +69,8 @@ public class HotelRoom extends APINode {
   private String mName = null;
   @SerializedName("room_id")
   private String mRoomId = null;
+  @SerializedName("sale_price")
+  private String mSalePrice = null;
   @SerializedName("url")
   private String mUrl = null;
   protected static Gson gson = null;
@@ -303,6 +305,10 @@ public class HotelRoom extends APINode {
     return mRoomId;
   }
 
+  public String getFieldSalePrice() {
+    return mSalePrice;
+  }
+
   public String getFieldUrl() {
     return mUrl;
   }
@@ -413,6 +419,7 @@ public class HotelRoom extends APINode {
       "margin_level",
       "name",
       "room_id",
+      "sale_price",
       "url",
     };
 
@@ -548,6 +555,13 @@ public class HotelRoom extends APINode {
       this.requestField("room_id", value);
       return this;
     }
+    public APIRequestGet requestSalePriceField () {
+      return this.requestSalePriceField(true);
+    }
+    public APIRequestGet requestSalePriceField (boolean value) {
+      this.requestField("sale_price", value);
+      return this;
+    }
     public APIRequestGet requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -573,6 +587,7 @@ public class HotelRoom extends APINode {
       "margin_level",
       "name",
       "pricing_variables",
+      "sale_price",
       "url",
     };
 
@@ -672,6 +687,15 @@ public class HotelRoom extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setSalePrice (Double salePrice) {
+      this.setParam("sale_price", salePrice);
+      return this;
+    }
+    public APIRequestUpdate setSalePrice (String salePrice) {
+      this.setParam("sale_price", salePrice);
+      return this;
+    }
+
     public APIRequestUpdate setUrl (String url) {
       this.setParam("url", url);
       return this;
@@ -739,6 +763,7 @@ public class HotelRoom extends APINode {
     this.mMarginLevel = instance.mMarginLevel;
     this.mName = instance.mName;
     this.mRoomId = instance.mRoomId;
+    this.mSalePrice = instance.mSalePrice;
     this.mUrl = instance.mUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

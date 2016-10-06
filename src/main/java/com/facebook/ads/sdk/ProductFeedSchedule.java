@@ -61,6 +61,8 @@ public class ProductFeedSchedule extends APINode {
   private EnumInterval mInterval = null;
   @SerializedName("minute")
   private Long mMinute = null;
+  @SerializedName("timezone")
+  private String mTimezone = null;
   @SerializedName("url")
   private String mUrl = null;
   @SerializedName("username")
@@ -251,6 +253,15 @@ public class ProductFeedSchedule extends APINode {
     return this;
   }
 
+  public String getFieldTimezone() {
+    return mTimezone;
+  }
+
+  public ProductFeedSchedule setFieldTimezone(String value) {
+    this.mTimezone = value;
+    return this;
+  }
+
   public String getFieldUrl() {
     return mUrl;
   }
@@ -343,6 +354,7 @@ public class ProductFeedSchedule extends APINode {
     this.mHour = instance.mHour;
     this.mInterval = instance.mInterval;
     this.mMinute = instance.mMinute;
+    this.mTimezone = instance.mTimezone;
     this.mUrl = instance.mUrl;
     this.mUsername = instance.mUsername;
     this.context = instance.context;

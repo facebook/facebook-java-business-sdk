@@ -283,6 +283,7 @@ public class ProductGroup extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "auto_creation_url",
       "filter",
       "id",
       "name",
@@ -359,6 +360,13 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestGetProductSets requestAutoCreationUrlField () {
+      return this.requestAutoCreationUrlField(true);
+    }
+    public APIRequestGetProductSets requestAutoCreationUrlField (boolean value) {
+      this.requestField("auto_creation_url", value);
+      return this;
+    }
     public APIRequestGetProductSets requestFilterField () {
       return this.requestFilterField(true);
     }
@@ -446,6 +454,7 @@ public class ProductGroup extends APINode {
       "sale_price_start_date",
       "shipping_weight_unit",
       "shipping_weight_value",
+      "short_description",
       "size",
       "start_date",
       "url",
@@ -794,6 +803,13 @@ public class ProductGroup extends APINode {
       this.requestField("shipping_weight_value", value);
       return this;
     }
+    public APIRequestGetProducts requestShortDescriptionField () {
+      return this.requestShortDescriptionField(true);
+    }
+    public APIRequestGetProducts requestShortDescriptionField (boolean value) {
+      this.requestField("short_description", value);
+      return this;
+    }
     public APIRequestGetProducts requestSizeField () {
       return this.requestSizeField(true);
     }
@@ -875,6 +891,7 @@ public class ProductGroup extends APINode {
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
+      "short_description",
       "size",
       "start_date",
       "url",
@@ -1180,6 +1197,11 @@ public class ProductGroup extends APINode {
 
     public APIRequestCreateProduct setSalePriceStartDate (String salePriceStartDate) {
       this.setParam("sale_price_start_date", salePriceStartDate);
+      return this;
+    }
+
+    public APIRequestCreateProduct setShortDescription (String shortDescription) {
+      this.setParam("short_description", shortDescription);
       return this;
     }
 

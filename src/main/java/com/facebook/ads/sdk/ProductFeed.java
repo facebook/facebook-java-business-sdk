@@ -347,6 +347,8 @@ public class ProductFeed extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "bulk_pagination",
+      "filter",
     };
 
     public static final String[] FIELDS = {
@@ -389,6 +391,7 @@ public class ProductFeed extends APINode {
       "sale_price_start_date",
       "shipping_weight_unit",
       "shipping_weight_value",
+      "short_description",
       "size",
       "start_date",
       "url",
@@ -427,6 +430,24 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+
+    public APIRequestGetProducts setBulkPagination (Boolean bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+    public APIRequestGetProducts setBulkPagination (String bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+
+    public APIRequestGetProducts setFilter (Object filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+    public APIRequestGetProducts setFilter (String filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
 
     public APIRequestGetProducts requestAllFields () {
       return this.requestAllFields(true);
@@ -735,6 +756,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestShippingWeightValueField (boolean value) {
       this.requestField("shipping_weight_value", value);
+      return this;
+    }
+    public APIRequestGetProducts requestShortDescriptionField () {
+      return this.requestShortDescriptionField(true);
+    }
+    public APIRequestGetProducts requestShortDescriptionField (boolean value) {
+      this.requestField("short_description", value);
       return this;
     }
     public APIRequestGetProducts requestSizeField () {

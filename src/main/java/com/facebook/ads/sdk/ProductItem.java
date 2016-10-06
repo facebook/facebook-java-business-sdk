@@ -129,6 +129,8 @@ public class ProductItem extends APINode {
   private EnumShippingWeightUnit mShippingWeightUnit = null;
   @SerializedName("shipping_weight_value")
   private Double mShippingWeightValue = null;
+  @SerializedName("short_description")
+  private String mShortDescription = null;
   @SerializedName("size")
   private String mSize = null;
   @SerializedName("start_date")
@@ -496,6 +498,10 @@ public class ProductItem extends APINode {
     return mShippingWeightValue;
   }
 
+  public String getFieldShortDescription() {
+    return mShortDescription;
+  }
+
   public String getFieldSize() {
     return mSize;
   }
@@ -525,6 +531,7 @@ public class ProductItem extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "auto_creation_url",
       "filter",
       "id",
       "name",
@@ -601,6 +608,13 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestGetProductSets requestAutoCreationUrlField () {
+      return this.requestAutoCreationUrlField(true);
+    }
+    public APIRequestGetProductSets requestAutoCreationUrlField (boolean value) {
+      this.requestField("auto_creation_url", value);
+      return this;
+    }
     public APIRequestGetProductSets requestFilterField () {
       return this.requestFilterField(true);
     }
@@ -774,6 +788,7 @@ public class ProductItem extends APINode {
       "sale_price_start_date",
       "shipping_weight_unit",
       "shipping_weight_value",
+      "short_description",
       "size",
       "start_date",
       "url",
@@ -1140,6 +1155,13 @@ public class ProductItem extends APINode {
       this.requestField("shipping_weight_value", value);
       return this;
     }
+    public APIRequestGet requestShortDescriptionField () {
+      return this.requestShortDescriptionField(true);
+    }
+    public APIRequestGet requestShortDescriptionField (boolean value) {
+      this.requestField("short_description", value);
+      return this;
+    }
     public APIRequestGet requestSizeField () {
       return this.requestSizeField(true);
     }
@@ -1220,6 +1242,7 @@ public class ProductItem extends APINode {
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
+      "short_description",
       "size",
       "start_date",
       "url",
@@ -1523,6 +1546,11 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setShortDescription (String shortDescription) {
+      this.setParam("short_description", shortDescription);
+      return this;
+    }
+
     public APIRequestUpdate setSize (String size) {
       this.setParam("size", size);
       return this;
@@ -1813,6 +1841,7 @@ public class ProductItem extends APINode {
     this.mSalePriceStartDate = instance.mSalePriceStartDate;
     this.mShippingWeightUnit = instance.mShippingWeightUnit;
     this.mShippingWeightValue = instance.mShippingWeightValue;
+    this.mShortDescription = instance.mShortDescription;
     this.mSize = instance.mSize;
     this.mStartDate = instance.mStartDate;
     this.mUrl = instance.mUrl;

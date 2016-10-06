@@ -37,6 +37,10 @@ import java.io.IOException;
 
 public class VideoUtils {
 
+  private static String READY = "ready";
+  private static String PROCESSING = "processing";
+  private static String ERROR = "error";
+
   public static int defaultWaitForEncodingCheckInterval = 10;
   public static int defaultWaitForEncodingCheckTries = 20;
   public static int defaultChunkUploadRetries = 5;
@@ -57,7 +61,9 @@ public class VideoUtils {
     String videoId = account.createAdVideo().addUploadFile("videoFile", videoFile).execute().getId();
     if (callback != null) callback.onProgressUpdate(ProgressCallback.EVENT_UPLOAD_COMPLETE, 100);
     if (waitForEncoding) {
-      waitForVideoEncoding(videoId, account.getContext(), callback);
+      if (!waitForVideoEncoding(videoId, account.getContext(), callback)) {
+        throw new APIException("Video encoding failed. videoId=" + videoId);
+      }
     }
     return videoId;
   }
@@ -135,7 +141,9 @@ public class VideoUtils {
       throw new APIException("Video upload failed unexpectedly. Video ID: " + videoId + ", Upload session ID: " + sessionId);
     }
     if (waitForEncoding) {
-      waitForVideoEncoding(videoId, account.getContext(), callback);
+      if (!waitForVideoEncoding(videoId, account.getContext(), callback)) {
+        throw new APIException("Video encoding failed. videoId=" + videoId);
+      }
     }
     return videoId;
   }
@@ -150,12 +158,14 @@ public class VideoUtils {
     );
   }
 
-
   public static boolean waitForVideoEncoding(String videoId, APIContext context, int checkIntervalInSec, int retries, ProgressCallback callback) throws APIException {
     for (int retry = 0; retry < retries; retry++) {
       String status = getVideoStatus(videoId, context, callback);
-      if ("ready".equals(status)) {
+      if (status.equals(READY)) {
         return true;
+      }
+      if (status.equals(ERROR)) {
+        return false;
       }
       try {
         Thread.sleep(checkIntervalInSec * 1000);
@@ -175,15 +185,16 @@ public class VideoUtils {
         .getAsJsonObject()
         .get("video_status")
         .getAsString();
+
     int progress = 0;
     if (response.get("status").getAsJsonObject().has("processing_progress")) {
       progress = response.get("status").getAsJsonObject().get("processing_progress").getAsInt();
     }
 
     if (callback != null) {
-      if ("processing".equals(status)) {
+      if (status.equals(PROCESSING)) {
         callback.onProgressUpdate(ProgressCallback.EVENT_SERVER_ENCODING_PROGRESS, progress);
-      } else if ("ready".equals(status)) {
+      } else if (status.equals(READY)) {
         callback.onProgressUpdate(ProgressCallback.EVENT_SERVER_ENCODING_COMPLETE, 100);
       }
     }

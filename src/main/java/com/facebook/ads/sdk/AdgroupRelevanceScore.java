@@ -56,7 +56,7 @@ public class AdgroupRelevanceScore extends APINode {
   @SerializedName("positive_feedback")
   private String mPositiveFeedback = null;
   @SerializedName("score")
-  private Long mScore = null;
+  private String mScore = null;
   @SerializedName("status")
   private String mStatus = null;
   protected static Gson gson = null;
@@ -218,11 +218,11 @@ public class AdgroupRelevanceScore extends APINode {
     return this;
   }
 
-  public Long getFieldScore() {
+  public String getFieldScore() {
     return mScore;
   }
 
-  public AdgroupRelevanceScore setFieldScore(Long value) {
+  public AdgroupRelevanceScore setFieldScore(String value) {
     this.mScore = value;
     return this;
   }

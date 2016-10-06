@@ -399,7 +399,6 @@ public class OffsitePixel extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "account_groups",
       "account_id",
       "account_status",
       "age",
@@ -430,7 +429,6 @@ public class OffsitePixel extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
-      "last_used_time",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -438,7 +436,6 @@ public class OffsitePixel extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
-      "owner_business",
       "partner",
       "rf_spec",
       "spend_cap",
@@ -521,13 +518,6 @@ public class OffsitePixel extends APINode {
       return this;
     }
 
-    public APIRequestGetAdAccounts requestAccountGroupsField () {
-      return this.requestAccountGroupsField(true);
-    }
-    public APIRequestGetAdAccounts requestAccountGroupsField (boolean value) {
-      this.requestField("account_groups", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestAccountIdField () {
       return this.requestAccountIdField(true);
     }
@@ -738,13 +728,6 @@ public class OffsitePixel extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestLastUsedTimeField () {
-      return this.requestLastUsedTimeField(true);
-    }
-    public APIRequestGetAdAccounts requestLastUsedTimeField (boolean value) {
-      this.requestField("last_used_time", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -792,13 +775,6 @@ public class OffsitePixel extends APINode {
     }
     public APIRequestGetAdAccounts requestOwnerField (boolean value) {
       this.requestField("owner", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestOwnerBusinessField () {
-      return this.requestOwnerBusinessField(true);
-    }
-    public APIRequestGetAdAccounts requestOwnerBusinessField (boolean value) {
-      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetAdAccounts requestPartnerField () {

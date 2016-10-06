@@ -51,6 +51,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class EventSourceGroup extends APINode {
+  @SerializedName("business")
+  private Business mBusiness = null;
   @SerializedName("event_sources")
   private List<ExternalEventSource> mEventSources = null;
   @SerializedName("id")
@@ -245,6 +247,17 @@ public class EventSourceGroup extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  }
+
+
+  public Business getFieldBusiness() {
+    if (mBusiness != null) {
+      mBusiness.context = getContext();
+    }
+    return mBusiness;
+  }
 
   public List<ExternalEventSource> getFieldEventSources() {
     return mEventSources;
@@ -365,6 +378,7 @@ public class EventSourceGroup extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "business",
       "event_sources",
       "id",
       "name",
@@ -439,6 +453,13 @@ public class EventSourceGroup extends APINode {
       return this;
     }
 
+    public APIRequestGet requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGet requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
     public APIRequestGet requestEventSourcesField () {
       return this.requestEventSourcesField(true);
     }
@@ -462,6 +483,106 @@ public class EventSourceGroup extends APINode {
     }
   }
 
+  public static class APIRequestUpdate extends APIRequest<EventSourceGroup> {
+
+    EventSourceGroup lastResponse = null;
+    @Override
+    public EventSourceGroup getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "event_sources",
+      "name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public EventSourceGroup parseResponse(String response) throws APIException {
+      return EventSourceGroup.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public EventSourceGroup execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public EventSourceGroup execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setEventSources (List<String> eventSources) {
+      this.setParam("event_sources", eventSources);
+      return this;
+    }
+    public APIRequestUpdate setEventSources (String eventSources) {
+      this.setParam("event_sources", eventSources);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -477,6 +598,7 @@ public class EventSourceGroup extends APINode {
   }
 
   public EventSourceGroup copyFrom(EventSourceGroup instance) {
+    this.mBusiness = instance.mBusiness;
     this.mEventSources = instance.mEventSources;
     this.mId = instance.mId;
     this.mName = instance.mName;

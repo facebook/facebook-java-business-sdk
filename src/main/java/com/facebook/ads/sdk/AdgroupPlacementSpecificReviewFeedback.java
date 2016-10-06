@@ -51,10 +51,20 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdgroupPlacementSpecificReviewFeedback extends APINode {
+  @SerializedName("account_admin")
+  private Map<String, String> mAccountAdmin = null;
+  @SerializedName("ad")
+  private Map<String, String> mAd = null;
   @SerializedName("facebook")
   private Map<String, String> mFacebook = null;
   @SerializedName("instagram")
   private Map<String, String> mInstagram = null;
+  @SerializedName("page_admin")
+  private Map<String, String> mPageAdmin = null;
+  @SerializedName("product")
+  private Map<String, String> mProduct = null;
+  @SerializedName("seller")
+  private Map<String, String> mSeller = null;
   protected static Gson gson = null;
 
   public AdgroupPlacementSpecificReviewFeedback() {
@@ -196,6 +206,24 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   }
 
 
+  public Map<String, String> getFieldAccountAdmin() {
+    return mAccountAdmin;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldAccountAdmin(Map<String, String> value) {
+    this.mAccountAdmin = value;
+    return this;
+  }
+
+  public Map<String, String> getFieldAd() {
+    return mAd;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldAd(Map<String, String> value) {
+    this.mAd = value;
+    return this;
+  }
+
   public Map<String, String> getFieldFacebook() {
     return mFacebook;
   }
@@ -211,6 +239,33 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
 
   public AdgroupPlacementSpecificReviewFeedback setFieldInstagram(Map<String, String> value) {
     this.mInstagram = value;
+    return this;
+  }
+
+  public Map<String, String> getFieldPageAdmin() {
+    return mPageAdmin;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldPageAdmin(Map<String, String> value) {
+    this.mPageAdmin = value;
+    return this;
+  }
+
+  public Map<String, String> getFieldProduct() {
+    return mProduct;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldProduct(Map<String, String> value) {
+    this.mProduct = value;
+    return this;
+  }
+
+  public Map<String, String> getFieldSeller() {
+    return mSeller;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldSeller(Map<String, String> value) {
+    this.mSeller = value;
     return this;
   }
 
@@ -231,8 +286,13 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   }
 
   public AdgroupPlacementSpecificReviewFeedback copyFrom(AdgroupPlacementSpecificReviewFeedback instance) {
+    this.mAccountAdmin = instance.mAccountAdmin;
+    this.mAd = instance.mAd;
     this.mFacebook = instance.mFacebook;
     this.mInstagram = instance.mInstagram;
+    this.mPageAdmin = instance.mPageAdmin;
+    this.mProduct = instance.mProduct;
+    this.mSeller = instance.mSeller;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

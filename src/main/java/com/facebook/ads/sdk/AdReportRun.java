@@ -337,14 +337,87 @@ public class AdReportRun extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "default_summary",
-      "fields",
-      "filtering",
-      "sort",
-      "summary",
     };
 
     public static final String[] FIELDS = {
+      "account_id",
+      "account_name",
+      "action_values",
+      "actions",
+      "ad_id",
+      "ad_name",
+      "adset_id",
+      "adset_name",
+      "app_store_clicks",
+      "buying_type",
+      "call_to_action_clicks",
+      "campaign_id",
+      "campaign_name",
+      "canvas_avg_view_percent",
+      "canvas_avg_view_time",
+      "clicks",
+      "cost_per_10_sec_video_view",
+      "cost_per_action_type",
+      "cost_per_estimated_ad_recallers",
+      "cost_per_inline_link_click",
+      "cost_per_inline_post_engagement",
+      "cost_per_total_action",
+      "cost_per_unique_action_type",
+      "cost_per_unique_click",
+      "cost_per_unique_inline_link_click",
+      "cpc",
+      "cpm",
+      "cpp",
+      "ctr",
+      "date_start",
+      "date_stop",
+      "deeplink_clicks",
+      "estimated_ad_recall_rate",
+      "estimated_ad_recallers",
+      "frequency",
+      "impressions",
+      "inline_link_click_ctr",
+      "inline_link_clicks",
+      "inline_post_engagement",
+      "newsfeed_avg_position",
+      "newsfeed_clicks",
+      "newsfeed_impressions",
+      "objective",
+      "place_page_name",
+      "reach",
+      "relevance_score",
+      "social_clicks",
+      "social_impressions",
+      "social_reach",
+      "social_spend",
+      "spend",
+      "total_action_value",
+      "total_actions",
+      "total_unique_actions",
+      "unique_actions",
+      "unique_clicks",
+      "unique_ctr",
+      "unique_impressions",
+      "unique_inline_link_click_ctr",
+      "unique_inline_link_clicks",
+      "unique_link_clicks_ctr",
+      "unique_social_clicks",
+      "unique_social_impressions",
+      "video_10_sec_watched_actions",
+      "video_15_sec_watched_actions",
+      "video_30_sec_watched_actions",
+      "video_avg_pct_watched_actions",
+      "video_avg_percent_watched_actions",
+      "video_avg_sec_watched_actions",
+      "video_avg_time_watched_actions",
+      "video_complete_watched_actions",
+      "video_p100_watched_actions",
+      "video_p25_watched_actions",
+      "video_p50_watched_actions",
+      "video_p75_watched_actions",
+      "video_p95_watched_actions",
+      "website_clicks",
+      "website_ctr",
     };
 
     @Override
@@ -379,51 +452,6 @@ public class AdReportRun extends APINode {
       return this;
     }
 
-
-    public APIRequestGetInsights setDefaultSummary (Boolean defaultSummary) {
-      this.setParam("default_summary", defaultSummary);
-      return this;
-    }
-    public APIRequestGetInsights setDefaultSummary (String defaultSummary) {
-      this.setParam("default_summary", defaultSummary);
-      return this;
-    }
-
-    public APIRequestGetInsights setFields (List<AdsInsights.EnumSummary> fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-    public APIRequestGetInsights setFields (String fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-
-    public APIRequestGetInsights setFiltering (List<Object> filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-    public APIRequestGetInsights setFiltering (String filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-
-    public APIRequestGetInsights setSort (List<String> sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-    public APIRequestGetInsights setSort (String sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-
-    public APIRequestGetInsights setSummary (List<AdsInsights.EnumSummary> summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
-    public APIRequestGetInsights setSummary (String summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
 
     public APIRequestGetInsights requestAllFields () {
       return this.requestAllFields(true);
@@ -461,6 +489,552 @@ public class AdReportRun extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights requestAccountIdField () {
+      return this.requestAccountIdField(true);
+    }
+    public APIRequestGetInsights requestAccountIdField (boolean value) {
+      this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAccountNameField () {
+      return this.requestAccountNameField(true);
+    }
+    public APIRequestGetInsights requestAccountNameField (boolean value) {
+      this.requestField("account_name", value);
+      return this;
+    }
+    public APIRequestGetInsights requestActionValuesField () {
+      return this.requestActionValuesField(true);
+    }
+    public APIRequestGetInsights requestActionValuesField (boolean value) {
+      this.requestField("action_values", value);
+      return this;
+    }
+    public APIRequestGetInsights requestActionsField () {
+      return this.requestActionsField(true);
+    }
+    public APIRequestGetInsights requestActionsField (boolean value) {
+      this.requestField("actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAdIdField () {
+      return this.requestAdIdField(true);
+    }
+    public APIRequestGetInsights requestAdIdField (boolean value) {
+      this.requestField("ad_id", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAdNameField () {
+      return this.requestAdNameField(true);
+    }
+    public APIRequestGetInsights requestAdNameField (boolean value) {
+      this.requestField("ad_name", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAdsetIdField () {
+      return this.requestAdsetIdField(true);
+    }
+    public APIRequestGetInsights requestAdsetIdField (boolean value) {
+      this.requestField("adset_id", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAdsetNameField () {
+      return this.requestAdsetNameField(true);
+    }
+    public APIRequestGetInsights requestAdsetNameField (boolean value) {
+      this.requestField("adset_name", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAppStoreClicksField () {
+      return this.requestAppStoreClicksField(true);
+    }
+    public APIRequestGetInsights requestAppStoreClicksField (boolean value) {
+      this.requestField("app_store_clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestBuyingTypeField () {
+      return this.requestBuyingTypeField(true);
+    }
+    public APIRequestGetInsights requestBuyingTypeField (boolean value) {
+      this.requestField("buying_type", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCallToActionClicksField () {
+      return this.requestCallToActionClicksField(true);
+    }
+    public APIRequestGetInsights requestCallToActionClicksField (boolean value) {
+      this.requestField("call_to_action_clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCampaignIdField () {
+      return this.requestCampaignIdField(true);
+    }
+    public APIRequestGetInsights requestCampaignIdField (boolean value) {
+      this.requestField("campaign_id", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCampaignNameField () {
+      return this.requestCampaignNameField(true);
+    }
+    public APIRequestGetInsights requestCampaignNameField (boolean value) {
+      this.requestField("campaign_name", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCanvasAvgViewPercentField () {
+      return this.requestCanvasAvgViewPercentField(true);
+    }
+    public APIRequestGetInsights requestCanvasAvgViewPercentField (boolean value) {
+      this.requestField("canvas_avg_view_percent", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCanvasAvgViewTimeField () {
+      return this.requestCanvasAvgViewTimeField(true);
+    }
+    public APIRequestGetInsights requestCanvasAvgViewTimeField (boolean value) {
+      this.requestField("canvas_avg_view_time", value);
+      return this;
+    }
+    public APIRequestGetInsights requestClicksField () {
+      return this.requestClicksField(true);
+    }
+    public APIRequestGetInsights requestClicksField (boolean value) {
+      this.requestField("clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPer10SecVideoViewField () {
+      return this.requestCostPer10SecVideoViewField(true);
+    }
+    public APIRequestGetInsights requestCostPer10SecVideoViewField (boolean value) {
+      this.requestField("cost_per_10_sec_video_view", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerActionTypeField () {
+      return this.requestCostPerActionTypeField(true);
+    }
+    public APIRequestGetInsights requestCostPerActionTypeField (boolean value) {
+      this.requestField("cost_per_action_type", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerEstimatedAdRecallersField () {
+      return this.requestCostPerEstimatedAdRecallersField(true);
+    }
+    public APIRequestGetInsights requestCostPerEstimatedAdRecallersField (boolean value) {
+      this.requestField("cost_per_estimated_ad_recallers", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerInlineLinkClickField () {
+      return this.requestCostPerInlineLinkClickField(true);
+    }
+    public APIRequestGetInsights requestCostPerInlineLinkClickField (boolean value) {
+      this.requestField("cost_per_inline_link_click", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerInlinePostEngagementField () {
+      return this.requestCostPerInlinePostEngagementField(true);
+    }
+    public APIRequestGetInsights requestCostPerInlinePostEngagementField (boolean value) {
+      this.requestField("cost_per_inline_post_engagement", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerTotalActionField () {
+      return this.requestCostPerTotalActionField(true);
+    }
+    public APIRequestGetInsights requestCostPerTotalActionField (boolean value) {
+      this.requestField("cost_per_total_action", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerUniqueActionTypeField () {
+      return this.requestCostPerUniqueActionTypeField(true);
+    }
+    public APIRequestGetInsights requestCostPerUniqueActionTypeField (boolean value) {
+      this.requestField("cost_per_unique_action_type", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerUniqueClickField () {
+      return this.requestCostPerUniqueClickField(true);
+    }
+    public APIRequestGetInsights requestCostPerUniqueClickField (boolean value) {
+      this.requestField("cost_per_unique_click", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerUniqueInlineLinkClickField () {
+      return this.requestCostPerUniqueInlineLinkClickField(true);
+    }
+    public APIRequestGetInsights requestCostPerUniqueInlineLinkClickField (boolean value) {
+      this.requestField("cost_per_unique_inline_link_click", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCpcField () {
+      return this.requestCpcField(true);
+    }
+    public APIRequestGetInsights requestCpcField (boolean value) {
+      this.requestField("cpc", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCpmField () {
+      return this.requestCpmField(true);
+    }
+    public APIRequestGetInsights requestCpmField (boolean value) {
+      this.requestField("cpm", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCppField () {
+      return this.requestCppField(true);
+    }
+    public APIRequestGetInsights requestCppField (boolean value) {
+      this.requestField("cpp", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCtrField () {
+      return this.requestCtrField(true);
+    }
+    public APIRequestGetInsights requestCtrField (boolean value) {
+      this.requestField("ctr", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDateStartField () {
+      return this.requestDateStartField(true);
+    }
+    public APIRequestGetInsights requestDateStartField (boolean value) {
+      this.requestField("date_start", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDateStopField () {
+      return this.requestDateStopField(true);
+    }
+    public APIRequestGetInsights requestDateStopField (boolean value) {
+      this.requestField("date_stop", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDeeplinkClicksField () {
+      return this.requestDeeplinkClicksField(true);
+    }
+    public APIRequestGetInsights requestDeeplinkClicksField (boolean value) {
+      this.requestField("deeplink_clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestEstimatedAdRecallRateField () {
+      return this.requestEstimatedAdRecallRateField(true);
+    }
+    public APIRequestGetInsights requestEstimatedAdRecallRateField (boolean value) {
+      this.requestField("estimated_ad_recall_rate", value);
+      return this;
+    }
+    public APIRequestGetInsights requestEstimatedAdRecallersField () {
+      return this.requestEstimatedAdRecallersField(true);
+    }
+    public APIRequestGetInsights requestEstimatedAdRecallersField (boolean value) {
+      this.requestField("estimated_ad_recallers", value);
+      return this;
+    }
+    public APIRequestGetInsights requestFrequencyField () {
+      return this.requestFrequencyField(true);
+    }
+    public APIRequestGetInsights requestFrequencyField (boolean value) {
+      this.requestField("frequency", value);
+      return this;
+    }
+    public APIRequestGetInsights requestImpressionsField () {
+      return this.requestImpressionsField(true);
+    }
+    public APIRequestGetInsights requestImpressionsField (boolean value) {
+      this.requestField("impressions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestInlineLinkClickCtrField () {
+      return this.requestInlineLinkClickCtrField(true);
+    }
+    public APIRequestGetInsights requestInlineLinkClickCtrField (boolean value) {
+      this.requestField("inline_link_click_ctr", value);
+      return this;
+    }
+    public APIRequestGetInsights requestInlineLinkClicksField () {
+      return this.requestInlineLinkClicksField(true);
+    }
+    public APIRequestGetInsights requestInlineLinkClicksField (boolean value) {
+      this.requestField("inline_link_clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestInlinePostEngagementField () {
+      return this.requestInlinePostEngagementField(true);
+    }
+    public APIRequestGetInsights requestInlinePostEngagementField (boolean value) {
+      this.requestField("inline_post_engagement", value);
+      return this;
+    }
+    public APIRequestGetInsights requestNewsfeedAvgPositionField () {
+      return this.requestNewsfeedAvgPositionField(true);
+    }
+    public APIRequestGetInsights requestNewsfeedAvgPositionField (boolean value) {
+      this.requestField("newsfeed_avg_position", value);
+      return this;
+    }
+    public APIRequestGetInsights requestNewsfeedClicksField () {
+      return this.requestNewsfeedClicksField(true);
+    }
+    public APIRequestGetInsights requestNewsfeedClicksField (boolean value) {
+      this.requestField("newsfeed_clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestNewsfeedImpressionsField () {
+      return this.requestNewsfeedImpressionsField(true);
+    }
+    public APIRequestGetInsights requestNewsfeedImpressionsField (boolean value) {
+      this.requestField("newsfeed_impressions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestObjectiveField () {
+      return this.requestObjectiveField(true);
+    }
+    public APIRequestGetInsights requestObjectiveField (boolean value) {
+      this.requestField("objective", value);
+      return this;
+    }
+    public APIRequestGetInsights requestPlacePageNameField () {
+      return this.requestPlacePageNameField(true);
+    }
+    public APIRequestGetInsights requestPlacePageNameField (boolean value) {
+      this.requestField("place_page_name", value);
+      return this;
+    }
+    public APIRequestGetInsights requestReachField () {
+      return this.requestReachField(true);
+    }
+    public APIRequestGetInsights requestReachField (boolean value) {
+      this.requestField("reach", value);
+      return this;
+    }
+    public APIRequestGetInsights requestRelevanceScoreField () {
+      return this.requestRelevanceScoreField(true);
+    }
+    public APIRequestGetInsights requestRelevanceScoreField (boolean value) {
+      this.requestField("relevance_score", value);
+      return this;
+    }
+    public APIRequestGetInsights requestSocialClicksField () {
+      return this.requestSocialClicksField(true);
+    }
+    public APIRequestGetInsights requestSocialClicksField (boolean value) {
+      this.requestField("social_clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestSocialImpressionsField () {
+      return this.requestSocialImpressionsField(true);
+    }
+    public APIRequestGetInsights requestSocialImpressionsField (boolean value) {
+      this.requestField("social_impressions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestSocialReachField () {
+      return this.requestSocialReachField(true);
+    }
+    public APIRequestGetInsights requestSocialReachField (boolean value) {
+      this.requestField("social_reach", value);
+      return this;
+    }
+    public APIRequestGetInsights requestSocialSpendField () {
+      return this.requestSocialSpendField(true);
+    }
+    public APIRequestGetInsights requestSocialSpendField (boolean value) {
+      this.requestField("social_spend", value);
+      return this;
+    }
+    public APIRequestGetInsights requestSpendField () {
+      return this.requestSpendField(true);
+    }
+    public APIRequestGetInsights requestSpendField (boolean value) {
+      this.requestField("spend", value);
+      return this;
+    }
+    public APIRequestGetInsights requestTotalActionValueField () {
+      return this.requestTotalActionValueField(true);
+    }
+    public APIRequestGetInsights requestTotalActionValueField (boolean value) {
+      this.requestField("total_action_value", value);
+      return this;
+    }
+    public APIRequestGetInsights requestTotalActionsField () {
+      return this.requestTotalActionsField(true);
+    }
+    public APIRequestGetInsights requestTotalActionsField (boolean value) {
+      this.requestField("total_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestTotalUniqueActionsField () {
+      return this.requestTotalUniqueActionsField(true);
+    }
+    public APIRequestGetInsights requestTotalUniqueActionsField (boolean value) {
+      this.requestField("total_unique_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestUniqueActionsField () {
+      return this.requestUniqueActionsField(true);
+    }
+    public APIRequestGetInsights requestUniqueActionsField (boolean value) {
+      this.requestField("unique_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestUniqueClicksField () {
+      return this.requestUniqueClicksField(true);
+    }
+    public APIRequestGetInsights requestUniqueClicksField (boolean value) {
+      this.requestField("unique_clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestUniqueCtrField () {
+      return this.requestUniqueCtrField(true);
+    }
+    public APIRequestGetInsights requestUniqueCtrField (boolean value) {
+      this.requestField("unique_ctr", value);
+      return this;
+    }
+    public APIRequestGetInsights requestUniqueImpressionsField () {
+      return this.requestUniqueImpressionsField(true);
+    }
+    public APIRequestGetInsights requestUniqueImpressionsField (boolean value) {
+      this.requestField("unique_impressions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestUniqueInlineLinkClickCtrField () {
+      return this.requestUniqueInlineLinkClickCtrField(true);
+    }
+    public APIRequestGetInsights requestUniqueInlineLinkClickCtrField (boolean value) {
+      this.requestField("unique_inline_link_click_ctr", value);
+      return this;
+    }
+    public APIRequestGetInsights requestUniqueInlineLinkClicksField () {
+      return this.requestUniqueInlineLinkClicksField(true);
+    }
+    public APIRequestGetInsights requestUniqueInlineLinkClicksField (boolean value) {
+      this.requestField("unique_inline_link_clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestUniqueLinkClicksCtrField () {
+      return this.requestUniqueLinkClicksCtrField(true);
+    }
+    public APIRequestGetInsights requestUniqueLinkClicksCtrField (boolean value) {
+      this.requestField("unique_link_clicks_ctr", value);
+      return this;
+    }
+    public APIRequestGetInsights requestUniqueSocialClicksField () {
+      return this.requestUniqueSocialClicksField(true);
+    }
+    public APIRequestGetInsights requestUniqueSocialClicksField (boolean value) {
+      this.requestField("unique_social_clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestUniqueSocialImpressionsField () {
+      return this.requestUniqueSocialImpressionsField(true);
+    }
+    public APIRequestGetInsights requestUniqueSocialImpressionsField (boolean value) {
+      this.requestField("unique_social_impressions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideo10SecWatchedActionsField () {
+      return this.requestVideo10SecWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideo10SecWatchedActionsField (boolean value) {
+      this.requestField("video_10_sec_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideo15SecWatchedActionsField () {
+      return this.requestVideo15SecWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideo15SecWatchedActionsField (boolean value) {
+      this.requestField("video_15_sec_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideo30SecWatchedActionsField () {
+      return this.requestVideo30SecWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideo30SecWatchedActionsField (boolean value) {
+      this.requestField("video_30_sec_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoAvgPctWatchedActionsField () {
+      return this.requestVideoAvgPctWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoAvgPctWatchedActionsField (boolean value) {
+      this.requestField("video_avg_pct_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoAvgPercentWatchedActionsField () {
+      return this.requestVideoAvgPercentWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoAvgPercentWatchedActionsField (boolean value) {
+      this.requestField("video_avg_percent_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoAvgSecWatchedActionsField () {
+      return this.requestVideoAvgSecWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoAvgSecWatchedActionsField (boolean value) {
+      this.requestField("video_avg_sec_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoAvgTimeWatchedActionsField () {
+      return this.requestVideoAvgTimeWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoAvgTimeWatchedActionsField (boolean value) {
+      this.requestField("video_avg_time_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoCompleteWatchedActionsField () {
+      return this.requestVideoCompleteWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoCompleteWatchedActionsField (boolean value) {
+      this.requestField("video_complete_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoP100WatchedActionsField () {
+      return this.requestVideoP100WatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoP100WatchedActionsField (boolean value) {
+      this.requestField("video_p100_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoP25WatchedActionsField () {
+      return this.requestVideoP25WatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoP25WatchedActionsField (boolean value) {
+      this.requestField("video_p25_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoP50WatchedActionsField () {
+      return this.requestVideoP50WatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoP50WatchedActionsField (boolean value) {
+      this.requestField("video_p50_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoP75WatchedActionsField () {
+      return this.requestVideoP75WatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoP75WatchedActionsField (boolean value) {
+      this.requestField("video_p75_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoP95WatchedActionsField () {
+      return this.requestVideoP95WatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoP95WatchedActionsField (boolean value) {
+      this.requestField("video_p95_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestWebsiteClicksField () {
+      return this.requestWebsiteClicksField(true);
+    }
+    public APIRequestGetInsights requestWebsiteClicksField (boolean value) {
+      this.requestField("website_clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestWebsiteCtrField () {
+      return this.requestWebsiteCtrField(true);
+    }
+    public APIRequestGetInsights requestWebsiteCtrField (boolean value) {
+      this.requestField("website_ctr", value);
+      return this;
+    }
   }
 
   public static class APIRequestGet extends APIRequest<AdReportRun> {
@@ -681,8 +1255,6 @@ public class AdReportRun extends APINode {
   }
 
   public static enum EnumActionBreakdowns {
-      @SerializedName("canvas_component_id")
-      VALUE_CANVAS_COMPONENT_ID("canvas_component_id"),
       @SerializedName("action_carousel_card_id")
       VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
       @SerializedName("action_carousel_card_name")
@@ -691,6 +1263,8 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_DESTINATION("action_destination"),
       @SerializedName("action_device")
       VALUE_ACTION_DEVICE("action_device"),
+      @SerializedName("action_reaction")
+      VALUE_ACTION_REACTION("action_reaction"),
       @SerializedName("action_target_id")
       VALUE_ACTION_TARGET_ID("action_target_id"),
       @SerializedName("action_type")
@@ -751,6 +1325,8 @@ public class AdReportRun extends APINode {
       VALUE_PLACE_PAGE_ID("place_page_id"),
       @SerializedName("placement")
       VALUE_PLACEMENT("placement"),
+      @SerializedName("device_platform")
+      VALUE_DEVICE_PLATFORM("device_platform"),
       @SerializedName("product_id")
       VALUE_PRODUCT_ID("product_id"),
       @SerializedName("region")
@@ -879,8 +1455,6 @@ public class AdReportRun extends APINode {
   }
 
   public static enum EnumSummaryActionBreakdowns {
-      @SerializedName("canvas_component_id")
-      VALUE_CANVAS_COMPONENT_ID("canvas_component_id"),
       @SerializedName("action_carousel_card_id")
       VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
       @SerializedName("action_carousel_card_name")
@@ -889,6 +1463,8 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_DESTINATION("action_destination"),
       @SerializedName("action_device")
       VALUE_ACTION_DEVICE("action_device"),
+      @SerializedName("action_reaction")
+      VALUE_ACTION_REACTION("action_reaction"),
       @SerializedName("action_target_id")
       VALUE_ACTION_TARGET_ID("action_target_id"),
       @SerializedName("action_type")

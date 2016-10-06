@@ -324,13 +324,11 @@ public class AdsPixel extends APINode {
       "description",
       "external_event_source",
       "id",
-      "last_used_time",
       "lookalike_audience_ids",
       "lookalike_spec",
       "name",
       "operation_status",
       "opt_out_link",
-      "owner_business",
       "permission_for_actions",
       "pixel_id",
       "retention_days",
@@ -459,13 +457,6 @@ public class AdsPixel extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAudiences requestLastUsedTimeField () {
-      return this.requestLastUsedTimeField(true);
-    }
-    public APIRequestGetAudiences requestLastUsedTimeField (boolean value) {
-      this.requestField("last_used_time", value);
-      return this;
-    }
     public APIRequestGetAudiences requestLookalikeAudienceIdsField () {
       return this.requestLookalikeAudienceIdsField(true);
     }
@@ -499,13 +490,6 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAudiences requestOptOutLinkField (boolean value) {
       this.requestField("opt_out_link", value);
-      return this;
-    }
-    public APIRequestGetAudiences requestOwnerBusinessField () {
-      return this.requestOwnerBusinessField(true);
-    }
-    public APIRequestGetAudiences requestOwnerBusinessField (boolean value) {
-      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetAudiences requestPermissionForActionsField () {
@@ -578,7 +562,6 @@ public class AdsPixel extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "account_groups",
       "account_id",
       "account_status",
       "age",
@@ -609,7 +592,6 @@ public class AdsPixel extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
-      "last_used_time",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -617,7 +599,6 @@ public class AdsPixel extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
-      "owner_business",
       "partner",
       "rf_spec",
       "spend_cap",
@@ -705,13 +686,6 @@ public class AdsPixel extends APINode {
       return this;
     }
 
-    public APIRequestGetSharedAccounts requestAccountGroupsField () {
-      return this.requestAccountGroupsField(true);
-    }
-    public APIRequestGetSharedAccounts requestAccountGroupsField (boolean value) {
-      this.requestField("account_groups", value);
-      return this;
-    }
     public APIRequestGetSharedAccounts requestAccountIdField () {
       return this.requestAccountIdField(true);
     }
@@ -922,13 +896,6 @@ public class AdsPixel extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestLastUsedTimeField () {
-      return this.requestLastUsedTimeField(true);
-    }
-    public APIRequestGetSharedAccounts requestLastUsedTimeField (boolean value) {
-      this.requestField("last_used_time", value);
-      return this;
-    }
     public APIRequestGetSharedAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -976,13 +943,6 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestOwnerField (boolean value) {
       this.requestField("owner", value);
-      return this;
-    }
-    public APIRequestGetSharedAccounts requestOwnerBusinessField () {
-      return this.requestOwnerBusinessField(true);
-    }
-    public APIRequestGetSharedAccounts requestOwnerBusinessField (boolean value) {
-      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestPartnerField () {
@@ -1075,9 +1035,16 @@ public class AdsPixel extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "created_by",
+      "created_time",
       "id",
+      "link",
       "name",
       "primary_page",
+      "timezone_id",
+      "two_factor_type",
+      "updated_by",
+      "updated_time",
     };
 
     @Override
@@ -1149,11 +1116,32 @@ public class AdsPixel extends APINode {
       return this;
     }
 
+    public APIRequestGetSharedAgencies requestCreatedByField () {
+      return this.requestCreatedByField(true);
+    }
+    public APIRequestGetSharedAgencies requestCreatedByField (boolean value) {
+      this.requestField("created_by", value);
+      return this;
+    }
+    public APIRequestGetSharedAgencies requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetSharedAgencies requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
     public APIRequestGetSharedAgencies requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGetSharedAgencies requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetSharedAgencies requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetSharedAgencies requestLinkField (boolean value) {
+      this.requestField("link", value);
       return this;
     }
     public APIRequestGetSharedAgencies requestNameField () {
@@ -1168,6 +1156,34 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAgencies requestPrimaryPageField (boolean value) {
       this.requestField("primary_page", value);
+      return this;
+    }
+    public APIRequestGetSharedAgencies requestTimezoneIdField () {
+      return this.requestTimezoneIdField(true);
+    }
+    public APIRequestGetSharedAgencies requestTimezoneIdField (boolean value) {
+      this.requestField("timezone_id", value);
+      return this;
+    }
+    public APIRequestGetSharedAgencies requestTwoFactorTypeField () {
+      return this.requestTwoFactorTypeField(true);
+    }
+    public APIRequestGetSharedAgencies requestTwoFactorTypeField (boolean value) {
+      this.requestField("two_factor_type", value);
+      return this;
+    }
+    public APIRequestGetSharedAgencies requestUpdatedByField () {
+      return this.requestUpdatedByField(true);
+    }
+    public APIRequestGetSharedAgencies requestUpdatedByField (boolean value) {
+      this.requestField("updated_by", value);
+      return this;
+    }
+    public APIRequestGetSharedAgencies requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetSharedAgencies requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
       return this;
     }
   }

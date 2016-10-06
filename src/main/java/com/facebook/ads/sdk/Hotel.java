@@ -348,6 +348,7 @@ public class Hotel extends APINode {
       "name",
       "pricing_variables",
       "room_id",
+      "sale_price",
       "url",
     };
 
@@ -449,6 +450,15 @@ public class Hotel extends APINode {
 
     public APIRequestCreateHotelRoom setRoomId (String roomId) {
       this.setParam("room_id", roomId);
+      return this;
+    }
+
+    public APIRequestCreateHotelRoom setSalePrice (Double salePrice) {
+      this.setParam("sale_price", salePrice);
+      return this;
+    }
+    public APIRequestCreateHotelRoom setSalePrice (String salePrice) {
+      this.setParam("sale_price", salePrice);
       return this;
     }
 

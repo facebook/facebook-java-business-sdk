@@ -51,6 +51,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeLinkDataCallToActionValue extends APINode {
+  @SerializedName("app_destination")
+  private String mAppDestination = null;
   @SerializedName("app_link")
   private String mAppLink = null;
   @SerializedName("application")
@@ -65,6 +67,8 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
   private String mLinkCaption = null;
   @SerializedName("link_description")
   private String mLinkDescription = null;
+  @SerializedName("link_format")
+  private String mLinkFormat = null;
   @SerializedName("link_title")
   private String mLinkTitle = null;
   @SerializedName("page")
@@ -212,6 +216,15 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
   }
 
 
+  public String getFieldAppDestination() {
+    return mAppDestination;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldAppDestination(String value) {
+    this.mAppDestination = value;
+    return this;
+  }
+
   public String getFieldAppLink() {
     return mAppLink;
   }
@@ -275,6 +288,15 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
     return this;
   }
 
+  public String getFieldLinkFormat() {
+    return mLinkFormat;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldLinkFormat(String value) {
+    this.mLinkFormat = value;
+    return this;
+  }
+
   public String getFieldLinkTitle() {
     return mLinkTitle;
   }
@@ -319,6 +341,7 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
   }
 
   public AdCreativeLinkDataCallToActionValue copyFrom(AdCreativeLinkDataCallToActionValue instance) {
+    this.mAppDestination = instance.mAppDestination;
     this.mAppLink = instance.mAppLink;
     this.mApplication = instance.mApplication;
     this.mEventId = instance.mEventId;
@@ -326,6 +349,7 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
     this.mLink = instance.mLink;
     this.mLinkCaption = instance.mLinkCaption;
     this.mLinkDescription = instance.mLinkDescription;
+    this.mLinkFormat = instance.mLinkFormat;
     this.mLinkTitle = instance.mLinkTitle;
     this.mPage = instance.mPage;
     this.mProductLink = instance.mProductLink;

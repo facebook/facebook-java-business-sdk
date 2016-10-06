@@ -57,8 +57,6 @@ public class User extends APINode {
   private List<Object> mAdminNotes = null;
   @SerializedName("age_range")
   private Object mAgeRange = null;
-  @SerializedName("bio")
-  private String mBio = null;
   @SerializedName("birthday")
   private String mBirthday = null;
   @SerializedName("context")
@@ -73,6 +71,8 @@ public class User extends APINode {
   private List<Object> mEducation = null;
   @SerializedName("email")
   private String mEmail = null;
+  @SerializedName("employee_number")
+  private String mEmployeeNumber = null;
   @SerializedName("favorite_athletes")
   private List<Object> mFavoriteAthletes = null;
   @SerializedName("favorite_teams")
@@ -117,6 +117,8 @@ public class User extends APINode {
   private String mName = null;
   @SerializedName("name_format")
   private String mNameFormat = null;
+  @SerializedName("page_scoped_id")
+  private String mPageScopedId = null;
   @SerializedName("payment_pricepoints")
   private Object mPaymentPricepoints = null;
   @SerializedName("political")
@@ -341,14 +343,6 @@ public class User extends APINode {
     return new APIRequestGetAccounts(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetAdAccountGroups getAdAccountGroups() {
-    return new APIRequestGetAdAccountGroups(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateAdAccountGroup createAdAccountGroup() {
-    return new APIRequestCreateAdAccountGroup(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAdAccounts getAdAccounts() {
     return new APIRequestGetAdAccounts(this.getPrefixedId().toString(), context);
   }
@@ -386,10 +380,6 @@ public class User extends APINode {
     return mAgeRange;
   }
 
-  public String getFieldBio() {
-    return mBio;
-  }
-
   public String getFieldBirthday() {
     return mBirthday;
   }
@@ -416,6 +406,10 @@ public class User extends APINode {
 
   public String getFieldEmail() {
     return mEmail;
+  }
+
+  public String getFieldEmployeeNumber() {
+    return mEmployeeNumber;
   }
 
   public List<Object> getFieldFavoriteAthletes() {
@@ -504,6 +498,10 @@ public class User extends APINode {
 
   public String getFieldNameFormat() {
     return mNameFormat;
+  }
+
+  public String getFieldPageScopedId() {
+    return mPageScopedId;
   }
 
   public Object getFieldPaymentPricepoints() {
@@ -711,258 +709,6 @@ public class User extends APINode {
 
   }
 
-  public static class APIRequestGetAdAccountGroups extends APIRequest<AdAccountGroup> {
-
-    APINodeList<AdAccountGroup> lastResponse = null;
-    @Override
-    public APINodeList<AdAccountGroup> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "account_group_id",
-      "accounts",
-      "id",
-      "name",
-      "status",
-      "users",
-    };
-
-    @Override
-    public APINodeList<AdAccountGroup> parseResponse(String response) throws APIException {
-      return AdAccountGroup.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<AdAccountGroup> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdAccountGroup> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGetAdAccountGroups(String nodeId, APIContext context) {
-      super(context, nodeId, "/adaccountgroups", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAdAccountGroups setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdAccountGroups setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAdAccountGroups requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAdAccountGroups requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdAccountGroups requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAdAccountGroups requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdAccountGroups requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdAccountGroups requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAdAccountGroups requestAccountGroupIdField () {
-      return this.requestAccountGroupIdField(true);
-    }
-    public APIRequestGetAdAccountGroups requestAccountGroupIdField (boolean value) {
-      this.requestField("account_group_id", value);
-      return this;
-    }
-    public APIRequestGetAdAccountGroups requestAccountsField () {
-      return this.requestAccountsField(true);
-    }
-    public APIRequestGetAdAccountGroups requestAccountsField (boolean value) {
-      this.requestField("accounts", value);
-      return this;
-    }
-    public APIRequestGetAdAccountGroups requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAdAccountGroups requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAdAccountGroups requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetAdAccountGroups requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetAdAccountGroups requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGetAdAccountGroups requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetAdAccountGroups requestUsersField () {
-      return this.requestUsersField(true);
-    }
-    public APIRequestGetAdAccountGroups requestUsersField (boolean value) {
-      this.requestField("users", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreateAdAccountGroup extends APIRequest<AdAccountGroup> {
-
-    AdAccountGroup lastResponse = null;
-    @Override
-    public AdAccountGroup getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "accounts",
-      "name",
-      "redownload",
-      "users",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdAccountGroup parseResponse(String response) throws APIException {
-      return AdAccountGroup.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdAccountGroup execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdAccountGroup execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestCreateAdAccountGroup(String nodeId, APIContext context) {
-      super(context, nodeId, "/adaccountgroups", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAdAccountGroup setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccountGroup setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAdAccountGroup setAccounts (Map<String, String> accounts) {
-      this.setParam("accounts", accounts);
-      return this;
-    }
-    public APIRequestCreateAdAccountGroup setAccounts (String accounts) {
-      this.setParam("accounts", accounts);
-      return this;
-    }
-
-    public APIRequestCreateAdAccountGroup setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateAdAccountGroup setRedownload (Boolean redownload) {
-      this.setParam("redownload", redownload);
-      return this;
-    }
-    public APIRequestCreateAdAccountGroup setRedownload (String redownload) {
-      this.setParam("redownload", redownload);
-      return this;
-    }
-
-    public APIRequestCreateAdAccountGroup setUsers (Map<String, String> users) {
-      this.setParam("users", users);
-      return this;
-    }
-    public APIRequestCreateAdAccountGroup setUsers (String users) {
-      this.setParam("users", users);
-      return this;
-    }
-
-    public APIRequestCreateAdAccountGroup requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAdAccountGroup requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccountGroup requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAdAccountGroup requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccountGroup requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccountGroup requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetAdAccounts extends APIRequest<AdAccount> {
 
     APINodeList<AdAccount> lastResponse = null;
@@ -974,7 +720,6 @@ public class User extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "account_groups",
       "account_id",
       "account_status",
       "age",
@@ -1005,7 +750,6 @@ public class User extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
-      "last_used_time",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -1013,7 +757,6 @@ public class User extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
-      "owner_business",
       "partner",
       "rf_spec",
       "spend_cap",
@@ -1096,13 +839,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestGetAdAccounts requestAccountGroupsField () {
-      return this.requestAccountGroupsField(true);
-    }
-    public APIRequestGetAdAccounts requestAccountGroupsField (boolean value) {
-      this.requestField("account_groups", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestAccountIdField () {
       return this.requestAccountIdField(true);
     }
@@ -1313,13 +1049,6 @@ public class User extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestLastUsedTimeField () {
-      return this.requestLastUsedTimeField(true);
-    }
-    public APIRequestGetAdAccounts requestLastUsedTimeField (boolean value) {
-      this.requestField("last_used_time", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -1367,13 +1096,6 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestOwnerField (boolean value) {
       this.requestField("owner", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestOwnerBusinessField () {
-      return this.requestOwnerBusinessField(true);
-    }
-    public APIRequestGetAdAccounts requestOwnerBusinessField (boolean value) {
-      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetAdAccounts requestPartnerField () {
@@ -1467,8 +1189,12 @@ public class User extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "allow_organic_lead",
+      "context_card",
+      "continued_flow_request_method",
       "created_time",
       "creator",
+      "creator_id",
       "cusomized_tcpa_content",
       "expired_leads_count",
       "follow_up_action_text",
@@ -1477,12 +1203,15 @@ public class User extends APINode {
       "is_continued_flow",
       "leadgen_export_csv_url",
       "leads_count",
+      "legal_content",
       "locale",
+      "messenger_welcome_message",
       "name",
       "page",
       "page_id",
       "privacy_policy_url",
       "qualifiers",
+      "questions",
       "status",
       "tcpa_compliance",
     };
@@ -1561,6 +1290,27 @@ public class User extends APINode {
       return this;
     }
 
+    public APIRequestGetLeadGenForms requestAllowOrganicLeadField () {
+      return this.requestAllowOrganicLeadField(true);
+    }
+    public APIRequestGetLeadGenForms requestAllowOrganicLeadField (boolean value) {
+      this.requestField("allow_organic_lead", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestContextCardField () {
+      return this.requestContextCardField(true);
+    }
+    public APIRequestGetLeadGenForms requestContextCardField (boolean value) {
+      this.requestField("context_card", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestContinuedFlowRequestMethodField () {
+      return this.requestContinuedFlowRequestMethodField(true);
+    }
+    public APIRequestGetLeadGenForms requestContinuedFlowRequestMethodField (boolean value) {
+      this.requestField("continued_flow_request_method", value);
+      return this;
+    }
     public APIRequestGetLeadGenForms requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -1573,6 +1323,13 @@ public class User extends APINode {
     }
     public APIRequestGetLeadGenForms requestCreatorField (boolean value) {
       this.requestField("creator", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestCreatorIdField () {
+      return this.requestCreatorIdField(true);
+    }
+    public APIRequestGetLeadGenForms requestCreatorIdField (boolean value) {
+      this.requestField("creator_id", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestCusomizedTcpaContentField () {
@@ -1631,11 +1388,25 @@ public class User extends APINode {
       this.requestField("leads_count", value);
       return this;
     }
+    public APIRequestGetLeadGenForms requestLegalContentField () {
+      return this.requestLegalContentField(true);
+    }
+    public APIRequestGetLeadGenForms requestLegalContentField (boolean value) {
+      this.requestField("legal_content", value);
+      return this;
+    }
     public APIRequestGetLeadGenForms requestLocaleField () {
       return this.requestLocaleField(true);
     }
     public APIRequestGetLeadGenForms requestLocaleField (boolean value) {
       this.requestField("locale", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestMessengerWelcomeMessageField () {
+      return this.requestMessengerWelcomeMessageField(true);
+    }
+    public APIRequestGetLeadGenForms requestMessengerWelcomeMessageField (boolean value) {
+      this.requestField("messenger_welcome_message", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestNameField () {
@@ -1671,6 +1442,13 @@ public class User extends APINode {
     }
     public APIRequestGetLeadGenForms requestQualifiersField (boolean value) {
       this.requestField("qualifiers", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestQuestionsField () {
+      return this.requestQuestionsField(true);
+    }
+    public APIRequestGetLeadGenForms requestQuestionsField (boolean value) {
+      this.requestField("questions", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestStatusField () {
@@ -2285,7 +2063,6 @@ public class User extends APINode {
       "about",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "context",
       "cover",
@@ -2293,6 +2070,7 @@ public class User extends APINode {
       "devices",
       "education",
       "email",
+      "employee_number",
       "favorite_athletes",
       "favorite_teams",
       "first_name",
@@ -2427,13 +2205,6 @@ public class User extends APINode {
       this.requestField("age_range", value);
       return this;
     }
-    public APIRequestGet requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGet requestBioField (boolean value) {
-      this.requestField("bio", value);
-      return this;
-    }
     public APIRequestGet requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
@@ -2481,6 +2252,13 @@ public class User extends APINode {
     }
     public APIRequestGet requestEmailField (boolean value) {
       this.requestField("email", value);
+      return this;
+    }
+    public APIRequestGet requestEmployeeNumberField () {
+      return this.requestEmployeeNumberField(true);
+    }
+    public APIRequestGet requestEmployeeNumberField (boolean value) {
+      this.requestField("employee_number", value);
       return this;
     }
     public APIRequestGet requestFavoriteAthletesField () {
@@ -2797,7 +2575,6 @@ public class User extends APINode {
     this.mAbout = instance.mAbout;
     this.mAdminNotes = instance.mAdminNotes;
     this.mAgeRange = instance.mAgeRange;
-    this.mBio = instance.mBio;
     this.mBirthday = instance.mBirthday;
     this.mContext = instance.mContext;
     this.mCover = instance.mCover;
@@ -2805,6 +2582,7 @@ public class User extends APINode {
     this.mDevices = instance.mDevices;
     this.mEducation = instance.mEducation;
     this.mEmail = instance.mEmail;
+    this.mEmployeeNumber = instance.mEmployeeNumber;
     this.mFavoriteAthletes = instance.mFavoriteAthletes;
     this.mFavoriteTeams = instance.mFavoriteTeams;
     this.mFirstName = instance.mFirstName;
@@ -2827,6 +2605,7 @@ public class User extends APINode {
     this.mMiddleName = instance.mMiddleName;
     this.mName = instance.mName;
     this.mNameFormat = instance.mNameFormat;
+    this.mPageScopedId = instance.mPageScopedId;
     this.mPaymentPricepoints = instance.mPaymentPricepoints;
     this.mPolitical = instance.mPolitical;
     this.mPublicKey = instance.mPublicKey;

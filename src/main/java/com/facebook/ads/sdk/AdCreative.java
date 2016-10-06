@@ -51,14 +51,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreative extends APINode {
-  @SerializedName("actor_id")
-  private String mActorId = null;
-  @SerializedName("actor_image_hash")
-  private String mActorImageHash = null;
-  @SerializedName("actor_image_url")
-  private String mActorImageUrl = null;
-  @SerializedName("actor_name")
-  private String mActorName = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
   @SerializedName("applink_treatment")
@@ -67,6 +59,8 @@ public class AdCreative extends APINode {
   private String mBody = null;
   @SerializedName("call_to_action_type")
   private EnumCallToActionType mCallToActionType = null;
+  @SerializedName("effective_instagram_story_id")
+  private String mEffectiveInstagramStoryId = null;
   @SerializedName("effective_object_story_id")
   private String mEffectiveObjectStoryId = null;
   @SerializedName("id")
@@ -113,6 +107,8 @@ public class AdCreative extends APINode {
   private String mTitle = null;
   @SerializedName("url_tags")
   private String mUrlTags = null;
+  @SerializedName("use_page_actor_override")
+  private Boolean mUsePageActorOverride = null;
   @SerializedName("creative_id")
   private String mCreativeId = null;
   protected static Gson gson = null;
@@ -323,42 +319,6 @@ public class AdCreative extends APINode {
   }
 
 
-  public String getFieldActorId() {
-    return mActorId;
-  }
-
-  public AdCreative setFieldActorId(String value) {
-    this.mActorId = value;
-    return this;
-  }
-
-  public String getFieldActorImageHash() {
-    return mActorImageHash;
-  }
-
-  public AdCreative setFieldActorImageHash(String value) {
-    this.mActorImageHash = value;
-    return this;
-  }
-
-  public String getFieldActorImageUrl() {
-    return mActorImageUrl;
-  }
-
-  public AdCreative setFieldActorImageUrl(String value) {
-    this.mActorImageUrl = value;
-    return this;
-  }
-
-  public String getFieldActorName() {
-    return mActorName;
-  }
-
-  public AdCreative setFieldActorName(String value) {
-    this.mActorName = value;
-    return this;
-  }
-
   public List<AdLabel> getFieldAdlabels() {
     return mAdlabels;
   }
@@ -397,6 +357,15 @@ public class AdCreative extends APINode {
 
   public AdCreative setFieldCallToActionType(EnumCallToActionType value) {
     this.mCallToActionType = value;
+    return this;
+  }
+
+  public String getFieldEffectiveInstagramStoryId() {
+    return mEffectiveInstagramStoryId;
+  }
+
+  public AdCreative setFieldEffectiveInstagramStoryId(String value) {
+    this.mEffectiveInstagramStoryId = value;
     return this;
   }
 
@@ -618,6 +587,15 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public Boolean getFieldUsePageActorOverride() {
+    return mUsePageActorOverride;
+  }
+
+  public AdCreative setFieldUsePageActorOverride(Boolean value) {
+    this.mUsePageActorOverride = value;
+    return this;
+  }
+
 
 
   public static class APIRequestDeleteAdLabels extends APIRequest<APINode> {
@@ -821,6 +799,7 @@ public class AdCreative extends APINode {
       "height",
       "interactive",
       "locale",
+      "place_page_id",
       "post",
       "product_item_ids",
       "width",
@@ -901,6 +880,15 @@ public class AdCreative extends APINode {
 
     public APIRequestGetPreviews setLocale (String locale) {
       this.setParam("locale", locale);
+      return this;
+    }
+
+    public APIRequestGetPreviews setPlacePageId (Long placePageId) {
+      this.setParam("place_page_id", placePageId);
+      return this;
+    }
+    public APIRequestGetPreviews setPlacePageId (String placePageId) {
+      this.setParam("place_page_id", placePageId);
       return this;
     }
 
@@ -1105,14 +1093,11 @@ public class AdCreative extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "actor_id",
-      "actor_image_hash",
-      "actor_image_url",
-      "actor_name",
       "adlabels",
       "applink_treatment",
       "body",
       "call_to_action_type",
+      "effective_instagram_story_id",
       "effective_object_story_id",
       "id",
       "image_crops",
@@ -1136,6 +1121,7 @@ public class AdCreative extends APINode {
       "thumbnail_url",
       "title",
       "url_tags",
+      "use_page_actor_override",
     };
 
     @Override
@@ -1225,34 +1211,6 @@ public class AdCreative extends APINode {
       return this;
     }
 
-    public APIRequestGet requestActorIdField () {
-      return this.requestActorIdField(true);
-    }
-    public APIRequestGet requestActorIdField (boolean value) {
-      this.requestField("actor_id", value);
-      return this;
-    }
-    public APIRequestGet requestActorImageHashField () {
-      return this.requestActorImageHashField(true);
-    }
-    public APIRequestGet requestActorImageHashField (boolean value) {
-      this.requestField("actor_image_hash", value);
-      return this;
-    }
-    public APIRequestGet requestActorImageUrlField () {
-      return this.requestActorImageUrlField(true);
-    }
-    public APIRequestGet requestActorImageUrlField (boolean value) {
-      this.requestField("actor_image_url", value);
-      return this;
-    }
-    public APIRequestGet requestActorNameField () {
-      return this.requestActorNameField(true);
-    }
-    public APIRequestGet requestActorNameField (boolean value) {
-      this.requestField("actor_name", value);
-      return this;
-    }
     public APIRequestGet requestAdlabelsField () {
       return this.requestAdlabelsField(true);
     }
@@ -1279,6 +1237,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestCallToActionTypeField (boolean value) {
       this.requestField("call_to_action_type", value);
+      return this;
+    }
+    public APIRequestGet requestEffectiveInstagramStoryIdField () {
+      return this.requestEffectiveInstagramStoryIdField(true);
+    }
+    public APIRequestGet requestEffectiveInstagramStoryIdField (boolean value) {
+      this.requestField("effective_instagram_story_id", value);
       return this;
     }
     public APIRequestGet requestEffectiveObjectStoryIdField () {
@@ -1442,6 +1407,13 @@ public class AdCreative extends APINode {
       this.requestField("url_tags", value);
       return this;
     }
+    public APIRequestGet requestUsePageActorOverrideField () {
+      return this.requestUsePageActorOverrideField(true);
+    }
+    public APIRequestGet requestUsePageActorOverrideField (boolean value) {
+      this.requestField("use_page_actor_override", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<AdCreative> {
@@ -1602,8 +1574,6 @@ public class AdCreative extends APINode {
       VALUE_BOOK_TRAVEL("BOOK_TRAVEL"),
       @SerializedName("LISTEN_MUSIC")
       VALUE_LISTEN_MUSIC("LISTEN_MUSIC"),
-      @SerializedName("WATCH_VIDEO")
-      VALUE_WATCH_VIDEO("WATCH_VIDEO"),
       @SerializedName("LEARN_MORE")
       VALUE_LEARN_MORE("LEARN_MORE"),
       @SerializedName("SIGN_UP")
@@ -1640,6 +1610,8 @@ public class AdCreative extends APINode {
       VALUE_RECORD_NOW("RECORD_NOW"),
       @SerializedName("VOTE_NOW")
       VALUE_VOTE_NOW("VOTE_NOW"),
+      @SerializedName("REGISTER_NOW")
+      VALUE_REGISTER_NOW("REGISTER_NOW"),
       @SerializedName("OPEN_MOVIES")
       VALUE_OPEN_MOVIES("OPEN_MOVIES"),
       NULL(null);
@@ -1765,14 +1737,11 @@ public class AdCreative extends APINode {
   }
 
   public AdCreative copyFrom(AdCreative instance) {
-    this.mActorId = instance.mActorId;
-    this.mActorImageHash = instance.mActorImageHash;
-    this.mActorImageUrl = instance.mActorImageUrl;
-    this.mActorName = instance.mActorName;
     this.mAdlabels = instance.mAdlabels;
     this.mApplinkTreatment = instance.mApplinkTreatment;
     this.mBody = instance.mBody;
     this.mCallToActionType = instance.mCallToActionType;
+    this.mEffectiveInstagramStoryId = instance.mEffectiveInstagramStoryId;
     this.mEffectiveObjectStoryId = instance.mEffectiveObjectStoryId;
     this.mId = instance.mId;
     this.mImageCrops = instance.mImageCrops;
@@ -1796,6 +1765,7 @@ public class AdCreative extends APINode {
     this.mThumbnailUrl = instance.mThumbnailUrl;
     this.mTitle = instance.mTitle;
     this.mUrlTags = instance.mUrlTags;
+    this.mUsePageActorOverride = instance.mUsePageActorOverride;
     this.mCreativeId = this.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

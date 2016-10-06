@@ -55,6 +55,8 @@ public class AdPromotedObject extends APINode {
   private String mApplicationId = null;
   @SerializedName("custom_event_type")
   private EnumCustomEventType mCustomEventType = null;
+  @SerializedName("event_id")
+  private String mEventId = null;
   @SerializedName("object_store_url")
   private String mObjectStoreUrl = null;
   @SerializedName("offer_id")
@@ -228,6 +230,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldEventId() {
+    return mEventId;
+  }
+
+  public AdPromotedObject setFieldEventId(String value) {
+    this.mEventId = value;
+    return this;
+  }
+
   public String getFieldObjectStoreUrl() {
     return mObjectStoreUrl;
   }
@@ -316,6 +327,8 @@ public class AdPromotedObject extends APINode {
       VALUE_PURCHASE("PURCHASE"),
       @SerializedName("LEAD")
       VALUE_LEAD("LEAD"),
+      @SerializedName("FLOW_COMPLETE")
+      VALUE_FLOW_COMPLETE("FLOW_COMPLETE"),
       @SerializedName("LEVEL_ACHIEVED")
       VALUE_LEVEL_ACHIEVED("LEVEL_ACHIEVED"),
       @SerializedName("ACHIEVEMENT_UNLOCKED")
@@ -355,6 +368,7 @@ public class AdPromotedObject extends APINode {
   public AdPromotedObject copyFrom(AdPromotedObject instance) {
     this.mApplicationId = instance.mApplicationId;
     this.mCustomEventType = instance.mCustomEventType;
+    this.mEventId = instance.mEventId;
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
     this.mOfferId = instance.mOfferId;
     this.mPageId = instance.mPageId;

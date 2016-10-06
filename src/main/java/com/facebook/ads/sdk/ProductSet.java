@@ -51,6 +51,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ProductSet extends APINode {
+  @SerializedName("auto_creation_url")
+  private String mAutoCreationUrl = null;
   @SerializedName("filter")
   private String mFilter = null;
   @SerializedName("id")
@@ -262,6 +264,10 @@ public class ProductSet extends APINode {
   }
 
 
+  public String getFieldAutoCreationUrl() {
+    return mAutoCreationUrl;
+  }
+
   public String getFieldFilter() {
     return mFilter;
   }
@@ -403,6 +409,7 @@ public class ProductSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "bulk_pagination",
     };
 
     public static final String[] FIELDS = {
@@ -445,6 +452,7 @@ public class ProductSet extends APINode {
       "sale_price_start_date",
       "shipping_weight_unit",
       "shipping_weight_value",
+      "short_description",
       "size",
       "start_date",
       "url",
@@ -483,6 +491,15 @@ public class ProductSet extends APINode {
       return this;
     }
 
+
+    public APIRequestGetProducts setBulkPagination (Boolean bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+    public APIRequestGetProducts setBulkPagination (String bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
 
     public APIRequestGetProducts requestAllFields () {
       return this.requestAllFields(true);
@@ -793,6 +810,13 @@ public class ProductSet extends APINode {
       this.requestField("shipping_weight_value", value);
       return this;
     }
+    public APIRequestGetProducts requestShortDescriptionField () {
+      return this.requestShortDescriptionField(true);
+    }
+    public APIRequestGetProducts requestShortDescriptionField (boolean value) {
+      this.requestField("short_description", value);
+      return this;
+    }
     public APIRequestGetProducts requestSizeField () {
       return this.requestSizeField(true);
     }
@@ -918,6 +942,7 @@ public class ProductSet extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "auto_creation_url",
       "filter",
       "id",
       "name",
@@ -994,6 +1019,13 @@ public class ProductSet extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAutoCreationUrlField () {
+      return this.requestAutoCreationUrlField(true);
+    }
+    public APIRequestGet requestAutoCreationUrlField (boolean value) {
+      this.requestField("auto_creation_url", value);
+      return this;
+    }
     public APIRequestGet requestFilterField () {
       return this.requestFilterField(true);
     }
@@ -1146,6 +1178,7 @@ public class ProductSet extends APINode {
   }
 
   public ProductSet copyFrom(ProductSet instance) {
+    this.mAutoCreationUrl = instance.mAutoCreationUrl;
     this.mFilter = instance.mFilter;
     this.mId = instance.mId;
     this.mName = instance.mName;

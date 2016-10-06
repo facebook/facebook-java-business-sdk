@@ -63,16 +63,12 @@ public class AdImage extends APINode {
   private Long mHeight = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("last_used_time")
-  private String mLastUsedTime = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("original_height")
   private Long mOriginalHeight = null;
   @SerializedName("original_width")
   private Long mOriginalWidth = null;
-  @SerializedName("owner_business")
-  private Business mOwnerBusiness = null;
   @SerializedName("permalink_url")
   private String mPermalinkUrl = null;
   @SerializedName("status")
@@ -294,10 +290,6 @@ public class AdImage extends APINode {
     return mId;
   }
 
-  public String getFieldLastUsedTime() {
-    return mLastUsedTime;
-  }
-
   public String getFieldName() {
     return mName;
   }
@@ -308,13 +300,6 @@ public class AdImage extends APINode {
 
   public Long getFieldOriginalWidth() {
     return mOriginalWidth;
-  }
-
-  public Business getFieldOwnerBusiness() {
-    if (mOwnerBusiness != null) {
-      mOwnerBusiness.context = getContext();
-    }
-    return mOwnerBusiness;
   }
 
   public String getFieldPermalinkUrl() {
@@ -360,11 +345,9 @@ public class AdImage extends APINode {
       "hash",
       "height",
       "id",
-      "last_used_time",
       "name",
       "original_height",
       "original_width",
-      "owner_business",
       "permalink_url",
       "status",
       "updated_time",
@@ -484,13 +467,6 @@ public class AdImage extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestLastUsedTimeField () {
-      return this.requestLastUsedTimeField(true);
-    }
-    public APIRequestGet requestLastUsedTimeField (boolean value) {
-      this.requestField("last_used_time", value);
-      return this;
-    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -510,13 +486,6 @@ public class AdImage extends APINode {
     }
     public APIRequestGet requestOriginalWidthField (boolean value) {
       this.requestField("original_width", value);
-      return this;
-    }
-    public APIRequestGet requestOwnerBusinessField () {
-      return this.requestOwnerBusinessField(true);
-    }
-    public APIRequestGet requestOwnerBusinessField (boolean value) {
-      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGet requestPermalinkUrlField () {
@@ -603,11 +572,9 @@ public class AdImage extends APINode {
     this.mHash = instance.mHash;
     this.mHeight = instance.mHeight;
     this.mId = instance.mId;
-    this.mLastUsedTime = instance.mLastUsedTime;
     this.mName = instance.mName;
     this.mOriginalHeight = instance.mOriginalHeight;
     this.mOriginalWidth = instance.mOriginalWidth;
-    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mStatus = instance.mStatus;
     this.mUpdatedTime = instance.mUpdatedTime;

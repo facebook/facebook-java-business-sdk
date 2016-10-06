@@ -63,6 +63,8 @@ public class ReachFrequencyPrediction extends APINode {
   private String mCampaignTimeStop = null;
   @SerializedName("curve_budget_reach")
   private String mCurveBudgetReach = null;
+  @SerializedName("daily_impression_curve")
+  private List<Double> mDailyImpressionCurve = null;
   @SerializedName("destination_id")
   private String mDestinationId = null;
   @SerializedName("expiration_time")
@@ -101,6 +103,8 @@ public class ReachFrequencyPrediction extends APINode {
   private String mName = null;
   @SerializedName("pause_periods")
   private String mPausePeriods = null;
+  @SerializedName("placement_breakdown")
+  private Object mPlacementBreakdown = null;
   @SerializedName("prediction_mode")
   private Long mPredictionMode = null;
   @SerializedName("prediction_progress")
@@ -328,6 +332,10 @@ public class ReachFrequencyPrediction extends APINode {
     return mCurveBudgetReach;
   }
 
+  public List<Double> getFieldDailyImpressionCurve() {
+    return mDailyImpressionCurve;
+  }
+
   public String getFieldDestinationId() {
     return mDestinationId;
   }
@@ -404,6 +412,10 @@ public class ReachFrequencyPrediction extends APINode {
     return mPausePeriods;
   }
 
+  public Object getFieldPlacementBreakdown() {
+    return mPlacementBreakdown;
+  }
+
   public Long getFieldPredictionMode() {
     return mPredictionMode;
   }
@@ -459,6 +471,7 @@ public class ReachFrequencyPrediction extends APINode {
       "campaign_time_start",
       "campaign_time_stop",
       "curve_budget_reach",
+      "daily_impression_curve",
       "destination_id",
       "expiration_time",
       "external_budget",
@@ -478,6 +491,7 @@ public class ReachFrequencyPrediction extends APINode {
       "interval_frequency_cap_reset_period",
       "name",
       "pause_periods",
+      "placement_breakdown",
       "prediction_mode",
       "prediction_progress",
       "reservation_status",
@@ -598,6 +612,13 @@ public class ReachFrequencyPrediction extends APINode {
     }
     public APIRequestGet requestCurveBudgetReachField (boolean value) {
       this.requestField("curve_budget_reach", value);
+      return this;
+    }
+    public APIRequestGet requestDailyImpressionCurveField () {
+      return this.requestDailyImpressionCurveField(true);
+    }
+    public APIRequestGet requestDailyImpressionCurveField (boolean value) {
+      this.requestField("daily_impression_curve", value);
       return this;
     }
     public APIRequestGet requestDestinationIdField () {
@@ -733,6 +754,13 @@ public class ReachFrequencyPrediction extends APINode {
       this.requestField("pause_periods", value);
       return this;
     }
+    public APIRequestGet requestPlacementBreakdownField () {
+      return this.requestPlacementBreakdownField(true);
+    }
+    public APIRequestGet requestPlacementBreakdownField (boolean value) {
+      this.requestField("placement_breakdown", value);
+      return this;
+    }
     public APIRequestGet requestPredictionModeField () {
       return this.requestPredictionModeField(true);
     }
@@ -844,6 +872,7 @@ public class ReachFrequencyPrediction extends APINode {
     this.mCampaignTimeStart = instance.mCampaignTimeStart;
     this.mCampaignTimeStop = instance.mCampaignTimeStop;
     this.mCurveBudgetReach = instance.mCurveBudgetReach;
+    this.mDailyImpressionCurve = instance.mDailyImpressionCurve;
     this.mDestinationId = instance.mDestinationId;
     this.mExpirationTime = instance.mExpirationTime;
     this.mExternalBudget = instance.mExternalBudget;
@@ -863,6 +892,7 @@ public class ReachFrequencyPrediction extends APINode {
     this.mIntervalFrequencyCapResetPeriod = instance.mIntervalFrequencyCapResetPeriod;
     this.mName = instance.mName;
     this.mPausePeriods = instance.mPausePeriods;
+    this.mPlacementBreakdown = instance.mPlacementBreakdown;
     this.mPredictionMode = instance.mPredictionMode;
     this.mPredictionProgress = instance.mPredictionProgress;
     this.mReservationStatus = instance.mReservationStatus;

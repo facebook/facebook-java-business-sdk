@@ -55,6 +55,8 @@ public class Campaign extends APINode {
   private String mAccountId = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
+  @SerializedName("budget_rebalance_flag")
+  private Boolean mBudgetRebalanceFlag = null;
   @SerializedName("buying_type")
   private String mBuyingType = null;
   @SerializedName("can_use_spend_cap")
@@ -306,6 +308,10 @@ public class Campaign extends APINode {
 
   public List<AdLabel> getFieldAdlabels() {
     return mAdlabels;
+  }
+
+  public Boolean getFieldBudgetRebalanceFlag() {
+    return mBudgetRebalanceFlag;
   }
 
   public String getFieldBuyingType() {
@@ -680,7 +686,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetAds setTimeRange (Map<String, String> timeRange) {
+    public APIRequestGetAds setTimeRange (Object timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -927,6 +933,7 @@ public class Campaign extends APINode {
       "frequency_control_specs",
       "id",
       "is_autobid",
+      "is_average_price_pacing",
       "lifetime_budget",
       "lifetime_frequency_cap",
       "lifetime_imps",
@@ -935,6 +942,7 @@ public class Campaign extends APINode {
       "pacing_type",
       "promoted_object",
       "recommendations",
+      "recurring_budget_semantics",
       "rf_prediction_id",
       "rtb_flag",
       "start_time",
@@ -1011,7 +1019,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetAdSets setTimeRange (Map<String, String> timeRange) {
+    public APIRequestGetAdSets setTimeRange (Object timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -1203,6 +1211,13 @@ public class Campaign extends APINode {
       this.requestField("is_autobid", value);
       return this;
     }
+    public APIRequestGetAdSets requestIsAveragePricePacingField () {
+      return this.requestIsAveragePricePacingField(true);
+    }
+    public APIRequestGetAdSets requestIsAveragePricePacingField (boolean value) {
+      this.requestField("is_average_price_pacing", value);
+      return this;
+    }
     public APIRequestGetAdSets requestLifetimeBudgetField () {
       return this.requestLifetimeBudgetField(true);
     }
@@ -1257,6 +1272,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestRecurringBudgetSemanticsField () {
+      return this.requestRecurringBudgetSemanticsField(true);
+    }
+    public APIRequestGetAdSets requestRecurringBudgetSemanticsField (boolean value) {
+      this.requestField("recurring_budget_semantics", value);
       return this;
     }
     public APIRequestGetAdSets requestRfPredictionIdField () {
@@ -1530,7 +1552,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRange (Map<String, String> timeRange) {
+    public APIRequestGetInsights setTimeRange (Object timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -1539,7 +1561,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRanges (List<Map<String, String>> timeRanges) {
+    public APIRequestGetInsights setTimeRanges (List<Object> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -1792,7 +1814,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRange (Map<String, String> timeRange) {
+    public APIRequestGetInsightsAsync setTimeRange (Object timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -1801,7 +1823,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRanges (List<Map<String, String>> timeRanges) {
+    public APIRequestGetInsightsAsync setTimeRanges (List<Object> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -1945,6 +1967,7 @@ public class Campaign extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "adlabels",
+      "budget_rebalance_flag",
       "buying_type",
       "can_use_spend_cap",
       "configured_status",
@@ -2042,6 +2065,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestAdlabelsField (boolean value) {
       this.requestField("adlabels", value);
+      return this;
+    }
+    public APIRequestGet requestBudgetRebalanceFlagField () {
+      return this.requestBudgetRebalanceFlagField(true);
+    }
+    public APIRequestGet requestBudgetRebalanceFlagField (boolean value) {
+      this.requestField("budget_rebalance_flag", value);
       return this;
     }
     public APIRequestGet requestBuyingTypeField () {
@@ -2153,6 +2183,7 @@ public class Campaign extends APINode {
     }
     public static final String[] PARAMS = {
       "adlabels",
+      "budget_rebalance_flag",
       "execution_options",
       "name",
       "objective",
@@ -2203,6 +2234,15 @@ public class Campaign extends APINode {
     }
     public APIRequestUpdate setAdlabels (String adlabels) {
       this.setParam("adlabels", adlabels);
+      return this;
+    }
+
+    public APIRequestUpdate setBudgetRebalanceFlag (Boolean budgetRebalanceFlag) {
+      this.setParam("budget_rebalance_flag", budgetRebalanceFlag);
+      return this;
+    }
+    public APIRequestUpdate setBudgetRebalanceFlag (String budgetRebalanceFlag) {
+      this.setParam("budget_rebalance_flag", budgetRebalanceFlag);
       return this;
     }
 
@@ -2545,6 +2585,7 @@ public class Campaign extends APINode {
   public Campaign copyFrom(Campaign instance) {
     this.mAccountId = instance.mAccountId;
     this.mAdlabels = instance.mAdlabels;
+    this.mBudgetRebalanceFlag = instance.mBudgetRebalanceFlag;
     this.mBuyingType = instance.mBuyingType;
     this.mCanUseSpendCap = instance.mCanUseSpendCap;
     this.mConfiguredStatus = instance.mConfiguredStatus;

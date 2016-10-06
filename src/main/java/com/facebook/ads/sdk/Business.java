@@ -51,14 +51,28 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class Business extends APINode {
+  @SerializedName("created_by")
+  private User mCreatedBy = null;
+  @SerializedName("created_time")
+  private String mCreatedTime = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("link")
+  private String mLink = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("payment_account_id")
   private String mPaymentAccountId = null;
   @SerializedName("primary_page")
   private Object mPrimaryPage = null;
+  @SerializedName("timezone_id")
+  private Long mTimezoneId = null;
+  @SerializedName("two_factor_type")
+  private String mTwoFactorType = null;
+  @SerializedName("updated_by")
+  private User mUpdatedBy = null;
+  @SerializedName("updated_time")
+  private String mUpdatedTime = null;
   protected static Gson gson = null;
 
   Business() {
@@ -251,6 +265,10 @@ public class Business extends APINode {
     return new APIRequestGetAdsPixels(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateAdsPixel createAdsPixel() {
+    return new APIRequestCreateAdsPixel(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteApps deleteApps() {
     return new APIRequestDeleteApps(this.getPrefixedId().toString(), context);
   }
@@ -372,8 +390,23 @@ public class Business extends APINode {
   }
 
 
+  public User getFieldCreatedBy() {
+    if (mCreatedBy != null) {
+      mCreatedBy.context = getContext();
+    }
+    return mCreatedBy;
+  }
+
+  public String getFieldCreatedTime() {
+    return mCreatedTime;
+  }
+
   public String getFieldId() {
     return mId;
+  }
+
+  public String getFieldLink() {
+    return mLink;
   }
 
   public String getFieldName() {
@@ -386,6 +419,25 @@ public class Business extends APINode {
 
   public Object getFieldPrimaryPage() {
     return mPrimaryPage;
+  }
+
+  public Long getFieldTimezoneId() {
+    return mTimezoneId;
+  }
+
+  public String getFieldTwoFactorType() {
+    return mTwoFactorType;
+  }
+
+  public User getFieldUpdatedBy() {
+    if (mUpdatedBy != null) {
+      mUpdatedBy.context = getContext();
+    }
+    return mUpdatedBy;
+  }
+
+  public String getFieldUpdatedTime() {
+    return mUpdatedTime;
   }
 
 
@@ -796,6 +848,96 @@ public class Business extends APINode {
     }
   }
 
+  public static class APIRequestCreateAdsPixel extends APIRequest<AdsPixel> {
+
+    AdsPixel lastResponse = null;
+    @Override
+    public AdsPixel getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdsPixel parseResponse(String response) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdsPixel execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestCreateAdsPixel(String nodeId, APIContext context) {
+      super(context, nodeId, "/adspixels", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAdsPixel setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdsPixel setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAdsPixel setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateAdsPixel requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAdsPixel requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdsPixel requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAdsPixel requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdsPixel requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdsPixel requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestDeleteApps extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -903,7 +1045,6 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "account_groups",
       "account_id",
       "account_status",
       "age",
@@ -934,7 +1075,6 @@ public class Business extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
-      "last_used_time",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -942,7 +1082,6 @@ public class Business extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
-      "owner_business",
       "partner",
       "rf_spec",
       "spend_cap",
@@ -1039,13 +1178,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestGetAssignedAdAccounts requestAccountGroupsField () {
-      return this.requestAccountGroupsField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestAccountGroupsField (boolean value) {
-      this.requestField("account_groups", value);
-      return this;
-    }
     public APIRequestGetAssignedAdAccounts requestAccountIdField () {
       return this.requestAccountIdField(true);
     }
@@ -1256,13 +1388,6 @@ public class Business extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
-    public APIRequestGetAssignedAdAccounts requestLastUsedTimeField () {
-      return this.requestLastUsedTimeField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestLastUsedTimeField (boolean value) {
-      this.requestField("last_used_time", value);
-      return this;
-    }
     public APIRequestGetAssignedAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -1310,13 +1435,6 @@ public class Business extends APINode {
     }
     public APIRequestGetAssignedAdAccounts requestOwnerField (boolean value) {
       this.requestField("owner", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestOwnerBusinessField () {
-      return this.requestOwnerBusinessField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestOwnerBusinessField (boolean value) {
-      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetAssignedAdAccounts requestPartnerField () {
@@ -1781,7 +1899,6 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "account_groups",
       "account_id",
       "account_status",
       "age",
@@ -1812,7 +1929,6 @@ public class Business extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
-      "last_used_time",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -1820,7 +1936,6 @@ public class Business extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
-      "owner_business",
       "partner",
       "rf_spec",
       "spend_cap",
@@ -1903,13 +2018,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestGetClientAdAccounts requestAccountGroupsField () {
-      return this.requestAccountGroupsField(true);
-    }
-    public APIRequestGetClientAdAccounts requestAccountGroupsField (boolean value) {
-      this.requestField("account_groups", value);
-      return this;
-    }
     public APIRequestGetClientAdAccounts requestAccountIdField () {
       return this.requestAccountIdField(true);
     }
@@ -2120,13 +2228,6 @@ public class Business extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
-    public APIRequestGetClientAdAccounts requestLastUsedTimeField () {
-      return this.requestLastUsedTimeField(true);
-    }
-    public APIRequestGetClientAdAccounts requestLastUsedTimeField (boolean value) {
-      this.requestField("last_used_time", value);
-      return this;
-    }
     public APIRequestGetClientAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -2174,13 +2275,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestOwnerField (boolean value) {
       this.requestField("owner", value);
-      return this;
-    }
-    public APIRequestGetClientAdAccounts requestOwnerBusinessField () {
-      return this.requestOwnerBusinessField(true);
-    }
-    public APIRequestGetClientAdAccounts requestOwnerBusinessField (boolean value) {
-      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestPartnerField () {
@@ -2457,6 +2551,7 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "business",
       "event_sources",
       "id",
       "name",
@@ -2531,6 +2626,13 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetEventSourceGroups requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetEventSourceGroups requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
     public APIRequestGetEventSourceGroups requestEventSourcesField () {
       return this.requestEventSourcesField(true);
     }
@@ -2672,6 +2774,7 @@ public class Business extends APINode {
       "campaign_time_start",
       "campaign_time_stop",
       "curve_budget_reach",
+      "daily_impression_curve",
       "destination_id",
       "expiration_time",
       "external_budget",
@@ -2691,6 +2794,7 @@ public class Business extends APINode {
       "interval_frequency_cap_reset_period",
       "name",
       "pause_periods",
+      "placement_breakdown",
       "prediction_mode",
       "prediction_progress",
       "reservation_status",
@@ -2820,6 +2924,13 @@ public class Business extends APINode {
     }
     public APIRequestGetGrpPlans requestCurveBudgetReachField (boolean value) {
       this.requestField("curve_budget_reach", value);
+      return this;
+    }
+    public APIRequestGetGrpPlans requestDailyImpressionCurveField () {
+      return this.requestDailyImpressionCurveField(true);
+    }
+    public APIRequestGetGrpPlans requestDailyImpressionCurveField (boolean value) {
+      this.requestField("daily_impression_curve", value);
       return this;
     }
     public APIRequestGetGrpPlans requestDestinationIdField () {
@@ -2953,6 +3064,13 @@ public class Business extends APINode {
     }
     public APIRequestGetGrpPlans requestPausePeriodsField (boolean value) {
       this.requestField("pause_periods", value);
+      return this;
+    }
+    public APIRequestGetGrpPlans requestPlacementBreakdownField () {
+      return this.requestPlacementBreakdownField(true);
+    }
+    public APIRequestGetGrpPlans requestPlacementBreakdownField (boolean value) {
+      this.requestField("placement_breakdown", value);
       return this;
     }
     public APIRequestGetGrpPlans requestPredictionModeField () {
@@ -3607,7 +3725,6 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "account_groups",
       "account_id",
       "account_status",
       "age",
@@ -3638,7 +3755,6 @@ public class Business extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
-      "last_used_time",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -3646,7 +3762,6 @@ public class Business extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
-      "owner_business",
       "partner",
       "rf_spec",
       "spend_cap",
@@ -3729,13 +3844,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestGetOwnedAdAccounts requestAccountGroupsField () {
-      return this.requestAccountGroupsField(true);
-    }
-    public APIRequestGetOwnedAdAccounts requestAccountGroupsField (boolean value) {
-      this.requestField("account_groups", value);
-      return this;
-    }
     public APIRequestGetOwnedAdAccounts requestAccountIdField () {
       return this.requestAccountIdField(true);
     }
@@ -3946,13 +4054,6 @@ public class Business extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
-    public APIRequestGetOwnedAdAccounts requestLastUsedTimeField () {
-      return this.requestLastUsedTimeField(true);
-    }
-    public APIRequestGetOwnedAdAccounts requestLastUsedTimeField (boolean value) {
-      this.requestField("last_used_time", value);
-      return this;
-    }
     public APIRequestGetOwnedAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -4000,13 +4101,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestOwnerField (boolean value) {
       this.requestField("owner", value);
-      return this;
-    }
-    public APIRequestGetOwnedAdAccounts requestOwnerBusinessField () {
-      return this.requestOwnerBusinessField(true);
-    }
-    public APIRequestGetOwnedAdAccounts requestOwnerBusinessField (boolean value) {
-      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestPartnerField () {
@@ -5317,9 +5411,16 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "created_by",
+      "created_time",
       "id",
+      "link",
       "name",
       "primary_page",
+      "timezone_id",
+      "two_factor_type",
+      "updated_by",
+      "updated_time",
     };
 
     @Override
@@ -5391,11 +5492,32 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGet requestCreatedByField () {
+      return this.requestCreatedByField(true);
+    }
+    public APIRequestGet requestCreatedByField (boolean value) {
+      this.requestField("created_by", value);
+      return this;
+    }
+    public APIRequestGet requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGet requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGet requestLinkField (boolean value) {
+      this.requestField("link", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -5410,6 +5532,34 @@ public class Business extends APINode {
     }
     public APIRequestGet requestPrimaryPageField (boolean value) {
       this.requestField("primary_page", value);
+      return this;
+    }
+    public APIRequestGet requestTimezoneIdField () {
+      return this.requestTimezoneIdField(true);
+    }
+    public APIRequestGet requestTimezoneIdField (boolean value) {
+      this.requestField("timezone_id", value);
+      return this;
+    }
+    public APIRequestGet requestTwoFactorTypeField () {
+      return this.requestTwoFactorTypeField(true);
+    }
+    public APIRequestGet requestTwoFactorTypeField (boolean value) {
+      this.requestField("two_factor_type", value);
+      return this;
+    }
+    public APIRequestGet requestUpdatedByField () {
+      return this.requestUpdatedByField(true);
+    }
+    public APIRequestGet requestUpdatedByField (boolean value) {
+      this.requestField("updated_by", value);
+      return this;
+    }
+    public APIRequestGet requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGet requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
       return this;
     }
   }
@@ -5483,10 +5633,17 @@ public class Business extends APINode {
   }
 
   public Business copyFrom(Business instance) {
+    this.mCreatedBy = instance.mCreatedBy;
+    this.mCreatedTime = instance.mCreatedTime;
     this.mId = instance.mId;
+    this.mLink = instance.mLink;
     this.mName = instance.mName;
     this.mPaymentAccountId = instance.mPaymentAccountId;
     this.mPrimaryPage = instance.mPrimaryPage;
+    this.mTimezoneId = instance.mTimezoneId;
+    this.mTwoFactorType = instance.mTwoFactorType;
+    this.mUpdatedBy = instance.mUpdatedBy;
+    this.mUpdatedTime = instance.mUpdatedTime;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -432,14 +432,11 @@ public class Ad extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "actor_id",
-      "actor_image_hash",
-      "actor_image_url",
-      "actor_name",
       "adlabels",
       "applink_treatment",
       "body",
       "call_to_action_type",
+      "effective_instagram_story_id",
       "effective_object_story_id",
       "id",
       "image_crops",
@@ -463,6 +460,7 @@ public class Ad extends APINode {
       "thumbnail_url",
       "title",
       "url_tags",
+      "use_page_actor_override",
     };
 
     @Override
@@ -534,34 +532,6 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetAdCreatives requestActorIdField () {
-      return this.requestActorIdField(true);
-    }
-    public APIRequestGetAdCreatives requestActorIdField (boolean value) {
-      this.requestField("actor_id", value);
-      return this;
-    }
-    public APIRequestGetAdCreatives requestActorImageHashField () {
-      return this.requestActorImageHashField(true);
-    }
-    public APIRequestGetAdCreatives requestActorImageHashField (boolean value) {
-      this.requestField("actor_image_hash", value);
-      return this;
-    }
-    public APIRequestGetAdCreatives requestActorImageUrlField () {
-      return this.requestActorImageUrlField(true);
-    }
-    public APIRequestGetAdCreatives requestActorImageUrlField (boolean value) {
-      this.requestField("actor_image_url", value);
-      return this;
-    }
-    public APIRequestGetAdCreatives requestActorNameField () {
-      return this.requestActorNameField(true);
-    }
-    public APIRequestGetAdCreatives requestActorNameField (boolean value) {
-      this.requestField("actor_name", value);
-      return this;
-    }
     public APIRequestGetAdCreatives requestAdlabelsField () {
       return this.requestAdlabelsField(true);
     }
@@ -588,6 +558,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestCallToActionTypeField (boolean value) {
       this.requestField("call_to_action_type", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestEffectiveInstagramStoryIdField () {
+      return this.requestEffectiveInstagramStoryIdField(true);
+    }
+    public APIRequestGetAdCreatives requestEffectiveInstagramStoryIdField (boolean value) {
+      this.requestField("effective_instagram_story_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestEffectiveObjectStoryIdField () {
@@ -749,6 +726,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestUrlTagsField (boolean value) {
       this.requestField("url_tags", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestUsePageActorOverrideField () {
+      return this.requestUsePageActorOverrideField(true);
+    }
+    public APIRequestGetAdCreatives requestUsePageActorOverrideField (boolean value) {
+      this.requestField("use_page_actor_override", value);
       return this;
     }
   }
@@ -1167,7 +1151,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRange (Map<String, String> timeRange) {
+    public APIRequestGetInsights setTimeRange (Object timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -1176,7 +1160,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRanges (List<Map<String, String>> timeRanges) {
+    public APIRequestGetInsights setTimeRanges (List<Object> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -1429,7 +1413,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRange (Map<String, String> timeRange) {
+    public APIRequestGetInsightsAsync setTimeRange (Object timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -1438,7 +1422,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRanges (List<Map<String, String>> timeRanges) {
+    public APIRequestGetInsightsAsync setTimeRanges (List<Object> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -1936,6 +1920,7 @@ public class Ad extends APINode {
       "height",
       "interactive",
       "locale",
+      "place_page_id",
       "post",
       "product_item_ids",
       "width",
@@ -2016,6 +2001,15 @@ public class Ad extends APINode {
 
     public APIRequestGetPreviews setLocale (String locale) {
       this.setParam("locale", locale);
+      return this;
+    }
+
+    public APIRequestGetPreviews setPlacePageId (Long placePageId) {
+      this.setParam("place_page_id", placePageId);
+      return this;
+    }
+    public APIRequestGetPreviews setPlacePageId (String placePageId) {
+      this.setParam("place_page_id", placePageId);
       return this;
     }
 

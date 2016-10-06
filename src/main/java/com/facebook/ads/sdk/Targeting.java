@@ -57,6 +57,8 @@ public class Targeting extends APINode {
   private Long mAgeMax = null;
   @SerializedName("age_min")
   private Long mAgeMin = null;
+  @SerializedName("alternate_auto_targeting_option")
+  private String mAlternateAutoTargetingOption = null;
   @SerializedName("app_install_state")
   private String mAppInstallState = null;
   @SerializedName("behaviors")
@@ -113,6 +115,8 @@ public class Targeting extends APINode {
   private List<TargetingProductAudienceSpec> mExcludedProductAudienceSpecs = null;
   @SerializedName("excluded_publisher_categories")
   private List<String> mExcludedPublisherCategories = null;
+  @SerializedName("excluded_publisher_domains")
+  private List<String> mExcludedPublisherDomains = null;
   @SerializedName("excluded_publisher_list_ids")
   private List<String> mExcludedPublisherListIds = null;
   @SerializedName("excluded_user_device")
@@ -165,8 +169,8 @@ public class Targeting extends APINode {
   private List<IDName> mOfficeType = null;
   @SerializedName("page_types")
   private List<String> mPageTypes = null;
-  @SerializedName("place_page_set_id")
-  private String mPlacePageSetId = null;
+  @SerializedName("place_page_set_ids")
+  private List<String> mPlacePageSetIds = null;
   @SerializedName("political_views")
   private List<Long> mPoliticalViews = null;
   @SerializedName("politics")
@@ -175,6 +179,8 @@ public class Targeting extends APINode {
   private List<TargetingProductAudienceSpec> mProductAudienceSpecs = null;
   @SerializedName("publisher_platforms")
   private List<String> mPublisherPlatforms = null;
+  @SerializedName("publisher_visibility_categories")
+  private List<String> mPublisherVisibilityCategories = null;
   @SerializedName("radius")
   private String mRadius = null;
   @SerializedName("regions")
@@ -368,6 +374,15 @@ public class Targeting extends APINode {
 
   public Targeting setFieldAgeMin(Long value) {
     this.mAgeMin = value;
+    return this;
+  }
+
+  public String getFieldAlternateAutoTargetingOption() {
+    return mAlternateAutoTargetingOption;
+  }
+
+  public Targeting setFieldAlternateAutoTargetingOption(String value) {
+    this.mAlternateAutoTargetingOption = value;
     return this;
   }
 
@@ -685,6 +700,15 @@ public class Targeting extends APINode {
 
   public Targeting setFieldExcludedPublisherCategories(List<String> value) {
     this.mExcludedPublisherCategories = value;
+    return this;
+  }
+
+  public List<String> getFieldExcludedPublisherDomains() {
+    return mExcludedPublisherDomains;
+  }
+
+  public Targeting setFieldExcludedPublisherDomains(List<String> value) {
+    this.mExcludedPublisherDomains = value;
     return this;
   }
 
@@ -1007,12 +1031,12 @@ public class Targeting extends APINode {
     return this;
   }
 
-  public String getFieldPlacePageSetId() {
-    return mPlacePageSetId;
+  public List<String> getFieldPlacePageSetIds() {
+    return mPlacePageSetIds;
   }
 
-  public Targeting setFieldPlacePageSetId(String value) {
-    this.mPlacePageSetId = value;
+  public Targeting setFieldPlacePageSetIds(List<String> value) {
+    this.mPlacePageSetIds = value;
     return this;
   }
 
@@ -1059,6 +1083,15 @@ public class Targeting extends APINode {
 
   public Targeting setFieldPublisherPlatforms(List<String> value) {
     this.mPublisherPlatforms = value;
+    return this;
+  }
+
+  public List<String> getFieldPublisherVisibilityCategories() {
+    return mPublisherVisibilityCategories;
+  }
+
+  public Targeting setFieldPublisherVisibilityCategories(List<String> value) {
+    this.mPublisherVisibilityCategories = value;
     return this;
   }
 
@@ -1266,6 +1299,7 @@ public class Targeting extends APINode {
     this.mAdgroupId = instance.mAdgroupId;
     this.mAgeMax = instance.mAgeMax;
     this.mAgeMin = instance.mAgeMin;
+    this.mAlternateAutoTargetingOption = instance.mAlternateAutoTargetingOption;
     this.mAppInstallState = instance.mAppInstallState;
     this.mBehaviors = instance.mBehaviors;
     this.mCities = instance.mCities;
@@ -1294,6 +1328,7 @@ public class Targeting extends APINode {
     this.mExcludedMobileDeviceModel = instance.mExcludedMobileDeviceModel;
     this.mExcludedProductAudienceSpecs = instance.mExcludedProductAudienceSpecs;
     this.mExcludedPublisherCategories = instance.mExcludedPublisherCategories;
+    this.mExcludedPublisherDomains = instance.mExcludedPublisherDomains;
     this.mExcludedPublisherListIds = instance.mExcludedPublisherListIds;
     this.mExcludedUserDevice = instance.mExcludedUserDevice;
     this.mExclusions = instance.mExclusions;
@@ -1320,11 +1355,12 @@ public class Targeting extends APINode {
     this.mNetWorth = instance.mNetWorth;
     this.mOfficeType = instance.mOfficeType;
     this.mPageTypes = instance.mPageTypes;
-    this.mPlacePageSetId = instance.mPlacePageSetId;
+    this.mPlacePageSetIds = instance.mPlacePageSetIds;
     this.mPoliticalViews = instance.mPoliticalViews;
     this.mPolitics = instance.mPolitics;
     this.mProductAudienceSpecs = instance.mProductAudienceSpecs;
     this.mPublisherPlatforms = instance.mPublisherPlatforms;
+    this.mPublisherVisibilityCategories = instance.mPublisherVisibilityCategories;
     this.mRadius = instance.mRadius;
     this.mRegions = instance.mRegions;
     this.mRelationshipStatuses = instance.mRelationshipStatuses;
