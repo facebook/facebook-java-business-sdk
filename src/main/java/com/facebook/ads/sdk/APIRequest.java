@@ -22,6 +22,7 @@
  */
 package com.facebook.ads.sdk;
 
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -319,6 +320,7 @@ public class APIRequest<T extends APINode> {
 
   public static class DefaultRequestExecutor implements IRequestExecutor {
 
+    private static final String DEFAULT_CONTENT_TYPE = "application/octet-stream";
     public static Map<String, String> fileToContentTypeMap = new HashMap<String, String>();
     static {
       fileToContentTypeMap.put(".atom", "application/atom+xml");
@@ -425,12 +427,23 @@ public class APIRequest<T extends APINode> {
     }
 
     private static String getContentTypeForFile(File file) {
-      for (Map.Entry entry : fileToContentTypeMap.entrySet()) {
-        if (file.getName().endsWith((String)entry.getKey())) {
-          return (String) entry.getValue();
-        }
+      String contentType = fileToContentTypeMap.get(getFileExtension(file));
+
+      if (contentType != null) return contentType;
+
+      try {
+        contentType = Files.probeContentType(file.toPath());
+      } catch (IOException ignored) {
       }
-      return null;
+
+      return contentType != null ? contentType : DEFAULT_CONTENT_TYPE;
+    }
+
+    private static String getFileExtension(File file) {
+      String fileName = file.getName();
+      int index = fileName.lastIndexOf('.');
+      if (index == -1) return "";
+      return fileName.substring(index, fileName.length());
     }
 
     private static int getContentLength(Map<String, Object> allParams, String boundary, APIContext context) throws IOException {
