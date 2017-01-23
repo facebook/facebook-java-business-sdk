@@ -1,28 +1,87 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.facebook.ads.sdk</groupId>
   <artifactId>facebook-java-ads-sdk</artifactId>
   <packaging>jar</packaging>
   <version>0.4.0</version>
-  <name>facebook-java-ads-sdk</name>
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>Facebook Ads SDK for Java</description>
   <url>https://developers.facebook.com/docs/marketing-api/sdks</url>
+  <licenses>
+    <license>
+      <name>Facebook Platform License</name>
+      <url>https://github.com/facebook/facebook-java-ads-sdk/blob/master/LICENSE.txt</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <name>Jiaming Liu</name>
+      <email>jiamingliu@fb.com</email>
+      <organization>Facebook Inc.</organization>
+      <organizationUrl>https://www.facebook.com</organizationUrl>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git://github.com/facebook/facebook-java-ads-sdk.git</connection>
+    <developerConnection>scm:git:ssh://github.com:facebook/facebook-java-ads-sdk.git</developerConnection>
+    <url>https://github.com/facebook/facebook-java-ads-sdk</url>
+  </scm>
   <build>
-  <plugins>
-    <plugin>  <!-- Create sources.jar -->
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-source-plugin</artifactId>
-      <executions>
-        <execution>
-          <id>attach-sources</id>
-          <goals>
-            <goal>jar</goal>
-          </goals>
-        </execution>
-      </executions>
-    </plugin>
-</plugins>
-</build>
+    <plugins>
+      <plugin>
+        <!-- Create sources.jar -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
   <dependencies>
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -30,4 +89,10 @@
       <version>2.5</version>
     </dependency>
   </dependencies>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
 </project>
