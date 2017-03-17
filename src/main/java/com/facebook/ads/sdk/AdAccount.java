@@ -1,4 +1,4 @@
-/**
+F/**
  * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
@@ -11318,7 +11318,7 @@ public class AdAccount extends APINode {
     }
 
     public APIRequestGetTargetingSearch(String nodeId, APIContext context) {
-      super(context, nodeId, "/targetingsearch", "GET", Arrays.asList(PARAMS));
+      super(context, nodeId, "/search", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
