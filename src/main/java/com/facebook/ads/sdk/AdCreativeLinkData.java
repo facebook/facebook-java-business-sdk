@@ -59,6 +59,8 @@ public class AdCreativeLinkData extends APINode {
   private EnumAttachmentStyle mAttachmentStyle = null;
   @SerializedName("branded_content_sponsor_page_id")
   private String mBrandedContentSponsorPageId = null;
+  @SerializedName("branded_content_sponsor_relationship")
+  private String mBrandedContentSponsorRelationship = null;
   @SerializedName("call_to_action")
   private AdCreativeLinkDataCallToAction mCallToAction = null;
   @SerializedName("caption")
@@ -87,6 +89,8 @@ public class AdCreativeLinkData extends APINode {
   private String mName = null;
   @SerializedName("offer_id")
   private String mOfferId = null;
+  @SerializedName("page_welcome_message")
+  private String mPageWelcomeMessage = null;
   @SerializedName("picture")
   private String mPicture = null;
   protected static Gson gson = null;
@@ -271,6 +275,15 @@ public class AdCreativeLinkData extends APINode {
     return this;
   }
 
+  public String getFieldBrandedContentSponsorRelationship() {
+    return mBrandedContentSponsorRelationship;
+  }
+
+  public AdCreativeLinkData setFieldBrandedContentSponsorRelationship(String value) {
+    this.mBrandedContentSponsorRelationship = value;
+    return this;
+  }
+
   public AdCreativeLinkDataCallToAction getFieldCallToAction() {
     return mCallToAction;
   }
@@ -412,6 +425,15 @@ public class AdCreativeLinkData extends APINode {
     return this;
   }
 
+  public String getFieldPageWelcomeMessage() {
+    return mPageWelcomeMessage;
+  }
+
+  public AdCreativeLinkData setFieldPageWelcomeMessage(String value) {
+    this.mPageWelcomeMessage = value;
+    return this;
+  }
+
   public String getFieldPicture() {
     return mPicture;
   }
@@ -461,6 +483,7 @@ public class AdCreativeLinkData extends APINode {
     this.mAppLinkSpec = instance.mAppLinkSpec;
     this.mAttachmentStyle = instance.mAttachmentStyle;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
+    this.mBrandedContentSponsorRelationship = instance.mBrandedContentSponsorRelationship;
     this.mCallToAction = instance.mCallToAction;
     this.mCaption = instance.mCaption;
     this.mChildAttachments = instance.mChildAttachments;
@@ -475,6 +498,7 @@ public class AdCreativeLinkData extends APINode {
     this.mMultiShareOptimized = instance.mMultiShareOptimized;
     this.mName = instance.mName;
     this.mOfferId = instance.mOfferId;
+    this.mPageWelcomeMessage = instance.mPageWelcomeMessage;
     this.mPicture = instance.mPicture;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

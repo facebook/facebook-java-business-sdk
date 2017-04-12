@@ -53,6 +53,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ProductGroup extends APINode {
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("product_catalog")
+  private ProductCatalog mProductCatalog = null;
   @SerializedName("retailer_id")
   private String mRetailerId = null;
   @SerializedName("variants")
@@ -249,6 +251,10 @@ public class ProductGroup extends APINode {
     return new APIRequestCreateProduct(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -260,6 +266,13 @@ public class ProductGroup extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public ProductCatalog getFieldProductCatalog() {
+    if (mProductCatalog != null) {
+      mProductCatalog.context = getContext();
+    }
+    return mProductCatalog;
   }
 
   public String getFieldRetailerId() {
@@ -443,7 +456,9 @@ public class ProductGroup extends APINode {
       "ordering_index",
       "pattern",
       "price",
+      "product_catalog",
       "product_feed",
+      "product_group",
       "product_type",
       "retailer_id",
       "retailer_product_group_id",
@@ -726,11 +741,25 @@ public class ProductGroup extends APINode {
       this.requestField("price", value);
       return this;
     }
+    public APIRequestGetProducts requestProductCatalogField () {
+      return this.requestProductCatalogField(true);
+    }
+    public APIRequestGetProducts requestProductCatalogField (boolean value) {
+      this.requestField("product_catalog", value);
+      return this;
+    }
     public APIRequestGetProducts requestProductFeedField () {
       return this.requestProductFeedField(true);
     }
     public APIRequestGetProducts requestProductFeedField (boolean value) {
       this.requestField("product_feed", value);
+      return this;
+    }
+    public APIRequestGetProducts requestProductGroupField () {
+      return this.requestProductGroupField(true);
+    }
+    public APIRequestGetProducts requestProductGroupField (boolean value) {
+      this.requestField("product_group", value);
       return this;
     }
     public APIRequestGetProducts requestProductTypeField () {
@@ -882,6 +911,7 @@ public class ProductGroup extends APINode {
       "iphone_app_store_id",
       "iphone_url",
       "manufacturer_part_number",
+      "material",
       "name",
       "ordering_index",
       "pattern",
@@ -1143,6 +1173,11 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setMaterial (String material) {
+      this.setParam("material", material);
+      return this;
+    }
+
     public APIRequestCreateProduct setName (String name) {
       this.setParam("name", name);
       return this;
@@ -1286,6 +1321,90 @@ public class ProductGroup extends APINode {
 
   }
 
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<ProductGroup> {
 
     ProductGroup lastResponse = null;
@@ -1298,6 +1417,7 @@ public class ProductGroup extends APINode {
 
     public static final String[] FIELDS = {
       "id",
+      "product_catalog",
       "retailer_id",
       "variants",
     };
@@ -1376,6 +1496,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestProductCatalogField () {
+      return this.requestProductCatalogField(true);
+    }
+    public APIRequestGet requestProductCatalogField (boolean value) {
+      this.requestField("product_catalog", value);
       return this;
     }
     public APIRequestGet requestRetailerIdField () {
@@ -1504,6 +1631,7 @@ public class ProductGroup extends APINode {
 
   public ProductGroup copyFrom(ProductGroup instance) {
     this.mId = instance.mId;
+    this.mProductCatalog = instance.mProductCatalog;
     this.mRetailerId = instance.mRetailerId;
     this.mVariants = instance.mVariants;
     this.context = instance.context;

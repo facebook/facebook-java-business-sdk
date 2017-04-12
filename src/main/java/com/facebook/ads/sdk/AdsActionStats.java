@@ -63,6 +63,8 @@ public class AdsActionStats extends APINode {
   private String m7dClick = null;
   @SerializedName("7d_view")
   private String m7dView = null;
+  @SerializedName("action_canvas_component_name")
+  private String mActionCanvasComponentName = null;
   @SerializedName("action_carousel_card_id")
   private String mActionCarouselCardId = null;
   @SerializedName("action_carousel_card_name")
@@ -278,6 +280,15 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldActionCanvasComponentName() {
+    return mActionCanvasComponentName;
+  }
+
+  public AdsActionStats setFieldActionCanvasComponentName(String value) {
+    this.mActionCanvasComponentName = value;
+    return this;
+  }
+
   public String getFieldActionCarouselCardId() {
     return mActionCarouselCardId;
   }
@@ -391,6 +402,7 @@ public class AdsActionStats extends APINode {
     this.m28dView = instance.m28dView;
     this.m7dClick = instance.m7dClick;
     this.m7dView = instance.m7dView;
+    this.mActionCanvasComponentName = instance.mActionCanvasComponentName;
     this.mActionCarouselCardId = instance.mActionCarouselCardId;
     this.mActionCarouselCardName = instance.mActionCarouselCardName;
     this.mActionDestination = instance.mActionDestination;

@@ -254,6 +254,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_NO_BUTTON("NO_BUTTON"),
       @SerializedName("CALL_NOW")
       VALUE_CALL_NOW("CALL_NOW"),
+      @SerializedName("APPLY_NOW")
+      VALUE_APPLY_NOW("APPLY_NOW"),
       @SerializedName("BUY_NOW")
       VALUE_BUY_NOW("BUY_NOW"),
       @SerializedName("GET_OFFER")
@@ -264,6 +266,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
       @SerializedName("MESSAGE_PAGE")
       VALUE_MESSAGE_PAGE("MESSAGE_PAGE"),
+      @SerializedName("MESSAGE_USER")
+      VALUE_MESSAGE_USER("MESSAGE_USER"),
       @SerializedName("SUBSCRIBE")
       VALUE_SUBSCRIBE("SUBSCRIBE"),
       @SerializedName("SELL_NOW")
@@ -280,6 +284,10 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_VOTE_NOW("VOTE_NOW"),
       @SerializedName("REGISTER_NOW")
       VALUE_REGISTER_NOW("REGISTER_NOW"),
+      @SerializedName("REQUEST_TIME")
+      VALUE_REQUEST_TIME("REQUEST_TIME"),
+      @SerializedName("SEE_MENU")
+      VALUE_SEE_MENU("SEE_MENU"),
       @SerializedName("OPEN_MOVIES")
       VALUE_OPEN_MOVIES("OPEN_MOVIES"),
       NULL(null);

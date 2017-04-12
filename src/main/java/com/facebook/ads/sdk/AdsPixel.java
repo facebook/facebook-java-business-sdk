@@ -57,6 +57,8 @@ public class AdsPixel extends APINode {
   private String mCreationTime = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_created_by_business")
+  private Boolean mIsCreatedByBusiness = null;
   @SerializedName("last_fired_time")
   private String mLastFiredTime = null;
   @SerializedName("name")
@@ -282,6 +284,10 @@ public class AdsPixel extends APINode {
     return mId;
   }
 
+  public Boolean getFieldIsCreatedByBusiness() {
+    return mIsCreatedByBusiness;
+  }
+
   public String getFieldLastFiredTime() {
     return mLastFiredTime;
   }
@@ -324,6 +330,7 @@ public class AdsPixel extends APINode {
       "description",
       "external_event_source",
       "id",
+      "is_value_based",
       "lookalike_audience_ids",
       "lookalike_spec",
       "name",
@@ -455,6 +462,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAudiences requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAudiences requestIsValueBasedField () {
+      return this.requestIsValueBasedField(true);
+    }
+    public APIRequestGetAudiences requestIsValueBasedField (boolean value) {
+      this.requestField("is_value_based", value);
       return this;
     }
     public APIRequestGetAudiences requestLookalikeAudienceIdsField () {
@@ -601,6 +615,8 @@ public class AdsPixel extends APINode {
       "owner",
       "partner",
       "rf_spec",
+      "salesforce_invoice_group_id",
+      "show_checkout_experience",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -957,6 +973,20 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestRfSpecField (boolean value) {
       this.requestField("rf_spec", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestSalesforceInvoiceGroupIdField () {
+      return this.requestSalesforceInvoiceGroupIdField(true);
+    }
+    public APIRequestGetSharedAccounts requestSalesforceInvoiceGroupIdField (boolean value) {
+      this.requestField("salesforce_invoice_group_id", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestShowCheckoutExperienceField () {
+      return this.requestShowCheckoutExperienceField(true);
+    }
+    public APIRequestGetSharedAccounts requestShowCheckoutExperienceField (boolean value) {
+      this.requestField("show_checkout_experience", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestSpendCapField () {
@@ -1338,6 +1368,7 @@ public class AdsPixel extends APINode {
       "code",
       "creation_time",
       "id",
+      "is_created_by_business",
       "last_fired_time",
       "name",
       "owner_ad_account",
@@ -1432,6 +1463,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIsCreatedByBusinessField () {
+      return this.requestIsCreatedByBusinessField(true);
+    }
+    public APIRequestGet requestIsCreatedByBusinessField (boolean value) {
+      this.requestField("is_created_by_business", value);
       return this;
     }
     public APIRequestGet requestLastFiredTimeField () {
@@ -1572,6 +1610,7 @@ public class AdsPixel extends APINode {
     this.mCode = instance.mCode;
     this.mCreationTime = instance.mCreationTime;
     this.mId = instance.mId;
+    this.mIsCreatedByBusiness = instance.mIsCreatedByBusiness;
     this.mLastFiredTime = instance.mLastFiredTime;
     this.mName = instance.mName;
     this.mOwnerAdAccount = instance.mOwnerAdAccount;

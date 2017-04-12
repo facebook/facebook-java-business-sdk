@@ -53,10 +53,14 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativePhotoData extends APINode {
   @SerializedName("branded_content_sponsor_page_id")
   private String mBrandedContentSponsorPageId = null;
+  @SerializedName("branded_content_sponsor_relationship")
+  private String mBrandedContentSponsorRelationship = null;
   @SerializedName("caption")
   private String mCaption = null;
   @SerializedName("image_hash")
   private String mImageHash = null;
+  @SerializedName("page_welcome_message")
+  private String mPageWelcomeMessage = null;
   @SerializedName("url")
   private String mUrl = null;
   protected static Gson gson = null;
@@ -209,6 +213,15 @@ public class AdCreativePhotoData extends APINode {
     return this;
   }
 
+  public String getFieldBrandedContentSponsorRelationship() {
+    return mBrandedContentSponsorRelationship;
+  }
+
+  public AdCreativePhotoData setFieldBrandedContentSponsorRelationship(String value) {
+    this.mBrandedContentSponsorRelationship = value;
+    return this;
+  }
+
   public String getFieldCaption() {
     return mCaption;
   }
@@ -224,6 +237,15 @@ public class AdCreativePhotoData extends APINode {
 
   public AdCreativePhotoData setFieldImageHash(String value) {
     this.mImageHash = value;
+    return this;
+  }
+
+  public String getFieldPageWelcomeMessage() {
+    return mPageWelcomeMessage;
+  }
+
+  public AdCreativePhotoData setFieldPageWelcomeMessage(String value) {
+    this.mPageWelcomeMessage = value;
     return this;
   }
 
@@ -254,8 +276,10 @@ public class AdCreativePhotoData extends APINode {
 
   public AdCreativePhotoData copyFrom(AdCreativePhotoData instance) {
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
+    this.mBrandedContentSponsorRelationship = instance.mBrandedContentSponsorRelationship;
     this.mCaption = instance.mCaption;
     this.mImageHash = instance.mImageHash;
+    this.mPageWelcomeMessage = instance.mPageWelcomeMessage;
     this.mUrl = instance.mUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

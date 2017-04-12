@@ -424,6 +424,12 @@ public class AdActivity extends APINode {
       VALUE_REMOVE_SHARED_AUDIENCE("remove_shared_audience"),
       @SerializedName("unknown")
       VALUE_UNKNOWN("unknown"),
+      @SerializedName("account_spending_limit_reached")
+      VALUE_ACCOUNT_SPENDING_LIMIT_REACHED("account_spending_limit_reached"),
+      @SerializedName("campaign_spending_limit_reached")
+      VALUE_CAMPAIGN_SPENDING_LIMIT_REACHED("campaign_spending_limit_reached"),
+      @SerializedName("lifetime_budget_spent")
+      VALUE_LIFETIME_BUDGET_SPENT("lifetime_budget_spent"),
       @SerializedName("funding_event_initiated")
       VALUE_FUNDING_EVENT_INITIATED("funding_event_initiated"),
       @SerializedName("funding_event_successful")

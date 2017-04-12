@@ -53,6 +53,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativeVideoData extends APINode {
   @SerializedName("branded_content_sponsor_page_id")
   private String mBrandedContentSponsorPageId = null;
+  @SerializedName("branded_content_sponsor_relationship")
+  private String mBrandedContentSponsorRelationship = null;
   @SerializedName("call_to_action")
   private AdCreativeLinkDataCallToAction mCallToAction = null;
   @SerializedName("description")
@@ -61,6 +63,10 @@ public class AdCreativeVideoData extends APINode {
   private String mImageHash = null;
   @SerializedName("image_url")
   private String mImageUrl = null;
+  @SerializedName("offer_id")
+  private String mOfferId = null;
+  @SerializedName("page_welcome_message")
+  private String mPageWelcomeMessage = null;
   @SerializedName("targeting")
   private Targeting mTargeting = null;
   @SerializedName("title")
@@ -217,6 +223,15 @@ public class AdCreativeVideoData extends APINode {
     return this;
   }
 
+  public String getFieldBrandedContentSponsorRelationship() {
+    return mBrandedContentSponsorRelationship;
+  }
+
+  public AdCreativeVideoData setFieldBrandedContentSponsorRelationship(String value) {
+    this.mBrandedContentSponsorRelationship = value;
+    return this;
+  }
+
   public AdCreativeLinkDataCallToAction getFieldCallToAction() {
     return mCallToAction;
   }
@@ -255,6 +270,24 @@ public class AdCreativeVideoData extends APINode {
 
   public AdCreativeVideoData setFieldImageUrl(String value) {
     this.mImageUrl = value;
+    return this;
+  }
+
+  public String getFieldOfferId() {
+    return mOfferId;
+  }
+
+  public AdCreativeVideoData setFieldOfferId(String value) {
+    this.mOfferId = value;
+    return this;
+  }
+
+  public String getFieldPageWelcomeMessage() {
+    return mPageWelcomeMessage;
+  }
+
+  public AdCreativeVideoData setFieldPageWelcomeMessage(String value) {
+    this.mPageWelcomeMessage = value;
     return this;
   }
 
@@ -308,10 +341,13 @@ public class AdCreativeVideoData extends APINode {
 
   public AdCreativeVideoData copyFrom(AdCreativeVideoData instance) {
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
+    this.mBrandedContentSponsorRelationship = instance.mBrandedContentSponsorRelationship;
     this.mCallToAction = instance.mCallToAction;
     this.mDescription = instance.mDescription;
     this.mImageHash = instance.mImageHash;
     this.mImageUrl = instance.mImageUrl;
+    this.mOfferId = instance.mOfferId;
+    this.mPageWelcomeMessage = instance.mPageWelcomeMessage;
     this.mTargeting = instance.mTargeting;
     this.mTitle = instance.mTitle;
     this.mVideoId = instance.mVideoId;

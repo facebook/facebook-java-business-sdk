@@ -107,8 +107,12 @@ public class ProductItem extends APINode {
   private String mPattern = null;
   @SerializedName("price")
   private String mPrice = null;
+  @SerializedName("product_catalog")
+  private ProductCatalog mProductCatalog = null;
   @SerializedName("product_feed")
   private ProductFeed mProductFeed = null;
+  @SerializedName("product_group")
+  private ProductGroup mProductGroup = null;
   @SerializedName("product_type")
   private String mProductType = null;
   @SerializedName("retailer_id")
@@ -451,11 +455,25 @@ public class ProductItem extends APINode {
     return mPrice;
   }
 
+  public ProductCatalog getFieldProductCatalog() {
+    if (mProductCatalog != null) {
+      mProductCatalog.context = getContext();
+    }
+    return mProductCatalog;
+  }
+
   public ProductFeed getFieldProductFeed() {
     if (mProductFeed != null) {
       mProductFeed.context = getContext();
     }
     return mProductFeed;
+  }
+
+  public ProductGroup getFieldProductGroup() {
+    if (mProductGroup != null) {
+      mProductGroup.context = getContext();
+    }
+    return mProductGroup;
   }
 
   public String getFieldProductType() {
@@ -777,7 +795,9 @@ public class ProductItem extends APINode {
       "ordering_index",
       "pattern",
       "price",
+      "product_catalog",
       "product_feed",
+      "product_group",
       "product_type",
       "retailer_id",
       "retailer_product_group_id",
@@ -1078,11 +1098,25 @@ public class ProductItem extends APINode {
       this.requestField("price", value);
       return this;
     }
+    public APIRequestGet requestProductCatalogField () {
+      return this.requestProductCatalogField(true);
+    }
+    public APIRequestGet requestProductCatalogField (boolean value) {
+      this.requestField("product_catalog", value);
+      return this;
+    }
     public APIRequestGet requestProductFeedField () {
       return this.requestProductFeedField(true);
     }
     public APIRequestGet requestProductFeedField (boolean value) {
       this.requestField("product_feed", value);
+      return this;
+    }
+    public APIRequestGet requestProductGroupField () {
+      return this.requestProductGroupField(true);
+    }
+    public APIRequestGet requestProductGroupField (boolean value) {
+      this.requestField("product_group", value);
       return this;
     }
     public APIRequestGet requestProductTypeField () {
@@ -1234,6 +1268,7 @@ public class ProductItem extends APINode {
       "iphone_app_store_id",
       "iphone_url",
       "manufacturer_part_number",
+      "material",
       "name",
       "ordering_index",
       "pattern",
@@ -1494,6 +1529,11 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setMaterial (String material) {
+      this.setParam("material", material);
+      return this;
+    }
+
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
       return this;
@@ -1633,16 +1673,16 @@ public class ProductItem extends APINode {
   }
 
   public static enum EnumAgeGroup {
-      @SerializedName("kids")
-      VALUE_KIDS("kids"),
       @SerializedName("adult")
       VALUE_ADULT("adult"),
       @SerializedName("infant")
       VALUE_INFANT("infant"),
-      @SerializedName("toddler")
-      VALUE_TODDLER("toddler"),
+      @SerializedName("kids")
+      VALUE_KIDS("kids"),
       @SerializedName("newborn")
       VALUE_NEWBORN("newborn"),
+      @SerializedName("toddler")
+      VALUE_TODDLER("toddler"),
       NULL(null);
 
       private String value;
@@ -1830,7 +1870,9 @@ public class ProductItem extends APINode {
     this.mOrderingIndex = instance.mOrderingIndex;
     this.mPattern = instance.mPattern;
     this.mPrice = instance.mPrice;
+    this.mProductCatalog = instance.mProductCatalog;
     this.mProductFeed = instance.mProductFeed;
+    this.mProductGroup = instance.mProductGroup;
     this.mProductType = instance.mProductType;
     this.mRetailerId = instance.mRetailerId;
     this.mRetailerProductGroupId = instance.mRetailerProductGroupId;

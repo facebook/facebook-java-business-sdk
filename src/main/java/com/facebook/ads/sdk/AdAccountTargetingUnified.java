@@ -360,6 +360,14 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_FACEBOOK_POSITIONS("facebook_positions"),
       @SerializedName("effective_facebook_positions")
       VALUE_EFFECTIVE_FACEBOOK_POSITIONS("effective_facebook_positions"),
+      @SerializedName("instagram_positions")
+      VALUE_INSTAGRAM_POSITIONS("instagram_positions"),
+      @SerializedName("effective_instagram_positions")
+      VALUE_EFFECTIVE_INSTAGRAM_POSITIONS("effective_instagram_positions"),
+      @SerializedName("messenger_positions")
+      VALUE_MESSENGER_POSITIONS("messenger_positions"),
+      @SerializedName("effective_messenger_positions")
+      VALUE_EFFECTIVE_MESSENGER_POSITIONS("effective_messenger_positions"),
       @SerializedName("device_platforms")
       VALUE_DEVICE_PLATFORMS("device_platforms"),
       @SerializedName("effective_device_platforms")
@@ -378,6 +386,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_PUBLISHER_VISIBILITY_CATEGORIES("publisher_visibility_categories"),
       @SerializedName("user_device")
       VALUE_USER_DEVICE("user_device"),
+      @SerializedName("mobile_device_model")
+      VALUE_MOBILE_DEVICE_MODEL("mobile_device_model"),
       @SerializedName("excluded_user_device")
       VALUE_EXCLUDED_USER_DEVICE("excluded_user_device"),
       @SerializedName("excluded_mobile_device_model")

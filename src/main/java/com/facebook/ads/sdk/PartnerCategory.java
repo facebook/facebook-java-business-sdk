@@ -315,6 +315,25 @@ public class PartnerCategory extends APINode {
 
 
 
+  public static enum EnumPrivateOrPublic {
+      @SerializedName("PRIVATE")
+      VALUE_PRIVATE("PRIVATE"),
+      @SerializedName("PUBLIC")
+      VALUE_PUBLIC("PUBLIC"),
+      NULL(null);
+
+      private String value;
+
+      private EnumPrivateOrPublic(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

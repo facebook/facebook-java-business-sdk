@@ -50,74 +50,54 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdImage extends APINode {
-  @SerializedName("account_id")
-  private String mAccountId = null;
-  @SerializedName("created_time")
-  private String mCreatedTime = null;
-  @SerializedName("creatives")
-  private List<String> mCreatives = null;
-  @SerializedName("hash")
-  private String mHash = null;
-  @SerializedName("height")
-  private Long mHeight = null;
+public class AdStudyObjective extends APINode {
+  @SerializedName("custom_attributes")
+  private List<String> mCustomAttributes = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("is_associated_creatives_in_adgroups")
-  private Boolean mIsAssociatedCreativesInAdgroups = null;
+  @SerializedName("is_primary")
+  private Boolean mIsPrimary = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("original_height")
-  private Long mOriginalHeight = null;
-  @SerializedName("original_width")
-  private Long mOriginalWidth = null;
-  @SerializedName("permalink_url")
-  private String mPermalinkUrl = null;
-  @SerializedName("status")
-  private EnumStatus mStatus = null;
-  @SerializedName("updated_time")
-  private String mUpdatedTime = null;
-  @SerializedName("url")
-  private String mUrl = null;
-  @SerializedName("url_128")
-  private String mUrl128 = null;
-  @SerializedName("width")
-  private Long mWidth = null;
+  @SerializedName("results")
+  private List<String> mResults = null;
+  @SerializedName("type")
+  private String mType = null;
   protected static Gson gson = null;
 
-  AdImage() {
+  AdStudyObjective() {
   }
 
-  public AdImage(Long id, APIContext context) {
+  public AdStudyObjective(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public AdImage(String id, APIContext context) {
+  public AdStudyObjective(String id, APIContext context) {
     this.mId = id;
     this.context = context;
   }
 
-  public AdImage fetch() throws APIException{
-    AdImage newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public AdStudyObjective fetch() throws APIException{
+    AdStudyObjective newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static AdImage fetchById(Long id, APIContext context) throws APIException {
+  public static AdStudyObjective fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static AdImage fetchById(String id, APIContext context) throws APIException {
-    AdImage adImage =
+  public static AdStudyObjective fetchById(String id, APIContext context) throws APIException {
+    AdStudyObjective adStudyObjective =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return adImage;
+    return adStudyObjective;
   }
 
-  public static APINodeList<AdImage> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdImage>)(
-      new APIRequest<AdImage>(context, "", "/", "GET", AdImage.getParser())
+  public static APINodeList<AdStudyObjective> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdStudyObjective>)(
+      new APIRequest<AdStudyObjective>(context, "", "/", "GET", AdStudyObjective.getParser())
         .setParam("ids", String.join(",", ids))
         .requestFields(fields)
         .execute()
@@ -131,12 +111,12 @@ public class AdImage extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdImage loadJSON(String json, APIContext context) {
-    AdImage adImage = getGson().fromJson(json, AdImage.class);
+  public static AdStudyObjective loadJSON(String json, APIContext context) {
+    AdStudyObjective adStudyObjective = getGson().fromJson(json, AdStudyObjective.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adImage.toString());
+      JsonElement o2 = parser.parse(adStudyObjective.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -146,13 +126,13 @@ public class AdImage extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adImage.context = context;
-    adImage.rawValue = json;
-    return adImage;
+    adStudyObjective.context = context;
+    adStudyObjective.rawValue = json;
+    return adStudyObjective;
   }
 
-  public static APINodeList<AdImage> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdImage> adImages = new APINodeList<AdImage>(request, json);
+  public static APINodeList<AdStudyObjective> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<AdStudyObjective> adStudyObjectives = new APINodeList<AdStudyObjective>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -163,9 +143,9 @@ public class AdImage extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adImages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adStudyObjectives.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return adImages;
+        return adStudyObjectives;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -173,13 +153,13 @@ public class AdImage extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adImages.setPaging(before, after);
+            adStudyObjectives.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adImages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adStudyObjectives.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -190,23 +170,23 @@ public class AdImage extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adImages.add(loadJSON(entry.getValue().toString(), context));
+                  adStudyObjectives.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adImages.add(loadJSON(obj.toString(), context));
+              adStudyObjectives.add(loadJSON(obj.toString(), context));
             }
           }
-          return adImages;
+          return adStudyObjectives;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adImages.add(loadJSON(entry.getValue().toString(), context));
+              adStudyObjectives.add(loadJSON(entry.getValue().toString(), context));
           }
-          return adImages;
+          return adStudyObjectives;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -223,20 +203,20 @@ public class AdImage extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adImages.add(loadJSON(value.toString(), context));
+              adStudyObjectives.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adImages;
+            return adStudyObjectives;
           }
 
           // Sixth, check if it's pure JsonObject
-          adImages.clear();
-          adImages.add(loadJSON(json, context));
-          return adImages;
+          adStudyObjectives.clear();
+          adStudyObjectives.add(loadJSON(json, context));
+          return adStudyObjectives;
         }
       }
     } catch (Exception e) {
@@ -268,113 +248,64 @@ public class AdImage extends APINode {
   }
 
 
-  public String getFieldAccountId() {
-    return mAccountId;
-  }
-
-  public String getFieldCreatedTime() {
-    return mCreatedTime;
-  }
-
-  public List<String> getFieldCreatives() {
-    return mCreatives;
-  }
-
-  public String getFieldHash() {
-    return mHash;
-  }
-
-  public Long getFieldHeight() {
-    return mHeight;
+  public List<String> getFieldCustomAttributes() {
+    return mCustomAttributes;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public Boolean getFieldIsAssociatedCreativesInAdgroups() {
-    return mIsAssociatedCreativesInAdgroups;
+  public Boolean getFieldIsPrimary() {
+    return mIsPrimary;
   }
 
   public String getFieldName() {
     return mName;
   }
 
-  public Long getFieldOriginalHeight() {
-    return mOriginalHeight;
+  public List<String> getFieldResults() {
+    return mResults;
   }
 
-  public Long getFieldOriginalWidth() {
-    return mOriginalWidth;
-  }
-
-  public String getFieldPermalinkUrl() {
-    return mPermalinkUrl;
-  }
-
-  public EnumStatus getFieldStatus() {
-    return mStatus;
-  }
-
-  public String getFieldUpdatedTime() {
-    return mUpdatedTime;
-  }
-
-  public String getFieldUrl() {
-    return mUrl;
-  }
-
-  public String getFieldUrl128() {
-    return mUrl128;
-  }
-
-  public Long getFieldWidth() {
-    return mWidth;
+  public String getFieldType() {
+    return mType;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<AdImage> {
+  public static class APIRequestGet extends APIRequest<AdStudyObjective> {
 
-    AdImage lastResponse = null;
+    AdStudyObjective lastResponse = null;
     @Override
-    public AdImage getLastResponse() {
+    public AdStudyObjective getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "breakdowns",
     };
 
     public static final String[] FIELDS = {
-      "account_id",
-      "created_time",
-      "creatives",
-      "hash",
-      "height",
+      "custom_attributes",
       "id",
-      "is_associated_creatives_in_adgroups",
+      "is_primary",
       "name",
-      "original_height",
-      "original_width",
-      "permalink_url",
-      "status",
-      "updated_time",
-      "url",
-      "url_128",
-      "width",
+      "results",
+      "type",
     };
 
     @Override
-    public AdImage parseResponse(String response) throws APIException {
-      return AdImage.parseResponse(response, getContext(), this).head();
+    public AdStudyObjective parseResponse(String response) throws APIException {
+      return AdStudyObjective.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public AdImage execute() throws APIException {
+    public AdStudyObjective execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdImage execute(Map<String, Object> extraParams) throws APIException {
+    public AdStudyObjective execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -395,6 +326,15 @@ public class AdImage extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setBreakdowns (List<AdStudyObjective.EnumBreakdowns> breakdowns) {
+      this.setParam("breakdowns", breakdowns);
+      return this;
+    }
+    public APIRequestGet setBreakdowns (String breakdowns) {
+      this.setParam("breakdowns", breakdowns);
+      return this;
+    }
 
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);
@@ -432,39 +372,11 @@ public class AdImage extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAccountIdField () {
-      return this.requestAccountIdField(true);
+    public APIRequestGet requestCustomAttributesField () {
+      return this.requestCustomAttributesField(true);
     }
-    public APIRequestGet requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGet requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGet requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGet requestCreativesField () {
-      return this.requestCreativesField(true);
-    }
-    public APIRequestGet requestCreativesField (boolean value) {
-      this.requestField("creatives", value);
-      return this;
-    }
-    public APIRequestGet requestHashField () {
-      return this.requestHashField(true);
-    }
-    public APIRequestGet requestHashField (boolean value) {
-      this.requestField("hash", value);
-      return this;
-    }
-    public APIRequestGet requestHeightField () {
-      return this.requestHeightField(true);
-    }
-    public APIRequestGet requestHeightField (boolean value) {
-      this.requestField("height", value);
+    public APIRequestGet requestCustomAttributesField (boolean value) {
+      this.requestField("custom_attributes", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -474,11 +386,11 @@ public class AdImage extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestIsAssociatedCreativesInAdgroupsField () {
-      return this.requestIsAssociatedCreativesInAdgroupsField(true);
+    public APIRequestGet requestIsPrimaryField () {
+      return this.requestIsPrimaryField(true);
     }
-    public APIRequestGet requestIsAssociatedCreativesInAdgroupsField (boolean value) {
-      this.requestField("is_associated_creatives_in_adgroups", value);
+    public APIRequestGet requestIsPrimaryField (boolean value) {
+      this.requestField("is_primary", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -488,74 +400,69 @@ public class AdImage extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestOriginalHeightField () {
-      return this.requestOriginalHeightField(true);
+    public APIRequestGet requestResultsField () {
+      return this.requestResultsField(true);
     }
-    public APIRequestGet requestOriginalHeightField (boolean value) {
-      this.requestField("original_height", value);
+    public APIRequestGet requestResultsField (boolean value) {
+      this.requestField("results", value);
       return this;
     }
-    public APIRequestGet requestOriginalWidthField () {
-      return this.requestOriginalWidthField(true);
+    public APIRequestGet requestTypeField () {
+      return this.requestTypeField(true);
     }
-    public APIRequestGet requestOriginalWidthField (boolean value) {
-      this.requestField("original_width", value);
-      return this;
-    }
-    public APIRequestGet requestPermalinkUrlField () {
-      return this.requestPermalinkUrlField(true);
-    }
-    public APIRequestGet requestPermalinkUrlField (boolean value) {
-      this.requestField("permalink_url", value);
-      return this;
-    }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGet requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGet requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGet requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGet requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
-    public APIRequestGet requestUrl128Field () {
-      return this.requestUrl128Field(true);
-    }
-    public APIRequestGet requestUrl128Field (boolean value) {
-      this.requestField("url_128", value);
-      return this;
-    }
-    public APIRequestGet requestWidthField () {
-      return this.requestWidthField(true);
-    }
-    public APIRequestGet requestWidthField (boolean value) {
-      this.requestField("width", value);
+    public APIRequestGet requestTypeField (boolean value) {
+      this.requestField("type", value);
       return this;
     }
   }
 
-  public static enum EnumStatus {
-      @SerializedName("ACTIVE")
-      VALUE_ACTIVE("ACTIVE"),
-      @SerializedName("DELETED")
-      VALUE_DELETED("DELETED"),
+  public static enum EnumBreakdowns {
+      @SerializedName("age")
+      VALUE_AGE("age"),
+      @SerializedName("cell_id")
+      VALUE_CELL_ID("cell_id"),
+      @SerializedName("gender")
+      VALUE_GENDER("gender"),
+      @SerializedName("country")
+      VALUE_COUNTRY("country"),
       NULL(null);
 
       private String value;
 
-      private EnumStatus(String value) {
+      private EnumBreakdowns(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumType {
+      @SerializedName("SALES")
+      VALUE_SALES("SALES"),
+      @SerializedName("NONSALES")
+      VALUE_NONSALES("NONSALES"),
+      @SerializedName("MAE")
+      VALUE_MAE("MAE"),
+      @SerializedName("TELCO")
+      VALUE_TELCO("TELCO"),
+      @SerializedName("FTL")
+      VALUE_FTL("FTL"),
+      @SerializedName("MAI")
+      VALUE_MAI("MAI"),
+      @SerializedName("PARTNER")
+      VALUE_PARTNER("PARTNER"),
+      @SerializedName("BRANDLIFT")
+      VALUE_BRANDLIFT("BRANDLIFT"),
+      @SerializedName("BRAND")
+      VALUE_BRAND("BRAND"),
+      NULL(null);
+
+      private String value;
+
+      private EnumType(String value) {
         this.value = value;
       }
 
@@ -579,32 +486,22 @@ public class AdImage extends APINode {
     return gson;
   }
 
-  public AdImage copyFrom(AdImage instance) {
-    this.mAccountId = instance.mAccountId;
-    this.mCreatedTime = instance.mCreatedTime;
-    this.mCreatives = instance.mCreatives;
-    this.mHash = instance.mHash;
-    this.mHeight = instance.mHeight;
+  public AdStudyObjective copyFrom(AdStudyObjective instance) {
+    this.mCustomAttributes = instance.mCustomAttributes;
     this.mId = instance.mId;
-    this.mIsAssociatedCreativesInAdgroups = instance.mIsAssociatedCreativesInAdgroups;
+    this.mIsPrimary = instance.mIsPrimary;
     this.mName = instance.mName;
-    this.mOriginalHeight = instance.mOriginalHeight;
-    this.mOriginalWidth = instance.mOriginalWidth;
-    this.mPermalinkUrl = instance.mPermalinkUrl;
-    this.mStatus = instance.mStatus;
-    this.mUpdatedTime = instance.mUpdatedTime;
-    this.mUrl = instance.mUrl;
-    this.mUrl128 = instance.mUrl128;
-    this.mWidth = instance.mWidth;
+    this.mResults = instance.mResults;
+    this.mType = instance.mType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdImage> getParser() {
-    return new APIRequest.ResponseParser<AdImage>() {
-      public APINodeList<AdImage> parseResponse(String response, APIContext context, APIRequest<AdImage> request) throws MalformedResponseException {
-        return AdImage.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<AdStudyObjective> getParser() {
+    return new APIRequest.ResponseParser<AdStudyObjective>() {
+      public APINodeList<AdStudyObjective> parseResponse(String response, APIContext context, APIRequest<AdStudyObjective> request) throws MalformedResponseException {
+        return AdStudyObjective.parseResponse(response, context, request);
       }
     };
   }

@@ -253,6 +253,10 @@ public class Business extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateAdStudy createAdStudy() {
+    return new APIRequestCreateAdStudy(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateAdAccount createAdAccount() {
     return new APIRequestCreateAdAccount(this.getPrefixedId().toString(), context);
   }
@@ -442,6 +446,192 @@ public class Business extends APINode {
 
 
 
+  public static class APIRequestCreateAdStudy extends APIRequest<AdStudy> {
+
+    AdStudy lastResponse = null;
+    @Override
+    public AdStudy getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "cells",
+      "confidence_level",
+      "cooldown_start_time",
+      "description",
+      "end_time",
+      "name",
+      "objectives",
+      "observation_end_time",
+      "start_time",
+      "type",
+      "viewers",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdStudy parseResponse(String response) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdStudy execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdStudy execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestCreateAdStudy(String nodeId, APIContext context) {
+      super(context, nodeId, "/ad_studies", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAdStudy setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdStudy setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAdStudy setCells (List<Object> cells) {
+      this.setParam("cells", cells);
+      return this;
+    }
+    public APIRequestCreateAdStudy setCells (String cells) {
+      this.setParam("cells", cells);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setConfidenceLevel (Double confidenceLevel) {
+      this.setParam("confidence_level", confidenceLevel);
+      return this;
+    }
+    public APIRequestCreateAdStudy setConfidenceLevel (String confidenceLevel) {
+      this.setParam("confidence_level", confidenceLevel);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setCooldownStartTime (Long cooldownStartTime) {
+      this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+    public APIRequestCreateAdStudy setCooldownStartTime (String cooldownStartTime) {
+      this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setEndTime (Long endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+    public APIRequestCreateAdStudy setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setObjectives (List<Object> objectives) {
+      this.setParam("objectives", objectives);
+      return this;
+    }
+    public APIRequestCreateAdStudy setObjectives (String objectives) {
+      this.setParam("objectives", objectives);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setObservationEndTime (Long observationEndTime) {
+      this.setParam("observation_end_time", observationEndTime);
+      return this;
+    }
+    public APIRequestCreateAdStudy setObservationEndTime (String observationEndTime) {
+      this.setParam("observation_end_time", observationEndTime);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setStartTime (Long startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+    public APIRequestCreateAdStudy setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setType (AdStudy.EnumType type) {
+      this.setParam("type", type);
+      return this;
+    }
+    public APIRequestCreateAdStudy setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy setViewers (List<Long> viewers) {
+      this.setParam("viewers", viewers);
+      return this;
+    }
+    public APIRequestCreateAdStudy setViewers (String viewers) {
+      this.setParam("viewers", viewers);
+      return this;
+    }
+
+    public APIRequestCreateAdStudy requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAdStudy requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdStudy requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAdStudy requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdStudy requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdStudy requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateAdAccount extends APIRequest<AdAccount> {
 
     AdAccount lastResponse = null;
@@ -503,6 +693,10 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdAccount setEndAdvertiser (Object endAdvertiser) {
+      this.setParam("end_advertiser", endAdvertiser);
+      return this;
+    }
     public APIRequestCreateAdAccount setEndAdvertiser (String endAdvertiser) {
       this.setParam("end_advertiser", endAdvertiser);
       return this;
@@ -716,12 +910,15 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "id_filter",
+      "name_filter",
     };
 
     public static final String[] FIELDS = {
       "code",
       "creation_time",
       "id",
+      "is_created_by_business",
       "last_fired_time",
       "name",
       "owner_ad_account",
@@ -760,6 +957,16 @@ public class Business extends APINode {
       return this;
     }
 
+
+    public APIRequestGetAdsPixels setIdFilter (String idFilter) {
+      this.setParam("id_filter", idFilter);
+      return this;
+    }
+
+    public APIRequestGetAdsPixels setNameFilter (String nameFilter) {
+      this.setParam("name_filter", nameFilter);
+      return this;
+    }
 
     public APIRequestGetAdsPixels requestAllFields () {
       return this.requestAllFields(true);
@@ -816,6 +1023,13 @@ public class Business extends APINode {
     }
     public APIRequestGetAdsPixels requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestIsCreatedByBusinessField () {
+      return this.requestIsCreatedByBusinessField(true);
+    }
+    public APIRequestGetAdsPixels requestIsCreatedByBusinessField (boolean value) {
+      this.requestField("is_created_by_business", value);
       return this;
     }
     public APIRequestGetAdsPixels requestLastFiredTimeField () {
@@ -1084,6 +1298,8 @@ public class Business extends APINode {
       "owner",
       "partner",
       "rf_spec",
+      "salesforce_invoice_group_id",
+      "show_checkout_experience",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -1451,6 +1667,20 @@ public class Business extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetAssignedAdAccounts requestSalesforceInvoiceGroupIdField () {
+      return this.requestSalesforceInvoiceGroupIdField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestSalesforceInvoiceGroupIdField (boolean value) {
+      this.requestField("salesforce_invoice_group_id", value);
+      return this;
+    }
+    public APIRequestGetAssignedAdAccounts requestShowCheckoutExperienceField () {
+      return this.requestShowCheckoutExperienceField(true);
+    }
+    public APIRequestGetAssignedAdAccounts requestShowCheckoutExperienceField (boolean value) {
+      this.requestField("show_checkout_experience", value);
+      return this;
+    }
     public APIRequestGetAssignedAdAccounts requestSpendCapField () {
       return this.requestSpendCapField(true);
     }
@@ -1630,6 +1860,9 @@ public class Business extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "da_display_settings",
+      "default_image_url",
+      "fallback_image_url",
       "feed_count",
       "id",
       "image_padding_landscape",
@@ -1729,6 +1962,27 @@ public class Business extends APINode {
       this.requestField("business", value);
       return this;
     }
+    public APIRequestGetAssignedProductCatalogs requestDaDisplaySettingsField () {
+      return this.requestDaDisplaySettingsField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestDaDisplaySettingsField (boolean value) {
+      this.requestField("da_display_settings", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestDefaultImageUrlField () {
+      return this.requestDefaultImageUrlField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestDefaultImageUrlField (boolean value) {
+      this.requestField("default_image_url", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestFallbackImageUrlField () {
+      return this.requestFallbackImageUrlField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestFallbackImageUrlField (boolean value) {
+      this.requestField("fallback_image_url", value);
+      return this;
+    }
     public APIRequestGetAssignedProductCatalogs requestFeedCountField () {
       return this.requestFeedCountField(true);
     }
@@ -1793,7 +2047,6 @@ public class Business extends APINode {
     public static final String[] FIELDS = {
       "ad_account",
       "id",
-      "permitted_roles",
     };
 
     @Override
@@ -1879,13 +2132,6 @@ public class Business extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetClientAdAccountRequests requestPermittedRolesField () {
-      return this.requestPermittedRolesField(true);
-    }
-    public APIRequestGetClientAdAccountRequests requestPermittedRolesField (boolean value) {
-      this.requestField("permitted_roles", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetClientAdAccounts extends APIRequest<AdAccount> {
@@ -1938,6 +2184,8 @@ public class Business extends APINode {
       "owner",
       "partner",
       "rf_spec",
+      "salesforce_invoice_group_id",
+      "show_checkout_experience",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -2289,6 +2537,20 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestRfSpecField (boolean value) {
       this.requestField("rf_spec", value);
+      return this;
+    }
+    public APIRequestGetClientAdAccounts requestSalesforceInvoiceGroupIdField () {
+      return this.requestSalesforceInvoiceGroupIdField(true);
+    }
+    public APIRequestGetClientAdAccounts requestSalesforceInvoiceGroupIdField (boolean value) {
+      this.requestField("salesforce_invoice_group_id", value);
+      return this;
+    }
+    public APIRequestGetClientAdAccounts requestShowCheckoutExperienceField () {
+      return this.requestShowCheckoutExperienceField(true);
+    }
+    public APIRequestGetClientAdAccounts requestShowCheckoutExperienceField (boolean value) {
+      this.requestField("show_checkout_experience", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestSpendCapField () {
@@ -2791,6 +3053,7 @@ public class Business extends APINode {
       "holdout_percentage",
       "id",
       "instagram_destination_id",
+      "interval_frequency_cap",
       "interval_frequency_cap_reset_period",
       "name",
       "pause_periods",
@@ -3043,6 +3306,13 @@ public class Business extends APINode {
     }
     public APIRequestGetGrpPlans requestInstagramDestinationIdField (boolean value) {
       this.requestField("instagram_destination_id", value);
+      return this;
+    }
+    public APIRequestGetGrpPlans requestIntervalFrequencyCapField () {
+      return this.requestIntervalFrequencyCapField(true);
+    }
+    public APIRequestGetGrpPlans requestIntervalFrequencyCapField (boolean value) {
+      this.requestField("interval_frequency_cap", value);
       return this;
     }
     public APIRequestGetGrpPlans requestIntervalFrequencyCapResetPeriodField () {
@@ -3518,7 +3788,9 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "auto_assign_to_new_accounts_only",
       "description",
+      "enable_auto_assign_to_accounts",
       "name",
     };
 
@@ -3558,8 +3830,26 @@ public class Business extends APINode {
     }
 
 
+    public APIRequestCreateOfflineConversionDataSet setAutoAssignToNewAccountsOnly (Boolean autoAssignToNewAccountsOnly) {
+      this.setParam("auto_assign_to_new_accounts_only", autoAssignToNewAccountsOnly);
+      return this;
+    }
+    public APIRequestCreateOfflineConversionDataSet setAutoAssignToNewAccountsOnly (String autoAssignToNewAccountsOnly) {
+      this.setParam("auto_assign_to_new_accounts_only", autoAssignToNewAccountsOnly);
+      return this;
+    }
+
     public APIRequestCreateOfflineConversionDataSet setDescription (String description) {
       this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateOfflineConversionDataSet setEnableAutoAssignToAccounts (Boolean enableAutoAssignToAccounts) {
+      this.setParam("enable_auto_assign_to_accounts", enableAutoAssignToAccounts);
+      return this;
+    }
+    public APIRequestCreateOfflineConversionDataSet setEnableAutoAssignToAccounts (String enableAutoAssignToAccounts) {
+      this.setParam("enable_auto_assign_to_accounts", enableAutoAssignToAccounts);
       return this;
     }
 
@@ -3606,11 +3896,11 @@ public class Business extends APINode {
 
   }
 
-  public static class APIRequestGetOwnedAdAccountRequests extends APIRequest<BusinessAdAccountRequest> {
+  public static class APIRequestGetOwnedAdAccountRequests extends APIRequest<LegacyBusinessAdAccountRequest> {
 
-    APINodeList<BusinessAdAccountRequest> lastResponse = null;
+    APINodeList<LegacyBusinessAdAccountRequest> lastResponse = null;
     @Override
-    public APINodeList<BusinessAdAccountRequest> getLastResponse() {
+    public APINodeList<LegacyBusinessAdAccountRequest> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -3623,17 +3913,17 @@ public class Business extends APINode {
     };
 
     @Override
-    public APINodeList<BusinessAdAccountRequest> parseResponse(String response) throws APIException {
-      return BusinessAdAccountRequest.parseResponse(response, getContext(), this);
+    public APINodeList<LegacyBusinessAdAccountRequest> parseResponse(String response) throws APIException {
+      return LegacyBusinessAdAccountRequest.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<BusinessAdAccountRequest> execute() throws APIException {
+    public APINodeList<LegacyBusinessAdAccountRequest> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<BusinessAdAccountRequest> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<LegacyBusinessAdAccountRequest> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -3764,6 +4054,8 @@ public class Business extends APINode {
       "owner",
       "partner",
       "rf_spec",
+      "salesforce_invoice_group_id",
+      "show_checkout_experience",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -4117,6 +4409,20 @@ public class Business extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetOwnedAdAccounts requestSalesforceInvoiceGroupIdField () {
+      return this.requestSalesforceInvoiceGroupIdField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestSalesforceInvoiceGroupIdField (boolean value) {
+      this.requestField("salesforce_invoice_group_id", value);
+      return this;
+    }
+    public APIRequestGetOwnedAdAccounts requestShowCheckoutExperienceField () {
+      return this.requestShowCheckoutExperienceField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestShowCheckoutExperienceField (boolean value) {
+      this.requestField("show_checkout_experience", value);
+      return this;
+    }
     public APIRequestGetOwnedAdAccounts requestSpendCapField () {
       return this.requestSpendCapField(true);
     }
@@ -4464,6 +4770,7 @@ public class Business extends APINode {
       "code",
       "creation_time",
       "id",
+      "is_created_by_business",
       "last_fired_time",
       "name",
       "owner_ad_account",
@@ -4558,6 +4865,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPixels requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestIsCreatedByBusinessField () {
+      return this.requestIsCreatedByBusinessField(true);
+    }
+    public APIRequestGetOwnedPixels requestIsCreatedByBusinessField (boolean value) {
+      this.requestField("is_created_by_business", value);
       return this;
     }
     public APIRequestGetOwnedPixels requestLastFiredTimeField () {
@@ -4790,6 +5104,9 @@ public class Business extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "da_display_settings",
+      "default_image_url",
+      "fallback_image_url",
       "feed_count",
       "id",
       "image_padding_landscape",
@@ -4875,6 +5192,27 @@ public class Business extends APINode {
       this.requestField("business", value);
       return this;
     }
+    public APIRequestGetProductCatalogs requestDaDisplaySettingsField () {
+      return this.requestDaDisplaySettingsField(true);
+    }
+    public APIRequestGetProductCatalogs requestDaDisplaySettingsField (boolean value) {
+      this.requestField("da_display_settings", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestDefaultImageUrlField () {
+      return this.requestDefaultImageUrlField(true);
+    }
+    public APIRequestGetProductCatalogs requestDefaultImageUrlField (boolean value) {
+      this.requestField("default_image_url", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestFallbackImageUrlField () {
+      return this.requestFallbackImageUrlField(true);
+    }
+    public APIRequestGetProductCatalogs requestFallbackImageUrlField (boolean value) {
+      this.requestField("fallback_image_url", value);
+      return this;
+    }
     public APIRequestGetProductCatalogs requestFeedCountField () {
       return this.requestFeedCountField(true);
     }
@@ -4934,6 +5272,7 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "da_display_settings",
       "name",
       "vertical",
     };
@@ -4973,6 +5312,15 @@ public class Business extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateProductCatalog setDaDisplaySettings (Object daDisplaySettings) {
+      this.setParam("da_display_settings", daDisplaySettings);
+      return this;
+    }
+    public APIRequestCreateProductCatalog setDaDisplaySettings (String daDisplaySettings) {
+      this.setParam("da_display_settings", daDisplaySettings);
+      return this;
+    }
 
     public APIRequestCreateProductCatalog setName (String name) {
       this.setParam("name", name);

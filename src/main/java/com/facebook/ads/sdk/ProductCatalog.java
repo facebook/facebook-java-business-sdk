@@ -53,6 +53,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ProductCatalog extends APINode {
   @SerializedName("business")
   private Business mBusiness = null;
+  @SerializedName("da_display_settings")
+  private ProductCatalogImageSettings mDaDisplaySettings = null;
+  @SerializedName("default_image_url")
+  private String mDefaultImageUrl = null;
+  @SerializedName("fallback_image_url")
+  private List<String> mFallbackImageUrl = null;
   @SerializedName("feed_count")
   private Long mFeedCount = null;
   @SerializedName("id")
@@ -267,6 +273,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestCreateExternalEventSource(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetFlights getFlights() {
+    return new APIRequestGetFlights(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetHotelRoomsBatch getHotelRoomsBatch() {
     return new APIRequestGetHotelRoomsBatch(this.getPrefixedId().toString(), context);
   }
@@ -349,6 +359,18 @@ public class ProductCatalog extends APINode {
       mBusiness.context = getContext();
     }
     return mBusiness;
+  }
+
+  public ProductCatalogImageSettings getFieldDaDisplaySettings() {
+    return mDaDisplaySettings;
+  }
+
+  public String getFieldDefaultImageUrl() {
+    return mDefaultImageUrl;
+  }
+
+  public List<String> getFieldFallbackImageUrl() {
+    return mFallbackImageUrl;
   }
 
   public Long getFieldFeedCount() {
@@ -939,6 +961,110 @@ public class ProductCatalog extends APINode {
 
     @Override
     public APIRequestCreateExternalEventSource requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetFlights extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "bulk_pagination",
+      "filter",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetFlights(String nodeId, APIContext context) {
+      super(context, nodeId, "/flights", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetFlights setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFlights setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetFlights setBulkPagination (Boolean bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+    public APIRequestGetFlights setBulkPagination (String bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+
+    public APIRequestGetFlights setFilter (Object filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+    public APIRequestGetFlights setFilter (String filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+
+    public APIRequestGetFlights requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetFlights requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFlights requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetFlights requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFlights requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFlights requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -2185,6 +2311,7 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "id",
+      "product_catalog",
       "retailer_id",
       "variants",
     };
@@ -2263,6 +2390,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProductGroups requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetProductGroups requestProductCatalogField () {
+      return this.requestProductCatalogField(true);
+    }
+    public APIRequestGetProductGroups requestProductCatalogField (boolean value) {
+      this.requestField("product_catalog", value);
       return this;
     }
     public APIRequestGetProductGroups requestRetailerIdField () {
@@ -2772,7 +2906,9 @@ public class ProductCatalog extends APINode {
       "ordering_index",
       "pattern",
       "price",
+      "product_catalog",
       "product_feed",
+      "product_group",
       "product_type",
       "retailer_id",
       "retailer_product_group_id",
@@ -3073,11 +3209,25 @@ public class ProductCatalog extends APINode {
       this.requestField("price", value);
       return this;
     }
+    public APIRequestGetProducts requestProductCatalogField () {
+      return this.requestProductCatalogField(true);
+    }
+    public APIRequestGetProducts requestProductCatalogField (boolean value) {
+      this.requestField("product_catalog", value);
+      return this;
+    }
     public APIRequestGetProducts requestProductFeedField () {
       return this.requestProductFeedField(true);
     }
     public APIRequestGetProducts requestProductFeedField (boolean value) {
       this.requestField("product_feed", value);
+      return this;
+    }
+    public APIRequestGetProducts requestProductGroupField () {
+      return this.requestProductGroupField(true);
+    }
+    public APIRequestGetProducts requestProductGroupField (boolean value) {
+      this.requestField("product_group", value);
       return this;
     }
     public APIRequestGetProducts requestProductTypeField () {
@@ -3229,6 +3379,7 @@ public class ProductCatalog extends APINode {
       "iphone_app_store_id",
       "iphone_url",
       "manufacturer_part_number",
+      "material",
       "name",
       "ordering_index",
       "pattern",
@@ -3491,6 +3642,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setMaterial (String material) {
+      this.setParam("material", material);
+      return this;
+    }
+
     public APIRequestCreateProduct setName (String name) {
       this.setParam("name", name);
       return this;
@@ -3652,10 +3808,15 @@ public class ProductCatalog extends APINode {
       "embeddable",
       "file_size",
       "file_url",
+      "fov",
+      "initial_heading",
+      "initial_pitch",
+      "original_projection_type",
       "referenced_sticker_id",
       "replace_video_id",
       "slideshow_spec",
       "source",
+      "spherical",
       "start_offset",
       "swap_mode",
       "thumb",
@@ -3739,6 +3900,42 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setFov (Long fov) {
+      this.setParam("fov", fov);
+      return this;
+    }
+    public APIRequestCreateVideo setFov (String fov) {
+      this.setParam("fov", fov);
+      return this;
+    }
+
+    public APIRequestCreateVideo setInitialHeading (Long initialHeading) {
+      this.setParam("initial_heading", initialHeading);
+      return this;
+    }
+    public APIRequestCreateVideo setInitialHeading (String initialHeading) {
+      this.setParam("initial_heading", initialHeading);
+      return this;
+    }
+
+    public APIRequestCreateVideo setInitialPitch (Long initialPitch) {
+      this.setParam("initial_pitch", initialPitch);
+      return this;
+    }
+    public APIRequestCreateVideo setInitialPitch (String initialPitch) {
+      this.setParam("initial_pitch", initialPitch);
+      return this;
+    }
+
+    public APIRequestCreateVideo setOriginalProjectionType (EnumOriginalProjectionType originalProjectionType) {
+      this.setParam("original_projection_type", originalProjectionType);
+      return this;
+    }
+    public APIRequestCreateVideo setOriginalProjectionType (String originalProjectionType) {
+      this.setParam("original_projection_type", originalProjectionType);
+      return this;
+    }
+
     public APIRequestCreateVideo setReferencedStickerId (String referencedStickerId) {
       this.setParam("referenced_sticker_id", referencedStickerId);
       return this;
@@ -3760,6 +3957,15 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateVideo setSource (String source) {
       this.setParam("source", source);
+      return this;
+    }
+
+    public APIRequestCreateVideo setSpherical (Boolean spherical) {
+      this.setParam("spherical", spherical);
+      return this;
+    }
+    public APIRequestCreateVideo setSpherical (String spherical) {
+      this.setParam("spherical", spherical);
       return this;
     }
 
@@ -3957,6 +4163,9 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "da_display_settings",
+      "default_image_url",
+      "fallback_image_url",
       "feed_count",
       "id",
       "image_padding_landscape",
@@ -4042,6 +4251,27 @@ public class ProductCatalog extends APINode {
       this.requestField("business", value);
       return this;
     }
+    public APIRequestGet requestDaDisplaySettingsField () {
+      return this.requestDaDisplaySettingsField(true);
+    }
+    public APIRequestGet requestDaDisplaySettingsField (boolean value) {
+      this.requestField("da_display_settings", value);
+      return this;
+    }
+    public APIRequestGet requestDefaultImageUrlField () {
+      return this.requestDefaultImageUrlField(true);
+    }
+    public APIRequestGet requestDefaultImageUrlField (boolean value) {
+      this.requestField("default_image_url", value);
+      return this;
+    }
+    public APIRequestGet requestFallbackImageUrlField () {
+      return this.requestFallbackImageUrlField(true);
+    }
+    public APIRequestGet requestFallbackImageUrlField (boolean value) {
+      this.requestField("fallback_image_url", value);
+      return this;
+    }
     public APIRequestGet requestFeedCountField () {
       return this.requestFeedCountField(true);
     }
@@ -4101,6 +4331,9 @@ public class ProductCatalog extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "da_display_settings",
+      "default_image_url",
+      "fallback_image_url",
       "name",
     };
 
@@ -4139,6 +4372,25 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+
+    public APIRequestUpdate setDaDisplaySettings (Object daDisplaySettings) {
+      this.setParam("da_display_settings", daDisplaySettings);
+      return this;
+    }
+    public APIRequestUpdate setDaDisplaySettings (String daDisplaySettings) {
+      this.setParam("da_display_settings", daDisplaySettings);
+      return this;
+    }
+
+    public APIRequestUpdate setDefaultImageUrl (String defaultImageUrl) {
+      this.setParam("default_image_url", defaultImageUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setFallbackImageUrl (String fallbackImageUrl) {
+      this.setParam("fallback_image_url", fallbackImageUrl);
+      return this;
+    }
 
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
@@ -4188,6 +4440,8 @@ public class ProductCatalog extends APINode {
       VALUE_COMMERCE("commerce"),
       @SerializedName("destinations")
       VALUE_DESTINATIONS("destinations"),
+      @SerializedName("flights")
+      VALUE_FLIGHTS("flights"),
       @SerializedName("hotels")
       VALUE_HOTELS("hotels"),
       NULL(null);
@@ -4246,6 +4500,25 @@ public class ProductCatalog extends APINode {
       private String value;
 
       private EnumContentCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumOriginalProjectionType {
+      @SerializedName("equirectangular")
+      VALUE_EQUIRECTANGULAR("equirectangular"),
+      @SerializedName("cubemap")
+      VALUE_CUBEMAP("cubemap"),
+      NULL(null);
+
+      private String value;
+
+      private EnumOriginalProjectionType(String value) {
         this.value = value;
       }
 
@@ -4332,6 +4605,9 @@ public class ProductCatalog extends APINode {
 
   public ProductCatalog copyFrom(ProductCatalog instance) {
     this.mBusiness = instance.mBusiness;
+    this.mDaDisplaySettings = instance.mDaDisplaySettings;
+    this.mDefaultImageUrl = instance.mDefaultImageUrl;
+    this.mFallbackImageUrl = instance.mFallbackImageUrl;
     this.mFeedCount = instance.mFeedCount;
     this.mId = instance.mId;
     this.mImagePaddingLandscape = instance.mImagePaddingLandscape;

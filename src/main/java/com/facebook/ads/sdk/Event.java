@@ -56,7 +56,7 @@ public class Event extends APINode {
   @SerializedName("can_guests_invite")
   private Boolean mCanGuestsInvite = null;
   @SerializedName("category")
-  private EnumCategory mCategory = null;
+  private String mCategory = null;
   @SerializedName("cover")
   private Object mCover = null;
   @SerializedName("declined_count")
@@ -296,7 +296,7 @@ public class Event extends APINode {
     return mCanGuestsInvite;
   }
 
-  public EnumCategory getFieldCategory() {
+  public String getFieldCategory() {
     return mCategory;
   }
 
@@ -848,71 +848,6 @@ public class Event extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-  }
-
-  public static enum EnumCategory {
-      @SerializedName("ART_EVENT")
-      VALUE_ART_EVENT("ART_EVENT"),
-      @SerializedName("BOOK_EVENT")
-      VALUE_BOOK_EVENT("BOOK_EVENT"),
-      @SerializedName("MOVIE_EVENT")
-      VALUE_MOVIE_EVENT("MOVIE_EVENT"),
-      @SerializedName("FUNDRAISER")
-      VALUE_FUNDRAISER("FUNDRAISER"),
-      @SerializedName("VOLUNTEERING")
-      VALUE_VOLUNTEERING("VOLUNTEERING"),
-      @SerializedName("FAMILY_EVENT")
-      VALUE_FAMILY_EVENT("FAMILY_EVENT"),
-      @SerializedName("FESTIVAL_EVENT")
-      VALUE_FESTIVAL_EVENT("FESTIVAL_EVENT"),
-      @SerializedName("NEIGHBORHOOD")
-      VALUE_NEIGHBORHOOD("NEIGHBORHOOD"),
-      @SerializedName("RELIGIOUS_EVENT")
-      VALUE_RELIGIOUS_EVENT("RELIGIOUS_EVENT"),
-      @SerializedName("SHOPPING")
-      VALUE_SHOPPING("SHOPPING"),
-      @SerializedName("COMEDY_EVENT")
-      VALUE_COMEDY_EVENT("COMEDY_EVENT"),
-      @SerializedName("MUSIC_EVENT")
-      VALUE_MUSIC_EVENT("MUSIC_EVENT"),
-      @SerializedName("DANCE_EVENT")
-      VALUE_DANCE_EVENT("DANCE_EVENT"),
-      @SerializedName("NIGHTLIFE")
-      VALUE_NIGHTLIFE("NIGHTLIFE"),
-      @SerializedName("THEATER_EVENT")
-      VALUE_THEATER_EVENT("THEATER_EVENT"),
-      @SerializedName("DINING_EVENT")
-      VALUE_DINING_EVENT("DINING_EVENT"),
-      @SerializedName("FOOD_TASTING")
-      VALUE_FOOD_TASTING("FOOD_TASTING"),
-      @SerializedName("CONFERENCE_EVENT")
-      VALUE_CONFERENCE_EVENT("CONFERENCE_EVENT"),
-      @SerializedName("MEETUP")
-      VALUE_MEETUP("MEETUP"),
-      @SerializedName("CLASS_EVENT")
-      VALUE_CLASS_EVENT("CLASS_EVENT"),
-      @SerializedName("LECTURE")
-      VALUE_LECTURE("LECTURE"),
-      @SerializedName("WORKSHOP")
-      VALUE_WORKSHOP("WORKSHOP"),
-      @SerializedName("FITNESS")
-      VALUE_FITNESS("FITNESS"),
-      @SerializedName("SPORTS_EVENT")
-      VALUE_SPORTS_EVENT("SPORTS_EVENT"),
-      @SerializedName("OTHER")
-      VALUE_OTHER("OTHER"),
-      NULL(null);
-
-      private String value;
-
-      private EnumCategory(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
   public static enum EnumType {

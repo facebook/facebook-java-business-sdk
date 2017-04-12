@@ -55,6 +55,10 @@ public class TargetingGeoLocationCustomLocation extends APINode {
   private String mAddressString = null;
   @SerializedName("country")
   private String mCountry = null;
+  @SerializedName("country_group")
+  private String mCountryGroup = null;
+  @SerializedName("custom_type")
+  private String mCustomType = null;
   @SerializedName("distance_unit")
   private String mDistanceUnit = null;
   @SerializedName("key")
@@ -63,6 +67,10 @@ public class TargetingGeoLocationCustomLocation extends APINode {
   private Double mLatitude = null;
   @SerializedName("longitude")
   private Double mLongitude = null;
+  @SerializedName("max_population")
+  private Long mMaxPopulation = null;
+  @SerializedName("min_population")
+  private Long mMinPopulation = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("primary_city_id")
@@ -230,6 +238,24 @@ public class TargetingGeoLocationCustomLocation extends APINode {
     return this;
   }
 
+  public String getFieldCountryGroup() {
+    return mCountryGroup;
+  }
+
+  public TargetingGeoLocationCustomLocation setFieldCountryGroup(String value) {
+    this.mCountryGroup = value;
+    return this;
+  }
+
+  public String getFieldCustomType() {
+    return mCustomType;
+  }
+
+  public TargetingGeoLocationCustomLocation setFieldCustomType(String value) {
+    this.mCustomType = value;
+    return this;
+  }
+
   public String getFieldDistanceUnit() {
     return mDistanceUnit;
   }
@@ -263,6 +289,24 @@ public class TargetingGeoLocationCustomLocation extends APINode {
 
   public TargetingGeoLocationCustomLocation setFieldLongitude(Double value) {
     this.mLongitude = value;
+    return this;
+  }
+
+  public Long getFieldMaxPopulation() {
+    return mMaxPopulation;
+  }
+
+  public TargetingGeoLocationCustomLocation setFieldMaxPopulation(Long value) {
+    this.mMaxPopulation = value;
+    return this;
+  }
+
+  public Long getFieldMinPopulation() {
+    return mMinPopulation;
+  }
+
+  public TargetingGeoLocationCustomLocation setFieldMinPopulation(Long value) {
+    this.mMinPopulation = value;
     return this;
   }
 
@@ -321,10 +365,14 @@ public class TargetingGeoLocationCustomLocation extends APINode {
   public TargetingGeoLocationCustomLocation copyFrom(TargetingGeoLocationCustomLocation instance) {
     this.mAddressString = instance.mAddressString;
     this.mCountry = instance.mCountry;
+    this.mCountryGroup = instance.mCountryGroup;
+    this.mCustomType = instance.mCustomType;
     this.mDistanceUnit = instance.mDistanceUnit;
     this.mKey = instance.mKey;
     this.mLatitude = instance.mLatitude;
     this.mLongitude = instance.mLongitude;
+    this.mMaxPopulation = instance.mMaxPopulation;
+    this.mMinPopulation = instance.mMinPopulation;
     this.mName = instance.mName;
     this.mPrimaryCityId = instance.mPrimaryCityId;
     this.mRadius = instance.mRadius;

@@ -53,6 +53,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdsPixelStats extends APINode {
   @SerializedName("count")
   private Long mCount = null;
+  @SerializedName("diagnostics_hourly_last_timestamp")
+  private String mDiagnosticsHourlyLastTimestamp = null;
   @SerializedName("value")
   private String mValue = null;
   protected static Gson gson = null;
@@ -205,6 +207,15 @@ public class AdsPixelStats extends APINode {
     return this;
   }
 
+  public String getFieldDiagnosticsHourlyLastTimestamp() {
+    return mDiagnosticsHourlyLastTimestamp;
+  }
+
+  public AdsPixelStats setFieldDiagnosticsHourlyLastTimestamp(String value) {
+    this.mDiagnosticsHourlyLastTimestamp = value;
+    return this;
+  }
+
   public String getFieldValue() {
     return mValue;
   }
@@ -232,6 +243,7 @@ public class AdsPixelStats extends APINode {
 
   public AdsPixelStats copyFrom(AdsPixelStats instance) {
     this.mCount = instance.mCount;
+    this.mDiagnosticsHourlyLastTimestamp = instance.mDiagnosticsHourlyLastTimestamp;
     this.mValue = instance.mValue;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

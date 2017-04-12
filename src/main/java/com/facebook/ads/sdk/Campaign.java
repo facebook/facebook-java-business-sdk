@@ -55,10 +55,14 @@ public class Campaign extends APINode {
   private String mAccountId = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
+  @SerializedName("brand_lift_studies")
+  private List<AdStudy> mBrandLiftStudies = null;
   @SerializedName("budget_rebalance_flag")
   private Boolean mBudgetRebalanceFlag = null;
   @SerializedName("buying_type")
   private String mBuyingType = null;
+  @SerializedName("can_create_brand_lift_study")
+  private Boolean mCanCreateBrandLiftStudy = null;
   @SerializedName("can_use_spend_cap")
   private Boolean mCanUseSpendCap = null;
   @SerializedName("configured_status")
@@ -310,12 +314,20 @@ public class Campaign extends APINode {
     return mAdlabels;
   }
 
+  public List<AdStudy> getFieldBrandLiftStudies() {
+    return mBrandLiftStudies;
+  }
+
   public Boolean getFieldBudgetRebalanceFlag() {
     return mBudgetRebalanceFlag;
   }
 
   public String getFieldBuyingType() {
     return mBuyingType;
+  }
+
+  public Boolean getFieldCanCreateBrandLiftStudy() {
+    return mCanCreateBrandLiftStudy;
   }
 
   public Boolean getFieldCanUseSpendCap() {
@@ -952,6 +964,7 @@ public class Campaign extends APINode {
       "time_based_ad_rotation_intervals",
       "updated_time",
       "use_new_app_click",
+      "view_through_attribution_window_days",
     };
 
     @Override
@@ -1342,6 +1355,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestUseNewAppClickField (boolean value) {
       this.requestField("use_new_app_click", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestViewThroughAttributionWindowDaysField () {
+      return this.requestViewThroughAttributionWindowDaysField(true);
+    }
+    public APIRequestGetAdSets requestViewThroughAttributionWindowDaysField (boolean value) {
+      this.requestField("view_through_attribution_window_days", value);
       return this;
     }
   }
@@ -1967,8 +1987,10 @@ public class Campaign extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "adlabels",
+      "brand_lift_studies",
       "budget_rebalance_flag",
       "buying_type",
+      "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
       "created_time",
@@ -2067,6 +2089,13 @@ public class Campaign extends APINode {
       this.requestField("adlabels", value);
       return this;
     }
+    public APIRequestGet requestBrandLiftStudiesField () {
+      return this.requestBrandLiftStudiesField(true);
+    }
+    public APIRequestGet requestBrandLiftStudiesField (boolean value) {
+      this.requestField("brand_lift_studies", value);
+      return this;
+    }
     public APIRequestGet requestBudgetRebalanceFlagField () {
       return this.requestBudgetRebalanceFlagField(true);
     }
@@ -2079,6 +2108,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestBuyingTypeField (boolean value) {
       this.requestField("buying_type", value);
+      return this;
+    }
+    public APIRequestGet requestCanCreateBrandLiftStudyField () {
+      return this.requestCanCreateBrandLiftStudyField(true);
+    }
+    public APIRequestGet requestCanCreateBrandLiftStudyField (boolean value) {
+      this.requestField("can_create_brand_lift_study", value);
       return this;
     }
     public APIRequestGet requestCanUseSpendCapField () {
@@ -2501,6 +2537,8 @@ public class Campaign extends APINode {
   }
 
   public static enum EnumObjective {
+      @SerializedName("APP_INSTALLS")
+      VALUE_APP_INSTALLS("APP_INSTALLS"),
       @SerializedName("BRAND_AWARENESS")
       VALUE_BRAND_AWARENESS("BRAND_AWARENESS"),
       @SerializedName("CANVAS_APP_ENGAGEMENT")
@@ -2511,8 +2549,6 @@ public class Campaign extends APINode {
       VALUE_CONVERSIONS("CONVERSIONS"),
       @SerializedName("EVENT_RESPONSES")
       VALUE_EVENT_RESPONSES("EVENT_RESPONSES"),
-      @SerializedName("EXTERNAL")
-      VALUE_EXTERNAL("EXTERNAL"),
       @SerializedName("LEAD_GENERATION")
       VALUE_LEAD_GENERATION("LEAD_GENERATION"),
       @SerializedName("LINK_CLICKS")
@@ -2585,8 +2621,10 @@ public class Campaign extends APINode {
   public Campaign copyFrom(Campaign instance) {
     this.mAccountId = instance.mAccountId;
     this.mAdlabels = instance.mAdlabels;
+    this.mBrandLiftStudies = instance.mBrandLiftStudies;
     this.mBudgetRebalanceFlag = instance.mBudgetRebalanceFlag;
     this.mBuyingType = instance.mBuyingType;
+    this.mCanCreateBrandLiftStudy = instance.mCanCreateBrandLiftStudy;
     this.mCanUseSpendCap = instance.mCanUseSpendCap;
     this.mConfiguredStatus = instance.mConfiguredStatus;
     this.mCreatedTime = instance.mCreatedTime;

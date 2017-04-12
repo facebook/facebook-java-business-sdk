@@ -341,6 +341,9 @@ public class Ad extends APINode {
   }
 
   public AdSet getFieldAdset() {
+    if (mAdset != null) {
+      mAdset.context = getContext();
+    }
     return mAdset;
   }
 
@@ -361,6 +364,9 @@ public class Ad extends APINode {
   }
 
   public Campaign getFieldCampaign() {
+    if (mCampaign != null) {
+      mCampaign.context = getContext();
+    }
     return mCampaign;
   }
 
@@ -432,6 +438,8 @@ public class Ad extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "account_id",
+      "actor_id",
       "adlabels",
       "applink_treatment",
       "body",
@@ -457,10 +465,12 @@ public class Ad extends APINode {
       "product_set_id",
       "run_status",
       "template_url",
+      "template_url_spec",
       "thumbnail_url",
       "title",
       "url_tags",
       "use_page_actor_override",
+      "video_id",
     };
 
     @Override
@@ -532,6 +542,20 @@ public class Ad extends APINode {
       return this;
     }
 
+    public APIRequestGetAdCreatives requestAccountIdField () {
+      return this.requestAccountIdField(true);
+    }
+    public APIRequestGetAdCreatives requestAccountIdField (boolean value) {
+      this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestActorIdField () {
+      return this.requestActorIdField(true);
+    }
+    public APIRequestGetAdCreatives requestActorIdField (boolean value) {
+      this.requestField("actor_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestAdlabelsField () {
       return this.requestAdlabelsField(true);
     }
@@ -707,6 +731,13 @@ public class Ad extends APINode {
       this.requestField("template_url", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestTemplateUrlSpecField () {
+      return this.requestTemplateUrlSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestTemplateUrlSpecField (boolean value) {
+      this.requestField("template_url_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestThumbnailUrlField () {
       return this.requestThumbnailUrlField(true);
     }
@@ -733,6 +764,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestUsePageActorOverrideField (boolean value) {
       this.requestField("use_page_actor_override", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestVideoIdField () {
+      return this.requestVideoIdField(true);
+    }
+    public APIRequestGetAdCreatives requestVideoIdField (boolean value) {
+      this.requestField("video_id", value);
       return this;
     }
   }
@@ -1743,6 +1781,7 @@ public class Ad extends APINode {
       "id",
       "is_organic",
       "post",
+      "retailer_item_id",
     };
 
     @Override
@@ -1905,6 +1944,13 @@ public class Ad extends APINode {
       this.requestField("post", value);
       return this;
     }
+    public APIRequestGetLeads requestRetailerItemIdField () {
+      return this.requestRetailerItemIdField(true);
+    }
+    public APIRequestGetLeads requestRetailerItemIdField (boolean value) {
+      this.requestField("retailer_item_id", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetPreviews extends APIRequest<AdPreview> {
@@ -1916,13 +1962,13 @@ public class Ad extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_format",
-      "dynamic_creative_spec",
+      "end_date",
       "height",
-      "interactive",
       "locale",
       "place_page_id",
       "post",
       "product_item_ids",
+      "start_date",
       "width",
     };
 
@@ -1972,12 +2018,8 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetPreviews setDynamicCreativeSpec (Object dynamicCreativeSpec) {
-      this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
-      return this;
-    }
-    public APIRequestGetPreviews setDynamicCreativeSpec (String dynamicCreativeSpec) {
-      this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
+    public APIRequestGetPreviews setEndDate (String endDate) {
+      this.setParam("end_date", endDate);
       return this;
     }
 
@@ -1987,15 +2029,6 @@ public class Ad extends APINode {
     }
     public APIRequestGetPreviews setHeight (String height) {
       this.setParam("height", height);
-      return this;
-    }
-
-    public APIRequestGetPreviews setInteractive (Boolean interactive) {
-      this.setParam("interactive", interactive);
-      return this;
-    }
-    public APIRequestGetPreviews setInteractive (String interactive) {
-      this.setParam("interactive", interactive);
       return this;
     }
 
@@ -2028,6 +2061,11 @@ public class Ad extends APINode {
     }
     public APIRequestGetPreviews setProductItemIds (String productItemIds) {
       this.setParam("product_item_ids", productItemIds);
+      return this;
+    }
+
+    public APIRequestGetPreviews setStartDate (String startDate) {
+      this.setParam("start_date", startDate);
       return this;
     }
 

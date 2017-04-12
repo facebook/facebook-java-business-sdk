@@ -63,6 +63,10 @@ public class Transaction extends APINode {
   private Long mBillingStartTime = null;
   @SerializedName("charge_type")
   private String mChargeType = null;
+  @SerializedName("checkout_campaign_group_id")
+  private String mCheckoutCampaignGroupId = null;
+  @SerializedName("credential_id")
+  private String mCredentialId = null;
   @SerializedName("fatura_id")
   private Long mFaturaId = null;
   @SerializedName("id")
@@ -279,6 +283,24 @@ public class Transaction extends APINode {
     return this;
   }
 
+  public String getFieldCheckoutCampaignGroupId() {
+    return mCheckoutCampaignGroupId;
+  }
+
+  public Transaction setFieldCheckoutCampaignGroupId(String value) {
+    this.mCheckoutCampaignGroupId = value;
+    return this;
+  }
+
+  public String getFieldCredentialId() {
+    return mCredentialId;
+  }
+
+  public Transaction setFieldCredentialId(String value) {
+    this.mCredentialId = value;
+    return this;
+  }
+
   public Long getFieldFaturaId() {
     return mFaturaId;
   }
@@ -398,6 +420,8 @@ public class Transaction extends APINode {
     this.mBillingReason = instance.mBillingReason;
     this.mBillingStartTime = instance.mBillingStartTime;
     this.mChargeType = instance.mChargeType;
+    this.mCheckoutCampaignGroupId = instance.mCheckoutCampaignGroupId;
+    this.mCredentialId = instance.mCredentialId;
     this.mFaturaId = instance.mFaturaId;
     this.mId = instance.mId;
     this.mPaymentOption = instance.mPaymentOption;

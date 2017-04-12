@@ -65,6 +65,8 @@ public class CustomAudience extends APINode {
   private AdsPixel mExternalEventSource = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_value_based")
+  private Boolean mIsValueBased = null;
   @SerializedName("lookalike_audience_ids")
   private List<String> mLookalikeAudienceIds = null;
   @SerializedName("lookalike_spec")
@@ -347,6 +349,10 @@ public class CustomAudience extends APINode {
     return mId;
   }
 
+  public Boolean getFieldIsValueBased() {
+    return mIsValueBased;
+  }
+
   public List<String> getFieldLookalikeAudienceIds() {
     return mLookalikeAudienceIds;
   }
@@ -546,6 +552,8 @@ public class CustomAudience extends APINode {
       "owner",
       "partner",
       "rf_spec",
+      "salesforce_invoice_group_id",
+      "show_checkout_experience",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -902,6 +910,20 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestRfSpecField (boolean value) {
       this.requestField("rf_spec", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestSalesforceInvoiceGroupIdField () {
+      return this.requestSalesforceInvoiceGroupIdField(true);
+    }
+    public APIRequestGetAdAccounts requestSalesforceInvoiceGroupIdField (boolean value) {
+      this.requestField("salesforce_invoice_group_id", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestShowCheckoutExperienceField () {
+      return this.requestShowCheckoutExperienceField(true);
+    }
+    public APIRequestGetAdAccounts requestShowCheckoutExperienceField (boolean value) {
+      this.requestField("show_checkout_experience", value);
       return this;
     }
     public APIRequestGetAdAccounts requestSpendCapField () {
@@ -1947,6 +1969,7 @@ public class CustomAudience extends APINode {
       "description",
       "external_event_source",
       "id",
+      "is_value_based",
       "lookalike_audience_ids",
       "lookalike_spec",
       "name",
@@ -2078,6 +2101,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIsValueBasedField () {
+      return this.requestIsValueBasedField(true);
+    }
+    public APIRequestGet requestIsValueBasedField (boolean value) {
+      this.requestField("is_value_based", value);
       return this;
     }
     public APIRequestGet requestLookalikeAudienceIdsField () {
@@ -2330,6 +2360,8 @@ public class CustomAudience extends APINode {
   }
 
   public static enum EnumClaimObjective {
+      @SerializedName("HOME_LISTING")
+      VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("PRODUCT")
       VALUE_PRODUCT("PRODUCT"),
       @SerializedName("TRAVEL")
@@ -2355,6 +2387,8 @@ public class CustomAudience extends APINode {
       VALUE_FLIGHT("FLIGHT"),
       @SerializedName("HOTEL")
       VALUE_HOTEL("HOTEL"),
+      @SerializedName("HOME_LISTING")
+      VALUE_HOME_LISTING("HOME_LISTING"),
       NULL(null);
 
       private String value;
@@ -2425,6 +2459,8 @@ public class CustomAudience extends APINode {
       VALUE_DESCRIPTION("description"),
       @SerializedName("external_event_source")
       VALUE_EXTERNAL_EVENT_SOURCE("external_event_source"),
+      @SerializedName("is_value_based")
+      VALUE_IS_VALUE_BASED("is_value_based"),
       @SerializedName("lookalike_audience_ids")
       VALUE_LOOKALIKE_AUDIENCE_IDS("lookalike_audience_ids"),
       @SerializedName("lookalike_spec")
@@ -2487,6 +2523,7 @@ public class CustomAudience extends APINode {
     this.mDescription = instance.mDescription;
     this.mExternalEventSource = instance.mExternalEventSource;
     this.mId = instance.mId;
+    this.mIsValueBased = instance.mIsValueBased;
     this.mLookalikeAudienceIds = instance.mLookalikeAudienceIds;
     this.mLookalikeSpec = instance.mLookalikeSpec;
     this.mName = instance.mName;

@@ -131,9 +131,11 @@ public class AdSet extends APINode {
   private String mUpdatedTime = null;
   @SerializedName("use_new_app_click")
   private Boolean mUseNewAppClick = null;
+  @SerializedName("view_through_attribution_window_days")
+  private Long mViewThroughAttributionWindowDays = null;
   protected static Gson gson = null;
 
-  AdSet() {
+  public AdSet() {
   }
 
   public AdSet(Long id, APIContext context) {
@@ -364,160 +366,402 @@ public class AdSet extends APINode {
     return mAccountId;
   }
 
+  public AdSet setFieldAccountId(String value) {
+    this.mAccountId = value;
+    return this;
+  }
+
   public List<AdLabel> getFieldAdlabels() {
     return mAdlabels;
   }
 
+  public AdSet setFieldAdlabels(List<AdLabel> value) {
+    this.mAdlabels = value;
+    return this;
+  }
+
+  public AdSet setFieldAdlabels(String value) {
+    Type type = new TypeToken<List<AdLabel>>(){}.getType();
+    this.mAdlabels = AdLabel.getGson().fromJson(value, type);
+    return this;
+  }
   public List<DayPart> getFieldAdsetSchedule() {
     return mAdsetSchedule;
   }
 
+  public AdSet setFieldAdsetSchedule(List<DayPart> value) {
+    this.mAdsetSchedule = value;
+    return this;
+  }
+
+  public AdSet setFieldAdsetSchedule(String value) {
+    Type type = new TypeToken<List<DayPart>>(){}.getType();
+    this.mAdsetSchedule = DayPart.getGson().fromJson(value, type);
+    return this;
+  }
   public Long getFieldAttributionWindowDays() {
     return mAttributionWindowDays;
+  }
+
+  public AdSet setFieldAttributionWindowDays(Long value) {
+    this.mAttributionWindowDays = value;
+    return this;
   }
 
   public Long getFieldBidAmount() {
     return mBidAmount;
   }
 
+  public AdSet setFieldBidAmount(Long value) {
+    this.mBidAmount = value;
+    return this;
+  }
+
   public Map<String, Long> getFieldBidInfo() {
     return mBidInfo;
+  }
+
+  public AdSet setFieldBidInfo(Map<String, Long> value) {
+    this.mBidInfo = value;
+    return this;
   }
 
   public EnumBillingEvent getFieldBillingEvent() {
     return mBillingEvent;
   }
 
+  public AdSet setFieldBillingEvent(EnumBillingEvent value) {
+    this.mBillingEvent = value;
+    return this;
+  }
+
   public String getFieldBudgetRemaining() {
     return mBudgetRemaining;
   }
 
+  public AdSet setFieldBudgetRemaining(String value) {
+    this.mBudgetRemaining = value;
+    return this;
+  }
+
   public Campaign getFieldCampaign() {
+    if (mCampaign != null) {
+      mCampaign.context = getContext();
+    }
     return mCampaign;
   }
 
+  public AdSet setFieldCampaign(Campaign value) {
+    this.mCampaign = value;
+    return this;
+  }
+
+  public AdSet setFieldCampaign(String value) {
+    Type type = new TypeToken<Campaign>(){}.getType();
+    this.mCampaign = Campaign.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldCampaignId() {
     return mCampaignId;
+  }
+
+  public AdSet setFieldCampaignId(String value) {
+    this.mCampaignId = value;
+    return this;
   }
 
   public EnumConfiguredStatus getFieldConfiguredStatus() {
     return mConfiguredStatus;
   }
 
+  public AdSet setFieldConfiguredStatus(EnumConfiguredStatus value) {
+    this.mConfiguredStatus = value;
+    return this;
+  }
+
   public String getFieldCreatedTime() {
     return mCreatedTime;
+  }
+
+  public AdSet setFieldCreatedTime(String value) {
+    this.mCreatedTime = value;
+    return this;
   }
 
   public List<String> getFieldCreativeSequence() {
     return mCreativeSequence;
   }
 
+  public AdSet setFieldCreativeSequence(List<String> value) {
+    this.mCreativeSequence = value;
+    return this;
+  }
+
   public String getFieldDailyBudget() {
     return mDailyBudget;
+  }
+
+  public AdSet setFieldDailyBudget(String value) {
+    this.mDailyBudget = value;
+    return this;
   }
 
   public EnumEffectiveStatus getFieldEffectiveStatus() {
     return mEffectiveStatus;
   }
 
+  public AdSet setFieldEffectiveStatus(EnumEffectiveStatus value) {
+    this.mEffectiveStatus = value;
+    return this;
+  }
+
   public String getFieldEndTime() {
     return mEndTime;
+  }
+
+  public AdSet setFieldEndTime(String value) {
+    this.mEndTime = value;
+    return this;
   }
 
   public Long getFieldFrequencyCap() {
     return mFrequencyCap;
   }
 
+  public AdSet setFieldFrequencyCap(Long value) {
+    this.mFrequencyCap = value;
+    return this;
+  }
+
   public Long getFieldFrequencyCapResetPeriod() {
     return mFrequencyCapResetPeriod;
+  }
+
+  public AdSet setFieldFrequencyCapResetPeriod(Long value) {
+    this.mFrequencyCapResetPeriod = value;
+    return this;
   }
 
   public List<Object> getFieldFrequencyControlSpecs() {
     return mFrequencyControlSpecs;
   }
 
+  public AdSet setFieldFrequencyControlSpecs(List<Object> value) {
+    this.mFrequencyControlSpecs = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
+  }
+
+  public AdSet setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public Boolean getFieldIsAutobid() {
     return mIsAutobid;
   }
 
+  public AdSet setFieldIsAutobid(Boolean value) {
+    this.mIsAutobid = value;
+    return this;
+  }
+
   public Boolean getFieldIsAveragePricePacing() {
     return mIsAveragePricePacing;
+  }
+
+  public AdSet setFieldIsAveragePricePacing(Boolean value) {
+    this.mIsAveragePricePacing = value;
+    return this;
   }
 
   public String getFieldLifetimeBudget() {
     return mLifetimeBudget;
   }
 
+  public AdSet setFieldLifetimeBudget(String value) {
+    this.mLifetimeBudget = value;
+    return this;
+  }
+
   public Long getFieldLifetimeFrequencyCap() {
     return mLifetimeFrequencyCap;
+  }
+
+  public AdSet setFieldLifetimeFrequencyCap(Long value) {
+    this.mLifetimeFrequencyCap = value;
+    return this;
   }
 
   public Long getFieldLifetimeImps() {
     return mLifetimeImps;
   }
 
+  public AdSet setFieldLifetimeImps(Long value) {
+    this.mLifetimeImps = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public AdSet setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public EnumOptimizationGoal getFieldOptimizationGoal() {
     return mOptimizationGoal;
   }
 
+  public AdSet setFieldOptimizationGoal(EnumOptimizationGoal value) {
+    this.mOptimizationGoal = value;
+    return this;
+  }
+
   public List<String> getFieldPacingType() {
     return mPacingType;
+  }
+
+  public AdSet setFieldPacingType(List<String> value) {
+    this.mPacingType = value;
+    return this;
   }
 
   public AdPromotedObject getFieldPromotedObject() {
     return mPromotedObject;
   }
 
+  public AdSet setFieldPromotedObject(AdPromotedObject value) {
+    this.mPromotedObject = value;
+    return this;
+  }
+
+  public AdSet setFieldPromotedObject(String value) {
+    Type type = new TypeToken<AdPromotedObject>(){}.getType();
+    this.mPromotedObject = AdPromotedObject.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdRecommendation> getFieldRecommendations() {
     return mRecommendations;
   }
 
+  public AdSet setFieldRecommendations(List<AdRecommendation> value) {
+    this.mRecommendations = value;
+    return this;
+  }
+
+  public AdSet setFieldRecommendations(String value) {
+    Type type = new TypeToken<List<AdRecommendation>>(){}.getType();
+    this.mRecommendations = AdRecommendation.getGson().fromJson(value, type);
+    return this;
+  }
   public Boolean getFieldRecurringBudgetSemantics() {
     return mRecurringBudgetSemantics;
+  }
+
+  public AdSet setFieldRecurringBudgetSemantics(Boolean value) {
+    this.mRecurringBudgetSemantics = value;
+    return this;
   }
 
   public String getFieldRfPredictionId() {
     return mRfPredictionId;
   }
 
+  public AdSet setFieldRfPredictionId(String value) {
+    this.mRfPredictionId = value;
+    return this;
+  }
+
   public Boolean getFieldRtbFlag() {
     return mRtbFlag;
+  }
+
+  public AdSet setFieldRtbFlag(Boolean value) {
+    this.mRtbFlag = value;
+    return this;
   }
 
   public String getFieldStartTime() {
     return mStartTime;
   }
 
+  public AdSet setFieldStartTime(String value) {
+    this.mStartTime = value;
+    return this;
+  }
+
   public EnumStatus getFieldStatus() {
     return mStatus;
+  }
+
+  public AdSet setFieldStatus(EnumStatus value) {
+    this.mStatus = value;
+    return this;
   }
 
   public Targeting getFieldTargeting() {
     return mTargeting;
   }
 
+  public AdSet setFieldTargeting(Targeting value) {
+    this.mTargeting = value;
+    return this;
+  }
+
+  public AdSet setFieldTargeting(String value) {
+    Type type = new TypeToken<Targeting>(){}.getType();
+    this.mTargeting = Targeting.getGson().fromJson(value, type);
+    return this;
+  }
   public List<List<Long>> getFieldTimeBasedAdRotationIdBlocks() {
     return mTimeBasedAdRotationIdBlocks;
+  }
+
+  public AdSet setFieldTimeBasedAdRotationIdBlocks(List<List<Long>> value) {
+    this.mTimeBasedAdRotationIdBlocks = value;
+    return this;
   }
 
   public List<Long> getFieldTimeBasedAdRotationIntervals() {
     return mTimeBasedAdRotationIntervals;
   }
 
+  public AdSet setFieldTimeBasedAdRotationIntervals(List<Long> value) {
+    this.mTimeBasedAdRotationIntervals = value;
+    return this;
+  }
+
   public String getFieldUpdatedTime() {
     return mUpdatedTime;
   }
 
+  public AdSet setFieldUpdatedTime(String value) {
+    this.mUpdatedTime = value;
+    return this;
+  }
+
   public Boolean getFieldUseNewAppClick() {
     return mUseNewAppClick;
+  }
+
+  public AdSet setFieldUseNewAppClick(Boolean value) {
+    this.mUseNewAppClick = value;
+    return this;
+  }
+
+  public Long getFieldViewThroughAttributionWindowDays() {
+    return mViewThroughAttributionWindowDays;
+  }
+
+  public AdSet setFieldViewThroughAttributionWindowDays(Long value) {
+    this.mViewThroughAttributionWindowDays = value;
+    return this;
   }
 
 
@@ -743,6 +987,8 @@ public class AdSet extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "account_id",
+      "actor_id",
       "adlabels",
       "applink_treatment",
       "body",
@@ -768,10 +1014,12 @@ public class AdSet extends APINode {
       "product_set_id",
       "run_status",
       "template_url",
+      "template_url_spec",
       "thumbnail_url",
       "title",
       "url_tags",
       "use_page_actor_override",
+      "video_id",
     };
 
     @Override
@@ -843,6 +1091,20 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestGetAdCreatives requestAccountIdField () {
+      return this.requestAccountIdField(true);
+    }
+    public APIRequestGetAdCreatives requestAccountIdField (boolean value) {
+      this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestActorIdField () {
+      return this.requestActorIdField(true);
+    }
+    public APIRequestGetAdCreatives requestActorIdField (boolean value) {
+      this.requestField("actor_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestAdlabelsField () {
       return this.requestAdlabelsField(true);
     }
@@ -1018,6 +1280,13 @@ public class AdSet extends APINode {
       this.requestField("template_url", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestTemplateUrlSpecField () {
+      return this.requestTemplateUrlSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestTemplateUrlSpecField (boolean value) {
+      this.requestField("template_url_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestThumbnailUrlField () {
       return this.requestThumbnailUrlField(true);
     }
@@ -1044,6 +1313,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestUsePageActorOverrideField (boolean value) {
       this.requestField("use_page_actor_override", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestVideoIdField () {
+      return this.requestVideoIdField(true);
+    }
+    public APIRequestGetAdCreatives requestVideoIdField (boolean value) {
+      this.requestField("video_id", value);
       return this;
     }
   }
@@ -2497,6 +2773,7 @@ public class AdSet extends APINode {
       "time_based_ad_rotation_intervals",
       "updated_time",
       "use_new_app_click",
+      "view_through_attribution_window_days",
     };
 
     @Override
@@ -2848,6 +3125,13 @@ public class AdSet extends APINode {
       this.requestField("use_new_app_click", value);
       return this;
     }
+    public APIRequestGet requestViewThroughAttributionWindowDaysField () {
+      return this.requestViewThroughAttributionWindowDaysField(true);
+    }
+    public APIRequestGet requestViewThroughAttributionWindowDaysField (boolean value) {
+      this.requestField("view_through_attribution_window_days", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<AdSet> {
@@ -2884,6 +3168,7 @@ public class AdSet extends APINode {
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
+      "view_through_attribution_window_days",
     };
 
     public static final String[] FIELDS = {
@@ -3136,6 +3421,15 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setViewThroughAttributionWindowDays (Long viewThroughAttributionWindowDays) {
+      this.setParam("view_through_attribution_window_days", viewThroughAttributionWindowDays);
+      return this;
+    }
+    public APIRequestUpdate setViewThroughAttributionWindowDays (String viewThroughAttributionWindowDays) {
+      this.setParam("view_through_attribution_window_days", viewThroughAttributionWindowDays);
+      return this;
+    }
+
     public APIRequestUpdate requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -3191,6 +3485,8 @@ public class AdSet extends APINode {
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
+      @SerializedName("MRC_VIDEO_VIEWS")
+      VALUE_MRC_VIDEO_VIEWS("MRC_VIDEO_VIEWS"),
       NULL(null);
 
       private String value;
@@ -3274,8 +3570,6 @@ public class AdSet extends APINode {
       VALUE_CLICKS("CLICKS"),
       @SerializedName("ENGAGED_USERS")
       VALUE_ENGAGED_USERS("ENGAGED_USERS"),
-      @SerializedName("EXTERNAL")
-      VALUE_EXTERNAL("EXTERNAL"),
       @SerializedName("EVENT_RESPONSES")
       VALUE_EVENT_RESPONSES("EVENT_RESPONSES"),
       @SerializedName("IMPRESSIONS")
@@ -3300,6 +3594,8 @@ public class AdSet extends APINode {
       VALUE_SOCIAL_IMPRESSIONS("SOCIAL_IMPRESSIONS"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
+      @SerializedName("APP_DOWNLOADS")
+      VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
       NULL(null);
 
       private String value;
@@ -3475,6 +3771,7 @@ public class AdSet extends APINode {
     this.mTimeBasedAdRotationIntervals = instance.mTimeBasedAdRotationIntervals;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mUseNewAppClick = instance.mUseNewAppClick;
+    this.mViewThroughAttributionWindowDays = instance.mViewThroughAttributionWindowDays;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

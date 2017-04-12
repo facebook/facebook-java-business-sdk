@@ -61,6 +61,8 @@ public class LookalikeSpec extends APINode {
   private Double mRatio = null;
   @SerializedName("starting_ratio")
   private Double mStartingRatio = null;
+  @SerializedName("target_countries")
+  private List<String> mTargetCountries = null;
   @SerializedName("type")
   private String mType = null;
   protected static Gson gson = null;
@@ -249,6 +251,15 @@ public class LookalikeSpec extends APINode {
     return this;
   }
 
+  public List<String> getFieldTargetCountries() {
+    return mTargetCountries;
+  }
+
+  public LookalikeSpec setFieldTargetCountries(List<String> value) {
+    this.mTargetCountries = value;
+    return this;
+  }
+
   public String getFieldType() {
     return mType;
   }
@@ -280,6 +291,7 @@ public class LookalikeSpec extends APINode {
     this.mOrigin = instance.mOrigin;
     this.mRatio = instance.mRatio;
     this.mStartingRatio = instance.mStartingRatio;
+    this.mTargetCountries = instance.mTargetCountries;
     this.mType = instance.mType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

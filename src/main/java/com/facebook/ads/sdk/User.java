@@ -59,6 +59,8 @@ public class User extends APINode {
   private Object mAgeRange = null;
   @SerializedName("birthday")
   private String mBirthday = null;
+  @SerializedName("can_review_measurement_request")
+  private Boolean mCanReviewMeasurementRequest = null;
   @SerializedName("context")
   private Object mContext = null;
   @SerializedName("cover")
@@ -117,8 +119,6 @@ public class User extends APINode {
   private String mName = null;
   @SerializedName("name_format")
   private String mNameFormat = null;
-  @SerializedName("page_scoped_id")
-  private String mPageScopedId = null;
   @SerializedName("payment_pricepoints")
   private Object mPaymentPricepoints = null;
   @SerializedName("political")
@@ -384,6 +384,10 @@ public class User extends APINode {
     return mBirthday;
   }
 
+  public Boolean getFieldCanReviewMeasurementRequest() {
+    return mCanReviewMeasurementRequest;
+  }
+
   public Object getFieldContext() {
     return mContext;
   }
@@ -498,10 +502,6 @@ public class User extends APINode {
 
   public String getFieldNameFormat() {
     return mNameFormat;
-  }
-
-  public String getFieldPageScopedId() {
-    return mPageScopedId;
   }
 
   public Object getFieldPaymentPricepoints() {
@@ -759,6 +759,8 @@ public class User extends APINode {
       "owner",
       "partner",
       "rf_spec",
+      "salesforce_invoice_group_id",
+      "show_checkout_experience",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -1112,6 +1114,20 @@ public class User extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestSalesforceInvoiceGroupIdField () {
+      return this.requestSalesforceInvoiceGroupIdField(true);
+    }
+    public APIRequestGetAdAccounts requestSalesforceInvoiceGroupIdField (boolean value) {
+      this.requestField("salesforce_invoice_group_id", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestShowCheckoutExperienceField () {
+      return this.requestShowCheckoutExperienceField(true);
+    }
+    public APIRequestGetAdAccounts requestShowCheckoutExperienceField (boolean value) {
+      this.requestField("show_checkout_experience", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestSpendCapField () {
       return this.requestSpendCapField(true);
     }
@@ -1207,6 +1223,7 @@ public class User extends APINode {
       "locale",
       "messenger_welcome_message",
       "name",
+      "organic_leads_count",
       "page",
       "page_id",
       "privacy_policy_url",
@@ -1414,6 +1431,13 @@ public class User extends APINode {
     }
     public APIRequestGetLeadGenForms requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestOrganicLeadsCountField () {
+      return this.requestOrganicLeadsCountField(true);
+    }
+    public APIRequestGetLeadGenForms requestOrganicLeadsCountField (boolean value) {
+      this.requestField("organic_leads_count", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestPageField () {
@@ -2064,6 +2088,7 @@ public class User extends APINode {
       "admin_notes",
       "age_range",
       "birthday",
+      "can_review_measurement_request",
       "context",
       "cover",
       "currency",
@@ -2210,6 +2235,13 @@ public class User extends APINode {
     }
     public APIRequestGet requestBirthdayField (boolean value) {
       this.requestField("birthday", value);
+      return this;
+    }
+    public APIRequestGet requestCanReviewMeasurementRequestField () {
+      return this.requestCanReviewMeasurementRequestField(true);
+    }
+    public APIRequestGet requestCanReviewMeasurementRequestField (boolean value) {
+      this.requestField("can_review_measurement_request", value);
       return this;
     }
     public APIRequestGet requestContextField () {
@@ -2576,6 +2608,7 @@ public class User extends APINode {
     this.mAdminNotes = instance.mAdminNotes;
     this.mAgeRange = instance.mAgeRange;
     this.mBirthday = instance.mBirthday;
+    this.mCanReviewMeasurementRequest = instance.mCanReviewMeasurementRequest;
     this.mContext = instance.mContext;
     this.mCover = instance.mCover;
     this.mCurrency = instance.mCurrency;
@@ -2605,7 +2638,6 @@ public class User extends APINode {
     this.mMiddleName = instance.mMiddleName;
     this.mName = instance.mName;
     this.mNameFormat = instance.mNameFormat;
-    this.mPageScopedId = instance.mPageScopedId;
     this.mPaymentPricepoints = instance.mPaymentPricepoints;
     this.mPolitical = instance.mPolitical;
     this.mPublicKey = instance.mPublicKey;

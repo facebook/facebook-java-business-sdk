@@ -50,27 +50,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdsPixelStatsResult extends APINode {
-  @SerializedName("aggregation")
-  private EnumAggregation mAggregation = null;
-  @SerializedName("data")
-  private List<AdsPixelStats> mData = null;
-  @SerializedName("timestamp")
-  private String mTimestamp = null;
+public class ProductCatalogImageSettings extends APINode {
+  @SerializedName("carousel_ad")
+  private ProductCatalogImageSettingsOperation mCarouselAd = null;
+  @SerializedName("single_ad")
+  private ProductCatalogImageSettingsOperation mSingleAd = null;
   protected static Gson gson = null;
 
-  public AdsPixelStatsResult() {
+  public ProductCatalogImageSettings() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdsPixelStatsResult loadJSON(String json, APIContext context) {
-    AdsPixelStatsResult adsPixelStatsResult = getGson().fromJson(json, AdsPixelStatsResult.class);
+  public static ProductCatalogImageSettings loadJSON(String json, APIContext context) {
+    ProductCatalogImageSettings productCatalogImageSettings = getGson().fromJson(json, ProductCatalogImageSettings.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adsPixelStatsResult.toString());
+      JsonElement o2 = parser.parse(productCatalogImageSettings.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -80,13 +78,13 @@ public class AdsPixelStatsResult extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adsPixelStatsResult.context = context;
-    adsPixelStatsResult.rawValue = json;
-    return adsPixelStatsResult;
+    productCatalogImageSettings.context = context;
+    productCatalogImageSettings.rawValue = json;
+    return productCatalogImageSettings;
   }
 
-  public static APINodeList<AdsPixelStatsResult> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdsPixelStatsResult> adsPixelStatsResults = new APINodeList<AdsPixelStatsResult>(request, json);
+  public static APINodeList<ProductCatalogImageSettings> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<ProductCatalogImageSettings> productCatalogImageSettingss = new APINodeList<ProductCatalogImageSettings>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -97,9 +95,9 @@ public class AdsPixelStatsResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsPixelStatsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          productCatalogImageSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return adsPixelStatsResults;
+        return productCatalogImageSettingss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -107,13 +105,13 @@ public class AdsPixelStatsResult extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adsPixelStatsResults.setPaging(before, after);
+            productCatalogImageSettingss.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsPixelStatsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              productCatalogImageSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -124,23 +122,23 @@ public class AdsPixelStatsResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsPixelStatsResults.add(loadJSON(entry.getValue().toString(), context));
+                  productCatalogImageSettingss.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsPixelStatsResults.add(loadJSON(obj.toString(), context));
+              productCatalogImageSettingss.add(loadJSON(obj.toString(), context));
             }
           }
-          return adsPixelStatsResults;
+          return productCatalogImageSettingss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsPixelStatsResults.add(loadJSON(entry.getValue().toString(), context));
+              productCatalogImageSettingss.add(loadJSON(entry.getValue().toString(), context));
           }
-          return adsPixelStatsResults;
+          return productCatalogImageSettingss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -157,20 +155,20 @@ public class AdsPixelStatsResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsPixelStatsResults.add(loadJSON(value.toString(), context));
+              productCatalogImageSettingss.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adsPixelStatsResults;
+            return productCatalogImageSettingss;
           }
 
           // Sixth, check if it's pure JsonObject
-          adsPixelStatsResults.clear();
-          adsPixelStatsResults.add(loadJSON(json, context));
-          return adsPixelStatsResults;
+          productCatalogImageSettingss.clear();
+          productCatalogImageSettingss.add(loadJSON(json, context));
+          return productCatalogImageSettingss;
         }
       }
     } catch (Exception e) {
@@ -198,70 +196,35 @@ public class AdsPixelStatsResult extends APINode {
   }
 
 
-  public EnumAggregation getFieldAggregation() {
-    return mAggregation;
+  public ProductCatalogImageSettingsOperation getFieldCarouselAd() {
+    return mCarouselAd;
   }
 
-  public AdsPixelStatsResult setFieldAggregation(EnumAggregation value) {
-    this.mAggregation = value;
+  public ProductCatalogImageSettings setFieldCarouselAd(ProductCatalogImageSettingsOperation value) {
+    this.mCarouselAd = value;
     return this;
   }
 
-  public List<AdsPixelStats> getFieldData() {
-    return mData;
+  public ProductCatalogImageSettings setFieldCarouselAd(String value) {
+    Type type = new TypeToken<ProductCatalogImageSettingsOperation>(){}.getType();
+    this.mCarouselAd = ProductCatalogImageSettingsOperation.getGson().fromJson(value, type);
+    return this;
+  }
+  public ProductCatalogImageSettingsOperation getFieldSingleAd() {
+    return mSingleAd;
   }
 
-  public AdsPixelStatsResult setFieldData(List<AdsPixelStats> value) {
-    this.mData = value;
+  public ProductCatalogImageSettings setFieldSingleAd(ProductCatalogImageSettingsOperation value) {
+    this.mSingleAd = value;
     return this;
   }
 
-  public AdsPixelStatsResult setFieldData(String value) {
-    Type type = new TypeToken<List<AdsPixelStats>>(){}.getType();
-    this.mData = AdsPixelStats.getGson().fromJson(value, type);
-    return this;
-  }
-  public String getFieldTimestamp() {
-    return mTimestamp;
-  }
-
-  public AdsPixelStatsResult setFieldTimestamp(String value) {
-    this.mTimestamp = value;
+  public ProductCatalogImageSettings setFieldSingleAd(String value) {
+    Type type = new TypeToken<ProductCatalogImageSettingsOperation>(){}.getType();
+    this.mSingleAd = ProductCatalogImageSettingsOperation.getGson().fromJson(value, type);
     return this;
   }
 
-
-
-  public static enum EnumAggregation {
-      @SerializedName("browser_type")
-      VALUE_BROWSER_TYPE("browser_type"),
-      @SerializedName("custom_data_field")
-      VALUE_CUSTOM_DATA_FIELD("custom_data_field"),
-      @SerializedName("device_os")
-      VALUE_DEVICE_OS("device_os"),
-      @SerializedName("device_type")
-      VALUE_DEVICE_TYPE("device_type"),
-      @SerializedName("event")
-      VALUE_EVENT("event"),
-      @SerializedName("host")
-      VALUE_HOST("host"),
-      @SerializedName("pixel_fire")
-      VALUE_PIXEL_FIRE("pixel_fire"),
-      @SerializedName("url")
-      VALUE_URL("url"),
-      NULL(null);
-
-      private String value;
-
-      private EnumAggregation(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -277,19 +240,18 @@ public class AdsPixelStatsResult extends APINode {
     return gson;
   }
 
-  public AdsPixelStatsResult copyFrom(AdsPixelStatsResult instance) {
-    this.mAggregation = instance.mAggregation;
-    this.mData = instance.mData;
-    this.mTimestamp = instance.mTimestamp;
+  public ProductCatalogImageSettings copyFrom(ProductCatalogImageSettings instance) {
+    this.mCarouselAd = instance.mCarouselAd;
+    this.mSingleAd = instance.mSingleAd;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdsPixelStatsResult> getParser() {
-    return new APIRequest.ResponseParser<AdsPixelStatsResult>() {
-      public APINodeList<AdsPixelStatsResult> parseResponse(String response, APIContext context, APIRequest<AdsPixelStatsResult> request) throws MalformedResponseException {
-        return AdsPixelStatsResult.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<ProductCatalogImageSettings> getParser() {
+    return new APIRequest.ResponseParser<ProductCatalogImageSettings>() {
+      public APINodeList<ProductCatalogImageSettings> parseResponse(String response, APIContext context, APIRequest<ProductCatalogImageSettings> request) throws MalformedResponseException {
+        return ProductCatalogImageSettings.parseResponse(response, context, request);
       }
     };
   }

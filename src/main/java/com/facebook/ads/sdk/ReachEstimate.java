@@ -249,8 +249,6 @@ public class ReachEstimate extends APINode {
       VALUE_CLICKS("CLICKS"),
       @SerializedName("ENGAGED_USERS")
       VALUE_ENGAGED_USERS("ENGAGED_USERS"),
-      @SerializedName("EXTERNAL")
-      VALUE_EXTERNAL("EXTERNAL"),
       @SerializedName("EVENT_RESPONSES")
       VALUE_EVENT_RESPONSES("EVENT_RESPONSES"),
       @SerializedName("IMPRESSIONS")
@@ -275,6 +273,8 @@ public class ReachEstimate extends APINode {
       VALUE_SOCIAL_IMPRESSIONS("SOCIAL_IMPRESSIONS"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
+      @SerializedName("APP_DOWNLOADS")
+      VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
       NULL(null);
 
       private String value;

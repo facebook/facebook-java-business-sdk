@@ -284,6 +284,7 @@ public class ProductFeedUpload extends APINode {
 
     public static final String[] FIELDS = {
       "description",
+      "error_type",
       "id",
       "severity",
       "summary",
@@ -364,6 +365,13 @@ public class ProductFeedUpload extends APINode {
     }
     public APIRequestGetErrors requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetErrors requestErrorTypeField () {
+      return this.requestErrorTypeField(true);
+    }
+    public APIRequestGetErrors requestErrorTypeField (boolean value) {
+      this.requestField("error_type", value);
       return this;
     }
     public APIRequestGetErrors requestIdField () {

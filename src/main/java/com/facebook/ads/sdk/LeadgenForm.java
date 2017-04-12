@@ -87,6 +87,8 @@ public class LeadgenForm extends APINode {
   private String mMessengerWelcomeMessage = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("organic_leads_count")
+  private Long mOrganicLeadsCount = null;
   @SerializedName("page")
   private Object mPage = null;
   @SerializedName("page_id")
@@ -373,6 +375,10 @@ public class LeadgenForm extends APINode {
     return mName;
   }
 
+  public Long getFieldOrganicLeadsCount() {
+    return mOrganicLeadsCount;
+  }
+
   public Object getFieldPage() {
     return mPage;
   }
@@ -427,6 +433,7 @@ public class LeadgenForm extends APINode {
       "id",
       "is_organic",
       "post",
+      "retailer_item_id",
     };
 
     @Override
@@ -587,6 +594,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGetLeads requestPostField (boolean value) {
       this.requestField("post", value);
+      return this;
+    }
+    public APIRequestGetLeads requestRetailerItemIdField () {
+      return this.requestRetailerItemIdField(true);
+    }
+    public APIRequestGetLeads requestRetailerItemIdField (boolean value) {
+      this.requestField("retailer_item_id", value);
       return this;
     }
   }
@@ -808,6 +822,7 @@ public class LeadgenForm extends APINode {
       "locale",
       "messenger_welcome_message",
       "name",
+      "organic_leads_count",
       "page",
       "page_id",
       "privacy_policy_url",
@@ -1012,6 +1027,13 @@ public class LeadgenForm extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGet requestOrganicLeadsCountField () {
+      return this.requestOrganicLeadsCountField(true);
+    }
+    public APIRequestGet requestOrganicLeadsCountField (boolean value) {
+      this.requestField("organic_leads_count", value);
+      return this;
+    }
     public APIRequestGet requestPageField () {
       return this.requestPageField(true);
     }
@@ -1096,6 +1118,7 @@ public class LeadgenForm extends APINode {
     this.mLocale = instance.mLocale;
     this.mMessengerWelcomeMessage = instance.mMessengerWelcomeMessage;
     this.mName = instance.mName;
+    this.mOrganicLeadsCount = instance.mOrganicLeadsCount;
     this.mPage = instance.mPage;
     this.mPageId = instance.mPageId;
     this.mPrivacyPolicyUrl = instance.mPrivacyPolicyUrl;

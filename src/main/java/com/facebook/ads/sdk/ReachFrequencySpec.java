@@ -57,6 +57,8 @@ public class ReachFrequencySpec extends APINode {
   private Object mMaxCampaignDuration = null;
   @SerializedName("max_days_to_finish")
   private Object mMaxDaysToFinish = null;
+  @SerializedName("max_pause_without_prediction_rerun")
+  private Object mMaxPauseWithoutPredictionRerun = null;
   @SerializedName("min_campaign_duration")
   private Object mMinCampaignDuration = null;
   @SerializedName("min_reach_limits")
@@ -229,6 +231,15 @@ public class ReachFrequencySpec extends APINode {
     return this;
   }
 
+  public Object getFieldMaxPauseWithoutPredictionRerun() {
+    return mMaxPauseWithoutPredictionRerun;
+  }
+
+  public ReachFrequencySpec setFieldMaxPauseWithoutPredictionRerun(Object value) {
+    this.mMaxPauseWithoutPredictionRerun = value;
+    return this;
+  }
+
   public Object getFieldMinCampaignDuration() {
     return mMinCampaignDuration;
   }
@@ -267,6 +278,7 @@ public class ReachFrequencySpec extends APINode {
     this.mCountries = instance.mCountries;
     this.mMaxCampaignDuration = instance.mMaxCampaignDuration;
     this.mMaxDaysToFinish = instance.mMaxDaysToFinish;
+    this.mMaxPauseWithoutPredictionRerun = instance.mMaxPauseWithoutPredictionRerun;
     this.mMinCampaignDuration = instance.mMinCampaignDuration;
     this.mMinReachLimits = instance.mMinReachLimits;
     this.context = instance.context;

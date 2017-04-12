@@ -59,8 +59,6 @@ public class AdCreativePlaceData extends APINode {
   private Double mLatitude = null;
   @SerializedName("longitude")
   private Double mLongitude = null;
-  @SerializedName("phone_number")
-  private String mPhoneNumber = null;
   @SerializedName("type")
   private String mType = null;
   protected static Gson gson = null;
@@ -240,15 +238,6 @@ public class AdCreativePlaceData extends APINode {
     return this;
   }
 
-  public String getFieldPhoneNumber() {
-    return mPhoneNumber;
-  }
-
-  public AdCreativePlaceData setFieldPhoneNumber(String value) {
-    this.mPhoneNumber = value;
-    return this;
-  }
-
   public String getFieldType() {
     return mType;
   }
@@ -279,7 +268,6 @@ public class AdCreativePlaceData extends APINode {
     this.mLabel = instance.mLabel;
     this.mLatitude = instance.mLatitude;
     this.mLongitude = instance.mLongitude;
-    this.mPhoneNumber = instance.mPhoneNumber;
     this.mType = instance.mType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

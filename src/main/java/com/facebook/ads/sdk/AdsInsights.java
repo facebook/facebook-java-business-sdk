@@ -67,10 +67,14 @@ public class AdsInsights extends APINode {
   private String mAdsetId = null;
   @SerializedName("adset_name")
   private String mAdsetName = null;
+  @SerializedName("age")
+  private String mAge = null;
   @SerializedName("app_store_clicks")
   private String mAppStoreClicks = null;
   @SerializedName("buying_type")
   private String mBuyingType = null;
+  @SerializedName("call_to_action_asset")
+  private Object mCallToActionAsset = null;
   @SerializedName("call_to_action_clicks")
   private String mCallToActionClicks = null;
   @SerializedName("campaign_id")
@@ -81,6 +85,8 @@ public class AdsInsights extends APINode {
   private String mCanvasAvgViewPercent = null;
   @SerializedName("canvas_avg_view_time")
   private String mCanvasAvgViewTime = null;
+  @SerializedName("canvas_component_avg_pct_view")
+  private List<AdsActionStats> mCanvasComponentAvgPctView = null;
   @SerializedName("clicks")
   private String mClicks = null;
   @SerializedName("cost_per_10_sec_video_view")
@@ -101,6 +107,8 @@ public class AdsInsights extends APINode {
   private String mCostPerUniqueClick = null;
   @SerializedName("cost_per_unique_inline_link_click")
   private String mCostPerUniqueInlineLinkClick = null;
+  @SerializedName("country")
+  private String mCountry = null;
   @SerializedName("cpc")
   private String mCpc = null;
   @SerializedName("cpm")
@@ -115,14 +123,30 @@ public class AdsInsights extends APINode {
   private String mDateStop = null;
   @SerializedName("deeplink_clicks")
   private String mDeeplinkClicks = null;
+  @SerializedName("device_platform")
+  private String mDevicePlatform = null;
+  @SerializedName("dma")
+  private String mDma = null;
   @SerializedName("estimated_ad_recall_rate")
   private String mEstimatedAdRecallRate = null;
   @SerializedName("estimated_ad_recallers")
   private String mEstimatedAdRecallers = null;
   @SerializedName("frequency")
   private String mFrequency = null;
+  @SerializedName("frequency_value")
+  private String mFrequencyValue = null;
+  @SerializedName("gender")
+  private String mGender = null;
+  @SerializedName("hourly_stats_aggregated_by_advertiser_time_zone")
+  private String mHourlyStatsAggregatedByAdvertiserTimeZone = null;
+  @SerializedName("hourly_stats_aggregated_by_audience_time_zone")
+  private String mHourlyStatsAggregatedByAudienceTimeZone = null;
+  @SerializedName("impression_device")
+  private String mImpressionDevice = null;
   @SerializedName("impressions")
   private String mImpressions = null;
+  @SerializedName("impressions_dummy")
+  private String mImpressionsDummy = null;
   @SerializedName("inline_link_click_ctr")
   private String mInlineLinkClickCtr = null;
   @SerializedName("inline_link_clicks")
@@ -137,10 +161,18 @@ public class AdsInsights extends APINode {
   private String mNewsfeedImpressions = null;
   @SerializedName("objective")
   private String mObjective = null;
+  @SerializedName("place_page_id")
+  private String mPlacePageId = null;
   @SerializedName("place_page_name")
   private String mPlacePageName = null;
+  @SerializedName("placement")
+  private String mPlacement = null;
+  @SerializedName("product_id")
+  private String mProductId = null;
   @SerializedName("reach")
   private String mReach = null;
+  @SerializedName("region")
+  private String mRegion = null;
   @SerializedName("relevance_score")
   private AdgroupRelevanceScore mRelevanceScore = null;
   @SerializedName("social_clicks")
@@ -430,6 +462,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldAge() {
+    return mAge;
+  }
+
+  public AdsInsights setFieldAge(String value) {
+    this.mAge = value;
+    return this;
+  }
+
   public String getFieldAppStoreClicks() {
     return mAppStoreClicks;
   }
@@ -445,6 +486,15 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldBuyingType(String value) {
     this.mBuyingType = value;
+    return this;
+  }
+
+  public Object getFieldCallToActionAsset() {
+    return mCallToActionAsset;
+  }
+
+  public AdsInsights setFieldCallToActionAsset(Object value) {
+    this.mCallToActionAsset = value;
     return this;
   }
 
@@ -493,6 +543,20 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<AdsActionStats> getFieldCanvasComponentAvgPctView() {
+    return mCanvasComponentAvgPctView;
+  }
+
+  public AdsInsights setFieldCanvasComponentAvgPctView(List<AdsActionStats> value) {
+    this.mCanvasComponentAvgPctView = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCanvasComponentAvgPctView(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCanvasComponentAvgPctView = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldClicks() {
     return mClicks;
   }
@@ -598,6 +662,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldCountry() {
+    return mCountry;
+  }
+
+  public AdsInsights setFieldCountry(String value) {
+    this.mCountry = value;
+    return this;
+  }
+
   public String getFieldCpc() {
     return mCpc;
   }
@@ -661,6 +734,24 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldDevicePlatform() {
+    return mDevicePlatform;
+  }
+
+  public AdsInsights setFieldDevicePlatform(String value) {
+    this.mDevicePlatform = value;
+    return this;
+  }
+
+  public String getFieldDma() {
+    return mDma;
+  }
+
+  public AdsInsights setFieldDma(String value) {
+    this.mDma = value;
+    return this;
+  }
+
   public String getFieldEstimatedAdRecallRate() {
     return mEstimatedAdRecallRate;
   }
@@ -688,12 +779,66 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldFrequencyValue() {
+    return mFrequencyValue;
+  }
+
+  public AdsInsights setFieldFrequencyValue(String value) {
+    this.mFrequencyValue = value;
+    return this;
+  }
+
+  public String getFieldGender() {
+    return mGender;
+  }
+
+  public AdsInsights setFieldGender(String value) {
+    this.mGender = value;
+    return this;
+  }
+
+  public String getFieldHourlyStatsAggregatedByAdvertiserTimeZone() {
+    return mHourlyStatsAggregatedByAdvertiserTimeZone;
+  }
+
+  public AdsInsights setFieldHourlyStatsAggregatedByAdvertiserTimeZone(String value) {
+    this.mHourlyStatsAggregatedByAdvertiserTimeZone = value;
+    return this;
+  }
+
+  public String getFieldHourlyStatsAggregatedByAudienceTimeZone() {
+    return mHourlyStatsAggregatedByAudienceTimeZone;
+  }
+
+  public AdsInsights setFieldHourlyStatsAggregatedByAudienceTimeZone(String value) {
+    this.mHourlyStatsAggregatedByAudienceTimeZone = value;
+    return this;
+  }
+
+  public String getFieldImpressionDevice() {
+    return mImpressionDevice;
+  }
+
+  public AdsInsights setFieldImpressionDevice(String value) {
+    this.mImpressionDevice = value;
+    return this;
+  }
+
   public String getFieldImpressions() {
     return mImpressions;
   }
 
   public AdsInsights setFieldImpressions(String value) {
     this.mImpressions = value;
+    return this;
+  }
+
+  public String getFieldImpressionsDummy() {
+    return mImpressionsDummy;
+  }
+
+  public AdsInsights setFieldImpressionsDummy(String value) {
+    this.mImpressionsDummy = value;
     return this;
   }
 
@@ -760,6 +905,15 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldPlacePageId() {
+    return mPlacePageId;
+  }
+
+  public AdsInsights setFieldPlacePageId(String value) {
+    this.mPlacePageId = value;
+    return this;
+  }
+
   public String getFieldPlacePageName() {
     return mPlacePageName;
   }
@@ -769,12 +923,39 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public String getFieldPlacement() {
+    return mPlacement;
+  }
+
+  public AdsInsights setFieldPlacement(String value) {
+    this.mPlacement = value;
+    return this;
+  }
+
+  public String getFieldProductId() {
+    return mProductId;
+  }
+
+  public AdsInsights setFieldProductId(String value) {
+    this.mProductId = value;
+    return this;
+  }
+
   public String getFieldReach() {
     return mReach;
   }
 
   public AdsInsights setFieldReach(String value) {
     this.mReach = value;
+    return this;
+  }
+
+  public String getFieldRegion() {
+    return mRegion;
+  }
+
+  public AdsInsights setFieldRegion(String value) {
+    this.mRegion = value;
     return this;
   }
 
@@ -1187,6 +1368,8 @@ public class AdsInsights extends APINode {
   }
 
   public static enum EnumActionBreakdowns {
+      @SerializedName("action_canvas_component_name")
+      VALUE_ACTION_CANVAS_COMPONENT_NAME("action_canvas_component_name"),
       @SerializedName("action_carousel_card_id")
       VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
       @SerializedName("action_carousel_card_name")
@@ -1243,6 +1426,8 @@ public class AdsInsights extends APINode {
       VALUE_AGE("age"),
       @SerializedName("country")
       VALUE_COUNTRY("country"),
+      @SerializedName("dma")
+      VALUE_DMA("dma"),
       @SerializedName("gender")
       VALUE_GENDER("gender"),
       @SerializedName("frequency_value")
@@ -1257,6 +1442,10 @@ public class AdsInsights extends APINode {
       VALUE_PLACE_PAGE_ID("place_page_id"),
       @SerializedName("placement")
       VALUE_PLACEMENT("placement"),
+      @SerializedName("publisher_platform")
+      VALUE_PUBLISHER_PLATFORM("publisher_platform"),
+      @SerializedName("platform_position")
+      VALUE_PLATFORM_POSITION("platform_position"),
       @SerializedName("device_platform")
       VALUE_DEVICE_PLATFORM("device_platform"),
       @SerializedName("product_id")
@@ -1346,6 +1535,8 @@ public class AdsInsights extends APINode {
   }
 
   public static enum EnumSummaryActionBreakdowns {
+      @SerializedName("action_canvas_component_name")
+      VALUE_ACTION_CANVAS_COMPONENT_NAME("action_canvas_component_name"),
       @SerializedName("action_carousel_card_id")
       VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
       @SerializedName("action_carousel_card_name")
@@ -1442,13 +1633,16 @@ public class AdsInsights extends APINode {
     this.mAdName = instance.mAdName;
     this.mAdsetId = instance.mAdsetId;
     this.mAdsetName = instance.mAdsetName;
+    this.mAge = instance.mAge;
     this.mAppStoreClicks = instance.mAppStoreClicks;
     this.mBuyingType = instance.mBuyingType;
+    this.mCallToActionAsset = instance.mCallToActionAsset;
     this.mCallToActionClicks = instance.mCallToActionClicks;
     this.mCampaignId = instance.mCampaignId;
     this.mCampaignName = instance.mCampaignName;
     this.mCanvasAvgViewPercent = instance.mCanvasAvgViewPercent;
     this.mCanvasAvgViewTime = instance.mCanvasAvgViewTime;
+    this.mCanvasComponentAvgPctView = instance.mCanvasComponentAvgPctView;
     this.mClicks = instance.mClicks;
     this.mCostPer10SecVideoView = instance.mCostPer10SecVideoView;
     this.mCostPerActionType = instance.mCostPerActionType;
@@ -1459,6 +1653,7 @@ public class AdsInsights extends APINode {
     this.mCostPerUniqueActionType = instance.mCostPerUniqueActionType;
     this.mCostPerUniqueClick = instance.mCostPerUniqueClick;
     this.mCostPerUniqueInlineLinkClick = instance.mCostPerUniqueInlineLinkClick;
+    this.mCountry = instance.mCountry;
     this.mCpc = instance.mCpc;
     this.mCpm = instance.mCpm;
     this.mCpp = instance.mCpp;
@@ -1466,10 +1661,18 @@ public class AdsInsights extends APINode {
     this.mDateStart = instance.mDateStart;
     this.mDateStop = instance.mDateStop;
     this.mDeeplinkClicks = instance.mDeeplinkClicks;
+    this.mDevicePlatform = instance.mDevicePlatform;
+    this.mDma = instance.mDma;
     this.mEstimatedAdRecallRate = instance.mEstimatedAdRecallRate;
     this.mEstimatedAdRecallers = instance.mEstimatedAdRecallers;
     this.mFrequency = instance.mFrequency;
+    this.mFrequencyValue = instance.mFrequencyValue;
+    this.mGender = instance.mGender;
+    this.mHourlyStatsAggregatedByAdvertiserTimeZone = instance.mHourlyStatsAggregatedByAdvertiserTimeZone;
+    this.mHourlyStatsAggregatedByAudienceTimeZone = instance.mHourlyStatsAggregatedByAudienceTimeZone;
+    this.mImpressionDevice = instance.mImpressionDevice;
     this.mImpressions = instance.mImpressions;
+    this.mImpressionsDummy = instance.mImpressionsDummy;
     this.mInlineLinkClickCtr = instance.mInlineLinkClickCtr;
     this.mInlineLinkClicks = instance.mInlineLinkClicks;
     this.mInlinePostEngagement = instance.mInlinePostEngagement;
@@ -1477,8 +1680,12 @@ public class AdsInsights extends APINode {
     this.mNewsfeedClicks = instance.mNewsfeedClicks;
     this.mNewsfeedImpressions = instance.mNewsfeedImpressions;
     this.mObjective = instance.mObjective;
+    this.mPlacePageId = instance.mPlacePageId;
     this.mPlacePageName = instance.mPlacePageName;
+    this.mPlacement = instance.mPlacement;
+    this.mProductId = instance.mProductId;
     this.mReach = instance.mReach;
+    this.mRegion = instance.mRegion;
     this.mRelevanceScore = instance.mRelevanceScore;
     this.mSocialClicks = instance.mSocialClicks;
     this.mSocialImpressions = instance.mSocialImpressions;
