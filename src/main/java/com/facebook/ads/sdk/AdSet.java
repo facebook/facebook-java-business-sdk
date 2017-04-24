@@ -57,8 +57,8 @@ public class AdSet extends APINode {
   private List<AdLabel> mAdlabels = null;
   @SerializedName("adset_schedule")
   private List<DayPart> mAdsetSchedule = null;
-  @SerializedName("attribution_window_days")
-  private Long mAttributionWindowDays = null;
+  @SerializedName("attribution_spec")
+  private List<Object> mAttributionSpec = null;
   @SerializedName("bid_amount")
   private Long mBidAmount = null;
   @SerializedName("bid_info")
@@ -131,8 +131,6 @@ public class AdSet extends APINode {
   private String mUpdatedTime = null;
   @SerializedName("use_new_app_click")
   private Boolean mUseNewAppClick = null;
-  @SerializedName("view_through_attribution_window_days")
-  private Long mViewThroughAttributionWindowDays = null;
   protected static Gson gson = null;
 
   public AdSet() {
@@ -399,12 +397,12 @@ public class AdSet extends APINode {
     this.mAdsetSchedule = DayPart.getGson().fromJson(value, type);
     return this;
   }
-  public Long getFieldAttributionWindowDays() {
-    return mAttributionWindowDays;
+  public List<Object> getFieldAttributionSpec() {
+    return mAttributionSpec;
   }
 
-  public AdSet setFieldAttributionWindowDays(Long value) {
-    this.mAttributionWindowDays = value;
+  public AdSet setFieldAttributionSpec(List<Object> value) {
+    this.mAttributionSpec = value;
     return this;
   }
 
@@ -755,15 +753,6 @@ public class AdSet extends APINode {
     return this;
   }
 
-  public Long getFieldViewThroughAttributionWindowDays() {
-    return mViewThroughAttributionWindowDays;
-  }
-
-  public AdSet setFieldViewThroughAttributionWindowDays(Long value) {
-    this.mViewThroughAttributionWindowDays = value;
-    return this;
-  }
-
 
 
   public static class APIRequestGetActivities extends APIRequest<AdActivity> {
@@ -1012,7 +1001,7 @@ public class AdSet extends APINode {
       "object_url",
       "platform_customizations",
       "product_set_id",
-      "run_status",
+      "status",
       "template_url",
       "template_url_spec",
       "thumbnail_url",
@@ -1266,11 +1255,11 @@ public class AdSet extends APINode {
       this.requestField("product_set_id", value);
       return this;
     }
-    public APIRequestGetAdCreatives requestRunStatusField () {
-      return this.requestRunStatusField(true);
+    public APIRequestGetAdCreatives requestStatusField () {
+      return this.requestStatusField(true);
     }
-    public APIRequestGetAdCreatives requestRunStatusField (boolean value) {
-      this.requestField("run_status", value);
+    public APIRequestGetAdCreatives requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
     public APIRequestGetAdCreatives requestTemplateUrlField () {
@@ -2736,7 +2725,7 @@ public class AdSet extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
-      "attribution_window_days",
+      "attribution_spec",
       "bid_amount",
       "bid_info",
       "billing_event",
@@ -2773,7 +2762,6 @@ public class AdSet extends APINode {
       "time_based_ad_rotation_intervals",
       "updated_time",
       "use_new_app_click",
-      "view_through_attribution_window_days",
     };
 
     @Override
@@ -2866,11 +2854,11 @@ public class AdSet extends APINode {
       this.requestField("adset_schedule", value);
       return this;
     }
-    public APIRequestGet requestAttributionWindowDaysField () {
-      return this.requestAttributionWindowDaysField(true);
+    public APIRequestGet requestAttributionSpecField () {
+      return this.requestAttributionSpecField(true);
     }
-    public APIRequestGet requestAttributionWindowDaysField (boolean value) {
-      this.requestField("attribution_window_days", value);
+    public APIRequestGet requestAttributionSpecField (boolean value) {
+      this.requestField("attribution_spec", value);
       return this;
     }
     public APIRequestGet requestBidAmountField () {
@@ -3125,13 +3113,6 @@ public class AdSet extends APINode {
       this.requestField("use_new_app_click", value);
       return this;
     }
-    public APIRequestGet requestViewThroughAttributionWindowDaysField () {
-      return this.requestViewThroughAttributionWindowDaysField(true);
-    }
-    public APIRequestGet requestViewThroughAttributionWindowDaysField (boolean value) {
-      this.requestField("view_through_attribution_window_days", value);
-      return this;
-    }
   }
 
   public static class APIRequestUpdate extends APIRequest<AdSet> {
@@ -3145,7 +3126,7 @@ public class AdSet extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
-      "attribution_window_days",
+      "attribution_spec",
       "bid_amount",
       "billing_event",
       "creative_sequence",
@@ -3168,7 +3149,6 @@ public class AdSet extends APINode {
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
-      "view_through_attribution_window_days",
     };
 
     public static final String[] FIELDS = {
@@ -3230,12 +3210,12 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAttributionWindowDays (Long attributionWindowDays) {
-      this.setParam("attribution_window_days", attributionWindowDays);
+    public APIRequestUpdate setAttributionSpec (List<Map<String, String>> attributionSpec) {
+      this.setParam("attribution_spec", attributionSpec);
       return this;
     }
-    public APIRequestUpdate setAttributionWindowDays (String attributionWindowDays) {
-      this.setParam("attribution_window_days", attributionWindowDays);
+    public APIRequestUpdate setAttributionSpec (String attributionSpec) {
+      this.setParam("attribution_spec", attributionSpec);
       return this;
     }
 
@@ -3418,15 +3398,6 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setTimeBasedAdRotationIntervals (String timeBasedAdRotationIntervals) {
       this.setParam("time_based_ad_rotation_intervals", timeBasedAdRotationIntervals);
-      return this;
-    }
-
-    public APIRequestUpdate setViewThroughAttributionWindowDays (Long viewThroughAttributionWindowDays) {
-      this.setParam("view_through_attribution_window_days", viewThroughAttributionWindowDays);
-      return this;
-    }
-    public APIRequestUpdate setViewThroughAttributionWindowDays (String viewThroughAttributionWindowDays) {
-      this.setParam("view_through_attribution_window_days", viewThroughAttributionWindowDays);
       return this;
     }
 
@@ -3638,32 +3609,40 @@ public class AdSet extends APINode {
       VALUE_TODAY("today"),
       @SerializedName("yesterday")
       VALUE_YESTERDAY("yesterday"),
-      @SerializedName("last_3_days")
-      VALUE_LAST_3_DAYS("last_3_days"),
-      @SerializedName("this_week")
-      VALUE_THIS_WEEK("this_week"),
-      @SerializedName("last_week")
-      VALUE_LAST_WEEK("last_week"),
-      @SerializedName("last_7_days")
-      VALUE_LAST_7_DAYS("last_7_days"),
-      @SerializedName("last_14_days")
-      VALUE_LAST_14_DAYS("last_14_days"),
-      @SerializedName("last_28_days")
-      VALUE_LAST_28_DAYS("last_28_days"),
-      @SerializedName("last_30_days")
-      VALUE_LAST_30_DAYS("last_30_days"),
-      @SerializedName("last_90_days")
-      VALUE_LAST_90_DAYS("last_90_days"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("last_month")
       VALUE_LAST_MONTH("last_month"),
       @SerializedName("this_quarter")
       VALUE_THIS_QUARTER("this_quarter"),
-      @SerializedName("last_3_months")
-      VALUE_LAST_3_MONTHS("last_3_months"),
       @SerializedName("lifetime")
       VALUE_LIFETIME("lifetime"),
+      @SerializedName("last_3d")
+      VALUE_LAST_3D("last_3d"),
+      @SerializedName("last_7d")
+      VALUE_LAST_7D("last_7d"),
+      @SerializedName("last_14d")
+      VALUE_LAST_14D("last_14d"),
+      @SerializedName("last_28d")
+      VALUE_LAST_28D("last_28d"),
+      @SerializedName("last_30d")
+      VALUE_LAST_30D("last_30d"),
+      @SerializedName("last_90d")
+      VALUE_LAST_90D("last_90d"),
+      @SerializedName("last_week_mon_sun")
+      VALUE_LAST_WEEK_MON_SUN("last_week_mon_sun"),
+      @SerializedName("last_week_sun_sat")
+      VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
+      @SerializedName("last_quarter")
+      VALUE_LAST_QUARTER("last_quarter"),
+      @SerializedName("last_year")
+      VALUE_LAST_YEAR("last_year"),
+      @SerializedName("this_week_mon_today")
+      VALUE_THIS_WEEK_MON_TODAY("this_week_mon_today"),
+      @SerializedName("this_week_sun_today")
+      VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
+      @SerializedName("this_year")
+      VALUE_THIS_YEAR("this_year"),
       NULL(null);
 
       private String value;
@@ -3734,7 +3713,7 @@ public class AdSet extends APINode {
     this.mAccountId = instance.mAccountId;
     this.mAdlabels = instance.mAdlabels;
     this.mAdsetSchedule = instance.mAdsetSchedule;
-    this.mAttributionWindowDays = instance.mAttributionWindowDays;
+    this.mAttributionSpec = instance.mAttributionSpec;
     this.mBidAmount = instance.mBidAmount;
     this.mBidInfo = instance.mBidInfo;
     this.mBillingEvent = instance.mBillingEvent;
@@ -3771,7 +3750,6 @@ public class AdSet extends APINode {
     this.mTimeBasedAdRotationIntervals = instance.mTimeBasedAdRotationIntervals;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mUseNewAppClick = instance.mUseNewAppClick;
-    this.mViewThroughAttributionWindowDays = instance.mViewThroughAttributionWindowDays;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

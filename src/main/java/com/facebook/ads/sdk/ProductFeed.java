@@ -1342,7 +1342,6 @@ public class ProductFeed extends APINode {
       "delimiter",
       "encoding",
       "name",
-      "quoted_fields",
       "quoted_fields_mode",
       "schedule",
     };
@@ -1417,15 +1416,6 @@ public class ProductFeed extends APINode {
 
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestUpdate setQuotedFields (Boolean quotedFields) {
-      this.setParam("quoted_fields", quotedFields);
-      return this;
-    }
-    public APIRequestUpdate setQuotedFields (String quotedFields) {
-      this.setParam("quoted_fields", quotedFields);
       return this;
     }
 

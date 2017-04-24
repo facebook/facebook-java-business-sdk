@@ -927,7 +927,7 @@ public class Campaign extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
-      "attribution_window_days",
+      "attribution_spec",
       "bid_amount",
       "bid_info",
       "billing_event",
@@ -964,7 +964,6 @@ public class Campaign extends APINode {
       "time_based_ad_rotation_intervals",
       "updated_time",
       "use_new_app_click",
-      "view_through_attribution_window_days",
     };
 
     @Override
@@ -1098,11 +1097,11 @@ public class Campaign extends APINode {
       this.requestField("adset_schedule", value);
       return this;
     }
-    public APIRequestGetAdSets requestAttributionWindowDaysField () {
-      return this.requestAttributionWindowDaysField(true);
+    public APIRequestGetAdSets requestAttributionSpecField () {
+      return this.requestAttributionSpecField(true);
     }
-    public APIRequestGetAdSets requestAttributionWindowDaysField (boolean value) {
-      this.requestField("attribution_window_days", value);
+    public APIRequestGetAdSets requestAttributionSpecField (boolean value) {
+      this.requestField("attribution_spec", value);
       return this;
     }
     public APIRequestGetAdSets requestBidAmountField () {
@@ -1355,13 +1354,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestUseNewAppClickField (boolean value) {
       this.requestField("use_new_app_click", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestViewThroughAttributionWindowDaysField () {
-      return this.requestViewThroughAttributionWindowDaysField(true);
-    }
-    public APIRequestGetAdSets requestViewThroughAttributionWindowDaysField (boolean value) {
-      this.requestField("view_through_attribution_window_days", value);
       return this;
     }
   }
@@ -2456,32 +2448,40 @@ public class Campaign extends APINode {
       VALUE_TODAY("today"),
       @SerializedName("yesterday")
       VALUE_YESTERDAY("yesterday"),
-      @SerializedName("last_3_days")
-      VALUE_LAST_3_DAYS("last_3_days"),
-      @SerializedName("this_week")
-      VALUE_THIS_WEEK("this_week"),
-      @SerializedName("last_week")
-      VALUE_LAST_WEEK("last_week"),
-      @SerializedName("last_7_days")
-      VALUE_LAST_7_DAYS("last_7_days"),
-      @SerializedName("last_14_days")
-      VALUE_LAST_14_DAYS("last_14_days"),
-      @SerializedName("last_28_days")
-      VALUE_LAST_28_DAYS("last_28_days"),
-      @SerializedName("last_30_days")
-      VALUE_LAST_30_DAYS("last_30_days"),
-      @SerializedName("last_90_days")
-      VALUE_LAST_90_DAYS("last_90_days"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("last_month")
       VALUE_LAST_MONTH("last_month"),
       @SerializedName("this_quarter")
       VALUE_THIS_QUARTER("this_quarter"),
-      @SerializedName("last_3_months")
-      VALUE_LAST_3_MONTHS("last_3_months"),
       @SerializedName("lifetime")
       VALUE_LIFETIME("lifetime"),
+      @SerializedName("last_3d")
+      VALUE_LAST_3D("last_3d"),
+      @SerializedName("last_7d")
+      VALUE_LAST_7D("last_7d"),
+      @SerializedName("last_14d")
+      VALUE_LAST_14D("last_14d"),
+      @SerializedName("last_28d")
+      VALUE_LAST_28D("last_28d"),
+      @SerializedName("last_30d")
+      VALUE_LAST_30D("last_30d"),
+      @SerializedName("last_90d")
+      VALUE_LAST_90D("last_90d"),
+      @SerializedName("last_week_mon_sun")
+      VALUE_LAST_WEEK_MON_SUN("last_week_mon_sun"),
+      @SerializedName("last_week_sun_sat")
+      VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
+      @SerializedName("last_quarter")
+      VALUE_LAST_QUARTER("last_quarter"),
+      @SerializedName("last_year")
+      VALUE_LAST_YEAR("last_year"),
+      @SerializedName("this_week_mon_today")
+      VALUE_THIS_WEEK_MON_TODAY("this_week_mon_today"),
+      @SerializedName("this_week_sun_today")
+      VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
+      @SerializedName("this_year")
+      VALUE_THIS_YEAR("this_year"),
       NULL(null);
 
       private String value;
@@ -2541,10 +2541,6 @@ public class Campaign extends APINode {
       VALUE_APP_INSTALLS("APP_INSTALLS"),
       @SerializedName("BRAND_AWARENESS")
       VALUE_BRAND_AWARENESS("BRAND_AWARENESS"),
-      @SerializedName("CANVAS_APP_ENGAGEMENT")
-      VALUE_CANVAS_APP_ENGAGEMENT("CANVAS_APP_ENGAGEMENT"),
-      @SerializedName("CANVAS_APP_INSTALLS")
-      VALUE_CANVAS_APP_INSTALLS("CANVAS_APP_INSTALLS"),
       @SerializedName("CONVERSIONS")
       VALUE_CONVERSIONS("CONVERSIONS"),
       @SerializedName("EVENT_RESPONSES")
@@ -2555,10 +2551,6 @@ public class Campaign extends APINode {
       VALUE_LINK_CLICKS("LINK_CLICKS"),
       @SerializedName("LOCAL_AWARENESS")
       VALUE_LOCAL_AWARENESS("LOCAL_AWARENESS"),
-      @SerializedName("MOBILE_APP_ENGAGEMENT")
-      VALUE_MOBILE_APP_ENGAGEMENT("MOBILE_APP_ENGAGEMENT"),
-      @SerializedName("MOBILE_APP_INSTALLS")
-      VALUE_MOBILE_APP_INSTALLS("MOBILE_APP_INSTALLS"),
       @SerializedName("OFFER_CLAIMS")
       VALUE_OFFER_CLAIMS("OFFER_CLAIMS"),
       @SerializedName("PAGE_LIKES")

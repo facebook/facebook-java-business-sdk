@@ -391,9 +391,6 @@ public class AdReportRun extends APINode {
       "inline_link_click_ctr",
       "inline_link_clicks",
       "inline_post_engagement",
-      "newsfeed_avg_position",
-      "newsfeed_clicks",
-      "newsfeed_impressions",
       "objective",
       "place_page_id",
       "place_page_name",
@@ -413,20 +410,15 @@ public class AdReportRun extends APINode {
       "unique_actions",
       "unique_clicks",
       "unique_ctr",
-      "unique_impressions",
       "unique_inline_link_click_ctr",
       "unique_inline_link_clicks",
       "unique_link_clicks_ctr",
       "unique_social_clicks",
-      "unique_social_impressions",
       "video_10_sec_watched_actions",
       "video_15_sec_watched_actions",
       "video_30_sec_watched_actions",
-      "video_avg_pct_watched_actions",
       "video_avg_percent_watched_actions",
-      "video_avg_sec_watched_actions",
       "video_avg_time_watched_actions",
-      "video_complete_watched_actions",
       "video_p100_watched_actions",
       "video_p25_watched_actions",
       "video_p50_watched_actions",
@@ -862,27 +854,6 @@ public class AdReportRun extends APINode {
       this.requestField("inline_post_engagement", value);
       return this;
     }
-    public APIRequestGetInsights requestNewsfeedAvgPositionField () {
-      return this.requestNewsfeedAvgPositionField(true);
-    }
-    public APIRequestGetInsights requestNewsfeedAvgPositionField (boolean value) {
-      this.requestField("newsfeed_avg_position", value);
-      return this;
-    }
-    public APIRequestGetInsights requestNewsfeedClicksField () {
-      return this.requestNewsfeedClicksField(true);
-    }
-    public APIRequestGetInsights requestNewsfeedClicksField (boolean value) {
-      this.requestField("newsfeed_clicks", value);
-      return this;
-    }
-    public APIRequestGetInsights requestNewsfeedImpressionsField () {
-      return this.requestNewsfeedImpressionsField(true);
-    }
-    public APIRequestGetInsights requestNewsfeedImpressionsField (boolean value) {
-      this.requestField("newsfeed_impressions", value);
-      return this;
-    }
     public APIRequestGetInsights requestObjectiveField () {
       return this.requestObjectiveField(true);
     }
@@ -1016,13 +987,6 @@ public class AdReportRun extends APINode {
       this.requestField("unique_ctr", value);
       return this;
     }
-    public APIRequestGetInsights requestUniqueImpressionsField () {
-      return this.requestUniqueImpressionsField(true);
-    }
-    public APIRequestGetInsights requestUniqueImpressionsField (boolean value) {
-      this.requestField("unique_impressions", value);
-      return this;
-    }
     public APIRequestGetInsights requestUniqueInlineLinkClickCtrField () {
       return this.requestUniqueInlineLinkClickCtrField(true);
     }
@@ -1051,13 +1015,6 @@ public class AdReportRun extends APINode {
       this.requestField("unique_social_clicks", value);
       return this;
     }
-    public APIRequestGetInsights requestUniqueSocialImpressionsField () {
-      return this.requestUniqueSocialImpressionsField(true);
-    }
-    public APIRequestGetInsights requestUniqueSocialImpressionsField (boolean value) {
-      this.requestField("unique_social_impressions", value);
-      return this;
-    }
     public APIRequestGetInsights requestVideo10SecWatchedActionsField () {
       return this.requestVideo10SecWatchedActionsField(true);
     }
@@ -1079,13 +1036,6 @@ public class AdReportRun extends APINode {
       this.requestField("video_30_sec_watched_actions", value);
       return this;
     }
-    public APIRequestGetInsights requestVideoAvgPctWatchedActionsField () {
-      return this.requestVideoAvgPctWatchedActionsField(true);
-    }
-    public APIRequestGetInsights requestVideoAvgPctWatchedActionsField (boolean value) {
-      this.requestField("video_avg_pct_watched_actions", value);
-      return this;
-    }
     public APIRequestGetInsights requestVideoAvgPercentWatchedActionsField () {
       return this.requestVideoAvgPercentWatchedActionsField(true);
     }
@@ -1093,25 +1043,11 @@ public class AdReportRun extends APINode {
       this.requestField("video_avg_percent_watched_actions", value);
       return this;
     }
-    public APIRequestGetInsights requestVideoAvgSecWatchedActionsField () {
-      return this.requestVideoAvgSecWatchedActionsField(true);
-    }
-    public APIRequestGetInsights requestVideoAvgSecWatchedActionsField (boolean value) {
-      this.requestField("video_avg_sec_watched_actions", value);
-      return this;
-    }
     public APIRequestGetInsights requestVideoAvgTimeWatchedActionsField () {
       return this.requestVideoAvgTimeWatchedActionsField(true);
     }
     public APIRequestGetInsights requestVideoAvgTimeWatchedActionsField (boolean value) {
       this.requestField("video_avg_time_watched_actions", value);
-      return this;
-    }
-    public APIRequestGetInsights requestVideoCompleteWatchedActionsField () {
-      return this.requestVideoCompleteWatchedActionsField(true);
-    }
-    public APIRequestGetInsights requestVideoCompleteWatchedActionsField (boolean value) {
-      this.requestField("video_complete_watched_actions", value);
       return this;
     }
     public APIRequestGetInsights requestVideoP100WatchedActionsField () {
@@ -1455,8 +1391,6 @@ public class AdReportRun extends APINode {
       VALUE_IMPRESSION_DEVICE("impression_device"),
       @SerializedName("place_page_id")
       VALUE_PLACE_PAGE_ID("place_page_id"),
-      @SerializedName("placement")
-      VALUE_PLACEMENT("placement"),
       @SerializedName("publisher_platform")
       VALUE_PUBLISHER_PLATFORM("publisher_platform"),
       @SerializedName("platform_position")
@@ -1486,32 +1420,40 @@ public class AdReportRun extends APINode {
       VALUE_TODAY("today"),
       @SerializedName("yesterday")
       VALUE_YESTERDAY("yesterday"),
-      @SerializedName("last_3_days")
-      VALUE_LAST_3_DAYS("last_3_days"),
-      @SerializedName("this_week")
-      VALUE_THIS_WEEK("this_week"),
-      @SerializedName("last_week")
-      VALUE_LAST_WEEK("last_week"),
-      @SerializedName("last_7_days")
-      VALUE_LAST_7_DAYS("last_7_days"),
-      @SerializedName("last_14_days")
-      VALUE_LAST_14_DAYS("last_14_days"),
-      @SerializedName("last_28_days")
-      VALUE_LAST_28_DAYS("last_28_days"),
-      @SerializedName("last_30_days")
-      VALUE_LAST_30_DAYS("last_30_days"),
-      @SerializedName("last_90_days")
-      VALUE_LAST_90_DAYS("last_90_days"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("last_month")
       VALUE_LAST_MONTH("last_month"),
       @SerializedName("this_quarter")
       VALUE_THIS_QUARTER("this_quarter"),
-      @SerializedName("last_3_months")
-      VALUE_LAST_3_MONTHS("last_3_months"),
       @SerializedName("lifetime")
       VALUE_LIFETIME("lifetime"),
+      @SerializedName("last_3d")
+      VALUE_LAST_3D("last_3d"),
+      @SerializedName("last_7d")
+      VALUE_LAST_7D("last_7d"),
+      @SerializedName("last_14d")
+      VALUE_LAST_14D("last_14d"),
+      @SerializedName("last_28d")
+      VALUE_LAST_28D("last_28d"),
+      @SerializedName("last_30d")
+      VALUE_LAST_30D("last_30d"),
+      @SerializedName("last_90d")
+      VALUE_LAST_90D("last_90d"),
+      @SerializedName("last_week_mon_sun")
+      VALUE_LAST_WEEK_MON_SUN("last_week_mon_sun"),
+      @SerializedName("last_week_sun_sat")
+      VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
+      @SerializedName("last_quarter")
+      VALUE_LAST_QUARTER("last_quarter"),
+      @SerializedName("last_year")
+      VALUE_LAST_YEAR("last_year"),
+      @SerializedName("this_week_mon_today")
+      VALUE_THIS_WEEK_MON_TODAY("this_week_mon_today"),
+      @SerializedName("this_week_sun_today")
+      VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
+      @SerializedName("this_year")
+      VALUE_THIS_YEAR("this_year"),
       NULL(null);
 
       private String value;

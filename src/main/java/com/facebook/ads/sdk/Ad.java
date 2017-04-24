@@ -307,10 +307,6 @@ public class Ad extends APINode {
     return new APIRequestGetPreviews(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetReachEstimate getReachEstimate() {
-    return new APIRequestGetReachEstimate(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetTargetingSentenceLines getTargetingSentenceLines() {
     return new APIRequestGetTargetingSentenceLines(this.getPrefixedId().toString(), context);
   }
@@ -463,7 +459,7 @@ public class Ad extends APINode {
       "object_url",
       "platform_customizations",
       "product_set_id",
-      "run_status",
+      "status",
       "template_url",
       "template_url_spec",
       "thumbnail_url",
@@ -717,11 +713,11 @@ public class Ad extends APINode {
       this.requestField("product_set_id", value);
       return this;
     }
-    public APIRequestGetAdCreatives requestRunStatusField () {
-      return this.requestRunStatusField(true);
+    public APIRequestGetAdCreatives requestStatusField () {
+      return this.requestStatusField(true);
     }
-    public APIRequestGetAdCreatives requestRunStatusField (boolean value) {
-      this.requestField("run_status", value);
+    public APIRequestGetAdCreatives requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
     public APIRequestGetAdCreatives requestTemplateUrlField () {
@@ -2123,148 +2119,6 @@ public class Ad extends APINode {
     }
   }
 
-  public static class APIRequestGetReachEstimate extends APIRequest<ReachEstimate> {
-
-    APINodeList<ReachEstimate> lastResponse = null;
-    @Override
-    public APINodeList<ReachEstimate> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "currency",
-      "daily_budget",
-      "optimize_for",
-    };
-
-    public static final String[] FIELDS = {
-      "bid_estimations",
-      "estimate_ready",
-      "unsupported",
-      "users",
-    };
-
-    @Override
-    public APINodeList<ReachEstimate> parseResponse(String response) throws APIException {
-      return ReachEstimate.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<ReachEstimate> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<ReachEstimate> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGetReachEstimate(String nodeId, APIContext context) {
-      super(context, nodeId, "/reachestimate", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetReachEstimate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReachEstimate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetReachEstimate setCurrency (String currency) {
-      this.setParam("currency", currency);
-      return this;
-    }
-
-    public APIRequestGetReachEstimate setDailyBudget (Double dailyBudget) {
-      this.setParam("daily_budget", dailyBudget);
-      return this;
-    }
-    public APIRequestGetReachEstimate setDailyBudget (String dailyBudget) {
-      this.setParam("daily_budget", dailyBudget);
-      return this;
-    }
-
-    public APIRequestGetReachEstimate setOptimizeFor (ReachEstimate.EnumOptimizeFor optimizeFor) {
-      this.setParam("optimize_for", optimizeFor);
-      return this;
-    }
-    public APIRequestGetReachEstimate setOptimizeFor (String optimizeFor) {
-      this.setParam("optimize_for", optimizeFor);
-      return this;
-    }
-
-    public APIRequestGetReachEstimate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetReachEstimate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReachEstimate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetReachEstimate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReachEstimate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetReachEstimate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetReachEstimate requestBidEstimationsField () {
-      return this.requestBidEstimationsField(true);
-    }
-    public APIRequestGetReachEstimate requestBidEstimationsField (boolean value) {
-      this.requestField("bid_estimations", value);
-      return this;
-    }
-    public APIRequestGetReachEstimate requestEstimateReadyField () {
-      return this.requestEstimateReadyField(true);
-    }
-    public APIRequestGetReachEstimate requestEstimateReadyField (boolean value) {
-      this.requestField("estimate_ready", value);
-      return this;
-    }
-    public APIRequestGetReachEstimate requestUnsupportedField () {
-      return this.requestUnsupportedField(true);
-    }
-    public APIRequestGetReachEstimate requestUnsupportedField (boolean value) {
-      this.requestField("unsupported", value);
-      return this;
-    }
-    public APIRequestGetReachEstimate requestUsersField () {
-      return this.requestUsersField(true);
-    }
-    public APIRequestGetReachEstimate requestUsersField (boolean value) {
-      this.requestField("users", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetTargetingSentenceLines extends APIRequest<TargetingSentenceLine> {
 
     APINodeList<TargetingSentenceLine> lastResponse = null;
@@ -3008,32 +2862,40 @@ public class Ad extends APINode {
       VALUE_TODAY("today"),
       @SerializedName("yesterday")
       VALUE_YESTERDAY("yesterday"),
-      @SerializedName("last_3_days")
-      VALUE_LAST_3_DAYS("last_3_days"),
-      @SerializedName("this_week")
-      VALUE_THIS_WEEK("this_week"),
-      @SerializedName("last_week")
-      VALUE_LAST_WEEK("last_week"),
-      @SerializedName("last_7_days")
-      VALUE_LAST_7_DAYS("last_7_days"),
-      @SerializedName("last_14_days")
-      VALUE_LAST_14_DAYS("last_14_days"),
-      @SerializedName("last_28_days")
-      VALUE_LAST_28_DAYS("last_28_days"),
-      @SerializedName("last_30_days")
-      VALUE_LAST_30_DAYS("last_30_days"),
-      @SerializedName("last_90_days")
-      VALUE_LAST_90_DAYS("last_90_days"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("last_month")
       VALUE_LAST_MONTH("last_month"),
       @SerializedName("this_quarter")
       VALUE_THIS_QUARTER("this_quarter"),
-      @SerializedName("last_3_months")
-      VALUE_LAST_3_MONTHS("last_3_months"),
       @SerializedName("lifetime")
       VALUE_LIFETIME("lifetime"),
+      @SerializedName("last_3d")
+      VALUE_LAST_3D("last_3d"),
+      @SerializedName("last_7d")
+      VALUE_LAST_7D("last_7d"),
+      @SerializedName("last_14d")
+      VALUE_LAST_14D("last_14d"),
+      @SerializedName("last_28d")
+      VALUE_LAST_28D("last_28d"),
+      @SerializedName("last_30d")
+      VALUE_LAST_30D("last_30d"),
+      @SerializedName("last_90d")
+      VALUE_LAST_90D("last_90d"),
+      @SerializedName("last_week_mon_sun")
+      VALUE_LAST_WEEK_MON_SUN("last_week_mon_sun"),
+      @SerializedName("last_week_sun_sat")
+      VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
+      @SerializedName("last_quarter")
+      VALUE_LAST_QUARTER("last_quarter"),
+      @SerializedName("last_year")
+      VALUE_LAST_YEAR("last_year"),
+      @SerializedName("this_week_mon_today")
+      VALUE_THIS_WEEK_MON_TODAY("this_week_mon_today"),
+      @SerializedName("this_week_sun_today")
+      VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
+      @SerializedName("this_year")
+      VALUE_THIS_YEAR("this_year"),
       NULL(null);
 
       private String value;

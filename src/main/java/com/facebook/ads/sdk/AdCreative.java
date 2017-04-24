@@ -101,8 +101,8 @@ public class AdCreative extends APINode {
   private Object mPlatformCustomizations = null;
   @SerializedName("product_set_id")
   private String mProductSetId = null;
-  @SerializedName("run_status")
-  private EnumRunStatus mRunStatus = null;
+  @SerializedName("status")
+  private EnumStatus mStatus = null;
   @SerializedName("template_url")
   private String mTemplateUrl = null;
   @SerializedName("template_url_spec")
@@ -568,12 +568,12 @@ public class AdCreative extends APINode {
     return this;
   }
 
-  public EnumRunStatus getFieldRunStatus() {
-    return mRunStatus;
+  public EnumStatus getFieldStatus() {
+    return mStatus;
   }
 
-  public AdCreative setFieldRunStatus(EnumRunStatus value) {
-    this.mRunStatus = value;
+  public AdCreative setFieldStatus(EnumStatus value) {
+    this.mStatus = value;
     return this;
   }
 
@@ -1011,7 +1011,7 @@ public class AdCreative extends APINode {
       "account_id",
       "adlabels",
       "name",
-      "run_status",
+      "status",
     };
 
     public static final String[] FIELDS = {
@@ -1069,12 +1069,12 @@ public class AdCreative extends APINode {
       return this;
     }
 
-    public APIRequestDelete setRunStatus (Long runStatus) {
-      this.setParam("run_status", runStatus);
+    public APIRequestDelete setStatus (AdCreative.EnumStatus status) {
+      this.setParam("status", status);
       return this;
     }
-    public APIRequestDelete setRunStatus (String runStatus) {
-      this.setParam("run_status", runStatus);
+    public APIRequestDelete setStatus (String status) {
+      this.setParam("status", status);
       return this;
     }
 
@@ -1154,7 +1154,7 @@ public class AdCreative extends APINode {
       "object_url",
       "platform_customizations",
       "product_set_id",
-      "run_status",
+      "status",
       "template_url",
       "template_url_spec",
       "thumbnail_url",
@@ -1426,11 +1426,11 @@ public class AdCreative extends APINode {
       this.requestField("product_set_id", value);
       return this;
     }
-    public APIRequestGet requestRunStatusField () {
-      return this.requestRunStatusField(true);
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
     }
-    public APIRequestGet requestRunStatusField (boolean value) {
-      this.requestField("run_status", value);
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
     public APIRequestGet requestTemplateUrlField () {
@@ -1495,7 +1495,7 @@ public class AdCreative extends APINode {
       "account_id",
       "adlabels",
       "name",
-      "run_status",
+      "status",
     };
 
     public static final String[] FIELDS = {
@@ -1553,12 +1553,12 @@ public class AdCreative extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setRunStatus (Long runStatus) {
-      this.setParam("run_status", runStatus);
+    public APIRequestUpdate setStatus (AdCreative.EnumStatus status) {
+      this.setParam("status", status);
       return this;
     }
-    public APIRequestUpdate setRunStatus (String runStatus) {
-      this.setParam("run_status", runStatus);
+    public APIRequestUpdate setStatus (String status) {
+      this.setParam("status", status);
       return this;
     }
 
@@ -1741,7 +1741,7 @@ public class AdCreative extends APINode {
       }
   }
 
-  public static enum EnumRunStatus {
+  public static enum EnumStatus {
       @SerializedName("ACTIVE")
       VALUE_ACTIVE("ACTIVE"),
       @SerializedName("DELETED")
@@ -1750,7 +1750,7 @@ public class AdCreative extends APINode {
 
       private String value;
 
-      private EnumRunStatus(String value) {
+      private EnumStatus(String value) {
         this.value = value;
       }
 
@@ -1838,7 +1838,7 @@ public class AdCreative extends APINode {
     this.mObjectUrl = instance.mObjectUrl;
     this.mPlatformCustomizations = instance.mPlatformCustomizations;
     this.mProductSetId = instance.mProductSetId;
-    this.mRunStatus = instance.mRunStatus;
+    this.mStatus = instance.mStatus;
     this.mTemplateUrl = instance.mTemplateUrl;
     this.mTemplateUrlSpec = instance.mTemplateUrlSpec;
     this.mThumbnailUrl = instance.mThumbnailUrl;

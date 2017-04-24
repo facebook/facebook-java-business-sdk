@@ -79,10 +79,6 @@ public class CustomConversion extends APINode {
   private Object mOfflineConversionDataSet = null;
   @SerializedName("pixel")
   private AdsPixel mPixel = null;
-  @SerializedName("pixel_aggregation_rule")
-  private String mPixelAggregationRule = null;
-  @SerializedName("pixel_rule")
-  private String mPixelRule = null;
   @SerializedName("retention_days")
   private Long mRetentionDays = null;
   @SerializedName("rule")
@@ -345,14 +341,6 @@ public class CustomConversion extends APINode {
       mPixel.context = getContext();
     }
     return mPixel;
-  }
-
-  public String getFieldPixelAggregationRule() {
-    return mPixelAggregationRule;
-  }
-
-  public String getFieldPixelRule() {
-    return mPixelRule;
   }
 
   public Long getFieldRetentionDays() {
@@ -710,8 +698,6 @@ public class CustomConversion extends APINode {
       "name",
       "offline_conversion_data_set",
       "pixel",
-      "pixel_aggregation_rule",
-      "pixel_rule",
       "retention_days",
       "rule",
     };
@@ -881,20 +867,6 @@ public class CustomConversion extends APINode {
     }
     public APIRequestGet requestPixelField (boolean value) {
       this.requestField("pixel", value);
-      return this;
-    }
-    public APIRequestGet requestPixelAggregationRuleField () {
-      return this.requestPixelAggregationRuleField(true);
-    }
-    public APIRequestGet requestPixelAggregationRuleField (boolean value) {
-      this.requestField("pixel_aggregation_rule", value);
-      return this;
-    }
-    public APIRequestGet requestPixelRuleField () {
-      return this.requestPixelRuleField(true);
-    }
-    public APIRequestGet requestPixelRuleField (boolean value) {
-      this.requestField("pixel_rule", value);
       return this;
     }
     public APIRequestGet requestRetentionDaysField () {
@@ -1104,8 +1076,6 @@ public class CustomConversion extends APINode {
     this.mName = instance.mName;
     this.mOfflineConversionDataSet = instance.mOfflineConversionDataSet;
     this.mPixel = instance.mPixel;
-    this.mPixelAggregationRule = instance.mPixelAggregationRule;
-    this.mPixelRule = instance.mPixelRule;
     this.mRetentionDays = instance.mRetentionDays;
     this.mRule = instance.mRule;
     this.context = instance.context;

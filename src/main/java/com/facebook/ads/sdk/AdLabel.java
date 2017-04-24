@@ -331,7 +331,7 @@ public class AdLabel extends APINode {
       "object_url",
       "platform_customizations",
       "product_set_id",
-      "run_status",
+      "status",
       "template_url",
       "template_url_spec",
       "thumbnail_url",
@@ -585,11 +585,11 @@ public class AdLabel extends APINode {
       this.requestField("product_set_id", value);
       return this;
     }
-    public APIRequestGetAdCreatives requestRunStatusField () {
-      return this.requestRunStatusField(true);
+    public APIRequestGetAdCreatives requestStatusField () {
+      return this.requestStatusField(true);
     }
-    public APIRequestGetAdCreatives requestRunStatusField (boolean value) {
-      this.requestField("run_status", value);
+    public APIRequestGetAdCreatives requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
     public APIRequestGetAdCreatives requestTemplateUrlField () {
@@ -917,7 +917,7 @@ public class AdLabel extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
-      "attribution_window_days",
+      "attribution_spec",
       "bid_amount",
       "bid_info",
       "billing_event",
@@ -954,7 +954,6 @@ public class AdLabel extends APINode {
       "time_based_ad_rotation_intervals",
       "updated_time",
       "use_new_app_click",
-      "view_through_attribution_window_days",
     };
 
     @Override
@@ -1047,11 +1046,11 @@ public class AdLabel extends APINode {
       this.requestField("adset_schedule", value);
       return this;
     }
-    public APIRequestGetAdSets requestAttributionWindowDaysField () {
-      return this.requestAttributionWindowDaysField(true);
+    public APIRequestGetAdSets requestAttributionSpecField () {
+      return this.requestAttributionSpecField(true);
     }
-    public APIRequestGetAdSets requestAttributionWindowDaysField (boolean value) {
-      this.requestField("attribution_window_days", value);
+    public APIRequestGetAdSets requestAttributionSpecField (boolean value) {
+      this.requestField("attribution_spec", value);
       return this;
     }
     public APIRequestGetAdSets requestBidAmountField () {
@@ -1304,13 +1303,6 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestUseNewAppClickField (boolean value) {
       this.requestField("use_new_app_click", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestViewThroughAttributionWindowDaysField () {
-      return this.requestViewThroughAttributionWindowDaysField(true);
-    }
-    public APIRequestGetAdSets requestViewThroughAttributionWindowDaysField (boolean value) {
-      this.requestField("view_through_attribution_window_days", value);
       return this;
     }
   }

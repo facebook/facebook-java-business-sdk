@@ -153,12 +153,6 @@ public class AdsInsights extends APINode {
   private String mInlineLinkClicks = null;
   @SerializedName("inline_post_engagement")
   private String mInlinePostEngagement = null;
-  @SerializedName("newsfeed_avg_position")
-  private String mNewsfeedAvgPosition = null;
-  @SerializedName("newsfeed_clicks")
-  private String mNewsfeedClicks = null;
-  @SerializedName("newsfeed_impressions")
-  private String mNewsfeedImpressions = null;
   @SerializedName("objective")
   private String mObjective = null;
   @SerializedName("place_page_id")
@@ -197,8 +191,6 @@ public class AdsInsights extends APINode {
   private String mUniqueClicks = null;
   @SerializedName("unique_ctr")
   private String mUniqueCtr = null;
-  @SerializedName("unique_impressions")
-  private String mUniqueImpressions = null;
   @SerializedName("unique_inline_link_click_ctr")
   private String mUniqueInlineLinkClickCtr = null;
   @SerializedName("unique_inline_link_clicks")
@@ -207,24 +199,16 @@ public class AdsInsights extends APINode {
   private String mUniqueLinkClicksCtr = null;
   @SerializedName("unique_social_clicks")
   private String mUniqueSocialClicks = null;
-  @SerializedName("unique_social_impressions")
-  private String mUniqueSocialImpressions = null;
   @SerializedName("video_10_sec_watched_actions")
   private List<AdsActionStats> mVideo10SecWatchedActions = null;
   @SerializedName("video_15_sec_watched_actions")
   private List<AdsActionStats> mVideo15SecWatchedActions = null;
   @SerializedName("video_30_sec_watched_actions")
   private List<AdsActionStats> mVideo30SecWatchedActions = null;
-  @SerializedName("video_avg_pct_watched_actions")
-  private List<AdsActionStats> mVideoAvgPctWatchedActions = null;
   @SerializedName("video_avg_percent_watched_actions")
   private List<AdsActionStats> mVideoAvgPercentWatchedActions = null;
-  @SerializedName("video_avg_sec_watched_actions")
-  private List<AdsActionStats> mVideoAvgSecWatchedActions = null;
   @SerializedName("video_avg_time_watched_actions")
   private List<AdsActionStats> mVideoAvgTimeWatchedActions = null;
-  @SerializedName("video_complete_watched_actions")
-  private List<AdsActionStats> mVideoCompleteWatchedActions = null;
   @SerializedName("video_p100_watched_actions")
   private List<AdsActionStats> mVideoP100WatchedActions = null;
   @SerializedName("video_p25_watched_actions")
@@ -869,33 +853,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public String getFieldNewsfeedAvgPosition() {
-    return mNewsfeedAvgPosition;
-  }
-
-  public AdsInsights setFieldNewsfeedAvgPosition(String value) {
-    this.mNewsfeedAvgPosition = value;
-    return this;
-  }
-
-  public String getFieldNewsfeedClicks() {
-    return mNewsfeedClicks;
-  }
-
-  public AdsInsights setFieldNewsfeedClicks(String value) {
-    this.mNewsfeedClicks = value;
-    return this;
-  }
-
-  public String getFieldNewsfeedImpressions() {
-    return mNewsfeedImpressions;
-  }
-
-  public AdsInsights setFieldNewsfeedImpressions(String value) {
-    this.mNewsfeedImpressions = value;
-    return this;
-  }
-
   public String getFieldObjective() {
     return mObjective;
   }
@@ -1077,15 +1034,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public String getFieldUniqueImpressions() {
-    return mUniqueImpressions;
-  }
-
-  public AdsInsights setFieldUniqueImpressions(String value) {
-    this.mUniqueImpressions = value;
-    return this;
-  }
-
   public String getFieldUniqueInlineLinkClickCtr() {
     return mUniqueInlineLinkClickCtr;
   }
@@ -1119,15 +1067,6 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldUniqueSocialClicks(String value) {
     this.mUniqueSocialClicks = value;
-    return this;
-  }
-
-  public String getFieldUniqueSocialImpressions() {
-    return mUniqueSocialImpressions;
-  }
-
-  public AdsInsights setFieldUniqueSocialImpressions(String value) {
-    this.mUniqueSocialImpressions = value;
     return this;
   }
 
@@ -1173,20 +1112,6 @@ public class AdsInsights extends APINode {
     this.mVideo30SecWatchedActions = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
-  public List<AdsActionStats> getFieldVideoAvgPctWatchedActions() {
-    return mVideoAvgPctWatchedActions;
-  }
-
-  public AdsInsights setFieldVideoAvgPctWatchedActions(List<AdsActionStats> value) {
-    this.mVideoAvgPctWatchedActions = value;
-    return this;
-  }
-
-  public AdsInsights setFieldVideoAvgPctWatchedActions(String value) {
-    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
-    this.mVideoAvgPctWatchedActions = AdsActionStats.getGson().fromJson(value, type);
-    return this;
-  }
   public List<AdsActionStats> getFieldVideoAvgPercentWatchedActions() {
     return mVideoAvgPercentWatchedActions;
   }
@@ -1201,20 +1126,6 @@ public class AdsInsights extends APINode {
     this.mVideoAvgPercentWatchedActions = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
-  public List<AdsActionStats> getFieldVideoAvgSecWatchedActions() {
-    return mVideoAvgSecWatchedActions;
-  }
-
-  public AdsInsights setFieldVideoAvgSecWatchedActions(List<AdsActionStats> value) {
-    this.mVideoAvgSecWatchedActions = value;
-    return this;
-  }
-
-  public AdsInsights setFieldVideoAvgSecWatchedActions(String value) {
-    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
-    this.mVideoAvgSecWatchedActions = AdsActionStats.getGson().fromJson(value, type);
-    return this;
-  }
   public List<AdsActionStats> getFieldVideoAvgTimeWatchedActions() {
     return mVideoAvgTimeWatchedActions;
   }
@@ -1227,20 +1138,6 @@ public class AdsInsights extends APINode {
   public AdsInsights setFieldVideoAvgTimeWatchedActions(String value) {
     Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
     this.mVideoAvgTimeWatchedActions = AdsActionStats.getGson().fromJson(value, type);
-    return this;
-  }
-  public List<AdsActionStats> getFieldVideoCompleteWatchedActions() {
-    return mVideoCompleteWatchedActions;
-  }
-
-  public AdsInsights setFieldVideoCompleteWatchedActions(List<AdsActionStats> value) {
-    this.mVideoCompleteWatchedActions = value;
-    return this;
-  }
-
-  public AdsInsights setFieldVideoCompleteWatchedActions(String value) {
-    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
-    this.mVideoCompleteWatchedActions = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
   public List<AdsActionStats> getFieldVideoP100WatchedActions() {
@@ -1440,8 +1337,6 @@ public class AdsInsights extends APINode {
       VALUE_IMPRESSION_DEVICE("impression_device"),
       @SerializedName("place_page_id")
       VALUE_PLACE_PAGE_ID("place_page_id"),
-      @SerializedName("placement")
-      VALUE_PLACEMENT("placement"),
       @SerializedName("publisher_platform")
       VALUE_PUBLISHER_PLATFORM("publisher_platform"),
       @SerializedName("platform_position")
@@ -1471,32 +1366,40 @@ public class AdsInsights extends APINode {
       VALUE_TODAY("today"),
       @SerializedName("yesterday")
       VALUE_YESTERDAY("yesterday"),
-      @SerializedName("last_3_days")
-      VALUE_LAST_3_DAYS("last_3_days"),
-      @SerializedName("this_week")
-      VALUE_THIS_WEEK("this_week"),
-      @SerializedName("last_week")
-      VALUE_LAST_WEEK("last_week"),
-      @SerializedName("last_7_days")
-      VALUE_LAST_7_DAYS("last_7_days"),
-      @SerializedName("last_14_days")
-      VALUE_LAST_14_DAYS("last_14_days"),
-      @SerializedName("last_28_days")
-      VALUE_LAST_28_DAYS("last_28_days"),
-      @SerializedName("last_30_days")
-      VALUE_LAST_30_DAYS("last_30_days"),
-      @SerializedName("last_90_days")
-      VALUE_LAST_90_DAYS("last_90_days"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("last_month")
       VALUE_LAST_MONTH("last_month"),
       @SerializedName("this_quarter")
       VALUE_THIS_QUARTER("this_quarter"),
-      @SerializedName("last_3_months")
-      VALUE_LAST_3_MONTHS("last_3_months"),
       @SerializedName("lifetime")
       VALUE_LIFETIME("lifetime"),
+      @SerializedName("last_3d")
+      VALUE_LAST_3D("last_3d"),
+      @SerializedName("last_7d")
+      VALUE_LAST_7D("last_7d"),
+      @SerializedName("last_14d")
+      VALUE_LAST_14D("last_14d"),
+      @SerializedName("last_28d")
+      VALUE_LAST_28D("last_28d"),
+      @SerializedName("last_30d")
+      VALUE_LAST_30D("last_30d"),
+      @SerializedName("last_90d")
+      VALUE_LAST_90D("last_90d"),
+      @SerializedName("last_week_mon_sun")
+      VALUE_LAST_WEEK_MON_SUN("last_week_mon_sun"),
+      @SerializedName("last_week_sun_sat")
+      VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
+      @SerializedName("last_quarter")
+      VALUE_LAST_QUARTER("last_quarter"),
+      @SerializedName("last_year")
+      VALUE_LAST_YEAR("last_year"),
+      @SerializedName("this_week_mon_today")
+      VALUE_THIS_WEEK_MON_TODAY("this_week_mon_today"),
+      @SerializedName("this_week_sun_today")
+      VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
+      @SerializedName("this_year")
+      VALUE_THIS_YEAR("this_year"),
       NULL(null);
 
       private String value;
@@ -1676,9 +1579,6 @@ public class AdsInsights extends APINode {
     this.mInlineLinkClickCtr = instance.mInlineLinkClickCtr;
     this.mInlineLinkClicks = instance.mInlineLinkClicks;
     this.mInlinePostEngagement = instance.mInlinePostEngagement;
-    this.mNewsfeedAvgPosition = instance.mNewsfeedAvgPosition;
-    this.mNewsfeedClicks = instance.mNewsfeedClicks;
-    this.mNewsfeedImpressions = instance.mNewsfeedImpressions;
     this.mObjective = instance.mObjective;
     this.mPlacePageId = instance.mPlacePageId;
     this.mPlacePageName = instance.mPlacePageName;
@@ -1698,20 +1598,15 @@ public class AdsInsights extends APINode {
     this.mUniqueActions = instance.mUniqueActions;
     this.mUniqueClicks = instance.mUniqueClicks;
     this.mUniqueCtr = instance.mUniqueCtr;
-    this.mUniqueImpressions = instance.mUniqueImpressions;
     this.mUniqueInlineLinkClickCtr = instance.mUniqueInlineLinkClickCtr;
     this.mUniqueInlineLinkClicks = instance.mUniqueInlineLinkClicks;
     this.mUniqueLinkClicksCtr = instance.mUniqueLinkClicksCtr;
     this.mUniqueSocialClicks = instance.mUniqueSocialClicks;
-    this.mUniqueSocialImpressions = instance.mUniqueSocialImpressions;
     this.mVideo10SecWatchedActions = instance.mVideo10SecWatchedActions;
     this.mVideo15SecWatchedActions = instance.mVideo15SecWatchedActions;
     this.mVideo30SecWatchedActions = instance.mVideo30SecWatchedActions;
-    this.mVideoAvgPctWatchedActions = instance.mVideoAvgPctWatchedActions;
     this.mVideoAvgPercentWatchedActions = instance.mVideoAvgPercentWatchedActions;
-    this.mVideoAvgSecWatchedActions = instance.mVideoAvgSecWatchedActions;
     this.mVideoAvgTimeWatchedActions = instance.mVideoAvgTimeWatchedActions;
-    this.mVideoCompleteWatchedActions = instance.mVideoCompleteWatchedActions;
     this.mVideoP100WatchedActions = instance.mVideoP100WatchedActions;
     this.mVideoP25WatchedActions = instance.mVideoP25WatchedActions;
     this.mVideoP50WatchedActions = instance.mVideoP50WatchedActions;

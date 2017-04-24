@@ -65,12 +65,8 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
   private String mLink = null;
   @SerializedName("link_caption")
   private String mLinkCaption = null;
-  @SerializedName("link_description")
-  private String mLinkDescription = null;
   @SerializedName("link_format")
   private String mLinkFormat = null;
-  @SerializedName("link_title")
-  private String mLinkTitle = null;
   @SerializedName("page")
   private String mPage = null;
   @SerializedName("product_link")
@@ -279,30 +275,12 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
     return this;
   }
 
-  public String getFieldLinkDescription() {
-    return mLinkDescription;
-  }
-
-  public AdCreativeLinkDataCallToActionValue setFieldLinkDescription(String value) {
-    this.mLinkDescription = value;
-    return this;
-  }
-
   public String getFieldLinkFormat() {
     return mLinkFormat;
   }
 
   public AdCreativeLinkDataCallToActionValue setFieldLinkFormat(String value) {
     this.mLinkFormat = value;
-    return this;
-  }
-
-  public String getFieldLinkTitle() {
-    return mLinkTitle;
-  }
-
-  public AdCreativeLinkDataCallToActionValue setFieldLinkTitle(String value) {
-    this.mLinkTitle = value;
     return this;
   }
 
@@ -348,9 +326,7 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
     this.mLeadGenFormId = instance.mLeadGenFormId;
     this.mLink = instance.mLink;
     this.mLinkCaption = instance.mLinkCaption;
-    this.mLinkDescription = instance.mLinkDescription;
     this.mLinkFormat = instance.mLinkFormat;
-    this.mLinkTitle = instance.mLinkTitle;
     this.mPage = instance.mPage;
     this.mProductLink = instance.mProductLink;
     this.context = instance.context;

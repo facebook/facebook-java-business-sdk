@@ -51,8 +51,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ReachEstimate extends APINode {
-  @SerializedName("bid_estimations")
-  private JsonArray mBidEstimations = null;
   @SerializedName("estimate_ready")
   private Boolean mEstimateReady = null;
   @SerializedName("unsupported")
@@ -200,15 +198,6 @@ public class ReachEstimate extends APINode {
   }
 
 
-  public JsonArray getFieldBidEstimations() {
-    return mBidEstimations;
-  }
-
-  public ReachEstimate setFieldBidEstimations(JsonArray value) {
-    this.mBidEstimations = value;
-    return this;
-  }
-
   public Boolean getFieldEstimateReady() {
     return mEstimateReady;
   }
@@ -304,7 +293,6 @@ public class ReachEstimate extends APINode {
   }
 
   public ReachEstimate copyFrom(ReachEstimate instance) {
-    this.mBidEstimations = instance.mBidEstimations;
     this.mEstimateReady = instance.mEstimateReady;
     this.mUnsupported = instance.mUnsupported;
     this.mUsers = instance.mUsers;

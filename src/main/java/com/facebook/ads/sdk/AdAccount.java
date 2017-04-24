@@ -1333,7 +1333,7 @@ public class AdAccount extends APINode {
       "object_url",
       "platform_customizations",
       "product_set_id",
-      "run_status",
+      "status",
       "template_url",
       "template_url_spec",
       "thumbnail_url",
@@ -1587,11 +1587,11 @@ public class AdAccount extends APINode {
       this.requestField("product_set_id", value);
       return this;
     }
-    public APIRequestGetAdCreatives requestRunStatusField () {
-      return this.requestRunStatusField(true);
+    public APIRequestGetAdCreatives requestStatusField () {
+      return this.requestStatusField(true);
     }
-    public APIRequestGetAdCreatives requestRunStatusField (boolean value) {
-      this.requestField("run_status", value);
+    public APIRequestGetAdCreatives requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
     public APIRequestGetAdCreatives requestTemplateUrlField () {
@@ -1653,14 +1653,12 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "action_spec",
       "actor_id",
       "adlabels",
       "applink_treatment",
       "body",
       "call_to_action",
       "dynamic_ad_voice",
-      "follow_redirect",
       "image_crops",
       "image_file",
       "image_hash",
@@ -1672,7 +1670,6 @@ public class AdAccount extends APINode {
       "link_url",
       "name",
       "object_id",
-      "object_instagram_id",
       "object_story_id",
       "object_story_spec",
       "object_type",
@@ -1723,15 +1720,6 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateAdCreative setActionSpec (List<Long> actionSpec) {
-      this.setParam("action_spec", actionSpec);
-      return this;
-    }
-    public APIRequestCreateAdCreative setActionSpec (String actionSpec) {
-      this.setParam("action_spec", actionSpec);
-      return this;
-    }
-
     public APIRequestCreateAdCreative setActorId (Long actorId) {
       this.setParam("actor_id", actorId);
       return this;
@@ -1779,15 +1767,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdCreative setDynamicAdVoice (String dynamicAdVoice) {
       this.setParam("dynamic_ad_voice", dynamicAdVoice);
-      return this;
-    }
-
-    public APIRequestCreateAdCreative setFollowRedirect (Boolean followRedirect) {
-      this.setParam("follow_redirect", followRedirect);
-      return this;
-    }
-    public APIRequestCreateAdCreative setFollowRedirect (String followRedirect) {
-      this.setParam("follow_redirect", followRedirect);
       return this;
     }
 
@@ -1855,15 +1834,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdCreative setObjectId (String objectId) {
       this.setParam("object_id", objectId);
-      return this;
-    }
-
-    public APIRequestCreateAdCreative setObjectInstagramId (Long objectInstagramId) {
-      this.setParam("object_instagram_id", objectInstagramId);
-      return this;
-    }
-    public APIRequestCreateAdCreative setObjectInstagramId (String objectInstagramId) {
-      this.setParam("object_instagram_id", objectInstagramId);
       return this;
     }
 
@@ -2019,7 +1989,7 @@ public class AdAccount extends APINode {
       "object_url",
       "platform_customizations",
       "product_set_id",
-      "run_status",
+      "status",
       "template_url",
       "template_url_spec",
       "thumbnail_url",
@@ -2291,11 +2261,11 @@ public class AdAccount extends APINode {
       this.requestField("product_set_id", value);
       return this;
     }
-    public APIRequestGetAdCreativesByLabels requestRunStatusField () {
-      return this.requestRunStatusField(true);
+    public APIRequestGetAdCreativesByLabels requestStatusField () {
+      return this.requestStatusField(true);
     }
-    public APIRequestGetAdCreativesByLabels requestRunStatusField (boolean value) {
-      this.requestField("run_status", value);
+    public APIRequestGetAdCreativesByLabels requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestTemplateUrlField () {
@@ -4115,7 +4085,7 @@ public class AdAccount extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
-      "attribution_window_days",
+      "attribution_spec",
       "bid_amount",
       "bid_info",
       "billing_event",
@@ -4152,7 +4122,6 @@ public class AdAccount extends APINode {
       "time_based_ad_rotation_intervals",
       "updated_time",
       "use_new_app_click",
-      "view_through_attribution_window_days",
     };
 
     @Override
@@ -4295,11 +4264,11 @@ public class AdAccount extends APINode {
       this.requestField("adset_schedule", value);
       return this;
     }
-    public APIRequestGetAdSets requestAttributionWindowDaysField () {
-      return this.requestAttributionWindowDaysField(true);
+    public APIRequestGetAdSets requestAttributionSpecField () {
+      return this.requestAttributionSpecField(true);
     }
-    public APIRequestGetAdSets requestAttributionWindowDaysField (boolean value) {
-      this.requestField("attribution_window_days", value);
+    public APIRequestGetAdSets requestAttributionSpecField (boolean value) {
+      this.requestField("attribution_spec", value);
       return this;
     }
     public APIRequestGetAdSets requestBidAmountField () {
@@ -4554,13 +4523,6 @@ public class AdAccount extends APINode {
       this.requestField("use_new_app_click", value);
       return this;
     }
-    public APIRequestGetAdSets requestViewThroughAttributionWindowDaysField () {
-      return this.requestViewThroughAttributionWindowDaysField(true);
-    }
-    public APIRequestGetAdSets requestViewThroughAttributionWindowDaysField (boolean value) {
-      this.requestField("view_through_attribution_window_days", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreateAdSet extends APIRequest<AdSet> {
@@ -4573,7 +4535,7 @@ public class AdAccount extends APINode {
     public static final String[] PARAMS = {
       "adlabels",
       "adset_schedule",
-      "attribution_window_days",
+      "attribution_spec",
       "bid_amount",
       "billing_event",
       "campaign_id",
@@ -4600,7 +4562,6 @@ public class AdAccount extends APINode {
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
-      "view_through_attribution_window_days",
     };
 
     public static final String[] FIELDS = {
@@ -4657,12 +4618,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdSet setAttributionWindowDays (Long attributionWindowDays) {
-      this.setParam("attribution_window_days", attributionWindowDays);
+    public APIRequestCreateAdSet setAttributionSpec (List<Map<String, String>> attributionSpec) {
+      this.setParam("attribution_spec", attributionSpec);
       return this;
     }
-    public APIRequestCreateAdSet setAttributionWindowDays (String attributionWindowDays) {
-      this.setParam("attribution_window_days", attributionWindowDays);
+    public APIRequestCreateAdSet setAttributionSpec (String attributionSpec) {
+      this.setParam("attribution_spec", attributionSpec);
       return this;
     }
 
@@ -4880,15 +4841,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdSet setViewThroughAttributionWindowDays (Long viewThroughAttributionWindowDays) {
-      this.setParam("view_through_attribution_window_days", viewThroughAttributionWindowDays);
-      return this;
-    }
-    public APIRequestCreateAdSet setViewThroughAttributionWindowDays (String viewThroughAttributionWindowDays) {
-      this.setParam("view_through_attribution_window_days", viewThroughAttributionWindowDays);
-      return this;
-    }
-
     public APIRequestCreateAdSet requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -4943,7 +4895,7 @@ public class AdAccount extends APINode {
       "account_id",
       "adlabels",
       "adset_schedule",
-      "attribution_window_days",
+      "attribution_spec",
       "bid_amount",
       "bid_info",
       "billing_event",
@@ -4980,7 +4932,6 @@ public class AdAccount extends APINode {
       "time_based_ad_rotation_intervals",
       "updated_time",
       "use_new_app_click",
-      "view_through_attribution_window_days",
     };
 
     @Override
@@ -5091,11 +5042,11 @@ public class AdAccount extends APINode {
       this.requestField("adset_schedule", value);
       return this;
     }
-    public APIRequestGetAdSetsByLabels requestAttributionWindowDaysField () {
-      return this.requestAttributionWindowDaysField(true);
+    public APIRequestGetAdSetsByLabels requestAttributionSpecField () {
+      return this.requestAttributionSpecField(true);
     }
-    public APIRequestGetAdSetsByLabels requestAttributionWindowDaysField (boolean value) {
-      this.requestField("attribution_window_days", value);
+    public APIRequestGetAdSetsByLabels requestAttributionSpecField (boolean value) {
+      this.requestField("attribution_spec", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestBidAmountField () {
@@ -5348,13 +5299,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestUseNewAppClickField (boolean value) {
       this.requestField("use_new_app_click", value);
-      return this;
-    }
-    public APIRequestGetAdSetsByLabels requestViewThroughAttributionWindowDaysField () {
-      return this.requestViewThroughAttributionWindowDaysField(true);
-    }
-    public APIRequestGetAdSetsByLabels requestViewThroughAttributionWindowDaysField (boolean value) {
-      this.requestField("view_through_attribution_window_days", value);
       return this;
     }
   }
@@ -7919,9 +7863,6 @@ public class AdAccount extends APINode {
       "description",
       "event_source_id",
       "name",
-      "pixel_aggregation_rule",
-      "pixel_id",
-      "pixel_rule",
       "retention_days",
       "rule",
     };
@@ -7997,21 +7938,6 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateCustomConversion setName (String name) {
       this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateCustomConversion setPixelAggregationRule (String pixelAggregationRule) {
-      this.setParam("pixel_aggregation_rule", pixelAggregationRule);
-      return this;
-    }
-
-    public APIRequestCreateCustomConversion setPixelId (String pixelId) {
-      this.setParam("pixel_id", pixelId);
-      return this;
-    }
-
-    public APIRequestCreateCustomConversion setPixelRule (String pixelRule) {
-      this.setParam("pixel_rule", pixelRule);
       return this;
     }
 
@@ -10491,7 +10417,6 @@ public class AdAccount extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "bid_estimations",
       "estimate_ready",
       "unsupported",
       "users",
@@ -10603,13 +10528,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetReachEstimate requestBidEstimationsField () {
-      return this.requestBidEstimationsField(true);
-    }
-    public APIRequestGetReachEstimate requestBidEstimationsField (boolean value) {
-      this.requestField("bid_estimations", value);
-      return this;
-    }
     public APIRequestGetReachEstimate requestEstimateReadyField () {
       return this.requestEstimateReadyField(true);
     }

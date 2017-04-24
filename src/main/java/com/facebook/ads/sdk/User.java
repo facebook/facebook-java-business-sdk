@@ -135,6 +135,8 @@ public class User extends APINode {
   private Object mSecuritySettings = null;
   @SerializedName("shared_login_upgrade_required_by")
   private String mSharedLoginUpgradeRequiredBy = null;
+  @SerializedName("short_name")
+  private String mShortName = null;
   @SerializedName("significant_other")
   private User mSignificantOther = null;
   @SerializedName("sports")
@@ -534,6 +536,10 @@ public class User extends APINode {
 
   public String getFieldSharedLoginUpgradeRequiredBy() {
     return mSharedLoginUpgradeRequiredBy;
+  }
+
+  public String getFieldShortName() {
+    return mShortName;
   }
 
   public User getFieldSignificantOther() {
@@ -2126,6 +2132,7 @@ public class User extends APINode {
       "religion",
       "security_settings",
       "shared_login_upgrade_required_by",
+      "short_name",
       "significant_other",
       "sports",
       "test_group",
@@ -2503,6 +2510,13 @@ public class User extends APINode {
       this.requestField("shared_login_upgrade_required_by", value);
       return this;
     }
+    public APIRequestGet requestShortNameField () {
+      return this.requestShortNameField(true);
+    }
+    public APIRequestGet requestShortNameField (boolean value) {
+      this.requestField("short_name", value);
+      return this;
+    }
     public APIRequestGet requestSignificantOtherField () {
       return this.requestSignificantOtherField(true);
     }
@@ -2646,6 +2660,7 @@ public class User extends APINode {
     this.mReligion = instance.mReligion;
     this.mSecuritySettings = instance.mSecuritySettings;
     this.mSharedLoginUpgradeRequiredBy = instance.mSharedLoginUpgradeRequiredBy;
+    this.mShortName = instance.mShortName;
     this.mSignificantOther = instance.mSignificantOther;
     this.mSports = instance.mSports;
     this.mTestGroup = instance.mTestGroup;

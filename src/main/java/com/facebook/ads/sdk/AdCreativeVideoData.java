@@ -57,12 +57,14 @@ public class AdCreativeVideoData extends APINode {
   private String mBrandedContentSponsorRelationship = null;
   @SerializedName("call_to_action")
   private AdCreativeLinkDataCallToAction mCallToAction = null;
-  @SerializedName("description")
-  private String mDescription = null;
   @SerializedName("image_hash")
   private String mImageHash = null;
   @SerializedName("image_url")
   private String mImageUrl = null;
+  @SerializedName("link_description")
+  private String mLinkDescription = null;
+  @SerializedName("message")
+  private String mMessage = null;
   @SerializedName("offer_id")
   private String mOfferId = null;
   @SerializedName("page_welcome_message")
@@ -246,15 +248,6 @@ public class AdCreativeVideoData extends APINode {
     this.mCallToAction = AdCreativeLinkDataCallToAction.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldDescription() {
-    return mDescription;
-  }
-
-  public AdCreativeVideoData setFieldDescription(String value) {
-    this.mDescription = value;
-    return this;
-  }
-
   public String getFieldImageHash() {
     return mImageHash;
   }
@@ -270,6 +263,24 @@ public class AdCreativeVideoData extends APINode {
 
   public AdCreativeVideoData setFieldImageUrl(String value) {
     this.mImageUrl = value;
+    return this;
+  }
+
+  public String getFieldLinkDescription() {
+    return mLinkDescription;
+  }
+
+  public AdCreativeVideoData setFieldLinkDescription(String value) {
+    this.mLinkDescription = value;
+    return this;
+  }
+
+  public String getFieldMessage() {
+    return mMessage;
+  }
+
+  public AdCreativeVideoData setFieldMessage(String value) {
+    this.mMessage = value;
     return this;
   }
 
@@ -343,9 +354,10 @@ public class AdCreativeVideoData extends APINode {
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
     this.mBrandedContentSponsorRelationship = instance.mBrandedContentSponsorRelationship;
     this.mCallToAction = instance.mCallToAction;
-    this.mDescription = instance.mDescription;
     this.mImageHash = instance.mImageHash;
     this.mImageUrl = instance.mImageUrl;
+    this.mLinkDescription = instance.mLinkDescription;
+    this.mMessage = instance.mMessage;
     this.mOfferId = instance.mOfferId;
     this.mPageWelcomeMessage = instance.mPageWelcomeMessage;
     this.mTargeting = instance.mTargeting;

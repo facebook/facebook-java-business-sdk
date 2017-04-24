@@ -1786,14 +1786,14 @@ public class ProductItem extends APINode {
   }
 
   public static enum EnumShippingWeightUnit {
-      @SerializedName("lb")
-      VALUE_LB("lb"),
-      @SerializedName("oz")
-      VALUE_OZ("oz"),
       @SerializedName("g")
       VALUE_G("g"),
       @SerializedName("kg")
       VALUE_KG("kg"),
+      @SerializedName("oz")
+      VALUE_OZ("oz"),
+      @SerializedName("lb")
+      VALUE_LB("lb"),
       NULL(null);
 
       private String value;
