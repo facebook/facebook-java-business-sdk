@@ -234,14 +234,14 @@ The error message can be obtained by calling getMessage(), getRawResponse(), or 
 
 ### Customisation and Debugging
 
-####Enable debugging
+#### Enable debugging
 You can enable the debug output by setting the APIContext to debug mode:
 
     public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true).setLogger(System.out);
 
 This will print out the network requests and responses. By default it prints on STDOUT, but you can customise by calling .setLogger(PrintSteam)
 
-####Customise Network
+#### Customise Network
 In v0.2.0, we added APIRequest.changeRequestExecutor(IRequestExecutor), which can be used to set your own network request executor. This makes it possible to add proxy settings, automatic retry, or better network traffic management. See ``/example/NetworkCustomizationExample.java``.
 
 Currently this is a static method because it is likely to be a global setting. If you do think object-level Customisation is needed, we'll add that functionality.
@@ -259,7 +259,7 @@ The executor needs to implement ``IRequestExecutor`` interface:
 
 ``DefaultRequestExecutor`` is used by default, and it is also a good starting point for Customisation.
 
-####Missing or Incorrect Request Params/Fields
+#### Missing or Incorrect Request Params/Fields
 It is recommended to use setXXX() or requestXXXField() to construct a proper APIRequest, which prevents mis-spelling of parameter/field names. However, if you believe that some needed params/fields are missing from these methods, you can call:
 
 ```java
@@ -271,14 +271,14 @@ This also works if you believe the type of the param is not correct in SDK.
 
 In this case, please help us make improvement by filing issues.
 
-####Missing Fields in Class Definition
+#### Missing Fields in Class Definition
 If you believe that certain fields are returned from server, but they are missing in class definition, then you can still access those fields by fetching it from raw response:
 
 	campaign.getRawResponseAsJsonObject().get("field").getAsString();
 	
 This situation can occasionally happen if new fields are added to server response while SDK is not up-to-date. We'll update the SDK periodically to include new fields.
 
-####Ad-hoc APIRequest
+#### Ad-hoc APIRequest
 Most of Marketing API can be found in SDK classes. If you don't find the one you want to access, it is possible to construct an Ad-hoc APIRequest:
 
 ```java
@@ -295,7 +295,7 @@ When constructing the APIRequest, you need to provide
 * The parser for expected response type. You can use null if it is not in SDK, which will return APINodeList<APINode> when executed.
 
 
-####FailedRequestException Troubleshooting
+#### FailedRequestException Troubleshooting
 There are many possible causes for a failed request:
 
 * Incorrect parameters are provided in the API request (check <a href="https://developers.facebook.com/docs/marketing-apis">Marketing API Docs</a>)
