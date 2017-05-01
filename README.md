@@ -1,12 +1,13 @@
 # Facebook Ads SDK for Java
 
-**IMPORTANT**: This SDK is in beta version. Please help us make improvement by reporting any issues you found.
+**IMPORTANT**: This SDK is now officially released for v2.9 API. Please continue to help us make improvement by reporting any issues you found.
 
-**BREAKING CHANGES NOTES (v0.3.0)**: New Release for the Java SDK (v0.3.0) includes following breaking changes:
+**BREAKING CHANGES NOTES (v2.9.0)**: New Release for the Java SDK (v2.9.0) includes following breaking changes:
 
-* **API version upgrade:** New SDK version calls Facebook Marketing API v2.7 endpoints. Classes are modified to use new fields/params/endpoints and to remove deprecated
+* **API version upgrade:** New SDK version calls Facebook Marketing API v2.9 endpoints. Classes are modified to use new fields/params/endpoints and to remove deprecated
 fields/params/endpoints. Please refer to <a href="https://developers.facebook.com/docs/marketing-api/changelog">Marketing API Changelog</a> for details.
 
+* **Version Code:** Starting from the official release, the SDK version will be maintained in the same way as other (PHP/Python) SDKs. We'll use the API_MAJOR.API_MINOR.SDK_RELEASE format, e.g. for API version v2.9, the SDK version will be v2.9.0, v2.9.1, ... There will be breaking changes when API version is changed. There is no breaking change between releases.
 
 ## Introduction
 The Facebook Ads SDK for Java provides an easy interface and abstraction to the Marketing API.
