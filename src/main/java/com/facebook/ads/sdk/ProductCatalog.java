@@ -108,7 +108,7 @@ public class ProductCatalog extends APINode {
   public static APINodeList<ProductCatalog> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<ProductCatalog>)(
       new APIRequest<ProductCatalog>(context, "", "/", "GET", ProductCatalog.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

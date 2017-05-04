@@ -98,7 +98,7 @@ public class OffsitePixel extends APINode {
   public static APINodeList<OffsitePixel> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<OffsitePixel>)(
       new APIRequest<OffsitePixel>(context, "", "/", "GET", OffsitePixel.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

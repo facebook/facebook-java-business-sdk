@@ -98,7 +98,7 @@ public class AdStudyObjective extends APINode {
   public static APINodeList<AdStudyObjective> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<AdStudyObjective>)(
       new APIRequest<AdStudyObjective>(context, "", "/", "GET", AdStudyObjective.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

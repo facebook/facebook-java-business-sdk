@@ -130,7 +130,7 @@ public class Ad extends APINode {
   public static APINodeList<Ad> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<Ad>)(
       new APIRequest<Ad>(context, "", "/", "GET", Ad.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

@@ -92,7 +92,7 @@ public class AdsDataPartner extends APINode {
   public static APINodeList<AdsDataPartner> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<AdsDataPartner>)(
       new APIRequest<AdsDataPartner>(context, "", "/", "GET", AdsDataPartner.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

@@ -160,7 +160,7 @@ public class ReachFrequencyPrediction extends APINode {
   public static APINodeList<ReachFrequencyPrediction> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<ReachFrequencyPrediction>)(
       new APIRequest<ReachFrequencyPrediction>(context, "", "/", "GET", ReachFrequencyPrediction.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

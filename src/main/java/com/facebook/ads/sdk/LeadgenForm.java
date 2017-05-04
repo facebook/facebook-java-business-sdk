@@ -138,7 +138,7 @@ public class LeadgenForm extends APINode {
   public static APINodeList<LeadgenForm> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<LeadgenForm>)(
       new APIRequest<LeadgenForm>(context, "", "/", "GET", LeadgenForm.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

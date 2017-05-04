@@ -114,7 +114,7 @@ public class Lead extends APINode {
   public static APINodeList<Lead> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<Lead>)(
       new APIRequest<Lead>(context, "", "/", "GET", Lead.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

@@ -134,7 +134,7 @@ public class Event extends APINode {
   public static APINodeList<Event> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<Event>)(
       new APIRequest<Event>(context, "", "/", "GET", Event.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

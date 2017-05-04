@@ -108,7 +108,7 @@ public class Business extends APINode {
   public static APINodeList<Business> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<Business>)(
       new APIRequest<Business>(context, "", "/", "GET", Business.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

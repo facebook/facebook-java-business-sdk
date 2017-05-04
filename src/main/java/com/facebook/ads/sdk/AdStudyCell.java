@@ -96,7 +96,7 @@ public class AdStudyCell extends APINode {
   public static APINodeList<AdStudyCell> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<AdStudyCell>)(
       new APIRequest<AdStudyCell>(context, "", "/", "GET", AdStudyCell.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

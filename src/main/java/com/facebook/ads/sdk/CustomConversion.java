@@ -118,7 +118,7 @@ public class CustomConversion extends APINode {
   public static APINodeList<CustomConversion> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<CustomConversion>)(
       new APIRequest<CustomConversion>(context, "", "/", "GET", CustomConversion.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

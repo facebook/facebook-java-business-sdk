@@ -112,7 +112,7 @@ public class AdReportRun extends APINode {
   public static APINodeList<AdReportRun> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<AdReportRun>)(
       new APIRequest<AdReportRun>(context, "", "/", "GET", AdReportRun.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

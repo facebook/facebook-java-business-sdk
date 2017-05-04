@@ -128,7 +128,7 @@ public class CustomAudience extends APINode {
   public static APINodeList<CustomAudience> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<CustomAudience>)(
       new APIRequest<CustomAudience>(context, "", "/", "GET", CustomAudience.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

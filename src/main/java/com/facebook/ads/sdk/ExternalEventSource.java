@@ -92,7 +92,7 @@ public class ExternalEventSource extends APINode {
   public static APINodeList<ExternalEventSource> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<ExternalEventSource>)(
       new APIRequest<ExternalEventSource>(context, "", "/", "GET", ExternalEventSource.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

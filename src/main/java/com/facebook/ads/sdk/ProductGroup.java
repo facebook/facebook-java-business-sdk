@@ -94,7 +94,7 @@ public class ProductGroup extends APINode {
   public static APINodeList<ProductGroup> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<ProductGroup>)(
       new APIRequest<ProductGroup>(context, "", "/", "GET", ProductGroup.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

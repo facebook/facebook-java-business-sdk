@@ -232,7 +232,7 @@ public class APIRequest<T extends APINode> {
     return endpointBas + "/" + context.getVersion() + "/" + nodeId + endpoint;
   }
 
-  private String joinStringList(List<String> list) {
+  public static String joinStringList(List<String> list) {
     if (list == null) return "";
     StringBuilder result = new StringBuilder();
     boolean isFirst = true;

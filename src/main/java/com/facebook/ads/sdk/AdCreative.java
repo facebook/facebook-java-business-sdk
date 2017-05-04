@@ -156,7 +156,7 @@ public class AdCreative extends APINode {
   public static APINodeList<AdCreative> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<AdCreative>)(
       new APIRequest<AdCreative>(context, "", "/", "GET", AdCreative.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

@@ -196,7 +196,7 @@ public class User extends APINode {
   public static APINodeList<User> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<User>)(
       new APIRequest<User>(context, "", "/", "GET", User.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

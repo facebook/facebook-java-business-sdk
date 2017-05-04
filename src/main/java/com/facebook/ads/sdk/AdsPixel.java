@@ -102,7 +102,7 @@ public class AdsPixel extends APINode {
   public static APINodeList<AdsPixel> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<AdsPixel>)(
       new APIRequest<AdsPixel>(context, "", "/", "GET", AdsPixel.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

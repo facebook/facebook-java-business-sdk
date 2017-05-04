@@ -92,7 +92,7 @@ public class Domain extends APINode {
   public static APINodeList<Domain> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<Domain>)(
       new APIRequest<Domain>(context, "", "/", "GET", Domain.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

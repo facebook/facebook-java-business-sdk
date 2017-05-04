@@ -98,7 +98,7 @@ public class AdPlacePageSet extends APINode {
   public static APINodeList<AdPlacePageSet> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<AdPlacePageSet>)(
       new APIRequest<AdPlacePageSet>(context, "", "/", "GET", AdPlacePageSet.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );

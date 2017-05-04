@@ -118,7 +118,7 @@ public class AdAsyncRequestSet extends APINode {
   public static APINodeList<AdAsyncRequestSet> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return (APINodeList<AdAsyncRequestSet>)(
       new APIRequest<AdAsyncRequestSet>(context, "", "/", "GET", AdAsyncRequestSet.getParser())
-        .setParam("ids", String.join(",", ids))
+        .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
