@@ -47,7 +47,7 @@ To start using Java SDK, you need add two .jar files into your project build pat
 * facebook-java-ads-sdk-[version].jar
 * gson-[version].jar
 
-Pre-compiled ``facebook-java-ads-sdk-[version].jar`` can be donwloaded from the ``/target`` folder. Alternatively, you may download the source code and compile locally with maven command: ``mvn package``. (Please install maven if it's not already there.)
+Pre-compiled ``facebook-java-ads-sdk-[version].jar`` can be downloaded from the ``/target`` folder. Alternatively, you may download the source code and compile locally with maven command: ``mvn package``. (Please install maven if it's not already there.)
 
 The SDK also has dependency on <a href="https://github.com/google/gson">gson</a>. If it's not already in your environment, you'll need to download and add to build path.
 
