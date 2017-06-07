@@ -59,6 +59,7 @@ public class APIRequest<T extends APINode> {
   protected ResponseParser<T> parser;
   protected Map<String, Object> params = new HashMap<String, Object>();
   protected List<String> returnFields;
+  protected Boolean omitResponseOnSuccess = null;
   private APIResponse lastResponse = null;
 
   public static void changeRequestExecutor(IRequestExecutor newExecutor) {
@@ -70,24 +71,25 @@ public class APIRequest<T extends APINode> {
   }
 
   public APIRequest(APIContext context, String nodeId, String endpoint, String method) {
-    this(context, nodeId, endpoint, method, null, null);
+    this(context, nodeId, endpoint, method, null, null, null);
   }
 
   public APIRequest(APIContext context, String nodeId, String endpoint, String method, ResponseParser<T> parser) {
-    this(context, nodeId, endpoint, method, null, parser);
+    this(context, nodeId, endpoint, method, null, parser, null);
   }
 
   public APIRequest(APIContext context, String nodeId, String endpoint, String method, List<String> paramNames) {
-    this(context, nodeId, endpoint, method, paramNames, null);
+    this(context, nodeId, endpoint, method, paramNames, null, null);
   }
 
-  public APIRequest(APIContext context, String nodeId, String endpoint, String method, List<String> paramNames, ResponseParser<T> parser) {
+  public APIRequest(APIContext context, String nodeId, String endpoint, String method, List<String> paramNames, ResponseParser<T> parser, Boolean omitResponseOnSuccess) {
     this.context = context;
     this.nodeId = nodeId;
     this.endpoint = endpoint;
     this.method = method;
     this.paramNames = paramNames;
     this.parser = parser;
+    this.omitResponseOnSuccess = omitResponseOnSuccess;
   }
 
   public APIResponse getLastResponse() {
@@ -145,6 +147,11 @@ public class APIRequest<T extends APINode> {
   public APIRequest setUseVideoEndpoint(boolean useVideoEndpoint) {
     this.useVideoEndpoint = useVideoEndpoint;
     return this;
+  }
+  
+  public APIRequest setOmitResponseOnSuccess(Boolean omitResponseOnSuccess) {
+      this.omitResponseOnSuccess = omitResponseOnSuccess;
+      return this;
   }
 
   protected String executeInternal() throws APIException {
@@ -304,6 +311,7 @@ public class APIRequest<T extends APINode> {
       }
       info.relativeUrl = relativeUrl.toString();
     }
+    info.omitResponseOnSuccess = this.omitResponseOnSuccess;
     return info;
   }
 

@@ -120,6 +120,10 @@ public class BatchRequest {
       batchElement.addProperty("method", info.method);
       batchElement.addProperty("relative_url", info.relativeUrl);
       batchElement.addProperty("name", requestEntry.name);
+      
+      if(info.omitResponseOnSuccess != null) {
+        batchElement.addProperty("omit_response_on_success", info.omitResponseOnSuccess);
+      }
 
       if (info.body != null) {
         batchElement.addProperty("body", info.body);
@@ -147,6 +151,7 @@ public class BatchRequest {
     public String body;
     public String relativeUrl;
     public Map<String, File> files;
+    public Boolean omitResponseOnSuccess;
   }
 
   private static class Pair {
