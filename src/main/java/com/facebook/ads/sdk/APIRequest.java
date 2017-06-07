@@ -49,6 +49,10 @@ public class APIRequest<T extends APINode> {
   public static final String USER_AGENT = APIConfig.USER_AGENT;
 
   private static IRequestExecutor executor = new DefaultRequestExecutor();
+  // 5 minute connect timeout (instead of the default infinite)
+  private static int CONNECT_TIMEOUT = 5 * 60 * 1000;
+  // 5 minute read timeout (instead of the default infinite)
+  private static int READ_TIMEOUT = 5 * 60 * 1000;
 
   protected APIContext context;
   protected boolean useVideoEndpoint = false;
@@ -349,6 +353,8 @@ public class APIRequest<T extends APINode> {
       context.log("GET: " + url.toString());
       HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 
+      con.setConnectTimeout(CONNECT_TIMEOUT);
+      con.setReadTimeout(READ_TIMEOUT);
       con.setRequestMethod("GET");
       con.setRequestProperty("User-Agent", USER_AGENT);
       con.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
@@ -362,6 +368,8 @@ public class APIRequest<T extends APINode> {
       context.log("Post: " + url.toString());
       HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 
+      con.setConnectTimeout(CONNECT_TIMEOUT);
+      con.setReadTimeout(READ_TIMEOUT);
       con.setRequestMethod("POST");
       con.setRequestProperty("User-Agent", USER_AGENT);
       con.setRequestProperty("Content-Type","multipart/form-data; boundary=" + boundary);
@@ -420,6 +428,8 @@ public class APIRequest<T extends APINode> {
       context.log("Delete: " + url.toString());
       HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 
+      con.setConnectTimeout(CONNECT_TIMEOUT);
+      con.setReadTimeout(READ_TIMEOUT);
       con.setRequestMethod("DELETE");
       con.setRequestProperty("User-Agent", USER_AGENT);
 
