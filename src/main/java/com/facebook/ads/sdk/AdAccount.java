@@ -11492,7 +11492,7 @@ public class AdAccount extends APINode {
     }
 
     public APIRequestGetTargetingSearch(String nodeId, APIContext context) {
-      super(context, nodeId, "/targetingsearch", "GET", Arrays.asList(PARAMS));
+      super(context, nodeId, "/search", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
