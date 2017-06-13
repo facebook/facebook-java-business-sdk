@@ -21,15 +21,10 @@
  *
  */
 
-import java.util.Arrays;
+import com.facebook.ads.sdk.*;
 
-import com.facebook.ads.sdk.APIContext;
-import com.facebook.ads.sdk.AdAccount;
-import com.facebook.ads.sdk.Campaign;
-import com.facebook.ads.sdk.AdSet;
-import com.facebook.ads.sdk.Targeting;
-import com.facebook.ads.sdk.TargetingGeoLocation;
-import com.facebook.ads.sdk.APIException;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class TargetingExample {
 
@@ -46,6 +41,8 @@ public class TargetingExample {
           .setFieldGeoLocations(new TargetingGeoLocation().setFieldCountries(Arrays.asList("US")))
           .setFieldAgeMin(18L)
           .setFieldAgeMax(30L)
+          .setFieldGenders(Collections.singletonList(1L)) // 0 - All (default), 1 - Men, 2 - Women
+          .setFieldLocales(Arrays.asList(6L, 24L)) // 6 - English (US), 24 - English (UK)
           .setFieldUserOs(Arrays.asList("Android", "iOS"));
 
       Campaign campaign = account.createCampaign()
