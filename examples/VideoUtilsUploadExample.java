@@ -148,7 +148,7 @@ public class VideoUtilsUploadExample {
                   new AdCreativeVideoData()
                       .setFieldImageHash(image.getFieldHash())
                       .setFieldVideoId(videoId3)
-                      .setFieldDescription("Java SDK Test Video Description")
+                      .setFieldLinkDescription("Java SDK Test Video Description")
              ).setFieldPageId(PAGE_ID)
           )
           .execute();

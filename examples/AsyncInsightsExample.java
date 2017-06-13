@@ -42,7 +42,7 @@ public class AsyncInsightsExample {
   public static void main(String[] args) {
     try {
       AdReportRun report = new Campaign(CAMPAIGN_ID, context).getInsightsAsync()
-          .setDatePreset(EnumDatePreset.VALUE_LAST_90_DAYS)
+          .setDatePreset(EnumDatePreset.VALUE_LAST_90D)
           .setActionBreakdowns(Arrays.asList(AdsInsights.EnumActionBreakdowns.VALUE_ACTION_TYPE))
           .setBreakdowns(Arrays.asList(AdsInsights.EnumBreakdowns.VALUE_GENDER))
           .requestAllFields()
