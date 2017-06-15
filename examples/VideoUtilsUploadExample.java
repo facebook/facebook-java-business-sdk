@@ -156,7 +156,7 @@ public class VideoUtilsUploadExample {
           .setName("Java SDK Test Video ad")
           .setAdsetId(Long.parseLong(adset.getId()))
           .setCreative(creative)
-          .setStatus("PAUSED")
+          .setStatus(Ad.EnumStatus.VALUE_PAUSED)
           .setBidAmount(100L)
           .setRedownload(true)
           .execute();

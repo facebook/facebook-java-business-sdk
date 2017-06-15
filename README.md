@@ -217,7 +217,7 @@ Example:
         .setName("Java SDK Batch Test ad")
         .setAdsetId("{result=adsetRequest:$.id}")
         .setCreative("{creative_id:{result=creativeRequest:$.id}}")
-        .setStatus("PAUSED")
+        .setStatus(Ad.EnumStatus.VALUE_PAUSED)
         .setBidAmount(100L)
         .addToBatch(batch);
       List<APIResponse> responses = batch.execute();
