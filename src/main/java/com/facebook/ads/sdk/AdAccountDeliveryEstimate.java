@@ -54,7 +54,7 @@ public class AdAccountDeliveryEstimate extends APINode {
   @SerializedName("bid_estimate")
   private Object mBidEstimate = null;
   @SerializedName("daily_outcomes_curve")
-  private List<OutcomePredictionPoLong> mDailyOutcomesCurve = null;
+  private List<OutcomePredictionPoint> mDailyOutcomesCurve = null;
   @SerializedName("estimate_dau")
   private Object mEstimateDau = null;
   @SerializedName("estimate_mau")
@@ -211,18 +211,18 @@ public class AdAccountDeliveryEstimate extends APINode {
     return this;
   }
 
-  public List<OutcomePredictionPoLong> getFieldDailyOutcomesCurve() {
+  public List<OutcomePredictionPoint> getFieldDailyOutcomesCurve() {
     return mDailyOutcomesCurve;
   }
 
-  public AdAccountDeliveryEstimate setFieldDailyOutcomesCurve(List<OutcomePredictionPoLong> value) {
+  public AdAccountDeliveryEstimate setFieldDailyOutcomesCurve(List<OutcomePredictionPoint> value) {
     this.mDailyOutcomesCurve = value;
     return this;
   }
 
   public AdAccountDeliveryEstimate setFieldDailyOutcomesCurve(String value) {
-    Type type = new TypeToken<List<OutcomePredictionPoLong>>(){}.getType();
-    this.mDailyOutcomesCurve = OutcomePredictionPoLong.getGson().fromJson(value, type);
+    Type type = new TypeToken<List<OutcomePredictionPoint>>(){}.getType();
+    this.mDailyOutcomesCurve = OutcomePredictionPoint.getGson().fromJson(value, type);
     return this;
   }
   public Object getFieldEstimateDau() {

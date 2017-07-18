@@ -4,7 +4,7 @@
   <groupId>com.facebook.ads.sdk</groupId>
   <artifactId>facebook-java-ads-sdk</artifactId>
   <packaging>jar</packaging>
-  <version>2.9.0</version>
+  <version>2.10.0</version>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>Facebook Ads SDK for Java</description>
   <url>https://developers.facebook.com/docs/marketing-api/sdks</url>
