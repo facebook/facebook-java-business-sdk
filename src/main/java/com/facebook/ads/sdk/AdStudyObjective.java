@@ -57,6 +57,8 @@ public class AdStudyObjective extends APINode {
   private String mId = null;
   @SerializedName("is_primary")
   private Boolean mIsPrimary = null;
+  @SerializedName("last_updated_results")
+  private String mLastUpdatedResults = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("results")
@@ -260,6 +262,10 @@ public class AdStudyObjective extends APINode {
     return mIsPrimary;
   }
 
+  public String getFieldLastUpdatedResults() {
+    return mLastUpdatedResults;
+  }
+
   public String getFieldName() {
     return mName;
   }
@@ -289,6 +295,7 @@ public class AdStudyObjective extends APINode {
       "custom_attributes",
       "id",
       "is_primary",
+      "last_updated_results",
       "name",
       "results",
       "type",
@@ -393,6 +400,13 @@ public class AdStudyObjective extends APINode {
       this.requestField("is_primary", value);
       return this;
     }
+    public APIRequestGet requestLastUpdatedResultsField () {
+      return this.requestLastUpdatedResultsField(true);
+    }
+    public APIRequestGet requestLastUpdatedResultsField (boolean value) {
+      this.requestField("last_updated_results", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -490,6 +504,7 @@ public class AdStudyObjective extends APINode {
     this.mCustomAttributes = instance.mCustomAttributes;
     this.mId = instance.mId;
     this.mIsPrimary = instance.mIsPrimary;
+    this.mLastUpdatedResults = instance.mLastUpdatedResults;
     this.mName = instance.mName;
     this.mResults = instance.mResults;
     this.mType = instance.mType;

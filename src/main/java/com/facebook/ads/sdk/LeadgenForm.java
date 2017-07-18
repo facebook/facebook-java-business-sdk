@@ -53,6 +53,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class LeadgenForm extends APINode {
   @SerializedName("allow_organic_lead")
   private Boolean mAllowOrganicLead = null;
+  @SerializedName("block_display_for_non_targeted_viewer")
+  private Boolean mBlockDisplayForNonTargetedViewer = null;
   @SerializedName("context_card")
   private Object mContextCard = null;
   @SerializedName("continued_flow_request_method")
@@ -302,6 +304,10 @@ public class LeadgenForm extends APINode {
 
   public Boolean getFieldAllowOrganicLead() {
     return mAllowOrganicLead;
+  }
+
+  public Boolean getFieldBlockDisplayForNonTargetedViewer() {
+    return mBlockDisplayForNonTargetedViewer;
   }
 
   public Object getFieldContextCard() {
@@ -805,6 +811,7 @@ public class LeadgenForm extends APINode {
 
     public static final String[] FIELDS = {
       "allow_organic_lead",
+      "block_display_for_non_targeted_viewer",
       "context_card",
       "continued_flow_request_method",
       "created_time",
@@ -906,6 +913,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGet requestAllowOrganicLeadField (boolean value) {
       this.requestField("allow_organic_lead", value);
+      return this;
+    }
+    public APIRequestGet requestBlockDisplayForNonTargetedViewerField () {
+      return this.requestBlockDisplayForNonTargetedViewerField(true);
+    }
+    public APIRequestGet requestBlockDisplayForNonTargetedViewerField (boolean value) {
+      this.requestField("block_display_for_non_targeted_viewer", value);
       return this;
     }
     public APIRequestGet requestContextCardField () {
@@ -1101,6 +1115,7 @@ public class LeadgenForm extends APINode {
 
   public LeadgenForm copyFrom(LeadgenForm instance) {
     this.mAllowOrganicLead = instance.mAllowOrganicLead;
+    this.mBlockDisplayForNonTargetedViewer = instance.mBlockDisplayForNonTargetedViewer;
     this.mContextCard = instance.mContextCard;
     this.mContinuedFlowRequestMethod = instance.mContinuedFlowRequestMethod;
     this.mCreatedTime = instance.mCreatedTime;

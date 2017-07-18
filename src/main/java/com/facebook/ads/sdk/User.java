@@ -731,6 +731,7 @@ public class User extends APINode {
       "age",
       "agency_client_declaration",
       "amount_spent",
+      "attribution_spec",
       "balance",
       "business",
       "business_city",
@@ -752,6 +753,7 @@ public class User extends APINode {
       "has_migrated_permissions",
       "id",
       "io_number",
+      "is_attribution_spec_system_default",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -880,6 +882,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestAmountSpentField (boolean value) {
       this.requestField("amount_spent", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAttributionSpecField () {
+      return this.requestAttributionSpecField(true);
+    }
+    public APIRequestGetAdAccounts requestAttributionSpecField (boolean value) {
+      this.requestField("attribution_spec", value);
       return this;
     }
     public APIRequestGetAdAccounts requestBalanceField () {
@@ -1027,6 +1036,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestIoNumberField (boolean value) {
       this.requestField("io_number", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsAttributionSpecSystemDefaultField () {
+      return this.requestIsAttributionSpecSystemDefaultField(true);
+    }
+    public APIRequestGetAdAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
+      this.requestField("is_attribution_spec_system_default", value);
       return this;
     }
     public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {
@@ -1207,11 +1223,13 @@ public class User extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "page_id",
       "query",
     };
 
     public static final String[] FIELDS = {
       "allow_organic_lead",
+      "block_display_for_non_targeted_viewer",
       "context_card",
       "continued_flow_request_method",
       "created_time",
@@ -1272,6 +1290,11 @@ public class User extends APINode {
     }
 
 
+    public APIRequestGetLeadGenForms setPageId (String pageId) {
+      this.setParam("page_id", pageId);
+      return this;
+    }
+
     public APIRequestGetLeadGenForms setQuery (String query) {
       this.setParam("query", query);
       return this;
@@ -1318,6 +1341,13 @@ public class User extends APINode {
     }
     public APIRequestGetLeadGenForms requestAllowOrganicLeadField (boolean value) {
       this.requestField("allow_organic_lead", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestBlockDisplayForNonTargetedViewerField () {
+      return this.requestBlockDisplayForNonTargetedViewerField(true);
+    }
+    public APIRequestGetLeadGenForms requestBlockDisplayForNonTargetedViewerField (boolean value) {
+      this.requestField("block_display_for_non_targeted_viewer", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestContextCardField () {
@@ -1801,12 +1831,15 @@ public class User extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "include_past_events",
       "is_page_event",
+      "page_id",
     };
 
     public static final String[] FIELDS = {
       "attending_count",
       "can_guests_invite",
+      "can_viewer_post",
       "category",
       "cover",
       "declined_count",
@@ -1816,6 +1849,7 @@ public class User extends APINode {
       "id",
       "interested_count",
       "is_canceled",
+      "is_draft",
       "is_page_owned",
       "is_viewer_admin",
       "maybe_count",
@@ -1826,6 +1860,8 @@ public class User extends APINode {
       "place",
       "start_time",
       "ticket_uri",
+      "ticketing_privacy_uri",
+      "ticketing_terms_uri",
       "timezone",
       "type",
       "updated_time",
@@ -1864,12 +1900,30 @@ public class User extends APINode {
     }
 
 
+    public APIRequestGetPromotableEvents setIncludePastEvents (Boolean includePastEvents) {
+      this.setParam("include_past_events", includePastEvents);
+      return this;
+    }
+    public APIRequestGetPromotableEvents setIncludePastEvents (String includePastEvents) {
+      this.setParam("include_past_events", includePastEvents);
+      return this;
+    }
+
     public APIRequestGetPromotableEvents setIsPageEvent (Boolean isPageEvent) {
       this.setParam("is_page_event", isPageEvent);
       return this;
     }
     public APIRequestGetPromotableEvents setIsPageEvent (String isPageEvent) {
       this.setParam("is_page_event", isPageEvent);
+      return this;
+    }
+
+    public APIRequestGetPromotableEvents setPageId (Long pageId) {
+      this.setParam("page_id", pageId);
+      return this;
+    }
+    public APIRequestGetPromotableEvents setPageId (String pageId) {
+      this.setParam("page_id", pageId);
       return this;
     }
 
@@ -1921,6 +1975,13 @@ public class User extends APINode {
     }
     public APIRequestGetPromotableEvents requestCanGuestsInviteField (boolean value) {
       this.requestField("can_guests_invite", value);
+      return this;
+    }
+    public APIRequestGetPromotableEvents requestCanViewerPostField () {
+      return this.requestCanViewerPostField(true);
+    }
+    public APIRequestGetPromotableEvents requestCanViewerPostField (boolean value) {
+      this.requestField("can_viewer_post", value);
       return this;
     }
     public APIRequestGetPromotableEvents requestCategoryField () {
@@ -1984,6 +2045,13 @@ public class User extends APINode {
     }
     public APIRequestGetPromotableEvents requestIsCanceledField (boolean value) {
       this.requestField("is_canceled", value);
+      return this;
+    }
+    public APIRequestGetPromotableEvents requestIsDraftField () {
+      return this.requestIsDraftField(true);
+    }
+    public APIRequestGetPromotableEvents requestIsDraftField (boolean value) {
+      this.requestField("is_draft", value);
       return this;
     }
     public APIRequestGetPromotableEvents requestIsPageOwnedField () {
@@ -2054,6 +2122,20 @@ public class User extends APINode {
     }
     public APIRequestGetPromotableEvents requestTicketUriField (boolean value) {
       this.requestField("ticket_uri", value);
+      return this;
+    }
+    public APIRequestGetPromotableEvents requestTicketingPrivacyUriField () {
+      return this.requestTicketingPrivacyUriField(true);
+    }
+    public APIRequestGetPromotableEvents requestTicketingPrivacyUriField (boolean value) {
+      this.requestField("ticketing_privacy_uri", value);
+      return this;
+    }
+    public APIRequestGetPromotableEvents requestTicketingTermsUriField () {
+      return this.requestTicketingTermsUriField(true);
+    }
+    public APIRequestGetPromotableEvents requestTicketingTermsUriField (boolean value) {
+      this.requestField("ticketing_terms_uri", value);
       return this;
     }
     public APIRequestGetPromotableEvents requestTimezoneField () {

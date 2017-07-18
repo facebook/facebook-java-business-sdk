@@ -71,6 +71,8 @@ public class Transaction extends APINode {
   private Long mFaturaId = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_business_ec_charge")
+  private Boolean mIsBusinessEcCharge = null;
   @SerializedName("payment_option")
   private String mPaymentOption = null;
   @SerializedName("product_type")
@@ -319,6 +321,15 @@ public class Transaction extends APINode {
     return this;
   }
 
+  public Boolean getFieldIsBusinessEcCharge() {
+    return mIsBusinessEcCharge;
+  }
+
+  public Transaction setFieldIsBusinessEcCharge(Boolean value) {
+    this.mIsBusinessEcCharge = value;
+    return this;
+  }
+
   public String getFieldPaymentOption() {
     return mPaymentOption;
   }
@@ -424,6 +435,7 @@ public class Transaction extends APINode {
     this.mCredentialId = instance.mCredentialId;
     this.mFaturaId = instance.mFaturaId;
     this.mId = instance.mId;
+    this.mIsBusinessEcCharge = instance.mIsBusinessEcCharge;
     this.mPaymentOption = instance.mPaymentOption;
     this.mProductType = instance.mProductType;
     this.mProviderAmount = instance.mProviderAmount;

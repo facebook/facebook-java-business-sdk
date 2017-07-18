@@ -1264,10 +1264,6 @@ public class ProductGroup extends APINode {
       return this;
     }
 
-    public APIRequestCreateProduct setWindowsPhoneAppId (Long windowsPhoneAppId) {
-      this.setParam("windows_phone_app_id", windowsPhoneAppId);
-      return this;
-    }
     public APIRequestCreateProduct setWindowsPhoneAppId (String windowsPhoneAppId) {
       this.setParam("windows_phone_app_id", windowsPhoneAppId);
       return this;

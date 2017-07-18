@@ -120,7 +120,7 @@ public class ReachFrequencyPrediction extends APINode {
   @SerializedName("target_audience_size")
   private Long mTargetAudienceSize = null;
   @SerializedName("target_spec")
-  private String mTargetSpec = null;
+  private Targeting mTargetSpec = null;
   @SerializedName("time_created")
   private String mTimeCreated = null;
   @SerializedName("time_updated")
@@ -446,7 +446,7 @@ public class ReachFrequencyPrediction extends APINode {
     return mTargetAudienceSize;
   }
 
-  public String getFieldTargetSpec() {
+  public Targeting getFieldTargetSpec() {
     return mTargetSpec;
   }
 

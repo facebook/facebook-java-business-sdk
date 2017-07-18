@@ -53,6 +53,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ReachFrequencySpec extends APINode {
   @SerializedName("countries")
   private List<String> mCountries = null;
+  @SerializedName("default_creation_data")
+  private Object mDefaultCreationData = null;
   @SerializedName("max_campaign_duration")
   private Object mMaxCampaignDuration = null;
   @SerializedName("max_days_to_finish")
@@ -213,6 +215,15 @@ public class ReachFrequencySpec extends APINode {
     return this;
   }
 
+  public Object getFieldDefaultCreationData() {
+    return mDefaultCreationData;
+  }
+
+  public ReachFrequencySpec setFieldDefaultCreationData(Object value) {
+    this.mDefaultCreationData = value;
+    return this;
+  }
+
   public Object getFieldMaxCampaignDuration() {
     return mMaxCampaignDuration;
   }
@@ -276,6 +287,7 @@ public class ReachFrequencySpec extends APINode {
 
   public ReachFrequencySpec copyFrom(ReachFrequencySpec instance) {
     this.mCountries = instance.mCountries;
+    this.mDefaultCreationData = instance.mDefaultCreationData;
     this.mMaxCampaignDuration = instance.mMaxCampaignDuration;
     this.mMaxDaysToFinish = instance.mMaxDaysToFinish;
     this.mMaxPauseWithoutPredictionRerun = instance.mMaxPauseWithoutPredictionRerun;

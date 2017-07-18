@@ -71,6 +71,8 @@ public class Targeting extends APINode {
   private List<Long> mCollegeYears = null;
   @SerializedName("connections")
   private List<IDName> mConnections = null;
+  @SerializedName("contextual_targeting_categories")
+  private List<IDName> mContextualTargetingCategories = null;
   @SerializedName("countries")
   private List<String> mCountries = null;
   @SerializedName("country")
@@ -123,8 +125,6 @@ public class Targeting extends APINode {
   private List<TargetingProductAudienceSpec> mExcludedProductAudienceSpecs = null;
   @SerializedName("excluded_publisher_categories")
   private List<String> mExcludedPublisherCategories = null;
-  @SerializedName("excluded_publisher_domains")
-  private List<String> mExcludedPublisherDomains = null;
   @SerializedName("excluded_publisher_list_ids")
   private List<String> mExcludedPublisherListIds = null;
   @SerializedName("excluded_user_device")
@@ -467,6 +467,20 @@ public class Targeting extends APINode {
     this.mConnections = IDName.getGson().fromJson(value, type);
     return this;
   }
+  public List<IDName> getFieldContextualTargetingCategories() {
+    return mContextualTargetingCategories;
+  }
+
+  public Targeting setFieldContextualTargetingCategories(List<IDName> value) {
+    this.mContextualTargetingCategories = value;
+    return this;
+  }
+
+  public Targeting setFieldContextualTargetingCategories(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mContextualTargetingCategories = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<String> getFieldCountries() {
     return mCountries;
   }
@@ -748,15 +762,6 @@ public class Targeting extends APINode {
 
   public Targeting setFieldExcludedPublisherCategories(List<String> value) {
     this.mExcludedPublisherCategories = value;
-    return this;
-  }
-
-  public List<String> getFieldExcludedPublisherDomains() {
-    return mExcludedPublisherDomains;
-  }
-
-  public Targeting setFieldExcludedPublisherDomains(List<String> value) {
-    this.mExcludedPublisherDomains = value;
     return this;
   }
 
@@ -1376,6 +1381,7 @@ public class Targeting extends APINode {
     this.mCities = instance.mCities;
     this.mCollegeYears = instance.mCollegeYears;
     this.mConnections = instance.mConnections;
+    this.mContextualTargetingCategories = instance.mContextualTargetingCategories;
     this.mCountries = instance.mCountries;
     this.mCountry = instance.mCountry;
     this.mCountryGroups = instance.mCountryGroups;
@@ -1402,7 +1408,6 @@ public class Targeting extends APINode {
     this.mExcludedMobileDeviceModel = instance.mExcludedMobileDeviceModel;
     this.mExcludedProductAudienceSpecs = instance.mExcludedProductAudienceSpecs;
     this.mExcludedPublisherCategories = instance.mExcludedPublisherCategories;
-    this.mExcludedPublisherDomains = instance.mExcludedPublisherDomains;
     this.mExcludedPublisherListIds = instance.mExcludedPublisherListIds;
     this.mExcludedUserDevice = instance.mExcludedUserDevice;
     this.mExclusions = instance.mExclusions;

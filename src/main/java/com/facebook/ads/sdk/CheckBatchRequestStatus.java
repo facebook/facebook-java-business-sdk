@@ -50,29 +50,29 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdsPixelStats extends APINode {
-  @SerializedName("count")
-  private Long mCount = null;
-  @SerializedName("diagnostics_hourly_last_timestamp")
-  private String mDiagnosticsHourlyLastTimestamp = null;
-  @SerializedName("event")
-  private String mEvent = null;
-  @SerializedName("value")
-  private String mValue = null;
+public class CheckBatchRequestStatus extends APINode {
+  @SerializedName("errors")
+  private List<Object> mErrors = null;
+  @SerializedName("errors_total_count")
+  private Long mErrorsTotalCount = null;
+  @SerializedName("handle")
+  private String mHandle = null;
+  @SerializedName("status")
+  private String mStatus = null;
   protected static Gson gson = null;
 
-  public AdsPixelStats() {
+  public CheckBatchRequestStatus() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdsPixelStats loadJSON(String json, APIContext context) {
-    AdsPixelStats adsPixelStats = getGson().fromJson(json, AdsPixelStats.class);
+  public static CheckBatchRequestStatus loadJSON(String json, APIContext context) {
+    CheckBatchRequestStatus checkBatchRequestStatus = getGson().fromJson(json, CheckBatchRequestStatus.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adsPixelStats.toString());
+      JsonElement o2 = parser.parse(checkBatchRequestStatus.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -82,13 +82,13 @@ public class AdsPixelStats extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adsPixelStats.context = context;
-    adsPixelStats.rawValue = json;
-    return adsPixelStats;
+    checkBatchRequestStatus.context = context;
+    checkBatchRequestStatus.rawValue = json;
+    return checkBatchRequestStatus;
   }
 
-  public static APINodeList<AdsPixelStats> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdsPixelStats> adsPixelStatss = new APINodeList<AdsPixelStats>(request, json);
+  public static APINodeList<CheckBatchRequestStatus> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<CheckBatchRequestStatus> checkBatchRequestStatuss = new APINodeList<CheckBatchRequestStatus>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,9 +99,9 @@ public class AdsPixelStats extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsPixelStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          checkBatchRequestStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return adsPixelStatss;
+        return checkBatchRequestStatuss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -109,13 +109,13 @@ public class AdsPixelStats extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adsPixelStatss.setPaging(before, after);
+            checkBatchRequestStatuss.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsPixelStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              checkBatchRequestStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -126,23 +126,23 @@ public class AdsPixelStats extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsPixelStatss.add(loadJSON(entry.getValue().toString(), context));
+                  checkBatchRequestStatuss.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsPixelStatss.add(loadJSON(obj.toString(), context));
+              checkBatchRequestStatuss.add(loadJSON(obj.toString(), context));
             }
           }
-          return adsPixelStatss;
+          return checkBatchRequestStatuss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsPixelStatss.add(loadJSON(entry.getValue().toString(), context));
+              checkBatchRequestStatuss.add(loadJSON(entry.getValue().toString(), context));
           }
-          return adsPixelStatss;
+          return checkBatchRequestStatuss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -159,20 +159,20 @@ public class AdsPixelStats extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsPixelStatss.add(loadJSON(value.toString(), context));
+              checkBatchRequestStatuss.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adsPixelStatss;
+            return checkBatchRequestStatuss;
           }
 
           // Sixth, check if it's pure JsonObject
-          adsPixelStatss.clear();
-          adsPixelStatss.add(loadJSON(json, context));
-          return adsPixelStatss;
+          checkBatchRequestStatuss.clear();
+          checkBatchRequestStatuss.add(loadJSON(json, context));
+          return checkBatchRequestStatuss;
         }
       }
     } catch (Exception e) {
@@ -200,39 +200,39 @@ public class AdsPixelStats extends APINode {
   }
 
 
-  public Long getFieldCount() {
-    return mCount;
+  public List<Object> getFieldErrors() {
+    return mErrors;
   }
 
-  public AdsPixelStats setFieldCount(Long value) {
-    this.mCount = value;
+  public CheckBatchRequestStatus setFieldErrors(List<Object> value) {
+    this.mErrors = value;
     return this;
   }
 
-  public String getFieldDiagnosticsHourlyLastTimestamp() {
-    return mDiagnosticsHourlyLastTimestamp;
+  public Long getFieldErrorsTotalCount() {
+    return mErrorsTotalCount;
   }
 
-  public AdsPixelStats setFieldDiagnosticsHourlyLastTimestamp(String value) {
-    this.mDiagnosticsHourlyLastTimestamp = value;
+  public CheckBatchRequestStatus setFieldErrorsTotalCount(Long value) {
+    this.mErrorsTotalCount = value;
     return this;
   }
 
-  public String getFieldEvent() {
-    return mEvent;
+  public String getFieldHandle() {
+    return mHandle;
   }
 
-  public AdsPixelStats setFieldEvent(String value) {
-    this.mEvent = value;
+  public CheckBatchRequestStatus setFieldHandle(String value) {
+    this.mHandle = value;
     return this;
   }
 
-  public String getFieldValue() {
-    return mValue;
+  public String getFieldStatus() {
+    return mStatus;
   }
 
-  public AdsPixelStats setFieldValue(String value) {
-    this.mValue = value;
+  public CheckBatchRequestStatus setFieldStatus(String value) {
+    this.mStatus = value;
     return this;
   }
 
@@ -252,20 +252,20 @@ public class AdsPixelStats extends APINode {
     return gson;
   }
 
-  public AdsPixelStats copyFrom(AdsPixelStats instance) {
-    this.mCount = instance.mCount;
-    this.mDiagnosticsHourlyLastTimestamp = instance.mDiagnosticsHourlyLastTimestamp;
-    this.mEvent = instance.mEvent;
-    this.mValue = instance.mValue;
+  public CheckBatchRequestStatus copyFrom(CheckBatchRequestStatus instance) {
+    this.mErrors = instance.mErrors;
+    this.mErrorsTotalCount = instance.mErrorsTotalCount;
+    this.mHandle = instance.mHandle;
+    this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdsPixelStats> getParser() {
-    return new APIRequest.ResponseParser<AdsPixelStats>() {
-      public APINodeList<AdsPixelStats> parseResponse(String response, APIContext context, APIRequest<AdsPixelStats> request) throws MalformedResponseException {
-        return AdsPixelStats.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<CheckBatchRequestStatus> getParser() {
+    return new APIRequest.ResponseParser<CheckBatchRequestStatus>() {
+      public APINodeList<CheckBatchRequestStatus> parseResponse(String response, APIContext context, APIRequest<CheckBatchRequestStatus> request) throws MalformedResponseException {
+        return CheckBatchRequestStatus.parseResponse(response, context, request);
       }
     };
   }

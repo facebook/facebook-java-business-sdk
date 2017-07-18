@@ -55,6 +55,8 @@ public class Event extends APINode {
   private Long mAttendingCount = null;
   @SerializedName("can_guests_invite")
   private Boolean mCanGuestsInvite = null;
+  @SerializedName("can_viewer_post")
+  private Boolean mCanViewerPost = null;
   @SerializedName("category")
   private String mCategory = null;
   @SerializedName("cover")
@@ -73,6 +75,8 @@ public class Event extends APINode {
   private Long mInterestedCount = null;
   @SerializedName("is_canceled")
   private Boolean mIsCanceled = null;
+  @SerializedName("is_draft")
+  private Boolean mIsDraft = null;
   @SerializedName("is_page_owned")
   private Boolean mIsPageOwned = null;
   @SerializedName("is_viewer_admin")
@@ -93,6 +97,10 @@ public class Event extends APINode {
   private String mStartTime = null;
   @SerializedName("ticket_uri")
   private String mTicketUri = null;
+  @SerializedName("ticketing_privacy_uri")
+  private String mTicketingPrivacyUri = null;
+  @SerializedName("ticketing_terms_uri")
+  private String mTicketingTermsUri = null;
   @SerializedName("timezone")
   private String mTimezone = null;
   @SerializedName("type")
@@ -296,6 +304,10 @@ public class Event extends APINode {
     return mCanGuestsInvite;
   }
 
+  public Boolean getFieldCanViewerPost() {
+    return mCanViewerPost;
+  }
+
   public String getFieldCategory() {
     return mCategory;
   }
@@ -330,6 +342,10 @@ public class Event extends APINode {
 
   public Boolean getFieldIsCanceled() {
     return mIsCanceled;
+  }
+
+  public Boolean getFieldIsDraft() {
+    return mIsDraft;
   }
 
   public Boolean getFieldIsPageOwned() {
@@ -370,6 +386,14 @@ public class Event extends APINode {
 
   public String getFieldTicketUri() {
     return mTicketUri;
+  }
+
+  public String getFieldTicketingPrivacyUri() {
+    return mTicketingPrivacyUri;
+  }
+
+  public String getFieldTicketingTermsUri() {
+    return mTicketingTermsUri;
   }
 
   public String getFieldTimezone() {
@@ -587,6 +611,7 @@ public class Event extends APINode {
     public static final String[] FIELDS = {
       "attending_count",
       "can_guests_invite",
+      "can_viewer_post",
       "category",
       "cover",
       "declined_count",
@@ -596,6 +621,7 @@ public class Event extends APINode {
       "id",
       "interested_count",
       "is_canceled",
+      "is_draft",
       "is_page_owned",
       "is_viewer_admin",
       "maybe_count",
@@ -606,6 +632,8 @@ public class Event extends APINode {
       "place",
       "start_time",
       "ticket_uri",
+      "ticketing_privacy_uri",
+      "ticketing_terms_uri",
       "timezone",
       "type",
       "updated_time",
@@ -694,6 +722,13 @@ public class Event extends APINode {
       this.requestField("can_guests_invite", value);
       return this;
     }
+    public APIRequestGet requestCanViewerPostField () {
+      return this.requestCanViewerPostField(true);
+    }
+    public APIRequestGet requestCanViewerPostField (boolean value) {
+      this.requestField("can_viewer_post", value);
+      return this;
+    }
     public APIRequestGet requestCategoryField () {
       return this.requestCategoryField(true);
     }
@@ -755,6 +790,13 @@ public class Event extends APINode {
     }
     public APIRequestGet requestIsCanceledField (boolean value) {
       this.requestField("is_canceled", value);
+      return this;
+    }
+    public APIRequestGet requestIsDraftField () {
+      return this.requestIsDraftField(true);
+    }
+    public APIRequestGet requestIsDraftField (boolean value) {
+      this.requestField("is_draft", value);
       return this;
     }
     public APIRequestGet requestIsPageOwnedField () {
@@ -827,6 +869,20 @@ public class Event extends APINode {
       this.requestField("ticket_uri", value);
       return this;
     }
+    public APIRequestGet requestTicketingPrivacyUriField () {
+      return this.requestTicketingPrivacyUriField(true);
+    }
+    public APIRequestGet requestTicketingPrivacyUriField (boolean value) {
+      this.requestField("ticketing_privacy_uri", value);
+      return this;
+    }
+    public APIRequestGet requestTicketingTermsUriField () {
+      return this.requestTicketingTermsUriField(true);
+    }
+    public APIRequestGet requestTicketingTermsUriField (boolean value) {
+      this.requestField("ticketing_terms_uri", value);
+      return this;
+    }
     public APIRequestGet requestTimezoneField () {
       return this.requestTimezoneField(true);
     }
@@ -890,6 +946,7 @@ public class Event extends APINode {
   public Event copyFrom(Event instance) {
     this.mAttendingCount = instance.mAttendingCount;
     this.mCanGuestsInvite = instance.mCanGuestsInvite;
+    this.mCanViewerPost = instance.mCanViewerPost;
     this.mCategory = instance.mCategory;
     this.mCover = instance.mCover;
     this.mDeclinedCount = instance.mDeclinedCount;
@@ -899,6 +956,7 @@ public class Event extends APINode {
     this.mId = instance.mId;
     this.mInterestedCount = instance.mInterestedCount;
     this.mIsCanceled = instance.mIsCanceled;
+    this.mIsDraft = instance.mIsDraft;
     this.mIsPageOwned = instance.mIsPageOwned;
     this.mIsViewerAdmin = instance.mIsViewerAdmin;
     this.mMaybeCount = instance.mMaybeCount;
@@ -909,6 +967,8 @@ public class Event extends APINode {
     this.mPlace = instance.mPlace;
     this.mStartTime = instance.mStartTime;
     this.mTicketUri = instance.mTicketUri;
+    this.mTicketingPrivacyUri = instance.mTicketingPrivacyUri;
+    this.mTicketingTermsUri = instance.mTicketingTermsUri;
     this.mTimezone = instance.mTimezone;
     this.mType = instance.mType;
     this.mUpdatedTime = instance.mUpdatedTime;

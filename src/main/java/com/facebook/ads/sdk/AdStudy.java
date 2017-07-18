@@ -345,9 +345,10 @@ public class AdStudy extends APINode {
     public static final String[] PARAMS = {
       "adspixels",
       "applications",
+      "customconversions",
       "is_primary",
       "name",
-      "offlinefeeds",
+      "offline_conversion_data_sets",
       "offsitepixels",
       "type",
     };
@@ -406,6 +407,15 @@ public class AdStudy extends APINode {
       return this;
     }
 
+    public APIRequestCreateObjective setCustomconversions (List<Object> customconversions) {
+      this.setParam("customconversions", customconversions);
+      return this;
+    }
+    public APIRequestCreateObjective setCustomconversions (String customconversions) {
+      this.setParam("customconversions", customconversions);
+      return this;
+    }
+
     public APIRequestCreateObjective setIsPrimary (Boolean isPrimary) {
       this.setParam("is_primary", isPrimary);
       return this;
@@ -420,12 +430,12 @@ public class AdStudy extends APINode {
       return this;
     }
 
-    public APIRequestCreateObjective setOfflinefeeds (List<Object> offlinefeeds) {
-      this.setParam("offlinefeeds", offlinefeeds);
+    public APIRequestCreateObjective setOfflineConversionDataSets (List<Object> offlineConversionDataSets) {
+      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
       return this;
     }
-    public APIRequestCreateObjective setOfflinefeeds (String offlinefeeds) {
-      this.setParam("offlinefeeds", offlinefeeds);
+    public APIRequestCreateObjective setOfflineConversionDataSets (String offlineConversionDataSets) {
+      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
       return this;
     }
 

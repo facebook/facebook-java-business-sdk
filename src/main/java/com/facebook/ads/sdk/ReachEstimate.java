@@ -264,6 +264,8 @@ public class ReachEstimate extends APINode {
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       @SerializedName("APP_DOWNLOADS")
       VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
+      @SerializedName("LANDING_PAGE_VIEWS")
+      VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
       NULL(null);
 
       private String value;

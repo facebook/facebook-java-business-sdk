@@ -85,6 +85,8 @@ public class CustomAudience extends APINode {
   private Long mRetentionDays = null;
   @SerializedName("rule")
   private String mRule = null;
+  @SerializedName("rule_aggregation")
+  private String mRuleAggregation = null;
   @SerializedName("subtype")
   private String mSubtype = null;
   @SerializedName("time_content_updated")
@@ -389,6 +391,10 @@ public class CustomAudience extends APINode {
     return mRule;
   }
 
+  public String getFieldRuleAggregation() {
+    return mRuleAggregation;
+  }
+
   public String getFieldSubtype() {
     return mSubtype;
   }
@@ -518,6 +524,7 @@ public class CustomAudience extends APINode {
       "age",
       "agency_client_declaration",
       "amount_spent",
+      "attribution_spec",
       "balance",
       "business",
       "business_city",
@@ -539,6 +546,7 @@ public class CustomAudience extends APINode {
       "has_migrated_permissions",
       "id",
       "io_number",
+      "is_attribution_spec_system_default",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -672,6 +680,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestAmountSpentField (boolean value) {
       this.requestField("amount_spent", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAttributionSpecField () {
+      return this.requestAttributionSpecField(true);
+    }
+    public APIRequestGetAdAccounts requestAttributionSpecField (boolean value) {
+      this.requestField("attribution_spec", value);
       return this;
     }
     public APIRequestGetAdAccounts requestBalanceField () {
@@ -819,6 +834,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestIoNumberField (boolean value) {
       this.requestField("io_number", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsAttributionSpecSystemDefaultField () {
+      return this.requestIsAttributionSpecSystemDefaultField(true);
+    }
+    public APIRequestGetAdAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
+      this.requestField("is_attribution_spec_system_default", value);
       return this;
     }
     public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {
@@ -1133,6 +1155,8 @@ public class CustomAudience extends APINode {
       "last_updated_by_app_id",
       "name",
       "recommendations",
+      "source_ad",
+      "source_ad_id",
       "status",
       "tracking_specs",
       "updated_time",
@@ -1356,6 +1380,20 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGetAds requestSourceAdField () {
+      return this.requestSourceAdField(true);
+    }
+    public APIRequestGetAds requestSourceAdField (boolean value) {
+      this.requestField("source_ad", value);
+      return this;
+    }
+    public APIRequestGetAds requestSourceAdIdField () {
+      return this.requestSourceAdIdField(true);
+    }
+    public APIRequestGetAds requestSourceAdIdField (boolean value) {
+      this.requestField("source_ad_id", value);
       return this;
     }
     public APIRequestGetAds requestStatusField () {
@@ -1979,6 +2017,7 @@ public class CustomAudience extends APINode {
       "pixel_id",
       "retention_days",
       "rule",
+      "rule_aggregation",
       "subtype",
       "time_content_updated",
       "time_created",
@@ -2173,6 +2212,13 @@ public class CustomAudience extends APINode {
       this.requestField("rule", value);
       return this;
     }
+    public APIRequestGet requestRuleAggregationField () {
+      return this.requestRuleAggregationField(true);
+    }
+    public APIRequestGet requestRuleAggregationField (boolean value) {
+      this.requestField("rule_aggregation", value);
+      return this;
+    }
     public APIRequestGet requestSubtypeField () {
       return this.requestSubtypeField(true);
     }
@@ -2221,6 +2267,7 @@ public class CustomAudience extends APINode {
       "product_set_id",
       "retention_days",
       "rule",
+      "rule_aggregation",
     };
 
     public static final String[] FIELDS = {
@@ -2321,6 +2368,11 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setRuleAggregation (String ruleAggregation) {
+      this.setParam("rule_aggregation", ruleAggregation);
+      return this;
+    }
+
     public APIRequestUpdate requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -2360,6 +2412,8 @@ public class CustomAudience extends APINode {
   }
 
   public static enum EnumClaimObjective {
+      @SerializedName("AUTO_OFFER")
+      VALUE_AUTO_OFFER("AUTO_OFFER"),
       @SerializedName("HOME_LISTING")
       VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("PRODUCT")
@@ -2381,14 +2435,16 @@ public class CustomAudience extends APINode {
   }
 
   public static enum EnumContentType {
+      @SerializedName("AUTO_OFFER")
+      VALUE_AUTO_OFFER("AUTO_OFFER"),
       @SerializedName("DESTINATION")
       VALUE_DESTINATION("DESTINATION"),
       @SerializedName("FLIGHT")
       VALUE_FLIGHT("FLIGHT"),
-      @SerializedName("HOTEL")
-      VALUE_HOTEL("HOTEL"),
       @SerializedName("HOME_LISTING")
       VALUE_HOME_LISTING("HOME_LISTING"),
+      @SerializedName("HOTEL")
+      VALUE_HOTEL("HOTEL"),
       NULL(null);
 
       private String value;
@@ -2430,6 +2486,8 @@ public class CustomAudience extends APINode {
       VALUE_BAG_OF_ACCOUNTS("BAG_OF_ACCOUNTS"),
       @SerializedName("STUDY_RULE_AUDIENCE")
       VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
+      @SerializedName("FOX")
+      VALUE_FOX("FOX"),
       NULL(null);
 
       private String value;
@@ -2479,6 +2537,8 @@ public class CustomAudience extends APINode {
       VALUE_RETENTION_DAYS("retention_days"),
       @SerializedName("rule")
       VALUE_RULE("rule"),
+      @SerializedName("rule_aggregation")
+      VALUE_RULE_AGGREGATION("rule_aggregation"),
       @SerializedName("subtype")
       VALUE_SUBTYPE("subtype"),
       @SerializedName("time_content_updated")
@@ -2533,6 +2593,7 @@ public class CustomAudience extends APINode {
     this.mPixelId = instance.mPixelId;
     this.mRetentionDays = instance.mRetentionDays;
     this.mRule = instance.mRule;
+    this.mRuleAggregation = instance.mRuleAggregation;
     this.mSubtype = instance.mSubtype;
     this.mTimeContentUpdated = instance.mTimeContentUpdated;
     this.mTimeCreated = instance.mTimeCreated;

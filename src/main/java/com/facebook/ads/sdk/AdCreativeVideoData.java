@@ -51,6 +51,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeVideoData extends APINode {
+  @SerializedName("additional_image_index")
+  private Long mAdditionalImageIndex = null;
   @SerializedName("branded_content_sponsor_page_id")
   private String mBrandedContentSponsorPageId = null;
   @SerializedName("branded_content_sponsor_relationship")
@@ -69,6 +71,8 @@ public class AdCreativeVideoData extends APINode {
   private String mOfferId = null;
   @SerializedName("page_welcome_message")
   private String mPageWelcomeMessage = null;
+  @SerializedName("retailer_item_ids")
+  private List<String> mRetailerItemIds = null;
   @SerializedName("targeting")
   private Targeting mTargeting = null;
   @SerializedName("title")
@@ -216,6 +220,15 @@ public class AdCreativeVideoData extends APINode {
   }
 
 
+  public Long getFieldAdditionalImageIndex() {
+    return mAdditionalImageIndex;
+  }
+
+  public AdCreativeVideoData setFieldAdditionalImageIndex(Long value) {
+    this.mAdditionalImageIndex = value;
+    return this;
+  }
+
   public String getFieldBrandedContentSponsorPageId() {
     return mBrandedContentSponsorPageId;
   }
@@ -302,6 +315,15 @@ public class AdCreativeVideoData extends APINode {
     return this;
   }
 
+  public List<String> getFieldRetailerItemIds() {
+    return mRetailerItemIds;
+  }
+
+  public AdCreativeVideoData setFieldRetailerItemIds(List<String> value) {
+    this.mRetailerItemIds = value;
+    return this;
+  }
+
   public Targeting getFieldTargeting() {
     return mTargeting;
   }
@@ -351,6 +373,7 @@ public class AdCreativeVideoData extends APINode {
   }
 
   public AdCreativeVideoData copyFrom(AdCreativeVideoData instance) {
+    this.mAdditionalImageIndex = instance.mAdditionalImageIndex;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
     this.mBrandedContentSponsorRelationship = instance.mBrandedContentSponsorRelationship;
     this.mCallToAction = instance.mCallToAction;
@@ -360,6 +383,7 @@ public class AdCreativeVideoData extends APINode {
     this.mMessage = instance.mMessage;
     this.mOfferId = instance.mOfferId;
     this.mPageWelcomeMessage = instance.mPageWelcomeMessage;
+    this.mRetailerItemIds = instance.mRetailerItemIds;
     this.mTargeting = instance.mTargeting;
     this.mTitle = instance.mTitle;
     this.mVideoId = instance.mVideoId;

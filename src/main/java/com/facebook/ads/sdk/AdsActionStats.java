@@ -73,6 +73,8 @@ public class AdsActionStats extends APINode {
   private String mActionDestination = null;
   @SerializedName("action_device")
   private String mActionDevice = null;
+  @SerializedName("action_link_click_destination")
+  private String mActionLinkClickDestination = null;
   @SerializedName("action_reaction")
   private String mActionReaction = null;
   @SerializedName("action_target_id")
@@ -325,6 +327,15 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldActionLinkClickDestination() {
+    return mActionLinkClickDestination;
+  }
+
+  public AdsActionStats setFieldActionLinkClickDestination(String value) {
+    this.mActionLinkClickDestination = value;
+    return this;
+  }
+
   public String getFieldActionReaction() {
     return mActionReaction;
   }
@@ -407,6 +418,7 @@ public class AdsActionStats extends APINode {
     this.mActionCarouselCardName = instance.mActionCarouselCardName;
     this.mActionDestination = instance.mActionDestination;
     this.mActionDevice = instance.mActionDevice;
+    this.mActionLinkClickDestination = instance.mActionLinkClickDestination;
     this.mActionReaction = instance.mActionReaction;
     this.mActionTargetId = instance.mActionTargetId;
     this.mActionType = instance.mActionType;

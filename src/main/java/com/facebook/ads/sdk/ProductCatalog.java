@@ -61,6 +61,8 @@ public class ProductCatalog extends APINode {
   private List<String> mFallbackImageUrl = null;
   @SerializedName("feed_count")
   private Long mFeedCount = null;
+  @SerializedName("flight_catalog_settings")
+  private Object mFlightCatalogSettings = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_padding_landscape")
@@ -71,6 +73,8 @@ public class ProductCatalog extends APINode {
   private String mName = null;
   @SerializedName("product_count")
   private Long mProductCount = null;
+  @SerializedName("qualified_product_count")
+  private Long mQualifiedProductCount = null;
   @SerializedName("vertical")
   private String mVertical = null;
   protected static Gson gson = null;
@@ -257,6 +261,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestGetAgencies(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCheckBatchRequestStatus getCheckBatchRequestStatus() {
+    return new APIRequestGetCheckBatchRequestStatus(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetDestinations getDestinations() {
     return new APIRequestGetDestinations(this.getPrefixedId().toString(), context);
   }
@@ -377,6 +385,10 @@ public class ProductCatalog extends APINode {
     return mFeedCount;
   }
 
+  public Object getFieldFlightCatalogSettings() {
+    return mFlightCatalogSettings;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -395,6 +407,10 @@ public class ProductCatalog extends APINode {
 
   public Long getFieldProductCount() {
     return mProductCount;
+  }
+
+  public Long getFieldQualifiedProductCount() {
+    return mQualifiedProductCount;
   }
 
   public String getFieldVertical() {
@@ -420,10 +436,12 @@ public class ProductCatalog extends APINode {
       "link",
       "name",
       "primary_page",
+      "profile_picture_uri",
       "timezone_id",
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "vertical",
     };
 
     @Override
@@ -537,6 +555,13 @@ public class ProductCatalog extends APINode {
       this.requestField("primary_page", value);
       return this;
     }
+    public APIRequestGetAgencies requestProfilePictureUriField () {
+      return this.requestProfilePictureUriField(true);
+    }
+    public APIRequestGetAgencies requestProfilePictureUriField (boolean value) {
+      this.requestField("profile_picture_uri", value);
+      return this;
+    }
     public APIRequestGetAgencies requestTimezoneIdField () {
       return this.requestTimezoneIdField(true);
     }
@@ -563,6 +588,135 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetAgencies requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestVerticalField () {
+      return this.requestVerticalField(true);
+    }
+    public APIRequestGetAgencies requestVerticalField (boolean value) {
+      this.requestField("vertical", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetCheckBatchRequestStatus extends APIRequest<CheckBatchRequestStatus> {
+
+    APINodeList<CheckBatchRequestStatus> lastResponse = null;
+    @Override
+    public APINodeList<CheckBatchRequestStatus> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "handle",
+    };
+
+    public static final String[] FIELDS = {
+      "errors",
+      "errors_total_count",
+      "handle",
+      "status",
+    };
+
+    @Override
+    public APINodeList<CheckBatchRequestStatus> parseResponse(String response) throws APIException {
+      return CheckBatchRequestStatus.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<CheckBatchRequestStatus> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<CheckBatchRequestStatus> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetCheckBatchRequestStatus(String nodeId, APIContext context) {
+      super(context, nodeId, "/check_batch_request_status", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCheckBatchRequestStatus setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCheckBatchRequestStatus setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCheckBatchRequestStatus setHandle (String handle) {
+      this.setParam("handle", handle);
+      return this;
+    }
+
+    public APIRequestGetCheckBatchRequestStatus requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCheckBatchRequestStatus requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCheckBatchRequestStatus requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCheckBatchRequestStatus requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCheckBatchRequestStatus requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCheckBatchRequestStatus requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCheckBatchRequestStatus requestErrorsField () {
+      return this.requestErrorsField(true);
+    }
+    public APIRequestGetCheckBatchRequestStatus requestErrorsField (boolean value) {
+      this.requestField("errors", value);
+      return this;
+    }
+    public APIRequestGetCheckBatchRequestStatus requestErrorsTotalCountField () {
+      return this.requestErrorsTotalCountField(true);
+    }
+    public APIRequestGetCheckBatchRequestStatus requestErrorsTotalCountField (boolean value) {
+      this.requestField("errors_total_count", value);
+      return this;
+    }
+    public APIRequestGetCheckBatchRequestStatus requestHandleField () {
+      return this.requestHandleField(true);
+    }
+    public APIRequestGetCheckBatchRequestStatus requestHandleField (boolean value) {
+      this.requestField("handle", value);
+      return this;
+    }
+    public APIRequestGetCheckBatchRequestStatus requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetCheckBatchRequestStatus requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
   }
@@ -1979,6 +2133,7 @@ public class ProductCatalog extends APINode {
       "latest_upload",
       "name",
       "product_count",
+      "qualified_product_count",
       "quoted_fields_mode",
       "schedule",
     };
@@ -2129,6 +2284,13 @@ public class ProductCatalog extends APINode {
       this.requestField("product_count", value);
       return this;
     }
+    public APIRequestGetProductFeeds requestQualifiedProductCountField () {
+      return this.requestQualifiedProductCountField(true);
+    }
+    public APIRequestGetProductFeeds requestQualifiedProductCountField (boolean value) {
+      this.requestField("qualified_product_count", value);
+      return this;
+    }
     public APIRequestGetProductFeeds requestQuotedFieldsModeField () {
       return this.requestQuotedFieldsModeField(true);
     }
@@ -2161,6 +2323,7 @@ public class ProductCatalog extends APINode {
       "file_name",
       "name",
       "quoted_fields_mode",
+      "rules",
       "schedule",
     };
 
@@ -2253,6 +2416,15 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateProductFeed setQuotedFieldsMode (String quotedFieldsMode) {
       this.setParam("quoted_fields_mode", quotedFieldsMode);
+      return this;
+    }
+
+    public APIRequestCreateProductFeed setRules (List<String> rules) {
+      this.setParam("rules", rules);
+      return this;
+    }
+    public APIRequestCreateProductFeed setRules (String rules) {
+      this.setParam("rules", rules);
       return this;
     }
 
@@ -3738,10 +3910,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateProduct setWindowsPhoneAppId (Long windowsPhoneAppId) {
-      this.setParam("windows_phone_app_id", windowsPhoneAppId);
-      return this;
-    }
     public APIRequestCreateProduct setWindowsPhoneAppId (String windowsPhoneAppId) {
       this.setParam("windows_phone_app_id", windowsPhoneAppId);
       return this;
@@ -3809,8 +3977,11 @@ public class ProductCatalog extends APINode {
       "file_size",
       "file_url",
       "fov",
+      "guide",
+      "guide_enabled",
       "initial_heading",
       "initial_pitch",
+      "original_fov",
       "original_projection_type",
       "referenced_sticker_id",
       "replace_video_id",
@@ -3909,6 +4080,24 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setGuide (List<List<Long>> guide) {
+      this.setParam("guide", guide);
+      return this;
+    }
+    public APIRequestCreateVideo setGuide (String guide) {
+      this.setParam("guide", guide);
+      return this;
+    }
+
+    public APIRequestCreateVideo setGuideEnabled (Boolean guideEnabled) {
+      this.setParam("guide_enabled", guideEnabled);
+      return this;
+    }
+    public APIRequestCreateVideo setGuideEnabled (String guideEnabled) {
+      this.setParam("guide_enabled", guideEnabled);
+      return this;
+    }
+
     public APIRequestCreateVideo setInitialHeading (Long initialHeading) {
       this.setParam("initial_heading", initialHeading);
       return this;
@@ -3924,6 +4113,15 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateVideo setInitialPitch (String initialPitch) {
       this.setParam("initial_pitch", initialPitch);
+      return this;
+    }
+
+    public APIRequestCreateVideo setOriginalFov (Long originalFov) {
+      this.setParam("original_fov", originalFov);
+      return this;
+    }
+    public APIRequestCreateVideo setOriginalFov (String originalFov) {
+      this.setParam("original_fov", originalFov);
       return this;
     }
 
@@ -4167,11 +4365,13 @@ public class ProductCatalog extends APINode {
       "default_image_url",
       "fallback_image_url",
       "feed_count",
+      "flight_catalog_settings",
       "id",
       "image_padding_landscape",
       "image_padding_square",
       "name",
       "product_count",
+      "qualified_product_count",
       "vertical",
     };
 
@@ -4279,6 +4479,13 @@ public class ProductCatalog extends APINode {
       this.requestField("feed_count", value);
       return this;
     }
+    public APIRequestGet requestFlightCatalogSettingsField () {
+      return this.requestFlightCatalogSettingsField(true);
+    }
+    public APIRequestGet requestFlightCatalogSettingsField (boolean value) {
+      this.requestField("flight_catalog_settings", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -4314,6 +4521,13 @@ public class ProductCatalog extends APINode {
       this.requestField("product_count", value);
       return this;
     }
+    public APIRequestGet requestQualifiedProductCountField () {
+      return this.requestQualifiedProductCountField(true);
+    }
+    public APIRequestGet requestQualifiedProductCountField (boolean value) {
+      this.requestField("qualified_product_count", value);
+      return this;
+    }
     public APIRequestGet requestVerticalField () {
       return this.requestVerticalField(true);
     }
@@ -4334,6 +4548,7 @@ public class ProductCatalog extends APINode {
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
+      "flight_catalog_settings",
       "name",
     };
 
@@ -4389,6 +4604,15 @@ public class ProductCatalog extends APINode {
 
     public APIRequestUpdate setFallbackImageUrl (String fallbackImageUrl) {
       this.setParam("fallback_image_url", fallbackImageUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setFlightCatalogSettings (Map<String, String> flightCatalogSettings) {
+      this.setParam("flight_catalog_settings", flightCatalogSettings);
+      return this;
+    }
+    public APIRequestUpdate setFlightCatalogSettings (String flightCatalogSettings) {
+      this.setParam("flight_catalog_settings", flightCatalogSettings);
       return this;
     }
 
@@ -4609,11 +4833,13 @@ public class ProductCatalog extends APINode {
     this.mDefaultImageUrl = instance.mDefaultImageUrl;
     this.mFallbackImageUrl = instance.mFallbackImageUrl;
     this.mFeedCount = instance.mFeedCount;
+    this.mFlightCatalogSettings = instance.mFlightCatalogSettings;
     this.mId = instance.mId;
     this.mImagePaddingLandscape = instance.mImagePaddingLandscape;
     this.mImagePaddingSquare = instance.mImagePaddingSquare;
     this.mName = instance.mName;
     this.mProductCount = instance.mProductCount;
+    this.mQualifiedProductCount = instance.mQualifiedProductCount;
     this.mVertical = instance.mVertical;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

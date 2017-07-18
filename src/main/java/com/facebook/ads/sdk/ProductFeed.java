@@ -73,6 +73,8 @@ public class ProductFeed extends APINode {
   private String mName = null;
   @SerializedName("product_count")
   private Long mProductCount = null;
+  @SerializedName("qualified_product_count")
+  private Long mQualifiedProductCount = null;
   @SerializedName("quoted_fields_mode")
   private EnumQuotedFieldsMode mQuotedFieldsMode = null;
   @SerializedName("schedule")
@@ -327,6 +329,10 @@ public class ProductFeed extends APINode {
 
   public Long getFieldProductCount() {
     return mProductCount;
+  }
+
+  public Long getFieldQualifiedProductCount() {
+    return mQualifiedProductCount;
   }
 
   public EnumQuotedFieldsMode getFieldQuotedFieldsMode() {
@@ -1163,6 +1169,7 @@ public class ProductFeed extends APINode {
       "latest_upload",
       "name",
       "product_count",
+      "qualified_product_count",
       "quoted_fields_mode",
       "schedule",
     };
@@ -1311,6 +1318,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGet requestProductCountField (boolean value) {
       this.requestField("product_count", value);
+      return this;
+    }
+    public APIRequestGet requestQualifiedProductCountField () {
+      return this.requestQualifiedProductCountField(true);
+    }
+    public APIRequestGet requestQualifiedProductCountField (boolean value) {
+      this.requestField("qualified_product_count", value);
       return this;
     }
     public APIRequestGet requestQuotedFieldsModeField () {
@@ -1574,6 +1588,7 @@ public class ProductFeed extends APINode {
     this.mLatestUpload = instance.mLatestUpload;
     this.mName = instance.mName;
     this.mProductCount = instance.mProductCount;
+    this.mQualifiedProductCount = instance.mQualifiedProductCount;
     this.mQuotedFieldsMode = instance.mQuotedFieldsMode;
     this.mSchedule = instance.mSchedule;
     this.context = instance.context;

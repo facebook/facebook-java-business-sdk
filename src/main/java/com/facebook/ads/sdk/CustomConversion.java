@@ -267,6 +267,14 @@ public class CustomConversion extends APINode {
     return new APIRequestGetActivities(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteSharedAgencies deleteSharedAgencies() {
+    return new APIRequestDeleteSharedAgencies(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateSharedAgency createSharedAgency() {
+    return new APIRequestCreateSharedAgency(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetStats getStats() {
     return new APIRequestGetStats(this.getPrefixedId().toString(), context);
   }
@@ -453,6 +461,186 @@ public class CustomConversion extends APINode {
 
     @Override
     public APIRequestGetActivities requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestDeleteSharedAgencies extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestDeleteSharedAgencies(String nodeId, APIContext context) {
+      super(context, nodeId, "/shared_agencies", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteSharedAgencies setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSharedAgencies setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteSharedAgencies setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestDeleteSharedAgencies requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteSharedAgencies requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSharedAgencies requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteSharedAgencies requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSharedAgencies requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSharedAgencies requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateSharedAgency extends APIRequest<CustomConversion> {
+
+    CustomConversion lastResponse = null;
+    @Override
+    public CustomConversion getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public CustomConversion parseResponse(String response) throws APIException {
+      return CustomConversion.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public CustomConversion execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public CustomConversion execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestCreateSharedAgency(String nodeId, APIContext context) {
+      super(context, nodeId, "/shared_agencies", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateSharedAgency setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSharedAgency setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateSharedAgency setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestCreateSharedAgency requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateSharedAgency requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSharedAgency requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateSharedAgency requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSharedAgency requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSharedAgency requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -1006,12 +1194,12 @@ public class CustomConversion extends APINode {
       VALUE_INITIATED_CHECKOUT("INITIATED_CHECKOUT"),
       @SerializedName("LEAD")
       VALUE_LEAD("LEAD"),
-      @SerializedName("OTHER")
-      VALUE_OTHER("OTHER"),
       @SerializedName("PURCHASE")
       VALUE_PURCHASE("PURCHASE"),
       @SerializedName("SEARCH")
       VALUE_SEARCH("SEARCH"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
       NULL(null);
 
       private String value;

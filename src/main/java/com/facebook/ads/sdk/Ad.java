@@ -89,6 +89,10 @@ public class Ad extends APINode {
   private String mName = null;
   @SerializedName("recommendations")
   private List<AdRecommendation> mRecommendations = null;
+  @SerializedName("source_ad")
+  private Ad mSourceAd = null;
+  @SerializedName("source_ad_id")
+  private String mSourceAdId = null;
   @SerializedName("status")
   private EnumStatus mStatus = null;
   @SerializedName("tracking_specs")
@@ -407,6 +411,17 @@ public class Ad extends APINode {
 
   public List<AdRecommendation> getFieldRecommendations() {
     return mRecommendations;
+  }
+
+  public Ad getFieldSourceAd() {
+    if (mSourceAd != null) {
+      mSourceAd.context = getContext();
+    }
+    return mSourceAd;
+  }
+
+  public String getFieldSourceAdId() {
+    return mSourceAdId;
   }
 
   public EnumStatus getFieldStatus() {
@@ -1006,6 +1021,7 @@ public class Ad extends APINode {
       "time_increment",
       "time_range",
       "time_ranges",
+      "use_account_attribution_setting",
     };
 
     public static final String[] FIELDS = {
@@ -1203,6 +1219,15 @@ public class Ad extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setUseAccountAttributionSetting (Boolean useAccountAttributionSetting) {
+      this.setParam("use_account_attribution_setting", useAccountAttributionSetting);
+      return this;
+    }
+    public APIRequestGetInsights setUseAccountAttributionSetting (String useAccountAttributionSetting) {
+      this.setParam("use_account_attribution_setting", useAccountAttributionSetting);
+      return this;
+    }
+
     public APIRequestGetInsights requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -1268,6 +1293,7 @@ public class Ad extends APINode {
       "time_increment",
       "time_range",
       "time_ranges",
+      "use_account_attribution_setting",
     };
 
     public static final String[] FIELDS = {
@@ -1462,6 +1488,15 @@ public class Ad extends APINode {
     }
     public APIRequestGetInsightsAsync setTimeRanges (String timeRanges) {
       this.setParam("time_ranges", timeRanges);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setUseAccountAttributionSetting (Boolean useAccountAttributionSetting) {
+      this.setParam("use_account_attribution_setting", useAccountAttributionSetting);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setUseAccountAttributionSetting (String useAccountAttributionSetting) {
+      this.setParam("use_account_attribution_setting", useAccountAttributionSetting);
       return this;
     }
 
@@ -2341,6 +2376,8 @@ public class Ad extends APINode {
       "last_updated_by_app_id",
       "name",
       "recommendations",
+      "source_ad",
+      "source_ad_id",
       "status",
       "tracking_specs",
       "updated_time",
@@ -2546,6 +2583,20 @@ public class Ad extends APINode {
     }
     public APIRequestGet requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGet requestSourceAdField () {
+      return this.requestSourceAdField(true);
+    }
+    public APIRequestGet requestSourceAdField (boolean value) {
+      this.requestField("source_ad", value);
+      return this;
+    }
+    public APIRequestGet requestSourceAdIdField () {
+      return this.requestSourceAdIdField(true);
+    }
+    public APIRequestGet requestSourceAdIdField (boolean value) {
+      this.requestField("source_ad_id", value);
       return this;
     }
     public APIRequestGet requestStatusField () {
@@ -2984,6 +3035,8 @@ public class Ad extends APINode {
     this.mLastUpdatedByAppId = instance.mLastUpdatedByAppId;
     this.mName = instance.mName;
     this.mRecommendations = instance.mRecommendations;
+    this.mSourceAd = instance.mSourceAd;
+    this.mSourceAdId = instance.mSourceAdId;
     this.mStatus = instance.mStatus;
     this.mTrackingSpecs = instance.mTrackingSpecs;
     this.mUpdatedTime = instance.mUpdatedTime;

@@ -79,6 +79,10 @@ public class Campaign extends APINode {
   private String mObjective = null;
   @SerializedName("recommendations")
   private List<AdRecommendation> mRecommendations = null;
+  @SerializedName("source_campaign")
+  private Campaign mSourceCampaign = null;
+  @SerializedName("source_campaign_id")
+  private String mSourceCampaignId = null;
   @SerializedName("spend_cap")
   private String mSpendCap = null;
   @SerializedName("start_time")
@@ -285,6 +289,10 @@ public class Campaign extends APINode {
     return new APIRequestGetAdSets(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetCopies getCopies() {
+    return new APIRequestGetCopies(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetInsights getInsights() {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
   }
@@ -360,6 +368,17 @@ public class Campaign extends APINode {
 
   public List<AdRecommendation> getFieldRecommendations() {
     return mRecommendations;
+  }
+
+  public Campaign getFieldSourceCampaign() {
+    if (mSourceCampaign != null) {
+      mSourceCampaign.context = getContext();
+    }
+    return mSourceCampaign;
+  }
+
+  public String getFieldSourceCampaignId() {
+    return mSourceCampaignId;
   }
 
   public String getFieldSpendCap() {
@@ -628,6 +647,8 @@ public class Campaign extends APINode {
       "last_updated_by_app_id",
       "name",
       "recommendations",
+      "source_ad",
+      "source_ad_id",
       "status",
       "tracking_specs",
       "updated_time",
@@ -885,6 +906,20 @@ public class Campaign extends APINode {
       this.requestField("recommendations", value);
       return this;
     }
+    public APIRequestGetAds requestSourceAdField () {
+      return this.requestSourceAdField(true);
+    }
+    public APIRequestGetAds requestSourceAdField (boolean value) {
+      this.requestField("source_ad", value);
+      return this;
+    }
+    public APIRequestGetAds requestSourceAdIdField () {
+      return this.requestSourceAdIdField(true);
+    }
+    public APIRequestGetAds requestSourceAdIdField (boolean value) {
+      this.requestField("source_ad_id", value);
+      return this;
+    }
     public APIRequestGetAds requestStatusField () {
       return this.requestStatusField(true);
     }
@@ -957,6 +992,8 @@ public class Campaign extends APINode {
       "recurring_budget_semantics",
       "rf_prediction_id",
       "rtb_flag",
+      "source_adset",
+      "source_adset_id",
       "start_time",
       "status",
       "targeting",
@@ -1307,6 +1344,20 @@ public class Campaign extends APINode {
       this.requestField("rtb_flag", value);
       return this;
     }
+    public APIRequestGetAdSets requestSourceAdsetField () {
+      return this.requestSourceAdsetField(true);
+    }
+    public APIRequestGetAdSets requestSourceAdsetField (boolean value) {
+      this.requestField("source_adset", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestSourceAdsetIdField () {
+      return this.requestSourceAdsetIdField(true);
+    }
+    public APIRequestGetAdSets requestSourceAdsetIdField (boolean value) {
+      this.requestField("source_adset_id", value);
+      return this;
+    }
     public APIRequestGetAdSets requestStartTimeField () {
       return this.requestStartTimeField(true);
     }
@@ -1358,6 +1409,298 @@ public class Campaign extends APINode {
     }
   }
 
+  public static class APIRequestGetCopies extends APIRequest<Campaign> {
+
+    APINodeList<Campaign> lastResponse = null;
+    @Override
+    public APINodeList<Campaign> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "date_preset",
+      "effective_status",
+      "is_completed",
+      "time_range",
+    };
+
+    public static final String[] FIELDS = {
+      "account_id",
+      "adlabels",
+      "brand_lift_studies",
+      "budget_rebalance_flag",
+      "buying_type",
+      "can_create_brand_lift_study",
+      "can_use_spend_cap",
+      "configured_status",
+      "created_time",
+      "effective_status",
+      "id",
+      "name",
+      "objective",
+      "recommendations",
+      "source_campaign",
+      "source_campaign_id",
+      "spend_cap",
+      "start_time",
+      "status",
+      "stop_time",
+      "updated_time",
+    };
+
+    @Override
+    public APINodeList<Campaign> parseResponse(String response) throws APIException {
+      return Campaign.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<Campaign> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Campaign> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetCopies(String nodeId, APIContext context) {
+      super(context, nodeId, "/copies", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCopies setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCopies setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCopies setDatePreset (Campaign.EnumDatePreset datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+    public APIRequestGetCopies setDatePreset (String datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+
+    public APIRequestGetCopies setEffectiveStatus (List<Campaign.EnumEffectiveStatus> effectiveStatus) {
+      this.setParam("effective_status", effectiveStatus);
+      return this;
+    }
+    public APIRequestGetCopies setEffectiveStatus (String effectiveStatus) {
+      this.setParam("effective_status", effectiveStatus);
+      return this;
+    }
+
+    public APIRequestGetCopies setIsCompleted (Boolean isCompleted) {
+      this.setParam("is_completed", isCompleted);
+      return this;
+    }
+    public APIRequestGetCopies setIsCompleted (String isCompleted) {
+      this.setParam("is_completed", isCompleted);
+      return this;
+    }
+
+    public APIRequestGetCopies setTimeRange (Object timeRange) {
+      this.setParam("time_range", timeRange);
+      return this;
+    }
+    public APIRequestGetCopies setTimeRange (String timeRange) {
+      this.setParam("time_range", timeRange);
+      return this;
+    }
+
+    public APIRequestGetCopies requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCopies requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCopies requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCopies requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCopies requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCopies requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCopies requestAccountIdField () {
+      return this.requestAccountIdField(true);
+    }
+    public APIRequestGetCopies requestAccountIdField (boolean value) {
+      this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAdlabelsField () {
+      return this.requestAdlabelsField(true);
+    }
+    public APIRequestGetCopies requestAdlabelsField (boolean value) {
+      this.requestField("adlabels", value);
+      return this;
+    }
+    public APIRequestGetCopies requestBrandLiftStudiesField () {
+      return this.requestBrandLiftStudiesField(true);
+    }
+    public APIRequestGetCopies requestBrandLiftStudiesField (boolean value) {
+      this.requestField("brand_lift_studies", value);
+      return this;
+    }
+    public APIRequestGetCopies requestBudgetRebalanceFlagField () {
+      return this.requestBudgetRebalanceFlagField(true);
+    }
+    public APIRequestGetCopies requestBudgetRebalanceFlagField (boolean value) {
+      this.requestField("budget_rebalance_flag", value);
+      return this;
+    }
+    public APIRequestGetCopies requestBuyingTypeField () {
+      return this.requestBuyingTypeField(true);
+    }
+    public APIRequestGetCopies requestBuyingTypeField (boolean value) {
+      this.requestField("buying_type", value);
+      return this;
+    }
+    public APIRequestGetCopies requestCanCreateBrandLiftStudyField () {
+      return this.requestCanCreateBrandLiftStudyField(true);
+    }
+    public APIRequestGetCopies requestCanCreateBrandLiftStudyField (boolean value) {
+      this.requestField("can_create_brand_lift_study", value);
+      return this;
+    }
+    public APIRequestGetCopies requestCanUseSpendCapField () {
+      return this.requestCanUseSpendCapField(true);
+    }
+    public APIRequestGetCopies requestCanUseSpendCapField (boolean value) {
+      this.requestField("can_use_spend_cap", value);
+      return this;
+    }
+    public APIRequestGetCopies requestConfiguredStatusField () {
+      return this.requestConfiguredStatusField(true);
+    }
+    public APIRequestGetCopies requestConfiguredStatusField (boolean value) {
+      this.requestField("configured_status", value);
+      return this;
+    }
+    public APIRequestGetCopies requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetCopies requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetCopies requestEffectiveStatusField () {
+      return this.requestEffectiveStatusField(true);
+    }
+    public APIRequestGetCopies requestEffectiveStatusField (boolean value) {
+      this.requestField("effective_status", value);
+      return this;
+    }
+    public APIRequestGetCopies requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCopies requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetCopies requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetCopies requestObjectiveField () {
+      return this.requestObjectiveField(true);
+    }
+    public APIRequestGetCopies requestObjectiveField (boolean value) {
+      this.requestField("objective", value);
+      return this;
+    }
+    public APIRequestGetCopies requestRecommendationsField () {
+      return this.requestRecommendationsField(true);
+    }
+    public APIRequestGetCopies requestRecommendationsField (boolean value) {
+      this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGetCopies requestSourceCampaignField () {
+      return this.requestSourceCampaignField(true);
+    }
+    public APIRequestGetCopies requestSourceCampaignField (boolean value) {
+      this.requestField("source_campaign", value);
+      return this;
+    }
+    public APIRequestGetCopies requestSourceCampaignIdField () {
+      return this.requestSourceCampaignIdField(true);
+    }
+    public APIRequestGetCopies requestSourceCampaignIdField (boolean value) {
+      this.requestField("source_campaign_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestSpendCapField () {
+      return this.requestSpendCapField(true);
+    }
+    public APIRequestGetCopies requestSpendCapField (boolean value) {
+      this.requestField("spend_cap", value);
+      return this;
+    }
+    public APIRequestGetCopies requestStartTimeField () {
+      return this.requestStartTimeField(true);
+    }
+    public APIRequestGetCopies requestStartTimeField (boolean value) {
+      this.requestField("start_time", value);
+      return this;
+    }
+    public APIRequestGetCopies requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetCopies requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetCopies requestStopTimeField () {
+      return this.requestStopTimeField(true);
+    }
+    public APIRequestGetCopies requestStopTimeField (boolean value) {
+      this.requestField("stop_time", value);
+      return this;
+    }
+    public APIRequestGetCopies requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetCopies requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetInsights extends APIRequest<AdsInsights> {
 
     APINodeList<AdsInsights> lastResponse = null;
@@ -1385,6 +1728,7 @@ public class Campaign extends APINode {
       "time_increment",
       "time_range",
       "time_ranges",
+      "use_account_attribution_setting",
     };
 
     public static final String[] FIELDS = {
@@ -1582,6 +1926,15 @@ public class Campaign extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights setUseAccountAttributionSetting (Boolean useAccountAttributionSetting) {
+      this.setParam("use_account_attribution_setting", useAccountAttributionSetting);
+      return this;
+    }
+    public APIRequestGetInsights setUseAccountAttributionSetting (String useAccountAttributionSetting) {
+      this.setParam("use_account_attribution_setting", useAccountAttributionSetting);
+      return this;
+    }
+
     public APIRequestGetInsights requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -1647,6 +2000,7 @@ public class Campaign extends APINode {
       "time_increment",
       "time_range",
       "time_ranges",
+      "use_account_attribution_setting",
     };
 
     public static final String[] FIELDS = {
@@ -1844,6 +2198,15 @@ public class Campaign extends APINode {
       return this;
     }
 
+    public APIRequestGetInsightsAsync setUseAccountAttributionSetting (Boolean useAccountAttributionSetting) {
+      this.setParam("use_account_attribution_setting", useAccountAttributionSetting);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setUseAccountAttributionSetting (String useAccountAttributionSetting) {
+      this.setParam("use_account_attribution_setting", useAccountAttributionSetting);
+      return this;
+    }
+
     public APIRequestGetInsightsAsync requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -1991,6 +2354,8 @@ public class Campaign extends APINode {
       "name",
       "objective",
       "recommendations",
+      "source_campaign",
+      "source_campaign_id",
       "spend_cap",
       "start_time",
       "status",
@@ -2163,6 +2528,20 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGet requestSourceCampaignField () {
+      return this.requestSourceCampaignField(true);
+    }
+    public APIRequestGet requestSourceCampaignField (boolean value) {
+      this.requestField("source_campaign", value);
+      return this;
+    }
+    public APIRequestGet requestSourceCampaignIdField () {
+      return this.requestSourceCampaignIdField(true);
+    }
+    public APIRequestGet requestSourceCampaignIdField (boolean value) {
+      this.requestField("source_campaign_id", value);
       return this;
     }
     public APIRequestGet requestSpendCapField () {
@@ -2625,6 +3004,8 @@ public class Campaign extends APINode {
     this.mName = instance.mName;
     this.mObjective = instance.mObjective;
     this.mRecommendations = instance.mRecommendations;
+    this.mSourceCampaign = instance.mSourceCampaign;
+    this.mSourceCampaignId = instance.mSourceCampaignId;
     this.mSpendCap = instance.mSpendCap;
     this.mStartTime = instance.mStartTime;
     this.mStatus = instance.mStatus;

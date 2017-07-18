@@ -357,6 +357,7 @@ public class AdAsyncRequestSet extends APINode {
       "result",
       "scope_object_id",
       "status",
+      "type",
       "updated_time",
     };
 
@@ -485,6 +486,13 @@ public class AdAsyncRequestSet extends APINode {
     }
     public APIRequestGetRequests requestStatusField (boolean value) {
       this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetRequests requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetRequests requestTypeField (boolean value) {
+      this.requestField("type", value);
       return this;
     }
     public APIRequestGetRequests requestUpdatedTimeField () {

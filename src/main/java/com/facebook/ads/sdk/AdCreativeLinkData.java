@@ -93,6 +93,10 @@ public class AdCreativeLinkData extends APINode {
   private String mPageWelcomeMessage = null;
   @SerializedName("picture")
   private String mPicture = null;
+  @SerializedName("retailer_item_ids")
+  private List<String> mRetailerItemIds = null;
+  @SerializedName("show_multiple_images")
+  private Boolean mShowMultipleImages = null;
   protected static Gson gson = null;
 
   public AdCreativeLinkData() {
@@ -443,6 +447,24 @@ public class AdCreativeLinkData extends APINode {
     return this;
   }
 
+  public List<String> getFieldRetailerItemIds() {
+    return mRetailerItemIds;
+  }
+
+  public AdCreativeLinkData setFieldRetailerItemIds(List<String> value) {
+    this.mRetailerItemIds = value;
+    return this;
+  }
+
+  public Boolean getFieldShowMultipleImages() {
+    return mShowMultipleImages;
+  }
+
+  public AdCreativeLinkData setFieldShowMultipleImages(Boolean value) {
+    this.mShowMultipleImages = value;
+    return this;
+  }
+
 
 
   public static enum EnumAttachmentStyle {
@@ -500,6 +522,8 @@ public class AdCreativeLinkData extends APINode {
     this.mOfferId = instance.mOfferId;
     this.mPageWelcomeMessage = instance.mPageWelcomeMessage;
     this.mPicture = instance.mPicture;
+    this.mRetailerItemIds = instance.mRetailerItemIds;
+    this.mShowMultipleImages = instance.mShowMultipleImages;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

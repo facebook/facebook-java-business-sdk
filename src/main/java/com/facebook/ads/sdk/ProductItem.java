@@ -1615,10 +1615,6 @@ public class ProductItem extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setWindowsPhoneAppId (Long windowsPhoneAppId) {
-      this.setParam("windows_phone_app_id", windowsPhoneAppId);
-      return this;
-    }
     public APIRequestUpdate setWindowsPhoneAppId (String windowsPhoneAppId) {
       this.setParam("windows_phone_app_id", windowsPhoneAppId);
       return this;
@@ -1771,6 +1767,8 @@ public class ProductItem extends APINode {
       VALUE_REJECTED("rejected"),
       @SerializedName("approved")
       VALUE_APPROVED("approved"),
+      @SerializedName("outdated")
+      VALUE_OUTDATED("outdated"),
       NULL(null);
 
       private String value;

@@ -404,6 +404,7 @@ public class OffsitePixel extends APINode {
       "age",
       "agency_client_declaration",
       "amount_spent",
+      "attribution_spec",
       "balance",
       "business",
       "business_city",
@@ -425,6 +426,7 @@ public class OffsitePixel extends APINode {
       "has_migrated_permissions",
       "id",
       "io_number",
+      "is_attribution_spec_system_default",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -553,6 +555,13 @@ public class OffsitePixel extends APINode {
     }
     public APIRequestGetAdAccounts requestAmountSpentField (boolean value) {
       this.requestField("amount_spent", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAttributionSpecField () {
+      return this.requestAttributionSpecField(true);
+    }
+    public APIRequestGetAdAccounts requestAttributionSpecField (boolean value) {
+      this.requestField("attribution_spec", value);
       return this;
     }
     public APIRequestGetAdAccounts requestBalanceField () {
@@ -700,6 +709,13 @@ public class OffsitePixel extends APINode {
     }
     public APIRequestGetAdAccounts requestIoNumberField (boolean value) {
       this.requestField("io_number", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsAttributionSpecSystemDefaultField () {
+      return this.requestIsAttributionSpecSystemDefaultField(true);
+    }
+    public APIRequestGetAdAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
+      this.requestField("is_attribution_spec_system_default", value);
       return this;
     }
     public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {

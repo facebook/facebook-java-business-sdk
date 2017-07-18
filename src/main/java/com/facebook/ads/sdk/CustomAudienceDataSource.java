@@ -248,6 +248,8 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_TOKENS("TOKENS"),
       @SerializedName("EXTERNAL_IDS_MIX")
       VALUE_EXTERNAL_IDS_MIX("EXTERNAL_IDS_MIX"),
+      @SerializedName("HOUSEHOLD_EXPANSION")
+      VALUE_HOUSEHOLD_EXPANSION("HOUSEHOLD_EXPANSION"),
       @SerializedName("WEB_PIXEL_HITS")
       VALUE_WEB_PIXEL_HITS("WEB_PIXEL_HITS"),
       @SerializedName("MOBILE_APP_EVENTS")
@@ -341,6 +343,8 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_COPY_PASTE("COPY_PASTE"),
       @SerializedName("CONTACT_IMPORTER")
       VALUE_CONTACT_IMPORTER("CONTACT_IMPORTER"),
+      @SerializedName("HOUSEHOLD_AUDIENCE")
+      VALUE_HOUSEHOLD_AUDIENCE("HOUSEHOLD_AUDIENCE"),
       NULL(null);
 
       private String value;

@@ -380,8 +380,6 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_EXCLUDED_PUBLISHER_CATEGORIES("excluded_publisher_categories"),
       @SerializedName("excluded_publisher_list_ids")
       VALUE_EXCLUDED_PUBLISHER_LIST_IDS("excluded_publisher_list_ids"),
-      @SerializedName("excluded_publisher_domains")
-      VALUE_EXCLUDED_PUBLISHER_DOMAINS("excluded_publisher_domains"),
       @SerializedName("publisher_visibility_categories")
       VALUE_PUBLISHER_VISIBILITY_CATEGORIES("publisher_visibility_categories"),
       @SerializedName("user_device")
@@ -430,6 +428,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_OFFICE_TYPE("office_type"),
       @SerializedName("targeting_optimization")
       VALUE_TARGETING_OPTIMIZATION("targeting_optimization"),
+      @SerializedName("direct_install_devices")
+      VALUE_DIRECT_INSTALL_DEVICES("direct_install_devices"),
       @SerializedName("engagement_specs")
       VALUE_ENGAGEMENT_SPECS("engagement_specs"),
       @SerializedName("excluded_engagement_specs")
@@ -454,6 +454,16 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_INTEREST_DEFAULTS_SOURCE("interest_defaults_source"),
       @SerializedName("alternate_auto_targeting_option")
       VALUE_ALTERNATE_AUTO_TARGETING_OPTION("alternate_auto_targeting_option"),
+      @SerializedName("contextual_targeting_categories")
+      VALUE_CONTEXTUAL_TARGETING_CATEGORIES("contextual_targeting_categories"),
+      @SerializedName("topic")
+      VALUE_TOPIC("topic"),
+      @SerializedName("format")
+      VALUE_FORMAT("format"),
+      @SerializedName("trending")
+      VALUE_TRENDING("trending"),
+      @SerializedName("gatekeepers")
+      VALUE_GATEKEEPERS("gatekeepers"),
       NULL(null);
 
       private String value;

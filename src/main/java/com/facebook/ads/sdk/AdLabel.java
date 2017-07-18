@@ -673,6 +673,8 @@ public class AdLabel extends APINode {
       "last_updated_by_app_id",
       "name",
       "recommendations",
+      "source_ad",
+      "source_ad_id",
       "status",
       "tracking_specs",
       "updated_time",
@@ -880,6 +882,20 @@ public class AdLabel extends APINode {
       this.requestField("recommendations", value);
       return this;
     }
+    public APIRequestGetAds requestSourceAdField () {
+      return this.requestSourceAdField(true);
+    }
+    public APIRequestGetAds requestSourceAdField (boolean value) {
+      this.requestField("source_ad", value);
+      return this;
+    }
+    public APIRequestGetAds requestSourceAdIdField () {
+      return this.requestSourceAdIdField(true);
+    }
+    public APIRequestGetAds requestSourceAdIdField (boolean value) {
+      this.requestField("source_ad_id", value);
+      return this;
+    }
     public APIRequestGetAds requestStatusField () {
       return this.requestStatusField(true);
     }
@@ -947,6 +963,8 @@ public class AdLabel extends APINode {
       "recurring_budget_semantics",
       "rf_prediction_id",
       "rtb_flag",
+      "source_adset",
+      "source_adset_id",
       "start_time",
       "status",
       "targeting",
@@ -1256,6 +1274,20 @@ public class AdLabel extends APINode {
       this.requestField("rtb_flag", value);
       return this;
     }
+    public APIRequestGetAdSets requestSourceAdsetField () {
+      return this.requestSourceAdsetField(true);
+    }
+    public APIRequestGetAdSets requestSourceAdsetField (boolean value) {
+      this.requestField("source_adset", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestSourceAdsetIdField () {
+      return this.requestSourceAdsetIdField(true);
+    }
+    public APIRequestGetAdSets requestSourceAdsetIdField (boolean value) {
+      this.requestField("source_adset_id", value);
+      return this;
+    }
     public APIRequestGetAdSets requestStartTimeField () {
       return this.requestStartTimeField(true);
     }
@@ -1332,6 +1364,8 @@ public class AdLabel extends APINode {
       "name",
       "objective",
       "recommendations",
+      "source_campaign",
+      "source_campaign_id",
       "spend_cap",
       "start_time",
       "status",
@@ -1504,6 +1538,20 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestSourceCampaignField () {
+      return this.requestSourceCampaignField(true);
+    }
+    public APIRequestGetCampaigns requestSourceCampaignField (boolean value) {
+      this.requestField("source_campaign", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestSourceCampaignIdField () {
+      return this.requestSourceCampaignIdField(true);
+    }
+    public APIRequestGetCampaigns requestSourceCampaignIdField (boolean value) {
+      this.requestField("source_campaign_id", value);
       return this;
     }
     public APIRequestGetCampaigns requestSpendCapField () {

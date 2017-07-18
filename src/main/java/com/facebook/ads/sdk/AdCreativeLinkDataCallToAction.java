@@ -288,6 +288,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_REQUEST_TIME("REQUEST_TIME"),
       @SerializedName("SEE_MENU")
       VALUE_SEE_MENU("SEE_MENU"),
+      @SerializedName("EMAIL_NOW")
+      VALUE_EMAIL_NOW("EMAIL_NOW"),
       @SerializedName("OPEN_MOVIES")
       VALUE_OPEN_MOVIES("OPEN_MOVIES"),
       NULL(null);
