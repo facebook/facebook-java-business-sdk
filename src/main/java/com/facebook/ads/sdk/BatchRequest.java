@@ -31,7 +31,6 @@ import java.util.Map;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.lang.StringBuilder;
 import java.io.DataOutputStream;

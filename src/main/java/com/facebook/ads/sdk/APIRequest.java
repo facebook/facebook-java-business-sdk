@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.net.URL;
 import java.net.URLEncoder;
-import javax.net.ssl.HttpsURLConnection;
+import java.net.HttpURLConnection;
 import java.io.BufferedReader;
 import java.lang.reflect.Modifier;
 import java.lang.StringBuilder;
@@ -200,7 +200,7 @@ public class APIRequest<T extends APINode> {
     return allParams;
   }
 
-  private static String readResponse(HttpsURLConnection con) throws APIException, IOException {
+  private static String readResponse(HttpURLConnection con) throws APIException, IOException {
     try {
       int responseCode = con.getResponseCode();
 
@@ -347,7 +347,7 @@ public class APIRequest<T extends APINode> {
       URL url = new URL(urlString.toString());
       context.log("Request:");
       context.log("GET: " + url.toString());
-      HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+      HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
       con.setRequestMethod("GET");
       con.setRequestProperty("User-Agent", USER_AGENT);
@@ -360,7 +360,7 @@ public class APIRequest<T extends APINode> {
       String boundary = "--------------------------" + new Random().nextLong();
       URL url = new URL(apiUrl);
       context.log("Post: " + url.toString());
-      HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+      HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
       con.setRequestMethod("POST");
       con.setRequestProperty("User-Agent", USER_AGENT);
@@ -418,7 +418,7 @@ public class APIRequest<T extends APINode> {
       }
       URL url = new URL(urlString.toString());
       context.log("Delete: " + url.toString());
-      HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+      HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
       con.setRequestMethod("DELETE");
       con.setRequestProperty("User-Agent", USER_AGENT);
