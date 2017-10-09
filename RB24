@@ -1,0 +1,47 @@
+import com.facebook.ads.sdk.APIContext;
+import com.facebook.ads.sdk.AdAccount;
+import com.facebook.ads.sdk.AdAccount.EnumCampaignStatus;
+import com.facebook.ads.sdk.AdAccount.EnumCampaignObjective;
+import com.facebook.ads.sdk.Campaign;
+import com.facebook.ads.sdk.APIException;
+
+public class QuickStartExample {
+
+  public static final String ACCESS_TOKEN = "EAAVAds4iZAO8BAIvI3OcKlhOHxlQVW3JReRv0REpwqVyieBIyXrF1U6LAwvokdZAMbl0IqI0EQkicWt41pXZB1yT5oFnUkK4XyfhuoyQSA4QYtdJZBBVLAnraNrTgUDsEZAxaMoX3GtdmUcYjs8oOkbsZBtvfAq8PDoLPPPBNFmfZBGt5Dh4RZBlAwrPhNOQSx2sL3NDyHW68wF5WGGEG3yMqLXGZCG3RF0sZD";
+  public static final Long ACCOUNT_ID = 117640828991598;
+  public static final String APP_SECRET = "4bec045ac87244714b5dc72cbe97c774";
+  
+  public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET);
+  public static void main(String[] args) {
+    try {
+      AdAccount account = new AdAccount(ACCOUNT_ID, context);
+      Campaign campaign = account.createCampaign()
+        .setName("Java SDK Test Campaign")
+        .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
+        .setSpendCap(10000L)
+        .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+        .execute();
+      System.out.println(campaign.fetch());
+    } catch (APIException e) {
+      e.printStackTrace();
+    }
+  }
+}
+More examples can be found in /examples folder.
+
+Understanding the SDK
+
+The SDK is consistent with the documentation of Marketing API.
+
+Get an object
+
+You always need to create an APIContext before making any API calls. APIContext includes your access token and app secret:
+
+APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET);
+To fetch an campaign object:
+
+Campaign campaign = new Campaign(CAMPAIGN_ID, context); // this only creates a new empty object
+campaign = campaign.get().requestAllFields().execute(); 
+// 1. get() is the API call name to get the object; 
+// 2. requestAllFields() means you want all the fields. If you only want certain fields, then you can call requestXXXFields() instead, and sever response will only contain specified fields.
+// 3. ***IMPORTANT*** any API calls should end with execute(), otherwise it will not be executed.
