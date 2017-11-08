@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -265,10 +265,6 @@ public class Business extends APINode {
     return new APIRequestCreateAdAccount(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAdAccounts createAdAccounts() {
-    return new APIRequestCreateAdAccounts(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAdsPixels getAdsPixels() {
     return new APIRequestGetAdsPixels(this.getPrefixedId().toString(), context);
   }
@@ -281,28 +277,8 @@ public class Business extends APINode {
     return new APIRequestDeleteApps(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetAssignedAdAccounts getAssignedAdAccounts() {
-    return new APIRequestGetAssignedAdAccounts(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetAssignedPages getAssignedPages() {
-    return new APIRequestGetAssignedPages(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetAssignedProductCatalogs getAssignedProductCatalogs() {
-    return new APIRequestGetAssignedProductCatalogs(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetClientAdAccountRequests getClientAdAccountRequests() {
-    return new APIRequestGetClientAdAccountRequests(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetClientAdAccounts getClientAdAccounts() {
     return new APIRequestGetClientAdAccounts(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetClientPageRequests getClientPageRequests() {
-    return new APIRequestGetClientPageRequests(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetClientPages getClientPages() {
@@ -341,20 +317,12 @@ public class Business extends APINode {
     return new APIRequestCreateOfflineConversionDataSet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetOwnedAdAccountRequests getOwnedAdAccountRequests() {
-    return new APIRequestGetOwnedAdAccountRequests(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetOwnedAdAccounts getOwnedAdAccounts() {
     return new APIRequestGetOwnedAdAccounts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetOwnedInstagramAccounts getOwnedInstagramAccounts() {
     return new APIRequestGetOwnedInstagramAccounts(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetOwnedPageRequests getOwnedPageRequests() {
-    return new APIRequestGetOwnedPageRequests(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetOwnedPages getOwnedPages() {
@@ -365,16 +333,16 @@ public class Business extends APINode {
     return new APIRequestGetOwnedPixels(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetPendingClientAdAccounts getPendingClientAdAccounts() {
+    return new APIRequestGetPendingClientAdAccounts(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetPendingOwnedAdAccounts getPendingOwnedAdAccounts() {
+    return new APIRequestGetPendingOwnedAdAccounts(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetPicture getPicture() {
     return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetProductCatalogs getProductCatalogs() {
-    return new APIRequestGetProductCatalogs(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateProductCatalog createProductCatalog() {
-    return new APIRequestCreateProductCatalog(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetReceivedAudiencePermissions getReceivedAudiencePermissions() {
@@ -383,10 +351,6 @@ public class Business extends APINode {
 
   public APIRequestGetSharedAudiencePermissions getSharedAudiencePermissions() {
     return new APIRequestGetSharedAudiencePermissions(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetSystemUsers getSystemUsers() {
-    return new APIRequestGetSystemUsers(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateUserPermission createUserPermission() {
@@ -810,116 +774,6 @@ public class Business extends APINode {
 
   }
 
-  public static class APIRequestCreateAdAccounts extends APIRequest<AdAccount> {
-
-    AdAccount lastResponse = null;
-    @Override
-    public AdAccount getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "access_type",
-      "adaccount_id",
-      "permitted_roles",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdAccount execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestCreateAdAccounts(String nodeId, APIContext context) {
-      super(context, nodeId, "/adaccounts", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAdAccounts setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccounts setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAdAccounts setAccessType (AdAccount.EnumAccessType accessType) {
-      this.setParam("access_type", accessType);
-      return this;
-    }
-    public APIRequestCreateAdAccounts setAccessType (String accessType) {
-      this.setParam("access_type", accessType);
-      return this;
-    }
-
-    public APIRequestCreateAdAccounts setAdaccountId (String adaccountId) {
-      this.setParam("adaccount_id", adaccountId);
-      return this;
-    }
-
-    public APIRequestCreateAdAccounts setPermittedRoles (List<AdAccount.EnumPermittedRoles> permittedRoles) {
-      this.setParam("permitted_roles", permittedRoles);
-      return this;
-    }
-    public APIRequestCreateAdAccounts setPermittedRoles (String permittedRoles) {
-      this.setParam("permitted_roles", permittedRoles);
-      return this;
-    }
-
-    public APIRequestCreateAdAccounts requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAdAccounts requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccounts requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAdAccounts requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccounts requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccounts requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetAdsPixels extends APIRequest<AdsPixel> {
 
     APINodeList<AdsPixel> lastResponse = null;
@@ -1272,926 +1126,6 @@ public class Business extends APINode {
 
   }
 
-  public static class APIRequestGetAssignedAdAccounts extends APIRequest<AdAccount> {
-
-    APINodeList<AdAccount> lastResponse = null;
-    @Override
-    public APINodeList<AdAccount> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "email",
-      "user_id",
-    };
-
-    public static final String[] FIELDS = {
-      "account_id",
-      "account_status",
-      "age",
-      "agency_client_declaration",
-      "amount_spent",
-      "attribution_spec",
-      "balance",
-      "business",
-      "business_city",
-      "business_country_code",
-      "business_name",
-      "business_state",
-      "business_street",
-      "business_street2",
-      "business_zip",
-      "capabilities",
-      "created_time",
-      "currency",
-      "disable_reason",
-      "end_advertiser",
-      "end_advertiser_name",
-      "failed_delivery_checks",
-      "funding_source",
-      "funding_source_details",
-      "has_migrated_permissions",
-      "id",
-      "io_number",
-      "is_attribution_spec_system_default",
-      "is_notifications_enabled",
-      "is_personal",
-      "is_prepay_account",
-      "is_tax_id_required",
-      "line_numbers",
-      "media_agency",
-      "min_campaign_group_spend_cap",
-      "min_daily_budget",
-      "name",
-      "offsite_pixels_tos_accepted",
-      "owner",
-      "partner",
-      "rf_spec",
-      "salesforce_invoice_group_id",
-      "show_checkout_experience",
-      "spend_cap",
-      "tax_id",
-      "tax_id_status",
-      "tax_id_type",
-      "timezone_id",
-      "timezone_name",
-      "timezone_offset_hours_utc",
-      "tos_accepted",
-      "user_role",
-    };
-
-    @Override
-    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<AdAccount> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGetAssignedAdAccounts(String nodeId, APIContext context) {
-      super(context, nodeId, "/assigned_ad_accounts", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAssignedAdAccounts setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedAdAccounts setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAssignedAdAccounts setEmail (String email) {
-      this.setParam("email", email);
-      return this;
-    }
-
-    public APIRequestGetAssignedAdAccounts setUserId (Long userId) {
-      this.setParam("user_id", userId);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts setUserId (String userId) {
-      this.setParam("user_id", userId);
-      return this;
-    }
-
-    public APIRequestGetAssignedAdAccounts requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAssignedAdAccounts requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedAdAccounts requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAssignedAdAccounts requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedAdAccounts requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedAdAccounts requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAssignedAdAccounts requestAccountIdField () {
-      return this.requestAccountIdField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestAccountStatusField () {
-      return this.requestAccountStatusField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestAccountStatusField (boolean value) {
-      this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestAgeField () {
-      return this.requestAgeField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestAgeField (boolean value) {
-      this.requestField("age", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestAgencyClientDeclarationField () {
-      return this.requestAgencyClientDeclarationField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestAgencyClientDeclarationField (boolean value) {
-      this.requestField("agency_client_declaration", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestAmountSpentField () {
-      return this.requestAmountSpentField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestAmountSpentField (boolean value) {
-      this.requestField("amount_spent", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestAttributionSpecField () {
-      return this.requestAttributionSpecField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestAttributionSpecField (boolean value) {
-      this.requestField("attribution_spec", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestBalanceField () {
-      return this.requestBalanceField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestBalanceField (boolean value) {
-      this.requestField("balance", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessField (boolean value) {
-      this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessCityField () {
-      return this.requestBusinessCityField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessCityField (boolean value) {
-      this.requestField("business_city", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessCountryCodeField () {
-      return this.requestBusinessCountryCodeField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessCountryCodeField (boolean value) {
-      this.requestField("business_country_code", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessNameField () {
-      return this.requestBusinessNameField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessNameField (boolean value) {
-      this.requestField("business_name", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessStateField () {
-      return this.requestBusinessStateField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessStateField (boolean value) {
-      this.requestField("business_state", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessStreetField () {
-      return this.requestBusinessStreetField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessStreetField (boolean value) {
-      this.requestField("business_street", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessStreet2Field () {
-      return this.requestBusinessStreet2Field(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessStreet2Field (boolean value) {
-      this.requestField("business_street2", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessZipField () {
-      return this.requestBusinessZipField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestBusinessZipField (boolean value) {
-      this.requestField("business_zip", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestCapabilitiesField () {
-      return this.requestCapabilitiesField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestCapabilitiesField (boolean value) {
-      this.requestField("capabilities", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestCurrencyField () {
-      return this.requestCurrencyField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestDisableReasonField () {
-      return this.requestDisableReasonField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestDisableReasonField (boolean value) {
-      this.requestField("disable_reason", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestEndAdvertiserField () {
-      return this.requestEndAdvertiserField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestEndAdvertiserField (boolean value) {
-      this.requestField("end_advertiser", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestEndAdvertiserNameField () {
-      return this.requestEndAdvertiserNameField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestEndAdvertiserNameField (boolean value) {
-      this.requestField("end_advertiser_name", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestFailedDeliveryChecksField () {
-      return this.requestFailedDeliveryChecksField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestFailedDeliveryChecksField (boolean value) {
-      this.requestField("failed_delivery_checks", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestFundingSourceField () {
-      return this.requestFundingSourceField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestFundingSourceField (boolean value) {
-      this.requestField("funding_source", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestFundingSourceDetailsField () {
-      return this.requestFundingSourceDetailsField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestFundingSourceDetailsField (boolean value) {
-      this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestHasMigratedPermissionsField () {
-      return this.requestHasMigratedPermissionsField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestHasMigratedPermissionsField (boolean value) {
-      this.requestField("has_migrated_permissions", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestIoNumberField () {
-      return this.requestIoNumberField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestIoNumberField (boolean value) {
-      this.requestField("io_number", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestIsAttributionSpecSystemDefaultField () {
-      return this.requestIsAttributionSpecSystemDefaultField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
-      this.requestField("is_attribution_spec_system_default", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestIsNotificationsEnabledField () {
-      return this.requestIsNotificationsEnabledField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestIsNotificationsEnabledField (boolean value) {
-      this.requestField("is_notifications_enabled", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestIsPersonalField () {
-      return this.requestIsPersonalField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestIsPersonalField (boolean value) {
-      this.requestField("is_personal", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestIsPrepayAccountField () {
-      return this.requestIsPrepayAccountField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestIsPrepayAccountField (boolean value) {
-      this.requestField("is_prepay_account", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestIsTaxIdRequiredField () {
-      return this.requestIsTaxIdRequiredField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestIsTaxIdRequiredField (boolean value) {
-      this.requestField("is_tax_id_required", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestLineNumbersField () {
-      return this.requestLineNumbersField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestLineNumbersField (boolean value) {
-      this.requestField("line_numbers", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestMediaAgencyField () {
-      return this.requestMediaAgencyField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestMediaAgencyField (boolean value) {
-      this.requestField("media_agency", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestMinCampaignGroupSpendCapField () {
-      return this.requestMinCampaignGroupSpendCapField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestMinCampaignGroupSpendCapField (boolean value) {
-      this.requestField("min_campaign_group_spend_cap", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestMinDailyBudgetField () {
-      return this.requestMinDailyBudgetField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestMinDailyBudgetField (boolean value) {
-      this.requestField("min_daily_budget", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestOffsitePixelsTosAcceptedField () {
-      return this.requestOffsitePixelsTosAcceptedField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestOffsitePixelsTosAcceptedField (boolean value) {
-      this.requestField("offsite_pixels_tos_accepted", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestOwnerField () {
-      return this.requestOwnerField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestOwnerField (boolean value) {
-      this.requestField("owner", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestPartnerField () {
-      return this.requestPartnerField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestPartnerField (boolean value) {
-      this.requestField("partner", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestRfSpecField () {
-      return this.requestRfSpecField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestRfSpecField (boolean value) {
-      this.requestField("rf_spec", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestSalesforceInvoiceGroupIdField () {
-      return this.requestSalesforceInvoiceGroupIdField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestSalesforceInvoiceGroupIdField (boolean value) {
-      this.requestField("salesforce_invoice_group_id", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestShowCheckoutExperienceField () {
-      return this.requestShowCheckoutExperienceField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestShowCheckoutExperienceField (boolean value) {
-      this.requestField("show_checkout_experience", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestSpendCapField () {
-      return this.requestSpendCapField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestSpendCapField (boolean value) {
-      this.requestField("spend_cap", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestTaxIdField () {
-      return this.requestTaxIdField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestTaxIdField (boolean value) {
-      this.requestField("tax_id", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestTaxIdStatusField () {
-      return this.requestTaxIdStatusField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestTaxIdStatusField (boolean value) {
-      this.requestField("tax_id_status", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestTaxIdTypeField () {
-      return this.requestTaxIdTypeField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestTaxIdTypeField (boolean value) {
-      this.requestField("tax_id_type", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestTimezoneIdField () {
-      return this.requestTimezoneIdField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestTimezoneIdField (boolean value) {
-      this.requestField("timezone_id", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestTimezoneNameField () {
-      return this.requestTimezoneNameField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestTimezoneNameField (boolean value) {
-      this.requestField("timezone_name", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestTimezoneOffsetHoursUtcField () {
-      return this.requestTimezoneOffsetHoursUtcField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestTimezoneOffsetHoursUtcField (boolean value) {
-      this.requestField("timezone_offset_hours_utc", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestTosAcceptedField () {
-      return this.requestTosAcceptedField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestTosAcceptedField (boolean value) {
-      this.requestField("tos_accepted", value);
-      return this;
-    }
-    public APIRequestGetAssignedAdAccounts requestUserRoleField () {
-      return this.requestUserRoleField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestUserRoleField (boolean value) {
-      this.requestField("user_role", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetAssignedPages extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "email",
-      "user_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGetAssignedPages(String nodeId, APIContext context) {
-      super(context, nodeId, "/assigned_pages", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAssignedPages setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedPages setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAssignedPages setEmail (String email) {
-      this.setParam("email", email);
-      return this;
-    }
-
-    public APIRequestGetAssignedPages setUserId (Long userId) {
-      this.setParam("user_id", userId);
-      return this;
-    }
-    public APIRequestGetAssignedPages setUserId (String userId) {
-      this.setParam("user_id", userId);
-      return this;
-    }
-
-    public APIRequestGetAssignedPages requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAssignedPages requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedPages requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAssignedPages requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedPages requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedPages requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetAssignedProductCatalogs extends APIRequest<ProductCatalog> {
-
-    APINodeList<ProductCatalog> lastResponse = null;
-    @Override
-    public APINodeList<ProductCatalog> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "email",
-      "user_id",
-    };
-
-    public static final String[] FIELDS = {
-      "business",
-      "da_display_settings",
-      "default_image_url",
-      "fallback_image_url",
-      "feed_count",
-      "flight_catalog_settings",
-      "id",
-      "image_padding_landscape",
-      "image_padding_square",
-      "name",
-      "product_count",
-      "qualified_product_count",
-      "vertical",
-    };
-
-    @Override
-    public APINodeList<ProductCatalog> parseResponse(String response) throws APIException {
-      return ProductCatalog.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<ProductCatalog> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<ProductCatalog> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGetAssignedProductCatalogs(String nodeId, APIContext context) {
-      super(context, nodeId, "/assigned_product_catalogs", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAssignedProductCatalogs setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedProductCatalogs setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAssignedProductCatalogs setEmail (String email) {
-      this.setParam("email", email);
-      return this;
-    }
-
-    public APIRequestGetAssignedProductCatalogs setUserId (Long userId) {
-      this.setParam("user_id", userId);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs setUserId (String userId) {
-      this.setParam("user_id", userId);
-      return this;
-    }
-
-    public APIRequestGetAssignedProductCatalogs requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAssignedProductCatalogs requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedProductCatalogs requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAssignedProductCatalogs requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedProductCatalogs requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAssignedProductCatalogs requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAssignedProductCatalogs requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestBusinessField (boolean value) {
-      this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestDaDisplaySettingsField () {
-      return this.requestDaDisplaySettingsField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestDaDisplaySettingsField (boolean value) {
-      this.requestField("da_display_settings", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestDefaultImageUrlField () {
-      return this.requestDefaultImageUrlField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestDefaultImageUrlField (boolean value) {
-      this.requestField("default_image_url", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestFallbackImageUrlField () {
-      return this.requestFallbackImageUrlField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestFallbackImageUrlField (boolean value) {
-      this.requestField("fallback_image_url", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestFeedCountField () {
-      return this.requestFeedCountField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestFeedCountField (boolean value) {
-      this.requestField("feed_count", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestFlightCatalogSettingsField () {
-      return this.requestFlightCatalogSettingsField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestFlightCatalogSettingsField (boolean value) {
-      this.requestField("flight_catalog_settings", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestImagePaddingLandscapeField () {
-      return this.requestImagePaddingLandscapeField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestImagePaddingLandscapeField (boolean value) {
-      this.requestField("image_padding_landscape", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestImagePaddingSquareField () {
-      return this.requestImagePaddingSquareField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestImagePaddingSquareField (boolean value) {
-      this.requestField("image_padding_square", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestProductCountField () {
-      return this.requestProductCountField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestProductCountField (boolean value) {
-      this.requestField("product_count", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestQualifiedProductCountField () {
-      return this.requestQualifiedProductCountField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestQualifiedProductCountField (boolean value) {
-      this.requestField("qualified_product_count", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestVerticalField () {
-      return this.requestVerticalField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestVerticalField (boolean value) {
-      this.requestField("vertical", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetClientAdAccountRequests extends APIRequest<BusinessAdAccountRequest> {
-
-    APINodeList<BusinessAdAccountRequest> lastResponse = null;
-    @Override
-    public APINodeList<BusinessAdAccountRequest> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "ad_account",
-      "id",
-    };
-
-    @Override
-    public APINodeList<BusinessAdAccountRequest> parseResponse(String response) throws APIException {
-      return BusinessAdAccountRequest.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<BusinessAdAccountRequest> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<BusinessAdAccountRequest> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGetClientAdAccountRequests(String nodeId, APIContext context) {
-      super(context, nodeId, "/client_ad_account_requests", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetClientAdAccountRequests setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClientAdAccountRequests setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetClientAdAccountRequests requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetClientAdAccountRequests requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClientAdAccountRequests requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetClientAdAccountRequests requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClientAdAccountRequests requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClientAdAccountRequests requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetClientAdAccountRequests requestAdAccountField () {
-      return this.requestAdAccountField(true);
-    }
-    public APIRequestGetClientAdAccountRequests requestAdAccountField (boolean value) {
-      this.requestField("ad_account", value);
-      return this;
-    }
-    public APIRequestGetClientAdAccountRequests requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetClientAdAccountRequests requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetClientAdAccounts extends APIRequest<AdAccount> {
 
     APINodeList<AdAccount> lastResponse = null;
@@ -2231,6 +1165,7 @@ public class Business extends APINode {
       "id",
       "io_number",
       "is_attribution_spec_system_default",
+      "is_direct_deals_enabled",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -2240,6 +1175,7 @@ public class Business extends APINode {
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "next_bill_date",
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
@@ -2522,6 +1458,13 @@ public class Business extends APINode {
       this.requestField("is_attribution_spec_system_default", value);
       return this;
     }
+    public APIRequestGetClientAdAccounts requestIsDirectDealsEnabledField () {
+      return this.requestIsDirectDealsEnabledField(true);
+    }
+    public APIRequestGetClientAdAccounts requestIsDirectDealsEnabledField (boolean value) {
+      this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
     public APIRequestGetClientAdAccounts requestIsNotificationsEnabledField () {
       return this.requestIsNotificationsEnabledField(true);
     }
@@ -2583,6 +1526,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetClientAdAccounts requestNextBillDateField () {
+      return this.requestNextBillDateField(true);
+    }
+    public APIRequestGetClientAdAccounts requestNextBillDateField (boolean value) {
+      this.requestField("next_bill_date", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -2688,106 +1638,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetClientPageRequests extends APIRequest<BusinessPageRequest> {
-
-    APINodeList<BusinessPageRequest> lastResponse = null;
-    @Override
-    public APINodeList<BusinessPageRequest> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-      "page",
-    };
-
-    @Override
-    public APINodeList<BusinessPageRequest> parseResponse(String response) throws APIException {
-      return BusinessPageRequest.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<BusinessPageRequest> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<BusinessPageRequest> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGetClientPageRequests(String nodeId, APIContext context) {
-      super(context, nodeId, "/client_page_requests", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetClientPageRequests setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClientPageRequests setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetClientPageRequests requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetClientPageRequests requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClientPageRequests requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetClientPageRequests requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClientPageRequests requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClientPageRequests requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetClientPageRequests requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetClientPageRequests requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetClientPageRequests requestPageField () {
-      return this.requestPageField(true);
-    }
-    public APIRequestGetClientPageRequests requestPageField (boolean value) {
-      this.requestField("page", value);
       return this;
     }
   }
@@ -3770,31 +2620,49 @@ public class Business extends APINode {
 
   }
 
-  public static class APIRequestGetOfflineConversionDataSets extends APIRequest<APINode> {
+  public static class APIRequestGetOfflineConversionDataSets extends APIRequest<OfflineConversionDataSet> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<OfflineConversionDataSet> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<OfflineConversionDataSet> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "attribute_stats",
+      "business",
+      "config",
+      "creation_time",
+      "description",
+      "duplicate_entries",
+      "enable_auto_assign_to_accounts",
+      "event_stats",
+      "event_time_max",
+      "event_time_min",
+      "id",
+      "is_restricted_use",
+      "last_upload_app",
+      "matched_entries",
+      "matched_unique_users",
+      "name",
+      "usage",
+      "valid_entries",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<OfflineConversionDataSet> parseResponse(String response) throws APIException {
+      return OfflineConversionDataSet.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<OfflineConversionDataSet> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<OfflineConversionDataSet> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -3852,13 +2720,139 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetOfflineConversionDataSets requestAttributeStatsField () {
+      return this.requestAttributeStatsField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestAttributeStatsField (boolean value) {
+      this.requestField("attribute_stats", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestConfigField () {
+      return this.requestConfigField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestConfigField (boolean value) {
+      this.requestField("config", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestDuplicateEntriesField () {
+      return this.requestDuplicateEntriesField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestDuplicateEntriesField (boolean value) {
+      this.requestField("duplicate_entries", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestEnableAutoAssignToAccountsField () {
+      return this.requestEnableAutoAssignToAccountsField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestEnableAutoAssignToAccountsField (boolean value) {
+      this.requestField("enable_auto_assign_to_accounts", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestEventStatsField () {
+      return this.requestEventStatsField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestEventStatsField (boolean value) {
+      this.requestField("event_stats", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestEventTimeMaxField () {
+      return this.requestEventTimeMaxField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestEventTimeMaxField (boolean value) {
+      this.requestField("event_time_max", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestEventTimeMinField () {
+      return this.requestEventTimeMinField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestEventTimeMinField (boolean value) {
+      this.requestField("event_time_min", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestIsRestrictedUseField () {
+      return this.requestIsRestrictedUseField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestIsRestrictedUseField (boolean value) {
+      this.requestField("is_restricted_use", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestLastUploadAppField () {
+      return this.requestLastUploadAppField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestLastUploadAppField (boolean value) {
+      this.requestField("last_upload_app", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestMatchedEntriesField () {
+      return this.requestMatchedEntriesField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestMatchedEntriesField (boolean value) {
+      this.requestField("matched_entries", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestMatchedUniqueUsersField () {
+      return this.requestMatchedUniqueUsersField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestMatchedUniqueUsersField (boolean value) {
+      this.requestField("matched_unique_users", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestUsageField () {
+      return this.requestUsageField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestUsageField (boolean value) {
+      this.requestField("usage", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestValidEntriesField () {
+      return this.requestValidEntriesField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestValidEntriesField (boolean value) {
+      this.requestField("valid_entries", value);
+      return this;
+    }
   }
 
-  public static class APIRequestCreateOfflineConversionDataSet extends APIRequest<APINode> {
+  public static class APIRequestCreateOfflineConversionDataSet extends APIRequest<OfflineConversionDataSet> {
 
-    APINode lastResponse = null;
+    OfflineConversionDataSet lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public OfflineConversionDataSet getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -3872,17 +2866,17 @@ public class Business extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public OfflineConversionDataSet parseResponse(String response) throws APIException {
+      return OfflineConversionDataSet.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public OfflineConversionDataSet execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public OfflineConversionDataSet execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
@@ -3970,114 +2964,6 @@ public class Business extends APINode {
 
   }
 
-  public static class APIRequestGetOwnedAdAccountRequests extends APIRequest<LegacyBusinessAdAccountRequest> {
-
-    APINodeList<LegacyBusinessAdAccountRequest> lastResponse = null;
-    @Override
-    public APINodeList<LegacyBusinessAdAccountRequest> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "ad_account",
-      "id",
-      "permitted_roles",
-    };
-
-    @Override
-    public APINodeList<LegacyBusinessAdAccountRequest> parseResponse(String response) throws APIException {
-      return LegacyBusinessAdAccountRequest.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<LegacyBusinessAdAccountRequest> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<LegacyBusinessAdAccountRequest> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGetOwnedAdAccountRequests(String nodeId, APIContext context) {
-      super(context, nodeId, "/owned_ad_account_requests", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetOwnedAdAccountRequests setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOwnedAdAccountRequests setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetOwnedAdAccountRequests requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetOwnedAdAccountRequests requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOwnedAdAccountRequests requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetOwnedAdAccountRequests requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOwnedAdAccountRequests requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOwnedAdAccountRequests requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetOwnedAdAccountRequests requestAdAccountField () {
-      return this.requestAdAccountField(true);
-    }
-    public APIRequestGetOwnedAdAccountRequests requestAdAccountField (boolean value) {
-      this.requestField("ad_account", value);
-      return this;
-    }
-    public APIRequestGetOwnedAdAccountRequests requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetOwnedAdAccountRequests requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetOwnedAdAccountRequests requestPermittedRolesField () {
-      return this.requestPermittedRolesField(true);
-    }
-    public APIRequestGetOwnedAdAccountRequests requestPermittedRolesField (boolean value) {
-      this.requestField("permitted_roles", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetOwnedAdAccounts extends APIRequest<AdAccount> {
 
     APINodeList<AdAccount> lastResponse = null;
@@ -4117,6 +3003,7 @@ public class Business extends APINode {
       "id",
       "io_number",
       "is_attribution_spec_system_default",
+      "is_direct_deals_enabled",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -4126,6 +3013,7 @@ public class Business extends APINode {
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "next_bill_date",
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
@@ -4408,6 +3296,13 @@ public class Business extends APINode {
       this.requestField("is_attribution_spec_system_default", value);
       return this;
     }
+    public APIRequestGetOwnedAdAccounts requestIsDirectDealsEnabledField () {
+      return this.requestIsDirectDealsEnabledField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestIsDirectDealsEnabledField (boolean value) {
+      this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
     public APIRequestGetOwnedAdAccounts requestIsNotificationsEnabledField () {
       return this.requestIsNotificationsEnabledField(true);
     }
@@ -4469,6 +3364,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetOwnedAdAccounts requestNextBillDateField () {
+      return this.requestNextBillDateField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestNextBillDateField (boolean value) {
+      this.requestField("next_bill_date", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -4660,106 +3562,6 @@ public class Business extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetOwnedPageRequests extends APIRequest<BusinessPageRequest> {
-
-    APINodeList<BusinessPageRequest> lastResponse = null;
-    @Override
-    public APINodeList<BusinessPageRequest> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-      "page",
-    };
-
-    @Override
-    public APINodeList<BusinessPageRequest> parseResponse(String response) throws APIException {
-      return BusinessPageRequest.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<BusinessPageRequest> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<BusinessPageRequest> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGetOwnedPageRequests(String nodeId, APIContext context) {
-      super(context, nodeId, "/owned_page_requests", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetOwnedPageRequests setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOwnedPageRequests setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetOwnedPageRequests requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetOwnedPageRequests requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOwnedPageRequests requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetOwnedPageRequests requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOwnedPageRequests requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetOwnedPageRequests requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetOwnedPageRequests requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetOwnedPageRequests requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetOwnedPageRequests requestPageField () {
-      return this.requestPageField(true);
-    }
-    public APIRequestGetOwnedPageRequests requestPageField (boolean value) {
-      this.requestField("page", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetOwnedPages extends APIRequest<APINode> {
@@ -5002,6 +3804,214 @@ public class Business extends APINode {
     }
   }
 
+  public static class APIRequestGetPendingClientAdAccounts extends APIRequest<BusinessAdAccountRequest> {
+
+    APINodeList<BusinessAdAccountRequest> lastResponse = null;
+    @Override
+    public APINodeList<BusinessAdAccountRequest> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "ad_account",
+      "id",
+    };
+
+    @Override
+    public APINodeList<BusinessAdAccountRequest> parseResponse(String response) throws APIException {
+      return BusinessAdAccountRequest.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<BusinessAdAccountRequest> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BusinessAdAccountRequest> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetPendingClientAdAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/pending_client_ad_accounts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPendingClientAdAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPendingClientAdAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPendingClientAdAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPendingClientAdAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPendingClientAdAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPendingClientAdAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPendingClientAdAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPendingClientAdAccounts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPendingClientAdAccounts requestAdAccountField () {
+      return this.requestAdAccountField(true);
+    }
+    public APIRequestGetPendingClientAdAccounts requestAdAccountField (boolean value) {
+      this.requestField("ad_account", value);
+      return this;
+    }
+    public APIRequestGetPendingClientAdAccounts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetPendingClientAdAccounts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetPendingOwnedAdAccounts extends APIRequest<LegacyBusinessAdAccountRequest> {
+
+    APINodeList<LegacyBusinessAdAccountRequest> lastResponse = null;
+    @Override
+    public APINodeList<LegacyBusinessAdAccountRequest> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "ad_account",
+      "id",
+      "permitted_roles",
+    };
+
+    @Override
+    public APINodeList<LegacyBusinessAdAccountRequest> parseResponse(String response) throws APIException {
+      return LegacyBusinessAdAccountRequest.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<LegacyBusinessAdAccountRequest> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<LegacyBusinessAdAccountRequest> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetPendingOwnedAdAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/pending_owned_ad_accounts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPendingOwnedAdAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPendingOwnedAdAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPendingOwnedAdAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPendingOwnedAdAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPendingOwnedAdAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPendingOwnedAdAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPendingOwnedAdAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPendingOwnedAdAccounts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPendingOwnedAdAccounts requestAdAccountField () {
+      return this.requestAdAccountField(true);
+    }
+    public APIRequestGetPendingOwnedAdAccounts requestAdAccountField (boolean value) {
+      this.requestField("ad_account", value);
+      return this;
+    }
+    public APIRequestGetPendingOwnedAdAccounts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetPendingOwnedAdAccounts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetPendingOwnedAdAccounts requestPermittedRolesField () {
+      return this.requestPermittedRolesField(true);
+    }
+    public APIRequestGetPendingOwnedAdAccounts requestPermittedRolesField (boolean value) {
+      this.requestField("permitted_roles", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetPicture extends APIRequest<ProfilePictureSource> {
 
     APINodeList<ProfilePictureSource> lastResponse = null;
@@ -5190,314 +4200,6 @@ public class Business extends APINode {
     }
   }
 
-  public static class APIRequestGetProductCatalogs extends APIRequest<ProductCatalog> {
-
-    APINodeList<ProductCatalog> lastResponse = null;
-    @Override
-    public APINodeList<ProductCatalog> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "business",
-      "da_display_settings",
-      "default_image_url",
-      "fallback_image_url",
-      "feed_count",
-      "flight_catalog_settings",
-      "id",
-      "image_padding_landscape",
-      "image_padding_square",
-      "name",
-      "product_count",
-      "qualified_product_count",
-      "vertical",
-    };
-
-    @Override
-    public APINodeList<ProductCatalog> parseResponse(String response) throws APIException {
-      return ProductCatalog.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<ProductCatalog> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<ProductCatalog> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGetProductCatalogs(String nodeId, APIContext context) {
-      super(context, nodeId, "/product_catalogs", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetProductCatalogs setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetProductCatalogs setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetProductCatalogs requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetProductCatalogs requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetProductCatalogs requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetProductCatalogs requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetProductCatalogs requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetProductCatalogs requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetProductCatalogs requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGetProductCatalogs requestBusinessField (boolean value) {
-      this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestDaDisplaySettingsField () {
-      return this.requestDaDisplaySettingsField(true);
-    }
-    public APIRequestGetProductCatalogs requestDaDisplaySettingsField (boolean value) {
-      this.requestField("da_display_settings", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestDefaultImageUrlField () {
-      return this.requestDefaultImageUrlField(true);
-    }
-    public APIRequestGetProductCatalogs requestDefaultImageUrlField (boolean value) {
-      this.requestField("default_image_url", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestFallbackImageUrlField () {
-      return this.requestFallbackImageUrlField(true);
-    }
-    public APIRequestGetProductCatalogs requestFallbackImageUrlField (boolean value) {
-      this.requestField("fallback_image_url", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestFeedCountField () {
-      return this.requestFeedCountField(true);
-    }
-    public APIRequestGetProductCatalogs requestFeedCountField (boolean value) {
-      this.requestField("feed_count", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestFlightCatalogSettingsField () {
-      return this.requestFlightCatalogSettingsField(true);
-    }
-    public APIRequestGetProductCatalogs requestFlightCatalogSettingsField (boolean value) {
-      this.requestField("flight_catalog_settings", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetProductCatalogs requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestImagePaddingLandscapeField () {
-      return this.requestImagePaddingLandscapeField(true);
-    }
-    public APIRequestGetProductCatalogs requestImagePaddingLandscapeField (boolean value) {
-      this.requestField("image_padding_landscape", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestImagePaddingSquareField () {
-      return this.requestImagePaddingSquareField(true);
-    }
-    public APIRequestGetProductCatalogs requestImagePaddingSquareField (boolean value) {
-      this.requestField("image_padding_square", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetProductCatalogs requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestProductCountField () {
-      return this.requestProductCountField(true);
-    }
-    public APIRequestGetProductCatalogs requestProductCountField (boolean value) {
-      this.requestField("product_count", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestQualifiedProductCountField () {
-      return this.requestQualifiedProductCountField(true);
-    }
-    public APIRequestGetProductCatalogs requestQualifiedProductCountField (boolean value) {
-      this.requestField("qualified_product_count", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestVerticalField () {
-      return this.requestVerticalField(true);
-    }
-    public APIRequestGetProductCatalogs requestVerticalField (boolean value) {
-      this.requestField("vertical", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreateProductCatalog extends APIRequest<ProductCatalog> {
-
-    ProductCatalog lastResponse = null;
-    @Override
-    public ProductCatalog getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "da_display_settings",
-      "flight_catalog_settings",
-      "name",
-      "vertical",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public ProductCatalog parseResponse(String response) throws APIException {
-      return ProductCatalog.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ProductCatalog execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestCreateProductCatalog(String nodeId, APIContext context) {
-      super(context, nodeId, "/product_catalogs", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateProductCatalog setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateProductCatalog setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateProductCatalog setDaDisplaySettings (Object daDisplaySettings) {
-      this.setParam("da_display_settings", daDisplaySettings);
-      return this;
-    }
-    public APIRequestCreateProductCatalog setDaDisplaySettings (String daDisplaySettings) {
-      this.setParam("da_display_settings", daDisplaySettings);
-      return this;
-    }
-
-    public APIRequestCreateProductCatalog setFlightCatalogSettings (Map<String, String> flightCatalogSettings) {
-      this.setParam("flight_catalog_settings", flightCatalogSettings);
-      return this;
-    }
-    public APIRequestCreateProductCatalog setFlightCatalogSettings (String flightCatalogSettings) {
-      this.setParam("flight_catalog_settings", flightCatalogSettings);
-      return this;
-    }
-
-    public APIRequestCreateProductCatalog setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateProductCatalog setVertical (ProductCatalog.EnumVertical vertical) {
-      this.setParam("vertical", vertical);
-      return this;
-    }
-    public APIRequestCreateProductCatalog setVertical (String vertical) {
-      this.setParam("vertical", vertical);
-      return this;
-    }
-
-    public APIRequestCreateProductCatalog requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateProductCatalog requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateProductCatalog requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateProductCatalog requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateProductCatalog requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateProductCatalog requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetReceivedAudiencePermissions extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -5672,90 +4374,6 @@ public class Business extends APINode {
 
     @Override
     public APIRequestGetSharedAudiencePermissions requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetSystemUsers extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGetSystemUsers(String nodeId, APIContext context) {
-      super(context, nodeId, "/system_users", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetSystemUsers setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSystemUsers setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetSystemUsers requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetSystemUsers requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSystemUsers requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetSystemUsers requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSystemUsers requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetSystemUsers requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -6061,6 +4679,8 @@ public class Business extends APINode {
       VALUE_FRUIT_ROLLUP_REPORT("fruit_rollup_report"),
       @SerializedName("third_party_mta_report")
       VALUE_THIRD_PARTY_MTA_REPORT("third_party_mta_report"),
+      @SerializedName("partner_lift_study_report")
+      VALUE_PARTNER_LIFT_STUDY_REPORT("partner_lift_study_report"),
       NULL(null);
 
       private String value;

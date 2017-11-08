@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -283,6 +283,14 @@ public class ProductCatalog extends APINode {
 
   public APIRequestGetFlights getFlights() {
     return new APIRequestGetFlights(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetHomeListings getHomeListings() {
+    return new APIRequestGetHomeListings(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateHomeListing createHomeListing() {
+    return new APIRequestCreateHomeListing(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetHotelRoomsBatch getHotelRoomsBatch() {
@@ -1225,6 +1233,312 @@ public class ProductCatalog extends APINode {
 
   }
 
+  public static class APIRequestGetHomeListings extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "bulk_pagination",
+      "filter",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGetHomeListings(String nodeId, APIContext context) {
+      super(context, nodeId, "/home_listings", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetHomeListings setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHomeListings setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetHomeListings setBulkPagination (Boolean bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+    public APIRequestGetHomeListings setBulkPagination (String bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+
+    public APIRequestGetHomeListings setFilter (Object filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+    public APIRequestGetHomeListings setFilter (String filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+
+    public APIRequestGetHomeListings requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetHomeListings requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHomeListings requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetHomeListings requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHomeListings requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHomeListings requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateHomeListing extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "address",
+      "availability",
+      "currency",
+      "description",
+      "home_listing_id",
+      "images",
+      "listing_type",
+      "name",
+      "num_baths",
+      "num_beds",
+      "num_units",
+      "price",
+      "property_type",
+      "url",
+      "year_built",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestCreateHomeListing(String nodeId, APIContext context) {
+      super(context, nodeId, "/home_listings", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateHomeListing setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateHomeListing setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateHomeListing setAddress (Object address) {
+      this.setParam("address", address);
+      return this;
+    }
+    public APIRequestCreateHomeListing setAddress (String address) {
+      this.setParam("address", address);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setAvailability (String availability) {
+      this.setParam("availability", availability);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setHomeListingId (String homeListingId) {
+      this.setParam("home_listing_id", homeListingId);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestCreateHomeListing setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setListingType (String listingType) {
+      this.setParam("listing_type", listingType);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setNumBaths (Double numBaths) {
+      this.setParam("num_baths", numBaths);
+      return this;
+    }
+    public APIRequestCreateHomeListing setNumBaths (String numBaths) {
+      this.setParam("num_baths", numBaths);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setNumBeds (Double numBeds) {
+      this.setParam("num_beds", numBeds);
+      return this;
+    }
+    public APIRequestCreateHomeListing setNumBeds (String numBeds) {
+      this.setParam("num_beds", numBeds);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setNumUnits (Double numUnits) {
+      this.setParam("num_units", numUnits);
+      return this;
+    }
+    public APIRequestCreateHomeListing setNumUnits (String numUnits) {
+      this.setParam("num_units", numUnits);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setPrice (Double price) {
+      this.setParam("price", price);
+      return this;
+    }
+    public APIRequestCreateHomeListing setPrice (String price) {
+      this.setParam("price", price);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setPropertyType (String propertyType) {
+      this.setParam("property_type", propertyType);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing setYearBuilt (Long yearBuilt) {
+      this.setParam("year_built", yearBuilt);
+      return this;
+    }
+    public APIRequestCreateHomeListing setYearBuilt (String yearBuilt) {
+      this.setParam("year_built", yearBuilt);
+      return this;
+    }
+
+    public APIRequestCreateHomeListing requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateHomeListing requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateHomeListing requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateHomeListing requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateHomeListing requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateHomeListing requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetHotelRoomsBatch extends APIRequest<ProductCatalogHotelRoomsBatch> {
 
     APINodeList<ProductCatalogHotelRoomsBatch> lastResponse = null;
@@ -2136,6 +2450,7 @@ public class ProductCatalog extends APINode {
       "qualified_product_count",
       "quoted_fields_mode",
       "schedule",
+      "update_schedule",
     };
 
     @Override
@@ -2305,6 +2620,13 @@ public class ProductCatalog extends APINode {
       this.requestField("schedule", value);
       return this;
     }
+    public APIRequestGetProductFeeds requestUpdateScheduleField () {
+      return this.requestUpdateScheduleField(true);
+    }
+    public APIRequestGetProductFeeds requestUpdateScheduleField (boolean value) {
+      this.requestField("update_schedule", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateProductFeed extends APIRequest<ProductFeed> {
@@ -2325,6 +2647,7 @@ public class ProductCatalog extends APINode {
       "quoted_fields_mode",
       "rules",
       "schedule",
+      "update_schedule",
     };
 
     public static final String[] FIELDS = {
@@ -2430,6 +2753,11 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProductFeed setSchedule (String schedule) {
       this.setParam("schedule", schedule);
+      return this;
+    }
+
+    public APIRequestCreateProductFeed setUpdateSchedule (String updateSchedule) {
+      this.setParam("update_schedule", updateSchedule);
       return this;
     }
 
@@ -4659,29 +4987,6 @@ public class ProductCatalog extends APINode {
 
   }
 
-  public static enum EnumVertical {
-      @SerializedName("commerce")
-      VALUE_COMMERCE("commerce"),
-      @SerializedName("destinations")
-      VALUE_DESTINATIONS("destinations"),
-      @SerializedName("flights")
-      VALUE_FLIGHTS("flights"),
-      @SerializedName("hotels")
-      VALUE_HOTELS("hotels"),
-      NULL(null);
-
-      private String value;
-
-      private EnumVertical(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumContentCategory {
       @SerializedName("BEAUTY_FASHION")
       VALUE_BEAUTY_FASHION("BEAUTY_FASHION"),
@@ -4738,6 +5043,8 @@ public class ProductCatalog extends APINode {
       VALUE_EQUIRECTANGULAR("equirectangular"),
       @SerializedName("cubemap")
       VALUE_CUBEMAP("cubemap"),
+      @SerializedName("equiangular_cubemap")
+      VALUE_EQUIANGULAR_CUBEMAP("equiangular_cubemap"),
       NULL(null);
 
       private String value;

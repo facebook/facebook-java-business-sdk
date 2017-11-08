@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -243,10 +243,6 @@ public class ProductSet extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetProductGroups getProductGroups() {
-    return new APIRequestGetProductGroups(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetProducts getProducts() {
     return new APIRequestGetProducts(this.getPrefixedId().toString(), context);
   }
@@ -292,122 +288,6 @@ public class ProductSet extends APINode {
   }
 
 
-
-  public static class APIRequestGetProductGroups extends APIRequest<ProductGroup> {
-
-    APINodeList<ProductGroup> lastResponse = null;
-    @Override
-    public APINodeList<ProductGroup> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-      "product_catalog",
-      "retailer_id",
-      "variants",
-    };
-
-    @Override
-    public APINodeList<ProductGroup> parseResponse(String response) throws APIException {
-      return ProductGroup.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<ProductGroup> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<ProductGroup> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGetProductGroups(String nodeId, APIContext context) {
-      super(context, nodeId, "/product_groups", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetProductGroups setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetProductGroups setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetProductGroups requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetProductGroups requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetProductGroups requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetProductGroups requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetProductGroups requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetProductGroups requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetProductGroups requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetProductGroups requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetProductGroups requestProductCatalogField () {
-      return this.requestProductCatalogField(true);
-    }
-    public APIRequestGetProductGroups requestProductCatalogField (boolean value) {
-      this.requestField("product_catalog", value);
-      return this;
-    }
-    public APIRequestGetProductGroups requestRetailerIdField () {
-      return this.requestRetailerIdField(true);
-    }
-    public APIRequestGetProductGroups requestRetailerIdField (boolean value) {
-      this.requestField("retailer_id", value);
-      return this;
-    }
-    public APIRequestGetProductGroups requestVariantsField () {
-      return this.requestVariantsField(true);
-    }
-    public APIRequestGetProductGroups requestVariantsField (boolean value) {
-      this.requestField("variants", value);
-      return this;
-    }
-  }
 
   public static class APIRequestGetProducts extends APIRequest<ProductItem> {
 

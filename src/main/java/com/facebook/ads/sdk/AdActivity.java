@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -362,6 +362,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_CAMPAIGN_RUN_STATUS("update_campaign_run_status"),
       @SerializedName("update_campaign_group_spend_cap")
       VALUE_UPDATE_CAMPAIGN_GROUP_SPEND_CAP("update_campaign_group_spend_cap"),
+      @SerializedName("campaign_ended")
+      VALUE_CAMPAIGN_ENDED("campaign_ended"),
       @SerializedName("create_campaign")
       VALUE_CREATE_CAMPAIGN("create_campaign"),
       @SerializedName("create_campaign_legacy")

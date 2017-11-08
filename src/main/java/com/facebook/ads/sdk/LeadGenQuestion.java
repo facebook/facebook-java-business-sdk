@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -57,6 +57,10 @@ public class LeadGenQuestion extends APINode {
   private String mConditionalQuestionsGroupId = null;
   @SerializedName("dependent_conditional_questions")
   private List<Object> mDependentConditionalQuestions = null;
+  @SerializedName("id")
+  private String mId = null;
+  @SerializedName("inline_context")
+  private String mInlineContext = null;
   @SerializedName("key")
   private String mKey = null;
   @SerializedName("label")
@@ -67,11 +71,51 @@ public class LeadGenQuestion extends APINode {
   private String mType = null;
   protected static Gson gson = null;
 
-  public LeadGenQuestion() {
+  LeadGenQuestion() {
+  }
+
+  public LeadGenQuestion(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public LeadGenQuestion(String id, APIContext context) {
+    this.mId = id;
+    this.context = context;
+  }
+
+  public LeadGenQuestion fetch() throws APIException{
+    LeadGenQuestion newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static LeadGenQuestion fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static LeadGenQuestion fetchById(String id, APIContext context) throws APIException {
+    LeadGenQuestion leadGenQuestion =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+    return leadGenQuestion;
+  }
+
+  public static APINodeList<LeadGenQuestion> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<LeadGenQuestion>)(
+      new APIRequest<LeadGenQuestion>(context, "", "/", "GET", LeadGenQuestion.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static LeadGenQuestion loadJSON(String json, APIContext context) {
     LeadGenQuestion leadGenQuestion = getGson().fromJson(json, LeadGenQuestion.class);
@@ -205,76 +249,204 @@ public class LeadGenQuestion extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public List<Object> getFieldConditionalQuestionsChoices() {
     return mConditionalQuestionsChoices;
-  }
-
-  public LeadGenQuestion setFieldConditionalQuestionsChoices(List<Object> value) {
-    this.mConditionalQuestionsChoices = value;
-    return this;
   }
 
   public String getFieldConditionalQuestionsGroupId() {
     return mConditionalQuestionsGroupId;
   }
 
-  public LeadGenQuestion setFieldConditionalQuestionsGroupId(String value) {
-    this.mConditionalQuestionsGroupId = value;
-    return this;
-  }
-
   public List<Object> getFieldDependentConditionalQuestions() {
     return mDependentConditionalQuestions;
   }
 
-  public LeadGenQuestion setFieldDependentConditionalQuestions(List<Object> value) {
-    this.mDependentConditionalQuestions = value;
-    return this;
+  public String getFieldId() {
+    return mId;
+  }
+
+  public String getFieldInlineContext() {
+    return mInlineContext;
   }
 
   public String getFieldKey() {
     return mKey;
   }
 
-  public LeadGenQuestion setFieldKey(String value) {
-    this.mKey = value;
-    return this;
-  }
-
   public String getFieldLabel() {
     return mLabel;
-  }
-
-  public LeadGenQuestion setFieldLabel(String value) {
-    this.mLabel = value;
-    return this;
   }
 
   public List<LeadGenQuestionOption> getFieldOptions() {
     return mOptions;
   }
 
-  public LeadGenQuestion setFieldOptions(List<LeadGenQuestionOption> value) {
-    this.mOptions = value;
-    return this;
-  }
-
-  public LeadGenQuestion setFieldOptions(String value) {
-    Type type = new TypeToken<List<LeadGenQuestionOption>>(){}.getType();
-    this.mOptions = LeadGenQuestionOption.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldType() {
     return mType;
   }
 
-  public LeadGenQuestion setFieldType(String value) {
-    this.mType = value;
-    return this;
+
+
+  public static class APIRequestGet extends APIRequest<LeadGenQuestion> {
+
+    LeadGenQuestion lastResponse = null;
+    @Override
+    public LeadGenQuestion getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "conditional_questions_choices",
+      "conditional_questions_group_id",
+      "dependent_conditional_questions",
+      "id",
+      "inline_context",
+      "key",
+      "label",
+      "options",
+      "type",
+    };
+
+    @Override
+    public LeadGenQuestion parseResponse(String response) throws APIException {
+      return LeadGenQuestion.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public LeadGenQuestion execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public LeadGenQuestion execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestConditionalQuestionsChoicesField () {
+      return this.requestConditionalQuestionsChoicesField(true);
+    }
+    public APIRequestGet requestConditionalQuestionsChoicesField (boolean value) {
+      this.requestField("conditional_questions_choices", value);
+      return this;
+    }
+    public APIRequestGet requestConditionalQuestionsGroupIdField () {
+      return this.requestConditionalQuestionsGroupIdField(true);
+    }
+    public APIRequestGet requestConditionalQuestionsGroupIdField (boolean value) {
+      this.requestField("conditional_questions_group_id", value);
+      return this;
+    }
+    public APIRequestGet requestDependentConditionalQuestionsField () {
+      return this.requestDependentConditionalQuestionsField(true);
+    }
+    public APIRequestGet requestDependentConditionalQuestionsField (boolean value) {
+      this.requestField("dependent_conditional_questions", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestInlineContextField () {
+      return this.requestInlineContextField(true);
+    }
+    public APIRequestGet requestInlineContextField (boolean value) {
+      this.requestField("inline_context", value);
+      return this;
+    }
+    public APIRequestGet requestKeyField () {
+      return this.requestKeyField(true);
+    }
+    public APIRequestGet requestKeyField (boolean value) {
+      this.requestField("key", value);
+      return this;
+    }
+    public APIRequestGet requestLabelField () {
+      return this.requestLabelField(true);
+    }
+    public APIRequestGet requestLabelField (boolean value) {
+      this.requestField("label", value);
+      return this;
+    }
+    public APIRequestGet requestOptionsField () {
+      return this.requestOptionsField(true);
+    }
+    public APIRequestGet requestOptionsField (boolean value) {
+      this.requestField("options", value);
+      return this;
+    }
+    public APIRequestGet requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGet requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
   }
-
-
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -294,6 +466,8 @@ public class LeadGenQuestion extends APINode {
     this.mConditionalQuestionsChoices = instance.mConditionalQuestionsChoices;
     this.mConditionalQuestionsGroupId = instance.mConditionalQuestionsGroupId;
     this.mDependentConditionalQuestions = instance.mDependentConditionalQuestions;
+    this.mId = instance.mId;
+    this.mInlineContext = instance.mInlineContext;
     this.mKey = instance.mKey;
     this.mLabel = instance.mLabel;
     this.mOptions = instance.mOptions;

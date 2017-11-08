@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -79,6 +79,8 @@ public class ProductFeed extends APINode {
   private EnumQuotedFieldsMode mQuotedFieldsMode = null;
   @SerializedName("schedule")
   private ProductFeedSchedule mSchedule = null;
+  @SerializedName("update_schedule")
+  private ProductFeedSchedule mUpdateSchedule = null;
   protected static Gson gson = null;
 
   ProductFeed() {
@@ -341,6 +343,10 @@ public class ProductFeed extends APINode {
 
   public ProductFeedSchedule getFieldSchedule() {
     return mSchedule;
+  }
+
+  public ProductFeedSchedule getFieldUpdateSchedule() {
+    return mUpdateSchedule;
   }
 
 
@@ -1172,6 +1178,7 @@ public class ProductFeed extends APINode {
       "qualified_product_count",
       "quoted_fields_mode",
       "schedule",
+      "update_schedule",
     };
 
     @Override
@@ -1341,6 +1348,13 @@ public class ProductFeed extends APINode {
       this.requestField("schedule", value);
       return this;
     }
+    public APIRequestGet requestUpdateScheduleField () {
+      return this.requestUpdateScheduleField(true);
+    }
+    public APIRequestGet requestUpdateScheduleField (boolean value) {
+      this.requestField("update_schedule", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<ProductFeed> {
@@ -1358,6 +1372,7 @@ public class ProductFeed extends APINode {
       "name",
       "quoted_fields_mode",
       "schedule",
+      "update_schedule",
     };
 
     public static final String[] FIELDS = {
@@ -1444,6 +1459,11 @@ public class ProductFeed extends APINode {
 
     public APIRequestUpdate setSchedule (String schedule) {
       this.setParam("schedule", schedule);
+      return this;
+    }
+
+    public APIRequestUpdate setUpdateSchedule (String updateSchedule) {
+      this.setParam("update_schedule", updateSchedule);
       return this;
     }
 
@@ -1591,6 +1611,7 @@ public class ProductFeed extends APINode {
     this.mQualifiedProductCount = instance.mQualifiedProductCount;
     this.mQuotedFieldsMode = instance.mQuotedFieldsMode;
     this.mSchedule = instance.mSchedule;
+    this.mUpdateSchedule = instance.mUpdateSchedule;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -453,7 +453,9 @@ public class Ad extends APINode {
       "actor_id",
       "adlabels",
       "applink_treatment",
+      "asset_feed_spec",
       "body",
+      "branded_content_sponsor_page_id",
       "call_to_action_type",
       "effective_instagram_story_id",
       "effective_object_story_id",
@@ -474,6 +476,7 @@ public class Ad extends APINode {
       "object_url",
       "platform_customizations",
       "product_set_id",
+      "recommender_settings",
       "status",
       "template_url",
       "template_url_spec",
@@ -581,11 +584,25 @@ public class Ad extends APINode {
       this.requestField("applink_treatment", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestAssetFeedSpecField () {
+      return this.requestAssetFeedSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestAssetFeedSpecField (boolean value) {
+      this.requestField("asset_feed_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestBodyField () {
       return this.requestBodyField(true);
     }
     public APIRequestGetAdCreatives requestBodyField (boolean value) {
       this.requestField("body", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestBrandedContentSponsorPageIdField () {
+      return this.requestBrandedContentSponsorPageIdField(true);
+    }
+    public APIRequestGetAdCreatives requestBrandedContentSponsorPageIdField (boolean value) {
+      this.requestField("branded_content_sponsor_page_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestCallToActionTypeField () {
@@ -726,6 +743,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestProductSetIdField (boolean value) {
       this.requestField("product_set_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestRecommenderSettingsField () {
+      return this.requestRecommenderSettingsField(true);
+    }
+    public APIRequestGetAdCreatives requestRecommenderSettingsField (boolean value) {
+      this.requestField("recommender_settings", value);
       return this;
     }
     public APIRequestGetAdCreatives requestStatusField () {
@@ -1993,6 +2017,7 @@ public class Ad extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_format",
+      "dynamic_creative_spec",
       "end_date",
       "height",
       "locale",
@@ -2046,6 +2071,15 @@ public class Ad extends APINode {
     }
     public APIRequestGetPreviews setAdFormat (String adFormat) {
       this.setParam("ad_format", adFormat);
+      return this;
+    }
+
+    public APIRequestGetPreviews setDynamicCreativeSpec (Object dynamicCreativeSpec) {
+      this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
+      return this;
+    }
+    public APIRequestGetPreviews setDynamicCreativeSpec (String dynamicCreativeSpec) {
+      this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
       return this;
     }
 

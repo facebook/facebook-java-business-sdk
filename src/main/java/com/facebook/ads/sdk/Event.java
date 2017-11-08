@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -67,6 +67,8 @@ public class Event extends APINode {
   private String mDescription = null;
   @SerializedName("end_time")
   private String mEndTime = null;
+  @SerializedName("event_times")
+  private List<Object> mEventTimes = null;
   @SerializedName("guest_list_enabled")
   private Boolean mGuestListEnabled = null;
   @SerializedName("id")
@@ -93,6 +95,8 @@ public class Event extends APINode {
   private Object mParentGroup = null;
   @SerializedName("place")
   private Object mPlace = null;
+  @SerializedName("scheduled_publish_time")
+  private String mScheduledPublishTime = null;
   @SerializedName("start_time")
   private String mStartTime = null;
   @SerializedName("ticket_uri")
@@ -328,6 +332,10 @@ public class Event extends APINode {
     return mEndTime;
   }
 
+  public List<Object> getFieldEventTimes() {
+    return mEventTimes;
+  }
+
   public Boolean getFieldGuestListEnabled() {
     return mGuestListEnabled;
   }
@@ -378,6 +386,10 @@ public class Event extends APINode {
 
   public Object getFieldPlace() {
     return mPlace;
+  }
+
+  public String getFieldScheduledPublishTime() {
+    return mScheduledPublishTime;
   }
 
   public String getFieldStartTime() {
@@ -617,6 +629,7 @@ public class Event extends APINode {
       "declined_count",
       "description",
       "end_time",
+      "event_times",
       "guest_list_enabled",
       "id",
       "interested_count",
@@ -630,6 +643,7 @@ public class Event extends APINode {
       "owner",
       "parent_group",
       "place",
+      "scheduled_publish_time",
       "start_time",
       "ticket_uri",
       "ticketing_privacy_uri",
@@ -764,6 +778,13 @@ public class Event extends APINode {
       this.requestField("end_time", value);
       return this;
     }
+    public APIRequestGet requestEventTimesField () {
+      return this.requestEventTimesField(true);
+    }
+    public APIRequestGet requestEventTimesField (boolean value) {
+      this.requestField("event_times", value);
+      return this;
+    }
     public APIRequestGet requestGuestListEnabledField () {
       return this.requestGuestListEnabledField(true);
     }
@@ -853,6 +874,13 @@ public class Event extends APINode {
     }
     public APIRequestGet requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGet requestScheduledPublishTimeField () {
+      return this.requestScheduledPublishTimeField(true);
+    }
+    public APIRequestGet requestScheduledPublishTimeField (boolean value) {
+      this.requestField("scheduled_publish_time", value);
       return this;
     }
     public APIRequestGet requestStartTimeField () {
@@ -952,6 +980,7 @@ public class Event extends APINode {
     this.mDeclinedCount = instance.mDeclinedCount;
     this.mDescription = instance.mDescription;
     this.mEndTime = instance.mEndTime;
+    this.mEventTimes = instance.mEventTimes;
     this.mGuestListEnabled = instance.mGuestListEnabled;
     this.mId = instance.mId;
     this.mInterestedCount = instance.mInterestedCount;
@@ -965,6 +994,7 @@ public class Event extends APINode {
     this.mOwner = instance.mOwner;
     this.mParentGroup = instance.mParentGroup;
     this.mPlace = instance.mPlace;
+    this.mScheduledPublishTime = instance.mScheduledPublishTime;
     this.mStartTime = instance.mStartTime;
     this.mTicketUri = instance.mTicketUri;
     this.mTicketingPrivacyUri = instance.mTicketingPrivacyUri;

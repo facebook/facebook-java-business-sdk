@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -310,7 +310,9 @@ public class AdLabel extends APINode {
       "actor_id",
       "adlabels",
       "applink_treatment",
+      "asset_feed_spec",
       "body",
+      "branded_content_sponsor_page_id",
       "call_to_action_type",
       "effective_instagram_story_id",
       "effective_object_story_id",
@@ -331,6 +333,7 @@ public class AdLabel extends APINode {
       "object_url",
       "platform_customizations",
       "product_set_id",
+      "recommender_settings",
       "status",
       "template_url",
       "template_url_spec",
@@ -438,11 +441,25 @@ public class AdLabel extends APINode {
       this.requestField("applink_treatment", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestAssetFeedSpecField () {
+      return this.requestAssetFeedSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestAssetFeedSpecField (boolean value) {
+      this.requestField("asset_feed_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestBodyField () {
       return this.requestBodyField(true);
     }
     public APIRequestGetAdCreatives requestBodyField (boolean value) {
       this.requestField("body", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestBrandedContentSponsorPageIdField () {
+      return this.requestBrandedContentSponsorPageIdField(true);
+    }
+    public APIRequestGetAdCreatives requestBrandedContentSponsorPageIdField (boolean value) {
+      this.requestField("branded_content_sponsor_page_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestCallToActionTypeField () {
@@ -583,6 +600,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestProductSetIdField (boolean value) {
       this.requestField("product_set_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestRecommenderSettingsField () {
+      return this.requestRecommenderSettingsField(true);
+    }
+    public APIRequestGetAdCreatives requestRecommenderSettingsField (boolean value) {
+      this.requestField("recommender_settings", value);
       return this;
     }
     public APIRequestGetAdCreatives requestStatusField () {
@@ -944,16 +968,16 @@ public class AdLabel extends APINode {
       "created_time",
       "creative_sequence",
       "daily_budget",
+      "destination_type",
       "effective_status",
       "end_time",
-      "frequency_cap",
-      "frequency_cap_reset_period",
       "frequency_control_specs",
+      "full_funnel_exploration_mode",
       "id",
+      "instagram_actor_id",
       "is_autobid",
       "is_average_price_pacing",
       "lifetime_budget",
-      "lifetime_frequency_cap",
       "lifetime_imps",
       "name",
       "optimization_goal",
@@ -1141,6 +1165,13 @@ public class AdLabel extends APINode {
       this.requestField("daily_budget", value);
       return this;
     }
+    public APIRequestGetAdSets requestDestinationTypeField () {
+      return this.requestDestinationTypeField(true);
+    }
+    public APIRequestGetAdSets requestDestinationTypeField (boolean value) {
+      this.requestField("destination_type", value);
+      return this;
+    }
     public APIRequestGetAdSets requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -1155,20 +1186,6 @@ public class AdLabel extends APINode {
       this.requestField("end_time", value);
       return this;
     }
-    public APIRequestGetAdSets requestFrequencyCapField () {
-      return this.requestFrequencyCapField(true);
-    }
-    public APIRequestGetAdSets requestFrequencyCapField (boolean value) {
-      this.requestField("frequency_cap", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestFrequencyCapResetPeriodField () {
-      return this.requestFrequencyCapResetPeriodField(true);
-    }
-    public APIRequestGetAdSets requestFrequencyCapResetPeriodField (boolean value) {
-      this.requestField("frequency_cap_reset_period", value);
-      return this;
-    }
     public APIRequestGetAdSets requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
@@ -1176,11 +1193,25 @@ public class AdLabel extends APINode {
       this.requestField("frequency_control_specs", value);
       return this;
     }
+    public APIRequestGetAdSets requestFullFunnelExplorationModeField () {
+      return this.requestFullFunnelExplorationModeField(true);
+    }
+    public APIRequestGetAdSets requestFullFunnelExplorationModeField (boolean value) {
+      this.requestField("full_funnel_exploration_mode", value);
+      return this;
+    }
     public APIRequestGetAdSets requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGetAdSets requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestInstagramActorIdField () {
+      return this.requestInstagramActorIdField(true);
+    }
+    public APIRequestGetAdSets requestInstagramActorIdField (boolean value) {
+      this.requestField("instagram_actor_id", value);
       return this;
     }
     public APIRequestGetAdSets requestIsAutobidField () {
@@ -1202,13 +1233,6 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestLifetimeFrequencyCapField () {
-      return this.requestLifetimeFrequencyCapField(true);
-    }
-    public APIRequestGetAdSets requestLifetimeFrequencyCapField (boolean value) {
-      this.requestField("lifetime_frequency_cap", value);
       return this;
     }
     public APIRequestGetAdSets requestLifetimeImpsField () {
@@ -1352,6 +1376,7 @@ public class AdLabel extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "adlabels",
+      "boosted_object_id",
       "brand_lift_studies",
       "budget_rebalance_flag",
       "buying_type",
@@ -1361,6 +1386,8 @@ public class AdLabel extends APINode {
       "created_time",
       "effective_status",
       "id",
+      "kpi_custom_conversion_id",
+      "kpi_type",
       "name",
       "objective",
       "recommendations",
@@ -1456,6 +1483,13 @@ public class AdLabel extends APINode {
       this.requestField("adlabels", value);
       return this;
     }
+    public APIRequestGetCampaigns requestBoostedObjectIdField () {
+      return this.requestBoostedObjectIdField(true);
+    }
+    public APIRequestGetCampaigns requestBoostedObjectIdField (boolean value) {
+      this.requestField("boosted_object_id", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestBrandLiftStudiesField () {
       return this.requestBrandLiftStudiesField(true);
     }
@@ -1517,6 +1551,20 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestKpiCustomConversionIdField () {
+      return this.requestKpiCustomConversionIdField(true);
+    }
+    public APIRequestGetCampaigns requestKpiCustomConversionIdField (boolean value) {
+      this.requestField("kpi_custom_conversion_id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestKpiTypeField () {
+      return this.requestKpiTypeField(true);
+    }
+    public APIRequestGetCampaigns requestKpiTypeField (boolean value) {
+      this.requestField("kpi_type", value);
       return this;
     }
     public APIRequestGetCampaigns requestNameField () {

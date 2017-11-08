@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -59,8 +59,12 @@ public class AdCreative extends APINode {
   private List<AdLabel> mAdlabels = null;
   @SerializedName("applink_treatment")
   private EnumApplinkTreatment mApplinkTreatment = null;
+  @SerializedName("asset_feed_spec")
+  private AdAssetFeedSpec mAssetFeedSpec = null;
   @SerializedName("body")
   private String mBody = null;
+  @SerializedName("branded_content_sponsor_page_id")
+  private String mBrandedContentSponsorPageId = null;
   @SerializedName("call_to_action_type")
   private EnumCallToActionType mCallToActionType = null;
   @SerializedName("effective_instagram_story_id")
@@ -101,6 +105,8 @@ public class AdCreative extends APINode {
   private Object mPlatformCustomizations = null;
   @SerializedName("product_set_id")
   private String mProductSetId = null;
+  @SerializedName("recommender_settings")
+  private Object mRecommenderSettings = null;
   @SerializedName("status")
   private EnumStatus mStatus = null;
   @SerializedName("template_url")
@@ -368,12 +374,35 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdAssetFeedSpec getFieldAssetFeedSpec() {
+    return mAssetFeedSpec;
+  }
+
+  public AdCreative setFieldAssetFeedSpec(AdAssetFeedSpec value) {
+    this.mAssetFeedSpec = value;
+    return this;
+  }
+
+  public AdCreative setFieldAssetFeedSpec(String value) {
+    Type type = new TypeToken<AdAssetFeedSpec>(){}.getType();
+    this.mAssetFeedSpec = AdAssetFeedSpec.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldBody() {
     return mBody;
   }
 
   public AdCreative setFieldBody(String value) {
     this.mBody = value;
+    return this;
+  }
+
+  public String getFieldBrandedContentSponsorPageId() {
+    return mBrandedContentSponsorPageId;
+  }
+
+  public AdCreative setFieldBrandedContentSponsorPageId(String value) {
+    this.mBrandedContentSponsorPageId = value;
     return this;
   }
 
@@ -565,6 +594,15 @@ public class AdCreative extends APINode {
 
   public AdCreative setFieldProductSetId(String value) {
     this.mProductSetId = value;
+    return this;
+  }
+
+  public Object getFieldRecommenderSettings() {
+    return mRecommenderSettings;
+  }
+
+  public AdCreative setFieldRecommenderSettings(Object value) {
+    this.mRecommenderSettings = value;
     return this;
   }
 
@@ -839,6 +877,7 @@ public class AdCreative extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_format",
+      "dynamic_creative_spec",
       "end_date",
       "height",
       "locale",
@@ -892,6 +931,15 @@ public class AdCreative extends APINode {
     }
     public APIRequestGetPreviews setAdFormat (String adFormat) {
       this.setParam("ad_format", adFormat);
+      return this;
+    }
+
+    public APIRequestGetPreviews setDynamicCreativeSpec (Object dynamicCreativeSpec) {
+      this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
+      return this;
+    }
+    public APIRequestGetPreviews setDynamicCreativeSpec (String dynamicCreativeSpec) {
+      this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
       return this;
     }
 
@@ -1133,7 +1181,9 @@ public class AdCreative extends APINode {
       "actor_id",
       "adlabels",
       "applink_treatment",
+      "asset_feed_spec",
       "body",
+      "branded_content_sponsor_page_id",
       "call_to_action_type",
       "effective_instagram_story_id",
       "effective_object_story_id",
@@ -1154,6 +1204,7 @@ public class AdCreative extends APINode {
       "object_url",
       "platform_customizations",
       "product_set_id",
+      "recommender_settings",
       "status",
       "template_url",
       "template_url_spec",
@@ -1279,11 +1330,25 @@ public class AdCreative extends APINode {
       this.requestField("applink_treatment", value);
       return this;
     }
+    public APIRequestGet requestAssetFeedSpecField () {
+      return this.requestAssetFeedSpecField(true);
+    }
+    public APIRequestGet requestAssetFeedSpecField (boolean value) {
+      this.requestField("asset_feed_spec", value);
+      return this;
+    }
     public APIRequestGet requestBodyField () {
       return this.requestBodyField(true);
     }
     public APIRequestGet requestBodyField (boolean value) {
       this.requestField("body", value);
+      return this;
+    }
+    public APIRequestGet requestBrandedContentSponsorPageIdField () {
+      return this.requestBrandedContentSponsorPageIdField(true);
+    }
+    public APIRequestGet requestBrandedContentSponsorPageIdField (boolean value) {
+      this.requestField("branded_content_sponsor_page_id", value);
       return this;
     }
     public APIRequestGet requestCallToActionTypeField () {
@@ -1424,6 +1489,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestProductSetIdField (boolean value) {
       this.requestField("product_set_id", value);
+      return this;
+    }
+    public APIRequestGet requestRecommenderSettingsField () {
+      return this.requestRecommenderSettingsField(true);
+    }
+    public APIRequestGet requestRecommenderSettingsField (boolean value) {
+      this.requestField("recommender_settings", value);
       return this;
     }
     public APIRequestGet requestStatusField () {
@@ -1678,6 +1750,8 @@ public class AdCreative extends APINode {
       VALUE_GET_QUOTE("GET_QUOTE"),
       @SerializedName("CONTACT_US")
       VALUE_CONTACT_US("CONTACT_US"),
+      @SerializedName("START_ORDER")
+      VALUE_START_ORDER("START_ORDER"),
       @SerializedName("RECORD_NOW")
       VALUE_RECORD_NOW("RECORD_NOW"),
       @SerializedName("VOTE_NOW")
@@ -1690,6 +1764,12 @@ public class AdCreative extends APINode {
       VALUE_SEE_MENU("SEE_MENU"),
       @SerializedName("EMAIL_NOW")
       VALUE_EMAIL_NOW("EMAIL_NOW"),
+      @SerializedName("GET_SHOWTIMES")
+      VALUE_GET_SHOWTIMES("GET_SHOWTIMES"),
+      @SerializedName("TRY_IT")
+      VALUE_TRY_IT("TRY_IT"),
+      @SerializedName("LISTEN_NOW")
+      VALUE_LISTEN_NOW("LISTEN_NOW"),
       @SerializedName("OPEN_MOVIES")
       VALUE_OPEN_MOVIES("OPEN_MOVIES"),
       NULL(null);
@@ -1819,7 +1899,9 @@ public class AdCreative extends APINode {
     this.mActorId = instance.mActorId;
     this.mAdlabels = instance.mAdlabels;
     this.mApplinkTreatment = instance.mApplinkTreatment;
+    this.mAssetFeedSpec = instance.mAssetFeedSpec;
     this.mBody = instance.mBody;
+    this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
     this.mCallToActionType = instance.mCallToActionType;
     this.mEffectiveInstagramStoryId = instance.mEffectiveInstagramStoryId;
     this.mEffectiveObjectStoryId = instance.mEffectiveObjectStoryId;
@@ -1840,6 +1922,7 @@ public class AdCreative extends APINode {
     this.mObjectUrl = instance.mObjectUrl;
     this.mPlatformCustomizations = instance.mPlatformCustomizations;
     this.mProductSetId = instance.mProductSetId;
+    this.mRecommenderSettings = instance.mRecommenderSettings;
     this.mStatus = instance.mStatus;
     this.mTemplateUrl = instance.mTemplateUrl;
     this.mTemplateUrlSpec = instance.mTemplateUrlSpec;

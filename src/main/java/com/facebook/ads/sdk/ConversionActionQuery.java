@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -95,8 +95,6 @@ public class ConversionActionQuery extends APINode {
   private List<String> mPostObjectWall = null;
   @SerializedName("post.wall")
   private List<String> mPostWall = null;
-  @SerializedName("product_set_id")
-  private List<String> mProductSetId = null;
   @SerializedName("question")
   private List<String> mQuestion = null;
   @SerializedName("question.creator")
@@ -444,15 +442,6 @@ public class ConversionActionQuery extends APINode {
     return this;
   }
 
-  public List<String> getFieldProductSetId() {
-    return mProductSetId;
-  }
-
-  public ConversionActionQuery setFieldProductSetId(List<String> value) {
-    this.mProductSetId = value;
-    return this;
-  }
-
   public List<String> getFieldQuestion() {
     return mQuestion;
   }
@@ -528,7 +517,6 @@ public class ConversionActionQuery extends APINode {
     this.mPostObject = instance.mPostObject;
     this.mPostObjectWall = instance.mPostObjectWall;
     this.mPostWall = instance.mPostWall;
-    this.mProductSetId = instance.mProductSetId;
     this.mQuestion = instance.mQuestion;
     this.mQuestionCreator = instance.mQuestionCreator;
     this.mResponse = instance.mResponse;

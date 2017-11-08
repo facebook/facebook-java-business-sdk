@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -754,6 +754,7 @@ public class User extends APINode {
       "id",
       "io_number",
       "is_attribution_spec_system_default",
+      "is_direct_deals_enabled",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -763,6 +764,7 @@ public class User extends APINode {
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "next_bill_date",
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
@@ -1045,6 +1047,13 @@ public class User extends APINode {
       this.requestField("is_attribution_spec_system_default", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestIsDirectDealsEnabledField () {
+      return this.requestIsDirectDealsEnabledField(true);
+    }
+    public APIRequestGetAdAccounts requestIsDirectDealsEnabledField (boolean value) {
+      this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {
       return this.requestIsNotificationsEnabledField(true);
     }
@@ -1106,6 +1115,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestNextBillDateField () {
+      return this.requestNextBillDateField(true);
+    }
+    public APIRequestGetAdAccounts requestNextBillDateField (boolean value) {
+      this.requestField("next_bill_date", value);
       return this;
     }
     public APIRequestGetAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -1231,12 +1247,12 @@ public class User extends APINode {
       "allow_organic_lead",
       "block_display_for_non_targeted_viewer",
       "context_card",
-      "continued_flow_request_method",
       "created_time",
       "creator",
       "creator_id",
       "cusomized_tcpa_content",
       "expired_leads_count",
+      "extra_details",
       "follow_up_action_text",
       "follow_up_action_url",
       "id",
@@ -1252,9 +1268,11 @@ public class User extends APINode {
       "page_id",
       "privacy_policy_url",
       "qualifiers",
+      "question_page_custom_headline",
       "questions",
       "status",
       "tcpa_compliance",
+      "thank_you_page",
     };
 
     @Override
@@ -1357,13 +1375,6 @@ public class User extends APINode {
       this.requestField("context_card", value);
       return this;
     }
-    public APIRequestGetLeadGenForms requestContinuedFlowRequestMethodField () {
-      return this.requestContinuedFlowRequestMethodField(true);
-    }
-    public APIRequestGetLeadGenForms requestContinuedFlowRequestMethodField (boolean value) {
-      this.requestField("continued_flow_request_method", value);
-      return this;
-    }
     public APIRequestGetLeadGenForms requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -1397,6 +1408,13 @@ public class User extends APINode {
     }
     public APIRequestGetLeadGenForms requestExpiredLeadsCountField (boolean value) {
       this.requestField("expired_leads_count", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestExtraDetailsField () {
+      return this.requestExtraDetailsField(true);
+    }
+    public APIRequestGetLeadGenForms requestExtraDetailsField (boolean value) {
+      this.requestField("extra_details", value);
       return this;
     }
     public APIRequestGetLeadGenForms requestFollowUpActionTextField () {
@@ -1504,6 +1522,13 @@ public class User extends APINode {
       this.requestField("qualifiers", value);
       return this;
     }
+    public APIRequestGetLeadGenForms requestQuestionPageCustomHeadlineField () {
+      return this.requestQuestionPageCustomHeadlineField(true);
+    }
+    public APIRequestGetLeadGenForms requestQuestionPageCustomHeadlineField (boolean value) {
+      this.requestField("question_page_custom_headline", value);
+      return this;
+    }
     public APIRequestGetLeadGenForms requestQuestionsField () {
       return this.requestQuestionsField(true);
     }
@@ -1523,6 +1548,13 @@ public class User extends APINode {
     }
     public APIRequestGetLeadGenForms requestTcpaComplianceField (boolean value) {
       this.requestField("tcpa_compliance", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestThankYouPageField () {
+      return this.requestThankYouPageField(true);
+    }
+    public APIRequestGetLeadGenForms requestThankYouPageField (boolean value) {
+      this.requestField("thank_you_page", value);
       return this;
     }
   }
@@ -1845,6 +1877,7 @@ public class User extends APINode {
       "declined_count",
       "description",
       "end_time",
+      "event_times",
       "guest_list_enabled",
       "id",
       "interested_count",
@@ -1858,6 +1891,7 @@ public class User extends APINode {
       "owner",
       "parent_group",
       "place",
+      "scheduled_publish_time",
       "start_time",
       "ticket_uri",
       "ticketing_privacy_uri",
@@ -2019,6 +2053,13 @@ public class User extends APINode {
       this.requestField("end_time", value);
       return this;
     }
+    public APIRequestGetPromotableEvents requestEventTimesField () {
+      return this.requestEventTimesField(true);
+    }
+    public APIRequestGetPromotableEvents requestEventTimesField (boolean value) {
+      this.requestField("event_times", value);
+      return this;
+    }
     public APIRequestGetPromotableEvents requestGuestListEnabledField () {
       return this.requestGuestListEnabledField(true);
     }
@@ -2108,6 +2149,13 @@ public class User extends APINode {
     }
     public APIRequestGetPromotableEvents requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetPromotableEvents requestScheduledPublishTimeField () {
+      return this.requestScheduledPublishTimeField(true);
+    }
+    public APIRequestGetPromotableEvents requestScheduledPublishTimeField (boolean value) {
+      this.requestField("scheduled_publish_time", value);
       return this;
     }
     public APIRequestGetPromotableEvents requestStartTimeField () {

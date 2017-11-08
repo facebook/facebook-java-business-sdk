@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -51,6 +51,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdsInsights extends APINode {
+  @SerializedName("account_currency")
+  private String mAccountCurrency = null;
   @SerializedName("account_id")
   private String mAccountId = null;
   @SerializedName("account_name")
@@ -181,8 +183,6 @@ public class AdsInsights extends APINode {
   private String mUniqueSocialClicks = null;
   @SerializedName("video_10_sec_watched_actions")
   private List<AdsActionStats> mVideo10SecWatchedActions = null;
-  @SerializedName("video_15_sec_watched_actions")
-  private List<AdsActionStats> mVideo15SecWatchedActions = null;
   @SerializedName("video_30_sec_watched_actions")
   private List<AdsActionStats> mVideo30SecWatchedActions = null;
   @SerializedName("video_avg_percent_watched_actions")
@@ -343,6 +343,15 @@ public class AdsInsights extends APINode {
     return getGson().toJson(this);
   }
 
+
+  public String getFieldAccountCurrency() {
+    return mAccountCurrency;
+  }
+
+  public AdsInsights setFieldAccountCurrency(String value) {
+    this.mAccountCurrency = value;
+    return this;
+  }
 
   public String getFieldAccountId() {
     return mAccountId;
@@ -1009,20 +1018,6 @@ public class AdsInsights extends APINode {
     this.mVideo10SecWatchedActions = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
-  public List<AdsActionStats> getFieldVideo15SecWatchedActions() {
-    return mVideo15SecWatchedActions;
-  }
-
-  public AdsInsights setFieldVideo15SecWatchedActions(List<AdsActionStats> value) {
-    this.mVideo15SecWatchedActions = value;
-    return this;
-  }
-
-  public AdsInsights setFieldVideo15SecWatchedActions(String value) {
-    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
-    this.mVideo15SecWatchedActions = AdsActionStats.getGson().fromJson(value, type);
-    return this;
-  }
   public List<AdsActionStats> getFieldVideo30SecWatchedActions() {
     return mVideo30SecWatchedActions;
   }
@@ -1462,6 +1457,7 @@ public class AdsInsights extends APINode {
   }
 
   public AdsInsights copyFrom(AdsInsights instance) {
+    this.mAccountCurrency = instance.mAccountCurrency;
     this.mAccountId = instance.mAccountId;
     this.mAccountName = instance.mAccountName;
     this.mActionValues = instance.mActionValues;
@@ -1527,7 +1523,6 @@ public class AdsInsights extends APINode {
     this.mUniqueOutboundClicksCtr = instance.mUniqueOutboundClicksCtr;
     this.mUniqueSocialClicks = instance.mUniqueSocialClicks;
     this.mVideo10SecWatchedActions = instance.mVideo10SecWatchedActions;
-    this.mVideo15SecWatchedActions = instance.mVideo15SecWatchedActions;
     this.mVideo30SecWatchedActions = instance.mVideo30SecWatchedActions;
     this.mVideoAvgPercentWatchedActions = instance.mVideoAvgPercentWatchedActions;
     this.mVideoAvgTimeWatchedActions = instance.mVideoAvgTimeWatchedActions;

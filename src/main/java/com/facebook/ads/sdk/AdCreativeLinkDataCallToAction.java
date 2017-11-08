@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -278,6 +278,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_GET_QUOTE("GET_QUOTE"),
       @SerializedName("CONTACT_US")
       VALUE_CONTACT_US("CONTACT_US"),
+      @SerializedName("START_ORDER")
+      VALUE_START_ORDER("START_ORDER"),
       @SerializedName("RECORD_NOW")
       VALUE_RECORD_NOW("RECORD_NOW"),
       @SerializedName("VOTE_NOW")
@@ -290,6 +292,12 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_SEE_MENU("SEE_MENU"),
       @SerializedName("EMAIL_NOW")
       VALUE_EMAIL_NOW("EMAIL_NOW"),
+      @SerializedName("GET_SHOWTIMES")
+      VALUE_GET_SHOWTIMES("GET_SHOWTIMES"),
+      @SerializedName("TRY_IT")
+      VALUE_TRY_IT("TRY_IT"),
+      @SerializedName("LISTEN_NOW")
+      VALUE_LISTEN_NOW("LISTEN_NOW"),
       @SerializedName("OPEN_MOVIES")
       VALUE_OPEN_MOVIES("OPEN_MOVIES"),
       NULL(null);

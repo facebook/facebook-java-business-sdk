@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -57,6 +57,8 @@ public class AdCreativePlaceData extends APINode {
   private String mLabel = null;
   @SerializedName("latitude")
   private Double mLatitude = null;
+  @SerializedName("location_source_id")
+  private String mLocationSourceId = null;
   @SerializedName("longitude")
   private Double mLongitude = null;
   @SerializedName("type")
@@ -229,6 +231,15 @@ public class AdCreativePlaceData extends APINode {
     return this;
   }
 
+  public String getFieldLocationSourceId() {
+    return mLocationSourceId;
+  }
+
+  public AdCreativePlaceData setFieldLocationSourceId(String value) {
+    this.mLocationSourceId = value;
+    return this;
+  }
+
   public Double getFieldLongitude() {
     return mLongitude;
   }
@@ -267,6 +278,7 @@ public class AdCreativePlaceData extends APINode {
     this.mAddressString = instance.mAddressString;
     this.mLabel = instance.mLabel;
     this.mLatitude = instance.mLatitude;
+    this.mLocationSourceId = instance.mLocationSourceId;
     this.mLongitude = instance.mLongitude;
     this.mType = instance.mType;
     this.context = instance.context;

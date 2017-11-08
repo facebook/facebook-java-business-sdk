@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -51,6 +51,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativePhotoData extends APINode {
+  @SerializedName("branded_content_shared_to_sponsor_status")
+  private String mBrandedContentSharedToSponsorStatus = null;
   @SerializedName("branded_content_sponsor_page_id")
   private String mBrandedContentSponsorPageId = null;
   @SerializedName("branded_content_sponsor_relationship")
@@ -204,6 +206,15 @@ public class AdCreativePhotoData extends APINode {
   }
 
 
+  public String getFieldBrandedContentSharedToSponsorStatus() {
+    return mBrandedContentSharedToSponsorStatus;
+  }
+
+  public AdCreativePhotoData setFieldBrandedContentSharedToSponsorStatus(String value) {
+    this.mBrandedContentSharedToSponsorStatus = value;
+    return this;
+  }
+
   public String getFieldBrandedContentSponsorPageId() {
     return mBrandedContentSponsorPageId;
   }
@@ -275,6 +286,7 @@ public class AdCreativePhotoData extends APINode {
   }
 
   public AdCreativePhotoData copyFrom(AdCreativePhotoData instance) {
+    this.mBrandedContentSharedToSponsorStatus = instance.mBrandedContentSharedToSponsorStatus;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
     this.mBrandedContentSponsorRelationship = instance.mBrandedContentSponsorRelationship;
     this.mCaption = instance.mCaption;

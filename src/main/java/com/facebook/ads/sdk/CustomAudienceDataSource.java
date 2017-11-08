@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -262,6 +262,16 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_WEB_PIXEL_COMBINATION_EVENTS("WEB_PIXEL_COMBINATION_EVENTS"),
       @SerializedName("PLATFORM")
       VALUE_PLATFORM("PLATFORM"),
+      @SerializedName("MULTI_DATA_EVENTS")
+      VALUE_MULTI_DATA_EVENTS("MULTI_DATA_EVENTS"),
+      @SerializedName("IG_BUSINESS_EVENTS")
+      VALUE_IG_BUSINESS_EVENTS("IG_BUSINESS_EVENTS"),
+      @SerializedName("STORE_VISIT_EVENTS")
+      VALUE_STORE_VISIT_EVENTS("STORE_VISIT_EVENTS"),
+      @SerializedName("INSTANT_ARTICLE_EVENTS")
+      VALUE_INSTANT_ARTICLE_EVENTS("INSTANT_ARTICLE_EVENTS"),
+      @SerializedName("FB_EVENT_SIGNALS")
+      VALUE_FB_EVENT_SIGNALS("FB_EVENT_SIGNALS"),
       @SerializedName("ENGAGEMENT_EVENT_USERS")
       VALUE_ENGAGEMENT_EVENT_USERS("ENGAGEMENT_EVENT_USERS"),
       @SerializedName("CUSTOM_AUDIENCE_USERS")
@@ -306,6 +316,10 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_MULTICOUNTRY_COMBINATION("MULTICOUNTRY_COMBINATION"),
       @SerializedName("PLATFORM_USERS")
       VALUE_PLATFORM_USERS("PLATFORM_USERS"),
+      @SerializedName("MULTI_EVENT_SOURCE")
+      VALUE_MULTI_EVENT_SOURCE("MULTI_EVENT_SOURCE"),
+      @SerializedName("SMART_AUDIENCE")
+      VALUE_SMART_AUDIENCE("SMART_AUDIENCE"),
       @SerializedName("MAIL_CHIMP_EMAIL_HASHES")
       VALUE_MAIL_CHIMP_EMAIL_HASHES("MAIL_CHIMP_EMAIL_HASHES"),
       @SerializedName("CONSTANT_CONTACTS_EMAIL_HASHES")
@@ -314,6 +328,8 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_COPY_PASTE_EMAIL_HASHES("COPY_PASTE_EMAIL_HASHES"),
       @SerializedName("CONTACT_IMPORTER")
       VALUE_CONTACT_IMPORTER("CONTACT_IMPORTER"),
+      @SerializedName("DATA_FILE")
+      VALUE_DATA_FILE("DATA_FILE"),
       NULL(null);
 
       private String value;

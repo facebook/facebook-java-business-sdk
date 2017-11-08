@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -85,6 +85,8 @@ public class AdsActionStats extends APINode {
   private String mActionVideoSound = null;
   @SerializedName("action_video_type")
   private String mActionVideoType = null;
+  @SerializedName("inline")
+  private String mInline = null;
   @SerializedName("value")
   private String mValue = null;
   protected static Gson gson = null;
@@ -381,6 +383,15 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldInline() {
+    return mInline;
+  }
+
+  public AdsActionStats setFieldInline(String value) {
+    this.mInline = value;
+    return this;
+  }
+
   public String getFieldValue() {
     return mValue;
   }
@@ -424,6 +435,7 @@ public class AdsActionStats extends APINode {
     this.mActionType = instance.mActionType;
     this.mActionVideoSound = instance.mActionVideoSound;
     this.mActionVideoType = instance.mActionVideoType;
+    this.mInline = instance.mInline;
     this.mValue = instance.mValue;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

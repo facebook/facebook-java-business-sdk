@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -340,6 +340,7 @@ public class AdReportRun extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "account_currency",
       "account_id",
       "account_name",
       "action_values",
@@ -405,7 +406,6 @@ public class AdReportRun extends APINode {
       "unique_outbound_clicks_ctr",
       "unique_social_clicks",
       "video_10_sec_watched_actions",
-      "video_15_sec_watched_actions",
       "video_30_sec_watched_actions",
       "video_avg_percent_watched_actions",
       "video_avg_time_watched_actions",
@@ -487,6 +487,13 @@ public class AdReportRun extends APINode {
       return this;
     }
 
+    public APIRequestGetInsights requestAccountCurrencyField () {
+      return this.requestAccountCurrencyField(true);
+    }
+    public APIRequestGetInsights requestAccountCurrencyField (boolean value) {
+      this.requestField("account_currency", value);
+      return this;
+    }
     public APIRequestGetInsights requestAccountIdField () {
       return this.requestAccountIdField(true);
     }
@@ -940,13 +947,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestVideo10SecWatchedActionsField (boolean value) {
       this.requestField("video_10_sec_watched_actions", value);
-      return this;
-    }
-    public APIRequestGetInsights requestVideo15SecWatchedActionsField () {
-      return this.requestVideo15SecWatchedActionsField(true);
-    }
-    public APIRequestGetInsights requestVideo15SecWatchedActionsField (boolean value) {
-      this.requestField("video_15_sec_watched_actions", value);
       return this;
     }
     public APIRequestGetInsights requestVideo30SecWatchedActionsField () {

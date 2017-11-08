@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -104,7 +104,7 @@ public class ReachFrequencyPrediction extends APINode {
   @SerializedName("name")
   private String mName = null;
   @SerializedName("pause_periods")
-  private String mPausePeriods = null;
+  private List<Object> mPausePeriods = null;
   @SerializedName("placement_breakdown")
   private Object mPlacementBreakdown = null;
   @SerializedName("prediction_mode")
@@ -414,7 +414,7 @@ public class ReachFrequencyPrediction extends APINode {
     return mName;
   }
 
-  public String getFieldPausePeriods() {
+  public List<Object> getFieldPausePeriods() {
     return mPausePeriods;
   }
 

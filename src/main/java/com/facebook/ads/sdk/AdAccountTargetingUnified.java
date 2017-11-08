@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -464,6 +464,16 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_TRENDING("trending"),
       @SerializedName("gatekeepers")
       VALUE_GATEKEEPERS("gatekeepers"),
+      @SerializedName("follow_profiles")
+      VALUE_FOLLOW_PROFILES("follow_profiles"),
+      @SerializedName("follow_profiles_negative")
+      VALUE_FOLLOW_PROFILES_NEGATIVE("follow_profiles_negative"),
+      @SerializedName("location_categories")
+      VALUE_LOCATION_CATEGORIES("location_categories"),
+      @SerializedName("user_page_threads")
+      VALUE_USER_PAGE_THREADS("user_page_threads"),
+      @SerializedName("user_page_threads_excluded")
+      VALUE_USER_PAGE_THREADS_EXCLUDED("user_page_threads_excluded"),
       NULL(null);
 
       private String value;

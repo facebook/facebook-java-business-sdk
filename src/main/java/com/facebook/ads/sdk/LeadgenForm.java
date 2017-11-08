@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -57,8 +57,6 @@ public class LeadgenForm extends APINode {
   private Boolean mBlockDisplayForNonTargetedViewer = null;
   @SerializedName("context_card")
   private Object mContextCard = null;
-  @SerializedName("continued_flow_request_method")
-  private String mContinuedFlowRequestMethod = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("creator")
@@ -69,6 +67,8 @@ public class LeadgenForm extends APINode {
   private String mCusomizedTcpaContent = null;
   @SerializedName("expired_leads_count")
   private Long mExpiredLeadsCount = null;
+  @SerializedName("extra_details")
+  private List<String> mExtraDetails = null;
   @SerializedName("follow_up_action_text")
   private String mFollowUpActionText = null;
   @SerializedName("follow_up_action_url")
@@ -99,12 +99,16 @@ public class LeadgenForm extends APINode {
   private String mPrivacyPolicyUrl = null;
   @SerializedName("qualifiers")
   private List<LeadGenQualifier> mQualifiers = null;
+  @SerializedName("question_page_custom_headline")
+  private String mQuestionPageCustomHeadline = null;
   @SerializedName("questions")
   private List<LeadGenQuestion> mQuestions = null;
   @SerializedName("status")
   private String mStatus = null;
   @SerializedName("tcpa_compliance")
   private Boolean mTcpaCompliance = null;
+  @SerializedName("thank_you_page")
+  private Object mThankYouPage = null;
   protected static Gson gson = null;
 
   LeadgenForm() {
@@ -314,10 +318,6 @@ public class LeadgenForm extends APINode {
     return mContextCard;
   }
 
-  public String getFieldContinuedFlowRequestMethod() {
-    return mContinuedFlowRequestMethod;
-  }
-
   public String getFieldCreatedTime() {
     return mCreatedTime;
   }
@@ -339,6 +339,10 @@ public class LeadgenForm extends APINode {
 
   public Long getFieldExpiredLeadsCount() {
     return mExpiredLeadsCount;
+  }
+
+  public List<String> getFieldExtraDetails() {
+    return mExtraDetails;
   }
 
   public String getFieldFollowUpActionText() {
@@ -401,6 +405,10 @@ public class LeadgenForm extends APINode {
     return mQualifiers;
   }
 
+  public String getFieldQuestionPageCustomHeadline() {
+    return mQuestionPageCustomHeadline;
+  }
+
   public List<LeadGenQuestion> getFieldQuestions() {
     return mQuestions;
   }
@@ -411,6 +419,10 @@ public class LeadgenForm extends APINode {
 
   public Boolean getFieldTcpaCompliance() {
     return mTcpaCompliance;
+  }
+
+  public Object getFieldThankYouPage() {
+    return mThankYouPage;
   }
 
 
@@ -813,12 +825,12 @@ public class LeadgenForm extends APINode {
       "allow_organic_lead",
       "block_display_for_non_targeted_viewer",
       "context_card",
-      "continued_flow_request_method",
       "created_time",
       "creator",
       "creator_id",
       "cusomized_tcpa_content",
       "expired_leads_count",
+      "extra_details",
       "follow_up_action_text",
       "follow_up_action_url",
       "id",
@@ -834,9 +846,11 @@ public class LeadgenForm extends APINode {
       "page_id",
       "privacy_policy_url",
       "qualifiers",
+      "question_page_custom_headline",
       "questions",
       "status",
       "tcpa_compliance",
+      "thank_you_page",
     };
 
     @Override
@@ -929,13 +943,6 @@ public class LeadgenForm extends APINode {
       this.requestField("context_card", value);
       return this;
     }
-    public APIRequestGet requestContinuedFlowRequestMethodField () {
-      return this.requestContinuedFlowRequestMethodField(true);
-    }
-    public APIRequestGet requestContinuedFlowRequestMethodField (boolean value) {
-      this.requestField("continued_flow_request_method", value);
-      return this;
-    }
     public APIRequestGet requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
@@ -969,6 +976,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGet requestExpiredLeadsCountField (boolean value) {
       this.requestField("expired_leads_count", value);
+      return this;
+    }
+    public APIRequestGet requestExtraDetailsField () {
+      return this.requestExtraDetailsField(true);
+    }
+    public APIRequestGet requestExtraDetailsField (boolean value) {
+      this.requestField("extra_details", value);
       return this;
     }
     public APIRequestGet requestFollowUpActionTextField () {
@@ -1076,6 +1090,13 @@ public class LeadgenForm extends APINode {
       this.requestField("qualifiers", value);
       return this;
     }
+    public APIRequestGet requestQuestionPageCustomHeadlineField () {
+      return this.requestQuestionPageCustomHeadlineField(true);
+    }
+    public APIRequestGet requestQuestionPageCustomHeadlineField (boolean value) {
+      this.requestField("question_page_custom_headline", value);
+      return this;
+    }
     public APIRequestGet requestQuestionsField () {
       return this.requestQuestionsField(true);
     }
@@ -1095,6 +1116,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGet requestTcpaComplianceField (boolean value) {
       this.requestField("tcpa_compliance", value);
+      return this;
+    }
+    public APIRequestGet requestThankYouPageField () {
+      return this.requestThankYouPageField(true);
+    }
+    public APIRequestGet requestThankYouPageField (boolean value) {
+      this.requestField("thank_you_page", value);
       return this;
     }
   }
@@ -1117,12 +1145,12 @@ public class LeadgenForm extends APINode {
     this.mAllowOrganicLead = instance.mAllowOrganicLead;
     this.mBlockDisplayForNonTargetedViewer = instance.mBlockDisplayForNonTargetedViewer;
     this.mContextCard = instance.mContextCard;
-    this.mContinuedFlowRequestMethod = instance.mContinuedFlowRequestMethod;
     this.mCreatedTime = instance.mCreatedTime;
     this.mCreator = instance.mCreator;
     this.mCreatorId = instance.mCreatorId;
     this.mCusomizedTcpaContent = instance.mCusomizedTcpaContent;
     this.mExpiredLeadsCount = instance.mExpiredLeadsCount;
+    this.mExtraDetails = instance.mExtraDetails;
     this.mFollowUpActionText = instance.mFollowUpActionText;
     this.mFollowUpActionUrl = instance.mFollowUpActionUrl;
     this.mId = instance.mId;
@@ -1138,9 +1166,11 @@ public class LeadgenForm extends APINode {
     this.mPageId = instance.mPageId;
     this.mPrivacyPolicyUrl = instance.mPrivacyPolicyUrl;
     this.mQualifiers = instance.mQualifiers;
+    this.mQuestionPageCustomHeadline = instance.mQuestionPageCustomHeadline;
     this.mQuestions = instance.mQuestions;
     this.mStatus = instance.mStatus;
     this.mTcpaCompliance = instance.mTcpaCompliance;
+    this.mThankYouPage = instance.mThankYouPage;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

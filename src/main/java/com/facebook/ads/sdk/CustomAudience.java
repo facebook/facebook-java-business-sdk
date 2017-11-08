@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -547,6 +547,7 @@ public class CustomAudience extends APINode {
       "id",
       "io_number",
       "is_attribution_spec_system_default",
+      "is_direct_deals_enabled",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -556,6 +557,7 @@ public class CustomAudience extends APINode {
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "next_bill_date",
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
@@ -843,6 +845,13 @@ public class CustomAudience extends APINode {
       this.requestField("is_attribution_spec_system_default", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestIsDirectDealsEnabledField () {
+      return this.requestIsDirectDealsEnabledField(true);
+    }
+    public APIRequestGetAdAccounts requestIsDirectDealsEnabledField (boolean value) {
+      this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {
       return this.requestIsNotificationsEnabledField(true);
     }
@@ -904,6 +913,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestNextBillDateField () {
+      return this.requestNextBillDateField(true);
+    }
+    public APIRequestGetAdAccounts requestNextBillDateField (boolean value) {
+      this.requestField("next_bill_date", value);
       return this;
     }
     public APIRequestGetAdAccounts requestOffsitePixelsTosAcceptedField () {
@@ -2257,6 +2273,7 @@ public class CustomAudience extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "allowed_domains",
       "claim_objective",
       "content_type",
       "description",
@@ -2305,6 +2322,15 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+
+    public APIRequestUpdate setAllowedDomains (List<String> allowedDomains) {
+      this.setParam("allowed_domains", allowedDomains);
+      return this;
+    }
+    public APIRequestUpdate setAllowedDomains (String allowedDomains) {
+      this.setParam("allowed_domains", allowedDomains);
+      return this;
+    }
 
     public APIRequestUpdate setClaimObjective (CustomAudience.EnumClaimObjective claimObjective) {
       this.setParam("claim_objective", claimObjective);
@@ -2420,6 +2446,8 @@ public class CustomAudience extends APINode {
       VALUE_PRODUCT("PRODUCT"),
       @SerializedName("TRAVEL")
       VALUE_TRAVEL("TRAVEL"),
+      @SerializedName("VEHICLE")
+      VALUE_VEHICLE("VEHICLE"),
       NULL(null);
 
       private String value;
@@ -2445,6 +2473,8 @@ public class CustomAudience extends APINode {
       VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("HOTEL")
       VALUE_HOTEL("HOTEL"),
+      @SerializedName("VEHICLE")
+      VALUE_VEHICLE("VEHICLE"),
       NULL(null);
 
       private String value;

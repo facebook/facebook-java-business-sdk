@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -79,26 +79,26 @@ public class AdSet extends APINode {
   private List<String> mCreativeSequence = null;
   @SerializedName("daily_budget")
   private String mDailyBudget = null;
+  @SerializedName("destination_type")
+  private String mDestinationType = null;
   @SerializedName("effective_status")
   private EnumEffectiveStatus mEffectiveStatus = null;
   @SerializedName("end_time")
   private String mEndTime = null;
-  @SerializedName("frequency_cap")
-  private Long mFrequencyCap = null;
-  @SerializedName("frequency_cap_reset_period")
-  private Long mFrequencyCapResetPeriod = null;
   @SerializedName("frequency_control_specs")
   private List<Object> mFrequencyControlSpecs = null;
+  @SerializedName("full_funnel_exploration_mode")
+  private String mFullFunnelExplorationMode = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("instagram_actor_id")
+  private String mInstagramActorId = null;
   @SerializedName("is_autobid")
   private Boolean mIsAutobid = null;
   @SerializedName("is_average_price_pacing")
   private Boolean mIsAveragePricePacing = null;
   @SerializedName("lifetime_budget")
   private String mLifetimeBudget = null;
-  @SerializedName("lifetime_frequency_cap")
-  private Long mLifetimeFrequencyCap = null;
   @SerializedName("lifetime_imps")
   private Long mLifetimeImps = null;
   @SerializedName("name")
@@ -516,6 +516,15 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public String getFieldDestinationType() {
+    return mDestinationType;
+  }
+
+  public AdSet setFieldDestinationType(String value) {
+    this.mDestinationType = value;
+    return this;
+  }
+
   public EnumEffectiveStatus getFieldEffectiveStatus() {
     return mEffectiveStatus;
   }
@@ -534,24 +543,6 @@ public class AdSet extends APINode {
     return this;
   }
 
-  public Long getFieldFrequencyCap() {
-    return mFrequencyCap;
-  }
-
-  public AdSet setFieldFrequencyCap(Long value) {
-    this.mFrequencyCap = value;
-    return this;
-  }
-
-  public Long getFieldFrequencyCapResetPeriod() {
-    return mFrequencyCapResetPeriod;
-  }
-
-  public AdSet setFieldFrequencyCapResetPeriod(Long value) {
-    this.mFrequencyCapResetPeriod = value;
-    return this;
-  }
-
   public List<Object> getFieldFrequencyControlSpecs() {
     return mFrequencyControlSpecs;
   }
@@ -561,12 +552,30 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public String getFieldFullFunnelExplorationMode() {
+    return mFullFunnelExplorationMode;
+  }
+
+  public AdSet setFieldFullFunnelExplorationMode(String value) {
+    this.mFullFunnelExplorationMode = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
   public AdSet setFieldId(String value) {
     this.mId = value;
+    return this;
+  }
+
+  public String getFieldInstagramActorId() {
+    return mInstagramActorId;
+  }
+
+  public AdSet setFieldInstagramActorId(String value) {
+    this.mInstagramActorId = value;
     return this;
   }
 
@@ -594,15 +603,6 @@ public class AdSet extends APINode {
 
   public AdSet setFieldLifetimeBudget(String value) {
     this.mLifetimeBudget = value;
-    return this;
-  }
-
-  public Long getFieldLifetimeFrequencyCap() {
-    return mLifetimeFrequencyCap;
-  }
-
-  public AdSet setFieldLifetimeFrequencyCap(Long value) {
-    this.mLifetimeFrequencyCap = value;
     return this;
   }
 
@@ -1018,7 +1018,9 @@ public class AdSet extends APINode {
       "actor_id",
       "adlabels",
       "applink_treatment",
+      "asset_feed_spec",
       "body",
+      "branded_content_sponsor_page_id",
       "call_to_action_type",
       "effective_instagram_story_id",
       "effective_object_story_id",
@@ -1039,6 +1041,7 @@ public class AdSet extends APINode {
       "object_url",
       "platform_customizations",
       "product_set_id",
+      "recommender_settings",
       "status",
       "template_url",
       "template_url_spec",
@@ -1146,11 +1149,25 @@ public class AdSet extends APINode {
       this.requestField("applink_treatment", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestAssetFeedSpecField () {
+      return this.requestAssetFeedSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestAssetFeedSpecField (boolean value) {
+      this.requestField("asset_feed_spec", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestBodyField () {
       return this.requestBodyField(true);
     }
     public APIRequestGetAdCreatives requestBodyField (boolean value) {
       this.requestField("body", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestBrandedContentSponsorPageIdField () {
+      return this.requestBrandedContentSponsorPageIdField(true);
+    }
+    public APIRequestGetAdCreatives requestBrandedContentSponsorPageIdField (boolean value) {
+      this.requestField("branded_content_sponsor_page_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestCallToActionTypeField () {
@@ -1291,6 +1308,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestProductSetIdField (boolean value) {
       this.requestField("product_set_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestRecommenderSettingsField () {
+      return this.requestRecommenderSettingsField(true);
+    }
+    public APIRequestGetAdCreatives requestRecommenderSettingsField (boolean value) {
+      this.requestField("recommender_settings", value);
       return this;
     }
     public APIRequestGetAdCreatives requestStatusField () {
@@ -2086,16 +2110,16 @@ public class AdSet extends APINode {
       "created_time",
       "creative_sequence",
       "daily_budget",
+      "destination_type",
       "effective_status",
       "end_time",
-      "frequency_cap",
-      "frequency_cap_reset_period",
       "frequency_control_specs",
+      "full_funnel_exploration_mode",
       "id",
+      "instagram_actor_id",
       "is_autobid",
       "is_average_price_pacing",
       "lifetime_budget",
-      "lifetime_frequency_cap",
       "lifetime_imps",
       "name",
       "optimization_goal",
@@ -2319,6 +2343,13 @@ public class AdSet extends APINode {
       this.requestField("daily_budget", value);
       return this;
     }
+    public APIRequestGetCopies requestDestinationTypeField () {
+      return this.requestDestinationTypeField(true);
+    }
+    public APIRequestGetCopies requestDestinationTypeField (boolean value) {
+      this.requestField("destination_type", value);
+      return this;
+    }
     public APIRequestGetCopies requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -2333,20 +2364,6 @@ public class AdSet extends APINode {
       this.requestField("end_time", value);
       return this;
     }
-    public APIRequestGetCopies requestFrequencyCapField () {
-      return this.requestFrequencyCapField(true);
-    }
-    public APIRequestGetCopies requestFrequencyCapField (boolean value) {
-      this.requestField("frequency_cap", value);
-      return this;
-    }
-    public APIRequestGetCopies requestFrequencyCapResetPeriodField () {
-      return this.requestFrequencyCapResetPeriodField(true);
-    }
-    public APIRequestGetCopies requestFrequencyCapResetPeriodField (boolean value) {
-      this.requestField("frequency_cap_reset_period", value);
-      return this;
-    }
     public APIRequestGetCopies requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
@@ -2354,11 +2371,25 @@ public class AdSet extends APINode {
       this.requestField("frequency_control_specs", value);
       return this;
     }
+    public APIRequestGetCopies requestFullFunnelExplorationModeField () {
+      return this.requestFullFunnelExplorationModeField(true);
+    }
+    public APIRequestGetCopies requestFullFunnelExplorationModeField (boolean value) {
+      this.requestField("full_funnel_exploration_mode", value);
+      return this;
+    }
     public APIRequestGetCopies requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGetCopies requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestInstagramActorIdField () {
+      return this.requestInstagramActorIdField(true);
+    }
+    public APIRequestGetCopies requestInstagramActorIdField (boolean value) {
+      this.requestField("instagram_actor_id", value);
       return this;
     }
     public APIRequestGetCopies requestIsAutobidField () {
@@ -2380,13 +2411,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGetCopies requestLifetimeFrequencyCapField () {
-      return this.requestLifetimeFrequencyCapField(true);
-    }
-    public APIRequestGetCopies requestLifetimeFrequencyCapField (boolean value) {
-      this.requestField("lifetime_frequency_cap", value);
       return this;
     }
     public APIRequestGetCopies requestLifetimeImpsField () {
@@ -3432,16 +3456,16 @@ public class AdSet extends APINode {
       "created_time",
       "creative_sequence",
       "daily_budget",
+      "destination_type",
       "effective_status",
       "end_time",
-      "frequency_cap",
-      "frequency_cap_reset_period",
       "frequency_control_specs",
+      "full_funnel_exploration_mode",
       "id",
+      "instagram_actor_id",
       "is_autobid",
       "is_average_price_pacing",
       "lifetime_budget",
-      "lifetime_frequency_cap",
       "lifetime_imps",
       "name",
       "optimization_goal",
@@ -3629,6 +3653,13 @@ public class AdSet extends APINode {
       this.requestField("daily_budget", value);
       return this;
     }
+    public APIRequestGet requestDestinationTypeField () {
+      return this.requestDestinationTypeField(true);
+    }
+    public APIRequestGet requestDestinationTypeField (boolean value) {
+      this.requestField("destination_type", value);
+      return this;
+    }
     public APIRequestGet requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -3643,20 +3674,6 @@ public class AdSet extends APINode {
       this.requestField("end_time", value);
       return this;
     }
-    public APIRequestGet requestFrequencyCapField () {
-      return this.requestFrequencyCapField(true);
-    }
-    public APIRequestGet requestFrequencyCapField (boolean value) {
-      this.requestField("frequency_cap", value);
-      return this;
-    }
-    public APIRequestGet requestFrequencyCapResetPeriodField () {
-      return this.requestFrequencyCapResetPeriodField(true);
-    }
-    public APIRequestGet requestFrequencyCapResetPeriodField (boolean value) {
-      this.requestField("frequency_cap_reset_period", value);
-      return this;
-    }
     public APIRequestGet requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
@@ -3664,11 +3681,25 @@ public class AdSet extends APINode {
       this.requestField("frequency_control_specs", value);
       return this;
     }
+    public APIRequestGet requestFullFunnelExplorationModeField () {
+      return this.requestFullFunnelExplorationModeField(true);
+    }
+    public APIRequestGet requestFullFunnelExplorationModeField (boolean value) {
+      this.requestField("full_funnel_exploration_mode", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestInstagramActorIdField () {
+      return this.requestInstagramActorIdField(true);
+    }
+    public APIRequestGet requestInstagramActorIdField (boolean value) {
+      this.requestField("instagram_actor_id", value);
       return this;
     }
     public APIRequestGet requestIsAutobidField () {
@@ -3690,13 +3721,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGet requestLifetimeFrequencyCapField () {
-      return this.requestLifetimeFrequencyCapField(true);
-    }
-    public APIRequestGet requestLifetimeFrequencyCapField (boolean value) {
-      this.requestField("lifetime_frequency_cap", value);
       return this;
     }
     public APIRequestGet requestLifetimeImpsField () {
@@ -3844,6 +3868,7 @@ public class AdSet extends APINode {
       "creative_sequence",
       "daily_budget",
       "daily_imps",
+      "destination_type",
       "end_time",
       "execution_options",
       "is_autobid",
@@ -3973,6 +3998,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setDailyImps (String dailyImps) {
       this.setParam("daily_imps", dailyImps);
+      return this;
+    }
+
+    public APIRequestUpdate setDestinationType (AdSet.EnumDestinationType destinationType) {
+      this.setParam("destination_type", destinationType);
+      return this;
+    }
+    public APIRequestUpdate setDestinationType (String destinationType) {
+      this.setParam("destination_type", destinationType);
       return this;
     }
 
@@ -4172,6 +4206,8 @@ public class AdSet extends APINode {
       VALUE_MRC_VIDEO_VIEWS("MRC_VIDEO_VIEWS"),
       @SerializedName("COMPLETED_VIDEO_VIEWS")
       VALUE_COMPLETED_VIDEO_VIEWS("COMPLETED_VIDEO_VIEWS"),
+      @SerializedName("VIDEO_VIEWS_15S")
+      VALUE_VIDEO_VIEWS_15S("VIDEO_VIEWS_15S"),
       NULL(null);
 
       private String value;
@@ -4251,6 +4287,8 @@ public class AdSet extends APINode {
       VALUE_APP_INSTALLS("APP_INSTALLS"),
       @SerializedName("BRAND_AWARENESS")
       VALUE_BRAND_AWARENESS("BRAND_AWARENESS"),
+      @SerializedName("AD_RECALL_LIFT")
+      VALUE_AD_RECALL_LIFT("AD_RECALL_LIFT"),
       @SerializedName("CLICKS")
       VALUE_CLICKS("CLICKS"),
       @SerializedName("ENGAGED_USERS")
@@ -4373,6 +4411,31 @@ public class AdSet extends APINode {
       }
   }
 
+  public static enum EnumDestinationType {
+      @SerializedName("UNDEFINED")
+      VALUE_UNDEFINED("UNDEFINED"),
+      @SerializedName("WEBSITE")
+      VALUE_WEBSITE("WEBSITE"),
+      @SerializedName("APP")
+      VALUE_APP("APP"),
+      @SerializedName("MESSENGER")
+      VALUE_MESSENGER("MESSENGER"),
+      @SerializedName("APPLINKS_AUTOMATIC")
+      VALUE_APPLINKS_AUTOMATIC("APPLINKS_AUTOMATIC"),
+      NULL(null);
+
+      private String value;
+
+      private EnumDestinationType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumExecutionOptions {
       @SerializedName("validate_only")
       VALUE_VALIDATE_ONLY("validate_only"),
@@ -4411,6 +4474,27 @@ public class AdSet extends APINode {
       }
   }
 
+  public static enum EnumFullFunnelExplorationMode {
+      @SerializedName("NONE_EXPLORATION")
+      VALUE_NONE_EXPLORATION("NONE_EXPLORATION"),
+      @SerializedName("LIMITED_EXPLORATION")
+      VALUE_LIMITED_EXPLORATION("LIMITED_EXPLORATION"),
+      @SerializedName("EXTENDED_EXPLORATION")
+      VALUE_EXTENDED_EXPLORATION("EXTENDED_EXPLORATION"),
+      NULL(null);
+
+      private String value;
+
+      private EnumFullFunnelExplorationMode(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -4440,16 +4524,16 @@ public class AdSet extends APINode {
     this.mCreatedTime = instance.mCreatedTime;
     this.mCreativeSequence = instance.mCreativeSequence;
     this.mDailyBudget = instance.mDailyBudget;
+    this.mDestinationType = instance.mDestinationType;
     this.mEffectiveStatus = instance.mEffectiveStatus;
     this.mEndTime = instance.mEndTime;
-    this.mFrequencyCap = instance.mFrequencyCap;
-    this.mFrequencyCapResetPeriod = instance.mFrequencyCapResetPeriod;
     this.mFrequencyControlSpecs = instance.mFrequencyControlSpecs;
+    this.mFullFunnelExplorationMode = instance.mFullFunnelExplorationMode;
     this.mId = instance.mId;
+    this.mInstagramActorId = instance.mInstagramActorId;
     this.mIsAutobid = instance.mIsAutobid;
     this.mIsAveragePricePacing = instance.mIsAveragePricePacing;
     this.mLifetimeBudget = instance.mLifetimeBudget;
-    this.mLifetimeFrequencyCap = instance.mLifetimeFrequencyCap;
     this.mLifetimeImps = instance.mLifetimeImps;
     this.mName = instance.mName;
     this.mOptimizationGoal = instance.mOptimizationGoal;

@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -53,12 +53,16 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCreativeVideoData extends APINode {
   @SerializedName("additional_image_index")
   private Long mAdditionalImageIndex = null;
+  @SerializedName("branded_content_shared_to_sponsor_status")
+  private String mBrandedContentSharedToSponsorStatus = null;
   @SerializedName("branded_content_sponsor_page_id")
   private String mBrandedContentSponsorPageId = null;
   @SerializedName("branded_content_sponsor_relationship")
   private String mBrandedContentSponsorRelationship = null;
   @SerializedName("call_to_action")
   private AdCreativeLinkDataCallToAction mCallToAction = null;
+  @SerializedName("collection_thumbnails")
+  private List<AdCreativeCollectionThumbnailInfo> mCollectionThumbnails = null;
   @SerializedName("image_hash")
   private String mImageHash = null;
   @SerializedName("image_url")
@@ -71,6 +75,8 @@ public class AdCreativeVideoData extends APINode {
   private String mOfferId = null;
   @SerializedName("page_welcome_message")
   private String mPageWelcomeMessage = null;
+  @SerializedName("post_click_configuration")
+  private AdCreativePostClickConfiguration mPostClickConfiguration = null;
   @SerializedName("retailer_item_ids")
   private List<String> mRetailerItemIds = null;
   @SerializedName("targeting")
@@ -229,6 +235,15 @@ public class AdCreativeVideoData extends APINode {
     return this;
   }
 
+  public String getFieldBrandedContentSharedToSponsorStatus() {
+    return mBrandedContentSharedToSponsorStatus;
+  }
+
+  public AdCreativeVideoData setFieldBrandedContentSharedToSponsorStatus(String value) {
+    this.mBrandedContentSharedToSponsorStatus = value;
+    return this;
+  }
+
   public String getFieldBrandedContentSponsorPageId() {
     return mBrandedContentSponsorPageId;
   }
@@ -259,6 +274,20 @@ public class AdCreativeVideoData extends APINode {
   public AdCreativeVideoData setFieldCallToAction(String value) {
     Type type = new TypeToken<AdCreativeLinkDataCallToAction>(){}.getType();
     this.mCallToAction = AdCreativeLinkDataCallToAction.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdCreativeCollectionThumbnailInfo> getFieldCollectionThumbnails() {
+    return mCollectionThumbnails;
+  }
+
+  public AdCreativeVideoData setFieldCollectionThumbnails(List<AdCreativeCollectionThumbnailInfo> value) {
+    this.mCollectionThumbnails = value;
+    return this;
+  }
+
+  public AdCreativeVideoData setFieldCollectionThumbnails(String value) {
+    Type type = new TypeToken<List<AdCreativeCollectionThumbnailInfo>>(){}.getType();
+    this.mCollectionThumbnails = AdCreativeCollectionThumbnailInfo.getGson().fromJson(value, type);
     return this;
   }
   public String getFieldImageHash() {
@@ -315,6 +344,20 @@ public class AdCreativeVideoData extends APINode {
     return this;
   }
 
+  public AdCreativePostClickConfiguration getFieldPostClickConfiguration() {
+    return mPostClickConfiguration;
+  }
+
+  public AdCreativeVideoData setFieldPostClickConfiguration(AdCreativePostClickConfiguration value) {
+    this.mPostClickConfiguration = value;
+    return this;
+  }
+
+  public AdCreativeVideoData setFieldPostClickConfiguration(String value) {
+    Type type = new TypeToken<AdCreativePostClickConfiguration>(){}.getType();
+    this.mPostClickConfiguration = AdCreativePostClickConfiguration.getGson().fromJson(value, type);
+    return this;
+  }
   public List<String> getFieldRetailerItemIds() {
     return mRetailerItemIds;
   }
@@ -374,15 +417,18 @@ public class AdCreativeVideoData extends APINode {
 
   public AdCreativeVideoData copyFrom(AdCreativeVideoData instance) {
     this.mAdditionalImageIndex = instance.mAdditionalImageIndex;
+    this.mBrandedContentSharedToSponsorStatus = instance.mBrandedContentSharedToSponsorStatus;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
     this.mBrandedContentSponsorRelationship = instance.mBrandedContentSponsorRelationship;
     this.mCallToAction = instance.mCallToAction;
+    this.mCollectionThumbnails = instance.mCollectionThumbnails;
     this.mImageHash = instance.mImageHash;
     this.mImageUrl = instance.mImageUrl;
     this.mLinkDescription = instance.mLinkDescription;
     this.mMessage = instance.mMessage;
     this.mOfferId = instance.mOfferId;
     this.mPageWelcomeMessage = instance.mPageWelcomeMessage;
+    this.mPostClickConfiguration = instance.mPostClickConfiguration;
     this.mRetailerItemIds = instance.mRetailerItemIds;
     this.mTargeting = instance.mTargeting;
     this.mTitle = instance.mTitle;

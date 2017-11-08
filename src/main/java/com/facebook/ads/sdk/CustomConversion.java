@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -59,6 +59,8 @@ public class CustomConversion extends APINode {
   private String mCreationTime = null;
   @SerializedName("custom_event_type")
   private EnumCustomEventType mCustomEventType = null;
+  @SerializedName("data_sources")
+  private List<ExternalEventSource> mDataSources = null;
   @SerializedName("default_conversion_value")
   private Long mDefaultConversionValue = null;
   @SerializedName("description")
@@ -76,7 +78,7 @@ public class CustomConversion extends APINode {
   @SerializedName("name")
   private String mName = null;
   @SerializedName("offline_conversion_data_set")
-  private Object mOfflineConversionDataSet = null;
+  private OfflineConversionDataSet mOfflineConversionDataSet = null;
   @SerializedName("pixel")
   private AdsPixel mPixel = null;
   @SerializedName("retention_days")
@@ -308,6 +310,10 @@ public class CustomConversion extends APINode {
     return mCustomEventType;
   }
 
+  public List<ExternalEventSource> getFieldDataSources() {
+    return mDataSources;
+  }
+
   public Long getFieldDefaultConversionValue() {
     return mDefaultConversionValue;
   }
@@ -340,7 +346,10 @@ public class CustomConversion extends APINode {
     return mName;
   }
 
-  public Object getFieldOfflineConversionDataSet() {
+  public OfflineConversionDataSet getFieldOfflineConversionDataSet() {
+    if (mOfflineConversionDataSet != null) {
+      mOfflineConversionDataSet.context = getContext();
+    }
     return mOfflineConversionDataSet;
   }
 
@@ -876,6 +885,7 @@ public class CustomConversion extends APINode {
       "aggregation_rule",
       "creation_time",
       "custom_event_type",
+      "data_sources",
       "default_conversion_value",
       "description",
       "event_source_type",
@@ -985,6 +995,13 @@ public class CustomConversion extends APINode {
     }
     public APIRequestGet requestCustomEventTypeField (boolean value) {
       this.requestField("custom_event_type", value);
+      return this;
+    }
+    public APIRequestGet requestDataSourcesField () {
+      return this.requestDataSourcesField(true);
+    }
+    public APIRequestGet requestDataSourcesField (boolean value) {
+      this.requestField("data_sources", value);
       return this;
     }
     public APIRequestGet requestDefaultConversionValueField () {
@@ -1254,6 +1271,7 @@ public class CustomConversion extends APINode {
     this.mAggregationRule = instance.mAggregationRule;
     this.mCreationTime = instance.mCreationTime;
     this.mCustomEventType = instance.mCustomEventType;
+    this.mDataSources = instance.mDataSources;
     this.mDefaultConversionValue = instance.mDefaultConversionValue;
     this.mDescription = instance.mDescription;
     this.mEventSourceType = instance.mEventSourceType;

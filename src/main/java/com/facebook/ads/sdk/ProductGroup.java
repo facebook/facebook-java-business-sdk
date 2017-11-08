@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -239,10 +239,6 @@ public class ProductGroup extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetProductSets getProductSets() {
-    return new APIRequestGetProductSets(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetProducts getProducts() {
     return new APIRequestGetProducts(this.getPrefixedId().toString(), context);
   }
@@ -284,138 +280,6 @@ public class ProductGroup extends APINode {
   }
 
 
-
-  public static class APIRequestGetProductSets extends APIRequest<ProductSet> {
-
-    APINodeList<ProductSet> lastResponse = null;
-    @Override
-    public APINodeList<ProductSet> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "auto_creation_url",
-      "filter",
-      "id",
-      "name",
-      "product_catalog",
-      "product_count",
-    };
-
-    @Override
-    public APINodeList<ProductSet> parseResponse(String response) throws APIException {
-      return ProductSet.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<ProductSet> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<ProductSet> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestGetProductSets(String nodeId, APIContext context) {
-      super(context, nodeId, "/product_sets", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetProductSets setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetProductSets setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetProductSets requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetProductSets requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetProductSets requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetProductSets requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetProductSets requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetProductSets requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetProductSets requestAutoCreationUrlField () {
-      return this.requestAutoCreationUrlField(true);
-    }
-    public APIRequestGetProductSets requestAutoCreationUrlField (boolean value) {
-      this.requestField("auto_creation_url", value);
-      return this;
-    }
-    public APIRequestGetProductSets requestFilterField () {
-      return this.requestFilterField(true);
-    }
-    public APIRequestGetProductSets requestFilterField (boolean value) {
-      this.requestField("filter", value);
-      return this;
-    }
-    public APIRequestGetProductSets requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetProductSets requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetProductSets requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetProductSets requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetProductSets requestProductCatalogField () {
-      return this.requestProductCatalogField(true);
-    }
-    public APIRequestGetProductSets requestProductCatalogField (boolean value) {
-      this.requestField("product_catalog", value);
-      return this;
-    }
-    public APIRequestGetProductSets requestProductCountField () {
-      return this.requestProductCountField(true);
-    }
-    public APIRequestGetProductSets requestProductCountField (boolean value) {
-      this.requestField("product_count", value);
-      return this;
-    }
-  }
 
   public static class APIRequestGetProducts extends APIRequest<ProductItem> {
 

@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -427,6 +427,7 @@ public class OffsitePixel extends APINode {
       "id",
       "io_number",
       "is_attribution_spec_system_default",
+      "is_direct_deals_enabled",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -436,6 +437,7 @@ public class OffsitePixel extends APINode {
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
+      "next_bill_date",
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
@@ -718,6 +720,13 @@ public class OffsitePixel extends APINode {
       this.requestField("is_attribution_spec_system_default", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestIsDirectDealsEnabledField () {
+      return this.requestIsDirectDealsEnabledField(true);
+    }
+    public APIRequestGetAdAccounts requestIsDirectDealsEnabledField (boolean value) {
+      this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {
       return this.requestIsNotificationsEnabledField(true);
     }
@@ -779,6 +788,13 @@ public class OffsitePixel extends APINode {
     }
     public APIRequestGetAdAccounts requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestNextBillDateField () {
+      return this.requestNextBillDateField(true);
+    }
+    public APIRequestGetAdAccounts requestNextBillDateField (boolean value) {
+      this.requestField("next_bill_date", value);
       return this;
     }
     public APIRequestGetAdAccounts requestOffsitePixelsTosAcceptedField () {

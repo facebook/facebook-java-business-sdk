@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -83,6 +83,8 @@ public class Targeting extends APINode {
   private List<IDName> mCustomAudiences = null;
   @SerializedName("device_platforms")
   private List<EnumDevicePlatforms> mDevicePlatforms = null;
+  @SerializedName("direct_install_devices")
+  private Boolean mDirectInstallDevices = null;
   @SerializedName("dynamic_audience_ids")
   private List<String> mDynamicAudienceIds = null;
   @SerializedName("education_majors")
@@ -179,8 +181,6 @@ public class Targeting extends APINode {
   private List<IDName> mNetWorth = null;
   @SerializedName("office_type")
   private List<IDName> mOfficeType = null;
-  @SerializedName("page_types")
-  private List<String> mPageTypes = null;
   @SerializedName("place_page_set_ids")
   private List<String> mPlacePageSetIds = null;
   @SerializedName("political_views")
@@ -528,6 +528,15 @@ public class Targeting extends APINode {
 
   public Targeting setFieldDevicePlatforms(List<EnumDevicePlatforms> value) {
     this.mDevicePlatforms = value;
+    return this;
+  }
+
+  public Boolean getFieldDirectInstallDevices() {
+    return mDirectInstallDevices;
+  }
+
+  public Targeting setFieldDirectInstallDevices(Boolean value) {
+    this.mDirectInstallDevices = value;
     return this;
   }
 
@@ -1093,15 +1102,6 @@ public class Targeting extends APINode {
     this.mOfficeType = IDName.getGson().fromJson(value, type);
     return this;
   }
-  public List<String> getFieldPageTypes() {
-    return mPageTypes;
-  }
-
-  public Targeting setFieldPageTypes(List<String> value) {
-    this.mPageTypes = value;
-    return this;
-  }
-
   public List<String> getFieldPlacePageSetIds() {
     return mPlacePageSetIds;
   }
@@ -1387,6 +1387,7 @@ public class Targeting extends APINode {
     this.mCountryGroups = instance.mCountryGroups;
     this.mCustomAudiences = instance.mCustomAudiences;
     this.mDevicePlatforms = instance.mDevicePlatforms;
+    this.mDirectInstallDevices = instance.mDirectInstallDevices;
     this.mDynamicAudienceIds = instance.mDynamicAudienceIds;
     this.mEducationMajors = instance.mEducationMajors;
     this.mEducationSchools = instance.mEducationSchools;
@@ -1435,7 +1436,6 @@ public class Targeting extends APINode {
     this.mMoms = instance.mMoms;
     this.mNetWorth = instance.mNetWorth;
     this.mOfficeType = instance.mOfficeType;
-    this.mPageTypes = instance.mPageTypes;
     this.mPlacePageSetIds = instance.mPlacePageSetIds;
     this.mPoliticalViews = instance.mPoliticalViews;
     this.mPolitics = instance.mPolitics;

@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -533,6 +533,10 @@ public class ProductFeedUpload extends APINode {
       VALUE_MANUAL_UPLOAD("Manual Upload"),
       @SerializedName("Server Fetch")
       VALUE_SERVER_FETCH("Server Fetch"),
+      @SerializedName("Reupload Last File")
+      VALUE_REUPLOAD_LAST_FILE("Reupload Last File"),
+      @SerializedName("User initiated server fetch")
+      VALUE_USER_INITIATED_SERVER_FETCH("User initiated server fetch"),
       NULL(null);
 
       private String value;

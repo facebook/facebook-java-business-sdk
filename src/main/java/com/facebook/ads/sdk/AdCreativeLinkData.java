@@ -43,7 +43,7 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-genereated.
+ * This class is auto-generated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
@@ -57,6 +57,8 @@ public class AdCreativeLinkData extends APINode {
   private AdCreativeLinkDataAppLinkSpec mAppLinkSpec = null;
   @SerializedName("attachment_style")
   private EnumAttachmentStyle mAttachmentStyle = null;
+  @SerializedName("branded_content_shared_to_sponsor_status")
+  private String mBrandedContentSharedToSponsorStatus = null;
   @SerializedName("branded_content_sponsor_page_id")
   private String mBrandedContentSponsorPageId = null;
   @SerializedName("branded_content_sponsor_relationship")
@@ -67,16 +69,22 @@ public class AdCreativeLinkData extends APINode {
   private String mCaption = null;
   @SerializedName("child_attachments")
   private List<AdCreativeLinkDataChildAttachment> mChildAttachments = null;
+  @SerializedName("collection_thumbnails")
+  private List<AdCreativeCollectionThumbnailInfo> mCollectionThumbnails = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("event_id")
   private String mEventId = null;
   @SerializedName("force_single_link")
   private Boolean mForceSingleLink = null;
+  @SerializedName("format_option")
+  private EnumFormatOption mFormatOption = null;
   @SerializedName("image_crops")
   private AdsImageCrops mImageCrops = null;
   @SerializedName("image_hash")
   private String mImageHash = null;
+  @SerializedName("image_overlay_spec")
+  private AdCreativeLinkDataImageOverlaySpec mImageOverlaySpec = null;
   @SerializedName("link")
   private String mLink = null;
   @SerializedName("message")
@@ -93,6 +101,8 @@ public class AdCreativeLinkData extends APINode {
   private String mPageWelcomeMessage = null;
   @SerializedName("picture")
   private String mPicture = null;
+  @SerializedName("post_click_configuration")
+  private AdCreativePostClickConfiguration mPostClickConfiguration = null;
   @SerializedName("retailer_item_ids")
   private List<String> mRetailerItemIds = null;
   @SerializedName("show_multiple_images")
@@ -270,6 +280,15 @@ public class AdCreativeLinkData extends APINode {
     return this;
   }
 
+  public String getFieldBrandedContentSharedToSponsorStatus() {
+    return mBrandedContentSharedToSponsorStatus;
+  }
+
+  public AdCreativeLinkData setFieldBrandedContentSharedToSponsorStatus(String value) {
+    this.mBrandedContentSharedToSponsorStatus = value;
+    return this;
+  }
+
   public String getFieldBrandedContentSponsorPageId() {
     return mBrandedContentSponsorPageId;
   }
@@ -325,6 +344,20 @@ public class AdCreativeLinkData extends APINode {
     this.mChildAttachments = AdCreativeLinkDataChildAttachment.getGson().fromJson(value, type);
     return this;
   }
+  public List<AdCreativeCollectionThumbnailInfo> getFieldCollectionThumbnails() {
+    return mCollectionThumbnails;
+  }
+
+  public AdCreativeLinkData setFieldCollectionThumbnails(List<AdCreativeCollectionThumbnailInfo> value) {
+    this.mCollectionThumbnails = value;
+    return this;
+  }
+
+  public AdCreativeLinkData setFieldCollectionThumbnails(String value) {
+    Type type = new TypeToken<List<AdCreativeCollectionThumbnailInfo>>(){}.getType();
+    this.mCollectionThumbnails = AdCreativeCollectionThumbnailInfo.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldDescription() {
     return mDescription;
   }
@@ -352,6 +385,15 @@ public class AdCreativeLinkData extends APINode {
     return this;
   }
 
+  public EnumFormatOption getFieldFormatOption() {
+    return mFormatOption;
+  }
+
+  public AdCreativeLinkData setFieldFormatOption(EnumFormatOption value) {
+    this.mFormatOption = value;
+    return this;
+  }
+
   public AdsImageCrops getFieldImageCrops() {
     return mImageCrops;
   }
@@ -375,6 +417,20 @@ public class AdCreativeLinkData extends APINode {
     return this;
   }
 
+  public AdCreativeLinkDataImageOverlaySpec getFieldImageOverlaySpec() {
+    return mImageOverlaySpec;
+  }
+
+  public AdCreativeLinkData setFieldImageOverlaySpec(AdCreativeLinkDataImageOverlaySpec value) {
+    this.mImageOverlaySpec = value;
+    return this;
+  }
+
+  public AdCreativeLinkData setFieldImageOverlaySpec(String value) {
+    Type type = new TypeToken<AdCreativeLinkDataImageOverlaySpec>(){}.getType();
+    this.mImageOverlaySpec = AdCreativeLinkDataImageOverlaySpec.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldLink() {
     return mLink;
   }
@@ -447,6 +503,20 @@ public class AdCreativeLinkData extends APINode {
     return this;
   }
 
+  public AdCreativePostClickConfiguration getFieldPostClickConfiguration() {
+    return mPostClickConfiguration;
+  }
+
+  public AdCreativeLinkData setFieldPostClickConfiguration(AdCreativePostClickConfiguration value) {
+    this.mPostClickConfiguration = value;
+    return this;
+  }
+
+  public AdCreativeLinkData setFieldPostClickConfiguration(String value) {
+    Type type = new TypeToken<AdCreativePostClickConfiguration>(){}.getType();
+    this.mPostClickConfiguration = AdCreativePostClickConfiguration.getGson().fromJson(value, type);
+    return this;
+  }
   public List<String> getFieldRetailerItemIds() {
     return mRetailerItemIds;
   }
@@ -486,6 +556,27 @@ public class AdCreativeLinkData extends APINode {
       }
   }
 
+  public static enum EnumFormatOption {
+      @SerializedName("carousel_images_multi_items")
+      VALUE_CAROUSEL_IMAGES_MULTI_ITEMS("carousel_images_multi_items"),
+      @SerializedName("carousel_images_single_item")
+      VALUE_CAROUSEL_IMAGES_SINGLE_ITEM("carousel_images_single_item"),
+      @SerializedName("single_image")
+      VALUE_SINGLE_IMAGE("single_image"),
+      NULL(null);
+
+      private String value;
+
+      private EnumFormatOption(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -504,16 +595,20 @@ public class AdCreativeLinkData extends APINode {
     this.mAdditionalImageIndex = instance.mAdditionalImageIndex;
     this.mAppLinkSpec = instance.mAppLinkSpec;
     this.mAttachmentStyle = instance.mAttachmentStyle;
+    this.mBrandedContentSharedToSponsorStatus = instance.mBrandedContentSharedToSponsorStatus;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
     this.mBrandedContentSponsorRelationship = instance.mBrandedContentSponsorRelationship;
     this.mCallToAction = instance.mCallToAction;
     this.mCaption = instance.mCaption;
     this.mChildAttachments = instance.mChildAttachments;
+    this.mCollectionThumbnails = instance.mCollectionThumbnails;
     this.mDescription = instance.mDescription;
     this.mEventId = instance.mEventId;
     this.mForceSingleLink = instance.mForceSingleLink;
+    this.mFormatOption = instance.mFormatOption;
     this.mImageCrops = instance.mImageCrops;
     this.mImageHash = instance.mImageHash;
+    this.mImageOverlaySpec = instance.mImageOverlaySpec;
     this.mLink = instance.mLink;
     this.mMessage = instance.mMessage;
     this.mMultiShareEndCard = instance.mMultiShareEndCard;
@@ -522,6 +617,7 @@ public class AdCreativeLinkData extends APINode {
     this.mOfferId = instance.mOfferId;
     this.mPageWelcomeMessage = instance.mPageWelcomeMessage;
     this.mPicture = instance.mPicture;
+    this.mPostClickConfiguration = instance.mPostClickConfiguration;
     this.mRetailerItemIds = instance.mRetailerItemIds;
     this.mShowMultipleImages = instance.mShowMultipleImages;
     this.context = instance.context;
