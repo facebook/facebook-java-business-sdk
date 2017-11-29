@@ -87,8 +87,6 @@ public class AdSet extends APINode {
   private String mEndTime = null;
   @SerializedName("frequency_control_specs")
   private List<Object> mFrequencyControlSpecs = null;
-  @SerializedName("full_funnel_exploration_mode")
-  private String mFullFunnelExplorationMode = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("instagram_actor_id")
@@ -549,15 +547,6 @@ public class AdSet extends APINode {
 
   public AdSet setFieldFrequencyControlSpecs(List<Object> value) {
     this.mFrequencyControlSpecs = value;
-    return this;
-  }
-
-  public String getFieldFullFunnelExplorationMode() {
-    return mFullFunnelExplorationMode;
-  }
-
-  public AdSet setFieldFullFunnelExplorationMode(String value) {
-    this.mFullFunnelExplorationMode = value;
     return this;
   }
 
@@ -2114,7 +2103,6 @@ public class AdSet extends APINode {
       "effective_status",
       "end_time",
       "frequency_control_specs",
-      "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
       "is_autobid",
@@ -2369,13 +2357,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestFrequencyControlSpecsField (boolean value) {
       this.requestField("frequency_control_specs", value);
-      return this;
-    }
-    public APIRequestGetCopies requestFullFunnelExplorationModeField () {
-      return this.requestFullFunnelExplorationModeField(true);
-    }
-    public APIRequestGetCopies requestFullFunnelExplorationModeField (boolean value) {
-      this.requestField("full_funnel_exploration_mode", value);
       return this;
     }
     public APIRequestGetCopies requestIdField () {
@@ -3460,7 +3441,6 @@ public class AdSet extends APINode {
       "effective_status",
       "end_time",
       "frequency_control_specs",
-      "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
       "is_autobid",
@@ -3679,13 +3659,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestFrequencyControlSpecsField (boolean value) {
       this.requestField("frequency_control_specs", value);
-      return this;
-    }
-    public APIRequestGet requestFullFunnelExplorationModeField () {
-      return this.requestFullFunnelExplorationModeField(true);
-    }
-    public APIRequestGet requestFullFunnelExplorationModeField (boolean value) {
-      this.requestField("full_funnel_exploration_mode", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -4474,27 +4447,6 @@ public class AdSet extends APINode {
       }
   }
 
-  public static enum EnumFullFunnelExplorationMode {
-      @SerializedName("NONE_EXPLORATION")
-      VALUE_NONE_EXPLORATION("NONE_EXPLORATION"),
-      @SerializedName("LIMITED_EXPLORATION")
-      VALUE_LIMITED_EXPLORATION("LIMITED_EXPLORATION"),
-      @SerializedName("EXTENDED_EXPLORATION")
-      VALUE_EXTENDED_EXPLORATION("EXTENDED_EXPLORATION"),
-      NULL(null);
-
-      private String value;
-
-      private EnumFullFunnelExplorationMode(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -4528,7 +4480,6 @@ public class AdSet extends APINode {
     this.mEffectiveStatus = instance.mEffectiveStatus;
     this.mEndTime = instance.mEndTime;
     this.mFrequencyControlSpecs = instance.mFrequencyControlSpecs;
-    this.mFullFunnelExplorationMode = instance.mFullFunnelExplorationMode;
     this.mId = instance.mId;
     this.mInstagramActorId = instance.mInstagramActorId;
     this.mIsAutobid = instance.mIsAutobid;

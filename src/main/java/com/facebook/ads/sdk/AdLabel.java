@@ -972,7 +972,6 @@ public class AdLabel extends APINode {
       "effective_status",
       "end_time",
       "frequency_control_specs",
-      "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
       "is_autobid",
@@ -1191,13 +1190,6 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestFrequencyControlSpecsField (boolean value) {
       this.requestField("frequency_control_specs", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestFullFunnelExplorationModeField () {
-      return this.requestFullFunnelExplorationModeField(true);
-    }
-    public APIRequestGetAdSets requestFullFunnelExplorationModeField (boolean value) {
-      this.requestField("full_funnel_exploration_mode", value);
       return this;
     }
     public APIRequestGetAdSets requestIdField () {
