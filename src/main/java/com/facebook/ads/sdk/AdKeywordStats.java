@@ -164,7 +164,13 @@ public class AdKeywordStats extends APINode {
               }
             }
             if (!isRedownload) {
-              adKeywordStatss.add(loadJSON(obj.toString(), context));
+              // Iterate over all interests
+              for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
+            	// Add name of the interest back into the object
+            	if(entry.getValue().isJsonObject()) 
+            	  entry.getValue().getAsJsonObject().addProperty("name", entry.getKey());
+                adKeywordStatss.add(loadJSON(entry.getValue().toString(), context));
+              }
             }
           }
           return adKeywordStatss;
