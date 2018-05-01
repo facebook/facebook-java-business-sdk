@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -58,11 +62,13 @@ public class AdSet extends APINode {
   @SerializedName("adset_schedule")
   private List<DayPart> mAdsetSchedule = null;
   @SerializedName("attribution_spec")
-  private List<Object> mAttributionSpec = null;
+  private List<AttributionSpec> mAttributionSpec = null;
   @SerializedName("bid_amount")
   private Long mBidAmount = null;
   @SerializedName("bid_info")
   private Map<String, Long> mBidInfo = null;
+  @SerializedName("bid_strategy")
+  private EnumBidStrategy mBidStrategy = null;
   @SerializedName("billing_event")
   private EnumBillingEvent mBillingEvent = null;
   @SerializedName("budget_remaining")
@@ -86,15 +92,11 @@ public class AdSet extends APINode {
   @SerializedName("end_time")
   private String mEndTime = null;
   @SerializedName("frequency_control_specs")
-  private List<Object> mFrequencyControlSpecs = null;
+  private List<AdCampaignFrequencyControlSpecs> mFrequencyControlSpecs = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("instagram_actor_id")
   private String mInstagramActorId = null;
-  @SerializedName("is_autobid")
-  private Boolean mIsAutobid = null;
-  @SerializedName("is_average_price_pacing")
-  private Boolean mIsAveragePricePacing = null;
   @SerializedName("lifetime_budget")
   private String mLifetimeBudget = null;
   @SerializedName("lifetime_imps")
@@ -157,11 +159,23 @@ public class AdSet extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<AdSet> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static AdSet fetchById(String id, APIContext context) throws APIException {
     AdSet adSet =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return adSet;
+  }
+
+  public static ListenableFuture<AdSet> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<AdSet> adSet =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return adSet;
   }
 
@@ -172,6 +186,15 @@ public class AdSet extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<AdSet>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<AdSet>> adSet =
+      new APIRequest(context, "", "/", "GET", AdSet.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return adSet;
   }
 
   private String getPrefixedId() {
@@ -220,10 +243,16 @@ public class AdSet extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adSets.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adSets.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adSets.setPaging(previous, next);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -329,6 +358,10 @@ public class AdSet extends APINode {
     return new APIRequestCreateAdLabel(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAdRulesGoverned getAdRulesGoverned() {
+    return new APIRequestGetAdRulesGoverned(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAds getAds() {
     return new APIRequestGetAds(this.getPrefixedId().toString(), context);
   }
@@ -407,15 +440,20 @@ public class AdSet extends APINode {
     this.mAdsetSchedule = DayPart.getGson().fromJson(value, type);
     return this;
   }
-  public List<Object> getFieldAttributionSpec() {
+  public List<AttributionSpec> getFieldAttributionSpec() {
     return mAttributionSpec;
   }
 
-  public AdSet setFieldAttributionSpec(List<Object> value) {
+  public AdSet setFieldAttributionSpec(List<AttributionSpec> value) {
     this.mAttributionSpec = value;
     return this;
   }
 
+  public AdSet setFieldAttributionSpec(String value) {
+    Type type = new TypeToken<List<AttributionSpec>>(){}.getType();
+    this.mAttributionSpec = AttributionSpec.getGson().fromJson(value, type);
+    return this;
+  }
   public Long getFieldBidAmount() {
     return mBidAmount;
   }
@@ -431,6 +469,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldBidInfo(Map<String, Long> value) {
     this.mBidInfo = value;
+    return this;
+  }
+
+  public EnumBidStrategy getFieldBidStrategy() {
+    return mBidStrategy;
+  }
+
+  public AdSet setFieldBidStrategy(EnumBidStrategy value) {
+    this.mBidStrategy = value;
     return this;
   }
 
@@ -541,15 +588,20 @@ public class AdSet extends APINode {
     return this;
   }
 
-  public List<Object> getFieldFrequencyControlSpecs() {
+  public List<AdCampaignFrequencyControlSpecs> getFieldFrequencyControlSpecs() {
     return mFrequencyControlSpecs;
   }
 
-  public AdSet setFieldFrequencyControlSpecs(List<Object> value) {
+  public AdSet setFieldFrequencyControlSpecs(List<AdCampaignFrequencyControlSpecs> value) {
     this.mFrequencyControlSpecs = value;
     return this;
   }
 
+  public AdSet setFieldFrequencyControlSpecs(String value) {
+    Type type = new TypeToken<List<AdCampaignFrequencyControlSpecs>>(){}.getType();
+    this.mFrequencyControlSpecs = AdCampaignFrequencyControlSpecs.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
   }
@@ -565,24 +617,6 @@ public class AdSet extends APINode {
 
   public AdSet setFieldInstagramActorId(String value) {
     this.mInstagramActorId = value;
-    return this;
-  }
-
-  public Boolean getFieldIsAutobid() {
-    return mIsAutobid;
-  }
-
-  public AdSet setFieldIsAutobid(Boolean value) {
-    this.mIsAutobid = value;
-    return this;
-  }
-
-  public Boolean getFieldIsAveragePricePacing() {
-    return mIsAveragePricePacing;
-  }
-
-  public AdSet setFieldIsAveragePricePacing(Boolean value) {
-    this.mIsAveragePricePacing = value;
     return this;
   }
 
@@ -827,6 +861,25 @@ public class AdSet extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINodeList<AdActivity>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdActivity>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdActivity>>() {
+           public APINodeList<AdActivity> apply(String result) {
+             try {
+               return APIRequestGetActivities.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestGetActivities(String nodeId, APIContext context) {
       super(context, nodeId, "/activities", "GET", Arrays.asList(PARAMS));
     }
@@ -1022,6 +1075,7 @@ public class AdSet extends APINode {
       "instagram_story_id",
       "link_og_id",
       "link_url",
+      "messenger_sponsored_message",
       "name",
       "object_id",
       "object_story_id",
@@ -1056,6 +1110,25 @@ public class AdSet extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<AdCreative>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdCreative>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdCreative>>() {
+           public APINodeList<AdCreative> apply(String result) {
+             try {
+               return APIRequestGetAdCreatives.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetAdCreatives(String nodeId, APIContext context) {
       super(context, nodeId, "/adcreatives", "GET", Arrays.asList(PARAMS));
@@ -1243,6 +1316,13 @@ public class AdSet extends APINode {
       this.requestField("link_url", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField () {
+      return this.requestMessengerSponsoredMessageField(true);
+    }
+    public APIRequestGetAdCreatives requestMessengerSponsoredMessageField (boolean value) {
+      this.requestField("messenger_sponsored_message", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestNameField () {
       return this.requestNameField(true);
     }
@@ -1395,6 +1475,25 @@ public class AdSet extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(String result) {
+             try {
+               return APIRequestDeleteAdLabels.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestDeleteAdLabels(String nodeId, APIContext context) {
       super(context, nodeId, "/adlabels", "DELETE", Arrays.asList(PARAMS));
     }
@@ -1499,6 +1598,25 @@ public class AdSet extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<AdLabel> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdLabel> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdLabel>() {
+           public AdLabel apply(String result) {
+             try {
+               return APIRequestCreateAdLabel.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestCreateAdLabel(String nodeId, APIContext context) {
       super(context, nodeId, "/adlabels", "POST", Arrays.asList(PARAMS));
     }
@@ -1572,6 +1690,199 @@ public class AdSet extends APINode {
 
   }
 
+  public static class APIRequestGetAdRulesGoverned extends APIRequest<AdRule> {
+
+    APINodeList<AdRule> lastResponse = null;
+    @Override
+    public APINodeList<AdRule> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "pass_evaluation",
+    };
+
+    public static final String[] FIELDS = {
+      "account_id",
+      "created_by",
+      "created_time",
+      "evaluation_spec",
+      "execution_spec",
+      "id",
+      "name",
+      "schedule_spec",
+      "status",
+      "updated_time",
+    };
+
+    @Override
+    public APINodeList<AdRule> parseResponse(String response) throws APIException {
+      return AdRule.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<AdRule> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdRule> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdRule>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdRule>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdRule>>() {
+           public APINodeList<AdRule> apply(String result) {
+             try {
+               return APIRequestGetAdRulesGoverned.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAdRulesGoverned(String nodeId, APIContext context) {
+      super(context, nodeId, "/adrules_governed", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdRulesGoverned setPassEvaluation (Boolean passEvaluation) {
+      this.setParam("pass_evaluation", passEvaluation);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned setPassEvaluation (String passEvaluation) {
+      this.setParam("pass_evaluation", passEvaluation);
+      return this;
+    }
+
+    public APIRequestGetAdRulesGoverned requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdRulesGoverned requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAdRulesGoverned requestAccountIdField () {
+      return this.requestAccountIdField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestAccountIdField (boolean value) {
+      this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestCreatedByField () {
+      return this.requestCreatedByField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestCreatedByField (boolean value) {
+      this.requestField("created_by", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestEvaluationSpecField () {
+      return this.requestEvaluationSpecField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestEvaluationSpecField (boolean value) {
+      this.requestField("evaluation_spec", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestExecutionSpecField () {
+      return this.requestExecutionSpecField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestExecutionSpecField (boolean value) {
+      this.requestField("execution_spec", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestScheduleSpecField () {
+      return this.requestScheduleSpecField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestScheduleSpecField (boolean value) {
+      this.requestField("schedule_spec", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetAds extends APIRequest<Ad> {
 
     APINodeList<Ad> lastResponse = null;
@@ -1583,7 +1894,6 @@ public class AdSet extends APINode {
       "ad_draft_id",
       "date_preset",
       "effective_status",
-      "include_deleted",
       "time_range",
       "updated_since",
     };
@@ -1631,6 +1941,25 @@ public class AdSet extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINodeList<Ad>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Ad>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<Ad>>() {
+           public APINodeList<Ad> apply(String result) {
+             try {
+               return APIRequestGetAds.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestGetAds(String nodeId, APIContext context) {
       super(context, nodeId, "/ads", "GET", Arrays.asList(PARAMS));
     }
@@ -1668,15 +1997,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds setEffectiveStatus (String effectiveStatus) {
       this.setParam("effective_status", effectiveStatus);
-      return this;
-    }
-
-    public APIRequestGetAds setIncludeDeleted (Boolean includeDeleted) {
-      this.setParam("include_deleted", includeDeleted);
-      return this;
-    }
-    public APIRequestGetAds setIncludeDeleted (String includeDeleted) {
-      this.setParam("include_deleted", includeDeleted);
       return this;
     }
 
@@ -1943,6 +2263,25 @@ public class AdSet extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINodeList<AdAsyncRequest>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdAsyncRequest>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdAsyncRequest>>() {
+           public APINodeList<AdAsyncRequest> apply(String result) {
+             try {
+               return APIRequestGetAsyncAdRequests.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestGetAsyncAdRequests(String nodeId, APIContext context) {
       super(context, nodeId, "/asyncadrequests", "GET", Arrays.asList(PARAMS));
     }
@@ -2091,6 +2430,7 @@ public class AdSet extends APINode {
       "attribution_spec",
       "bid_amount",
       "bid_info",
+      "bid_strategy",
       "billing_event",
       "budget_remaining",
       "campaign",
@@ -2105,8 +2445,6 @@ public class AdSet extends APINode {
       "frequency_control_specs",
       "id",
       "instagram_actor_id",
-      "is_autobid",
-      "is_average_price_pacing",
       "lifetime_budget",
       "lifetime_imps",
       "name",
@@ -2143,6 +2481,25 @@ public class AdSet extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<AdSet>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdSet>>() {
+           public APINodeList<AdSet> apply(String result) {
+             try {
+               return APIRequestGetCopies.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetCopies(String nodeId, APIContext context) {
       super(context, nodeId, "/copies", "GET", Arrays.asList(PARAMS));
@@ -2275,6 +2632,13 @@ public class AdSet extends APINode {
       this.requestField("bid_info", value);
       return this;
     }
+    public APIRequestGetCopies requestBidStrategyField () {
+      return this.requestBidStrategyField(true);
+    }
+    public APIRequestGetCopies requestBidStrategyField (boolean value) {
+      this.requestField("bid_strategy", value);
+      return this;
+    }
     public APIRequestGetCopies requestBillingEventField () {
       return this.requestBillingEventField(true);
     }
@@ -2371,20 +2735,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
-      return this;
-    }
-    public APIRequestGetCopies requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetCopies requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGetCopies requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGetCopies requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
       return this;
     }
     public APIRequestGetCopies requestLifetimeBudgetField () {
@@ -2536,7 +2886,6 @@ public class AdSet extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "bid_estimate",
       "daily_outcomes_curve",
       "estimate_dau",
       "estimate_mau",
@@ -2558,6 +2907,25 @@ public class AdSet extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<AdCampaignDeliveryEstimate>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdCampaignDeliveryEstimate>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdCampaignDeliveryEstimate>>() {
+           public APINodeList<AdCampaignDeliveryEstimate> apply(String result) {
+             try {
+               return APIRequestGetDeliveryEstimate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetDeliveryEstimate(String nodeId, APIContext context) {
       super(context, nodeId, "/delivery_estimate", "GET", Arrays.asList(PARAMS));
@@ -2639,13 +3007,6 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetDeliveryEstimate requestBidEstimateField () {
-      return this.requestBidEstimateField(true);
-    }
-    public APIRequestGetDeliveryEstimate requestBidEstimateField (boolean value) {
-      this.requestField("bid_estimate", value);
-      return this;
-    }
     public APIRequestGetDeliveryEstimate requestDailyOutcomesCurveField () {
       return this.requestDailyOutcomesCurveField(true);
     }
@@ -2724,6 +3085,25 @@ public class AdSet extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<AdsInsights>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdsInsights>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdsInsights>>() {
+           public APINodeList<AdsInsights> apply(String result) {
+             try {
+               return APIRequestGetInsights.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetInsights(String nodeId, APIContext context) {
       super(context, nodeId, "/insights", "GET", Arrays.asList(PARAMS));
@@ -2950,9 +3330,9 @@ public class AdSet extends APINode {
 
   public static class APIRequestGetInsightsAsync extends APIRequest<AdReportRun> {
 
-    APINodeList<AdReportRun> lastResponse = null;
+    AdReportRun lastResponse = null;
     @Override
-    public APINodeList<AdReportRun> getLastResponse() {
+    public AdReportRun getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -2982,20 +3362,39 @@ public class AdSet extends APINode {
     };
 
     @Override
-    public APINodeList<AdReportRun> parseResponse(String response) throws APIException {
-      return AdReportRun.parseResponse(response, getContext(), this);
+    public AdReportRun parseResponse(String response) throws APIException {
+      return AdReportRun.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINodeList<AdReportRun> execute() throws APIException {
+    public AdReportRun execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<AdReportRun> execute(Map<String, Object> extraParams) throws APIException {
+    public AdReportRun execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<AdReportRun> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdReportRun> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdReportRun>() {
+           public AdReportRun apply(String result) {
+             try {
+               return APIRequestGetInsightsAsync.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetInsightsAsync(String nodeId, APIContext context) {
       super(context, nodeId, "/insights", "POST", Arrays.asList(PARAMS));
@@ -3252,6 +3651,25 @@ public class AdSet extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINodeList<TargetingSentenceLine>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<TargetingSentenceLine>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<TargetingSentenceLine>>() {
+           public APINodeList<TargetingSentenceLine> apply(String result) {
+             try {
+               return APIRequestGetTargetingSentenceLines.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestGetTargetingSentenceLines(String nodeId, APIContext context) {
       super(context, nodeId, "/targetingsentencelines", "GET", Arrays.asList(PARAMS));
     }
@@ -3357,6 +3775,25 @@ public class AdSet extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
@@ -3429,6 +3866,7 @@ public class AdSet extends APINode {
       "attribution_spec",
       "bid_amount",
       "bid_info",
+      "bid_strategy",
       "billing_event",
       "budget_remaining",
       "campaign",
@@ -3443,8 +3881,6 @@ public class AdSet extends APINode {
       "frequency_control_specs",
       "id",
       "instagram_actor_id",
-      "is_autobid",
-      "is_average_price_pacing",
       "lifetime_budget",
       "lifetime_imps",
       "name",
@@ -3481,6 +3917,25 @@ public class AdSet extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<AdSet> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdSet>() {
+           public AdSet apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
@@ -3575,6 +4030,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestBidInfoField (boolean value) {
       this.requestField("bid_info", value);
+      return this;
+    }
+    public APIRequestGet requestBidStrategyField () {
+      return this.requestBidStrategyField(true);
+    }
+    public APIRequestGet requestBidStrategyField (boolean value) {
+      this.requestField("bid_strategy", value);
       return this;
     }
     public APIRequestGet requestBillingEventField () {
@@ -3673,20 +4135,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
-      return this;
-    }
-    public APIRequestGet requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGet requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGet requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGet requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
       return this;
     }
     public APIRequestGet requestLifetimeBudgetField () {
@@ -3837,6 +4285,7 @@ public class AdSet extends APINode {
       "adset_schedule",
       "attribution_spec",
       "bid_amount",
+      "bid_strategy",
       "billing_event",
       "creative_sequence",
       "daily_budget",
@@ -3844,15 +4293,12 @@ public class AdSet extends APINode {
       "destination_type",
       "end_time",
       "execution_options",
-      "is_autobid",
-      "is_average_price_pacing",
       "lifetime_budget",
       "lifetime_imps",
       "name",
       "optimization_goal",
       "pacing_type",
       "promoted_object",
-      "redownload",
       "rf_prediction_id",
       "start_time",
       "status",
@@ -3879,6 +4325,25 @@ public class AdSet extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<AdSet> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdSet>() {
+           public AdSet apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
@@ -3935,6 +4400,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setBidAmount (String bidAmount) {
       this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+
+    public APIRequestUpdate setBidStrategy (AdSet.EnumBidStrategy bidStrategy) {
+      this.setParam("bid_strategy", bidStrategy);
+      return this;
+    }
+    public APIRequestUpdate setBidStrategy (String bidStrategy) {
+      this.setParam("bid_strategy", bidStrategy);
       return this;
     }
 
@@ -3997,24 +4471,6 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setIsAutobid (Boolean isAutobid) {
-      this.setParam("is_autobid", isAutobid);
-      return this;
-    }
-    public APIRequestUpdate setIsAutobid (String isAutobid) {
-      this.setParam("is_autobid", isAutobid);
-      return this;
-    }
-
-    public APIRequestUpdate setIsAveragePricePacing (Boolean isAveragePricePacing) {
-      this.setParam("is_average_price_pacing", isAveragePricePacing);
-      return this;
-    }
-    public APIRequestUpdate setIsAveragePricePacing (String isAveragePricePacing) {
-      this.setParam("is_average_price_pacing", isAveragePricePacing);
-      return this;
-    }
-
     public APIRequestUpdate setLifetimeBudget (Long lifetimeBudget) {
       this.setParam("lifetime_budget", lifetimeBudget);
       return this;
@@ -4062,15 +4518,6 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setPromotedObject (String promotedObject) {
       this.setParam("promoted_object", promotedObject);
-      return this;
-    }
-
-    public APIRequestUpdate setRedownload (Boolean redownload) {
-      this.setParam("redownload", redownload);
-      return this;
-    }
-    public APIRequestUpdate setRedownload (String redownload) {
-      this.setParam("redownload", redownload);
       return this;
     }
 
@@ -4158,6 +4605,27 @@ public class AdSet extends APINode {
 
   }
 
+  public static enum EnumBidStrategy {
+      @SerializedName("LOWEST_COST_WITHOUT_CAP")
+      VALUE_LOWEST_COST_WITHOUT_CAP("LOWEST_COST_WITHOUT_CAP"),
+      @SerializedName("LOWEST_COST_WITH_BID_CAP")
+      VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
+      @SerializedName("TARGET_COST")
+      VALUE_TARGET_COST("TARGET_COST"),
+      NULL(null);
+
+      private String value;
+
+      private EnumBidStrategy(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumBillingEvent {
       @SerializedName("APP_INSTALLS")
       VALUE_APP_INSTALLS("APP_INSTALLS"),
@@ -4167,6 +4635,8 @@ public class AdSet extends APINode {
       VALUE_IMPRESSIONS("IMPRESSIONS"),
       @SerializedName("LINK_CLICKS")
       VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
       @SerializedName("OFFER_CLAIMS")
       VALUE_OFFER_CLAIMS("OFFER_CLAIMS"),
       @SerializedName("PAGE_LIKES")
@@ -4175,12 +4645,6 @@ public class AdSet extends APINode {
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      @SerializedName("MRC_VIDEO_VIEWS")
-      VALUE_MRC_VIDEO_VIEWS("MRC_VIDEO_VIEWS"),
-      @SerializedName("COMPLETED_VIDEO_VIEWS")
-      VALUE_COMPLETED_VIDEO_VIEWS("COMPLETED_VIDEO_VIEWS"),
-      @SerializedName("VIDEO_VIEWS_15S")
-      VALUE_VIDEO_VIEWS_15S("VIDEO_VIEWS_15S"),
       NULL(null);
 
       private String value;
@@ -4294,6 +4758,10 @@ public class AdSet extends APINode {
       VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
       @SerializedName("LANDING_PAGE_VIEWS")
       VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
+      @SerializedName("VALUE")
+      VALUE_VALUE("VALUE"),
+      @SerializedName("REPLIES")
+      VALUE_REPLIES("REPLIES"),
       NULL(null);
 
       private String value;
@@ -4468,6 +4936,7 @@ public class AdSet extends APINode {
     this.mAttributionSpec = instance.mAttributionSpec;
     this.mBidAmount = instance.mBidAmount;
     this.mBidInfo = instance.mBidInfo;
+    this.mBidStrategy = instance.mBidStrategy;
     this.mBillingEvent = instance.mBillingEvent;
     this.mBudgetRemaining = instance.mBudgetRemaining;
     this.mCampaign = instance.mCampaign;
@@ -4482,8 +4951,6 @@ public class AdSet extends APINode {
     this.mFrequencyControlSpecs = instance.mFrequencyControlSpecs;
     this.mId = instance.mId;
     this.mInstagramActorId = instance.mInstagramActorId;
-    this.mIsAutobid = instance.mIsAutobid;
-    this.mIsAveragePricePacing = instance.mIsAveragePricePacing;
     this.mLifetimeBudget = instance.mLifetimeBudget;
     this.mLifetimeImps = instance.mLifetimeImps;
     this.mName = instance.mName;

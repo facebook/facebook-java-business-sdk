@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -89,6 +93,8 @@ public class AdCreative extends APINode {
   private String mLinkOgId = null;
   @SerializedName("link_url")
   private String mLinkUrl = null;
+  @SerializedName("messenger_sponsored_message")
+  private String mMessengerSponsoredMessage = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("object_id")
@@ -151,11 +157,23 @@ public class AdCreative extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<AdCreative> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static AdCreative fetchById(String id, APIContext context) throws APIException {
     AdCreative adCreative =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return adCreative;
+  }
+
+  public static ListenableFuture<AdCreative> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<AdCreative> adCreative =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return adCreative;
   }
 
@@ -166,6 +184,15 @@ public class AdCreative extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<AdCreative>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<AdCreative>> adCreative =
+      new APIRequest(context, "", "/", "GET", AdCreative.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return adCreative;
   }
 
   private String getPrefixedId() {
@@ -215,10 +242,16 @@ public class AdCreative extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adCreatives.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adCreatives.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adCreatives.setPaging(previous, next);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -520,6 +553,15 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public String getFieldMessengerSponsoredMessage() {
+    return mMessengerSponsoredMessage;
+  }
+
+  public AdCreative setFieldMessengerSponsoredMessage(String value) {
+    this.mMessengerSponsoredMessage = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
   }
@@ -710,6 +752,25 @@ public class AdCreative extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(String result) {
+             try {
+               return APIRequestDeleteAdLabels.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestDeleteAdLabels(String nodeId, APIContext context) {
       super(context, nodeId, "/adlabels", "DELETE", Arrays.asList(PARAMS));
     }
@@ -804,6 +865,25 @@ public class AdCreative extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<AdLabel> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdLabel> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdLabel>() {
+           public AdLabel apply(String result) {
+             try {
+               return APIRequestCreateAdLabel.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestCreateAdLabel(String nodeId, APIContext context) {
       super(context, nodeId, "/adlabels", "POST", Arrays.asList(PARAMS));
     }
@@ -880,7 +960,6 @@ public class AdCreative extends APINode {
       "dynamic_creative_spec",
       "end_date",
       "height",
-      "locale",
       "place_page_id",
       "post",
       "product_item_ids",
@@ -907,6 +986,25 @@ public class AdCreative extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<AdPreview>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdPreview>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdPreview>>() {
+           public APINodeList<AdPreview> apply(String result) {
+             try {
+               return APIRequestGetPreviews.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetPreviews(String nodeId, APIContext context) {
       super(context, nodeId, "/previews", "GET", Arrays.asList(PARAMS));
@@ -954,11 +1052,6 @@ public class AdCreative extends APINode {
     }
     public APIRequestGetPreviews setHeight (String height) {
       this.setParam("height", height);
-      return this;
-    }
-
-    public APIRequestGetPreviews setLocale (String locale) {
-      this.setParam("locale", locale);
       return this;
     }
 
@@ -1081,6 +1174,25 @@ public class AdCreative extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
@@ -1196,6 +1308,7 @@ public class AdCreative extends APINode {
       "instagram_story_id",
       "link_og_id",
       "link_url",
+      "messenger_sponsored_message",
       "name",
       "object_id",
       "object_story_id",
@@ -1230,6 +1343,25 @@ public class AdCreative extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<AdCreative> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdCreative> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdCreative>() {
+           public AdCreative apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
@@ -1435,6 +1567,13 @@ public class AdCreative extends APINode {
       this.requestField("link_url", value);
       return this;
     }
+    public APIRequestGet requestMessengerSponsoredMessageField () {
+      return this.requestMessengerSponsoredMessageField(true);
+    }
+    public APIRequestGet requestMessengerSponsoredMessageField (boolean value) {
+      this.requestField("messenger_sponsored_message", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -1589,6 +1728,25 @@ public class AdCreative extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<AdCreative> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdCreative> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdCreative>() {
+           public AdCreative apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
@@ -1706,14 +1864,22 @@ public class AdCreative extends APINode {
       VALUE_INSTALL_APP("INSTALL_APP"),
       @SerializedName("USE_APP")
       VALUE_USE_APP("USE_APP"),
+      @SerializedName("CALL")
+      VALUE_CALL("CALL"),
+      @SerializedName("CALL_ME")
+      VALUE_CALL_ME("CALL_ME"),
       @SerializedName("INSTALL_MOBILE_APP")
       VALUE_INSTALL_MOBILE_APP("INSTALL_MOBILE_APP"),
       @SerializedName("USE_MOBILE_APP")
       VALUE_USE_MOBILE_APP("USE_MOBILE_APP"),
+      @SerializedName("MOBILE_DOWNLOAD")
+      VALUE_MOBILE_DOWNLOAD("MOBILE_DOWNLOAD"),
       @SerializedName("BOOK_TRAVEL")
       VALUE_BOOK_TRAVEL("BOOK_TRAVEL"),
       @SerializedName("LISTEN_MUSIC")
       VALUE_LISTEN_MUSIC("LISTEN_MUSIC"),
+      @SerializedName("WATCH_VIDEO")
+      VALUE_WATCH_VIDEO("WATCH_VIDEO"),
       @SerializedName("LEARN_MORE")
       VALUE_LEARN_MORE("LEARN_MORE"),
       @SerializedName("SIGN_UP")
@@ -1724,8 +1890,8 @@ public class AdCreative extends APINode {
       VALUE_WATCH_MORE("WATCH_MORE"),
       @SerializedName("NO_BUTTON")
       VALUE_NO_BUTTON("NO_BUTTON"),
-      @SerializedName("CALL_NOW")
-      VALUE_CALL_NOW("CALL_NOW"),
+      @SerializedName("VISIT_PAGES_FEED")
+      VALUE_VISIT_PAGES_FEED("VISIT_PAGES_FEED"),
       @SerializedName("APPLY_NOW")
       VALUE_APPLY_NOW("APPLY_NOW"),
       @SerializedName("BUY_NOW")
@@ -1734,44 +1900,50 @@ public class AdCreative extends APINode {
       VALUE_GET_OFFER("GET_OFFER"),
       @SerializedName("GET_OFFER_VIEW")
       VALUE_GET_OFFER_VIEW("GET_OFFER_VIEW"),
+      @SerializedName("BUY_TICKETS")
+      VALUE_BUY_TICKETS("BUY_TICKETS"),
+      @SerializedName("UPDATE_APP")
+      VALUE_UPDATE_APP("UPDATE_APP"),
       @SerializedName("GET_DIRECTIONS")
       VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
+      @SerializedName("BUY")
+      VALUE_BUY("BUY"),
       @SerializedName("MESSAGE_PAGE")
       VALUE_MESSAGE_PAGE("MESSAGE_PAGE"),
-      @SerializedName("MESSAGE_USER")
-      VALUE_MESSAGE_USER("MESSAGE_USER"),
+      @SerializedName("DONATE")
+      VALUE_DONATE("DONATE"),
       @SerializedName("SUBSCRIBE")
       VALUE_SUBSCRIBE("SUBSCRIBE"),
+      @SerializedName("SAY_THANKS")
+      VALUE_SAY_THANKS("SAY_THANKS"),
       @SerializedName("SELL_NOW")
       VALUE_SELL_NOW("SELL_NOW"),
+      @SerializedName("SHARE")
+      VALUE_SHARE("SHARE"),
       @SerializedName("DONATE_NOW")
       VALUE_DONATE_NOW("DONATE_NOW"),
       @SerializedName("GET_QUOTE")
       VALUE_GET_QUOTE("GET_QUOTE"),
       @SerializedName("CONTACT_US")
       VALUE_CONTACT_US("CONTACT_US"),
-      @SerializedName("START_ORDER")
-      VALUE_START_ORDER("START_ORDER"),
+      @SerializedName("ORDER_NOW")
+      VALUE_ORDER_NOW("ORDER_NOW"),
+      @SerializedName("ADD_TO_CART")
+      VALUE_ADD_TO_CART("ADD_TO_CART"),
+      @SerializedName("VIDEO_ANNOTATION")
+      VALUE_VIDEO_ANNOTATION("VIDEO_ANNOTATION"),
+      @SerializedName("MOMENTS")
+      VALUE_MOMENTS("MOMENTS"),
       @SerializedName("RECORD_NOW")
       VALUE_RECORD_NOW("RECORD_NOW"),
-      @SerializedName("VOTE_NOW")
-      VALUE_VOTE_NOW("VOTE_NOW"),
-      @SerializedName("REGISTER_NOW")
-      VALUE_REGISTER_NOW("REGISTER_NOW"),
-      @SerializedName("REQUEST_TIME")
-      VALUE_REQUEST_TIME("REQUEST_TIME"),
-      @SerializedName("SEE_MENU")
-      VALUE_SEE_MENU("SEE_MENU"),
-      @SerializedName("EMAIL_NOW")
-      VALUE_EMAIL_NOW("EMAIL_NOW"),
       @SerializedName("GET_SHOWTIMES")
       VALUE_GET_SHOWTIMES("GET_SHOWTIMES"),
-      @SerializedName("TRY_IT")
-      VALUE_TRY_IT("TRY_IT"),
       @SerializedName("LISTEN_NOW")
       VALUE_LISTEN_NOW("LISTEN_NOW"),
-      @SerializedName("OPEN_MOVIES")
-      VALUE_OPEN_MOVIES("OPEN_MOVIES"),
+      @SerializedName("EVENT_RSVP")
+      VALUE_EVENT_RSVP("EVENT_RSVP"),
+      @SerializedName("WHATSAPP_MESSAGE")
+      VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
       NULL(null);
 
       private String value;
@@ -1914,6 +2086,7 @@ public class AdCreative extends APINode {
     this.mInstagramStoryId = instance.mInstagramStoryId;
     this.mLinkOgId = instance.mLinkOgId;
     this.mLinkUrl = instance.mLinkUrl;
+    this.mMessengerSponsoredMessage = instance.mMessengerSponsoredMessage;
     this.mName = instance.mName;
     this.mObjectId = instance.mObjectId;
     this.mObjectStoryId = instance.mObjectStoryId;

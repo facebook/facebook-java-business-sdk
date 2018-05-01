@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -104,10 +108,16 @@ public class ReachEstimate extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            reachEstimates.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                reachEstimates.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            reachEstimates.setPaging(previous, next);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -226,61 +236,6 @@ public class ReachEstimate extends APINode {
   }
 
 
-
-  public static enum EnumOptimizeFor {
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
-      @SerializedName("APP_INSTALLS")
-      VALUE_APP_INSTALLS("APP_INSTALLS"),
-      @SerializedName("BRAND_AWARENESS")
-      VALUE_BRAND_AWARENESS("BRAND_AWARENESS"),
-      @SerializedName("AD_RECALL_LIFT")
-      VALUE_AD_RECALL_LIFT("AD_RECALL_LIFT"),
-      @SerializedName("CLICKS")
-      VALUE_CLICKS("CLICKS"),
-      @SerializedName("ENGAGED_USERS")
-      VALUE_ENGAGED_USERS("ENGAGED_USERS"),
-      @SerializedName("EVENT_RESPONSES")
-      VALUE_EVENT_RESPONSES("EVENT_RESPONSES"),
-      @SerializedName("IMPRESSIONS")
-      VALUE_IMPRESSIONS("IMPRESSIONS"),
-      @SerializedName("LEAD_GENERATION")
-      VALUE_LEAD_GENERATION("LEAD_GENERATION"),
-      @SerializedName("LINK_CLICKS")
-      VALUE_LINK_CLICKS("LINK_CLICKS"),
-      @SerializedName("OFFER_CLAIMS")
-      VALUE_OFFER_CLAIMS("OFFER_CLAIMS"),
-      @SerializedName("OFFSITE_CONVERSIONS")
-      VALUE_OFFSITE_CONVERSIONS("OFFSITE_CONVERSIONS"),
-      @SerializedName("PAGE_ENGAGEMENT")
-      VALUE_PAGE_ENGAGEMENT("PAGE_ENGAGEMENT"),
-      @SerializedName("PAGE_LIKES")
-      VALUE_PAGE_LIKES("PAGE_LIKES"),
-      @SerializedName("POST_ENGAGEMENT")
-      VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
-      @SerializedName("REACH")
-      VALUE_REACH("REACH"),
-      @SerializedName("SOCIAL_IMPRESSIONS")
-      VALUE_SOCIAL_IMPRESSIONS("SOCIAL_IMPRESSIONS"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      @SerializedName("APP_DOWNLOADS")
-      VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
-      @SerializedName("LANDING_PAGE_VIEWS")
-      VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
-      NULL(null);
-
-      private String value;
-
-      private EnumOptimizeFor(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {

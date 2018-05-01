@@ -28,16 +28,30 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.function.Consumer;
 
 public class APINodeList<T extends APINode> extends ArrayList<T> implements APIResponse {
+    // before after are cursors used by cursor based pagination
     private String before;
     private String after;
+    // previous and next are URLs used to fetch pages. They are used more general
+    // See https://developers.facebook.com/docs/graph-api/using-graph-api/#paging
+    private String previous;
+    private String next;
     private APIRequest<T> request;
     private String rawValue;
+    private boolean autoPagination;
 
     public APINodeList(APIRequest<T> request, String rawValue) {
       this.request = request;
       this.rawValue = rawValue;
+    }
+
+    public APINodeList<T> withAutoPaginationIterator(boolean autoPagination) {
+      this.autoPagination = autoPagination;
+      return this;
     }
 
     public APINodeList<T> nextPage() throws APIException {
@@ -45,16 +59,39 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
     }
 
     public APINodeList<T> nextPage(int limit) throws APIException {
+      if (this.next != null) {
+        this.request.setOverrideUrl(this.next);
+        return (APINodeList<T>) request.execute();
+      }
       if (after == null) return null;
+      this.request.setOverrideUrl(null);
       Map<String, Object> extraParams = new HashMap<String, Object>();
       if (limit > 0) extraParams.put("limit", limit);
       extraParams.put("after", after);
       return (APINodeList<T>) request.execute(extraParams);
     }
 
-    public void setPaging(String before, String after) {
+    public void setCursors(String before, String after) {
       this.before = before;
       this.after = after;
+    }
+
+    public void setPaging(String previous, String next) {
+      this.previous = previous;
+      this.next = next;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+      return this.autoPagination ? new APINodeListAutoPaginationIterator(this) : super.iterator();
+    }
+
+    @Override
+    public void forEach(Consumer<? super T> action) {
+      Objects.requireNonNull(action);
+      for (T t : this) {
+        action.accept(t);
+      }
     }
 
     @Override
@@ -76,5 +113,43 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
     @Override
     public APIException getException() {
       return null;
+    }
+
+    protected Iterator<T> getCurrentListIterator() {
+      return super.iterator();
+    }
+
+    private class APINodeListAutoPaginationIterator<E extends APINodeList<T>> implements Iterator<T> {
+      private APINodeList<T> list;
+      private Iterator<T> it;
+
+      APINodeListAutoPaginationIterator(E list) {
+        this.list = list;
+        this.it = list.getCurrentListIterator();
+      }
+
+      @Override
+      public boolean hasNext() {
+        if (it.hasNext()) {
+          return true;
+        } else {
+          try {
+            list = list.nextPage();
+          } catch (APIException e) {
+            throw new RuntimeException(e);
+          }
+          if (list == null) {
+            return false;
+          } else {
+            it = list.getCurrentListIterator();
+            return it.hasNext();
+          }
+        }
+      }
+
+      @Override
+      public T next() {
+        return this.hasNext() ? it.next() : null;
+      }
     }
 }

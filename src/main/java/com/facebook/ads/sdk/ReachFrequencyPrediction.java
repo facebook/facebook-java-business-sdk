@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -62,7 +66,7 @@ public class ReachFrequencyPrediction extends APINode {
   @SerializedName("campaign_time_stop")
   private String mCampaignTimeStop = null;
   @SerializedName("curve_budget_reach")
-  private String mCurveBudgetReach = null;
+  private Object mCurveBudgetReach = null;
   @SerializedName("daily_impression_curve")
   private List<Double> mDailyImpressionCurve = null;
   @SerializedName("destination_id")
@@ -89,6 +93,12 @@ public class ReachFrequencyPrediction extends APINode {
   private Long mExternalReach = null;
   @SerializedName("frequency_cap")
   private Long mFrequencyCap = null;
+  @SerializedName("frequency_distribution")
+  private List<Double> mFrequencyDistribution = null;
+  @SerializedName("frequency_distribution_map")
+  private List<Object> mFrequencyDistributionMap = null;
+  @SerializedName("frequency_distribution_map_agg")
+  private List<Object> mFrequencyDistributionMapAgg = null;
   @SerializedName("grp_dmas_audience_size")
   private Double mGrpDmasAudienceSize = null;
   @SerializedName("holdout_percentage")
@@ -149,11 +159,23 @@ public class ReachFrequencyPrediction extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<ReachFrequencyPrediction> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static ReachFrequencyPrediction fetchById(String id, APIContext context) throws APIException {
     ReachFrequencyPrediction reachFrequencyPrediction =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return reachFrequencyPrediction;
+  }
+
+  public static ListenableFuture<ReachFrequencyPrediction> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<ReachFrequencyPrediction> reachFrequencyPrediction =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return reachFrequencyPrediction;
   }
 
@@ -164,6 +186,15 @@ public class ReachFrequencyPrediction extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<ReachFrequencyPrediction>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<ReachFrequencyPrediction>> reachFrequencyPrediction =
+      new APIRequest(context, "", "/", "GET", ReachFrequencyPrediction.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return reachFrequencyPrediction;
   }
 
   private String getPrefixedId() {
@@ -212,10 +243,16 @@ public class ReachFrequencyPrediction extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            reachFrequencyPredictions.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                reachFrequencyPredictions.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            reachFrequencyPredictions.setPaging(previous, next);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -330,7 +367,7 @@ public class ReachFrequencyPrediction extends APINode {
     return mCampaignTimeStop;
   }
 
-  public String getFieldCurveBudgetReach() {
+  public Object getFieldCurveBudgetReach() {
     return mCurveBudgetReach;
   }
 
@@ -384,6 +421,18 @@ public class ReachFrequencyPrediction extends APINode {
 
   public Long getFieldFrequencyCap() {
     return mFrequencyCap;
+  }
+
+  public List<Double> getFieldFrequencyDistribution() {
+    return mFrequencyDistribution;
+  }
+
+  public List<Object> getFieldFrequencyDistributionMap() {
+    return mFrequencyDistributionMap;
+  }
+
+  public List<Object> getFieldFrequencyDistributionMapAgg() {
+    return mFrequencyDistributionMapAgg;
   }
 
   public Double getFieldGrpDmasAudienceSize() {
@@ -490,6 +539,9 @@ public class ReachFrequencyPrediction extends APINode {
       "external_minimum_reach",
       "external_reach",
       "frequency_cap",
+      "frequency_distribution",
+      "frequency_distribution_map",
+      "frequency_distribution_map_agg",
       "grp_dmas_audience_size",
       "holdout_percentage",
       "id",
@@ -525,6 +577,25 @@ public class ReachFrequencyPrediction extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<ReachFrequencyPrediction> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ReachFrequencyPrediction> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ReachFrequencyPrediction>() {
+           public ReachFrequencyPrediction apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
@@ -712,6 +783,27 @@ public class ReachFrequencyPrediction extends APINode {
       this.requestField("frequency_cap", value);
       return this;
     }
+    public APIRequestGet requestFrequencyDistributionField () {
+      return this.requestFrequencyDistributionField(true);
+    }
+    public APIRequestGet requestFrequencyDistributionField (boolean value) {
+      this.requestField("frequency_distribution", value);
+      return this;
+    }
+    public APIRequestGet requestFrequencyDistributionMapField () {
+      return this.requestFrequencyDistributionMapField(true);
+    }
+    public APIRequestGet requestFrequencyDistributionMapField (boolean value) {
+      this.requestField("frequency_distribution_map", value);
+      return this;
+    }
+    public APIRequestGet requestFrequencyDistributionMapAggField () {
+      return this.requestFrequencyDistributionMapAggField(true);
+    }
+    public APIRequestGet requestFrequencyDistributionMapAggField (boolean value) {
+      this.requestField("frequency_distribution_map_agg", value);
+      return this;
+    }
     public APIRequestGet requestGrpDmasAudienceSizeField () {
       return this.requestGrpDmasAudienceSizeField(true);
     }
@@ -840,6 +932,31 @@ public class ReachFrequencyPrediction extends APINode {
     }
   }
 
+  public static enum EnumInstreamPackages {
+      @SerializedName("NORMAL")
+      VALUE_NORMAL("NORMAL"),
+      @SerializedName("PREMIUM")
+      VALUE_PREMIUM("PREMIUM"),
+      @SerializedName("SPORTS")
+      VALUE_SPORTS("SPORTS"),
+      @SerializedName("ENTERTAINMENT")
+      VALUE_ENTERTAINMENT("ENTERTAINMENT"),
+      @SerializedName("BEAUTY")
+      VALUE_BEAUTY("BEAUTY"),
+      NULL(null);
+
+      private String value;
+
+      private EnumInstreamPackages(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumStatus {
       @SerializedName("EXPIRED")
       VALUE_EXPIRED("EXPIRED"),
@@ -899,6 +1016,9 @@ public class ReachFrequencyPrediction extends APINode {
     this.mExternalMinimumReach = instance.mExternalMinimumReach;
     this.mExternalReach = instance.mExternalReach;
     this.mFrequencyCap = instance.mFrequencyCap;
+    this.mFrequencyDistribution = instance.mFrequencyDistribution;
+    this.mFrequencyDistributionMap = instance.mFrequencyDistributionMap;
+    this.mFrequencyDistributionMapAgg = instance.mFrequencyDistributionMapAgg;
     this.mGrpDmasAudienceSize = instance.mGrpDmasAudienceSize;
     this.mHoldoutPercentage = instance.mHoldoutPercentage;
     this.mId = instance.mId;

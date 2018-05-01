@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -101,11 +105,23 @@ public class AdReportRun extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<AdReportRun> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static AdReportRun fetchById(String id, APIContext context) throws APIException {
     AdReportRun adReportRun =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return adReportRun;
+  }
+
+  public static ListenableFuture<AdReportRun> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<AdReportRun> adReportRun =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return adReportRun;
   }
 
@@ -116,6 +132,15 @@ public class AdReportRun extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<AdReportRun>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<AdReportRun>> adReportRun =
+      new APIRequest(context, "", "/", "GET", AdReportRun.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return adReportRun;
   }
 
   private String getPrefixedId() {
@@ -173,10 +198,16 @@ public class AdReportRun extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adReportRuns.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adReportRuns.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adReportRuns.setPaging(previous, next);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -355,7 +386,6 @@ public class AdReportRun extends APINode {
       "campaign_name",
       "canvas_avg_view_percent",
       "canvas_avg_view_time",
-      "canvas_component_avg_pct_view",
       "clicks",
       "cost_per_10_sec_video_view",
       "cost_per_action_type",
@@ -433,6 +463,25 @@ public class AdReportRun extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<AdsInsights>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdsInsights>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdsInsights>>() {
+           public APINodeList<AdsInsights> apply(String result) {
+             try {
+               return APIRequestGetInsights.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetInsights(String nodeId, APIContext context) {
       super(context, nodeId, "/insights", "GET", Arrays.asList(PARAMS));
@@ -590,13 +639,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCanvasAvgViewTimeField (boolean value) {
       this.requestField("canvas_avg_view_time", value);
-      return this;
-    }
-    public APIRequestGetInsights requestCanvasComponentAvgPctViewField () {
-      return this.requestCanvasComponentAvgPctViewField(true);
-    }
-    public APIRequestGetInsights requestCanvasComponentAvgPctViewField (boolean value) {
-      this.requestField("canvas_component_avg_pct_view", value);
       return this;
     }
     public APIRequestGetInsights requestClicksField () {
@@ -1063,6 +1105,25 @@ public class AdReportRun extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<AdReportRun> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdReportRun> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdReportRun>() {
+           public AdReportRun apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
@@ -1323,6 +1384,22 @@ public class AdReportRun extends APINode {
       VALUE_PRODUCT_ID("product_id"),
       @SerializedName("region")
       VALUE_REGION("region"),
+      @SerializedName("ad_format_asset")
+      VALUE_AD_FORMAT_ASSET("ad_format_asset"),
+      @SerializedName("body_asset")
+      VALUE_BODY_ASSET("body_asset"),
+      @SerializedName("call_to_action_asset")
+      VALUE_CALL_TO_ACTION_ASSET("call_to_action_asset"),
+      @SerializedName("description_asset")
+      VALUE_DESCRIPTION_ASSET("description_asset"),
+      @SerializedName("image_asset")
+      VALUE_IMAGE_ASSET("image_asset"),
+      @SerializedName("link_url_asset")
+      VALUE_LINK_URL_ASSET("link_url_asset"),
+      @SerializedName("title_asset")
+      VALUE_TITLE_ASSET("title_asset"),
+      @SerializedName("video_asset")
+      VALUE_VIDEO_ASSET("video_asset"),
       NULL(null);
 
       private String value;

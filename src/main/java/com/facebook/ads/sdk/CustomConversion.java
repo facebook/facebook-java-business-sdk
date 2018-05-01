@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -109,11 +113,23 @@ public class CustomConversion extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<CustomConversion> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static CustomConversion fetchById(String id, APIContext context) throws APIException {
     CustomConversion customConversion =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return customConversion;
+  }
+
+  public static ListenableFuture<CustomConversion> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<CustomConversion> customConversion =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return customConversion;
   }
 
@@ -124,6 +140,15 @@ public class CustomConversion extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<CustomConversion>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<CustomConversion>> customConversion =
+      new APIRequest(context, "", "/", "GET", CustomConversion.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return customConversion;
   }
 
   private String getPrefixedId() {
@@ -172,10 +197,16 @@ public class CustomConversion extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            customConversions.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                customConversions.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            customConversions.setPaging(previous, next);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -267,6 +298,14 @@ public class CustomConversion extends APINode {
 
   public APIRequestGetActivities getActivities() {
     return new APIRequestGetActivities(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestDeleteAdAccounts deleteAdAccounts() {
+    return new APIRequestDeleteAdAccounts(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateAdAccount createAdAccount() {
+    return new APIRequestCreateAdAccount(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteSharedAgencies deleteSharedAgencies() {
@@ -402,6 +441,25 @@ public class CustomConversion extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(String result) {
+             try {
+               return APIRequestGetActivities.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestGetActivities(String nodeId, APIContext context) {
       super(context, nodeId, "/activities", "GET", Arrays.asList(PARAMS));
     }
@@ -476,6 +534,236 @@ public class CustomConversion extends APINode {
 
   }
 
+  public static class APIRequestDeleteAdAccounts extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "account_id",
+      "business",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(String result) {
+             try {
+               return APIRequestDeleteAdAccounts.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteAdAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/adaccounts", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteAdAccounts setAccountId (String accountId) {
+      this.setParam("account_id", accountId);
+      return this;
+    }
+
+    public APIRequestDeleteAdAccounts setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestDeleteAdAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteAdAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAdAccounts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateAdAccount extends APIRequest<CustomConversion> {
+
+    CustomConversion lastResponse = null;
+    @Override
+    public CustomConversion getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "account_id",
+      "business",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public CustomConversion parseResponse(String response) throws APIException {
+      return CustomConversion.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public CustomConversion execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public CustomConversion execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<CustomConversion> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<CustomConversion> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, CustomConversion>() {
+           public CustomConversion apply(String result) {
+             try {
+               return APIRequestCreateAdAccount.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAdAccount(String nodeId, APIContext context) {
+      super(context, nodeId, "/adaccounts", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAdAccount setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdAccount setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAdAccount setAccountId (String accountId) {
+      this.setParam("account_id", accountId);
+      return this;
+    }
+
+    public APIRequestCreateAdAccount setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestCreateAdAccount requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAdAccount requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdAccount requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAdAccount requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdAccount requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdAccount requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestDeleteSharedAgencies extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -505,6 +793,25 @@ public class CustomConversion extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(String result) {
+             try {
+               return APIRequestDeleteSharedAgencies.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestDeleteSharedAgencies(String nodeId, APIContext context) {
       super(context, nodeId, "/shared_agencies", "DELETE", Arrays.asList(PARAMS));
@@ -595,6 +902,25 @@ public class CustomConversion extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<CustomConversion> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<CustomConversion> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, CustomConversion>() {
+           public CustomConversion apply(String result) {
+             try {
+               return APIRequestCreateSharedAgency.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestCreateSharedAgency(String nodeId, APIContext context) {
       super(context, nodeId, "/shared_agencies", "POST", Arrays.asList(PARAMS));
@@ -690,6 +1016,25 @@ public class CustomConversion extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<CustomConversionStatsResult>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CustomConversionStatsResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<CustomConversionStatsResult>>() {
+           public APINodeList<CustomConversionStatsResult> apply(String result) {
+             try {
+               return APIRequestGetStats.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetStats(String nodeId, APIContext context) {
       super(context, nodeId, "/stats", "GET", Arrays.asList(PARAMS));
@@ -815,6 +1160,25 @@ public class CustomConversion extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
@@ -915,6 +1279,25 @@ public class CustomConversion extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<CustomConversion> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<CustomConversion> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, CustomConversion>() {
+           public CustomConversion apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
@@ -1122,6 +1505,25 @@ public class CustomConversion extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<CustomConversion> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<CustomConversion> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, CustomConversion>() {
+           public CustomConversion apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
@@ -1215,6 +1617,24 @@ public class CustomConversion extends APINode {
       VALUE_PURCHASE("PURCHASE"),
       @SerializedName("SEARCH")
       VALUE_SEARCH("SEARCH"),
+      @SerializedName("CONTACT")
+      VALUE_CONTACT("CONTACT"),
+      @SerializedName("CUSTOMIZE_PRODUCT")
+      VALUE_CUSTOMIZE_PRODUCT("CUSTOMIZE_PRODUCT"),
+      @SerializedName("DONATE")
+      VALUE_DONATE("DONATE"),
+      @SerializedName("FIND_LOCATION")
+      VALUE_FIND_LOCATION("FIND_LOCATION"),
+      @SerializedName("SCHEDULE")
+      VALUE_SCHEDULE("SCHEDULE"),
+      @SerializedName("START_TRIAL")
+      VALUE_START_TRIAL("START_TRIAL"),
+      @SerializedName("SUBMIT_APPLICATION")
+      VALUE_SUBMIT_APPLICATION("SUBMIT_APPLICATION"),
+      @SerializedName("SUBSCRIBE")
+      VALUE_SUBSCRIBE("SUBSCRIBE"),
+      @SerializedName("TAKE_SURVEY")
+      VALUE_TAKE_SURVEY("TAKE_SURVEY"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
       NULL(null);
