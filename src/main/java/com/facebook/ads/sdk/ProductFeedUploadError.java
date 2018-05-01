@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -87,11 +91,23 @@ public class ProductFeedUploadError extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<ProductFeedUploadError> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static ProductFeedUploadError fetchById(String id, APIContext context) throws APIException {
     ProductFeedUploadError productFeedUploadError =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return productFeedUploadError;
+  }
+
+  public static ListenableFuture<ProductFeedUploadError> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<ProductFeedUploadError> productFeedUploadError =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return productFeedUploadError;
   }
 
@@ -102,6 +118,15 @@ public class ProductFeedUploadError extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<ProductFeedUploadError>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<ProductFeedUploadError>> productFeedUploadError =
+      new APIRequest(context, "", "/", "GET", ProductFeedUploadError.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return productFeedUploadError;
   }
 
   private String getPrefixedId() {
@@ -150,10 +175,16 @@ public class ProductFeedUploadError extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            productFeedUploadErrors.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                productFeedUploadErrors.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            productFeedUploadErrors.setPaging(previous, next);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -278,37 +309,53 @@ public class ProductFeedUploadError extends APINode {
 
 
 
-  public static class APIRequestGetSamples extends APIRequest<ProductFeedUploadErrorSample> {
+  public static class APIRequestGetSamples extends APIRequest<APINode> {
 
-    APINodeList<ProductFeedUploadErrorSample> lastResponse = null;
+    APINodeList<APINode> lastResponse = null;
     @Override
-    public APINodeList<ProductFeedUploadErrorSample> getLastResponse() {
+    public APINodeList<APINode> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "id",
-      "retailer_id",
-      "row_number",
     };
 
     @Override
-    public APINodeList<ProductFeedUploadErrorSample> parseResponse(String response) throws APIException {
-      return ProductFeedUploadErrorSample.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<ProductFeedUploadErrorSample> execute() throws APIException {
+    public APINodeList<APINode> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<ProductFeedUploadErrorSample> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(String result) {
+             try {
+               return APIRequestGetSamples.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetSamples(String nodeId, APIContext context) {
       super(context, nodeId, "/samples", "GET", Arrays.asList(PARAMS));
@@ -363,27 +410,6 @@ public class ProductFeedUploadError extends APINode {
       return this;
     }
 
-    public APIRequestGetSamples requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetSamples requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetSamples requestRetailerIdField () {
-      return this.requestRetailerIdField(true);
-    }
-    public APIRequestGetSamples requestRetailerIdField (boolean value) {
-      this.requestField("retailer_id", value);
-      return this;
-    }
-    public APIRequestGetSamples requestRowNumberField () {
-      return this.requestRowNumberField(true);
-    }
-    public APIRequestGetSamples requestRowNumberField (boolean value) {
-      this.requestField("row_number", value);
-      return this;
-    }
   }
 
   public static class APIRequestGet extends APIRequest<ProductFeedUploadError> {
@@ -420,6 +446,25 @@ public class ProductFeedUploadError extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<ProductFeedUploadError> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductFeedUploadError> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProductFeedUploadError>() {
+           public ProductFeedUploadError apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));

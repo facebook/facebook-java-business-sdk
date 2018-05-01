@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -105,11 +109,23 @@ public class ProductFeed extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<ProductFeed> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static ProductFeed fetchById(String id, APIContext context) throws APIException {
     ProductFeed productFeed =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return productFeed;
+  }
+
+  public static ListenableFuture<ProductFeed> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<ProductFeed> productFeed =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return productFeed;
   }
 
@@ -120,6 +136,15 @@ public class ProductFeed extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<ProductFeed>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<ProductFeed>> productFeed =
+      new APIRequest(context, "", "/", "GET", ProductFeed.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return productFeed;
   }
 
   private String getPrefixedId() {
@@ -168,10 +193,16 @@ public class ProductFeed extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            productFeeds.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                productFeeds.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            productFeeds.setPaging(previous, next);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -265,12 +296,20 @@ public class ProductFeed extends APINode {
     return new APIRequestGetProducts(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateRule createRule() {
+    return new APIRequestCreateRule(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetUploads getUploads() {
     return new APIRequestGetUploads(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateUpload createUpload() {
     return new APIRequestCreateUpload(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetVehicles getVehicles() {
+    return new APIRequestGetVehicles(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDelete delete() {
@@ -365,6 +404,7 @@ public class ProductFeed extends APINode {
 
     public static final String[] FIELDS = {
       "additional_image_urls",
+      "additional_variant_attributes",
       "age_group",
       "applinks",
       "availability",
@@ -386,6 +426,7 @@ public class ProductFeed extends APINode {
       "gtin",
       "id",
       "image_url",
+      "inventory",
       "manufacturer_part_number",
       "material",
       "name",
@@ -427,6 +468,25 @@ public class ProductFeed extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<ProductItem>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ProductItem>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<ProductItem>>() {
+           public APINodeList<ProductItem> apply(String result) {
+             try {
+               return APIRequestGetProducts.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetProducts(String nodeId, APIContext context) {
       super(context, nodeId, "/products", "GET", Arrays.asList(PARAMS));
@@ -504,6 +564,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestAdditionalImageUrlsField (boolean value) {
       this.requestField("additional_image_urls", value);
+      return this;
+    }
+    public APIRequestGetProducts requestAdditionalVariantAttributesField () {
+      return this.requestAdditionalVariantAttributesField(true);
+    }
+    public APIRequestGetProducts requestAdditionalVariantAttributesField (boolean value) {
+      this.requestField("additional_variant_attributes", value);
       return this;
     }
     public APIRequestGetProducts requestAgeGroupField () {
@@ -651,6 +718,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestImageUrlField (boolean value) {
       this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGetProducts requestInventoryField () {
+      return this.requestInventoryField(true);
+    }
+    public APIRequestGetProducts requestInventoryField (boolean value) {
+      this.requestField("inventory", value);
       return this;
     }
     public APIRequestGetProducts requestManufacturerPartNumberField () {
@@ -823,6 +897,135 @@ public class ProductFeed extends APINode {
     }
   }
 
+  public static class APIRequestCreateRule extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "attribute",
+      "params",
+      "rule_type",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestCreateRule.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateRule(String nodeId, APIContext context) {
+      super(context, nodeId, "/rules", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateRule setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateRule setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateRule setAttribute (String attribute) {
+      this.setParam("attribute", attribute);
+      return this;
+    }
+
+    public APIRequestCreateRule setparamParams (Map<String, String> params) {
+      this.setParam("params", params);
+      return this;
+    }
+    public APIRequestCreateRule setParams (String params) {
+      this.setParam("params", params);
+      return this;
+    }
+
+    public APIRequestCreateRule setRuleType (EnumRuleType ruleType) {
+      this.setParam("rule_type", ruleType);
+      return this;
+    }
+    public APIRequestCreateRule setRuleType (String ruleType) {
+      this.setParam("rule_type", ruleType);
+      return this;
+    }
+
+    public APIRequestCreateRule requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateRule requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateRule requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateRule requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateRule requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateRule requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetUploads extends APIRequest<ProductFeedUpload> {
 
     APINodeList<ProductFeedUpload> lastResponse = null;
@@ -835,10 +1038,17 @@ public class ProductFeed extends APINode {
 
     public static final String[] FIELDS = {
       "end_time",
+      "error_count",
+      "filename",
       "id",
       "input_method",
+      "num_deleted_items",
+      "num_detected_items",
+      "num_invalid_items",
+      "num_persisted_items",
       "start_time",
       "url",
+      "warning_count",
     };
 
     @Override
@@ -856,6 +1066,25 @@ public class ProductFeed extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<ProductFeedUpload>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ProductFeedUpload>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<ProductFeedUpload>>() {
+           public APINodeList<ProductFeedUpload> apply(String result) {
+             try {
+               return APIRequestGetUploads.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetUploads(String nodeId, APIContext context) {
       super(context, nodeId, "/uploads", "GET", Arrays.asList(PARAMS));
@@ -917,6 +1146,20 @@ public class ProductFeed extends APINode {
       this.requestField("end_time", value);
       return this;
     }
+    public APIRequestGetUploads requestErrorCountField () {
+      return this.requestErrorCountField(true);
+    }
+    public APIRequestGetUploads requestErrorCountField (boolean value) {
+      this.requestField("error_count", value);
+      return this;
+    }
+    public APIRequestGetUploads requestFilenameField () {
+      return this.requestFilenameField(true);
+    }
+    public APIRequestGetUploads requestFilenameField (boolean value) {
+      this.requestField("filename", value);
+      return this;
+    }
     public APIRequestGetUploads requestIdField () {
       return this.requestIdField(true);
     }
@@ -931,6 +1174,34 @@ public class ProductFeed extends APINode {
       this.requestField("input_method", value);
       return this;
     }
+    public APIRequestGetUploads requestNumDeletedItemsField () {
+      return this.requestNumDeletedItemsField(true);
+    }
+    public APIRequestGetUploads requestNumDeletedItemsField (boolean value) {
+      this.requestField("num_deleted_items", value);
+      return this;
+    }
+    public APIRequestGetUploads requestNumDetectedItemsField () {
+      return this.requestNumDetectedItemsField(true);
+    }
+    public APIRequestGetUploads requestNumDetectedItemsField (boolean value) {
+      this.requestField("num_detected_items", value);
+      return this;
+    }
+    public APIRequestGetUploads requestNumInvalidItemsField () {
+      return this.requestNumInvalidItemsField(true);
+    }
+    public APIRequestGetUploads requestNumInvalidItemsField (boolean value) {
+      this.requestField("num_invalid_items", value);
+      return this;
+    }
+    public APIRequestGetUploads requestNumPersistedItemsField () {
+      return this.requestNumPersistedItemsField(true);
+    }
+    public APIRequestGetUploads requestNumPersistedItemsField (boolean value) {
+      this.requestField("num_persisted_items", value);
+      return this;
+    }
     public APIRequestGetUploads requestStartTimeField () {
       return this.requestStartTimeField(true);
     }
@@ -943,6 +1214,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetUploads requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetUploads requestWarningCountField () {
+      return this.requestWarningCountField(true);
+    }
+    public APIRequestGetUploads requestWarningCountField (boolean value) {
+      this.requestField("warning_count", value);
       return this;
     }
   }
@@ -980,6 +1258,25 @@ public class ProductFeed extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<ProductFeedUpload> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductFeedUpload> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProductFeedUpload>() {
+           public ProductFeedUpload apply(String result) {
+             try {
+               return APIRequestCreateUpload.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestCreateUpload(String nodeId, APIContext context) {
       super(context, nodeId, "/uploads", "POST", Arrays.asList(PARAMS));
@@ -1069,6 +1366,129 @@ public class ProductFeed extends APINode {
 
   }
 
+  public static class APIRequestGetVehicles extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "bulk_pagination",
+      "filter",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(String result) {
+             try {
+               return APIRequestGetVehicles.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetVehicles(String nodeId, APIContext context) {
+      super(context, nodeId, "/vehicles", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetVehicles setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVehicles setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetVehicles setBulkPagination (Boolean bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+    public APIRequestGetVehicles setBulkPagination (String bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+
+    public APIRequestGetVehicles setFilter (Object filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+    public APIRequestGetVehicles setFilter (String filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+
+    public APIRequestGetVehicles requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetVehicles requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVehicles requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetVehicles requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVehicles requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVehicles requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestDelete extends APIRequest<APINode> {
 
     APINode lastResponse = null;
@@ -1097,6 +1517,25 @@ public class ProductFeed extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
@@ -1196,6 +1635,25 @@ public class ProductFeed extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<ProductFeed> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductFeed> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProductFeed>() {
+           public ProductFeed apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
@@ -1394,6 +1852,25 @@ public class ProductFeed extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<ProductFeed> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductFeed> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProductFeed>() {
+           public ProductFeed apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
@@ -1573,6 +2050,78 @@ public class ProductFeed extends APINode {
       private String value;
 
       private EnumEncoding(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumFeedType {
+      @SerializedName("AUTO")
+      VALUE_AUTO("AUTO"),
+      @SerializedName("AUTO_OFFER")
+      VALUE_AUTO_OFFER("AUTO_OFFER"),
+      @SerializedName("DESTINATION")
+      VALUE_DESTINATION("DESTINATION"),
+      @SerializedName("FLIGHT")
+      VALUE_FLIGHT("FLIGHT"),
+      @SerializedName("HOME_LISTING")
+      VALUE_HOME_LISTING("HOME_LISTING"),
+      @SerializedName("HOME_SERVICE_PROVIDER")
+      VALUE_HOME_SERVICE_PROVIDER("HOME_SERVICE_PROVIDER"),
+      @SerializedName("HOME_SERVICE_REVIEW")
+      VALUE_HOME_SERVICE_REVIEW("HOME_SERVICE_REVIEW"),
+      @SerializedName("HOTEL")
+      VALUE_HOTEL("HOTEL"),
+      @SerializedName("HOTEL_ROOM")
+      VALUE_HOTEL_ROOM("HOTEL_ROOM"),
+      @SerializedName("LOCAL_INVENTORY")
+      VALUE_LOCAL_INVENTORY("LOCAL_INVENTORY"),
+      @SerializedName("MARKET")
+      VALUE_MARKET("MARKET"),
+      @SerializedName("MEDIA_TITLE")
+      VALUE_MEDIA_TITLE("MEDIA_TITLE"),
+      @SerializedName("PRODUCTS")
+      VALUE_PRODUCTS("PRODUCTS"),
+      @SerializedName("TEST_DYNAMIC_ITEM")
+      VALUE_TEST_DYNAMIC_ITEM("TEST_DYNAMIC_ITEM"),
+      @SerializedName("VEHICLE_OFFER")
+      VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
+      @SerializedName("VEHICLES")
+      VALUE_VEHICLES("VEHICLES"),
+      NULL(null);
+
+      private String value;
+
+      private EnumFeedType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumRuleType {
+      @SerializedName("mapping_rule")
+      VALUE_MAPPING_RULE("mapping_rule"),
+      @SerializedName("value_mapping_rule")
+      VALUE_VALUE_MAPPING_RULE("value_mapping_rule"),
+      @SerializedName("letter_case_rule")
+      VALUE_LETTER_CASE_RULE("letter_case_rule"),
+      @SerializedName("fallback_rule")
+      VALUE_FALLBACK_RULE("fallback_rule"),
+      @SerializedName("regex_replace_rule")
+      VALUE_REGEX_REPLACE_RULE("regex_replace_rule"),
+      NULL(null);
+
+      private String value;
+
+      private EnumRuleType(String value) {
         this.value = value;
       }
 

@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -100,10 +104,16 @@ public class AdPreview extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adPreviews.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adPreviews.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adPreviews.setPaging(previous, next);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -226,18 +236,30 @@ public class AdPreview extends APINode {
       VALUE_MOBILE_NATIVE("MOBILE_NATIVE"),
       @SerializedName("INSTAGRAM_STANDARD")
       VALUE_INSTAGRAM_STANDARD("INSTAGRAM_STANDARD"),
+      @SerializedName("INSTAGRAM_STORY")
+      VALUE_INSTAGRAM_STORY("INSTAGRAM_STORY"),
+      @SerializedName("AUDIENCE_NETWORK_INSTREAM_VIDEO")
+      VALUE_AUDIENCE_NETWORK_INSTREAM_VIDEO("AUDIENCE_NETWORK_INSTREAM_VIDEO"),
       @SerializedName("AUDIENCE_NETWORK_OUTSTREAM_VIDEO")
       VALUE_AUDIENCE_NETWORK_OUTSTREAM_VIDEO("AUDIENCE_NETWORK_OUTSTREAM_VIDEO"),
+      @SerializedName("AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE")
+      VALUE_AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE("AUDIENCE_NETWORK_INSTREAM_VIDEO_MOBILE"),
+      @SerializedName("AUDIENCE_NETWORK_REWARDED_VIDEO")
+      VALUE_AUDIENCE_NETWORK_REWARDED_VIDEO("AUDIENCE_NETWORK_REWARDED_VIDEO"),
       @SerializedName("INSTANT_ARTICLE_STANDARD")
       VALUE_INSTANT_ARTICLE_STANDARD("INSTANT_ARTICLE_STANDARD"),
       @SerializedName("INSTREAM_VIDEO_DESKTOP")
       VALUE_INSTREAM_VIDEO_DESKTOP("INSTREAM_VIDEO_DESKTOP"),
       @SerializedName("INSTREAM_VIDEO_MOBILE")
       VALUE_INSTREAM_VIDEO_MOBILE("INSTREAM_VIDEO_MOBILE"),
+      @SerializedName("MESSENGER_MOBILE_INBOX_MEDIA")
+      VALUE_MESSENGER_MOBILE_INBOX_MEDIA("MESSENGER_MOBILE_INBOX_MEDIA"),
       @SerializedName("SUGGESTED_VIDEO_DESKTOP")
       VALUE_SUGGESTED_VIDEO_DESKTOP("SUGGESTED_VIDEO_DESKTOP"),
       @SerializedName("SUGGESTED_VIDEO_MOBILE")
       VALUE_SUGGESTED_VIDEO_MOBILE("SUGGESTED_VIDEO_MOBILE"),
+      @SerializedName("MARKETPLACE_MOBILE")
+      VALUE_MARKETPLACE_MOBILE("MARKETPLACE_MOBILE"),
       NULL(null);
 
       private String value;

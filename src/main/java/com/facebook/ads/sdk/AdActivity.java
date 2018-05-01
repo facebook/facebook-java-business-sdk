@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -120,10 +124,16 @@ public class AdActivity extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adActivitys.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adActivitys.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adActivitys.setPaging(previous, next);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -362,20 +372,20 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_CAMPAIGN_RUN_STATUS("update_campaign_run_status"),
       @SerializedName("update_campaign_group_spend_cap")
       VALUE_UPDATE_CAMPAIGN_GROUP_SPEND_CAP("update_campaign_group_spend_cap"),
-      @SerializedName("campaign_ended")
-      VALUE_CAMPAIGN_ENDED("campaign_ended"),
-      @SerializedName("create_campaign")
-      VALUE_CREATE_CAMPAIGN("create_campaign"),
       @SerializedName("create_campaign_legacy")
       VALUE_CREATE_CAMPAIGN_LEGACY("create_campaign_legacy"),
       @SerializedName("update_campaign_budget")
       VALUE_UPDATE_CAMPAIGN_BUDGET("update_campaign_budget"),
       @SerializedName("update_campaign_duration")
       VALUE_UPDATE_CAMPAIGN_DURATION("update_campaign_duration"),
+      @SerializedName("campaign_ended")
+      VALUE_CAMPAIGN_ENDED("campaign_ended"),
       @SerializedName("create_ad_set")
       VALUE_CREATE_AD_SET("create_ad_set"),
       @SerializedName("update_ad_set_bidding")
       VALUE_UPDATE_AD_SET_BIDDING("update_ad_set_bidding"),
+      @SerializedName("update_ad_set_bid_strategy")
+      VALUE_UPDATE_AD_SET_BID_STRATEGY("update_ad_set_bid_strategy"),
       @SerializedName("update_ad_set_budget")
       VALUE_UPDATE_AD_SET_BUDGET("update_ad_set_budget"),
       @SerializedName("update_ad_set_duration")
@@ -384,8 +394,16 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_SET_RUN_STATUS("update_ad_set_run_status"),
       @SerializedName("update_ad_set_name")
       VALUE_UPDATE_AD_SET_NAME("update_ad_set_name"),
+      @SerializedName("update_ad_set_target_spec")
+      VALUE_UPDATE_AD_SET_TARGET_SPEC("update_ad_set_target_spec"),
+      @SerializedName("update_ad_set_bid_adjustments")
+      VALUE_UPDATE_AD_SET_BID_ADJUSTMENTS("update_ad_set_bid_adjustments"),
       @SerializedName("create_ad")
       VALUE_CREATE_AD("create_ad"),
+      @SerializedName("ad_review_approved")
+      VALUE_AD_REVIEW_APPROVED("ad_review_approved"),
+      @SerializedName("ad_review_declined")
+      VALUE_AD_REVIEW_DECLINED("ad_review_declined"),
       @SerializedName("update_ad_creative")
       VALUE_UPDATE_AD_CREATIVE("update_ad_creative"),
       @SerializedName("edit_and_update_ad_creative")
@@ -402,12 +420,6 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_TARGETS_SPEC("update_ad_targets_spec"),
       @SerializedName("update_adgroup_stop_delivery")
       VALUE_UPDATE_ADGROUP_STOP_DELIVERY("update_adgroup_stop_delivery"),
-      @SerializedName("update_ad_set_target_spec")
-      VALUE_UPDATE_AD_SET_TARGET_SPEC("update_ad_set_target_spec"),
-      @SerializedName("ad_review_approved")
-      VALUE_AD_REVIEW_APPROVED("ad_review_approved"),
-      @SerializedName("ad_review_declined")
-      VALUE_AD_REVIEW_DECLINED("ad_review_declined"),
       @SerializedName("first_delivery_event")
       VALUE_FIRST_DELIVERY_EVENT("first_delivery_event"),
       @SerializedName("create_audience")

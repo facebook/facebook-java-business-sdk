@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -75,8 +79,6 @@ public class Transaction extends APINode {
   private Boolean mIsBusinessEcCharge = null;
   @SerializedName("payment_option")
   private String mPaymentOption = null;
-  @SerializedName("product_type")
-  private EnumProductType mProductType = null;
   @SerializedName("provider_amount")
   private TransactionCurrencyAmount mProviderAmount = null;
   @SerializedName("status")
@@ -132,10 +134,16 @@ public class Transaction extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            transactions.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                transactions.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            transactions.setPaging(previous, next);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -339,15 +347,6 @@ public class Transaction extends APINode {
     return this;
   }
 
-  public EnumProductType getFieldProductType() {
-    return mProductType;
-  }
-
-  public Transaction setFieldProductType(EnumProductType value) {
-    this.mProductType = value;
-    return this;
-  }
-
   public TransactionCurrencyAmount getFieldProviderAmount() {
     return mProviderAmount;
   }
@@ -391,25 +390,6 @@ public class Transaction extends APINode {
 
 
 
-  public static enum EnumProductType {
-      @SerializedName("facebook_ad")
-      VALUE_FACEBOOK_AD("facebook_ad"),
-      @SerializedName("ig_ad")
-      VALUE_IG_AD("ig_ad"),
-      NULL(null);
-
-      private String value;
-
-      private EnumProductType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -437,7 +417,6 @@ public class Transaction extends APINode {
     this.mId = instance.mId;
     this.mIsBusinessEcCharge = instance.mIsBusinessEcCharge;
     this.mPaymentOption = instance.mPaymentOption;
-    this.mProductType = instance.mProductType;
     this.mProviderAmount = instance.mProviderAmount;
     this.mStatus = instance.mStatus;
     this.mTime = instance.mTime;

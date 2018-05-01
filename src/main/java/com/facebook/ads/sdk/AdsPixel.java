@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -51,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdsPixel extends APINode {
+  @SerializedName("can_proxy")
+  private Boolean mCanProxy = null;
   @SerializedName("code")
   private String mCode = null;
   @SerializedName("creation_time")
@@ -93,11 +99,23 @@ public class AdsPixel extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<AdsPixel> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static AdsPixel fetchById(String id, APIContext context) throws APIException {
     AdsPixel adsPixel =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return adsPixel;
+  }
+
+  public static ListenableFuture<AdsPixel> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<AdsPixel> adsPixel =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return adsPixel;
   }
 
@@ -108,6 +126,15 @@ public class AdsPixel extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<AdsPixel>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<AdsPixel>> adsPixel =
+      new APIRequest(context, "", "/", "GET", AdsPixel.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return adsPixel;
   }
 
   private String getPrefixedId() {
@@ -156,10 +183,16 @@ public class AdsPixel extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adsPixels.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adsPixels.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adsPixels.setPaging(previous, next);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -253,8 +286,16 @@ public class AdsPixel extends APINode {
     return new APIRequestGetAudiences(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteSharedAccounts deleteSharedAccounts() {
+    return new APIRequestDeleteSharedAccounts(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetSharedAccounts getSharedAccounts() {
     return new APIRequestGetSharedAccounts(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateSharedAccount createSharedAccount() {
+    return new APIRequestCreateSharedAccount(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetSharedAgencies getSharedAgencies() {
@@ -273,6 +314,10 @@ public class AdsPixel extends APINode {
     return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
+
+  public Boolean getFieldCanProxy() {
+    return mCanProxy;
+  }
 
   public String getFieldCode() {
     return mCode;
@@ -372,6 +417,25 @@ public class AdsPixel extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<CustomAudience>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<CustomAudience>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<CustomAudience>>() {
+           public APINodeList<CustomAudience> apply(String result) {
+             try {
+               return APIRequestGetAudiences.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetAudiences(String nodeId, APIContext context) {
       super(context, nodeId, "/audiences", "GET", Arrays.asList(PARAMS));
@@ -587,6 +651,121 @@ public class AdsPixel extends APINode {
     }
   }
 
+  public static class APIRequestDeleteSharedAccounts extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "account_id",
+      "business",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(String result) {
+             try {
+               return APIRequestDeleteSharedAccounts.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteSharedAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/shared_accounts", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteSharedAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSharedAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteSharedAccounts setAccountId (String accountId) {
+      this.setParam("account_id", accountId);
+      return this;
+    }
+
+    public APIRequestDeleteSharedAccounts setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestDeleteSharedAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteSharedAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSharedAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteSharedAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSharedAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteSharedAccounts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetSharedAccounts extends APIRequest<AdAccount> {
 
     APINodeList<AdAccount> lastResponse = null;
@@ -620,6 +799,7 @@ public class AdsPixel extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "extended_credit_invoice_group",
       "failed_delivery_checks",
       "funding_source",
       "funding_source_details",
@@ -637,12 +817,10 @@ public class AdsPixel extends APINode {
       "min_campaign_group_spend_cap",
       "min_daily_budget",
       "name",
-      "next_bill_date",
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
       "rf_spec",
-      "salesforce_invoice_group_id",
       "show_checkout_experience",
       "spend_cap",
       "tax_id",
@@ -670,6 +848,25 @@ public class AdsPixel extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<AdAccount>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdAccount>>() {
+           public APINodeList<AdAccount> apply(String result) {
+             try {
+               return APIRequestGetSharedAccounts.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetSharedAccounts(String nodeId, APIContext context) {
       super(context, nodeId, "/shared_accounts", "GET", Arrays.asList(PARAMS));
@@ -876,6 +1073,13 @@ public class AdsPixel extends APINode {
       this.requestField("end_advertiser_name", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField () {
+      return this.requestExtendedCreditInvoiceGroupField(true);
+    }
+    public APIRequestGetSharedAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
+      this.requestField("extended_credit_invoice_group", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestFailedDeliveryChecksField () {
       return this.requestFailedDeliveryChecksField(true);
     }
@@ -995,13 +1199,6 @@ public class AdsPixel extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetSharedAccounts requestNextBillDateField () {
-      return this.requestNextBillDateField(true);
-    }
-    public APIRequestGetSharedAccounts requestNextBillDateField (boolean value) {
-      this.requestField("next_bill_date", value);
-      return this;
-    }
     public APIRequestGetSharedAccounts requestOffsitePixelsTosAcceptedField () {
       return this.requestOffsitePixelsTosAcceptedField(true);
     }
@@ -1028,13 +1225,6 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestRfSpecField (boolean value) {
       this.requestField("rf_spec", value);
-      return this;
-    }
-    public APIRequestGetSharedAccounts requestSalesforceInvoiceGroupIdField () {
-      return this.requestSalesforceInvoiceGroupIdField(true);
-    }
-    public APIRequestGetSharedAccounts requestSalesforceInvoiceGroupIdField (boolean value) {
-      this.requestField("salesforce_invoice_group_id", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestShowCheckoutExperienceField () {
@@ -1109,6 +1299,121 @@ public class AdsPixel extends APINode {
     }
   }
 
+  public static class APIRequestCreateSharedAccount extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "account_id",
+      "business",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestCreateSharedAccount.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateSharedAccount(String nodeId, APIContext context) {
+      super(context, nodeId, "/shared_accounts", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateSharedAccount setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSharedAccount setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateSharedAccount setAccountId (String accountId) {
+      this.setParam("account_id", accountId);
+      return this;
+    }
+
+    public APIRequestCreateSharedAccount setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestCreateSharedAccount requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateSharedAccount requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSharedAccount requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateSharedAccount requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSharedAccount requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateSharedAccount requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetSharedAgencies extends APIRequest<Business> {
 
     APINodeList<Business> lastResponse = null;
@@ -1149,6 +1454,25 @@ public class AdsPixel extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<Business>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<Business>>() {
+           public APINodeList<Business> apply(String result) {
+             try {
+               return APIRequestGetSharedAgencies.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetSharedAgencies(String nodeId, APIContext context) {
       super(context, nodeId, "/shared_agencies", "GET", Arrays.asList(PARAMS));
@@ -1306,7 +1630,7 @@ public class AdsPixel extends APINode {
     public static final String[] FIELDS = {
       "aggregation",
       "data",
-      "timestamp",
+      "start_time",
     };
 
     @Override
@@ -1324,6 +1648,25 @@ public class AdsPixel extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<AdsPixelStatsResult>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdsPixelStatsResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdsPixelStatsResult>>() {
+           public APINodeList<AdsPixelStatsResult> apply(String result) {
+             try {
+               return APIRequestGetStats.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetStats(String nodeId, APIContext context) {
       super(context, nodeId, "/stats", "GET", Arrays.asList(PARAMS));
@@ -1351,6 +1694,10 @@ public class AdsPixel extends APINode {
       return this;
     }
 
+    public APIRequestGetStats setEndTime (Object endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
     public APIRequestGetStats setEndTime (String endTime) {
       this.setParam("end_time", endTime);
       return this;
@@ -1361,6 +1708,10 @@ public class AdsPixel extends APINode {
       return this;
     }
 
+    public APIRequestGetStats setStartTime (Object startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
     public APIRequestGetStats setStartTime (String startTime) {
       this.setParam("start_time", startTime);
       return this;
@@ -1416,11 +1767,11 @@ public class AdsPixel extends APINode {
       this.requestField("data", value);
       return this;
     }
-    public APIRequestGetStats requestTimestampField () {
-      return this.requestTimestampField(true);
+    public APIRequestGetStats requestStartTimeField () {
+      return this.requestStartTimeField(true);
     }
-    public APIRequestGetStats requestTimestampField (boolean value) {
-      this.requestField("timestamp", value);
+    public APIRequestGetStats requestStartTimeField (boolean value) {
+      this.requestField("start_time", value);
       return this;
     }
   }
@@ -1436,6 +1787,7 @@ public class AdsPixel extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "can_proxy",
       "code",
       "creation_time",
       "creator",
@@ -1462,6 +1814,25 @@ public class AdsPixel extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<AdsPixel> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdsPixel> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdsPixel>() {
+           public AdsPixel apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
@@ -1516,6 +1887,13 @@ public class AdsPixel extends APINode {
       return this;
     }
 
+    public APIRequestGet requestCanProxyField () {
+      return this.requestCanProxyField(true);
+    }
+    public APIRequestGet requestCanProxyField (boolean value) {
+      this.requestField("can_proxy", value);
+      return this;
+    }
     public APIRequestGet requestCodeField () {
       return this.requestCodeField(true);
     }
@@ -1611,6 +1989,25 @@ public class AdsPixel extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<AdsPixel> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdsPixel> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdsPixel>() {
+           public AdsPixel apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
@@ -1686,6 +2083,7 @@ public class AdsPixel extends APINode {
   }
 
   public AdsPixel copyFrom(AdsPixel instance) {
+    this.mCanProxy = instance.mCanProxy;
     this.mCode = instance.mCode;
     this.mCreationTime = instance.mCreationTime;
     this.mCreator = instance.mCreator;
