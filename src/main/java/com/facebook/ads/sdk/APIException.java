@@ -24,9 +24,9 @@ package com.facebook.ads.sdk;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.sundaysky.ads.automator.api.exception.AutomatorException;
+//import com.sundaysky.ads.automator.api.exception.AutomatorException;
 
-public class APIException extends Exception implements APIResponse, AutomatorException {
+public class APIException extends Exception implements APIResponse {
 
   public APIException () {
     super();
