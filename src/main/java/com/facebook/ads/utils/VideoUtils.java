@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class VideoUtils {
 
@@ -71,16 +72,20 @@ public class VideoUtils {
     return uploadVideoFileInChunks(account, videoFile, defaultChunkUploadRetries, true, null);
   }
   public static String uploadVideoFileInChunks(AdAccount account, File videoFile, int maxRetry, boolean waitForEncoding, ProgressCallback callback) throws APIException, IOException {
-    int totalRetry = 0;
     long fileSize = videoFile.length();
-    FileInputStream is = null;
+    FileInputStream is = new FileInputStream(videoFile);
+    return uploadVideoStreamInChunks(account, is, fileSize, videoFile.getName(), maxRetry, waitForEncoding, callback);
+  }
+
+  // [SSKY] Refactored to upload directly from input stream rather than file stream
+  public static String uploadVideoStreamInChunks(AdAccount account, InputStream videoInputStream, long videoSize, String videoName, int maxRetry, boolean waitForEncoding, ProgressCallback callback) throws APIException, IOException {
+    int totalRetry = 0;
     String sessionId;
     String videoId;
     try {
-      is = new FileInputStream(videoFile);
       JsonObject start = account.createAdVideo()
-          .setUploadPhase(EnumUploadPhase.VALUE_START)
-          .setFileSize(fileSize)
+              .setUploadPhase(EnumUploadPhase.VALUE_START)
+              .setFileSize(videoSize)
           .execute()
           .getRawResponseAsJsonObject();
       sessionId = start.get("upload_session_id").getAsString();
@@ -93,7 +98,15 @@ public class VideoUtils {
       while (!transferAllDone) {
         int chunkSize = (int)(endOffset - startOffset);
         if (chunk == null || chunkSize != chunk.length) chunk = new byte[chunkSize];
-        is.read(chunk);
+
+        // [SSKY] - added this part to handle reading input stream directly from the DVG, since HTTP streams
+        // do not necessarily return all the bytes in a single read
+        int amountRead = 0;
+        int totalRead = 0;
+        while (amountRead > -1 && totalRead < chunkSize) {
+          amountRead = videoInputStream.read(chunk, totalRead, chunkSize - totalRead);
+          totalRead += amountRead;
+        }
         JsonObject transfer = null;
         while (totalRetry < maxRetry) {
           try {
@@ -103,14 +116,14 @@ public class VideoUtils {
                 .setUploadSessionId(sessionId)
                 .execute()
                 .getRawResponseAsJsonObject();
-            if (endOffset == fileSize) {
+            if (endOffset == videoSize) {
               if (callback != null) callback.onProgressUpdate(ProgressCallback.EVENT_UPLOAD_COMPLETE, 100);
               transferAllDone = true;
             } else {
               startOffset = Long.parseLong(transfer.get("start_offset").getAsString());
               endOffset = Long.parseLong(transfer.get("end_offset").getAsString());
               if (callback != null) {
-                callback.onProgressUpdate(ProgressCallback.EVENT_UPLOAD_PROGRESS, (int)(startOffset * 100L / fileSize));
+                callback.onProgressUpdate(ProgressCallback.EVENT_UPLOAD_PROGRESS, (int) (startOffset * 100L / videoSize));
               }
             }
             break;
@@ -127,13 +140,13 @@ public class VideoUtils {
         }
       }
     } finally {
-      if (is != null) is.close();
+      if (videoInputStream != null) videoInputStream.close();
     }
 
     boolean success = account.createAdVideo()
         .setUploadPhase(EnumUploadPhase.VALUE_FINISH)
         .setUploadSessionId(sessionId)
-        .setTitle("chunked video upload")
+            .setTitle(videoName)
         .execute()
         .getRawResponseAsJsonObject().get("success").getAsBoolean();
 
