@@ -1293,7 +1293,7 @@ public class OffsitePixel extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setTag (OffsitePixel.EnumTag tag) {
+    public APIRequestUpdate setTag (EnumTag tag) {
       this.setParam("tag", tag);
       return this;
     }
@@ -1353,7 +1353,7 @@ public class OffsitePixel extends APINode {
       VALUE_ADD_TO_CART("ADD_TO_CART"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -721,7 +721,7 @@ public class AdAsyncRequestSet extends APINode {
       VALUE_OFF("OFF"),
       @SerializedName("ON_COMPLETE")
       VALUE_ON_COMPLETE("ON_COMPLETE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -742,7 +742,7 @@ public class AdAsyncRequestSet extends APINode {
       VALUE_SENDING("SENDING"),
       @SerializedName("SENT")
       VALUE_SENT("SENT"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

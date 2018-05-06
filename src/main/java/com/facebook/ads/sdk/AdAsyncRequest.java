@@ -470,7 +470,7 @@ public class AdAsyncRequest extends APINode {
       VALUE_ERROR_DEPENDENCY("ERROR_DEPENDENCY"),
       @SerializedName("ERROR_CONFLICTS")
       VALUE_ERROR_CONFLICTS("ERROR_CONFLICTS"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -503,7 +503,7 @@ public class AdAsyncRequest extends APINode {
       VALUE_ERROR_DEPENDENCY("ERROR_DEPENDENCY"),
       @SerializedName("ERROR_CONFLICTS")
       VALUE_ERROR_CONFLICTS("ERROR_CONFLICTS"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

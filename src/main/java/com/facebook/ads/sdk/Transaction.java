@@ -396,7 +396,7 @@ public class Transaction extends APINode {
       VALUE_FACEBOOK_AD("facebook_ad"),
       @SerializedName("ig_ad")
       VALUE_IG_AD("ig_ad"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

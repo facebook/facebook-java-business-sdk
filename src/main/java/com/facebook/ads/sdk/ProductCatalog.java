@@ -5024,7 +5024,7 @@ public class ProductCatalog extends APINode {
       VALUE_VIDEO_GAMING("VIDEO_GAMING"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5045,7 +5045,7 @@ public class ProductCatalog extends APINode {
       VALUE_CUBEMAP("cubemap"),
       @SerializedName("equiangular_cubemap")
       VALUE_EQUIANGULAR_CUBEMAP("equiangular_cubemap"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5062,7 +5062,7 @@ public class ProductCatalog extends APINode {
   public static enum EnumSwapMode {
       @SerializedName("replace")
       VALUE_REPLACE("replace"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5083,7 +5083,7 @@ public class ProductCatalog extends APINode {
       VALUE_DRAFT("DRAFT"),
       @SerializedName("ADS_POST")
       VALUE_ADS_POST("ADS_POST"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5106,7 +5106,7 @@ public class ProductCatalog extends APINode {
       VALUE_FINISH("finish"),
       @SerializedName("cancel")
       VALUE_CANCEL("cancel"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

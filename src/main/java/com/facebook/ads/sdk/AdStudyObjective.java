@@ -334,7 +334,7 @@ public class AdStudyObjective extends APINode {
     }
 
 
-    public APIRequestGet setBreakdowns (List<AdStudyObjective.EnumBreakdowns> breakdowns) {
+    public APIRequestGet setBreakdowns (List<EnumBreakdowns> breakdowns) {
       this.setParam("breakdowns", breakdowns);
       return this;
     }
@@ -439,7 +439,7 @@ public class AdStudyObjective extends APINode {
       VALUE_GENDER("gender"),
       @SerializedName("country")
       VALUE_COUNTRY("country"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -472,7 +472,7 @@ public class AdStudyObjective extends APINode {
       VALUE_BRANDLIFT("BRANDLIFT"),
       @SerializedName("BRAND")
       VALUE_BRAND("BRAND"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

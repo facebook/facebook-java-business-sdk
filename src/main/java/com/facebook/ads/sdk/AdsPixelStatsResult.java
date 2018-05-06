@@ -249,7 +249,7 @@ public class AdsPixelStatsResult extends APINode {
       VALUE_PIXEL_FIRE("pixel_fire"),
       @SerializedName("url")
       VALUE_URL("url"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -1425,7 +1425,7 @@ public class ProductFeed extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setDelimiter (ProductFeed.EnumDelimiter delimiter) {
+    public APIRequestUpdate setDelimiter (EnumDelimiter delimiter) {
       this.setParam("delimiter", delimiter);
       return this;
     }
@@ -1434,7 +1434,7 @@ public class ProductFeed extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setEncoding (ProductFeed.EnumEncoding encoding) {
+    public APIRequestUpdate setEncoding (EnumEncoding encoding) {
       this.setParam("encoding", encoding);
       return this;
     }
@@ -1448,7 +1448,7 @@ public class ProductFeed extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setQuotedFieldsMode (ProductFeed.EnumQuotedFieldsMode quotedFieldsMode) {
+    public APIRequestUpdate setQuotedFieldsMode (EnumQuotedFieldsMode quotedFieldsMode) {
       this.setParam("quoted_fields_mode", quotedFieldsMode);
       return this;
     }
@@ -1518,7 +1518,7 @@ public class ProductFeed extends APINode {
       VALUE_TILDE("TILDE"),
       @SerializedName("SEMICOLON")
       VALUE_SEMICOLON("SEMICOLON"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1539,7 +1539,7 @@ public class ProductFeed extends APINode {
       VALUE_ON("ON"),
       @SerializedName("OFF")
       VALUE_OFF("OFF"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1568,7 +1568,7 @@ public class ProductFeed extends APINode {
       VALUE_UTF32LE("UTF32LE"),
       @SerializedName("UTF32BE")
       VALUE_UTF32BE("UTF32BE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

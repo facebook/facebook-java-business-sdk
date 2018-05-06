@@ -268,7 +268,7 @@ public class ReachEstimate extends APINode {
       VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
       @SerializedName("LANDING_PAGE_VIEWS")
       VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -293,7 +293,7 @@ public class ProfilePictureSource extends APINode {
       VALUE_LARGE("large"),
       @SerializedName("square")
       VALUE_SQUARE("square"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

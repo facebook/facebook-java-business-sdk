@@ -523,7 +523,7 @@ public class ProductFeedUploadError extends APINode {
       VALUE_FATAL("fatal"),
       @SerializedName("warning")
       VALUE_WARNING("warning"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

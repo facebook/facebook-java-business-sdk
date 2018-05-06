@@ -330,7 +330,7 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_CONTACT_IMPORTER("CONTACT_IMPORTER"),
       @SerializedName("DATA_FILE")
       VALUE_DATA_FILE("DATA_FILE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -361,7 +361,7 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_CONTACT_IMPORTER("CONTACT_IMPORTER"),
       @SerializedName("HOUSEHOLD_AUDIENCE")
       VALUE_HOUSEHOLD_AUDIENCE("HOUSEHOLD_AUDIENCE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

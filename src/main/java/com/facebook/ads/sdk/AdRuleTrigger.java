@@ -265,7 +265,7 @@ public class AdRuleTrigger extends APINode {
       VALUE_ALL("ALL"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -288,7 +288,7 @@ public class AdRuleTrigger extends APINode {
       VALUE_STATS_MILESTONE("STATS_MILESTONE"),
       @SerializedName("STATS_CHANGE")
       VALUE_STATS_CHANGE("STATS_CHANGE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

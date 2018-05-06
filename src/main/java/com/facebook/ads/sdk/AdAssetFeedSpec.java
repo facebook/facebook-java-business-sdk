@@ -450,7 +450,7 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_LISTEN_NOW("LISTEN_NOW"),
       @SerializedName("OPEN_MOVIES")
       VALUE_OPEN_MOVIES("OPEN_MOVIES"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

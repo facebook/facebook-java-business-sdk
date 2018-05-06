@@ -474,7 +474,7 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_USER_PAGE_THREADS("user_page_threads"),
       @SerializedName("user_page_threads_excluded")
       VALUE_USER_PAGE_THREADS_EXCLUDED("user_page_threads_excluded"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

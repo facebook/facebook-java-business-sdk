@@ -572,7 +572,7 @@ public class AdAccountRoas extends APINode {
       VALUE_YIELD_7D("yield_7d"),
       @SerializedName("yield_90d")
       VALUE_YIELD_90D("yield_90d"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

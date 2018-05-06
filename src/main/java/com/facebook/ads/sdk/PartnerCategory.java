@@ -320,7 +320,7 @@ public class PartnerCategory extends APINode {
       VALUE_PRIVATE("PRIVATE"),
       @SerializedName("PUBLIC")
       VALUE_PUBLIC("PUBLIC"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

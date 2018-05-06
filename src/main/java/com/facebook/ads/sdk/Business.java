@@ -4681,7 +4681,7 @@ public class Business extends APINode {
       VALUE_THIRD_PARTY_MTA_REPORT("third_party_mta_report"),
       @SerializedName("partner_lift_study_report")
       VALUE_PARTNER_LIFT_STUDY_REPORT("partner_lift_study_report"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4708,7 +4708,7 @@ public class Business extends APINode {
       VALUE_EMPLOYEE("EMPLOYEE"),
       @SerializedName("FB_EMPLOYEE_SALES_REP")
       VALUE_FB_EMPLOYEE_SALES_REP("FB_EMPLOYEE_SALES_REP"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

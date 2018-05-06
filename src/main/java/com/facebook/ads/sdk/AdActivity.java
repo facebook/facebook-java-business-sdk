@@ -438,7 +438,7 @@ public class AdActivity extends APINode {
       VALUE_FUNDING_EVENT_SUCCESSFUL("funding_event_successful"),
       @SerializedName("update_ad_labels")
       VALUE_UPDATE_AD_LABELS("update_ad_labels"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -473,7 +473,7 @@ public class AdActivity extends APINode {
       VALUE_STATUS("STATUS"),
       @SerializedName("TARGETING")
       VALUE_TARGETING("TARGETING"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

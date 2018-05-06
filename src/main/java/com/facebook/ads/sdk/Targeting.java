@@ -1321,7 +1321,7 @@ public class Targeting extends APINode {
       VALUE_DESKTOP("desktop"),
       @SerializedName("connected_tv")
       VALUE_CONNECTED_TV("connected_tv"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1342,7 +1342,7 @@ public class Targeting extends APINode {
       VALUE_DESKTOP("desktop"),
       @SerializedName("connected_tv")
       VALUE_CONNECTED_TV("connected_tv"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

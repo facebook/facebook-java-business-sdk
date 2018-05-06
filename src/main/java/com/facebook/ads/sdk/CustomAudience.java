@@ -2332,7 +2332,7 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setClaimObjective (CustomAudience.EnumClaimObjective claimObjective) {
+    public APIRequestUpdate setClaimObjective (EnumClaimObjective claimObjective) {
       this.setParam("claim_objective", claimObjective);
       return this;
     }
@@ -2341,7 +2341,7 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setContentType (CustomAudience.EnumContentType contentType) {
+    public APIRequestUpdate setContentType (EnumContentType contentType) {
       this.setParam("content_type", contentType);
       return this;
     }
@@ -2448,7 +2448,7 @@ public class CustomAudience extends APINode {
       VALUE_TRAVEL("TRAVEL"),
       @SerializedName("VEHICLE")
       VALUE_VEHICLE("VEHICLE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2475,7 +2475,7 @@ public class CustomAudience extends APINode {
       VALUE_HOTEL("HOTEL"),
       @SerializedName("VEHICLE")
       VALUE_VEHICLE("VEHICLE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2518,7 +2518,7 @@ public class CustomAudience extends APINode {
       VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
       @SerializedName("FOX")
       VALUE_FOX("FOX"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2577,7 +2577,7 @@ public class CustomAudience extends APINode {
       VALUE_TIME_CREATED("time_created"),
       @SerializedName("time_updated")
       VALUE_TIME_UPDATED("time_updated"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

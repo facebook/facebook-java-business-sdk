@@ -232,7 +232,7 @@ public class AdRuleExecutionOptions extends APINode {
       VALUE_EQUAL("EQUAL"),
       @SerializedName("IN")
       VALUE_IN("IN"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

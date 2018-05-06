@@ -278,7 +278,7 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_CIRCLE_WITH_TEXT("circle_with_text"),
       @SerializedName("triangle_with_text")
       VALUE_TRIANGLE_WITH_TEXT("triangle_with_text"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -301,7 +301,7 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_BOTTOM_LEFT("bottom_left"),
       @SerializedName("bottom_right")
       VALUE_BOTTOM_RIGHT("bottom_right"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -336,7 +336,7 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_NOTO_SANS_REGULAR("noto_sans_regular"),
       @SerializedName("dynads_hybrid_bold")
       VALUE_DYNADS_HYBRID_BOLD("dynads_hybrid_bold"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -357,7 +357,7 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_STRIKETHROUGH_PRICE("strikethrough_price"),
       @SerializedName("percentage_off")
       VALUE_PERCENTAGE_OFF("percentage_off"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -404,7 +404,7 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_BACKGROUND_FFFFFF_TEXT_646464("background_ffffff_text_646464"),
       @SerializedName("background_ffffff_text_000000")
       VALUE_BACKGROUND_FFFFFF_TEXT_000000("background_ffffff_text_000000"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

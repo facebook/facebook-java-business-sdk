@@ -239,7 +239,7 @@ public class AdRuleHistoryResult extends APINode {
       VALUE_ADSET("ADSET"),
       @SerializedName("AD")
       VALUE_AD("AD"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

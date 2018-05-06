@@ -551,7 +551,7 @@ public class AdImage extends APINode {
       VALUE_ACTIVE("ACTIVE"),
       @SerializedName("DELETED")
       VALUE_DELETED("DELETED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

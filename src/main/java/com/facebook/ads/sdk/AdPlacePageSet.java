@@ -505,7 +505,7 @@ public class AdPlacePageSet extends APINode {
       VALUE_RECENT("recent"),
       @SerializedName("home")
       VALUE_HOME("home"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

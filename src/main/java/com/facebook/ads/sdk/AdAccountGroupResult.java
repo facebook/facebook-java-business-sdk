@@ -43,30 +43,34 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-generated.
+ * This class is auto-genereated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
  * pull request for this class.
  *
  */
-public class AdPreview extends APINode {
-  @SerializedName("body")
-  private String mBody = null;
+public class AdAccountGroupResult extends APINode {
+  @SerializedName("account_group_id")
+  private String mAccountGroupId = null;
+  @SerializedName("name")
+  private String mName = null;
+  @SerializedName("status")
+  private Long mStatus = null;
   protected static Gson gson = null;
 
-  public AdPreview() {
+  public AdAccountGroupResult() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdPreview loadJSON(String json, APIContext context) {
-    AdPreview adPreview = getGson().fromJson(json, AdPreview.class);
+  public static AdAccountGroupResult loadJSON(String json, APIContext context) {
+    AdAccountGroupResult adAccountGroupResult = getGson().fromJson(json, AdAccountGroupResult.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adPreview.toString());
+      JsonElement o2 = parser.parse(adAccountGroupResult.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -76,13 +80,13 @@ public class AdPreview extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adPreview.context = context;
-    adPreview.rawValue = json;
-    return adPreview;
+    adAccountGroupResult.context = context;
+    adAccountGroupResult.rawValue = json;
+    return adAccountGroupResult;
   }
 
-  public static APINodeList<AdPreview> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdPreview> adPreviews = new APINodeList<AdPreview>(request, json);
+  public static APINodeList<AdAccountGroupResult> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<AdAccountGroupResult> adAccountGroupResults = new APINodeList<AdAccountGroupResult>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -93,9 +97,9 @@ public class AdPreview extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adPreviews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAccountGroupResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return adPreviews;
+        return adAccountGroupResults;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -103,13 +107,13 @@ public class AdPreview extends APINode {
             JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
             String before = paging.has("before") ? paging.get("before").getAsString() : null;
             String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adPreviews.setPaging(before, after);
+            adAccountGroupResults.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adPreviews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAccountGroupResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -120,23 +124,23 @@ public class AdPreview extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adPreviews.add(loadJSON(entry.getValue().toString(), context));
+                  adAccountGroupResults.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adPreviews.add(loadJSON(obj.toString(), context));
+              adAccountGroupResults.add(loadJSON(obj.toString(), context));
             }
           }
-          return adPreviews;
+          return adAccountGroupResults;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adPreviews.add(loadJSON(entry.getValue().toString(), context));
+              adAccountGroupResults.add(loadJSON(entry.getValue().toString(), context));
           }
-          return adPreviews;
+          return adAccountGroupResults;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -153,20 +157,20 @@ public class AdPreview extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adPreviews.add(loadJSON(value.toString(), context));
+              adAccountGroupResults.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adPreviews;
+            return adAccountGroupResults;
           }
 
           // Sixth, check if it's pure JsonObject
-          adPreviews.clear();
-          adPreviews.add(loadJSON(json, context));
-          return adPreviews;
+          adAccountGroupResults.clear();
+          adAccountGroupResults.add(loadJSON(json, context));
+          return adAccountGroupResults;
         }
       }
     } catch (Exception e) {
@@ -194,63 +198,34 @@ public class AdPreview extends APINode {
   }
 
 
-  public String getFieldBody() {
-    return mBody;
+  public String getFieldAccountGroupId() {
+    return mAccountGroupId;
   }
 
-  public AdPreview setFieldBody(String value) {
-    this.mBody = value;
+  public AdAccountGroupResult setFieldAccountGroupId(String value) {
+    this.mAccountGroupId = value;
+    return this;
+  }
+
+  public String getFieldName() {
+    return mName;
+  }
+
+  public AdAccountGroupResult setFieldName(String value) {
+    this.mName = value;
+    return this;
+  }
+
+  public Long getFieldStatus() {
+    return mStatus;
+  }
+
+  public AdAccountGroupResult setFieldStatus(Long value) {
+    this.mStatus = value;
     return this;
   }
 
 
-
-  public static enum EnumAdFormat {
-      @SerializedName("RIGHT_COLUMN_STANDARD")
-      VALUE_RIGHT_COLUMN_STANDARD("RIGHT_COLUMN_STANDARD"),
-      @SerializedName("DESKTOP_FEED_STANDARD")
-      VALUE_DESKTOP_FEED_STANDARD("DESKTOP_FEED_STANDARD"),
-      @SerializedName("MOBILE_FEED_STANDARD")
-      VALUE_MOBILE_FEED_STANDARD("MOBILE_FEED_STANDARD"),
-      @SerializedName("MOBILE_FEED_BASIC")
-      VALUE_MOBILE_FEED_BASIC("MOBILE_FEED_BASIC"),
-      @SerializedName("MOBILE_INTERSTITIAL")
-      VALUE_MOBILE_INTERSTITIAL("MOBILE_INTERSTITIAL"),
-      @SerializedName("MOBILE_BANNER")
-      VALUE_MOBILE_BANNER("MOBILE_BANNER"),
-      @SerializedName("MOBILE_MEDIUM_RECTANGLE")
-      VALUE_MOBILE_MEDIUM_RECTANGLE("MOBILE_MEDIUM_RECTANGLE"),
-      @SerializedName("MOBILE_FULLWIDTH")
-      VALUE_MOBILE_FULLWIDTH("MOBILE_FULLWIDTH"),
-      @SerializedName("MOBILE_NATIVE")
-      VALUE_MOBILE_NATIVE("MOBILE_NATIVE"),
-      @SerializedName("INSTAGRAM_STANDARD")
-      VALUE_INSTAGRAM_STANDARD("INSTAGRAM_STANDARD"),
-      @SerializedName("AUDIENCE_NETWORK_OUTSTREAM_VIDEO")
-      VALUE_AUDIENCE_NETWORK_OUTSTREAM_VIDEO("AUDIENCE_NETWORK_OUTSTREAM_VIDEO"),
-      @SerializedName("INSTANT_ARTICLE_STANDARD")
-      VALUE_INSTANT_ARTICLE_STANDARD("INSTANT_ARTICLE_STANDARD"),
-      @SerializedName("INSTREAM_VIDEO_DESKTOP")
-      VALUE_INSTREAM_VIDEO_DESKTOP("INSTREAM_VIDEO_DESKTOP"),
-      @SerializedName("INSTREAM_VIDEO_MOBILE")
-      VALUE_INSTREAM_VIDEO_MOBILE("INSTREAM_VIDEO_MOBILE"),
-      @SerializedName("SUGGESTED_VIDEO_DESKTOP")
-      VALUE_SUGGESTED_VIDEO_DESKTOP("SUGGESTED_VIDEO_DESKTOP"),
-      @SerializedName("SUGGESTED_VIDEO_MOBILE")
-      VALUE_SUGGESTED_VIDEO_MOBILE("SUGGESTED_VIDEO_MOBILE"),
-      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
-
-      private String value;
-
-      private EnumAdFormat(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -266,17 +241,19 @@ public class AdPreview extends APINode {
     return gson;
   }
 
-  public AdPreview copyFrom(AdPreview instance) {
-    this.mBody = instance.mBody;
+  public AdAccountGroupResult copyFrom(AdAccountGroupResult instance) {
+    this.mAccountGroupId = instance.mAccountGroupId;
+    this.mName = instance.mName;
+    this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdPreview> getParser() {
-    return new APIRequest.ResponseParser<AdPreview>() {
-      public APINodeList<AdPreview> parseResponse(String response, APIContext context, APIRequest<AdPreview> request) throws MalformedResponseException {
-        return AdPreview.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<AdAccountGroupResult> getParser() {
+    return new APIRequest.ResponseParser<AdAccountGroupResult>() {
+      public APINodeList<AdAccountGroupResult> parseResponse(String response, APIContext context, APIRequest<AdAccountGroupResult> request) throws MalformedResponseException {
+        return AdAccountGroupResult.parseResponse(response, context, request);
       }
     };
   }

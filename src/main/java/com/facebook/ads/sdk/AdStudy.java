@@ -696,7 +696,7 @@ public class AdStudy extends APINode {
       VALUE_LIFT("LIFT"),
       @SerializedName("SPLIT_TEST")
       VALUE_SPLIT_TEST("SPLIT_TEST"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

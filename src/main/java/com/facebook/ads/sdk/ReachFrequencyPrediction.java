@@ -851,7 +851,7 @@ public class ReachFrequencyPrediction extends APINode {
       VALUE_ACTIVE("ACTIVE"),
       @SerializedName("COMPLETED")
       VALUE_COMPLETED("COMPLETED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
