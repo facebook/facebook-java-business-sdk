@@ -44,14 +44,9 @@ For now, we can use the <a href="https://developers.facebook.com/tools/explorer"
 
 ### Install package
 
-To start using Java SDK, you need add two .jar files into your project build path:
+To start using Java SDK, follow the instructions on <a href="https://developers.facebook.com/docs/business-sdk/getting-started#java">Getting started instruction</a>.
 
-* facebook-java-business-sdk-[version].jar
-* gson-[version].jar
-
-Pre-compiled `facebook-java-business-sdk-[version].jar can be downloaded from the /target folder. Alternatively, you may download the source code and compile locally with the Maven command: mvn package`. (Please install Maven if it's not already there.)
-
-The SDK also has a dependency on <a href="https://github.com/google/gson" target="_blank">gson</a>. If it's not already in your environment, you'll need to download and add to the build path.
+If you want to use pre-compiled .jar file, visit https://repo1.maven.org/maven2/com/facebook/business/sdk/facebook-java-business-sdk/ to download specific version. If you download the one without dependencies, you will need to download all dependent .jar files and add them to your path when build and run. Use the .pom file in the version directory to decide dependencies.
 
 ### Run Sample code
 Here is the minimal code needed to create a campaign in your ad account. If your app and build environments are set up correctly, this code should compile and run without error. You can verify the created campaign in <a href="https://www.facebook.com/ads/manager/" target="_blank">Ads Manager</a>.
