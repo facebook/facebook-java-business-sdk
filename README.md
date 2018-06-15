@@ -1,6 +1,6 @@
 # Facebook Business SDK for Java
 
-**BREAKING CHANGES NOTES (v0.3.0)**: New Release for the Java SDK (v0.3.0) includes following breaking changes:
+**BREAKING CHANGES NOTES (v3.0.0)**: New Release for the Java SDK (v3.0.0) includes following breaking changes:
 
 * **API version upgrade:** The new SDK version calls Facebook Graph API endpoints related to the Pages, Instagram, Business Manager, and Marketing products. Classes now use new fields/params/endpoints. Please refer to the <a href="https://developers.facebook.com/docs/graph-api/changelog" target="_blank">Graph API Changelog</a> for details.
 
@@ -159,7 +159,7 @@ campaigns = campaigns.nextPage();
 - Or, enable auto pagination iterator with:
 
 ```
-campaigns = campaigns.withAutoPaginationIterator();
+campaigns = campaigns.withAutoPaginationIterator(true);
 ```
 
 In this case, campaigns.iterator() will return an iterator that can fetch the next page automatically.
