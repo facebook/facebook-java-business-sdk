@@ -118,6 +118,9 @@ public class AdRuleSchedule extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adRuleSchedules.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adRuleSchedules.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"

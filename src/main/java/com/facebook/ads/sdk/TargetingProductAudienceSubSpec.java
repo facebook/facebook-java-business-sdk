@@ -116,6 +116,9 @@ public class TargetingProductAudienceSubSpec extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             targetingProductAudienceSubSpecs.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              targetingProductAudienceSubSpecs.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"

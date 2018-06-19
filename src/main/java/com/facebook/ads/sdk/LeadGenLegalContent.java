@@ -179,6 +179,9 @@ public class LeadGenLegalContent extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             leadGenLegalContents.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              leadGenLegalContents.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -270,10 +273,6 @@ public class LeadGenLegalContent extends APINode {
 
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -416,162 +415,6 @@ public class LeadGenLegalContent extends APINode {
       this.requestField("privacy_policy", value);
       return this;
     }
-  }
-
-  public static class APIRequestUpdate extends APIRequest<LeadGenLegalContent> {
-
-    LeadGenLegalContent lastResponse = null;
-    @Override
-    public LeadGenLegalContent getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "custom_disclaimer",
-      "privacy_policy",
-      "status",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public LeadGenLegalContent parseResponse(String response) throws APIException {
-      return LeadGenLegalContent.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public LeadGenLegalContent execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public LeadGenLegalContent execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<LeadGenLegalContent> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<LeadGenLegalContent> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, LeadGenLegalContent>() {
-           public LeadGenLegalContent apply(String result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setCustomDisclaimer (Object customDisclaimer) {
-      this.setParam("custom_disclaimer", customDisclaimer);
-      return this;
-    }
-    public APIRequestUpdate setCustomDisclaimer (String customDisclaimer) {
-      this.setParam("custom_disclaimer", customDisclaimer);
-      return this;
-    }
-
-    public APIRequestUpdate setPrivacyPolicy (Object privacyPolicy) {
-      this.setParam("privacy_policy", privacyPolicy);
-      return this;
-    }
-    public APIRequestUpdate setPrivacyPolicy (String privacyPolicy) {
-      this.setParam("privacy_policy", privacyPolicy);
-      return this;
-    }
-
-    public APIRequestUpdate setStatus (LeadGenLegalContent.EnumStatus status) {
-      this.setParam("status", status);
-      return this;
-    }
-    public APIRequestUpdate setStatus (String status) {
-      this.setParam("status", status);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static enum EnumStatus {
-      @SerializedName("ACTIVE")
-      VALUE_ACTIVE("ACTIVE"),
-      @SerializedName("ARCHIVED")
-      VALUE_ARCHIVED("ARCHIVED"),
-      @SerializedName("DELETED")
-      VALUE_DELETED("DELETED"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      NULL(null);
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
 

@@ -134,6 +134,9 @@ public class AdActivity extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adActivitys.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adActivitys.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -394,6 +397,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_SET_RUN_STATUS("update_ad_set_run_status"),
       @SerializedName("update_ad_set_name")
       VALUE_UPDATE_AD_SET_NAME("update_ad_set_name"),
+      @SerializedName("update_ad_set_optimization_goal")
+      VALUE_UPDATE_AD_SET_OPTIMIZATION_GOAL("update_ad_set_optimization_goal"),
       @SerializedName("update_ad_set_target_spec")
       VALUE_UPDATE_AD_SET_TARGET_SPEC("update_ad_set_target_spec"),
       @SerializedName("update_ad_set_bid_adjustments")
@@ -450,6 +455,8 @@ public class AdActivity extends APINode {
       VALUE_FUNDING_EVENT_SUCCESSFUL("funding_event_successful"),
       @SerializedName("update_ad_labels")
       VALUE_UPDATE_AD_LABELS("update_ad_labels"),
+      @SerializedName("di_ad_set_learning_stage_exit")
+      VALUE_DI_AD_SET_LEARNING_STAGE_EXIT("di_ad_set_learning_stage_exit"),
       NULL(null);
 
       private String value;

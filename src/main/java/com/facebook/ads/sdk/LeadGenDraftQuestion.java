@@ -128,6 +128,9 @@ public class LeadGenDraftQuestion extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             leadGenDraftQuestions.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              leadGenDraftQuestions.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"

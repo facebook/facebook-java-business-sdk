@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ExtendedCreditInvoiceGroup extends APINode {
+  @SerializedName("customer_po_number")
+  private String mCustomerPoNumber = null;
   @SerializedName("email")
   private Object mEmail = null;
   @SerializedName("emails")
@@ -181,6 +183,9 @@ public class ExtendedCreditInvoiceGroup extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             extendedCreditInvoiceGroups.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              extendedCreditInvoiceGroups.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -290,6 +295,10 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
+
+  public String getFieldCustomerPoNumber() {
+    return mCustomerPoNumber;
+  }
 
   public Object getFieldEmail() {
     return mEmail;
@@ -455,10 +464,12 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
+      "has_page_authorized_adaccount",
       "id",
       "io_number",
       "is_attribution_spec_system_default",
       "is_direct_deals_enabled",
+      "is_in_middle_of_local_entity_migration",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -482,6 +493,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tos_accepted",
     };
 
     @Override
@@ -754,6 +766,13 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       this.requestField("has_migrated_permissions", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestHasPageAuthorizedAdaccountField () {
+      return this.requestHasPageAuthorizedAdaccountField(true);
+    }
+    public APIRequestGetAdAccounts requestHasPageAuthorizedAdaccountField (boolean value) {
+      this.requestField("has_page_authorized_adaccount", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestIdField () {
       return this.requestIdField(true);
     }
@@ -780,6 +799,13 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     }
     public APIRequestGetAdAccounts requestIsDirectDealsEnabledField (boolean value) {
       this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField () {
+      return this.requestIsInMiddleOfLocalEntityMigrationField(true);
+    }
+    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField (boolean value) {
+      this.requestField("is_in_middle_of_local_entity_migration", value);
       return this;
     }
     public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {
@@ -943,6 +969,13 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       this.requestField("user_role", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestUserTosAcceptedField () {
+      return this.requestUserTosAcceptedField(true);
+    }
+    public APIRequestGetAdAccounts requestUserTosAcceptedField (boolean value) {
+      this.requestField("user_tos_accepted", value);
+      return this;
+    }
   }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
@@ -1059,6 +1092,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "customer_po_number",
       "email",
       "emails",
       "id",
@@ -1153,6 +1187,13 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       return this;
     }
 
+    public APIRequestGet requestCustomerPoNumberField () {
+      return this.requestCustomerPoNumberField(true);
+    }
+    public APIRequestGet requestCustomerPoNumberField (boolean value) {
+      this.requestField("customer_po_number", value);
+      return this;
+    }
     public APIRequestGet requestEmailField () {
       return this.requestEmailField(true);
     }
@@ -1313,6 +1354,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
   }
 
   public ExtendedCreditInvoiceGroup copyFrom(ExtendedCreditInvoiceGroup instance) {
+    this.mCustomerPoNumber = instance.mCustomerPoNumber;
     this.mEmail = instance.mEmail;
     this.mEmails = instance.mEmails;
     this.mId = instance.mId;

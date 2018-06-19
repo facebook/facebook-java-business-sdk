@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ProductFeedUploadError extends APINode {
+  @SerializedName("affected_surfaces")
+  private List<EnumAffectedSurfaces> mAffectedSurfaces = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("error_type")
@@ -185,6 +187,9 @@ public class ProductFeedUploadError extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             productFeedUploadErrors.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              productFeedUploadErrors.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -282,6 +287,10 @@ public class ProductFeedUploadError extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
+
+  public List<EnumAffectedSurfaces> getFieldAffectedSurfaces() {
+    return mAffectedSurfaces;
+  }
 
   public String getFieldDescription() {
     return mDescription;
@@ -423,6 +432,7 @@ public class ProductFeedUploadError extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "affected_surfaces",
       "description",
       "error_type",
       "id",
@@ -519,6 +529,13 @@ public class ProductFeedUploadError extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAffectedSurfacesField () {
+      return this.requestAffectedSurfacesField(true);
+    }
+    public APIRequestGet requestAffectedSurfacesField (boolean value) {
+      this.requestField("affected_surfaces", value);
+      return this;
+    }
     public APIRequestGet requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -563,6 +580,27 @@ public class ProductFeedUploadError extends APINode {
     }
   }
 
+  public static enum EnumAffectedSurfaces {
+      @SerializedName("Dynamic Ads")
+      VALUE_DYNAMIC_ADS("Dynamic Ads"),
+      @SerializedName("Marketplace")
+      VALUE_MARKETPLACE("Marketplace"),
+      @SerializedName("US Marketplace")
+      VALUE_US_MARKETPLACE("US Marketplace"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAffectedSurfaces(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumSeverity {
       @SerializedName("fatal")
       VALUE_FATAL("fatal"),
@@ -597,6 +635,7 @@ public class ProductFeedUploadError extends APINode {
   }
 
   public ProductFeedUploadError copyFrom(ProductFeedUploadError instance) {
+    this.mAffectedSurfaces = instance.mAffectedSurfaces;
     this.mDescription = instance.mDescription;
     this.mErrorType = instance.mErrorType;
     this.mId = instance.mId;

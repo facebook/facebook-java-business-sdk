@@ -76,7 +76,7 @@ public class AudioCopyright extends APINode {
   @SerializedName("update_time")
   private String mUpdateTime = null;
   @SerializedName("whitelisted_fb_users")
-  private List<User> mWhitelistedFbUsers = null;
+  private List<Object> mWhitelistedFbUsers = null;
   @SerializedName("whitelisted_ig_users")
   private List<String> mWhitelistedIgUsers = null;
   protected static Gson gson = null;
@@ -197,6 +197,9 @@ public class AudioCopyright extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             audioCopyrights.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              audioCopyrights.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -334,7 +337,7 @@ public class AudioCopyright extends APINode {
     return mUpdateTime;
   }
 
-  public List<User> getFieldWhitelistedFbUsers() {
+  public List<Object> getFieldWhitelistedFbUsers() {
     return mWhitelistedFbUsers;
   }
 

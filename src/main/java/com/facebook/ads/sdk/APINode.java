@@ -110,16 +110,21 @@ public class APINode implements APIResponse {
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
-          JsonObject paging = obj.get("paging").getAsJsonObject();
-          if (paging.has("cursors")) {
-              JsonObject cursors = paging.get("cursors").getAsJsonObject();
-              String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
-              String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-              nodes.setCursors(before, after);
+          if (obj.has("paging")) {
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                nodes.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            nodes.setPaging(previous, next);
           }
-          String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
-          String next = paging.has("next") ? paging.get("next").getAsString() : null;
-          nodes.setPaging(previous, next);
+          if (context.hasAppSecret()) {
+            nodes.setAppSecret(context.getAppSecretProof());
+          }
 
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"

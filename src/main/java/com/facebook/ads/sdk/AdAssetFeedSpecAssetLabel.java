@@ -116,6 +116,9 @@ public class AdAssetFeedSpecAssetLabel extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adAssetFeedSpecAssetLabels.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adAssetFeedSpecAssetLabels.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"

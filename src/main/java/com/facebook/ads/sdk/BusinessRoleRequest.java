@@ -199,6 +199,9 @@ public class BusinessRoleRequest extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             businessRoleRequests.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              businessRoleRequests.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"

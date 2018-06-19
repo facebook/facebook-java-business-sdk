@@ -117,6 +117,8 @@ public class AdCreativeLinkData extends APINode {
   private List<String> mRetailerItemIds = null;
   @SerializedName("show_multiple_images")
   private Boolean mShowMultipleImages = null;
+  @SerializedName("static_fallback_spec")
+  private Object mStaticFallbackSpec = null;
   protected static Gson gson = null;
 
   public AdCreativeLinkData() {
@@ -174,6 +176,9 @@ public class AdCreativeLinkData extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adCreativeLinkDatas.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adCreativeLinkDatas.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -583,6 +588,15 @@ public class AdCreativeLinkData extends APINode {
     return this;
   }
 
+  public Object getFieldStaticFallbackSpec() {
+    return mStaticFallbackSpec;
+  }
+
+  public AdCreativeLinkData setFieldStaticFallbackSpec(Object value) {
+    this.mStaticFallbackSpec = value;
+    return this;
+  }
+
 
 
   public static enum EnumAttachmentStyle {
@@ -673,6 +687,7 @@ public class AdCreativeLinkData extends APINode {
     this.mPreferredImageTags = instance.mPreferredImageTags;
     this.mRetailerItemIds = instance.mRetailerItemIds;
     this.mShowMultipleImages = instance.mShowMultipleImages;
+    this.mStaticFallbackSpec = instance.mStaticFallbackSpec;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

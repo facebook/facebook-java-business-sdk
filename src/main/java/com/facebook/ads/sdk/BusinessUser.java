@@ -59,10 +59,14 @@ public class BusinessUser extends APINode {
   private Business mBusiness = null;
   @SerializedName("email")
   private String mEmail = null;
+  @SerializedName("finance_permission")
+  private String mFinancePermission = null;
   @SerializedName("first_name")
   private String mFirstName = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("ip_permission")
+  private String mIpPermission = null;
   @SerializedName("last_name")
   private String mLastName = null;
   @SerializedName("marked_for_removal")
@@ -195,6 +199,9 @@ public class BusinessUser extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             businessUsers.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              businessUsers.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -308,12 +315,20 @@ public class BusinessUser extends APINode {
     return mEmail;
   }
 
+  public String getFieldFinancePermission() {
+    return mFinancePermission;
+  }
+
   public String getFieldFirstName() {
     return mFirstName;
   }
 
   public String getFieldId() {
     return mId;
+  }
+
+  public String getFieldIpPermission() {
+    return mIpPermission;
   }
 
   public String getFieldLastName() {
@@ -462,8 +477,10 @@ public class BusinessUser extends APINode {
     public static final String[] FIELDS = {
       "business",
       "email",
+      "finance_permission",
       "first_name",
       "id",
+      "ip_permission",
       "last_name",
       "marked_for_removal",
       "name",
@@ -575,6 +592,13 @@ public class BusinessUser extends APINode {
       this.requestField("email", value);
       return this;
     }
+    public APIRequestGet requestFinancePermissionField () {
+      return this.requestFinancePermissionField(true);
+    }
+    public APIRequestGet requestFinancePermissionField (boolean value) {
+      this.requestField("finance_permission", value);
+      return this;
+    }
     public APIRequestGet requestFirstNameField () {
       return this.requestFirstNameField(true);
     }
@@ -587,6 +611,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIpPermissionField () {
+      return this.requestIpPermissionField(true);
+    }
+    public APIRequestGet requestIpPermissionField (boolean value) {
+      this.requestField("ip_permission", value);
       return this;
     }
     public APIRequestGet requestLastNameField () {
@@ -831,8 +862,10 @@ public class BusinessUser extends APINode {
   public BusinessUser copyFrom(BusinessUser instance) {
     this.mBusiness = instance.mBusiness;
     this.mEmail = instance.mEmail;
+    this.mFinancePermission = instance.mFinancePermission;
     this.mFirstName = instance.mFirstName;
     this.mId = instance.mId;
+    this.mIpPermission = instance.mIpPermission;
     this.mLastName = instance.mLastName;
     this.mMarkedForRemoval = instance.mMarkedForRemoval;
     this.mName = instance.mName;

@@ -208,6 +208,9 @@ public class AdReportRun extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adReportRuns.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adReportRuns.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"

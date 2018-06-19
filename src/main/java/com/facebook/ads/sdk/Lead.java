@@ -79,6 +79,8 @@ public class Lead extends APINode {
   private String mId = null;
   @SerializedName("is_organic")
   private Boolean mIsOrganic = null;
+  @SerializedName("partner_name")
+  private String mPartnerName = null;
   @SerializedName("post")
   private Object mPost = null;
   @SerializedName("retailer_item_id")
@@ -201,6 +203,9 @@ public class Lead extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             leads.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              leads.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -347,6 +352,10 @@ public class Lead extends APINode {
     return mIsOrganic;
   }
 
+  public String getFieldPartnerName() {
+    return mPartnerName;
+  }
+
   public Object getFieldPost() {
     return mPost;
   }
@@ -483,6 +492,7 @@ public class Lead extends APINode {
       "form_id",
       "id",
       "is_organic",
+      "partner_name",
       "post",
       "retailer_item_id",
     };
@@ -659,6 +669,13 @@ public class Lead extends APINode {
       this.requestField("is_organic", value);
       return this;
     }
+    public APIRequestGet requestPartnerNameField () {
+      return this.requestPartnerNameField(true);
+    }
+    public APIRequestGet requestPartnerNameField (boolean value) {
+      this.requestField("partner_name", value);
+      return this;
+    }
     public APIRequestGet requestPostField () {
       return this.requestPostField(true);
     }
@@ -702,6 +719,7 @@ public class Lead extends APINode {
     this.mFormId = instance.mFormId;
     this.mId = instance.mId;
     this.mIsOrganic = instance.mIsOrganic;
+    this.mPartnerName = instance.mPartnerName;
     this.mPost = instance.mPost;
     this.mRetailerItemId = instance.mRetailerItemId;
     this.context = instance.context;

@@ -179,6 +179,9 @@ public class ExternalEventSource extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             externalEventSources.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              externalEventSources.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"

@@ -207,6 +207,9 @@ public class OracleTransaction extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             oracleTransactions.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              oracleTransactions.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"

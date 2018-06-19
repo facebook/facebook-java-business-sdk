@@ -1,2 +1,5 @@
 target/*
+!target/*.jar
 .idea
+*.class
+docs/DocSmithConfig.java

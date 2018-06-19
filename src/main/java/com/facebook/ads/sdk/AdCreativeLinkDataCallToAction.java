@@ -116,6 +116,9 @@ public class AdCreativeLinkDataCallToAction extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adCreativeLinkDataCallToActions.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adCreativeLinkDataCallToActions.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -324,6 +327,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_EVENT_RSVP("EVENT_RSVP"),
       @SerializedName("WHATSAPP_MESSAGE")
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
+      @SerializedName("FOLLOW_NEWS_STORYLINE")
+      VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
       NULL(null);
 
       private String value;

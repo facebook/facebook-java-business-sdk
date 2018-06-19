@@ -109,6 +109,8 @@ public class AdAccount extends APINode {
   private FundingSourceDetails mFundingSourceDetails = null;
   @SerializedName("has_migrated_permissions")
   private Boolean mHasMigratedPermissions = null;
+  @SerializedName("has_page_authorized_adaccount")
+  private Boolean mHasPageAuthorizedAdaccount = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("io_number")
@@ -117,6 +119,8 @@ public class AdAccount extends APINode {
   private Boolean mIsAttributionSpecSystemDefault = null;
   @SerializedName("is_direct_deals_enabled")
   private Boolean mIsDirectDealsEnabled = null;
+  @SerializedName("is_in_middle_of_local_entity_migration")
+  private Boolean mIsInMiddleOfLocalEntityMigration = null;
   @SerializedName("is_notifications_enabled")
   private Boolean mIsNotificationsEnabled = null;
   @SerializedName("is_personal")
@@ -163,6 +167,8 @@ public class AdAccount extends APINode {
   private Map<String, Long> mTosAccepted = null;
   @SerializedName("user_role")
   private String mUserRole = null;
+  @SerializedName("user_tos_accepted")
+  private Map<String, Long> mUserTosAccepted = null;
   protected static Gson gson = null;
 
   AdAccount() {
@@ -293,6 +299,9 @@ public class AdAccount extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adAccounts.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adAccounts.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -606,10 +615,6 @@ public class AdAccount extends APINode {
     return new APIRequestGetOffsitePixels(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateOffsitePixel createOffsitePixel() {
-    return new APIRequestCreateOffsitePixel(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetPartnerCategories getPartnerCategories() {
     return new APIRequestGetPartnerCategories(this.getPrefixedId().toString(), context);
   }
@@ -821,6 +826,10 @@ public class AdAccount extends APINode {
     return mHasMigratedPermissions;
   }
 
+  public Boolean getFieldHasPageAuthorizedAdaccount() {
+    return mHasPageAuthorizedAdaccount;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -835,6 +844,10 @@ public class AdAccount extends APINode {
 
   public Boolean getFieldIsDirectDealsEnabled() {
     return mIsDirectDealsEnabled;
+  }
+
+  public Boolean getFieldIsInMiddleOfLocalEntityMigration() {
+    return mIsInMiddleOfLocalEntityMigration;
   }
 
   public Boolean getFieldIsNotificationsEnabled() {
@@ -927,6 +940,10 @@ public class AdAccount extends APINode {
 
   public String getFieldUserRole() {
     return mUserRole;
+  }
+
+  public Map<String, Long> getFieldUserTosAccepted() {
+    return mUserTosAccepted;
   }
 
 
@@ -1974,6 +1991,7 @@ public class AdAccount extends APINode {
     public static final String[] PARAMS = {
       "adlabels",
       "applink_treatment",
+      "authorization_category",
       "body",
       "branded_content_sponsor_page_id",
       "dynamic_ad_voice",
@@ -2071,6 +2089,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdCreative setApplinkTreatment (String applinkTreatment) {
       this.setParam("applink_treatment", applinkTreatment);
+      return this;
+    }
+
+    public APIRequestCreateAdCreative setAuthorizationCategory (AdCreative.EnumAuthorizationCategory authorizationCategory) {
+      this.setParam("authorization_category", authorizationCategory);
+      return this;
+    }
+    public APIRequestCreateAdCreative setAuthorizationCategory (String authorizationCategory) {
+      this.setParam("authorization_category", authorizationCategory);
       return this;
     }
 
@@ -7040,6 +7067,7 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "audio_story_wave_animation_handle",
       "composer_session_id",
       "description",
       "end_offset",
@@ -7131,6 +7159,11 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdVideo setUseVideoEndpoint(boolean useVideoEndpoint) {
       this.useVideoEndpoint = useVideoEndpoint;
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setAudioStoryWaveAnimationHandle (String audioStoryWaveAnimationHandle) {
+      this.setParam("audio_story_wave_animation_handle", audioStoryWaveAnimationHandle);
       return this;
     }
 
@@ -7472,11 +7505,11 @@ public class AdAccount extends APINode {
 
   }
 
-  public static class APIRequestCreateAgency extends APIRequest<APINode> {
+  public static class APIRequestCreateAgency extends APIRequest<AdAccount> {
 
-    APINode lastResponse = null;
+    AdAccount lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public AdAccount getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -7488,30 +7521,30 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public AdAccount execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public AdAccount execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<AdAccount> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<String, AdAccount>() {
+           public AdAccount apply(String result) {
              try {
                return APIRequestCreateAgency.this.parseResponse(result);
              } catch (Exception e) {
@@ -7544,7 +7577,7 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAgency setPermittedRoles (List<EnumPermittedRoles> permittedRoles) {
+    public APIRequestCreateAgency setPermittedRoles (List<AdAccount.EnumPermittedRoles> permittedRoles) {
       this.setParam("permitted_roles", permittedRoles);
       return this;
     }
@@ -9968,9 +10001,11 @@ public class AdAccount extends APINode {
       "allowed_domains",
       "claim_objective",
       "content_type",
+      "customer_file_source",
       "dataset_id",
       "description",
       "event_source_group",
+      "event_sources",
       "is_value_based",
       "list_of_accounts",
       "lookalike_spec",
@@ -10068,6 +10103,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateCustomAudience setCustomerFileSource (CustomAudience.EnumCustomerFileSource customerFileSource) {
+      this.setParam("customer_file_source", customerFileSource);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setCustomerFileSource (String customerFileSource) {
+      this.setParam("customer_file_source", customerFileSource);
+      return this;
+    }
+
     public APIRequestCreateCustomAudience setDatasetId (String datasetId) {
       this.setParam("dataset_id", datasetId);
       return this;
@@ -10080,6 +10124,15 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateCustomAudience setEventSourceGroup (String eventSourceGroup) {
       this.setParam("event_source_group", eventSourceGroup);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setEventSources (List<Map<String, String>> eventSources) {
+      this.setParam("event_sources", eventSources);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setEventSources (String eventSources) {
+      this.setParam("event_sources", eventSources);
       return this;
     }
 
@@ -12056,6 +12109,7 @@ public class AdAccount extends APINode {
       "id",
       "is_restricted_use",
       "last_upload_app",
+      "match_rate_approx",
       "matched_entries",
       "name",
       "usage",
@@ -12232,6 +12286,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetOfflineConversionDataSets requestLastUploadAppField (boolean value) {
       this.requestField("last_upload_app", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestMatchRateApproxField () {
+      return this.requestMatchRateApproxField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestMatchRateApproxField (boolean value) {
+      this.requestField("match_rate_approx", value);
       return this;
     }
     public APIRequestGetOfflineConversionDataSets requestMatchedEntriesField () {
@@ -12413,125 +12474,6 @@ public class AdAccount extends APINode {
       this.requestField("tag", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateOffsitePixel extends APIRequest<OffsitePixel> {
-
-    OffsitePixel lastResponse = null;
-    @Override
-    public OffsitePixel getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "name",
-      "tag",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public OffsitePixel parseResponse(String response) throws APIException {
-      return OffsitePixel.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public OffsitePixel execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public OffsitePixel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<OffsitePixel> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<OffsitePixel> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, OffsitePixel>() {
-           public OffsitePixel apply(String result) {
-             try {
-               return APIRequestCreateOffsitePixel.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateOffsitePixel(String nodeId, APIContext context) {
-      super(context, nodeId, "/offsitepixels", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateOffsitePixel setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOffsitePixel setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateOffsitePixel setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateOffsitePixel setTag (OffsitePixel.EnumTag tag) {
-      this.setParam("tag", tag);
-      return this;
-    }
-    public APIRequestCreateOffsitePixel setTag (String tag) {
-      this.setParam("tag", tag);
-      return this;
-    }
-
-    public APIRequestCreateOffsitePixel requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateOffsitePixel requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOffsitePixel requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateOffsitePixel requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOffsitePixel requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateOffsitePixel requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetPartnerCategories extends APIRequest<PartnerCategory> {
@@ -13135,6 +13077,7 @@ public class AdAccount extends APINode {
       "associated_audience_id",
       "creation_params",
       "description",
+      "event_sources",
       "exclusions",
       "inclusions",
       "name",
@@ -13223,6 +13166,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateProductAudience setEventSources (List<Map<String, String>> eventSources) {
+      this.setParam("event_sources", eventSources);
+      return this;
+    }
+    public APIRequestCreateProductAudience setEventSources (String eventSources) {
+      this.setParam("event_sources", eventSources);
+      return this;
+    }
+
     public APIRequestCreateProductAudience setExclusions (List<Object> exclusions) {
       this.setParam("exclusions", exclusions);
       return this;
@@ -13265,7 +13217,7 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateProductAudience setSubtype (CustomAudience.EnumSubtype subtype) {
+    public APIRequestCreateProductAudience setSubtype (AdAccount.EnumSubtype subtype) {
       this.setParam("subtype", subtype);
       return this;
     }
@@ -13432,8 +13384,6 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "block_list_id",
-      "draft_id",
       "name",
     };
 
@@ -13491,24 +13441,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-
-    public APIRequestCreatePublisherBlockList setBlockListId (Object blockListId) {
-      this.setParam("block_list_id", blockListId);
-      return this;
-    }
-    public APIRequestCreatePublisherBlockList setBlockListId (String blockListId) {
-      this.setParam("block_list_id", blockListId);
-      return this;
-    }
-
-    public APIRequestCreatePublisherBlockList setDraftId (Object draftId) {
-      this.setParam("draft_id", draftId);
-      return this;
-    }
-    public APIRequestCreatePublisherBlockList setDraftId (String draftId) {
-      this.setParam("draft_id", draftId);
-      return this;
-    }
 
     public APIRequestCreatePublisherBlockList setName (String name) {
       this.setParam("name", name);
@@ -16329,10 +16261,12 @@ public class AdAccount extends APINode {
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
+      "has_page_authorized_adaccount",
       "id",
       "io_number",
       "is_attribution_spec_system_default",
       "is_direct_deals_enabled",
+      "is_in_middle_of_local_entity_migration",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -16356,6 +16290,7 @@ public class AdAccount extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tos_accepted",
     };
 
     @Override
@@ -16628,6 +16563,13 @@ public class AdAccount extends APINode {
       this.requestField("has_migrated_permissions", value);
       return this;
     }
+    public APIRequestGet requestHasPageAuthorizedAdaccountField () {
+      return this.requestHasPageAuthorizedAdaccountField(true);
+    }
+    public APIRequestGet requestHasPageAuthorizedAdaccountField (boolean value) {
+      this.requestField("has_page_authorized_adaccount", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -16654,6 +16596,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGet requestIsDirectDealsEnabledField (boolean value) {
       this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
+    public APIRequestGet requestIsInMiddleOfLocalEntityMigrationField () {
+      return this.requestIsInMiddleOfLocalEntityMigrationField(true);
+    }
+    public APIRequestGet requestIsInMiddleOfLocalEntityMigrationField (boolean value) {
+      this.requestField("is_in_middle_of_local_entity_migration", value);
       return this;
     }
     public APIRequestGet requestIsNotificationsEnabledField () {
@@ -16815,6 +16764,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGet requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGet requestUserTosAcceptedField () {
+      return this.requestUserTosAcceptedField(true);
+    }
+    public APIRequestGet requestUserTosAcceptedField (boolean value) {
+      this.requestField("user_tos_accepted", value);
       return this;
     }
   }
@@ -17002,6 +16958,35 @@ public class AdAccount extends APINode {
 
   }
 
+  public static enum EnumPermittedRoles {
+      @SerializedName("ADMIN")
+      VALUE_ADMIN("ADMIN"),
+      @SerializedName("GENERAL_USER")
+      VALUE_GENERAL_USER("GENERAL_USER"),
+      @SerializedName("REPORTS_ONLY")
+      VALUE_REPORTS_ONLY("REPORTS_ONLY"),
+      @SerializedName("INSTAGRAM_ADVERTISER")
+      VALUE_INSTAGRAM_ADVERTISER("INSTAGRAM_ADVERTISER"),
+      @SerializedName("INSTAGRAM_MANAGER")
+      VALUE_INSTAGRAM_MANAGER("INSTAGRAM_MANAGER"),
+      @SerializedName("CREATIVE")
+      VALUE_CREATIVE("CREATIVE"),
+      @SerializedName("FB_EMPLOYEE_DSO_ADVERTISER")
+      VALUE_FB_EMPLOYEE_DSO_ADVERTISER("FB_EMPLOYEE_DSO_ADVERTISER"),
+      NULL(null);
+
+      private String value;
+
+      private EnumPermittedRoles(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumRole {
       @SerializedName("ADMIN")
       VALUE_ADMIN("ADMIN"),
@@ -17031,26 +17016,40 @@ public class AdAccount extends APINode {
       }
   }
 
-  public static enum EnumPermittedRoles {
-      @SerializedName("ADMIN")
-      VALUE_ADMIN("ADMIN"),
-      @SerializedName("GENERAL_USER")
-      VALUE_GENERAL_USER("GENERAL_USER"),
-      @SerializedName("REPORTS_ONLY")
-      VALUE_REPORTS_ONLY("REPORTS_ONLY"),
-      @SerializedName("INSTAGRAM_ADVERTISER")
-      VALUE_INSTAGRAM_ADVERTISER("INSTAGRAM_ADVERTISER"),
-      @SerializedName("INSTAGRAM_MANAGER")
-      VALUE_INSTAGRAM_MANAGER("INSTAGRAM_MANAGER"),
-      @SerializedName("CREATIVE")
-      VALUE_CREATIVE("CREATIVE"),
-      @SerializedName("FB_EMPLOYEE_DSO_ADVERTISER")
-      VALUE_FB_EMPLOYEE_DSO_ADVERTISER("FB_EMPLOYEE_DSO_ADVERTISER"),
+  public static enum EnumSubtype {
+      @SerializedName("CUSTOM")
+      VALUE_CUSTOM("CUSTOM"),
+      @SerializedName("WEBSITE")
+      VALUE_WEBSITE("WEBSITE"),
+      @SerializedName("APP")
+      VALUE_APP("APP"),
+      @SerializedName("OFFLINE_CONVERSION")
+      VALUE_OFFLINE_CONVERSION("OFFLINE_CONVERSION"),
+      @SerializedName("CLAIM")
+      VALUE_CLAIM("CLAIM"),
+      @SerializedName("PARTNER")
+      VALUE_PARTNER("PARTNER"),
+      @SerializedName("MANAGED")
+      VALUE_MANAGED("MANAGED"),
+      @SerializedName("VIDEO")
+      VALUE_VIDEO("VIDEO"),
+      @SerializedName("LOOKALIKE")
+      VALUE_LOOKALIKE("LOOKALIKE"),
+      @SerializedName("ENGAGEMENT")
+      VALUE_ENGAGEMENT("ENGAGEMENT"),
+      @SerializedName("DATA_SET")
+      VALUE_DATA_SET("DATA_SET"),
+      @SerializedName("BAG_OF_ACCOUNTS")
+      VALUE_BAG_OF_ACCOUNTS("BAG_OF_ACCOUNTS"),
+      @SerializedName("STUDY_RULE_AUDIENCE")
+      VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
+      @SerializedName("FOX")
+      VALUE_FOX("FOX"),
       NULL(null);
 
       private String value;
 
-      private EnumPermittedRoles(String value) {
+      private EnumSubtype(String value) {
         this.value = value;
       }
 
@@ -17153,6 +17152,8 @@ public class AdAccount extends APINode {
       VALUE_EVENT_RSVP("EVENT_RSVP"),
       @SerializedName("WHATSAPP_MESSAGE")
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
+      @SerializedName("FOLLOW_NEWS_STORYLINE")
+      VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
       NULL(null);
 
       private String value;
@@ -17299,10 +17300,12 @@ public class AdAccount extends APINode {
     this.mFundingSource = instance.mFundingSource;
     this.mFundingSourceDetails = instance.mFundingSourceDetails;
     this.mHasMigratedPermissions = instance.mHasMigratedPermissions;
+    this.mHasPageAuthorizedAdaccount = instance.mHasPageAuthorizedAdaccount;
     this.mId = instance.mId;
     this.mIoNumber = instance.mIoNumber;
     this.mIsAttributionSpecSystemDefault = instance.mIsAttributionSpecSystemDefault;
     this.mIsDirectDealsEnabled = instance.mIsDirectDealsEnabled;
+    this.mIsInMiddleOfLocalEntityMigration = instance.mIsInMiddleOfLocalEntityMigration;
     this.mIsNotificationsEnabled = instance.mIsNotificationsEnabled;
     this.mIsPersonal = instance.mIsPersonal;
     this.mIsPrepayAccount = instance.mIsPrepayAccount;
@@ -17326,6 +17329,7 @@ public class AdAccount extends APINode {
     this.mTimezoneOffsetHoursUtc = instance.mTimezoneOffsetHoursUtc;
     this.mTosAccepted = instance.mTosAccepted;
     this.mUserRole = instance.mUserRole;
+    this.mUserTosAccepted = instance.mUserTosAccepted;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

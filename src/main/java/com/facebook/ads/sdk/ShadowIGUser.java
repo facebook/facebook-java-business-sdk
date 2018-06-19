@@ -199,6 +199,9 @@ public class ShadowIGUser extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             shadowIGUsers.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              shadowIGUsers.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -292,12 +295,12 @@ public class ShadowIGUser extends APINode {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateMedia createMedia() {
-    return new APIRequestCreateMedia(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetMedia getMedia() {
     return new APIRequestGetMedia(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateMedia createMedia() {
+    return new APIRequestCreateMedia(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateMediaPublish createMediaPublish() {
@@ -559,121 +562,6 @@ public class ShadowIGUser extends APINode {
     }
   }
 
-  public static class APIRequestCreateMedia extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "caption",
-      "image_url",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
-             try {
-               return APIRequestCreateMedia.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateMedia(String nodeId, APIContext context) {
-      super(context, nodeId, "/media", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateMedia setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMedia setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateMedia setCaption (String caption) {
-      this.setParam("caption", caption);
-      return this;
-    }
-
-    public APIRequestCreateMedia setImageUrl (String imageUrl) {
-      this.setParam("image_url", imageUrl);
-      return this;
-    }
-
-    public APIRequestCreateMedia requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateMedia requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMedia requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateMedia requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMedia requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateMedia requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetMedia extends APIRequest<ShadowIGMedia> {
 
     APINodeList<ShadowIGMedia> lastResponse = null;
@@ -887,6 +775,127 @@ public class ShadowIGUser extends APINode {
       this.requestField("username", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateMedia extends APIRequest<ShadowIGUser> {
+
+    ShadowIGUser lastResponse = null;
+    @Override
+    public ShadowIGUser getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "caption",
+      "image_url",
+      "media_type",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public ShadowIGUser parseResponse(String response) throws APIException {
+      return ShadowIGUser.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public ShadowIGUser execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ShadowIGUser execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<ShadowIGUser> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ShadowIGUser> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ShadowIGUser>() {
+           public ShadowIGUser apply(String result) {
+             try {
+               return APIRequestCreateMedia.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateMedia(String nodeId, APIContext context) {
+      super(context, nodeId, "/media", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMedia setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMedia setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMedia setCaption (String caption) {
+      this.setParam("caption", caption);
+      return this;
+    }
+
+    public APIRequestCreateMedia setImageUrl (String imageUrl) {
+      this.setParam("image_url", imageUrl);
+      return this;
+    }
+
+    public APIRequestCreateMedia setMediaType (String mediaType) {
+      this.setParam("media_type", mediaType);
+      return this;
+    }
+
+    public APIRequestCreateMedia requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMedia requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMedia requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMedia requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMedia requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMedia requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestCreateMediaPublish extends APIRequest<ShadowIGMedia> {

@@ -63,6 +63,8 @@ public class PartnerIntegrationLinked extends APINode {
   private Boolean mHasOauthToken = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("name")
+  private String mName = null;
   @SerializedName("offline_conversion_data_set")
   private OfflineConversionDataSet mOfflineConversionDataSet = null;
   @SerializedName("partner")
@@ -189,6 +191,9 @@ public class PartnerIntegrationLinked extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             partnerIntegrationLinkeds.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              partnerIntegrationLinkeds.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -302,6 +307,10 @@ public class PartnerIntegrationLinked extends APINode {
     return mId;
   }
 
+  public String getFieldName() {
+    return mName;
+  }
+
   public OfflineConversionDataSet getFieldOfflineConversionDataSet() {
     if (mOfflineConversionDataSet != null) {
       mOfflineConversionDataSet.context = getContext();
@@ -341,6 +350,7 @@ public class PartnerIntegrationLinked extends APINode {
       "external_id",
       "has_oauth_token",
       "id",
+      "name",
       "offline_conversion_data_set",
       "partner",
       "product_catalog",
@@ -463,6 +473,13 @@ public class PartnerIntegrationLinked extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGet requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
     public APIRequestGet requestOfflineConversionDataSetField () {
       return this.requestOfflineConversionDataSetField(true);
     }
@@ -512,6 +529,7 @@ public class PartnerIntegrationLinked extends APINode {
     this.mExternalId = instance.mExternalId;
     this.mHasOauthToken = instance.mHasOauthToken;
     this.mId = instance.mId;
+    this.mName = instance.mName;
     this.mOfflineConversionDataSet = instance.mOfflineConversionDataSet;
     this.mPartner = instance.mPartner;
     this.mProductCatalog = instance.mProductCatalog;

@@ -120,6 +120,9 @@ public class AdRuleTrigger extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adRuleTriggers.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adRuleTriggers.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -298,6 +301,8 @@ public class AdRuleTrigger extends APINode {
       VALUE_STATS_MILESTONE("STATS_MILESTONE"),
       @SerializedName("STATS_CHANGE")
       VALUE_STATS_CHANGE("STATS_CHANGE"),
+      @SerializedName("DELIVERY_INSIGHTS_CHANGE")
+      VALUE_DELIVERY_INSIGHTS_CHANGE("DELIVERY_INSIGHTS_CHANGE"),
       NULL(null);
 
       private String value;

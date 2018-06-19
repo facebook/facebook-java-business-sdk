@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdAssetFeedSpec extends APINode {
   @SerializedName("ad_formats")
   private List<String> mAdFormats = null;
+  @SerializedName("additional_data")
+  private Object mAdditionalData = null;
   @SerializedName("asset_customization_rules")
   private List<Object> mAssetCustomizationRules = null;
   @SerializedName("autotranslate")
@@ -138,6 +140,9 @@ public class AdAssetFeedSpec extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adAssetFeedSpecs.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adAssetFeedSpecs.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -234,6 +239,15 @@ public class AdAssetFeedSpec extends APINode {
 
   public AdAssetFeedSpec setFieldAdFormats(List<String> value) {
     this.mAdFormats = value;
+    return this;
+  }
+
+  public Object getFieldAdditionalData() {
+    return mAdditionalData;
+  }
+
+  public AdAssetFeedSpec setFieldAdditionalData(Object value) {
+    this.mAdditionalData = value;
     return this;
   }
 
@@ -480,6 +494,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_EVENT_RSVP("EVENT_RSVP"),
       @SerializedName("WHATSAPP_MESSAGE")
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
+      @SerializedName("FOLLOW_NEWS_STORYLINE")
+      VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
       NULL(null);
 
       private String value;
@@ -510,6 +526,7 @@ public class AdAssetFeedSpec extends APINode {
 
   public AdAssetFeedSpec copyFrom(AdAssetFeedSpec instance) {
     this.mAdFormats = instance.mAdFormats;
+    this.mAdditionalData = instance.mAdditionalData;
     this.mAssetCustomizationRules = instance.mAssetCustomizationRules;
     this.mAutotranslate = instance.mAutotranslate;
     this.mBodies = instance.mBodies;

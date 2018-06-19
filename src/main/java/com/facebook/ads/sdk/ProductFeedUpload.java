@@ -197,6 +197,9 @@ public class ProductFeedUpload extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             productFeedUploads.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              productFeedUploads.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -356,6 +359,7 @@ public class ProductFeedUpload extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "affected_surfaces",
       "description",
       "error_type",
       "id",
@@ -452,6 +456,13 @@ public class ProductFeedUpload extends APINode {
       return this;
     }
 
+    public APIRequestGetErrors requestAffectedSurfacesField () {
+      return this.requestAffectedSurfacesField(true);
+    }
+    public APIRequestGetErrors requestAffectedSurfacesField (boolean value) {
+      this.requestField("affected_surfaces", value);
+      return this;
+    }
     public APIRequestGetErrors requestDescriptionField () {
       return this.requestDescriptionField(true);
     }

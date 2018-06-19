@@ -59,8 +59,6 @@ public class OwnedDomain extends APINode {
   private String mDomainName = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("page_block_list")
-  private Object mPageBlockList = null;
   protected static Gson gson = null;
 
   OwnedDomain() {
@@ -179,6 +177,9 @@ public class OwnedDomain extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             ownedDomains.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              ownedDomains.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -281,10 +282,6 @@ public class OwnedDomain extends APINode {
     return mId;
   }
 
-  public Object getFieldPageBlockList() {
-    return mPageBlockList;
-  }
-
 
 
   public static class APIRequestGet extends APIRequest<OwnedDomain> {
@@ -300,7 +297,6 @@ public class OwnedDomain extends APINode {
     public static final String[] FIELDS = {
       "domain_name",
       "id",
-      "page_block_list",
     };
 
     @Override
@@ -405,13 +401,6 @@ public class OwnedDomain extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestPageBlockListField () {
-      return this.requestPageBlockListField(true);
-    }
-    public APIRequestGet requestPageBlockListField (boolean value) {
-      this.requestField("page_block_list", value);
-      return this;
-    }
   }
 
 
@@ -431,7 +420,6 @@ public class OwnedDomain extends APINode {
   public OwnedDomain copyFrom(OwnedDomain instance) {
     this.mDomainName = instance.mDomainName;
     this.mId = instance.mId;
-    this.mPageBlockList = instance.mPageBlockList;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

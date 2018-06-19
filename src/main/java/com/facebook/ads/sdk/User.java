@@ -101,6 +101,8 @@ public class User extends APINode {
   private Boolean mInstalled = null;
   @SerializedName("interested_in")
   private List<String> mInterestedIn = null;
+  @SerializedName("is_famedeeplinkinguser")
+  private Boolean mIsFamedeeplinkinguser = null;
   @SerializedName("is_payment_enabled")
   private Boolean mIsPaymentEnabled = null;
   @SerializedName("is_shared_login")
@@ -295,6 +297,9 @@ public class User extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             users.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              users.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -540,6 +545,10 @@ public class User extends APINode {
     return mInterestedIn;
   }
 
+  public Boolean getFieldIsFamedeeplinkinguser() {
+    return mIsFamedeeplinkinguser;
+  }
+
   public Boolean getFieldIsPaymentEnabled() {
     return mIsPaymentEnabled;
   }
@@ -742,6 +751,7 @@ public class User extends APINode {
       "contact_address",
       "context",
       "copyright_attribution_insights",
+      "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
       "culinary_team",
@@ -839,6 +849,7 @@ public class User extends APINode {
       "single_line_address",
       "starring",
       "start_info",
+      "store_code",
       "store_location_descriptor",
       "store_number",
       "studio",
@@ -1163,6 +1174,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestCopyrightAttributionInsightsField (boolean value) {
       this.requestField("copyright_attribution_insights", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestCopyrightWhitelistedIgPartnersField () {
+      return this.requestCopyrightWhitelistedIgPartnersField(true);
+    }
+    public APIRequestGetAccounts requestCopyrightWhitelistedIgPartnersField (boolean value) {
+      this.requestField("copyright_whitelisted_ig_partners", value);
       return this;
     }
     public APIRequestGetAccounts requestCountryPageLikesField () {
@@ -1844,6 +1862,13 @@ public class User extends APINode {
       this.requestField("start_info", value);
       return this;
     }
+    public APIRequestGetAccounts requestStoreCodeField () {
+      return this.requestStoreCodeField(true);
+    }
+    public APIRequestGetAccounts requestStoreCodeField (boolean value) {
+      this.requestField("store_code", value);
+      return this;
+    }
     public APIRequestGetAccounts requestStoreLocationDescriptorField () {
       return this.requestStoreLocationDescriptorField(true);
     }
@@ -2205,10 +2230,12 @@ public class User extends APINode {
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
+      "has_page_authorized_adaccount",
       "id",
       "io_number",
       "is_attribution_spec_system_default",
       "is_direct_deals_enabled",
+      "is_in_middle_of_local_entity_migration",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -2232,6 +2259,7 @@ public class User extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tos_accepted",
     };
 
     @Override
@@ -2504,6 +2532,13 @@ public class User extends APINode {
       this.requestField("has_migrated_permissions", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestHasPageAuthorizedAdaccountField () {
+      return this.requestHasPageAuthorizedAdaccountField(true);
+    }
+    public APIRequestGetAdAccounts requestHasPageAuthorizedAdaccountField (boolean value) {
+      this.requestField("has_page_authorized_adaccount", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestIdField () {
       return this.requestIdField(true);
     }
@@ -2530,6 +2565,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestIsDirectDealsEnabledField (boolean value) {
       this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField () {
+      return this.requestIsInMiddleOfLocalEntityMigrationField(true);
+    }
+    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField (boolean value) {
+      this.requestField("is_in_middle_of_local_entity_migration", value);
       return this;
     }
     public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {
@@ -2691,6 +2733,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestUserTosAcceptedField () {
+      return this.requestUserTosAcceptedField(true);
+    }
+    public APIRequestGetAdAccounts requestUserTosAcceptedField (boolean value) {
+      this.requestField("user_tos_accepted", value);
       return this;
     }
   }
@@ -4999,6 +5048,7 @@ public class User extends APINode {
       "cover",
       "declined_count",
       "description",
+      "discount_code_enabled",
       "end_time",
       "event_times",
       "guest_list_enabled",
@@ -5188,6 +5238,13 @@ public class User extends APINode {
     }
     public APIRequestGetPromotableEvents requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetPromotableEvents requestDiscountCodeEnabledField () {
+      return this.requestDiscountCodeEnabledField(true);
+    }
+    public APIRequestGetPromotableEvents requestDiscountCodeEnabledField (boolean value) {
+      this.requestField("discount_code_enabled", value);
       return this;
     }
     public APIRequestGetPromotableEvents requestEndTimeField () {
@@ -5626,6 +5683,7 @@ public class User extends APINode {
       "install_type",
       "installed",
       "interested_in",
+      "is_famedeeplinkinguser",
       "is_payment_enabled",
       "is_shared_login",
       "is_verified",
@@ -5913,6 +5971,13 @@ public class User extends APINode {
     }
     public APIRequestGet requestInterestedInField (boolean value) {
       this.requestField("interested_in", value);
+      return this;
+    }
+    public APIRequestGet requestIsFamedeeplinkinguserField () {
+      return this.requestIsFamedeeplinkinguserField(true);
+    }
+    public APIRequestGet requestIsFamedeeplinkinguserField (boolean value) {
+      this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
     public APIRequestGet requestIsPaymentEnabledField () {
@@ -6221,6 +6286,7 @@ public class User extends APINode {
     this.mInstallType = instance.mInstallType;
     this.mInstalled = instance.mInstalled;
     this.mInterestedIn = instance.mInterestedIn;
+    this.mIsFamedeeplinkinguser = instance.mIsFamedeeplinkinguser;
     this.mIsPaymentEnabled = instance.mIsPaymentEnabled;
     this.mIsSharedLogin = instance.mIsSharedLogin;
     this.mIsVerified = instance.mIsVerified;

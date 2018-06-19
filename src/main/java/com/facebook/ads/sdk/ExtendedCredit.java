@@ -65,6 +65,8 @@ public class ExtendedCredit extends APINode {
   private String mCreditType = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_automated_experience")
+  private Boolean mIsAutomatedExperience = null;
   @SerializedName("last_payment_time")
   private String mLastPaymentTime = null;
   @SerializedName("legal_entity_name")
@@ -203,6 +205,9 @@ public class ExtendedCredit extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             extendedCredits.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              extendedCredits.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -333,6 +338,10 @@ public class ExtendedCredit extends APINode {
     return mId;
   }
 
+  public Boolean getFieldIsAutomatedExperience() {
+    return mIsAutomatedExperience;
+  }
+
   public String getFieldLastPaymentTime() {
     return mLastPaymentTime;
   }
@@ -392,6 +401,7 @@ public class ExtendedCredit extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "customer_po_number",
       "email",
       "emails",
       "id",
@@ -486,6 +496,13 @@ public class ExtendedCredit extends APINode {
       return this;
     }
 
+    public APIRequestGetExtendedCreditInvoiceGroups requestCustomerPoNumberField () {
+      return this.requestCustomerPoNumberField(true);
+    }
+    public APIRequestGetExtendedCreditInvoiceGroups requestCustomerPoNumberField (boolean value) {
+      this.requestField("customer_po_number", value);
+      return this;
+    }
     public APIRequestGetExtendedCreditInvoiceGroups requestEmailField () {
       return this.requestEmailField(true);
     }
@@ -985,6 +1002,7 @@ public class ExtendedCredit extends APINode {
       "credit_available",
       "credit_type",
       "id",
+      "is_automated_experience",
       "last_payment_time",
       "legal_entity_name",
       "liable_biz_name",
@@ -1120,6 +1138,13 @@ public class ExtendedCredit extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIsAutomatedExperienceField () {
+      return this.requestIsAutomatedExperienceField(true);
+    }
+    public APIRequestGet requestIsAutomatedExperienceField (boolean value) {
+      this.requestField("is_automated_experience", value);
+      return this;
+    }
     public APIRequestGet requestLastPaymentTimeField () {
       return this.requestLastPaymentTimeField(true);
     }
@@ -1212,6 +1237,7 @@ public class ExtendedCredit extends APINode {
     this.mCreditAvailable = instance.mCreditAvailable;
     this.mCreditType = instance.mCreditType;
     this.mId = instance.mId;
+    this.mIsAutomatedExperience = instance.mIsAutomatedExperience;
     this.mLastPaymentTime = instance.mLastPaymentTime;
     this.mLegalEntityName = instance.mLegalEntityName;
     this.mLiableBizName = instance.mLiableBizName;

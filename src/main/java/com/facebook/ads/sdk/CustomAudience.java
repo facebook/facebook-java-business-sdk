@@ -59,6 +59,8 @@ public class CustomAudience extends APINode {
   private String mAccountId = null;
   @SerializedName("approximate_count")
   private Long mApproximateCount = null;
+  @SerializedName("customer_file_source")
+  private String mCustomerFileSource = null;
   @SerializedName("data_source")
   private CustomAudienceDataSource mDataSource = null;
   @SerializedName("delivery_status")
@@ -217,6 +219,9 @@ public class CustomAudience extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             customAudiences.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              customAudiences.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -357,6 +362,10 @@ public class CustomAudience extends APINode {
 
   public Long getFieldApproximateCount() {
     return mApproximateCount;
+  }
+
+  public String getFieldCustomerFileSource() {
+    return mCustomerFileSource;
   }
 
   public CustomAudienceDataSource getFieldDataSource() {
@@ -595,10 +604,12 @@ public class CustomAudience extends APINode {
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
+      "has_page_authorized_adaccount",
       "id",
       "io_number",
       "is_attribution_spec_system_default",
       "is_direct_deals_enabled",
+      "is_in_middle_of_local_entity_migration",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -622,6 +633,7 @@ public class CustomAudience extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tos_accepted",
     };
 
     @Override
@@ -899,6 +911,13 @@ public class CustomAudience extends APINode {
       this.requestField("has_migrated_permissions", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestHasPageAuthorizedAdaccountField () {
+      return this.requestHasPageAuthorizedAdaccountField(true);
+    }
+    public APIRequestGetAdAccounts requestHasPageAuthorizedAdaccountField (boolean value) {
+      this.requestField("has_page_authorized_adaccount", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestIdField () {
       return this.requestIdField(true);
     }
@@ -925,6 +944,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestIsDirectDealsEnabledField (boolean value) {
       this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField () {
+      return this.requestIsInMiddleOfLocalEntityMigrationField(true);
+    }
+    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField (boolean value) {
+      this.requestField("is_in_middle_of_local_entity_migration", value);
       return this;
     }
     public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {
@@ -1086,6 +1112,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestUserTosAcceptedField () {
+      return this.requestUserTosAcceptedField(true);
+    }
+    public APIRequestGetAdAccounts requestUserTosAcceptedField (boolean value) {
+      this.requestField("user_tos_accepted", value);
       return this;
     }
   }
@@ -2212,6 +2245,7 @@ public class CustomAudience extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "approximate_count",
+      "customer_file_source",
       "data_source",
       "delivery_status",
       "description",
@@ -2334,6 +2368,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestApproximateCountField (boolean value) {
       this.requestField("approximate_count", value);
+      return this;
+    }
+    public APIRequestGet requestCustomerFileSourceField () {
+      return this.requestCustomerFileSourceField(true);
+    }
+    public APIRequestGet requestCustomerFileSourceField (boolean value) {
+      this.requestField("customer_file_source", value);
       return this;
     }
     public APIRequestGet requestDataSourceField () {
@@ -2489,8 +2530,10 @@ public class CustomAudience extends APINode {
       "allowed_domains",
       "claim_objective",
       "content_type",
+      "customer_file_source",
       "description",
       "event_source_group",
+      "event_sources",
       "lookalike_spec",
       "name",
       "opt_out_link",
@@ -2582,6 +2625,15 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setCustomerFileSource (CustomAudience.EnumCustomerFileSource customerFileSource) {
+      this.setParam("customer_file_source", customerFileSource);
+      return this;
+    }
+    public APIRequestUpdate setCustomerFileSource (String customerFileSource) {
+      this.setParam("customer_file_source", customerFileSource);
+      return this;
+    }
+
     public APIRequestUpdate setDescription (String description) {
       this.setParam("description", description);
       return this;
@@ -2589,6 +2641,15 @@ public class CustomAudience extends APINode {
 
     public APIRequestUpdate setEventSourceGroup (String eventSourceGroup) {
       this.setParam("event_source_group", eventSourceGroup);
+      return this;
+    }
+
+    public APIRequestUpdate setEventSources (List<Map<String, String>> eventSources) {
+      this.setParam("event_sources", eventSources);
+      return this;
+    }
+    public APIRequestUpdate setEventSources (String eventSources) {
+      this.setParam("event_sources", eventSources);
       return this;
     }
 
@@ -2705,6 +2766,8 @@ public class CustomAudience extends APINode {
       VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("HOTEL")
       VALUE_HOTEL("HOTEL"),
+      @SerializedName("MEDIA_TITLE")
+      VALUE_MEDIA_TITLE("MEDIA_TITLE"),
       @SerializedName("VEHICLE")
       VALUE_VEHICLE("VEHICLE"),
       @SerializedName("VEHICLE_OFFER")
@@ -2714,6 +2777,27 @@ public class CustomAudience extends APINode {
       private String value;
 
       private EnumContentType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCustomerFileSource {
+      @SerializedName("USER_PROVIDED_ONLY")
+      VALUE_USER_PROVIDED_ONLY("USER_PROVIDED_ONLY"),
+      @SerializedName("PARTNER_PROVIDED_ONLY")
+      VALUE_PARTNER_PROVIDED_ONLY("PARTNER_PROVIDED_ONLY"),
+      @SerializedName("BOTH_USER_AND_PARTNER_PROVIDED")
+      VALUE_BOTH_USER_AND_PARTNER_PROVIDED("BOTH_USER_AND_PARTNER_PROVIDED"),
+      NULL(null);
+
+      private String value;
+
+      private EnumCustomerFileSource(String value) {
         this.value = value;
       }
 
@@ -2773,6 +2857,8 @@ public class CustomAudience extends APINode {
       VALUE_ACCOUNT_ID("account_id"),
       @SerializedName("approximate_count")
       VALUE_APPROXIMATE_COUNT("approximate_count"),
+      @SerializedName("customer_file_source")
+      VALUE_CUSTOMER_FILE_SOURCE("customer_file_source"),
       @SerializedName("data_source")
       VALUE_DATA_SOURCE("data_source"),
       @SerializedName("delivery_status")
@@ -2842,6 +2928,7 @@ public class CustomAudience extends APINode {
   public CustomAudience copyFrom(CustomAudience instance) {
     this.mAccountId = instance.mAccountId;
     this.mApproximateCount = instance.mApproximateCount;
+    this.mCustomerFileSource = instance.mCustomerFileSource;
     this.mDataSource = instance.mDataSource;
     this.mDeliveryStatus = instance.mDeliveryStatus;
     this.mDescription = instance.mDescription;

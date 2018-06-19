@@ -122,6 +122,9 @@ public class AdAssetFeedSpecImage extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adAssetFeedSpecImages.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adAssetFeedSpecImages.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"

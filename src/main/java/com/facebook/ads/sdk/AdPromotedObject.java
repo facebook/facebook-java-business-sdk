@@ -132,6 +132,9 @@ public class AdPromotedObject extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adPromotedObjects.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adPromotedObjects.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -337,6 +340,8 @@ public class AdPromotedObject extends APINode {
       VALUE_CONTENT_VIEW("CONTENT_VIEW"),
       @SerializedName("SEARCH")
       VALUE_SEARCH("SEARCH"),
+      @SerializedName("MESSAGING_CONVERSATION_STARTED_7D")
+      VALUE_MESSAGING_CONVERSATION_STARTED_7D("MESSAGING_CONVERSATION_STARTED_7D"),
       @SerializedName("LEVEL_ACHIEVED")
       VALUE_LEVEL_ACHIEVED("LEVEL_ACHIEVED"),
       @SerializedName("ACHIEVEMENT_UNLOCKED")

@@ -217,6 +217,9 @@ public class LiveVideo extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             liveVideos.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              liveVideos.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -808,10 +811,12 @@ public class LiveVideo extends APINode {
       "ad_break_intent",
       "ad_break_start_now",
       "ad_break_time_offset",
+      "allow_bm_crossposting",
       "attribution_app_id",
       "attribution_app_metadata",
       "commercial_break_durations",
       "content_tags",
+      "crossposting_actions",
       "custom_labels",
       "description",
       "direct_share_status",
@@ -945,6 +950,15 @@ public class LiveVideo extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setAllowBmCrossposting (Boolean allowBmCrossposting) {
+      this.setParam("allow_bm_crossposting", allowBmCrossposting);
+      return this;
+    }
+    public APIRequestUpdate setAllowBmCrossposting (String allowBmCrossposting) {
+      this.setParam("allow_bm_crossposting", allowBmCrossposting);
+      return this;
+    }
+
     public APIRequestUpdate setAttributionAppId (String attributionAppId) {
       this.setParam("attribution_app_id", attributionAppId);
       return this;
@@ -970,6 +984,15 @@ public class LiveVideo extends APINode {
     }
     public APIRequestUpdate setContentTags (String contentTags) {
       this.setParam("content_tags", contentTags);
+      return this;
+    }
+
+    public APIRequestUpdate setCrosspostingActions (List<Map<String, String>> crosspostingActions) {
+      this.setParam("crossposting_actions", crosspostingActions);
+      return this;
+    }
+    public APIRequestUpdate setCrosspostingActions (String crosspostingActions) {
+      this.setParam("crossposting_actions", crosspostingActions);
       return this;
     }
 
@@ -1204,6 +1227,8 @@ public class LiveVideo extends APINode {
       VALUE_SLOW("SLOW"),
       @SerializedName("DISCUSSION")
       VALUE_DISCUSSION("DISCUSSION"),
+      @SerializedName("RESTRICTED")
+      VALUE_RESTRICTED("RESTRICTED"),
       NULL(null);
 
       private String value;
@@ -1300,8 +1325,6 @@ public class LiveVideo extends APINode {
       VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
       @SerializedName("CUBEMAP")
       VALUE_CUBEMAP("CUBEMAP"),
-      @SerializedName("SINGLE_FISH_EYE")
-      VALUE_SINGLE_FISH_EYE("SINGLE_FISH_EYE"),
       NULL(null);
 
       private String value;

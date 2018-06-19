@@ -193,6 +193,9 @@ public class AdsPixel extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adsPixels.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adsPixels.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -380,6 +383,7 @@ public class AdsPixel extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "approximate_count",
+      "customer_file_source",
       "data_source",
       "delivery_status",
       "description",
@@ -507,6 +511,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAudiences requestApproximateCountField (boolean value) {
       this.requestField("approximate_count", value);
+      return this;
+    }
+    public APIRequestGetAudiences requestCustomerFileSourceField () {
+      return this.requestCustomerFileSourceField(true);
+    }
+    public APIRequestGetAudiences requestCustomerFileSourceField (boolean value) {
+      this.requestField("customer_file_source", value);
       return this;
     }
     public APIRequestGetAudiences requestDataSourceField () {
@@ -804,10 +815,12 @@ public class AdsPixel extends APINode {
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
+      "has_page_authorized_adaccount",
       "id",
       "io_number",
       "is_attribution_spec_system_default",
       "is_direct_deals_enabled",
+      "is_in_middle_of_local_entity_migration",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -831,6 +844,7 @@ public class AdsPixel extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tos_accepted",
     };
 
     @Override
@@ -1108,6 +1122,13 @@ public class AdsPixel extends APINode {
       this.requestField("has_migrated_permissions", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestHasPageAuthorizedAdaccountField () {
+      return this.requestHasPageAuthorizedAdaccountField(true);
+    }
+    public APIRequestGetSharedAccounts requestHasPageAuthorizedAdaccountField (boolean value) {
+      this.requestField("has_page_authorized_adaccount", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestIdField () {
       return this.requestIdField(true);
     }
@@ -1134,6 +1155,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestIsDirectDealsEnabledField (boolean value) {
       this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestIsInMiddleOfLocalEntityMigrationField () {
+      return this.requestIsInMiddleOfLocalEntityMigrationField(true);
+    }
+    public APIRequestGetSharedAccounts requestIsInMiddleOfLocalEntityMigrationField (boolean value) {
+      this.requestField("is_in_middle_of_local_entity_migration", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestIsNotificationsEnabledField () {
@@ -1297,6 +1325,13 @@ public class AdsPixel extends APINode {
       this.requestField("user_role", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestUserTosAcceptedField () {
+      return this.requestUserTosAcceptedField(true);
+    }
+    public APIRequestGetSharedAccounts requestUserTosAcceptedField (boolean value) {
+      this.requestField("user_tos_accepted", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateSharedAccount extends APIRequest<APINode> {
@@ -1425,6 +1460,7 @@ public class AdsPixel extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "block_offline_analytics",
       "created_by",
       "created_time",
       "id",
@@ -1527,6 +1563,13 @@ public class AdsPixel extends APINode {
       return this;
     }
 
+    public APIRequestGetSharedAgencies requestBlockOfflineAnalyticsField () {
+      return this.requestBlockOfflineAnalyticsField(true);
+    }
+    public APIRequestGetSharedAgencies requestBlockOfflineAnalyticsField (boolean value) {
+      this.requestField("block_offline_analytics", value);
+      return this;
+    }
     public APIRequestGetSharedAgencies requestCreatedByField () {
       return this.requestCreatedByField(true);
     }

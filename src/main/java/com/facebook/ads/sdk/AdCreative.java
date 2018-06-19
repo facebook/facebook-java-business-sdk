@@ -252,6 +252,9 @@ public class AdCreative extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adCreatives.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adCreatives.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -1944,6 +1947,8 @@ public class AdCreative extends APINode {
       VALUE_EVENT_RSVP("EVENT_RSVP"),
       @SerializedName("WHATSAPP_MESSAGE")
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
+      @SerializedName("FOLLOW_NEWS_STORYLINE")
+      VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
       NULL(null);
 
       private String value;
@@ -2005,6 +2010,25 @@ public class AdCreative extends APINode {
       private String value;
 
       private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumAuthorizationCategory {
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("POLITICAL")
+      VALUE_POLITICAL("POLITICAL"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAuthorizationCategory(String value) {
         this.value = value;
       }
 

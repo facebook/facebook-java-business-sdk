@@ -109,6 +109,8 @@ public class Page extends APINode {
   private OpenGraphContext mContext = null;
   @SerializedName("copyright_attribution_insights")
   private CopyrightAttributionInsights mCopyrightAttributionInsights = null;
+  @SerializedName("copyright_whitelisted_ig_partners")
+  private List<String> mCopyrightWhitelistedIgPartners = null;
   @SerializedName("country_page_likes")
   private Long mCountryPageLikes = null;
   @SerializedName("cover")
@@ -303,6 +305,8 @@ public class Page extends APINode {
   private String mStarring = null;
   @SerializedName("start_info")
   private PageStartInfo mStartInfo = null;
+  @SerializedName("store_code")
+  private String mStoreCode = null;
   @SerializedName("store_location_descriptor")
   private String mStoreLocationDescriptor = null;
   @SerializedName("store_number")
@@ -451,6 +455,9 @@ public class Page extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             pages.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              pages.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -656,10 +663,6 @@ public class Page extends APINode {
     return new APIRequestCreateInstantArticlesPublish(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateJoinThread createJoinThread() {
-    return new APIRequestCreateJoinThread(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateLabel createLabel() {
     return new APIRequestCreateLabel(this.getPrefixedId().toString(), context);
   }
@@ -786,14 +789,6 @@ public class Page extends APINode {
 
   public APIRequestCreatePendingUser createPendingUser() {
     return new APIRequestCreatePendingUser(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetPersonas getPersonas() {
-    return new APIRequestGetPersonas(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreatePersona createPersona() {
-    return new APIRequestCreatePersona(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPhotos getPhotos() {
@@ -1065,6 +1060,10 @@ public class Page extends APINode {
 
   public CopyrightAttributionInsights getFieldCopyrightAttributionInsights() {
     return mCopyrightAttributionInsights;
+  }
+
+  public List<String> getFieldCopyrightWhitelistedIgPartners() {
+    return mCopyrightWhitelistedIgPartners;
   }
 
   public Long getFieldCountryPageLikes() {
@@ -1465,6 +1464,10 @@ public class Page extends APINode {
 
   public PageStartInfo getFieldStartInfo() {
     return mStartInfo;
+  }
+
+  public String getFieldStoreCode() {
+    return mStoreCode;
   }
 
   public String getFieldStoreLocationDescriptor() {
@@ -4880,6 +4883,7 @@ public class Page extends APINode {
       "cover",
       "declined_count",
       "description",
+      "discount_code_enabled",
       "end_time",
       "event_times",
       "guest_list_enabled",
@@ -5069,6 +5073,13 @@ public class Page extends APINode {
     }
     public APIRequestGetEvents requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetEvents requestDiscountCodeEnabledField () {
+      return this.requestDiscountCodeEnabledField(true);
+    }
+    public APIRequestGetEvents requestDiscountCodeEnabledField (boolean value) {
+      this.requestField("discount_code_enabled", value);
       return this;
     }
     public APIRequestGetEvents requestEndTimeField () {
@@ -7878,129 +7889,6 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestCreateJoinThread extends APIRequest<Page> {
-
-    Page lastResponse = null;
-    @Override
-    public Page getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "persona_id",
-      "recipient_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Page parseResponse(String response) throws APIException {
-      return Page.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public Page execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<Page> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, Page>() {
-           public Page apply(String result) {
-             try {
-               return APIRequestCreateJoinThread.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateJoinThread(String nodeId, APIContext context) {
-      super(context, nodeId, "/join_threads", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateJoinThread setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateJoinThread setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateJoinThread setPersonaId (Object personaId) {
-      this.setParam("persona_id", personaId);
-      return this;
-    }
-    public APIRequestCreateJoinThread setPersonaId (String personaId) {
-      this.setParam("persona_id", personaId);
-      return this;
-    }
-
-    public APIRequestCreateJoinThread setRecipientId (Object recipientId) {
-      this.setParam("recipient_id", recipientId);
-      return this;
-    }
-    public APIRequestCreateJoinThread setRecipientId (String recipientId) {
-      this.setParam("recipient_id", recipientId);
-      return this;
-    }
-
-    public APIRequestCreateJoinThread requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateJoinThread requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateJoinThread requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateJoinThread requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateJoinThread requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateJoinThread requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestCreateLabel extends APIRequest<PageLabel> {
 
     PageLabel lastResponse = null;
@@ -8384,11 +8272,11 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestCreateLeadGenDraftForm extends APIRequest<APINode> {
+  public static class APIRequestCreateLeadGenDraftForm extends APIRequest<Page> {
 
-    APINode lastResponse = null;
+    Page lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public Page getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -8412,30 +8300,30 @@ public class Page extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public Page parseResponse(String response) throws APIException {
+      return Page.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public Page execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public Page execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<Page> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<String, Page>() {
+           public Page apply(String result) {
              try {
                return APIRequestCreateLeadGenDraftForm.this.parseResponse(result);
              } catch (Exception e) {
@@ -8523,7 +8411,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateLeadGenDraftForm setLocale (EnumLocale locale) {
+    public APIRequestCreateLeadGenDraftForm setLocale (Page.EnumLocale locale) {
       this.setParam("locale", locale);
       return this;
     }
@@ -9240,6 +9128,7 @@ public class Page extends APINode {
       "contact_address",
       "context",
       "copyright_attribution_insights",
+      "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
       "culinary_team",
@@ -9337,6 +9226,7 @@ public class Page extends APINode {
       "single_line_address",
       "starring",
       "start_info",
+      "store_code",
       "store_location_descriptor",
       "store_number",
       "studio",
@@ -9634,6 +9524,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestCopyrightAttributionInsightsField (boolean value) {
       this.requestField("copyright_attribution_insights", value);
+      return this;
+    }
+    public APIRequestGetLikes requestCopyrightWhitelistedIgPartnersField () {
+      return this.requestCopyrightWhitelistedIgPartnersField(true);
+    }
+    public APIRequestGetLikes requestCopyrightWhitelistedIgPartnersField (boolean value) {
+      this.requestField("copyright_whitelisted_ig_partners", value);
       return this;
     }
     public APIRequestGetLikes requestCountryPageLikesField () {
@@ -10315,6 +10212,13 @@ public class Page extends APINode {
       this.requestField("start_info", value);
       return this;
     }
+    public APIRequestGetLikes requestStoreCodeField () {
+      return this.requestStoreCodeField(true);
+    }
+    public APIRequestGetLikes requestStoreCodeField (boolean value) {
+      this.requestField("store_code", value);
+      return this;
+    }
     public APIRequestGetLikes requestStoreLocationDescriptorField () {
       return this.requestStoreLocationDescriptorField(true);
     }
@@ -10864,11 +10768,13 @@ public class Page extends APINode {
     public static final String[] PARAMS = {
       "attribution_app_id",
       "content_tags",
+      "crossposting_actions",
       "custom_labels",
       "description",
       "encoding_settings",
       "fisheye_video_cropped",
       "front_z_rotation",
+      "game_show",
       "is_spherical",
       "live_encoders",
       "original_fov",
@@ -10956,6 +10862,15 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreateLiveVideo setCrosspostingActions (List<Map<String, String>> crosspostingActions) {
+      this.setParam("crossposting_actions", crosspostingActions);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setCrosspostingActions (String crosspostingActions) {
+      this.setParam("crossposting_actions", crosspostingActions);
+      return this;
+    }
+
     public APIRequestCreateLiveVideo setCustomLabels (List<String> customLabels) {
       this.setParam("custom_labels", customLabels);
       return this;
@@ -10990,6 +10905,15 @@ public class Page extends APINode {
     }
     public APIRequestCreateLiveVideo setFrontZRotation (String frontZRotation) {
       this.setParam("front_z_rotation", frontZRotation);
+      return this;
+    }
+
+    public APIRequestCreateLiveVideo setGameShow (Map<String, String> gameShow) {
+      this.setParam("game_show", gameShow);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setGameShow (String gameShow) {
+      this.setParam("game_show", gameShow);
       return this;
     }
 
@@ -11332,6 +11256,7 @@ public class Page extends APINode {
       "contact_address",
       "context",
       "copyright_attribution_insights",
+      "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
       "culinary_team",
@@ -11429,6 +11354,7 @@ public class Page extends APINode {
       "single_line_address",
       "starring",
       "start_info",
+      "store_code",
       "store_location_descriptor",
       "store_number",
       "studio",
@@ -11721,6 +11647,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestCopyrightAttributionInsightsField (boolean value) {
       this.requestField("copyright_attribution_insights", value);
+      return this;
+    }
+    public APIRequestGetLocations requestCopyrightWhitelistedIgPartnersField () {
+      return this.requestCopyrightWhitelistedIgPartnersField(true);
+    }
+    public APIRequestGetLocations requestCopyrightWhitelistedIgPartnersField (boolean value) {
+      this.requestField("copyright_whitelisted_ig_partners", value);
       return this;
     }
     public APIRequestGetLocations requestCountryPageLikesField () {
@@ -12402,6 +12335,13 @@ public class Page extends APINode {
       this.requestField("start_info", value);
       return this;
     }
+    public APIRequestGetLocations requestStoreCodeField () {
+      return this.requestStoreCodeField(true);
+    }
+    public APIRequestGetLocations requestStoreCodeField (boolean value) {
+      this.requestField("store_code", value);
+      return this;
+    }
     public APIRequestGetLocations requestStoreLocationDescriptorField () {
       return this.requestStoreLocationDescriptorField(true);
     }
@@ -12528,6 +12468,7 @@ public class Page extends APINode {
       "phone",
       "place_topics",
       "price_range",
+      "store_code",
       "store_location_descriptor",
       "store_name",
       "store_number",
@@ -12625,7 +12566,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateLocation setLocationPageId (Long locationPageId) {
+    public APIRequestCreateLocation setLocationPageId (Object locationPageId) {
       this.setParam("location_page_id", locationPageId);
       return this;
     }
@@ -12676,6 +12617,11 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreateLocation setStoreCode (String storeCode) {
+      this.setParam("store_code", storeCode);
+      return this;
+    }
+
     public APIRequestCreateLocation setStoreLocationDescriptor (String storeLocationDescriptor) {
       this.setParam("store_location_descriptor", storeLocationDescriptor);
       return this;
@@ -12695,6 +12641,10 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreateLocation setWebsite (Object website) {
+      this.setParam("website", website);
+      return this;
+    }
     public APIRequestCreateLocation setWebsite (String website) {
       this.setParam("website", website);
       return this;
@@ -15347,252 +15297,6 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestGetPersonas extends APIRequest<Persona> {
-
-    APINodeList<Persona> lastResponse = null;
-    @Override
-    public APINodeList<Persona> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-      "name",
-      "profile_picture_url",
-    };
-
-    @Override
-    public APINodeList<Persona> parseResponse(String response) throws APIException {
-      return Persona.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<Persona> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<Persona> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<Persona>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<Persona>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Persona>>() {
-           public APINodeList<Persona> apply(String result) {
-             try {
-               return APIRequestGetPersonas.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetPersonas(String nodeId, APIContext context) {
-      super(context, nodeId, "/personas", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetPersonas setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPersonas setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetPersonas requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetPersonas requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPersonas requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetPersonas requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPersonas requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPersonas requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetPersonas requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPersonas requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetPersonas requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetPersonas requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetPersonas requestProfilePictureUrlField () {
-      return this.requestProfilePictureUrlField(true);
-    }
-    public APIRequestGetPersonas requestProfilePictureUrlField (boolean value) {
-      this.requestField("profile_picture_url", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreatePersona extends APIRequest<Page> {
-
-    Page lastResponse = null;
-    @Override
-    public Page getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "name",
-      "profile_picture_url",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Page parseResponse(String response) throws APIException {
-      return Page.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public Page execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<Page> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, Page>() {
-           public Page apply(String result) {
-             try {
-               return APIRequestCreatePersona.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreatePersona(String nodeId, APIContext context) {
-      super(context, nodeId, "/personas", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePersona setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePersona setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePersona setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreatePersona setProfilePictureUrl (Object profilePictureUrl) {
-      this.setParam("profile_picture_url", profilePictureUrl);
-      return this;
-    }
-    public APIRequestCreatePersona setProfilePictureUrl (String profilePictureUrl) {
-      this.setParam("profile_picture_url", profilePictureUrl);
-      return this;
-    }
-
-    public APIRequestCreatePersona requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePersona requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePersona requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePersona requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePersona requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePersona requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetPhotos extends APIRequest<Photo> {
 
     APINodeList<Photo> lastResponse = null;
@@ -16649,6 +16353,7 @@ public class Page extends APINode {
       "android_key_hash",
       "caption",
       "composer_session_id",
+      "has_umg",
       "height",
       "ios_bundle_id",
       "media_effect_ids",
@@ -16737,6 +16442,15 @@ public class Page extends APINode {
 
     public APIRequestCreatePicture setComposerSessionId (String composerSessionId) {
       this.setParam("composer_session_id", composerSessionId);
+      return this;
+    }
+
+    public APIRequestCreatePicture setHasUmg (Boolean hasUmg) {
+      this.setParam("has_umg", hasUmg);
+      return this;
+    }
+    public APIRequestCreatePicture setHasUmg (String hasUmg) {
+      this.setParam("has_umg", hasUmg);
       return this;
     }
 
@@ -19290,6 +19004,7 @@ public class Page extends APINode {
       "install_type",
       "installed",
       "interested_in",
+      "is_famedeeplinkinguser",
       "is_payment_enabled",
       "is_shared_login",
       "is_verified",
@@ -19586,6 +19301,13 @@ public class Page extends APINode {
     }
     public APIRequestGetRoles requestInterestedInField (boolean value) {
       this.requestField("interested_in", value);
+      return this;
+    }
+    public APIRequestGetRoles requestIsFamedeeplinkinguserField () {
+      return this.requestIsFamedeeplinkinguserField(true);
+    }
+    public APIRequestGetRoles requestIsFamedeeplinkinguserField (boolean value) {
+      this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
     public APIRequestGetRoles requestIsPaymentEnabledField () {
@@ -23996,6 +23718,7 @@ public class Page extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_breaks",
+      "audio_story_wave_animation_handle",
       "backdated_post",
       "content_category",
       "content_tags",
@@ -24105,6 +23828,11 @@ public class Page extends APINode {
     }
     public APIRequestCreateVideo setAdBreaks (String adBreaks) {
       this.setParam("ad_breaks", adBreaks);
+      return this;
+    }
+
+    public APIRequestCreateVideo setAudioStoryWaveAnimationHandle (String audioStoryWaveAnimationHandle) {
+      this.setParam("audio_story_wave_animation_handle", audioStoryWaveAnimationHandle);
       return this;
     }
 
@@ -25148,6 +24876,7 @@ public class Page extends APINode {
       "contact_address",
       "context",
       "copyright_attribution_insights",
+      "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
       "culinary_team",
@@ -25245,6 +24974,7 @@ public class Page extends APINode {
       "single_line_address",
       "starring",
       "start_info",
+      "store_code",
       "store_location_descriptor",
       "store_number",
       "studio",
@@ -25542,6 +25272,13 @@ public class Page extends APINode {
     }
     public APIRequestGet requestCopyrightAttributionInsightsField (boolean value) {
       this.requestField("copyright_attribution_insights", value);
+      return this;
+    }
+    public APIRequestGet requestCopyrightWhitelistedIgPartnersField () {
+      return this.requestCopyrightWhitelistedIgPartnersField(true);
+    }
+    public APIRequestGet requestCopyrightWhitelistedIgPartnersField (boolean value) {
+      this.requestField("copyright_whitelisted_ig_partners", value);
       return this;
     }
     public APIRequestGet requestCountryPageLikesField () {
@@ -26221,6 +25958,13 @@ public class Page extends APINode {
     }
     public APIRequestGet requestStartInfoField (boolean value) {
       this.requestField("start_info", value);
+      return this;
+    }
+    public APIRequestGet requestStoreCodeField () {
+      return this.requestStoreCodeField(true);
+    }
+    public APIRequestGet requestStoreCodeField (boolean value) {
+      this.requestField("store_code", value);
       return this;
     }
     public APIRequestGet requestStoreLocationDescriptorField () {
@@ -27639,6 +27383,7 @@ public class Page extends APINode {
     this.mContactAddress = instance.mContactAddress;
     this.mContext = instance.mContext;
     this.mCopyrightAttributionInsights = instance.mCopyrightAttributionInsights;
+    this.mCopyrightWhitelistedIgPartners = instance.mCopyrightWhitelistedIgPartners;
     this.mCountryPageLikes = instance.mCountryPageLikes;
     this.mCover = instance.mCover;
     this.mCulinaryTeam = instance.mCulinaryTeam;
@@ -27736,6 +27481,7 @@ public class Page extends APINode {
     this.mSingleLineAddress = instance.mSingleLineAddress;
     this.mStarring = instance.mStarring;
     this.mStartInfo = instance.mStartInfo;
+    this.mStoreCode = instance.mStoreCode;
     this.mStoreLocationDescriptor = instance.mStoreLocationDescriptor;
     this.mStoreNumber = instance.mStoreNumber;
     this.mStudio = instance.mStudio;

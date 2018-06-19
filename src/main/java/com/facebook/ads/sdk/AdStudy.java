@@ -75,6 +75,8 @@ public class AdStudy extends APINode {
   private String mName = null;
   @SerializedName("observation_end_time")
   private String mObservationEndTime = null;
+  @SerializedName("results_first_available_date")
+  private String mResultsFirstAvailableDate = null;
   @SerializedName("start_time")
   private String mStartTime = null;
   @SerializedName("type")
@@ -201,6 +203,9 @@ public class AdStudy extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adStudys.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adStudys.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -359,6 +364,10 @@ public class AdStudy extends APINode {
 
   public String getFieldObservationEndTime() {
     return mObservationEndTime;
+  }
+
+  public String getFieldResultsFirstAvailableDate() {
+    return mResultsFirstAvailableDate;
   }
 
   public String getFieldStartTime() {
@@ -979,6 +988,7 @@ public class AdStudy extends APINode {
       "id",
       "name",
       "observation_end_time",
+      "results_first_available_date",
       "start_time",
       "type",
       "updated_by",
@@ -1141,6 +1151,13 @@ public class AdStudy extends APINode {
     }
     public APIRequestGet requestObservationEndTimeField (boolean value) {
       this.requestField("observation_end_time", value);
+      return this;
+    }
+    public APIRequestGet requestResultsFirstAvailableDateField () {
+      return this.requestResultsFirstAvailableDateField(true);
+    }
+    public APIRequestGet requestResultsFirstAvailableDateField (boolean value) {
+      this.requestField("results_first_available_date", value);
       return this;
     }
     public APIRequestGet requestStartTimeField () {
@@ -1456,6 +1473,7 @@ public class AdStudy extends APINode {
     this.mId = instance.mId;
     this.mName = instance.mName;
     this.mObservationEndTime = instance.mObservationEndTime;
+    this.mResultsFirstAvailableDate = instance.mResultsFirstAvailableDate;
     this.mStartTime = instance.mStartTime;
     this.mType = instance.mType;
     this.mUpdatedBy = instance.mUpdatedBy;

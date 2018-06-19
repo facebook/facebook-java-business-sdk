@@ -187,6 +187,9 @@ public class PageSavedFilter extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             pageSavedFilters.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              pageSavedFilters.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -529,6 +532,8 @@ public class PageSavedFilter extends APINode {
       VALUE_LEAD_ADS_FORMS("LEAD_ADS_FORMS"),
       @SerializedName("LEAD_ADS_CRM_SETUP")
       VALUE_LEAD_ADS_CRM_SETUP("LEAD_ADS_CRM_SETUP"),
+      @SerializedName("LEAD_ADS_CUSTOM_CRM_SETUP")
+      VALUE_LEAD_ADS_CUSTOM_CRM_SETUP("LEAD_ADS_CUSTOM_CRM_SETUP"),
       @SerializedName("PUBLISHED_POSTS")
       VALUE_PUBLISHED_POSTS("PUBLISHED_POSTS"),
       @SerializedName("SCHEDULED_POSTS")
@@ -595,6 +600,8 @@ public class PageSavedFilter extends APINode {
       VALUE_REFERENCE_RESOLUTIONS("REFERENCE_RESOLUTIONS"),
       @SerializedName("SOUND_RECORDINGS")
       VALUE_SOUND_RECORDINGS("SOUND_RECORDINGS"),
+      @SerializedName("PREMIUM_MUSIC_VIDEOS")
+      VALUE_PREMIUM_MUSIC_VIDEOS("PREMIUM_MUSIC_VIDEOS"),
       @SerializedName("LIVE_BROADCASTS")
       VALUE_LIVE_BROADCASTS("LIVE_BROADCASTS"),
       @SerializedName("CROSSPOSTED_VIDEOS")
@@ -651,6 +658,10 @@ public class PageSavedFilter extends APINode {
       VALUE_GEM_PRODUCER_DASHBOARD("GEM_PRODUCER_DASHBOARD"),
       @SerializedName("MONETIZED_VIDEOS")
       VALUE_MONETIZED_VIDEOS("MONETIZED_VIDEOS"),
+      @SerializedName("AUDIO_RELEASES")
+      VALUE_AUDIO_RELEASES("AUDIO_RELEASES"),
+      @SerializedName("NEWS_STORYLINES")
+      VALUE_NEWS_STORYLINES("NEWS_STORYLINES"),
       NULL(null);
 
       private String value;

@@ -67,6 +67,8 @@ public class Event extends APINode {
   private Long mDeclinedCount = null;
   @SerializedName("description")
   private String mDescription = null;
+  @SerializedName("discount_code_enabled")
+  private Boolean mDiscountCodeEnabled = null;
   @SerializedName("end_time")
   private String mEndTime = null;
   @SerializedName("event_times")
@@ -231,6 +233,9 @@ public class Event extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             events.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              events.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -359,6 +364,10 @@ public class Event extends APINode {
 
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public Boolean getFieldDiscountCodeEnabled() {
+    return mDiscountCodeEnabled;
   }
 
   public String getFieldEndTime() {
@@ -1193,6 +1202,7 @@ public class Event extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "audio_story_wave_animation_handle",
       "content_category",
       "description",
       "embeddable",
@@ -1277,6 +1287,11 @@ public class Event extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateVideo setAudioStoryWaveAnimationHandle (String audioStoryWaveAnimationHandle) {
+      this.setParam("audio_story_wave_animation_handle", audioStoryWaveAnimationHandle);
+      return this;
+    }
 
     public APIRequestCreateVideo setContentCategory (EnumContentCategory contentCategory) {
       this.setParam("content_category", contentCategory);
@@ -1553,6 +1568,7 @@ public class Event extends APINode {
       "cover",
       "declined_count",
       "description",
+      "discount_code_enabled",
       "end_time",
       "event_times",
       "guest_list_enabled",
@@ -1706,6 +1722,13 @@ public class Event extends APINode {
     }
     public APIRequestGet requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGet requestDiscountCodeEnabledField () {
+      return this.requestDiscountCodeEnabledField(true);
+    }
+    public APIRequestGet requestDiscountCodeEnabledField (boolean value) {
+      this.requestField("discount_code_enabled", value);
       return this;
     }
     public APIRequestGet requestEndTimeField () {
@@ -1941,6 +1964,8 @@ public class Event extends APINode {
       VALUE_OFFSITE_TICKET("OFFSITE_TICKET"),
       @SerializedName("ONSITE_TICKET")
       VALUE_ONSITE_TICKET("ONSITE_TICKET"),
+      @SerializedName("RSVP")
+      VALUE_RSVP("RSVP"),
       NULL(null);
 
       private String value;
@@ -1960,8 +1985,6 @@ public class Event extends APINode {
       VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
       @SerializedName("CUBEMAP")
       VALUE_CUBEMAP("CUBEMAP"),
-      @SerializedName("SINGLE_FISH_EYE")
-      VALUE_SINGLE_FISH_EYE("SINGLE_FISH_EYE"),
       NULL(null);
 
       private String value;
@@ -2197,6 +2220,7 @@ public class Event extends APINode {
     this.mCover = instance.mCover;
     this.mDeclinedCount = instance.mDeclinedCount;
     this.mDescription = instance.mDescription;
+    this.mDiscountCodeEnabled = instance.mDiscountCodeEnabled;
     this.mEndTime = instance.mEndTime;
     this.mEventTimes = instance.mEventTimes;
     this.mGuestListEnabled = instance.mGuestListEnabled;

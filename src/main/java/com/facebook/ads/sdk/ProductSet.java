@@ -185,6 +185,9 @@ public class ProductSet extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             productSets.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              productSets.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -337,6 +340,7 @@ public class ProductSet extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "additional_image_cdn_urls",
       "additional_image_urls",
       "additional_variant_attributes",
       "age_group",
@@ -359,10 +363,12 @@ public class ProductSet extends APINode {
       "gender",
       "gtin",
       "id",
+      "image_cdn_urls",
       "image_url",
       "inventory",
       "manufacturer_part_number",
       "material",
+      "mobile_link",
       "name",
       "ordering_index",
       "pattern",
@@ -493,6 +499,13 @@ public class ProductSet extends APINode {
       return this;
     }
 
+    public APIRequestGetProducts requestAdditionalImageCdnUrlsField () {
+      return this.requestAdditionalImageCdnUrlsField(true);
+    }
+    public APIRequestGetProducts requestAdditionalImageCdnUrlsField (boolean value) {
+      this.requestField("additional_image_cdn_urls", value);
+      return this;
+    }
     public APIRequestGetProducts requestAdditionalImageUrlsField () {
       return this.requestAdditionalImageUrlsField(true);
     }
@@ -647,6 +660,13 @@ public class ProductSet extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetProducts requestImageCdnUrlsField () {
+      return this.requestImageCdnUrlsField(true);
+    }
+    public APIRequestGetProducts requestImageCdnUrlsField (boolean value) {
+      this.requestField("image_cdn_urls", value);
+      return this;
+    }
     public APIRequestGetProducts requestImageUrlField () {
       return this.requestImageUrlField(true);
     }
@@ -673,6 +693,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestMaterialField (boolean value) {
       this.requestField("material", value);
+      return this;
+    }
+    public APIRequestGetProducts requestMobileLinkField () {
+      return this.requestMobileLinkField(true);
+    }
+    public APIRequestGetProducts requestMobileLinkField (boolean value) {
+      this.requestField("mobile_link", value);
       return this;
     }
     public APIRequestGetProducts requestNameField () {

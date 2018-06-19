@@ -24,6 +24,7 @@ package com.facebook.ads.sdk;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.net.URL;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -43,6 +44,7 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
     private APIRequest<T> request;
     private String rawValue;
     private boolean autoPagination;
+    private String appSecret;
 
     public APINodeList(APIRequest<T> request, String rawValue) {
       this.request = request;
@@ -59,8 +61,26 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
     }
 
     public APINodeList<T> nextPage(int limit) throws APIException {
+      // First check if 'next' url is retured. If so, always use the it.
       if (this.next != null) {
-        this.request.setOverrideUrl(this.next);
+        // App secret won't return with the 'next' URL. Need to append it
+        // for paging.
+        if (this.appSecret == null) {
+          this.request.setOverrideUrl(this.next);
+        } else {
+          try {
+            URL a = new URL(this.next);
+            String connector = a.getQuery() == null ? "?" : "&";
+            this.request.setOverrideUrl(
+              this.next +
+              connector +
+              "appsecret_proof=" +
+              this.appSecret
+            );
+          } catch (java.net.MalformedURLException e) {
+            return null;
+          }
+        }
         return (APINodeList<T>) request.execute();
       }
       if (after == null) return null;
@@ -79,6 +99,10 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
     public void setPaging(String previous, String next) {
       this.previous = previous;
       this.next = next;
+    }
+
+    public void setAppSecret(String appSecret) {
+      this.appSecret = appSecret;
     }
 
     @Override

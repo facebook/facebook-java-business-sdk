@@ -132,6 +132,9 @@ public class AdAccountTargetingUnified extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             adAccountTargetingUnifieds.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adAccountTargetingUnifieds.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -521,6 +524,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_IS_WHATSAPP_DESTINATION_AD("is_whatsapp_destination_ad"),
       @SerializedName("marketplace_product_categories")
       VALUE_MARKETPLACE_PRODUCT_CATEGORIES("marketplace_product_categories"),
+      @SerializedName("instream_video_sponsorship_placements")
+      VALUE_INSTREAM_VIDEO_SPONSORSHIP_PLACEMENTS("instream_video_sponsorship_placements"),
       NULL(null);
 
       private String value;

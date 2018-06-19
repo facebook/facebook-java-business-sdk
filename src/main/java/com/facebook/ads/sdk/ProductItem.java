@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ProductItem extends APINode {
+  @SerializedName("additional_image_cdn_urls")
+  private List<List<Object>> mAdditionalImageCdnUrls = null;
   @SerializedName("additional_image_urls")
   private List<String> mAdditionalImageUrls = null;
   @SerializedName("additional_variant_attributes")
@@ -99,6 +101,8 @@ public class ProductItem extends APINode {
   private String mGtin = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("image_cdn_urls")
+  private List<Object> mImageCdnUrls = null;
   @SerializedName("image_url")
   private String mImageUrl = null;
   @SerializedName("inventory")
@@ -107,6 +111,8 @@ public class ProductItem extends APINode {
   private String mManufacturerPartNumber = null;
   @SerializedName("material")
   private String mMaterial = null;
+  @SerializedName("mobile_link")
+  private String mMobileLink = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("ordering_index")
@@ -269,6 +275,9 @@ public class ProductItem extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             productItems.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              productItems.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -375,6 +384,10 @@ public class ProductItem extends APINode {
   }
 
 
+  public List<List<Object>> getFieldAdditionalImageCdnUrls() {
+    return mAdditionalImageCdnUrls;
+  }
+
   public List<String> getFieldAdditionalImageUrls() {
     return mAdditionalImageUrls;
   }
@@ -466,6 +479,10 @@ public class ProductItem extends APINode {
     return mId;
   }
 
+  public List<Object> getFieldImageCdnUrls() {
+    return mImageCdnUrls;
+  }
+
   public String getFieldImageUrl() {
     return mImageUrl;
   }
@@ -480,6 +497,10 @@ public class ProductItem extends APINode {
 
   public String getFieldMaterial() {
     return mMaterial;
+  }
+
+  public String getFieldMobileLink() {
+    return mMobileLink;
   }
 
   public String getFieldName() {
@@ -848,6 +869,7 @@ public class ProductItem extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "additional_image_cdn_urls",
       "additional_image_urls",
       "additional_variant_attributes",
       "age_group",
@@ -870,10 +892,12 @@ public class ProductItem extends APINode {
       "gender",
       "gtin",
       "id",
+      "image_cdn_urls",
       "image_url",
       "inventory",
       "manufacturer_part_number",
       "material",
+      "mobile_link",
       "name",
       "ordering_index",
       "pattern",
@@ -1004,6 +1028,13 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAdditionalImageCdnUrlsField () {
+      return this.requestAdditionalImageCdnUrlsField(true);
+    }
+    public APIRequestGet requestAdditionalImageCdnUrlsField (boolean value) {
+      this.requestField("additional_image_cdn_urls", value);
+      return this;
+    }
     public APIRequestGet requestAdditionalImageUrlsField () {
       return this.requestAdditionalImageUrlsField(true);
     }
@@ -1158,6 +1189,13 @@ public class ProductItem extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestImageCdnUrlsField () {
+      return this.requestImageCdnUrlsField(true);
+    }
+    public APIRequestGet requestImageCdnUrlsField (boolean value) {
+      this.requestField("image_cdn_urls", value);
+      return this;
+    }
     public APIRequestGet requestImageUrlField () {
       return this.requestImageUrlField(true);
     }
@@ -1184,6 +1222,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestMaterialField (boolean value) {
       this.requestField("material", value);
+      return this;
+    }
+    public APIRequestGet requestMobileLinkField () {
+      return this.requestMobileLinkField(true);
+    }
+    public APIRequestGet requestMobileLinkField (boolean value) {
+      this.requestField("mobile_link", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -1386,6 +1431,7 @@ public class ProductItem extends APINode {
       "iphone_url",
       "manufacturer_part_number",
       "material",
+      "mobile_link",
       "name",
       "offer_price_amount",
       "offer_price_end_date",
@@ -1394,6 +1440,7 @@ public class ProductItem extends APINode {
       "pattern",
       "price",
       "product_type",
+      "retailer_id",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
@@ -1686,6 +1733,15 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setMobileLink (Object mobileLink) {
+      this.setParam("mobile_link", mobileLink);
+      return this;
+    }
+    public APIRequestUpdate setMobileLink (String mobileLink) {
+      this.setParam("mobile_link", mobileLink);
+      return this;
+    }
+
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
       return this;
@@ -1743,6 +1799,11 @@ public class ProductItem extends APINode {
 
     public APIRequestUpdate setProductType (String productType) {
       this.setParam("product_type", productType);
+      return this;
+    }
+
+    public APIRequestUpdate setRetailerId (String retailerId) {
+      this.setParam("retailer_id", retailerId);
       return this;
     }
 
@@ -1854,12 +1915,16 @@ public class ProductItem extends APINode {
   public static enum EnumAgeGroup {
       @SerializedName("adult")
       VALUE_ADULT("adult"),
+      @SerializedName("all ages")
+      VALUE_ALL_AGES("all ages"),
       @SerializedName("infant")
       VALUE_INFANT("infant"),
       @SerializedName("kids")
       VALUE_KIDS("kids"),
       @SerializedName("newborn")
       VALUE_NEWBORN("newborn"),
+      @SerializedName("teen")
+      VALUE_TEEN("teen"),
       @SerializedName("toddler")
       VALUE_TODDLER("toddler"),
       NULL(null);
@@ -2027,6 +2092,7 @@ public class ProductItem extends APINode {
   }
 
   public ProductItem copyFrom(ProductItem instance) {
+    this.mAdditionalImageCdnUrls = instance.mAdditionalImageCdnUrls;
     this.mAdditionalImageUrls = instance.mAdditionalImageUrls;
     this.mAdditionalVariantAttributes = instance.mAdditionalVariantAttributes;
     this.mAgeGroup = instance.mAgeGroup;
@@ -2049,10 +2115,12 @@ public class ProductItem extends APINode {
     this.mGender = instance.mGender;
     this.mGtin = instance.mGtin;
     this.mId = instance.mId;
+    this.mImageCdnUrls = instance.mImageCdnUrls;
     this.mImageUrl = instance.mImageUrl;
     this.mInventory = instance.mInventory;
     this.mManufacturerPartNumber = instance.mManufacturerPartNumber;
     this.mMaterial = instance.mMaterial;
+    this.mMobileLink = instance.mMobileLink;
     this.mName = instance.mName;
     this.mOrderingIndex = instance.mOrderingIndex;
     this.mPattern = instance.mPattern;

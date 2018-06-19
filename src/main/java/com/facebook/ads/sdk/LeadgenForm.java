@@ -231,6 +231,9 @@ public class LeadgenForm extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             leadgenForms.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              leadgenForms.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -495,6 +498,7 @@ public class LeadgenForm extends APINode {
       "form_id",
       "id",
       "is_organic",
+      "partner_name",
       "post",
       "retailer_item_id",
     };
@@ -669,6 +673,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGetLeads requestIsOrganicField (boolean value) {
       this.requestField("is_organic", value);
+      return this;
+    }
+    public APIRequestGetLeads requestPartnerNameField () {
+      return this.requestPartnerNameField(true);
+    }
+    public APIRequestGetLeads requestPartnerNameField (boolean value) {
+      this.requestField("partner_name", value);
       return this;
     }
     public APIRequestGetLeads requestPostField () {

@@ -84,7 +84,7 @@ public class Targeting extends APINode {
   @SerializedName("country_groups")
   private List<String> mCountryGroups = null;
   @SerializedName("custom_audiences")
-  private List<IDName> mCustomAudiences = null;
+  private List<Object> mCustomAudiences = null;
   @SerializedName("device_platforms")
   private List<EnumDevicePlatforms> mDevicePlatforms = null;
   @SerializedName("direct_install_devices")
@@ -167,6 +167,8 @@ public class Targeting extends APINode {
   private List<IDName> mIndustries = null;
   @SerializedName("instagram_positions")
   private List<String> mInstagramPositions = null;
+  @SerializedName("instream_video_sponsorship_placements")
+  private List<String> mInstreamVideoSponsorshipPlacements = null;
   @SerializedName("interested_in")
   private List<Long> mInterestedIn = null;
   @SerializedName("interests")
@@ -284,6 +286,9 @@ public class Targeting extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             targetings.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              targetings.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -520,20 +525,15 @@ public class Targeting extends APINode {
     return this;
   }
 
-  public List<IDName> getFieldCustomAudiences() {
+  public List<Object> getFieldCustomAudiences() {
     return mCustomAudiences;
   }
 
-  public Targeting setFieldCustomAudiences(List<IDName> value) {
+  public Targeting setFieldCustomAudiences(List<Object> value) {
     this.mCustomAudiences = value;
     return this;
   }
 
-  public Targeting setFieldCustomAudiences(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mCustomAudiences = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<EnumDevicePlatforms> getFieldDevicePlatforms() {
     return mDevicePlatforms;
   }
@@ -1008,6 +1008,15 @@ public class Targeting extends APINode {
     return this;
   }
 
+  public List<String> getFieldInstreamVideoSponsorshipPlacements() {
+    return mInstreamVideoSponsorshipPlacements;
+  }
+
+  public Targeting setFieldInstreamVideoSponsorshipPlacements(List<String> value) {
+    this.mInstreamVideoSponsorshipPlacements = value;
+    return this;
+  }
+
   public List<Long> getFieldInterestedIn() {
     return mInterestedIn;
   }
@@ -1448,6 +1457,7 @@ public class Targeting extends APINode {
     this.mIncome = instance.mIncome;
     this.mIndustries = instance.mIndustries;
     this.mInstagramPositions = instance.mInstagramPositions;
+    this.mInstreamVideoSponsorshipPlacements = instance.mInstreamVideoSponsorshipPlacements;
     this.mInterestedIn = instance.mInterestedIn;
     this.mInterests = instance.mInterests;
     this.mIsWhatsappDestinationAd = instance.mIsWhatsappDestinationAd;

@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class Business extends APINode {
+  @SerializedName("block_offline_analytics")
+  private Boolean mBlockOfflineAnalytics = null;
   @SerializedName("created_by")
   private User mCreatedBy = null;
   @SerializedName("created_time")
@@ -199,6 +201,9 @@ public class Business extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             businesss.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              businesss.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -580,6 +585,10 @@ public class Business extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
+
+  public Boolean getFieldBlockOfflineAnalytics() {
+    return mBlockOfflineAnalytics;
+  }
 
   public User getFieldCreatedBy() {
     if (mCreatedBy != null) {
@@ -1676,6 +1685,10 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdAccountCreationRequest setExtendedCreditId (Object extendedCreditId) {
+      this.setParam("extended_credit_id", extendedCreditId);
+      return this;
+    }
     public APIRequestCreateAdAccountCreationRequest setExtendedCreditId (String extendedCreditId) {
       this.setParam("extended_credit_id", extendedCreditId);
       return this;
@@ -3038,6 +3051,7 @@ public class Business extends APINode {
       "contact_address",
       "context",
       "copyright_attribution_insights",
+      "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
       "culinary_team",
@@ -3135,6 +3149,7 @@ public class Business extends APINode {
       "single_line_address",
       "starring",
       "start_info",
+      "store_code",
       "store_location_descriptor",
       "store_number",
       "studio",
@@ -3432,6 +3447,13 @@ public class Business extends APINode {
     }
     public APIRequestGetAgencyPages requestCopyrightAttributionInsightsField (boolean value) {
       this.requestField("copyright_attribution_insights", value);
+      return this;
+    }
+    public APIRequestGetAgencyPages requestCopyrightWhitelistedIgPartnersField () {
+      return this.requestCopyrightWhitelistedIgPartnersField(true);
+    }
+    public APIRequestGetAgencyPages requestCopyrightWhitelistedIgPartnersField (boolean value) {
+      this.requestField("copyright_whitelisted_ig_partners", value);
       return this;
     }
     public APIRequestGetAgencyPages requestCountryPageLikesField () {
@@ -4111,6 +4133,13 @@ public class Business extends APINode {
     }
     public APIRequestGetAgencyPages requestStartInfoField (boolean value) {
       this.requestField("start_info", value);
+      return this;
+    }
+    public APIRequestGetAgencyPages requestStoreCodeField () {
+      return this.requestStoreCodeField(true);
+    }
+    public APIRequestGetAgencyPages requestStoreCodeField (boolean value) {
+      this.requestField("store_code", value);
       return this;
     }
     public APIRequestGetAgencyPages requestStoreLocationDescriptorField () {
@@ -4981,8 +5010,10 @@ public class Business extends APINode {
     public static final String[] FIELDS = {
       "business",
       "email",
+      "finance_permission",
       "first_name",
       "id",
+      "ip_permission",
       "last_name",
       "marked_for_removal",
       "name",
@@ -5094,6 +5125,13 @@ public class Business extends APINode {
       this.requestField("email", value);
       return this;
     }
+    public APIRequestGetBusinessUsers requestFinancePermissionField () {
+      return this.requestFinancePermissionField(true);
+    }
+    public APIRequestGetBusinessUsers requestFinancePermissionField (boolean value) {
+      this.requestField("finance_permission", value);
+      return this;
+    }
     public APIRequestGetBusinessUsers requestFirstNameField () {
       return this.requestFirstNameField(true);
     }
@@ -5106,6 +5144,13 @@ public class Business extends APINode {
     }
     public APIRequestGetBusinessUsers requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetBusinessUsers requestIpPermissionField () {
+      return this.requestIpPermissionField(true);
+    }
+    public APIRequestGetBusinessUsers requestIpPermissionField (boolean value) {
+      this.requestField("ip_permission", value);
       return this;
     }
     public APIRequestGetBusinessUsers requestLastNameField () {
@@ -5458,10 +5503,12 @@ public class Business extends APINode {
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
+      "has_page_authorized_adaccount",
       "id",
       "io_number",
       "is_attribution_spec_system_default",
       "is_direct_deals_enabled",
+      "is_in_middle_of_local_entity_migration",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -5485,6 +5532,7 @@ public class Business extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tos_accepted",
     };
 
     @Override
@@ -5757,6 +5805,13 @@ public class Business extends APINode {
       this.requestField("has_migrated_permissions", value);
       return this;
     }
+    public APIRequestGetClientAdAccounts requestHasPageAuthorizedAdaccountField () {
+      return this.requestHasPageAuthorizedAdaccountField(true);
+    }
+    public APIRequestGetClientAdAccounts requestHasPageAuthorizedAdaccountField (boolean value) {
+      this.requestField("has_page_authorized_adaccount", value);
+      return this;
+    }
     public APIRequestGetClientAdAccounts requestIdField () {
       return this.requestIdField(true);
     }
@@ -5783,6 +5838,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestIsDirectDealsEnabledField (boolean value) {
       this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
+    public APIRequestGetClientAdAccounts requestIsInMiddleOfLocalEntityMigrationField () {
+      return this.requestIsInMiddleOfLocalEntityMigrationField(true);
+    }
+    public APIRequestGetClientAdAccounts requestIsInMiddleOfLocalEntityMigrationField (boolean value) {
+      this.requestField("is_in_middle_of_local_entity_migration", value);
       return this;
     }
     public APIRequestGetClientAdAccounts requestIsNotificationsEnabledField () {
@@ -5944,6 +6006,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientAdAccounts requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGetClientAdAccounts requestUserTosAcceptedField () {
+      return this.requestUserTosAcceptedField(true);
+    }
+    public APIRequestGetClientAdAccounts requestUserTosAcceptedField (boolean value) {
+      this.requestField("user_tos_accepted", value);
       return this;
     }
   }
@@ -6294,6 +6363,7 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "block_offline_analytics",
       "created_by",
       "created_time",
       "id",
@@ -6396,6 +6466,13 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetClientBusinesses requestBlockOfflineAnalyticsField () {
+      return this.requestBlockOfflineAnalyticsField(true);
+    }
+    public APIRequestGetClientBusinesses requestBlockOfflineAnalyticsField (boolean value) {
+      this.requestField("block_offline_analytics", value);
+      return this;
+    }
     public APIRequestGetClientBusinesses requestCreatedByField () {
       return this.requestCreatedByField(true);
     }
@@ -6520,6 +6597,7 @@ public class Business extends APINode {
       "contact_address",
       "context",
       "copyright_attribution_insights",
+      "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
       "culinary_team",
@@ -6617,6 +6695,7 @@ public class Business extends APINode {
       "single_line_address",
       "starring",
       "start_info",
+      "store_code",
       "store_location_descriptor",
       "store_number",
       "studio",
@@ -6909,6 +6988,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestCopyrightAttributionInsightsField (boolean value) {
       this.requestField("copyright_attribution_insights", value);
+      return this;
+    }
+    public APIRequestGetClientPages requestCopyrightWhitelistedIgPartnersField () {
+      return this.requestCopyrightWhitelistedIgPartnersField(true);
+    }
+    public APIRequestGetClientPages requestCopyrightWhitelistedIgPartnersField (boolean value) {
+      this.requestField("copyright_whitelisted_ig_partners", value);
       return this;
     }
     public APIRequestGetClientPages requestCountryPageLikesField () {
@@ -7588,6 +7674,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPages requestStartInfoField (boolean value) {
       this.requestField("start_info", value);
+      return this;
+    }
+    public APIRequestGetClientPages requestStoreCodeField () {
+      return this.requestStoreCodeField(true);
+    }
+    public APIRequestGetClientPages requestStoreCodeField (boolean value) {
+      this.requestField("store_code", value);
       return this;
     }
     public APIRequestGetClientPages requestStoreLocationDescriptorField () {
@@ -8739,6 +8832,7 @@ public class Business extends APINode {
       "credit_available",
       "credit_type",
       "id",
+      "is_automated_experience",
       "last_payment_time",
       "legal_entity_name",
       "liable_biz_name",
@@ -8872,6 +8966,13 @@ public class Business extends APINode {
     }
     public APIRequestGetExtendedCredits requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetExtendedCredits requestIsAutomatedExperienceField () {
+      return this.requestIsAutomatedExperienceField(true);
+    }
+    public APIRequestGetExtendedCredits requestIsAutomatedExperienceField (boolean value) {
+      this.requestField("is_automated_experience", value);
       return this;
     }
     public APIRequestGetExtendedCredits requestLastPaymentTimeField () {
@@ -9986,6 +10087,7 @@ public class Business extends APINode {
       "id",
       "is_restricted_use",
       "last_upload_app",
+      "match_rate_approx",
       "matched_entries",
       "name",
       "usage",
@@ -10162,6 +10264,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOfflineConversionDataSets requestLastUploadAppField (boolean value) {
       this.requestField("last_upload_app", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestMatchRateApproxField () {
+      return this.requestMatchRateApproxField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestMatchRateApproxField (boolean value) {
+      this.requestField("match_rate_approx", value);
       return this;
     }
     public APIRequestGetOfflineConversionDataSets requestMatchedEntriesField () {
@@ -10366,10 +10475,12 @@ public class Business extends APINode {
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
+      "has_page_authorized_adaccount",
       "id",
       "io_number",
       "is_attribution_spec_system_default",
       "is_direct_deals_enabled",
+      "is_in_middle_of_local_entity_migration",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -10393,6 +10504,7 @@ public class Business extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tos_accepted",
     };
 
     @Override
@@ -10665,6 +10777,13 @@ public class Business extends APINode {
       this.requestField("has_migrated_permissions", value);
       return this;
     }
+    public APIRequestGetOwnedAdAccounts requestHasPageAuthorizedAdaccountField () {
+      return this.requestHasPageAuthorizedAdaccountField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestHasPageAuthorizedAdaccountField (boolean value) {
+      this.requestField("has_page_authorized_adaccount", value);
+      return this;
+    }
     public APIRequestGetOwnedAdAccounts requestIdField () {
       return this.requestIdField(true);
     }
@@ -10691,6 +10810,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestIsDirectDealsEnabledField (boolean value) {
       this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
+    public APIRequestGetOwnedAdAccounts requestIsInMiddleOfLocalEntityMigrationField () {
+      return this.requestIsInMiddleOfLocalEntityMigrationField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestIsInMiddleOfLocalEntityMigrationField (boolean value) {
+      this.requestField("is_in_middle_of_local_entity_migration", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestIsNotificationsEnabledField () {
@@ -10852,6 +10978,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGetOwnedAdAccounts requestUserTosAcceptedField () {
+      return this.requestUserTosAcceptedField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestUserTosAcceptedField (boolean value) {
+      this.requestField("user_tos_accepted", value);
       return this;
     }
   }
@@ -11306,6 +11439,7 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "block_offline_analytics",
       "created_by",
       "created_time",
       "id",
@@ -11417,6 +11551,13 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetOwnedBusinesses requestBlockOfflineAnalyticsField () {
+      return this.requestBlockOfflineAnalyticsField(true);
+    }
+    public APIRequestGetOwnedBusinesses requestBlockOfflineAnalyticsField (boolean value) {
+      this.requestField("block_offline_analytics", value);
+      return this;
+    }
     public APIRequestGetOwnedBusinesses requestCreatedByField () {
       return this.requestCreatedByField(true);
     }
@@ -11938,6 +12079,7 @@ public class Business extends APINode {
       "contact_address",
       "context",
       "copyright_attribution_insights",
+      "copyright_whitelisted_ig_partners",
       "country_page_likes",
       "cover",
       "culinary_team",
@@ -12035,6 +12177,7 @@ public class Business extends APINode {
       "single_line_address",
       "starring",
       "start_info",
+      "store_code",
       "store_location_descriptor",
       "store_number",
       "studio",
@@ -12327,6 +12470,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPages requestCopyrightAttributionInsightsField (boolean value) {
       this.requestField("copyright_attribution_insights", value);
+      return this;
+    }
+    public APIRequestGetOwnedPages requestCopyrightWhitelistedIgPartnersField () {
+      return this.requestCopyrightWhitelistedIgPartnersField(true);
+    }
+    public APIRequestGetOwnedPages requestCopyrightWhitelistedIgPartnersField (boolean value) {
+      this.requestField("copyright_whitelisted_ig_partners", value);
       return this;
     }
     public APIRequestGetOwnedPages requestCountryPageLikesField () {
@@ -13008,6 +13158,13 @@ public class Business extends APINode {
       this.requestField("start_info", value);
       return this;
     }
+    public APIRequestGetOwnedPages requestStoreCodeField () {
+      return this.requestStoreCodeField(true);
+    }
+    public APIRequestGetOwnedPages requestStoreCodeField (boolean value) {
+      this.requestField("store_code", value);
+      return this;
+    }
     public APIRequestGetOwnedPages requestStoreLocationDescriptorField () {
       return this.requestStoreLocationDescriptorField(true);
     }
@@ -13123,6 +13280,7 @@ public class Business extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "ig_password",
       "page_id",
     };
 
@@ -13180,6 +13338,11 @@ public class Business extends APINode {
       return this;
     }
 
+
+    public APIRequestCreateOwnedPage setIgPassword (String igPassword) {
+      this.setParam("ig_password", igPassword);
+      return this;
+    }
 
     public APIRequestCreateOwnedPage setPageId (Long pageId) {
       this.setParam("page_id", pageId);
@@ -13875,6 +14038,7 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "block_offline_analytics",
       "created_by",
       "created_time",
       "id",
@@ -13977,6 +14141,13 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetPartners requestBlockOfflineAnalyticsField () {
+      return this.requestBlockOfflineAnalyticsField(true);
+    }
+    public APIRequestGetPartners requestBlockOfflineAnalyticsField (boolean value) {
+      this.requestField("block_offline_analytics", value);
+      return this;
+    }
     public APIRequestGetPartners requestCreatedByField () {
       return this.requestCreatedByField(true);
     }
@@ -16215,6 +16386,7 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "block_offline_analytics",
       "created_by",
       "created_time",
       "id",
@@ -16317,6 +16489,13 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGet requestBlockOfflineAnalyticsField () {
+      return this.requestBlockOfflineAnalyticsField(true);
+    }
+    public APIRequestGet requestBlockOfflineAnalyticsField (boolean value) {
+      this.requestField("block_offline_analytics", value);
+      return this;
+    }
     public APIRequestGet requestCreatedByField () {
       return this.requestCreatedByField(true);
     }
@@ -16696,6 +16875,8 @@ public class Business extends APINode {
       VALUE_TIME("TIME"),
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
+      @SerializedName("METRIC")
+      VALUE_METRIC("METRIC"),
       NULL(null);
 
       private String value;
@@ -16763,6 +16944,7 @@ public class Business extends APINode {
   }
 
   public Business copyFrom(Business instance) {
+    this.mBlockOfflineAnalytics = instance.mBlockOfflineAnalytics;
     this.mCreatedBy = instance.mCreatedBy;
     this.mCreatedTime = instance.mCreatedTime;
     this.mId = instance.mId;

@@ -79,6 +79,8 @@ public class OfflineConversionDataSet extends APINode {
   private Boolean mIsRestrictedUse = null;
   @SerializedName("last_upload_app")
   private String mLastUploadApp = null;
+  @SerializedName("match_rate_approx")
+  private Long mMatchRateApprox = null;
   @SerializedName("matched_entries")
   private Long mMatchedEntries = null;
   @SerializedName("name")
@@ -205,6 +207,9 @@ public class OfflineConversionDataSet extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             offlineConversionDataSets.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              offlineConversionDataSets.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -408,6 +413,10 @@ public class OfflineConversionDataSet extends APINode {
 
   public String getFieldLastUploadApp() {
     return mLastUploadApp;
+  }
+
+  public Long getFieldMatchRateApprox() {
+    return mMatchRateApprox;
   }
 
   public Long getFieldMatchedEntries() {
@@ -712,10 +721,12 @@ public class OfflineConversionDataSet extends APINode {
       "funding_source",
       "funding_source_details",
       "has_migrated_permissions",
+      "has_page_authorized_adaccount",
       "id",
       "io_number",
       "is_attribution_spec_system_default",
       "is_direct_deals_enabled",
+      "is_in_middle_of_local_entity_migration",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -739,6 +750,7 @@ public class OfflineConversionDataSet extends APINode {
       "timezone_offset_hours_utc",
       "tos_accepted",
       "user_role",
+      "user_tos_accepted",
     };
 
     @Override
@@ -1016,6 +1028,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("has_migrated_permissions", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestHasPageAuthorizedAdaccountField () {
+      return this.requestHasPageAuthorizedAdaccountField(true);
+    }
+    public APIRequestGetAdAccounts requestHasPageAuthorizedAdaccountField (boolean value) {
+      this.requestField("has_page_authorized_adaccount", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestIdField () {
       return this.requestIdField(true);
     }
@@ -1042,6 +1061,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAdAccounts requestIsDirectDealsEnabledField (boolean value) {
       this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField () {
+      return this.requestIsInMiddleOfLocalEntityMigrationField(true);
+    }
+    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField (boolean value) {
+      this.requestField("is_in_middle_of_local_entity_migration", value);
       return this;
     }
     public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {
@@ -1203,6 +1229,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAdAccounts requestUserRoleField (boolean value) {
       this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestUserTosAcceptedField () {
+      return this.requestUserTosAcceptedField(true);
+    }
+    public APIRequestGetAdAccounts requestUserTosAcceptedField (boolean value) {
+      this.requestField("user_tos_accepted", value);
       return this;
     }
   }
@@ -1630,7 +1663,7 @@ public class OfflineConversionDataSet extends APINode {
     }
 
 
-    public APIRequestCreateEvent setData (List<Object> data) {
+    public APIRequestCreateEvent setData (List<String> data) {
       this.setParam("data", data);
       return this;
     }
@@ -2451,7 +2484,7 @@ public class OfflineConversionDataSet extends APINode {
     }
 
 
-    public APIRequestCreateValidate setData (List<Object> data) {
+    public APIRequestCreateValidate setData (List<String> data) {
       this.setParam("data", data);
       return this;
     }
@@ -2629,6 +2662,7 @@ public class OfflineConversionDataSet extends APINode {
       "id",
       "is_restricted_use",
       "last_upload_app",
+      "match_rate_approx",
       "matched_entries",
       "name",
       "usage",
@@ -2805,6 +2839,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGet requestLastUploadAppField (boolean value) {
       this.requestField("last_upload_app", value);
+      return this;
+    }
+    public APIRequestGet requestMatchRateApproxField () {
+      return this.requestMatchRateApproxField(true);
+    }
+    public APIRequestGet requestMatchRateApproxField (boolean value) {
+      this.requestField("match_rate_approx", value);
       return this;
     }
     public APIRequestGet requestMatchedEntriesField () {
@@ -3147,6 +3188,7 @@ public class OfflineConversionDataSet extends APINode {
     this.mId = instance.mId;
     this.mIsRestrictedUse = instance.mIsRestrictedUse;
     this.mLastUploadApp = instance.mLastUploadApp;
+    this.mMatchRateApprox = instance.mMatchRateApprox;
     this.mMatchedEntries = instance.mMatchedEntries;
     this.mName = instance.mName;
     this.mUsage = instance.mUsage;

@@ -203,6 +203,9 @@ public class ProductFeed extends APINode {
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
             productFeeds.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              productFeeds.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -403,6 +406,7 @@ public class ProductFeed extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "additional_image_cdn_urls",
       "additional_image_urls",
       "additional_variant_attributes",
       "age_group",
@@ -425,10 +429,12 @@ public class ProductFeed extends APINode {
       "gender",
       "gtin",
       "id",
+      "image_cdn_urls",
       "image_url",
       "inventory",
       "manufacturer_part_number",
       "material",
+      "mobile_link",
       "name",
       "ordering_index",
       "pattern",
@@ -559,6 +565,13 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    public APIRequestGetProducts requestAdditionalImageCdnUrlsField () {
+      return this.requestAdditionalImageCdnUrlsField(true);
+    }
+    public APIRequestGetProducts requestAdditionalImageCdnUrlsField (boolean value) {
+      this.requestField("additional_image_cdn_urls", value);
+      return this;
+    }
     public APIRequestGetProducts requestAdditionalImageUrlsField () {
       return this.requestAdditionalImageUrlsField(true);
     }
@@ -713,6 +726,13 @@ public class ProductFeed extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetProducts requestImageCdnUrlsField () {
+      return this.requestImageCdnUrlsField(true);
+    }
+    public APIRequestGetProducts requestImageCdnUrlsField (boolean value) {
+      this.requestField("image_cdn_urls", value);
+      return this;
+    }
     public APIRequestGetProducts requestImageUrlField () {
       return this.requestImageUrlField(true);
     }
@@ -739,6 +759,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestMaterialField (boolean value) {
       this.requestField("material", value);
+      return this;
+    }
+    public APIRequestGetProducts requestMobileLinkField () {
+      return this.requestMobileLinkField(true);
+    }
+    public APIRequestGetProducts requestMobileLinkField (boolean value) {
+      this.requestField("mobile_link", value);
       return this;
     }
     public APIRequestGetProducts requestNameField () {
@@ -2070,10 +2097,6 @@ public class ProductFeed extends APINode {
       VALUE_FLIGHT("FLIGHT"),
       @SerializedName("HOME_LISTING")
       VALUE_HOME_LISTING("HOME_LISTING"),
-      @SerializedName("HOME_SERVICE_PROVIDER")
-      VALUE_HOME_SERVICE_PROVIDER("HOME_SERVICE_PROVIDER"),
-      @SerializedName("HOME_SERVICE_REVIEW")
-      VALUE_HOME_SERVICE_REVIEW("HOME_SERVICE_REVIEW"),
       @SerializedName("HOTEL")
       VALUE_HOTEL("HOTEL"),
       @SerializedName("HOTEL_ROOM")
@@ -2086,8 +2109,6 @@ public class ProductFeed extends APINode {
       VALUE_MEDIA_TITLE("MEDIA_TITLE"),
       @SerializedName("PRODUCTS")
       VALUE_PRODUCTS("PRODUCTS"),
-      @SerializedName("TEST_DYNAMIC_ITEM")
-      VALUE_TEST_DYNAMIC_ITEM("TEST_DYNAMIC_ITEM"),
       @SerializedName("VEHICLE_OFFER")
       VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
       @SerializedName("VEHICLES")
