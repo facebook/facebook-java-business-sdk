@@ -59,12 +59,16 @@ public class Campaign extends APINode {
   private String mAccountId = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
+  @SerializedName("bid_strategy")
+  private EnumBidStrategy mBidStrategy = null;
   @SerializedName("boosted_object_id")
   private String mBoostedObjectId = null;
   @SerializedName("brand_lift_studies")
   private List<AdStudy> mBrandLiftStudies = null;
   @SerializedName("budget_rebalance_flag")
   private Boolean mBudgetRebalanceFlag = null;
+  @SerializedName("budget_remaining")
+  private String mBudgetRemaining = null;
   @SerializedName("buying_type")
   private String mBuyingType = null;
   @SerializedName("can_create_brand_lift_study")
@@ -75,10 +79,14 @@ public class Campaign extends APINode {
   private EnumConfiguredStatus mConfiguredStatus = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
+  @SerializedName("daily_budget")
+  private String mDailyBudget = null;
   @SerializedName("effective_status")
   private EnumEffectiveStatus mEffectiveStatus = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("lifetime_budget")
+  private String mLifetimeBudget = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("objective")
@@ -362,6 +370,10 @@ public class Campaign extends APINode {
     return mAdlabels;
   }
 
+  public EnumBidStrategy getFieldBidStrategy() {
+    return mBidStrategy;
+  }
+
   public String getFieldBoostedObjectId() {
     return mBoostedObjectId;
   }
@@ -372,6 +384,10 @@ public class Campaign extends APINode {
 
   public Boolean getFieldBudgetRebalanceFlag() {
     return mBudgetRebalanceFlag;
+  }
+
+  public String getFieldBudgetRemaining() {
+    return mBudgetRemaining;
   }
 
   public String getFieldBuyingType() {
@@ -394,12 +410,20 @@ public class Campaign extends APINode {
     return mCreatedTime;
   }
 
+  public String getFieldDailyBudget() {
+    return mDailyBudget;
+  }
+
   public EnumEffectiveStatus getFieldEffectiveStatus() {
     return mEffectiveStatus;
   }
 
   public String getFieldId() {
     return mId;
+  }
+
+  public String getFieldLifetimeBudget() {
+    return mLifetimeBudget;
   }
 
   public String getFieldName() {
@@ -1258,6 +1282,8 @@ public class Campaign extends APINode {
       "created_time",
       "creative_sequence",
       "daily_budget",
+      "daily_min_spend_target",
+      "daily_spend_cap",
       "destination_type",
       "effective_status",
       "end_time",
@@ -1266,6 +1292,8 @@ public class Campaign extends APINode {
       "instagram_actor_id",
       "lifetime_budget",
       "lifetime_imps",
+      "lifetime_min_spend_target",
+      "lifetime_spend_cap",
       "name",
       "optimization_goal",
       "pacing_type",
@@ -1519,6 +1547,20 @@ public class Campaign extends APINode {
       this.requestField("daily_budget", value);
       return this;
     }
+    public APIRequestGetAdSets requestDailyMinSpendTargetField () {
+      return this.requestDailyMinSpendTargetField(true);
+    }
+    public APIRequestGetAdSets requestDailyMinSpendTargetField (boolean value) {
+      this.requestField("daily_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestDailySpendCapField () {
+      return this.requestDailySpendCapField(true);
+    }
+    public APIRequestGetAdSets requestDailySpendCapField (boolean value) {
+      this.requestField("daily_spend_cap", value);
+      return this;
+    }
     public APIRequestGetAdSets requestDestinationTypeField () {
       return this.requestDestinationTypeField(true);
     }
@@ -1573,6 +1615,20 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestLifetimeImpsField (boolean value) {
       this.requestField("lifetime_imps", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestLifetimeMinSpendTargetField () {
+      return this.requestLifetimeMinSpendTargetField(true);
+    }
+    public APIRequestGetAdSets requestLifetimeMinSpendTargetField (boolean value) {
+      this.requestField("lifetime_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestLifetimeSpendCapField () {
+      return this.requestLifetimeSpendCapField(true);
+    }
+    public APIRequestGetAdSets requestLifetimeSpendCapField (boolean value) {
+      this.requestField("lifetime_spend_cap", value);
       return this;
     }
     public APIRequestGetAdSets requestNameField () {
@@ -1713,16 +1769,20 @@ public class Campaign extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "adlabels",
+      "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
       "budget_rebalance_flag",
+      "budget_remaining",
       "buying_type",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
       "created_time",
+      "daily_budget",
       "effective_status",
       "id",
+      "lifetime_budget",
       "name",
       "objective",
       "recommendations",
@@ -1873,6 +1933,13 @@ public class Campaign extends APINode {
       this.requestField("adlabels", value);
       return this;
     }
+    public APIRequestGetCopies requestBidStrategyField () {
+      return this.requestBidStrategyField(true);
+    }
+    public APIRequestGetCopies requestBidStrategyField (boolean value) {
+      this.requestField("bid_strategy", value);
+      return this;
+    }
     public APIRequestGetCopies requestBoostedObjectIdField () {
       return this.requestBoostedObjectIdField(true);
     }
@@ -1892,6 +1959,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestBudgetRebalanceFlagField (boolean value) {
       this.requestField("budget_rebalance_flag", value);
+      return this;
+    }
+    public APIRequestGetCopies requestBudgetRemainingField () {
+      return this.requestBudgetRemainingField(true);
+    }
+    public APIRequestGetCopies requestBudgetRemainingField (boolean value) {
+      this.requestField("budget_remaining", value);
       return this;
     }
     public APIRequestGetCopies requestBuyingTypeField () {
@@ -1929,6 +2003,13 @@ public class Campaign extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetCopies requestDailyBudgetField () {
+      return this.requestDailyBudgetField(true);
+    }
+    public APIRequestGetCopies requestDailyBudgetField (boolean value) {
+      this.requestField("daily_budget", value);
+      return this;
+    }
     public APIRequestGetCopies requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -1941,6 +2022,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestLifetimeBudgetField () {
+      return this.requestLifetimeBudgetField(true);
+    }
+    public APIRequestGetCopies requestLifetimeBudgetField (boolean value) {
+      this.requestField("lifetime_budget", value);
       return this;
     }
     public APIRequestGetCopies requestNameField () {
@@ -2713,16 +2801,20 @@ public class Campaign extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "adlabels",
+      "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
       "budget_rebalance_flag",
+      "budget_remaining",
       "buying_type",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
       "created_time",
+      "daily_budget",
       "effective_status",
       "id",
+      "lifetime_budget",
       "name",
       "objective",
       "recommendations",
@@ -2837,6 +2929,13 @@ public class Campaign extends APINode {
       this.requestField("adlabels", value);
       return this;
     }
+    public APIRequestGet requestBidStrategyField () {
+      return this.requestBidStrategyField(true);
+    }
+    public APIRequestGet requestBidStrategyField (boolean value) {
+      this.requestField("bid_strategy", value);
+      return this;
+    }
     public APIRequestGet requestBoostedObjectIdField () {
       return this.requestBoostedObjectIdField(true);
     }
@@ -2856,6 +2955,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestBudgetRebalanceFlagField (boolean value) {
       this.requestField("budget_rebalance_flag", value);
+      return this;
+    }
+    public APIRequestGet requestBudgetRemainingField () {
+      return this.requestBudgetRemainingField(true);
+    }
+    public APIRequestGet requestBudgetRemainingField (boolean value) {
+      this.requestField("budget_remaining", value);
       return this;
     }
     public APIRequestGet requestBuyingTypeField () {
@@ -2893,6 +2999,13 @@ public class Campaign extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGet requestDailyBudgetField () {
+      return this.requestDailyBudgetField(true);
+    }
+    public APIRequestGet requestDailyBudgetField (boolean value) {
+      this.requestField("daily_budget", value);
+      return this;
+    }
     public APIRequestGet requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -2905,6 +3018,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestLifetimeBudgetField () {
+      return this.requestLifetimeBudgetField(true);
+    }
+    public APIRequestGet requestLifetimeBudgetField (boolean value) {
+      this.requestField("lifetime_budget", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -2988,9 +3108,12 @@ public class Campaign extends APINode {
     }
     public static final String[] PARAMS = {
       "adlabels",
+      "bid_strategy",
       "budget_rebalance_flag",
+      "daily_budget",
       "execution_options",
       "iterative_split_test_configs",
+      "lifetime_budget",
       "name",
       "objective",
       "promoted_object",
@@ -3062,12 +3185,30 @@ public class Campaign extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setBidStrategy (Campaign.EnumBidStrategy bidStrategy) {
+      this.setParam("bid_strategy", bidStrategy);
+      return this;
+    }
+    public APIRequestUpdate setBidStrategy (String bidStrategy) {
+      this.setParam("bid_strategy", bidStrategy);
+      return this;
+    }
+
     public APIRequestUpdate setBudgetRebalanceFlag (Boolean budgetRebalanceFlag) {
       this.setParam("budget_rebalance_flag", budgetRebalanceFlag);
       return this;
     }
     public APIRequestUpdate setBudgetRebalanceFlag (String budgetRebalanceFlag) {
       this.setParam("budget_rebalance_flag", budgetRebalanceFlag);
+      return this;
+    }
+
+    public APIRequestUpdate setDailyBudget (Long dailyBudget) {
+      this.setParam("daily_budget", dailyBudget);
+      return this;
+    }
+    public APIRequestUpdate setDailyBudget (String dailyBudget) {
+      this.setParam("daily_budget", dailyBudget);
       return this;
     }
 
@@ -3086,6 +3227,15 @@ public class Campaign extends APINode {
     }
     public APIRequestUpdate setIterativeSplitTestConfigs (String iterativeSplitTestConfigs) {
       this.setParam("iterative_split_test_configs", iterativeSplitTestConfigs);
+      return this;
+    }
+
+    public APIRequestUpdate setLifetimeBudget (Long lifetimeBudget) {
+      this.setParam("lifetime_budget", lifetimeBudget);
+      return this;
+    }
+    public APIRequestUpdate setLifetimeBudget (String lifetimeBudget) {
+      this.setParam("lifetime_budget", lifetimeBudget);
       return this;
     }
 
@@ -3166,6 +3316,27 @@ public class Campaign extends APINode {
       return this;
     }
 
+  }
+
+  public static enum EnumBidStrategy {
+      @SerializedName("LOWEST_COST_WITHOUT_CAP")
+      VALUE_LOWEST_COST_WITHOUT_CAP("LOWEST_COST_WITHOUT_CAP"),
+      @SerializedName("LOWEST_COST_WITH_BID_CAP")
+      VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
+      @SerializedName("TARGET_COST")
+      VALUE_TARGET_COST("TARGET_COST"),
+      NULL(null);
+
+      private String value;
+
+      private EnumBidStrategy(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumConfiguredStatus {
@@ -3421,16 +3592,20 @@ public class Campaign extends APINode {
   public Campaign copyFrom(Campaign instance) {
     this.mAccountId = instance.mAccountId;
     this.mAdlabels = instance.mAdlabels;
+    this.mBidStrategy = instance.mBidStrategy;
     this.mBoostedObjectId = instance.mBoostedObjectId;
     this.mBrandLiftStudies = instance.mBrandLiftStudies;
     this.mBudgetRebalanceFlag = instance.mBudgetRebalanceFlag;
+    this.mBudgetRemaining = instance.mBudgetRemaining;
     this.mBuyingType = instance.mBuyingType;
     this.mCanCreateBrandLiftStudy = instance.mCanCreateBrandLiftStudy;
     this.mCanUseSpendCap = instance.mCanUseSpendCap;
     this.mConfiguredStatus = instance.mConfiguredStatus;
     this.mCreatedTime = instance.mCreatedTime;
+    this.mDailyBudget = instance.mDailyBudget;
     this.mEffectiveStatus = instance.mEffectiveStatus;
     this.mId = instance.mId;
+    this.mLifetimeBudget = instance.mLifetimeBudget;
     this.mName = instance.mName;
     this.mObjective = instance.mObjective;
     this.mRecommendations = instance.mRecommendations;

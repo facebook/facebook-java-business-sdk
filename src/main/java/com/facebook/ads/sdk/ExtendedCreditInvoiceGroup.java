@@ -1232,7 +1232,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "email",
+      "emails",
       "name",
     };
 
@@ -1291,8 +1291,12 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     }
 
 
-    public APIRequestUpdate setEmail (String email) {
-      this.setParam("email", email);
+    public APIRequestUpdate setEmails (List<String> emails) {
+      this.setParam("emails", emails);
+      return this;
+    }
+    public APIRequestUpdate setEmails (String emails) {
+      this.setParam("emails", emails);
       return this;
     }
 

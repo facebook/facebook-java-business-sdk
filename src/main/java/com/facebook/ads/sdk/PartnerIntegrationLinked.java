@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class PartnerIntegrationLinked extends APINode {
   @SerializedName("ads_pixel")
   private AdsPixel mAdsPixel = null;
+  @SerializedName("application")
+  private Object mApplication = null;
   @SerializedName("external_id")
   private String mExternalId = null;
   @SerializedName("has_oauth_token")
@@ -295,6 +297,10 @@ public class PartnerIntegrationLinked extends APINode {
     return mAdsPixel;
   }
 
+  public Object getFieldApplication() {
+    return mApplication;
+  }
+
   public String getFieldExternalId() {
     return mExternalId;
   }
@@ -347,6 +353,7 @@ public class PartnerIntegrationLinked extends APINode {
 
     public static final String[] FIELDS = {
       "ads_pixel",
+      "application",
       "external_id",
       "has_oauth_token",
       "id",
@@ -452,6 +459,13 @@ public class PartnerIntegrationLinked extends APINode {
       this.requestField("ads_pixel", value);
       return this;
     }
+    public APIRequestGet requestApplicationField () {
+      return this.requestApplicationField(true);
+    }
+    public APIRequestGet requestApplicationField (boolean value) {
+      this.requestField("application", value);
+      return this;
+    }
     public APIRequestGet requestExternalIdField () {
       return this.requestExternalIdField(true);
     }
@@ -526,6 +540,7 @@ public class PartnerIntegrationLinked extends APINode {
 
   public PartnerIntegrationLinked copyFrom(PartnerIntegrationLinked instance) {
     this.mAdsPixel = instance.mAdsPixel;
+    this.mApplication = instance.mApplication;
     this.mExternalId = instance.mExternalId;
     this.mHasOauthToken = instance.mHasOauthToken;
     this.mId = instance.mId;

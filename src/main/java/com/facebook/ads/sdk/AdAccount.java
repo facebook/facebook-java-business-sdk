@@ -5229,6 +5229,8 @@ public class AdAccount extends APINode {
       "created_time",
       "creative_sequence",
       "daily_budget",
+      "daily_min_spend_target",
+      "daily_spend_cap",
       "destination_type",
       "effective_status",
       "end_time",
@@ -5237,6 +5239,8 @@ public class AdAccount extends APINode {
       "instagram_actor_id",
       "lifetime_budget",
       "lifetime_imps",
+      "lifetime_min_spend_target",
+      "lifetime_spend_cap",
       "name",
       "optimization_goal",
       "pacing_type",
@@ -5490,6 +5494,20 @@ public class AdAccount extends APINode {
       this.requestField("daily_budget", value);
       return this;
     }
+    public APIRequestGetAdSets requestDailyMinSpendTargetField () {
+      return this.requestDailyMinSpendTargetField(true);
+    }
+    public APIRequestGetAdSets requestDailyMinSpendTargetField (boolean value) {
+      this.requestField("daily_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestDailySpendCapField () {
+      return this.requestDailySpendCapField(true);
+    }
+    public APIRequestGetAdSets requestDailySpendCapField (boolean value) {
+      this.requestField("daily_spend_cap", value);
+      return this;
+    }
     public APIRequestGetAdSets requestDestinationTypeField () {
       return this.requestDestinationTypeField(true);
     }
@@ -5544,6 +5562,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestLifetimeImpsField (boolean value) {
       this.requestField("lifetime_imps", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestLifetimeMinSpendTargetField () {
+      return this.requestLifetimeMinSpendTargetField(true);
+    }
+    public APIRequestGetAdSets requestLifetimeMinSpendTargetField (boolean value) {
+      this.requestField("lifetime_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestLifetimeSpendCapField () {
+      return this.requestLifetimeSpendCapField(true);
+    }
+    public APIRequestGetAdSets requestLifetimeSpendCapField (boolean value) {
+      this.requestField("lifetime_spend_cap", value);
       return this;
     }
     public APIRequestGetAdSets requestNameField () {
@@ -5686,12 +5718,16 @@ public class AdAccount extends APINode {
       "creative_sequence",
       "daily_budget",
       "daily_imps",
+      "daily_min_spend_target",
+      "daily_spend_cap",
       "destination_type",
       "end_time",
       "execution_options",
       "frequency_control_specs",
       "lifetime_budget",
       "lifetime_imps",
+      "lifetime_min_spend_target",
+      "lifetime_spend_cap",
       "name",
       "optimization_goal",
       "pacing_type",
@@ -5854,6 +5890,24 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdSet setDailyMinSpendTarget (Long dailyMinSpendTarget) {
+      this.setParam("daily_min_spend_target", dailyMinSpendTarget);
+      return this;
+    }
+    public APIRequestCreateAdSet setDailyMinSpendTarget (String dailyMinSpendTarget) {
+      this.setParam("daily_min_spend_target", dailyMinSpendTarget);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setDailySpendCap (Long dailySpendCap) {
+      this.setParam("daily_spend_cap", dailySpendCap);
+      return this;
+    }
+    public APIRequestCreateAdSet setDailySpendCap (String dailySpendCap) {
+      this.setParam("daily_spend_cap", dailySpendCap);
+      return this;
+    }
+
     public APIRequestCreateAdSet setDestinationType (AdSet.EnumDestinationType destinationType) {
       this.setParam("destination_type", destinationType);
       return this;
@@ -5901,6 +5955,24 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdSet setLifetimeImps (String lifetimeImps) {
       this.setParam("lifetime_imps", lifetimeImps);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setLifetimeMinSpendTarget (Long lifetimeMinSpendTarget) {
+      this.setParam("lifetime_min_spend_target", lifetimeMinSpendTarget);
+      return this;
+    }
+    public APIRequestCreateAdSet setLifetimeMinSpendTarget (String lifetimeMinSpendTarget) {
+      this.setParam("lifetime_min_spend_target", lifetimeMinSpendTarget);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setLifetimeSpendCap (Long lifetimeSpendCap) {
+      this.setParam("lifetime_spend_cap", lifetimeSpendCap);
+      return this;
+    }
+    public APIRequestCreateAdSet setLifetimeSpendCap (String lifetimeSpendCap) {
+      this.setParam("lifetime_spend_cap", lifetimeSpendCap);
       return this;
     }
 
@@ -6048,6 +6120,8 @@ public class AdAccount extends APINode {
       "created_time",
       "creative_sequence",
       "daily_budget",
+      "daily_min_spend_target",
+      "daily_spend_cap",
       "destination_type",
       "effective_status",
       "end_time",
@@ -6056,6 +6130,8 @@ public class AdAccount extends APINode {
       "instagram_actor_id",
       "lifetime_budget",
       "lifetime_imps",
+      "lifetime_min_spend_target",
+      "lifetime_spend_cap",
       "name",
       "optimization_goal",
       "pacing_type",
@@ -6286,6 +6362,20 @@ public class AdAccount extends APINode {
       this.requestField("daily_budget", value);
       return this;
     }
+    public APIRequestGetAdSetsByLabels requestDailyMinSpendTargetField () {
+      return this.requestDailyMinSpendTargetField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestDailyMinSpendTargetField (boolean value) {
+      this.requestField("daily_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestDailySpendCapField () {
+      return this.requestDailySpendCapField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestDailySpendCapField (boolean value) {
+      this.requestField("daily_spend_cap", value);
+      return this;
+    }
     public APIRequestGetAdSetsByLabels requestDestinationTypeField () {
       return this.requestDestinationTypeField(true);
     }
@@ -6340,6 +6430,20 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestLifetimeImpsField (boolean value) {
       this.requestField("lifetime_imps", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestLifetimeMinSpendTargetField () {
+      return this.requestLifetimeMinSpendTargetField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestLifetimeMinSpendTargetField (boolean value) {
+      this.requestField("lifetime_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestLifetimeSpendCapField () {
+      return this.requestLifetimeSpendCapField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestLifetimeSpendCapField (boolean value) {
+      this.requestField("lifetime_spend_cap", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestNameField () {
@@ -7085,6 +7189,7 @@ public class AdAccount extends APINode {
       "og_suggestion_mechanism",
       "original_fov",
       "original_projection_type",
+      "react_mode_metadata",
       "referenced_sticker_id",
       "slideshow_spec",
       "start_offset",
@@ -7281,6 +7386,11 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdVideo setOriginalProjectionType (String originalProjectionType) {
       this.setParam("original_projection_type", originalProjectionType);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setReactModeMetadata (String reactModeMetadata) {
+      this.setParam("react_mode_metadata", reactModeMetadata);
       return this;
     }
 
@@ -9068,16 +9178,20 @@ public class AdAccount extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "adlabels",
+      "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
       "budget_rebalance_flag",
+      "budget_remaining",
       "buying_type",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
       "created_time",
+      "daily_budget",
       "effective_status",
       "id",
+      "lifetime_budget",
       "name",
       "objective",
       "recommendations",
@@ -9219,6 +9333,13 @@ public class AdAccount extends APINode {
       this.requestField("adlabels", value);
       return this;
     }
+    public APIRequestGetCampaigns requestBidStrategyField () {
+      return this.requestBidStrategyField(true);
+    }
+    public APIRequestGetCampaigns requestBidStrategyField (boolean value) {
+      this.requestField("bid_strategy", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestBoostedObjectIdField () {
       return this.requestBoostedObjectIdField(true);
     }
@@ -9238,6 +9359,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaigns requestBudgetRebalanceFlagField (boolean value) {
       this.requestField("budget_rebalance_flag", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestBudgetRemainingField () {
+      return this.requestBudgetRemainingField(true);
+    }
+    public APIRequestGetCampaigns requestBudgetRemainingField (boolean value) {
+      this.requestField("budget_remaining", value);
       return this;
     }
     public APIRequestGetCampaigns requestBuyingTypeField () {
@@ -9275,6 +9403,13 @@ public class AdAccount extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetCampaigns requestDailyBudgetField () {
+      return this.requestDailyBudgetField(true);
+    }
+    public APIRequestGetCampaigns requestDailyBudgetField (boolean value) {
+      this.requestField("daily_budget", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -9287,6 +9422,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaigns requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLifetimeBudgetField () {
+      return this.requestLifetimeBudgetField(true);
+    }
+    public APIRequestGetCampaigns requestLifetimeBudgetField (boolean value) {
+      this.requestField("lifetime_budget", value);
       return this;
     }
     public APIRequestGetCampaigns requestNameField () {
@@ -9370,10 +9512,13 @@ public class AdAccount extends APINode {
     }
     public static final String[] PARAMS = {
       "adlabels",
+      "bid_strategy",
       "budget_rebalance_flag",
       "buying_type",
+      "daily_budget",
       "execution_options",
       "iterative_split_test_configs",
+      "lifetime_budget",
       "name",
       "objective",
       "promoted_object",
@@ -9445,6 +9590,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateCampaign setBidStrategy (Campaign.EnumBidStrategy bidStrategy) {
+      this.setParam("bid_strategy", bidStrategy);
+      return this;
+    }
+    public APIRequestCreateCampaign setBidStrategy (String bidStrategy) {
+      this.setParam("bid_strategy", bidStrategy);
+      return this;
+    }
+
     public APIRequestCreateCampaign setBudgetRebalanceFlag (Boolean budgetRebalanceFlag) {
       this.setParam("budget_rebalance_flag", budgetRebalanceFlag);
       return this;
@@ -9456,6 +9610,15 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateCampaign setBuyingType (String buyingType) {
       this.setParam("buying_type", buyingType);
+      return this;
+    }
+
+    public APIRequestCreateCampaign setDailyBudget (Long dailyBudget) {
+      this.setParam("daily_budget", dailyBudget);
+      return this;
+    }
+    public APIRequestCreateCampaign setDailyBudget (String dailyBudget) {
+      this.setParam("daily_budget", dailyBudget);
       return this;
     }
 
@@ -9474,6 +9637,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateCampaign setIterativeSplitTestConfigs (String iterativeSplitTestConfigs) {
       this.setParam("iterative_split_test_configs", iterativeSplitTestConfigs);
+      return this;
+    }
+
+    public APIRequestCreateCampaign setLifetimeBudget (Long lifetimeBudget) {
+      this.setParam("lifetime_budget", lifetimeBudget);
+      return this;
+    }
+    public APIRequestCreateCampaign setLifetimeBudget (String lifetimeBudget) {
+      this.setParam("lifetime_budget", lifetimeBudget);
       return this;
     }
 
@@ -9571,16 +9743,20 @@ public class AdAccount extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "adlabels",
+      "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
       "budget_rebalance_flag",
+      "budget_remaining",
       "buying_type",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
       "created_time",
+      "daily_budget",
       "effective_status",
       "id",
+      "lifetime_budget",
       "name",
       "objective",
       "recommendations",
@@ -9713,6 +9889,13 @@ public class AdAccount extends APINode {
       this.requestField("adlabels", value);
       return this;
     }
+    public APIRequestGetCampaignsByLabels requestBidStrategyField () {
+      return this.requestBidStrategyField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestBidStrategyField (boolean value) {
+      this.requestField("bid_strategy", value);
+      return this;
+    }
     public APIRequestGetCampaignsByLabels requestBoostedObjectIdField () {
       return this.requestBoostedObjectIdField(true);
     }
@@ -9732,6 +9915,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaignsByLabels requestBudgetRebalanceFlagField (boolean value) {
       this.requestField("budget_rebalance_flag", value);
+      return this;
+    }
+    public APIRequestGetCampaignsByLabels requestBudgetRemainingField () {
+      return this.requestBudgetRemainingField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestBudgetRemainingField (boolean value) {
+      this.requestField("budget_remaining", value);
       return this;
     }
     public APIRequestGetCampaignsByLabels requestBuyingTypeField () {
@@ -9769,6 +9959,13 @@ public class AdAccount extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetCampaignsByLabels requestDailyBudgetField () {
+      return this.requestDailyBudgetField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestDailyBudgetField (boolean value) {
+      this.requestField("daily_budget", value);
+      return this;
+    }
     public APIRequestGetCampaignsByLabels requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -9781,6 +9978,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaignsByLabels requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCampaignsByLabels requestLifetimeBudgetField () {
+      return this.requestLifetimeBudgetField(true);
+    }
+    public APIRequestGetCampaignsByLabels requestLifetimeBudgetField (boolean value) {
+      this.requestField("lifetime_budget", value);
       return this;
     }
     public APIRequestGetCampaignsByLabels requestNameField () {

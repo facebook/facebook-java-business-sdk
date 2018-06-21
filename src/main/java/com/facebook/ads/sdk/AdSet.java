@@ -85,6 +85,10 @@ public class AdSet extends APINode {
   private List<String> mCreativeSequence = null;
   @SerializedName("daily_budget")
   private String mDailyBudget = null;
+  @SerializedName("daily_min_spend_target")
+  private String mDailyMinSpendTarget = null;
+  @SerializedName("daily_spend_cap")
+  private String mDailySpendCap = null;
   @SerializedName("destination_type")
   private String mDestinationType = null;
   @SerializedName("effective_status")
@@ -101,6 +105,10 @@ public class AdSet extends APINode {
   private String mLifetimeBudget = null;
   @SerializedName("lifetime_imps")
   private Long mLifetimeImps = null;
+  @SerializedName("lifetime_min_spend_target")
+  private String mLifetimeMinSpendTarget = null;
+  @SerializedName("lifetime_spend_cap")
+  private String mLifetimeSpendCap = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("optimization_goal")
@@ -564,6 +572,24 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public String getFieldDailyMinSpendTarget() {
+    return mDailyMinSpendTarget;
+  }
+
+  public AdSet setFieldDailyMinSpendTarget(String value) {
+    this.mDailyMinSpendTarget = value;
+    return this;
+  }
+
+  public String getFieldDailySpendCap() {
+    return mDailySpendCap;
+  }
+
+  public AdSet setFieldDailySpendCap(String value) {
+    this.mDailySpendCap = value;
+    return this;
+  }
+
   public String getFieldDestinationType() {
     return mDestinationType;
   }
@@ -638,6 +664,24 @@ public class AdSet extends APINode {
 
   public AdSet setFieldLifetimeImps(Long value) {
     this.mLifetimeImps = value;
+    return this;
+  }
+
+  public String getFieldLifetimeMinSpendTarget() {
+    return mLifetimeMinSpendTarget;
+  }
+
+  public AdSet setFieldLifetimeMinSpendTarget(String value) {
+    this.mLifetimeMinSpendTarget = value;
+    return this;
+  }
+
+  public String getFieldLifetimeSpendCap() {
+    return mLifetimeSpendCap;
+  }
+
+  public AdSet setFieldLifetimeSpendCap(String value) {
+    this.mLifetimeSpendCap = value;
     return this;
   }
 
@@ -2442,6 +2486,8 @@ public class AdSet extends APINode {
       "created_time",
       "creative_sequence",
       "daily_budget",
+      "daily_min_spend_target",
+      "daily_spend_cap",
       "destination_type",
       "effective_status",
       "end_time",
@@ -2450,6 +2496,8 @@ public class AdSet extends APINode {
       "instagram_actor_id",
       "lifetime_budget",
       "lifetime_imps",
+      "lifetime_min_spend_target",
+      "lifetime_spend_cap",
       "name",
       "optimization_goal",
       "pacing_type",
@@ -2698,6 +2746,20 @@ public class AdSet extends APINode {
       this.requestField("daily_budget", value);
       return this;
     }
+    public APIRequestGetCopies requestDailyMinSpendTargetField () {
+      return this.requestDailyMinSpendTargetField(true);
+    }
+    public APIRequestGetCopies requestDailyMinSpendTargetField (boolean value) {
+      this.requestField("daily_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGetCopies requestDailySpendCapField () {
+      return this.requestDailySpendCapField(true);
+    }
+    public APIRequestGetCopies requestDailySpendCapField (boolean value) {
+      this.requestField("daily_spend_cap", value);
+      return this;
+    }
     public APIRequestGetCopies requestDestinationTypeField () {
       return this.requestDestinationTypeField(true);
     }
@@ -2752,6 +2814,20 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestLifetimeImpsField (boolean value) {
       this.requestField("lifetime_imps", value);
+      return this;
+    }
+    public APIRequestGetCopies requestLifetimeMinSpendTargetField () {
+      return this.requestLifetimeMinSpendTargetField(true);
+    }
+    public APIRequestGetCopies requestLifetimeMinSpendTargetField (boolean value) {
+      this.requestField("lifetime_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGetCopies requestLifetimeSpendCapField () {
+      return this.requestLifetimeSpendCapField(true);
+    }
+    public APIRequestGetCopies requestLifetimeSpendCapField (boolean value) {
+      this.requestField("lifetime_spend_cap", value);
       return this;
     }
     public APIRequestGetCopies requestNameField () {
@@ -3878,6 +3954,8 @@ public class AdSet extends APINode {
       "created_time",
       "creative_sequence",
       "daily_budget",
+      "daily_min_spend_target",
+      "daily_spend_cap",
       "destination_type",
       "effective_status",
       "end_time",
@@ -3886,6 +3964,8 @@ public class AdSet extends APINode {
       "instagram_actor_id",
       "lifetime_budget",
       "lifetime_imps",
+      "lifetime_min_spend_target",
+      "lifetime_spend_cap",
       "name",
       "optimization_goal",
       "pacing_type",
@@ -4098,6 +4178,20 @@ public class AdSet extends APINode {
       this.requestField("daily_budget", value);
       return this;
     }
+    public APIRequestGet requestDailyMinSpendTargetField () {
+      return this.requestDailyMinSpendTargetField(true);
+    }
+    public APIRequestGet requestDailyMinSpendTargetField (boolean value) {
+      this.requestField("daily_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGet requestDailySpendCapField () {
+      return this.requestDailySpendCapField(true);
+    }
+    public APIRequestGet requestDailySpendCapField (boolean value) {
+      this.requestField("daily_spend_cap", value);
+      return this;
+    }
     public APIRequestGet requestDestinationTypeField () {
       return this.requestDestinationTypeField(true);
     }
@@ -4152,6 +4246,20 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestLifetimeImpsField (boolean value) {
       this.requestField("lifetime_imps", value);
+      return this;
+    }
+    public APIRequestGet requestLifetimeMinSpendTargetField () {
+      return this.requestLifetimeMinSpendTargetField(true);
+    }
+    public APIRequestGet requestLifetimeMinSpendTargetField (boolean value) {
+      this.requestField("lifetime_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGet requestLifetimeSpendCapField () {
+      return this.requestLifetimeSpendCapField(true);
+    }
+    public APIRequestGet requestLifetimeSpendCapField (boolean value) {
+      this.requestField("lifetime_spend_cap", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -4293,11 +4401,15 @@ public class AdSet extends APINode {
       "creative_sequence",
       "daily_budget",
       "daily_imps",
+      "daily_min_spend_target",
+      "daily_spend_cap",
       "destination_type",
       "end_time",
       "execution_options",
       "lifetime_budget",
       "lifetime_imps",
+      "lifetime_min_spend_target",
+      "lifetime_spend_cap",
       "name",
       "optimization_goal",
       "pacing_type",
@@ -4451,6 +4563,24 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setDailyMinSpendTarget (Long dailyMinSpendTarget) {
+      this.setParam("daily_min_spend_target", dailyMinSpendTarget);
+      return this;
+    }
+    public APIRequestUpdate setDailyMinSpendTarget (String dailyMinSpendTarget) {
+      this.setParam("daily_min_spend_target", dailyMinSpendTarget);
+      return this;
+    }
+
+    public APIRequestUpdate setDailySpendCap (Long dailySpendCap) {
+      this.setParam("daily_spend_cap", dailySpendCap);
+      return this;
+    }
+    public APIRequestUpdate setDailySpendCap (String dailySpendCap) {
+      this.setParam("daily_spend_cap", dailySpendCap);
+      return this;
+    }
+
     public APIRequestUpdate setDestinationType (AdSet.EnumDestinationType destinationType) {
       this.setParam("destination_type", destinationType);
       return this;
@@ -4489,6 +4619,24 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setLifetimeImps (String lifetimeImps) {
       this.setParam("lifetime_imps", lifetimeImps);
+      return this;
+    }
+
+    public APIRequestUpdate setLifetimeMinSpendTarget (Long lifetimeMinSpendTarget) {
+      this.setParam("lifetime_min_spend_target", lifetimeMinSpendTarget);
+      return this;
+    }
+    public APIRequestUpdate setLifetimeMinSpendTarget (String lifetimeMinSpendTarget) {
+      this.setParam("lifetime_min_spend_target", lifetimeMinSpendTarget);
+      return this;
+    }
+
+    public APIRequestUpdate setLifetimeSpendCap (Long lifetimeSpendCap) {
+      this.setParam("lifetime_spend_cap", lifetimeSpendCap);
+      return this;
+    }
+    public APIRequestUpdate setLifetimeSpendCap (String lifetimeSpendCap) {
+      this.setParam("lifetime_spend_cap", lifetimeSpendCap);
       return this;
     }
 
@@ -4948,6 +5096,8 @@ public class AdSet extends APINode {
     this.mCreatedTime = instance.mCreatedTime;
     this.mCreativeSequence = instance.mCreativeSequence;
     this.mDailyBudget = instance.mDailyBudget;
+    this.mDailyMinSpendTarget = instance.mDailyMinSpendTarget;
+    this.mDailySpendCap = instance.mDailySpendCap;
     this.mDestinationType = instance.mDestinationType;
     this.mEffectiveStatus = instance.mEffectiveStatus;
     this.mEndTime = instance.mEndTime;
@@ -4956,6 +5106,8 @@ public class AdSet extends APINode {
     this.mInstagramActorId = instance.mInstagramActorId;
     this.mLifetimeBudget = instance.mLifetimeBudget;
     this.mLifetimeImps = instance.mLifetimeImps;
+    this.mLifetimeMinSpendTarget = instance.mLifetimeMinSpendTarget;
+    this.mLifetimeSpendCap = instance.mLifetimeSpendCap;
     this.mName = instance.mName;
     this.mOptimizationGoal = instance.mOptimizationGoal;
     this.mPacingType = instance.mPacingType;

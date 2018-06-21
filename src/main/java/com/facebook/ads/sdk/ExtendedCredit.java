@@ -541,7 +541,7 @@ public class ExtendedCredit extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "email",
+      "emails",
       "name",
     };
 
@@ -600,8 +600,12 @@ public class ExtendedCredit extends APINode {
     }
 
 
-    public APIRequestCreateExtendedCreditInvoiceGroup setEmail (String email) {
-      this.setParam("email", email);
+    public APIRequestCreateExtendedCreditInvoiceGroup setEmails (List<String> emails) {
+      this.setParam("emails", emails);
+      return this;
+    }
+    public APIRequestCreateExtendedCreditInvoiceGroup setEmails (String emails) {
+      this.setParam("emails", emails);
       return this;
     }
 

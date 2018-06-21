@@ -5953,6 +5953,7 @@ public class Page extends APINode {
       "publish_event_id",
       "published",
       "quote",
+      "react_mode_metadata",
       "ref",
       "referenceable_image_ids",
       "sales_promo_id",
@@ -6646,6 +6647,11 @@ public class Page extends APINode {
 
     public APIRequestCreateFeed setQuote (String quote) {
       this.setParam("quote", quote);
+      return this;
+    }
+
+    public APIRequestCreateFeed setReactModeMetadata (String reactModeMetadata) {
+      this.setParam("react_mode_metadata", reactModeMetadata);
       return this;
     }
 
@@ -23744,6 +23750,7 @@ public class Page extends APINode {
       "original_fov",
       "original_projection_type",
       "published",
+      "react_mode_metadata",
       "reference_only",
       "referenced_sticker_id",
       "replace_video_id",
@@ -24046,6 +24053,11 @@ public class Page extends APINode {
     }
     public APIRequestCreateVideo setPublished (String published) {
       this.setParam("published", published);
+      return this;
+    }
+
+    public APIRequestCreateVideo setReactModeMetadata (String reactModeMetadata) {
+      this.setParam("react_mode_metadata", reactModeMetadata);
       return this;
     }
 

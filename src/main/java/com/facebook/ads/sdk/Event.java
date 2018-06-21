@@ -1218,6 +1218,7 @@ public class Event extends APINode {
       "initial_pitch",
       "original_fov",
       "original_projection_type",
+      "react_mode_metadata",
       "referenced_sticker_id",
       "replace_video_id",
       "slideshow_spec",
@@ -1417,6 +1418,11 @@ public class Event extends APINode {
     }
     public APIRequestCreateVideo setOriginalProjectionType (String originalProjectionType) {
       this.setParam("original_projection_type", originalProjectionType);
+      return this;
+    }
+
+    public APIRequestCreateVideo setReactModeMetadata (String reactModeMetadata) {
+      this.setParam("react_mode_metadata", reactModeMetadata);
       return this;
     }
 

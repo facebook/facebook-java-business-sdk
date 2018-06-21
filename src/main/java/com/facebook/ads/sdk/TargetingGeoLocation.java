@@ -67,6 +67,8 @@ public class TargetingGeoLocation extends APINode {
   private List<TargetingGeoLocationElectoralDistrict> mElectoralDistricts = null;
   @SerializedName("geo_markets")
   private List<TargetingGeoLocationMarket> mGeoMarkets = null;
+  @SerializedName("location_set_ids")
+  private List<String> mLocationSetIds = null;
   @SerializedName("location_types")
   private List<String> mLocationTypes = null;
   @SerializedName("places")
@@ -301,6 +303,15 @@ public class TargetingGeoLocation extends APINode {
     this.mGeoMarkets = TargetingGeoLocationMarket.getGson().fromJson(value, type);
     return this;
   }
+  public List<String> getFieldLocationSetIds() {
+    return mLocationSetIds;
+  }
+
+  public TargetingGeoLocation setFieldLocationSetIds(List<String> value) {
+    this.mLocationSetIds = value;
+    return this;
+  }
+
   public List<String> getFieldLocationTypes() {
     return mLocationTypes;
   }
@@ -389,6 +400,7 @@ public class TargetingGeoLocation extends APINode {
     this.mCustomLocations = instance.mCustomLocations;
     this.mElectoralDistricts = instance.mElectoralDistricts;
     this.mGeoMarkets = instance.mGeoMarkets;
+    this.mLocationSetIds = instance.mLocationSetIds;
     this.mLocationTypes = instance.mLocationTypes;
     this.mPlaces = instance.mPlaces;
     this.mPoliticalDistricts = instance.mPoliticalDistricts;

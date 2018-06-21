@@ -1049,6 +1049,8 @@ public class AdLabel extends APINode {
       "created_time",
       "creative_sequence",
       "daily_budget",
+      "daily_min_spend_target",
+      "daily_spend_cap",
       "destination_type",
       "effective_status",
       "end_time",
@@ -1057,6 +1059,8 @@ public class AdLabel extends APINode {
       "instagram_actor_id",
       "lifetime_budget",
       "lifetime_imps",
+      "lifetime_min_spend_target",
+      "lifetime_spend_cap",
       "name",
       "optimization_goal",
       "pacing_type",
@@ -1269,6 +1273,20 @@ public class AdLabel extends APINode {
       this.requestField("daily_budget", value);
       return this;
     }
+    public APIRequestGetAdSets requestDailyMinSpendTargetField () {
+      return this.requestDailyMinSpendTargetField(true);
+    }
+    public APIRequestGetAdSets requestDailyMinSpendTargetField (boolean value) {
+      this.requestField("daily_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestDailySpendCapField () {
+      return this.requestDailySpendCapField(true);
+    }
+    public APIRequestGetAdSets requestDailySpendCapField (boolean value) {
+      this.requestField("daily_spend_cap", value);
+      return this;
+    }
     public APIRequestGetAdSets requestDestinationTypeField () {
       return this.requestDestinationTypeField(true);
     }
@@ -1323,6 +1341,20 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestLifetimeImpsField (boolean value) {
       this.requestField("lifetime_imps", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestLifetimeMinSpendTargetField () {
+      return this.requestLifetimeMinSpendTargetField(true);
+    }
+    public APIRequestGetAdSets requestLifetimeMinSpendTargetField (boolean value) {
+      this.requestField("lifetime_min_spend_target", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestLifetimeSpendCapField () {
+      return this.requestLifetimeSpendCapField(true);
+    }
+    public APIRequestGetAdSets requestLifetimeSpendCapField (boolean value) {
+      this.requestField("lifetime_spend_cap", value);
       return this;
     }
     public APIRequestGetAdSets requestNameField () {
@@ -1459,16 +1491,20 @@ public class AdLabel extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "adlabels",
+      "bid_strategy",
       "boosted_object_id",
       "brand_lift_studies",
       "budget_rebalance_flag",
+      "budget_remaining",
       "buying_type",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
       "created_time",
+      "daily_budget",
       "effective_status",
       "id",
+      "lifetime_budget",
       "name",
       "objective",
       "recommendations",
@@ -1583,6 +1619,13 @@ public class AdLabel extends APINode {
       this.requestField("adlabels", value);
       return this;
     }
+    public APIRequestGetCampaigns requestBidStrategyField () {
+      return this.requestBidStrategyField(true);
+    }
+    public APIRequestGetCampaigns requestBidStrategyField (boolean value) {
+      this.requestField("bid_strategy", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestBoostedObjectIdField () {
       return this.requestBoostedObjectIdField(true);
     }
@@ -1602,6 +1645,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestBudgetRebalanceFlagField (boolean value) {
       this.requestField("budget_rebalance_flag", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestBudgetRemainingField () {
+      return this.requestBudgetRemainingField(true);
+    }
+    public APIRequestGetCampaigns requestBudgetRemainingField (boolean value) {
+      this.requestField("budget_remaining", value);
       return this;
     }
     public APIRequestGetCampaigns requestBuyingTypeField () {
@@ -1639,6 +1689,13 @@ public class AdLabel extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetCampaigns requestDailyBudgetField () {
+      return this.requestDailyBudgetField(true);
+    }
+    public APIRequestGetCampaigns requestDailyBudgetField (boolean value) {
+      this.requestField("daily_budget", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -1651,6 +1708,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestLifetimeBudgetField () {
+      return this.requestLifetimeBudgetField(true);
+    }
+    public APIRequestGetCampaigns requestLifetimeBudgetField (boolean value) {
+      this.requestField("lifetime_budget", value);
       return this;
     }
     public APIRequestGetCampaigns requestNameField () {
