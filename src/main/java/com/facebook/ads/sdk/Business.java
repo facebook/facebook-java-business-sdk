@@ -10078,6 +10078,7 @@ public class Business extends APINode {
       "business",
       "config",
       "creation_time",
+      "data_origin",
       "description",
       "duplicate_entries",
       "enable_auto_assign_to_accounts",
@@ -10203,6 +10204,13 @@ public class Business extends APINode {
       this.requestField("creation_time", value);
       return this;
     }
+    public APIRequestGetOfflineConversionDataSets requestDataOriginField () {
+      return this.requestDataOriginField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestDataOriginField (boolean value) {
+      this.requestField("data_origin", value);
+      return this;
+    }
     public APIRequestGetOfflineConversionDataSets requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -10312,6 +10320,7 @@ public class Business extends APINode {
     }
     public static final String[] PARAMS = {
       "auto_assign_to_new_accounts_only",
+      "data_origin",
       "description",
       "enable_auto_assign_to_accounts",
       "name",
@@ -10378,6 +10387,15 @@ public class Business extends APINode {
     }
     public APIRequestCreateOfflineConversionDataSet setAutoAssignToNewAccountsOnly (String autoAssignToNewAccountsOnly) {
       this.setParam("auto_assign_to_new_accounts_only", autoAssignToNewAccountsOnly);
+      return this;
+    }
+
+    public APIRequestCreateOfflineConversionDataSet setDataOrigin (OfflineConversionDataSet.EnumDataOrigin dataOrigin) {
+      this.setParam("data_origin", dataOrigin);
+      return this;
+    }
+    public APIRequestCreateOfflineConversionDataSet setDataOrigin (String dataOrigin) {
+      this.setParam("data_origin", dataOrigin);
       return this;
     }
 

@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.Spliterator;
 import java.util.function.Consumer;
 
 public class APINodeList<T extends APINode> extends ArrayList<T> implements APIResponse {
@@ -176,4 +177,81 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
         return this.hasNext() ? it.next() : null;
       }
     }
+
+
+      @Override
+      public int size() {
+        if (this.autoPagination) {
+          throw new RuntimeException("When auto pagination is enabled, size is not available. Use stream/parallelStream or forEach to iterate");
+        } else {
+          return super.size();
+        }
+      }
+
+      @Override
+      public Spliterator<T> spliterator() {
+        return this.autoPagination ? new APINodeListAutoPaginationSpliterator(this) : super.spliterator();
+      }
+
+      private class APINodeListAutoPaginationSpliterator implements Spliterator<T> {
+        APINodeList<T> list;
+        Iterator<T> it;
+        boolean alreadySplit = false;
+
+        APINodeListAutoPaginationSpliterator(APINodeList<T> list) {
+          this.list = list.withAutoPaginationIterator(true);
+          this.it = list.getCurrentListIterator();
+        }
+
+        @Override
+        public boolean tryAdvance(Consumer<? super T> action) {
+          if (it.hasNext()) {
+            action.accept(it.next());
+            return true;
+          } else {
+            if (alreadySplit) {
+              return false;
+            } else {
+              try {
+                this.list = list.nextPage();
+                this.it = list.getCurrentListIterator();
+              } catch (APIException e) {
+                throw new RuntimeException(e);
+              }
+
+              if (it.hasNext()) {
+                action.accept(it.next());
+                return true;
+              } else {
+                return false;
+              }
+            }
+          }
+        }
+
+        @Override
+        public Spliterator<T> trySplit() {
+          if (alreadySplit) {
+            return null;
+          } else {
+            this.alreadySplit = true;
+            try {
+              APINodeList<T> nextList = list.nextPage();
+              return nextList.getCurrentListIterator().hasNext() ? new APINodeListAutoPaginationSpliterator(nextList) : null;
+            } catch (APIException e) {
+              throw new RuntimeException(e);
+            }
+          }
+        }
+
+        @Override
+        public long estimateSize() {
+          return Integer.MAX_VALUE;
+        }
+
+        @Override
+        public int characteristics() {
+          return Spliterator.IMMUTABLE;
+        }
+      }
 }

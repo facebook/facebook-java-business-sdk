@@ -489,6 +489,7 @@ public class Event extends APINode {
       "schedule_custom_profile_image",
       "spatial_audio_format",
       "status",
+      "stereoscopic_mode",
       "stop_on_delete_stream",
       "stream_type",
       "title",
@@ -687,6 +688,15 @@ public class Event extends APINode {
     }
     public APIRequestCreateLiveVideo setStatus (String status) {
       this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestCreateLiveVideo setStereoscopicMode (EnumStereoscopicMode stereoscopicMode) {
+      this.setParam("stereoscopic_mode", stereoscopicMode);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setStereoscopicMode (String stereoscopicMode) {
+      this.setParam("stereoscopic_mode", stereoscopicMode);
       return this;
     }
 
@@ -2038,6 +2048,27 @@ public class Event extends APINode {
       private String value;
 
       private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumStereoscopicMode {
+      @SerializedName("MONO")
+      VALUE_MONO("MONO"),
+      @SerializedName("LEFT_RIGHT")
+      VALUE_LEFT_RIGHT("LEFT_RIGHT"),
+      @SerializedName("TOP_BOTTOM")
+      VALUE_TOP_BOTTOM("TOP_BOTTOM"),
+      NULL(null);
+
+      private String value;
+
+      private EnumStereoscopicMode(String value) {
         this.value = value;
       }
 

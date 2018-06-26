@@ -65,6 +65,8 @@ public class LiveVideo extends APINode {
   private VideoCopyright mCopyright = null;
   @SerializedName("creation_time")
   private String mCreationTime = null;
+  @SerializedName("dash_ingest_url")
+  private String mDashIngestUrl = null;
   @SerializedName("dash_preview_url")
   private String mDashPreviewUrl = null;
   @SerializedName("description")
@@ -345,6 +347,10 @@ public class LiveVideo extends APINode {
     return mCreationTime;
   }
 
+  public String getFieldDashIngestUrl() {
+    return mDashIngestUrl;
+  }
+
   public String getFieldDashPreviewUrl() {
     return mDashPreviewUrl;
   }
@@ -534,6 +540,7 @@ public class LiveVideo extends APINode {
       "broadcast_start_time",
       "copyright",
       "creation_time",
+      "dash_ingest_url",
       "dash_preview_url",
       "description",
       "embed_html",
@@ -674,6 +681,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGet requestCreationTimeField (boolean value) {
       this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGet requestDashIngestUrlField () {
+      return this.requestDashIngestUrlField(true);
+    }
+    public APIRequestGet requestDashIngestUrlField (boolean value) {
+      this.requestField("dash_ingest_url", value);
       return this;
     }
     public APIRequestGet requestDashPreviewUrlField () {
@@ -1356,6 +1370,27 @@ public class LiveVideo extends APINode {
       }
   }
 
+  public static enum EnumStereoscopicMode {
+      @SerializedName("MONO")
+      VALUE_MONO("MONO"),
+      @SerializedName("LEFT_RIGHT")
+      VALUE_LEFT_RIGHT("LEFT_RIGHT"),
+      @SerializedName("TOP_BOTTOM")
+      VALUE_TOP_BOTTOM("TOP_BOTTOM"),
+      NULL(null);
+
+      private String value;
+
+      private EnumStereoscopicMode(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumType {
       @SerializedName("tagged")
       VALUE_TAGGED("tagged"),
@@ -1395,6 +1430,7 @@ public class LiveVideo extends APINode {
     this.mBroadcastStartTime = instance.mBroadcastStartTime;
     this.mCopyright = instance.mCopyright;
     this.mCreationTime = instance.mCreationTime;
+    this.mDashIngestUrl = instance.mDashIngestUrl;
     this.mDashPreviewUrl = instance.mDashPreviewUrl;
     this.mDescription = instance.mDescription;
     this.mEmbedHtml = instance.mEmbedHtml;

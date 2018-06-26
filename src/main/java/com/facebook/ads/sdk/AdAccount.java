@@ -12304,6 +12304,7 @@ public class AdAccount extends APINode {
       "business",
       "config",
       "creation_time",
+      "data_origin",
       "description",
       "duplicate_entries",
       "enable_auto_assign_to_accounts",
@@ -12427,6 +12428,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetOfflineConversionDataSets requestCreationTimeField (boolean value) {
       this.requestField("creation_time", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestDataOriginField () {
+      return this.requestDataOriginField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestDataOriginField (boolean value) {
+      this.requestField("data_origin", value);
       return this;
     }
     public APIRequestGetOfflineConversionDataSets requestDescriptionField () {

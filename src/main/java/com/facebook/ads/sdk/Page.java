@@ -10483,6 +10483,7 @@ public class Page extends APINode {
       "broadcast_start_time",
       "copyright",
       "creation_time",
+      "dash_ingest_url",
       "dash_preview_url",
       "description",
       "embed_html",
@@ -10643,6 +10644,13 @@ public class Page extends APINode {
       this.requestField("creation_time", value);
       return this;
     }
+    public APIRequestGetLiveVideos requestDashIngestUrlField () {
+      return this.requestDashIngestUrlField(true);
+    }
+    public APIRequestGetLiveVideos requestDashIngestUrlField (boolean value) {
+      this.requestField("dash_ingest_url", value);
+      return this;
+    }
     public APIRequestGetLiveVideos requestDashPreviewUrlField () {
       return this.requestDashPreviewUrlField(true);
     }
@@ -10793,6 +10801,7 @@ public class Page extends APINode {
       "schedule_custom_profile_image",
       "spatial_audio_format",
       "status",
+      "stereoscopic_mode",
       "stop_on_delete_stream",
       "stream_type",
       "targeting",
@@ -11028,6 +11037,15 @@ public class Page extends APINode {
     }
     public APIRequestCreateLiveVideo setStatus (String status) {
       this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestCreateLiveVideo setStereoscopicMode (LiveVideo.EnumStereoscopicMode stereoscopicMode) {
+      this.setParam("stereoscopic_mode", stereoscopicMode);
+      return this;
+    }
+    public APIRequestCreateLiveVideo setStereoscopicMode (String stereoscopicMode) {
+      this.setParam("stereoscopic_mode", stereoscopicMode);
       return this;
     }
 

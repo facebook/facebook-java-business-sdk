@@ -71,6 +71,8 @@ public class PartnerIntegrationLinked extends APINode {
   private OfflineConversionDataSet mOfflineConversionDataSet = null;
   @SerializedName("partner")
   private String mPartner = null;
+  @SerializedName("partner_profile")
+  private Object mPartnerProfile = null;
   @SerializedName("product_catalog")
   private ProductCatalog mProductCatalog = null;
   @SerializedName("setup_status")
@@ -328,6 +330,10 @@ public class PartnerIntegrationLinked extends APINode {
     return mPartner;
   }
 
+  public Object getFieldPartnerProfile() {
+    return mPartnerProfile;
+  }
+
   public ProductCatalog getFieldProductCatalog() {
     if (mProductCatalog != null) {
       mProductCatalog.context = getContext();
@@ -360,6 +366,7 @@ public class PartnerIntegrationLinked extends APINode {
       "name",
       "offline_conversion_data_set",
       "partner",
+      "partner_profile",
       "product_catalog",
       "setup_status",
     };
@@ -508,6 +515,13 @@ public class PartnerIntegrationLinked extends APINode {
       this.requestField("partner", value);
       return this;
     }
+    public APIRequestGet requestPartnerProfileField () {
+      return this.requestPartnerProfileField(true);
+    }
+    public APIRequestGet requestPartnerProfileField (boolean value) {
+      this.requestField("partner_profile", value);
+      return this;
+    }
     public APIRequestGet requestProductCatalogField () {
       return this.requestProductCatalogField(true);
     }
@@ -547,6 +561,7 @@ public class PartnerIntegrationLinked extends APINode {
     this.mName = instance.mName;
     this.mOfflineConversionDataSet = instance.mOfflineConversionDataSet;
     this.mPartner = instance.mPartner;
+    this.mPartnerProfile = instance.mPartnerProfile;
     this.mProductCatalog = instance.mProductCatalog;
     this.mSetupStatus = instance.mSetupStatus;
     this.context = instance.context;
