@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -71,6 +75,8 @@ public class AdStudy extends APINode {
   private String mName = null;
   @SerializedName("observation_end_time")
   private String mObservationEndTime = null;
+  @SerializedName("results_first_available_date")
+  private String mResultsFirstAvailableDate = null;
   @SerializedName("start_time")
   private String mStartTime = null;
   @SerializedName("type")
@@ -103,11 +109,23 @@ public class AdStudy extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<AdStudy> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static AdStudy fetchById(String id, APIContext context) throws APIException {
     AdStudy adStudy =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return adStudy;
+  }
+
+  public static ListenableFuture<AdStudy> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<AdStudy> adStudy =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return adStudy;
   }
 
@@ -118,6 +136,15 @@ public class AdStudy extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<AdStudy>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<AdStudy>> adStudy =
+      new APIRequest(context, "", "/", "GET", AdStudy.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return adStudy;
   }
 
   private String getPrefixedId() {
@@ -166,10 +193,19 @@ public class AdStudy extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adStudys.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adStudys.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adStudys.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adStudys.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -259,12 +295,28 @@ public class AdStudy extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateCustomAudience createCustomAudience() {
+    return new APIRequestCreateCustomAudience(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateObjective createObjective() {
     return new APIRequestCreateObjective(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteUserPermissions deleteUserPermissions() {
+    return new APIRequestDeleteUserPermissions(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateUserPermission createUserPermission() {
+    return new APIRequestCreateUserPermission(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -314,6 +366,10 @@ public class AdStudy extends APINode {
     return mObservationEndTime;
   }
 
+  public String getFieldResultsFirstAvailableDate() {
+    return mResultsFirstAvailableDate;
+  }
+
   public String getFieldStartTime() {
     return mStartTime;
   }
@@ -334,6 +390,143 @@ public class AdStudy extends APINode {
   }
 
 
+
+  public static class APIRequestCreateCustomAudience extends APIRequest<AdStudy> {
+
+    AdStudy lastResponse = null;
+    @Override
+    public AdStudy getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "account_id",
+      "audience_name",
+      "audience_type",
+      "cell_id",
+      "objective_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdStudy parseResponse(String response) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdStudy execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdStudy execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdStudy> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdStudy> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdStudy>() {
+           public AdStudy apply(String result) {
+             try {
+               return APIRequestCreateCustomAudience.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateCustomAudience(String nodeId, APIContext context) {
+      super(context, nodeId, "/customaudiences", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCustomAudience setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCustomAudience setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateCustomAudience setAccountId (String accountId) {
+      this.setParam("account_id", accountId);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setAudienceName (String audienceName) {
+      this.setParam("audience_name", audienceName);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setAudienceType (AdStudy.EnumAudienceType audienceType) {
+      this.setParam("audience_type", audienceType);
+      return this;
+    }
+    public APIRequestCreateCustomAudience setAudienceType (String audienceType) {
+      this.setParam("audience_type", audienceType);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setCellId (String cellId) {
+      this.setParam("cell_id", cellId);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setObjectiveId (String objectiveId) {
+      this.setParam("objective_id", objectiveId);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCustomAudience requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCustomAudience requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCustomAudience requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCustomAudience requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCustomAudience requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestCreateObjective extends APIRequest<AdStudyObjective> {
 
@@ -371,6 +564,25 @@ public class AdStudy extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<AdStudyObjective> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdStudyObjective> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdStudyObjective>() {
+           public AdStudyObjective apply(String result) {
+             try {
+               return APIRequestCreateObjective.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestCreateObjective(String nodeId, APIContext context) {
       super(context, nodeId, "/objectives", "POST", Arrays.asList(PARAMS));
@@ -495,6 +707,266 @@ public class AdStudy extends APINode {
 
   }
 
+  public static class APIRequestDeleteUserPermissions extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business",
+      "email",
+      "user",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(String result) {
+             try {
+               return APIRequestDeleteUserPermissions.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteUserPermissions(String nodeId, APIContext context) {
+      super(context, nodeId, "/userpermissions", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteUserPermissions setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteUserPermissions setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteUserPermissions setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestDeleteUserPermissions setEmail (String email) {
+      this.setParam("email", email);
+      return this;
+    }
+
+    public APIRequestDeleteUserPermissions setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestDeleteUserPermissions setUser (String user) {
+      this.setParam("user", user);
+      return this;
+    }
+
+    public APIRequestDeleteUserPermissions requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteUserPermissions requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteUserPermissions requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteUserPermissions requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteUserPermissions requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteUserPermissions requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateUserPermission extends APIRequest<AdStudy> {
+
+    AdStudy lastResponse = null;
+    @Override
+    public AdStudy getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business",
+      "email",
+      "role",
+      "user",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdStudy parseResponse(String response) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdStudy execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdStudy execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdStudy> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdStudy> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdStudy>() {
+           public AdStudy apply(String result) {
+             try {
+               return APIRequestCreateUserPermission.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateUserPermission(String nodeId, APIContext context) {
+      super(context, nodeId, "/userpermissions", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateUserPermission setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUserPermission setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateUserPermission setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestCreateUserPermission setEmail (String email) {
+      this.setParam("email", email);
+      return this;
+    }
+
+    public APIRequestCreateUserPermission setRole (AdStudy.EnumRole role) {
+      this.setParam("role", role);
+      return this;
+    }
+    public APIRequestCreateUserPermission setRole (String role) {
+      this.setParam("role", role);
+      return this;
+    }
+
+    public APIRequestCreateUserPermission setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestCreateUserPermission setUser (String user) {
+      this.setParam("user", user);
+      return this;
+    }
+
+    public APIRequestCreateUserPermission requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateUserPermission requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUserPermission requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateUserPermission requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUserPermission requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUserPermission requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGet extends APIRequest<AdStudy> {
 
     AdStudy lastResponse = null;
@@ -516,6 +988,7 @@ public class AdStudy extends APINode {
       "id",
       "name",
       "observation_end_time",
+      "results_first_available_date",
       "start_time",
       "type",
       "updated_by",
@@ -537,6 +1010,25 @@ public class AdStudy extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<AdStudy> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdStudy> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdStudy>() {
+           public AdStudy apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
@@ -661,6 +1153,13 @@ public class AdStudy extends APINode {
       this.requestField("observation_end_time", value);
       return this;
     }
+    public APIRequestGet requestResultsFirstAvailableDateField () {
+      return this.requestResultsFirstAvailableDateField(true);
+    }
+    public APIRequestGet requestResultsFirstAvailableDateField (boolean value) {
+      this.requestField("results_first_available_date", value);
+      return this;
+    }
     public APIRequestGet requestStartTimeField () {
       return this.requestStartTimeField(true);
     }
@@ -689,6 +1188,245 @@ public class AdStudy extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<AdStudy> {
+
+    AdStudy lastResponse = null;
+    @Override
+    public AdStudy getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "cells",
+      "client_business",
+      "confidence_level",
+      "cooldown_start_time",
+      "description",
+      "end_time",
+      "name",
+      "objectives",
+      "observation_end_time",
+      "start_time",
+      "viewers",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdStudy parseResponse(String response) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdStudy execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdStudy execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdStudy> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdStudy> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdStudy>() {
+           public AdStudy apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setCells (List<Object> cells) {
+      this.setParam("cells", cells);
+      return this;
+    }
+    public APIRequestUpdate setCells (String cells) {
+      this.setParam("cells", cells);
+      return this;
+    }
+
+    public APIRequestUpdate setClientBusiness (String clientBusiness) {
+      this.setParam("client_business", clientBusiness);
+      return this;
+    }
+
+    public APIRequestUpdate setConfidenceLevel (Double confidenceLevel) {
+      this.setParam("confidence_level", confidenceLevel);
+      return this;
+    }
+    public APIRequestUpdate setConfidenceLevel (String confidenceLevel) {
+      this.setParam("confidence_level", confidenceLevel);
+      return this;
+    }
+
+    public APIRequestUpdate setCooldownStartTime (Long cooldownStartTime) {
+      this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+    public APIRequestUpdate setCooldownStartTime (String cooldownStartTime) {
+      this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setEndTime (Long endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+    public APIRequestUpdate setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setObjectives (List<Object> objectives) {
+      this.setParam("objectives", objectives);
+      return this;
+    }
+    public APIRequestUpdate setObjectives (String objectives) {
+      this.setParam("objectives", objectives);
+      return this;
+    }
+
+    public APIRequestUpdate setObservationEndTime (Long observationEndTime) {
+      this.setParam("observation_end_time", observationEndTime);
+      return this;
+    }
+    public APIRequestUpdate setObservationEndTime (String observationEndTime) {
+      this.setParam("observation_end_time", observationEndTime);
+      return this;
+    }
+
+    public APIRequestUpdate setStartTime (Long startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+    public APIRequestUpdate setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestUpdate setViewers (List<Long> viewers) {
+      this.setParam("viewers", viewers);
+      return this;
+    }
+    public APIRequestUpdate setViewers (String viewers) {
+      this.setParam("viewers", viewers);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static enum EnumAudienceType {
+      @SerializedName("MOST_RESPONSIVE")
+      VALUE_MOST_RESPONSIVE("MOST_RESPONSIVE"),
+      @SerializedName("NOT_MOST_RESPONSIVE")
+      VALUE_NOT_MOST_RESPONSIVE("NOT_MOST_RESPONSIVE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAudienceType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumRole {
+      @SerializedName("ADMIN")
+      VALUE_ADMIN("ADMIN"),
+      @SerializedName("ANALYST")
+      VALUE_ANALYST("ANALYST"),
+      NULL(null);
+
+      private String value;
+
+      private EnumRole(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumType {
@@ -735,6 +1473,7 @@ public class AdStudy extends APINode {
     this.mId = instance.mId;
     this.mName = instance.mName;
     this.mObservationEndTime = instance.mObservationEndTime;
+    this.mResultsFirstAvailableDate = instance.mResultsFirstAvailableDate;
     this.mStartTime = instance.mStartTime;
     this.mType = instance.mType;
     this.mUpdatedBy = instance.mUpdatedBy;

@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -81,8 +85,6 @@ public class AdsInsights extends APINode {
   private String mCanvasAvgViewPercent = null;
   @SerializedName("canvas_avg_view_time")
   private String mCanvasAvgViewTime = null;
-  @SerializedName("canvas_component_avg_pct_view")
-  private List<AdsActionStats> mCanvasComponentAvgPctView = null;
   @SerializedName("clicks")
   private String mClicks = null;
   @SerializedName("cost_per_10_sec_video_view")
@@ -263,10 +265,19 @@ public class AdsInsights extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adsInsightss.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adsInsightss.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adsInsightss.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adsInsightss.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -502,20 +513,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public List<AdsActionStats> getFieldCanvasComponentAvgPctView() {
-    return mCanvasComponentAvgPctView;
-  }
-
-  public AdsInsights setFieldCanvasComponentAvgPctView(List<AdsActionStats> value) {
-    this.mCanvasComponentAvgPctView = value;
-    return this;
-  }
-
-  public AdsInsights setFieldCanvasComponentAvgPctView(String value) {
-    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
-    this.mCanvasComponentAvgPctView = AdsActionStats.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldClicks() {
     return mClicks;
   }
@@ -1341,7 +1338,27 @@ public class AdsInsights extends APINode {
       VALUE_PRODUCT_ID("product_id"),
       @SerializedName("region")
       VALUE_REGION("region"),
+<<<<<<< HEAD
       NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
+=======
+      @SerializedName("ad_format_asset")
+      VALUE_AD_FORMAT_ASSET("ad_format_asset"),
+      @SerializedName("body_asset")
+      VALUE_BODY_ASSET("body_asset"),
+      @SerializedName("call_to_action_asset")
+      VALUE_CALL_TO_ACTION_ASSET("call_to_action_asset"),
+      @SerializedName("description_asset")
+      VALUE_DESCRIPTION_ASSET("description_asset"),
+      @SerializedName("image_asset")
+      VALUE_IMAGE_ASSET("image_asset"),
+      @SerializedName("link_url_asset")
+      VALUE_LINK_URL_ASSET("link_url_asset"),
+      @SerializedName("title_asset")
+      VALUE_TITLE_ASSET("title_asset"),
+      @SerializedName("video_asset")
+      VALUE_VIDEO_ASSET("video_asset"),
+      NULL(null);
+>>>>>>> upstream/master
 
       private String value;
 
@@ -1539,7 +1556,6 @@ public class AdsInsights extends APINode {
     this.mCampaignName = instance.mCampaignName;
     this.mCanvasAvgViewPercent = instance.mCanvasAvgViewPercent;
     this.mCanvasAvgViewTime = instance.mCanvasAvgViewTime;
-    this.mCanvasComponentAvgPctView = instance.mCanvasComponentAvgPctView;
     this.mClicks = instance.mClicks;
     this.mCostPer10SecVideoView = instance.mCostPer10SecVideoView;
     this.mCostPerActionType = instance.mCostPerActionType;

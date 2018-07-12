@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -53,14 +57,28 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ProductFeedUpload extends APINode {
   @SerializedName("end_time")
   private String mEndTime = null;
+  @SerializedName("error_count")
+  private Long mErrorCount = null;
+  @SerializedName("filename")
+  private String mFilename = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("input_method")
   private EnumInputMethod mInputMethod = null;
+  @SerializedName("num_deleted_items")
+  private Long mNumDeletedItems = null;
+  @SerializedName("num_detected_items")
+  private Long mNumDetectedItems = null;
+  @SerializedName("num_invalid_items")
+  private Long mNumInvalidItems = null;
+  @SerializedName("num_persisted_items")
+  private Long mNumPersistedItems = null;
   @SerializedName("start_time")
   private String mStartTime = null;
   @SerializedName("url")
   private String mUrl = null;
+  @SerializedName("warning_count")
+  private Long mWarningCount = null;
   protected static Gson gson = null;
 
   ProductFeedUpload() {
@@ -85,11 +103,23 @@ public class ProductFeedUpload extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<ProductFeedUpload> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static ProductFeedUpload fetchById(String id, APIContext context) throws APIException {
     ProductFeedUpload productFeedUpload =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return productFeedUpload;
+  }
+
+  public static ListenableFuture<ProductFeedUpload> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<ProductFeedUpload> productFeedUpload =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return productFeedUpload;
   }
 
@@ -100,6 +130,15 @@ public class ProductFeedUpload extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<ProductFeedUpload>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<ProductFeedUpload>> productFeedUpload =
+      new APIRequest(context, "", "/", "GET", ProductFeedUpload.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return productFeedUpload;
   }
 
   private String getPrefixedId() {
@@ -148,10 +187,19 @@ public class ProductFeedUpload extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            productFeedUploads.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                productFeedUploads.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            productFeedUploads.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              productFeedUploads.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -254,6 +302,14 @@ public class ProductFeedUpload extends APINode {
     return mEndTime;
   }
 
+  public Long getFieldErrorCount() {
+    return mErrorCount;
+  }
+
+  public String getFieldFilename() {
+    return mFilename;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -262,12 +318,32 @@ public class ProductFeedUpload extends APINode {
     return mInputMethod;
   }
 
+  public Long getFieldNumDeletedItems() {
+    return mNumDeletedItems;
+  }
+
+  public Long getFieldNumDetectedItems() {
+    return mNumDetectedItems;
+  }
+
+  public Long getFieldNumInvalidItems() {
+    return mNumInvalidItems;
+  }
+
+  public Long getFieldNumPersistedItems() {
+    return mNumPersistedItems;
+  }
+
   public String getFieldStartTime() {
     return mStartTime;
   }
 
   public String getFieldUrl() {
     return mUrl;
+  }
+
+  public Long getFieldWarningCount() {
+    return mWarningCount;
   }
 
 
@@ -283,6 +359,7 @@ public class ProductFeedUpload extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "affected_surfaces",
       "description",
       "error_type",
       "id",
@@ -306,6 +383,25 @@ public class ProductFeedUpload extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<ProductFeedUploadError>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ProductFeedUploadError>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<ProductFeedUploadError>>() {
+           public APINodeList<ProductFeedUploadError> apply(String result) {
+             try {
+               return APIRequestGetErrors.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetErrors(String nodeId, APIContext context) {
       super(context, nodeId, "/errors", "GET", Arrays.asList(PARAMS));
@@ -360,6 +456,13 @@ public class ProductFeedUpload extends APINode {
       return this;
     }
 
+    public APIRequestGetErrors requestAffectedSurfacesField () {
+      return this.requestAffectedSurfacesField(true);
+    }
+    public APIRequestGetErrors requestAffectedSurfacesField (boolean value) {
+      this.requestField("affected_surfaces", value);
+      return this;
+    }
     public APIRequestGetErrors requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -416,10 +519,17 @@ public class ProductFeedUpload extends APINode {
 
     public static final String[] FIELDS = {
       "end_time",
+      "error_count",
+      "filename",
       "id",
       "input_method",
+      "num_deleted_items",
+      "num_detected_items",
+      "num_invalid_items",
+      "num_persisted_items",
       "start_time",
       "url",
+      "warning_count",
     };
 
     @Override
@@ -437,6 +547,25 @@ public class ProductFeedUpload extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<ProductFeedUpload> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductFeedUpload> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProductFeedUpload>() {
+           public ProductFeedUpload apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
@@ -498,6 +627,20 @@ public class ProductFeedUpload extends APINode {
       this.requestField("end_time", value);
       return this;
     }
+    public APIRequestGet requestErrorCountField () {
+      return this.requestErrorCountField(true);
+    }
+    public APIRequestGet requestErrorCountField (boolean value) {
+      this.requestField("error_count", value);
+      return this;
+    }
+    public APIRequestGet requestFilenameField () {
+      return this.requestFilenameField(true);
+    }
+    public APIRequestGet requestFilenameField (boolean value) {
+      this.requestField("filename", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -512,6 +655,34 @@ public class ProductFeedUpload extends APINode {
       this.requestField("input_method", value);
       return this;
     }
+    public APIRequestGet requestNumDeletedItemsField () {
+      return this.requestNumDeletedItemsField(true);
+    }
+    public APIRequestGet requestNumDeletedItemsField (boolean value) {
+      this.requestField("num_deleted_items", value);
+      return this;
+    }
+    public APIRequestGet requestNumDetectedItemsField () {
+      return this.requestNumDetectedItemsField(true);
+    }
+    public APIRequestGet requestNumDetectedItemsField (boolean value) {
+      this.requestField("num_detected_items", value);
+      return this;
+    }
+    public APIRequestGet requestNumInvalidItemsField () {
+      return this.requestNumInvalidItemsField(true);
+    }
+    public APIRequestGet requestNumInvalidItemsField (boolean value) {
+      this.requestField("num_invalid_items", value);
+      return this;
+    }
+    public APIRequestGet requestNumPersistedItemsField () {
+      return this.requestNumPersistedItemsField(true);
+    }
+    public APIRequestGet requestNumPersistedItemsField (boolean value) {
+      this.requestField("num_persisted_items", value);
+      return this;
+    }
     public APIRequestGet requestStartTimeField () {
       return this.requestStartTimeField(true);
     }
@@ -524,6 +695,13 @@ public class ProductFeedUpload extends APINode {
     }
     public APIRequestGet requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGet requestWarningCountField () {
+      return this.requestWarningCountField(true);
+    }
+    public APIRequestGet requestWarningCountField (boolean value) {
+      this.requestField("warning_count", value);
       return this;
     }
   }
@@ -567,10 +745,17 @@ public class ProductFeedUpload extends APINode {
 
   public ProductFeedUpload copyFrom(ProductFeedUpload instance) {
     this.mEndTime = instance.mEndTime;
+    this.mErrorCount = instance.mErrorCount;
+    this.mFilename = instance.mFilename;
     this.mId = instance.mId;
     this.mInputMethod = instance.mInputMethod;
+    this.mNumDeletedItems = instance.mNumDeletedItems;
+    this.mNumDetectedItems = instance.mNumDetectedItems;
+    this.mNumInvalidItems = instance.mNumInvalidItems;
+    this.mNumPersistedItems = instance.mNumPersistedItems;
     this.mStartTime = instance.mStartTime;
     this.mUrl = instance.mUrl;
+    this.mWarningCount = instance.mWarningCount;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

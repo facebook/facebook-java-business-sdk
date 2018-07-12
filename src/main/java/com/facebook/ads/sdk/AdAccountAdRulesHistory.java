@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -116,10 +120,19 @@ public class AdAccountAdRulesHistory extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adAccountAdRulesHistorys.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adAccountAdRulesHistorys.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adAccountAdRulesHistorys.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adAccountAdRulesHistorys.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -312,6 +325,43 @@ public class AdAccountAdRulesHistory extends APINode {
   }
 
 
+
+  public static enum EnumAction {
+      @SerializedName("BUDGET_NOT_REDISTRIBUTED")
+      VALUE_BUDGET_NOT_REDISTRIBUTED("BUDGET_NOT_REDISTRIBUTED"),
+      @SerializedName("CHANGED_BID")
+      VALUE_CHANGED_BID("CHANGED_BID"),
+      @SerializedName("CHANGED_BUDGET")
+      VALUE_CHANGED_BUDGET("CHANGED_BUDGET"),
+      @SerializedName("EMAIL")
+      VALUE_EMAIL("EMAIL"),
+      @SerializedName("ENDPOINT_PINGED")
+      VALUE_ENDPOINT_PINGED("ENDPOINT_PINGED"),
+      @SerializedName("ERROR")
+      VALUE_ERROR("ERROR"),
+      @SerializedName("FACEBOOK_NOTIFICATION_SENT")
+      VALUE_FACEBOOK_NOTIFICATION_SENT("FACEBOOK_NOTIFICATION_SENT"),
+      @SerializedName("MESSAGE_SENT")
+      VALUE_MESSAGE_SENT("MESSAGE_SENT"),
+      @SerializedName("NOT_CHANGED")
+      VALUE_NOT_CHANGED("NOT_CHANGED"),
+      @SerializedName("PAUSED")
+      VALUE_PAUSED("PAUSED"),
+      @SerializedName("UNPAUSED")
+      VALUE_UNPAUSED("UNPAUSED"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAction(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {

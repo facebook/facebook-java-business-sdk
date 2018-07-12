@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -87,11 +91,23 @@ public class OffsitePixel extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<OffsitePixel> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static OffsitePixel fetchById(String id, APIContext context) throws APIException {
     OffsitePixel offsitePixel =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return offsitePixel;
+  }
+
+  public static ListenableFuture<OffsitePixel> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<OffsitePixel> offsitePixel =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return offsitePixel;
   }
 
@@ -102,6 +118,15 @@ public class OffsitePixel extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<OffsitePixel>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<OffsitePixel>> offsitePixel =
+      new APIRequest(context, "", "/", "GET", OffsitePixel.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return offsitePixel;
   }
 
   private String getPrefixedId() {
@@ -150,10 +175,19 @@ public class OffsitePixel extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            offsitePixels.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                offsitePixels.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            offsitePixels.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              offsitePixels.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -243,28 +277,8 @@ public class OffsitePixel extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestDeleteAdAccounts deleteAdAccounts() {
-    return new APIRequestDeleteAdAccounts(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetAdAccounts getAdAccounts() {
-    return new APIRequestGetAdAccounts(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateAdAccount createAdAccount() {
-    return new APIRequestCreateAdAccount(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestDelete delete() {
-    return new APIRequestDelete(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -294,205 +308,92 @@ public class OffsitePixel extends APINode {
 
 
 
-  public static class APIRequestDeleteAdAccounts extends APIRequest<APINode> {
+  public static class APIRequestGet extends APIRequest<OffsitePixel> {
 
-    APINodeList<APINode> lastResponse = null;
+    OffsitePixel lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public OffsitePixel getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "adaccounts",
+      "value",
     };
 
     public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public APIRequestDeleteAdAccounts(String nodeId, APIContext context) {
-      super(context, nodeId, "/adaccounts", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteAdAccounts setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdAccounts setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteAdAccounts setAdaccounts (List<String> adaccounts) {
-      this.setParam("adaccounts", adaccounts);
-      return this;
-    }
-    public APIRequestDeleteAdAccounts setAdaccounts (String adaccounts) {
-      this.setParam("adaccounts", adaccounts);
-      return this;
-    }
-
-    public APIRequestDeleteAdAccounts requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteAdAccounts requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdAccounts requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteAdAccounts requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdAccounts requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAdAccounts requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetAdAccounts extends APIRequest<AdAccount> {
-
-    APINodeList<AdAccount> lastResponse = null;
-    @Override
-    public APINodeList<AdAccount> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "account_id",
-      "account_status",
-      "age",
-      "agency_client_declaration",
-      "amount_spent",
-      "attribution_spec",
-      "balance",
-      "business",
-      "business_city",
-      "business_country_code",
-      "business_name",
-      "business_state",
-      "business_street",
-      "business_street2",
-      "business_zip",
-      "capabilities",
-      "created_time",
-      "currency",
-      "disable_reason",
-      "end_advertiser",
-      "end_advertiser_name",
-      "failed_delivery_checks",
-      "funding_source",
-      "funding_source_details",
-      "has_migrated_permissions",
+      "creator",
       "id",
-      "io_number",
-      "is_attribution_spec_system_default",
-      "is_direct_deals_enabled",
-      "is_notifications_enabled",
-      "is_personal",
-      "is_prepay_account",
-      "is_tax_id_required",
-      "line_numbers",
-      "media_agency",
-      "min_campaign_group_spend_cap",
-      "min_daily_budget",
+      "js_pixel",
+      "last_firing_time",
       "name",
-      "next_bill_date",
-      "offsite_pixels_tos_accepted",
-      "owner",
-      "partner",
-      "rf_spec",
-      "salesforce_invoice_group_id",
-      "show_checkout_experience",
-      "spend_cap",
-      "tax_id",
-      "tax_id_status",
-      "tax_id_type",
-      "timezone_id",
-      "timezone_name",
-      "timezone_offset_hours_utc",
-      "tos_accepted",
-      "user_role",
+      "tag",
     };
 
     @Override
-    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this);
+    public OffsitePixel parseResponse(String response) throws APIException {
+      return OffsitePixel.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINodeList<AdAccount> execute() throws APIException {
+    public OffsitePixel execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
+    public OffsitePixel execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public APIRequestGetAdAccounts(String nodeId, APIContext context) {
-      super(context, nodeId, "/adaccounts", "GET", Arrays.asList(PARAMS));
+    public ListenableFuture<OffsitePixel> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<OffsitePixel> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, OffsitePixel>() {
+           public OffsitePixel apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetAdAccounts setParam(String param, Object value) {
+    public APIRequestGet setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetAdAccounts setParams(Map<String, Object> params) {
+    public APIRequestGet setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetAdAccounts requestAllFields () {
+    public APIRequestGet setValue (Long value) {
+      this.setParam("value", value);
+      return this;
+    }
+    public APIRequestGet setValue (String value) {
+      this.setParam("value", value);
+      return this;
+    }
+
+    public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetAdAccounts requestAllFields (boolean value) {
+    public APIRequestGet requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -500,12 +401,12 @@ public class OffsitePixel extends APINode {
     }
 
     @Override
-    public APIRequestGetAdAccounts requestFields (List<String> fields) {
+    public APIRequestGet requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetAdAccounts requestFields (List<String> fields, boolean value) {
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -513,318 +414,60 @@ public class OffsitePixel extends APINode {
     }
 
     @Override
-    public APIRequestGetAdAccounts requestField (String field) {
+    public APIRequestGet requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetAdAccounts requestField (String field, boolean value) {
+    public APIRequestGet requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetAdAccounts requestAccountIdField () {
-      return this.requestAccountIdField(true);
+    public APIRequestGet requestCreatorField () {
+      return this.requestCreatorField(true);
     }
-    public APIRequestGetAdAccounts requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
+    public APIRequestGet requestCreatorField (boolean value) {
+      this.requestField("creator", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestAccountStatusField () {
-      return this.requestAccountStatusField(true);
-    }
-    public APIRequestGetAdAccounts requestAccountStatusField (boolean value) {
-      this.requestField("account_status", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestAgeField () {
-      return this.requestAgeField(true);
-    }
-    public APIRequestGetAdAccounts requestAgeField (boolean value) {
-      this.requestField("age", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestAgencyClientDeclarationField () {
-      return this.requestAgencyClientDeclarationField(true);
-    }
-    public APIRequestGetAdAccounts requestAgencyClientDeclarationField (boolean value) {
-      this.requestField("agency_client_declaration", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestAmountSpentField () {
-      return this.requestAmountSpentField(true);
-    }
-    public APIRequestGetAdAccounts requestAmountSpentField (boolean value) {
-      this.requestField("amount_spent", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestAttributionSpecField () {
-      return this.requestAttributionSpecField(true);
-    }
-    public APIRequestGetAdAccounts requestAttributionSpecField (boolean value) {
-      this.requestField("attribution_spec", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestBalanceField () {
-      return this.requestBalanceField(true);
-    }
-    public APIRequestGetAdAccounts requestBalanceField (boolean value) {
-      this.requestField("balance", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGetAdAccounts requestBusinessField (boolean value) {
-      this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestBusinessCityField () {
-      return this.requestBusinessCityField(true);
-    }
-    public APIRequestGetAdAccounts requestBusinessCityField (boolean value) {
-      this.requestField("business_city", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestBusinessCountryCodeField () {
-      return this.requestBusinessCountryCodeField(true);
-    }
-    public APIRequestGetAdAccounts requestBusinessCountryCodeField (boolean value) {
-      this.requestField("business_country_code", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestBusinessNameField () {
-      return this.requestBusinessNameField(true);
-    }
-    public APIRequestGetAdAccounts requestBusinessNameField (boolean value) {
-      this.requestField("business_name", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestBusinessStateField () {
-      return this.requestBusinessStateField(true);
-    }
-    public APIRequestGetAdAccounts requestBusinessStateField (boolean value) {
-      this.requestField("business_state", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestBusinessStreetField () {
-      return this.requestBusinessStreetField(true);
-    }
-    public APIRequestGetAdAccounts requestBusinessStreetField (boolean value) {
-      this.requestField("business_street", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestBusinessStreet2Field () {
-      return this.requestBusinessStreet2Field(true);
-    }
-    public APIRequestGetAdAccounts requestBusinessStreet2Field (boolean value) {
-      this.requestField("business_street2", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestBusinessZipField () {
-      return this.requestBusinessZipField(true);
-    }
-    public APIRequestGetAdAccounts requestBusinessZipField (boolean value) {
-      this.requestField("business_zip", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestCapabilitiesField () {
-      return this.requestCapabilitiesField(true);
-    }
-    public APIRequestGetAdAccounts requestCapabilitiesField (boolean value) {
-      this.requestField("capabilities", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetAdAccounts requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestCurrencyField () {
-      return this.requestCurrencyField(true);
-    }
-    public APIRequestGetAdAccounts requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestDisableReasonField () {
-      return this.requestDisableReasonField(true);
-    }
-    public APIRequestGetAdAccounts requestDisableReasonField (boolean value) {
-      this.requestField("disable_reason", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestEndAdvertiserField () {
-      return this.requestEndAdvertiserField(true);
-    }
-    public APIRequestGetAdAccounts requestEndAdvertiserField (boolean value) {
-      this.requestField("end_advertiser", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestEndAdvertiserNameField () {
-      return this.requestEndAdvertiserNameField(true);
-    }
-    public APIRequestGetAdAccounts requestEndAdvertiserNameField (boolean value) {
-      this.requestField("end_advertiser_name", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestFailedDeliveryChecksField () {
-      return this.requestFailedDeliveryChecksField(true);
-    }
-    public APIRequestGetAdAccounts requestFailedDeliveryChecksField (boolean value) {
-      this.requestField("failed_delivery_checks", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestFundingSourceField () {
-      return this.requestFundingSourceField(true);
-    }
-    public APIRequestGetAdAccounts requestFundingSourceField (boolean value) {
-      this.requestField("funding_source", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestFundingSourceDetailsField () {
-      return this.requestFundingSourceDetailsField(true);
-    }
-    public APIRequestGetAdAccounts requestFundingSourceDetailsField (boolean value) {
-      this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {
-      return this.requestHasMigratedPermissionsField(true);
-    }
-    public APIRequestGetAdAccounts requestHasMigratedPermissionsField (boolean value) {
-      this.requestField("has_migrated_permissions", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestIdField () {
+    public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
-    public APIRequestGetAdAccounts requestIdField (boolean value) {
+    public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestIoNumberField () {
-      return this.requestIoNumberField(true);
+    public APIRequestGet requestJsPixelField () {
+      return this.requestJsPixelField(true);
     }
-    public APIRequestGetAdAccounts requestIoNumberField (boolean value) {
-      this.requestField("io_number", value);
+    public APIRequestGet requestJsPixelField (boolean value) {
+      this.requestField("js_pixel", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestIsAttributionSpecSystemDefaultField () {
-      return this.requestIsAttributionSpecSystemDefaultField(true);
+    public APIRequestGet requestLastFiringTimeField () {
+      return this.requestLastFiringTimeField(true);
     }
-    public APIRequestGetAdAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
-      this.requestField("is_attribution_spec_system_default", value);
+    public APIRequestGet requestLastFiringTimeField (boolean value) {
+      this.requestField("last_firing_time", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestIsDirectDealsEnabledField () {
-      return this.requestIsDirectDealsEnabledField(true);
-    }
-    public APIRequestGetAdAccounts requestIsDirectDealsEnabledField (boolean value) {
-      this.requestField("is_direct_deals_enabled", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {
-      return this.requestIsNotificationsEnabledField(true);
-    }
-    public APIRequestGetAdAccounts requestIsNotificationsEnabledField (boolean value) {
-      this.requestField("is_notifications_enabled", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestIsPersonalField () {
-      return this.requestIsPersonalField(true);
-    }
-    public APIRequestGetAdAccounts requestIsPersonalField (boolean value) {
-      this.requestField("is_personal", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestIsPrepayAccountField () {
-      return this.requestIsPrepayAccountField(true);
-    }
-    public APIRequestGetAdAccounts requestIsPrepayAccountField (boolean value) {
-      this.requestField("is_prepay_account", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestIsTaxIdRequiredField () {
-      return this.requestIsTaxIdRequiredField(true);
-    }
-    public APIRequestGetAdAccounts requestIsTaxIdRequiredField (boolean value) {
-      this.requestField("is_tax_id_required", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestLineNumbersField () {
-      return this.requestLineNumbersField(true);
-    }
-    public APIRequestGetAdAccounts requestLineNumbersField (boolean value) {
-      this.requestField("line_numbers", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestMediaAgencyField () {
-      return this.requestMediaAgencyField(true);
-    }
-    public APIRequestGetAdAccounts requestMediaAgencyField (boolean value) {
-      this.requestField("media_agency", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestMinCampaignGroupSpendCapField () {
-      return this.requestMinCampaignGroupSpendCapField(true);
-    }
-    public APIRequestGetAdAccounts requestMinCampaignGroupSpendCapField (boolean value) {
-      this.requestField("min_campaign_group_spend_cap", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestMinDailyBudgetField () {
-      return this.requestMinDailyBudgetField(true);
-    }
-    public APIRequestGetAdAccounts requestMinDailyBudgetField (boolean value) {
-      this.requestField("min_daily_budget", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestNameField () {
+    public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
-    public APIRequestGetAdAccounts requestNameField (boolean value) {
+    public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestNextBillDateField () {
-      return this.requestNextBillDateField(true);
+    public APIRequestGet requestTagField () {
+      return this.requestTagField(true);
     }
-    public APIRequestGetAdAccounts requestNextBillDateField (boolean value) {
-      this.requestField("next_bill_date", value);
+    public APIRequestGet requestTagField (boolean value) {
+      this.requestField("tag", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestOffsitePixelsTosAcceptedField () {
-      return this.requestOffsitePixelsTosAcceptedField(true);
-    }
-    public APIRequestGetAdAccounts requestOffsitePixelsTosAcceptedField (boolean value) {
-      this.requestField("offsite_pixels_tos_accepted", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestOwnerField () {
-      return this.requestOwnerField(true);
-    }
-    public APIRequestGetAdAccounts requestOwnerField (boolean value) {
-      this.requestField("owner", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestPartnerField () {
-      return this.requestPartnerField(true);
-    }
-    public APIRequestGetAdAccounts requestPartnerField (boolean value) {
-      this.requestField("partner", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestRfSpecField () {
-      return this.requestRfSpecField(true);
-    }
-    public APIRequestGetAdAccounts requestRfSpecField (boolean value) {
-      this.requestField("rf_spec", value);
-      return this;
-    }
+<<<<<<< HEAD
     public APIRequestGetAdAccounts requestSalesforceInvoiceGroupIdField () {
       return this.requestSalesforceInvoiceGroupIdField(true);
     }
@@ -1365,6 +1008,8 @@ public class OffsitePixel extends APINode {
       public String toString() {
         return value;
       }
+=======
+>>>>>>> upstream/master
   }
 
 

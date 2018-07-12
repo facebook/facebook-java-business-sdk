@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -51,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdCreativeLinkDataImageOverlaySpec extends APINode {
+  @SerializedName("custom_text_type")
+  private EnumCustomTextType mCustomTextType = null;
   @SerializedName("float_with_margin")
   private Boolean mFloatWithMargin = null;
   @SerializedName("overlay_template")
@@ -112,10 +118,19 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adCreativeLinkDataImageOverlaySpecs.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adCreativeLinkDataImageOverlaySpecs.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adCreativeLinkDataImageOverlaySpecs.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adCreativeLinkDataImageOverlaySpecs.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -206,6 +221,15 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   }
 
 
+  public EnumCustomTextType getFieldCustomTextType() {
+    return mCustomTextType;
+  }
+
+  public AdCreativeLinkDataImageOverlaySpec setFieldCustomTextType(EnumCustomTextType value) {
+    this.mCustomTextType = value;
+    return this;
+  }
+
   public Boolean getFieldFloatWithMargin() {
     return mFloatWithMargin;
   }
@@ -270,6 +294,23 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   }
 
 
+
+  public static enum EnumCustomTextType {
+      @SerializedName("free_shipping")
+      VALUE_FREE_SHIPPING("free_shipping"),
+      NULL(null);
+
+      private String value;
+
+      private EnumCustomTextType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
 
   public static enum EnumOverlayTemplate {
       @SerializedName("pill_with_text")
@@ -357,7 +398,15 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_STRIKETHROUGH_PRICE("strikethrough_price"),
       @SerializedName("percentage_off")
       VALUE_PERCENTAGE_OFF("percentage_off"),
+<<<<<<< HEAD
       NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
+=======
+      @SerializedName("custom")
+      VALUE_CUSTOM("custom"),
+      @SerializedName("from_price")
+      VALUE_FROM_PRICE("from_price"),
+      NULL(null);
+>>>>>>> upstream/master
 
       private String value;
 
@@ -433,6 +482,7 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   }
 
   public AdCreativeLinkDataImageOverlaySpec copyFrom(AdCreativeLinkDataImageOverlaySpec instance) {
+    this.mCustomTextType = instance.mCustomTextType;
     this.mFloatWithMargin = instance.mFloatWithMargin;
     this.mOverlayTemplate = instance.mOverlayTemplate;
     this.mPosition = instance.mPosition;

@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -53,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdAssetFeedSpecLinkURL extends APINode {
   @SerializedName("adlabels")
   private List<AdAssetFeedSpecAssetLabel> mAdlabels = null;
+  @SerializedName("carousel_see_more_url")
+  private String mCarouselSeeMoreUrl = null;
   @SerializedName("deeplink_url")
   private String mDeeplinkUrl = null;
   @SerializedName("display_url")
@@ -108,10 +114,19 @@ public class AdAssetFeedSpecLinkURL extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adAssetFeedSpecLinkURLs.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adAssetFeedSpecLinkURLs.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adAssetFeedSpecLinkURLs.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adAssetFeedSpecLinkURLs.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -216,6 +231,15 @@ public class AdAssetFeedSpecLinkURL extends APINode {
     this.mAdlabels = AdAssetFeedSpecAssetLabel.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldCarouselSeeMoreUrl() {
+    return mCarouselSeeMoreUrl;
+  }
+
+  public AdAssetFeedSpecLinkURL setFieldCarouselSeeMoreUrl(String value) {
+    this.mCarouselSeeMoreUrl = value;
+    return this;
+  }
+
   public String getFieldDeeplinkUrl() {
     return mDeeplinkUrl;
   }
@@ -270,6 +294,7 @@ public class AdAssetFeedSpecLinkURL extends APINode {
 
   public AdAssetFeedSpecLinkURL copyFrom(AdAssetFeedSpecLinkURL instance) {
     this.mAdlabels = instance.mAdlabels;
+    this.mCarouselSeeMoreUrl = instance.mCarouselSeeMoreUrl;
     this.mDeeplinkUrl = instance.mDeeplinkUrl;
     this.mDisplayUrl = instance.mDisplayUrl;
     this.mUrlTags = instance.mUrlTags;

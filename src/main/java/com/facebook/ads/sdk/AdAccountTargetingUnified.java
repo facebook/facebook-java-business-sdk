@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -57,10 +61,16 @@ public class AdAccountTargetingUnified extends APINode {
   private String mDescription = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_recommendation")
+  private Boolean mIsRecommendation = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("path")
   private List<String> mPath = null;
+  @SerializedName("recommendation_model")
+  private String mRecommendationModel = null;
+  @SerializedName("search_interest_id")
+  private String mSearchInterestId = null;
   @SerializedName("type")
   private String mType = null;
   @SerializedName("valid")
@@ -112,10 +122,19 @@ public class AdAccountTargetingUnified extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adAccountTargetingUnifieds.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adAccountTargetingUnifieds.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adAccountTargetingUnifieds.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adAccountTargetingUnifieds.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -233,6 +252,15 @@ public class AdAccountTargetingUnified extends APINode {
     return this;
   }
 
+  public Boolean getFieldIsRecommendation() {
+    return mIsRecommendation;
+  }
+
+  public AdAccountTargetingUnified setFieldIsRecommendation(Boolean value) {
+    this.mIsRecommendation = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
   }
@@ -248,6 +276,24 @@ public class AdAccountTargetingUnified extends APINode {
 
   public AdAccountTargetingUnified setFieldPath(List<String> value) {
     this.mPath = value;
+    return this;
+  }
+
+  public String getFieldRecommendationModel() {
+    return mRecommendationModel;
+  }
+
+  public AdAccountTargetingUnified setFieldRecommendationModel(String value) {
+    this.mRecommendationModel = value;
+    return this;
+  }
+
+  public String getFieldSearchInterestId() {
+    return mSearchInterestId;
+  }
+
+  public AdAccountTargetingUnified setFieldSearchInterestId(String value) {
+    this.mSearchInterestId = value;
     return this;
   }
 
@@ -474,7 +520,17 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_USER_PAGE_THREADS("user_page_threads"),
       @SerializedName("user_page_threads_excluded")
       VALUE_USER_PAGE_THREADS_EXCLUDED("user_page_threads_excluded"),
+<<<<<<< HEAD
       NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
+=======
+      @SerializedName("is_whatsapp_destination_ad")
+      VALUE_IS_WHATSAPP_DESTINATION_AD("is_whatsapp_destination_ad"),
+      @SerializedName("marketplace_product_categories")
+      VALUE_MARKETPLACE_PRODUCT_CATEGORIES("marketplace_product_categories"),
+      @SerializedName("instream_video_sponsorship_placements")
+      VALUE_INSTREAM_VIDEO_SPONSORSHIP_PLACEMENTS("instream_video_sponsorship_placements"),
+      NULL(null);
+>>>>>>> upstream/master
 
       private String value;
 
@@ -506,8 +562,11 @@ public class AdAccountTargetingUnified extends APINode {
     this.mAudienceSize = instance.mAudienceSize;
     this.mDescription = instance.mDescription;
     this.mId = instance.mId;
+    this.mIsRecommendation = instance.mIsRecommendation;
     this.mName = instance.mName;
     this.mPath = instance.mPath;
+    this.mRecommendationModel = instance.mRecommendationModel;
+    this.mSearchInterestId = instance.mSearchInterestId;
     this.mType = instance.mType;
     this.mValid = instance.mValid;
     this.context = instance.context;

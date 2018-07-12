@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -120,10 +124,19 @@ public class AdPromotedObject extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adPromotedObjects.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adPromotedObjects.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adPromotedObjects.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adPromotedObjects.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -315,12 +328,6 @@ public class AdPromotedObject extends APINode {
 
 
   public static enum EnumCustomEventType {
-      @SerializedName("COMPLETE_REGISTRATION")
-      VALUE_COMPLETE_REGISTRATION("COMPLETE_REGISTRATION"),
-      @SerializedName("CONTENT_VIEW")
-      VALUE_CONTENT_VIEW("CONTENT_VIEW"),
-      @SerializedName("SEARCH")
-      VALUE_SEARCH("SEARCH"),
       @SerializedName("RATE")
       VALUE_RATE("RATE"),
       @SerializedName("TUTORIAL_COMPLETION")
@@ -337,6 +344,14 @@ public class AdPromotedObject extends APINode {
       VALUE_PURCHASE("PURCHASE"),
       @SerializedName("LEAD")
       VALUE_LEAD("LEAD"),
+      @SerializedName("COMPLETE_REGISTRATION")
+      VALUE_COMPLETE_REGISTRATION("COMPLETE_REGISTRATION"),
+      @SerializedName("CONTENT_VIEW")
+      VALUE_CONTENT_VIEW("CONTENT_VIEW"),
+      @SerializedName("SEARCH")
+      VALUE_SEARCH("SEARCH"),
+      @SerializedName("MESSAGING_CONVERSATION_STARTED_7D")
+      VALUE_MESSAGING_CONVERSATION_STARTED_7D("MESSAGING_CONVERSATION_STARTED_7D"),
       @SerializedName("LEVEL_ACHIEVED")
       VALUE_LEVEL_ACHIEVED("LEVEL_ACHIEVED"),
       @SerializedName("ACHIEVEMENT_UNLOCKED")
