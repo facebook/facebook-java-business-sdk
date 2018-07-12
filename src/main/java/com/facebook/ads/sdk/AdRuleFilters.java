@@ -267,7 +267,7 @@ public class AdRuleFilters extends APINode {
       VALUE_ALL("ALL"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

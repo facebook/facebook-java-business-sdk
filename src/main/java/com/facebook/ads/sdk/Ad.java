@@ -3473,7 +3473,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setExecutionOptions (List<Ad.EnumExecutionOptions> executionOptions) {
+    public APIRequestUpdate setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -3487,7 +3487,20 @@ public class Ad extends APINode {
       return this;
     }
 
+<<<<<<< HEAD
+    public APIRequestUpdate setRedownload (Boolean redownload) {
+      this.setParam("redownload", redownload);
+      return this;
+    }
+    public APIRequestUpdate setRedownload (String redownload) {
+      this.setParam("redownload", redownload);
+      return this;
+    }
+
+    public APIRequestUpdate setStatus (EnumStatus status) {
+=======
     public APIRequestUpdate setStatus (Ad.EnumStatus status) {
+>>>>>>> upstream/master
       this.setParam("status", status);
       return this;
     }
@@ -3554,7 +3567,7 @@ public class Ad extends APINode {
       VALUE_ABSOLUTE_OCPM("ABSOLUTE_OCPM"),
       @SerializedName("CPA")
       VALUE_CPA("CPA"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3577,7 +3590,7 @@ public class Ad extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("ARCHIVED")
       VALUE_ARCHIVED("ARCHIVED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3612,7 +3625,7 @@ public class Ad extends APINode {
       VALUE_ARCHIVED("ARCHIVED"),
       @SerializedName("ADSET_PAUSED")
       VALUE_ADSET_PAUSED("ADSET_PAUSED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3635,7 +3648,7 @@ public class Ad extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("ARCHIVED")
       VALUE_ARCHIVED("ARCHIVED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3688,7 +3701,7 @@ public class Ad extends APINode {
       VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
       @SerializedName("this_year")
       VALUE_THIS_YEAR("this_year"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3709,7 +3722,7 @@ public class Ad extends APINode {
       VALUE_SYNCHRONOUS_AD_REVIEW("synchronous_ad_review"),
       @SerializedName("include_recommendations")
       VALUE_INCLUDE_RECOMMENDATIONS("include_recommendations"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3728,7 +3741,7 @@ public class Ad extends APINode {
       VALUE_ALL("ALL"),
       @SerializedName("ANY")
       VALUE_ANY("ANY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

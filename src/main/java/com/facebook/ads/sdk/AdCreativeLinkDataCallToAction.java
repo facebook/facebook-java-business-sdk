@@ -323,6 +323,11 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_GET_SHOWTIMES("GET_SHOWTIMES"),
       @SerializedName("LISTEN_NOW")
       VALUE_LISTEN_NOW("LISTEN_NOW"),
+<<<<<<< HEAD
+      @SerializedName("OPEN_MOVIES")
+      VALUE_OPEN_MOVIES("OPEN_MOVIES"),
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
+=======
       @SerializedName("EVENT_RSVP")
       VALUE_EVENT_RSVP("EVENT_RSVP"),
       @SerializedName("WHATSAPP_MESSAGE")
@@ -330,6 +335,7 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
       NULL(null);
+>>>>>>> upstream/master
 
       private String value;
 

@@ -1547,7 +1547,7 @@ public class ProductItem extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAvailability (ProductItem.EnumAvailability availability) {
+    public APIRequestUpdate setAvailability (EnumAvailability availability) {
       this.setParam("availability", availability);
       return this;
     }
@@ -1576,7 +1576,7 @@ public class ProductItem extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCondition (ProductItem.EnumCondition condition) {
+    public APIRequestUpdate setCondition (EnumCondition condition) {
       this.setParam("condition", condition);
       return this;
     }
@@ -1634,7 +1634,7 @@ public class ProductItem extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setGender (ProductItem.EnumGender gender) {
+    public APIRequestUpdate setGender (EnumGender gender) {
       this.setParam("gender", gender);
       return this;
     }
@@ -1850,7 +1850,7 @@ public class ProductItem extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setVisibility (ProductItem.EnumVisibility visibility) {
+    public APIRequestUpdate setVisibility (EnumVisibility visibility) {
       this.setParam("visibility", visibility);
       return this;
     }
@@ -1927,7 +1927,7 @@ public class ProductItem extends APINode {
       VALUE_TEEN("teen"),
       @SerializedName("toddler")
       VALUE_TODDLER("toddler"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1952,9 +1952,13 @@ public class ProductItem extends APINode {
       VALUE_AVAILABLE_FOR_ORDER("available for order"),
       @SerializedName("discontinued")
       VALUE_DISCONTINUED("discontinued"),
+<<<<<<< HEAD
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
+=======
       @SerializedName("pending")
       VALUE_PENDING("pending"),
       NULL(null);
+>>>>>>> upstream/master
 
       private String value;
 
@@ -1975,9 +1979,13 @@ public class ProductItem extends APINode {
       VALUE_REFURBISHED("refurbished"),
       @SerializedName("used")
       VALUE_USED("used"),
+<<<<<<< HEAD
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
+=======
       @SerializedName("cpo")
       VALUE_CPO("cpo"),
       NULL(null);
+>>>>>>> upstream/master
 
       private String value;
 
@@ -1998,7 +2006,7 @@ public class ProductItem extends APINode {
       VALUE_MALE("male"),
       @SerializedName("unisex")
       VALUE_UNISEX("unisex"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2021,7 +2029,7 @@ public class ProductItem extends APINode {
       VALUE_APPROVED("approved"),
       @SerializedName("outdated")
       VALUE_OUTDATED("outdated"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2044,7 +2052,7 @@ public class ProductItem extends APINode {
       VALUE_OZ("oz"),
       @SerializedName("lb")
       VALUE_LB("lb"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2063,7 +2071,7 @@ public class ProductItem extends APINode {
       VALUE_STAGING("staging"),
       @SerializedName("published")
       VALUE_PUBLISHED("published"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -1288,7 +1288,7 @@ public class AdReportRun extends APINode {
       VALUE_28D_CLICK("28d_click"),
       @SerializedName("default")
       VALUE_DEFAULT("default"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1325,7 +1325,7 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1344,7 +1344,7 @@ public class AdReportRun extends APINode {
       VALUE_IMPRESSION("impression"),
       @SerializedName("conversion")
       VALUE_CONVERSION("conversion"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1387,6 +1387,9 @@ public class AdReportRun extends APINode {
       VALUE_PRODUCT_ID("product_id"),
       @SerializedName("region")
       VALUE_REGION("region"),
+<<<<<<< HEAD
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
+=======
       @SerializedName("ad_format_asset")
       VALUE_AD_FORMAT_ASSET("ad_format_asset"),
       @SerializedName("body_asset")
@@ -1404,6 +1407,7 @@ public class AdReportRun extends APINode {
       @SerializedName("video_asset")
       VALUE_VIDEO_ASSET("video_asset"),
       NULL(null);
+>>>>>>> upstream/master
 
       private String value;
 
@@ -1456,7 +1460,7 @@ public class AdReportRun extends APINode {
       VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
       @SerializedName("this_year")
       VALUE_THIS_YEAR("this_year"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1497,7 +1501,7 @@ public class AdReportRun extends APINode {
       VALUE_TIME_COMPLETED("time_completed"),
       @SerializedName("time_ref")
       VALUE_TIME_REF("time_ref"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1520,7 +1524,7 @@ public class AdReportRun extends APINode {
       VALUE_CAMPAIGN("campaign"),
       @SerializedName("account")
       VALUE_ACCOUNT("account"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1557,7 +1561,7 @@ public class AdReportRun extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -254,7 +254,7 @@ public class ProductCatalogPricingVariablesBatch extends APINode {
   public static enum EnumStandard {
       @SerializedName("google")
       VALUE_GOOGLE("google"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

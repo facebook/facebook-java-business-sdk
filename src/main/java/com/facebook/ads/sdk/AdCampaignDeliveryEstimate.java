@@ -297,11 +297,15 @@ public class AdCampaignDeliveryEstimate extends APINode {
       VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
       @SerializedName("LANDING_PAGE_VIEWS")
       VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
+<<<<<<< HEAD
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
+=======
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
       @SerializedName("REPLIES")
       VALUE_REPLIES("REPLIES"),
       NULL(null);
+>>>>>>> upstream/master
 
       private String value;
 

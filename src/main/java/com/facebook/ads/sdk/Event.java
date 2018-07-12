@@ -1919,7 +1919,7 @@ public class Event extends APINode {
       VALUE_GROUP("group"),
       @SerializedName("community")
       VALUE_COMMUNITY("community"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

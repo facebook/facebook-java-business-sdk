@@ -715,7 +715,7 @@ public class ProductFeedUpload extends APINode {
       VALUE_REUPLOAD_LAST_FILE("Reupload Last File"),
       @SerializedName("User initiated server fetch")
       VALUE_USER_INITIATED_SERVER_FETCH("User initiated server fetch"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

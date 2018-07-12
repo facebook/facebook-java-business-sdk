@@ -1232,7 +1232,7 @@ public class AdCreative extends APINode {
       return this;
     }
 
-    public APIRequestDelete setStatus (AdCreative.EnumStatus status) {
+    public APIRequestDelete setStatus (EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
@@ -1786,7 +1786,7 @@ public class AdCreative extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setStatus (AdCreative.EnumStatus status) {
+    public APIRequestUpdate setStatus (EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
@@ -1840,7 +1840,7 @@ public class AdCreative extends APINode {
       VALUE_DEEPLINK_WITH_APPSTORE_FALLBACK("deeplink_with_appstore_fallback"),
       @SerializedName("web_only")
       VALUE_WEB_ONLY("web_only"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1943,6 +1943,11 @@ public class AdCreative extends APINode {
       VALUE_GET_SHOWTIMES("GET_SHOWTIMES"),
       @SerializedName("LISTEN_NOW")
       VALUE_LISTEN_NOW("LISTEN_NOW"),
+<<<<<<< HEAD
+      @SerializedName("OPEN_MOVIES")
+      VALUE_OPEN_MOVIES("OPEN_MOVIES"),
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
+=======
       @SerializedName("EVENT_RSVP")
       VALUE_EVENT_RSVP("EVENT_RSVP"),
       @SerializedName("WHATSAPP_MESSAGE")
@@ -1950,6 +1955,7 @@ public class AdCreative extends APINode {
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
       NULL(null);
+>>>>>>> upstream/master
 
       private String value;
 
@@ -1986,7 +1992,7 @@ public class AdCreative extends APINode {
       VALUE_VIDEO("VIDEO"),
       @SerializedName("INVALID")
       VALUE_INVALID("INVALID"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2005,7 +2011,7 @@ public class AdCreative extends APINode {
       VALUE_ACTIVE("ACTIVE"),
       @SerializedName("DELETED")
       VALUE_DELETED("DELETED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2043,7 +2049,7 @@ public class AdCreative extends APINode {
       VALUE_DYNAMIC("DYNAMIC"),
       @SerializedName("STORY_OWNER")
       VALUE_STORY_OWNER("STORY_OWNER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2062,7 +2068,7 @@ public class AdCreative extends APINode {
       VALUE_ALL("ALL"),
       @SerializedName("ANY")
       VALUE_ANY("ANY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

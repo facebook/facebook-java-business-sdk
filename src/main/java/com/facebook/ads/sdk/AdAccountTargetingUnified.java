@@ -520,6 +520,9 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_USER_PAGE_THREADS("user_page_threads"),
       @SerializedName("user_page_threads_excluded")
       VALUE_USER_PAGE_THREADS_EXCLUDED("user_page_threads_excluded"),
+<<<<<<< HEAD
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
+=======
       @SerializedName("is_whatsapp_destination_ad")
       VALUE_IS_WHATSAPP_DESTINATION_AD("is_whatsapp_destination_ad"),
       @SerializedName("marketplace_product_categories")
@@ -527,6 +530,7 @@ public class AdAccountTargetingUnified extends APINode {
       @SerializedName("instream_video_sponsorship_placements")
       VALUE_INSTREAM_VIDEO_SPONSORSHIP_PLACEMENTS("instream_video_sponsorship_placements"),
       NULL(null);
+>>>>>>> upstream/master
 
       private String value;
 

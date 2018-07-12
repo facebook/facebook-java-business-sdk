@@ -1847,7 +1847,7 @@ public class Campaign extends APINode {
     }
 
 
-    public APIRequestGetCopies setDatePreset (Campaign.EnumDatePreset datePreset) {
+    public APIRequestGetCopies setDatePreset (EnumDatePreset datePreset) {
       this.setParam("date_preset", datePreset);
       return this;
     }
@@ -1856,7 +1856,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestGetCopies setEffectiveStatus (List<Campaign.EnumEffectiveStatus> effectiveStatus) {
+    public APIRequestGetCopies setEffectiveStatus (List<EnumEffectiveStatus> effectiveStatus) {
       this.setParam("effective_status", effectiveStatus);
       return this;
     }
@@ -3203,6 +3203,9 @@ public class Campaign extends APINode {
       return this;
     }
 
+<<<<<<< HEAD
+    public APIRequestUpdate setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
+=======
     public APIRequestUpdate setDailyBudget (Long dailyBudget) {
       this.setParam("daily_budget", dailyBudget);
       return this;
@@ -3213,6 +3216,7 @@ public class Campaign extends APINode {
     }
 
     public APIRequestUpdate setExecutionOptions (List<Campaign.EnumExecutionOptions> executionOptions) {
+>>>>>>> upstream/master
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -3244,7 +3248,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setObjective (Campaign.EnumObjective objective) {
+    public APIRequestUpdate setObjective (EnumObjective objective) {
       this.setParam("objective", objective);
       return this;
     }
@@ -3271,7 +3275,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setStatus (Campaign.EnumStatus status) {
+    public APIRequestUpdate setStatus (EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
@@ -3348,7 +3352,7 @@ public class Campaign extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("ARCHIVED")
       VALUE_ARCHIVED("ARCHIVED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3383,7 +3387,7 @@ public class Campaign extends APINode {
       VALUE_ARCHIVED("ARCHIVED"),
       @SerializedName("ADSET_PAUSED")
       VALUE_ADSET_PAUSED("ADSET_PAUSED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3406,7 +3410,7 @@ public class Campaign extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("ARCHIVED")
       VALUE_ARCHIVED("ARCHIVED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3459,7 +3463,7 @@ public class Campaign extends APINode {
       VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
       @SerializedName("this_year")
       VALUE_THIS_YEAR("this_year"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3480,7 +3484,7 @@ public class Campaign extends APINode {
       VALUE_DELETE_OLDEST("DELETE_OLDEST"),
       @SerializedName("DELETE_ARCHIVED_BEFORE")
       VALUE_DELETE_ARCHIVED_BEFORE("DELETE_ARCHIVED_BEFORE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3499,7 +3503,7 @@ public class Campaign extends APINode {
       VALUE_VALIDATE_ONLY("validate_only"),
       @SerializedName("include_recommendations")
       VALUE_INCLUDE_RECOMMENDATIONS("include_recommendations"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3542,7 +3546,7 @@ public class Campaign extends APINode {
       VALUE_REACH("REACH"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3561,7 +3565,7 @@ public class Campaign extends APINode {
       VALUE_ALL("ALL"),
       @SerializedName("ANY")
       VALUE_ANY("ANY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

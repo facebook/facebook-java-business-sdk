@@ -75,6 +75,8 @@ public class AdPromotedObject extends APINode {
   private String mProductCatalogId = null;
   @SerializedName("product_set_id")
   private String mProductSetId = null;
+  @SerializedName("pixel_rule")
+  private String mPixelRule = null;
   protected static Gson gson = null;
 
   public AdPromotedObject() {
@@ -315,6 +317,14 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldPixelRule() {
+    return mPixelRule;
+  }
+
+  public AdPromotedObject setFieldPixelRule(String value) {
+    this.mPixelRule = value;
+    return this;
+  }
 
 
   public static enum EnumCustomEventType {
@@ -350,7 +360,7 @@ public class AdPromotedObject extends APINode {
       VALUE_SPENT_CREDITS("SPENT_CREDITS"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -391,6 +401,7 @@ public class AdPromotedObject extends APINode {
     this.mProductSetId = instance.mProductSetId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
+    this.mPixelRule = instance.mPixelRule;
     return this;
   }
 

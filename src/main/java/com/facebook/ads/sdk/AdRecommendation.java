@@ -296,7 +296,7 @@ public class AdRecommendation extends APINode {
       VALUE_MEDIUM("MEDIUM"),
       @SerializedName("LOW")
       VALUE_LOW("LOW"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -317,7 +317,7 @@ public class AdRecommendation extends APINode {
       VALUE_MEDIUM("MEDIUM"),
       @SerializedName("LOW")
       VALUE_LOW("LOW"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
