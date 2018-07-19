@@ -419,6 +419,8 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_BID_TYPE("update_ad_bid_type"),
       @SerializedName("update_ad_run_status")
       VALUE_UPDATE_AD_RUN_STATUS("update_ad_run_status"),
+      @SerializedName("update_ad_run_status_to_be_set_after_review")
+      VALUE_UPDATE_AD_RUN_STATUS_TO_BE_SET_AFTER_REVIEW("update_ad_run_status_to_be_set_after_review"),
       @SerializedName("update_ad_friendly_name")
       VALUE_UPDATE_AD_FRIENDLY_NAME("update_ad_friendly_name"),
       @SerializedName("update_ad_targets_spec")

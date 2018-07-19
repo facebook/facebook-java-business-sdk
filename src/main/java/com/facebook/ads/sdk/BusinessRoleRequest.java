@@ -56,7 +56,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class BusinessRoleRequest extends APINode {
   @SerializedName("created_by")
-  private User mCreatedBy = null;
+  private Object mCreatedBy = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("email")
@@ -78,7 +78,7 @@ public class BusinessRoleRequest extends APINode {
   @SerializedName("status")
   private String mStatus = null;
   @SerializedName("updated_by")
-  private User mUpdatedBy = null;
+  private Object mUpdatedBy = null;
   @SerializedName("updated_time")
   private String mUpdatedTime = null;
   protected static Gson gson = null;
@@ -304,10 +304,7 @@ public class BusinessRoleRequest extends APINode {
   }
 
 
-  public User getFieldCreatedBy() {
-    if (mCreatedBy != null) {
-      mCreatedBy.context = getContext();
-    }
+  public Object getFieldCreatedBy() {
     return mCreatedBy;
   }
 
@@ -354,10 +351,7 @@ public class BusinessRoleRequest extends APINode {
     return mStatus;
   }
 
-  public User getFieldUpdatedBy() {
-    if (mUpdatedBy != null) {
-      mUpdatedBy.context = getContext();
-    }
+  public Object getFieldUpdatedBy() {
     return mUpdatedBy;
   }
 

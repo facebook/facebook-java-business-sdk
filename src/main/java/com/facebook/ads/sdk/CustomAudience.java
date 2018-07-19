@@ -311,16 +311,16 @@ public class CustomAudience extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateAdAccount createAdAccount() {
+    return new APIRequestCreateAdAccount(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteAdAccounts deleteAdAccounts() {
     return new APIRequestDeleteAdAccounts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetAdAccounts getAdAccounts() {
     return new APIRequestGetAdAccounts(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateAdAccount createAdAccount() {
-    return new APIRequestCreateAdAccount(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetAds getAds() {
@@ -452,6 +452,145 @@ public class CustomAudience extends APINode {
   }
 
 
+
+  public static class APIRequestCreateAdAccount extends APIRequest<AdAccount> {
+
+    AdAccount lastResponse = null;
+    @Override
+    public AdAccount getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "adaccounts",
+      "permissions",
+      "relationship_type",
+      "replace",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdAccount parseResponse(String response) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdAccount execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAccount execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdAccount> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdAccount>() {
+           public AdAccount apply(String result) {
+             try {
+               return APIRequestCreateAdAccount.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAdAccount(String nodeId, APIContext context) {
+      super(context, nodeId, "/ad_accounts", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAdAccount setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdAccount setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAdAccount setAdaccounts (List<String> adaccounts) {
+      this.setParam("adaccounts", adaccounts);
+      return this;
+    }
+    public APIRequestCreateAdAccount setAdaccounts (String adaccounts) {
+      this.setParam("adaccounts", adaccounts);
+      return this;
+    }
+
+    public APIRequestCreateAdAccount setPermissions (String permissions) {
+      this.setParam("permissions", permissions);
+      return this;
+    }
+
+    public APIRequestCreateAdAccount setRelationshipType (List<String> relationshipType) {
+      this.setParam("relationship_type", relationshipType);
+      return this;
+    }
+    public APIRequestCreateAdAccount setRelationshipType (String relationshipType) {
+      this.setParam("relationship_type", relationshipType);
+      return this;
+    }
+
+    public APIRequestCreateAdAccount setReplace (Boolean replace) {
+      this.setParam("replace", replace);
+      return this;
+    }
+    public APIRequestCreateAdAccount setReplace (String replace) {
+      this.setParam("replace", replace);
+      return this;
+    }
+
+    public APIRequestCreateAdAccount requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAdAccount requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdAccount requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAdAccount requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdAccount requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdAccount requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestDeleteAdAccounts extends APIRequest<APINode> {
 
@@ -1121,135 +1260,6 @@ public class CustomAudience extends APINode {
       this.requestField("user_tos_accepted", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateAdAccount extends APIRequest<AdAccount> {
-
-    AdAccount lastResponse = null;
-    @Override
-    public AdAccount getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "adaccounts",
-      "permissions",
-      "replace",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdAccount execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdAccount> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
-             try {
-               return APIRequestCreateAdAccount.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAdAccount(String nodeId, APIContext context) {
-      super(context, nodeId, "/adaccounts", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAdAccount setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccount setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAdAccount setAdaccounts (List<String> adaccounts) {
-      this.setParam("adaccounts", adaccounts);
-      return this;
-    }
-    public APIRequestCreateAdAccount setAdaccounts (String adaccounts) {
-      this.setParam("adaccounts", adaccounts);
-      return this;
-    }
-
-    public APIRequestCreateAdAccount setPermissions (String permissions) {
-      this.setParam("permissions", permissions);
-      return this;
-    }
-
-    public APIRequestCreateAdAccount setReplace (Boolean replace) {
-      this.setParam("replace", replace);
-      return this;
-    }
-    public APIRequestCreateAdAccount setReplace (String replace) {
-      this.setParam("replace", replace);
-      return this;
-    }
-
-    public APIRequestCreateAdAccount requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAdAccount requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccount requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAdAccount requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccount requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAdAccount requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetAds extends APIRequest<Ad> {

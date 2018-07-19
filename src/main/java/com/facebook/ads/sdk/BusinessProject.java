@@ -60,7 +60,7 @@ public class BusinessProject extends APINode {
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("creator")
-  private User mCreator = null;
+  private Object mCreator = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("name")
@@ -295,10 +295,7 @@ public class BusinessProject extends APINode {
     return mCreatedTime;
   }
 
-  public User getFieldCreator() {
-    if (mCreator != null) {
-      mCreator.context = getContext();
-    }
+  public Object getFieldCreator() {
     return mCreator;
   }
 

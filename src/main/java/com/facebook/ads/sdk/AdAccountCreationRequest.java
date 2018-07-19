@@ -95,6 +95,8 @@ public class AdAccountCreationRequest extends APINode {
   private String mOfficialWebsiteUrl = null;
   @SerializedName("planning_agency_business")
   private Business mPlanningAgencyBusiness = null;
+  @SerializedName("planning_agency_business_id")
+  private String mPlanningAgencyBusinessId = null;
   @SerializedName("promotable_app_ids")
   private List<String> mPromotableAppIds = null;
   @SerializedName("promotable_page_ids")
@@ -426,6 +428,10 @@ public class AdAccountCreationRequest extends APINode {
     return mPlanningAgencyBusiness;
   }
 
+  public String getFieldPlanningAgencyBusinessId() {
+    return mPlanningAgencyBusinessId;
+  }
+
   public List<String> getFieldPromotableAppIds() {
     return mPromotableAppIds;
   }
@@ -594,6 +600,7 @@ public class AdAccountCreationRequest extends APINode {
       "is_under_authorization",
       "official_website_url",
       "planning_agency_business",
+      "planning_agency_business_id",
       "promotable_app_ids",
       "promotable_page_ids",
       "promotable_urls",
@@ -830,6 +837,13 @@ public class AdAccountCreationRequest extends APINode {
     }
     public APIRequestGet requestPlanningAgencyBusinessField (boolean value) {
       this.requestField("planning_agency_business", value);
+      return this;
+    }
+    public APIRequestGet requestPlanningAgencyBusinessIdField () {
+      return this.requestPlanningAgencyBusinessIdField(true);
+    }
+    public APIRequestGet requestPlanningAgencyBusinessIdField (boolean value) {
+      this.requestField("planning_agency_business_id", value);
       return this;
     }
     public APIRequestGet requestPromotableAppIdsField () {
@@ -1364,8 +1378,8 @@ public class AdAccountCreationRequest extends APINode {
       VALUE_SMB_RENTALS("SMB_RENTALS"),
       @SerializedName("SMB_REPAIR_AND_MAINTENANCE")
       VALUE_SMB_REPAIR_AND_MAINTENANCE("SMB_REPAIR_AND_MAINTENANCE"),
-      @SerializedName("SMB_WIRELINE_SERVICES")
-      VALUE_SMB_WIRELINE_SERVICES("SMB_WIRELINE_SERVICES"),
+      @SerializedName("OTHER_WIRELINE_SERVICES")
+      VALUE_OTHER_WIRELINE_SERVICES("OTHER_WIRELINE_SERVICES"),
       @SerializedName("SOFTWARE")
       VALUE_SOFTWARE("SOFTWARE"),
       @SerializedName("SPORTING")
@@ -1535,6 +1549,7 @@ public class AdAccountCreationRequest extends APINode {
     this.mIsUnderAuthorization = instance.mIsUnderAuthorization;
     this.mOfficialWebsiteUrl = instance.mOfficialWebsiteUrl;
     this.mPlanningAgencyBusiness = instance.mPlanningAgencyBusiness;
+    this.mPlanningAgencyBusinessId = instance.mPlanningAgencyBusinessId;
     this.mPromotableAppIds = instance.mPromotableAppIds;
     this.mPromotablePageIds = instance.mPromotablePageIds;
     this.mPromotableUrls = instance.mPromotableUrls;

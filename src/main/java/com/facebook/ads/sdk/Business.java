@@ -58,7 +58,7 @@ public class Business extends APINode {
   @SerializedName("block_offline_analytics")
   private Boolean mBlockOfflineAnalytics = null;
   @SerializedName("created_by")
-  private User mCreatedBy = null;
+  private Object mCreatedBy = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
   @SerializedName("id")
@@ -78,7 +78,7 @@ public class Business extends APINode {
   @SerializedName("two_factor_type")
   private String mTwoFactorType = null;
   @SerializedName("updated_by")
-  private User mUpdatedBy = null;
+  private Object mUpdatedBy = null;
   @SerializedName("updated_time")
   private String mUpdatedTime = null;
   @SerializedName("vertical")
@@ -393,10 +393,6 @@ public class Business extends APINode {
     return new APIRequestCreateClientApp(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetClientBusinesses getClientBusinesses() {
-    return new APIRequestGetClientBusinesses(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetClientPages getClientPages() {
     return new APIRequestGetClientPages(this.getPrefixedId().toString(), context);
   }
@@ -590,10 +586,7 @@ public class Business extends APINode {
     return mBlockOfflineAnalytics;
   }
 
-  public User getFieldCreatedBy() {
-    if (mCreatedBy != null) {
-      mCreatedBy.context = getContext();
-    }
+  public Object getFieldCreatedBy() {
     return mCreatedBy;
   }
 
@@ -636,10 +629,7 @@ public class Business extends APINode {
     return mTwoFactorType;
   }
 
-  public User getFieldUpdatedBy() {
-    if (mUpdatedBy != null) {
-      mUpdatedBy.context = getContext();
-    }
+  public Object getFieldUpdatedBy() {
     return mUpdatedBy;
   }
 
@@ -1000,6 +990,7 @@ public class Business extends APINode {
       "end_advertiser",
       "funding_id",
       "invoice",
+      "invoice_group_id",
       "io",
       "liable_address_id",
       "media_agency",
@@ -1099,6 +1090,15 @@ public class Business extends APINode {
     }
     public APIRequestCreateAdAccount setInvoice (String invoice) {
       this.setParam("invoice", invoice);
+      return this;
+    }
+
+    public APIRequestCreateAdAccount setInvoiceGroupId (Object invoiceGroupId) {
+      this.setParam("invoice_group_id", invoiceGroupId);
+      return this;
+    }
+    public APIRequestCreateAdAccount setInvoiceGroupId (String invoiceGroupId) {
+      this.setParam("invoice_group_id", invoiceGroupId);
       return this;
     }
 
@@ -1228,6 +1228,7 @@ public class Business extends APINode {
       "is_under_authorization",
       "official_website_url",
       "planning_agency_business",
+      "planning_agency_business_id",
       "promotable_app_ids",
       "promotable_page_ids",
       "promotable_urls",
@@ -1473,6 +1474,13 @@ public class Business extends APINode {
     }
     public APIRequestGetAdAccountCreationRequests requestPlanningAgencyBusinessField (boolean value) {
       this.requestField("planning_agency_business", value);
+      return this;
+    }
+    public APIRequestGetAdAccountCreationRequests requestPlanningAgencyBusinessIdField () {
+      return this.requestPlanningAgencyBusinessIdField(true);
+    }
+    public APIRequestGetAdAccountCreationRequests requestPlanningAgencyBusinessIdField (boolean value) {
+      this.requestField("planning_agency_business_id", value);
       return this;
     }
     public APIRequestGetAdAccountCreationRequests requestPromotableAppIdsField () {
@@ -6350,213 +6358,6 @@ public class Business extends APINode {
       return this;
     }
 
-  }
-
-  public static class APIRequestGetClientBusinesses extends APIRequest<Business> {
-
-    APINodeList<Business> lastResponse = null;
-    @Override
-    public APINodeList<Business> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "block_offline_analytics",
-      "created_by",
-      "created_time",
-      "id",
-      "link",
-      "name",
-      "primary_page",
-      "profile_picture_uri",
-      "timezone_id",
-      "two_factor_type",
-      "updated_by",
-      "updated_time",
-      "vertical",
-    };
-
-    @Override
-    public APINodeList<Business> parseResponse(String response) throws APIException {
-      return Business.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<Business> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<Business> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<Business>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Business>>() {
-           public APINodeList<Business> apply(String result) {
-             try {
-               return APIRequestGetClientBusinesses.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetClientBusinesses(String nodeId, APIContext context) {
-      super(context, nodeId, "/client_businesses", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetClientBusinesses setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClientBusinesses setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetClientBusinesses requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetClientBusinesses requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClientBusinesses requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetClientBusinesses requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClientBusinesses requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetClientBusinesses requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetClientBusinesses requestBlockOfflineAnalyticsField () {
-      return this.requestBlockOfflineAnalyticsField(true);
-    }
-    public APIRequestGetClientBusinesses requestBlockOfflineAnalyticsField (boolean value) {
-      this.requestField("block_offline_analytics", value);
-      return this;
-    }
-    public APIRequestGetClientBusinesses requestCreatedByField () {
-      return this.requestCreatedByField(true);
-    }
-    public APIRequestGetClientBusinesses requestCreatedByField (boolean value) {
-      this.requestField("created_by", value);
-      return this;
-    }
-    public APIRequestGetClientBusinesses requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetClientBusinesses requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetClientBusinesses requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetClientBusinesses requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetClientBusinesses requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetClientBusinesses requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetClientBusinesses requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetClientBusinesses requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetClientBusinesses requestPrimaryPageField () {
-      return this.requestPrimaryPageField(true);
-    }
-    public APIRequestGetClientBusinesses requestPrimaryPageField (boolean value) {
-      this.requestField("primary_page", value);
-      return this;
-    }
-    public APIRequestGetClientBusinesses requestProfilePictureUriField () {
-      return this.requestProfilePictureUriField(true);
-    }
-    public APIRequestGetClientBusinesses requestProfilePictureUriField (boolean value) {
-      this.requestField("profile_picture_uri", value);
-      return this;
-    }
-    public APIRequestGetClientBusinesses requestTimezoneIdField () {
-      return this.requestTimezoneIdField(true);
-    }
-    public APIRequestGetClientBusinesses requestTimezoneIdField (boolean value) {
-      this.requestField("timezone_id", value);
-      return this;
-    }
-    public APIRequestGetClientBusinesses requestTwoFactorTypeField () {
-      return this.requestTwoFactorTypeField(true);
-    }
-    public APIRequestGetClientBusinesses requestTwoFactorTypeField (boolean value) {
-      this.requestField("two_factor_type", value);
-      return this;
-    }
-    public APIRequestGetClientBusinesses requestUpdatedByField () {
-      return this.requestUpdatedByField(true);
-    }
-    public APIRequestGetClientBusinesses requestUpdatedByField (boolean value) {
-      this.requestField("updated_by", value);
-      return this;
-    }
-    public APIRequestGetClientBusinesses requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGetClientBusinesses requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetClientBusinesses requestVerticalField () {
-      return this.requestVerticalField(true);
-    }
-    public APIRequestGetClientBusinesses requestVerticalField (boolean value) {
-      this.requestField("vertical", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetClientPages extends APIRequest<Page> {

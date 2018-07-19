@@ -4247,7 +4247,7 @@ public class ProductCatalog extends APINode {
     }
     public static final String[] PARAMS = {
       "bulk_pagination",
-      "filter",
+      "return_only_approved_products",
     };
 
     public static final String[] FIELDS = {
@@ -4365,12 +4365,12 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestGetProducts setFilter (Object filter) {
-      this.setParam("filter", filter);
+    public APIRequestGetProducts setReturnOnlyApprovedProducts (Boolean returnOnlyApprovedProducts) {
+      this.setParam("return_only_approved_products", returnOnlyApprovedProducts);
       return this;
     }
-    public APIRequestGetProducts setFilter (String filter) {
-      this.setParam("filter", filter);
+    public APIRequestGetProducts setReturnOnlyApprovedProducts (String returnOnlyApprovedProducts) {
+      this.setParam("return_only_approved_products", returnOnlyApprovedProducts);
       return this;
     }
 

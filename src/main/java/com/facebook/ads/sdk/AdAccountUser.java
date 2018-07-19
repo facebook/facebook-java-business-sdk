@@ -63,8 +63,6 @@ public class AdAccountUser extends APINode {
   private List<Long> mPermissions = null;
   @SerializedName("role")
   private Long mRole = null;
-  @SerializedName("roles")
-  private List<String> mRoles = null;
   protected static Gson gson = null;
 
   public AdAccountUser() {
@@ -251,15 +249,6 @@ public class AdAccountUser extends APINode {
     return this;
   }
 
-  public List<String> getFieldRoles() {
-    return mRoles;
-  }
-
-  public AdAccountUser setFieldRoles(List<String> value) {
-    this.mRoles = value;
-    return this;
-  }
-
 
 
 
@@ -281,7 +270,6 @@ public class AdAccountUser extends APINode {
     this.mName = instance.mName;
     this.mPermissions = instance.mPermissions;
     this.mRole = instance.mRole;
-    this.mRoles = instance.mRoles;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

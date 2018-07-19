@@ -16308,7 +16308,6 @@ public class AdAccount extends APINode {
       "name",
       "permissions",
       "role",
-      "roles",
     };
 
     @Override
@@ -16425,13 +16424,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetUsers requestRoleField (boolean value) {
       this.requestField("role", value);
-      return this;
-    }
-    public APIRequestGetUsers requestRolesField () {
-      return this.requestRolesField(true);
-    }
-    public APIRequestGetUsers requestRolesField (boolean value) {
-      this.requestField("roles", value);
       return this;
     }
   }

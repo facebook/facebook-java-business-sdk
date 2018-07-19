@@ -480,6 +480,10 @@ public class CustomConversion extends APINode {
     }
 
 
+    public APIRequestGetActivities setEndTime (Object endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
     public APIRequestGetActivities setEndTime (String endTime) {
       this.setParam("end_time", endTime);
       return this;
@@ -494,6 +498,10 @@ public class CustomConversion extends APINode {
       return this;
     }
 
+    public APIRequestGetActivities setStartTime (Object startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
     public APIRequestGetActivities setStartTime (String startTime) {
       this.setParam("start_time", startTime);
       return this;

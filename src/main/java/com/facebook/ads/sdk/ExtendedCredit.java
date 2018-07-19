@@ -401,6 +401,7 @@ public class ExtendedCredit extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "auto_enroll",
       "customer_po_number",
       "email",
       "emails",
@@ -496,6 +497,13 @@ public class ExtendedCredit extends APINode {
       return this;
     }
 
+    public APIRequestGetExtendedCreditInvoiceGroups requestAutoEnrollField () {
+      return this.requestAutoEnrollField(true);
+    }
+    public APIRequestGetExtendedCreditInvoiceGroups requestAutoEnrollField (boolean value) {
+      this.requestField("auto_enroll", value);
+      return this;
+    }
     public APIRequestGetExtendedCreditInvoiceGroups requestCustomerPoNumberField () {
       return this.requestCustomerPoNumberField(true);
     }

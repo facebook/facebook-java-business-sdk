@@ -11186,7 +11186,7 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestDeleteLocations setLocationPageId (Long locationPageId) {
+    public APIRequestDeleteLocations setLocationPageId (Object locationPageId) {
       this.setParam("location_page_id", locationPageId);
       return this;
     }
@@ -22768,6 +22768,7 @@ public class Page extends APINode {
       "reference_file",
       "reference_file_disabled",
       "reference_file_disabled_by_ops",
+      "reference_file_expired",
       "reference_owner_id",
       "rule_ids",
       "whitelisted_ids",
@@ -22947,6 +22948,13 @@ public class Page extends APINode {
       this.requestField("reference_file_disabled_by_ops", value);
       return this;
     }
+    public APIRequestGetVideoCopyrights requestReferenceFileExpiredField () {
+      return this.requestReferenceFileExpiredField(true);
+    }
+    public APIRequestGetVideoCopyrights requestReferenceFileExpiredField (boolean value) {
+      this.requestField("reference_file_expired", value);
+      return this;
+    }
     public APIRequestGetVideoCopyrights requestReferenceOwnerIdField () {
       return this.requestReferenceOwnerIdField(true);
     }
@@ -22983,6 +22991,7 @@ public class Page extends APINode {
       "copyright_content_id",
       "excluded_ownership_countries",
       "excluded_ownership_segments",
+      "fingerprint_id",
       "is_reference_disabled",
       "is_reference_video",
       "monitoring_type",
@@ -23081,6 +23090,11 @@ public class Page extends APINode {
     }
     public APIRequestCreateVideoCopyright setExcludedOwnershipSegments (String excludedOwnershipSegments) {
       this.setParam("excluded_ownership_segments", excludedOwnershipSegments);
+      return this;
+    }
+
+    public APIRequestCreateVideoCopyright setFingerprintId (String fingerprintId) {
+      this.setParam("fingerprint_id", fingerprintId);
       return this;
     }
 
@@ -23427,6 +23441,7 @@ public class Page extends APINode {
       "reference_file",
       "reference_file_disabled",
       "reference_file_disabled_by_ops",
+      "reference_file_expired",
       "reference_owner_id",
       "rule_ids",
       "whitelisted_ids",
@@ -23595,6 +23610,13 @@ public class Page extends APINode {
     }
     public APIRequestGetVideoMediaCopyrights requestReferenceFileDisabledByOpsField (boolean value) {
       this.requestField("reference_file_disabled_by_ops", value);
+      return this;
+    }
+    public APIRequestGetVideoMediaCopyrights requestReferenceFileExpiredField () {
+      return this.requestReferenceFileExpiredField(true);
+    }
+    public APIRequestGetVideoMediaCopyrights requestReferenceFileExpiredField (boolean value) {
+      this.requestField("reference_file_expired", value);
       return this;
     }
     public APIRequestGetVideoMediaCopyrights requestReferenceOwnerIdField () {
@@ -26993,8 +27015,6 @@ public class Page extends APINode {
       VALUE_UPDATE("UPDATE"),
       @SerializedName("MESSAGE_TAG")
       VALUE_MESSAGE_TAG("MESSAGE_TAG"),
-      @SerializedName("NON_PROMOTIONAL_SUBSCRIPTION")
-      VALUE_NON_PROMOTIONAL_SUBSCRIPTION("NON_PROMOTIONAL_SUBSCRIPTION"),
       NULL(null);
 
       private String value;

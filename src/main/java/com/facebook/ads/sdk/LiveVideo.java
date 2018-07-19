@@ -846,6 +846,7 @@ public class LiveVideo extends APINode {
       "product_items",
       "published",
       "schedule_custom_profile_image",
+      "schedule_feed_background_image",
       "sponsor_id",
       "sponsor_relationship",
       "status",
@@ -1138,6 +1139,15 @@ public class LiveVideo extends APINode {
     }
     public APIRequestUpdate setScheduleCustomProfileImage (String scheduleCustomProfileImage) {
       this.setParam("schedule_custom_profile_image", scheduleCustomProfileImage);
+      return this;
+    }
+
+    public APIRequestUpdate setScheduleFeedBackgroundImage (File scheduleFeedBackgroundImage) {
+      this.setParam("schedule_feed_background_image", scheduleFeedBackgroundImage);
+      return this;
+    }
+    public APIRequestUpdate setScheduleFeedBackgroundImage (String scheduleFeedBackgroundImage) {
+      this.setParam("schedule_feed_background_image", scheduleFeedBackgroundImage);
       return this;
     }
 

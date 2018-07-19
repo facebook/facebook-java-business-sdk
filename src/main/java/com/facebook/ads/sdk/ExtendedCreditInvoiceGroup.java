@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ExtendedCreditInvoiceGroup extends APINode {
+  @SerializedName("auto_enroll")
+  private Boolean mAutoEnroll = null;
   @SerializedName("customer_po_number")
   private String mCustomerPoNumber = null;
   @SerializedName("email")
@@ -295,6 +297,10 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
+
+  public Boolean getFieldAutoEnroll() {
+    return mAutoEnroll;
+  }
 
   public String getFieldCustomerPoNumber() {
     return mCustomerPoNumber;
@@ -1092,6 +1098,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "auto_enroll",
       "customer_po_number",
       "email",
       "emails",
@@ -1187,6 +1194,13 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAutoEnrollField () {
+      return this.requestAutoEnrollField(true);
+    }
+    public APIRequestGet requestAutoEnrollField (boolean value) {
+      this.requestField("auto_enroll", value);
+      return this;
+    }
     public APIRequestGet requestCustomerPoNumberField () {
       return this.requestCustomerPoNumberField(true);
     }
@@ -1358,6 +1372,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
   }
 
   public ExtendedCreditInvoiceGroup copyFrom(ExtendedCreditInvoiceGroup instance) {
+    this.mAutoEnroll = instance.mAutoEnroll;
     this.mCustomerPoNumber = instance.mCustomerPoNumber;
     this.mEmail = instance.mEmail;
     this.mEmails = instance.mEmails;
