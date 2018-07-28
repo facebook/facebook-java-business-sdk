@@ -745,6 +745,7 @@ public class OfflineConversionDataSet extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
+      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -1158,6 +1159,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAdAccounts requestPartnerField (boolean value) {
       this.requestField("partner", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestRateLimitResetTimeField () {
+      return this.requestRateLimitResetTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestRateLimitResetTimeField (boolean value) {
+      this.requestField("rate_limit_reset_time", value);
       return this;
     }
     public APIRequestGetAdAccounts requestRfSpecField () {

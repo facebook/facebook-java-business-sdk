@@ -75,8 +75,6 @@ public class AdsInsights extends APINode {
   private String mAdsetName = null;
   @SerializedName("buying_type")
   private String mBuyingType = null;
-  @SerializedName("call_to_action_clicks")
-  private String mCallToActionClicks = null;
   @SerializedName("campaign_id")
   private String mCampaignId = null;
   @SerializedName("campaign_name")
@@ -99,8 +97,6 @@ public class AdsInsights extends APINode {
   private String mCostPerInlinePostEngagement = null;
   @SerializedName("cost_per_outbound_click")
   private List<AdsActionStats> mCostPerOutboundClick = null;
-  @SerializedName("cost_per_total_action")
-  private String mCostPerTotalAction = null;
   @SerializedName("cost_per_unique_action_type")
   private List<AdsActionStats> mCostPerUniqueActionType = null;
   @SerializedName("cost_per_unique_click")
@@ -149,22 +145,14 @@ public class AdsInsights extends APINode {
   private String mReach = null;
   @SerializedName("relevance_score")
   private AdgroupRelevanceScore mRelevanceScore = null;
-  @SerializedName("social_clicks")
-  private String mSocialClicks = null;
   @SerializedName("social_impressions")
   private String mSocialImpressions = null;
-  @SerializedName("social_reach")
-  private String mSocialReach = null;
   @SerializedName("social_spend")
   private String mSocialSpend = null;
   @SerializedName("spend")
   private String mSpend = null;
   @SerializedName("total_action_value")
   private String mTotalActionValue = null;
-  @SerializedName("total_actions")
-  private String mTotalActions = null;
-  @SerializedName("total_unique_actions")
-  private String mTotalUniqueActions = null;
   @SerializedName("unique_actions")
   private List<AdsActionStats> mUniqueActions = null;
   @SerializedName("unique_clicks")
@@ -181,8 +169,6 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mUniqueOutboundClicks = null;
   @SerializedName("unique_outbound_clicks_ctr")
   private List<AdsActionStats> mUniqueOutboundClicksCtr = null;
-  @SerializedName("unique_social_clicks")
-  private String mUniqueSocialClicks = null;
   @SerializedName("video_10_sec_watched_actions")
   private List<AdsActionStats> mVideo10SecWatchedActions = null;
   @SerializedName("video_30_sec_watched_actions")
@@ -455,15 +441,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public String getFieldCallToActionClicks() {
-    return mCallToActionClicks;
-  }
-
-  public AdsInsights setFieldCallToActionClicks(String value) {
-    this.mCallToActionClicks = value;
-    return this;
-  }
-
   public String getFieldCampaignId() {
     return mCampaignId;
   }
@@ -578,15 +555,6 @@ public class AdsInsights extends APINode {
     this.mCostPerOutboundClick = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldCostPerTotalAction() {
-    return mCostPerTotalAction;
-  }
-
-  public AdsInsights setFieldCostPerTotalAction(String value) {
-    this.mCostPerTotalAction = value;
-    return this;
-  }
-
   public List<AdsActionStats> getFieldCostPerUniqueActionType() {
     return mCostPerUniqueActionType;
   }
@@ -833,30 +801,12 @@ public class AdsInsights extends APINode {
     this.mRelevanceScore = AdgroupRelevanceScore.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldSocialClicks() {
-    return mSocialClicks;
-  }
-
-  public AdsInsights setFieldSocialClicks(String value) {
-    this.mSocialClicks = value;
-    return this;
-  }
-
   public String getFieldSocialImpressions() {
     return mSocialImpressions;
   }
 
   public AdsInsights setFieldSocialImpressions(String value) {
     this.mSocialImpressions = value;
-    return this;
-  }
-
-  public String getFieldSocialReach() {
-    return mSocialReach;
-  }
-
-  public AdsInsights setFieldSocialReach(String value) {
-    this.mSocialReach = value;
     return this;
   }
 
@@ -884,24 +834,6 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldTotalActionValue(String value) {
     this.mTotalActionValue = value;
-    return this;
-  }
-
-  public String getFieldTotalActions() {
-    return mTotalActions;
-  }
-
-  public AdsInsights setFieldTotalActions(String value) {
-    this.mTotalActions = value;
-    return this;
-  }
-
-  public String getFieldTotalUniqueActions() {
-    return mTotalUniqueActions;
-  }
-
-  public AdsInsights setFieldTotalUniqueActions(String value) {
-    this.mTotalUniqueActions = value;
     return this;
   }
 
@@ -992,15 +924,6 @@ public class AdsInsights extends APINode {
     this.mUniqueOutboundClicksCtr = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldUniqueSocialClicks() {
-    return mUniqueSocialClicks;
-  }
-
-  public AdsInsights setFieldUniqueSocialClicks(String value) {
-    this.mUniqueSocialClicks = value;
-    return this;
-  }
-
   public List<AdsActionStats> getFieldVideo10SecWatchedActions() {
     return mVideo10SecWatchedActions;
   }
@@ -1480,7 +1403,6 @@ public class AdsInsights extends APINode {
     this.mAdsetId = instance.mAdsetId;
     this.mAdsetName = instance.mAdsetName;
     this.mBuyingType = instance.mBuyingType;
-    this.mCallToActionClicks = instance.mCallToActionClicks;
     this.mCampaignId = instance.mCampaignId;
     this.mCampaignName = instance.mCampaignName;
     this.mCanvasAvgViewPercent = instance.mCanvasAvgViewPercent;
@@ -1492,7 +1414,6 @@ public class AdsInsights extends APINode {
     this.mCostPerInlineLinkClick = instance.mCostPerInlineLinkClick;
     this.mCostPerInlinePostEngagement = instance.mCostPerInlinePostEngagement;
     this.mCostPerOutboundClick = instance.mCostPerOutboundClick;
-    this.mCostPerTotalAction = instance.mCostPerTotalAction;
     this.mCostPerUniqueActionType = instance.mCostPerUniqueActionType;
     this.mCostPerUniqueClick = instance.mCostPerUniqueClick;
     this.mCostPerUniqueInlineLinkClick = instance.mCostPerUniqueInlineLinkClick;
@@ -1517,14 +1438,10 @@ public class AdsInsights extends APINode {
     this.mPlacePageName = instance.mPlacePageName;
     this.mReach = instance.mReach;
     this.mRelevanceScore = instance.mRelevanceScore;
-    this.mSocialClicks = instance.mSocialClicks;
     this.mSocialImpressions = instance.mSocialImpressions;
-    this.mSocialReach = instance.mSocialReach;
     this.mSocialSpend = instance.mSocialSpend;
     this.mSpend = instance.mSpend;
     this.mTotalActionValue = instance.mTotalActionValue;
-    this.mTotalActions = instance.mTotalActions;
-    this.mTotalUniqueActions = instance.mTotalUniqueActions;
     this.mUniqueActions = instance.mUniqueActions;
     this.mUniqueClicks = instance.mUniqueClicks;
     this.mUniqueCtr = instance.mUniqueCtr;
@@ -1533,7 +1450,6 @@ public class AdsInsights extends APINode {
     this.mUniqueLinkClicksCtr = instance.mUniqueLinkClicksCtr;
     this.mUniqueOutboundClicks = instance.mUniqueOutboundClicks;
     this.mUniqueOutboundClicksCtr = instance.mUniqueOutboundClicksCtr;
-    this.mUniqueSocialClicks = instance.mUniqueSocialClicks;
     this.mVideo10SecWatchedActions = instance.mVideo10SecWatchedActions;
     this.mVideo30SecWatchedActions = instance.mVideo30SecWatchedActions;
     this.mVideoAvgPercentWatchedActions = instance.mVideoAvgPercentWatchedActions;

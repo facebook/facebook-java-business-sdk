@@ -95,6 +95,8 @@ public class LeadGenDataDraft extends APINode {
   private String mStatus = null;
   @SerializedName("thank_you_page")
   private Object mThankYouPage = null;
+  @SerializedName("tracking_parameters")
+  private List<Object> mTrackingParameters = null;
   protected static Gson gson = null;
 
   LeadGenDataDraft() {
@@ -397,6 +399,10 @@ public class LeadGenDataDraft extends APINode {
     return mThankYouPage;
   }
 
+  public List<Object> getFieldTrackingParameters() {
+    return mTrackingParameters;
+  }
+
 
 
   public static class APIRequestGet extends APIRequest<LeadGenDataDraft> {
@@ -430,6 +436,7 @@ public class LeadGenDataDraft extends APINode {
       "questions",
       "status",
       "thank_you_page",
+      "tracking_parameters",
     };
 
     @Override
@@ -660,6 +667,13 @@ public class LeadGenDataDraft extends APINode {
       this.requestField("thank_you_page", value);
       return this;
     }
+    public APIRequestGet requestTrackingParametersField () {
+      return this.requestTrackingParametersField(true);
+    }
+    public APIRequestGet requestTrackingParametersField (boolean value) {
+      this.requestField("tracking_parameters", value);
+      return this;
+    }
   }
 
   public static class APIRequestUpdate extends APIRequest<LeadGenDataDraft> {
@@ -686,6 +700,7 @@ public class LeadGenDataDraft extends APINode {
       "questions",
       "status",
       "thank_you_page",
+      "tracking_parameters",
     };
 
     public static final String[] FIELDS = {
@@ -826,7 +841,7 @@ public class LeadGenDataDraft extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setPrivacyPolicy (Object privacyPolicy) {
+    public APIRequestUpdate setPrivacyPolicy (Map<String, String> privacyPolicy) {
       this.setParam("privacy_policy", privacyPolicy);
       return this;
     }
@@ -858,12 +873,21 @@ public class LeadGenDataDraft extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setThankYouPage (Object thankYouPage) {
+    public APIRequestUpdate setThankYouPage (Map<String, String> thankYouPage) {
       this.setParam("thank_you_page", thankYouPage);
       return this;
     }
     public APIRequestUpdate setThankYouPage (String thankYouPage) {
       this.setParam("thank_you_page", thankYouPage);
+      return this;
+    }
+
+    public APIRequestUpdate setTrackingParameters (Object trackingParameters) {
+      this.setParam("tracking_parameters", trackingParameters);
+      return this;
+    }
+    public APIRequestUpdate setTrackingParameters (String trackingParameters) {
+      this.setParam("tracking_parameters", trackingParameters);
       return this;
     }
 
@@ -1040,6 +1064,7 @@ public class LeadGenDataDraft extends APINode {
     this.mQuestions = instance.mQuestions;
     this.mStatus = instance.mStatus;
     this.mThankYouPage = instance.mThankYouPage;
+    this.mTrackingParameters = instance.mTrackingParameters;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

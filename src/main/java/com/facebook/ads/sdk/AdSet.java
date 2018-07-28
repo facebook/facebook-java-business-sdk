@@ -889,6 +889,7 @@ public class AdSet extends APINode {
       "extra_data",
       "object_id",
       "object_name",
+      "object_type",
       "translated_event_type",
     };
 
@@ -1081,6 +1082,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetActivities requestObjectNameField (boolean value) {
       this.requestField("object_name", value);
+      return this;
+    }
+    public APIRequestGetActivities requestObjectTypeField () {
+      return this.requestObjectTypeField(true);
+    }
+    public APIRequestGetActivities requestObjectTypeField (boolean value) {
+      this.requestField("object_type", value);
       return this;
     }
     public APIRequestGetActivities requestTranslatedEventTypeField () {

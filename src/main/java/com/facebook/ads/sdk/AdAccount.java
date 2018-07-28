@@ -145,6 +145,8 @@ public class AdAccount extends APINode {
   private String mOwner = null;
   @SerializedName("partner")
   private String mPartner = null;
+  @SerializedName("rate_limit_reset_time")
+  private String mRateLimitResetTime = null;
   @SerializedName("rf_spec")
   private ReachFrequencySpec mRfSpec = null;
   @SerializedName("show_checkout_experience")
@@ -623,14 +625,6 @@ public class AdAccount extends APINode {
     return new APIRequestGetPartners(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeletePendingUsers deletePendingUsers() {
-    return new APIRequestDeletePendingUsers(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreatePendingUser createPendingUser() {
-    return new APIRequestCreatePendingUser(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateProductAudience createProductAudience() {
     return new APIRequestCreateProductAudience(this.getPrefixedId().toString(), context);
   }
@@ -898,6 +892,10 @@ public class AdAccount extends APINode {
     return mPartner;
   }
 
+  public String getFieldRateLimitResetTime() {
+    return mRateLimitResetTime;
+  }
+
   public ReachFrequencySpec getFieldRfSpec() {
     return mRfSpec;
   }
@@ -977,6 +975,7 @@ public class AdAccount extends APINode {
       "extra_data",
       "object_id",
       "object_name",
+      "object_type",
       "translated_event_type",
     };
 
@@ -1192,6 +1191,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetActivities requestObjectNameField (boolean value) {
       this.requestField("object_name", value);
+      return this;
+    }
+    public APIRequestGetActivities requestObjectTypeField () {
+      return this.requestObjectTypeField(true);
+    }
+    public APIRequestGetActivities requestObjectTypeField (boolean value) {
+      this.requestField("object_type", value);
       return this;
     }
     public APIRequestGetActivities requestTranslatedEventTypeField () {
@@ -7624,7 +7630,7 @@ public class AdAccount extends APINode {
     }
     public static final String[] PARAMS = {
       "business",
-      "permitted_roles",
+      "permitted_tasks",
     };
 
     public static final String[] FIELDS = {
@@ -7687,12 +7693,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAgency setPermittedRoles (List<AdAccount.EnumPermittedRoles> permittedRoles) {
-      this.setParam("permitted_roles", permittedRoles);
+    public APIRequestCreateAgency setPermittedTasks (List<AdAccount.EnumPermittedTasks> permittedTasks) {
+      this.setParam("permitted_tasks", permittedTasks);
       return this;
     }
-    public APIRequestCreateAgency setPermittedRoles (String permittedRoles) {
-      this.setParam("permitted_roles", permittedRoles);
+    public APIRequestCreateAgency setPermittedTasks (String permittedTasks) {
+      this.setParam("permitted_tasks", permittedTasks);
       return this;
     }
 
@@ -8099,7 +8105,7 @@ public class AdAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "role",
+      "tasks",
       "user",
     };
 
@@ -8158,12 +8164,12 @@ public class AdAccount extends APINode {
     }
 
 
-    public APIRequestCreateAssignedUser setRole (AdAccount.EnumRole role) {
-      this.setParam("role", role);
+    public APIRequestCreateAssignedUser setTasks (List<AdAccount.EnumTasks> tasks) {
+      this.setParam("tasks", tasks);
       return this;
     }
-    public APIRequestCreateAssignedUser setRole (String role) {
-      this.setParam("role", role);
+    public APIRequestCreateAssignedUser setTasks (String tasks) {
+      this.setParam("tasks", tasks);
       return this;
     }
 
@@ -11837,6 +11843,7 @@ public class AdAccount extends APINode {
       "status",
       "tcpa_compliance",
       "thank_you_page",
+      "tracking_parameters",
     };
 
     @Override
@@ -12133,6 +12140,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetLeadGenForms requestThankYouPageField (boolean value) {
       this.requestField("thank_you_page", value);
+      return this;
+    }
+    public APIRequestGetLeadGenForms requestTrackingParametersField () {
+      return this.requestTrackingParametersField(true);
+    }
+    public APIRequestGetLeadGenForms requestTrackingParametersField (boolean value) {
+      this.requestField("tracking_parameters", value);
       return this;
     }
   }
@@ -13040,242 +13054,6 @@ public class AdAccount extends APINode {
       this.requestField("rev_share_policies", value);
       return this;
     }
-  }
-
-  public static class APIRequestDeletePendingUsers extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "request_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
-             try {
-               return APIRequestDeletePendingUsers.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeletePendingUsers(String nodeId, APIContext context) {
-      super(context, nodeId, "/pending_users", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeletePendingUsers setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeletePendingUsers setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeletePendingUsers setRequestId (Long requestId) {
-      this.setParam("request_id", requestId);
-      return this;
-    }
-    public APIRequestDeletePendingUsers setRequestId (String requestId) {
-      this.setParam("request_id", requestId);
-      return this;
-    }
-
-    public APIRequestDeletePendingUsers requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeletePendingUsers requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeletePendingUsers requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeletePendingUsers requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeletePendingUsers requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeletePendingUsers requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreatePendingUser extends APIRequest<AdAccount> {
-
-    AdAccount lastResponse = null;
-    @Override
-    public AdAccount getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "request_id",
-      "role",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdAccount execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdAccount> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
-             try {
-               return APIRequestCreatePendingUser.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreatePendingUser(String nodeId, APIContext context) {
-      super(context, nodeId, "/pending_users", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePendingUser setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePendingUser setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePendingUser setRequestId (Long requestId) {
-      this.setParam("request_id", requestId);
-      return this;
-    }
-    public APIRequestCreatePendingUser setRequestId (String requestId) {
-      this.setParam("request_id", requestId);
-      return this;
-    }
-
-    public APIRequestCreatePendingUser setRole (AdAccount.EnumRole role) {
-      this.setParam("role", role);
-      return this;
-    }
-    public APIRequestCreatePendingUser setRole (String role) {
-      this.setParam("role", role);
-      return this;
-    }
-
-    public APIRequestCreatePendingUser requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePendingUser requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePendingUser requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePendingUser requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePendingUser requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePendingUser requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestCreateProductAudience extends APIRequest<CustomAudience> {
@@ -16306,8 +16084,7 @@ public class AdAccount extends APINode {
     public static final String[] FIELDS = {
       "id",
       "name",
-      "permissions",
-      "role",
+      "tasks",
     };
 
     @Override
@@ -16412,18 +16189,11 @@ public class AdAccount extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetUsers requestPermissionsField () {
-      return this.requestPermissionsField(true);
+    public APIRequestGetUsers requestTasksField () {
+      return this.requestTasksField(true);
     }
-    public APIRequestGetUsers requestPermissionsField (boolean value) {
-      this.requestField("permissions", value);
-      return this;
-    }
-    public APIRequestGetUsers requestRoleField () {
-      return this.requestRoleField(true);
-    }
-    public APIRequestGetUsers requestRoleField (boolean value) {
-      this.requestField("role", value);
+    public APIRequestGetUsers requestTasksField (boolean value) {
+      this.requestField("tasks", value);
       return this;
     }
   }
@@ -16483,6 +16253,7 @@ public class AdAccount extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
+      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -16893,6 +16664,13 @@ public class AdAccount extends APINode {
       this.requestField("partner", value);
       return this;
     }
+    public APIRequestGet requestRateLimitResetTimeField () {
+      return this.requestRateLimitResetTimeField(true);
+    }
+    public APIRequestGet requestRateLimitResetTimeField (boolean value) {
+      this.requestField("rate_limit_reset_time", value);
+      return this;
+    }
     public APIRequestGet requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
@@ -17162,26 +16940,18 @@ public class AdAccount extends APINode {
 
   }
 
-  public static enum EnumPermittedRoles {
-      @SerializedName("ADMIN")
-      VALUE_ADMIN("ADMIN"),
-      @SerializedName("GENERAL_USER")
-      VALUE_GENERAL_USER("GENERAL_USER"),
-      @SerializedName("REPORTS_ONLY")
-      VALUE_REPORTS_ONLY("REPORTS_ONLY"),
-      @SerializedName("INSTAGRAM_ADVERTISER")
-      VALUE_INSTAGRAM_ADVERTISER("INSTAGRAM_ADVERTISER"),
-      @SerializedName("INSTAGRAM_MANAGER")
-      VALUE_INSTAGRAM_MANAGER("INSTAGRAM_MANAGER"),
-      @SerializedName("CREATIVE")
-      VALUE_CREATIVE("CREATIVE"),
-      @SerializedName("FB_EMPLOYEE_DSO_ADVERTISER")
-      VALUE_FB_EMPLOYEE_DSO_ADVERTISER("FB_EMPLOYEE_DSO_ADVERTISER"),
+  public static enum EnumPermittedTasks {
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
+      @SerializedName("ADVERTISE")
+      VALUE_ADVERTISE("ADVERTISE"),
+      @SerializedName("ANALYZE")
+      VALUE_ANALYZE("ANALYZE"),
       NULL(null);
 
       private String value;
 
-      private EnumPermittedRoles(String value) {
+      private EnumPermittedTasks(String value) {
         this.value = value;
       }
 
@@ -17191,26 +16961,18 @@ public class AdAccount extends APINode {
       }
   }
 
-  public static enum EnumRole {
-      @SerializedName("ADMIN")
-      VALUE_ADMIN("ADMIN"),
-      @SerializedName("GENERAL_USER")
-      VALUE_GENERAL_USER("GENERAL_USER"),
-      @SerializedName("REPORTS_ONLY")
-      VALUE_REPORTS_ONLY("REPORTS_ONLY"),
-      @SerializedName("INSTAGRAM_ADVERTISER")
-      VALUE_INSTAGRAM_ADVERTISER("INSTAGRAM_ADVERTISER"),
-      @SerializedName("INSTAGRAM_MANAGER")
-      VALUE_INSTAGRAM_MANAGER("INSTAGRAM_MANAGER"),
-      @SerializedName("CREATIVE")
-      VALUE_CREATIVE("CREATIVE"),
-      @SerializedName("FB_EMPLOYEE_DSO_ADVERTISER")
-      VALUE_FB_EMPLOYEE_DSO_ADVERTISER("FB_EMPLOYEE_DSO_ADVERTISER"),
+  public static enum EnumTasks {
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
+      @SerializedName("ADVERTISE")
+      VALUE_ADVERTISE("ADVERTISE"),
+      @SerializedName("ANALYZE")
+      VALUE_ANALYZE("ANALYZE"),
       NULL(null);
 
       private String value;
 
-      private EnumRole(String value) {
+      private EnumTasks(String value) {
         this.value = value;
       }
 
@@ -17522,6 +17284,7 @@ public class AdAccount extends APINode {
     this.mOffsitePixelsTosAccepted = instance.mOffsitePixelsTosAccepted;
     this.mOwner = instance.mOwner;
     this.mPartner = instance.mPartner;
+    this.mRateLimitResetTime = instance.mRateLimitResetTime;
     this.mRfSpec = instance.mRfSpec;
     this.mShowCheckoutExperience = instance.mShowCheckoutExperience;
     this.mSpendCap = instance.mSpendCap;

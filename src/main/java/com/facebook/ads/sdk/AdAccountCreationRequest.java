@@ -1198,8 +1198,12 @@ public class AdAccountCreationRequest extends APINode {
       VALUE_ARTS("ARTS"),
       @SerializedName("AUCTIONS")
       VALUE_AUCTIONS("AUCTIONS"),
+      @SerializedName("AUTO_AGENCY")
+      VALUE_AUTO_AGENCY("AUTO_AGENCY"),
       @SerializedName("AUTO_RENTAL")
       VALUE_AUTO_RENTAL("AUTO_RENTAL"),
+      @SerializedName("AUTOMOTIVE_MANUFACTURER")
+      VALUE_AUTOMOTIVE_MANUFACTURER("AUTOMOTIVE_MANUFACTURER"),
       @SerializedName("B2B")
       VALUE_B2B("B2B"),
       @SerializedName("B2B_MANUFACTURING")
@@ -1242,6 +1246,8 @@ public class AdAccountCreationRequest extends APINode {
       VALUE_DAILYDEALS("DAILYDEALS"),
       @SerializedName("DATING")
       VALUE_DATING("DATING"),
+      @SerializedName("DEALERSHIP")
+      VALUE_DEALERSHIP("DEALERSHIP"),
       @SerializedName("DEPARTMENT_STORE")
       VALUE_DEPARTMENT_STORE("DEPARTMENT_STORE"),
       @SerializedName("DESKTOP_SOFTWARE")
@@ -1288,6 +1294,8 @@ public class AdAccountCreationRequest extends APINode {
       VALUE_HOTEL_AND_ACCOMODATION("HOTEL_AND_ACCOMODATION"),
       @SerializedName("HOUSEHOLD_GOODS")
       VALUE_HOUSEHOLD_GOODS("HOUSEHOLD_GOODS"),
+      @SerializedName("INDUSTRIAL_AND_FARM_VEHICLE")
+      VALUE_INDUSTRIAL_AND_FARM_VEHICLE("INDUSTRIAL_AND_FARM_VEHICLE"),
       @SerializedName("INSURANCE")
       VALUE_INSURANCE("INSURANCE"),
       @SerializedName("INVESTMENT_BANK_AND_BROKERAGE")
@@ -1298,6 +1306,8 @@ public class AdAccountCreationRequest extends APINode {
       VALUE_MOBILE_AND_SOCIAL("MOBILE_AND_SOCIAL"),
       @SerializedName("MOBILE_APPS")
       VALUE_MOBILE_APPS("MOBILE_APPS"),
+      @SerializedName("MOTORCYCLES")
+      VALUE_MOTORCYCLES("MOTORCYCLES"),
       @SerializedName("MOVIES")
       VALUE_MOVIES("MOVIES"),
       @SerializedName("MUSEUMS_AND_PARKS_AND_LIBRARIES")
@@ -1314,6 +1324,8 @@ public class AdAccountCreationRequest extends APINode {
       VALUE_OIL_AND_GAS_AND_CONSUMABLE_FUEL("OIL_AND_GAS_AND_CONSUMABLE_FUEL"),
       @SerializedName("ONLINE_OR_SOFTWARE")
       VALUE_ONLINE_OR_SOFTWARE("ONLINE_OR_SOFTWARE"),
+      @SerializedName("PARTS_AND_SERVICE")
+      VALUE_PARTS_AND_SERVICE("PARTS_AND_SERVICE"),
       @SerializedName("PET")
       VALUE_PET("PET"),
       @SerializedName("PET_RETAIL")
@@ -1330,6 +1342,8 @@ public class AdAccountCreationRequest extends APINode {
       VALUE_PUBLISHING_INTERNET("PUBLISHING_INTERNET"),
       @SerializedName("RAILROADS")
       VALUE_RAILROADS("RAILROADS"),
+      @SerializedName("RECREATIONAL")
+      VALUE_RECREATIONAL("RECREATIONAL"),
       @SerializedName("REAL_ESTATE")
       VALUE_REAL_ESTATE("REAL_ESTATE"),
       @SerializedName("REAL_MONEY_OR_SKILLED_GAMING")
@@ -1427,6 +1441,8 @@ public class AdAccountCreationRequest extends APINode {
       VALUE_ADVERTISING_AND_MARKETING("ADVERTISING_AND_MARKETING"),
       @SerializedName("AUTO_AGENCY")
       VALUE_AUTO_AGENCY("AUTO_AGENCY"),
+      @SerializedName("AUTOMOTIVE")
+      VALUE_AUTOMOTIVE("AUTOMOTIVE"),
       @SerializedName("CONSUMER_PACKAGED_GOODS")
       VALUE_CONSUMER_PACKAGED_GOODS("CONSUMER_PACKAGED_GOODS"),
       @SerializedName("CPG_AND_BEVERAGE")

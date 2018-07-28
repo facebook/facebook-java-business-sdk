@@ -103,8 +103,6 @@ public class User extends APINode {
   private List<String> mInterestedIn = null;
   @SerializedName("is_famedeeplinkinguser")
   private Boolean mIsFamedeeplinkinguser = null;
-  @SerializedName("is_payment_enabled")
-  private Boolean mIsPaymentEnabled = null;
   @SerializedName("is_shared_login")
   private Boolean mIsSharedLogin = null;
   @SerializedName("is_verified")
@@ -113,8 +111,6 @@ public class User extends APINode {
   private List<PageLabel> mLabels = null;
   @SerializedName("languages")
   private List<Object> mLanguages = null;
-  @SerializedName("last_ad_referral")
-  private Object mLastAdReferral = null;
   @SerializedName("last_name")
   private String mLastName = null;
   @SerializedName("link")
@@ -549,10 +545,6 @@ public class User extends APINode {
     return mIsFamedeeplinkinguser;
   }
 
-  public Boolean getFieldIsPaymentEnabled() {
-    return mIsPaymentEnabled;
-  }
-
   public Boolean getFieldIsSharedLogin() {
     return mIsSharedLogin;
   }
@@ -567,10 +559,6 @@ public class User extends APINode {
 
   public List<Object> getFieldLanguages() {
     return mLanguages;
-  }
-
-  public Object getFieldLastAdReferral() {
-    return mLastAdReferral;
   }
 
   public String getFieldLastName() {
@@ -2248,6 +2236,7 @@ public class User extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
+      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -2656,6 +2645,13 @@ public class User extends APINode {
     }
     public APIRequestGetAdAccounts requestPartnerField (boolean value) {
       this.requestField("partner", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestRateLimitResetTimeField () {
+      return this.requestRateLimitResetTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestRateLimitResetTimeField (boolean value) {
+      this.requestField("rate_limit_reset_time", value);
       return this;
     }
     public APIRequestGetAdAccounts requestRfSpecField () {
@@ -3218,6 +3214,7 @@ public class User extends APINode {
       "status",
       "tcpa_compliance",
       "thank_you_page",
+      "tracking_parameters",
     };
 
     @Override
@@ -3521,6 +3518,13 @@ public class User extends APINode {
       this.requestField("thank_you_page", value);
       return this;
     }
+    public APIRequestGetLeadGenForms requestTrackingParametersField () {
+      return this.requestTrackingParametersField(true);
+    }
+    public APIRequestGetLeadGenForms requestTrackingParametersField (boolean value) {
+      this.requestField("tracking_parameters", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateLiveEncoder extends APIRequest<APINode> {
@@ -3665,7 +3669,7 @@ public class User extends APINode {
     }
     public static final String[] PARAMS = {
       "broadcast_status",
-      "type",
+      "source",
     };
 
     public static final String[] FIELDS = {
@@ -3755,12 +3759,12 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestGetLiveVideos setType (LiveVideo.EnumType type) {
-      this.setParam("type", type);
+    public APIRequestGetLiveVideos setSource (LiveVideo.EnumSource source) {
+      this.setParam("source", source);
       return this;
     }
-    public APIRequestGetLiveVideos setType (String type) {
-      this.setParam("type", type);
+    public APIRequestGetLiveVideos setSource (String source) {
+      this.setParam("source", source);
       return this;
     }
 
@@ -5702,12 +5706,10 @@ public class User extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -5998,13 +6000,6 @@ public class User extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGet requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGet requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGet requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -6031,13 +6026,6 @@ public class User extends APINode {
     }
     public APIRequestGet requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGet requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGet requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGet requestLastNameField () {
@@ -6305,12 +6293,10 @@ public class User extends APINode {
     this.mInstalled = instance.mInstalled;
     this.mInterestedIn = instance.mInterestedIn;
     this.mIsFamedeeplinkinguser = instance.mIsFamedeeplinkinguser;
-    this.mIsPaymentEnabled = instance.mIsPaymentEnabled;
     this.mIsSharedLogin = instance.mIsSharedLogin;
     this.mIsVerified = instance.mIsVerified;
     this.mLabels = instance.mLabels;
     this.mLanguages = instance.mLanguages;
-    this.mLastAdReferral = instance.mLastAdReferral;
     this.mLastName = instance.mLastName;
     this.mLink = instance.mLink;
     this.mLocalNewsMegaphoneDismissStatus = instance.mLocalNewsMegaphoneDismissStatus;

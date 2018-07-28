@@ -384,7 +384,6 @@ public class AdReportRun extends APINode {
       "adset_id",
       "adset_name",
       "buying_type",
-      "call_to_action_clicks",
       "campaign_id",
       "campaign_name",
       "canvas_avg_view_percent",
@@ -396,7 +395,6 @@ public class AdReportRun extends APINode {
       "cost_per_inline_link_click",
       "cost_per_inline_post_engagement",
       "cost_per_outbound_click",
-      "cost_per_total_action",
       "cost_per_unique_action_type",
       "cost_per_unique_click",
       "cost_per_unique_inline_link_click",
@@ -421,14 +419,10 @@ public class AdReportRun extends APINode {
       "place_page_name",
       "reach",
       "relevance_score",
-      "social_clicks",
       "social_impressions",
-      "social_reach",
       "social_spend",
       "spend",
       "total_action_value",
-      "total_actions",
-      "total_unique_actions",
       "unique_actions",
       "unique_clicks",
       "unique_ctr",
@@ -437,7 +431,6 @@ public class AdReportRun extends APINode {
       "unique_link_clicks_ctr",
       "unique_outbound_clicks",
       "unique_outbound_clicks_ctr",
-      "unique_social_clicks",
       "video_10_sec_watched_actions",
       "video_30_sec_watched_actions",
       "video_avg_percent_watched_actions",
@@ -609,13 +602,6 @@ public class AdReportRun extends APINode {
       this.requestField("buying_type", value);
       return this;
     }
-    public APIRequestGetInsights requestCallToActionClicksField () {
-      return this.requestCallToActionClicksField(true);
-    }
-    public APIRequestGetInsights requestCallToActionClicksField (boolean value) {
-      this.requestField("call_to_action_clicks", value);
-      return this;
-    }
     public APIRequestGetInsights requestCampaignIdField () {
       return this.requestCampaignIdField(true);
     }
@@ -691,13 +677,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCostPerOutboundClickField (boolean value) {
       this.requestField("cost_per_outbound_click", value);
-      return this;
-    }
-    public APIRequestGetInsights requestCostPerTotalActionField () {
-      return this.requestCostPerTotalActionField(true);
-    }
-    public APIRequestGetInsights requestCostPerTotalActionField (boolean value) {
-      this.requestField("cost_per_total_action", value);
       return this;
     }
     public APIRequestGetInsights requestCostPerUniqueActionTypeField () {
@@ -868,25 +847,11 @@ public class AdReportRun extends APINode {
       this.requestField("relevance_score", value);
       return this;
     }
-    public APIRequestGetInsights requestSocialClicksField () {
-      return this.requestSocialClicksField(true);
-    }
-    public APIRequestGetInsights requestSocialClicksField (boolean value) {
-      this.requestField("social_clicks", value);
-      return this;
-    }
     public APIRequestGetInsights requestSocialImpressionsField () {
       return this.requestSocialImpressionsField(true);
     }
     public APIRequestGetInsights requestSocialImpressionsField (boolean value) {
       this.requestField("social_impressions", value);
-      return this;
-    }
-    public APIRequestGetInsights requestSocialReachField () {
-      return this.requestSocialReachField(true);
-    }
-    public APIRequestGetInsights requestSocialReachField (boolean value) {
-      this.requestField("social_reach", value);
       return this;
     }
     public APIRequestGetInsights requestSocialSpendField () {
@@ -908,20 +873,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestTotalActionValueField (boolean value) {
       this.requestField("total_action_value", value);
-      return this;
-    }
-    public APIRequestGetInsights requestTotalActionsField () {
-      return this.requestTotalActionsField(true);
-    }
-    public APIRequestGetInsights requestTotalActionsField (boolean value) {
-      this.requestField("total_actions", value);
-      return this;
-    }
-    public APIRequestGetInsights requestTotalUniqueActionsField () {
-      return this.requestTotalUniqueActionsField(true);
-    }
-    public APIRequestGetInsights requestTotalUniqueActionsField (boolean value) {
-      this.requestField("total_unique_actions", value);
       return this;
     }
     public APIRequestGetInsights requestUniqueActionsField () {
@@ -978,13 +929,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestUniqueOutboundClicksCtrField (boolean value) {
       this.requestField("unique_outbound_clicks_ctr", value);
-      return this;
-    }
-    public APIRequestGetInsights requestUniqueSocialClicksField () {
-      return this.requestUniqueSocialClicksField(true);
-    }
-    public APIRequestGetInsights requestUniqueSocialClicksField (boolean value) {
-      this.requestField("unique_social_clicks", value);
       return this;
     }
     public APIRequestGetInsights requestVideo10SecWatchedActionsField () {

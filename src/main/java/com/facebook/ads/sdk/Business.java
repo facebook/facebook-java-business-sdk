@@ -5529,6 +5529,7 @@ public class Business extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
+      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -5939,6 +5940,13 @@ public class Business extends APINode {
       this.requestField("partner", value);
       return this;
     }
+    public APIRequestGetClientAdAccounts requestRateLimitResetTimeField () {
+      return this.requestRateLimitResetTimeField(true);
+    }
+    public APIRequestGetClientAdAccounts requestRateLimitResetTimeField (boolean value) {
+      this.requestField("rate_limit_reset_time", value);
+      return this;
+    }
     public APIRequestGetClientAdAccounts requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
@@ -6034,7 +6042,7 @@ public class Business extends APINode {
     }
     public static final String[] PARAMS = {
       "adaccount_id",
-      "permitted_roles",
+      "permitted_tasks",
     };
 
     public static final String[] FIELDS = {
@@ -6097,12 +6105,12 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateClientAdAccount setPermittedRoles (List<AdAccount.EnumPermittedRoles> permittedRoles) {
-      this.setParam("permitted_roles", permittedRoles);
+    public APIRequestCreateClientAdAccount setPermittedTasks (List<AdAccount.EnumPermittedTasks> permittedTasks) {
+      this.setParam("permitted_tasks", permittedTasks);
       return this;
     }
-    public APIRequestCreateClientAdAccount setPermittedRoles (String permittedRoles) {
-      this.setParam("permitted_roles", permittedRoles);
+    public APIRequestCreateClientAdAccount setPermittedTasks (String permittedTasks) {
+      this.setParam("permitted_tasks", permittedTasks);
       return this;
     }
 
@@ -10312,6 +10320,7 @@ public class Business extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
+      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -10720,6 +10729,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedAdAccounts requestPartnerField (boolean value) {
       this.requestField("partner", value);
+      return this;
+    }
+    public APIRequestGetOwnedAdAccounts requestRateLimitResetTimeField () {
+      return this.requestRateLimitResetTimeField(true);
+    }
+    public APIRequestGetOwnedAdAccounts requestRateLimitResetTimeField (boolean value) {
+      this.requestField("rate_limit_reset_time", value);
       return this;
     }
     public APIRequestGetOwnedAdAccounts requestRfSpecField () {

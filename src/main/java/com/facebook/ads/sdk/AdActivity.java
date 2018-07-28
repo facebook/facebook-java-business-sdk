@@ -75,6 +75,8 @@ public class AdActivity extends APINode {
   private String mObjectId = null;
   @SerializedName("object_name")
   private String mObjectName = null;
+  @SerializedName("object_type")
+  private String mObjectType = null;
   @SerializedName("translated_event_type")
   private String mTranslatedEventType = null;
   protected static Gson gson = null;
@@ -317,6 +319,15 @@ public class AdActivity extends APINode {
     return this;
   }
 
+  public String getFieldObjectType() {
+    return mObjectType;
+  }
+
+  public AdActivity setFieldObjectType(String value) {
+    this.mObjectType = value;
+    return this;
+  }
+
   public String getFieldTranslatedEventType() {
     return mTranslatedEventType;
   }
@@ -533,6 +544,7 @@ public class AdActivity extends APINode {
     this.mExtraData = instance.mExtraData;
     this.mObjectId = instance.mObjectId;
     this.mObjectName = instance.mObjectName;
+    this.mObjectType = instance.mObjectType;
     this.mTranslatedEventType = instance.mTranslatedEventType;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

@@ -113,6 +113,8 @@ public class LeadgenForm extends APINode {
   private Boolean mTcpaCompliance = null;
   @SerializedName("thank_you_page")
   private Object mThankYouPage = null;
+  @SerializedName("tracking_parameters")
+  private List<Object> mTrackingParameters = null;
   protected static Gson gson = null;
 
   LeadgenForm() {
@@ -471,6 +473,10 @@ public class LeadgenForm extends APINode {
 
   public Object getFieldThankYouPage() {
     return mThankYouPage;
+  }
+
+  public List<Object> getFieldTrackingParameters() {
+    return mTrackingParameters;
   }
 
 
@@ -1085,6 +1091,7 @@ public class LeadgenForm extends APINode {
       "status",
       "tcpa_compliance",
       "thank_you_page",
+      "tracking_parameters",
     };
 
     @Override
@@ -1376,6 +1383,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGet requestThankYouPageField (boolean value) {
       this.requestField("thank_you_page", value);
+      return this;
+    }
+    public APIRequestGet requestTrackingParametersField () {
+      return this.requestTrackingParametersField(true);
+    }
+    public APIRequestGet requestTrackingParametersField (boolean value) {
+      this.requestField("tracking_parameters", value);
       return this;
     }
   }
@@ -1681,6 +1695,7 @@ public class LeadgenForm extends APINode {
     this.mStatus = instance.mStatus;
     this.mTcpaCompliance = instance.mTcpaCompliance;
     this.mThankYouPage = instance.mThankYouPage;
+    this.mTrackingParameters = instance.mTrackingParameters;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

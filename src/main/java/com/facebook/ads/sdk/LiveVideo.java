@@ -1363,6 +1363,25 @@ public class LiveVideo extends APINode {
       }
   }
 
+  public static enum EnumSource {
+      @SerializedName("target")
+      VALUE_TARGET("target"),
+      @SerializedName("owner")
+      VALUE_OWNER("owner"),
+      NULL(null);
+
+      private String value;
+
+      private EnumSource(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumSpatialAudioFormat {
       @SerializedName("ambiX_4")
       VALUE_AMBIX_4("ambiX_4"),
@@ -1392,25 +1411,6 @@ public class LiveVideo extends APINode {
       private String value;
 
       private EnumStereoscopicMode(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumType {
-      @SerializedName("tagged")
-      VALUE_TAGGED("tagged"),
-      @SerializedName("uploaded")
-      VALUE_UPLOADED("uploaded"),
-      NULL(null);
-
-      private String value;
-
-      private EnumType(String value) {
         this.value = value;
       }
 

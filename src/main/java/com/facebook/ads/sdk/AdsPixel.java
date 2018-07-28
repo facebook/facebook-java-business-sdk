@@ -833,6 +833,7 @@ public class AdsPixel extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
+      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -1246,6 +1247,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetSharedAccounts requestPartnerField (boolean value) {
       this.requestField("partner", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestRateLimitResetTimeField () {
+      return this.requestRateLimitResetTimeField(true);
+    }
+    public APIRequestGetSharedAccounts requestRateLimitResetTimeField (boolean value) {
+      this.requestField("rate_limit_reset_time", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestRfSpecField () {

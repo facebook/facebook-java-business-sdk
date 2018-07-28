@@ -761,6 +761,7 @@ public class CustomAudience extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
+      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -1174,6 +1175,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestPartnerField (boolean value) {
       this.requestField("partner", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestRateLimitResetTimeField () {
+      return this.requestRateLimitResetTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestRateLimitResetTimeField (boolean value) {
+      this.requestField("rate_limit_reset_time", value);
       return this;
     }
     public APIRequestGetAdAccounts requestRfSpecField () {
@@ -2766,8 +2774,6 @@ public class CustomAudience extends APINode {
   }
 
   public static enum EnumContentType {
-      @SerializedName("AUTO_OFFER")
-      VALUE_AUTO_OFFER("AUTO_OFFER"),
       @SerializedName("DESTINATION")
       VALUE_DESTINATION("DESTINATION"),
       @SerializedName("FLIGHT")
@@ -2778,6 +2784,8 @@ public class CustomAudience extends APINode {
       VALUE_HOTEL("HOTEL"),
       @SerializedName("MEDIA_TITLE")
       VALUE_MEDIA_TITLE("MEDIA_TITLE"),
+      @SerializedName("PRODUCT")
+      VALUE_PRODUCT("PRODUCT"),
       @SerializedName("VEHICLE")
       VALUE_VEHICLE("VEHICLE"),
       @SerializedName("VEHICLE_OFFER")
@@ -2861,8 +2869,6 @@ public class CustomAudience extends APINode {
   }
 
   public static enum EnumFields {
-      @SerializedName("id")
-      VALUE_ID("id"),
       @SerializedName("account_id")
       VALUE_ACCOUNT_ID("account_id"),
       @SerializedName("approximate_count")
@@ -2877,6 +2883,8 @@ public class CustomAudience extends APINode {
       VALUE_DESCRIPTION("description"),
       @SerializedName("external_event_source")
       VALUE_EXTERNAL_EVENT_SOURCE("external_event_source"),
+      @SerializedName("id")
+      VALUE_ID("id"),
       @SerializedName("is_value_based")
       VALUE_IS_VALUE_BASED("is_value_based"),
       @SerializedName("lookalike_audience_ids")
