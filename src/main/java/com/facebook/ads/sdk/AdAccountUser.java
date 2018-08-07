@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -55,10 +59,8 @@ public class AdAccountUser extends APINode {
   private String mId = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("permissions")
-  private List<Long> mPermissions = null;
-  @SerializedName("role")
-  private Long mRole = null;
+  @SerializedName("tasks")
+  private List<String> mTasks = null;
   protected static Gson gson = null;
 
   public AdAccountUser() {
@@ -106,10 +108,19 @@ public class AdAccountUser extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adAccountUsers.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adAccountUsers.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adAccountUsers.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adAccountUsers.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -218,21 +229,12 @@ public class AdAccountUser extends APINode {
     return this;
   }
 
-  public List<Long> getFieldPermissions() {
-    return mPermissions;
+  public List<String> getFieldTasks() {
+    return mTasks;
   }
 
-  public AdAccountUser setFieldPermissions(List<Long> value) {
-    this.mPermissions = value;
-    return this;
-  }
-
-  public Long getFieldRole() {
-    return mRole;
-  }
-
-  public AdAccountUser setFieldRole(Long value) {
-    this.mRole = value;
+  public AdAccountUser setFieldTasks(List<String> value) {
+    this.mTasks = value;
     return this;
   }
 
@@ -255,8 +257,7 @@ public class AdAccountUser extends APINode {
   public AdAccountUser copyFrom(AdAccountUser instance) {
     this.mId = instance.mId;
     this.mName = instance.mName;
-    this.mPermissions = instance.mPermissions;
-    this.mRole = instance.mRole;
+    this.mTasks = instance.mTasks;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

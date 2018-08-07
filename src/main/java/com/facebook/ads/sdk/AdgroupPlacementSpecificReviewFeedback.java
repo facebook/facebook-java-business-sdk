@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -55,14 +59,28 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   private Map<String, String> mAccountAdmin = null;
   @SerializedName("ad")
   private Map<String, String> mAd = null;
+  @SerializedName("b2c")
+  private Map<String, String> mB2c = null;
+  @SerializedName("bsg")
+  private Map<String, String> mBsg = null;
+  @SerializedName("city_community")
+  private Map<String, String> mCityCommunity = null;
+  @SerializedName("dpa")
+  private Map<String, String> mDpa = null;
   @SerializedName("facebook")
   private Map<String, String> mFacebook = null;
   @SerializedName("instagram")
   private Map<String, String> mInstagram = null;
+  @SerializedName("instagram_shop")
+  private Map<String, String> mInstagramShop = null;
+  @SerializedName("marketplace")
+  private Map<String, String> mMarketplace = null;
   @SerializedName("page_admin")
   private Map<String, String> mPageAdmin = null;
   @SerializedName("product")
   private Map<String, String> mProduct = null;
+  @SerializedName("product_service")
+  private Map<String, String> mProductService = null;
   @SerializedName("seller")
   private Map<String, String> mSeller = null;
   protected static Gson gson = null;
@@ -112,10 +130,19 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adgroupPlacementSpecificReviewFeedbacks.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adgroupPlacementSpecificReviewFeedbacks.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adgroupPlacementSpecificReviewFeedbacks.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adgroupPlacementSpecificReviewFeedbacks.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -224,6 +251,42 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     return this;
   }
 
+  public Map<String, String> getFieldB2c() {
+    return mB2c;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldB2c(Map<String, String> value) {
+    this.mB2c = value;
+    return this;
+  }
+
+  public Map<String, String> getFieldBsg() {
+    return mBsg;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldBsg(Map<String, String> value) {
+    this.mBsg = value;
+    return this;
+  }
+
+  public Map<String, String> getFieldCityCommunity() {
+    return mCityCommunity;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldCityCommunity(Map<String, String> value) {
+    this.mCityCommunity = value;
+    return this;
+  }
+
+  public Map<String, String> getFieldDpa() {
+    return mDpa;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldDpa(Map<String, String> value) {
+    this.mDpa = value;
+    return this;
+  }
+
   public Map<String, String> getFieldFacebook() {
     return mFacebook;
   }
@@ -242,6 +305,24 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
     return this;
   }
 
+  public Map<String, String> getFieldInstagramShop() {
+    return mInstagramShop;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldInstagramShop(Map<String, String> value) {
+    this.mInstagramShop = value;
+    return this;
+  }
+
+  public Map<String, String> getFieldMarketplace() {
+    return mMarketplace;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldMarketplace(Map<String, String> value) {
+    this.mMarketplace = value;
+    return this;
+  }
+
   public Map<String, String> getFieldPageAdmin() {
     return mPageAdmin;
   }
@@ -257,6 +338,15 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
 
   public AdgroupPlacementSpecificReviewFeedback setFieldProduct(Map<String, String> value) {
     this.mProduct = value;
+    return this;
+  }
+
+  public Map<String, String> getFieldProductService() {
+    return mProductService;
+  }
+
+  public AdgroupPlacementSpecificReviewFeedback setFieldProductService(Map<String, String> value) {
+    this.mProductService = value;
     return this;
   }
 
@@ -288,10 +378,17 @@ public class AdgroupPlacementSpecificReviewFeedback extends APINode {
   public AdgroupPlacementSpecificReviewFeedback copyFrom(AdgroupPlacementSpecificReviewFeedback instance) {
     this.mAccountAdmin = instance.mAccountAdmin;
     this.mAd = instance.mAd;
+    this.mB2c = instance.mB2c;
+    this.mBsg = instance.mBsg;
+    this.mCityCommunity = instance.mCityCommunity;
+    this.mDpa = instance.mDpa;
     this.mFacebook = instance.mFacebook;
     this.mInstagram = instance.mInstagram;
+    this.mInstagramShop = instance.mInstagramShop;
+    this.mMarketplace = instance.mMarketplace;
     this.mPageAdmin = instance.mPageAdmin;
     this.mProduct = instance.mProduct;
+    this.mProductService = instance.mProductService;
     this.mSeller = instance.mSeller;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

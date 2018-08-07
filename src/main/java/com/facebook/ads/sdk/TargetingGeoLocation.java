@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -63,6 +67,8 @@ public class TargetingGeoLocation extends APINode {
   private List<TargetingGeoLocationElectoralDistrict> mElectoralDistricts = null;
   @SerializedName("geo_markets")
   private List<TargetingGeoLocationMarket> mGeoMarkets = null;
+  @SerializedName("location_set_ids")
+  private List<String> mLocationSetIds = null;
   @SerializedName("location_types")
   private List<String> mLocationTypes = null;
   @SerializedName("places")
@@ -120,10 +126,19 @@ public class TargetingGeoLocation extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            targetingGeoLocations.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                targetingGeoLocations.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            targetingGeoLocations.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              targetingGeoLocations.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -288,6 +303,15 @@ public class TargetingGeoLocation extends APINode {
     this.mGeoMarkets = TargetingGeoLocationMarket.getGson().fromJson(value, type);
     return this;
   }
+  public List<String> getFieldLocationSetIds() {
+    return mLocationSetIds;
+  }
+
+  public TargetingGeoLocation setFieldLocationSetIds(List<String> value) {
+    this.mLocationSetIds = value;
+    return this;
+  }
+
   public List<String> getFieldLocationTypes() {
     return mLocationTypes;
   }
@@ -376,6 +400,7 @@ public class TargetingGeoLocation extends APINode {
     this.mCustomLocations = instance.mCustomLocations;
     this.mElectoralDistricts = instance.mElectoralDistricts;
     this.mGeoMarkets = instance.mGeoMarkets;
+    this.mLocationSetIds = instance.mLocationSetIds;
     this.mLocationTypes = instance.mLocationTypes;
     this.mPlaces = instance.mPlaces;
     this.mPoliticalDistricts = instance.mPoliticalDistricts;

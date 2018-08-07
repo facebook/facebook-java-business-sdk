@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -83,11 +87,23 @@ public class ProductGroup extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<ProductGroup> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static ProductGroup fetchById(String id, APIContext context) throws APIException {
     ProductGroup productGroup =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return productGroup;
+  }
+
+  public static ListenableFuture<ProductGroup> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<ProductGroup> productGroup =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return productGroup;
   }
 
@@ -98,6 +114,15 @@ public class ProductGroup extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<ProductGroup>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<ProductGroup>> productGroup =
+      new APIRequest(context, "", "/", "GET", ProductGroup.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return productGroup;
   }
 
   private String getPrefixedId() {
@@ -146,10 +171,19 @@ public class ProductGroup extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            productGroups.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                productGroups.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            productGroups.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              productGroups.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -292,7 +326,9 @@ public class ProductGroup extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "additional_image_cdn_urls",
       "additional_image_urls",
+      "additional_variant_attributes",
       "age_group",
       "applinks",
       "availability",
@@ -313,9 +349,12 @@ public class ProductGroup extends APINode {
       "gender",
       "gtin",
       "id",
+      "image_cdn_urls",
       "image_url",
+      "inventory",
       "manufacturer_part_number",
       "material",
+      "mobile_link",
       "name",
       "ordering_index",
       "pattern",
@@ -355,6 +394,25 @@ public class ProductGroup extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<ProductItem>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ProductItem>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<ProductItem>>() {
+           public APINodeList<ProductItem> apply(String result) {
+             try {
+               return APIRequestGetProducts.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetProducts(String nodeId, APIContext context) {
       super(context, nodeId, "/products", "GET", Arrays.asList(PARAMS));
@@ -409,11 +467,25 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestGetProducts requestAdditionalImageCdnUrlsField () {
+      return this.requestAdditionalImageCdnUrlsField(true);
+    }
+    public APIRequestGetProducts requestAdditionalImageCdnUrlsField (boolean value) {
+      this.requestField("additional_image_cdn_urls", value);
+      return this;
+    }
     public APIRequestGetProducts requestAdditionalImageUrlsField () {
       return this.requestAdditionalImageUrlsField(true);
     }
     public APIRequestGetProducts requestAdditionalImageUrlsField (boolean value) {
       this.requestField("additional_image_urls", value);
+      return this;
+    }
+    public APIRequestGetProducts requestAdditionalVariantAttributesField () {
+      return this.requestAdditionalVariantAttributesField(true);
+    }
+    public APIRequestGetProducts requestAdditionalVariantAttributesField (boolean value) {
+      this.requestField("additional_variant_attributes", value);
       return this;
     }
     public APIRequestGetProducts requestAgeGroupField () {
@@ -556,11 +628,25 @@ public class ProductGroup extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetProducts requestImageCdnUrlsField () {
+      return this.requestImageCdnUrlsField(true);
+    }
+    public APIRequestGetProducts requestImageCdnUrlsField (boolean value) {
+      this.requestField("image_cdn_urls", value);
+      return this;
+    }
     public APIRequestGetProducts requestImageUrlField () {
       return this.requestImageUrlField(true);
     }
     public APIRequestGetProducts requestImageUrlField (boolean value) {
       this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGetProducts requestInventoryField () {
+      return this.requestInventoryField(true);
+    }
+    public APIRequestGetProducts requestInventoryField (boolean value) {
+      this.requestField("inventory", value);
       return this;
     }
     public APIRequestGetProducts requestManufacturerPartNumberField () {
@@ -575,6 +661,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestMaterialField (boolean value) {
       this.requestField("material", value);
+      return this;
+    }
+    public APIRequestGetProducts requestMobileLinkField () {
+      return this.requestMobileLinkField(true);
+    }
+    public APIRequestGetProducts requestMobileLinkField (boolean value) {
+      this.requestField("mobile_link", value);
       return this;
     }
     public APIRequestGetProducts requestNameField () {
@@ -742,6 +835,7 @@ public class ProductGroup extends APINode {
     }
     public static final String[] PARAMS = {
       "additional_image_urls",
+      "additional_variant_attributes",
       "android_app_name",
       "android_class",
       "android_package",
@@ -776,7 +870,11 @@ public class ProductGroup extends APINode {
       "iphone_url",
       "manufacturer_part_number",
       "material",
+      "mobile_link",
       "name",
+      "offer_price_amount",
+      "offer_price_end_date",
+      "offer_price_start_date",
       "ordering_index",
       "pattern",
       "price",
@@ -814,6 +912,25 @@ public class ProductGroup extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<ProductItem> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductItem> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProductItem>() {
+           public ProductItem apply(String result) {
+             try {
+               return APIRequestCreateProduct.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestCreateProduct(String nodeId, APIContext context) {
       super(context, nodeId, "/products", "POST", Arrays.asList(PARAMS));
     }
@@ -837,6 +954,15 @@ public class ProductGroup extends APINode {
     }
     public APIRequestCreateProduct setAdditionalImageUrls (String additionalImageUrls) {
       this.setParam("additional_image_urls", additionalImageUrls);
+      return this;
+    }
+
+    public APIRequestCreateProduct setAdditionalVariantAttributes (Object additionalVariantAttributes) {
+      this.setParam("additional_variant_attributes", additionalVariantAttributes);
+      return this;
+    }
+    public APIRequestCreateProduct setAdditionalVariantAttributes (String additionalVariantAttributes) {
+      this.setParam("additional_variant_attributes", additionalVariantAttributes);
       return this;
     }
 
@@ -961,6 +1087,10 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setImageUrl (Object imageUrl) {
+      this.setParam("image_url", imageUrl);
+      return this;
+    }
     public APIRequestCreateProduct setImageUrl (String imageUrl) {
       this.setParam("image_url", imageUrl);
       return this;
@@ -1042,8 +1172,44 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setMobileLink (Object mobileLink) {
+      this.setParam("mobile_link", mobileLink);
+      return this;
+    }
+    public APIRequestCreateProduct setMobileLink (String mobileLink) {
+      this.setParam("mobile_link", mobileLink);
+      return this;
+    }
+
     public APIRequestCreateProduct setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateProduct setOfferPriceAmount (Long offerPriceAmount) {
+      this.setParam("offer_price_amount", offerPriceAmount);
+      return this;
+    }
+    public APIRequestCreateProduct setOfferPriceAmount (String offerPriceAmount) {
+      this.setParam("offer_price_amount", offerPriceAmount);
+      return this;
+    }
+
+    public APIRequestCreateProduct setOfferPriceEndDate (Object offerPriceEndDate) {
+      this.setParam("offer_price_end_date", offerPriceEndDate);
+      return this;
+    }
+    public APIRequestCreateProduct setOfferPriceEndDate (String offerPriceEndDate) {
+      this.setParam("offer_price_end_date", offerPriceEndDate);
+      return this;
+    }
+
+    public APIRequestCreateProduct setOfferPriceStartDate (Object offerPriceStartDate) {
+      this.setParam("offer_price_start_date", offerPriceStartDate);
+      return this;
+    }
+    public APIRequestCreateProduct setOfferPriceStartDate (String offerPriceStartDate) {
+      this.setParam("offer_price_start_date", offerPriceStartDate);
       return this;
     }
 
@@ -1114,6 +1280,10 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+    public APIRequestCreateProduct setUrl (Object url) {
+      this.setParam("url", url);
+      return this;
+    }
     public APIRequestCreateProduct setUrl (String url) {
       this.setParam("url", url);
       return this;
@@ -1210,6 +1380,25 @@ public class ProductGroup extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
@@ -1297,6 +1486,25 @@ public class ProductGroup extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<ProductGroup> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProductGroup>() {
+           public ProductGroup apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
@@ -1389,6 +1597,7 @@ public class ProductGroup extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "default_product_id",
       "variants",
     };
 
@@ -1411,6 +1620,25 @@ public class ProductGroup extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<ProductGroup> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProductGroup>() {
+           public ProductGroup apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
@@ -1427,6 +1655,11 @@ public class ProductGroup extends APINode {
       return this;
     }
 
+
+    public APIRequestUpdate setDefaultProductId (String defaultProductId) {
+      this.setParam("default_product_id", defaultProductId);
+      return this;
+    }
 
     public APIRequestUpdate setVariants (List<Object> variants) {
       this.setParam("variants", variants);

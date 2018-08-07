@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -54,7 +58,7 @@ public class BusinessPageRequest extends APINode {
   @SerializedName("id")
   private String mId = null;
   @SerializedName("page")
-  private Object mPage = null;
+  private Page mPage = null;
   protected static Gson gson = null;
 
   public BusinessPageRequest() {
@@ -102,10 +106,19 @@ public class BusinessPageRequest extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            businessPageRequests.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                businessPageRequests.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            businessPageRequests.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              businessPageRequests.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -205,15 +218,23 @@ public class BusinessPageRequest extends APINode {
     return this;
   }
 
-  public Object getFieldPage() {
+  public Page getFieldPage() {
+    if (mPage != null) {
+      mPage.context = getContext();
+    }
     return mPage;
   }
 
-  public BusinessPageRequest setFieldPage(Object value) {
+  public BusinessPageRequest setFieldPage(Page value) {
     this.mPage = value;
     return this;
   }
 
+  public BusinessPageRequest setFieldPage(String value) {
+    Type type = new TypeToken<Page>(){}.getType();
+    this.mPage = Page.getGson().fromJson(value, type);
+    return this;
+  }
 
 
 

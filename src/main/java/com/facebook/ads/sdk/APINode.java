@@ -92,7 +92,7 @@ public class APINode implements APIResponse {
     return this;
   }
 
-  public static APINodeList parseResponse(String json, APIContext context, APIRequest<APINode> request) throws MalformedResponseException{
+  public static APINodeList<APINode> parseResponse(String json, APIContext context, APIRequest<APINode> request) throws MalformedResponseException{
     APINodeList<APINode> nodes = new APINodeList<APINode>(request, json);
     JsonArray arr;
     JsonObject obj;
@@ -111,8 +111,19 @@ public class APINode implements APIResponse {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            nodes.setPaging(paging.get("before").getAsString(), paging.get("after").getAsString());
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                nodes.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            nodes.setPaging(previous, next);
+          }
+          if (context.hasAppSecret()) {
+            nodes.setAppSecret(context.getAppSecretProof());
           }
 
           if (obj.get("data").isJsonArray()) {

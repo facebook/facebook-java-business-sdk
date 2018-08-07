@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -53,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ProfilePictureSource extends APINode {
   @SerializedName("bottom")
   private Long mBottom = null;
+  @SerializedName("cache_key")
+  private String mCacheKey = null;
   @SerializedName("height")
   private Long mHeight = null;
   @SerializedName("is_silhouette")
@@ -114,10 +120,19 @@ public class ProfilePictureSource extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            profilePictureSources.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                profilePictureSources.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            profilePictureSources.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              profilePictureSources.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -214,6 +229,15 @@ public class ProfilePictureSource extends APINode {
 
   public ProfilePictureSource setFieldBottom(Long value) {
     this.mBottom = value;
+    return this;
+  }
+
+  public String getFieldCacheKey() {
+    return mCacheKey;
+  }
+
+  public ProfilePictureSource setFieldCacheKey(String value) {
+    this.mCacheKey = value;
     return this;
   }
 
@@ -323,6 +347,7 @@ public class ProfilePictureSource extends APINode {
 
   public ProfilePictureSource copyFrom(ProfilePictureSource instance) {
     this.mBottom = instance.mBottom;
+    this.mCacheKey = instance.mCacheKey;
     this.mHeight = instance.mHeight;
     this.mIsSilhouette = instance.mIsSilhouette;
     this.mLeft = instance.mLeft;
