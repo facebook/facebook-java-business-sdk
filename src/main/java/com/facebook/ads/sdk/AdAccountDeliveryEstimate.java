@@ -301,7 +301,7 @@ public class AdAccountDeliveryEstimate extends APINode {
       VALUE_VALUE("VALUE"),
       @SerializedName("REPLIES")
       VALUE_REPLIES("REPLIES"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

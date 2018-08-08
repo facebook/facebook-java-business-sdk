@@ -2147,7 +2147,7 @@ public class AdLabel extends APINode {
   public static enum EnumExecutionOptions {
       @SerializedName("validate_only")
       VALUE_VALIDATE_ONLY("validate_only"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

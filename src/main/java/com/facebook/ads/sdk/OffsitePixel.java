@@ -469,6 +469,149 @@ public class OffsitePixel extends APINode {
     }
   }
 
+  public static class APIRequestUpdate extends APIRequest<OffsitePixel> {
+
+    OffsitePixel lastResponse = null;
+    @Override
+    public OffsitePixel getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "app_event",
+      "app_id_for_app_event_firing",
+      "name",
+      "tag",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public OffsitePixel parseResponse(String response) throws APIException {
+      return OffsitePixel.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public OffsitePixel execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public OffsitePixel execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setAppEvent (String appEvent) {
+      this.setParam("app_event", appEvent);
+      return this;
+    }
+
+    public APIRequestUpdate setAppIdForAppEventFiring (Long appIdForAppEventFiring) {
+      this.setParam("app_id_for_app_event_firing", appIdForAppEventFiring);
+      return this;
+    }
+    public APIRequestUpdate setAppIdForAppEventFiring (String appIdForAppEventFiring) {
+      this.setParam("app_id_for_app_event_firing", appIdForAppEventFiring);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setTag (EnumTag tag) {
+      this.setParam("tag", tag);
+      return this;
+    }
+    public APIRequestUpdate setTag (String tag) {
+      this.setParam("tag", tag);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static enum EnumTag {
+      @SerializedName("CHECKOUT")
+      VALUE_CHECKOUT("CHECKOUT"),
+      @SerializedName("REGISTRATION")
+      VALUE_REGISTRATION("REGISTRATION"),
+      @SerializedName("LEAD")
+      VALUE_LEAD("LEAD"),
+      @SerializedName("KEY_PAGE_VIEW")
+      VALUE_KEY_PAGE_VIEW("KEY_PAGE_VIEW"),
+      @SerializedName("ADD_TO_CART")
+      VALUE_ADD_TO_CART("ADD_TO_CART"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
+
+      private String value;
+
+      private EnumTag(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

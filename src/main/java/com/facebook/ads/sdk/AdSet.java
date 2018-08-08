@@ -2577,7 +2577,7 @@ public class AdSet extends APINode {
     }
 
 
-    public APIRequestGetCopies setDatePreset (AdSet.EnumDatePreset datePreset) {
+    public APIRequestGetCopies setDatePreset (EnumDatePreset datePreset) {
       this.setParam("date_preset", datePreset);
       return this;
     }
@@ -2586,7 +2586,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetCopies setEffectiveStatus (List<AdSet.EnumEffectiveStatus> effectiveStatus) {
+    public APIRequestGetCopies setEffectiveStatus (List<EnumEffectiveStatus> effectiveStatus) {
       this.setParam("effective_status", effectiveStatus);
       return this;
     }
@@ -4589,7 +4589,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setDestinationType (AdSet.EnumDestinationType destinationType) {
+    public APIRequestUpdate setDestinationType (EnumDestinationType destinationType) {
       this.setParam("destination_type", destinationType);
       return this;
     }
@@ -4603,7 +4603,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setExecutionOptions (List<AdSet.EnumExecutionOptions> executionOptions) {
+    public APIRequestUpdate setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -4653,7 +4653,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setOptimizationGoal (AdSet.EnumOptimizationGoal optimizationGoal) {
+    public APIRequestUpdate setOptimizationGoal (EnumOptimizationGoal optimizationGoal) {
       this.setParam("optimization_goal", optimizationGoal);
       return this;
     }
@@ -4690,7 +4690,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setStatus (AdSet.EnumStatus status) {
+    public APIRequestUpdate setStatus (EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
@@ -4804,7 +4804,13 @@ public class AdSet extends APINode {
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
       @SerializedName("VIDEO_VIEWS")
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      NULL(null);
+      @SerializedName("MRC_VIDEO_VIEWS")
+      VALUE_MRC_VIDEO_VIEWS("MRC_VIDEO_VIEWS"),
+      @SerializedName("COMPLETED_VIDEO_VIEWS")
+      VALUE_COMPLETED_VIDEO_VIEWS("COMPLETED_VIDEO_VIEWS"),
+      @SerializedName("VIDEO_VIEWS_15S")
+      VALUE_VIDEO_VIEWS_15S("VIDEO_VIEWS_15S"),
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4827,7 +4833,7 @@ public class AdSet extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("ARCHIVED")
       VALUE_ARCHIVED("ARCHIVED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4862,7 +4868,7 @@ public class AdSet extends APINode {
       VALUE_ARCHIVED("ARCHIVED"),
       @SerializedName("ADSET_PAUSED")
       VALUE_ADSET_PAUSED("ADSET_PAUSED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4921,7 +4927,7 @@ public class AdSet extends APINode {
       VALUE_VALUE("VALUE"),
       @SerializedName("REPLIES")
       VALUE_REPLIES("REPLIES"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4944,7 +4950,7 @@ public class AdSet extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("ARCHIVED")
       VALUE_ARCHIVED("ARCHIVED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4997,7 +5003,7 @@ public class AdSet extends APINode {
       VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
       @SerializedName("this_year")
       VALUE_THIS_YEAR("this_year"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5022,7 +5028,7 @@ public class AdSet extends APINode {
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("APPLINKS_AUTOMATIC")
       VALUE_APPLINKS_AUTOMATIC("APPLINKS_AUTOMATIC"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5041,7 +5047,7 @@ public class AdSet extends APINode {
       VALUE_VALIDATE_ONLY("validate_only"),
       @SerializedName("include_recommendations")
       VALUE_INCLUDE_RECOMMENDATIONS("include_recommendations"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5060,7 +5066,7 @@ public class AdSet extends APINode {
       VALUE_ALL("ALL"),
       @SerializedName("ANY")
       VALUE_ANY("ANY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

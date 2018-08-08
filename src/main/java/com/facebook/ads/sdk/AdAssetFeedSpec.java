@@ -496,7 +496,9 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
-      NULL(null);
+      @SerializedName("OPEN_MOVIES")
+      VALUE_OPEN_MOVIES("OPEN_MOVIES"),
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

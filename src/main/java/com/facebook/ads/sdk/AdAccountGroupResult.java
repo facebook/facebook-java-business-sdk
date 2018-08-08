@@ -31,10 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Function;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -47,34 +43,34 @@ import com.google.gson.JsonParser;
 import com.facebook.ads.sdk.APIException.MalformedResponseException;
 
 /**
- * This class is auto-generated.
+ * This class is auto-genereated.
  *
  * For any issues or feature requests related to this class, please let us know
  * on github and we'll fix in our codegen framework. We'll not be able to accept
  * pull request for this class.
  *
  */
-public class AdRuleExecutionOptions extends APINode {
-  @SerializedName("field")
-  private String mField = null;
-  @SerializedName("operator")
-  private EnumOperator mOperator = null;
-  @SerializedName("value")
-  private Object mValue = null;
+public class AdAccountGroupResult extends APINode {
+  @SerializedName("account_group_id")
+  private String mAccountGroupId = null;
+  @SerializedName("name")
+  private String mName = null;
+  @SerializedName("status")
+  private Long mStatus = null;
   protected static Gson gson = null;
 
-  public AdRuleExecutionOptions() {
+  public AdAccountGroupResult() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdRuleExecutionOptions loadJSON(String json, APIContext context) {
-    AdRuleExecutionOptions adRuleExecutionOptions = getGson().fromJson(json, AdRuleExecutionOptions.class);
+  public static AdAccountGroupResult loadJSON(String json, APIContext context) {
+    AdAccountGroupResult adAccountGroupResult = getGson().fromJson(json, AdAccountGroupResult.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adRuleExecutionOptions.toString());
+      JsonElement o2 = parser.parse(adAccountGroupResult.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,13 +80,13 @@ public class AdRuleExecutionOptions extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adRuleExecutionOptions.context = context;
-    adRuleExecutionOptions.rawValue = json;
-    return adRuleExecutionOptions;
+    adAccountGroupResult.context = context;
+    adAccountGroupResult.rawValue = json;
+    return adAccountGroupResult;
   }
 
-  public static APINodeList<AdRuleExecutionOptions> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdRuleExecutionOptions> adRuleExecutionOptionss = new APINodeList<AdRuleExecutionOptions>(request, json);
+  public static APINodeList<AdAccountGroupResult> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<AdAccountGroupResult> adAccountGroupResults = new APINodeList<AdAccountGroupResult>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,32 +97,23 @@ public class AdRuleExecutionOptions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adRuleExecutionOptionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAccountGroupResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return adRuleExecutionOptionss;
+        return adAccountGroupResults;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject();
-            if (paging.has("cursors")) {
-                JsonObject cursors = paging.get("cursors").getAsJsonObject();
-                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
-                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adRuleExecutionOptionss.setCursors(before, after);
-            }
-            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
-            String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adRuleExecutionOptionss.setPaging(previous, next);
-            if (context.hasAppSecret()) {
-              adRuleExecutionOptionss.setAppSecret(context.getAppSecretProof());
-            }
+            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
+            String before = paging.has("before") ? paging.get("before").getAsString() : null;
+            String after = paging.has("after") ? paging.get("after").getAsString() : null;
+            adAccountGroupResults.setPaging(before, after);
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adRuleExecutionOptionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAccountGroupResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,23 +124,23 @@ public class AdRuleExecutionOptions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adRuleExecutionOptionss.add(loadJSON(entry.getValue().toString(), context));
+                  adAccountGroupResults.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adRuleExecutionOptionss.add(loadJSON(obj.toString(), context));
+              adAccountGroupResults.add(loadJSON(obj.toString(), context));
             }
           }
-          return adRuleExecutionOptionss;
+          return adAccountGroupResults;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adRuleExecutionOptionss.add(loadJSON(entry.getValue().toString(), context));
+              adAccountGroupResults.add(loadJSON(entry.getValue().toString(), context));
           }
-          return adRuleExecutionOptionss;
+          return adAccountGroupResults;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -170,20 +157,20 @@ public class AdRuleExecutionOptions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adRuleExecutionOptionss.add(loadJSON(value.toString(), context));
+              adAccountGroupResults.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adRuleExecutionOptionss;
+            return adAccountGroupResults;
           }
 
           // Sixth, check if it's pure JsonObject
-          adRuleExecutionOptionss.clear();
-          adRuleExecutionOptionss.add(loadJSON(json, context));
-          return adRuleExecutionOptionss;
+          adAccountGroupResults.clear();
+          adAccountGroupResults.add(loadJSON(json, context));
+          return adAccountGroupResults;
         }
       }
     } catch (Exception e) {
@@ -211,53 +198,34 @@ public class AdRuleExecutionOptions extends APINode {
   }
 
 
-  public String getFieldField() {
-    return mField;
+  public String getFieldAccountGroupId() {
+    return mAccountGroupId;
   }
 
-  public AdRuleExecutionOptions setFieldField(String value) {
-    this.mField = value;
+  public AdAccountGroupResult setFieldAccountGroupId(String value) {
+    this.mAccountGroupId = value;
     return this;
   }
 
-  public EnumOperator getFieldOperator() {
-    return mOperator;
+  public String getFieldName() {
+    return mName;
   }
 
-  public AdRuleExecutionOptions setFieldOperator(EnumOperator value) {
-    this.mOperator = value;
+  public AdAccountGroupResult setFieldName(String value) {
+    this.mName = value;
     return this;
   }
 
-  public Object getFieldValue() {
-    return mValue;
+  public Long getFieldStatus() {
+    return mStatus;
   }
 
-  public AdRuleExecutionOptions setFieldValue(Object value) {
-    this.mValue = value;
+  public AdAccountGroupResult setFieldStatus(Long value) {
+    this.mStatus = value;
     return this;
   }
 
 
-
-  public static enum EnumOperator {
-      @SerializedName("EQUAL")
-      VALUE_EQUAL("EQUAL"),
-      @SerializedName("IN")
-      VALUE_IN("IN"),
-      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
-
-      private String value;
-
-      private EnumOperator(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -273,19 +241,19 @@ public class AdRuleExecutionOptions extends APINode {
     return gson;
   }
 
-  public AdRuleExecutionOptions copyFrom(AdRuleExecutionOptions instance) {
-    this.mField = instance.mField;
-    this.mOperator = instance.mOperator;
-    this.mValue = instance.mValue;
+  public AdAccountGroupResult copyFrom(AdAccountGroupResult instance) {
+    this.mAccountGroupId = instance.mAccountGroupId;
+    this.mName = instance.mName;
+    this.mStatus = instance.mStatus;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdRuleExecutionOptions> getParser() {
-    return new APIRequest.ResponseParser<AdRuleExecutionOptions>() {
-      public APINodeList<AdRuleExecutionOptions> parseResponse(String response, APIContext context, APIRequest<AdRuleExecutionOptions> request) throws MalformedResponseException {
-        return AdRuleExecutionOptions.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<AdAccountGroupResult> getParser() {
+    return new APIRequest.ResponseParser<AdAccountGroupResult>() {
+      public APINodeList<AdAccountGroupResult> parseResponse(String response, APIContext context, APIRequest<AdAccountGroupResult> request) throws MalformedResponseException {
+        return AdAccountGroupResult.parseResponse(response, context, request);
       }
     };
   }

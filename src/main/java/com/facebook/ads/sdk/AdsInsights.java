@@ -171,6 +171,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mUniqueOutboundClicksCtr = null;
   @SerializedName("video_10_sec_watched_actions")
   private List<AdsActionStats> mVideo10SecWatchedActions = null;
+  @SerializedName("video_15_sec_watched_actions")
+  private List<AdsActionStats> mVideo15SecWatchedActions = null;
   @SerializedName("video_30_sec_watched_actions")
   private List<AdsActionStats> mVideo30SecWatchedActions = null;
   @SerializedName("video_avg_percent_watched_actions")
@@ -192,6 +194,17 @@ public class AdsInsights extends APINode {
   @SerializedName("website_purchase_roas")
   private List<AdsActionStats> mWebsitePurchaseRoas = null;
   protected static Gson gson = null;
+
+  //[SSKY]
+  @SerializedName("device_platform")
+  private String mDevicePlatform = null;
+  @SerializedName("impression_device")
+  private String mImpressionDevice = null;
+  @SerializedName("publisher_platform")
+  private String mPublisherPlatform = null;
+  @SerializedName("platform_position")
+  private String mPlatformPosition = null;
+
 
   public AdsInsights() {
   }
@@ -508,6 +521,46 @@ public class AdsInsights extends APINode {
     this.mCostPerActionType = value;
     return this;
   }
+
+  //[SSKY]
+  public String getFieldDevicePlatform() {
+    return mDevicePlatform;
+  }
+
+  public AdsInsights setFieldDevicePlatform(String value) {
+    this.mDevicePlatform = value;
+    return this;
+  }
+
+  public String getFieldImpressionDevice() {
+    return mImpressionDevice;
+  }
+
+  public AdsInsights setFieldImpressionDevice(String value) {
+    this.mImpressionDevice = value;
+    return this;
+  }
+
+  public String getFieldPublisherPlatform() {
+    return mPublisherPlatform;
+  }
+
+  public AdsInsights setFieldPublisherPlatform(String value) {
+    this.mPublisherPlatform = value;
+    return this;
+  }
+
+  public String getFieldPlatformPosition() {
+    return mPlatformPosition;
+  }
+
+  public AdsInsights setFieldPlatformPosition(String value) {
+    this.mPlatformPosition = value;
+    return this;
+  }
+
+
+
 
   public AdsInsights setFieldCostPerActionType(String value) {
     Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
@@ -938,6 +991,20 @@ public class AdsInsights extends APINode {
     this.mVideo10SecWatchedActions = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public List<AdsActionStats> getFieldVideo15SecWatchedActions() {
+    return mVideo15SecWatchedActions;
+  }
+
+  public AdsInsights setFieldVideo15SecWatchedActions(List<AdsActionStats> value) {
+    this.mVideo15SecWatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideo15SecWatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideo15SecWatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldVideo30SecWatchedActions() {
     return mVideo30SecWatchedActions;
   }
@@ -1095,7 +1162,7 @@ public class AdsInsights extends APINode {
       VALUE_28D_CLICK("28d_click"),
       @SerializedName("default")
       VALUE_DEFAULT("default"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1132,7 +1199,7 @@ public class AdsInsights extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1151,7 +1218,7 @@ public class AdsInsights extends APINode {
       VALUE_IMPRESSION("impression"),
       @SerializedName("conversion")
       VALUE_CONVERSION("conversion"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1210,7 +1277,7 @@ public class AdsInsights extends APINode {
       VALUE_TITLE_ASSET("title_asset"),
       @SerializedName("video_asset")
       VALUE_VIDEO_ASSET("video_asset"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1263,7 +1330,7 @@ public class AdsInsights extends APINode {
       VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
       @SerializedName("this_year")
       VALUE_THIS_YEAR("this_year"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1286,7 +1353,7 @@ public class AdsInsights extends APINode {
       VALUE_CAMPAIGN("campaign"),
       @SerializedName("account")
       VALUE_ACCOUNT("account"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1323,7 +1390,7 @@ public class AdsInsights extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1364,7 +1431,7 @@ public class AdsInsights extends APINode {
       VALUE_TIME_COMPLETED("time_completed"),
       @SerializedName("time_ref")
       VALUE_TIME_REF("time_ref"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1451,6 +1518,7 @@ public class AdsInsights extends APINode {
     this.mUniqueOutboundClicks = instance.mUniqueOutboundClicks;
     this.mUniqueOutboundClicksCtr = instance.mUniqueOutboundClicksCtr;
     this.mVideo10SecWatchedActions = instance.mVideo10SecWatchedActions;
+    this.mVideo15SecWatchedActions = instance.mVideo15SecWatchedActions;
     this.mVideo30SecWatchedActions = instance.mVideo30SecWatchedActions;
     this.mVideoAvgPercentWatchedActions = instance.mVideoAvgPercentWatchedActions;
     this.mVideoAvgTimeWatchedActions = instance.mVideoAvgTimeWatchedActions;
@@ -1463,6 +1531,11 @@ public class AdsInsights extends APINode {
     this.mWebsitePurchaseRoas = instance.mWebsitePurchaseRoas;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
+    //[SSKY]
+    this.mDevicePlatform = instance.mDevicePlatform;
+    this.mImpressionDevice = instance.mImpressionDevice;
+    this.mPublisherPlatform = instance.mPublisherPlatform;
+    this.mPlatformPosition = instance.mPlatformPosition;
     return this;
   }
 

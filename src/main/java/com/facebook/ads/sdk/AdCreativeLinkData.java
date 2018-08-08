@@ -604,7 +604,7 @@ public class AdCreativeLinkData extends APINode {
       VALUE_LINK("link"),
       @SerializedName("default")
       VALUE_DEFAULT("default"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -627,7 +627,7 @@ public class AdCreativeLinkData extends APINode {
       VALUE_CAROUSEL_SLIDESHOWS("carousel_slideshows"),
       @SerializedName("single_image")
       VALUE_SINGLE_IMAGE("single_image"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

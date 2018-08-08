@@ -1,5 +1,6 @@
 target/*
 !target/*.jar
+facebook-java-ads-sdk.iml
 .idea
 *.class
 docs/DocSmithConfig.java

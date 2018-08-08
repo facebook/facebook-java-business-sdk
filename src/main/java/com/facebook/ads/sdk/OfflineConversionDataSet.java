@@ -3095,7 +3095,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_SHARE_CUSTOM_AUDIENCE("share_custom_audience"),
       @SerializedName("unshare_custom_audience")
       VALUE_UNSHARE_CUSTOM_AUDIENCE("unshare_custom_audience"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3114,7 +3114,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_UPLOAD_TIME("upload_time"),
       @SerializedName("event_time")
       VALUE_EVENT_TIME("event_time"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

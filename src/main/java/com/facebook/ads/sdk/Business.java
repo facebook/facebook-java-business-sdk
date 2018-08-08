@@ -16417,6 +16417,31 @@ public class Business extends APINode {
     }
   }
 
+  public static enum EnumReportType {
+      @SerializedName("multi_channel_report")
+      VALUE_MULTI_CHANNEL_REPORT("multi_channel_report"),
+      @SerializedName("video_metrics_report")
+      VALUE_VIDEO_METRICS_REPORT("video_metrics_report"),
+      @SerializedName("fruit_rollup_report")
+      VALUE_FRUIT_ROLLUP_REPORT("fruit_rollup_report"),
+      @SerializedName("third_party_mta_report")
+      VALUE_THIRD_PARTY_MTA_REPORT("third_party_mta_report"),
+      @SerializedName("partner_lift_study_report")
+      VALUE_PARTNER_LIFT_STUDY_REPORT("partner_lift_study_report"),
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
+
+      private String value;
+
+      private EnumReportType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumRole {
       @SerializedName("FINANCE_EDITOR")
       VALUE_FINANCE_EDITOR("FINANCE_EDITOR"),
@@ -16430,7 +16455,7 @@ public class Business extends APINode {
       VALUE_EMPLOYEE("EMPLOYEE"),
       @SerializedName("FB_EMPLOYEE_SALES_REP")
       VALUE_FB_EMPLOYEE_SALES_REP("FB_EMPLOYEE_SALES_REP"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -264,7 +264,7 @@ public class AdsPixelStatsResult extends APINode {
       VALUE_URL("url"),
       @SerializedName("event_total_counts")
       VALUE_EVENT_TOTAL_COUNTS("event_total_counts"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

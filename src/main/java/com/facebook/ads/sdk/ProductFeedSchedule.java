@@ -321,7 +321,7 @@ public class ProductFeedSchedule extends APINode {
       VALUE_FRIDAY("FRIDAY"),
       @SerializedName("SATURDAY")
       VALUE_SATURDAY("SATURDAY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -344,7 +344,7 @@ public class ProductFeedSchedule extends APINode {
       VALUE_WEEKLY("WEEKLY"),
       @SerializedName("MONTHLY")
       VALUE_MONTHLY("MONTHLY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

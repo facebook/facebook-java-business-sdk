@@ -470,7 +470,7 @@ public class AdActivity extends APINode {
       VALUE_UPDATE_AD_LABELS("update_ad_labels"),
       @SerializedName("di_ad_set_learning_stage_exit")
       VALUE_DI_AD_SET_LEARNING_STAGE_EXIT("di_ad_set_learning_stage_exit"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -505,7 +505,7 @@ public class AdActivity extends APINode {
       VALUE_STATUS("STATUS"),
       @SerializedName("TARGETING")
       VALUE_TARGETING("TARGETING"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -338,7 +338,7 @@ public class AdRuleHistory extends APINode {
       VALUE_PAUSED("PAUSED"),
       @SerializedName("UNPAUSED")
       VALUE_UNPAUSED("UNPAUSED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

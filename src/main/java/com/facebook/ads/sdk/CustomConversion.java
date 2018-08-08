@@ -35,6 +35,7 @@ import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.SettableFuture;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -54,6 +55,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomConversion extends APINode {
   @SerializedName("account_id")
   private String mAccountId = null;
@@ -1648,7 +1650,7 @@ public class CustomConversion extends APINode {
       VALUE_TAKE_SURVEY("TAKE_SURVEY"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1669,7 +1671,7 @@ public class CustomConversion extends APINode {
       VALUE_CONVERSION_DELETE("conversion_delete"),
       @SerializedName("conversion_update")
       VALUE_CONVERSION_UPDATE("conversion_update"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

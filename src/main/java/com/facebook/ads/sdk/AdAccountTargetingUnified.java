@@ -526,7 +526,7 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_MARKETPLACE_PRODUCT_CATEGORIES("marketplace_product_categories"),
       @SerializedName("instream_video_sponsorship_placements")
       VALUE_INSTREAM_VIDEO_SPONSORSHIP_PLACEMENTS("instream_video_sponsorship_placements"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -928,7 +928,7 @@ public class AdRule extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setStatus (AdRule.EnumStatus status) {
+    public APIRequestUpdate setStatus (EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
@@ -982,7 +982,7 @@ public class AdRule extends APINode {
       VALUE_DISABLED("DISABLED"),
       @SerializedName("DELETED")
       VALUE_DELETED("DELETED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

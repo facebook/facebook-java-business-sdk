@@ -251,7 +251,7 @@ public class AdRuleExecutionSpec extends APINode {
       VALUE_ROTATE("ROTATE"),
       @SerializedName("UNPAUSE")
       VALUE_UNPAUSE("UNPAUSE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

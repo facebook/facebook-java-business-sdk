@@ -263,7 +263,7 @@ public class AdPreview extends APINode {
       VALUE_SUGGESTED_VIDEO_MOBILE("SUGGESTED_VIDEO_MOBILE"),
       @SerializedName("MARKETPLACE_MOBILE")
       VALUE_MARKETPLACE_MOBILE("MARKETPLACE_MOBILE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

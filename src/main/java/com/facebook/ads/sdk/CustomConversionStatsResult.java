@@ -257,7 +257,7 @@ public class CustomConversionStatsResult extends APINode {
       VALUE_URL("url"),
       @SerializedName("usd_amount")
       VALUE_USD_AMOUNT("usd_amount"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
