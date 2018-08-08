@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -93,11 +97,23 @@ public class AdAsyncRequest extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<AdAsyncRequest> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static AdAsyncRequest fetchById(String id, APIContext context) throws APIException {
     AdAsyncRequest adAsyncRequest =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return adAsyncRequest;
+  }
+
+  public static ListenableFuture<AdAsyncRequest> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<AdAsyncRequest> adAsyncRequest =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return adAsyncRequest;
   }
 
@@ -108,6 +124,15 @@ public class AdAsyncRequest extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<AdAsyncRequest>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<AdAsyncRequest>> adAsyncRequest =
+      new APIRequest(context, "", "/", "GET", AdAsyncRequest.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return adAsyncRequest;
   }
 
   private String getPrefixedId() {
@@ -156,10 +181,19 @@ public class AdAsyncRequest extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adAsyncRequests.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adAsyncRequests.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adAsyncRequests.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adAsyncRequests.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -332,6 +366,25 @@ public class AdAsyncRequest extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<AdAsyncRequest> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdAsyncRequest> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdAsyncRequest>() {
+           public AdAsyncRequest apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));

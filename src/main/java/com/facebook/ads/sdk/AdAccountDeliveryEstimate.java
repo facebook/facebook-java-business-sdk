@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -51,14 +55,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdAccountDeliveryEstimate extends APINode {
-  @SerializedName("bid_estimate")
-  private Object mBidEstimate = null;
   @SerializedName("daily_outcomes_curve")
   private List<OutcomePredictionPoint> mDailyOutcomesCurve = null;
   @SerializedName("estimate_dau")
-  private Object mEstimateDau = null;
+  private Long mEstimateDau = null;
   @SerializedName("estimate_mau")
-  private Object mEstimateMau = null;
+  private Long mEstimateMau = null;
   @SerializedName("estimate_ready")
   private Boolean mEstimateReady = null;
   protected static Gson gson = null;
@@ -108,10 +110,19 @@ public class AdAccountDeliveryEstimate extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adAccountDeliveryEstimates.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adAccountDeliveryEstimates.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adAccountDeliveryEstimates.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adAccountDeliveryEstimates.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -202,15 +213,6 @@ public class AdAccountDeliveryEstimate extends APINode {
   }
 
 
-  public Object getFieldBidEstimate() {
-    return mBidEstimate;
-  }
-
-  public AdAccountDeliveryEstimate setFieldBidEstimate(Object value) {
-    this.mBidEstimate = value;
-    return this;
-  }
-
   public List<OutcomePredictionPoint> getFieldDailyOutcomesCurve() {
     return mDailyOutcomesCurve;
   }
@@ -225,20 +227,20 @@ public class AdAccountDeliveryEstimate extends APINode {
     this.mDailyOutcomesCurve = OutcomePredictionPoint.getGson().fromJson(value, type);
     return this;
   }
-  public Object getFieldEstimateDau() {
+  public Long getFieldEstimateDau() {
     return mEstimateDau;
   }
 
-  public AdAccountDeliveryEstimate setFieldEstimateDau(Object value) {
+  public AdAccountDeliveryEstimate setFieldEstimateDau(Long value) {
     this.mEstimateDau = value;
     return this;
   }
 
-  public Object getFieldEstimateMau() {
+  public Long getFieldEstimateMau() {
     return mEstimateMau;
   }
 
-  public AdAccountDeliveryEstimate setFieldEstimateMau(Object value) {
+  public AdAccountDeliveryEstimate setFieldEstimateMau(Long value) {
     this.mEstimateMau = value;
     return this;
   }
@@ -295,6 +297,10 @@ public class AdAccountDeliveryEstimate extends APINode {
       VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
       @SerializedName("LANDING_PAGE_VIEWS")
       VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
+      @SerializedName("VALUE")
+      VALUE_VALUE("VALUE"),
+      @SerializedName("REPLIES")
+      VALUE_REPLIES("REPLIES"),
       NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
@@ -324,7 +330,6 @@ public class AdAccountDeliveryEstimate extends APINode {
   }
 
   public AdAccountDeliveryEstimate copyFrom(AdAccountDeliveryEstimate instance) {
-    this.mBidEstimate = instance.mBidEstimate;
     this.mDailyOutcomesCurve = instance.mDailyOutcomesCurve;
     this.mEstimateDau = instance.mEstimateDau;
     this.mEstimateMau = instance.mEstimateMau;

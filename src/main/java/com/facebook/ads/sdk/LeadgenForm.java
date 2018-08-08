@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -75,14 +79,14 @@ public class LeadgenForm extends APINode {
   private String mFollowUpActionUrl = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("is_continued_flow")
-  private Boolean mIsContinuedFlow = null;
+  @SerializedName("is_optimized_for_quality")
+  private Boolean mIsOptimizedForQuality = null;
   @SerializedName("leadgen_export_csv_url")
   private String mLeadgenExportCsvUrl = null;
   @SerializedName("leads_count")
   private Long mLeadsCount = null;
   @SerializedName("legal_content")
-  private Object mLegalContent = null;
+  private LeadGenLegalContent mLegalContent = null;
   @SerializedName("locale")
   private String mLocale = null;
   @SerializedName("messenger_welcome_message")
@@ -92,7 +96,7 @@ public class LeadgenForm extends APINode {
   @SerializedName("organic_leads_count")
   private Long mOrganicLeadsCount = null;
   @SerializedName("page")
-  private Object mPage = null;
+  private Page mPage = null;
   @SerializedName("page_id")
   private String mPageId = null;
   @SerializedName("privacy_policy_url")
@@ -109,6 +113,8 @@ public class LeadgenForm extends APINode {
   private Boolean mTcpaCompliance = null;
   @SerializedName("thank_you_page")
   private Object mThankYouPage = null;
+  @SerializedName("tracking_parameters")
+  private List<Object> mTrackingParameters = null;
   protected static Gson gson = null;
 
   LeadgenForm() {
@@ -133,11 +139,23 @@ public class LeadgenForm extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<LeadgenForm> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static LeadgenForm fetchById(String id, APIContext context) throws APIException {
     LeadgenForm leadgenForm =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return leadgenForm;
+  }
+
+  public static ListenableFuture<LeadgenForm> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<LeadgenForm> leadgenForm =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return leadgenForm;
   }
 
@@ -148,6 +166,15 @@ public class LeadgenForm extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<LeadgenForm>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<LeadgenForm>> leadgenForm =
+      new APIRequest(context, "", "/", "GET", LeadgenForm.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return leadgenForm;
   }
 
   private String getPrefixedId() {
@@ -196,10 +223,19 @@ public class LeadgenForm extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            leadgenForms.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                leadgenForms.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            leadgenForms.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              leadgenForms.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -293,6 +329,10 @@ public class LeadgenForm extends APINode {
     return new APIRequestGetLeads(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateLead createLead() {
+    return new APIRequestCreateLead(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateTestLead createTestLead() {
     return new APIRequestCreateTestLead(this.getPrefixedId().toString(), context);
   }
@@ -303,6 +343,10 @@ public class LeadgenForm extends APINode {
 
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -357,8 +401,8 @@ public class LeadgenForm extends APINode {
     return mId;
   }
 
-  public Boolean getFieldIsContinuedFlow() {
-    return mIsContinuedFlow;
+  public Boolean getFieldIsOptimizedForQuality() {
+    return mIsOptimizedForQuality;
   }
 
   public String getFieldLeadgenExportCsvUrl() {
@@ -369,7 +413,10 @@ public class LeadgenForm extends APINode {
     return mLeadsCount;
   }
 
-  public Object getFieldLegalContent() {
+  public LeadGenLegalContent getFieldLegalContent() {
+    if (mLegalContent != null) {
+      mLegalContent.context = getContext();
+    }
     return mLegalContent;
   }
 
@@ -389,7 +436,10 @@ public class LeadgenForm extends APINode {
     return mOrganicLeadsCount;
   }
 
-  public Object getFieldPage() {
+  public Page getFieldPage() {
+    if (mPage != null) {
+      mPage.context = getContext();
+    }
     return mPage;
   }
 
@@ -425,6 +475,10 @@ public class LeadgenForm extends APINode {
     return mThankYouPage;
   }
 
+  public List<Object> getFieldTrackingParameters() {
+    return mTrackingParameters;
+  }
+
 
 
   public static class APIRequestGetLeads extends APIRequest<Lead> {
@@ -450,6 +504,7 @@ public class LeadgenForm extends APINode {
       "form_id",
       "id",
       "is_organic",
+      "partner_name",
       "post",
       "retailer_item_id",
     };
@@ -469,6 +524,25 @@ public class LeadgenForm extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<Lead>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Lead>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<Lead>>() {
+           public APINodeList<Lead> apply(String result) {
+             try {
+               return APIRequestGetLeads.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetLeads(String nodeId, APIContext context) {
       super(context, nodeId, "/leads", "GET", Arrays.asList(PARAMS));
@@ -607,6 +681,13 @@ public class LeadgenForm extends APINode {
       this.requestField("is_organic", value);
       return this;
     }
+    public APIRequestGetLeads requestPartnerNameField () {
+      return this.requestPartnerNameField(true);
+    }
+    public APIRequestGetLeads requestPartnerNameField (boolean value) {
+      this.requestField("partner_name", value);
+      return this;
+    }
     public APIRequestGetLeads requestPostField () {
       return this.requestPostField(true);
     }
@@ -621,6 +702,127 @@ public class LeadgenForm extends APINode {
       this.requestField("retailer_item_id", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateLead extends APIRequest<LeadgenForm> {
+
+    LeadgenForm lastResponse = null;
+    @Override
+    public LeadgenForm getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "end_time",
+      "session_id",
+      "start_time",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public LeadgenForm parseResponse(String response) throws APIException {
+      return LeadgenForm.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public LeadgenForm execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public LeadgenForm execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<LeadgenForm> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<LeadgenForm> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, LeadgenForm>() {
+           public LeadgenForm apply(String result) {
+             try {
+               return APIRequestCreateLead.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateLead(String nodeId, APIContext context) {
+      super(context, nodeId, "/leads", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateLead setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLead setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateLead setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestCreateLead setSessionId (String sessionId) {
+      this.setParam("session_id", sessionId);
+      return this;
+    }
+
+    public APIRequestCreateLead setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestCreateLead requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateLead requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLead requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateLead requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLead requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLead requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestCreateTestLead extends APIRequest<LeadgenForm> {
@@ -653,6 +855,25 @@ public class LeadgenForm extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<LeadgenForm> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<LeadgenForm> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, LeadgenForm>() {
+           public LeadgenForm apply(String result) {
+             try {
+               return APIRequestCreateTestLead.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestCreateTestLead(String nodeId, APIContext context) {
       super(context, nodeId, "/test_leads", "POST", Arrays.asList(PARAMS));
@@ -756,6 +977,25 @@ public class LeadgenForm extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
@@ -834,7 +1074,7 @@ public class LeadgenForm extends APINode {
       "follow_up_action_text",
       "follow_up_action_url",
       "id",
-      "is_continued_flow",
+      "is_optimized_for_quality",
       "leadgen_export_csv_url",
       "leads_count",
       "legal_content",
@@ -851,6 +1091,7 @@ public class LeadgenForm extends APINode {
       "status",
       "tcpa_compliance",
       "thank_you_page",
+      "tracking_parameters",
     };
 
     @Override
@@ -868,6 +1109,25 @@ public class LeadgenForm extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<LeadgenForm> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<LeadgenForm> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, LeadgenForm>() {
+           public LeadgenForm apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
@@ -1006,11 +1266,11 @@ public class LeadgenForm extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestIsContinuedFlowField () {
-      return this.requestIsContinuedFlowField(true);
+    public APIRequestGet requestIsOptimizedForQualityField () {
+      return this.requestIsOptimizedForQualityField(true);
     }
-    public APIRequestGet requestIsContinuedFlowField (boolean value) {
-      this.requestField("is_continued_flow", value);
+    public APIRequestGet requestIsOptimizedForQualityField (boolean value) {
+      this.requestField("is_optimized_for_quality", value);
       return this;
     }
     public APIRequestGet requestLeadgenExportCsvUrlField () {
@@ -1125,6 +1385,270 @@ public class LeadgenForm extends APINode {
       this.requestField("thank_you_page", value);
       return this;
     }
+    public APIRequestGet requestTrackingParametersField () {
+      return this.requestTrackingParametersField(true);
+    }
+    public APIRequestGet requestTrackingParametersField (boolean value) {
+      this.requestField("tracking_parameters", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<LeadgenForm> {
+
+    LeadgenForm lastResponse = null;
+    @Override
+    public LeadgenForm getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "context_card_id",
+      "legal_content_id",
+      "locale",
+      "name",
+      "questions",
+      "status",
+      "thank_you_page_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public LeadgenForm parseResponse(String response) throws APIException {
+      return LeadgenForm.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public LeadgenForm execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public LeadgenForm execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<LeadgenForm> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<LeadgenForm> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, LeadgenForm>() {
+           public LeadgenForm apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setContextCardId (String contextCardId) {
+      this.setParam("context_card_id", contextCardId);
+      return this;
+    }
+
+    public APIRequestUpdate setLegalContentId (String legalContentId) {
+      this.setParam("legal_content_id", legalContentId);
+      return this;
+    }
+
+    public APIRequestUpdate setLocale (LeadgenForm.EnumLocale locale) {
+      this.setParam("locale", locale);
+      return this;
+    }
+    public APIRequestUpdate setLocale (String locale) {
+      this.setParam("locale", locale);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setQuestions (List<Object> questions) {
+      this.setParam("questions", questions);
+      return this;
+    }
+    public APIRequestUpdate setQuestions (String questions) {
+      this.setParam("questions", questions);
+      return this;
+    }
+
+    public APIRequestUpdate setStatus (LeadgenForm.EnumStatus status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestUpdate setStatus (String status) {
+      this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestUpdate setThankYouPageId (String thankYouPageId) {
+      this.setParam("thank_you_page_id", thankYouPageId);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static enum EnumLocale {
+      @SerializedName("EN_US")
+      VALUE_EN_US("EN_US"),
+      @SerializedName("IT_IT")
+      VALUE_IT_IT("IT_IT"),
+      @SerializedName("FR_FR")
+      VALUE_FR_FR("FR_FR"),
+      @SerializedName("ES_ES")
+      VALUE_ES_ES("ES_ES"),
+      @SerializedName("ES_LA")
+      VALUE_ES_LA("ES_LA"),
+      @SerializedName("DE_DE")
+      VALUE_DE_DE("DE_DE"),
+      @SerializedName("EN_GB")
+      VALUE_EN_GB("EN_GB"),
+      @SerializedName("PT_BR")
+      VALUE_PT_BR("PT_BR"),
+      @SerializedName("ZH_TW")
+      VALUE_ZH_TW("ZH_TW"),
+      @SerializedName("ZH_HK")
+      VALUE_ZH_HK("ZH_HK"),
+      @SerializedName("TR_TR")
+      VALUE_TR_TR("TR_TR"),
+      @SerializedName("AR_AR")
+      VALUE_AR_AR("AR_AR"),
+      @SerializedName("CS_CZ")
+      VALUE_CS_CZ("CS_CZ"),
+      @SerializedName("DA_DK")
+      VALUE_DA_DK("DA_DK"),
+      @SerializedName("FI_FI")
+      VALUE_FI_FI("FI_FI"),
+      @SerializedName("HE_IL")
+      VALUE_HE_IL("HE_IL"),
+      @SerializedName("HI_IN")
+      VALUE_HI_IN("HI_IN"),
+      @SerializedName("HU_HU")
+      VALUE_HU_HU("HU_HU"),
+      @SerializedName("ID_ID")
+      VALUE_ID_ID("ID_ID"),
+      @SerializedName("JA_JP")
+      VALUE_JA_JP("JA_JP"),
+      @SerializedName("KO_KR")
+      VALUE_KO_KR("KO_KR"),
+      @SerializedName("NB_NO")
+      VALUE_NB_NO("NB_NO"),
+      @SerializedName("NL_NL")
+      VALUE_NL_NL("NL_NL"),
+      @SerializedName("PL_PL")
+      VALUE_PL_PL("PL_PL"),
+      @SerializedName("PT_PT")
+      VALUE_PT_PT("PT_PT"),
+      @SerializedName("RO_RO")
+      VALUE_RO_RO("RO_RO"),
+      @SerializedName("RU_RU")
+      VALUE_RU_RU("RU_RU"),
+      @SerializedName("SV_SE")
+      VALUE_SV_SE("SV_SE"),
+      @SerializedName("TH_TH")
+      VALUE_TH_TH("TH_TH"),
+      @SerializedName("VI_VN")
+      VALUE_VI_VN("VI_VN"),
+      @SerializedName("ZH_CN")
+      VALUE_ZH_CN("ZH_CN"),
+      NULL(null);
+
+      private String value;
+
+      private EnumLocale(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumStatus {
+      @SerializedName("ACTIVE")
+      VALUE_ACTIVE("ACTIVE"),
+      @SerializedName("ARCHIVED")
+      VALUE_ARCHIVED("ARCHIVED"),
+      @SerializedName("DELETED")
+      VALUE_DELETED("DELETED"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
+      NULL(null);
+
+      private String value;
+
+      private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 
@@ -1154,7 +1678,7 @@ public class LeadgenForm extends APINode {
     this.mFollowUpActionText = instance.mFollowUpActionText;
     this.mFollowUpActionUrl = instance.mFollowUpActionUrl;
     this.mId = instance.mId;
-    this.mIsContinuedFlow = instance.mIsContinuedFlow;
+    this.mIsOptimizedForQuality = instance.mIsOptimizedForQuality;
     this.mLeadgenExportCsvUrl = instance.mLeadgenExportCsvUrl;
     this.mLeadsCount = instance.mLeadsCount;
     this.mLegalContent = instance.mLegalContent;
@@ -1171,6 +1695,7 @@ public class LeadgenForm extends APINode {
     this.mStatus = instance.mStatus;
     this.mTcpaCompliance = instance.mTcpaCompliance;
     this.mThankYouPage = instance.mThankYouPage;
+    this.mTrackingParameters = instance.mTrackingParameters;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

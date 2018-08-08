@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -55,8 +59,8 @@ public class AdsPixelStatsResult extends APINode {
   private EnumAggregation mAggregation = null;
   @SerializedName("data")
   private List<AdsPixelStats> mData = null;
-  @SerializedName("timestamp")
-  private String mTimestamp = null;
+  @SerializedName("start_time")
+  private String mStartTime = null;
   protected static Gson gson = null;
 
   public AdsPixelStatsResult() {
@@ -104,10 +108,19 @@ public class AdsPixelStatsResult extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adsPixelStatsResults.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adsPixelStatsResults.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adsPixelStatsResults.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adsPixelStatsResults.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -221,12 +234,12 @@ public class AdsPixelStatsResult extends APINode {
     this.mData = AdsPixelStats.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldTimestamp() {
-    return mTimestamp;
+  public String getFieldStartTime() {
+    return mStartTime;
   }
 
-  public AdsPixelStatsResult setFieldTimestamp(String value) {
-    this.mTimestamp = value;
+  public AdsPixelStatsResult setFieldStartTime(String value) {
+    this.mStartTime = value;
     return this;
   }
 
@@ -249,6 +262,8 @@ public class AdsPixelStatsResult extends APINode {
       VALUE_PIXEL_FIRE("pixel_fire"),
       @SerializedName("url")
       VALUE_URL("url"),
+      @SerializedName("event_total_counts")
+      VALUE_EVENT_TOTAL_COUNTS("event_total_counts"),
       NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
@@ -280,7 +295,7 @@ public class AdsPixelStatsResult extends APINode {
   public AdsPixelStatsResult copyFrom(AdsPixelStatsResult instance) {
     this.mAggregation = instance.mAggregation;
     this.mData = instance.mData;
-    this.mTimestamp = instance.mTimestamp;
+    this.mStartTime = instance.mStartTime;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

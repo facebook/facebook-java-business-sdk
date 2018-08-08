@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -71,6 +75,10 @@ public class AdCreativeLinkData extends APINode {
   private List<AdCreativeLinkDataChildAttachment> mChildAttachments = null;
   @SerializedName("collection_thumbnails")
   private List<AdCreativeCollectionThumbnailInfo> mCollectionThumbnails = null;
+  @SerializedName("custom_overlay_spec")
+  private AdCreativeLinkDataCustomOverlaySpec mCustomOverlaySpec = null;
+  @SerializedName("customization_rules_spec")
+  private List<Object> mCustomizationRulesSpec = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("event_id")
@@ -103,10 +111,14 @@ public class AdCreativeLinkData extends APINode {
   private String mPicture = null;
   @SerializedName("post_click_configuration")
   private AdCreativePostClickConfiguration mPostClickConfiguration = null;
+  @SerializedName("preferred_image_tags")
+  private List<String> mPreferredImageTags = null;
   @SerializedName("retailer_item_ids")
   private List<String> mRetailerItemIds = null;
   @SerializedName("show_multiple_images")
   private Boolean mShowMultipleImages = null;
+  @SerializedName("static_fallback_spec")
+  private Object mStaticFallbackSpec = null;
   protected static Gson gson = null;
 
   public AdCreativeLinkData() {
@@ -154,10 +166,19 @@ public class AdCreativeLinkData extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adCreativeLinkDatas.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adCreativeLinkDatas.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adCreativeLinkDatas.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adCreativeLinkDatas.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -358,6 +379,29 @@ public class AdCreativeLinkData extends APINode {
     this.mCollectionThumbnails = AdCreativeCollectionThumbnailInfo.getGson().fromJson(value, type);
     return this;
   }
+  public AdCreativeLinkDataCustomOverlaySpec getFieldCustomOverlaySpec() {
+    return mCustomOverlaySpec;
+  }
+
+  public AdCreativeLinkData setFieldCustomOverlaySpec(AdCreativeLinkDataCustomOverlaySpec value) {
+    this.mCustomOverlaySpec = value;
+    return this;
+  }
+
+  public AdCreativeLinkData setFieldCustomOverlaySpec(String value) {
+    Type type = new TypeToken<AdCreativeLinkDataCustomOverlaySpec>(){}.getType();
+    this.mCustomOverlaySpec = AdCreativeLinkDataCustomOverlaySpec.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<Object> getFieldCustomizationRulesSpec() {
+    return mCustomizationRulesSpec;
+  }
+
+  public AdCreativeLinkData setFieldCustomizationRulesSpec(List<Object> value) {
+    this.mCustomizationRulesSpec = value;
+    return this;
+  }
+
   public String getFieldDescription() {
     return mDescription;
   }
@@ -517,6 +561,15 @@ public class AdCreativeLinkData extends APINode {
     this.mPostClickConfiguration = AdCreativePostClickConfiguration.getGson().fromJson(value, type);
     return this;
   }
+  public List<String> getFieldPreferredImageTags() {
+    return mPreferredImageTags;
+  }
+
+  public AdCreativeLinkData setFieldPreferredImageTags(List<String> value) {
+    this.mPreferredImageTags = value;
+    return this;
+  }
+
   public List<String> getFieldRetailerItemIds() {
     return mRetailerItemIds;
   }
@@ -532,6 +585,15 @@ public class AdCreativeLinkData extends APINode {
 
   public AdCreativeLinkData setFieldShowMultipleImages(Boolean value) {
     this.mShowMultipleImages = value;
+    return this;
+  }
+
+  public Object getFieldStaticFallbackSpec() {
+    return mStaticFallbackSpec;
+  }
+
+  public AdCreativeLinkData setFieldStaticFallbackSpec(Object value) {
+    this.mStaticFallbackSpec = value;
     return this;
   }
 
@@ -561,6 +623,8 @@ public class AdCreativeLinkData extends APINode {
       VALUE_CAROUSEL_IMAGES_MULTI_ITEMS("carousel_images_multi_items"),
       @SerializedName("carousel_images_single_item")
       VALUE_CAROUSEL_IMAGES_SINGLE_ITEM("carousel_images_single_item"),
+      @SerializedName("carousel_slideshows")
+      VALUE_CAROUSEL_SLIDESHOWS("carousel_slideshows"),
       @SerializedName("single_image")
       VALUE_SINGLE_IMAGE("single_image"),
       NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
@@ -602,6 +666,8 @@ public class AdCreativeLinkData extends APINode {
     this.mCaption = instance.mCaption;
     this.mChildAttachments = instance.mChildAttachments;
     this.mCollectionThumbnails = instance.mCollectionThumbnails;
+    this.mCustomOverlaySpec = instance.mCustomOverlaySpec;
+    this.mCustomizationRulesSpec = instance.mCustomizationRulesSpec;
     this.mDescription = instance.mDescription;
     this.mEventId = instance.mEventId;
     this.mForceSingleLink = instance.mForceSingleLink;
@@ -618,8 +684,10 @@ public class AdCreativeLinkData extends APINode {
     this.mPageWelcomeMessage = instance.mPageWelcomeMessage;
     this.mPicture = instance.mPicture;
     this.mPostClickConfiguration = instance.mPostClickConfiguration;
+    this.mPreferredImageTags = instance.mPreferredImageTags;
     this.mRetailerItemIds = instance.mRetailerItemIds;
     this.mShowMultipleImages = instance.mShowMultipleImages;
+    this.mStaticFallbackSpec = instance.mStaticFallbackSpec;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

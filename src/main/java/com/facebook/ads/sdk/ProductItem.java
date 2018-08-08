@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -51,8 +55,12 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class ProductItem extends APINode {
+  @SerializedName("additional_image_cdn_urls")
+  private List<List<Object>> mAdditionalImageCdnUrls = null;
   @SerializedName("additional_image_urls")
   private List<String> mAdditionalImageUrls = null;
+  @SerializedName("additional_variant_attributes")
+  private List<Object> mAdditionalVariantAttributes = null;
   @SerializedName("age_group")
   private EnumAgeGroup mAgeGroup = null;
   @SerializedName("applinks")
@@ -93,12 +101,18 @@ public class ProductItem extends APINode {
   private String mGtin = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("image_cdn_urls")
+  private List<Object> mImageCdnUrls = null;
   @SerializedName("image_url")
   private String mImageUrl = null;
+  @SerializedName("inventory")
+  private Long mInventory = null;
   @SerializedName("manufacturer_part_number")
   private String mManufacturerPartNumber = null;
   @SerializedName("material")
   private String mMaterial = null;
+  @SerializedName("mobile_link")
+  private String mMobileLink = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("ordering_index")
@@ -167,11 +181,23 @@ public class ProductItem extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<ProductItem> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static ProductItem fetchById(String id, APIContext context) throws APIException {
     ProductItem productItem =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return productItem;
+  }
+
+  public static ListenableFuture<ProductItem> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<ProductItem> productItem =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return productItem;
   }
 
@@ -182,6 +208,15 @@ public class ProductItem extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<ProductItem>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<ProductItem>> productItem =
+      new APIRequest(context, "", "/", "GET", ProductItem.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return productItem;
   }
 
   private String getPrefixedId() {
@@ -230,10 +265,19 @@ public class ProductItem extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            productItems.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                productItems.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            productItems.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              productItems.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -340,8 +384,16 @@ public class ProductItem extends APINode {
   }
 
 
+  public List<List<Object>> getFieldAdditionalImageCdnUrls() {
+    return mAdditionalImageCdnUrls;
+  }
+
   public List<String> getFieldAdditionalImageUrls() {
     return mAdditionalImageUrls;
+  }
+
+  public List<Object> getFieldAdditionalVariantAttributes() {
+    return mAdditionalVariantAttributes;
   }
 
   public EnumAgeGroup getFieldAgeGroup() {
@@ -427,8 +479,16 @@ public class ProductItem extends APINode {
     return mId;
   }
 
+  public List<Object> getFieldImageCdnUrls() {
+    return mImageCdnUrls;
+  }
+
   public String getFieldImageUrl() {
     return mImageUrl;
+  }
+
+  public Long getFieldInventory() {
+    return mInventory;
   }
 
   public String getFieldManufacturerPartNumber() {
@@ -437,6 +497,10 @@ public class ProductItem extends APINode {
 
   public String getFieldMaterial() {
     return mMaterial;
+  }
+
+  public String getFieldMobileLink() {
+    return mMobileLink;
   }
 
   public String getFieldName() {
@@ -573,6 +637,25 @@ public class ProductItem extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINodeList<ProductSet>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ProductSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<ProductSet>>() {
+           public APINodeList<ProductSet> apply(String result) {
+             try {
+               return APIRequestGetProductSets.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestGetProductSets(String nodeId, APIContext context) {
       super(context, nodeId, "/product_sets", "GET", Arrays.asList(PARAMS));
     }
@@ -699,6 +782,25 @@ public class ProductItem extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestDelete(String nodeId, APIContext context) {
       super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
@@ -767,7 +869,9 @@ public class ProductItem extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "additional_image_cdn_urls",
       "additional_image_urls",
+      "additional_variant_attributes",
       "age_group",
       "applinks",
       "availability",
@@ -788,9 +892,12 @@ public class ProductItem extends APINode {
       "gender",
       "gtin",
       "id",
+      "image_cdn_urls",
       "image_url",
+      "inventory",
       "manufacturer_part_number",
       "material",
+      "mobile_link",
       "name",
       "ordering_index",
       "pattern",
@@ -830,6 +937,25 @@ public class ProductItem extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<ProductItem> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductItem> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProductItem>() {
+           public ProductItem apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
@@ -902,11 +1028,25 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAdditionalImageCdnUrlsField () {
+      return this.requestAdditionalImageCdnUrlsField(true);
+    }
+    public APIRequestGet requestAdditionalImageCdnUrlsField (boolean value) {
+      this.requestField("additional_image_cdn_urls", value);
+      return this;
+    }
     public APIRequestGet requestAdditionalImageUrlsField () {
       return this.requestAdditionalImageUrlsField(true);
     }
     public APIRequestGet requestAdditionalImageUrlsField (boolean value) {
       this.requestField("additional_image_urls", value);
+      return this;
+    }
+    public APIRequestGet requestAdditionalVariantAttributesField () {
+      return this.requestAdditionalVariantAttributesField(true);
+    }
+    public APIRequestGet requestAdditionalVariantAttributesField (boolean value) {
+      this.requestField("additional_variant_attributes", value);
       return this;
     }
     public APIRequestGet requestAgeGroupField () {
@@ -1049,11 +1189,25 @@ public class ProductItem extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestImageCdnUrlsField () {
+      return this.requestImageCdnUrlsField(true);
+    }
+    public APIRequestGet requestImageCdnUrlsField (boolean value) {
+      this.requestField("image_cdn_urls", value);
+      return this;
+    }
     public APIRequestGet requestImageUrlField () {
       return this.requestImageUrlField(true);
     }
     public APIRequestGet requestImageUrlField (boolean value) {
       this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGet requestInventoryField () {
+      return this.requestInventoryField(true);
+    }
+    public APIRequestGet requestInventoryField (boolean value) {
+      this.requestField("inventory", value);
       return this;
     }
     public APIRequestGet requestManufacturerPartNumberField () {
@@ -1068,6 +1222,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestMaterialField (boolean value) {
       this.requestField("material", value);
+      return this;
+    }
+    public APIRequestGet requestMobileLinkField () {
+      return this.requestMobileLinkField(true);
+    }
+    public APIRequestGet requestMobileLinkField (boolean value) {
+      this.requestField("mobile_link", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -1235,6 +1396,7 @@ public class ProductItem extends APINode {
     }
     public static final String[] PARAMS = {
       "additional_image_urls",
+      "additional_variant_attributes",
       "android_app_name",
       "android_class",
       "android_package",
@@ -1269,11 +1431,16 @@ public class ProductItem extends APINode {
       "iphone_url",
       "manufacturer_part_number",
       "material",
+      "mobile_link",
       "name",
+      "offer_price_amount",
+      "offer_price_end_date",
+      "offer_price_start_date",
       "ordering_index",
       "pattern",
       "price",
       "product_type",
+      "retailer_id",
       "sale_price",
       "sale_price_end_date",
       "sale_price_start_date",
@@ -1306,6 +1473,25 @@ public class ProductItem extends APINode {
       return lastResponse;
     }
 
+    public ListenableFuture<ProductItem> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductItem> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProductItem>() {
+           public ProductItem apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
     public APIRequestUpdate(String nodeId, APIContext context) {
       super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
     }
@@ -1329,6 +1515,15 @@ public class ProductItem extends APINode {
     }
     public APIRequestUpdate setAdditionalImageUrls (String additionalImageUrls) {
       this.setParam("additional_image_urls", additionalImageUrls);
+      return this;
+    }
+
+    public APIRequestUpdate setAdditionalVariantAttributes (Object additionalVariantAttributes) {
+      this.setParam("additional_variant_attributes", additionalVariantAttributes);
+      return this;
+    }
+    public APIRequestUpdate setAdditionalVariantAttributes (String additionalVariantAttributes) {
+      this.setParam("additional_variant_attributes", additionalVariantAttributes);
       return this;
     }
 
@@ -1453,6 +1648,10 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setImageUrl (Object imageUrl) {
+      this.setParam("image_url", imageUrl);
+      return this;
+    }
     public APIRequestUpdate setImageUrl (String imageUrl) {
       this.setParam("image_url", imageUrl);
       return this;
@@ -1534,8 +1733,44 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setMobileLink (Object mobileLink) {
+      this.setParam("mobile_link", mobileLink);
+      return this;
+    }
+    public APIRequestUpdate setMobileLink (String mobileLink) {
+      this.setParam("mobile_link", mobileLink);
+      return this;
+    }
+
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setOfferPriceAmount (Long offerPriceAmount) {
+      this.setParam("offer_price_amount", offerPriceAmount);
+      return this;
+    }
+    public APIRequestUpdate setOfferPriceAmount (String offerPriceAmount) {
+      this.setParam("offer_price_amount", offerPriceAmount);
+      return this;
+    }
+
+    public APIRequestUpdate setOfferPriceEndDate (Object offerPriceEndDate) {
+      this.setParam("offer_price_end_date", offerPriceEndDate);
+      return this;
+    }
+    public APIRequestUpdate setOfferPriceEndDate (String offerPriceEndDate) {
+      this.setParam("offer_price_end_date", offerPriceEndDate);
+      return this;
+    }
+
+    public APIRequestUpdate setOfferPriceStartDate (Object offerPriceStartDate) {
+      this.setParam("offer_price_start_date", offerPriceStartDate);
+      return this;
+    }
+    public APIRequestUpdate setOfferPriceStartDate (String offerPriceStartDate) {
+      this.setParam("offer_price_start_date", offerPriceStartDate);
       return this;
     }
 
@@ -1564,6 +1799,11 @@ public class ProductItem extends APINode {
 
     public APIRequestUpdate setProductType (String productType) {
       this.setParam("product_type", productType);
+      return this;
+    }
+
+    public APIRequestUpdate setRetailerId (String retailerId) {
+      this.setParam("retailer_id", retailerId);
       return this;
     }
 
@@ -1601,6 +1841,10 @@ public class ProductItem extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setUrl (Object url) {
+      this.setParam("url", url);
+      return this;
+    }
     public APIRequestUpdate setUrl (String url) {
       this.setParam("url", url);
       return this;
@@ -1671,12 +1915,16 @@ public class ProductItem extends APINode {
   public static enum EnumAgeGroup {
       @SerializedName("adult")
       VALUE_ADULT("adult"),
+      @SerializedName("all ages")
+      VALUE_ALL_AGES("all ages"),
       @SerializedName("infant")
       VALUE_INFANT("infant"),
       @SerializedName("kids")
       VALUE_KIDS("kids"),
       @SerializedName("newborn")
       VALUE_NEWBORN("newborn"),
+      @SerializedName("teen")
+      VALUE_TEEN("teen"),
       @SerializedName("toddler")
       VALUE_TODDLER("toddler"),
       NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
@@ -1704,6 +1952,8 @@ public class ProductItem extends APINode {
       VALUE_AVAILABLE_FOR_ORDER("available for order"),
       @SerializedName("discontinued")
       VALUE_DISCONTINUED("discontinued"),
+      @SerializedName("pending")
+      VALUE_PENDING("pending"),
       NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
@@ -1725,6 +1975,8 @@ public class ProductItem extends APINode {
       VALUE_REFURBISHED("refurbished"),
       @SerializedName("used")
       VALUE_USED("used"),
+      @SerializedName("cpo")
+      VALUE_CPO("cpo"),
       NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
@@ -1840,7 +2092,9 @@ public class ProductItem extends APINode {
   }
 
   public ProductItem copyFrom(ProductItem instance) {
+    this.mAdditionalImageCdnUrls = instance.mAdditionalImageCdnUrls;
     this.mAdditionalImageUrls = instance.mAdditionalImageUrls;
+    this.mAdditionalVariantAttributes = instance.mAdditionalVariantAttributes;
     this.mAgeGroup = instance.mAgeGroup;
     this.mApplinks = instance.mApplinks;
     this.mAvailability = instance.mAvailability;
@@ -1861,9 +2115,12 @@ public class ProductItem extends APINode {
     this.mGender = instance.mGender;
     this.mGtin = instance.mGtin;
     this.mId = instance.mId;
+    this.mImageCdnUrls = instance.mImageCdnUrls;
     this.mImageUrl = instance.mImageUrl;
+    this.mInventory = instance.mInventory;
     this.mManufacturerPartNumber = instance.mManufacturerPartNumber;
     this.mMaterial = instance.mMaterial;
+    this.mMobileLink = instance.mMobileLink;
     this.mName = instance.mName;
     this.mOrderingIndex = instance.mOrderingIndex;
     this.mPattern = instance.mPattern;

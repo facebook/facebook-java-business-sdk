@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -53,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdPromotedObject extends APINode {
   @SerializedName("application_id")
   private String mApplicationId = null;
+  @SerializedName("custom_conversion_id")
+  private String mCustomConversionId = null;
   @SerializedName("custom_event_type")
   private EnumCustomEventType mCustomEventType = null;
   @SerializedName("event_id")
@@ -61,6 +67,8 @@ public class AdPromotedObject extends APINode {
   private String mObjectStoreUrl = null;
   @SerializedName("offer_id")
   private String mOfferId = null;
+  @SerializedName("offline_conversion_data_set_id")
+  private String mOfflineConversionDataSetId = null;
   @SerializedName("page_id")
   private String mPageId = null;
   @SerializedName("pixel_id")
@@ -120,10 +128,19 @@ public class AdPromotedObject extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adPromotedObjects.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adPromotedObjects.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adPromotedObjects.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adPromotedObjects.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -223,6 +240,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldCustomConversionId() {
+    return mCustomConversionId;
+  }
+
+  public AdPromotedObject setFieldCustomConversionId(String value) {
+    this.mCustomConversionId = value;
+    return this;
+  }
+
   public EnumCustomEventType getFieldCustomEventType() {
     return mCustomEventType;
   }
@@ -256,6 +282,15 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject setFieldOfferId(String value) {
     this.mOfferId = value;
+    return this;
+  }
+
+  public String getFieldOfflineConversionDataSetId() {
+    return mOfflineConversionDataSetId;
+  }
+
+  public AdPromotedObject setFieldOfflineConversionDataSetId(String value) {
+    this.mOfflineConversionDataSetId = value;
     return this;
   }
 
@@ -315,12 +350,6 @@ public class AdPromotedObject extends APINode {
 
 
   public static enum EnumCustomEventType {
-      @SerializedName("COMPLETE_REGISTRATION")
-      VALUE_COMPLETE_REGISTRATION("COMPLETE_REGISTRATION"),
-      @SerializedName("CONTENT_VIEW")
-      VALUE_CONTENT_VIEW("CONTENT_VIEW"),
-      @SerializedName("SEARCH")
-      VALUE_SEARCH("SEARCH"),
       @SerializedName("RATE")
       VALUE_RATE("RATE"),
       @SerializedName("TUTORIAL_COMPLETION")
@@ -337,6 +366,16 @@ public class AdPromotedObject extends APINode {
       VALUE_PURCHASE("PURCHASE"),
       @SerializedName("LEAD")
       VALUE_LEAD("LEAD"),
+      @SerializedName("COMPLETE_REGISTRATION")
+      VALUE_COMPLETE_REGISTRATION("COMPLETE_REGISTRATION"),
+      @SerializedName("CONTENT_VIEW")
+      VALUE_CONTENT_VIEW("CONTENT_VIEW"),
+      @SerializedName("SEARCH")
+      VALUE_SEARCH("SEARCH"),
+      @SerializedName("SERVICE_BOOKING_REQUEST")
+      VALUE_SERVICE_BOOKING_REQUEST("SERVICE_BOOKING_REQUEST"),
+      @SerializedName("MESSAGING_CONVERSATION_STARTED_7D")
+      VALUE_MESSAGING_CONVERSATION_STARTED_7D("MESSAGING_CONVERSATION_STARTED_7D"),
       @SerializedName("LEVEL_ACHIEVED")
       VALUE_LEVEL_ACHIEVED("LEVEL_ACHIEVED"),
       @SerializedName("ACHIEVEMENT_UNLOCKED")
@@ -375,10 +414,12 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject copyFrom(AdPromotedObject instance) {
     this.mApplicationId = instance.mApplicationId;
+    this.mCustomConversionId = instance.mCustomConversionId;
     this.mCustomEventType = instance.mCustomEventType;
     this.mEventId = instance.mEventId;
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
     this.mOfferId = instance.mOfferId;
+    this.mOfflineConversionDataSetId = instance.mOfflineConversionDataSetId;
     this.mPageId = instance.mPageId;
     this.mPixelId = instance.mPixelId;
     this.mPlacePageSetId = instance.mPlacePageSetId;

@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -101,11 +105,23 @@ public class AdReportRun extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<AdReportRun> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static AdReportRun fetchById(String id, APIContext context) throws APIException {
     AdReportRun adReportRun =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return adReportRun;
+  }
+
+  public static ListenableFuture<AdReportRun> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<AdReportRun> adReportRun =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return adReportRun;
   }
 
@@ -116,6 +132,15 @@ public class AdReportRun extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<AdReportRun>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<AdReportRun>> adReportRun =
+      new APIRequest(context, "", "/", "GET", AdReportRun.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return adReportRun;
   }
 
   private String getPrefixedId() {
@@ -173,10 +198,19 @@ public class AdReportRun extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adReportRuns.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adReportRuns.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adReportRuns.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adReportRuns.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -350,12 +384,10 @@ public class AdReportRun extends APINode {
       "adset_id",
       "adset_name",
       "buying_type",
-      "call_to_action_clicks",
       "campaign_id",
       "campaign_name",
       "canvas_avg_view_percent",
       "canvas_avg_view_time",
-      "canvas_component_avg_pct_view",
       "clicks",
       "cost_per_10_sec_video_view",
       "cost_per_action_type",
@@ -363,7 +395,6 @@ public class AdReportRun extends APINode {
       "cost_per_inline_link_click",
       "cost_per_inline_post_engagement",
       "cost_per_outbound_click",
-      "cost_per_total_action",
       "cost_per_unique_action_type",
       "cost_per_unique_click",
       "cost_per_unique_inline_link_click",
@@ -388,14 +419,10 @@ public class AdReportRun extends APINode {
       "place_page_name",
       "reach",
       "relevance_score",
-      "social_clicks",
       "social_impressions",
-      "social_reach",
       "social_spend",
       "spend",
       "total_action_value",
-      "total_actions",
-      "total_unique_actions",
       "unique_actions",
       "unique_clicks",
       "unique_ctr",
@@ -404,7 +431,6 @@ public class AdReportRun extends APINode {
       "unique_link_clicks_ctr",
       "unique_outbound_clicks",
       "unique_outbound_clicks_ctr",
-      "unique_social_clicks",
       "video_10_sec_watched_actions",
       "video_30_sec_watched_actions",
       "video_avg_percent_watched_actions",
@@ -433,6 +459,25 @@ public class AdReportRun extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<APINodeList<AdsInsights>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdsInsights>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdsInsights>>() {
+           public APINodeList<AdsInsights> apply(String result) {
+             try {
+               return APIRequestGetInsights.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGetInsights(String nodeId, APIContext context) {
       super(context, nodeId, "/insights", "GET", Arrays.asList(PARAMS));
@@ -557,13 +602,6 @@ public class AdReportRun extends APINode {
       this.requestField("buying_type", value);
       return this;
     }
-    public APIRequestGetInsights requestCallToActionClicksField () {
-      return this.requestCallToActionClicksField(true);
-    }
-    public APIRequestGetInsights requestCallToActionClicksField (boolean value) {
-      this.requestField("call_to_action_clicks", value);
-      return this;
-    }
     public APIRequestGetInsights requestCampaignIdField () {
       return this.requestCampaignIdField(true);
     }
@@ -590,13 +628,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCanvasAvgViewTimeField (boolean value) {
       this.requestField("canvas_avg_view_time", value);
-      return this;
-    }
-    public APIRequestGetInsights requestCanvasComponentAvgPctViewField () {
-      return this.requestCanvasComponentAvgPctViewField(true);
-    }
-    public APIRequestGetInsights requestCanvasComponentAvgPctViewField (boolean value) {
-      this.requestField("canvas_component_avg_pct_view", value);
       return this;
     }
     public APIRequestGetInsights requestClicksField () {
@@ -646,13 +677,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCostPerOutboundClickField (boolean value) {
       this.requestField("cost_per_outbound_click", value);
-      return this;
-    }
-    public APIRequestGetInsights requestCostPerTotalActionField () {
-      return this.requestCostPerTotalActionField(true);
-    }
-    public APIRequestGetInsights requestCostPerTotalActionField (boolean value) {
-      this.requestField("cost_per_total_action", value);
       return this;
     }
     public APIRequestGetInsights requestCostPerUniqueActionTypeField () {
@@ -823,25 +847,11 @@ public class AdReportRun extends APINode {
       this.requestField("relevance_score", value);
       return this;
     }
-    public APIRequestGetInsights requestSocialClicksField () {
-      return this.requestSocialClicksField(true);
-    }
-    public APIRequestGetInsights requestSocialClicksField (boolean value) {
-      this.requestField("social_clicks", value);
-      return this;
-    }
     public APIRequestGetInsights requestSocialImpressionsField () {
       return this.requestSocialImpressionsField(true);
     }
     public APIRequestGetInsights requestSocialImpressionsField (boolean value) {
       this.requestField("social_impressions", value);
-      return this;
-    }
-    public APIRequestGetInsights requestSocialReachField () {
-      return this.requestSocialReachField(true);
-    }
-    public APIRequestGetInsights requestSocialReachField (boolean value) {
-      this.requestField("social_reach", value);
       return this;
     }
     public APIRequestGetInsights requestSocialSpendField () {
@@ -863,20 +873,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestTotalActionValueField (boolean value) {
       this.requestField("total_action_value", value);
-      return this;
-    }
-    public APIRequestGetInsights requestTotalActionsField () {
-      return this.requestTotalActionsField(true);
-    }
-    public APIRequestGetInsights requestTotalActionsField (boolean value) {
-      this.requestField("total_actions", value);
-      return this;
-    }
-    public APIRequestGetInsights requestTotalUniqueActionsField () {
-      return this.requestTotalUniqueActionsField(true);
-    }
-    public APIRequestGetInsights requestTotalUniqueActionsField (boolean value) {
-      this.requestField("total_unique_actions", value);
       return this;
     }
     public APIRequestGetInsights requestUniqueActionsField () {
@@ -933,13 +929,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestUniqueOutboundClicksCtrField (boolean value) {
       this.requestField("unique_outbound_clicks_ctr", value);
-      return this;
-    }
-    public APIRequestGetInsights requestUniqueSocialClicksField () {
-      return this.requestUniqueSocialClicksField(true);
-    }
-    public APIRequestGetInsights requestUniqueSocialClicksField (boolean value) {
-      this.requestField("unique_social_clicks", value);
       return this;
     }
     public APIRequestGetInsights requestVideo10SecWatchedActionsField () {
@@ -1062,6 +1051,25 @@ public class AdReportRun extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<AdReportRun> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdReportRun> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdReportRun>() {
+           public AdReportRun apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
@@ -1323,6 +1331,22 @@ public class AdReportRun extends APINode {
       VALUE_PRODUCT_ID("product_id"),
       @SerializedName("region")
       VALUE_REGION("region"),
+      @SerializedName("ad_format_asset")
+      VALUE_AD_FORMAT_ASSET("ad_format_asset"),
+      @SerializedName("body_asset")
+      VALUE_BODY_ASSET("body_asset"),
+      @SerializedName("call_to_action_asset")
+      VALUE_CALL_TO_ACTION_ASSET("call_to_action_asset"),
+      @SerializedName("description_asset")
+      VALUE_DESCRIPTION_ASSET("description_asset"),
+      @SerializedName("image_asset")
+      VALUE_IMAGE_ASSET("image_asset"),
+      @SerializedName("link_url_asset")
+      VALUE_LINK_URL_ASSET("link_url_asset"),
+      @SerializedName("title_asset")
+      VALUE_TITLE_ASSET("title_asset"),
+      @SerializedName("video_asset")
+      VALUE_VIDEO_ASSET("video_asset"),
       NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;

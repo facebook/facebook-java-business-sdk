@@ -31,6 +31,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.SettableFuture;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
@@ -85,11 +89,23 @@ public class AdStudyCell extends APINode {
     return fetchById(id.toString(), context);
   }
 
+  public static ListenableFuture<AdStudyCell> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
   public static AdStudyCell fetchById(String id, APIContext context) throws APIException {
     AdStudyCell adStudyCell =
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
+    return adStudyCell;
+  }
+
+  public static ListenableFuture<AdStudyCell> fetchByIdAsync(String id, APIContext context) throws APIException {
+    ListenableFuture<AdStudyCell> adStudyCell =
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
     return adStudyCell;
   }
 
@@ -100,6 +116,15 @@ public class AdStudyCell extends APINode {
         .requestFields(fields)
         .execute()
     );
+  }
+
+  public static ListenableFuture<APINodeList<AdStudyCell>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    ListenableFuture<APINodeList<AdStudyCell>> adStudyCell =
+      new APIRequest(context, "", "/", "GET", AdStudyCell.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+    return adStudyCell;
   }
 
   private String getPrefixedId() {
@@ -148,10 +173,19 @@ public class AdStudyCell extends APINode {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
           if (obj.has("paging")) {
-            JsonObject paging = obj.get("paging").getAsJsonObject().get("cursors").getAsJsonObject();
-            String before = paging.has("before") ? paging.get("before").getAsString() : null;
-            String after = paging.has("after") ? paging.get("after").getAsString() : null;
-            adStudyCells.setPaging(before, after);
+            JsonObject paging = obj.get("paging").getAsJsonObject();
+            if (paging.has("cursors")) {
+                JsonObject cursors = paging.get("cursors").getAsJsonObject();
+                String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
+                String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
+                adStudyCells.setCursors(before, after);
+            }
+            String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
+            String next = paging.has("next") ? paging.get("next").getAsString() : null;
+            adStudyCells.setPaging(previous, next);
+            if (context.hasAppSecret()) {
+              adStudyCells.setAppSecret(context.getAppSecretProof());
+            }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
@@ -245,6 +279,10 @@ public class AdStudyCell extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  }
+
 
   public Long getFieldAdEntitiesCount() {
     return mAdEntitiesCount;
@@ -301,6 +339,25 @@ public class AdStudyCell extends APINode {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
+
+    public ListenableFuture<AdStudyCell> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdStudyCell> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdStudyCell>() {
+           public AdStudyCell apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
 
     public APIRequestGet(String nodeId, APIContext context) {
       super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
@@ -390,6 +447,212 @@ public class AdStudyCell extends APINode {
       this.requestField("treatment_percentage", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<AdStudyCell> {
+
+    AdStudyCell lastResponse = null;
+    @Override
+    public AdStudyCell getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "adaccounts",
+      "adsets",
+      "campaigns",
+      "creation_template",
+      "description",
+      "name",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdStudyCell parseResponse(String response) throws APIException {
+      return AdStudyCell.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdStudyCell execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdStudyCell execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdStudyCell> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdStudyCell> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdStudyCell>() {
+           public AdStudyCell apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setAdaccounts (List<Long> adaccounts) {
+      this.setParam("adaccounts", adaccounts);
+      return this;
+    }
+    public APIRequestUpdate setAdaccounts (String adaccounts) {
+      this.setParam("adaccounts", adaccounts);
+      return this;
+    }
+
+    public APIRequestUpdate setAdsets (List<String> adsets) {
+      this.setParam("adsets", adsets);
+      return this;
+    }
+    public APIRequestUpdate setAdsets (String adsets) {
+      this.setParam("adsets", adsets);
+      return this;
+    }
+
+    public APIRequestUpdate setCampaigns (List<String> campaigns) {
+      this.setParam("campaigns", campaigns);
+      return this;
+    }
+    public APIRequestUpdate setCampaigns (String campaigns) {
+      this.setParam("campaigns", campaigns);
+      return this;
+    }
+
+    public APIRequestUpdate setCreationTemplate (AdStudyCell.EnumCreationTemplate creationTemplate) {
+      this.setParam("creation_template", creationTemplate);
+      return this;
+    }
+    public APIRequestUpdate setCreationTemplate (String creationTemplate) {
+      this.setParam("creation_template", creationTemplate);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static enum EnumCreationTemplate {
+      @SerializedName("AUTOMATIC_PLACEMENTS")
+      VALUE_AUTOMATIC_PLACEMENTS("AUTOMATIC_PLACEMENTS"),
+      @SerializedName("BRAND_AWARENESS")
+      VALUE_BRAND_AWARENESS("BRAND_AWARENESS"),
+      @SerializedName("FACEBOOK")
+      VALUE_FACEBOOK("FACEBOOK"),
+      @SerializedName("FACEBOOK_AUDIENCE_NETWORK")
+      VALUE_FACEBOOK_AUDIENCE_NETWORK("FACEBOOK_AUDIENCE_NETWORK"),
+      @SerializedName("FACEBOOK_INSTAGRAM")
+      VALUE_FACEBOOK_INSTAGRAM("FACEBOOK_INSTAGRAM"),
+      @SerializedName("FACEBOOK_NEWS_FEED")
+      VALUE_FACEBOOK_NEWS_FEED("FACEBOOK_NEWS_FEED"),
+      @SerializedName("FACEBOOK_NEWS_FEED_IN_STREAM_VIDEO")
+      VALUE_FACEBOOK_NEWS_FEED_IN_STREAM_VIDEO("FACEBOOK_NEWS_FEED_IN_STREAM_VIDEO"),
+      @SerializedName("IN_STREAM_VIDEO")
+      VALUE_IN_STREAM_VIDEO("IN_STREAM_VIDEO"),
+      @SerializedName("INSTAGRAM")
+      VALUE_INSTAGRAM("INSTAGRAM"),
+      @SerializedName("MOBILE_OPTIMIZED_VIDEO")
+      VALUE_MOBILE_OPTIMIZED_VIDEO("MOBILE_OPTIMIZED_VIDEO"),
+      @SerializedName("PAGE_POST_ENGAGEMENT")
+      VALUE_PAGE_POST_ENGAGEMENT("PAGE_POST_ENGAGEMENT"),
+      @SerializedName("REACH")
+      VALUE_REACH("REACH"),
+      @SerializedName("TV_COMMERCIAL")
+      VALUE_TV_COMMERCIAL("TV_COMMERCIAL"),
+      @SerializedName("TV_FACEBOOK")
+      VALUE_TV_FACEBOOK("TV_FACEBOOK"),
+      @SerializedName("VIDEO_VIEW_OPTIMIZATION")
+      VALUE_VIDEO_VIEW_OPTIMIZATION("VIDEO_VIEW_OPTIMIZATION"),
+      @SerializedName("LOW_FREQUENCY")
+      VALUE_LOW_FREQUENCY("LOW_FREQUENCY"),
+      @SerializedName("MEDIUM_FREQUENCY")
+      VALUE_MEDIUM_FREQUENCY("MEDIUM_FREQUENCY"),
+      @SerializedName("HIGH_FREQUENCY")
+      VALUE_HIGH_FREQUENCY("HIGH_FREQUENCY"),
+      NULL(null);
+
+      private String value;
+
+      private EnumCreationTemplate(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 
