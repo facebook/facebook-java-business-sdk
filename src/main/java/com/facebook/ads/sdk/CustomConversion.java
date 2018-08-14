@@ -1644,8 +1644,6 @@ public class CustomConversion extends APINode {
       VALUE_SUBMIT_APPLICATION("SUBMIT_APPLICATION"),
       @SerializedName("SUBSCRIBE")
       VALUE_SUBSCRIBE("SUBSCRIBE"),
-      @SerializedName("TAKE_SURVEY")
-      VALUE_TAKE_SURVEY("TAKE_SURVEY"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
       NULL(null);

@@ -69,6 +69,8 @@ public class ProductItem extends APINode {
   private EnumAvailability mAvailability = null;
   @SerializedName("brand")
   private String mBrand = null;
+  @SerializedName("capability_to_review_status")
+  private List<Object> mCapabilityToReviewStatus = null;
   @SerializedName("category")
   private String mCategory = null;
   @SerializedName("color")
@@ -413,6 +415,10 @@ public class ProductItem extends APINode {
 
   public String getFieldBrand() {
     return mBrand;
+  }
+
+  public List<Object> getFieldCapabilityToReviewStatus() {
+    return mCapabilityToReviewStatus;
   }
 
   public String getFieldCategory() {
@@ -876,6 +882,7 @@ public class ProductItem extends APINode {
       "applinks",
       "availability",
       "brand",
+      "capability_to_review_status",
       "category",
       "color",
       "commerce_insights",
@@ -1075,6 +1082,13 @@ public class ProductItem extends APINode {
     }
     public APIRequestGet requestBrandField (boolean value) {
       this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGet requestCapabilityToReviewStatusField () {
+      return this.requestCapabilityToReviewStatusField(true);
+    }
+    public APIRequestGet requestCapabilityToReviewStatusField (boolean value) {
+      this.requestField("capability_to_review_status", value);
       return this;
     }
     public APIRequestGet requestCategoryField () {
@@ -2099,6 +2113,7 @@ public class ProductItem extends APINode {
     this.mApplinks = instance.mApplinks;
     this.mAvailability = instance.mAvailability;
     this.mBrand = instance.mBrand;
+    this.mCapabilityToReviewStatus = instance.mCapabilityToReviewStatus;
     this.mCategory = instance.mCategory;
     this.mColor = instance.mColor;
     this.mCommerceInsights = instance.mCommerceInsights;

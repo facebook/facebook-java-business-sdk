@@ -63,6 +63,8 @@ public class BusinessRoleRequest extends APINode {
   private String mEmail = null;
   @SerializedName("expiration_time")
   private String mExpirationTime = null;
+  @SerializedName("expiry_time")
+  private String mExpiryTime = null;
   @SerializedName("finance_role")
   private String mFinanceRole = null;
   @SerializedName("id")
@@ -320,6 +322,10 @@ public class BusinessRoleRequest extends APINode {
     return mExpirationTime;
   }
 
+  public String getFieldExpiryTime() {
+    return mExpiryTime;
+  }
+
   public String getFieldFinanceRole() {
     return mFinanceRole;
   }
@@ -479,6 +485,7 @@ public class BusinessRoleRequest extends APINode {
       "created_time",
       "email",
       "expiration_time",
+      "expiry_time",
       "finance_role",
       "id",
       "invite_link",
@@ -604,6 +611,13 @@ public class BusinessRoleRequest extends APINode {
     }
     public APIRequestGet requestExpirationTimeField (boolean value) {
       this.requestField("expiration_time", value);
+      return this;
+    }
+    public APIRequestGet requestExpiryTimeField () {
+      return this.requestExpiryTimeField(true);
+    }
+    public APIRequestGet requestExpiryTimeField (boolean value) {
+      this.requestField("expiry_time", value);
       return this;
     }
     public APIRequestGet requestFinanceRoleField () {
@@ -853,6 +867,7 @@ public class BusinessRoleRequest extends APINode {
     this.mCreatedTime = instance.mCreatedTime;
     this.mEmail = instance.mEmail;
     this.mExpirationTime = instance.mExpirationTime;
+    this.mExpiryTime = instance.mExpiryTime;
     this.mFinanceRole = instance.mFinanceRole;
     this.mId = instance.mId;
     this.mInviteLink = instance.mInviteLink;

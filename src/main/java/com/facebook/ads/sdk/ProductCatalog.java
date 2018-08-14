@@ -4248,6 +4248,7 @@ public class ProductCatalog extends APINode {
     public static final String[] PARAMS = {
       "bulk_pagination",
       "filter",
+      "return_only_approved_products",
     };
 
     public static final String[] FIELDS = {
@@ -4258,6 +4259,7 @@ public class ProductCatalog extends APINode {
       "applinks",
       "availability",
       "brand",
+      "capability_to_review_status",
       "category",
       "color",
       "commerce_insights",
@@ -4374,6 +4376,15 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestGetProducts setReturnOnlyApprovedProducts (Boolean returnOnlyApprovedProducts) {
+      this.setParam("return_only_approved_products", returnOnlyApprovedProducts);
+      return this;
+    }
+    public APIRequestGetProducts setReturnOnlyApprovedProducts (String returnOnlyApprovedProducts) {
+      this.setParam("return_only_approved_products", returnOnlyApprovedProducts);
+      return this;
+    }
+
     public APIRequestGetProducts requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -4457,6 +4468,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetProducts requestBrandField (boolean value) {
       this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCapabilityToReviewStatusField () {
+      return this.requestCapabilityToReviewStatusField(true);
+    }
+    public APIRequestGetProducts requestCapabilityToReviewStatusField (boolean value) {
+      this.requestField("capability_to_review_status", value);
       return this;
     }
     public APIRequestGetProducts requestCategoryField () {
@@ -5612,6 +5630,7 @@ public class ProductCatalog extends APINode {
       "upload_phase",
       "upload_session_id",
       "video_file_chunk",
+      "xpost_everstore_handle",
     };
 
     public static final String[] FIELDS = {
@@ -5896,6 +5915,11 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateVideo setVideoFileChunk (String videoFileChunk) {
       this.setParam("video_file_chunk", videoFileChunk);
+      return this;
+    }
+
+    public APIRequestCreateVideo setXpostEverstoreHandle (String xpostEverstoreHandle) {
+      this.setParam("xpost_everstore_handle", xpostEverstoreHandle);
       return this;
     }
 

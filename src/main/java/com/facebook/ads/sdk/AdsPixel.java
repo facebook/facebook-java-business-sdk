@@ -400,6 +400,7 @@ public class AdsPixel extends APINode {
       "retention_days",
       "rule",
       "rule_aggregation",
+      "sharing_status",
       "subtype",
       "time_content_updated",
       "time_created",
@@ -630,6 +631,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAudiences requestRuleAggregationField (boolean value) {
       this.requestField("rule_aggregation", value);
+      return this;
+    }
+    public APIRequestGetAudiences requestSharingStatusField () {
+      return this.requestSharingStatusField(true);
+    }
+    public APIRequestGetAudiences requestSharingStatusField (boolean value) {
+      this.requestField("sharing_status", value);
       return this;
     }
     public APIRequestGetAudiences requestSubtypeField () {

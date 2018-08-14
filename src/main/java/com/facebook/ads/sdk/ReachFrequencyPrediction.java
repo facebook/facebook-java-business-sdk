@@ -111,6 +111,8 @@ public class ReachFrequencyPrediction extends APINode {
   private Long mIntervalFrequencyCap = null;
   @SerializedName("interval_frequency_cap_reset_period")
   private Long mIntervalFrequencyCapResetPeriod = null;
+  @SerializedName("is_io")
+  private Boolean mIsIo = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("pause_periods")
@@ -462,6 +464,10 @@ public class ReachFrequencyPrediction extends APINode {
     return mIntervalFrequencyCapResetPeriod;
   }
 
+  public Boolean getFieldIsIo() {
+    return mIsIo;
+  }
+
   public String getFieldName() {
     return mName;
   }
@@ -551,6 +557,7 @@ public class ReachFrequencyPrediction extends APINode {
       "instagram_destination_id",
       "interval_frequency_cap",
       "interval_frequency_cap_reset_period",
+      "is_io",
       "name",
       "pause_periods",
       "placement_breakdown",
@@ -849,6 +856,13 @@ public class ReachFrequencyPrediction extends APINode {
       this.requestField("interval_frequency_cap_reset_period", value);
       return this;
     }
+    public APIRequestGet requestIsIoField () {
+      return this.requestIsIoField(true);
+    }
+    public APIRequestGet requestIsIoField (boolean value) {
+      this.requestField("is_io", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -1028,6 +1042,7 @@ public class ReachFrequencyPrediction extends APINode {
     this.mInstagramDestinationId = instance.mInstagramDestinationId;
     this.mIntervalFrequencyCap = instance.mIntervalFrequencyCap;
     this.mIntervalFrequencyCapResetPeriod = instance.mIntervalFrequencyCapResetPeriod;
+    this.mIsIo = instance.mIsIo;
     this.mName = instance.mName;
     this.mPausePeriods = instance.mPausePeriods;
     this.mPlacementBreakdown = instance.mPlacementBreakdown;

@@ -101,6 +101,8 @@ public class AdSet extends APINode {
   private String mId = null;
   @SerializedName("instagram_actor_id")
   private String mInstagramActorId = null;
+  @SerializedName("is_dynamic_creative_optimization")
+  private Boolean mIsDynamicCreativeOptimization = null;
   @SerializedName("lifetime_budget")
   private String mLifetimeBudget = null;
   @SerializedName("lifetime_imps")
@@ -646,6 +648,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldInstagramActorId(String value) {
     this.mInstagramActorId = value;
+    return this;
+  }
+
+  public Boolean getFieldIsDynamicCreativeOptimization() {
+    return mIsDynamicCreativeOptimization;
+  }
+
+  public AdSet setFieldIsDynamicCreativeOptimization(Boolean value) {
+    this.mIsDynamicCreativeOptimization = value;
     return this;
   }
 
@@ -2502,6 +2513,7 @@ public class AdSet extends APINode {
       "frequency_control_specs",
       "id",
       "instagram_actor_id",
+      "is_dynamic_creative_optimization",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -2808,6 +2820,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestIsDynamicCreativeOptimizationField () {
+      return this.requestIsDynamicCreativeOptimizationField(true);
+    }
+    public APIRequestGetCopies requestIsDynamicCreativeOptimizationField (boolean value) {
+      this.requestField("is_dynamic_creative_optimization", value);
       return this;
     }
     public APIRequestGetCopies requestLifetimeBudgetField () {
@@ -3970,6 +3989,7 @@ public class AdSet extends APINode {
       "frequency_control_specs",
       "id",
       "instagram_actor_id",
+      "is_dynamic_creative_optimization",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -4240,6 +4260,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGet requestIsDynamicCreativeOptimizationField () {
+      return this.requestIsDynamicCreativeOptimizationField(true);
+    }
+    public APIRequestGet requestIsDynamicCreativeOptimizationField (boolean value) {
+      this.requestField("is_dynamic_creative_optimization", value);
       return this;
     }
     public APIRequestGet requestLifetimeBudgetField () {
@@ -5112,6 +5139,7 @@ public class AdSet extends APINode {
     this.mFrequencyControlSpecs = instance.mFrequencyControlSpecs;
     this.mId = instance.mId;
     this.mInstagramActorId = instance.mInstagramActorId;
+    this.mIsDynamicCreativeOptimization = instance.mIsDynamicCreativeOptimization;
     this.mLifetimeBudget = instance.mLifetimeBudget;
     this.mLifetimeImps = instance.mLifetimeImps;
     this.mLifetimeMinSpendTarget = instance.mLifetimeMinSpendTarget;

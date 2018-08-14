@@ -5243,6 +5243,7 @@ public class AdAccount extends APINode {
       "frequency_control_specs",
       "id",
       "instagram_actor_id",
+      "is_dynamic_creative_optimization",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -5556,6 +5557,13 @@ public class AdAccount extends APINode {
       this.requestField("instagram_actor_id", value);
       return this;
     }
+    public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField () {
+      return this.requestIsDynamicCreativeOptimizationField(true);
+    }
+    public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField (boolean value) {
+      this.requestField("is_dynamic_creative_optimization", value);
+      return this;
+    }
     public APIRequestGetAdSets requestLifetimeBudgetField () {
       return this.requestLifetimeBudgetField(true);
     }
@@ -5730,6 +5738,7 @@ public class AdAccount extends APINode {
       "end_time",
       "execution_options",
       "frequency_control_specs",
+      "is_dynamic_creative_optimization",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -5946,6 +5955,15 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdSet setIsDynamicCreativeOptimization (Boolean isDynamicCreativeOptimization) {
+      this.setParam("is_dynamic_creative_optimization", isDynamicCreativeOptimization);
+      return this;
+    }
+    public APIRequestCreateAdSet setIsDynamicCreativeOptimization (String isDynamicCreativeOptimization) {
+      this.setParam("is_dynamic_creative_optimization", isDynamicCreativeOptimization);
+      return this;
+    }
+
     public APIRequestCreateAdSet setLifetimeBudget (Long lifetimeBudget) {
       this.setParam("lifetime_budget", lifetimeBudget);
       return this;
@@ -6134,6 +6152,7 @@ public class AdAccount extends APINode {
       "frequency_control_specs",
       "id",
       "instagram_actor_id",
+      "is_dynamic_creative_optimization",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -6422,6 +6441,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGetAdSetsByLabels requestIsDynamicCreativeOptimizationField () {
+      return this.requestIsDynamicCreativeOptimizationField(true);
+    }
+    public APIRequestGetAdSetsByLabels requestIsDynamicCreativeOptimizationField (boolean value) {
+      this.requestField("is_dynamic_creative_optimization", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestLifetimeBudgetField () {
@@ -7205,6 +7231,7 @@ public class AdAccount extends APINode {
       "upload_phase",
       "upload_session_id",
       "video_file_chunk",
+      "xpost_everstore_handle",
       "file",
     };
 
@@ -7471,6 +7498,11 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdVideo setVideoFileChunk (byte[] videoFileChunk) {
       this.setParam("video_file_chunk", videoFileChunk);
+      return this;
+    }
+
+    public APIRequestCreateAdVideo setXpostEverstoreHandle (String xpostEverstoreHandle) {
+      this.setParam("xpost_everstore_handle", xpostEverstoreHandle);
       return this;
     }
 
@@ -13657,6 +13689,7 @@ public class AdAccount extends APINode {
       "instagram_destination_id",
       "interval_frequency_cap",
       "interval_frequency_cap_reset_period",
+      "is_io",
       "name",
       "pause_periods",
       "placement_breakdown",
@@ -13953,6 +13986,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetReachFrequencyPredictions requestIntervalFrequencyCapResetPeriodField (boolean value) {
       this.requestField("interval_frequency_cap_reset_period", value);
+      return this;
+    }
+    public APIRequestGetReachFrequencyPredictions requestIsIoField () {
+      return this.requestIsIoField(true);
+    }
+    public APIRequestGetReachFrequencyPredictions requestIsIoField (boolean value) {
+      this.requestField("is_io", value);
       return this;
     }
     public APIRequestGetReachFrequencyPredictions requestNameField () {

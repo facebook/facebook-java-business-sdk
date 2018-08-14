@@ -8519,6 +8519,7 @@ public class Page extends APINode {
       "questions",
       "thank_you_page",
       "thank_you_page_id",
+      "tracking_parameters",
     };
 
     public static final String[] FIELDS = {
@@ -8709,6 +8710,15 @@ public class Page extends APINode {
     }
     public APIRequestCreateLeadGenForm setThankYouPageId (String thankYouPageId) {
       this.setParam("thank_you_page_id", thankYouPageId);
+      return this;
+    }
+
+    public APIRequestCreateLeadGenForm setTrackingParameters (Object trackingParameters) {
+      this.setParam("tracking_parameters", trackingParameters);
+      return this;
+    }
+    public APIRequestCreateLeadGenForm setTrackingParameters (String trackingParameters) {
+      this.setParam("tracking_parameters", trackingParameters);
       return this;
     }
 
@@ -12987,7 +12997,6 @@ public class Page extends APINode {
       "message",
       "messaging_type",
       "notification_type",
-      "persona_id",
       "recipient",
       "sender_action",
       "tag",
@@ -13072,15 +13081,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateMessage setNotificationType (String notificationType) {
       this.setParam("notification_type", notificationType);
-      return this;
-    }
-
-    public APIRequestCreateMessage setPersonaId (Object personaId) {
-      this.setParam("persona_id", personaId);
-      return this;
-    }
-    public APIRequestCreateMessage setPersonaId (String personaId) {
-      this.setParam("persona_id", personaId);
       return this;
     }
 
@@ -23136,6 +23136,7 @@ public class Page extends APINode {
       "initial_heading",
       "initial_pitch",
       "is_voice_clip",
+      "multilingual_data",
       "no_story",
       "original_fov",
       "original_projection_type",
@@ -23149,6 +23150,7 @@ public class Page extends APINode {
       "slideshow_spec",
       "social_actions",
       "source",
+      "specified_dialect",
       "spherical",
       "sponsor_id",
       "sponsor_relationship",
@@ -23162,6 +23164,7 @@ public class Page extends APINode {
       "upload_phase",
       "upload_session_id",
       "video_file_chunk",
+      "xpost_everstore_handle",
     };
 
     public static final String[] FIELDS = {
@@ -23410,6 +23413,15 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setMultilingualData (List<Object> multilingualData) {
+      this.setParam("multilingual_data", multilingualData);
+      return this;
+    }
+    public APIRequestCreateVideo setMultilingualData (String multilingualData) {
+      this.setParam("multilingual_data", multilingualData);
+      return this;
+    }
+
     public APIRequestCreateVideo setNoStory (Boolean noStory) {
       this.setParam("no_story", noStory);
       return this;
@@ -23511,6 +23523,11 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setSpecifiedDialect (String specifiedDialect) {
+      this.setParam("specified_dialect", specifiedDialect);
+      return this;
+    }
+
     public APIRequestCreateVideo setSpherical (Boolean spherical) {
       this.setParam("spherical", spherical);
       return this;
@@ -23605,6 +23622,11 @@ public class Page extends APINode {
 
     public APIRequestCreateVideo setVideoFileChunk (String videoFileChunk) {
       this.setParam("video_file_chunk", videoFileChunk);
+      return this;
+    }
+
+    public APIRequestCreateVideo setXpostEverstoreHandle (String xpostEverstoreHandle) {
+      this.setParam("xpost_everstore_handle", xpostEverstoreHandle);
       return this;
     }
 
@@ -25485,8 +25507,10 @@ public class Page extends APINode {
     }
     public static final String[] PARAMS = {
       "about",
+      "accept_crossposting_handshake",
       "allow_spherical_photo",
       "attire",
+      "begin_crossposting_handshake",
       "bio",
       "category_list",
       "company_overview",
@@ -25596,6 +25620,15 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setAcceptCrosspostingHandshake (List<Map<String, String>> acceptCrosspostingHandshake) {
+      this.setParam("accept_crossposting_handshake", acceptCrosspostingHandshake);
+      return this;
+    }
+    public APIRequestUpdate setAcceptCrosspostingHandshake (String acceptCrosspostingHandshake) {
+      this.setParam("accept_crossposting_handshake", acceptCrosspostingHandshake);
+      return this;
+    }
+
     public APIRequestUpdate setAllowSphericalPhoto (Boolean allowSphericalPhoto) {
       this.setParam("allow_spherical_photo", allowSphericalPhoto);
       return this;
@@ -25611,6 +25644,15 @@ public class Page extends APINode {
     }
     public APIRequestUpdate setAttire (String attire) {
       this.setParam("attire", attire);
+      return this;
+    }
+
+    public APIRequestUpdate setBeginCrosspostingHandshake (List<Map<String, String>> beginCrosspostingHandshake) {
+      this.setParam("begin_crossposting_handshake", beginCrosspostingHandshake);
+      return this;
+    }
+    public APIRequestUpdate setBeginCrosspostingHandshake (String beginCrosspostingHandshake) {
+      this.setParam("begin_crossposting_handshake", beginCrosspostingHandshake);
       return this;
     }
 

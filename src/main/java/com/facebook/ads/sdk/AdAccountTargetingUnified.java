@@ -422,6 +422,10 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_AUDIENCE_NETWORK_POSITIONS("audience_network_positions"),
       @SerializedName("effective_audience_network_positions")
       VALUE_EFFECTIVE_AUDIENCE_NETWORK_POSITIONS("effective_audience_network_positions"),
+      @SerializedName("whatsapp_positions")
+      VALUE_WHATSAPP_POSITIONS("whatsapp_positions"),
+      @SerializedName("effective_whatsapp_positions")
+      VALUE_EFFECTIVE_WHATSAPP_POSITIONS("effective_whatsapp_positions"),
       @SerializedName("excluded_publisher_categories")
       VALUE_EXCLUDED_PUBLISHER_CATEGORIES("excluded_publisher_categories"),
       @SerializedName("excluded_publisher_list_ids")

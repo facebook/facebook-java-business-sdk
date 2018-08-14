@@ -59,8 +59,12 @@ public class SystemUser extends APINode {
   private User mCreatedBy = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
+  @SerializedName("finance_permission")
+  private String mFinancePermission = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("ip_permission")
+  private String mIpPermission = null;
   @SerializedName("name")
   private String mName = null;
   protected static Gson gson = null;
@@ -293,8 +297,16 @@ public class SystemUser extends APINode {
     return mCreatedTime;
   }
 
+  public String getFieldFinancePermission() {
+    return mFinancePermission;
+  }
+
   public String getFieldId() {
     return mId;
+  }
+
+  public String getFieldIpPermission() {
+    return mIpPermission;
   }
 
   public String getFieldName() {
@@ -316,7 +328,9 @@ public class SystemUser extends APINode {
     public static final String[] FIELDS = {
       "created_by",
       "created_time",
+      "finance_permission",
       "id",
+      "ip_permission",
       "name",
     };
 
@@ -422,11 +436,25 @@ public class SystemUser extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGet requestFinancePermissionField () {
+      return this.requestFinancePermissionField(true);
+    }
+    public APIRequestGet requestFinancePermissionField (boolean value) {
+      this.requestField("finance_permission", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIpPermissionField () {
+      return this.requestIpPermissionField(true);
+    }
+    public APIRequestGet requestIpPermissionField (boolean value) {
+      this.requestField("ip_permission", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -591,7 +619,9 @@ public class SystemUser extends APINode {
   public SystemUser copyFrom(SystemUser instance) {
     this.mCreatedBy = instance.mCreatedBy;
     this.mCreatedTime = instance.mCreatedTime;
+    this.mFinancePermission = instance.mFinancePermission;
     this.mId = instance.mId;
+    this.mIpPermission = instance.mIpPermission;
     this.mName = instance.mName;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

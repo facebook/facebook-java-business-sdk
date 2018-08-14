@@ -683,6 +683,7 @@ public class BusinessUser extends APINode {
       "email",
       "first_name",
       "last_name",
+      "pending_email",
       "role",
       "title",
     };
@@ -763,6 +764,11 @@ public class BusinessUser extends APINode {
 
     public APIRequestUpdate setLastName (String lastName) {
       this.setParam("last_name", lastName);
+      return this;
+    }
+
+    public APIRequestUpdate setPendingEmail (String pendingEmail) {
+      this.setParam("pending_email", pendingEmail);
       return this;
     }
 

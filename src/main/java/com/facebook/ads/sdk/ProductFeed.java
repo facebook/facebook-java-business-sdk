@@ -413,6 +413,7 @@ public class ProductFeed extends APINode {
       "applinks",
       "availability",
       "brand",
+      "capability_to_review_status",
       "category",
       "color",
       "commerce_insights",
@@ -612,6 +613,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestBrandField (boolean value) {
       this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCapabilityToReviewStatusField () {
+      return this.requestCapabilityToReviewStatusField(true);
+    }
+    public APIRequestGetProducts requestCapabilityToReviewStatusField (boolean value) {
+      this.requestField("capability_to_review_status", value);
       return this;
     }
     public APIRequestGetProducts requestCategoryField () {

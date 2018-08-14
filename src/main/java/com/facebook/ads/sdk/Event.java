@@ -1242,6 +1242,7 @@ public class Event extends APINode {
       "upload_phase",
       "upload_session_id",
       "video_file_chunk",
+      "xpost_everstore_handle",
     };
 
     public static final String[] FIELDS = {
@@ -1526,6 +1527,11 @@ public class Event extends APINode {
 
     public APIRequestCreateVideo setVideoFileChunk (String videoFileChunk) {
       this.setParam("video_file_chunk", videoFileChunk);
+      return this;
+    }
+
+    public APIRequestCreateVideo setXpostEverstoreHandle (String xpostEverstoreHandle) {
+      this.setParam("xpost_everstore_handle", xpostEverstoreHandle);
       return this;
     }
 

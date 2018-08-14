@@ -8896,6 +8896,7 @@ public class Business extends APINode {
       "instagram_destination_id",
       "interval_frequency_cap",
       "interval_frequency_cap_reset_period",
+      "is_io",
       "name",
       "pause_periods",
       "placement_breakdown",
@@ -9201,6 +9202,13 @@ public class Business extends APINode {
     }
     public APIRequestGetGrpPlans requestIntervalFrequencyCapResetPeriodField (boolean value) {
       this.requestField("interval_frequency_cap_reset_period", value);
+      return this;
+    }
+    public APIRequestGetGrpPlans requestIsIoField () {
+      return this.requestIsIoField(true);
+    }
+    public APIRequestGetGrpPlans requestIsIoField (boolean value) {
+      this.requestField("is_io", value);
       return this;
     }
     public APIRequestGetGrpPlans requestNameField () {
@@ -14688,6 +14696,7 @@ public class Business extends APINode {
       "created_time",
       "email",
       "expiration_time",
+      "expiry_time",
       "finance_role",
       "id",
       "invite_link",
@@ -14818,6 +14827,13 @@ public class Business extends APINode {
     }
     public APIRequestGetPendingUsers requestExpirationTimeField (boolean value) {
       this.requestField("expiration_time", value);
+      return this;
+    }
+    public APIRequestGetPendingUsers requestExpiryTimeField () {
+      return this.requestExpiryTimeField(true);
+    }
+    public APIRequestGetPendingUsers requestExpiryTimeField (boolean value) {
+      this.requestField("expiry_time", value);
       return this;
     }
     public APIRequestGetPendingUsers requestFinanceRoleField () {
@@ -15379,7 +15395,9 @@ public class Business extends APINode {
     public static final String[] FIELDS = {
       "created_by",
       "created_time",
+      "finance_permission",
       "id",
+      "ip_permission",
       "name",
     };
 
@@ -15485,11 +15503,25 @@ public class Business extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetSystemUsers requestFinancePermissionField () {
+      return this.requestFinancePermissionField(true);
+    }
+    public APIRequestGetSystemUsers requestFinancePermissionField (boolean value) {
+      this.requestField("finance_permission", value);
+      return this;
+    }
     public APIRequestGetSystemUsers requestIdField () {
       return this.requestIdField(true);
     }
     public APIRequestGetSystemUsers requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetSystemUsers requestIpPermissionField () {
+      return this.requestIpPermissionField(true);
+    }
+    public APIRequestGetSystemUsers requestIpPermissionField (boolean value) {
+      this.requestField("ip_permission", value);
       return this;
     }
     public APIRequestGetSystemUsers requestNameField () {
@@ -15553,7 +15585,7 @@ public class Business extends APINode {
     };
 
     public APIRequestCreateSystemUser(String nodeId, APIContext context) {
-      super(context, nodeId, "/systemusers", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/system_users", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
@@ -15756,6 +15788,7 @@ public class Business extends APINode {
       "created_time",
       "email",
       "expiration_time",
+      "expiry_time",
       "finance_role",
       "id",
       "invite_link",
@@ -15895,6 +15928,13 @@ public class Business extends APINode {
     }
     public APIRequestGetUserInvitations requestExpirationTimeField (boolean value) {
       this.requestField("expiration_time", value);
+      return this;
+    }
+    public APIRequestGetUserInvitations requestExpiryTimeField () {
+      return this.requestExpiryTimeField(true);
+    }
+    public APIRequestGetUserInvitations requestExpiryTimeField (boolean value) {
+      this.requestField("expiry_time", value);
       return this;
     }
     public APIRequestGetUserInvitations requestFinanceRoleField () {
@@ -16637,6 +16677,10 @@ public class Business extends APINode {
       VALUE_FB_AD_NETWORK_BIDDING_REQUEST("FB_AD_NETWORK_BIDDING_REQUEST"),
       @SerializedName("FB_AD_NETWORK_BIDDING_RESPONSE")
       VALUE_FB_AD_NETWORK_BIDDING_RESPONSE("FB_AD_NETWORK_BIDDING_RESPONSE"),
+      @SerializedName("FB_AD_NETWORK_BIDDING_BID_RATE")
+      VALUE_FB_AD_NETWORK_BIDDING_BID_RATE("FB_AD_NETWORK_BIDDING_BID_RATE"),
+      @SerializedName("FB_AD_NETWORK_BIDDING_WIN_RATE")
+      VALUE_FB_AD_NETWORK_BIDDING_WIN_RATE("FB_AD_NETWORK_BIDDING_WIN_RATE"),
       @SerializedName("FB_AD_NETWORK_REQUEST")
       VALUE_FB_AD_NETWORK_REQUEST("FB_AD_NETWORK_REQUEST"),
       @SerializedName("FB_AD_NETWORK_FILLED_REQUEST")

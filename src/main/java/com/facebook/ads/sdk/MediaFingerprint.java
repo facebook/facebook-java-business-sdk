@@ -63,6 +63,8 @@ public class MediaFingerprint extends APINode {
   private String mFingerprintContentType = null;
   @SerializedName("fingerprint_type")
   private String mFingerprintType = null;
+  @SerializedName("fingerprint_validity")
+  private String mFingerprintValidity = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("metadata")
@@ -310,6 +312,10 @@ public class MediaFingerprint extends APINode {
     return mFingerprintType;
   }
 
+  public String getFieldFingerprintValidity() {
+    return mFingerprintValidity;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -446,6 +452,7 @@ public class MediaFingerprint extends APINode {
       "expiration_time",
       "fingerprint_content_type",
       "fingerprint_type",
+      "fingerprint_validity",
       "id",
       "metadata",
       "title",
@@ -566,6 +573,13 @@ public class MediaFingerprint extends APINode {
     }
     public APIRequestGet requestFingerprintTypeField (boolean value) {
       this.requestField("fingerprint_type", value);
+      return this;
+    }
+    public APIRequestGet requestFingerprintValidityField () {
+      return this.requestFingerprintValidityField(true);
+    }
+    public APIRequestGet requestFingerprintValidityField (boolean value) {
+      this.requestField("fingerprint_validity", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -767,6 +781,7 @@ public class MediaFingerprint extends APINode {
     this.mExpirationTime = instance.mExpirationTime;
     this.mFingerprintContentType = instance.mFingerprintContentType;
     this.mFingerprintType = instance.mFingerprintType;
+    this.mFingerprintValidity = instance.mFingerprintValidity;
     this.mId = instance.mId;
     this.mMetadata = instance.mMetadata;
     this.mTitle = instance.mTitle;

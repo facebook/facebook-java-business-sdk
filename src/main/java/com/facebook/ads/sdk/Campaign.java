@@ -1290,6 +1290,7 @@ public class Campaign extends APINode {
       "frequency_control_specs",
       "id",
       "instagram_actor_id",
+      "is_dynamic_creative_optimization",
       "lifetime_budget",
       "lifetime_imps",
       "lifetime_min_spend_target",
@@ -1601,6 +1602,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField () {
+      return this.requestIsDynamicCreativeOptimizationField(true);
+    }
+    public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField (boolean value) {
+      this.requestField("is_dynamic_creative_optimization", value);
       return this;
     }
     public APIRequestGetAdSets requestLifetimeBudgetField () {

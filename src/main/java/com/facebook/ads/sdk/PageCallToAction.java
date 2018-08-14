@@ -979,6 +979,8 @@ public class PageCallToAction extends APINode {
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("EMAIL")
       VALUE_EMAIL("EMAIL"),
+      @SerializedName("SHOP_ON_FACEBOOK")
+      VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       NULL(null);
@@ -1008,6 +1010,8 @@ public class PageCallToAction extends APINode {
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("EMAIL")
       VALUE_EMAIL("EMAIL"),
+      @SerializedName("SHOP_ON_FACEBOOK")
+      VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       NULL(null);
@@ -1071,6 +1075,8 @@ public class PageCallToAction extends APINode {
       VALUE_PLAY_MUSIC("PLAY_MUSIC"),
       @SerializedName("VISIT_GROUP")
       VALUE_VISIT_GROUP("VISIT_GROUP"),
+      @SerializedName("SHOP_ON_FACEBOOK")
+      VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
       NULL(null);
 
       private String value;
@@ -1094,6 +1100,8 @@ public class PageCallToAction extends APINode {
       VALUE_NONE("NONE"),
       @SerializedName("WEBSITE")
       VALUE_WEBSITE("WEBSITE"),
+      @SerializedName("SHOP_ON_FACEBOOK")
+      VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
       NULL(null);
 
       private String value;

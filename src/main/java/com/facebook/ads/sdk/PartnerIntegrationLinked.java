@@ -59,6 +59,8 @@ public class PartnerIntegrationLinked extends APINode {
   private AdsPixel mAdsPixel = null;
   @SerializedName("application")
   private Object mApplication = null;
+  @SerializedName("completed_integration_types")
+  private List<String> mCompletedIntegrationTypes = null;
   @SerializedName("external_id")
   private String mExternalId = null;
   @SerializedName("has_oauth_token")
@@ -303,6 +305,10 @@ public class PartnerIntegrationLinked extends APINode {
     return mApplication;
   }
 
+  public List<String> getFieldCompletedIntegrationTypes() {
+    return mCompletedIntegrationTypes;
+  }
+
   public String getFieldExternalId() {
     return mExternalId;
   }
@@ -360,6 +366,7 @@ public class PartnerIntegrationLinked extends APINode {
     public static final String[] FIELDS = {
       "ads_pixel",
       "application",
+      "completed_integration_types",
       "external_id",
       "has_oauth_token",
       "id",
@@ -473,6 +480,13 @@ public class PartnerIntegrationLinked extends APINode {
       this.requestField("application", value);
       return this;
     }
+    public APIRequestGet requestCompletedIntegrationTypesField () {
+      return this.requestCompletedIntegrationTypesField(true);
+    }
+    public APIRequestGet requestCompletedIntegrationTypesField (boolean value) {
+      this.requestField("completed_integration_types", value);
+      return this;
+    }
     public APIRequestGet requestExternalIdField () {
       return this.requestExternalIdField(true);
     }
@@ -555,6 +569,7 @@ public class PartnerIntegrationLinked extends APINode {
   public PartnerIntegrationLinked copyFrom(PartnerIntegrationLinked instance) {
     this.mAdsPixel = instance.mAdsPixel;
     this.mApplication = instance.mApplication;
+    this.mCompletedIntegrationTypes = instance.mCompletedIntegrationTypes;
     this.mExternalId = instance.mExternalId;
     this.mHasOauthToken = instance.mHasOauthToken;
     this.mId = instance.mId;

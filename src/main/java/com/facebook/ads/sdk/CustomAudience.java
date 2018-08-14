@@ -84,7 +84,7 @@ public class CustomAudience extends APINode {
   @SerializedName("opt_out_link")
   private String mOptOutLink = null;
   @SerializedName("permission_for_actions")
-  private CustomAudiencePermission mPermissionForActions = null;
+  private Object mPermissionForActions = null;
   @SerializedName("pixel_id")
   private String mPixelId = null;
   @SerializedName("retention_days")
@@ -93,6 +93,8 @@ public class CustomAudience extends APINode {
   private String mRule = null;
   @SerializedName("rule_aggregation")
   private String mRuleAggregation = null;
+  @SerializedName("sharing_status")
+  private CustomAudienceSharingStatus mSharingStatus = null;
   @SerializedName("subtype")
   private String mSubtype = null;
   @SerializedName("time_content_updated")
@@ -415,7 +417,7 @@ public class CustomAudience extends APINode {
     return mOptOutLink;
   }
 
-  public CustomAudiencePermission getFieldPermissionForActions() {
+  public Object getFieldPermissionForActions() {
     return mPermissionForActions;
   }
 
@@ -433,6 +435,10 @@ public class CustomAudience extends APINode {
 
   public String getFieldRuleAggregation() {
     return mRuleAggregation;
+  }
+
+  public CustomAudienceSharingStatus getFieldSharingStatus() {
+    return mSharingStatus;
   }
 
   public String getFieldSubtype() {
@@ -2258,6 +2264,7 @@ public class CustomAudience extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "ad_account_id",
     };
 
     public static final String[] FIELDS = {
@@ -2280,6 +2287,7 @@ public class CustomAudience extends APINode {
       "retention_days",
       "rule",
       "rule_aggregation",
+      "sharing_status",
       "subtype",
       "time_content_updated",
       "time_created",
@@ -2337,6 +2345,11 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setAdAccountId (String adAccountId) {
+      this.setParam("ad_account_id", adAccountId);
+      return this;
+    }
 
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);
@@ -2505,6 +2518,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestRuleAggregationField (boolean value) {
       this.requestField("rule_aggregation", value);
+      return this;
+    }
+    public APIRequestGet requestSharingStatusField () {
+      return this.requestSharingStatusField(true);
+    }
+    public APIRequestGet requestSharingStatusField (boolean value) {
+      this.requestField("sharing_status", value);
       return this;
     }
     public APIRequestGet requestSubtypeField () {
@@ -2774,6 +2794,8 @@ public class CustomAudience extends APINode {
   }
 
   public static enum EnumContentType {
+      @SerializedName("AUTOMOTIVE_MODEL")
+      VALUE_AUTOMOTIVE_MODEL("AUTOMOTIVE_MODEL"),
       @SerializedName("DESTINATION")
       VALUE_DESTINATION("DESTINATION"),
       @SerializedName("FLIGHT")
@@ -2871,8 +2893,6 @@ public class CustomAudience extends APINode {
   public static enum EnumFields {
       @SerializedName("account_id")
       VALUE_ACCOUNT_ID("account_id"),
-      @SerializedName("approximate_count")
-      VALUE_APPROXIMATE_COUNT("approximate_count"),
       @SerializedName("customer_file_source")
       VALUE_CUSTOMER_FILE_SOURCE("customer_file_source"),
       @SerializedName("data_source")
@@ -2885,6 +2905,8 @@ public class CustomAudience extends APINode {
       VALUE_EXTERNAL_EVENT_SOURCE("external_event_source"),
       @SerializedName("id")
       VALUE_ID("id"),
+      @SerializedName("approximate_count")
+      VALUE_APPROXIMATE_COUNT("approximate_count"),
       @SerializedName("is_value_based")
       VALUE_IS_VALUE_BASED("is_value_based"),
       @SerializedName("lookalike_audience_ids")
@@ -2907,6 +2929,8 @@ public class CustomAudience extends APINode {
       VALUE_RULE("rule"),
       @SerializedName("rule_aggregation")
       VALUE_RULE_AGGREGATION("rule_aggregation"),
+      @SerializedName("sharing_status")
+      VALUE_SHARING_STATUS("sharing_status"),
       @SerializedName("subtype")
       VALUE_SUBTYPE("subtype"),
       @SerializedName("time_content_updated")
@@ -2963,6 +2987,7 @@ public class CustomAudience extends APINode {
     this.mRetentionDays = instance.mRetentionDays;
     this.mRule = instance.mRule;
     this.mRuleAggregation = instance.mRuleAggregation;
+    this.mSharingStatus = instance.mSharingStatus;
     this.mSubtype = instance.mSubtype;
     this.mTimeContentUpdated = instance.mTimeContentUpdated;
     this.mTimeCreated = instance.mTimeCreated;

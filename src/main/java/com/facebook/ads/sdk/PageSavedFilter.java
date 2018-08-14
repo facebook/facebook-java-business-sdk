@@ -476,6 +476,8 @@ public class PageSavedFilter extends APINode {
   public static enum EnumSection {
       @SerializedName("AUDIENCE_ALERTS")
       VALUE_AUDIENCE_ALERTS("AUDIENCE_ALERTS"),
+      @SerializedName("CAMPAIGN_CENTER")
+      VALUE_CAMPAIGN_CENTER("CAMPAIGN_CENTER"),
       @SerializedName("CHEX_PENDING_ORDERS")
       VALUE_CHEX_PENDING_ORDERS("CHEX_PENDING_ORDERS"),
       @SerializedName("CHEX_COMPLETED_ORDERS")

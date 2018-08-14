@@ -374,6 +374,12 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
       VALUE_FREE_SHIPPING("free_shipping"),
       @SerializedName("inventory")
       VALUE_INVENTORY("inventory"),
+      @SerializedName("pay_on_arrival")
+      VALUE_PAY_ON_ARRIVAL("pay_on_arrival"),
+      @SerializedName("pay_at_hotel")
+      VALUE_PAY_AT_HOTEL("pay_at_hotel"),
+      @SerializedName("fast_delivery")
+      VALUE_FAST_DELIVERY("fast_delivery"),
       NULL(null);
 
       private String value;
