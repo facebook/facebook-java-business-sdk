@@ -61,13 +61,74 @@ public class CustomAudienceDataSource extends APINode {
   private EnumSubType mSubType = null;
   @SerializedName("type")
   private EnumType mType = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public CustomAudienceDataSource() {
+  CustomAudienceDataSource() {
+  }
+
+  public CustomAudienceDataSource(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public CustomAudienceDataSource(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public CustomAudienceDataSource fetch() throws APIException{
+    CustomAudienceDataSource newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static CustomAudienceDataSource fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<CustomAudienceDataSource> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static CustomAudienceDataSource fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<CustomAudienceDataSource> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<CustomAudienceDataSource> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CustomAudienceDataSource>)(
+      new APIRequest<CustomAudienceDataSource>(context, "", "/", "GET", CustomAudienceDataSource.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<CustomAudienceDataSource>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", CustomAudienceDataSource.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static CustomAudienceDataSource loadJSON(String json, APIContext context) {
     CustomAudienceDataSource customAudienceDataSource = getGson().fromJson(json, CustomAudienceDataSource.class);
@@ -210,35 +271,163 @@ public class CustomAudienceDataSource extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldCreationParams() {
     return mCreationParams;
-  }
-
-  public CustomAudienceDataSource setFieldCreationParams(String value) {
-    this.mCreationParams = value;
-    return this;
   }
 
   public EnumSubType getFieldSubType() {
     return mSubType;
   }
 
-  public CustomAudienceDataSource setFieldSubType(EnumSubType value) {
-    this.mSubType = value;
-    return this;
-  }
-
   public EnumType getFieldType() {
     return mType;
   }
 
-  public CustomAudienceDataSource setFieldType(EnumType value) {
-    this.mType = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<CustomAudienceDataSource> {
+
+    CustomAudienceDataSource lastResponse = null;
+    @Override
+    public CustomAudienceDataSource getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "creation_params",
+      "sub_type",
+      "type",
+      "id",
+    };
+
+    @Override
+    public CustomAudienceDataSource parseResponse(String response) throws APIException {
+      return CustomAudienceDataSource.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public CustomAudienceDataSource execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public CustomAudienceDataSource execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<CustomAudienceDataSource> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<CustomAudienceDataSource> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, CustomAudienceDataSource>() {
+           public CustomAudienceDataSource apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestCreationParamsField () {
+      return this.requestCreationParamsField(true);
+    }
+    public APIRequestGet requestCreationParamsField (boolean value) {
+      this.requestField("creation_params", value);
+      return this;
+    }
+    public APIRequestGet requestSubTypeField () {
+      return this.requestSubTypeField(true);
+    }
+    public APIRequestGet requestSubTypeField (boolean value) {
+      this.requestField("sub_type", value);
+      return this;
+    }
+    public APIRequestGet requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGet requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumSubType {
       @SerializedName("ANYTHING")
@@ -333,6 +522,8 @@ public class CustomAudienceDataSource extends APINode {
       VALUE_MULTI_EVENT_SOURCE("MULTI_EVENT_SOURCE"),
       @SerializedName("SMART_AUDIENCE")
       VALUE_SMART_AUDIENCE("SMART_AUDIENCE"),
+      @SerializedName("LOOKALIKE_PLATFORM")
+      VALUE_LOOKALIKE_PLATFORM("LOOKALIKE_PLATFORM"),
       @SerializedName("MAIL_CHIMP_EMAIL_HASHES")
       VALUE_MAIL_CHIMP_EMAIL_HASHES("MAIL_CHIMP_EMAIL_HASHES"),
       @SerializedName("CONSTANT_CONTACTS_EMAIL_HASHES")
@@ -406,6 +597,7 @@ public class CustomAudienceDataSource extends APINode {
     this.mCreationParams = instance.mCreationParams;
     this.mSubType = instance.mSubType;
     this.mType = instance.mType;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

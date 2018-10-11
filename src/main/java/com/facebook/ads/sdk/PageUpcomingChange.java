@@ -78,6 +78,7 @@ public class PageUpcomingChange extends APINode {
 
   public PageUpcomingChange(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -96,19 +97,17 @@ public class PageUpcomingChange extends APINode {
   }
 
   public static PageUpcomingChange fetchById(String id, APIContext context) throws APIException {
-    PageUpcomingChange pageUpcomingChange =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return pageUpcomingChange;
   }
 
   public static ListenableFuture<PageUpcomingChange> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<PageUpcomingChange> pageUpcomingChange =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return pageUpcomingChange;
   }
 
   public static APINodeList<PageUpcomingChange> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -121,12 +120,11 @@ public class PageUpcomingChange extends APINode {
   }
 
   public static ListenableFuture<APINodeList<PageUpcomingChange>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<PageUpcomingChange>> pageUpcomingChange =
+    return
       new APIRequest(context, "", "/", "GET", PageUpcomingChange.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return pageUpcomingChange;
   }
 
   private String getPrefixedId() {

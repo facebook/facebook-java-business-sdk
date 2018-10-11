@@ -78,6 +78,7 @@ public class MeasurementReport extends APINode {
 
   public MeasurementReport(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -96,19 +97,17 @@ public class MeasurementReport extends APINode {
   }
 
   public static MeasurementReport fetchById(String id, APIContext context) throws APIException {
-    MeasurementReport measurementReport =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return measurementReport;
   }
 
   public static ListenableFuture<MeasurementReport> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<MeasurementReport> measurementReport =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return measurementReport;
   }
 
   public static APINodeList<MeasurementReport> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -121,12 +120,11 @@ public class MeasurementReport extends APINode {
   }
 
   public static ListenableFuture<APINodeList<MeasurementReport>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<MeasurementReport>> measurementReport =
+    return
       new APIRequest(context, "", "/", "GET", MeasurementReport.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return measurementReport;
   }
 
   private String getPrefixedId() {
@@ -578,8 +576,8 @@ public class MeasurementReport extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "is_last_batch",
       "payload",
+      "is_last_batch",
       "url",
     };
 
@@ -638,21 +636,21 @@ public class MeasurementReport extends APINode {
     }
 
 
-    public APIRequestUpdate setIsLastBatch (Boolean isLastBatch) {
-      this.setParam("is_last_batch", isLastBatch);
-      return this;
-    }
-    public APIRequestUpdate setIsLastBatch (String isLastBatch) {
-      this.setParam("is_last_batch", isLastBatch);
-      return this;
-    }
-
     public APIRequestUpdate setPayload (File payload) {
       this.setParam("payload", payload);
       return this;
     }
     public APIRequestUpdate setPayload (String payload) {
       this.setParam("payload", payload);
+      return this;
+    }
+
+    public APIRequestUpdate setIsLastBatch (Boolean isLastBatch) {
+      this.setParam("is_last_batch", isLastBatch);
+      return this;
+    }
+    public APIRequestUpdate setIsLastBatch (String isLastBatch) {
+      this.setParam("is_last_batch", isLastBatch);
       return this;
     }
 

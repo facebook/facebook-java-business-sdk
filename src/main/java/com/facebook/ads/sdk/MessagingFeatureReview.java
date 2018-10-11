@@ -59,13 +59,74 @@ public class MessagingFeatureReview extends APINode {
   private String mFeature = null;
   @SerializedName("status")
   private String mStatus = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public MessagingFeatureReview() {
+  MessagingFeatureReview() {
+  }
+
+  public MessagingFeatureReview(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public MessagingFeatureReview(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public MessagingFeatureReview fetch() throws APIException{
+    MessagingFeatureReview newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static MessagingFeatureReview fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<MessagingFeatureReview> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static MessagingFeatureReview fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<MessagingFeatureReview> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<MessagingFeatureReview> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<MessagingFeatureReview>)(
+      new APIRequest<MessagingFeatureReview>(context, "", "/", "GET", MessagingFeatureReview.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<MessagingFeatureReview>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", MessagingFeatureReview.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static MessagingFeatureReview loadJSON(String json, APIContext context) {
     MessagingFeatureReview messagingFeatureReview = getGson().fromJson(json, MessagingFeatureReview.class);
@@ -208,26 +269,151 @@ public class MessagingFeatureReview extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldFeature() {
     return mFeature;
-  }
-
-  public MessagingFeatureReview setFieldFeature(String value) {
-    this.mFeature = value;
-    return this;
   }
 
   public String getFieldStatus() {
     return mStatus;
   }
 
-  public MessagingFeatureReview setFieldStatus(String value) {
-    this.mStatus = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<MessagingFeatureReview> {
+
+    MessagingFeatureReview lastResponse = null;
+    @Override
+    public MessagingFeatureReview getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "feature",
+      "status",
+      "id",
+    };
+
+    @Override
+    public MessagingFeatureReview parseResponse(String response) throws APIException {
+      return MessagingFeatureReview.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public MessagingFeatureReview execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public MessagingFeatureReview execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<MessagingFeatureReview> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<MessagingFeatureReview> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, MessagingFeatureReview>() {
+           public MessagingFeatureReview apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestFeatureField () {
+      return this.requestFeatureField(true);
+    }
+    public APIRequestGet requestFeatureField (boolean value) {
+      this.requestField("feature", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -246,6 +432,7 @@ public class MessagingFeatureReview extends APINode {
   public MessagingFeatureReview copyFrom(MessagingFeatureReview instance) {
     this.mFeature = instance.mFeature;
     this.mStatus = instance.mStatus;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

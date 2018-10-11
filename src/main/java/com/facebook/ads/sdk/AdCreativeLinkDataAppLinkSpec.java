@@ -63,13 +63,74 @@ public class AdCreativeLinkDataAppLinkSpec extends APINode {
   private List<IosAppLink> mIpad = null;
   @SerializedName("iphone")
   private List<IosAppLink> mIphone = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdCreativeLinkDataAppLinkSpec() {
+  AdCreativeLinkDataAppLinkSpec() {
+  }
+
+  public AdCreativeLinkDataAppLinkSpec(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdCreativeLinkDataAppLinkSpec(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdCreativeLinkDataAppLinkSpec fetch() throws APIException{
+    AdCreativeLinkDataAppLinkSpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdCreativeLinkDataAppLinkSpec fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdCreativeLinkDataAppLinkSpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdCreativeLinkDataAppLinkSpec fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdCreativeLinkDataAppLinkSpec> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdCreativeLinkDataAppLinkSpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdCreativeLinkDataAppLinkSpec>)(
+      new APIRequest<AdCreativeLinkDataAppLinkSpec>(context, "", "/", "GET", AdCreativeLinkDataAppLinkSpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdCreativeLinkDataAppLinkSpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdCreativeLinkDataAppLinkSpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdCreativeLinkDataAppLinkSpec loadJSON(String json, APIContext context) {
     AdCreativeLinkDataAppLinkSpec adCreativeLinkDataAppLinkSpec = getGson().fromJson(json, AdCreativeLinkDataAppLinkSpec.class);
@@ -212,64 +273,175 @@ public class AdCreativeLinkDataAppLinkSpec extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public List<AndroidAppLink> getFieldAndroid() {
     return mAndroid;
   }
 
-  public AdCreativeLinkDataAppLinkSpec setFieldAndroid(List<AndroidAppLink> value) {
-    this.mAndroid = value;
-    return this;
-  }
-
-  public AdCreativeLinkDataAppLinkSpec setFieldAndroid(String value) {
-    Type type = new TypeToken<List<AndroidAppLink>>(){}.getType();
-    this.mAndroid = AndroidAppLink.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IosAppLink> getFieldIos() {
     return mIos;
   }
 
-  public AdCreativeLinkDataAppLinkSpec setFieldIos(List<IosAppLink> value) {
-    this.mIos = value;
-    return this;
-  }
-
-  public AdCreativeLinkDataAppLinkSpec setFieldIos(String value) {
-    Type type = new TypeToken<List<IosAppLink>>(){}.getType();
-    this.mIos = IosAppLink.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IosAppLink> getFieldIpad() {
     return mIpad;
   }
 
-  public AdCreativeLinkDataAppLinkSpec setFieldIpad(List<IosAppLink> value) {
-    this.mIpad = value;
-    return this;
-  }
-
-  public AdCreativeLinkDataAppLinkSpec setFieldIpad(String value) {
-    Type type = new TypeToken<List<IosAppLink>>(){}.getType();
-    this.mIpad = IosAppLink.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IosAppLink> getFieldIphone() {
     return mIphone;
   }
 
-  public AdCreativeLinkDataAppLinkSpec setFieldIphone(List<IosAppLink> value) {
-    this.mIphone = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
-  public AdCreativeLinkDataAppLinkSpec setFieldIphone(String value) {
-    Type type = new TypeToken<List<IosAppLink>>(){}.getType();
-    this.mIphone = IosAppLink.getGson().fromJson(value, type);
-    return this;
-  }
 
+
+  public static class APIRequestGet extends APIRequest<AdCreativeLinkDataAppLinkSpec> {
+
+    AdCreativeLinkDataAppLinkSpec lastResponse = null;
+    @Override
+    public AdCreativeLinkDataAppLinkSpec getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "android",
+      "ios",
+      "ipad",
+      "iphone",
+      "id",
+    };
+
+    @Override
+    public AdCreativeLinkDataAppLinkSpec parseResponse(String response) throws APIException {
+      return AdCreativeLinkDataAppLinkSpec.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdCreativeLinkDataAppLinkSpec execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdCreativeLinkDataAppLinkSpec execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdCreativeLinkDataAppLinkSpec> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdCreativeLinkDataAppLinkSpec> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdCreativeLinkDataAppLinkSpec>() {
+           public AdCreativeLinkDataAppLinkSpec apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestAndroidField () {
+      return this.requestAndroidField(true);
+    }
+    public APIRequestGet requestAndroidField (boolean value) {
+      this.requestField("android", value);
+      return this;
+    }
+    public APIRequestGet requestIosField () {
+      return this.requestIosField(true);
+    }
+    public APIRequestGet requestIosField (boolean value) {
+      this.requestField("ios", value);
+      return this;
+    }
+    public APIRequestGet requestIpadField () {
+      return this.requestIpadField(true);
+    }
+    public APIRequestGet requestIpadField (boolean value) {
+      this.requestField("ipad", value);
+      return this;
+    }
+    public APIRequestGet requestIphoneField () {
+      return this.requestIphoneField(true);
+    }
+    public APIRequestGet requestIphoneField (boolean value) {
+      this.requestField("iphone", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -290,6 +462,7 @@ public class AdCreativeLinkDataAppLinkSpec extends APINode {
     this.mIos = instance.mIos;
     this.mIpad = instance.mIpad;
     this.mIphone = instance.mIphone;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -78,6 +78,7 @@ public class AdPlacePageSet extends APINode {
 
   public AdPlacePageSet(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -96,19 +97,17 @@ public class AdPlacePageSet extends APINode {
   }
 
   public static AdPlacePageSet fetchById(String id, APIContext context) throws APIException {
-    AdPlacePageSet adPlacePageSet =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return adPlacePageSet;
   }
 
   public static ListenableFuture<AdPlacePageSet> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<AdPlacePageSet> adPlacePageSet =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return adPlacePageSet;
   }
 
   public static APINodeList<AdPlacePageSet> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -121,12 +120,11 @@ public class AdPlacePageSet extends APINode {
   }
 
   public static ListenableFuture<APINodeList<AdPlacePageSet>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<AdPlacePageSet>> adPlacePageSet =
+    return
       new APIRequest(context, "", "/", "GET", AdPlacePageSet.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return adPlacePageSet;
   }
 
   private String getPrefixedId() {

@@ -80,6 +80,7 @@ public class PageSavedFilter extends APINode {
 
   public PageSavedFilter(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -98,19 +99,17 @@ public class PageSavedFilter extends APINode {
   }
 
   public static PageSavedFilter fetchById(String id, APIContext context) throws APIException {
-    PageSavedFilter pageSavedFilter =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return pageSavedFilter;
   }
 
   public static ListenableFuture<PageSavedFilter> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<PageSavedFilter> pageSavedFilter =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return pageSavedFilter;
   }
 
   public static APINodeList<PageSavedFilter> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -123,12 +122,11 @@ public class PageSavedFilter extends APINode {
   }
 
   public static ListenableFuture<APINodeList<PageSavedFilter>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<PageSavedFilter>> pageSavedFilter =
+    return
       new APIRequest(context, "", "/", "GET", PageSavedFilter.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return pageSavedFilter;
   }
 
   private String getPrefixedId() {
@@ -279,6 +277,10 @@ public class PageSavedFilter extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -313,6 +315,109 @@ public class PageSavedFilter extends APINode {
   }
 
 
+
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGet extends APIRequest<PageSavedFilter> {
 
@@ -476,8 +581,8 @@ public class PageSavedFilter extends APINode {
   public static enum EnumSection {
       @SerializedName("AUDIENCE_ALERTS")
       VALUE_AUDIENCE_ALERTS("AUDIENCE_ALERTS"),
-      @SerializedName("CAMPAIGN_CENTER")
-      VALUE_CAMPAIGN_CENTER("CAMPAIGN_CENTER"),
+      @SerializedName("CANDIDATE_VIDEOS")
+      VALUE_CANDIDATE_VIDEOS("CANDIDATE_VIDEOS"),
       @SerializedName("CHEX_PENDING_ORDERS")
       VALUE_CHEX_PENDING_ORDERS("CHEX_PENDING_ORDERS"),
       @SerializedName("CHEX_COMPLETED_ORDERS")
@@ -492,8 +597,6 @@ public class PageSavedFilter extends APINode {
       VALUE_COMMERCE_PENDING_ORDERS("COMMERCE_PENDING_ORDERS"),
       @SerializedName("COMMERCE_PAST_ORDERS")
       VALUE_COMMERCE_PAST_ORDERS("COMMERCE_PAST_ORDERS"),
-      @SerializedName("COMMERCE_DISCOUNT_CODES")
-      VALUE_COMMERCE_DISCOUNT_CODES("COMMERCE_DISCOUNT_CODES"),
       @SerializedName("COMMERCE_MERCHANT_SETTINGS")
       VALUE_COMMERCE_MERCHANT_SETTINGS("COMMERCE_MERCHANT_SETTINGS"),
       @SerializedName("COMMERCE_SHOP_LINK")
@@ -536,6 +639,8 @@ public class PageSavedFilter extends APINode {
       VALUE_LEAD_ADS_CRM_SETUP("LEAD_ADS_CRM_SETUP"),
       @SerializedName("LEAD_ADS_CUSTOM_CRM_SETUP")
       VALUE_LEAD_ADS_CUSTOM_CRM_SETUP("LEAD_ADS_CUSTOM_CRM_SETUP"),
+      @SerializedName("POST_IDEAS")
+      VALUE_POST_IDEAS("POST_IDEAS"),
       @SerializedName("PUBLISHED_POSTS")
       VALUE_PUBLISHED_POSTS("PUBLISHED_POSTS"),
       @SerializedName("SCHEDULED_POSTS")
@@ -556,6 +661,12 @@ public class PageSavedFilter extends APINode {
       VALUE_PLAYLISTS("PLAYLISTS"),
       @SerializedName("PLAYLIST_DETAILS")
       VALUE_PLAYLIST_DETAILS("PLAYLIST_DETAILS"),
+      @SerializedName("POPULAR_VIDEOS")
+      VALUE_POPULAR_VIDEOS("POPULAR_VIDEOS"),
+      @SerializedName("POPULAR_FACEBOOK_VIDEOS")
+      VALUE_POPULAR_FACEBOOK_VIDEOS("POPULAR_FACEBOOK_VIDEOS"),
+      @SerializedName("POPULAR_INSTAGRAM_VIDEOS")
+      VALUE_POPULAR_INSTAGRAM_VIDEOS("POPULAR_INSTAGRAM_VIDEOS"),
       @SerializedName("POSTS_CONFIG")
       VALUE_POSTS_CONFIG("POSTS_CONFIG"),
       @SerializedName("SEASONS")
@@ -612,12 +723,6 @@ public class PageSavedFilter extends APINode {
       VALUE_PUBLISHED_PROFILE_PICTURE_FRAMES("PUBLISHED_PROFILE_PICTURE_FRAMES"),
       @SerializedName("PENDING_PROFILE_PICTURE_FRAMES")
       VALUE_PENDING_PROFILE_PICTURE_FRAMES("PENDING_PROFILE_PICTURE_FRAMES"),
-      @SerializedName("TAROT_COMPOSER")
-      VALUE_TAROT_COMPOSER("TAROT_COMPOSER"),
-      @SerializedName("DRAFT_EDITIONS")
-      VALUE_DRAFT_EDITIONS("DRAFT_EDITIONS"),
-      @SerializedName("PUBLISHED_EDITIONS")
-      VALUE_PUBLISHED_EDITIONS("PUBLISHED_EDITIONS"),
       @SerializedName("PUBLISHED_EVENTS")
       VALUE_PUBLISHED_EVENTS("PUBLISHED_EVENTS"),
       @SerializedName("DRAFT_EVENTS")
@@ -630,8 +735,6 @@ public class PageSavedFilter extends APINode {
       VALUE_TOURS("TOURS"),
       @SerializedName("POLLS_COMPOSER")
       VALUE_POLLS_COMPOSER("POLLS_COMPOSER"),
-      @SerializedName("BRAND_ASSET_LIBRARY")
-      VALUE_BRAND_ASSET_LIBRARY("BRAND_ASSET_LIBRARY"),
       @SerializedName("JOB_APPLICATIONS")
       VALUE_JOB_APPLICATIONS("JOB_APPLICATIONS"),
       @SerializedName("SUBSCRIPTIONS")
@@ -658,6 +761,8 @@ public class PageSavedFilter extends APINode {
       VALUE_BRANDED_CONTENT_CREATOR("BRANDED_CONTENT_CREATOR"),
       @SerializedName("SOUNDS_COLLECTION")
       VALUE_SOUNDS_COLLECTION("SOUNDS_COLLECTION"),
+      @SerializedName("CREATOR_STUDIO")
+      VALUE_CREATOR_STUDIO("CREATOR_STUDIO"),
       @SerializedName("CONTENT_TESTS")
       VALUE_CONTENT_TESTS("CONTENT_TESTS"),
       @SerializedName("GEM_PRODUCER_DASHBOARD")

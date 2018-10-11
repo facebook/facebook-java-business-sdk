@@ -94,6 +94,7 @@ public class ShadowIGMedia extends APINode {
 
   public ShadowIGMedia(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -112,19 +113,17 @@ public class ShadowIGMedia extends APINode {
   }
 
   public static ShadowIGMedia fetchById(String id, APIContext context) throws APIException {
-    ShadowIGMedia shadowIGMedia =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return shadowIGMedia;
   }
 
   public static ListenableFuture<ShadowIGMedia> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<ShadowIGMedia> shadowIGMedia =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return shadowIGMedia;
   }
 
   public static APINodeList<ShadowIGMedia> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -137,12 +136,11 @@ public class ShadowIGMedia extends APINode {
   }
 
   public static ListenableFuture<APINodeList<ShadowIGMedia>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<ShadowIGMedia>> shadowIGMedia =
+    return
       new APIRequest(context, "", "/", "GET", ShadowIGMedia.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return shadowIGMedia;
   }
 
   private String getPrefixedId() {
@@ -293,10 +291,6 @@ public class ShadowIGMedia extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetComments getComments() {
-    return new APIRequestGetComments(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateComment createComment() {
     return new APIRequestCreateComment(this.getPrefixedId().toString(), context);
   }
@@ -374,173 +368,6 @@ public class ShadowIGMedia extends APINode {
   }
 
 
-
-  public static class APIRequestGetComments extends APIRequest<ShadowIGComment> {
-
-    APINodeList<ShadowIGComment> lastResponse = null;
-    @Override
-    public APINodeList<ShadowIGComment> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "hidden",
-      "id",
-      "like_count",
-      "media",
-      "text",
-      "timestamp",
-      "user",
-      "username",
-    };
-
-    @Override
-    public APINodeList<ShadowIGComment> parseResponse(String response) throws APIException {
-      return ShadowIGComment.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<ShadowIGComment> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<ShadowIGComment> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<ShadowIGComment>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<ShadowIGComment>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ShadowIGComment>>() {
-           public APINodeList<ShadowIGComment> apply(String result) {
-             try {
-               return APIRequestGetComments.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetComments(String nodeId, APIContext context) {
-      super(context, nodeId, "/comments", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetComments setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetComments setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetComments requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetComments requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetComments requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetComments requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetComments requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetComments requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetComments requestHiddenField () {
-      return this.requestHiddenField(true);
-    }
-    public APIRequestGetComments requestHiddenField (boolean value) {
-      this.requestField("hidden", value);
-      return this;
-    }
-    public APIRequestGetComments requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetComments requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetComments requestLikeCountField () {
-      return this.requestLikeCountField(true);
-    }
-    public APIRequestGetComments requestLikeCountField (boolean value) {
-      this.requestField("like_count", value);
-      return this;
-    }
-    public APIRequestGetComments requestMediaField () {
-      return this.requestMediaField(true);
-    }
-    public APIRequestGetComments requestMediaField (boolean value) {
-      this.requestField("media", value);
-      return this;
-    }
-    public APIRequestGetComments requestTextField () {
-      return this.requestTextField(true);
-    }
-    public APIRequestGetComments requestTextField (boolean value) {
-      this.requestField("text", value);
-      return this;
-    }
-    public APIRequestGetComments requestTimestampField () {
-      return this.requestTimestampField(true);
-    }
-    public APIRequestGetComments requestTimestampField (boolean value) {
-      this.requestField("timestamp", value);
-      return this;
-    }
-    public APIRequestGetComments requestUserField () {
-      return this.requestUserField(true);
-    }
-    public APIRequestGetComments requestUserField (boolean value) {
-      this.requestField("user", value);
-      return this;
-    }
-    public APIRequestGetComments requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetComments requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
-  }
 
   public static class APIRequestCreateComment extends APIRequest<ShadowIGComment> {
 

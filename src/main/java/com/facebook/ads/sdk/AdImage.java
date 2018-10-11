@@ -98,6 +98,7 @@ public class AdImage extends APINode {
 
   public AdImage(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -116,19 +117,17 @@ public class AdImage extends APINode {
   }
 
   public static AdImage fetchById(String id, APIContext context) throws APIException {
-    AdImage adImage =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return adImage;
   }
 
   public static ListenableFuture<AdImage> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<AdImage> adImage =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return adImage;
   }
 
   public static APINodeList<AdImage> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -141,12 +140,11 @@ public class AdImage extends APINode {
   }
 
   public static ListenableFuture<APINodeList<AdImage>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<AdImage>> adImage =
+    return
       new APIRequest(context, "", "/", "GET", AdImage.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return adImage;
   }
 
   private String getPrefixedId() {

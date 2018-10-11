@@ -84,6 +84,7 @@ public class MediaFingerprint extends APINode {
 
   public MediaFingerprint(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -102,19 +103,17 @@ public class MediaFingerprint extends APINode {
   }
 
   public static MediaFingerprint fetchById(String id, APIContext context) throws APIException {
-    MediaFingerprint mediaFingerprint =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return mediaFingerprint;
   }
 
   public static ListenableFuture<MediaFingerprint> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<MediaFingerprint> mediaFingerprint =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return mediaFingerprint;
   }
 
   public static APINodeList<MediaFingerprint> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -127,12 +126,11 @@ public class MediaFingerprint extends APINode {
   }
 
   public static ListenableFuture<APINodeList<MediaFingerprint>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<MediaFingerprint>> mediaFingerprint =
+    return
       new APIRequest(context, "", "/", "GET", MediaFingerprint.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return mediaFingerprint;
   }
 
   private String getPrefixedId() {
@@ -620,8 +618,8 @@ public class MediaFingerprint extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "metadata",
       "title",
+      "metadata",
       "universal_content_id",
     };
 
@@ -680,17 +678,17 @@ public class MediaFingerprint extends APINode {
     }
 
 
+    public APIRequestUpdate setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
     public APIRequestUpdate setMetadata (Object metadata) {
       this.setParam("metadata", metadata);
       return this;
     }
     public APIRequestUpdate setMetadata (String metadata) {
       this.setParam("metadata", metadata);
-      return this;
-    }
-
-    public APIRequestUpdate setTitle (String title) {
-      this.setParam("title", title);
       return this;
     }
 
@@ -753,6 +751,27 @@ public class MediaFingerprint extends APINode {
       private String value;
 
       private EnumFingerprintContentType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumFingerprintValidity {
+      @SerializedName("VALID")
+      VALUE_VALID("VALID"),
+      @SerializedName("EXPIRING")
+      VALUE_EXPIRING("EXPIRING"),
+      @SerializedName("EXPIRED")
+      VALUE_EXPIRED("EXPIRED"),
+      NULL(null);
+
+      private String value;
+
+      private EnumFingerprintValidity(String value) {
         this.value = value;
       }
 

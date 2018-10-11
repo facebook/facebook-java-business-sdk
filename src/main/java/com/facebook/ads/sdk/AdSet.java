@@ -57,12 +57,22 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdSet extends APINode {
   @SerializedName("account_id")
   private String mAccountId = null;
+  @SerializedName("ad_keywords")
+  private String mAdKeywords = null;
+  @SerializedName("adasset_feed")
+  private AdAssetFeed mAdassetFeed = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
   @SerializedName("adset_schedule")
   private List<DayPart> mAdsetSchedule = null;
+  @SerializedName("asset_feed_id")
+  private String mAssetFeedId = null;
   @SerializedName("attribution_spec")
   private List<AttributionSpec> mAttributionSpec = null;
+  @SerializedName("best_creative")
+  private AdDynamicCreative mBestCreative = null;
+  @SerializedName("bid_adjustments")
+  private AdBidAdjustments mBidAdjustments = null;
   @SerializedName("bid_amount")
   private Long mBidAmount = null;
   @SerializedName("bid_info")
@@ -95,16 +105,30 @@ public class AdSet extends APINode {
   private EnumEffectiveStatus mEffectiveStatus = null;
   @SerializedName("end_time")
   private String mEndTime = null;
+  @SerializedName("frequency_cap")
+  private Long mFrequencyCap = null;
+  @SerializedName("frequency_cap_reset_period")
+  private Long mFrequencyCapResetPeriod = null;
   @SerializedName("frequency_control_specs")
   private List<AdCampaignFrequencyControlSpecs> mFrequencyControlSpecs = null;
+  @SerializedName("full_funnel_exploration_mode")
+  private String mFullFunnelExplorationMode = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("instagram_actor_id")
   private String mInstagramActorId = null;
+  @SerializedName("is_autobid")
+  private Boolean mIsAutobid = null;
+  @SerializedName("is_average_price_pacing")
+  private Boolean mIsAveragePricePacing = null;
+  @SerializedName("is_dynamic_creative")
+  private Boolean mIsDynamicCreative = null;
   @SerializedName("is_dynamic_creative_optimization")
   private Boolean mIsDynamicCreativeOptimization = null;
   @SerializedName("lifetime_budget")
   private String mLifetimeBudget = null;
+  @SerializedName("lifetime_frequency_cap")
+  private Long mLifetimeFrequencyCap = null;
   @SerializedName("lifetime_imps")
   private Long mLifetimeImps = null;
   @SerializedName("lifetime_min_spend_target")
@@ -123,6 +147,8 @@ public class AdSet extends APINode {
   private List<AdRecommendation> mRecommendations = null;
   @SerializedName("recurring_budget_semantics")
   private Boolean mRecurringBudgetSemantics = null;
+  @SerializedName("review_feedback")
+  private String mReviewFeedback = null;
   @SerializedName("rf_prediction_id")
   private String mRfPredictionId = null;
   @SerializedName("rtb_flag")
@@ -141,6 +167,8 @@ public class AdSet extends APINode {
   private List<List<Long>> mTimeBasedAdRotationIdBlocks = null;
   @SerializedName("time_based_ad_rotation_intervals")
   private List<Long> mTimeBasedAdRotationIntervals = null;
+  @SerializedName("tracking_specs")
+  private String mTrackingSpecs = null;
   @SerializedName("updated_time")
   private String mUpdatedTime = null;
   @SerializedName("use_new_app_click")
@@ -156,6 +184,7 @@ public class AdSet extends APINode {
 
   public AdSet(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -174,19 +203,17 @@ public class AdSet extends APINode {
   }
 
   public static AdSet fetchById(String id, APIContext context) throws APIException {
-    AdSet adSet =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return adSet;
   }
 
   public static ListenableFuture<AdSet> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<AdSet> adSet =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return adSet;
   }
 
   public static APINodeList<AdSet> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -199,12 +226,11 @@ public class AdSet extends APINode {
   }
 
   public static ListenableFuture<APINodeList<AdSet>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<AdSet>> adSet =
+    return
       new APIRequest(context, "", "/", "GET", AdSet.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return adSet;
   }
 
   private String getPrefixedId() {
@@ -359,6 +385,10 @@ public class AdSet extends APINode {
     return new APIRequestGetActivities(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAdStudies getAdStudies() {
+    return new APIRequestGetAdStudies(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAdCreatives getAdCreatives() {
     return new APIRequestGetAdCreatives(this.getPrefixedId().toString(), context);
   }
@@ -371,10 +401,6 @@ public class AdSet extends APINode {
     return new APIRequestCreateAdLabel(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetAdRulesGoverned getAdRulesGoverned() {
-    return new APIRequestGetAdRulesGoverned(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAds getAds() {
     return new APIRequestGetAds(this.getPrefixedId().toString(), context);
   }
@@ -385,6 +411,10 @@ public class AdSet extends APINode {
 
   public APIRequestGetCopies getCopies() {
     return new APIRequestGetCopies(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateCopy createCopy() {
+    return new APIRequestCreateCopy(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetDeliveryEstimate getDeliveryEstimate() {
@@ -425,6 +455,32 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public String getFieldAdKeywords() {
+    return mAdKeywords;
+  }
+
+  public AdSet setFieldAdKeywords(String value) {
+    this.mAdKeywords = value;
+    return this;
+  }
+
+  public AdAssetFeed getFieldAdassetFeed() {
+    if (mAdassetFeed != null) {
+      mAdassetFeed.context = getContext();
+    }
+    return mAdassetFeed;
+  }
+
+  public AdSet setFieldAdassetFeed(AdAssetFeed value) {
+    this.mAdassetFeed = value;
+    return this;
+  }
+
+  public AdSet setFieldAdassetFeed(String value) {
+    Type type = new TypeToken<AdAssetFeed>(){}.getType();
+    this.mAdassetFeed = AdAssetFeed.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdLabel> getFieldAdlabels() {
     return mAdlabels;
   }
@@ -453,6 +509,15 @@ public class AdSet extends APINode {
     this.mAdsetSchedule = DayPart.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldAssetFeedId() {
+    return mAssetFeedId;
+  }
+
+  public AdSet setFieldAssetFeedId(String value) {
+    this.mAssetFeedId = value;
+    return this;
+  }
+
   public List<AttributionSpec> getFieldAttributionSpec() {
     return mAttributionSpec;
   }
@@ -465,6 +530,40 @@ public class AdSet extends APINode {
   public AdSet setFieldAttributionSpec(String value) {
     Type type = new TypeToken<List<AttributionSpec>>(){}.getType();
     this.mAttributionSpec = AttributionSpec.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdDynamicCreative getFieldBestCreative() {
+    if (mBestCreative != null) {
+      mBestCreative.context = getContext();
+    }
+    return mBestCreative;
+  }
+
+  public AdSet setFieldBestCreative(AdDynamicCreative value) {
+    this.mBestCreative = value;
+    return this;
+  }
+
+  public AdSet setFieldBestCreative(String value) {
+    Type type = new TypeToken<AdDynamicCreative>(){}.getType();
+    this.mBestCreative = AdDynamicCreative.getGson().fromJson(value, type);
+    return this;
+  }
+  public AdBidAdjustments getFieldBidAdjustments() {
+    if (mBidAdjustments != null) {
+      mBidAdjustments.context = getContext();
+    }
+    return mBidAdjustments;
+  }
+
+  public AdSet setFieldBidAdjustments(AdBidAdjustments value) {
+    this.mBidAdjustments = value;
+    return this;
+  }
+
+  public AdSet setFieldBidAdjustments(String value) {
+    Type type = new TypeToken<AdBidAdjustments>(){}.getType();
+    this.mBidAdjustments = AdBidAdjustments.getGson().fromJson(value, type);
     return this;
   }
   public Long getFieldBidAmount() {
@@ -619,6 +718,24 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public Long getFieldFrequencyCap() {
+    return mFrequencyCap;
+  }
+
+  public AdSet setFieldFrequencyCap(Long value) {
+    this.mFrequencyCap = value;
+    return this;
+  }
+
+  public Long getFieldFrequencyCapResetPeriod() {
+    return mFrequencyCapResetPeriod;
+  }
+
+  public AdSet setFieldFrequencyCapResetPeriod(Long value) {
+    this.mFrequencyCapResetPeriod = value;
+    return this;
+  }
+
   public List<AdCampaignFrequencyControlSpecs> getFieldFrequencyControlSpecs() {
     return mFrequencyControlSpecs;
   }
@@ -633,6 +750,15 @@ public class AdSet extends APINode {
     this.mFrequencyControlSpecs = AdCampaignFrequencyControlSpecs.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldFullFunnelExplorationMode() {
+    return mFullFunnelExplorationMode;
+  }
+
+  public AdSet setFieldFullFunnelExplorationMode(String value) {
+    this.mFullFunnelExplorationMode = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -651,6 +777,33 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public Boolean getFieldIsAutobid() {
+    return mIsAutobid;
+  }
+
+  public AdSet setFieldIsAutobid(Boolean value) {
+    this.mIsAutobid = value;
+    return this;
+  }
+
+  public Boolean getFieldIsAveragePricePacing() {
+    return mIsAveragePricePacing;
+  }
+
+  public AdSet setFieldIsAveragePricePacing(Boolean value) {
+    this.mIsAveragePricePacing = value;
+    return this;
+  }
+
+  public Boolean getFieldIsDynamicCreative() {
+    return mIsDynamicCreative;
+  }
+
+  public AdSet setFieldIsDynamicCreative(Boolean value) {
+    this.mIsDynamicCreative = value;
+    return this;
+  }
+
   public Boolean getFieldIsDynamicCreativeOptimization() {
     return mIsDynamicCreativeOptimization;
   }
@@ -666,6 +819,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldLifetimeBudget(String value) {
     this.mLifetimeBudget = value;
+    return this;
+  }
+
+  public Long getFieldLifetimeFrequencyCap() {
+    return mLifetimeFrequencyCap;
+  }
+
+  public AdSet setFieldLifetimeFrequencyCap(Long value) {
+    this.mLifetimeFrequencyCap = value;
     return this;
   }
 
@@ -724,6 +886,9 @@ public class AdSet extends APINode {
   }
 
   public AdPromotedObject getFieldPromotedObject() {
+    if (mPromotedObject != null) {
+      mPromotedObject.context = getContext();
+    }
     return mPromotedObject;
   }
 
@@ -757,6 +922,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldRecurringBudgetSemantics(Boolean value) {
     this.mRecurringBudgetSemantics = value;
+    return this;
+  }
+
+  public String getFieldReviewFeedback() {
+    return mReviewFeedback;
+  }
+
+  public AdSet setFieldReviewFeedback(String value) {
+    this.mReviewFeedback = value;
     return this;
   }
 
@@ -823,6 +997,9 @@ public class AdSet extends APINode {
   }
 
   public Targeting getFieldTargeting() {
+    if (mTargeting != null) {
+      mTargeting.context = getContext();
+    }
     return mTargeting;
   }
 
@@ -854,6 +1031,15 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public String getFieldTrackingSpecs() {
+    return mTrackingSpecs;
+  }
+
+  public AdSet setFieldTrackingSpecs(String value) {
+    this.mTrackingSpecs = value;
+    return this;
+  }
+
   public String getFieldUpdatedTime() {
     return mUpdatedTime;
   }
@@ -882,11 +1068,13 @@ public class AdSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "business_id",
-      "category",
+      "after",
+      "limit",
       "since",
-      "uid",
+      "category",
       "until",
+      "uid",
+      "business_id",
     };
 
     public static final String[] FIELDS = {
@@ -902,6 +1090,7 @@ public class AdSet extends APINode {
       "object_name",
       "object_type",
       "translated_event_type",
+      "id",
     };
 
     @Override
@@ -956,8 +1145,22 @@ public class AdSet extends APINode {
     }
 
 
-    public APIRequestGetActivities setBusinessId (String businessId) {
-      this.setParam("business_id", businessId);
+    public APIRequestGetActivities setAfter (String after) {
+      this.setParam("after", after);
+      return this;
+    }
+
+    public APIRequestGetActivities setLimit (Long limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+    public APIRequestGetActivities setLimit (String limit) {
+      this.setParam("limit", limit);
+      return this;
+    }
+
+    public APIRequestGetActivities setSince (String since) {
+      this.setParam("since", since);
       return this;
     }
 
@@ -970,8 +1173,8 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetActivities setSince (String since) {
-      this.setParam("since", since);
+    public APIRequestGetActivities setUntil (String until) {
+      this.setParam("until", until);
       return this;
     }
 
@@ -984,8 +1187,8 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetActivities setUntil (String until) {
-      this.setParam("until", until);
+    public APIRequestGetActivities setBusinessId (String businessId) {
+      this.setParam("business_id", businessId);
       return this;
     }
 
@@ -1109,6 +1312,236 @@ public class AdSet extends APINode {
       this.requestField("translated_event_type", value);
       return this;
     }
+    public APIRequestGetActivities requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetActivities requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetAdStudies extends APIRequest<AdStudy> {
+
+    APINodeList<AdStudy> lastResponse = null;
+    @Override
+    public APINodeList<AdStudy> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "business",
+      "canceled_time",
+      "cooldown_start_time",
+      "created_by",
+      "created_time",
+      "description",
+      "end_time",
+      "id",
+      "name",
+      "observation_end_time",
+      "results_first_available_date",
+      "start_time",
+      "type",
+      "updated_by",
+      "updated_time",
+    };
+
+    @Override
+    public APINodeList<AdStudy> parseResponse(String response) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<AdStudy> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdStudy> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdStudy>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdStudy>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdStudy>>() {
+           public APINodeList<AdStudy> apply(String result) {
+             try {
+               return APIRequestGetAdStudies.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAdStudies(String nodeId, APIContext context) {
+      super(context, nodeId, "/ad_studies", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdStudies setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdStudies setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdStudies requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdStudies requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdStudies requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdStudies requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdStudies requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdStudies requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAdStudies requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetAdStudies requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestCanceledTimeField () {
+      return this.requestCanceledTimeField(true);
+    }
+    public APIRequestGetAdStudies requestCanceledTimeField (boolean value) {
+      this.requestField("canceled_time", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestCooldownStartTimeField () {
+      return this.requestCooldownStartTimeField(true);
+    }
+    public APIRequestGetAdStudies requestCooldownStartTimeField (boolean value) {
+      this.requestField("cooldown_start_time", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestCreatedByField () {
+      return this.requestCreatedByField(true);
+    }
+    public APIRequestGetAdStudies requestCreatedByField (boolean value) {
+      this.requestField("created_by", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetAdStudies requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetAdStudies requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestEndTimeField () {
+      return this.requestEndTimeField(true);
+    }
+    public APIRequestGetAdStudies requestEndTimeField (boolean value) {
+      this.requestField("end_time", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAdStudies requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAdStudies requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestObservationEndTimeField () {
+      return this.requestObservationEndTimeField(true);
+    }
+    public APIRequestGetAdStudies requestObservationEndTimeField (boolean value) {
+      this.requestField("observation_end_time", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestResultsFirstAvailableDateField () {
+      return this.requestResultsFirstAvailableDateField(true);
+    }
+    public APIRequestGetAdStudies requestResultsFirstAvailableDateField (boolean value) {
+      this.requestField("results_first_available_date", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestStartTimeField () {
+      return this.requestStartTimeField(true);
+    }
+    public APIRequestGetAdStudies requestStartTimeField (boolean value) {
+      this.requestField("start_time", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetAdStudies requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestUpdatedByField () {
+      return this.requestUpdatedByField(true);
+    }
+    public APIRequestGetAdStudies requestUpdatedByField (boolean value) {
+      this.requestField("updated_by", value);
+      return this;
+    }
+    public APIRequestGetAdStudies requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetAdStudies requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetAdCreatives extends APIRequest<AdCreative> {
@@ -1126,12 +1559,23 @@ public class AdSet extends APINode {
       "actor_id",
       "adlabels",
       "applink_treatment",
+      "asset_feed_id",
       "asset_feed_spec",
+      "authorization_category",
+      "auto_update",
       "body",
       "branded_content_sponsor_page_id",
+      "bundle_folder_id",
       "call_to_action_type",
+      "categorization_criteria",
+      "category_media_source",
+      "destination_set_id",
+      "dynamic_ad_voice",
+      "effective_authorization_category",
       "effective_instagram_story_id",
       "effective_object_story_id",
+      "enable_direct_install",
+      "enable_launch_instant_app",
       "id",
       "image_crops",
       "image_hash",
@@ -1139,16 +1583,20 @@ public class AdSet extends APINode {
       "instagram_actor_id",
       "instagram_permalink_url",
       "instagram_story_id",
+      "link_deep_link_url",
       "link_og_id",
       "link_url",
       "messenger_sponsored_message",
       "name",
       "object_id",
+      "object_store_url",
       "object_story_id",
       "object_story_spec",
       "object_type",
       "object_url",
+      "place_page_set_id",
       "platform_customizations",
+      "playable_asset_id",
       "product_set_id",
       "recommender_settings",
       "status",
@@ -1277,11 +1725,32 @@ public class AdSet extends APINode {
       this.requestField("applink_treatment", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestAssetFeedIdField () {
+      return this.requestAssetFeedIdField(true);
+    }
+    public APIRequestGetAdCreatives requestAssetFeedIdField (boolean value) {
+      this.requestField("asset_feed_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestAssetFeedSpecField () {
       return this.requestAssetFeedSpecField(true);
     }
     public APIRequestGetAdCreatives requestAssetFeedSpecField (boolean value) {
       this.requestField("asset_feed_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestAuthorizationCategoryField () {
+      return this.requestAuthorizationCategoryField(true);
+    }
+    public APIRequestGetAdCreatives requestAuthorizationCategoryField (boolean value) {
+      this.requestField("authorization_category", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestAutoUpdateField () {
+      return this.requestAutoUpdateField(true);
+    }
+    public APIRequestGetAdCreatives requestAutoUpdateField (boolean value) {
+      this.requestField("auto_update", value);
       return this;
     }
     public APIRequestGetAdCreatives requestBodyField () {
@@ -1298,11 +1767,53 @@ public class AdSet extends APINode {
       this.requestField("branded_content_sponsor_page_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestBundleFolderIdField () {
+      return this.requestBundleFolderIdField(true);
+    }
+    public APIRequestGetAdCreatives requestBundleFolderIdField (boolean value) {
+      this.requestField("bundle_folder_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestCallToActionTypeField () {
       return this.requestCallToActionTypeField(true);
     }
     public APIRequestGetAdCreatives requestCallToActionTypeField (boolean value) {
       this.requestField("call_to_action_type", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestCategorizationCriteriaField () {
+      return this.requestCategorizationCriteriaField(true);
+    }
+    public APIRequestGetAdCreatives requestCategorizationCriteriaField (boolean value) {
+      this.requestField("categorization_criteria", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestCategoryMediaSourceField () {
+      return this.requestCategoryMediaSourceField(true);
+    }
+    public APIRequestGetAdCreatives requestCategoryMediaSourceField (boolean value) {
+      this.requestField("category_media_source", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestDestinationSetIdField () {
+      return this.requestDestinationSetIdField(true);
+    }
+    public APIRequestGetAdCreatives requestDestinationSetIdField (boolean value) {
+      this.requestField("destination_set_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestDynamicAdVoiceField () {
+      return this.requestDynamicAdVoiceField(true);
+    }
+    public APIRequestGetAdCreatives requestDynamicAdVoiceField (boolean value) {
+      this.requestField("dynamic_ad_voice", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestEffectiveAuthorizationCategoryField () {
+      return this.requestEffectiveAuthorizationCategoryField(true);
+    }
+    public APIRequestGetAdCreatives requestEffectiveAuthorizationCategoryField (boolean value) {
+      this.requestField("effective_authorization_category", value);
       return this;
     }
     public APIRequestGetAdCreatives requestEffectiveInstagramStoryIdField () {
@@ -1317,6 +1828,20 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestEffectiveObjectStoryIdField (boolean value) {
       this.requestField("effective_object_story_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestEnableDirectInstallField () {
+      return this.requestEnableDirectInstallField(true);
+    }
+    public APIRequestGetAdCreatives requestEnableDirectInstallField (boolean value) {
+      this.requestField("enable_direct_install", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestEnableLaunchInstantAppField () {
+      return this.requestEnableLaunchInstantAppField(true);
+    }
+    public APIRequestGetAdCreatives requestEnableLaunchInstantAppField (boolean value) {
+      this.requestField("enable_launch_instant_app", value);
       return this;
     }
     public APIRequestGetAdCreatives requestIdField () {
@@ -1368,6 +1893,13 @@ public class AdSet extends APINode {
       this.requestField("instagram_story_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestLinkDeepLinkUrlField () {
+      return this.requestLinkDeepLinkUrlField(true);
+    }
+    public APIRequestGetAdCreatives requestLinkDeepLinkUrlField (boolean value) {
+      this.requestField("link_deep_link_url", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestLinkOgIdField () {
       return this.requestLinkOgIdField(true);
     }
@@ -1403,6 +1935,13 @@ public class AdSet extends APINode {
       this.requestField("object_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestObjectStoreUrlField () {
+      return this.requestObjectStoreUrlField(true);
+    }
+    public APIRequestGetAdCreatives requestObjectStoreUrlField (boolean value) {
+      this.requestField("object_store_url", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestObjectStoryIdField () {
       return this.requestObjectStoryIdField(true);
     }
@@ -1431,11 +1970,25 @@ public class AdSet extends APINode {
       this.requestField("object_url", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestPlacePageSetIdField () {
+      return this.requestPlacePageSetIdField(true);
+    }
+    public APIRequestGetAdCreatives requestPlacePageSetIdField (boolean value) {
+      this.requestField("place_page_set_id", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestPlatformCustomizationsField () {
       return this.requestPlatformCustomizationsField(true);
     }
     public APIRequestGetAdCreatives requestPlatformCustomizationsField (boolean value) {
       this.requestField("platform_customizations", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestPlayableAssetIdField () {
+      return this.requestPlayableAssetIdField(true);
+    }
+    public APIRequestGetAdCreatives requestPlayableAssetIdField (boolean value) {
+      this.requestField("playable_asset_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestProductSetIdField () {
@@ -1586,7 +2139,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestDeleteAdLabels setExecutionOptions (List<AdLabel.EnumExecutionOptions> executionOptions) {
+    public APIRequestDeleteAdLabels setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -1633,11 +2186,11 @@ public class AdSet extends APINode {
 
   }
 
-  public static class APIRequestCreateAdLabel extends APIRequest<AdLabel> {
+  public static class APIRequestCreateAdLabel extends APIRequest<AdSet> {
 
-    AdLabel lastResponse = null;
+    AdSet lastResponse = null;
     @Override
-    public AdLabel getLastResponse() {
+    public AdSet getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -1649,30 +2202,30 @@ public class AdSet extends APINode {
     };
 
     @Override
-    public AdLabel parseResponse(String response) throws APIException {
-      return AdLabel.parseResponse(response, getContext(), this).head();
+    public AdSet parseResponse(String response) throws APIException {
+      return AdSet.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public AdLabel execute() throws APIException {
+    public AdSet execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdLabel execute(Map<String, Object> extraParams) throws APIException {
+    public AdSet execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<AdLabel> executeAsync() throws APIException {
+    public ListenableFuture<AdSet> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<AdLabel> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<AdSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdLabel>() {
-           public AdLabel apply(String result) {
+        new Function<String, AdSet>() {
+           public AdSet apply(String result) {
              try {
                return APIRequestCreateAdLabel.this.parseResponse(result);
              } catch (Exception e) {
@@ -1709,7 +2262,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdLabel setExecutionOptions (List<AdLabel.EnumExecutionOptions> executionOptions) {
+    public APIRequestCreateAdLabel setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -1756,199 +2309,6 @@ public class AdSet extends APINode {
 
   }
 
-  public static class APIRequestGetAdRulesGoverned extends APIRequest<AdRule> {
-
-    APINodeList<AdRule> lastResponse = null;
-    @Override
-    public APINodeList<AdRule> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "pass_evaluation",
-    };
-
-    public static final String[] FIELDS = {
-      "account_id",
-      "created_by",
-      "created_time",
-      "evaluation_spec",
-      "execution_spec",
-      "id",
-      "name",
-      "schedule_spec",
-      "status",
-      "updated_time",
-    };
-
-    @Override
-    public APINodeList<AdRule> parseResponse(String response) throws APIException {
-      return AdRule.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<AdRule> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdRule> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdRule>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdRule>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdRule>>() {
-           public APINodeList<AdRule> apply(String result) {
-             try {
-               return APIRequestGetAdRulesGoverned.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAdRulesGoverned(String nodeId, APIContext context) {
-      super(context, nodeId, "/adrules_governed", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAdRulesGoverned setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdRulesGoverned setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAdRulesGoverned setPassEvaluation (Boolean passEvaluation) {
-      this.setParam("pass_evaluation", passEvaluation);
-      return this;
-    }
-    public APIRequestGetAdRulesGoverned setPassEvaluation (String passEvaluation) {
-      this.setParam("pass_evaluation", passEvaluation);
-      return this;
-    }
-
-    public APIRequestGetAdRulesGoverned requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAdRulesGoverned requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdRulesGoverned requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAdRulesGoverned requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdRulesGoverned requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdRulesGoverned requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAdRulesGoverned requestAccountIdField () {
-      return this.requestAccountIdField(true);
-    }
-    public APIRequestGetAdRulesGoverned requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGetAdRulesGoverned requestCreatedByField () {
-      return this.requestCreatedByField(true);
-    }
-    public APIRequestGetAdRulesGoverned requestCreatedByField (boolean value) {
-      this.requestField("created_by", value);
-      return this;
-    }
-    public APIRequestGetAdRulesGoverned requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetAdRulesGoverned requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetAdRulesGoverned requestEvaluationSpecField () {
-      return this.requestEvaluationSpecField(true);
-    }
-    public APIRequestGetAdRulesGoverned requestEvaluationSpecField (boolean value) {
-      this.requestField("evaluation_spec", value);
-      return this;
-    }
-    public APIRequestGetAdRulesGoverned requestExecutionSpecField () {
-      return this.requestExecutionSpecField(true);
-    }
-    public APIRequestGetAdRulesGoverned requestExecutionSpecField (boolean value) {
-      this.requestField("execution_spec", value);
-      return this;
-    }
-    public APIRequestGetAdRulesGoverned requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAdRulesGoverned requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAdRulesGoverned requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetAdRulesGoverned requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetAdRulesGoverned requestScheduleSpecField () {
-      return this.requestScheduleSpecField(true);
-    }
-    public APIRequestGetAdRulesGoverned requestScheduleSpecField (boolean value) {
-      this.requestField("schedule_spec", value);
-      return this;
-    }
-    public APIRequestGetAdRulesGoverned requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGetAdRulesGoverned requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetAdRulesGoverned requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGetAdRulesGoverned requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetAds extends APIRequest<Ad> {
 
     APINodeList<Ad> lastResponse = null;
@@ -1957,11 +2317,12 @@ public class AdSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "ad_draft_id",
-      "date_preset",
+      "include_deleted",
       "effective_status",
+      "date_preset",
       "time_range",
       "updated_since",
+      "ad_draft_id",
     };
 
     public static final String[] FIELDS = {
@@ -1979,16 +2340,29 @@ public class AdSet extends APINode {
       "conversion_specs",
       "created_time",
       "creative",
+      "demolink_hash",
+      "display_sequence",
       "effective_status",
+      "engagement_audience",
+      "failed_delivery_checks",
       "id",
+      "impression_control_map",
+      "issues_info",
       "last_updated_by_app_id",
+      "locations",
       "name",
+      "objective_source",
+      "priority",
       "recommendations",
+      "social_prefs",
       "source_ad",
       "source_ad_id",
       "status",
+      "targeting",
+      "tracking_and_conversion_with_defaults",
       "tracking_specs",
       "updated_time",
+      "url_override",
     };
 
     @Override
@@ -2043,17 +2417,12 @@ public class AdSet extends APINode {
     }
 
 
-    public APIRequestGetAds setAdDraftId (String adDraftId) {
-      this.setParam("ad_draft_id", adDraftId);
+    public APIRequestGetAds setIncludeDeleted (Boolean includeDeleted) {
+      this.setParam("include_deleted", includeDeleted);
       return this;
     }
-
-    public APIRequestGetAds setDatePreset (Ad.EnumDatePreset datePreset) {
-      this.setParam("date_preset", datePreset);
-      return this;
-    }
-    public APIRequestGetAds setDatePreset (String datePreset) {
-      this.setParam("date_preset", datePreset);
+    public APIRequestGetAds setIncludeDeleted (String includeDeleted) {
+      this.setParam("include_deleted", includeDeleted);
       return this;
     }
 
@@ -2063,6 +2432,15 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds setEffectiveStatus (String effectiveStatus) {
       this.setParam("effective_status", effectiveStatus);
+      return this;
+    }
+
+    public APIRequestGetAds setDatePreset (Ad.EnumDatePreset datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+    public APIRequestGetAds setDatePreset (String datePreset) {
+      this.setParam("date_preset", datePreset);
       return this;
     }
 
@@ -2081,6 +2459,11 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds setUpdatedSince (String updatedSince) {
       this.setParam("updated_since", updatedSince);
+      return this;
+    }
+
+    public APIRequestGetAds setAdDraftId (String adDraftId) {
+      this.setParam("ad_draft_id", adDraftId);
       return this;
     }
 
@@ -2218,11 +2601,39 @@ public class AdSet extends APINode {
       this.requestField("creative", value);
       return this;
     }
+    public APIRequestGetAds requestDemolinkHashField () {
+      return this.requestDemolinkHashField(true);
+    }
+    public APIRequestGetAds requestDemolinkHashField (boolean value) {
+      this.requestField("demolink_hash", value);
+      return this;
+    }
+    public APIRequestGetAds requestDisplaySequenceField () {
+      return this.requestDisplaySequenceField(true);
+    }
+    public APIRequestGetAds requestDisplaySequenceField (boolean value) {
+      this.requestField("display_sequence", value);
+      return this;
+    }
     public APIRequestGetAds requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
     public APIRequestGetAds requestEffectiveStatusField (boolean value) {
       this.requestField("effective_status", value);
+      return this;
+    }
+    public APIRequestGetAds requestEngagementAudienceField () {
+      return this.requestEngagementAudienceField(true);
+    }
+    public APIRequestGetAds requestEngagementAudienceField (boolean value) {
+      this.requestField("engagement_audience", value);
+      return this;
+    }
+    public APIRequestGetAds requestFailedDeliveryChecksField () {
+      return this.requestFailedDeliveryChecksField(true);
+    }
+    public APIRequestGetAds requestFailedDeliveryChecksField (boolean value) {
+      this.requestField("failed_delivery_checks", value);
       return this;
     }
     public APIRequestGetAds requestIdField () {
@@ -2232,11 +2643,32 @@ public class AdSet extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetAds requestImpressionControlMapField () {
+      return this.requestImpressionControlMapField(true);
+    }
+    public APIRequestGetAds requestImpressionControlMapField (boolean value) {
+      this.requestField("impression_control_map", value);
+      return this;
+    }
+    public APIRequestGetAds requestIssuesInfoField () {
+      return this.requestIssuesInfoField(true);
+    }
+    public APIRequestGetAds requestIssuesInfoField (boolean value) {
+      this.requestField("issues_info", value);
+      return this;
+    }
     public APIRequestGetAds requestLastUpdatedByAppIdField () {
       return this.requestLastUpdatedByAppIdField(true);
     }
     public APIRequestGetAds requestLastUpdatedByAppIdField (boolean value) {
       this.requestField("last_updated_by_app_id", value);
+      return this;
+    }
+    public APIRequestGetAds requestLocationsField () {
+      return this.requestLocationsField(true);
+    }
+    public APIRequestGetAds requestLocationsField (boolean value) {
+      this.requestField("locations", value);
       return this;
     }
     public APIRequestGetAds requestNameField () {
@@ -2246,11 +2678,32 @@ public class AdSet extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGetAds requestObjectiveSourceField () {
+      return this.requestObjectiveSourceField(true);
+    }
+    public APIRequestGetAds requestObjectiveSourceField (boolean value) {
+      this.requestField("objective_source", value);
+      return this;
+    }
+    public APIRequestGetAds requestPriorityField () {
+      return this.requestPriorityField(true);
+    }
+    public APIRequestGetAds requestPriorityField (boolean value) {
+      this.requestField("priority", value);
+      return this;
+    }
     public APIRequestGetAds requestRecommendationsField () {
       return this.requestRecommendationsField(true);
     }
     public APIRequestGetAds requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
+      return this;
+    }
+    public APIRequestGetAds requestSocialPrefsField () {
+      return this.requestSocialPrefsField(true);
+    }
+    public APIRequestGetAds requestSocialPrefsField (boolean value) {
+      this.requestField("social_prefs", value);
       return this;
     }
     public APIRequestGetAds requestSourceAdField () {
@@ -2274,6 +2727,20 @@ public class AdSet extends APINode {
       this.requestField("status", value);
       return this;
     }
+    public APIRequestGetAds requestTargetingField () {
+      return this.requestTargetingField(true);
+    }
+    public APIRequestGetAds requestTargetingField (boolean value) {
+      this.requestField("targeting", value);
+      return this;
+    }
+    public APIRequestGetAds requestTrackingAndConversionWithDefaultsField () {
+      return this.requestTrackingAndConversionWithDefaultsField(true);
+    }
+    public APIRequestGetAds requestTrackingAndConversionWithDefaultsField (boolean value) {
+      this.requestField("tracking_and_conversion_with_defaults", value);
+      return this;
+    }
     public APIRequestGetAds requestTrackingSpecsField () {
       return this.requestTrackingSpecsField(true);
     }
@@ -2286,6 +2753,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetAds requestUrlOverrideField () {
+      return this.requestUrlOverrideField(true);
+    }
+    public APIRequestGetAds requestUrlOverrideField (boolean value) {
+      this.requestField("url_override", value);
       return this;
     }
   }
@@ -2483,17 +2957,22 @@ public class AdSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "date_preset",
       "effective_status",
+      "date_preset",
       "is_completed",
       "time_range",
     };
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_keywords",
+      "adasset_feed",
       "adlabels",
       "adset_schedule",
+      "asset_feed_id",
       "attribution_spec",
+      "best_creative",
+      "bid_adjustments",
       "bid_amount",
       "bid_info",
       "bid_strategy",
@@ -2510,11 +2989,18 @@ public class AdSet extends APINode {
       "destination_type",
       "effective_status",
       "end_time",
+      "frequency_cap",
+      "frequency_cap_reset_period",
       "frequency_control_specs",
+      "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
+      "is_autobid",
+      "is_average_price_pacing",
+      "is_dynamic_creative",
       "is_dynamic_creative_optimization",
       "lifetime_budget",
+      "lifetime_frequency_cap",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
@@ -2524,6 +3010,7 @@ public class AdSet extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "review_feedback",
       "rf_prediction_id",
       "rtb_flag",
       "source_adset",
@@ -2533,6 +3020,7 @@ public class AdSet extends APINode {
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
+      "tracking_specs",
       "updated_time",
       "use_new_app_click",
     };
@@ -2589,21 +3077,21 @@ public class AdSet extends APINode {
     }
 
 
-    public APIRequestGetCopies setDatePreset (AdSet.EnumDatePreset datePreset) {
-      this.setParam("date_preset", datePreset);
-      return this;
-    }
-    public APIRequestGetCopies setDatePreset (String datePreset) {
-      this.setParam("date_preset", datePreset);
-      return this;
-    }
-
     public APIRequestGetCopies setEffectiveStatus (List<AdSet.EnumEffectiveStatus> effectiveStatus) {
       this.setParam("effective_status", effectiveStatus);
       return this;
     }
     public APIRequestGetCopies setEffectiveStatus (String effectiveStatus) {
       this.setParam("effective_status", effectiveStatus);
+      return this;
+    }
+
+    public APIRequestGetCopies setDatePreset (AdSet.EnumDatePreset datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+    public APIRequestGetCopies setDatePreset (String datePreset) {
+      this.setParam("date_preset", datePreset);
       return this;
     }
 
@@ -2668,6 +3156,20 @@ public class AdSet extends APINode {
       this.requestField("account_id", value);
       return this;
     }
+    public APIRequestGetCopies requestAdKeywordsField () {
+      return this.requestAdKeywordsField(true);
+    }
+    public APIRequestGetCopies requestAdKeywordsField (boolean value) {
+      this.requestField("ad_keywords", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAdassetFeedField () {
+      return this.requestAdassetFeedField(true);
+    }
+    public APIRequestGetCopies requestAdassetFeedField (boolean value) {
+      this.requestField("adasset_feed", value);
+      return this;
+    }
     public APIRequestGetCopies requestAdlabelsField () {
       return this.requestAdlabelsField(true);
     }
@@ -2682,11 +3184,32 @@ public class AdSet extends APINode {
       this.requestField("adset_schedule", value);
       return this;
     }
+    public APIRequestGetCopies requestAssetFeedIdField () {
+      return this.requestAssetFeedIdField(true);
+    }
+    public APIRequestGetCopies requestAssetFeedIdField (boolean value) {
+      this.requestField("asset_feed_id", value);
+      return this;
+    }
     public APIRequestGetCopies requestAttributionSpecField () {
       return this.requestAttributionSpecField(true);
     }
     public APIRequestGetCopies requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
+      return this;
+    }
+    public APIRequestGetCopies requestBestCreativeField () {
+      return this.requestBestCreativeField(true);
+    }
+    public APIRequestGetCopies requestBestCreativeField (boolean value) {
+      this.requestField("best_creative", value);
+      return this;
+    }
+    public APIRequestGetCopies requestBidAdjustmentsField () {
+      return this.requestBidAdjustmentsField(true);
+    }
+    public APIRequestGetCopies requestBidAdjustmentsField (boolean value) {
+      this.requestField("bid_adjustments", value);
       return this;
     }
     public APIRequestGetCopies requestBidAmountField () {
@@ -2801,11 +3324,32 @@ public class AdSet extends APINode {
       this.requestField("end_time", value);
       return this;
     }
+    public APIRequestGetCopies requestFrequencyCapField () {
+      return this.requestFrequencyCapField(true);
+    }
+    public APIRequestGetCopies requestFrequencyCapField (boolean value) {
+      this.requestField("frequency_cap", value);
+      return this;
+    }
+    public APIRequestGetCopies requestFrequencyCapResetPeriodField () {
+      return this.requestFrequencyCapResetPeriodField(true);
+    }
+    public APIRequestGetCopies requestFrequencyCapResetPeriodField (boolean value) {
+      this.requestField("frequency_cap_reset_period", value);
+      return this;
+    }
     public APIRequestGetCopies requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
     public APIRequestGetCopies requestFrequencyControlSpecsField (boolean value) {
       this.requestField("frequency_control_specs", value);
+      return this;
+    }
+    public APIRequestGetCopies requestFullFunnelExplorationModeField () {
+      return this.requestFullFunnelExplorationModeField(true);
+    }
+    public APIRequestGetCopies requestFullFunnelExplorationModeField (boolean value) {
+      this.requestField("full_funnel_exploration_mode", value);
       return this;
     }
     public APIRequestGetCopies requestIdField () {
@@ -2822,6 +3366,27 @@ public class AdSet extends APINode {
       this.requestField("instagram_actor_id", value);
       return this;
     }
+    public APIRequestGetCopies requestIsAutobidField () {
+      return this.requestIsAutobidField(true);
+    }
+    public APIRequestGetCopies requestIsAutobidField (boolean value) {
+      this.requestField("is_autobid", value);
+      return this;
+    }
+    public APIRequestGetCopies requestIsAveragePricePacingField () {
+      return this.requestIsAveragePricePacingField(true);
+    }
+    public APIRequestGetCopies requestIsAveragePricePacingField (boolean value) {
+      this.requestField("is_average_price_pacing", value);
+      return this;
+    }
+    public APIRequestGetCopies requestIsDynamicCreativeField () {
+      return this.requestIsDynamicCreativeField(true);
+    }
+    public APIRequestGetCopies requestIsDynamicCreativeField (boolean value) {
+      this.requestField("is_dynamic_creative", value);
+      return this;
+    }
     public APIRequestGetCopies requestIsDynamicCreativeOptimizationField () {
       return this.requestIsDynamicCreativeOptimizationField(true);
     }
@@ -2834,6 +3399,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
+      return this;
+    }
+    public APIRequestGetCopies requestLifetimeFrequencyCapField () {
+      return this.requestLifetimeFrequencyCapField(true);
+    }
+    public APIRequestGetCopies requestLifetimeFrequencyCapField (boolean value) {
+      this.requestField("lifetime_frequency_cap", value);
       return this;
     }
     public APIRequestGetCopies requestLifetimeImpsField () {
@@ -2899,6 +3471,13 @@ public class AdSet extends APINode {
       this.requestField("recurring_budget_semantics", value);
       return this;
     }
+    public APIRequestGetCopies requestReviewFeedbackField () {
+      return this.requestReviewFeedbackField(true);
+    }
+    public APIRequestGetCopies requestReviewFeedbackField (boolean value) {
+      this.requestField("review_feedback", value);
+      return this;
+    }
     public APIRequestGetCopies requestRfPredictionIdField () {
       return this.requestRfPredictionIdField(true);
     }
@@ -2962,6 +3541,13 @@ public class AdSet extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
+    public APIRequestGetCopies requestTrackingSpecsField () {
+      return this.requestTrackingSpecsField(true);
+    }
+    public APIRequestGetCopies requestTrackingSpecsField (boolean value) {
+      this.requestField("tracking_specs", value);
+      return this;
+    }
     public APIRequestGetCopies requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -2978,6 +3564,167 @@ public class AdSet extends APINode {
     }
   }
 
+  public static class APIRequestCreateCopy extends APIRequest<AdSet> {
+
+    AdSet lastResponse = null;
+    @Override
+    public AdSet getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "deep_copy",
+      "campaign_id",
+      "rename_options",
+      "status_option",
+      "start_time",
+      "end_time",
+      "create_dco_adset",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdSet parseResponse(String response) throws APIException {
+      return AdSet.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdSet execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdSet execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdSet> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdSet>() {
+           public AdSet apply(String result) {
+             try {
+               return APIRequestCreateCopy.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateCopy(String nodeId, APIContext context) {
+      super(context, nodeId, "/copies", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateCopy setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCopy setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateCopy setDeepCopy (Boolean deepCopy) {
+      this.setParam("deep_copy", deepCopy);
+      return this;
+    }
+    public APIRequestCreateCopy setDeepCopy (String deepCopy) {
+      this.setParam("deep_copy", deepCopy);
+      return this;
+    }
+
+    public APIRequestCreateCopy setCampaignId (String campaignId) {
+      this.setParam("campaign_id", campaignId);
+      return this;
+    }
+
+    public APIRequestCreateCopy setRenameOptions (Object renameOptions) {
+      this.setParam("rename_options", renameOptions);
+      return this;
+    }
+    public APIRequestCreateCopy setRenameOptions (String renameOptions) {
+      this.setParam("rename_options", renameOptions);
+      return this;
+    }
+
+    public APIRequestCreateCopy setStatusOption (AdSet.EnumStatusOption statusOption) {
+      this.setParam("status_option", statusOption);
+      return this;
+    }
+    public APIRequestCreateCopy setStatusOption (String statusOption) {
+      this.setParam("status_option", statusOption);
+      return this;
+    }
+
+    public APIRequestCreateCopy setStartTime (String startTime) {
+      this.setParam("start_time", startTime);
+      return this;
+    }
+
+    public APIRequestCreateCopy setEndTime (String endTime) {
+      this.setParam("end_time", endTime);
+      return this;
+    }
+
+    public APIRequestCreateCopy setCreateDcoAdset (Boolean createDcoAdset) {
+      this.setParam("create_dco_adset", createDcoAdset);
+      return this;
+    }
+    public APIRequestCreateCopy setCreateDcoAdset (String createDcoAdset) {
+      this.setParam("create_dco_adset", createDcoAdset);
+      return this;
+    }
+
+    public APIRequestCreateCopy requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateCopy requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCopy requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateCopy requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCopy requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateCopy requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetDeliveryEstimate extends APIRequest<AdCampaignDeliveryEstimate> {
 
     APINodeList<AdCampaignDeliveryEstimate> lastResponse = null;
@@ -2986,16 +3733,18 @@ public class AdSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "targeting_spec",
       "optimization_goal",
       "promoted_object",
-      "targeting_spec",
     };
 
     public static final String[] FIELDS = {
+      "bid_estimate",
       "daily_outcomes_curve",
       "estimate_dau",
       "estimate_mau",
       "estimate_ready",
+      "id",
     };
 
     @Override
@@ -3050,6 +3799,15 @@ public class AdSet extends APINode {
     }
 
 
+    public APIRequestGetDeliveryEstimate setTargetingSpec (Targeting targetingSpec) {
+      this.setParam("targeting_spec", targetingSpec);
+      return this;
+    }
+    public APIRequestGetDeliveryEstimate setTargetingSpec (String targetingSpec) {
+      this.setParam("targeting_spec", targetingSpec);
+      return this;
+    }
+
     public APIRequestGetDeliveryEstimate setOptimizationGoal (AdCampaignDeliveryEstimate.EnumOptimizationGoal optimizationGoal) {
       this.setParam("optimization_goal", optimizationGoal);
       return this;
@@ -3065,15 +3823,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetDeliveryEstimate setPromotedObject (String promotedObject) {
       this.setParam("promoted_object", promotedObject);
-      return this;
-    }
-
-    public APIRequestGetDeliveryEstimate setTargetingSpec (Targeting targetingSpec) {
-      this.setParam("targeting_spec", targetingSpec);
-      return this;
-    }
-    public APIRequestGetDeliveryEstimate setTargetingSpec (String targetingSpec) {
-      this.setParam("targeting_spec", targetingSpec);
       return this;
     }
 
@@ -3113,6 +3862,13 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestGetDeliveryEstimate requestBidEstimateField () {
+      return this.requestBidEstimateField(true);
+    }
+    public APIRequestGetDeliveryEstimate requestBidEstimateField (boolean value) {
+      this.requestField("bid_estimate", value);
+      return this;
+    }
     public APIRequestGetDeliveryEstimate requestDailyOutcomesCurveField () {
       return this.requestDailyOutcomesCurveField(true);
     }
@@ -3141,6 +3897,13 @@ public class AdSet extends APINode {
       this.requestField("estimate_ready", value);
       return this;
     }
+    public APIRequestGetDeliveryEstimate requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetDeliveryEstimate requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetInsights extends APIRequest<AdsInsights> {
@@ -3151,21 +3914,21 @@ public class AdSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "default_summary",
+      "fields",
+      "filtering",
+      "summary",
+      "sort",
       "action_attribution_windows",
       "action_breakdowns",
       "action_report_time",
       "breakdowns",
       "date_preset",
-      "default_summary",
       "export_columns",
       "export_format",
       "export_name",
-      "fields",
-      "filtering",
       "level",
       "product_id_limit",
-      "sort",
-      "summary",
       "summary_action_breakdowns",
       "time_increment",
       "time_range",
@@ -3228,6 +3991,51 @@ public class AdSet extends APINode {
     }
 
 
+    public APIRequestGetInsights setDefaultSummary (Boolean defaultSummary) {
+      this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+    public APIRequestGetInsights setDefaultSummary (String defaultSummary) {
+      this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+
+    public APIRequestGetInsights setFields (List<String> fields) {
+      this.setParam("fields", fields);
+      return this;
+    }
+    public APIRequestGetInsights setFields (String fields) {
+      this.setParam("fields", fields);
+      return this;
+    }
+
+    public APIRequestGetInsights setFiltering (List<Object> filtering) {
+      this.setParam("filtering", filtering);
+      return this;
+    }
+    public APIRequestGetInsights setFiltering (String filtering) {
+      this.setParam("filtering", filtering);
+      return this;
+    }
+
+    public APIRequestGetInsights setSummary (List<String> summary) {
+      this.setParam("summary", summary);
+      return this;
+    }
+    public APIRequestGetInsights setSummary (String summary) {
+      this.setParam("summary", summary);
+      return this;
+    }
+
+    public APIRequestGetInsights setSort (List<String> sort) {
+      this.setParam("sort", sort);
+      return this;
+    }
+    public APIRequestGetInsights setSort (String sort) {
+      this.setParam("sort", sort);
+      return this;
+    }
+
     public APIRequestGetInsights setActionAttributionWindows (List<AdsInsights.EnumActionAttributionWindows> actionAttributionWindows) {
       this.setParam("action_attribution_windows", actionAttributionWindows);
       return this;
@@ -3273,15 +4081,6 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setDefaultSummary (Boolean defaultSummary) {
-      this.setParam("default_summary", defaultSummary);
-      return this;
-    }
-    public APIRequestGetInsights setDefaultSummary (String defaultSummary) {
-      this.setParam("default_summary", defaultSummary);
-      return this;
-    }
-
     public APIRequestGetInsights setExportColumns (List<String> exportColumns) {
       this.setParam("export_columns", exportColumns);
       return this;
@@ -3301,24 +4100,6 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setFields (List<AdsInsights.EnumSummary> fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-    public APIRequestGetInsights setFields (String fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-
-    public APIRequestGetInsights setFiltering (List<Object> filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-    public APIRequestGetInsights setFiltering (String filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-
     public APIRequestGetInsights setLevel (AdsInsights.EnumLevel level) {
       this.setParam("level", level);
       return this;
@@ -3334,24 +4115,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetInsights setProductIdLimit (String productIdLimit) {
       this.setParam("product_id_limit", productIdLimit);
-      return this;
-    }
-
-    public APIRequestGetInsights setSort (List<String> sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-    public APIRequestGetInsights setSort (String sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-
-    public APIRequestGetInsights setSummary (List<AdsInsights.EnumSummary> summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
-    public APIRequestGetInsights setSummary (String summary) {
-      this.setParam("summary", summary);
       return this;
     }
 
@@ -3442,21 +4205,21 @@ public class AdSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "default_summary",
+      "fields",
+      "filtering",
+      "summary",
+      "sort",
       "action_attribution_windows",
       "action_breakdowns",
       "action_report_time",
       "breakdowns",
       "date_preset",
-      "default_summary",
       "export_columns",
       "export_format",
       "export_name",
-      "fields",
-      "filtering",
       "level",
       "product_id_limit",
-      "sort",
-      "summary",
       "summary_action_breakdowns",
       "time_increment",
       "time_range",
@@ -3519,6 +4282,51 @@ public class AdSet extends APINode {
     }
 
 
+    public APIRequestGetInsightsAsync setDefaultSummary (Boolean defaultSummary) {
+      this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setDefaultSummary (String defaultSummary) {
+      this.setParam("default_summary", defaultSummary);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setFields (List<String> fields) {
+      this.setParam("fields", fields);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setFields (String fields) {
+      this.setParam("fields", fields);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setFiltering (List<Object> filtering) {
+      this.setParam("filtering", filtering);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setFiltering (String filtering) {
+      this.setParam("filtering", filtering);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setSummary (List<String> summary) {
+      this.setParam("summary", summary);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setSummary (String summary) {
+      this.setParam("summary", summary);
+      return this;
+    }
+
+    public APIRequestGetInsightsAsync setSort (List<String> sort) {
+      this.setParam("sort", sort);
+      return this;
+    }
+    public APIRequestGetInsightsAsync setSort (String sort) {
+      this.setParam("sort", sort);
+      return this;
+    }
+
     public APIRequestGetInsightsAsync setActionAttributionWindows (List<AdsInsights.EnumActionAttributionWindows> actionAttributionWindows) {
       this.setParam("action_attribution_windows", actionAttributionWindows);
       return this;
@@ -3564,15 +4372,6 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setDefaultSummary (Boolean defaultSummary) {
-      this.setParam("default_summary", defaultSummary);
-      return this;
-    }
-    public APIRequestGetInsightsAsync setDefaultSummary (String defaultSummary) {
-      this.setParam("default_summary", defaultSummary);
-      return this;
-    }
-
     public APIRequestGetInsightsAsync setExportColumns (List<String> exportColumns) {
       this.setParam("export_columns", exportColumns);
       return this;
@@ -3592,24 +4391,6 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setFields (List<AdsInsights.EnumSummary> fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-    public APIRequestGetInsightsAsync setFields (String fields) {
-      this.setParam("fields", fields);
-      return this;
-    }
-
-    public APIRequestGetInsightsAsync setFiltering (List<Object> filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-    public APIRequestGetInsightsAsync setFiltering (String filtering) {
-      this.setParam("filtering", filtering);
-      return this;
-    }
-
     public APIRequestGetInsightsAsync setLevel (AdsInsights.EnumLevel level) {
       this.setParam("level", level);
       return this;
@@ -3625,24 +4406,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetInsightsAsync setProductIdLimit (String productIdLimit) {
       this.setParam("product_id_limit", productIdLimit);
-      return this;
-    }
-
-    public APIRequestGetInsightsAsync setSort (List<String> sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-    public APIRequestGetInsightsAsync setSort (String sort) {
-      this.setParam("sort", sort);
-      return this;
-    }
-
-    public APIRequestGetInsightsAsync setSummary (List<AdsInsights.EnumSummary> summary) {
-      this.setParam("summary", summary);
-      return this;
-    }
-    public APIRequestGetInsightsAsync setSummary (String summary) {
-      this.setParam("summary", summary);
       return this;
     }
 
@@ -3963,13 +4726,21 @@ public class AdSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "date_preset",
+      "from_adtable",
+      "time_range",
     };
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_keywords",
+      "adasset_feed",
       "adlabels",
       "adset_schedule",
+      "asset_feed_id",
       "attribution_spec",
+      "best_creative",
+      "bid_adjustments",
       "bid_amount",
       "bid_info",
       "bid_strategy",
@@ -3986,11 +4757,18 @@ public class AdSet extends APINode {
       "destination_type",
       "effective_status",
       "end_time",
+      "frequency_cap",
+      "frequency_cap_reset_period",
       "frequency_control_specs",
+      "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
+      "is_autobid",
+      "is_average_price_pacing",
+      "is_dynamic_creative",
       "is_dynamic_creative_optimization",
       "lifetime_budget",
+      "lifetime_frequency_cap",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
@@ -4000,6 +4778,7 @@ public class AdSet extends APINode {
       "promoted_object",
       "recommendations",
       "recurring_budget_semantics",
+      "review_feedback",
       "rf_prediction_id",
       "rtb_flag",
       "source_adset",
@@ -4009,6 +4788,7 @@ public class AdSet extends APINode {
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
+      "tracking_specs",
       "updated_time",
       "use_new_app_click",
     };
@@ -4065,6 +4845,33 @@ public class AdSet extends APINode {
     }
 
 
+    public APIRequestGet setDatePreset (EnumDatePreset datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+    public APIRequestGet setDatePreset (String datePreset) {
+      this.setParam("date_preset", datePreset);
+      return this;
+    }
+
+    public APIRequestGet setFromAdtable (Boolean fromAdtable) {
+      this.setParam("from_adtable", fromAdtable);
+      return this;
+    }
+    public APIRequestGet setFromAdtable (String fromAdtable) {
+      this.setParam("from_adtable", fromAdtable);
+      return this;
+    }
+
+    public APIRequestGet setTimeRange (Object timeRange) {
+      this.setParam("time_range", timeRange);
+      return this;
+    }
+    public APIRequestGet setTimeRange (String timeRange) {
+      this.setParam("time_range", timeRange);
+      return this;
+    }
+
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -4108,6 +4915,20 @@ public class AdSet extends APINode {
       this.requestField("account_id", value);
       return this;
     }
+    public APIRequestGet requestAdKeywordsField () {
+      return this.requestAdKeywordsField(true);
+    }
+    public APIRequestGet requestAdKeywordsField (boolean value) {
+      this.requestField("ad_keywords", value);
+      return this;
+    }
+    public APIRequestGet requestAdassetFeedField () {
+      return this.requestAdassetFeedField(true);
+    }
+    public APIRequestGet requestAdassetFeedField (boolean value) {
+      this.requestField("adasset_feed", value);
+      return this;
+    }
     public APIRequestGet requestAdlabelsField () {
       return this.requestAdlabelsField(true);
     }
@@ -4122,11 +4943,32 @@ public class AdSet extends APINode {
       this.requestField("adset_schedule", value);
       return this;
     }
+    public APIRequestGet requestAssetFeedIdField () {
+      return this.requestAssetFeedIdField(true);
+    }
+    public APIRequestGet requestAssetFeedIdField (boolean value) {
+      this.requestField("asset_feed_id", value);
+      return this;
+    }
     public APIRequestGet requestAttributionSpecField () {
       return this.requestAttributionSpecField(true);
     }
     public APIRequestGet requestAttributionSpecField (boolean value) {
       this.requestField("attribution_spec", value);
+      return this;
+    }
+    public APIRequestGet requestBestCreativeField () {
+      return this.requestBestCreativeField(true);
+    }
+    public APIRequestGet requestBestCreativeField (boolean value) {
+      this.requestField("best_creative", value);
+      return this;
+    }
+    public APIRequestGet requestBidAdjustmentsField () {
+      return this.requestBidAdjustmentsField(true);
+    }
+    public APIRequestGet requestBidAdjustmentsField (boolean value) {
+      this.requestField("bid_adjustments", value);
       return this;
     }
     public APIRequestGet requestBidAmountField () {
@@ -4241,11 +5083,32 @@ public class AdSet extends APINode {
       this.requestField("end_time", value);
       return this;
     }
+    public APIRequestGet requestFrequencyCapField () {
+      return this.requestFrequencyCapField(true);
+    }
+    public APIRequestGet requestFrequencyCapField (boolean value) {
+      this.requestField("frequency_cap", value);
+      return this;
+    }
+    public APIRequestGet requestFrequencyCapResetPeriodField () {
+      return this.requestFrequencyCapResetPeriodField(true);
+    }
+    public APIRequestGet requestFrequencyCapResetPeriodField (boolean value) {
+      this.requestField("frequency_cap_reset_period", value);
+      return this;
+    }
     public APIRequestGet requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
     public APIRequestGet requestFrequencyControlSpecsField (boolean value) {
       this.requestField("frequency_control_specs", value);
+      return this;
+    }
+    public APIRequestGet requestFullFunnelExplorationModeField () {
+      return this.requestFullFunnelExplorationModeField(true);
+    }
+    public APIRequestGet requestFullFunnelExplorationModeField (boolean value) {
+      this.requestField("full_funnel_exploration_mode", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -4262,6 +5125,27 @@ public class AdSet extends APINode {
       this.requestField("instagram_actor_id", value);
       return this;
     }
+    public APIRequestGet requestIsAutobidField () {
+      return this.requestIsAutobidField(true);
+    }
+    public APIRequestGet requestIsAutobidField (boolean value) {
+      this.requestField("is_autobid", value);
+      return this;
+    }
+    public APIRequestGet requestIsAveragePricePacingField () {
+      return this.requestIsAveragePricePacingField(true);
+    }
+    public APIRequestGet requestIsAveragePricePacingField (boolean value) {
+      this.requestField("is_average_price_pacing", value);
+      return this;
+    }
+    public APIRequestGet requestIsDynamicCreativeField () {
+      return this.requestIsDynamicCreativeField(true);
+    }
+    public APIRequestGet requestIsDynamicCreativeField (boolean value) {
+      this.requestField("is_dynamic_creative", value);
+      return this;
+    }
     public APIRequestGet requestIsDynamicCreativeOptimizationField () {
       return this.requestIsDynamicCreativeOptimizationField(true);
     }
@@ -4274,6 +5158,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
+      return this;
+    }
+    public APIRequestGet requestLifetimeFrequencyCapField () {
+      return this.requestLifetimeFrequencyCapField(true);
+    }
+    public APIRequestGet requestLifetimeFrequencyCapField (boolean value) {
+      this.requestField("lifetime_frequency_cap", value);
       return this;
     }
     public APIRequestGet requestLifetimeImpsField () {
@@ -4339,6 +5230,13 @@ public class AdSet extends APINode {
       this.requestField("recurring_budget_semantics", value);
       return this;
     }
+    public APIRequestGet requestReviewFeedbackField () {
+      return this.requestReviewFeedbackField(true);
+    }
+    public APIRequestGet requestReviewFeedbackField (boolean value) {
+      this.requestField("review_feedback", value);
+      return this;
+    }
     public APIRequestGet requestRfPredictionIdField () {
       return this.requestRfPredictionIdField(true);
     }
@@ -4402,6 +5300,13 @@ public class AdSet extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
+    public APIRequestGet requestTrackingSpecsField () {
+      return this.requestTrackingSpecsField(true);
+    }
+    public APIRequestGet requestTrackingSpecsField (boolean value) {
+      this.requestField("tracking_specs", value);
+      return this;
+    }
     public APIRequestGet requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -4427,21 +5332,30 @@ public class AdSet extends APINode {
     }
     public static final String[] PARAMS = {
       "account_id",
+      "ad_keywords",
       "adlabels",
-      "adset_schedule",
-      "attribution_spec",
       "bid_amount",
+      "bid_adjustments",
       "bid_strategy",
       "billing_event",
+      "campaign_spec",
+      "adset_schedule",
+      "status",
       "creative_sequence",
       "daily_budget",
       "daily_imps",
       "daily_min_spend_target",
       "daily_spend_cap",
+      "date_format",
       "destination_type",
       "end_time",
       "execution_options",
+      "frequency_cap",
+      "frequency_cap_reset_period",
+      "is_autobid",
+      "is_average_price_pacing",
       "lifetime_budget",
+      "lifetime_frequency_cap",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
@@ -4449,12 +5363,17 @@ public class AdSet extends APINode {
       "optimization_goal",
       "pacing_type",
       "promoted_object",
+      "rb_prediction_id",
       "rf_prediction_id",
       "start_time",
-      "status",
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
+      "time_start",
+      "time_stop",
+      "upstream_events",
+      "full_funnel_exploration_mode",
+      "attribution_spec",
     };
 
     public static final String[] FIELDS = {
@@ -4517,6 +5436,15 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setAdKeywords (Object adKeywords) {
+      this.setParam("ad_keywords", adKeywords);
+      return this;
+    }
+    public APIRequestUpdate setAdKeywords (String adKeywords) {
+      this.setParam("ad_keywords", adKeywords);
+      return this;
+    }
+
     public APIRequestUpdate setAdlabels (List<Object> adlabels) {
       this.setParam("adlabels", adlabels);
       return this;
@@ -4526,30 +5454,21 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAdsetSchedule (List<Object> adsetSchedule) {
-      this.setParam("adset_schedule", adsetSchedule);
-      return this;
-    }
-    public APIRequestUpdate setAdsetSchedule (String adsetSchedule) {
-      this.setParam("adset_schedule", adsetSchedule);
-      return this;
-    }
-
-    public APIRequestUpdate setAttributionSpec (List<Map<String, String>> attributionSpec) {
-      this.setParam("attribution_spec", attributionSpec);
-      return this;
-    }
-    public APIRequestUpdate setAttributionSpec (String attributionSpec) {
-      this.setParam("attribution_spec", attributionSpec);
-      return this;
-    }
-
     public APIRequestUpdate setBidAmount (Long bidAmount) {
       this.setParam("bid_amount", bidAmount);
       return this;
     }
     public APIRequestUpdate setBidAmount (String bidAmount) {
       this.setParam("bid_amount", bidAmount);
+      return this;
+    }
+
+    public APIRequestUpdate setBidAdjustments (Object bidAdjustments) {
+      this.setParam("bid_adjustments", bidAdjustments);
+      return this;
+    }
+    public APIRequestUpdate setBidAdjustments (String bidAdjustments) {
+      this.setParam("bid_adjustments", bidAdjustments);
       return this;
     }
 
@@ -4568,6 +5487,33 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setBillingEvent (String billingEvent) {
       this.setParam("billing_event", billingEvent);
+      return this;
+    }
+
+    public APIRequestUpdate setCampaignSpec (Object campaignSpec) {
+      this.setParam("campaign_spec", campaignSpec);
+      return this;
+    }
+    public APIRequestUpdate setCampaignSpec (String campaignSpec) {
+      this.setParam("campaign_spec", campaignSpec);
+      return this;
+    }
+
+    public APIRequestUpdate setAdsetSchedule (List<Object> adsetSchedule) {
+      this.setParam("adset_schedule", adsetSchedule);
+      return this;
+    }
+    public APIRequestUpdate setAdsetSchedule (String adsetSchedule) {
+      this.setParam("adset_schedule", adsetSchedule);
+      return this;
+    }
+
+    public APIRequestUpdate setStatus (AdSet.EnumStatus status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestUpdate setStatus (String status) {
+      this.setParam("status", status);
       return this;
     }
 
@@ -4616,6 +5562,11 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setDateFormat (String dateFormat) {
+      this.setParam("date_format", dateFormat);
+      return this;
+    }
+
     public APIRequestUpdate setDestinationType (AdSet.EnumDestinationType destinationType) {
       this.setParam("destination_type", destinationType);
       return this;
@@ -4639,12 +5590,57 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setFrequencyCap (Long frequencyCap) {
+      this.setParam("frequency_cap", frequencyCap);
+      return this;
+    }
+    public APIRequestUpdate setFrequencyCap (String frequencyCap) {
+      this.setParam("frequency_cap", frequencyCap);
+      return this;
+    }
+
+    public APIRequestUpdate setFrequencyCapResetPeriod (Long frequencyCapResetPeriod) {
+      this.setParam("frequency_cap_reset_period", frequencyCapResetPeriod);
+      return this;
+    }
+    public APIRequestUpdate setFrequencyCapResetPeriod (String frequencyCapResetPeriod) {
+      this.setParam("frequency_cap_reset_period", frequencyCapResetPeriod);
+      return this;
+    }
+
+    public APIRequestUpdate setIsAutobid (Boolean isAutobid) {
+      this.setParam("is_autobid", isAutobid);
+      return this;
+    }
+    public APIRequestUpdate setIsAutobid (String isAutobid) {
+      this.setParam("is_autobid", isAutobid);
+      return this;
+    }
+
+    public APIRequestUpdate setIsAveragePricePacing (Boolean isAveragePricePacing) {
+      this.setParam("is_average_price_pacing", isAveragePricePacing);
+      return this;
+    }
+    public APIRequestUpdate setIsAveragePricePacing (String isAveragePricePacing) {
+      this.setParam("is_average_price_pacing", isAveragePricePacing);
+      return this;
+    }
+
     public APIRequestUpdate setLifetimeBudget (Long lifetimeBudget) {
       this.setParam("lifetime_budget", lifetimeBudget);
       return this;
     }
     public APIRequestUpdate setLifetimeBudget (String lifetimeBudget) {
       this.setParam("lifetime_budget", lifetimeBudget);
+      return this;
+    }
+
+    public APIRequestUpdate setLifetimeFrequencyCap (Long lifetimeFrequencyCap) {
+      this.setParam("lifetime_frequency_cap", lifetimeFrequencyCap);
+      return this;
+    }
+    public APIRequestUpdate setLifetimeFrequencyCap (String lifetimeFrequencyCap) {
+      this.setParam("lifetime_frequency_cap", lifetimeFrequencyCap);
       return this;
     }
 
@@ -4707,6 +5703,11 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setRbPredictionId (String rbPredictionId) {
+      this.setParam("rb_prediction_id", rbPredictionId);
+      return this;
+    }
+
     public APIRequestUpdate setRfPredictionId (String rfPredictionId) {
       this.setParam("rf_prediction_id", rfPredictionId);
       return this;
@@ -4714,15 +5715,6 @@ public class AdSet extends APINode {
 
     public APIRequestUpdate setStartTime (String startTime) {
       this.setParam("start_time", startTime);
-      return this;
-    }
-
-    public APIRequestUpdate setStatus (AdSet.EnumStatus status) {
-      this.setParam("status", status);
-      return this;
-    }
-    public APIRequestUpdate setStatus (String status) {
-      this.setParam("status", status);
       return this;
     }
 
@@ -4750,6 +5742,43 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setTimeBasedAdRotationIntervals (String timeBasedAdRotationIntervals) {
       this.setParam("time_based_ad_rotation_intervals", timeBasedAdRotationIntervals);
+      return this;
+    }
+
+    public APIRequestUpdate setTimeStart (String timeStart) {
+      this.setParam("time_start", timeStart);
+      return this;
+    }
+
+    public APIRequestUpdate setTimeStop (String timeStop) {
+      this.setParam("time_stop", timeStop);
+      return this;
+    }
+
+    public APIRequestUpdate setUpstreamEvents (Map<String, String> upstreamEvents) {
+      this.setParam("upstream_events", upstreamEvents);
+      return this;
+    }
+    public APIRequestUpdate setUpstreamEvents (String upstreamEvents) {
+      this.setParam("upstream_events", upstreamEvents);
+      return this;
+    }
+
+    public APIRequestUpdate setFullFunnelExplorationMode (AdSet.EnumFullFunnelExplorationMode fullFunnelExplorationMode) {
+      this.setParam("full_funnel_exploration_mode", fullFunnelExplorationMode);
+      return this;
+    }
+    public APIRequestUpdate setFullFunnelExplorationMode (String fullFunnelExplorationMode) {
+      this.setParam("full_funnel_exploration_mode", fullFunnelExplorationMode);
+      return this;
+    }
+
+    public APIRequestUpdate setAttributionSpec (List<Map<String, String>> attributionSpec) {
+      this.setParam("attribution_spec", attributionSpec);
+      return this;
+    }
+    public APIRequestUpdate setAttributionSpec (String attributionSpec) {
+      this.setParam("attribution_spec", attributionSpec);
       return this;
     }
 
@@ -5082,6 +6111,27 @@ public class AdSet extends APINode {
       }
   }
 
+  public static enum EnumFullFunnelExplorationMode {
+      @SerializedName("NONE_EXPLORATION")
+      VALUE_NONE_EXPLORATION("NONE_EXPLORATION"),
+      @SerializedName("LIMITED_EXPLORATION")
+      VALUE_LIMITED_EXPLORATION("LIMITED_EXPLORATION"),
+      @SerializedName("EXTENDED_EXPLORATION")
+      VALUE_EXTENDED_EXPLORATION("EXTENDED_EXPLORATION"),
+      NULL(null);
+
+      private String value;
+
+      private EnumFullFunnelExplorationMode(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumOperator {
       @SerializedName("ALL")
       VALUE_ALL("ALL"),
@@ -5092,6 +6142,27 @@ public class AdSet extends APINode {
       private String value;
 
       private EnumOperator(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumStatusOption {
+      @SerializedName("ACTIVE")
+      VALUE_ACTIVE("ACTIVE"),
+      @SerializedName("PAUSED")
+      VALUE_PAUSED("PAUSED"),
+      @SerializedName("INHERITED_FROM_SOURCE")
+      VALUE_INHERITED_FROM_SOURCE("INHERITED_FROM_SOURCE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumStatusOption(String value) {
         this.value = value;
       }
 
@@ -5117,9 +6188,14 @@ public class AdSet extends APINode {
 
   public AdSet copyFrom(AdSet instance) {
     this.mAccountId = instance.mAccountId;
+    this.mAdKeywords = instance.mAdKeywords;
+    this.mAdassetFeed = instance.mAdassetFeed;
     this.mAdlabels = instance.mAdlabels;
     this.mAdsetSchedule = instance.mAdsetSchedule;
+    this.mAssetFeedId = instance.mAssetFeedId;
     this.mAttributionSpec = instance.mAttributionSpec;
+    this.mBestCreative = instance.mBestCreative;
+    this.mBidAdjustments = instance.mBidAdjustments;
     this.mBidAmount = instance.mBidAmount;
     this.mBidInfo = instance.mBidInfo;
     this.mBidStrategy = instance.mBidStrategy;
@@ -5136,11 +6212,18 @@ public class AdSet extends APINode {
     this.mDestinationType = instance.mDestinationType;
     this.mEffectiveStatus = instance.mEffectiveStatus;
     this.mEndTime = instance.mEndTime;
+    this.mFrequencyCap = instance.mFrequencyCap;
+    this.mFrequencyCapResetPeriod = instance.mFrequencyCapResetPeriod;
     this.mFrequencyControlSpecs = instance.mFrequencyControlSpecs;
+    this.mFullFunnelExplorationMode = instance.mFullFunnelExplorationMode;
     this.mId = instance.mId;
     this.mInstagramActorId = instance.mInstagramActorId;
+    this.mIsAutobid = instance.mIsAutobid;
+    this.mIsAveragePricePacing = instance.mIsAveragePricePacing;
+    this.mIsDynamicCreative = instance.mIsDynamicCreative;
     this.mIsDynamicCreativeOptimization = instance.mIsDynamicCreativeOptimization;
     this.mLifetimeBudget = instance.mLifetimeBudget;
+    this.mLifetimeFrequencyCap = instance.mLifetimeFrequencyCap;
     this.mLifetimeImps = instance.mLifetimeImps;
     this.mLifetimeMinSpendTarget = instance.mLifetimeMinSpendTarget;
     this.mLifetimeSpendCap = instance.mLifetimeSpendCap;
@@ -5150,6 +6233,7 @@ public class AdSet extends APINode {
     this.mPromotedObject = instance.mPromotedObject;
     this.mRecommendations = instance.mRecommendations;
     this.mRecurringBudgetSemantics = instance.mRecurringBudgetSemantics;
+    this.mReviewFeedback = instance.mReviewFeedback;
     this.mRfPredictionId = instance.mRfPredictionId;
     this.mRtbFlag = instance.mRtbFlag;
     this.mSourceAdset = instance.mSourceAdset;
@@ -5159,6 +6243,7 @@ public class AdSet extends APINode {
     this.mTargeting = instance.mTargeting;
     this.mTimeBasedAdRotationIdBlocks = instance.mTimeBasedAdRotationIdBlocks;
     this.mTimeBasedAdRotationIntervals = instance.mTimeBasedAdRotationIntervals;
+    this.mTrackingSpecs = instance.mTrackingSpecs;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mUseNewAppClick = instance.mUseNewAppClick;
     this.context = instance.context;

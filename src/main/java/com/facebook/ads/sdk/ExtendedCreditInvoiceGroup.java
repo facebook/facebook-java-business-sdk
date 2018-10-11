@@ -78,6 +78,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
 
   public ExtendedCreditInvoiceGroup(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -96,19 +97,17 @@ public class ExtendedCreditInvoiceGroup extends APINode {
   }
 
   public static ExtendedCreditInvoiceGroup fetchById(String id, APIContext context) throws APIException {
-    ExtendedCreditInvoiceGroup extendedCreditInvoiceGroup =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return extendedCreditInvoiceGroup;
   }
 
   public static ListenableFuture<ExtendedCreditInvoiceGroup> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<ExtendedCreditInvoiceGroup> extendedCreditInvoiceGroup =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return extendedCreditInvoiceGroup;
   }
 
   public static APINodeList<ExtendedCreditInvoiceGroup> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -121,12 +120,11 @@ public class ExtendedCreditInvoiceGroup extends APINode {
   }
 
   public static ListenableFuture<APINodeList<ExtendedCreditInvoiceGroup>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<ExtendedCreditInvoiceGroup>> extendedCreditInvoiceGroup =
+    return
       new APIRequest(context, "", "/", "GET", ExtendedCreditInvoiceGroup.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return extendedCreditInvoiceGroup;
   }
 
   private String getPrefixedId() {
@@ -446,6 +444,8 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "account_status",
+      "ad_account_creation_request",
+      "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
       "amount_spent",
@@ -462,6 +462,8 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       "capabilities",
       "created_time",
       "currency",
+      "daily_spend_limit",
+      "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -475,6 +477,7 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       "io_number",
       "is_attribution_spec_system_default",
       "is_direct_deals_enabled",
+      "is_in_3ds_authorization_enabled_market",
       "is_in_middle_of_local_entity_migration",
       "is_notifications_enabled",
       "is_personal",
@@ -605,6 +608,20 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       this.requestField("account_status", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestAdAccountCreationRequestField () {
+      return this.requestAdAccountCreationRequestField(true);
+    }
+    public APIRequestGetAdAccounts requestAdAccountCreationRequestField (boolean value) {
+      this.requestField("ad_account_creation_request", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAdAccountPromotableObjectsField () {
+      return this.requestAdAccountPromotableObjectsField(true);
+    }
+    public APIRequestGetAdAccounts requestAdAccountPromotableObjectsField (boolean value) {
+      this.requestField("ad_account_promotable_objects", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestAgeField () {
       return this.requestAgeField(true);
     }
@@ -717,6 +734,20 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestDailySpendLimitField () {
+      return this.requestDailySpendLimitField(true);
+    }
+    public APIRequestGetAdAccounts requestDailySpendLimitField (boolean value) {
+      this.requestField("daily_spend_limit", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField () {
+      return this.requestDirectDealsTosAcceptedField(true);
+    }
+    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField (boolean value) {
+      this.requestField("direct_deals_tos_accepted", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -806,6 +837,13 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     }
     public APIRequestGetAdAccounts requestIsDirectDealsEnabledField (boolean value) {
       this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsIn3dsAuthorizationEnabledMarketField () {
+      return this.requestIsIn3dsAuthorizationEnabledMarketField(true);
+    }
+    public APIRequestGetAdAccounts requestIsIn3dsAuthorizationEnabledMarketField (boolean value) {
+      this.requestField("is_in_3ds_authorization_enabled_market", value);
       return this;
     }
     public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField () {
@@ -1254,8 +1292,8 @@ public class ExtendedCreditInvoiceGroup extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "emails",
       "name",
+      "emails",
     };
 
     public static final String[] FIELDS = {
@@ -1313,17 +1351,17 @@ public class ExtendedCreditInvoiceGroup extends APINode {
     }
 
 
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
     public APIRequestUpdate setEmails (List<String> emails) {
       this.setParam("emails", emails);
       return this;
     }
     public APIRequestUpdate setEmails (String emails) {
       this.setParam("emails", emails);
-      return this;
-    }
-
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
       return this;
     }
 

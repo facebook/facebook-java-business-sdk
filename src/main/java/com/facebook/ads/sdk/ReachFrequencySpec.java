@@ -59,6 +59,8 @@ public class ReachFrequencySpec extends APINode {
   private List<String> mCountries = null;
   @SerializedName("default_creation_data")
   private Object mDefaultCreationData = null;
+  @SerializedName("global_io_max_campaign_duration")
+  private Long mGlobalIoMaxCampaignDuration = null;
   @SerializedName("max_campaign_duration")
   private Object mMaxCampaignDuration = null;
   @SerializedName("max_days_to_finish")
@@ -69,13 +71,76 @@ public class ReachFrequencySpec extends APINode {
   private Object mMinCampaignDuration = null;
   @SerializedName("min_reach_limits")
   private Object mMinReachLimits = null;
+  @SerializedName("supports_video_view_benchmark_per_country")
+  private Object mSupportsVideoViewBenchmarkPerCountry = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public ReachFrequencySpec() {
+  ReachFrequencySpec() {
+  }
+
+  public ReachFrequencySpec(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public ReachFrequencySpec(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public ReachFrequencySpec fetch() throws APIException{
+    ReachFrequencySpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static ReachFrequencySpec fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<ReachFrequencySpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static ReachFrequencySpec fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<ReachFrequencySpec> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<ReachFrequencySpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ReachFrequencySpec>)(
+      new APIRequest<ReachFrequencySpec>(context, "", "/", "GET", ReachFrequencySpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<ReachFrequencySpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", ReachFrequencySpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static ReachFrequencySpec loadJSON(String json, APIContext context) {
     ReachFrequencySpec reachFrequencySpec = getGson().fromJson(json, ReachFrequencySpec.class);
@@ -218,71 +283,235 @@ public class ReachFrequencySpec extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public List<String> getFieldCountries() {
     return mCountries;
-  }
-
-  public ReachFrequencySpec setFieldCountries(List<String> value) {
-    this.mCountries = value;
-    return this;
   }
 
   public Object getFieldDefaultCreationData() {
     return mDefaultCreationData;
   }
 
-  public ReachFrequencySpec setFieldDefaultCreationData(Object value) {
-    this.mDefaultCreationData = value;
-    return this;
+  public Long getFieldGlobalIoMaxCampaignDuration() {
+    return mGlobalIoMaxCampaignDuration;
   }
 
   public Object getFieldMaxCampaignDuration() {
     return mMaxCampaignDuration;
   }
 
-  public ReachFrequencySpec setFieldMaxCampaignDuration(Object value) {
-    this.mMaxCampaignDuration = value;
-    return this;
-  }
-
   public Object getFieldMaxDaysToFinish() {
     return mMaxDaysToFinish;
-  }
-
-  public ReachFrequencySpec setFieldMaxDaysToFinish(Object value) {
-    this.mMaxDaysToFinish = value;
-    return this;
   }
 
   public Object getFieldMaxPauseWithoutPredictionRerun() {
     return mMaxPauseWithoutPredictionRerun;
   }
 
-  public ReachFrequencySpec setFieldMaxPauseWithoutPredictionRerun(Object value) {
-    this.mMaxPauseWithoutPredictionRerun = value;
-    return this;
-  }
-
   public Object getFieldMinCampaignDuration() {
     return mMinCampaignDuration;
-  }
-
-  public ReachFrequencySpec setFieldMinCampaignDuration(Object value) {
-    this.mMinCampaignDuration = value;
-    return this;
   }
 
   public Object getFieldMinReachLimits() {
     return mMinReachLimits;
   }
 
-  public ReachFrequencySpec setFieldMinReachLimits(Object value) {
-    this.mMinReachLimits = value;
-    return this;
+  public Object getFieldSupportsVideoViewBenchmarkPerCountry() {
+    return mSupportsVideoViewBenchmarkPerCountry;
+  }
+
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<ReachFrequencySpec> {
+
+    ReachFrequencySpec lastResponse = null;
+    @Override
+    public ReachFrequencySpec getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "countries",
+      "default_creation_data",
+      "global_io_max_campaign_duration",
+      "max_campaign_duration",
+      "max_days_to_finish",
+      "max_pause_without_prediction_rerun",
+      "min_campaign_duration",
+      "min_reach_limits",
+      "supports_video_view_benchmark_per_country",
+      "id",
+    };
+
+    @Override
+    public ReachFrequencySpec parseResponse(String response) throws APIException {
+      return ReachFrequencySpec.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public ReachFrequencySpec execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ReachFrequencySpec execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<ReachFrequencySpec> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ReachFrequencySpec> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ReachFrequencySpec>() {
+           public ReachFrequencySpec apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestCountriesField () {
+      return this.requestCountriesField(true);
+    }
+    public APIRequestGet requestCountriesField (boolean value) {
+      this.requestField("countries", value);
+      return this;
+    }
+    public APIRequestGet requestDefaultCreationDataField () {
+      return this.requestDefaultCreationDataField(true);
+    }
+    public APIRequestGet requestDefaultCreationDataField (boolean value) {
+      this.requestField("default_creation_data", value);
+      return this;
+    }
+    public APIRequestGet requestGlobalIoMaxCampaignDurationField () {
+      return this.requestGlobalIoMaxCampaignDurationField(true);
+    }
+    public APIRequestGet requestGlobalIoMaxCampaignDurationField (boolean value) {
+      this.requestField("global_io_max_campaign_duration", value);
+      return this;
+    }
+    public APIRequestGet requestMaxCampaignDurationField () {
+      return this.requestMaxCampaignDurationField(true);
+    }
+    public APIRequestGet requestMaxCampaignDurationField (boolean value) {
+      this.requestField("max_campaign_duration", value);
+      return this;
+    }
+    public APIRequestGet requestMaxDaysToFinishField () {
+      return this.requestMaxDaysToFinishField(true);
+    }
+    public APIRequestGet requestMaxDaysToFinishField (boolean value) {
+      this.requestField("max_days_to_finish", value);
+      return this;
+    }
+    public APIRequestGet requestMaxPauseWithoutPredictionRerunField () {
+      return this.requestMaxPauseWithoutPredictionRerunField(true);
+    }
+    public APIRequestGet requestMaxPauseWithoutPredictionRerunField (boolean value) {
+      this.requestField("max_pause_without_prediction_rerun", value);
+      return this;
+    }
+    public APIRequestGet requestMinCampaignDurationField () {
+      return this.requestMinCampaignDurationField(true);
+    }
+    public APIRequestGet requestMinCampaignDurationField (boolean value) {
+      this.requestField("min_campaign_duration", value);
+      return this;
+    }
+    public APIRequestGet requestMinReachLimitsField () {
+      return this.requestMinReachLimitsField(true);
+    }
+    public APIRequestGet requestMinReachLimitsField (boolean value) {
+      this.requestField("min_reach_limits", value);
+      return this;
+    }
+    public APIRequestGet requestSupportsVideoViewBenchmarkPerCountryField () {
+      return this.requestSupportsVideoViewBenchmarkPerCountryField(true);
+    }
+    public APIRequestGet requestSupportsVideoViewBenchmarkPerCountryField (boolean value) {
+      this.requestField("supports_video_view_benchmark_per_country", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -301,11 +530,14 @@ public class ReachFrequencySpec extends APINode {
   public ReachFrequencySpec copyFrom(ReachFrequencySpec instance) {
     this.mCountries = instance.mCountries;
     this.mDefaultCreationData = instance.mDefaultCreationData;
+    this.mGlobalIoMaxCampaignDuration = instance.mGlobalIoMaxCampaignDuration;
     this.mMaxCampaignDuration = instance.mMaxCampaignDuration;
     this.mMaxDaysToFinish = instance.mMaxDaysToFinish;
     this.mMaxPauseWithoutPredictionRerun = instance.mMaxPauseWithoutPredictionRerun;
     this.mMinCampaignDuration = instance.mMinCampaignDuration;
     this.mMinReachLimits = instance.mMinReachLimits;
+    this.mSupportsVideoViewBenchmarkPerCountry = instance.mSupportsVideoViewBenchmarkPerCountry;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

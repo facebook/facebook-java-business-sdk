@@ -56,7 +56,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class VideoCopyrightRule extends APINode {
   @SerializedName("condition_groups")
-  private List<Object> mConditionGroups = null;
+  private List<VideoCopyrightConditionGroup> mConditionGroups = null;
   @SerializedName("copyrights")
   private List<String> mCopyrights = null;
   @SerializedName("created_date")
@@ -80,6 +80,7 @@ public class VideoCopyrightRule extends APINode {
 
   public VideoCopyrightRule(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -98,19 +99,17 @@ public class VideoCopyrightRule extends APINode {
   }
 
   public static VideoCopyrightRule fetchById(String id, APIContext context) throws APIException {
-    VideoCopyrightRule videoCopyrightRule =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return videoCopyrightRule;
   }
 
   public static ListenableFuture<VideoCopyrightRule> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<VideoCopyrightRule> videoCopyrightRule =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return videoCopyrightRule;
   }
 
   public static APINodeList<VideoCopyrightRule> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -123,12 +122,11 @@ public class VideoCopyrightRule extends APINode {
   }
 
   public static ListenableFuture<APINodeList<VideoCopyrightRule>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<VideoCopyrightRule>> videoCopyrightRule =
+    return
       new APIRequest(context, "", "/", "GET", VideoCopyrightRule.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return videoCopyrightRule;
   }
 
   private String getPrefixedId() {
@@ -288,7 +286,7 @@ public class VideoCopyrightRule extends APINode {
   }
 
 
-  public List<Object> getFieldConditionGroups() {
+  public List<VideoCopyrightConditionGroup> getFieldConditionGroups() {
     return mConditionGroups;
   }
 

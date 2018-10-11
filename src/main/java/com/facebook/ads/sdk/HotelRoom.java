@@ -88,6 +88,7 @@ public class HotelRoom extends APINode {
 
   public HotelRoom(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -106,19 +107,17 @@ public class HotelRoom extends APINode {
   }
 
   public static HotelRoom fetchById(String id, APIContext context) throws APIException {
-    HotelRoom hotelRoom =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return hotelRoom;
   }
 
   public static ListenableFuture<HotelRoom> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<HotelRoom> hotelRoom =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return hotelRoom;
   }
 
   public static APINodeList<HotelRoom> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -131,12 +130,11 @@ public class HotelRoom extends APINode {
   }
 
   public static ListenableFuture<APINodeList<HotelRoom>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<HotelRoom>> hotelRoom =
+    return
       new APIRequest(context, "", "/", "GET", HotelRoom.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return hotelRoom;
   }
 
   private String getPrefixedId() {
@@ -287,6 +285,10 @@ public class HotelRoom extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetPricingVariables getPricingVariables() {
+    return new APIRequestGetPricingVariables(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDelete delete() {
     return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
@@ -348,6 +350,141 @@ public class HotelRoom extends APINode {
   }
 
 
+
+  public static class APIRequestGetPricingVariables extends APIRequest<DynamicPriceConfigByDate> {
+
+    APINodeList<DynamicPriceConfigByDate> lastResponse = null;
+    @Override
+    public APINodeList<DynamicPriceConfigByDate> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "checkin_date",
+      "prices",
+      "prices_pretty",
+      "id",
+    };
+
+    @Override
+    public APINodeList<DynamicPriceConfigByDate> parseResponse(String response) throws APIException {
+      return DynamicPriceConfigByDate.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<DynamicPriceConfigByDate> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<DynamicPriceConfigByDate> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<DynamicPriceConfigByDate>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<DynamicPriceConfigByDate>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<DynamicPriceConfigByDate>>() {
+           public APINodeList<DynamicPriceConfigByDate> apply(String result) {
+             try {
+               return APIRequestGetPricingVariables.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPricingVariables(String nodeId, APIContext context) {
+      super(context, nodeId, "/pricing_variables", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPricingVariables setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPricingVariables setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPricingVariables requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPricingVariables requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPricingVariables requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPricingVariables requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPricingVariables requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPricingVariables requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPricingVariables requestCheckinDateField () {
+      return this.requestCheckinDateField(true);
+    }
+    public APIRequestGetPricingVariables requestCheckinDateField (boolean value) {
+      this.requestField("checkin_date", value);
+      return this;
+    }
+    public APIRequestGetPricingVariables requestPricesField () {
+      return this.requestPricesField(true);
+    }
+    public APIRequestGetPricingVariables requestPricesField (boolean value) {
+      this.requestField("prices", value);
+      return this;
+    }
+    public APIRequestGetPricingVariables requestPricesPrettyField () {
+      return this.requestPricesPrettyField(true);
+    }
+    public APIRequestGetPricingVariables requestPricesPrettyField (boolean value) {
+      this.requestField("prices_pretty", value);
+      return this;
+    }
+    public APIRequestGetPricingVariables requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetPricingVariables requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
 
@@ -651,16 +788,16 @@ public class HotelRoom extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "applinks",
-      "base_price",
-      "currency",
       "description",
+      "name",
+      "url",
+      "currency",
+      "base_price",
+      "applinks",
       "images",
       "margin_level",
-      "name",
       "pricing_variables",
       "sale_price",
-      "url",
     };
 
     public static final String[] FIELDS = {
@@ -718,12 +855,23 @@ public class HotelRoom extends APINode {
     }
 
 
-    public APIRequestUpdate setApplinks (Object applinks) {
-      this.setParam("applinks", applinks);
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
       return this;
     }
-    public APIRequestUpdate setApplinks (String applinks) {
-      this.setParam("applinks", applinks);
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestUpdate setCurrency (String currency) {
+      this.setParam("currency", currency);
       return this;
     }
 
@@ -736,13 +884,12 @@ public class HotelRoom extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCurrency (String currency) {
-      this.setParam("currency", currency);
+    public APIRequestUpdate setApplinks (Object applinks) {
+      this.setParam("applinks", applinks);
       return this;
     }
-
-    public APIRequestUpdate setDescription (String description) {
-      this.setParam("description", description);
+    public APIRequestUpdate setApplinks (String applinks) {
+      this.setParam("applinks", applinks);
       return this;
     }
 
@@ -764,11 +911,6 @@ public class HotelRoom extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
     public APIRequestUpdate setPricingVariables (List<Object> pricingVariables) {
       this.setParam("pricing_variables", pricingVariables);
       return this;
@@ -784,11 +926,6 @@ public class HotelRoom extends APINode {
     }
     public APIRequestUpdate setSalePrice (String salePrice) {
       this.setParam("sale_price", salePrice);
-      return this;
-    }
-
-    public APIRequestUpdate setUrl (String url) {
-      this.setParam("url", url);
       return this;
     }
 

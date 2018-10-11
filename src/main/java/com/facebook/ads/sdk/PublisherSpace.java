@@ -72,6 +72,7 @@ public class PublisherSpace extends APINode {
 
   public PublisherSpace(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -90,19 +91,17 @@ public class PublisherSpace extends APINode {
   }
 
   public static PublisherSpace fetchById(String id, APIContext context) throws APIException {
-    PublisherSpace publisherSpace =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return publisherSpace;
   }
 
   public static ListenableFuture<PublisherSpace> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<PublisherSpace> publisherSpace =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return publisherSpace;
   }
 
   public static APINodeList<PublisherSpace> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -115,12 +114,11 @@ public class PublisherSpace extends APINode {
   }
 
   public static ListenableFuture<APINodeList<PublisherSpace>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<PublisherSpace>> publisherSpace =
+    return
       new APIRequest(context, "", "/", "GET", PublisherSpace.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return publisherSpace;
   }
 
   private String getPrefixedId() {

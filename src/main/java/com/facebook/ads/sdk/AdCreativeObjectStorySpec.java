@@ -69,13 +69,74 @@ public class AdCreativeObjectStorySpec extends APINode {
   private AdCreativeTextData mTextData = null;
   @SerializedName("video_data")
   private AdCreativeVideoData mVideoData = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
   public AdCreativeObjectStorySpec() {
   }
 
+  public AdCreativeObjectStorySpec(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdCreativeObjectStorySpec(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdCreativeObjectStorySpec fetch() throws APIException{
+    AdCreativeObjectStorySpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdCreativeObjectStorySpec fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdCreativeObjectStorySpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdCreativeObjectStorySpec fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdCreativeObjectStorySpec> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdCreativeObjectStorySpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdCreativeObjectStorySpec>)(
+      new APIRequest<AdCreativeObjectStorySpec>(context, "", "/", "GET", AdCreativeObjectStorySpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdCreativeObjectStorySpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdCreativeObjectStorySpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
+  }
+
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdCreativeObjectStorySpec loadJSON(String json, APIContext context) {
     AdCreativeObjectStorySpec adCreativeObjectStorySpec = getGson().fromJson(json, AdCreativeObjectStorySpec.class);
@@ -218,6 +279,10 @@ public class AdCreativeObjectStorySpec extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldInstagramActorId() {
     return mInstagramActorId;
@@ -229,6 +294,9 @@ public class AdCreativeObjectStorySpec extends APINode {
   }
 
   public AdCreativeLinkData getFieldLinkData() {
+    if (mLinkData != null) {
+      mLinkData.context = getContext();
+    }
     return mLinkData;
   }
 
@@ -252,6 +320,9 @@ public class AdCreativeObjectStorySpec extends APINode {
   }
 
   public AdCreativePhotoData getFieldPhotoData() {
+    if (mPhotoData != null) {
+      mPhotoData.context = getContext();
+    }
     return mPhotoData;
   }
 
@@ -266,6 +337,9 @@ public class AdCreativeObjectStorySpec extends APINode {
     return this;
   }
   public AdCreativeLinkData getFieldTemplateData() {
+    if (mTemplateData != null) {
+      mTemplateData.context = getContext();
+    }
     return mTemplateData;
   }
 
@@ -280,6 +354,9 @@ public class AdCreativeObjectStorySpec extends APINode {
     return this;
   }
   public AdCreativeTextData getFieldTextData() {
+    if (mTextData != null) {
+      mTextData.context = getContext();
+    }
     return mTextData;
   }
 
@@ -294,6 +371,9 @@ public class AdCreativeObjectStorySpec extends APINode {
     return this;
   }
   public AdCreativeVideoData getFieldVideoData() {
+    if (mVideoData != null) {
+      mVideoData.context = getContext();
+    }
     return mVideoData;
   }
 
@@ -307,7 +387,183 @@ public class AdCreativeObjectStorySpec extends APINode {
     this.mVideoData = AdCreativeVideoData.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldId() {
+    return mId;
+  }
 
+  public AdCreativeObjectStorySpec setFieldId(String value) {
+    this.mId = value;
+    return this;
+  }
+
+
+
+  public static class APIRequestGet extends APIRequest<AdCreativeObjectStorySpec> {
+
+    AdCreativeObjectStorySpec lastResponse = null;
+    @Override
+    public AdCreativeObjectStorySpec getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "instagram_actor_id",
+      "link_data",
+      "page_id",
+      "photo_data",
+      "template_data",
+      "text_data",
+      "video_data",
+      "id",
+    };
+
+    @Override
+    public AdCreativeObjectStorySpec parseResponse(String response) throws APIException {
+      return AdCreativeObjectStorySpec.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdCreativeObjectStorySpec execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdCreativeObjectStorySpec execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdCreativeObjectStorySpec> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdCreativeObjectStorySpec> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdCreativeObjectStorySpec>() {
+           public AdCreativeObjectStorySpec apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestInstagramActorIdField () {
+      return this.requestInstagramActorIdField(true);
+    }
+    public APIRequestGet requestInstagramActorIdField (boolean value) {
+      this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGet requestLinkDataField () {
+      return this.requestLinkDataField(true);
+    }
+    public APIRequestGet requestLinkDataField (boolean value) {
+      this.requestField("link_data", value);
+      return this;
+    }
+    public APIRequestGet requestPageIdField () {
+      return this.requestPageIdField(true);
+    }
+    public APIRequestGet requestPageIdField (boolean value) {
+      this.requestField("page_id", value);
+      return this;
+    }
+    public APIRequestGet requestPhotoDataField () {
+      return this.requestPhotoDataField(true);
+    }
+    public APIRequestGet requestPhotoDataField (boolean value) {
+      this.requestField("photo_data", value);
+      return this;
+    }
+    public APIRequestGet requestTemplateDataField () {
+      return this.requestTemplateDataField(true);
+    }
+    public APIRequestGet requestTemplateDataField (boolean value) {
+      this.requestField("template_data", value);
+      return this;
+    }
+    public APIRequestGet requestTextDataField () {
+      return this.requestTextDataField(true);
+    }
+    public APIRequestGet requestTextDataField (boolean value) {
+      this.requestField("text_data", value);
+      return this;
+    }
+    public APIRequestGet requestVideoDataField () {
+      return this.requestVideoDataField(true);
+    }
+    public APIRequestGet requestVideoDataField (boolean value) {
+      this.requestField("video_data", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -331,6 +587,7 @@ public class AdCreativeObjectStorySpec extends APINode {
     this.mTemplateData = instance.mTemplateData;
     this.mTextData = instance.mTextData;
     this.mVideoData = instance.mVideoData;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

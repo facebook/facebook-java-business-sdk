@@ -59,13 +59,74 @@ public class AdRuleExecutionSpec extends APINode {
   private List<AdRuleExecutionOptions> mExecutionOptions = null;
   @SerializedName("execution_type")
   private EnumExecutionType mExecutionType = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdRuleExecutionSpec() {
+  AdRuleExecutionSpec() {
+  }
+
+  public AdRuleExecutionSpec(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdRuleExecutionSpec(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdRuleExecutionSpec fetch() throws APIException{
+    AdRuleExecutionSpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdRuleExecutionSpec fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdRuleExecutionSpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdRuleExecutionSpec fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdRuleExecutionSpec> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdRuleExecutionSpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdRuleExecutionSpec>)(
+      new APIRequest<AdRuleExecutionSpec>(context, "", "/", "GET", AdRuleExecutionSpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdRuleExecutionSpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdRuleExecutionSpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdRuleExecutionSpec loadJSON(String json, APIContext context) {
     AdRuleExecutionSpec adRuleExecutionSpec = getGson().fromJson(json, AdRuleExecutionSpec.class);
@@ -208,31 +269,151 @@ public class AdRuleExecutionSpec extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public List<AdRuleExecutionOptions> getFieldExecutionOptions() {
     return mExecutionOptions;
   }
 
-  public AdRuleExecutionSpec setFieldExecutionOptions(List<AdRuleExecutionOptions> value) {
-    this.mExecutionOptions = value;
-    return this;
-  }
-
-  public AdRuleExecutionSpec setFieldExecutionOptions(String value) {
-    Type type = new TypeToken<List<AdRuleExecutionOptions>>(){}.getType();
-    this.mExecutionOptions = AdRuleExecutionOptions.getGson().fromJson(value, type);
-    return this;
-  }
   public EnumExecutionType getFieldExecutionType() {
     return mExecutionType;
   }
 
-  public AdRuleExecutionSpec setFieldExecutionType(EnumExecutionType value) {
-    this.mExecutionType = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdRuleExecutionSpec> {
+
+    AdRuleExecutionSpec lastResponse = null;
+    @Override
+    public AdRuleExecutionSpec getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "execution_options",
+      "execution_type",
+      "id",
+    };
+
+    @Override
+    public AdRuleExecutionSpec parseResponse(String response) throws APIException {
+      return AdRuleExecutionSpec.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdRuleExecutionSpec execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdRuleExecutionSpec execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdRuleExecutionSpec> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdRuleExecutionSpec> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdRuleExecutionSpec>() {
+           public AdRuleExecutionSpec apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestExecutionOptionsField () {
+      return this.requestExecutionOptionsField(true);
+    }
+    public APIRequestGet requestExecutionOptionsField (boolean value) {
+      this.requestField("execution_options", value);
+      return this;
+    }
+    public APIRequestGet requestExecutionTypeField () {
+      return this.requestExecutionTypeField(true);
+    }
+    public APIRequestGet requestExecutionTypeField (boolean value) {
+      this.requestField("execution_type", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumExecutionType {
       @SerializedName("PING_ENDPOINT")
@@ -282,6 +463,7 @@ public class AdRuleExecutionSpec extends APINode {
   public AdRuleExecutionSpec copyFrom(AdRuleExecutionSpec instance) {
     this.mExecutionOptions = instance.mExecutionOptions;
     this.mExecutionType = instance.mExecutionType;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

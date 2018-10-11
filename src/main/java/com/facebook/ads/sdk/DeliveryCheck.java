@@ -63,13 +63,74 @@ public class DeliveryCheck extends APINode {
   private DeliveryCheckExtraInfo mExtraInfo = null;
   @SerializedName("summary")
   private String mSummary = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public DeliveryCheck() {
+  DeliveryCheck() {
+  }
+
+  public DeliveryCheck(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public DeliveryCheck(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public DeliveryCheck fetch() throws APIException{
+    DeliveryCheck newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static DeliveryCheck fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<DeliveryCheck> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static DeliveryCheck fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<DeliveryCheck> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<DeliveryCheck> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<DeliveryCheck>)(
+      new APIRequest<DeliveryCheck>(context, "", "/", "GET", DeliveryCheck.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<DeliveryCheck>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", DeliveryCheck.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static DeliveryCheck loadJSON(String json, APIContext context) {
     DeliveryCheck deliveryCheck = getGson().fromJson(json, DeliveryCheck.class);
@@ -212,49 +273,178 @@ public class DeliveryCheck extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldCheckName() {
     return mCheckName;
-  }
-
-  public DeliveryCheck setFieldCheckName(String value) {
-    this.mCheckName = value;
-    return this;
   }
 
   public String getFieldDescription() {
     return mDescription;
   }
 
-  public DeliveryCheck setFieldDescription(String value) {
-    this.mDescription = value;
-    return this;
-  }
-
   public DeliveryCheckExtraInfo getFieldExtraInfo() {
+    if (mExtraInfo != null) {
+      mExtraInfo.context = getContext();
+    }
     return mExtraInfo;
   }
 
-  public DeliveryCheck setFieldExtraInfo(DeliveryCheckExtraInfo value) {
-    this.mExtraInfo = value;
-    return this;
-  }
-
-  public DeliveryCheck setFieldExtraInfo(String value) {
-    Type type = new TypeToken<DeliveryCheckExtraInfo>(){}.getType();
-    this.mExtraInfo = DeliveryCheckExtraInfo.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldSummary() {
     return mSummary;
   }
 
-  public DeliveryCheck setFieldSummary(String value) {
-    this.mSummary = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<DeliveryCheck> {
+
+    DeliveryCheck lastResponse = null;
+    @Override
+    public DeliveryCheck getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "check_name",
+      "description",
+      "extra_info",
+      "summary",
+      "id",
+    };
+
+    @Override
+    public DeliveryCheck parseResponse(String response) throws APIException {
+      return DeliveryCheck.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public DeliveryCheck execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public DeliveryCheck execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<DeliveryCheck> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<DeliveryCheck> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, DeliveryCheck>() {
+           public DeliveryCheck apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestCheckNameField () {
+      return this.requestCheckNameField(true);
+    }
+    public APIRequestGet requestCheckNameField (boolean value) {
+      this.requestField("check_name", value);
+      return this;
+    }
+    public APIRequestGet requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGet requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGet requestExtraInfoField () {
+      return this.requestExtraInfoField(true);
+    }
+    public APIRequestGet requestExtraInfoField (boolean value) {
+      this.requestField("extra_info", value);
+      return this;
+    }
+    public APIRequestGet requestSummaryField () {
+      return this.requestSummaryField(true);
+    }
+    public APIRequestGet requestSummaryField (boolean value) {
+      this.requestField("summary", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -275,6 +465,7 @@ public class DeliveryCheck extends APINode {
     this.mDescription = instance.mDescription;
     this.mExtraInfo = instance.mExtraInfo;
     this.mSummary = instance.mSummary;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

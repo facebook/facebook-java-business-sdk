@@ -111,13 +111,74 @@ public class FlexibleTargeting extends APINode {
   private List<IDName> mWorkEmployers = null;
   @SerializedName("work_positions")
   private List<IDName> mWorkPositions = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public FlexibleTargeting() {
+  FlexibleTargeting() {
+  }
+
+  public FlexibleTargeting(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public FlexibleTargeting(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public FlexibleTargeting fetch() throws APIException{
+    FlexibleTargeting newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static FlexibleTargeting fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<FlexibleTargeting> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static FlexibleTargeting fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<FlexibleTargeting> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<FlexibleTargeting> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<FlexibleTargeting>)(
+      new APIRequest<FlexibleTargeting>(context, "", "/", "GET", FlexibleTargeting.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<FlexibleTargeting>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", FlexibleTargeting.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static FlexibleTargeting loadJSON(String json, APIContext context) {
     FlexibleTargeting flexibleTargeting = getGson().fromJson(json, FlexibleTargeting.class);
@@ -260,380 +321,463 @@ public class FlexibleTargeting extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public List<IDName> getFieldBehaviors() {
     return mBehaviors;
   }
 
-  public FlexibleTargeting setFieldBehaviors(List<IDName> value) {
-    this.mBehaviors = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldBehaviors(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mBehaviors = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<Long> getFieldCollegeYears() {
     return mCollegeYears;
-  }
-
-  public FlexibleTargeting setFieldCollegeYears(List<Long> value) {
-    this.mCollegeYears = value;
-    return this;
   }
 
   public List<IDName> getFieldConnections() {
     return mConnections;
   }
 
-  public FlexibleTargeting setFieldConnections(List<IDName> value) {
-    this.mConnections = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldConnections(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mConnections = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldCustomAudiences() {
     return mCustomAudiences;
   }
 
-  public FlexibleTargeting setFieldCustomAudiences(List<IDName> value) {
-    this.mCustomAudiences = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldCustomAudiences(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mCustomAudiences = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldEducationMajors() {
     return mEducationMajors;
   }
 
-  public FlexibleTargeting setFieldEducationMajors(List<IDName> value) {
-    this.mEducationMajors = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldEducationMajors(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mEducationMajors = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldEducationSchools() {
     return mEducationSchools;
   }
 
-  public FlexibleTargeting setFieldEducationSchools(List<IDName> value) {
-    this.mEducationSchools = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldEducationSchools(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mEducationSchools = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<Long> getFieldEducationStatuses() {
     return mEducationStatuses;
-  }
-
-  public FlexibleTargeting setFieldEducationStatuses(List<Long> value) {
-    this.mEducationStatuses = value;
-    return this;
   }
 
   public List<IDName> getFieldEthnicAffinity() {
     return mEthnicAffinity;
   }
 
-  public FlexibleTargeting setFieldEthnicAffinity(List<IDName> value) {
-    this.mEthnicAffinity = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldEthnicAffinity(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mEthnicAffinity = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldFamilyStatuses() {
     return mFamilyStatuses;
   }
 
-  public FlexibleTargeting setFieldFamilyStatuses(List<IDName> value) {
-    this.mFamilyStatuses = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldFamilyStatuses(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mFamilyStatuses = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldFriendsOfConnections() {
     return mFriendsOfConnections;
   }
 
-  public FlexibleTargeting setFieldFriendsOfConnections(List<IDName> value) {
-    this.mFriendsOfConnections = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldFriendsOfConnections(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mFriendsOfConnections = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldGeneration() {
     return mGeneration;
   }
 
-  public FlexibleTargeting setFieldGeneration(List<IDName> value) {
-    this.mGeneration = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldGeneration(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mGeneration = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldHomeOwnership() {
     return mHomeOwnership;
   }
 
-  public FlexibleTargeting setFieldHomeOwnership(List<IDName> value) {
-    this.mHomeOwnership = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldHomeOwnership(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mHomeOwnership = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldHomeType() {
     return mHomeType;
   }
 
-  public FlexibleTargeting setFieldHomeType(List<IDName> value) {
-    this.mHomeType = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldHomeType(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mHomeType = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldHomeValue() {
     return mHomeValue;
   }
 
-  public FlexibleTargeting setFieldHomeValue(List<IDName> value) {
-    this.mHomeValue = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldHomeValue(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mHomeValue = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldHouseholdComposition() {
     return mHouseholdComposition;
   }
 
-  public FlexibleTargeting setFieldHouseholdComposition(List<IDName> value) {
-    this.mHouseholdComposition = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldHouseholdComposition(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mHouseholdComposition = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldIncome() {
     return mIncome;
   }
 
-  public FlexibleTargeting setFieldIncome(List<IDName> value) {
-    this.mIncome = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldIncome(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mIncome = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldIndustries() {
     return mIndustries;
   }
 
-  public FlexibleTargeting setFieldIndustries(List<IDName> value) {
-    this.mIndustries = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldIndustries(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mIndustries = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<Long> getFieldInterestedIn() {
     return mInterestedIn;
-  }
-
-  public FlexibleTargeting setFieldInterestedIn(List<Long> value) {
-    this.mInterestedIn = value;
-    return this;
   }
 
   public List<IDName> getFieldInterests() {
     return mInterests;
   }
 
-  public FlexibleTargeting setFieldInterests(List<IDName> value) {
-    this.mInterests = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldInterests(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mInterests = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldLifeEvents() {
     return mLifeEvents;
   }
 
-  public FlexibleTargeting setFieldLifeEvents(List<IDName> value) {
-    this.mLifeEvents = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldLifeEvents(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mLifeEvents = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldMoms() {
     return mMoms;
   }
 
-  public FlexibleTargeting setFieldMoms(List<IDName> value) {
-    this.mMoms = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldMoms(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mMoms = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldNetWorth() {
     return mNetWorth;
   }
 
-  public FlexibleTargeting setFieldNetWorth(List<IDName> value) {
-    this.mNetWorth = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldNetWorth(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mNetWorth = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldOfficeType() {
     return mOfficeType;
   }
 
-  public FlexibleTargeting setFieldOfficeType(List<IDName> value) {
-    this.mOfficeType = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldOfficeType(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mOfficeType = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldPolitics() {
     return mPolitics;
   }
 
-  public FlexibleTargeting setFieldPolitics(List<IDName> value) {
-    this.mPolitics = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldPolitics(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mPolitics = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<Long> getFieldRelationshipStatuses() {
     return mRelationshipStatuses;
-  }
-
-  public FlexibleTargeting setFieldRelationshipStatuses(List<Long> value) {
-    this.mRelationshipStatuses = value;
-    return this;
   }
 
   public List<IDName> getFieldUserAdclusters() {
     return mUserAdclusters;
   }
 
-  public FlexibleTargeting setFieldUserAdclusters(List<IDName> value) {
-    this.mUserAdclusters = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldUserAdclusters(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mUserAdclusters = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldWorkEmployers() {
     return mWorkEmployers;
   }
 
-  public FlexibleTargeting setFieldWorkEmployers(List<IDName> value) {
-    this.mWorkEmployers = value;
-    return this;
-  }
-
-  public FlexibleTargeting setFieldWorkEmployers(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mWorkEmployers = IDName.getGson().fromJson(value, type);
-    return this;
-  }
   public List<IDName> getFieldWorkPositions() {
     return mWorkPositions;
   }
 
-  public FlexibleTargeting setFieldWorkPositions(List<IDName> value) {
-    this.mWorkPositions = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
-  public FlexibleTargeting setFieldWorkPositions(String value) {
-    Type type = new TypeToken<List<IDName>>(){}.getType();
-    this.mWorkPositions = IDName.getGson().fromJson(value, type);
-    return this;
-  }
 
+
+  public static class APIRequestGet extends APIRequest<FlexibleTargeting> {
+
+    FlexibleTargeting lastResponse = null;
+    @Override
+    public FlexibleTargeting getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "behaviors",
+      "college_years",
+      "connections",
+      "custom_audiences",
+      "education_majors",
+      "education_schools",
+      "education_statuses",
+      "ethnic_affinity",
+      "family_statuses",
+      "friends_of_connections",
+      "generation",
+      "home_ownership",
+      "home_type",
+      "home_value",
+      "household_composition",
+      "income",
+      "industries",
+      "interested_in",
+      "interests",
+      "life_events",
+      "moms",
+      "net_worth",
+      "office_type",
+      "politics",
+      "relationship_statuses",
+      "user_adclusters",
+      "work_employers",
+      "work_positions",
+      "id",
+    };
+
+    @Override
+    public FlexibleTargeting parseResponse(String response) throws APIException {
+      return FlexibleTargeting.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public FlexibleTargeting execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public FlexibleTargeting execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<FlexibleTargeting> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<FlexibleTargeting> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, FlexibleTargeting>() {
+           public FlexibleTargeting apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestBehaviorsField () {
+      return this.requestBehaviorsField(true);
+    }
+    public APIRequestGet requestBehaviorsField (boolean value) {
+      this.requestField("behaviors", value);
+      return this;
+    }
+    public APIRequestGet requestCollegeYearsField () {
+      return this.requestCollegeYearsField(true);
+    }
+    public APIRequestGet requestCollegeYearsField (boolean value) {
+      this.requestField("college_years", value);
+      return this;
+    }
+    public APIRequestGet requestConnectionsField () {
+      return this.requestConnectionsField(true);
+    }
+    public APIRequestGet requestConnectionsField (boolean value) {
+      this.requestField("connections", value);
+      return this;
+    }
+    public APIRequestGet requestCustomAudiencesField () {
+      return this.requestCustomAudiencesField(true);
+    }
+    public APIRequestGet requestCustomAudiencesField (boolean value) {
+      this.requestField("custom_audiences", value);
+      return this;
+    }
+    public APIRequestGet requestEducationMajorsField () {
+      return this.requestEducationMajorsField(true);
+    }
+    public APIRequestGet requestEducationMajorsField (boolean value) {
+      this.requestField("education_majors", value);
+      return this;
+    }
+    public APIRequestGet requestEducationSchoolsField () {
+      return this.requestEducationSchoolsField(true);
+    }
+    public APIRequestGet requestEducationSchoolsField (boolean value) {
+      this.requestField("education_schools", value);
+      return this;
+    }
+    public APIRequestGet requestEducationStatusesField () {
+      return this.requestEducationStatusesField(true);
+    }
+    public APIRequestGet requestEducationStatusesField (boolean value) {
+      this.requestField("education_statuses", value);
+      return this;
+    }
+    public APIRequestGet requestEthnicAffinityField () {
+      return this.requestEthnicAffinityField(true);
+    }
+    public APIRequestGet requestEthnicAffinityField (boolean value) {
+      this.requestField("ethnic_affinity", value);
+      return this;
+    }
+    public APIRequestGet requestFamilyStatusesField () {
+      return this.requestFamilyStatusesField(true);
+    }
+    public APIRequestGet requestFamilyStatusesField (boolean value) {
+      this.requestField("family_statuses", value);
+      return this;
+    }
+    public APIRequestGet requestFriendsOfConnectionsField () {
+      return this.requestFriendsOfConnectionsField(true);
+    }
+    public APIRequestGet requestFriendsOfConnectionsField (boolean value) {
+      this.requestField("friends_of_connections", value);
+      return this;
+    }
+    public APIRequestGet requestGenerationField () {
+      return this.requestGenerationField(true);
+    }
+    public APIRequestGet requestGenerationField (boolean value) {
+      this.requestField("generation", value);
+      return this;
+    }
+    public APIRequestGet requestHomeOwnershipField () {
+      return this.requestHomeOwnershipField(true);
+    }
+    public APIRequestGet requestHomeOwnershipField (boolean value) {
+      this.requestField("home_ownership", value);
+      return this;
+    }
+    public APIRequestGet requestHomeTypeField () {
+      return this.requestHomeTypeField(true);
+    }
+    public APIRequestGet requestHomeTypeField (boolean value) {
+      this.requestField("home_type", value);
+      return this;
+    }
+    public APIRequestGet requestHomeValueField () {
+      return this.requestHomeValueField(true);
+    }
+    public APIRequestGet requestHomeValueField (boolean value) {
+      this.requestField("home_value", value);
+      return this;
+    }
+    public APIRequestGet requestHouseholdCompositionField () {
+      return this.requestHouseholdCompositionField(true);
+    }
+    public APIRequestGet requestHouseholdCompositionField (boolean value) {
+      this.requestField("household_composition", value);
+      return this;
+    }
+    public APIRequestGet requestIncomeField () {
+      return this.requestIncomeField(true);
+    }
+    public APIRequestGet requestIncomeField (boolean value) {
+      this.requestField("income", value);
+      return this;
+    }
+    public APIRequestGet requestIndustriesField () {
+      return this.requestIndustriesField(true);
+    }
+    public APIRequestGet requestIndustriesField (boolean value) {
+      this.requestField("industries", value);
+      return this;
+    }
+    public APIRequestGet requestInterestedInField () {
+      return this.requestInterestedInField(true);
+    }
+    public APIRequestGet requestInterestedInField (boolean value) {
+      this.requestField("interested_in", value);
+      return this;
+    }
+    public APIRequestGet requestInterestsField () {
+      return this.requestInterestsField(true);
+    }
+    public APIRequestGet requestInterestsField (boolean value) {
+      this.requestField("interests", value);
+      return this;
+    }
+    public APIRequestGet requestLifeEventsField () {
+      return this.requestLifeEventsField(true);
+    }
+    public APIRequestGet requestLifeEventsField (boolean value) {
+      this.requestField("life_events", value);
+      return this;
+    }
+    public APIRequestGet requestMomsField () {
+      return this.requestMomsField(true);
+    }
+    public APIRequestGet requestMomsField (boolean value) {
+      this.requestField("moms", value);
+      return this;
+    }
+    public APIRequestGet requestNetWorthField () {
+      return this.requestNetWorthField(true);
+    }
+    public APIRequestGet requestNetWorthField (boolean value) {
+      this.requestField("net_worth", value);
+      return this;
+    }
+    public APIRequestGet requestOfficeTypeField () {
+      return this.requestOfficeTypeField(true);
+    }
+    public APIRequestGet requestOfficeTypeField (boolean value) {
+      this.requestField("office_type", value);
+      return this;
+    }
+    public APIRequestGet requestPoliticsField () {
+      return this.requestPoliticsField(true);
+    }
+    public APIRequestGet requestPoliticsField (boolean value) {
+      this.requestField("politics", value);
+      return this;
+    }
+    public APIRequestGet requestRelationshipStatusesField () {
+      return this.requestRelationshipStatusesField(true);
+    }
+    public APIRequestGet requestRelationshipStatusesField (boolean value) {
+      this.requestField("relationship_statuses", value);
+      return this;
+    }
+    public APIRequestGet requestUserAdclustersField () {
+      return this.requestUserAdclustersField(true);
+    }
+    public APIRequestGet requestUserAdclustersField (boolean value) {
+      this.requestField("user_adclusters", value);
+      return this;
+    }
+    public APIRequestGet requestWorkEmployersField () {
+      return this.requestWorkEmployersField(true);
+    }
+    public APIRequestGet requestWorkEmployersField (boolean value) {
+      this.requestField("work_employers", value);
+      return this;
+    }
+    public APIRequestGet requestWorkPositionsField () {
+      return this.requestWorkPositionsField(true);
+    }
+    public APIRequestGet requestWorkPositionsField (boolean value) {
+      this.requestField("work_positions", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -678,6 +822,7 @@ public class FlexibleTargeting extends APINode {
     this.mUserAdclusters = instance.mUserAdclusters;
     this.mWorkEmployers = instance.mWorkEmployers;
     this.mWorkPositions = instance.mWorkPositions;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

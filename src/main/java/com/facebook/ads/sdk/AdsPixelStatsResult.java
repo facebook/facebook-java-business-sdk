@@ -56,18 +56,79 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class AdsPixelStatsResult extends APINode {
   @SerializedName("aggregation")
-  private EnumAggregation mAggregation = null;
+  private String mAggregation = null;
   @SerializedName("data")
   private List<AdsPixelStats> mData = null;
   @SerializedName("start_time")
   private String mStartTime = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdsPixelStatsResult() {
+  AdsPixelStatsResult() {
+  }
+
+  public AdsPixelStatsResult(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdsPixelStatsResult(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdsPixelStatsResult fetch() throws APIException{
+    AdsPixelStatsResult newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdsPixelStatsResult fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdsPixelStatsResult> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdsPixelStatsResult fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdsPixelStatsResult> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdsPixelStatsResult> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdsPixelStatsResult>)(
+      new APIRequest<AdsPixelStatsResult>(context, "", "/", "GET", AdsPixelStatsResult.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdsPixelStatsResult>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdsPixelStatsResult.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdsPixelStatsResult loadJSON(String json, APIContext context) {
     AdsPixelStatsResult adsPixelStatsResult = getGson().fromJson(json, AdsPixelStatsResult.class);
@@ -210,40 +271,163 @@ public class AdsPixelStatsResult extends APINode {
     return getGson().toJson(this);
   }
 
-
-  public EnumAggregation getFieldAggregation() {
-    return mAggregation;
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public AdsPixelStatsResult setFieldAggregation(EnumAggregation value) {
-    this.mAggregation = value;
-    return this;
+
+  public String getFieldAggregation() {
+    return mAggregation;
   }
 
   public List<AdsPixelStats> getFieldData() {
     return mData;
   }
 
-  public AdsPixelStatsResult setFieldData(List<AdsPixelStats> value) {
-    this.mData = value;
-    return this;
-  }
-
-  public AdsPixelStatsResult setFieldData(String value) {
-    Type type = new TypeToken<List<AdsPixelStats>>(){}.getType();
-    this.mData = AdsPixelStats.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldStartTime() {
     return mStartTime;
   }
 
-  public AdsPixelStatsResult setFieldStartTime(String value) {
-    this.mStartTime = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdsPixelStatsResult> {
+
+    AdsPixelStatsResult lastResponse = null;
+    @Override
+    public AdsPixelStatsResult getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "aggregation",
+      "data",
+      "start_time",
+      "id",
+    };
+
+    @Override
+    public AdsPixelStatsResult parseResponse(String response) throws APIException {
+      return AdsPixelStatsResult.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdsPixelStatsResult execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdsPixelStatsResult execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdsPixelStatsResult> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdsPixelStatsResult> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdsPixelStatsResult>() {
+           public AdsPixelStatsResult apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestAggregationField () {
+      return this.requestAggregationField(true);
+    }
+    public APIRequestGet requestAggregationField (boolean value) {
+      this.requestField("aggregation", value);
+      return this;
+    }
+    public APIRequestGet requestDataField () {
+      return this.requestDataField(true);
+    }
+    public APIRequestGet requestDataField (boolean value) {
+      this.requestField("data", value);
+      return this;
+    }
+    public APIRequestGet requestStartTimeField () {
+      return this.requestStartTimeField(true);
+    }
+    public APIRequestGet requestStartTimeField (boolean value) {
+      this.requestField("start_time", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumAggregation {
       @SerializedName("browser_type")
@@ -258,12 +442,26 @@ public class AdsPixelStatsResult extends APINode {
       VALUE_EVENT("event"),
       @SerializedName("host")
       VALUE_HOST("host"),
+      @SerializedName("people_reached")
+      VALUE_PEOPLE_REACHED("people_reached"),
+      @SerializedName("pii_keys")
+      VALUE_PII_KEYS("pii_keys"),
+      @SerializedName("pii_lift")
+      VALUE_PII_LIFT("pii_lift"),
       @SerializedName("pixel_fire")
       VALUE_PIXEL_FIRE("pixel_fire"),
+      @SerializedName("event_detection_method")
+      VALUE_EVENT_DETECTION_METHOD("event_detection_method"),
       @SerializedName("url")
       VALUE_URL("url"),
+      @SerializedName("event_value_count")
+      VALUE_EVENT_VALUE_COUNT("event_value_count"),
+      @SerializedName("url_by_rule")
+      VALUE_URL_BY_RULE("url_by_rule"),
       @SerializedName("event_total_counts")
       VALUE_EVENT_TOTAL_COUNTS("event_total_counts"),
+      @SerializedName("event_source")
+      VALUE_EVENT_SOURCE("event_source"),
       NULL(null);
 
       private String value;
@@ -296,6 +494,7 @@ public class AdsPixelStatsResult extends APINode {
     this.mAggregation = instance.mAggregation;
     this.mData = instance.mData;
     this.mStartTime = instance.mStartTime;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

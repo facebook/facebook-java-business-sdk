@@ -56,7 +56,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class Tab extends APINode {
   @SerializedName("application")
-  private Object mApplication = null;
+  private Application mApplication = null;
   @SerializedName("custom_image_url")
   private String mCustomImageUrl = null;
   @SerializedName("custom_name")
@@ -77,7 +77,66 @@ public class Tab extends APINode {
   private Long mPosition = null;
   protected static Gson gson = null;
 
-  public Tab() {
+  Tab() {
+  }
+
+  public Tab(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public Tab(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public Tab fetch() throws APIException{
+    Tab newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static Tab fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<Tab> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static Tab fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<Tab> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<Tab> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<Tab>)(
+      new APIRequest<Tab>(context, "", "/", "GET", Tab.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<Tab>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", Tab.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
@@ -224,98 +283,238 @@ public class Tab extends APINode {
     return getGson().toJson(this);
   }
 
-
-  public Object getFieldApplication() {
-    return mApplication;
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public Tab setFieldApplication(Object value) {
-    this.mApplication = value;
-    return this;
+
+  public Application getFieldApplication() {
+    if (mApplication != null) {
+      mApplication.context = getContext();
+    }
+    return mApplication;
   }
 
   public String getFieldCustomImageUrl() {
     return mCustomImageUrl;
   }
 
-  public Tab setFieldCustomImageUrl(String value) {
-    this.mCustomImageUrl = value;
-    return this;
-  }
-
   public String getFieldCustomName() {
     return mCustomName;
-  }
-
-  public Tab setFieldCustomName(String value) {
-    this.mCustomName = value;
-    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public Tab setFieldId(String value) {
-    this.mId = value;
-    return this;
-  }
-
   public String getFieldImageUrl() {
     return mImageUrl;
-  }
-
-  public Tab setFieldImageUrl(String value) {
-    this.mImageUrl = value;
-    return this;
   }
 
   public Boolean getFieldIsNonConnectionLandingTab() {
     return mIsNonConnectionLandingTab;
   }
 
-  public Tab setFieldIsNonConnectionLandingTab(Boolean value) {
-    this.mIsNonConnectionLandingTab = value;
-    return this;
-  }
-
   public Boolean getFieldIsPermanent() {
     return mIsPermanent;
-  }
-
-  public Tab setFieldIsPermanent(Boolean value) {
-    this.mIsPermanent = value;
-    return this;
   }
 
   public String getFieldLink() {
     return mLink;
   }
 
-  public Tab setFieldLink(String value) {
-    this.mLink = value;
-    return this;
-  }
-
   public String getFieldName() {
     return mName;
-  }
-
-  public Tab setFieldName(String value) {
-    this.mName = value;
-    return this;
   }
 
   public Long getFieldPosition() {
     return mPosition;
   }
 
-  public Tab setFieldPosition(Long value) {
-    this.mPosition = value;
-    return this;
+
+
+  public static class APIRequestGet extends APIRequest<Tab> {
+
+    Tab lastResponse = null;
+    @Override
+    public Tab getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "application",
+      "custom_image_url",
+      "custom_name",
+      "id",
+      "image_url",
+      "is_non_connection_landing_tab",
+      "is_permanent",
+      "link",
+      "name",
+      "position",
+    };
+
+    @Override
+    public Tab parseResponse(String response) throws APIException {
+      return Tab.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public Tab execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Tab execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<Tab> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Tab> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, Tab>() {
+           public Tab apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestApplicationField () {
+      return this.requestApplicationField(true);
+    }
+    public APIRequestGet requestApplicationField (boolean value) {
+      this.requestField("application", value);
+      return this;
+    }
+    public APIRequestGet requestCustomImageUrlField () {
+      return this.requestCustomImageUrlField(true);
+    }
+    public APIRequestGet requestCustomImageUrlField (boolean value) {
+      this.requestField("custom_image_url", value);
+      return this;
+    }
+    public APIRequestGet requestCustomNameField () {
+      return this.requestCustomNameField(true);
+    }
+    public APIRequestGet requestCustomNameField (boolean value) {
+      this.requestField("custom_name", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestImageUrlField () {
+      return this.requestImageUrlField(true);
+    }
+    public APIRequestGet requestImageUrlField (boolean value) {
+      this.requestField("image_url", value);
+      return this;
+    }
+    public APIRequestGet requestIsNonConnectionLandingTabField () {
+      return this.requestIsNonConnectionLandingTabField(true);
+    }
+    public APIRequestGet requestIsNonConnectionLandingTabField (boolean value) {
+      this.requestField("is_non_connection_landing_tab", value);
+      return this;
+    }
+    public APIRequestGet requestIsPermanentField () {
+      return this.requestIsPermanentField(true);
+    }
+    public APIRequestGet requestIsPermanentField (boolean value) {
+      this.requestField("is_permanent", value);
+      return this;
+    }
+    public APIRequestGet requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGet requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGet requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGet requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestPositionField () {
+      return this.requestPositionField(true);
+    }
+    public APIRequestGet requestPositionField (boolean value) {
+      this.requestField("position", value);
+      return this;
+    }
   }
-
-
 
 
   synchronized /*package*/ static Gson getGson() {

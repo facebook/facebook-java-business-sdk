@@ -82,6 +82,7 @@ public class PlaceTopic extends APINode {
 
   public PlaceTopic(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -100,19 +101,17 @@ public class PlaceTopic extends APINode {
   }
 
   public static PlaceTopic fetchById(String id, APIContext context) throws APIException {
-    PlaceTopic placeTopic =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return placeTopic;
   }
 
   public static ListenableFuture<PlaceTopic> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<PlaceTopic> placeTopic =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return placeTopic;
   }
 
   public static APINodeList<PlaceTopic> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -125,12 +124,11 @@ public class PlaceTopic extends APINode {
   }
 
   public static ListenableFuture<APINodeList<PlaceTopic>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<PlaceTopic>> placeTopic =
+    return
       new APIRequest(context, "", "/", "GET", PlaceTopic.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return placeTopic;
   }
 
   private String getPrefixedId() {
@@ -394,7 +392,7 @@ public class PlaceTopic extends APINode {
     }
 
 
-    public APIRequestGet setIconSize (PlaceTopic.EnumIconSize iconSize) {
+    public APIRequestGet setIconSize (EnumIconSize iconSize) {
       this.setParam("icon_size", iconSize);
       return this;
     }

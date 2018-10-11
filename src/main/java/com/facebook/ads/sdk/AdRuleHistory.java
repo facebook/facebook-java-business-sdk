@@ -71,13 +71,74 @@ public class AdRuleHistory extends APINode {
   private AdRuleScheduleSpec mScheduleSpec = null;
   @SerializedName("timestamp")
   private String mTimestamp = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdRuleHistory() {
+  AdRuleHistory() {
+  }
+
+  public AdRuleHistory(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdRuleHistory(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdRuleHistory fetch() throws APIException{
+    AdRuleHistory newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdRuleHistory fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdRuleHistory> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdRuleHistory fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdRuleHistory> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdRuleHistory> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdRuleHistory>)(
+      new APIRequest<AdRuleHistory>(context, "", "/", "GET", AdRuleHistory.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdRuleHistory>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdRuleHistory.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdRuleHistory loadJSON(String json, APIContext context) {
     AdRuleHistory adRuleHistory = getGson().fromJson(json, AdRuleHistory.class);
@@ -220,100 +281,258 @@ public class AdRuleHistory extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public AdRuleEvaluationSpec getFieldEvaluationSpec() {
+    if (mEvaluationSpec != null) {
+      mEvaluationSpec.context = getContext();
+    }
     return mEvaluationSpec;
   }
 
-  public AdRuleHistory setFieldEvaluationSpec(AdRuleEvaluationSpec value) {
-    this.mEvaluationSpec = value;
-    return this;
-  }
-
-  public AdRuleHistory setFieldEvaluationSpec(String value) {
-    Type type = new TypeToken<AdRuleEvaluationSpec>(){}.getType();
-    this.mEvaluationSpec = AdRuleEvaluationSpec.getGson().fromJson(value, type);
-    return this;
-  }
   public Long getFieldExceptionCode() {
     return mExceptionCode;
-  }
-
-  public AdRuleHistory setFieldExceptionCode(Long value) {
-    this.mExceptionCode = value;
-    return this;
   }
 
   public String getFieldExceptionMessage() {
     return mExceptionMessage;
   }
 
-  public AdRuleHistory setFieldExceptionMessage(String value) {
-    this.mExceptionMessage = value;
-    return this;
-  }
-
   public AdRuleExecutionSpec getFieldExecutionSpec() {
+    if (mExecutionSpec != null) {
+      mExecutionSpec.context = getContext();
+    }
     return mExecutionSpec;
   }
 
-  public AdRuleHistory setFieldExecutionSpec(AdRuleExecutionSpec value) {
-    this.mExecutionSpec = value;
-    return this;
-  }
-
-  public AdRuleHistory setFieldExecutionSpec(String value) {
-    Type type = new TypeToken<AdRuleExecutionSpec>(){}.getType();
-    this.mExecutionSpec = AdRuleExecutionSpec.getGson().fromJson(value, type);
-    return this;
-  }
   public Boolean getFieldIsManual() {
     return mIsManual;
-  }
-
-  public AdRuleHistory setFieldIsManual(Boolean value) {
-    this.mIsManual = value;
-    return this;
   }
 
   public List<AdRuleHistoryResult> getFieldResults() {
     return mResults;
   }
 
-  public AdRuleHistory setFieldResults(List<AdRuleHistoryResult> value) {
-    this.mResults = value;
-    return this;
-  }
-
-  public AdRuleHistory setFieldResults(String value) {
-    Type type = new TypeToken<List<AdRuleHistoryResult>>(){}.getType();
-    this.mResults = AdRuleHistoryResult.getGson().fromJson(value, type);
-    return this;
-  }
   public AdRuleScheduleSpec getFieldScheduleSpec() {
+    if (mScheduleSpec != null) {
+      mScheduleSpec.context = getContext();
+    }
     return mScheduleSpec;
   }
 
-  public AdRuleHistory setFieldScheduleSpec(AdRuleScheduleSpec value) {
-    this.mScheduleSpec = value;
-    return this;
-  }
-
-  public AdRuleHistory setFieldScheduleSpec(String value) {
-    Type type = new TypeToken<AdRuleScheduleSpec>(){}.getType();
-    this.mScheduleSpec = AdRuleScheduleSpec.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldTimestamp() {
     return mTimestamp;
   }
 
-  public AdRuleHistory setFieldTimestamp(String value) {
-    this.mTimestamp = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdRuleHistory> {
+
+    AdRuleHistory lastResponse = null;
+    @Override
+    public AdRuleHistory getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "action",
+      "hide_no_changes",
+      "object_id",
+    };
+
+    public static final String[] FIELDS = {
+      "evaluation_spec",
+      "exception_code",
+      "exception_message",
+      "execution_spec",
+      "is_manual",
+      "results",
+      "schedule_spec",
+      "timestamp",
+      "id",
+    };
+
+    @Override
+    public AdRuleHistory parseResponse(String response) throws APIException {
+      return AdRuleHistory.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdRuleHistory execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdRuleHistory execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdRuleHistory> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdRuleHistory> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdRuleHistory>() {
+           public AdRuleHistory apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet setAction (EnumAction action) {
+      this.setParam("action", action);
+      return this;
+    }
+    public APIRequestGet setAction (String action) {
+      this.setParam("action", action);
+      return this;
+    }
+
+    public APIRequestGet setHideNoChanges (Boolean hideNoChanges) {
+      this.setParam("hide_no_changes", hideNoChanges);
+      return this;
+    }
+    public APIRequestGet setHideNoChanges (String hideNoChanges) {
+      this.setParam("hide_no_changes", hideNoChanges);
+      return this;
+    }
+
+    public APIRequestGet setObjectId (String objectId) {
+      this.setParam("object_id", objectId);
+      return this;
+    }
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestEvaluationSpecField () {
+      return this.requestEvaluationSpecField(true);
+    }
+    public APIRequestGet requestEvaluationSpecField (boolean value) {
+      this.requestField("evaluation_spec", value);
+      return this;
+    }
+    public APIRequestGet requestExceptionCodeField () {
+      return this.requestExceptionCodeField(true);
+    }
+    public APIRequestGet requestExceptionCodeField (boolean value) {
+      this.requestField("exception_code", value);
+      return this;
+    }
+    public APIRequestGet requestExceptionMessageField () {
+      return this.requestExceptionMessageField(true);
+    }
+    public APIRequestGet requestExceptionMessageField (boolean value) {
+      this.requestField("exception_message", value);
+      return this;
+    }
+    public APIRequestGet requestExecutionSpecField () {
+      return this.requestExecutionSpecField(true);
+    }
+    public APIRequestGet requestExecutionSpecField (boolean value) {
+      this.requestField("execution_spec", value);
+      return this;
+    }
+    public APIRequestGet requestIsManualField () {
+      return this.requestIsManualField(true);
+    }
+    public APIRequestGet requestIsManualField (boolean value) {
+      this.requestField("is_manual", value);
+      return this;
+    }
+    public APIRequestGet requestResultsField () {
+      return this.requestResultsField(true);
+    }
+    public APIRequestGet requestResultsField (boolean value) {
+      this.requestField("results", value);
+      return this;
+    }
+    public APIRequestGet requestScheduleSpecField () {
+      return this.requestScheduleSpecField(true);
+    }
+    public APIRequestGet requestScheduleSpecField (boolean value) {
+      this.requestField("schedule_spec", value);
+      return this;
+    }
+    public APIRequestGet requestTimestampField () {
+      return this.requestTimestampField(true);
+    }
+    public APIRequestGet requestTimestampField (boolean value) {
+      this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumAction {
       @SerializedName("BUDGET_NOT_REDISTRIBUTED")
@@ -375,6 +594,7 @@ public class AdRuleHistory extends APINode {
     this.mResults = instance.mResults;
     this.mScheduleSpec = instance.mScheduleSpec;
     this.mTimestamp = instance.mTimestamp;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

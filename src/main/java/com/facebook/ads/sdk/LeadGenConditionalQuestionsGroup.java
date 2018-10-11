@@ -56,9 +56,9 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class LeadGenConditionalQuestionsGroup extends APINode {
   @SerializedName("choices")
-  private List<Object> mChoices = null;
+  private List<LeadGenConditionalQuestionsGroupChoices> mChoices = null;
   @SerializedName("questions")
-  private List<Object> mQuestions = null;
+  private List<LeadGenConditionalQuestionsGroupQuestions> mQuestions = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
@@ -72,6 +72,7 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
 
   public LeadGenConditionalQuestionsGroup(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -90,19 +91,17 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
   }
 
   public static LeadGenConditionalQuestionsGroup fetchById(String id, APIContext context) throws APIException {
-    LeadGenConditionalQuestionsGroup leadGenConditionalQuestionsGroup =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return leadGenConditionalQuestionsGroup;
   }
 
   public static ListenableFuture<LeadGenConditionalQuestionsGroup> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<LeadGenConditionalQuestionsGroup> leadGenConditionalQuestionsGroup =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return leadGenConditionalQuestionsGroup;
   }
 
   public static APINodeList<LeadGenConditionalQuestionsGroup> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -115,12 +114,11 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
   }
 
   public static ListenableFuture<APINodeList<LeadGenConditionalQuestionsGroup>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<LeadGenConditionalQuestionsGroup>> leadGenConditionalQuestionsGroup =
+    return
       new APIRequest(context, "", "/", "GET", LeadGenConditionalQuestionsGroup.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return leadGenConditionalQuestionsGroup;
   }
 
   private String getPrefixedId() {
@@ -276,11 +274,11 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
   }
 
 
-  public List<Object> getFieldChoices() {
+  public List<LeadGenConditionalQuestionsGroupChoices> getFieldChoices() {
     return mChoices;
   }
 
-  public List<Object> getFieldQuestions() {
+  public List<LeadGenConditionalQuestionsGroupQuestions> getFieldQuestions() {
     return mQuestions;
   }
 

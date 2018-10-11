@@ -94,6 +94,7 @@ public class BusinessRoleRequest extends APINode {
 
   public BusinessRoleRequest(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -112,19 +113,17 @@ public class BusinessRoleRequest extends APINode {
   }
 
   public static BusinessRoleRequest fetchById(String id, APIContext context) throws APIException {
-    BusinessRoleRequest businessRoleRequest =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return businessRoleRequest;
   }
 
   public static ListenableFuture<BusinessRoleRequest> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<BusinessRoleRequest> businessRoleRequest =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return businessRoleRequest;
   }
 
   public static APINodeList<BusinessRoleRequest> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -137,12 +136,11 @@ public class BusinessRoleRequest extends APINode {
   }
 
   public static ListenableFuture<APINodeList<BusinessRoleRequest>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<BusinessRoleRequest>> businessRoleRequest =
+    return
       new APIRequest(context, "", "/", "GET", BusinessRoleRequest.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return businessRoleRequest;
   }
 
   private String getPrefixedId() {

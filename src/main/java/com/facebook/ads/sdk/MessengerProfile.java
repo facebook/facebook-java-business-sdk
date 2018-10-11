@@ -71,13 +71,74 @@ public class MessengerProfile extends APINode {
   private Object mTargetAudience = null;
   @SerializedName("whitelisted_domains")
   private List<String> mWhitelistedDomains = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public MessengerProfile() {
+  MessengerProfile() {
+  }
+
+  public MessengerProfile(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public MessengerProfile(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public MessengerProfile fetch() throws APIException{
+    MessengerProfile newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static MessengerProfile fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<MessengerProfile> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static MessengerProfile fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<MessengerProfile> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<MessengerProfile> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<MessengerProfile>)(
+      new APIRequest<MessengerProfile>(context, "", "/", "GET", MessengerProfile.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<MessengerProfile>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", MessengerProfile.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static MessengerProfile loadJSON(String json, APIContext context) {
     MessengerProfile messengerProfile = getGson().fromJson(json, MessengerProfile.class);
@@ -220,110 +281,222 @@ public class MessengerProfile extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldAccountLinkingUrl() {
     return mAccountLinkingUrl;
-  }
-
-  public MessengerProfile setFieldAccountLinkingUrl(String value) {
-    this.mAccountLinkingUrl = value;
-    return this;
   }
 
   public Object getFieldGetStarted() {
     return mGetStarted;
   }
 
-  public MessengerProfile setFieldGetStarted(Object value) {
-    this.mGetStarted = value;
-    return this;
-  }
-
   public List<Object> getFieldGreeting() {
     return mGreeting;
-  }
-
-  public MessengerProfile setFieldGreeting(List<Object> value) {
-    this.mGreeting = value;
-    return this;
   }
 
   public Object getFieldHomeUrl() {
     return mHomeUrl;
   }
 
-  public MessengerProfile setFieldHomeUrl(Object value) {
-    this.mHomeUrl = value;
-    return this;
-  }
-
   public Object getFieldPaymentSettings() {
     return mPaymentSettings;
-  }
-
-  public MessengerProfile setFieldPaymentSettings(Object value) {
-    this.mPaymentSettings = value;
-    return this;
   }
 
   public List<Object> getFieldPersistentMenu() {
     return mPersistentMenu;
   }
 
-  public MessengerProfile setFieldPersistentMenu(List<Object> value) {
-    this.mPersistentMenu = value;
-    return this;
-  }
-
   public Object getFieldTargetAudience() {
     return mTargetAudience;
-  }
-
-  public MessengerProfile setFieldTargetAudience(Object value) {
-    this.mTargetAudience = value;
-    return this;
   }
 
   public List<String> getFieldWhitelistedDomains() {
     return mWhitelistedDomains;
   }
 
-  public MessengerProfile setFieldWhitelistedDomains(List<String> value) {
-    this.mWhitelistedDomains = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
 
-  public static enum EnumFields {
-      @SerializedName("GET_STARTED")
-      VALUE_GET_STARTED("GET_STARTED"),
-      @SerializedName("PERSISTENT_MENU")
-      VALUE_PERSISTENT_MENU("PERSISTENT_MENU"),
-      @SerializedName("TARGET_AUDIENCE")
-      VALUE_TARGET_AUDIENCE("TARGET_AUDIENCE"),
-      @SerializedName("WHITELISTED_DOMAINS")
-      VALUE_WHITELISTED_DOMAINS("WHITELISTED_DOMAINS"),
-      @SerializedName("GREETING")
-      VALUE_GREETING("GREETING"),
-      @SerializedName("ACCOUNT_LINKING_URL")
-      VALUE_ACCOUNT_LINKING_URL("ACCOUNT_LINKING_URL"),
-      @SerializedName("PAYMENT_SETTINGS")
-      VALUE_PAYMENT_SETTINGS("PAYMENT_SETTINGS"),
-      @SerializedName("HOME_URL")
-      VALUE_HOME_URL("HOME_URL"),
-      NULL(null);
+  public static class APIRequestGet extends APIRequest<MessengerProfile> {
 
-      private String value;
+    MessengerProfile lastResponse = null;
+    @Override
+    public MessengerProfile getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
 
-      private EnumFields(String value) {
-        this.value = value;
+    public static final String[] FIELDS = {
+      "account_linking_url",
+      "get_started",
+      "greeting",
+      "home_url",
+      "payment_settings",
+      "persistent_menu",
+      "target_audience",
+      "whitelisted_domains",
+      "id",
+    };
+
+    @Override
+    public MessengerProfile parseResponse(String response) throws APIException {
+      return MessengerProfile.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public MessengerProfile execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public MessengerProfile execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<MessengerProfile> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<MessengerProfile> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, MessengerProfile>() {
+           public MessengerProfile apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
       }
+      return this;
+    }
 
-      @Override
-      public String toString() {
-        return value;
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
       }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestAccountLinkingUrlField () {
+      return this.requestAccountLinkingUrlField(true);
+    }
+    public APIRequestGet requestAccountLinkingUrlField (boolean value) {
+      this.requestField("account_linking_url", value);
+      return this;
+    }
+    public APIRequestGet requestGetStartedField () {
+      return this.requestGetStartedField(true);
+    }
+    public APIRequestGet requestGetStartedField (boolean value) {
+      this.requestField("get_started", value);
+      return this;
+    }
+    public APIRequestGet requestGreetingField () {
+      return this.requestGreetingField(true);
+    }
+    public APIRequestGet requestGreetingField (boolean value) {
+      this.requestField("greeting", value);
+      return this;
+    }
+    public APIRequestGet requestHomeUrlField () {
+      return this.requestHomeUrlField(true);
+    }
+    public APIRequestGet requestHomeUrlField (boolean value) {
+      this.requestField("home_url", value);
+      return this;
+    }
+    public APIRequestGet requestPaymentSettingsField () {
+      return this.requestPaymentSettingsField(true);
+    }
+    public APIRequestGet requestPaymentSettingsField (boolean value) {
+      this.requestField("payment_settings", value);
+      return this;
+    }
+    public APIRequestGet requestPersistentMenuField () {
+      return this.requestPersistentMenuField(true);
+    }
+    public APIRequestGet requestPersistentMenuField (boolean value) {
+      this.requestField("persistent_menu", value);
+      return this;
+    }
+    public APIRequestGet requestTargetAudienceField () {
+      return this.requestTargetAudienceField(true);
+    }
+    public APIRequestGet requestTargetAudienceField (boolean value) {
+      this.requestField("target_audience", value);
+      return this;
+    }
+    public APIRequestGet requestWhitelistedDomainsField () {
+      return this.requestWhitelistedDomainsField(true);
+    }
+    public APIRequestGet requestWhitelistedDomainsField (boolean value) {
+      this.requestField("whitelisted_domains", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
   }
 
 
@@ -349,6 +522,7 @@ public class MessengerProfile extends APINode {
     this.mPersistentMenu = instance.mPersistentMenu;
     this.mTargetAudience = instance.mTargetAudience;
     this.mWhitelistedDomains = instance.mWhitelistedDomains;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

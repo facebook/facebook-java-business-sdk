@@ -59,13 +59,74 @@ public class InstagramInsightsValue extends APINode {
   private String mEndTime = null;
   @SerializedName("value")
   private Object mValue = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public InstagramInsightsValue() {
+  InstagramInsightsValue() {
+  }
+
+  public InstagramInsightsValue(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public InstagramInsightsValue(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public InstagramInsightsValue fetch() throws APIException{
+    InstagramInsightsValue newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static InstagramInsightsValue fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<InstagramInsightsValue> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static InstagramInsightsValue fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<InstagramInsightsValue> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<InstagramInsightsValue> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<InstagramInsightsValue>)(
+      new APIRequest<InstagramInsightsValue>(context, "", "/", "GET", InstagramInsightsValue.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<InstagramInsightsValue>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", InstagramInsightsValue.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static InstagramInsightsValue loadJSON(String json, APIContext context) {
     InstagramInsightsValue instagramInsightsValue = getGson().fromJson(json, InstagramInsightsValue.class);
@@ -208,26 +269,151 @@ public class InstagramInsightsValue extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldEndTime() {
     return mEndTime;
-  }
-
-  public InstagramInsightsValue setFieldEndTime(String value) {
-    this.mEndTime = value;
-    return this;
   }
 
   public Object getFieldValue() {
     return mValue;
   }
 
-  public InstagramInsightsValue setFieldValue(Object value) {
-    this.mValue = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<InstagramInsightsValue> {
+
+    InstagramInsightsValue lastResponse = null;
+    @Override
+    public InstagramInsightsValue getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "end_time",
+      "value",
+      "id",
+    };
+
+    @Override
+    public InstagramInsightsValue parseResponse(String response) throws APIException {
+      return InstagramInsightsValue.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public InstagramInsightsValue execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public InstagramInsightsValue execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<InstagramInsightsValue> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<InstagramInsightsValue> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, InstagramInsightsValue>() {
+           public InstagramInsightsValue apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestEndTimeField () {
+      return this.requestEndTimeField(true);
+    }
+    public APIRequestGet requestEndTimeField (boolean value) {
+      this.requestField("end_time", value);
+      return this;
+    }
+    public APIRequestGet requestValueField () {
+      return this.requestValueField(true);
+    }
+    public APIRequestGet requestValueField (boolean value) {
+      this.requestField("value", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -246,6 +432,7 @@ public class InstagramInsightsValue extends APINode {
   public InstagramInsightsValue copyFrom(InstagramInsightsValue instance) {
     this.mEndTime = instance.mEndTime;
     this.mValue = instance.mValue;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

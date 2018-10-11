@@ -72,6 +72,7 @@ public class AdsDataPartner extends APINode {
 
   public AdsDataPartner(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -90,19 +91,17 @@ public class AdsDataPartner extends APINode {
   }
 
   public static AdsDataPartner fetchById(String id, APIContext context) throws APIException {
-    AdsDataPartner adsDataPartner =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return adsDataPartner;
   }
 
   public static ListenableFuture<AdsDataPartner> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<AdsDataPartner> adsDataPartner =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return adsDataPartner;
   }
 
   public static APINodeList<AdsDataPartner> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -115,12 +114,11 @@ public class AdsDataPartner extends APINode {
   }
 
   public static ListenableFuture<APINodeList<AdsDataPartner>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<AdsDataPartner>> adsDataPartner =
+    return
       new APIRequest(context, "", "/", "GET", AdsDataPartner.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return adsDataPartner;
   }
 
   private String getPrefixedId() {
@@ -271,6 +269,10 @@ public class AdsDataPartner extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestDeleteUsersOfAnyAudience deleteUsersOfAnyAudience() {
+    return new APIRequestDeleteUsersOfAnyAudience(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -289,6 +291,119 @@ public class AdsDataPartner extends APINode {
   }
 
 
+
+  public static class APIRequestDeleteUsersOfAnyAudience extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "external_ids",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(String result) {
+             try {
+               return APIRequestDeleteUsersOfAnyAudience.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteUsersOfAnyAudience(String nodeId, APIContext context) {
+      super(context, nodeId, "/usersofanyaudience", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteUsersOfAnyAudience setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteUsersOfAnyAudience setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteUsersOfAnyAudience setExternalIds (List<String> externalIds) {
+      this.setParam("external_ids", externalIds);
+      return this;
+    }
+    public APIRequestDeleteUsersOfAnyAudience setExternalIds (String externalIds) {
+      this.setParam("external_ids", externalIds);
+      return this;
+    }
+
+    public APIRequestDeleteUsersOfAnyAudience requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteUsersOfAnyAudience requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteUsersOfAnyAudience requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteUsersOfAnyAudience requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteUsersOfAnyAudience requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteUsersOfAnyAudience requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGet extends APIRequest<AdsDataPartner> {
 

@@ -63,6 +63,8 @@ public class AdPromotedObject extends APINode {
   private EnumCustomEventType mCustomEventType = null;
   @SerializedName("event_id")
   private String mEventId = null;
+  @SerializedName("fundraiser_campaign_id")
+  private String mFundraiserCampaignId = null;
   @SerializedName("object_store_url")
   private String mObjectStoreUrl = null;
   @SerializedName("offer_id")
@@ -71,21 +73,90 @@ public class AdPromotedObject extends APINode {
   private String mOfflineConversionDataSetId = null;
   @SerializedName("page_id")
   private String mPageId = null;
+  @SerializedName("pixel_aggregation_rule")
+  private String mPixelAggregationRule = null;
   @SerializedName("pixel_id")
   private String mPixelId = null;
+  @SerializedName("pixel_rule")
+  private String mPixelRule = null;
   @SerializedName("place_page_set_id")
   private String mPlacePageSetId = null;
   @SerializedName("product_catalog_id")
   private String mProductCatalogId = null;
+  @SerializedName("product_item_id")
+  private String mProductItemId = null;
   @SerializedName("product_set_id")
   private String mProductSetId = null;
+  @SerializedName("retention_days")
+  private String mRetentionDays = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdPromotedObject() {
+  AdPromotedObject() {
+  }
+
+  public AdPromotedObject(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdPromotedObject(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdPromotedObject fetch() throws APIException{
+    AdPromotedObject newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdPromotedObject fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdPromotedObject> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdPromotedObject fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdPromotedObject> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdPromotedObject> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdPromotedObject>)(
+      new APIRequest<AdPromotedObject>(context, "", "/", "GET", AdPromotedObject.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdPromotedObject>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdPromotedObject.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdPromotedObject loadJSON(String json, APIContext context) {
     AdPromotedObject adPromotedObject = getGson().fromJson(json, AdPromotedObject.class);
@@ -228,122 +299,353 @@ public class AdPromotedObject extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldApplicationId() {
     return mApplicationId;
-  }
-
-  public AdPromotedObject setFieldApplicationId(String value) {
-    this.mApplicationId = value;
-    return this;
   }
 
   public String getFieldCustomConversionId() {
     return mCustomConversionId;
   }
 
-  public AdPromotedObject setFieldCustomConversionId(String value) {
-    this.mCustomConversionId = value;
-    return this;
-  }
-
   public EnumCustomEventType getFieldCustomEventType() {
     return mCustomEventType;
-  }
-
-  public AdPromotedObject setFieldCustomEventType(EnumCustomEventType value) {
-    this.mCustomEventType = value;
-    return this;
   }
 
   public String getFieldEventId() {
     return mEventId;
   }
 
-  public AdPromotedObject setFieldEventId(String value) {
-    this.mEventId = value;
-    return this;
+  public String getFieldFundraiserCampaignId() {
+    return mFundraiserCampaignId;
   }
 
   public String getFieldObjectStoreUrl() {
     return mObjectStoreUrl;
   }
 
-  public AdPromotedObject setFieldObjectStoreUrl(String value) {
-    this.mObjectStoreUrl = value;
-    return this;
-  }
-
   public String getFieldOfferId() {
     return mOfferId;
-  }
-
-  public AdPromotedObject setFieldOfferId(String value) {
-    this.mOfferId = value;
-    return this;
   }
 
   public String getFieldOfflineConversionDataSetId() {
     return mOfflineConversionDataSetId;
   }
 
-  public AdPromotedObject setFieldOfflineConversionDataSetId(String value) {
-    this.mOfflineConversionDataSetId = value;
-    return this;
-  }
-
   public String getFieldPageId() {
     return mPageId;
   }
 
-  public AdPromotedObject setFieldPageId(String value) {
-    this.mPageId = value;
-    return this;
+  public String getFieldPixelAggregationRule() {
+    return mPixelAggregationRule;
   }
 
   public String getFieldPixelId() {
     return mPixelId;
   }
 
-  public AdPromotedObject setFieldPixelId(String value) {
-    this.mPixelId = value;
-    return this;
+  public String getFieldPixelRule() {
+    return mPixelRule;
   }
 
   public String getFieldPlacePageSetId() {
     return mPlacePageSetId;
   }
 
-  public AdPromotedObject setFieldPlacePageSetId(String value) {
-    this.mPlacePageSetId = value;
-    return this;
-  }
-
   public String getFieldProductCatalogId() {
     return mProductCatalogId;
   }
 
-  public AdPromotedObject setFieldProductCatalogId(String value) {
-    this.mProductCatalogId = value;
-    return this;
+  public String getFieldProductItemId() {
+    return mProductItemId;
   }
 
   public String getFieldProductSetId() {
     return mProductSetId;
   }
 
-  public AdPromotedObject setFieldProductSetId(String value) {
-    this.mProductSetId = value;
-    return this;
+  public String getFieldRetentionDays() {
+    return mRetentionDays;
+  }
+
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdPromotedObject> {
+
+    AdPromotedObject lastResponse = null;
+    @Override
+    public AdPromotedObject getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "application_id",
+      "custom_conversion_id",
+      "custom_event_type",
+      "event_id",
+      "fundraiser_campaign_id",
+      "object_store_url",
+      "offer_id",
+      "offline_conversion_data_set_id",
+      "page_id",
+      "pixel_aggregation_rule",
+      "pixel_id",
+      "pixel_rule",
+      "place_page_set_id",
+      "product_catalog_id",
+      "product_item_id",
+      "product_set_id",
+      "retention_days",
+      "id",
+    };
+
+    @Override
+    public AdPromotedObject parseResponse(String response) throws APIException {
+      return AdPromotedObject.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdPromotedObject execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdPromotedObject execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdPromotedObject> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdPromotedObject> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdPromotedObject>() {
+           public AdPromotedObject apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestApplicationIdField () {
+      return this.requestApplicationIdField(true);
+    }
+    public APIRequestGet requestApplicationIdField (boolean value) {
+      this.requestField("application_id", value);
+      return this;
+    }
+    public APIRequestGet requestCustomConversionIdField () {
+      return this.requestCustomConversionIdField(true);
+    }
+    public APIRequestGet requestCustomConversionIdField (boolean value) {
+      this.requestField("custom_conversion_id", value);
+      return this;
+    }
+    public APIRequestGet requestCustomEventTypeField () {
+      return this.requestCustomEventTypeField(true);
+    }
+    public APIRequestGet requestCustomEventTypeField (boolean value) {
+      this.requestField("custom_event_type", value);
+      return this;
+    }
+    public APIRequestGet requestEventIdField () {
+      return this.requestEventIdField(true);
+    }
+    public APIRequestGet requestEventIdField (boolean value) {
+      this.requestField("event_id", value);
+      return this;
+    }
+    public APIRequestGet requestFundraiserCampaignIdField () {
+      return this.requestFundraiserCampaignIdField(true);
+    }
+    public APIRequestGet requestFundraiserCampaignIdField (boolean value) {
+      this.requestField("fundraiser_campaign_id", value);
+      return this;
+    }
+    public APIRequestGet requestObjectStoreUrlField () {
+      return this.requestObjectStoreUrlField(true);
+    }
+    public APIRequestGet requestObjectStoreUrlField (boolean value) {
+      this.requestField("object_store_url", value);
+      return this;
+    }
+    public APIRequestGet requestOfferIdField () {
+      return this.requestOfferIdField(true);
+    }
+    public APIRequestGet requestOfferIdField (boolean value) {
+      this.requestField("offer_id", value);
+      return this;
+    }
+    public APIRequestGet requestOfflineConversionDataSetIdField () {
+      return this.requestOfflineConversionDataSetIdField(true);
+    }
+    public APIRequestGet requestOfflineConversionDataSetIdField (boolean value) {
+      this.requestField("offline_conversion_data_set_id", value);
+      return this;
+    }
+    public APIRequestGet requestPageIdField () {
+      return this.requestPageIdField(true);
+    }
+    public APIRequestGet requestPageIdField (boolean value) {
+      this.requestField("page_id", value);
+      return this;
+    }
+    public APIRequestGet requestPixelAggregationRuleField () {
+      return this.requestPixelAggregationRuleField(true);
+    }
+    public APIRequestGet requestPixelAggregationRuleField (boolean value) {
+      this.requestField("pixel_aggregation_rule", value);
+      return this;
+    }
+    public APIRequestGet requestPixelIdField () {
+      return this.requestPixelIdField(true);
+    }
+    public APIRequestGet requestPixelIdField (boolean value) {
+      this.requestField("pixel_id", value);
+      return this;
+    }
+    public APIRequestGet requestPixelRuleField () {
+      return this.requestPixelRuleField(true);
+    }
+    public APIRequestGet requestPixelRuleField (boolean value) {
+      this.requestField("pixel_rule", value);
+      return this;
+    }
+    public APIRequestGet requestPlacePageSetIdField () {
+      return this.requestPlacePageSetIdField(true);
+    }
+    public APIRequestGet requestPlacePageSetIdField (boolean value) {
+      this.requestField("place_page_set_id", value);
+      return this;
+    }
+    public APIRequestGet requestProductCatalogIdField () {
+      return this.requestProductCatalogIdField(true);
+    }
+    public APIRequestGet requestProductCatalogIdField (boolean value) {
+      this.requestField("product_catalog_id", value);
+      return this;
+    }
+    public APIRequestGet requestProductItemIdField () {
+      return this.requestProductItemIdField(true);
+    }
+    public APIRequestGet requestProductItemIdField (boolean value) {
+      this.requestField("product_item_id", value);
+      return this;
+    }
+    public APIRequestGet requestProductSetIdField () {
+      return this.requestProductSetIdField(true);
+    }
+    public APIRequestGet requestProductSetIdField (boolean value) {
+      this.requestField("product_set_id", value);
+      return this;
+    }
+    public APIRequestGet requestRetentionDaysField () {
+      return this.requestRetentionDaysField(true);
+    }
+    public APIRequestGet requestRetentionDaysField (boolean value) {
+      this.requestField("retention_days", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumCustomEventType {
       @SerializedName("RATE")
       VALUE_RATE("RATE"),
       @SerializedName("TUTORIAL_COMPLETION")
       VALUE_TUTORIAL_COMPLETION("TUTORIAL_COMPLETION"),
+      @SerializedName("CONTACT")
+      VALUE_CONTACT("CONTACT"),
+      @SerializedName("CUSTOMIZE_PRODUCT")
+      VALUE_CUSTOMIZE_PRODUCT("CUSTOMIZE_PRODUCT"),
+      @SerializedName("DONATE")
+      VALUE_DONATE("DONATE"),
+      @SerializedName("FIND_LOCATION")
+      VALUE_FIND_LOCATION("FIND_LOCATION"),
+      @SerializedName("SCHEDULE")
+      VALUE_SCHEDULE("SCHEDULE"),
+      @SerializedName("START_TRIAL")
+      VALUE_START_TRIAL("START_TRIAL"),
+      @SerializedName("SUBMIT_APPLICATION")
+      VALUE_SUBMIT_APPLICATION("SUBMIT_APPLICATION"),
+      @SerializedName("SUBSCRIBE")
+      VALUE_SUBSCRIBE("SUBSCRIBE"),
       @SerializedName("ADD_TO_CART")
       VALUE_ADD_TO_CART("ADD_TO_CART"),
       @SerializedName("ADD_TO_WISHLIST")
@@ -407,14 +709,20 @@ public class AdPromotedObject extends APINode {
     this.mCustomConversionId = instance.mCustomConversionId;
     this.mCustomEventType = instance.mCustomEventType;
     this.mEventId = instance.mEventId;
+    this.mFundraiserCampaignId = instance.mFundraiserCampaignId;
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
     this.mOfferId = instance.mOfferId;
     this.mOfflineConversionDataSetId = instance.mOfflineConversionDataSetId;
     this.mPageId = instance.mPageId;
+    this.mPixelAggregationRule = instance.mPixelAggregationRule;
     this.mPixelId = instance.mPixelId;
+    this.mPixelRule = instance.mPixelRule;
     this.mPlacePageSetId = instance.mPlacePageSetId;
     this.mProductCatalogId = instance.mProductCatalogId;
+    this.mProductItemId = instance.mProductItemId;
     this.mProductSetId = instance.mProductSetId;
+    this.mRetentionDays = instance.mRetentionDays;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

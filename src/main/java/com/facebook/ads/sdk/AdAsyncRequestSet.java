@@ -98,6 +98,7 @@ public class AdAsyncRequestSet extends APINode {
 
   public AdAsyncRequestSet(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -116,19 +117,17 @@ public class AdAsyncRequestSet extends APINode {
   }
 
   public static AdAsyncRequestSet fetchById(String id, APIContext context) throws APIException {
-    AdAsyncRequestSet adAsyncRequestSet =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return adAsyncRequestSet;
   }
 
   public static ListenableFuture<AdAsyncRequestSet> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<AdAsyncRequestSet> adAsyncRequestSet =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return adAsyncRequestSet;
   }
 
   public static APINodeList<AdAsyncRequestSet> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -141,12 +140,11 @@ public class AdAsyncRequestSet extends APINode {
   }
 
   public static ListenableFuture<APINodeList<AdAsyncRequestSet>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<AdAsyncRequestSet>> adAsyncRequestSet =
+    return
       new APIRequest(context, "", "/", "GET", AdAsyncRequestSet.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return adAsyncRequestSet;
   }
 
   private String getPrefixedId() {
@@ -301,8 +299,16 @@ public class AdAsyncRequestSet extends APINode {
     return new APIRequestGetRequests(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -343,6 +349,9 @@ public class AdAsyncRequestSet extends APINode {
   }
 
   public AdAsyncRequestSetNotificationResult getFieldNotificationResult() {
+    if (mNotificationResult != null) {
+      mNotificationResult.context = getContext();
+    }
     return mNotificationResult;
   }
 
@@ -555,6 +564,109 @@ public class AdAsyncRequestSet extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+  }
+
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGet extends APIRequest<AdAsyncRequestSet> {
@@ -786,6 +898,131 @@ public class AdAsyncRequestSet extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<AdAsyncRequestSet> {
+
+    AdAsyncRequestSet lastResponse = null;
+    @Override
+    public AdAsyncRequestSet getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "name",
+      "notification_uri",
+      "notification_mode",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdAsyncRequestSet parseResponse(String response) throws APIException {
+      return AdAsyncRequestSet.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdAsyncRequestSet execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAsyncRequestSet execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdAsyncRequestSet> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdAsyncRequestSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdAsyncRequestSet>() {
+           public AdAsyncRequestSet apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setNotificationUri (String notificationUri) {
+      this.setParam("notification_uri", notificationUri);
+      return this;
+    }
+
+    public APIRequestUpdate setNotificationMode (AdAsyncRequestSet.EnumNotificationMode notificationMode) {
+      this.setParam("notification_mode", notificationMode);
+      return this;
+    }
+    public APIRequestUpdate setNotificationMode (String notificationMode) {
+      this.setParam("notification_mode", notificationMode);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static enum EnumNotificationMode {

@@ -70,6 +70,7 @@ public class OwnedDomain extends APINode {
 
   public OwnedDomain(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -88,19 +89,17 @@ public class OwnedDomain extends APINode {
   }
 
   public static OwnedDomain fetchById(String id, APIContext context) throws APIException {
-    OwnedDomain ownedDomain =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return ownedDomain;
   }
 
   public static ListenableFuture<OwnedDomain> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<OwnedDomain> ownedDomain =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return ownedDomain;
   }
 
   public static APINodeList<OwnedDomain> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -113,12 +112,11 @@ public class OwnedDomain extends APINode {
   }
 
   public static ListenableFuture<APINodeList<OwnedDomain>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<OwnedDomain>> ownedDomain =
+    return
       new APIRequest(context, "", "/", "GET", OwnedDomain.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return ownedDomain;
   }
 
   private String getPrefixedId() {
@@ -269,6 +267,10 @@ public class OwnedDomain extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateAgency createAgency() {
+    return new APIRequestCreateAgency(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -283,6 +285,125 @@ public class OwnedDomain extends APINode {
   }
 
 
+
+  public static class APIRequestCreateAgency extends APIRequest<OwnedDomain> {
+
+    OwnedDomain lastResponse = null;
+    @Override
+    public OwnedDomain getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business",
+      "permitted_roles",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public OwnedDomain parseResponse(String response) throws APIException {
+      return OwnedDomain.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public OwnedDomain execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public OwnedDomain execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<OwnedDomain> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<OwnedDomain> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, OwnedDomain>() {
+           public OwnedDomain apply(String result) {
+             try {
+               return APIRequestCreateAgency.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAgency(String nodeId, APIContext context) {
+      super(context, nodeId, "/Agencies", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAgency setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAgency setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAgency setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestCreateAgency setPermittedRoles (List<OwnedDomain.EnumPermittedRoles> permittedRoles) {
+      this.setParam("permitted_roles", permittedRoles);
+      return this;
+    }
+    public APIRequestCreateAgency setPermittedRoles (String permittedRoles) {
+      this.setParam("permitted_roles", permittedRoles);
+      return this;
+    }
+
+    public APIRequestCreateAgency requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAgency requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAgency requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAgency requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAgency requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAgency requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGet extends APIRequest<OwnedDomain> {
 
@@ -401,6 +522,25 @@ public class OwnedDomain extends APINode {
       this.requestField("id", value);
       return this;
     }
+  }
+
+  public static enum EnumPermittedRoles {
+      @SerializedName("ADMIN")
+      VALUE_ADMIN("ADMIN"),
+      @SerializedName("WEBMASTER_DEVELOPER")
+      VALUE_WEBMASTER_DEVELOPER("WEBMASTER_DEVELOPER"),
+      NULL(null);
+
+      private String value;
+
+      private EnumPermittedRoles(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 

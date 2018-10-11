@@ -69,13 +69,74 @@ public class AdRecommendation extends APINode {
   private AdRecommendationData mRecommendationData = null;
   @SerializedName("title")
   private String mTitle = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdRecommendation() {
+  AdRecommendation() {
+  }
+
+  public AdRecommendation(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdRecommendation(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdRecommendation fetch() throws APIException{
+    AdRecommendation newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdRecommendation fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdRecommendation> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdRecommendation fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdRecommendation> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdRecommendation> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdRecommendation>)(
+      new APIRequest<AdRecommendation>(context, "", "/", "GET", AdRecommendation.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdRecommendation>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdRecommendation.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdRecommendation loadJSON(String json, APIContext context) {
     AdRecommendation adRecommendation = getGson().fromJson(json, AdRecommendation.class);
@@ -218,76 +279,214 @@ public class AdRecommendation extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldBlameField() {
     return mBlameField;
-  }
-
-  public AdRecommendation setFieldBlameField(String value) {
-    this.mBlameField = value;
-    return this;
   }
 
   public Long getFieldCode() {
     return mCode;
   }
 
-  public AdRecommendation setFieldCode(Long value) {
-    this.mCode = value;
-    return this;
-  }
-
   public EnumConfidence getFieldConfidence() {
     return mConfidence;
-  }
-
-  public AdRecommendation setFieldConfidence(EnumConfidence value) {
-    this.mConfidence = value;
-    return this;
   }
 
   public EnumImportance getFieldImportance() {
     return mImportance;
   }
 
-  public AdRecommendation setFieldImportance(EnumImportance value) {
-    this.mImportance = value;
-    return this;
-  }
-
   public String getFieldMessage() {
     return mMessage;
   }
 
-  public AdRecommendation setFieldMessage(String value) {
-    this.mMessage = value;
-    return this;
-  }
-
   public AdRecommendationData getFieldRecommendationData() {
+    if (mRecommendationData != null) {
+      mRecommendationData.context = getContext();
+    }
     return mRecommendationData;
   }
 
-  public AdRecommendation setFieldRecommendationData(AdRecommendationData value) {
-    this.mRecommendationData = value;
-    return this;
-  }
-
-  public AdRecommendation setFieldRecommendationData(String value) {
-    Type type = new TypeToken<AdRecommendationData>(){}.getType();
-    this.mRecommendationData = AdRecommendationData.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldTitle() {
     return mTitle;
   }
 
-  public AdRecommendation setFieldTitle(String value) {
-    this.mTitle = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdRecommendation> {
+
+    AdRecommendation lastResponse = null;
+    @Override
+    public AdRecommendation getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "blame_field",
+      "code",
+      "confidence",
+      "importance",
+      "message",
+      "recommendation_data",
+      "title",
+      "id",
+    };
+
+    @Override
+    public AdRecommendation parseResponse(String response) throws APIException {
+      return AdRecommendation.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdRecommendation execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdRecommendation execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdRecommendation> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdRecommendation> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdRecommendation>() {
+           public AdRecommendation apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestBlameFieldField () {
+      return this.requestBlameFieldField(true);
+    }
+    public APIRequestGet requestBlameFieldField (boolean value) {
+      this.requestField("blame_field", value);
+      return this;
+    }
+    public APIRequestGet requestCodeField () {
+      return this.requestCodeField(true);
+    }
+    public APIRequestGet requestCodeField (boolean value) {
+      this.requestField("code", value);
+      return this;
+    }
+    public APIRequestGet requestConfidenceField () {
+      return this.requestConfidenceField(true);
+    }
+    public APIRequestGet requestConfidenceField (boolean value) {
+      this.requestField("confidence", value);
+      return this;
+    }
+    public APIRequestGet requestImportanceField () {
+      return this.requestImportanceField(true);
+    }
+    public APIRequestGet requestImportanceField (boolean value) {
+      this.requestField("importance", value);
+      return this;
+    }
+    public APIRequestGet requestMessageField () {
+      return this.requestMessageField(true);
+    }
+    public APIRequestGet requestMessageField (boolean value) {
+      this.requestField("message", value);
+      return this;
+    }
+    public APIRequestGet requestRecommendationDataField () {
+      return this.requestRecommendationDataField(true);
+    }
+    public APIRequestGet requestRecommendationDataField (boolean value) {
+      this.requestField("recommendation_data", value);
+      return this;
+    }
+    public APIRequestGet requestTitleField () {
+      return this.requestTitleField(true);
+    }
+    public APIRequestGet requestTitleField (boolean value) {
+      this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumConfidence {
       @SerializedName("HIGH")
@@ -353,6 +552,7 @@ public class AdRecommendation extends APINode {
     this.mMessage = instance.mMessage;
     this.mRecommendationData = instance.mRecommendationData;
     this.mTitle = instance.mTitle;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

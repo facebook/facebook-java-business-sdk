@@ -72,6 +72,7 @@ public class OfflineTermsOfService extends APINode {
 
   public OfflineTermsOfService(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -90,19 +91,17 @@ public class OfflineTermsOfService extends APINode {
   }
 
   public static OfflineTermsOfService fetchById(String id, APIContext context) throws APIException {
-    OfflineTermsOfService offlineTermsOfService =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return offlineTermsOfService;
   }
 
   public static ListenableFuture<OfflineTermsOfService> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<OfflineTermsOfService> offlineTermsOfService =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return offlineTermsOfService;
   }
 
   public static APINodeList<OfflineTermsOfService> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -115,12 +114,11 @@ public class OfflineTermsOfService extends APINode {
   }
 
   public static ListenableFuture<APINodeList<OfflineTermsOfService>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<OfflineTermsOfService>> offlineTermsOfService =
+    return
       new APIRequest(context, "", "/", "GET", OfflineTermsOfService.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return offlineTermsOfService;
   }
 
   private String getPrefixedId() {

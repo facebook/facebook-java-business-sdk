@@ -56,7 +56,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class PageCallToAction extends APINode {
   @SerializedName("android_app")
-  private Object mAndroidApp = null;
+  private Application mAndroidApp = null;
   @SerializedName("android_deeplink")
   private String mAndroidDeeplink = null;
   @SerializedName("android_destination_type")
@@ -76,7 +76,7 @@ public class PageCallToAction extends APINode {
   @SerializedName("intl_number_with_plus")
   private String mIntlNumberWithPlus = null;
   @SerializedName("iphone_app")
-  private Object mIphoneApp = null;
+  private Application mIphoneApp = null;
   @SerializedName("iphone_deeplink")
   private String mIphoneDeeplink = null;
   @SerializedName("iphone_destination_type")
@@ -104,6 +104,7 @@ public class PageCallToAction extends APINode {
 
   public PageCallToAction(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -122,19 +123,17 @@ public class PageCallToAction extends APINode {
   }
 
   public static PageCallToAction fetchById(String id, APIContext context) throws APIException {
-    PageCallToAction pageCallToAction =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return pageCallToAction;
   }
 
   public static ListenableFuture<PageCallToAction> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<PageCallToAction> pageCallToAction =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return pageCallToAction;
   }
 
   public static APINodeList<PageCallToAction> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -147,12 +146,11 @@ public class PageCallToAction extends APINode {
   }
 
   public static ListenableFuture<APINodeList<PageCallToAction>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<PageCallToAction>> pageCallToAction =
+    return
       new APIRequest(context, "", "/", "GET", PageCallToAction.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return pageCallToAction;
   }
 
   private String getPrefixedId() {
@@ -316,7 +314,10 @@ public class PageCallToAction extends APINode {
   }
 
 
-  public Object getFieldAndroidApp() {
+  public Application getFieldAndroidApp() {
+    if (mAndroidApp != null) {
+      mAndroidApp.context = getContext();
+    }
     return mAndroidApp;
   }
 
@@ -359,7 +360,10 @@ public class PageCallToAction extends APINode {
     return mIntlNumberWithPlus;
   }
 
-  public Object getFieldIphoneApp() {
+  public Application getFieldIphoneApp() {
+    if (mIphoneApp != null) {
+      mIphoneApp.context = getContext();
+    }
     return mIphoneApp;
   }
 
@@ -763,20 +767,20 @@ public class PageCallToAction extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "android_app_id",
-      "android_deeplink",
-      "android_destination_type",
-      "android_package_name",
-      "android_url",
-      "email_address",
-      "intl_number_with_plus",
-      "iphone_app_id",
-      "iphone_deeplink",
-      "iphone_destination_type",
-      "iphone_url",
       "type",
+      "intl_number_with_plus",
+      "email_address",
       "web_destination_type",
       "web_url",
+      "android_destination_type",
+      "android_deeplink",
+      "android_package_name",
+      "android_url",
+      "android_app_id",
+      "iphone_destination_type",
+      "iphone_deeplink",
+      "iphone_url",
+      "iphone_app_id",
     };
 
     public static final String[] FIELDS = {
@@ -834,41 +838,12 @@ public class PageCallToAction extends APINode {
     }
 
 
-    public APIRequestUpdate setAndroidAppId (Long androidAppId) {
-      this.setParam("android_app_id", androidAppId);
+    public APIRequestUpdate setType (PageCallToAction.EnumType type) {
+      this.setParam("type", type);
       return this;
     }
-    public APIRequestUpdate setAndroidAppId (String androidAppId) {
-      this.setParam("android_app_id", androidAppId);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidDeeplink (String androidDeeplink) {
-      this.setParam("android_deeplink", androidDeeplink);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidDestinationType (PageCallToAction.EnumAndroidDestinationType androidDestinationType) {
-      this.setParam("android_destination_type", androidDestinationType);
-      return this;
-    }
-    public APIRequestUpdate setAndroidDestinationType (String androidDestinationType) {
-      this.setParam("android_destination_type", androidDestinationType);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidPackageName (String androidPackageName) {
-      this.setParam("android_package_name", androidPackageName);
-      return this;
-    }
-
-    public APIRequestUpdate setAndroidUrl (String androidUrl) {
-      this.setParam("android_url", androidUrl);
-      return this;
-    }
-
-    public APIRequestUpdate setEmailAddress (String emailAddress) {
-      this.setParam("email_address", emailAddress);
+    public APIRequestUpdate setType (String type) {
+      this.setParam("type", type);
       return this;
     }
 
@@ -877,40 +852,8 @@ public class PageCallToAction extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setIphoneAppId (Long iphoneAppId) {
-      this.setParam("iphone_app_id", iphoneAppId);
-      return this;
-    }
-    public APIRequestUpdate setIphoneAppId (String iphoneAppId) {
-      this.setParam("iphone_app_id", iphoneAppId);
-      return this;
-    }
-
-    public APIRequestUpdate setIphoneDeeplink (String iphoneDeeplink) {
-      this.setParam("iphone_deeplink", iphoneDeeplink);
-      return this;
-    }
-
-    public APIRequestUpdate setIphoneDestinationType (PageCallToAction.EnumIphoneDestinationType iphoneDestinationType) {
-      this.setParam("iphone_destination_type", iphoneDestinationType);
-      return this;
-    }
-    public APIRequestUpdate setIphoneDestinationType (String iphoneDestinationType) {
-      this.setParam("iphone_destination_type", iphoneDestinationType);
-      return this;
-    }
-
-    public APIRequestUpdate setIphoneUrl (String iphoneUrl) {
-      this.setParam("iphone_url", iphoneUrl);
-      return this;
-    }
-
-    public APIRequestUpdate setType (PageCallToAction.EnumType type) {
-      this.setParam("type", type);
-      return this;
-    }
-    public APIRequestUpdate setType (String type) {
-      this.setParam("type", type);
+    public APIRequestUpdate setEmailAddress (String emailAddress) {
+      this.setParam("email_address", emailAddress);
       return this;
     }
 
@@ -925,6 +868,67 @@ public class PageCallToAction extends APINode {
 
     public APIRequestUpdate setWebUrl (String webUrl) {
       this.setParam("web_url", webUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setAndroidDestinationType (PageCallToAction.EnumAndroidDestinationType androidDestinationType) {
+      this.setParam("android_destination_type", androidDestinationType);
+      return this;
+    }
+    public APIRequestUpdate setAndroidDestinationType (String androidDestinationType) {
+      this.setParam("android_destination_type", androidDestinationType);
+      return this;
+    }
+
+    public APIRequestUpdate setAndroidDeeplink (String androidDeeplink) {
+      this.setParam("android_deeplink", androidDeeplink);
+      return this;
+    }
+
+    public APIRequestUpdate setAndroidPackageName (String androidPackageName) {
+      this.setParam("android_package_name", androidPackageName);
+      return this;
+    }
+
+    public APIRequestUpdate setAndroidUrl (String androidUrl) {
+      this.setParam("android_url", androidUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setAndroidAppId (Long androidAppId) {
+      this.setParam("android_app_id", androidAppId);
+      return this;
+    }
+    public APIRequestUpdate setAndroidAppId (String androidAppId) {
+      this.setParam("android_app_id", androidAppId);
+      return this;
+    }
+
+    public APIRequestUpdate setIphoneDestinationType (PageCallToAction.EnumIphoneDestinationType iphoneDestinationType) {
+      this.setParam("iphone_destination_type", iphoneDestinationType);
+      return this;
+    }
+    public APIRequestUpdate setIphoneDestinationType (String iphoneDestinationType) {
+      this.setParam("iphone_destination_type", iphoneDestinationType);
+      return this;
+    }
+
+    public APIRequestUpdate setIphoneDeeplink (String iphoneDeeplink) {
+      this.setParam("iphone_deeplink", iphoneDeeplink);
+      return this;
+    }
+
+    public APIRequestUpdate setIphoneUrl (String iphoneUrl) {
+      this.setParam("iphone_url", iphoneUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setIphoneAppId (Long iphoneAppId) {
+      this.setParam("iphone_app_id", iphoneAppId);
+      return this;
+    }
+    public APIRequestUpdate setIphoneAppId (String iphoneAppId) {
+      this.setParam("iphone_app_id", iphoneAppId);
       return this;
     }
 
@@ -1077,6 +1081,10 @@ public class PageCallToAction extends APINode {
       VALUE_VISIT_GROUP("VISIT_GROUP"),
       @SerializedName("SHOP_ON_FACEBOOK")
       VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
+      @SerializedName("LOCAL_DEV_PLATFORM")
+      VALUE_LOCAL_DEV_PLATFORM("LOCAL_DEV_PLATFORM"),
+      @SerializedName("INTERESTED")
+      VALUE_INTERESTED("INTERESTED"),
       NULL(null);
 
       private String value;

@@ -69,17 +69,80 @@ public class ProfilePictureSource extends APINode {
   private Long mRight = null;
   @SerializedName("top")
   private Long mTop = null;
+  @SerializedName("uri")
+  private String mUri = null;
   @SerializedName("url")
   private String mUrl = null;
   @SerializedName("width")
   private Long mWidth = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public ProfilePictureSource() {
+  ProfilePictureSource() {
+  }
+
+  public ProfilePictureSource(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public ProfilePictureSource(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public ProfilePictureSource fetch() throws APIException{
+    ProfilePictureSource newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static ProfilePictureSource fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<ProfilePictureSource> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static ProfilePictureSource fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<ProfilePictureSource> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<ProfilePictureSource> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ProfilePictureSource>)(
+      new APIRequest<ProfilePictureSource>(context, "", "/", "GET", ProfilePictureSource.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<ProfilePictureSource>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", ProfilePictureSource.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static ProfilePictureSource loadJSON(String json, APIContext context) {
     ProfilePictureSource profilePictureSource = getGson().fromJson(json, ProfilePictureSource.class);
@@ -222,101 +285,255 @@ public class ProfilePictureSource extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public Long getFieldBottom() {
     return mBottom;
-  }
-
-  public ProfilePictureSource setFieldBottom(Long value) {
-    this.mBottom = value;
-    return this;
   }
 
   public String getFieldCacheKey() {
     return mCacheKey;
   }
 
-  public ProfilePictureSource setFieldCacheKey(String value) {
-    this.mCacheKey = value;
-    return this;
-  }
-
   public Long getFieldHeight() {
     return mHeight;
-  }
-
-  public ProfilePictureSource setFieldHeight(Long value) {
-    this.mHeight = value;
-    return this;
   }
 
   public Boolean getFieldIsSilhouette() {
     return mIsSilhouette;
   }
 
-  public ProfilePictureSource setFieldIsSilhouette(Boolean value) {
-    this.mIsSilhouette = value;
-    return this;
-  }
-
   public Long getFieldLeft() {
     return mLeft;
-  }
-
-  public ProfilePictureSource setFieldLeft(Long value) {
-    this.mLeft = value;
-    return this;
   }
 
   public Long getFieldRight() {
     return mRight;
   }
 
-  public ProfilePictureSource setFieldRight(Long value) {
-    this.mRight = value;
-    return this;
-  }
-
   public Long getFieldTop() {
     return mTop;
   }
 
-  public ProfilePictureSource setFieldTop(Long value) {
-    this.mTop = value;
-    return this;
+  public String getFieldUri() {
+    return mUri;
   }
 
   public String getFieldUrl() {
     return mUrl;
   }
 
-  public ProfilePictureSource setFieldUrl(String value) {
-    this.mUrl = value;
-    return this;
-  }
-
   public Long getFieldWidth() {
     return mWidth;
   }
 
-  public ProfilePictureSource setFieldWidth(Long value) {
-    this.mWidth = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
 
+  public static class APIRequestGet extends APIRequest<ProfilePictureSource> {
+
+    ProfilePictureSource lastResponse = null;
+    @Override
+    public ProfilePictureSource getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "bottom",
+      "cache_key",
+      "height",
+      "is_silhouette",
+      "left",
+      "right",
+      "top",
+      "uri",
+      "url",
+      "width",
+      "id",
+    };
+
+    @Override
+    public ProfilePictureSource parseResponse(String response) throws APIException {
+      return ProfilePictureSource.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public ProfilePictureSource execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProfilePictureSource execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProfilePictureSource> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProfilePictureSource> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProfilePictureSource>() {
+           public ProfilePictureSource apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestBottomField () {
+      return this.requestBottomField(true);
+    }
+    public APIRequestGet requestBottomField (boolean value) {
+      this.requestField("bottom", value);
+      return this;
+    }
+    public APIRequestGet requestCacheKeyField () {
+      return this.requestCacheKeyField(true);
+    }
+    public APIRequestGet requestCacheKeyField (boolean value) {
+      this.requestField("cache_key", value);
+      return this;
+    }
+    public APIRequestGet requestHeightField () {
+      return this.requestHeightField(true);
+    }
+    public APIRequestGet requestHeightField (boolean value) {
+      this.requestField("height", value);
+      return this;
+    }
+    public APIRequestGet requestIsSilhouetteField () {
+      return this.requestIsSilhouetteField(true);
+    }
+    public APIRequestGet requestIsSilhouetteField (boolean value) {
+      this.requestField("is_silhouette", value);
+      return this;
+    }
+    public APIRequestGet requestLeftField () {
+      return this.requestLeftField(true);
+    }
+    public APIRequestGet requestLeftField (boolean value) {
+      this.requestField("left", value);
+      return this;
+    }
+    public APIRequestGet requestRightField () {
+      return this.requestRightField(true);
+    }
+    public APIRequestGet requestRightField (boolean value) {
+      this.requestField("right", value);
+      return this;
+    }
+    public APIRequestGet requestTopField () {
+      return this.requestTopField(true);
+    }
+    public APIRequestGet requestTopField (boolean value) {
+      this.requestField("top", value);
+      return this;
+    }
+    public APIRequestGet requestUriField () {
+      return this.requestUriField(true);
+    }
+    public APIRequestGet requestUriField (boolean value) {
+      this.requestField("uri", value);
+      return this;
+    }
+    public APIRequestGet requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGet requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGet requestWidthField () {
+      return this.requestWidthField(true);
+    }
+    public APIRequestGet requestWidthField (boolean value) {
+      this.requestField("width", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
   public static enum EnumType {
+      @SerializedName("thumbnail")
+      VALUE_THUMBNAIL("thumbnail"),
       @SerializedName("small")
       VALUE_SMALL("small"),
-      @SerializedName("normal")
-      VALUE_NORMAL("normal"),
       @SerializedName("album")
       VALUE_ALBUM("album"),
-      @SerializedName("large")
-      VALUE_LARGE("large"),
-      @SerializedName("square")
-      VALUE_SQUARE("square"),
       NULL(null);
 
       private String value;
@@ -353,8 +570,10 @@ public class ProfilePictureSource extends APINode {
     this.mLeft = instance.mLeft;
     this.mRight = instance.mRight;
     this.mTop = instance.mTop;
+    this.mUri = instance.mUri;
     this.mUrl = instance.mUrl;
     this.mWidth = instance.mWidth;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

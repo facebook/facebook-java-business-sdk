@@ -72,6 +72,7 @@ public class LeadGenLegalContent extends APINode {
 
   public LeadGenLegalContent(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -90,19 +91,17 @@ public class LeadGenLegalContent extends APINode {
   }
 
   public static LeadGenLegalContent fetchById(String id, APIContext context) throws APIException {
-    LeadGenLegalContent leadGenLegalContent =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return leadGenLegalContent;
   }
 
   public static ListenableFuture<LeadGenLegalContent> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<LeadGenLegalContent> leadGenLegalContent =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return leadGenLegalContent;
   }
 
   public static APINodeList<LeadGenLegalContent> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -115,12 +114,11 @@ public class LeadGenLegalContent extends APINode {
   }
 
   public static ListenableFuture<APINodeList<LeadGenLegalContent>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<LeadGenLegalContent>> leadGenLegalContent =
+    return
       new APIRequest(context, "", "/", "GET", LeadGenLegalContent.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return leadGenLegalContent;
   }
 
   private String getPrefixedId() {
@@ -415,6 +413,29 @@ public class LeadGenLegalContent extends APINode {
       this.requestField("privacy_policy", value);
       return this;
     }
+  }
+
+  public static enum EnumStatus {
+      @SerializedName("ACTIVE")
+      VALUE_ACTIVE("ACTIVE"),
+      @SerializedName("ARCHIVED")
+      VALUE_ARCHIVED("ARCHIVED"),
+      @SerializedName("DELETED")
+      VALUE_DELETED("DELETED"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
+      NULL(null);
+
+      private String value;
+
+      private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 

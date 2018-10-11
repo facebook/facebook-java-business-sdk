@@ -86,6 +86,7 @@ public class Canvas extends APINode {
 
   public Canvas(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -104,19 +105,17 @@ public class Canvas extends APINode {
   }
 
   public static Canvas fetchById(String id, APIContext context) throws APIException {
-    Canvas canvas =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return canvas;
   }
 
   public static ListenableFuture<Canvas> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<Canvas> canvas =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return canvas;
   }
 
   public static APINodeList<Canvas> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -129,12 +128,11 @@ public class Canvas extends APINode {
   }
 
   public static ListenableFuture<APINodeList<Canvas>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<Canvas>> canvas =
+    return
       new APIRequest(context, "", "/", "GET", Canvas.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return canvas;
   }
 
   private String getPrefixedId() {
@@ -457,11 +455,11 @@ public class Canvas extends APINode {
 
   }
 
-  public static class APIRequestCreatePreviewNotification extends APIRequest<APINode> {
+  public static class APIRequestCreatePreviewNotification extends APIRequest<Canvas> {
 
-    APINode lastResponse = null;
+    Canvas lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public Canvas getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -472,30 +470,30 @@ public class Canvas extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public Canvas parseResponse(String response) throws APIException {
+      return Canvas.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public Canvas execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public Canvas execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<Canvas> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<Canvas> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<String, Canvas>() {
+           public Canvas apply(String result) {
              try {
                return APIRequestCreatePreviewNotification.this.parseResponse(result);
              } catch (Exception e) {
@@ -864,11 +862,11 @@ public class Canvas extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "background_color",
-      "body_element_ids",
-      "is_hidden",
-      "is_published",
       "name",
+      "body_element_ids",
+      "background_color",
+      "is_published",
+      "is_hidden",
     };
 
     public static final String[] FIELDS = {
@@ -926,8 +924,8 @@ public class Canvas extends APINode {
     }
 
 
-    public APIRequestUpdate setBackgroundColor (String backgroundColor) {
-      this.setParam("background_color", backgroundColor);
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 
@@ -940,12 +938,8 @@ public class Canvas extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setIsHidden (Boolean isHidden) {
-      this.setParam("is_hidden", isHidden);
-      return this;
-    }
-    public APIRequestUpdate setIsHidden (String isHidden) {
-      this.setParam("is_hidden", isHidden);
+    public APIRequestUpdate setBackgroundColor (String backgroundColor) {
+      this.setParam("background_color", backgroundColor);
       return this;
     }
 
@@ -958,8 +952,12 @@ public class Canvas extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
+    public APIRequestUpdate setIsHidden (Boolean isHidden) {
+      this.setParam("is_hidden", isHidden);
+      return this;
+    }
+    public APIRequestUpdate setIsHidden (String isHidden) {
+      this.setParam("is_hidden", isHidden);
       return this;
     }
 

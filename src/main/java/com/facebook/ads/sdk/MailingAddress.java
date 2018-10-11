@@ -82,6 +82,7 @@ public class MailingAddress extends APINode {
 
   public MailingAddress(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -100,19 +101,17 @@ public class MailingAddress extends APINode {
   }
 
   public static MailingAddress fetchById(String id, APIContext context) throws APIException {
-    MailingAddress mailingAddress =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return mailingAddress;
   }
 
   public static ListenableFuture<MailingAddress> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<MailingAddress> mailingAddress =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return mailingAddress;
   }
 
   public static APINodeList<MailingAddress> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -125,12 +124,11 @@ public class MailingAddress extends APINode {
   }
 
   public static ListenableFuture<APINodeList<MailingAddress>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<MailingAddress>> mailingAddress =
+    return
       new APIRequest(context, "", "/", "GET", MailingAddress.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return mailingAddress;
   }
 
   private String getPrefixedId() {

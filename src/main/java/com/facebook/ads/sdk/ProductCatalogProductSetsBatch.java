@@ -63,13 +63,74 @@ public class ProductCatalogProductSetsBatch extends APINode {
   private String mHandle = null;
   @SerializedName("status")
   private String mStatus = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public ProductCatalogProductSetsBatch() {
+  ProductCatalogProductSetsBatch() {
+  }
+
+  public ProductCatalogProductSetsBatch(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public ProductCatalogProductSetsBatch(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public ProductCatalogProductSetsBatch fetch() throws APIException{
+    ProductCatalogProductSetsBatch newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static ProductCatalogProductSetsBatch fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<ProductCatalogProductSetsBatch> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static ProductCatalogProductSetsBatch fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<ProductCatalogProductSetsBatch> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<ProductCatalogProductSetsBatch> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ProductCatalogProductSetsBatch>)(
+      new APIRequest<ProductCatalogProductSetsBatch>(context, "", "/", "GET", ProductCatalogProductSetsBatch.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<ProductCatalogProductSetsBatch>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", ProductCatalogProductSetsBatch.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static ProductCatalogProductSetsBatch loadJSON(String json, APIContext context) {
     ProductCatalogProductSetsBatch productCatalogProductSetsBatch = getGson().fromJson(json, ProductCatalogProductSetsBatch.class);
@@ -212,44 +273,175 @@ public class ProductCatalogProductSetsBatch extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public List<Object> getFieldErrors() {
     return mErrors;
-  }
-
-  public ProductCatalogProductSetsBatch setFieldErrors(List<Object> value) {
-    this.mErrors = value;
-    return this;
   }
 
   public Long getFieldErrorsTotalCount() {
     return mErrorsTotalCount;
   }
 
-  public ProductCatalogProductSetsBatch setFieldErrorsTotalCount(Long value) {
-    this.mErrorsTotalCount = value;
-    return this;
-  }
-
   public String getFieldHandle() {
     return mHandle;
-  }
-
-  public ProductCatalogProductSetsBatch setFieldHandle(String value) {
-    this.mHandle = value;
-    return this;
   }
 
   public String getFieldStatus() {
     return mStatus;
   }
 
-  public ProductCatalogProductSetsBatch setFieldStatus(String value) {
-    this.mStatus = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<ProductCatalogProductSetsBatch> {
+
+    ProductCatalogProductSetsBatch lastResponse = null;
+    @Override
+    public ProductCatalogProductSetsBatch getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "errors",
+      "errors_total_count",
+      "handle",
+      "status",
+      "id",
+    };
+
+    @Override
+    public ProductCatalogProductSetsBatch parseResponse(String response) throws APIException {
+      return ProductCatalogProductSetsBatch.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public ProductCatalogProductSetsBatch execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalogProductSetsBatch execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductCatalogProductSetsBatch> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductCatalogProductSetsBatch> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProductCatalogProductSetsBatch>() {
+           public ProductCatalogProductSetsBatch apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestErrorsField () {
+      return this.requestErrorsField(true);
+    }
+    public APIRequestGet requestErrorsField (boolean value) {
+      this.requestField("errors", value);
+      return this;
+    }
+    public APIRequestGet requestErrorsTotalCountField () {
+      return this.requestErrorsTotalCountField(true);
+    }
+    public APIRequestGet requestErrorsTotalCountField (boolean value) {
+      this.requestField("errors_total_count", value);
+      return this;
+    }
+    public APIRequestGet requestHandleField () {
+      return this.requestHandleField(true);
+    }
+    public APIRequestGet requestHandleField (boolean value) {
+      this.requestField("handle", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -270,6 +462,7 @@ public class ProductCatalogProductSetsBatch extends APINode {
     this.mErrorsTotalCount = instance.mErrorsTotalCount;
     this.mHandle = instance.mHandle;
     this.mStatus = instance.mStatus;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

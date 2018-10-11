@@ -63,13 +63,74 @@ public class FundingSourceDetailsCoupon extends APINode {
   private String mDisplayAmount = null;
   @SerializedName("expiration")
   private String mExpiration = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public FundingSourceDetailsCoupon() {
+  FundingSourceDetailsCoupon() {
+  }
+
+  public FundingSourceDetailsCoupon(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public FundingSourceDetailsCoupon(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public FundingSourceDetailsCoupon fetch() throws APIException{
+    FundingSourceDetailsCoupon newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static FundingSourceDetailsCoupon fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<FundingSourceDetailsCoupon> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static FundingSourceDetailsCoupon fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<FundingSourceDetailsCoupon> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<FundingSourceDetailsCoupon> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<FundingSourceDetailsCoupon>)(
+      new APIRequest<FundingSourceDetailsCoupon>(context, "", "/", "GET", FundingSourceDetailsCoupon.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<FundingSourceDetailsCoupon>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", FundingSourceDetailsCoupon.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static FundingSourceDetailsCoupon loadJSON(String json, APIContext context) {
     FundingSourceDetailsCoupon fundingSourceDetailsCoupon = getGson().fromJson(json, FundingSourceDetailsCoupon.class);
@@ -212,44 +273,175 @@ public class FundingSourceDetailsCoupon extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public Long getFieldAmount() {
     return mAmount;
-  }
-
-  public FundingSourceDetailsCoupon setFieldAmount(Long value) {
-    this.mAmount = value;
-    return this;
   }
 
   public String getFieldCurrency() {
     return mCurrency;
   }
 
-  public FundingSourceDetailsCoupon setFieldCurrency(String value) {
-    this.mCurrency = value;
-    return this;
-  }
-
   public String getFieldDisplayAmount() {
     return mDisplayAmount;
-  }
-
-  public FundingSourceDetailsCoupon setFieldDisplayAmount(String value) {
-    this.mDisplayAmount = value;
-    return this;
   }
 
   public String getFieldExpiration() {
     return mExpiration;
   }
 
-  public FundingSourceDetailsCoupon setFieldExpiration(String value) {
-    this.mExpiration = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<FundingSourceDetailsCoupon> {
+
+    FundingSourceDetailsCoupon lastResponse = null;
+    @Override
+    public FundingSourceDetailsCoupon getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "amount",
+      "currency",
+      "display_amount",
+      "expiration",
+      "id",
+    };
+
+    @Override
+    public FundingSourceDetailsCoupon parseResponse(String response) throws APIException {
+      return FundingSourceDetailsCoupon.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public FundingSourceDetailsCoupon execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public FundingSourceDetailsCoupon execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<FundingSourceDetailsCoupon> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<FundingSourceDetailsCoupon> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, FundingSourceDetailsCoupon>() {
+           public FundingSourceDetailsCoupon apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestAmountField () {
+      return this.requestAmountField(true);
+    }
+    public APIRequestGet requestAmountField (boolean value) {
+      this.requestField("amount", value);
+      return this;
+    }
+    public APIRequestGet requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGet requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGet requestDisplayAmountField () {
+      return this.requestDisplayAmountField(true);
+    }
+    public APIRequestGet requestDisplayAmountField (boolean value) {
+      this.requestField("display_amount", value);
+      return this;
+    }
+    public APIRequestGet requestExpirationField () {
+      return this.requestExpirationField(true);
+    }
+    public APIRequestGet requestExpirationField (boolean value) {
+      this.requestField("expiration", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -270,6 +462,7 @@ public class FundingSourceDetailsCoupon extends APINode {
     this.mCurrency = instance.mCurrency;
     this.mDisplayAmount = instance.mDisplayAmount;
     this.mExpiration = instance.mExpiration;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -59,13 +59,74 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
   private String mResponse = null;
   @SerializedName("status")
   private String mStatus = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdAsyncRequestSetNotificationResult() {
+  AdAsyncRequestSetNotificationResult() {
+  }
+
+  public AdAsyncRequestSetNotificationResult(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdAsyncRequestSetNotificationResult(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdAsyncRequestSetNotificationResult fetch() throws APIException{
+    AdAsyncRequestSetNotificationResult newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdAsyncRequestSetNotificationResult fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdAsyncRequestSetNotificationResult> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdAsyncRequestSetNotificationResult fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdAsyncRequestSetNotificationResult> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdAsyncRequestSetNotificationResult> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdAsyncRequestSetNotificationResult>)(
+      new APIRequest<AdAsyncRequestSetNotificationResult>(context, "", "/", "GET", AdAsyncRequestSetNotificationResult.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdAsyncRequestSetNotificationResult>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdAsyncRequestSetNotificationResult.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdAsyncRequestSetNotificationResult loadJSON(String json, APIContext context) {
     AdAsyncRequestSetNotificationResult adAsyncRequestSetNotificationResult = getGson().fromJson(json, AdAsyncRequestSetNotificationResult.class);
@@ -208,26 +269,151 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldResponse() {
     return mResponse;
-  }
-
-  public AdAsyncRequestSetNotificationResult setFieldResponse(String value) {
-    this.mResponse = value;
-    return this;
   }
 
   public String getFieldStatus() {
     return mStatus;
   }
 
-  public AdAsyncRequestSetNotificationResult setFieldStatus(String value) {
-    this.mStatus = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdAsyncRequestSetNotificationResult> {
+
+    AdAsyncRequestSetNotificationResult lastResponse = null;
+    @Override
+    public AdAsyncRequestSetNotificationResult getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "response",
+      "status",
+      "id",
+    };
+
+    @Override
+    public AdAsyncRequestSetNotificationResult parseResponse(String response) throws APIException {
+      return AdAsyncRequestSetNotificationResult.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdAsyncRequestSetNotificationResult execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAsyncRequestSetNotificationResult execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdAsyncRequestSetNotificationResult> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdAsyncRequestSetNotificationResult> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdAsyncRequestSetNotificationResult>() {
+           public AdAsyncRequestSetNotificationResult apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestResponseField () {
+      return this.requestResponseField(true);
+    }
+    public APIRequestGet requestResponseField (boolean value) {
+      this.requestField("response", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -246,6 +432,7 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
   public AdAsyncRequestSetNotificationResult copyFrom(AdAsyncRequestSetNotificationResult instance) {
     this.mResponse = instance.mResponse;
     this.mStatus = instance.mStatus;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

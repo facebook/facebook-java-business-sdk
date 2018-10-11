@@ -59,13 +59,74 @@ public class RevSharePolicy extends APINode {
   private String mPolicyId = null;
   @SerializedName("policy_name")
   private String mPolicyName = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public RevSharePolicy() {
+  RevSharePolicy() {
+  }
+
+  public RevSharePolicy(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public RevSharePolicy(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public RevSharePolicy fetch() throws APIException{
+    RevSharePolicy newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static RevSharePolicy fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<RevSharePolicy> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static RevSharePolicy fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<RevSharePolicy> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<RevSharePolicy> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<RevSharePolicy>)(
+      new APIRequest<RevSharePolicy>(context, "", "/", "GET", RevSharePolicy.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<RevSharePolicy>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", RevSharePolicy.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static RevSharePolicy loadJSON(String json, APIContext context) {
     RevSharePolicy revSharePolicy = getGson().fromJson(json, RevSharePolicy.class);
@@ -208,26 +269,151 @@ public class RevSharePolicy extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldPolicyId() {
     return mPolicyId;
-  }
-
-  public RevSharePolicy setFieldPolicyId(String value) {
-    this.mPolicyId = value;
-    return this;
   }
 
   public String getFieldPolicyName() {
     return mPolicyName;
   }
 
-  public RevSharePolicy setFieldPolicyName(String value) {
-    this.mPolicyName = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<RevSharePolicy> {
+
+    RevSharePolicy lastResponse = null;
+    @Override
+    public RevSharePolicy getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "policy_id",
+      "policy_name",
+      "id",
+    };
+
+    @Override
+    public RevSharePolicy parseResponse(String response) throws APIException {
+      return RevSharePolicy.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public RevSharePolicy execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public RevSharePolicy execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<RevSharePolicy> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<RevSharePolicy> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, RevSharePolicy>() {
+           public RevSharePolicy apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestPolicyIdField () {
+      return this.requestPolicyIdField(true);
+    }
+    public APIRequestGet requestPolicyIdField (boolean value) {
+      this.requestField("policy_id", value);
+      return this;
+    }
+    public APIRequestGet requestPolicyNameField () {
+      return this.requestPolicyNameField(true);
+    }
+    public APIRequestGet requestPolicyNameField (boolean value) {
+      this.requestField("policy_name", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -246,6 +432,7 @@ public class RevSharePolicy extends APINode {
   public RevSharePolicy copyFrom(RevSharePolicy instance) {
     this.mPolicyId = instance.mPolicyId;
     this.mPolicyName = instance.mPolicyName;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
