@@ -7950,6 +7950,7 @@ public class Application extends APINode {
       "start_time",
       "status",
       "targeting",
+      "third_party_integrated_deal",
     };
 
     @Override
@@ -8192,6 +8193,13 @@ public class Application extends APINode {
     }
     public APIRequestGetDirectDeals requestTargetingField (boolean value) {
       this.requestField("targeting", value);
+      return this;
+    }
+    public APIRequestGetDirectDeals requestThirdPartyIntegratedDealField () {
+      return this.requestThirdPartyIntegratedDealField(true);
+    }
+    public APIRequestGetDirectDeals requestThirdPartyIntegratedDealField (boolean value) {
+      this.requestField("third_party_integrated_deal", value);
       return this;
     }
   }
@@ -16978,6 +16986,8 @@ public class Application extends APINode {
       VALUE_PROPERTY("PROPERTY"),
       @SerializedName("CLICKED_VIEW_TAG")
       VALUE_CLICKED_VIEW_TAG("CLICKED_VIEW_TAG"),
+      @SerializedName("NO_FILL_REASON")
+      VALUE_NO_FILL_REASON("NO_FILL_REASON"),
       NULL(null);
 
       private String value;
@@ -17055,6 +17065,8 @@ public class Application extends APINode {
       VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR("FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR"),
       @SerializedName("FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR")
       VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR("FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR"),
+      @SerializedName("FB_AD_NETWORK_NO_FILL")
+      VALUE_FB_AD_NETWORK_NO_FILL("FB_AD_NETWORK_NO_FILL"),
       NULL(null);
 
       private String value;

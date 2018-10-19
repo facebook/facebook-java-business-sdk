@@ -3074,6 +3074,7 @@ public class ProductFeed extends APINode {
       "id",
       "images",
       "interior_color",
+      "legal_disclosure_impressum_url",
       "make",
       "mileage",
       "model",
@@ -3354,6 +3355,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetVehicles requestInteriorColorField (boolean value) {
       this.requestField("interior_color", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestLegalDisclosureImpressumUrlField () {
+      return this.requestLegalDisclosureImpressumUrlField(true);
+    }
+    public APIRequestGetVehicles requestLegalDisclosureImpressumUrlField (boolean value) {
+      this.requestField("legal_disclosure_impressum_url", value);
       return this;
     }
     public APIRequestGetVehicles requestMakeField () {
@@ -4097,8 +4105,6 @@ public class ProductFeed extends APINode {
   public static enum EnumFeedType {
       @SerializedName("AUTO")
       VALUE_AUTO("AUTO"),
-      @SerializedName("AUTO_OFFER")
-      VALUE_AUTO_OFFER("AUTO_OFFER"),
       @SerializedName("DESTINATION")
       VALUE_DESTINATION("DESTINATION"),
       @SerializedName("FLIGHT")

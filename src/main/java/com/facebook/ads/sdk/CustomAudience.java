@@ -4233,8 +4233,6 @@ public class CustomAudience extends APINode {
       VALUE_LOOKALIKE("LOOKALIKE"),
       @SerializedName("ENGAGEMENT")
       VALUE_ENGAGEMENT("ENGAGEMENT"),
-      @SerializedName("DATA_SET")
-      VALUE_DATA_SET("DATA_SET"),
       @SerializedName("BAG_OF_ACCOUNTS")
       VALUE_BAG_OF_ACCOUNTS("BAG_OF_ACCOUNTS"),
       @SerializedName("STUDY_RULE_AUDIENCE")

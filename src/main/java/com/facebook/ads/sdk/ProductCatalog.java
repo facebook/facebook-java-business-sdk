@@ -341,6 +341,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestGetFlights(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateFlight createFlight() {
+    return new APIRequestCreateFlight(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetHomeListings getHomeListings() {
     return new APIRequestGetHomeListings(this.getPrefixedId().toString(), context);
   }
@@ -2762,6 +2766,131 @@ public class ProductCatalog extends APINode {
       this.requestField("url", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateFlight extends APIRequest<Flight> {
+
+    Flight lastResponse = null;
+    @Override
+    public Flight getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "images",
+      "origin_airport",
+      "destination_airport",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Flight parseResponse(String response) throws APIException {
+      return Flight.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public Flight execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Flight execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<Flight> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Flight> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, Flight>() {
+           public Flight apply(String result) {
+             try {
+               return APIRequestCreateFlight.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateFlight(String nodeId, APIContext context) {
+      super(context, nodeId, "/flights", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateFlight setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFlight setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateFlight setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestCreateFlight setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestCreateFlight setOriginAirport (String originAirport) {
+      this.setParam("origin_airport", originAirport);
+      return this;
+    }
+
+    public APIRequestCreateFlight setDestinationAirport (String destinationAirport) {
+      this.setParam("destination_airport", destinationAirport);
+      return this;
+    }
+
+    public APIRequestCreateFlight requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateFlight requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFlight requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateFlight requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFlight requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateFlight requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetHomeListings extends APIRequest<HomeListing> {
@@ -7386,6 +7515,7 @@ public class ProductCatalog extends APINode {
       "id",
       "images",
       "interior_color",
+      "legal_disclosure_impressum_url",
       "make",
       "mileage",
       "model",
@@ -7666,6 +7796,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetVehicles requestInteriorColorField (boolean value) {
       this.requestField("interior_color", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestLegalDisclosureImpressumUrlField () {
+      return this.requestLegalDisclosureImpressumUrlField(true);
+    }
+    public APIRequestGetVehicles requestLegalDisclosureImpressumUrlField (boolean value) {
+      this.requestField("legal_disclosure_impressum_url", value);
       return this;
     }
     public APIRequestGetVehicles requestMakeField () {

@@ -7748,6 +7748,10 @@ public class AdVideo extends APINode {
       VALUE_FUNDRAISER_COVER_VIDEO("FUNDRAISER_COVER_VIDEO"),
       @SerializedName("PROTON")
       VALUE_PROTON("PROTON"),
+      @SerializedName("BELL_POLL")
+      VALUE_BELL_POLL("BELL_POLL"),
+      @SerializedName("CIVIC_PROPOSAL_COVER_VIDEO")
+      VALUE_CIVIC_PROPOSAL_COVER_VIDEO("CIVIC_PROPOSAL_COVER_VIDEO"),
       NULL(null);
 
       private String value;

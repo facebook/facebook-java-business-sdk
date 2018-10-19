@@ -99,6 +99,8 @@ public class Vehicle extends APINode {
   private List<String> mImages = null;
   @SerializedName("interior_color")
   private String mInteriorColor = null;
+  @SerializedName("legal_disclosure_impressum_url")
+  private String mLegalDisclosureImpressumUrl = null;
   @SerializedName("make")
   private String mMake = null;
   @SerializedName("mileage")
@@ -446,6 +448,10 @@ public class Vehicle extends APINode {
     return mInteriorColor;
   }
 
+  public String getFieldLegalDisclosureImpressumUrl() {
+    return mLegalDisclosureImpressumUrl;
+  }
+
   public String getFieldMake() {
     return mMake;
   }
@@ -561,6 +567,7 @@ public class Vehicle extends APINode {
       "id",
       "images",
       "interior_color",
+      "legal_disclosure_impressum_url",
       "make",
       "mileage",
       "model",
@@ -825,6 +832,13 @@ public class Vehicle extends APINode {
       this.requestField("interior_color", value);
       return this;
     }
+    public APIRequestGet requestLegalDisclosureImpressumUrlField () {
+      return this.requestLegalDisclosureImpressumUrlField(true);
+    }
+    public APIRequestGet requestLegalDisclosureImpressumUrlField (boolean value) {
+      this.requestField("legal_disclosure_impressum_url", value);
+      return this;
+    }
     public APIRequestGet requestMakeField () {
       return this.requestMakeField(true);
     }
@@ -1004,6 +1018,7 @@ public class Vehicle extends APINode {
     this.mId = instance.mId;
     this.mImages = instance.mImages;
     this.mInteriorColor = instance.mInteriorColor;
+    this.mLegalDisclosureImpressumUrl = instance.mLegalDisclosureImpressumUrl;
     this.mMake = instance.mMake;
     this.mMileage = instance.mMileage;
     this.mModel = instance.mModel;

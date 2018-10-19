@@ -749,6 +749,10 @@ public class AdAccount extends APINode {
     return new APIRequestGetMatchedSearchApplications(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetMaxBid getMaxBid() {
+    return new APIRequestGetMaxBid(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetMinimumBudgets getMinimumBudgets() {
     return new APIRequestGetMinimumBudgets(this.getPrefixedId().toString(), context);
   }
@@ -21543,6 +21547,7 @@ public class AdAccount extends APINode {
       "start_time",
       "status",
       "targeting",
+      "third_party_integrated_deal",
     };
 
     @Override
@@ -21794,6 +21799,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDirectDeals requestTargetingField (boolean value) {
       this.requestField("targeting", value);
+      return this;
+    }
+    public APIRequestGetDirectDeals requestThirdPartyIntegratedDealField () {
+      return this.requestThirdPartyIntegratedDealField(true);
+    }
+    public APIRequestGetDirectDeals requestThirdPartyIntegratedDealField (boolean value) {
+      this.requestField("third_party_integrated_deal", value);
       return this;
     }
   }
@@ -23501,6 +23513,125 @@ public class AdAccount extends APINode {
       return this.requestIdField(true);
     }
     public APIRequestGetMatchedSearchApplications requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetMaxBid extends APIRequest<AdAccountMaxBid> {
+
+    APINodeList<AdAccountMaxBid> lastResponse = null;
+    @Override
+    public APINodeList<AdAccountMaxBid> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "max_bid",
+      "id",
+    };
+
+    @Override
+    public APINodeList<AdAccountMaxBid> parseResponse(String response) throws APIException {
+      return AdAccountMaxBid.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<AdAccountMaxBid> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdAccountMaxBid> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdAccountMaxBid>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdAccountMaxBid>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdAccountMaxBid>>() {
+           public APINodeList<AdAccountMaxBid> apply(String result) {
+             try {
+               return APIRequestGetMaxBid.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetMaxBid(String nodeId, APIContext context) {
+      super(context, nodeId, "/max_bid", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetMaxBid setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMaxBid setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetMaxBid requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetMaxBid requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMaxBid requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetMaxBid requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMaxBid requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMaxBid requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetMaxBid requestMaxBidField () {
+      return this.requestMaxBidField(true);
+    }
+    public APIRequestGetMaxBid requestMaxBidField (boolean value) {
+      this.requestField("max_bid", value);
+      return this;
+    }
+    public APIRequestGetMaxBid requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetMaxBid requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
@@ -31143,8 +31274,6 @@ public class AdAccount extends APINode {
       VALUE_LOOKALIKE("LOOKALIKE"),
       @SerializedName("ENGAGEMENT")
       VALUE_ENGAGEMENT("ENGAGEMENT"),
-      @SerializedName("DATA_SET")
-      VALUE_DATA_SET("DATA_SET"),
       @SerializedName("BAG_OF_ACCOUNTS")
       VALUE_BAG_OF_ACCOUNTS("BAG_OF_ACCOUNTS"),
       @SerializedName("STUDY_RULE_AUDIENCE")

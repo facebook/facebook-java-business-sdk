@@ -35,7 +35,7 @@ public class AdAccountCustomAudiencesPostDynamicValueBasedLookalikeCustomAudienc
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createCustomAudience()
-      .setName("Dynamic Value-Based lookalike")
+      .setName("Test Value-Based lookalike from Pixel")
       .setSubtype(CustomAudience.EnumSubtype.VALUE_LOOKALIKE)
       .setLookalikeSpec("{\"origin_event_sources\":[{\"id\":\"<sourceID>\"}],\"type\":\"custom_ratio\",\"ratio\":0.01,\"country\":\"US\"}")
       .execute();

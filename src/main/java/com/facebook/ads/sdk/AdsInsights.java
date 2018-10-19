@@ -107,6 +107,8 @@ public class AdsInsights extends APINode {
   private String mClicks = null;
   @SerializedName("cost_per_10_sec_video_view")
   private List<AdsActionStats> mCostPer10SecVideoView = null;
+  @SerializedName("cost_per_15_sec_video_view")
+  private List<AdsActionStats> mCostPer15SecVideoView = null;
   @SerializedName("cost_per_2_sec_continuous_video_view")
   private List<AdsActionStats> mCostPer2SecContinuousVideoView = null;
   @SerializedName("cost_per_action_type")
@@ -125,6 +127,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mCostPerOneThousandAdImpression = null;
   @SerializedName("cost_per_outbound_click")
   private List<AdsActionStats> mCostPerOutboundClick = null;
+  @SerializedName("cost_per_thruplay")
+  private List<AdsActionStats> mCostPerThruplay = null;
   @SerializedName("cost_per_unique_action_type")
   private List<AdsActionStats> mCostPerUniqueActionType = null;
   @SerializedName("cost_per_unique_click")
@@ -203,6 +207,8 @@ public class AdsInsights extends APINode {
   private Object mLinkUrlAsset = null;
   @SerializedName("location")
   private String mLocation = null;
+  @SerializedName("media_asset")
+  private Object mMediaAsset = null;
   @SerializedName("mobile_app_purchase_roas")
   private List<AdsActionStats> mMobileAppPurchaseRoas = null;
   @SerializedName("objective")
@@ -261,10 +267,14 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mUniqueVideoContinuous2SecWatchedActions = null;
   @SerializedName("unique_video_view_10_sec")
   private List<AdsActionStats> mUniqueVideoView10Sec = null;
+  @SerializedName("unique_video_view_15_sec")
+  private List<AdsActionStats> mUniqueVideoView15Sec = null;
   @SerializedName("updated_time")
   private String mUpdatedTime = null;
   @SerializedName("video_10_sec_watched_actions")
   private List<AdsActionStats> mVideo10SecWatchedActions = null;
+  @SerializedName("video_15_sec_watched_actions")
+  private List<AdsActionStats> mVideo15SecWatchedActions = null;
   @SerializedName("video_30_sec_watched_actions")
   private List<AdsActionStats> mVideo30SecWatchedActions = null;
   @SerializedName("video_asset")
@@ -293,6 +303,8 @@ public class AdsInsights extends APINode {
   private List<Object> mVideoPlayRetention20To60sActions = null;
   @SerializedName("video_play_retention_graph_actions")
   private List<Object> mVideoPlayRetentionGraphActions = null;
+  @SerializedName("video_thruplay_watched_actions")
+  private List<AdsActionStats> mVideoThruplayWatchedActions = null;
   @SerializedName("video_time_watched_actions")
   private List<AdsActionStats> mVideoTimeWatchedActions = null;
   @SerializedName("website_ctr")
@@ -618,6 +630,10 @@ public class AdsInsights extends APINode {
     return mCostPer10SecVideoView;
   }
 
+  public List<AdsActionStats> getFieldCostPer15SecVideoView() {
+    return mCostPer15SecVideoView;
+  }
+
   public List<AdsActionStats> getFieldCostPer2SecContinuousVideoView() {
     return mCostPer2SecContinuousVideoView;
   }
@@ -652,6 +668,10 @@ public class AdsInsights extends APINode {
 
   public List<AdsActionStats> getFieldCostPerOutboundClick() {
     return mCostPerOutboundClick;
+  }
+
+  public List<AdsActionStats> getFieldCostPerThruplay() {
+    return mCostPerThruplay;
   }
 
   public List<AdsActionStats> getFieldCostPerUniqueActionType() {
@@ -810,6 +830,10 @@ public class AdsInsights extends APINode {
     return mLocation;
   }
 
+  public Object getFieldMediaAsset() {
+    return mMediaAsset;
+  }
+
   public List<AdsActionStats> getFieldMobileAppPurchaseRoas() {
     return mMobileAppPurchaseRoas;
   }
@@ -929,12 +953,20 @@ public class AdsInsights extends APINode {
     return mUniqueVideoView10Sec;
   }
 
+  public List<AdsActionStats> getFieldUniqueVideoView15Sec() {
+    return mUniqueVideoView15Sec;
+  }
+
   public String getFieldUpdatedTime() {
     return mUpdatedTime;
   }
 
   public List<AdsActionStats> getFieldVideo10SecWatchedActions() {
     return mVideo10SecWatchedActions;
+  }
+
+  public List<AdsActionStats> getFieldVideo15SecWatchedActions() {
+    return mVideo15SecWatchedActions;
   }
 
   public List<AdsActionStats> getFieldVideo30SecWatchedActions() {
@@ -993,6 +1025,10 @@ public class AdsInsights extends APINode {
     return mVideoPlayRetentionGraphActions;
   }
 
+  public List<AdsActionStats> getFieldVideoThruplayWatchedActions() {
+    return mVideoThruplayWatchedActions;
+  }
+
   public List<AdsActionStats> getFieldVideoTimeWatchedActions() {
     return mVideoTimeWatchedActions;
   }
@@ -1048,6 +1084,7 @@ public class AdsInsights extends APINode {
       "canvas_component_avg_pct_view",
       "clicks",
       "cost_per_10_sec_video_view",
+      "cost_per_15_sec_video_view",
       "cost_per_2_sec_continuous_video_view",
       "cost_per_action_type",
       "cost_per_ad_click",
@@ -1057,6 +1094,7 @@ public class AdsInsights extends APINode {
       "cost_per_inline_post_engagement",
       "cost_per_one_thousand_ad_impression",
       "cost_per_outbound_click",
+      "cost_per_thruplay",
       "cost_per_unique_action_type",
       "cost_per_unique_click",
       "cost_per_unique_inline_link_click",
@@ -1096,6 +1134,7 @@ public class AdsInsights extends APINode {
       "labels",
       "link_url_asset",
       "location",
+      "media_asset",
       "mobile_app_purchase_roas",
       "objective",
       "outbound_clicks",
@@ -1125,8 +1164,10 @@ public class AdsInsights extends APINode {
       "unique_outbound_clicks_ctr",
       "unique_video_continuous_2_sec_watched_actions",
       "unique_video_view_10_sec",
+      "unique_video_view_15_sec",
       "updated_time",
       "video_10_sec_watched_actions",
+      "video_15_sec_watched_actions",
       "video_30_sec_watched_actions",
       "video_asset",
       "video_avg_percent_watched_actions",
@@ -1141,6 +1182,7 @@ public class AdsInsights extends APINode {
       "video_play_retention_0_to_15s_actions",
       "video_play_retention_20_to_60s_actions",
       "video_play_retention_graph_actions",
+      "video_thruplay_watched_actions",
       "video_time_watched_actions",
       "website_ctr",
       "website_purchase_roas",
@@ -1417,6 +1459,13 @@ public class AdsInsights extends APINode {
       this.requestField("cost_per_10_sec_video_view", value);
       return this;
     }
+    public APIRequestGet requestCostPer15SecVideoViewField () {
+      return this.requestCostPer15SecVideoViewField(true);
+    }
+    public APIRequestGet requestCostPer15SecVideoViewField (boolean value) {
+      this.requestField("cost_per_15_sec_video_view", value);
+      return this;
+    }
     public APIRequestGet requestCostPer2SecContinuousVideoViewField () {
       return this.requestCostPer2SecContinuousVideoViewField(true);
     }
@@ -1478,6 +1527,13 @@ public class AdsInsights extends APINode {
     }
     public APIRequestGet requestCostPerOutboundClickField (boolean value) {
       this.requestField("cost_per_outbound_click", value);
+      return this;
+    }
+    public APIRequestGet requestCostPerThruplayField () {
+      return this.requestCostPerThruplayField(true);
+    }
+    public APIRequestGet requestCostPerThruplayField (boolean value) {
+      this.requestField("cost_per_thruplay", value);
       return this;
     }
     public APIRequestGet requestCostPerUniqueActionTypeField () {
@@ -1753,6 +1809,13 @@ public class AdsInsights extends APINode {
       this.requestField("location", value);
       return this;
     }
+    public APIRequestGet requestMediaAssetField () {
+      return this.requestMediaAssetField(true);
+    }
+    public APIRequestGet requestMediaAssetField (boolean value) {
+      this.requestField("media_asset", value);
+      return this;
+    }
     public APIRequestGet requestMobileAppPurchaseRoasField () {
       return this.requestMobileAppPurchaseRoasField(true);
     }
@@ -1956,6 +2019,13 @@ public class AdsInsights extends APINode {
       this.requestField("unique_video_view_10_sec", value);
       return this;
     }
+    public APIRequestGet requestUniqueVideoView15SecField () {
+      return this.requestUniqueVideoView15SecField(true);
+    }
+    public APIRequestGet requestUniqueVideoView15SecField (boolean value) {
+      this.requestField("unique_video_view_15_sec", value);
+      return this;
+    }
     public APIRequestGet requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -1968,6 +2038,13 @@ public class AdsInsights extends APINode {
     }
     public APIRequestGet requestVideo10SecWatchedActionsField (boolean value) {
       this.requestField("video_10_sec_watched_actions", value);
+      return this;
+    }
+    public APIRequestGet requestVideo15SecWatchedActionsField () {
+      return this.requestVideo15SecWatchedActionsField(true);
+    }
+    public APIRequestGet requestVideo15SecWatchedActionsField (boolean value) {
+      this.requestField("video_15_sec_watched_actions", value);
       return this;
     }
     public APIRequestGet requestVideo30SecWatchedActionsField () {
@@ -2066,6 +2143,13 @@ public class AdsInsights extends APINode {
     }
     public APIRequestGet requestVideoPlayRetentionGraphActionsField (boolean value) {
       this.requestField("video_play_retention_graph_actions", value);
+      return this;
+    }
+    public APIRequestGet requestVideoThruplayWatchedActionsField () {
+      return this.requestVideoThruplayWatchedActionsField(true);
+    }
+    public APIRequestGet requestVideoThruplayWatchedActionsField (boolean value) {
+      this.requestField("video_thruplay_watched_actions", value);
       return this;
     }
     public APIRequestGet requestVideoTimeWatchedActionsField () {
@@ -2396,6 +2480,7 @@ public class AdsInsights extends APINode {
     this.mCanvasComponentAvgPctView = instance.mCanvasComponentAvgPctView;
     this.mClicks = instance.mClicks;
     this.mCostPer10SecVideoView = instance.mCostPer10SecVideoView;
+    this.mCostPer15SecVideoView = instance.mCostPer15SecVideoView;
     this.mCostPer2SecContinuousVideoView = instance.mCostPer2SecContinuousVideoView;
     this.mCostPerActionType = instance.mCostPerActionType;
     this.mCostPerAdClick = instance.mCostPerAdClick;
@@ -2405,6 +2490,7 @@ public class AdsInsights extends APINode {
     this.mCostPerInlinePostEngagement = instance.mCostPerInlinePostEngagement;
     this.mCostPerOneThousandAdImpression = instance.mCostPerOneThousandAdImpression;
     this.mCostPerOutboundClick = instance.mCostPerOutboundClick;
+    this.mCostPerThruplay = instance.mCostPerThruplay;
     this.mCostPerUniqueActionType = instance.mCostPerUniqueActionType;
     this.mCostPerUniqueClick = instance.mCostPerUniqueClick;
     this.mCostPerUniqueInlineLinkClick = instance.mCostPerUniqueInlineLinkClick;
@@ -2444,6 +2530,7 @@ public class AdsInsights extends APINode {
     this.mLabels = instance.mLabels;
     this.mLinkUrlAsset = instance.mLinkUrlAsset;
     this.mLocation = instance.mLocation;
+    this.mMediaAsset = instance.mMediaAsset;
     this.mMobileAppPurchaseRoas = instance.mMobileAppPurchaseRoas;
     this.mObjective = instance.mObjective;
     this.mOutboundClicks = instance.mOutboundClicks;
@@ -2473,8 +2560,10 @@ public class AdsInsights extends APINode {
     this.mUniqueOutboundClicksCtr = instance.mUniqueOutboundClicksCtr;
     this.mUniqueVideoContinuous2SecWatchedActions = instance.mUniqueVideoContinuous2SecWatchedActions;
     this.mUniqueVideoView10Sec = instance.mUniqueVideoView10Sec;
+    this.mUniqueVideoView15Sec = instance.mUniqueVideoView15Sec;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mVideo10SecWatchedActions = instance.mVideo10SecWatchedActions;
+    this.mVideo15SecWatchedActions = instance.mVideo15SecWatchedActions;
     this.mVideo30SecWatchedActions = instance.mVideo30SecWatchedActions;
     this.mVideoAsset = instance.mVideoAsset;
     this.mVideoAvgPercentWatchedActions = instance.mVideoAvgPercentWatchedActions;
@@ -2489,6 +2578,7 @@ public class AdsInsights extends APINode {
     this.mVideoPlayRetention0To15sActions = instance.mVideoPlayRetention0To15sActions;
     this.mVideoPlayRetention20To60sActions = instance.mVideoPlayRetention20To60sActions;
     this.mVideoPlayRetentionGraphActions = instance.mVideoPlayRetentionGraphActions;
+    this.mVideoThruplayWatchedActions = instance.mVideoThruplayWatchedActions;
     this.mVideoTimeWatchedActions = instance.mVideoTimeWatchedActions;
     this.mWebsiteCtr = instance.mWebsiteCtr;
     this.mWebsitePurchaseRoas = instance.mWebsitePurchaseRoas;

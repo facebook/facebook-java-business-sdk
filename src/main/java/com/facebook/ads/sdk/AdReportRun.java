@@ -410,6 +410,7 @@ public class AdReportRun extends APINode {
       "canvas_component_avg_pct_view",
       "clicks",
       "cost_per_10_sec_video_view",
+      "cost_per_15_sec_video_view",
       "cost_per_2_sec_continuous_video_view",
       "cost_per_action_type",
       "cost_per_ad_click",
@@ -419,6 +420,7 @@ public class AdReportRun extends APINode {
       "cost_per_inline_post_engagement",
       "cost_per_one_thousand_ad_impression",
       "cost_per_outbound_click",
+      "cost_per_thruplay",
       "cost_per_unique_action_type",
       "cost_per_unique_click",
       "cost_per_unique_inline_link_click",
@@ -458,6 +460,7 @@ public class AdReportRun extends APINode {
       "labels",
       "link_url_asset",
       "location",
+      "media_asset",
       "mobile_app_purchase_roas",
       "objective",
       "outbound_clicks",
@@ -487,8 +490,10 @@ public class AdReportRun extends APINode {
       "unique_outbound_clicks_ctr",
       "unique_video_continuous_2_sec_watched_actions",
       "unique_video_view_10_sec",
+      "unique_video_view_15_sec",
       "updated_time",
       "video_10_sec_watched_actions",
+      "video_15_sec_watched_actions",
       "video_30_sec_watched_actions",
       "video_asset",
       "video_avg_percent_watched_actions",
@@ -503,6 +508,7 @@ public class AdReportRun extends APINode {
       "video_play_retention_0_to_15s_actions",
       "video_play_retention_20_to_60s_actions",
       "video_play_retention_graph_actions",
+      "video_thruplay_watched_actions",
       "video_time_watched_actions",
       "website_ctr",
       "website_purchase_roas",
@@ -779,6 +785,13 @@ public class AdReportRun extends APINode {
       this.requestField("cost_per_10_sec_video_view", value);
       return this;
     }
+    public APIRequestGetInsights requestCostPer15SecVideoViewField () {
+      return this.requestCostPer15SecVideoViewField(true);
+    }
+    public APIRequestGetInsights requestCostPer15SecVideoViewField (boolean value) {
+      this.requestField("cost_per_15_sec_video_view", value);
+      return this;
+    }
     public APIRequestGetInsights requestCostPer2SecContinuousVideoViewField () {
       return this.requestCostPer2SecContinuousVideoViewField(true);
     }
@@ -840,6 +853,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCostPerOutboundClickField (boolean value) {
       this.requestField("cost_per_outbound_click", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerThruplayField () {
+      return this.requestCostPerThruplayField(true);
+    }
+    public APIRequestGetInsights requestCostPerThruplayField (boolean value) {
+      this.requestField("cost_per_thruplay", value);
       return this;
     }
     public APIRequestGetInsights requestCostPerUniqueActionTypeField () {
@@ -1115,6 +1135,13 @@ public class AdReportRun extends APINode {
       this.requestField("location", value);
       return this;
     }
+    public APIRequestGetInsights requestMediaAssetField () {
+      return this.requestMediaAssetField(true);
+    }
+    public APIRequestGetInsights requestMediaAssetField (boolean value) {
+      this.requestField("media_asset", value);
+      return this;
+    }
     public APIRequestGetInsights requestMobileAppPurchaseRoasField () {
       return this.requestMobileAppPurchaseRoasField(true);
     }
@@ -1318,6 +1345,13 @@ public class AdReportRun extends APINode {
       this.requestField("unique_video_view_10_sec", value);
       return this;
     }
+    public APIRequestGetInsights requestUniqueVideoView15SecField () {
+      return this.requestUniqueVideoView15SecField(true);
+    }
+    public APIRequestGetInsights requestUniqueVideoView15SecField (boolean value) {
+      this.requestField("unique_video_view_15_sec", value);
+      return this;
+    }
     public APIRequestGetInsights requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -1330,6 +1364,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestVideo10SecWatchedActionsField (boolean value) {
       this.requestField("video_10_sec_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideo15SecWatchedActionsField () {
+      return this.requestVideo15SecWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideo15SecWatchedActionsField (boolean value) {
+      this.requestField("video_15_sec_watched_actions", value);
       return this;
     }
     public APIRequestGetInsights requestVideo30SecWatchedActionsField () {
@@ -1428,6 +1469,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestVideoPlayRetentionGraphActionsField (boolean value) {
       this.requestField("video_play_retention_graph_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoThruplayWatchedActionsField () {
+      return this.requestVideoThruplayWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoThruplayWatchedActionsField (boolean value) {
+      this.requestField("video_thruplay_watched_actions", value);
       return this;
     }
     public APIRequestGetInsights requestVideoTimeWatchedActionsField () {

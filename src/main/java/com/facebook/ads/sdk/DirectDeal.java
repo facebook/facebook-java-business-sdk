@@ -99,6 +99,8 @@ public class DirectDeal extends APINode {
   private String mStatus = null;
   @SerializedName("targeting")
   private Targeting mTargeting = null;
+  @SerializedName("third_party_integrated_deal")
+  private Boolean mThirdPartyIntegratedDeal = null;
   protected static Gson gson = null;
 
   DirectDeal() {
@@ -408,6 +410,10 @@ public class DirectDeal extends APINode {
       mTargeting.context = getContext();
     }
     return mTargeting;
+  }
+
+  public Boolean getFieldThirdPartyIntegratedDeal() {
+    return mThirdPartyIntegratedDeal;
   }
 
 
@@ -1348,6 +1354,7 @@ public class DirectDeal extends APINode {
       "start_time",
       "status",
       "targeting",
+      "third_party_integrated_deal",
     };
 
     @Override
@@ -1592,6 +1599,13 @@ public class DirectDeal extends APINode {
       this.requestField("targeting", value);
       return this;
     }
+    public APIRequestGet requestThirdPartyIntegratedDealField () {
+      return this.requestThirdPartyIntegratedDealField(true);
+    }
+    public APIRequestGet requestThirdPartyIntegratedDealField (boolean value) {
+      this.requestField("third_party_integrated_deal", value);
+      return this;
+    }
   }
 
   public static enum EnumStatus {
@@ -1660,6 +1674,7 @@ public class DirectDeal extends APINode {
     this.mStartTime = instance.mStartTime;
     this.mStatus = instance.mStatus;
     this.mTargeting = instance.mTargeting;
+    this.mThirdPartyIntegratedDeal = instance.mThirdPartyIntegratedDeal;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

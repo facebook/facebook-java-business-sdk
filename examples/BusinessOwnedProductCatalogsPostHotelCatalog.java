@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountCustomAudiencesPostDynamicEventValueBasedLookalikeCustomAudience {
+public class BusinessOwnedProductCatalogsPostHotelCatalog {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -34,10 +34,9 @@ public class AdAccountCustomAudiencesPostDynamicEventValueBasedLookalikeCustomAu
     String id = "<ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdAccount(id, context).createCustomAudience()
-      .setName("Test Value-Based lookalike from Pixel")
-      .setSubtype(CustomAudience.EnumSubtype.VALUE_LOOKALIKE)
-      .setLookalikeSpec("{\"origin_event_sources\":[{\"id\":\"<sourceID>\",\"event_names\":[\"AddToCart\"]}],\"type\":\"custom_ratio\",\"ratio\":0.01,\"country\":\"US\"}")
+    new Business(id, context).createOwnedProductCatalog()
+      .setName("Test Hotel Catalog")
+      .setVertical(ProductCatalog.EnumVertical.VALUE_HOTELS)
       .execute();
 
   }

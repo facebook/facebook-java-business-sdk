@@ -2587,6 +2587,7 @@ public class ProductSet extends APINode {
       "id",
       "images",
       "interior_color",
+      "legal_disclosure_impressum_url",
       "make",
       "mileage",
       "model",
@@ -2867,6 +2868,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetVehicles requestInteriorColorField (boolean value) {
       this.requestField("interior_color", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestLegalDisclosureImpressumUrlField () {
+      return this.requestLegalDisclosureImpressumUrlField(true);
+    }
+    public APIRequestGetVehicles requestLegalDisclosureImpressumUrlField (boolean value) {
+      this.requestField("legal_disclosure_impressum_url", value);
       return this;
     }
     public APIRequestGetVehicles requestMakeField () {

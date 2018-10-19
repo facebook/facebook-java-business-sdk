@@ -91,6 +91,8 @@ public class AdCreativeLinkData extends APINode {
   private AdsImageCrops mImageCrops = null;
   @SerializedName("image_hash")
   private String mImageHash = null;
+  @SerializedName("image_layer_specs")
+  private List<AdCreativeLinkDataImageLayerSpec> mImageLayerSpecs = null;
   @SerializedName("image_overlay_spec")
   private AdCreativeLinkDataImageOverlaySpec mImageOverlaySpec = null;
   @SerializedName("link")
@@ -420,6 +422,10 @@ public class AdCreativeLinkData extends APINode {
     return mImageHash;
   }
 
+  public List<AdCreativeLinkDataImageLayerSpec> getFieldImageLayerSpecs() {
+    return mImageLayerSpecs;
+  }
+
   public AdCreativeLinkDataImageOverlaySpec getFieldImageOverlaySpec() {
     if (mImageOverlaySpec != null) {
       mImageOverlaySpec.context = getContext();
@@ -527,6 +533,7 @@ public class AdCreativeLinkData extends APINode {
       "format_option",
       "image_crops",
       "image_hash",
+      "image_layer_specs",
       "image_overlay_spec",
       "link",
       "message",
@@ -759,6 +766,13 @@ public class AdCreativeLinkData extends APINode {
       this.requestField("image_hash", value);
       return this;
     }
+    public APIRequestGet requestImageLayerSpecsField () {
+      return this.requestImageLayerSpecsField(true);
+    }
+    public APIRequestGet requestImageLayerSpecsField (boolean value) {
+      this.requestField("image_layer_specs", value);
+      return this;
+    }
     public APIRequestGet requestImageOverlaySpecField () {
       return this.requestImageOverlaySpecField(true);
     }
@@ -948,6 +962,7 @@ public class AdCreativeLinkData extends APINode {
     this.mFormatOption = instance.mFormatOption;
     this.mImageCrops = instance.mImageCrops;
     this.mImageHash = instance.mImageHash;
+    this.mImageLayerSpecs = instance.mImageLayerSpecs;
     this.mImageOverlaySpec = instance.mImageOverlaySpec;
     this.mLink = instance.mLink;
     this.mMessage = instance.mMessage;

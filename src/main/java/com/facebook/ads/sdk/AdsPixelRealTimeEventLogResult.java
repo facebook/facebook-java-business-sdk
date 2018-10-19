@@ -63,8 +63,10 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
   private String mEvent = null;
   @SerializedName("event_detection_method")
   private String mEventDetectionMethod = null;
-  @SerializedName("rule_conditions")
-  private String mRuleConditions = null;
+  @SerializedName("matched_rule_conditions")
+  private String mMatchedRuleConditions = null;
+  @SerializedName("source_rule_condition")
+  private String mSourceRuleCondition = null;
   @SerializedName("timestamp")
   private String mTimestamp = null;
   @SerializedName("url")
@@ -300,8 +302,12 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
     return mEventDetectionMethod;
   }
 
-  public String getFieldRuleConditions() {
-    return mRuleConditions;
+  public String getFieldMatchedRuleConditions() {
+    return mMatchedRuleConditions;
+  }
+
+  public String getFieldSourceRuleCondition() {
+    return mSourceRuleCondition;
   }
 
   public String getFieldTimestamp() {
@@ -333,7 +339,8 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
       "device_type",
       "event",
       "event_detection_method",
-      "rule_conditions",
+      "matched_rule_conditions",
+      "source_rule_condition",
       "timestamp",
       "url",
       "id",
@@ -455,11 +462,18 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
       this.requestField("event_detection_method", value);
       return this;
     }
-    public APIRequestGet requestRuleConditionsField () {
-      return this.requestRuleConditionsField(true);
+    public APIRequestGet requestMatchedRuleConditionsField () {
+      return this.requestMatchedRuleConditionsField(true);
     }
-    public APIRequestGet requestRuleConditionsField (boolean value) {
-      this.requestField("rule_conditions", value);
+    public APIRequestGet requestMatchedRuleConditionsField (boolean value) {
+      this.requestField("matched_rule_conditions", value);
+      return this;
+    }
+    public APIRequestGet requestSourceRuleConditionField () {
+      return this.requestSourceRuleConditionField(true);
+    }
+    public APIRequestGet requestSourceRuleConditionField (boolean value) {
+      this.requestField("source_rule_condition", value);
       return this;
     }
     public APIRequestGet requestTimestampField () {
@@ -504,7 +518,8 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
     this.mDeviceType = instance.mDeviceType;
     this.mEvent = instance.mEvent;
     this.mEventDetectionMethod = instance.mEventDetectionMethod;
-    this.mRuleConditions = instance.mRuleConditions;
+    this.mMatchedRuleConditions = instance.mMatchedRuleConditions;
+    this.mSourceRuleCondition = instance.mSourceRuleCondition;
     this.mTimestamp = instance.mTimestamp;
     this.mUrl = instance.mUrl;
     this.mId = instance.mId;

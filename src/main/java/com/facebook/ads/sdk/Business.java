@@ -12005,6 +12005,7 @@ public class Business extends APINode {
       "start_time",
       "status",
       "targeting",
+      "third_party_integrated_deal",
     };
 
     @Override
@@ -12256,6 +12257,13 @@ public class Business extends APINode {
     }
     public APIRequestGetDirectDeals requestTargetingField (boolean value) {
       this.requestField("targeting", value);
+      return this;
+    }
+    public APIRequestGetDirectDeals requestThirdPartyIntegratedDealField () {
+      return this.requestThirdPartyIntegratedDealField(true);
+    }
+    public APIRequestGetDirectDeals requestThirdPartyIntegratedDealField (boolean value) {
+      this.requestField("third_party_integrated_deal", value);
       return this;
     }
   }
