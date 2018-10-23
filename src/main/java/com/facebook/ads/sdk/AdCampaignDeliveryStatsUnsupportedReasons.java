@@ -54,70 +54,68 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ReachEstimate extends APINode {
-  @SerializedName("estimate_ready")
-  private Boolean mEstimateReady = null;
-  @SerializedName("unsupported")
-  private Boolean mUnsupported = null;
-  @SerializedName("users")
-  private Long mUsers = null;
+public class AdCampaignDeliveryStatsUnsupportedReasons extends APINode {
+  @SerializedName("reason_data")
+  private List<Object> mReasonData = null;
+  @SerializedName("reason_type")
+  private String mReasonType = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
 
-  ReachEstimate() {
+  AdCampaignDeliveryStatsUnsupportedReasons() {
   }
 
-  public ReachEstimate(Long id, APIContext context) {
+  public AdCampaignDeliveryStatsUnsupportedReasons(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public ReachEstimate(String id, APIContext context) {
+  public AdCampaignDeliveryStatsUnsupportedReasons(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public ReachEstimate fetch() throws APIException{
-    ReachEstimate newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public AdCampaignDeliveryStatsUnsupportedReasons fetch() throws APIException{
+    AdCampaignDeliveryStatsUnsupportedReasons newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static ReachEstimate fetchById(Long id, APIContext context) throws APIException {
+  public static AdCampaignDeliveryStatsUnsupportedReasons fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<ReachEstimate> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<AdCampaignDeliveryStatsUnsupportedReasons> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static ReachEstimate fetchById(String id, APIContext context) throws APIException {
+  public static AdCampaignDeliveryStatsUnsupportedReasons fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<ReachEstimate> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<AdCampaignDeliveryStatsUnsupportedReasons> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<ReachEstimate> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ReachEstimate>)(
-      new APIRequest<ReachEstimate>(context, "", "/", "GET", ReachEstimate.getParser())
+  public static APINodeList<AdCampaignDeliveryStatsUnsupportedReasons> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdCampaignDeliveryStatsUnsupportedReasons>)(
+      new APIRequest<AdCampaignDeliveryStatsUnsupportedReasons>(context, "", "/", "GET", AdCampaignDeliveryStatsUnsupportedReasons.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<ReachEstimate>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<AdCampaignDeliveryStatsUnsupportedReasons>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", ReachEstimate.getParser())
+      new APIRequest(context, "", "/", "GET", AdCampaignDeliveryStatsUnsupportedReasons.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -130,12 +128,12 @@ public class ReachEstimate extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ReachEstimate loadJSON(String json, APIContext context) {
-    ReachEstimate reachEstimate = getGson().fromJson(json, ReachEstimate.class);
+  public static AdCampaignDeliveryStatsUnsupportedReasons loadJSON(String json, APIContext context) {
+    AdCampaignDeliveryStatsUnsupportedReasons adCampaignDeliveryStatsUnsupportedReasons = getGson().fromJson(json, AdCampaignDeliveryStatsUnsupportedReasons.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(reachEstimate.toString());
+      JsonElement o2 = parser.parse(adCampaignDeliveryStatsUnsupportedReasons.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -145,13 +143,13 @@ public class ReachEstimate extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    reachEstimate.context = context;
-    reachEstimate.rawValue = json;
-    return reachEstimate;
+    adCampaignDeliveryStatsUnsupportedReasons.context = context;
+    adCampaignDeliveryStatsUnsupportedReasons.rawValue = json;
+    return adCampaignDeliveryStatsUnsupportedReasons;
   }
 
-  public static APINodeList<ReachEstimate> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ReachEstimate> reachEstimates = new APINodeList<ReachEstimate>(request, json);
+  public static APINodeList<AdCampaignDeliveryStatsUnsupportedReasons> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<AdCampaignDeliveryStatsUnsupportedReasons> adCampaignDeliveryStatsUnsupportedReasonss = new APINodeList<AdCampaignDeliveryStatsUnsupportedReasons>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -162,9 +160,9 @@ public class ReachEstimate extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          reachEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCampaignDeliveryStatsUnsupportedReasonss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return reachEstimates;
+        return adCampaignDeliveryStatsUnsupportedReasonss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -174,20 +172,20 @@ public class ReachEstimate extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                reachEstimates.setCursors(before, after);
+                adCampaignDeliveryStatsUnsupportedReasonss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            reachEstimates.setPaging(previous, next);
+            adCampaignDeliveryStatsUnsupportedReasonss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              reachEstimates.setAppSecret(context.getAppSecretProof());
+              adCampaignDeliveryStatsUnsupportedReasonss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              reachEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCampaignDeliveryStatsUnsupportedReasonss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -198,23 +196,23 @@ public class ReachEstimate extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  reachEstimates.add(loadJSON(entry.getValue().toString(), context));
+                  adCampaignDeliveryStatsUnsupportedReasonss.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              reachEstimates.add(loadJSON(obj.toString(), context));
+              adCampaignDeliveryStatsUnsupportedReasonss.add(loadJSON(obj.toString(), context));
             }
           }
-          return reachEstimates;
+          return adCampaignDeliveryStatsUnsupportedReasonss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              reachEstimates.add(loadJSON(entry.getValue().toString(), context));
+              adCampaignDeliveryStatsUnsupportedReasonss.add(loadJSON(entry.getValue().toString(), context));
           }
-          return reachEstimates;
+          return adCampaignDeliveryStatsUnsupportedReasonss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -231,20 +229,20 @@ public class ReachEstimate extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              reachEstimates.add(loadJSON(value.toString(), context));
+              adCampaignDeliveryStatsUnsupportedReasonss.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return reachEstimates;
+            return adCampaignDeliveryStatsUnsupportedReasonss;
           }
 
           // Sixth, check if it's pure JsonObject
-          reachEstimates.clear();
-          reachEstimates.add(loadJSON(json, context));
-          return reachEstimates;
+          adCampaignDeliveryStatsUnsupportedReasonss.clear();
+          adCampaignDeliveryStatsUnsupportedReasonss.add(loadJSON(json, context));
+          return adCampaignDeliveryStatsUnsupportedReasonss;
         }
       }
     } catch (Exception e) {
@@ -276,16 +274,12 @@ public class ReachEstimate extends APINode {
   }
 
 
-  public Boolean getFieldEstimateReady() {
-    return mEstimateReady;
+  public List<Object> getFieldReasonData() {
+    return mReasonData;
   }
 
-  public Boolean getFieldUnsupported() {
-    return mUnsupported;
-  }
-
-  public Long getFieldUsers() {
-    return mUsers;
+  public String getFieldReasonType() {
+    return mReasonType;
   }
 
   public String getFieldId() {
@@ -294,48 +288,47 @@ public class ReachEstimate extends APINode {
 
 
 
-  public static class APIRequestGet extends APIRequest<ReachEstimate> {
+  public static class APIRequestGet extends APIRequest<AdCampaignDeliveryStatsUnsupportedReasons> {
 
-    ReachEstimate lastResponse = null;
+    AdCampaignDeliveryStatsUnsupportedReasons lastResponse = null;
     @Override
-    public ReachEstimate getLastResponse() {
+    public AdCampaignDeliveryStatsUnsupportedReasons getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "estimate_ready",
-      "unsupported",
-      "users",
+      "reason_data",
+      "reason_type",
       "id",
     };
 
     @Override
-    public ReachEstimate parseResponse(String response) throws APIException {
-      return ReachEstimate.parseResponse(response, getContext(), this).head();
+    public AdCampaignDeliveryStatsUnsupportedReasons parseResponse(String response) throws APIException {
+      return AdCampaignDeliveryStatsUnsupportedReasons.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public ReachEstimate execute() throws APIException {
+    public AdCampaignDeliveryStatsUnsupportedReasons execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public ReachEstimate execute(Map<String, Object> extraParams) throws APIException {
+    public AdCampaignDeliveryStatsUnsupportedReasons execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<ReachEstimate> executeAsync() throws APIException {
+    public ListenableFuture<AdCampaignDeliveryStatsUnsupportedReasons> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<ReachEstimate> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<AdCampaignDeliveryStatsUnsupportedReasons> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ReachEstimate>() {
-           public ReachEstimate apply(String result) {
+        new Function<String, AdCampaignDeliveryStatsUnsupportedReasons>() {
+           public AdCampaignDeliveryStatsUnsupportedReasons apply(String result) {
              try {
                return APIRequestGet.this.parseResponse(result);
              } catch (Exception e) {
@@ -399,25 +392,18 @@ public class ReachEstimate extends APINode {
       return this;
     }
 
-    public APIRequestGet requestEstimateReadyField () {
-      return this.requestEstimateReadyField(true);
+    public APIRequestGet requestReasonDataField () {
+      return this.requestReasonDataField(true);
     }
-    public APIRequestGet requestEstimateReadyField (boolean value) {
-      this.requestField("estimate_ready", value);
+    public APIRequestGet requestReasonDataField (boolean value) {
+      this.requestField("reason_data", value);
       return this;
     }
-    public APIRequestGet requestUnsupportedField () {
-      return this.requestUnsupportedField(true);
+    public APIRequestGet requestReasonTypeField () {
+      return this.requestReasonTypeField(true);
     }
-    public APIRequestGet requestUnsupportedField (boolean value) {
-      this.requestField("unsupported", value);
-      return this;
-    }
-    public APIRequestGet requestUsersField () {
-      return this.requestUsersField(true);
-    }
-    public APIRequestGet requestUsersField (boolean value) {
-      this.requestField("users", value);
+    public APIRequestGet requestReasonTypeField (boolean value) {
+      this.requestField("reason_type", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -427,67 +413,6 @@ public class ReachEstimate extends APINode {
       this.requestField("id", value);
       return this;
     }
-  }
-
-  public static enum EnumOptimizeFor {
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
-      @SerializedName("APP_INSTALLS")
-      VALUE_APP_INSTALLS("APP_INSTALLS"),
-      @SerializedName("BRAND_AWARENESS")
-      VALUE_BRAND_AWARENESS("BRAND_AWARENESS"),
-      @SerializedName("AD_RECALL_LIFT")
-      VALUE_AD_RECALL_LIFT("AD_RECALL_LIFT"),
-      @SerializedName("CLICKS")
-      VALUE_CLICKS("CLICKS"),
-      @SerializedName("ENGAGED_USERS")
-      VALUE_ENGAGED_USERS("ENGAGED_USERS"),
-      @SerializedName("EVENT_RESPONSES")
-      VALUE_EVENT_RESPONSES("EVENT_RESPONSES"),
-      @SerializedName("IMPRESSIONS")
-      VALUE_IMPRESSIONS("IMPRESSIONS"),
-      @SerializedName("LEAD_GENERATION")
-      VALUE_LEAD_GENERATION("LEAD_GENERATION"),
-      @SerializedName("LINK_CLICKS")
-      VALUE_LINK_CLICKS("LINK_CLICKS"),
-      @SerializedName("OFFER_CLAIMS")
-      VALUE_OFFER_CLAIMS("OFFER_CLAIMS"),
-      @SerializedName("OFFSITE_CONVERSIONS")
-      VALUE_OFFSITE_CONVERSIONS("OFFSITE_CONVERSIONS"),
-      @SerializedName("PAGE_ENGAGEMENT")
-      VALUE_PAGE_ENGAGEMENT("PAGE_ENGAGEMENT"),
-      @SerializedName("PAGE_LIKES")
-      VALUE_PAGE_LIKES("PAGE_LIKES"),
-      @SerializedName("POST_ENGAGEMENT")
-      VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
-      @SerializedName("REACH")
-      VALUE_REACH("REACH"),
-      @SerializedName("SOCIAL_IMPRESSIONS")
-      VALUE_SOCIAL_IMPRESSIONS("SOCIAL_IMPRESSIONS"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      @SerializedName("APP_DOWNLOADS")
-      VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
-      @SerializedName("LANDING_PAGE_VIEWS")
-      VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
-      @SerializedName("VALUE")
-      VALUE_VALUE("VALUE"),
-      @SerializedName("REPLIES")
-      VALUE_REPLIES("REPLIES"),
-      @SerializedName("DERIVED_EVENTS")
-      VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
-      NULL(null);
-
-      private String value;
-
-      private EnumOptimizeFor(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
 
@@ -504,20 +429,19 @@ public class ReachEstimate extends APINode {
     return gson;
   }
 
-  public ReachEstimate copyFrom(ReachEstimate instance) {
-    this.mEstimateReady = instance.mEstimateReady;
-    this.mUnsupported = instance.mUnsupported;
-    this.mUsers = instance.mUsers;
+  public AdCampaignDeliveryStatsUnsupportedReasons copyFrom(AdCampaignDeliveryStatsUnsupportedReasons instance) {
+    this.mReasonData = instance.mReasonData;
+    this.mReasonType = instance.mReasonType;
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ReachEstimate> getParser() {
-    return new APIRequest.ResponseParser<ReachEstimate>() {
-      public APINodeList<ReachEstimate> parseResponse(String response, APIContext context, APIRequest<ReachEstimate> request) throws MalformedResponseException {
-        return ReachEstimate.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<AdCampaignDeliveryStatsUnsupportedReasons> getParser() {
+    return new APIRequest.ResponseParser<AdCampaignDeliveryStatsUnsupportedReasons>() {
+      public APINodeList<AdCampaignDeliveryStatsUnsupportedReasons> parseResponse(String response, APIContext context, APIRequest<AdCampaignDeliveryStatsUnsupportedReasons> request) throws MalformedResponseException {
+        return AdCampaignDeliveryStatsUnsupportedReasons.parseResponse(response, context, request);
       }
     };
   }

@@ -829,6 +829,7 @@ public class AdsPixel extends APINode {
       "customer_file_source",
       "data_source",
       "data_source_types",
+      "datafile_custom_audience_uploading_status",
       "delivery_status",
       "description",
       "excluded_custom_audiences",
@@ -988,6 +989,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGetAudiences requestDataSourceTypesField (boolean value) {
       this.requestField("data_source_types", value);
+      return this;
+    }
+    public APIRequestGetAudiences requestDatafileCustomAudienceUploadingStatusField () {
+      return this.requestDatafileCustomAudienceUploadingStatusField(true);
+    }
+    public APIRequestGetAudiences requestDatafileCustomAudienceUploadingStatusField (boolean value) {
+      this.requestField("datafile_custom_audience_uploading_status", value);
       return this;
     }
     public APIRequestGetAudiences requestDeliveryStatusField () {

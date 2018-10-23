@@ -59,6 +59,8 @@ public class MerchantReport extends APINode {
   private Long mAddToCart = null;
   @SerializedName("brand")
   private String mBrand = null;
+  @SerializedName("catalog_segment")
+  private ProductCatalog mCatalogSegment = null;
   @SerializedName("catalog_segment_id")
   private String mCatalogSegmentId = null;
   @SerializedName("catalog_segment_purchase_value")
@@ -69,6 +71,10 @@ public class MerchantReport extends APINode {
   private String mDate = null;
   @SerializedName("link_clicks")
   private Long mLinkClicks = null;
+  @SerializedName("merchant_currency")
+  private String mMerchantCurrency = null;
+  @SerializedName("page")
+  private Page mPage = null;
   @SerializedName("page_id")
   private String mPageId = null;
   @SerializedName("product_id")
@@ -304,6 +310,13 @@ public class MerchantReport extends APINode {
     return mBrand;
   }
 
+  public ProductCatalog getFieldCatalogSegment() {
+    if (mCatalogSegment != null) {
+      mCatalogSegment.context = getContext();
+    }
+    return mCatalogSegment;
+  }
+
   public String getFieldCatalogSegmentId() {
     return mCatalogSegmentId;
   }
@@ -322,6 +335,17 @@ public class MerchantReport extends APINode {
 
   public Long getFieldLinkClicks() {
     return mLinkClicks;
+  }
+
+  public String getFieldMerchantCurrency() {
+    return mMerchantCurrency;
+  }
+
+  public Page getFieldPage() {
+    if (mPage != null) {
+      mPage.context = getContext();
+    }
+    return mPage;
   }
 
   public String getFieldPageId() {
@@ -367,11 +391,14 @@ public class MerchantReport extends APINode {
     public static final String[] FIELDS = {
       "add_to_cart",
       "brand",
+      "catalog_segment",
       "catalog_segment_id",
       "catalog_segment_purchase_value",
       "category",
       "date",
       "link_clicks",
+      "merchant_currency",
+      "page",
       "page_id",
       "product_id",
       "product_quantity",
@@ -483,6 +510,13 @@ public class MerchantReport extends APINode {
       this.requestField("brand", value);
       return this;
     }
+    public APIRequestGet requestCatalogSegmentField () {
+      return this.requestCatalogSegmentField(true);
+    }
+    public APIRequestGet requestCatalogSegmentField (boolean value) {
+      this.requestField("catalog_segment", value);
+      return this;
+    }
     public APIRequestGet requestCatalogSegmentIdField () {
       return this.requestCatalogSegmentIdField(true);
     }
@@ -516,6 +550,20 @@ public class MerchantReport extends APINode {
     }
     public APIRequestGet requestLinkClicksField (boolean value) {
       this.requestField("link_clicks", value);
+      return this;
+    }
+    public APIRequestGet requestMerchantCurrencyField () {
+      return this.requestMerchantCurrencyField(true);
+    }
+    public APIRequestGet requestMerchantCurrencyField (boolean value) {
+      this.requestField("merchant_currency", value);
+      return this;
+    }
+    public APIRequestGet requestPageField () {
+      return this.requestPageField(true);
+    }
+    public APIRequestGet requestPageField (boolean value) {
+      this.requestField("page", value);
       return this;
     }
     public APIRequestGet requestPageIdField () {
@@ -586,11 +634,14 @@ public class MerchantReport extends APINode {
   public MerchantReport copyFrom(MerchantReport instance) {
     this.mAddToCart = instance.mAddToCart;
     this.mBrand = instance.mBrand;
+    this.mCatalogSegment = instance.mCatalogSegment;
     this.mCatalogSegmentId = instance.mCatalogSegmentId;
     this.mCatalogSegmentPurchaseValue = instance.mCatalogSegmentPurchaseValue;
     this.mCategory = instance.mCategory;
     this.mDate = instance.mDate;
     this.mLinkClicks = instance.mLinkClicks;
+    this.mMerchantCurrency = instance.mMerchantCurrency;
+    this.mPage = instance.mPage;
     this.mPageId = instance.mPageId;
     this.mProductId = instance.mProductId;
     this.mProductQuantity = instance.mProductQuantity;

@@ -7246,6 +7246,7 @@ public class Page extends APINode {
     public static final String[] PARAMS = {
       "body_element_ids",
       "background_color",
+      "enable_swipe_to_open",
       "is_published",
       "is_hidden",
       "name",
@@ -7317,6 +7318,15 @@ public class Page extends APINode {
 
     public APIRequestCreateCanvase setBackgroundColor (String backgroundColor) {
       this.setParam("background_color", backgroundColor);
+      return this;
+    }
+
+    public APIRequestCreateCanvase setEnableSwipeToOpen (Boolean enableSwipeToOpen) {
+      this.setParam("enable_swipe_to_open", enableSwipeToOpen);
+      return this;
+    }
+    public APIRequestCreateCanvase setEnableSwipeToOpen (String enableSwipeToOpen) {
+      this.setParam("enable_swipe_to_open", enableSwipeToOpen);
       return this;
     }
 
@@ -35113,7 +35123,6 @@ public class Page extends APINode {
       "gdpv4_enabled",
       "gdpv4_nux_content",
       "gdpv4_nux_enabled",
-      "groups_app_settings",
       "has_messenger_product",
       "hosting_url",
       "icon_url",
@@ -35571,13 +35580,6 @@ public class Page extends APINode {
     }
     public APIRequestGetSecondaryReceivers requestGdpv4NuxEnabledField (boolean value) {
       this.requestField("gdpv4_nux_enabled", value);
-      return this;
-    }
-    public APIRequestGetSecondaryReceivers requestGroupsAppSettingsField () {
-      return this.requestGroupsAppSettingsField(true);
-    }
-    public APIRequestGetSecondaryReceivers requestGroupsAppSettingsField (boolean value) {
-      this.requestField("groups_app_settings", value);
       return this;
     }
     public APIRequestGetSecondaryReceivers requestHasMessengerProductField () {
@@ -36554,7 +36556,6 @@ public class Page extends APINode {
       "gdpv4_enabled",
       "gdpv4_nux_content",
       "gdpv4_nux_enabled",
-      "groups_app_settings",
       "has_messenger_product",
       "hosting_url",
       "icon_url",
@@ -37012,13 +37013,6 @@ public class Page extends APINode {
     }
     public APIRequestGetSubscribedApps requestGdpv4NuxEnabledField (boolean value) {
       this.requestField("gdpv4_nux_enabled", value);
-      return this;
-    }
-    public APIRequestGetSubscribedApps requestGroupsAppSettingsField () {
-      return this.requestGroupsAppSettingsField(true);
-    }
-    public APIRequestGetSubscribedApps requestGroupsAppSettingsField (boolean value) {
-      this.requestField("groups_app_settings", value);
       return this;
     }
     public APIRequestGetSubscribedApps requestHasMessengerProductField () {

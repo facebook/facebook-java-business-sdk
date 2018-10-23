@@ -1626,6 +1626,7 @@ public class AdAccount extends APINode {
       "name",
       "location_types",
       "parent_page",
+      "targeted_area_type",
     };
 
     public static final String[] FIELDS = {
@@ -1699,6 +1700,15 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdPlacePageSet setParentPage (String parentPage) {
       this.setParam("parent_page", parentPage);
+      return this;
+    }
+
+    public APIRequestCreateAdPlacePageSet setTargetedAreaType (AdPlacePageSet.EnumTargetedAreaType targetedAreaType) {
+      this.setParam("targeted_area_type", targetedAreaType);
+      return this;
+    }
+    public APIRequestCreateAdPlacePageSet setTargetedAreaType (String targetedAreaType) {
+      this.setParam("targeted_area_type", targetedAreaType);
       return this;
     }
 
@@ -7555,15 +7565,12 @@ public class AdAccount extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
-      "impression_control_map",
       "issues_info",
       "last_updated_by_app_id",
-      "locations",
       "name",
       "objective_source",
       "priority",
       "recommendations",
-      "social_prefs",
       "source_ad",
       "source_ad_id",
       "status",
@@ -7571,7 +7578,6 @@ public class AdAccount extends APINode {
       "tracking_and_conversion_with_defaults",
       "tracking_specs",
       "updated_time",
-      "url_override",
     };
 
     @Override
@@ -7852,13 +7858,6 @@ public class AdAccount extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAds requestImpressionControlMapField () {
-      return this.requestImpressionControlMapField(true);
-    }
-    public APIRequestGetAds requestImpressionControlMapField (boolean value) {
-      this.requestField("impression_control_map", value);
-      return this;
-    }
     public APIRequestGetAds requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -7871,13 +7870,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAds requestLastUpdatedByAppIdField (boolean value) {
       this.requestField("last_updated_by_app_id", value);
-      return this;
-    }
-    public APIRequestGetAds requestLocationsField () {
-      return this.requestLocationsField(true);
-    }
-    public APIRequestGetAds requestLocationsField (boolean value) {
-      this.requestField("locations", value);
       return this;
     }
     public APIRequestGetAds requestNameField () {
@@ -7906,13 +7898,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAds requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
-      return this;
-    }
-    public APIRequestGetAds requestSocialPrefsField () {
-      return this.requestSocialPrefsField(true);
-    }
-    public APIRequestGetAds requestSocialPrefsField (boolean value) {
-      this.requestField("social_prefs", value);
       return this;
     }
     public APIRequestGetAds requestSourceAdField () {
@@ -7964,13 +7949,6 @@ public class AdAccount extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetAds requestUrlOverrideField () {
-      return this.requestUrlOverrideField(true);
-    }
-    public APIRequestGetAds requestUrlOverrideField (boolean value) {
-      this.requestField("url_override", value);
-      return this;
-    }
   }
 
   public static class APIRequestCreateAd extends APIRequest<Ad> {
@@ -7990,10 +7968,8 @@ public class AdAccount extends APINode {
       "status",
       "priority",
       "tracking_specs",
-      "social_prefs",
       "display_sequence",
       "engagement_audience",
-      "social_required",
       "adset_spec",
       "draft_adgroup_id",
       "execution_options",
@@ -8136,15 +8112,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAd setSocialPrefs (List<String> socialPrefs) {
-      this.setParam("social_prefs", socialPrefs);
-      return this;
-    }
-    public APIRequestCreateAd setSocialPrefs (String socialPrefs) {
-      this.setParam("social_prefs", socialPrefs);
-      return this;
-    }
-
     public APIRequestCreateAd setDisplaySequence (Long displaySequence) {
       this.setParam("display_sequence", displaySequence);
       return this;
@@ -8160,15 +8127,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAd setEngagementAudience (String engagementAudience) {
       this.setParam("engagement_audience", engagementAudience);
-      return this;
-    }
-
-    public APIRequestCreateAd setSocialRequired (Boolean socialRequired) {
-      this.setParam("social_required", socialRequired);
-      return this;
-    }
-    public APIRequestCreateAd setSocialRequired (String socialRequired) {
-      this.setParam("social_required", socialRequired);
       return this;
     }
 
@@ -8289,15 +8247,12 @@ public class AdAccount extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
-      "impression_control_map",
       "issues_info",
       "last_updated_by_app_id",
-      "locations",
       "name",
       "objective_source",
       "priority",
       "recommendations",
-      "social_prefs",
       "source_ad",
       "source_ad_id",
       "status",
@@ -8305,7 +8260,6 @@ public class AdAccount extends APINode {
       "tracking_and_conversion_with_defaults",
       "tracking_specs",
       "updated_time",
-      "url_override",
     };
 
     @Override
@@ -8554,13 +8508,6 @@ public class AdAccount extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAdsByLabels requestImpressionControlMapField () {
-      return this.requestImpressionControlMapField(true);
-    }
-    public APIRequestGetAdsByLabels requestImpressionControlMapField (boolean value) {
-      this.requestField("impression_control_map", value);
-      return this;
-    }
     public APIRequestGetAdsByLabels requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -8573,13 +8520,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdsByLabels requestLastUpdatedByAppIdField (boolean value) {
       this.requestField("last_updated_by_app_id", value);
-      return this;
-    }
-    public APIRequestGetAdsByLabels requestLocationsField () {
-      return this.requestLocationsField(true);
-    }
-    public APIRequestGetAdsByLabels requestLocationsField (boolean value) {
-      this.requestField("locations", value);
       return this;
     }
     public APIRequestGetAdsByLabels requestNameField () {
@@ -8608,13 +8548,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdsByLabels requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
-      return this;
-    }
-    public APIRequestGetAdsByLabels requestSocialPrefsField () {
-      return this.requestSocialPrefsField(true);
-    }
-    public APIRequestGetAdsByLabels requestSocialPrefsField (boolean value) {
-      this.requestField("social_prefs", value);
       return this;
     }
     public APIRequestGetAdsByLabels requestSourceAdField () {
@@ -8664,13 +8597,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdsByLabels requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetAdsByLabels requestUrlOverrideField () {
-      return this.requestUrlOverrideField(true);
-    }
-    public APIRequestGetAdsByLabels requestUrlOverrideField (boolean value) {
-      this.requestField("url_override", value);
       return this;
     }
   }
@@ -11561,7 +11487,6 @@ public class AdAccount extends APINode {
       "gdpv4_enabled",
       "gdpv4_nux_content",
       "gdpv4_nux_enabled",
-      "groups_app_settings",
       "has_messenger_product",
       "hosting_url",
       "icon_url",
@@ -12029,13 +11954,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdvertisableApplications requestGdpv4NuxEnabledField (boolean value) {
       this.requestField("gdpv4_nux_enabled", value);
-      return this;
-    }
-    public APIRequestGetAdvertisableApplications requestGroupsAppSettingsField () {
-      return this.requestGroupsAppSettingsField(true);
-    }
-    public APIRequestGetAdvertisableApplications requestGroupsAppSettingsField (boolean value) {
-      this.requestField("groups_app_settings", value);
       return this;
     }
     public APIRequestGetAdvertisableApplications requestHasMessengerProductField () {
@@ -14708,7 +14626,6 @@ public class AdAccount extends APINode {
       "gdpv4_enabled",
       "gdpv4_nux_content",
       "gdpv4_nux_enabled",
-      "groups_app_settings",
       "has_messenger_product",
       "hosting_url",
       "icon_url",
@@ -15166,13 +15083,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetApplications requestGdpv4NuxEnabledField (boolean value) {
       this.requestField("gdpv4_nux_enabled", value);
-      return this;
-    }
-    public APIRequestGetApplications requestGroupsAppSettingsField () {
-      return this.requestGroupsAppSettingsField(true);
-    }
-    public APIRequestGetApplications requestGroupsAppSettingsField (boolean value) {
-      this.requestField("groups_app_settings", value);
       return this;
     }
     public APIRequestGetApplications requestHasMessengerProductField () {
@@ -21547,6 +21457,7 @@ public class AdAccount extends APINode {
       "start_time",
       "status",
       "targeting",
+      "third_party_ids",
       "third_party_integrated_deal",
     };
 
@@ -21799,6 +21710,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDirectDeals requestTargetingField (boolean value) {
       this.requestField("targeting", value);
+      return this;
+    }
+    public APIRequestGetDirectDeals requestThirdPartyIdsField () {
+      return this.requestThirdPartyIdsField(true);
+    }
+    public APIRequestGetDirectDeals requestThirdPartyIdsField (boolean value) {
+      this.requestField("third_party_ids", value);
       return this;
     }
     public APIRequestGetDirectDeals requestThirdPartyIntegratedDealField () {
@@ -23942,6 +23860,7 @@ public class AdAccount extends APINode {
       "event_time_max",
       "event_time_min",
       "id",
+      "is_mta_use",
       "is_restricted_use",
       "last_upload_app",
       "last_upload_app_changed_time",
@@ -24123,6 +24042,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetOfflineConversionDataSets requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOfflineConversionDataSets requestIsMtaUseField () {
+      return this.requestIsMtaUseField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestIsMtaUseField (boolean value) {
+      this.requestField("is_mta_use", value);
       return this;
     }
     public APIRequestGetOfflineConversionDataSets requestIsRestrictedUseField () {

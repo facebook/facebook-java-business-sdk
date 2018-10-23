@@ -189,8 +189,6 @@ public class Targeting extends APINode {
   private List<IDName> mNetWorth = null;
   @SerializedName("office_type")
   private List<IDName> mOfficeType = null;
-  @SerializedName("page_types")
-  private List<String> mPageTypes = null;
   @SerializedName("place_page_set_ids")
   private List<String> mPlacePageSetIds = null;
   @SerializedName("political_views")
@@ -1215,15 +1213,6 @@ public class Targeting extends APINode {
     this.mOfficeType = IDName.getGson().fromJson(value, type);
     return this;
   }
-  public List<String> getFieldPageTypes() {
-    return mPageTypes;
-  }
-
-  public Targeting setFieldPageTypes(List<String> value) {
-    this.mPageTypes = value;
-    return this;
-  }
-
   public List<String> getFieldPlacePageSetIds() {
     return mPlacePageSetIds;
   }
@@ -1539,7 +1528,6 @@ public class Targeting extends APINode {
       "moms",
       "net_worth",
       "office_type",
-      "page_types",
       "place_page_set_ids",
       "political_views",
       "politics",
@@ -2114,13 +2102,6 @@ public class Targeting extends APINode {
       this.requestField("office_type", value);
       return this;
     }
-    public APIRequestGet requestPageTypesField () {
-      return this.requestPageTypesField(true);
-    }
-    public APIRequestGet requestPageTypesField (boolean value) {
-      this.requestField("page_types", value);
-      return this;
-    }
     public APIRequestGet requestPlacePageSetIdsField () {
       return this.requestPlacePageSetIdsField(true);
     }
@@ -2401,7 +2382,6 @@ public class Targeting extends APINode {
     this.mMoms = instance.mMoms;
     this.mNetWorth = instance.mNetWorth;
     this.mOfficeType = instance.mOfficeType;
-    this.mPageTypes = instance.mPageTypes;
     this.mPlacePageSetIds = instance.mPlacePageSetIds;
     this.mPoliticalViews = instance.mPoliticalViews;
     this.mPolitics = instance.mPolitics;

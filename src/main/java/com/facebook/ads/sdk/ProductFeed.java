@@ -1232,6 +1232,7 @@ public class ProductFeed extends APINode {
 
     public static final String[] FIELDS = {
       "ac_type",
+      "additional_fees_description",
       "address",
       "agent_company",
       "agent_email",
@@ -1385,6 +1386,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetHomeListings requestAcTypeField (boolean value) {
       this.requestField("ac_type", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestAdditionalFeesDescriptionField () {
+      return this.requestAdditionalFeesDescriptionField(true);
+    }
+    public APIRequestGetHomeListings requestAdditionalFeesDescriptionField (boolean value) {
+      this.requestField("additional_fees_description", value);
       return this;
     }
     public APIRequestGetHomeListings requestAddressField () {

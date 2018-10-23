@@ -65,6 +65,8 @@ public class CustomAudience extends APINode {
   private CustomAudienceDataSource mDataSource = null;
   @SerializedName("data_source_types")
   private String mDataSourceTypes = null;
+  @SerializedName("datafile_custom_audience_uploading_status")
+  private String mDatafileCustomAudienceUploadingStatus = null;
   @SerializedName("delivery_status")
   private CustomAudienceStatus mDeliveryStatus = null;
   @SerializedName("description")
@@ -425,6 +427,10 @@ public class CustomAudience extends APINode {
 
   public String getFieldDataSourceTypes() {
     return mDataSourceTypes;
+  }
+
+  public String getFieldDatafileCustomAudienceUploadingStatus() {
+    return mDatafileCustomAudienceUploadingStatus;
   }
 
   public CustomAudienceStatus getFieldDeliveryStatus() {
@@ -1464,15 +1470,12 @@ public class CustomAudience extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
-      "impression_control_map",
       "issues_info",
       "last_updated_by_app_id",
-      "locations",
       "name",
       "objective_source",
       "priority",
       "recommendations",
-      "social_prefs",
       "source_ad",
       "source_ad_id",
       "status",
@@ -1480,7 +1483,6 @@ public class CustomAudience extends APINode {
       "tracking_and_conversion_with_defaults",
       "tracking_specs",
       "updated_time",
-      "url_override",
     };
 
     @Override
@@ -1729,13 +1731,6 @@ public class CustomAudience extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAds requestImpressionControlMapField () {
-      return this.requestImpressionControlMapField(true);
-    }
-    public APIRequestGetAds requestImpressionControlMapField (boolean value) {
-      this.requestField("impression_control_map", value);
-      return this;
-    }
     public APIRequestGetAds requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -1748,13 +1743,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestLastUpdatedByAppIdField (boolean value) {
       this.requestField("last_updated_by_app_id", value);
-      return this;
-    }
-    public APIRequestGetAds requestLocationsField () {
-      return this.requestLocationsField(true);
-    }
-    public APIRequestGetAds requestLocationsField (boolean value) {
-      this.requestField("locations", value);
       return this;
     }
     public APIRequestGetAds requestNameField () {
@@ -1783,13 +1771,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
-      return this;
-    }
-    public APIRequestGetAds requestSocialPrefsField () {
-      return this.requestSocialPrefsField(true);
-    }
-    public APIRequestGetAds requestSocialPrefsField (boolean value) {
-      this.requestField("social_prefs", value);
       return this;
     }
     public APIRequestGetAds requestSourceAdField () {
@@ -1839,13 +1820,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAds requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetAds requestUrlOverrideField () {
-      return this.requestUrlOverrideField(true);
-    }
-    public APIRequestGetAds requestUrlOverrideField (boolean value) {
-      this.requestField("url_override", value);
       return this;
     }
   }
@@ -3362,6 +3336,7 @@ public class CustomAudience extends APINode {
       "customer_file_source",
       "data_source",
       "data_source_types",
+      "datafile_custom_audience_uploading_status",
       "delivery_status",
       "description",
       "excluded_custom_audiences",
@@ -3521,6 +3496,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestDataSourceTypesField (boolean value) {
       this.requestField("data_source_types", value);
+      return this;
+    }
+    public APIRequestGet requestDatafileCustomAudienceUploadingStatusField () {
+      return this.requestDatafileCustomAudienceUploadingStatusField(true);
+    }
+    public APIRequestGet requestDatafileCustomAudienceUploadingStatusField (boolean value) {
+      this.requestField("datafile_custom_audience_uploading_status", value);
       return this;
     }
     public APIRequestGet requestDeliveryStatusField () {
@@ -4346,6 +4328,7 @@ public class CustomAudience extends APINode {
     this.mCustomerFileSource = instance.mCustomerFileSource;
     this.mDataSource = instance.mDataSource;
     this.mDataSourceTypes = instance.mDataSourceTypes;
+    this.mDatafileCustomAudienceUploadingStatus = instance.mDatafileCustomAudienceUploadingStatus;
     this.mDeliveryStatus = instance.mDeliveryStatus;
     this.mDescription = instance.mDescription;
     this.mExcludedCustomAudiences = instance.mExcludedCustomAudiences;

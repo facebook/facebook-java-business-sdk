@@ -1127,7 +1127,6 @@ public class LiveVideo extends APINode {
       "can_hide",
       "can_like",
       "can_remove",
-      "can_reply_privately",
       "comment_count",
       "created_time",
       "from",
@@ -1141,7 +1140,6 @@ public class LiveVideo extends APINode {
       "object",
       "parent",
       "permalink_url",
-      "private_reply_conversation",
       "user_likes",
     };
 
@@ -1314,13 +1312,6 @@ public class LiveVideo extends APINode {
       this.requestField("can_remove", value);
       return this;
     }
-    public APIRequestGetComments requestCanReplyPrivatelyField () {
-      return this.requestCanReplyPrivatelyField(true);
-    }
-    public APIRequestGetComments requestCanReplyPrivatelyField (boolean value) {
-      this.requestField("can_reply_privately", value);
-      return this;
-    }
     public APIRequestGetComments requestCommentCountField () {
       return this.requestCommentCountField(true);
     }
@@ -1410,13 +1401,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetComments requestPermalinkUrlField (boolean value) {
       this.requestField("permalink_url", value);
-      return this;
-    }
-    public APIRequestGetComments requestPrivateReplyConversationField () {
-      return this.requestPrivateReplyConversationField(true);
-    }
-    public APIRequestGetComments requestPrivateReplyConversationField (boolean value) {
-      this.requestField("private_reply_conversation", value);
       return this;
     }
     public APIRequestGetComments requestUserLikesField () {

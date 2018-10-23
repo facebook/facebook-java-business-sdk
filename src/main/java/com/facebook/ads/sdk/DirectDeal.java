@@ -99,6 +99,8 @@ public class DirectDeal extends APINode {
   private String mStatus = null;
   @SerializedName("targeting")
   private Targeting mTargeting = null;
+  @SerializedName("third_party_ids")
+  private List<String> mThirdPartyIds = null;
   @SerializedName("third_party_integrated_deal")
   private Boolean mThirdPartyIntegratedDeal = null;
   protected static Gson gson = null;
@@ -412,6 +414,10 @@ public class DirectDeal extends APINode {
     return mTargeting;
   }
 
+  public List<String> getFieldThirdPartyIds() {
+    return mThirdPartyIds;
+  }
+
   public Boolean getFieldThirdPartyIntegratedDeal() {
     return mThirdPartyIntegratedDeal;
   }
@@ -474,7 +480,6 @@ public class DirectDeal extends APINode {
       "gdpv4_enabled",
       "gdpv4_nux_content",
       "gdpv4_nux_enabled",
-      "groups_app_settings",
       "has_messenger_product",
       "hosting_url",
       "icon_url",
@@ -934,13 +939,6 @@ public class DirectDeal extends APINode {
       this.requestField("gdpv4_nux_enabled", value);
       return this;
     }
-    public APIRequestGetApplications requestGroupsAppSettingsField () {
-      return this.requestGroupsAppSettingsField(true);
-    }
-    public APIRequestGetApplications requestGroupsAppSettingsField (boolean value) {
-      this.requestField("groups_app_settings", value);
-      return this;
-    }
     public APIRequestGetApplications requestHasMessengerProductField () {
       return this.requestHasMessengerProductField(true);
     }
@@ -1354,6 +1352,7 @@ public class DirectDeal extends APINode {
       "start_time",
       "status",
       "targeting",
+      "third_party_ids",
       "third_party_integrated_deal",
     };
 
@@ -1599,6 +1598,13 @@ public class DirectDeal extends APINode {
       this.requestField("targeting", value);
       return this;
     }
+    public APIRequestGet requestThirdPartyIdsField () {
+      return this.requestThirdPartyIdsField(true);
+    }
+    public APIRequestGet requestThirdPartyIdsField (boolean value) {
+      this.requestField("third_party_ids", value);
+      return this;
+    }
     public APIRequestGet requestThirdPartyIntegratedDealField () {
       return this.requestThirdPartyIntegratedDealField(true);
     }
@@ -1674,6 +1680,7 @@ public class DirectDeal extends APINode {
     this.mStartTime = instance.mStartTime;
     this.mStatus = instance.mStatus;
     this.mTargeting = instance.mTargeting;
+    this.mThirdPartyIds = instance.mThirdPartyIds;
     this.mThirdPartyIntegratedDeal = instance.mThirdPartyIntegratedDeal;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

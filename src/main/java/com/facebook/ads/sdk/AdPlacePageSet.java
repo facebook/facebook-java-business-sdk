@@ -592,6 +592,27 @@ public class AdPlacePageSet extends APINode {
       }
   }
 
+  public static enum EnumTargetedAreaType {
+      @SerializedName("CUSTOM_RADIUS")
+      VALUE_CUSTOM_RADIUS("CUSTOM_RADIUS"),
+      @SerializedName("MARKETING_AREA")
+      VALUE_MARKETING_AREA("MARKETING_AREA"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumTargetedAreaType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

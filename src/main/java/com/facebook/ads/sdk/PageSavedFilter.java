@@ -755,8 +755,6 @@ public class PageSavedFilter extends APINode {
       VALUE_QR_CODE("QR_CODE"),
       @SerializedName("ORGANIC_PIXEL")
       VALUE_ORGANIC_PIXEL("ORGANIC_PIXEL"),
-      @SerializedName("CREDIBILITY_INDICATORS")
-      VALUE_CREDIBILITY_INDICATORS("CREDIBILITY_INDICATORS"),
       @SerializedName("ATTRIBUTIONS")
       VALUE_ATTRIBUTIONS("ATTRIBUTIONS"),
       @SerializedName("BROADCASTED_MESSAGES")

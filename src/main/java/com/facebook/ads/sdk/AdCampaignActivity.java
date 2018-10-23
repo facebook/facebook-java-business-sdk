@@ -1310,6 +1310,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_VALUE("VALUE"),
       @SerializedName("REPLIES")
       VALUE_REPLIES("REPLIES"),
+      @SerializedName("DERIVED_EVENTS")
+      VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
       NULL(null);
 
       private String value;
@@ -1369,6 +1371,8 @@ public class AdCampaignActivity extends APINode {
       VALUE_VALUE("VALUE"),
       @SerializedName("REPLIES")
       VALUE_REPLIES("REPLIES"),
+      @SerializedName("DERIVED_EVENTS")
+      VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
       NULL(null);
 
       private String value;

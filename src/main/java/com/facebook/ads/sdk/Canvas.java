@@ -867,6 +867,7 @@ public class Canvas extends APINode {
       "background_color",
       "is_published",
       "is_hidden",
+      "enable_swipe_to_open",
     };
 
     public static final String[] FIELDS = {
@@ -958,6 +959,15 @@ public class Canvas extends APINode {
     }
     public APIRequestUpdate setIsHidden (String isHidden) {
       this.setParam("is_hidden", isHidden);
+      return this;
+    }
+
+    public APIRequestUpdate setEnableSwipeToOpen (Boolean enableSwipeToOpen) {
+      this.setParam("enable_swipe_to_open", enableSwipeToOpen);
+      return this;
+    }
+    public APIRequestUpdate setEnableSwipeToOpen (String enableSwipeToOpen) {
+      this.setParam("enable_swipe_to_open", enableSwipeToOpen);
       return this;
     }
 

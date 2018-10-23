@@ -563,7 +563,6 @@ public class ShadowIGUser extends APINode {
       "media_type",
       "caption",
       "image_url",
-      "thumb_offset",
       "children",
     };
 
@@ -634,11 +633,6 @@ public class ShadowIGUser extends APINode {
 
     public APIRequestCreateMedia setImageUrl (String imageUrl) {
       this.setParam("image_url", imageUrl);
-      return this;
-    }
-
-    public APIRequestCreateMedia setThumbOffset (String thumbOffset) {
-      this.setParam("thumb_offset", thumbOffset);
       return this;
     }
 

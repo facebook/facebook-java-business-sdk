@@ -2193,6 +2193,8 @@ public class ProductItem extends APINode {
       VALUE_USED("used"),
       @SerializedName("cpo")
       VALUE_CPO("cpo"),
+      @SerializedName("open_box_new")
+      VALUE_OPEN_BOX_NEW("open_box_new"),
       NULL(null);
 
       private String value;

@@ -600,6 +600,9 @@ public class Flight extends APINode {
     public static final String[] PARAMS = {
       "destination_airport",
       "origin_airport",
+      "description",
+      "url",
+      "images",
     };
 
     public static final String[] FIELDS = {
@@ -664,6 +667,29 @@ public class Flight extends APINode {
 
     public APIRequestUpdate setOriginAirport (String originAirport) {
       this.setParam("origin_airport", originAirport);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setUrl (Object url) {
+      this.setParam("url", url);
+      return this;
+    }
+    public APIRequestUpdate setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestUpdate setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestUpdate setImages (String images) {
+      this.setParam("images", images);
       return this;
     }
 

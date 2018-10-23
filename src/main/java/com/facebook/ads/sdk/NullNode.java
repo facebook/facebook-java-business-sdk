@@ -54,64 +54,64 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class Null extends APINode {
+public class NullNode extends APINode {
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
 
-  Null() {
+  NullNode() {
   }
 
-  public Null(Long id, APIContext context) {
+  public NullNode(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public Null(String id, APIContext context) {
+  public NullNode(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public Null fetch() throws APIException{
-    Null newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public NullNode fetch() throws APIException{
+    NullNode newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static Null fetchById(Long id, APIContext context) throws APIException {
+  public static NullNode fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<Null> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<NullNode> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static Null fetchById(String id, APIContext context) throws APIException {
+  public static NullNode fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<Null> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<NullNode> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<Null> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<Null>)(
-      new APIRequest<Null>(context, "", "/", "GET", Null.getParser())
+  public static APINodeList<NullNode> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<NullNode>)(
+      new APIRequest<NullNode>(context, "", "/", "GET", NullNode.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<Null>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<NullNode>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", Null.getParser())
+      new APIRequest(context, "", "/", "GET", NullNode.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -124,12 +124,12 @@ public class Null extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Null loadJSON(String json, APIContext context) {
-    Null _null = getGson().fromJson(json, Null.class);
+  public static NullNode loadJSON(String json, APIContext context) {
+    NullNode nullNode = getGson().fromJson(json, NullNode.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(_null.toString());
+      JsonElement o2 = parser.parse(nullNode.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -139,13 +139,13 @@ public class Null extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    _null.context = context;
-    _null.rawValue = json;
-    return null;
+    nullNode.context = context;
+    nullNode.rawValue = json;
+    return nullNode;
   }
 
-  public static APINodeList<Null> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Null> nulls = new APINodeList<Null>(request, json);
+  public static APINodeList<NullNode> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
+    APINodeList<NullNode> nullNodes = new APINodeList<NullNode>(request, json);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -156,9 +156,9 @@ public class Null extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          nulls.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          nullNodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
         };
-        return nulls;
+        return nullNodes;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -168,20 +168,20 @@ public class Null extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                nulls.setCursors(before, after);
+                nullNodes.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            nulls.setPaging(previous, next);
+            nullNodes.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              nulls.setAppSecret(context.getAppSecretProof());
+              nullNodes.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              nulls.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              nullNodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -192,23 +192,23 @@ public class Null extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  nulls.add(loadJSON(entry.getValue().toString(), context));
+                  nullNodes.add(loadJSON(entry.getValue().toString(), context));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              nulls.add(loadJSON(obj.toString(), context));
+              nullNodes.add(loadJSON(obj.toString(), context));
             }
           }
-          return nulls;
+          return nullNodes;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              nulls.add(loadJSON(entry.getValue().toString(), context));
+              nullNodes.add(loadJSON(entry.getValue().toString(), context));
           }
-          return nulls;
+          return nullNodes;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -225,20 +225,20 @@ public class Null extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              nulls.add(loadJSON(value.toString(), context));
+              nullNodes.add(loadJSON(value.toString(), context));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return nulls;
+            return nullNodes;
           }
 
           // Sixth, check if it's pure JsonObject
-          nulls.clear();
-          nulls.add(loadJSON(json, context));
-          return nulls;
+          nullNodes.clear();
+          nullNodes.add(loadJSON(json, context));
+          return nullNodes;
         }
       }
     } catch (Exception e) {
@@ -276,11 +276,11 @@ public class Null extends APINode {
 
 
 
-  public static class APIRequestGet extends APIRequest<Null> {
+  public static class APIRequestGet extends APIRequest<NullNode> {
 
-    Null lastResponse = null;
+    NullNode lastResponse = null;
     @Override
-    public Null getLastResponse() {
+    public NullNode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -291,30 +291,30 @@ public class Null extends APINode {
     };
 
     @Override
-    public Null parseResponse(String response) throws APIException {
-      return Null.parseResponse(response, getContext(), this).head();
+    public NullNode parseResponse(String response) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public Null execute() throws APIException {
+    public NullNode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Null execute(Map<String, Object> extraParams) throws APIException {
+    public NullNode execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<Null> executeAsync() throws APIException {
+    public ListenableFuture<NullNode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Null> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<NullNode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Null>() {
-           public Null apply(String result) {
+        new Function<String, NullNode>() {
+           public NullNode apply(String result) {
              try {
                return APIRequestGet.this.parseResponse(result);
              } catch (Exception e) {
@@ -401,17 +401,17 @@ public class Null extends APINode {
     return gson;
   }
 
-  public Null copyFrom(Null instance) {
+  public NullNode copyFrom(NullNode instance) {
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<Null> getParser() {
-    return new APIRequest.ResponseParser<Null>() {
-      public APINodeList<Null> parseResponse(String response, APIContext context, APIRequest<Null> request) throws MalformedResponseException {
-        return Null.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<NullNode> getParser() {
+    return new APIRequest.ResponseParser<NullNode>() {
+      public APINodeList<NullNode> parseResponse(String response, APIContext context, APIRequest<NullNode> request) throws MalformedResponseException {
+        return NullNode.parseResponse(response, context, request);
       }
     };
   }

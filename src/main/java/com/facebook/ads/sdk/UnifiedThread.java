@@ -543,7 +543,6 @@ public class UnifiedThread extends APINode {
       "prng",
       "proxied_app_id",
       "recipients",
-      "replace_message_id",
       "replied_to_message_id",
       "selected_cta_token",
       "shareable_attachment",
@@ -931,11 +930,6 @@ public class UnifiedThread extends APINode {
     }
     public APIRequestCreateMessage setRecipients (String recipients) {
       this.setParam("recipients", recipients);
-      return this;
-    }
-
-    public APIRequestCreateMessage setReplaceMessageId (String replaceMessageId) {
-      this.setParam("replace_message_id", replaceMessageId);
       return this;
     }
 

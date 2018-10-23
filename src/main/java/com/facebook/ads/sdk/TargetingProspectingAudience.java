@@ -56,7 +56,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class TargetingProspectingAudience extends APINode {
   @SerializedName("sources")
-  private String mSources = null;
+  private List<Object> mSources = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
@@ -272,7 +272,7 @@ public class TargetingProspectingAudience extends APINode {
   }
 
 
-  public String getFieldSources() {
+  public List<Object> getFieldSources() {
     return mSources;
   }
 

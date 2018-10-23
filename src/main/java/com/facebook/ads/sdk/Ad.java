@@ -95,14 +95,10 @@ public class Ad extends APINode {
   private List<DeliveryCheck> mFailedDeliveryChecks = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("impression_control_map")
-  private List<String> mImpressionControlMap = null;
   @SerializedName("issues_info")
   private List<AdgroupIssuesInfo> mIssuesInfo = null;
   @SerializedName("last_updated_by_app_id")
   private String mLastUpdatedByAppId = null;
-  @SerializedName("locations")
-  private List<Long> mLocations = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("objective_source")
@@ -111,8 +107,6 @@ public class Ad extends APINode {
   private Long mPriority = null;
   @SerializedName("recommendations")
   private List<AdRecommendation> mRecommendations = null;
-  @SerializedName("social_prefs")
-  private List<String> mSocialPrefs = null;
   @SerializedName("source_ad")
   private Ad mSourceAd = null;
   @SerializedName("source_ad_id")
@@ -127,8 +121,6 @@ public class Ad extends APINode {
   private List<ConversionActionQuery> mTrackingSpecs = null;
   @SerializedName("updated_time")
   private String mUpdatedTime = null;
-  @SerializedName("url_override")
-  private String mUrlOverride = null;
   protected static Gson gson = null;
 
   Ad() {
@@ -498,20 +490,12 @@ public class Ad extends APINode {
     return mId;
   }
 
-  public List<String> getFieldImpressionControlMap() {
-    return mImpressionControlMap;
-  }
-
   public List<AdgroupIssuesInfo> getFieldIssuesInfo() {
     return mIssuesInfo;
   }
 
   public String getFieldLastUpdatedByAppId() {
     return mLastUpdatedByAppId;
-  }
-
-  public List<Long> getFieldLocations() {
-    return mLocations;
   }
 
   public String getFieldName() {
@@ -528,10 +512,6 @@ public class Ad extends APINode {
 
   public List<AdRecommendation> getFieldRecommendations() {
     return mRecommendations;
-  }
-
-  public List<String> getFieldSocialPrefs() {
-    return mSocialPrefs;
   }
 
   public Ad getFieldSourceAd() {
@@ -569,10 +549,6 @@ public class Ad extends APINode {
 
   public String getFieldUpdatedTime() {
     return mUpdatedTime;
-  }
-
-  public String getFieldUrlOverride() {
-    return mUrlOverride;
   }
 
 
@@ -1172,7 +1148,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestDeleteAdLabels setExecutionOptions (List<Ad.EnumExecutionOptions> executionOptions) {
+    public APIRequestDeleteAdLabels setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -1295,7 +1271,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdLabel setExecutionOptions (List<Ad.EnumExecutionOptions> executionOptions) {
+    public APIRequestCreateAdLabel setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -1378,15 +1354,12 @@ public class Ad extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
-      "impression_control_map",
       "issues_info",
       "last_updated_by_app_id",
-      "locations",
       "name",
       "objective_source",
       "priority",
       "recommendations",
-      "social_prefs",
       "source_ad",
       "source_ad_id",
       "status",
@@ -1394,7 +1367,6 @@ public class Ad extends APINode {
       "tracking_and_conversion_with_defaults",
       "tracking_specs",
       "updated_time",
-      "url_override",
     };
 
     @Override
@@ -1670,13 +1642,6 @@ public class Ad extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetCopies requestImpressionControlMapField () {
-      return this.requestImpressionControlMapField(true);
-    }
-    public APIRequestGetCopies requestImpressionControlMapField (boolean value) {
-      this.requestField("impression_control_map", value);
-      return this;
-    }
     public APIRequestGetCopies requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -1689,13 +1654,6 @@ public class Ad extends APINode {
     }
     public APIRequestGetCopies requestLastUpdatedByAppIdField (boolean value) {
       this.requestField("last_updated_by_app_id", value);
-      return this;
-    }
-    public APIRequestGetCopies requestLocationsField () {
-      return this.requestLocationsField(true);
-    }
-    public APIRequestGetCopies requestLocationsField (boolean value) {
-      this.requestField("locations", value);
       return this;
     }
     public APIRequestGetCopies requestNameField () {
@@ -1724,13 +1682,6 @@ public class Ad extends APINode {
     }
     public APIRequestGetCopies requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
-      return this;
-    }
-    public APIRequestGetCopies requestSocialPrefsField () {
-      return this.requestSocialPrefsField(true);
-    }
-    public APIRequestGetCopies requestSocialPrefsField (boolean value) {
-      this.requestField("social_prefs", value);
       return this;
     }
     public APIRequestGetCopies requestSourceAdField () {
@@ -1780,13 +1731,6 @@ public class Ad extends APINode {
     }
     public APIRequestGetCopies requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetCopies requestUrlOverrideField () {
-      return this.requestUrlOverrideField(true);
-    }
-    public APIRequestGetCopies requestUrlOverrideField (boolean value) {
-      this.requestField("url_override", value);
       return this;
     }
   }
@@ -3837,15 +3781,12 @@ public class Ad extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
-      "impression_control_map",
       "issues_info",
       "last_updated_by_app_id",
-      "locations",
       "name",
       "objective_source",
       "priority",
       "recommendations",
-      "social_prefs",
       "source_ad",
       "source_ad_id",
       "status",
@@ -3853,7 +3794,6 @@ public class Ad extends APINode {
       "tracking_and_conversion_with_defaults",
       "tracking_specs",
       "updated_time",
-      "url_override",
     };
 
     @Override
@@ -4120,13 +4060,6 @@ public class Ad extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestImpressionControlMapField () {
-      return this.requestImpressionControlMapField(true);
-    }
-    public APIRequestGet requestImpressionControlMapField (boolean value) {
-      this.requestField("impression_control_map", value);
-      return this;
-    }
     public APIRequestGet requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -4139,13 +4072,6 @@ public class Ad extends APINode {
     }
     public APIRequestGet requestLastUpdatedByAppIdField (boolean value) {
       this.requestField("last_updated_by_app_id", value);
-      return this;
-    }
-    public APIRequestGet requestLocationsField () {
-      return this.requestLocationsField(true);
-    }
-    public APIRequestGet requestLocationsField (boolean value) {
-      this.requestField("locations", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -4174,13 +4100,6 @@ public class Ad extends APINode {
     }
     public APIRequestGet requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
-      return this;
-    }
-    public APIRequestGet requestSocialPrefsField () {
-      return this.requestSocialPrefsField(true);
-    }
-    public APIRequestGet requestSocialPrefsField (boolean value) {
-      this.requestField("social_prefs", value);
       return this;
     }
     public APIRequestGet requestSourceAdField () {
@@ -4232,13 +4151,6 @@ public class Ad extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGet requestUrlOverrideField () {
-      return this.requestUrlOverrideField(true);
-    }
-    public APIRequestGet requestUrlOverrideField (boolean value) {
-      this.requestField("url_override", value);
-      return this;
-    }
   }
 
   public static class APIRequestUpdate extends APIRequest<Ad> {
@@ -4258,7 +4170,6 @@ public class Ad extends APINode {
       "tracking_specs",
       "display_sequence",
       "engagement_audience",
-      "social_required",
       "adset_spec",
       "draft_adgroup_id",
       "execution_options",
@@ -4391,15 +4302,6 @@ public class Ad extends APINode {
     }
     public APIRequestUpdate setEngagementAudience (String engagementAudience) {
       this.setParam("engagement_audience", engagementAudience);
-      return this;
-    }
-
-    public APIRequestUpdate setSocialRequired (Boolean socialRequired) {
-      this.setParam("social_required", socialRequired);
-      return this;
-    }
-    public APIRequestUpdate setSocialRequired (String socialRequired) {
-      this.setParam("social_required", socialRequired);
       return this;
     }
 
@@ -4737,15 +4639,12 @@ public class Ad extends APINode {
     this.mEngagementAudience = instance.mEngagementAudience;
     this.mFailedDeliveryChecks = instance.mFailedDeliveryChecks;
     this.mId = instance.mId;
-    this.mImpressionControlMap = instance.mImpressionControlMap;
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLastUpdatedByAppId = instance.mLastUpdatedByAppId;
-    this.mLocations = instance.mLocations;
     this.mName = instance.mName;
     this.mObjectiveSource = instance.mObjectiveSource;
     this.mPriority = instance.mPriority;
     this.mRecommendations = instance.mRecommendations;
-    this.mSocialPrefs = instance.mSocialPrefs;
     this.mSourceAd = instance.mSourceAd;
     this.mSourceAdId = instance.mSourceAdId;
     this.mStatus = instance.mStatus;
@@ -4753,7 +4652,6 @@ public class Ad extends APINode {
     this.mTrackingAndConversionWithDefaults = instance.mTrackingAndConversionWithDefaults;
     this.mTrackingSpecs = instance.mTrackingSpecs;
     this.mUpdatedTime = instance.mUpdatedTime;
-    this.mUrlOverride = instance.mUrlOverride;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

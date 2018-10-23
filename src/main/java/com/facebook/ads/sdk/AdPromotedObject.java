@@ -674,6 +674,10 @@ public class AdPromotedObject extends APINode {
       VALUE_ACHIEVEMENT_UNLOCKED("ACHIEVEMENT_UNLOCKED"),
       @SerializedName("SPENT_CREDITS")
       VALUE_SPENT_CREDITS("SPENT_CREDITS"),
+      @SerializedName("D2_RETENTION")
+      VALUE_D2_RETENTION("D2_RETENTION"),
+      @SerializedName("D7_RETENTION")
+      VALUE_D7_RETENTION("D7_RETENTION"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
       NULL(null);

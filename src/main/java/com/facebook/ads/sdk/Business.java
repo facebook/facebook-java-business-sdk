@@ -493,6 +493,10 @@ public class Business extends APINode {
     return new APIRequestDeleteInstagramAccounts(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateManagedBusiness createManagedBusiness() {
+    return new APIRequestCreateManagedBusiness(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetMatchedSearchApplications getMatchedSearchApplications() {
     return new APIRequestGetMatchedSearchApplications(this.getPrefixedId().toString(), context);
   }
@@ -7479,7 +7483,6 @@ public class Business extends APINode {
       "gdpv4_enabled",
       "gdpv4_nux_content",
       "gdpv4_nux_enabled",
-      "groups_app_settings",
       "has_messenger_product",
       "hosting_url",
       "icon_url",
@@ -7937,13 +7940,6 @@ public class Business extends APINode {
     }
     public APIRequestGetClientApps requestGdpv4NuxEnabledField (boolean value) {
       this.requestField("gdpv4_nux_enabled", value);
-      return this;
-    }
-    public APIRequestGetClientApps requestGroupsAppSettingsField () {
-      return this.requestGroupsAppSettingsField(true);
-    }
-    public APIRequestGetClientApps requestGroupsAppSettingsField (boolean value) {
-      this.requestField("groups_app_settings", value);
       return this;
     }
     public APIRequestGetClientApps requestHasMessengerProductField () {
@@ -12005,6 +12001,7 @@ public class Business extends APINode {
       "start_time",
       "status",
       "targeting",
+      "third_party_ids",
       "third_party_integrated_deal",
     };
 
@@ -12257,6 +12254,13 @@ public class Business extends APINode {
     }
     public APIRequestGetDirectDeals requestTargetingField (boolean value) {
       this.requestField("targeting", value);
+      return this;
+    }
+    public APIRequestGetDirectDeals requestThirdPartyIdsField () {
+      return this.requestThirdPartyIdsField(true);
+    }
+    public APIRequestGetDirectDeals requestThirdPartyIdsField (boolean value) {
+      this.requestField("third_party_ids", value);
       return this;
     }
     public APIRequestGetDirectDeals requestThirdPartyIntegratedDealField () {
@@ -13981,6 +13985,181 @@ public class Business extends APINode {
 
   }
 
+  public static class APIRequestCreateManagedBusiness extends APIRequest<Business> {
+
+    Business lastResponse = null;
+    @Override
+    public Business getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "name",
+      "vertical",
+      "timezone_id",
+      "survey_business_type",
+      "survey_num_people",
+      "survey_num_assets",
+      "sales_rep_email",
+      "existing_client_business_id",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Business parseResponse(String response) throws APIException {
+      return Business.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public Business execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Business execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<Business> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Business> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, Business>() {
+           public Business apply(String result) {
+             try {
+               return APIRequestCreateManagedBusiness.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateManagedBusiness(String nodeId, APIContext context) {
+      super(context, nodeId, "/managed_businesses", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateManagedBusiness setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateManagedBusiness setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateManagedBusiness setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateManagedBusiness setVertical (Business.EnumVertical vertical) {
+      this.setParam("vertical", vertical);
+      return this;
+    }
+    public APIRequestCreateManagedBusiness setVertical (String vertical) {
+      this.setParam("vertical", vertical);
+      return this;
+    }
+
+    public APIRequestCreateManagedBusiness setTimezoneId (Long timezoneId) {
+      this.setParam("timezone_id", timezoneId);
+      return this;
+    }
+    public APIRequestCreateManagedBusiness setTimezoneId (String timezoneId) {
+      this.setParam("timezone_id", timezoneId);
+      return this;
+    }
+
+    public APIRequestCreateManagedBusiness setSurveyBusinessType (Business.EnumSurveyBusinessType surveyBusinessType) {
+      this.setParam("survey_business_type", surveyBusinessType);
+      return this;
+    }
+    public APIRequestCreateManagedBusiness setSurveyBusinessType (String surveyBusinessType) {
+      this.setParam("survey_business_type", surveyBusinessType);
+      return this;
+    }
+
+    public APIRequestCreateManagedBusiness setSurveyNumPeople (Long surveyNumPeople) {
+      this.setParam("survey_num_people", surveyNumPeople);
+      return this;
+    }
+    public APIRequestCreateManagedBusiness setSurveyNumPeople (String surveyNumPeople) {
+      this.setParam("survey_num_people", surveyNumPeople);
+      return this;
+    }
+
+    public APIRequestCreateManagedBusiness setSurveyNumAssets (Long surveyNumAssets) {
+      this.setParam("survey_num_assets", surveyNumAssets);
+      return this;
+    }
+    public APIRequestCreateManagedBusiness setSurveyNumAssets (String surveyNumAssets) {
+      this.setParam("survey_num_assets", surveyNumAssets);
+      return this;
+    }
+
+    public APIRequestCreateManagedBusiness setSalesRepEmail (String salesRepEmail) {
+      this.setParam("sales_rep_email", salesRepEmail);
+      return this;
+    }
+
+    public APIRequestCreateManagedBusiness setExistingClientBusinessId (Object existingClientBusinessId) {
+      this.setParam("existing_client_business_id", existingClientBusinessId);
+      return this;
+    }
+    public APIRequestCreateManagedBusiness setExistingClientBusinessId (String existingClientBusinessId) {
+      this.setParam("existing_client_business_id", existingClientBusinessId);
+      return this;
+    }
+
+    public APIRequestCreateManagedBusiness requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateManagedBusiness requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateManagedBusiness requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateManagedBusiness requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateManagedBusiness requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateManagedBusiness requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetMatchedSearchApplications extends APIRequest<BusinessMatchedSearchApplicationsEdgeData> {
 
     APINodeList<BusinessMatchedSearchApplicationsEdgeData> lastResponse = null;
@@ -14493,6 +14672,7 @@ public class Business extends APINode {
       "event_time_max",
       "event_time_min",
       "id",
+      "is_mta_use",
       "is_restricted_use",
       "last_upload_app",
       "last_upload_app_changed_time",
@@ -14676,6 +14856,13 @@ public class Business extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetOfflineConversionDataSets requestIsMtaUseField () {
+      return this.requestIsMtaUseField(true);
+    }
+    public APIRequestGetOfflineConversionDataSets requestIsMtaUseField (boolean value) {
+      this.requestField("is_mta_use", value);
+      return this;
+    }
     public APIRequestGetOfflineConversionDataSets requestIsRestrictedUseField () {
       return this.requestIsRestrictedUseField(true);
     }
@@ -14753,6 +14940,7 @@ public class Business extends APINode {
       "description",
       "data_origin",
       "enable_auto_assign_to_accounts",
+      "is_mta_use",
       "auto_assign_to_new_accounts_only",
     };
 
@@ -14836,6 +15024,15 @@ public class Business extends APINode {
     }
     public APIRequestCreateOfflineConversionDataSet setEnableAutoAssignToAccounts (String enableAutoAssignToAccounts) {
       this.setParam("enable_auto_assign_to_accounts", enableAutoAssignToAccounts);
+      return this;
+    }
+
+    public APIRequestCreateOfflineConversionDataSet setIsMtaUse (Boolean isMtaUse) {
+      this.setParam("is_mta_use", isMtaUse);
+      return this;
+    }
+    public APIRequestCreateOfflineConversionDataSet setIsMtaUse (String isMtaUse) {
+      this.setParam("is_mta_use", isMtaUse);
       return this;
     }
 
@@ -15777,7 +15974,6 @@ public class Business extends APINode {
       "gdpv4_enabled",
       "gdpv4_nux_content",
       "gdpv4_nux_enabled",
-      "groups_app_settings",
       "has_messenger_product",
       "hosting_url",
       "icon_url",
@@ -16235,13 +16431,6 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedApps requestGdpv4NuxEnabledField (boolean value) {
       this.requestField("gdpv4_nux_enabled", value);
-      return this;
-    }
-    public APIRequestGetOwnedApps requestGroupsAppSettingsField () {
-      return this.requestGroupsAppSettingsField(true);
-    }
-    public APIRequestGetOwnedApps requestGroupsAppSettingsField (boolean value) {
-      this.requestField("groups_app_settings", value);
       return this;
     }
     public APIRequestGetOwnedApps requestHasMessengerProductField () {
@@ -21116,6 +21305,7 @@ public class Business extends APINode {
       "event_time_max",
       "event_time_min",
       "id",
+      "is_mta_use",
       "is_restricted_use",
       "last_upload_app",
       "last_upload_app_changed_time",
@@ -21297,6 +21487,13 @@ public class Business extends APINode {
     }
     public APIRequestGetPendingOfflineConversionDataSets requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetPendingOfflineConversionDataSets requestIsMtaUseField () {
+      return this.requestIsMtaUseField(true);
+    }
+    public APIRequestGetPendingOfflineConversionDataSets requestIsMtaUseField (boolean value) {
+      this.requestField("is_mta_use", value);
       return this;
     }
     public APIRequestGetPendingOfflineConversionDataSets requestIsRestrictedUseField () {
@@ -24796,6 +24993,29 @@ public class Business extends APINode {
       }
   }
 
+  public static enum EnumSurveyBusinessType {
+      @SerializedName("AGENCY")
+      VALUE_AGENCY("AGENCY"),
+      @SerializedName("ADVERTISER")
+      VALUE_ADVERTISER("ADVERTISER"),
+      @SerializedName("APP_DEVELOPER")
+      VALUE_APP_DEVELOPER("APP_DEVELOPER"),
+      @SerializedName("PUBLISHER")
+      VALUE_PUBLISHER("PUBLISHER"),
+      NULL(null);
+
+      private String value;
+
+      private EnumSurveyBusinessType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumPagePermittedRoles {
       @SerializedName("MANAGER")
       VALUE_MANAGER("MANAGER"),
@@ -24812,29 +25032,6 @@ public class Business extends APINode {
       private String value;
 
       private EnumPagePermittedRoles(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumSurveyBusinessType {
-      @SerializedName("AGENCY")
-      VALUE_AGENCY("AGENCY"),
-      @SerializedName("ADVERTISER")
-      VALUE_ADVERTISER("ADVERTISER"),
-      @SerializedName("APP_DEVELOPER")
-      VALUE_APP_DEVELOPER("APP_DEVELOPER"),
-      @SerializedName("PUBLISHER")
-      VALUE_PUBLISHER("PUBLISHER"),
-      NULL(null);
-
-      private String value;
-
-      private EnumSurveyBusinessType(String value) {
         this.value = value;
       }
 

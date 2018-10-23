@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class HomeListing extends APINode {
   @SerializedName("ac_type")
   private String mAcType = null;
+  @SerializedName("additional_fees_description")
+  private String mAdditionalFeesDescription = null;
   @SerializedName("address")
   private Object mAddress = null;
   @SerializedName("agent_company")
@@ -362,6 +364,10 @@ public class HomeListing extends APINode {
     return mAcType;
   }
 
+  public String getFieldAdditionalFeesDescription() {
+    return mAdditionalFeesDescription;
+  }
+
   public Object getFieldAddress() {
     return mAddress;
   }
@@ -645,6 +651,7 @@ public class HomeListing extends APINode {
 
     public static final String[] FIELDS = {
       "ac_type",
+      "additional_fees_description",
       "address",
       "agent_company",
       "agent_email",
@@ -780,6 +787,13 @@ public class HomeListing extends APINode {
     }
     public APIRequestGet requestAcTypeField (boolean value) {
       this.requestField("ac_type", value);
+      return this;
+    }
+    public APIRequestGet requestAdditionalFeesDescriptionField () {
+      return this.requestAdditionalFeesDescriptionField(true);
+    }
+    public APIRequestGet requestAdditionalFeesDescriptionField (boolean value) {
+      this.requestField("additional_fees_description", value);
       return this;
     }
     public APIRequestGet requestAddressField () {
@@ -1295,6 +1309,7 @@ public class HomeListing extends APINode {
 
   public HomeListing copyFrom(HomeListing instance) {
     this.mAcType = instance.mAcType;
+    this.mAdditionalFeesDescription = instance.mAdditionalFeesDescription;
     this.mAddress = instance.mAddress;
     this.mAgentCompany = instance.mAgentCompany;
     this.mAgentEmail = instance.mAgentEmail;

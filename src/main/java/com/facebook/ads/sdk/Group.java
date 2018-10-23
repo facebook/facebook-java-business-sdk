@@ -7685,6 +7685,8 @@ public class Group extends APINode {
       VALUE_GAME("GAME"),
       @SerializedName("HIGH_SCHOOL_FORUM")
       VALUE_HIGH_SCHOOL_FORUM("HIGH_SCHOOL_FORUM"),
+      @SerializedName("JOBS")
+      VALUE_JOBS("JOBS"),
       @SerializedName("REAL_WORLD_AT_WORK")
       VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
       @SerializedName("FOR_WORK")

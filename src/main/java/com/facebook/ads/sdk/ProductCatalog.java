@@ -2779,6 +2779,8 @@ public class ProductCatalog extends APINode {
       "images",
       "origin_airport",
       "destination_airport",
+      "description",
+      "url",
     };
 
     public static final String[] FIELDS = {
@@ -2855,6 +2857,20 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateFlight setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateFlight setUrl (Object url) {
+      this.setParam("url", url);
+      return this;
+    }
+    public APIRequestCreateFlight setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
     public APIRequestCreateFlight requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -2907,6 +2923,7 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "ac_type",
+      "additional_fees_description",
       "address",
       "agent_company",
       "agent_email",
@@ -3060,6 +3077,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHomeListings requestAcTypeField (boolean value) {
       this.requestField("ac_type", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestAdditionalFeesDescriptionField () {
+      return this.requestAdditionalFeesDescriptionField(true);
+    }
+    public APIRequestGetHomeListings requestAdditionalFeesDescriptionField (boolean value) {
+      this.requestField("additional_fees_description", value);
       return this;
     }
     public APIRequestGetHomeListings requestAddressField () {

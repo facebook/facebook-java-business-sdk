@@ -79,6 +79,8 @@ public class OfflineConversionDataSet extends APINode {
   private Long mEventTimeMin = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("is_mta_use")
+  private Boolean mIsMtaUse = null;
   @SerializedName("is_restricted_use")
   private Boolean mIsRestrictedUse = null;
   @SerializedName("last_upload_app")
@@ -439,6 +441,10 @@ public class OfflineConversionDataSet extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public Boolean getFieldIsMtaUse() {
+    return mIsMtaUse;
   }
 
   public Boolean getFieldIsRestrictedUse() {
@@ -1963,6 +1969,7 @@ public class OfflineConversionDataSet extends APINode {
       "customer_file_source",
       "data_source",
       "data_source_types",
+      "datafile_custom_audience_uploading_status",
       "delivery_status",
       "description",
       "excluded_custom_audiences",
@@ -2122,6 +2129,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAudiences requestDataSourceTypesField (boolean value) {
       this.requestField("data_source_types", value);
+      return this;
+    }
+    public APIRequestGetAudiences requestDatafileCustomAudienceUploadingStatusField () {
+      return this.requestDatafileCustomAudienceUploadingStatusField(true);
+    }
+    public APIRequestGetAudiences requestDatafileCustomAudienceUploadingStatusField (boolean value) {
+      this.requestField("datafile_custom_audience_uploading_status", value);
       return this;
     }
     public APIRequestGetAudiences requestDeliveryStatusField () {
@@ -3953,6 +3967,7 @@ public class OfflineConversionDataSet extends APINode {
       "event_time_max",
       "event_time_min",
       "id",
+      "is_mta_use",
       "is_restricted_use",
       "last_upload_app",
       "last_upload_app_changed_time",
@@ -4134,6 +4149,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIsMtaUseField () {
+      return this.requestIsMtaUseField(true);
+    }
+    public APIRequestGet requestIsMtaUseField (boolean value) {
+      this.requestField("is_mta_use", value);
       return this;
     }
     public APIRequestGet requestIsRestrictedUseField () {
@@ -4590,6 +4612,7 @@ public class OfflineConversionDataSet extends APINode {
     this.mEventTimeMax = instance.mEventTimeMax;
     this.mEventTimeMin = instance.mEventTimeMin;
     this.mId = instance.mId;
+    this.mIsMtaUse = instance.mIsMtaUse;
     this.mIsRestrictedUse = instance.mIsRestrictedUse;
     this.mLastUploadApp = instance.mLastUploadApp;
     this.mLastUploadAppChangedTime = instance.mLastUploadAppChangedTime;

@@ -69,6 +69,8 @@ public class CalibratorExistingRule extends APINode {
   private String mId = null;
   @SerializedName("rule")
   private String mRule = null;
+  @SerializedName("rule_type")
+  private String mRuleType = null;
   @SerializedName("sample_urls")
   private List<String> mSampleUrls = null;
   @SerializedName("status")
@@ -318,6 +320,10 @@ public class CalibratorExistingRule extends APINode {
     return mRule;
   }
 
+  public String getFieldRuleType() {
+    return mRuleType;
+  }
+
   public List<String> getFieldSampleUrls() {
     return mSampleUrls;
   }
@@ -479,6 +485,7 @@ public class CalibratorExistingRule extends APINode {
       "event_type",
       "id",
       "rule",
+      "rule_type",
       "sample_urls",
       "status",
     };
@@ -620,6 +627,13 @@ public class CalibratorExistingRule extends APINode {
       this.requestField("rule", value);
       return this;
     }
+    public APIRequestGet requestRuleTypeField () {
+      return this.requestRuleTypeField(true);
+    }
+    public APIRequestGet requestRuleTypeField (boolean value) {
+      this.requestField("rule_type", value);
+      return this;
+    }
     public APIRequestGet requestSampleUrlsField () {
       return this.requestSampleUrlsField(true);
     }
@@ -679,6 +693,7 @@ public class CalibratorExistingRule extends APINode {
     this.mEventType = instance.mEventType;
     this.mId = instance.mId;
     this.mRule = instance.mRule;
+    this.mRuleType = instance.mRuleType;
     this.mSampleUrls = instance.mSampleUrls;
     this.mStatus = instance.mStatus;
     this.context = instance.context;

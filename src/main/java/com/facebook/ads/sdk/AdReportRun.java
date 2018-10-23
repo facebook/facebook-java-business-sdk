@@ -399,6 +399,9 @@ public class AdReportRun extends APINode {
       "adset_name",
       "age",
       "age_targeting",
+      "auction_bid",
+      "auction_competitiveness",
+      "auction_max_competitor_bid",
       "bid_type",
       "body_asset",
       "buying_type",
@@ -476,10 +479,10 @@ public class AdReportRun extends APINode {
       "reach",
       "region",
       "relevance_score",
+      "rule_asset",
       "social_spend",
       "spend",
       "title_asset",
-      "total_action_value",
       "unique_actions",
       "unique_clicks",
       "unique_ctr",
@@ -512,6 +515,7 @@ public class AdReportRun extends APINode {
       "video_time_watched_actions",
       "website_ctr",
       "website_purchase_roas",
+      "wish_bid",
       "id",
     };
 
@@ -706,6 +710,27 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestAgeTargetingField (boolean value) {
       this.requestField("age_targeting", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAuctionBidField () {
+      return this.requestAuctionBidField(true);
+    }
+    public APIRequestGetInsights requestAuctionBidField (boolean value) {
+      this.requestField("auction_bid", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAuctionCompetitivenessField () {
+      return this.requestAuctionCompetitivenessField(true);
+    }
+    public APIRequestGetInsights requestAuctionCompetitivenessField (boolean value) {
+      this.requestField("auction_competitiveness", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAuctionMaxCompetitorBidField () {
+      return this.requestAuctionMaxCompetitorBidField(true);
+    }
+    public APIRequestGetInsights requestAuctionMaxCompetitorBidField (boolean value) {
+      this.requestField("auction_max_competitor_bid", value);
       return this;
     }
     public APIRequestGetInsights requestBidTypeField () {
@@ -1247,6 +1272,13 @@ public class AdReportRun extends APINode {
       this.requestField("relevance_score", value);
       return this;
     }
+    public APIRequestGetInsights requestRuleAssetField () {
+      return this.requestRuleAssetField(true);
+    }
+    public APIRequestGetInsights requestRuleAssetField (boolean value) {
+      this.requestField("rule_asset", value);
+      return this;
+    }
     public APIRequestGetInsights requestSocialSpendField () {
       return this.requestSocialSpendField(true);
     }
@@ -1266,13 +1298,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestTitleAssetField (boolean value) {
       this.requestField("title_asset", value);
-      return this;
-    }
-    public APIRequestGetInsights requestTotalActionValueField () {
-      return this.requestTotalActionValueField(true);
-    }
-    public APIRequestGetInsights requestTotalActionValueField (boolean value) {
-      this.requestField("total_action_value", value);
       return this;
     }
     public APIRequestGetInsights requestUniqueActionsField () {
@@ -1497,6 +1522,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestWebsitePurchaseRoasField (boolean value) {
       this.requestField("website_purchase_roas", value);
+      return this;
+    }
+    public APIRequestGetInsights requestWishBidField () {
+      return this.requestWishBidField(true);
+    }
+    public APIRequestGetInsights requestWishBidField (boolean value) {
+      this.requestField("wish_bid", value);
       return this;
     }
     public APIRequestGetInsights requestIdField () {

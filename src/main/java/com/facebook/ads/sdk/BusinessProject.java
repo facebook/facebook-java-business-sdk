@@ -1349,7 +1349,6 @@ public class BusinessProject extends APINode {
       "gdpv4_enabled",
       "gdpv4_nux_content",
       "gdpv4_nux_enabled",
-      "groups_app_settings",
       "has_messenger_product",
       "hosting_url",
       "icon_url",
@@ -1807,13 +1806,6 @@ public class BusinessProject extends APINode {
     }
     public APIRequestGetApps requestGdpv4NuxEnabledField (boolean value) {
       this.requestField("gdpv4_nux_enabled", value);
-      return this;
-    }
-    public APIRequestGetApps requestGroupsAppSettingsField () {
-      return this.requestGroupsAppSettingsField(true);
-    }
-    public APIRequestGetApps requestGroupsAppSettingsField (boolean value) {
-      this.requestField("groups_app_settings", value);
       return this;
     }
     public APIRequestGetApps requestHasMessengerProductField () {

@@ -495,10 +495,6 @@ public class User extends APINode {
     return new APIRequestCreateCheckin(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateContactsPhoto createContactsPhoto() {
-    return new APIRequestCreateContactsPhoto(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetConversations getConversations() {
     return new APIRequestGetConversations(this.getPrefixedId().toString(), context);
   }
@@ -617,6 +613,10 @@ public class User extends APINode {
 
   public APIRequestCreateLiveVideo createLiveVideo() {
     return new APIRequestCreateLiveVideo(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateLocationupdate createLocationupdate() {
+    return new APIRequestCreateLocationupdate(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateLoggedOutPushSetNonce createLoggedOutPushSetNonce() {
@@ -10340,165 +10340,6 @@ public class User extends APINode {
 
   }
 
-  public static class APIRequestCreateContactsPhoto extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "published",
-      "target_id",
-      "url",
-      "full_res_is_coming_later",
-      "manual_privacy",
-      "audience_exp",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
-             try {
-               return APIRequestCreateContactsPhoto.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateContactsPhoto(String nodeId, APIContext context) {
-      super(context, nodeId, "/contacts_photos", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateContactsPhoto setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateContactsPhoto setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateContactsPhoto setPublished (Boolean published) {
-      this.setParam("published", published);
-      return this;
-    }
-    public APIRequestCreateContactsPhoto setPublished (String published) {
-      this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestCreateContactsPhoto setTargetId (Long targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-    public APIRequestCreateContactsPhoto setTargetId (String targetId) {
-      this.setParam("target_id", targetId);
-      return this;
-    }
-
-    public APIRequestCreateContactsPhoto setUrl (String url) {
-      this.setParam("url", url);
-      return this;
-    }
-
-    public APIRequestCreateContactsPhoto setFullResIsComingLater (Boolean fullResIsComingLater) {
-      this.setParam("full_res_is_coming_later", fullResIsComingLater);
-      return this;
-    }
-    public APIRequestCreateContactsPhoto setFullResIsComingLater (String fullResIsComingLater) {
-      this.setParam("full_res_is_coming_later", fullResIsComingLater);
-      return this;
-    }
-
-    public APIRequestCreateContactsPhoto setManualPrivacy (Boolean manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-    public APIRequestCreateContactsPhoto setManualPrivacy (String manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-
-    public APIRequestCreateContactsPhoto setAudienceExp (Boolean audienceExp) {
-      this.setParam("audience_exp", audienceExp);
-      return this;
-    }
-    public APIRequestCreateContactsPhoto setAudienceExp (String audienceExp) {
-      this.setParam("audience_exp", audienceExp);
-      return this;
-    }
-
-    public APIRequestCreateContactsPhoto requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateContactsPhoto requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateContactsPhoto requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateContactsPhoto requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateContactsPhoto requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateContactsPhoto requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetConversations extends APIRequest<UnifiedThread> {
 
     APINodeList<UnifiedThread> lastResponse = null;
@@ -20003,6 +19844,157 @@ public class User extends APINode {
 
     @Override
     public APIRequestCreateLiveVideo requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateLocationupdate extends APIRequest<User> {
+
+    User lastResponse = null;
+    @Override
+    public User getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "locations",
+      "deviceid",
+      "trace_ids",
+      "dynamic_collection_checksum",
+      "android_config_checksum",
+      "skip_pvd",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public User parseResponse(String response) throws APIException {
+      return User.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public User execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public User execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<User> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, User>() {
+           public User apply(String result) {
+             try {
+               return APIRequestCreateLocationupdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateLocationupdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/locationupdates", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateLocationupdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLocationupdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateLocationupdate setLocations (List<Object> locations) {
+      this.setParam("locations", locations);
+      return this;
+    }
+    public APIRequestCreateLocationupdate setLocations (String locations) {
+      this.setParam("locations", locations);
+      return this;
+    }
+
+    public APIRequestCreateLocationupdate setDeviceid (String deviceid) {
+      this.setParam("deviceid", deviceid);
+      return this;
+    }
+
+    public APIRequestCreateLocationupdate setTraceIds (List<String> traceIds) {
+      this.setParam("trace_ids", traceIds);
+      return this;
+    }
+    public APIRequestCreateLocationupdate setTraceIds (String traceIds) {
+      this.setParam("trace_ids", traceIds);
+      return this;
+    }
+
+    public APIRequestCreateLocationupdate setDynamicCollectionChecksum (String dynamicCollectionChecksum) {
+      this.setParam("dynamic_collection_checksum", dynamicCollectionChecksum);
+      return this;
+    }
+
+    public APIRequestCreateLocationupdate setAndroidConfigChecksum (String androidConfigChecksum) {
+      this.setParam("android_config_checksum", androidConfigChecksum);
+      return this;
+    }
+
+    public APIRequestCreateLocationupdate setSkipPvd (Boolean skipPvd) {
+      this.setParam("skip_pvd", skipPvd);
+      return this;
+    }
+    public APIRequestCreateLocationupdate setSkipPvd (String skipPvd) {
+      this.setParam("skip_pvd", skipPvd);
+      return this;
+    }
+
+    public APIRequestCreateLocationupdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateLocationupdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLocationupdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateLocationupdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLocationupdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateLocationupdate requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -33003,6 +32995,8 @@ public class User extends APINode {
       VALUE_IAP_GROUP_SUBSCRIPTION("IAP_GROUP_SUBSCRIPTION"),
       @SerializedName("MOR_NONE")
       VALUE_MOR_NONE("MOR_NONE"),
+      @SerializedName("MOR_ADS_CONSENT")
+      VALUE_MOR_ADS_CONSENT("MOR_ADS_CONSENT"),
       @SerializedName("MOR_ADS_INVOICE")
       VALUE_MOR_ADS_INVOICE("MOR_ADS_INVOICE"),
       @SerializedName("MOR_DONATIONS")

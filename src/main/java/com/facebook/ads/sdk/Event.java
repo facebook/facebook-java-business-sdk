@@ -1382,11 +1382,11 @@ public class Event extends APINode {
     }
   }
 
-  public static class APIRequestGetComments extends APIRequest<Null> {
+  public static class APIRequestGetComments extends APIRequest<NullNode> {
 
-    APINodeList<Null> lastResponse = null;
+    APINodeList<NullNode> lastResponse = null;
     @Override
-    public APINodeList<Null> getLastResponse() {
+    public APINodeList<NullNode> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -1397,30 +1397,30 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<Null> parseResponse(String response) throws APIException {
-      return Null.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<Null> execute() throws APIException {
+    public APINodeList<NullNode> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<Null> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<Null>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<Null>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Null>>() {
-           public APINodeList<Null> apply(String result) {
+        new Function<String, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(String result) {
              try {
                return APIRequestGetComments.this.parseResponse(result);
              } catch (Exception e) {
@@ -2299,11 +2299,11 @@ public class Event extends APINode {
     }
   }
 
-  public static class APIRequestGetFeed extends APIRequest<Null> {
+  public static class APIRequestGetFeed extends APIRequest<NullNode> {
 
-    APINodeList<Null> lastResponse = null;
+    APINodeList<NullNode> lastResponse = null;
     @Override
-    public APINodeList<Null> getLastResponse() {
+    public APINodeList<NullNode> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -2314,30 +2314,30 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<Null> parseResponse(String response) throws APIException {
-      return Null.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<Null> execute() throws APIException {
+    public APINodeList<NullNode> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<Null> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<Null>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<Null>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Null>>() {
-           public APINodeList<Null> apply(String result) {
+        new Function<String, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(String result) {
              try {
                return APIRequestGetFeed.this.parseResponse(result);
              } catch (Exception e) {
@@ -4030,11 +4030,11 @@ public class Event extends APINode {
     }
   }
 
-  public static class APIRequestGetLiveVideos extends APIRequest<Null> {
+  public static class APIRequestGetLiveVideos extends APIRequest<NullNode> {
 
-    APINodeList<Null> lastResponse = null;
+    APINodeList<NullNode> lastResponse = null;
     @Override
-    public APINodeList<Null> getLastResponse() {
+    public APINodeList<NullNode> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -4045,30 +4045,30 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<Null> parseResponse(String response) throws APIException {
-      return Null.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<Null> execute() throws APIException {
+    public APINodeList<NullNode> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<Null> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<Null>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<Null>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Null>>() {
-           public APINodeList<Null> apply(String result) {
+        new Function<String, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(String result) {
              try {
                return APIRequestGetLiveVideos.this.parseResponse(result);
              } catch (Exception e) {
@@ -5666,11 +5666,11 @@ public class Event extends APINode {
     }
   }
 
-  public static class APIRequestGetPhotos extends APIRequest<Null> {
+  public static class APIRequestGetPhotos extends APIRequest<NullNode> {
 
-    APINodeList<Null> lastResponse = null;
+    APINodeList<NullNode> lastResponse = null;
     @Override
-    public APINodeList<Null> getLastResponse() {
+    public APINodeList<NullNode> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -5681,30 +5681,30 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<Null> parseResponse(String response) throws APIException {
-      return Null.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<Null> execute() throws APIException {
+    public APINodeList<NullNode> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<Null> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<Null>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<Null>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Null>>() {
-           public APINodeList<Null> apply(String result) {
+        new Function<String, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(String result) {
              try {
                return APIRequestGetPhotos.this.parseResponse(result);
              } catch (Exception e) {
@@ -6314,11 +6314,11 @@ public class Event extends APINode {
 
   }
 
-  public static class APIRequestGetPicture extends APIRequest<Null> {
+  public static class APIRequestGetPicture extends APIRequest<NullNode> {
 
-    APINodeList<Null> lastResponse = null;
+    APINodeList<NullNode> lastResponse = null;
     @Override
-    public APINodeList<Null> getLastResponse() {
+    public APINodeList<NullNode> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -6329,30 +6329,30 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<Null> parseResponse(String response) throws APIException {
-      return Null.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<Null> execute() throws APIException {
+    public APINodeList<NullNode> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<Null> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<Null>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<Null>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Null>>() {
-           public APINodeList<Null> apply(String result) {
+        new Function<String, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(String result) {
              try {
                return APIRequestGetPicture.this.parseResponse(result);
              } catch (Exception e) {
@@ -6425,11 +6425,11 @@ public class Event extends APINode {
     }
   }
 
-  public static class APIRequestGetPosts extends APIRequest<Null> {
+  public static class APIRequestGetPosts extends APIRequest<NullNode> {
 
-    APINodeList<Null> lastResponse = null;
+    APINodeList<NullNode> lastResponse = null;
     @Override
-    public APINodeList<Null> getLastResponse() {
+    public APINodeList<NullNode> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -6440,30 +6440,30 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<Null> parseResponse(String response) throws APIException {
-      return Null.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<Null> execute() throws APIException {
+    public APINodeList<NullNode> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<Null> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<Null>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<Null>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Null>>() {
-           public APINodeList<Null> apply(String result) {
+        new Function<String, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(String result) {
              try {
                return APIRequestGetPosts.this.parseResponse(result);
              } catch (Exception e) {
@@ -6727,11 +6727,11 @@ public class Event extends APINode {
     }
   }
 
-  public static class APIRequestGetVideos extends APIRequest<Null> {
+  public static class APIRequestGetVideos extends APIRequest<NullNode> {
 
-    APINodeList<Null> lastResponse = null;
+    APINodeList<NullNode> lastResponse = null;
     @Override
-    public APINodeList<Null> getLastResponse() {
+    public APINodeList<NullNode> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -6742,30 +6742,30 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<Null> parseResponse(String response) throws APIException {
-      return Null.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<Null> execute() throws APIException {
+    public APINodeList<NullNode> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<Null> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<Null>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<Null>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<NullNode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Null>>() {
-           public APINodeList<Null> apply(String result) {
+        new Function<String, APINodeList<NullNode>>() {
+           public APINodeList<NullNode> apply(String result) {
              try {
                return APIRequestGetVideos.this.parseResponse(result);
              } catch (Exception e) {

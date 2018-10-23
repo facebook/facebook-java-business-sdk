@@ -504,6 +504,8 @@ public class UserPaymentModulesOptions extends APINode {
       VALUE_IAP_GROUP_SUBSCRIPTION("IAP_GROUP_SUBSCRIPTION"),
       @SerializedName("MOR_NONE")
       VALUE_MOR_NONE("MOR_NONE"),
+      @SerializedName("MOR_ADS_CONSENT")
+      VALUE_MOR_ADS_CONSENT("MOR_ADS_CONSENT"),
       @SerializedName("MOR_ADS_INVOICE")
       VALUE_MOR_ADS_INVOICE("MOR_ADS_INVOICE"),
       @SerializedName("MOR_DONATIONS")

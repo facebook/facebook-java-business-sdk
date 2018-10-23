@@ -85,6 +85,12 @@ public class AdsInsights extends APINode {
   private String mAge = null;
   @SerializedName("age_targeting")
   private String mAgeTargeting = null;
+  @SerializedName("auction_bid")
+  private String mAuctionBid = null;
+  @SerializedName("auction_competitiveness")
+  private String mAuctionCompetitiveness = null;
+  @SerializedName("auction_max_competitor_bid")
+  private String mAuctionMaxCompetitorBid = null;
   @SerializedName("bid_type")
   private String mBidType = null;
   @SerializedName("body_asset")
@@ -239,14 +245,14 @@ public class AdsInsights extends APINode {
   private String mRegion = null;
   @SerializedName("relevance_score")
   private AdgroupRelevanceScore mRelevanceScore = null;
+  @SerializedName("rule_asset")
+  private Object mRuleAsset = null;
   @SerializedName("social_spend")
   private String mSocialSpend = null;
   @SerializedName("spend")
   private String mSpend = null;
   @SerializedName("title_asset")
   private Object mTitleAsset = null;
-  @SerializedName("total_action_value")
-  private String mTotalActionValue = null;
   @SerializedName("unique_actions")
   private List<AdsActionStats> mUniqueActions = null;
   @SerializedName("unique_clicks")
@@ -311,6 +317,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mWebsiteCtr = null;
   @SerializedName("website_purchase_roas")
   private List<AdsActionStats> mWebsitePurchaseRoas = null;
+  @SerializedName("wish_bid")
+  private String mWishBid = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
@@ -584,6 +592,18 @@ public class AdsInsights extends APINode {
 
   public String getFieldAgeTargeting() {
     return mAgeTargeting;
+  }
+
+  public String getFieldAuctionBid() {
+    return mAuctionBid;
+  }
+
+  public String getFieldAuctionCompetitiveness() {
+    return mAuctionCompetitiveness;
+  }
+
+  public String getFieldAuctionMaxCompetitorBid() {
+    return mAuctionMaxCompetitorBid;
   }
 
   public String getFieldBidType() {
@@ -897,6 +917,10 @@ public class AdsInsights extends APINode {
     return mRelevanceScore;
   }
 
+  public Object getFieldRuleAsset() {
+    return mRuleAsset;
+  }
+
   public String getFieldSocialSpend() {
     return mSocialSpend;
   }
@@ -907,10 +931,6 @@ public class AdsInsights extends APINode {
 
   public Object getFieldTitleAsset() {
     return mTitleAsset;
-  }
-
-  public String getFieldTotalActionValue() {
-    return mTotalActionValue;
   }
 
   public List<AdsActionStats> getFieldUniqueActions() {
@@ -1041,6 +1061,10 @@ public class AdsInsights extends APINode {
     return mWebsitePurchaseRoas;
   }
 
+  public String getFieldWishBid() {
+    return mWishBid;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -1073,6 +1097,9 @@ public class AdsInsights extends APINode {
       "adset_name",
       "age",
       "age_targeting",
+      "auction_bid",
+      "auction_competitiveness",
+      "auction_max_competitor_bid",
       "bid_type",
       "body_asset",
       "buying_type",
@@ -1150,10 +1177,10 @@ public class AdsInsights extends APINode {
       "reach",
       "region",
       "relevance_score",
+      "rule_asset",
       "social_spend",
       "spend",
       "title_asset",
-      "total_action_value",
       "unique_actions",
       "unique_clicks",
       "unique_ctr",
@@ -1186,6 +1213,7 @@ public class AdsInsights extends APINode {
       "video_time_watched_actions",
       "website_ctr",
       "website_purchase_roas",
+      "wish_bid",
       "id",
     };
 
@@ -1380,6 +1408,27 @@ public class AdsInsights extends APINode {
     }
     public APIRequestGet requestAgeTargetingField (boolean value) {
       this.requestField("age_targeting", value);
+      return this;
+    }
+    public APIRequestGet requestAuctionBidField () {
+      return this.requestAuctionBidField(true);
+    }
+    public APIRequestGet requestAuctionBidField (boolean value) {
+      this.requestField("auction_bid", value);
+      return this;
+    }
+    public APIRequestGet requestAuctionCompetitivenessField () {
+      return this.requestAuctionCompetitivenessField(true);
+    }
+    public APIRequestGet requestAuctionCompetitivenessField (boolean value) {
+      this.requestField("auction_competitiveness", value);
+      return this;
+    }
+    public APIRequestGet requestAuctionMaxCompetitorBidField () {
+      return this.requestAuctionMaxCompetitorBidField(true);
+    }
+    public APIRequestGet requestAuctionMaxCompetitorBidField (boolean value) {
+      this.requestField("auction_max_competitor_bid", value);
       return this;
     }
     public APIRequestGet requestBidTypeField () {
@@ -1921,6 +1970,13 @@ public class AdsInsights extends APINode {
       this.requestField("relevance_score", value);
       return this;
     }
+    public APIRequestGet requestRuleAssetField () {
+      return this.requestRuleAssetField(true);
+    }
+    public APIRequestGet requestRuleAssetField (boolean value) {
+      this.requestField("rule_asset", value);
+      return this;
+    }
     public APIRequestGet requestSocialSpendField () {
       return this.requestSocialSpendField(true);
     }
@@ -1940,13 +1996,6 @@ public class AdsInsights extends APINode {
     }
     public APIRequestGet requestTitleAssetField (boolean value) {
       this.requestField("title_asset", value);
-      return this;
-    }
-    public APIRequestGet requestTotalActionValueField () {
-      return this.requestTotalActionValueField(true);
-    }
-    public APIRequestGet requestTotalActionValueField (boolean value) {
-      this.requestField("total_action_value", value);
       return this;
     }
     public APIRequestGet requestUniqueActionsField () {
@@ -2171,6 +2220,13 @@ public class AdsInsights extends APINode {
     }
     public APIRequestGet requestWebsitePurchaseRoasField (boolean value) {
       this.requestField("website_purchase_roas", value);
+      return this;
+    }
+    public APIRequestGet requestWishBidField () {
+      return this.requestWishBidField(true);
+    }
+    public APIRequestGet requestWishBidField (boolean value) {
+      this.requestField("wish_bid", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -2469,6 +2525,9 @@ public class AdsInsights extends APINode {
     this.mAdsetName = instance.mAdsetName;
     this.mAge = instance.mAge;
     this.mAgeTargeting = instance.mAgeTargeting;
+    this.mAuctionBid = instance.mAuctionBid;
+    this.mAuctionCompetitiveness = instance.mAuctionCompetitiveness;
+    this.mAuctionMaxCompetitorBid = instance.mAuctionMaxCompetitorBid;
     this.mBidType = instance.mBidType;
     this.mBodyAsset = instance.mBodyAsset;
     this.mBuyingType = instance.mBuyingType;
@@ -2546,10 +2605,10 @@ public class AdsInsights extends APINode {
     this.mReach = instance.mReach;
     this.mRegion = instance.mRegion;
     this.mRelevanceScore = instance.mRelevanceScore;
+    this.mRuleAsset = instance.mRuleAsset;
     this.mSocialSpend = instance.mSocialSpend;
     this.mSpend = instance.mSpend;
     this.mTitleAsset = instance.mTitleAsset;
-    this.mTotalActionValue = instance.mTotalActionValue;
     this.mUniqueActions = instance.mUniqueActions;
     this.mUniqueClicks = instance.mUniqueClicks;
     this.mUniqueCtr = instance.mUniqueCtr;
@@ -2582,6 +2641,7 @@ public class AdsInsights extends APINode {
     this.mVideoTimeWatchedActions = instance.mVideoTimeWatchedActions;
     this.mWebsiteCtr = instance.mWebsiteCtr;
     this.mWebsitePurchaseRoas = instance.mWebsitePurchaseRoas;
+    this.mWishBid = instance.mWishBid;
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

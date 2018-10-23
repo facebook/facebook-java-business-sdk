@@ -2346,15 +2346,12 @@ public class AdSet extends APINode {
       "engagement_audience",
       "failed_delivery_checks",
       "id",
-      "impression_control_map",
       "issues_info",
       "last_updated_by_app_id",
-      "locations",
       "name",
       "objective_source",
       "priority",
       "recommendations",
-      "social_prefs",
       "source_ad",
       "source_ad_id",
       "status",
@@ -2362,7 +2359,6 @@ public class AdSet extends APINode {
       "tracking_and_conversion_with_defaults",
       "tracking_specs",
       "updated_time",
-      "url_override",
     };
 
     @Override
@@ -2643,13 +2639,6 @@ public class AdSet extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAds requestImpressionControlMapField () {
-      return this.requestImpressionControlMapField(true);
-    }
-    public APIRequestGetAds requestImpressionControlMapField (boolean value) {
-      this.requestField("impression_control_map", value);
-      return this;
-    }
     public APIRequestGetAds requestIssuesInfoField () {
       return this.requestIssuesInfoField(true);
     }
@@ -2662,13 +2651,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds requestLastUpdatedByAppIdField (boolean value) {
       this.requestField("last_updated_by_app_id", value);
-      return this;
-    }
-    public APIRequestGetAds requestLocationsField () {
-      return this.requestLocationsField(true);
-    }
-    public APIRequestGetAds requestLocationsField (boolean value) {
-      this.requestField("locations", value);
       return this;
     }
     public APIRequestGetAds requestNameField () {
@@ -2697,13 +2679,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds requestRecommendationsField (boolean value) {
       this.requestField("recommendations", value);
-      return this;
-    }
-    public APIRequestGetAds requestSocialPrefsField () {
-      return this.requestSocialPrefsField(true);
-    }
-    public APIRequestGetAds requestSocialPrefsField (boolean value) {
-      this.requestField("social_prefs", value);
       return this;
     }
     public APIRequestGetAds requestSourceAdField () {
@@ -2753,13 +2728,6 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAds requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetAds requestUrlOverrideField () {
-      return this.requestUrlOverrideField(true);
-    }
-    public APIRequestGetAds requestUrlOverrideField (boolean value) {
-      this.requestField("url_override", value);
       return this;
     }
   }
@@ -5977,6 +5945,8 @@ public class AdSet extends APINode {
       VALUE_VALUE("VALUE"),
       @SerializedName("REPLIES")
       VALUE_REPLIES("REPLIES"),
+      @SerializedName("DERIVED_EVENTS")
+      VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
       NULL(null);
 
       private String value;
