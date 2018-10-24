@@ -915,7 +915,7 @@ public class VideoCopyright extends APINode {
       VALUE_MOVIE("movie"),
       @SerializedName("web")
       VALUE_WEB("web"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -936,7 +936,7 @@ public class VideoCopyright extends APINode {
       VALUE_VIDEO_ONLY("VIDEO_ONLY"),
       @SerializedName("AUDIO_ONLY")
       VALUE_AUDIO_ONLY("AUDIO_ONLY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

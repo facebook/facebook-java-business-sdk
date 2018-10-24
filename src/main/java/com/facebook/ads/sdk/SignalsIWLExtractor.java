@@ -734,7 +734,7 @@ public class SignalsIWLExtractor extends APINode {
       VALUE_SUBSCRIBE("Subscribe"),
       @SerializedName("ViewContent")
       VALUE_VIEWCONTENT("ViewContent"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -769,7 +769,7 @@ public class SignalsIWLExtractor extends APINode {
       VALUE_SCHEMA_DOT_ORG("SCHEMA_DOT_ORG"),
       @SerializedName("URI")
       VALUE_URI("URI"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

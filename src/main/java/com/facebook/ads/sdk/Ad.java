@@ -4608,7 +4608,7 @@ public class Ad extends APINode {
       VALUE_PAUSED("PAUSED"),
       @SerializedName("INHERITED_FROM_SOURCE")
       VALUE_INHERITED_FROM_SOURCE("INHERITED_FROM_SOURCE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

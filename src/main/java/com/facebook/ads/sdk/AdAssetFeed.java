@@ -1541,7 +1541,7 @@ public class AdAssetFeed extends APINode {
       VALUE_SINGLE_IMAGE("SINGLE_IMAGE"),
       @SerializedName("SINGLE_VIDEO")
       VALUE_SINGLE_VIDEO("SINGLE_VIDEO"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1652,7 +1652,7 @@ public class AdAssetFeed extends APINode {
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1683,7 +1683,7 @@ public class AdAssetFeed extends APINode {
       VALUE_DCO_PARITY("DCO_PARITY"),
       @SerializedName("PREVIEW_DYNAMIC_RENDERING")
       VALUE_PREVIEW_DYNAMIC_RENDERING("PREVIEW_DYNAMIC_RENDERING"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1794,7 +1794,7 @@ public class AdAssetFeed extends APINode {
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

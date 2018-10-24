@@ -462,7 +462,7 @@ public class InstantArticleInsightsQueryResult extends APINode {
       VALUE_GENDER_AND_AGE("gender_and_age"),
       @SerializedName("is_organic")
       VALUE_IS_ORGANIC("is_organic"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -487,7 +487,7 @@ public class InstantArticleInsightsQueryResult extends APINode {
       VALUE_MONTH("month"),
       @SerializedName("lifetime")
       VALUE_LIFETIME("lifetime"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

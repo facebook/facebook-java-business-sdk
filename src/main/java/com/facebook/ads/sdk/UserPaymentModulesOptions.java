@@ -624,7 +624,7 @@ public class UserPaymentModulesOptions extends APINode {
       VALUE_IG_NMOR_P2B("IG_NMOR_P2B"),
       @SerializedName("NMOR_INSTAGRAM_P2B")
       VALUE_NMOR_INSTAGRAM_P2B("NMOR_INSTAGRAM_P2B"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

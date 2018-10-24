@@ -1252,7 +1252,7 @@ public class NativeOffer extends APINode {
       VALUE_DISCOUNT_AND_BARCODES("discount_and_barcodes"),
       @SerializedName("discount_and_discount")
       VALUE_DISCOUNT_AND_DISCOUNT("discount_and_discount"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1293,7 +1293,7 @@ public class NativeOffer extends APINode {
       VALUE_UPC_A("UPC_A"),
       @SerializedName("UPC_E")
       VALUE_UPC_E("UPC_E"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1314,7 +1314,7 @@ public class NativeOffer extends APINode {
       VALUE_OFFLINE("offline"),
       @SerializedName("both")
       VALUE_BOTH("both"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

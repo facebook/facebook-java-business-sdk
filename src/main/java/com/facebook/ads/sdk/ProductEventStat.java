@@ -565,7 +565,7 @@ public class ProductEventStat extends APINode {
       VALUE_MOBILE_WINDOWS_PHONE("mobile_windows_phone"),
       @SerializedName("unknown")
       VALUE_UNKNOWN("unknown"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -594,7 +594,7 @@ public class ProductEventStat extends APINode {
       VALUE_LEAD("Lead"),
       @SerializedName("AddToWishlist")
       VALUE_ADDTOWISHLIST("AddToWishlist"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -611,7 +611,7 @@ public class ProductEventStat extends APINode {
   public static enum EnumBreakdowns {
       @SerializedName("DEVICE_TYPE")
       VALUE_DEVICE_TYPE("DEVICE_TYPE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

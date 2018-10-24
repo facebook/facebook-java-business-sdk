@@ -599,7 +599,7 @@ public class AdPlacePageSet extends APINode {
       VALUE_MARKETING_AREA("MARKETING_AREA"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

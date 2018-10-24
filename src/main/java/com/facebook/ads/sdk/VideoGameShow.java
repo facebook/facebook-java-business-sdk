@@ -805,7 +805,7 @@ public class VideoGameShow extends APINode {
       VALUE_START_GAME("START_GAME"),
       @SerializedName("END_GAME")
       VALUE_END_GAME("END_GAME"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

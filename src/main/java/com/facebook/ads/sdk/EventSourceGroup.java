@@ -1641,7 +1641,7 @@ public class EventSourceGroup extends APINode {
       VALUE_ANALYST("ANALYST"),
       @SerializedName("LIMITED_ANALYST")
       VALUE_LIMITED_ANALYST("LIMITED_ANALYST"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

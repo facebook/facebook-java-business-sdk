@@ -434,7 +434,7 @@ public class StreamingReaction extends APINode {
       VALUE_THANKFUL("THANKFUL"),
       @SerializedName("PRIDE")
       VALUE_PRIDE("PRIDE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

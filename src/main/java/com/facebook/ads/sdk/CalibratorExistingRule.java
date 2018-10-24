@@ -657,7 +657,7 @@ public class CalibratorExistingRule extends APINode {
       VALUE_RULE_EVENT_REMAPPING("RULE_EVENT_REMAPPING"),
       @SerializedName("RULE_STATUS_UPDATE")
       VALUE_RULE_STATUS_UPDATE("RULE_STATUS_UPDATE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

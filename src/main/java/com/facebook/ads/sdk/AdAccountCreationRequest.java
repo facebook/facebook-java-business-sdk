@@ -2358,7 +2358,7 @@ public class AdAccountCreationRequest extends APINode {
       VALUE_WATER_AND_SOFT_DRINK_AND_BAVERAGE("WATER_AND_SOFT_DRINK_AND_BAVERAGE"),
       @SerializedName("WIRELESS_SERVICES")
       VALUE_WIRELESS_SERVICES("WIRELESS_SERVICES"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2413,7 +2413,7 @@ public class AdAccountCreationRequest extends APINode {
       VALUE_TELECOM("TELECOM"),
       @SerializedName("TRAVEL")
       VALUE_TRAVEL("TRAVEL"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2452,7 +2452,7 @@ public class AdAccountCreationRequest extends APINode {
       VALUE_APPEAL_APPROVED("APPEAL_APPROVED"),
       @SerializedName("APPEAL_DISAPPROVED")
       VALUE_APPEAL_DISAPPROVED("APPEAL_DISAPPROVED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

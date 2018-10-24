@@ -987,7 +987,7 @@ public class PageCallToAction extends APINode {
       VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1018,7 +1018,7 @@ public class PageCallToAction extends APINode {
       VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1085,7 +1085,7 @@ public class PageCallToAction extends APINode {
       VALUE_LOCAL_DEV_PLATFORM("LOCAL_DEV_PLATFORM"),
       @SerializedName("INTERESTED")
       VALUE_INTERESTED("INTERESTED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1110,7 +1110,7 @@ public class PageCallToAction extends APINode {
       VALUE_WEBSITE("WEBSITE"),
       @SerializedName("SHOP_ON_FACEBOOK")
       VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

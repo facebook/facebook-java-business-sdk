@@ -867,7 +867,7 @@ public class SavedMessageResponse extends APINode {
       VALUE_SMART_REPLY_POSITIVE_FEEDBACK("SMART_REPLY_POSITIVE_FEEDBACK"),
       @SerializedName("JOB_APPLICATION")
       VALUE_JOB_APPLICATION("JOB_APPLICATION"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

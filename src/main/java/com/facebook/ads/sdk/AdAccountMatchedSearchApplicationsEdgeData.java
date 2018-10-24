@@ -510,7 +510,7 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
       VALUE_INSTANT_GAME("INSTANT_GAME"),
       @SerializedName("DOES_NOT_EXIST")
       VALUE_DOES_NOT_EXIST("DOES_NOT_EXIST"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

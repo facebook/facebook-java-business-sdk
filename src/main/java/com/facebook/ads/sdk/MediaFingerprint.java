@@ -746,7 +746,7 @@ public class MediaFingerprint extends APINode {
       VALUE_MOVIE("MOVIE"),
       @SerializedName("AM_SONGTRACK")
       VALUE_AM_SONGTRACK("AM_SONGTRACK"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -767,7 +767,7 @@ public class MediaFingerprint extends APINode {
       VALUE_EXPIRING("EXPIRING"),
       @SerializedName("EXPIRED")
       VALUE_EXPIRED("EXPIRED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

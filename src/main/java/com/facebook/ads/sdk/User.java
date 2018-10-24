@@ -32538,7 +32538,7 @@ public class User extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32557,7 +32557,7 @@ public class User extends APINode {
       VALUE_YES("YES"),
       @SerializedName("NO")
       VALUE_NO("NO"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32576,7 +32576,7 @@ public class User extends APINode {
       VALUE_STATUS_ON("STATUS_ON"),
       @SerializedName("STATUS_OFF")
       VALUE_STATUS_OFF("STATUS_OFF"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32595,7 +32595,7 @@ public class User extends APINode {
       VALUE_BOT_ACTION("BOT_ACTION"),
       @SerializedName("NATIVE")
       VALUE_NATIVE("NATIVE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32616,7 +32616,7 @@ public class User extends APINode {
       VALUE_GROUPS_SOCIAL("groups_social"),
       @SerializedName("ema")
       VALUE_EMA("ema"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32635,7 +32635,7 @@ public class User extends APINode {
       VALUE_GENERIC("generic"),
       @SerializedName("content_update")
       VALUE_CONTENT_UPDATE("content_update"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32744,7 +32744,7 @@ public class User extends APINode {
       VALUE_TWITCH("TWITCH"),
       @SerializedName("WHATSAPP")
       VALUE_WHATSAPP("WHATSAPP"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32767,7 +32767,7 @@ public class User extends APINode {
       VALUE_CONNECTIONS("CONNECTIONS"),
       @SerializedName("GROWTH_CONTACT_IMPORTER")
       VALUE_GROWTH_CONTACT_IMPORTER("GROWTH_CONTACT_IMPORTER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32794,7 +32794,7 @@ public class User extends APINode {
       VALUE_MIN("min"),
       @SerializedName("none")
       VALUE_NONE("none"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32819,7 +32819,7 @@ public class User extends APINode {
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32838,7 +32838,7 @@ public class User extends APINode {
       VALUE_ENABLED("enabled"),
       @SerializedName("disabled")
       VALUE_DISABLED("disabled"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32857,7 +32857,7 @@ public class User extends APINode {
       VALUE_1("1"),
       @SerializedName("2")
       VALUE_2("2"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32880,7 +32880,7 @@ public class User extends APINode {
       VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
       @SerializedName("BRANDING_OTHER")
       VALUE_BRANDING_OTHER("BRANDING_OTHER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32905,7 +32905,7 @@ public class User extends APINode {
       VALUE_4("4"),
       @SerializedName("5")
       VALUE_5("5"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32924,7 +32924,7 @@ public class User extends APINode {
       VALUE_PLAINTEXT("PLAINTEXT"),
       @SerializedName("MARKDOWN")
       VALUE_MARKDOWN("MARKDOWN"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32943,7 +32943,7 @@ public class User extends APINode {
       VALUE_STORY("STORY"),
       @SerializedName("TIMELINE")
       VALUE_TIMELINE("TIMELINE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -32964,7 +32964,7 @@ public class User extends APINode {
       VALUE_CONSUME("CONSUME"),
       @SerializedName("DROP")
       VALUE_DROP("DROP"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -33115,7 +33115,7 @@ public class User extends APINode {
       VALUE_IG_NMOR_P2B("IG_NMOR_P2B"),
       @SerializedName("NMOR_INSTAGRAM_P2B")
       VALUE_NMOR_INSTAGRAM_P2B("NMOR_INSTAGRAM_P2B"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

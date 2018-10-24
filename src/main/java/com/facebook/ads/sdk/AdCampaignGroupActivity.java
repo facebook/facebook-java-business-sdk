@@ -732,7 +732,7 @@ public class AdCampaignGroupActivity extends APINode {
       VALUE_APP_INSTALLS("APP_INSTALLS"),
       @SerializedName("MESSAGES")
       VALUE_MESSAGES("MESSAGES"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -783,7 +783,7 @@ public class AdCampaignGroupActivity extends APINode {
       VALUE_APP_INSTALLS("APP_INSTALLS"),
       @SerializedName("MESSAGES")
       VALUE_MESSAGES("MESSAGES"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

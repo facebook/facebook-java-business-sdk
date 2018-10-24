@@ -3969,7 +3969,7 @@ public class Campaign extends APINode {
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
       @SerializedName("TARGET_COST")
       VALUE_TARGET_COST("TARGET_COST"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4205,7 +4205,7 @@ public class Campaign extends APINode {
       VALUE_PAUSED("PAUSED"),
       @SerializedName("INHERITED_FROM_SOURCE")
       VALUE_INHERITED_FROM_SOURCE("INHERITED_FROM_SOURCE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

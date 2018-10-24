@@ -926,7 +926,7 @@ public class FriendList extends APINode {
   public static enum EnumListType {
       @SerializedName("app_created")
       VALUE_APP_CREATED("app_created"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

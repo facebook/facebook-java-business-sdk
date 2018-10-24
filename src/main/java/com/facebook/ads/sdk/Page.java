@@ -45884,7 +45884,7 @@ public class Page extends APINode {
       VALUE_CASUAL("Casual"),
       @SerializedName("Dressy")
       VALUE_DRESSY("Dressy"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46013,7 +46013,7 @@ public class Page extends APINode {
       VALUE_VEGETARIAN("Vegetarian"),
       @SerializedName("Vietnamese")
       VALUE_VIETNAMESE("Vietnamese"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46034,7 +46034,7 @@ public class Page extends APINode {
       VALUE_EMAIL_NOTIF("EMAIL_NOTIF"),
       @SerializedName("MOBILE_NOTIF")
       VALUE_MOBILE_NOTIF("MOBILE_NOTIF"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46079,7 +46079,7 @@ public class Page extends APINode {
       VALUE_MULT_CUSTOM_AUDIENCES("MULT_CUSTOM_AUDIENCES"),
       @SerializedName("EVENT_CUSTOM_AUDIENCES")
       VALUE_EVENT_CUSTOM_AUDIENCES("EVENT_CUSTOM_AUDIENCES"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46106,7 +46106,7 @@ public class Page extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46133,7 +46133,7 @@ public class Page extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46154,7 +46154,7 @@ public class Page extends APINode {
       VALUE_UPDATE("UPDATE"),
       @SerializedName("MESSAGE_TAG")
       VALUE_MESSAGE_TAG("MESSAGE_TAG"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46175,7 +46175,7 @@ public class Page extends APINode {
       VALUE_SILENT_PUSH("SILENT_PUSH"),
       @SerializedName("NO_PUSH")
       VALUE_NO_PUSH("NO_PUSH"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46194,7 +46194,7 @@ public class Page extends APINode {
       VALUE_DRAFT("DRAFT"),
       @SerializedName("LIVE")
       VALUE_LIVE("LIVE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46215,7 +46215,7 @@ public class Page extends APINode {
       VALUE_TYPING_ON("TYPING_ON"),
       @SerializedName("TYPING_OFF")
       VALUE_TYPING_OFF("TYPING_OFF"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46234,7 +46234,7 @@ public class Page extends APINode {
       VALUE_STANDARD("STANDARD"),
       @SerializedName("REF")
       VALUE_REF("REF"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46295,7 +46295,7 @@ public class Page extends APINode {
       VALUE_SWEDISH("SWEDISH"),
       @SerializedName("VIETNAMESE")
       VALUE_VIETNAMESE("VIETNAMESE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46316,7 +46316,7 @@ public class Page extends APINode {
       VALUE_GROUPS_SOCIAL("groups_social"),
       @SerializedName("ema")
       VALUE_EMA("ema"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46461,7 +46461,7 @@ public class Page extends APINode {
       VALUE_LIVE_VIDEOS("live_videos"),
       @SerializedName("registration")
       VALUE_REGISTRATION("registration"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46480,7 +46480,7 @@ public class Page extends APINode {
       VALUE_ADD("ADD"),
       @SerializedName("REMOVE")
       VALUE_REMOVE("REMOVE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46499,7 +46499,7 @@ public class Page extends APINode {
       VALUE_ADD("ADD"),
       @SerializedName("REMOVE")
       VALUE_REMOVE("REMOVE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46520,7 +46520,7 @@ public class Page extends APINode {
       VALUE_VIDEO_ONLY("VIDEO_ONLY"),
       @SerializedName("AUDIO_ONLY")
       VALUE_AUDIO_ONLY("AUDIO_ONLY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46545,7 +46545,7 @@ public class Page extends APINode {
       VALUE_CLAIM_AD_EARNINGS("CLAIM_AD_EARNINGS"),
       @SerializedName("REQUEST_TAKEDOWN")
       VALUE_REQUEST_TAKEDOWN("REQUEST_TAKEDOWN"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46568,7 +46568,7 @@ public class Page extends APINode {
       VALUE_MESSAGE_BUSINESS("MESSAGE_BUSINESS"),
       @SerializedName("DOWNLOAD")
       VALUE_DOWNLOAD("DOWNLOAD"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46599,7 +46599,7 @@ public class Page extends APINode {
       VALUE_PAYMENT_SETTINGS("PAYMENT_SETTINGS"),
       @SerializedName("HOME_URL")
       VALUE_HOME_URL("HOME_URL"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46624,7 +46624,7 @@ public class Page extends APINode {
       VALUE_DOMAIN_WHITELISTING("DOMAIN_WHITELISTING"),
       @SerializedName("PAYMENT")
       VALUE_PAYMENT("PAYMENT"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -46643,7 +46643,7 @@ public class Page extends APINode {
       VALUE_NEW_THREAD("NEW_THREAD"),
       @SerializedName("EXISTING_THREAD")
       VALUE_EXISTING_THREAD("EXISTING_THREAD"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

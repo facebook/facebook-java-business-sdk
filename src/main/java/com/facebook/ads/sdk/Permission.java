@@ -420,7 +420,7 @@ public class Permission extends APINode {
       VALUE_GRANTED("granted"),
       @SerializedName("declined")
       VALUE_DECLINED("declined"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

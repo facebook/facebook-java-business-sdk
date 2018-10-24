@@ -8208,7 +8208,7 @@ public class Event extends APINode {
       VALUE_SCHEDULED_DRAFT_FOR_PUBLICATION("scheduled_draft_for_publication"),
       @SerializedName("published")
       VALUE_PUBLISHED("published"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8227,7 +8227,7 @@ public class Event extends APINode {
       VALUE_UPCOMING("upcoming"),
       @SerializedName("past")
       VALUE_PAST("past"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8248,7 +8248,7 @@ public class Event extends APINode {
       VALUE_ONSITE_TICKET("ONSITE_TICKET"),
       @SerializedName("RSVP")
       VALUE_RSVP("RSVP"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8275,7 +8275,7 @@ public class Event extends APINode {
       VALUE_MIN("min"),
       @SerializedName("none")
       VALUE_NONE("none"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8300,7 +8300,7 @@ public class Event extends APINode {
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8319,7 +8319,7 @@ public class Event extends APINode {
       VALUE_ENABLED("enabled"),
       @SerializedName("disabled")
       VALUE_DISABLED("disabled"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8338,7 +8338,7 @@ public class Event extends APINode {
       VALUE_1("1"),
       @SerializedName("2")
       VALUE_2("2"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8361,7 +8361,7 @@ public class Event extends APINode {
       VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
       @SerializedName("BRANDING_OTHER")
       VALUE_BRANDING_OTHER("BRANDING_OTHER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8386,7 +8386,7 @@ public class Event extends APINode {
       VALUE_4("4"),
       @SerializedName("5")
       VALUE_5("5"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8405,7 +8405,7 @@ public class Event extends APINode {
       VALUE_PLAINTEXT("PLAINTEXT"),
       @SerializedName("MARKDOWN")
       VALUE_MARKDOWN("MARKDOWN"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8424,7 +8424,7 @@ public class Event extends APINode {
       VALUE_STORY("STORY"),
       @SerializedName("TIMELINE")
       VALUE_TIMELINE("TIMELINE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8449,7 +8449,7 @@ public class Event extends APINode {
       VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
       @SerializedName("SCHEDULED_CANCELED")
       VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8468,7 +8468,7 @@ public class Event extends APINode {
       VALUE_REGULAR("REGULAR"),
       @SerializedName("AMBIENT")
       VALUE_AMBIENT("AMBIENT"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8489,7 +8489,7 @@ public class Event extends APINode {
       VALUE_CUBEMAP("CUBEMAP"),
       @SerializedName("HALF_EQUIRECTANGULAR")
       VALUE_HALF_EQUIRECTANGULAR("HALF_EQUIRECTANGULAR"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8506,7 +8506,7 @@ public class Event extends APINode {
   public static enum EnumSpatialAudioFormat {
       @SerializedName("ambiX_4")
       VALUE_AMBIX_4("ambiX_4"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -8527,7 +8527,7 @@ public class Event extends APINode {
       VALUE_LEFT_RIGHT("LEFT_RIGHT"),
       @SerializedName("TOP_BOTTOM")
       VALUE_TOP_BOTTOM("TOP_BOTTOM"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

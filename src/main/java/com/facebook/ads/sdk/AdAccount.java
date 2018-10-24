@@ -31063,7 +31063,7 @@ public class AdAccount extends APINode {
       VALUE_VND("VND"),
       @SerializedName("ZAR")
       VALUE_ZAR("ZAR"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -31084,7 +31084,7 @@ public class AdAccount extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -31105,7 +31105,7 @@ public class AdAccount extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -31132,7 +31132,7 @@ public class AdAccount extends APINode {
       VALUE_VEHICLE("VEHICLE"),
       @SerializedName("VEHICLE_OFFER")
       VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -31165,7 +31165,7 @@ public class AdAccount extends APINode {
       VALUE_VEHICLE("VEHICLE"),
       @SerializedName("VEHICLE_OFFER")
       VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -31206,7 +31206,7 @@ public class AdAccount extends APINode {
       VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
       @SerializedName("FOX")
       VALUE_FOX("FOX"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -31253,7 +31253,7 @@ public class AdAccount extends APINode {
       VALUE_VIDEO_ENGAGEMENT("VIDEO_ENGAGEMENT"),
       @SerializedName("VALIDATION_VIEW")
       VALUE_VALIDATION_VIEW("VALIDATION_VIEW"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -31280,7 +31280,7 @@ public class AdAccount extends APINode {
       VALUE_CAMPAIGN_GROUP("campaign_group"),
       @SerializedName("account")
       VALUE_ACCOUNT("account"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -31333,7 +31333,7 @@ public class AdAccount extends APINode {
       VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
       @SerializedName("this_year")
       VALUE_THIS_YEAR("this_year"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -31354,7 +31354,7 @@ public class AdAccount extends APINode {
       VALUE_NEWADSMANAGER("newAdsManager"),
       @SerializedName("adsExcelAddin")
       VALUE_ADSEXCELADDIN("adsExcelAddin"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -31391,7 +31391,7 @@ public class AdAccount extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -31412,7 +31412,7 @@ public class AdAccount extends APINode {
       VALUE_WEEKLY("weekly"),
       @SerializedName("monthly")
       VALUE_MONTHLY("monthly"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

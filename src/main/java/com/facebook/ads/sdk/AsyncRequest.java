@@ -438,7 +438,7 @@ public class AsyncRequest extends APINode {
       VALUE_FINISHED("FINISHED"),
       @SerializedName("ERROR")
       VALUE_ERROR("ERROR"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -459,7 +459,7 @@ public class AsyncRequest extends APINode {
       VALUE_BATCH_API("BATCH_API"),
       @SerializedName("ASYNC_ADGROUP_CREATION")
       VALUE_ASYNC_ADGROUP_CREATION("ASYNC_ADGROUP_CREATION"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -642,7 +642,7 @@ public class ExtendedCreditAllocationConfig extends APINode {
       VALUE_SEQUENTIAL("Sequential"),
       @SerializedName("MSA")
       VALUE_MSA("MSA"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -661,7 +661,7 @@ public class ExtendedCreditAllocationConfig extends APINode {
       VALUE_FIXED("FIXED"),
       @SerializedName("AUTH")
       VALUE_AUTH("AUTH"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -680,7 +680,7 @@ public class ExtendedCreditAllocationConfig extends APINode {
       VALUE_AGENCY("Agency"),
       @SerializedName("Advertiser")
       VALUE_ADVERTISER("Advertiser"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

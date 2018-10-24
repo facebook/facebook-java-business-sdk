@@ -637,7 +637,7 @@ public class ProductFeedUploadError extends APINode {
       VALUE_MARKETPLACE("Marketplace"),
       @SerializedName("US Marketplace")
       VALUE_US_MARKETPLACE("US Marketplace"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

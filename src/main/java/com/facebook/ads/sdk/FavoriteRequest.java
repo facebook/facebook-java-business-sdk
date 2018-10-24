@@ -599,7 +599,7 @@ public class FavoriteRequest extends APINode {
       VALUE_POST("POST"),
       @SerializedName("DELETE")
       VALUE_DELETE("DELETE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -652,7 +652,7 @@ public class FavoriteRequest extends APINode {
       VALUE_V3_2("v3.2"),
       @SerializedName("v4.0")
       VALUE_V4_0("v4.0"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

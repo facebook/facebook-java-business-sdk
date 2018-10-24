@@ -4135,7 +4135,7 @@ public class ProductFeed extends APINode {
       VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
       @SerializedName("VEHICLES")
       VALUE_VEHICLES("VEHICLES"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4160,7 +4160,7 @@ public class ProductFeed extends APINode {
       VALUE_FALLBACK_RULE("fallback_rule"),
       @SerializedName("regex_replace_rule")
       VALUE_REGEX_REPLACE_RULE("regex_replace_rule"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

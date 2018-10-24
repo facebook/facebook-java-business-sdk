@@ -476,7 +476,7 @@ public class ReachEstimate extends APINode {
       VALUE_REPLIES("REPLIES"),
       @SerializedName("DERIVED_EVENTS")
       VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

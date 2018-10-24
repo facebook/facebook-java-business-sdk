@@ -710,7 +710,7 @@ public class MeasurementReport extends APINode {
       VALUE_PARTNER_LIFT_STUDY_REPORT("partner_lift_study_report"),
       @SerializedName("mmm_report")
       VALUE_MMM_REPORT("mmm_report"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

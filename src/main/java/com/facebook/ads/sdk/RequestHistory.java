@@ -492,7 +492,7 @@ public class RequestHistory extends APINode {
       VALUE_POST("POST"),
       @SerializedName("DELETE")
       VALUE_DELETE("DELETE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

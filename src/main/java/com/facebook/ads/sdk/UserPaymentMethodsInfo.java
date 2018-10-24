@@ -596,7 +596,7 @@ public class UserPaymentMethodsInfo extends APINode {
       VALUE_WHATSAPP_P2M("whatsapp_p2m"),
       @SerializedName("movie_ticketing")
       VALUE_MOVIE_TICKETING("movie_ticketing"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -669,7 +669,7 @@ public class UserPaymentMethodsInfo extends APINode {
       VALUE_STORED_BALANCE("stored_balance"),
       @SerializedName("third_party_bundle")
       VALUE_THIRD_PARTY_BUNDLE("third_party_bundle"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

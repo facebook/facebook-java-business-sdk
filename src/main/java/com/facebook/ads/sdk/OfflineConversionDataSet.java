@@ -4377,7 +4377,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_DIRECTLY_FROM_PARTNERS("DIRECTLY_FROM_PARTNERS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4398,7 +4398,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_UPLOADER("UPLOADER"),
       @SerializedName("ADVERTISER")
       VALUE_ADVERTISER("ADVERTISER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4421,7 +4421,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_AGENCY("AGENCY"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4442,7 +4442,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_UPLOADER("UPLOADER"),
       @SerializedName("ADVERTISER")
       VALUE_ADVERTISER("ADVERTISER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4523,7 +4523,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_HOURLY("hourly"),
       @SerializedName("six_hourly")
       VALUE_SIX_HOURLY("six_hourly"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4552,7 +4552,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_EVENT_TIME_MAX("EVENT_TIME_MAX"),
       @SerializedName("IS_EXCLUDED_FOR_LIFT")
       VALUE_IS_EXCLUDED_FOR_LIFT("IS_EXCLUDED_FOR_LIFT"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4571,7 +4571,7 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_ASCENDING("ASCENDING"),
       @SerializedName("DESCENDING")
       VALUE_DESCENDING("DESCENDING"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

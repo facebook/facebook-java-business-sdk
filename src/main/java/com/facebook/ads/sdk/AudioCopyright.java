@@ -724,7 +724,7 @@ public class AudioCopyright extends APINode {
       VALUE_DDEX("ddex"),
       @SerializedName("reference_conflict_dialog")
       VALUE_REFERENCE_CONFLICT_DIALOG("reference_conflict_dialog"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

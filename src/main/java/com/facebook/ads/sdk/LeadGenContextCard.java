@@ -514,7 +514,7 @@ public class LeadGenContextCard extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("DRAFT")
       VALUE_DRAFT("DRAFT"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -533,7 +533,7 @@ public class LeadGenContextCard extends APINode {
       VALUE_LIST_STYLE("LIST_STYLE"),
       @SerializedName("PARAGRAPH_STYLE")
       VALUE_PARAGRAPH_STYLE("PARAGRAPH_STYLE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

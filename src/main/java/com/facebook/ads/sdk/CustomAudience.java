@@ -4180,7 +4180,7 @@ public class CustomAudience extends APINode {
       VALUE_PARTNER_PROVIDED_ONLY("PARTNER_PROVIDED_ONLY"),
       @SerializedName("BOTH_USER_AND_PARTNER_PROVIDED")
       VALUE_BOTH_USER_AND_PARTNER_PROVIDED("BOTH_USER_AND_PARTNER_PROVIDED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4244,7 +4244,7 @@ public class CustomAudience extends APINode {
       VALUE_MATCH("match"),
       @SerializedName("optout")
       VALUE_OPTOUT("optout"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4265,7 +4265,7 @@ public class CustomAudience extends APINode {
       VALUE_SHA256("sha256"),
       @SerializedName("plain")
       VALUE_PLAIN("plain"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

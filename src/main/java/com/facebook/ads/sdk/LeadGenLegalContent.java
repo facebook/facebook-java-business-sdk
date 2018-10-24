@@ -424,7 +424,7 @@ public class LeadGenLegalContent extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("DRAFT")
       VALUE_DRAFT("DRAFT"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

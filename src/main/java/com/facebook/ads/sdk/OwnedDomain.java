@@ -529,7 +529,7 @@ public class OwnedDomain extends APINode {
       VALUE_ADMIN("ADMIN"),
       @SerializedName("WEBMASTER_DEVELOPER")
       VALUE_WEBMASTER_DEVELOPER("WEBMASTER_DEVELOPER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

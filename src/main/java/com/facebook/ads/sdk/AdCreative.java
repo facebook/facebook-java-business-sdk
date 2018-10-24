@@ -2378,7 +2378,7 @@ public class AdCreative extends APINode {
       VALUE_NONE("NONE"),
       @SerializedName("POLITICAL")
       VALUE_POLITICAL("POLITICAL"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2399,7 +2399,7 @@ public class AdCreative extends APINode {
       VALUE_CATEGORY("category"),
       @SerializedName("product_type")
       VALUE_PRODUCT_TYPE("product_type"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2422,7 +2422,7 @@ public class AdCreative extends APINode {
       VALUE_PRODUCTS_COLLAGE("PRODUCTS_COLLAGE"),
       @SerializedName("PRODUCTS_SLIDESHOW")
       VALUE_PRODUCTS_SLIDESHOW("PRODUCTS_SLIDESHOW"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

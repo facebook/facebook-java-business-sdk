@@ -776,7 +776,7 @@ public class Profile extends APINode {
       VALUE_GROUP("group"),
       @SerializedName("application")
       VALUE_APPLICATION("application"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -809,7 +809,7 @@ public class Profile extends APINode {
       VALUE_THANKFUL("THANKFUL"),
       @SerializedName("PRIDE")
       VALUE_PRIDE("PRIDE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

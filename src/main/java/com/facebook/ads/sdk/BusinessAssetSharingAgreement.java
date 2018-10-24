@@ -585,7 +585,7 @@ public class BusinessAssetSharingAgreement extends APINode {
       VALUE_IN_PROGRESS("IN_PROGRESS"),
       @SerializedName("EXPIRED")
       VALUE_EXPIRED("EXPIRED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

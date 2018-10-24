@@ -1858,7 +1858,7 @@ public class LeadgenForm extends APINode {
       VALUE_VI_VN("VI_VN"),
       @SerializedName("ZH_CN")
       VALUE_ZH_CN("ZH_CN"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1881,7 +1881,7 @@ public class LeadgenForm extends APINode {
       VALUE_DELETED("DELETED"),
       @SerializedName("DRAFT")
       VALUE_DRAFT("DRAFT"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -434,7 +434,7 @@ public class ProductDaEventSamplesBatch extends APINode {
       VALUE_CONTENT_ID("CONTENT_ID"),
       @SerializedName("CONTENT_URL")
       VALUE_CONTENT_URL("CONTENT_URL"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -463,7 +463,7 @@ public class ProductDaEventSamplesBatch extends APINode {
       VALUE_LEAD("Lead"),
       @SerializedName("AddToWishlist")
       VALUE_ADDTOWISHLIST("AddToWishlist"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

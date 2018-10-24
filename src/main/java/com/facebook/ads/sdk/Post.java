@@ -7034,7 +7034,7 @@ public class Post extends APINode {
       VALUE_MIN("min"),
       @SerializedName("none")
       VALUE_NONE("none"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7053,7 +7053,7 @@ public class Post extends APINode {
       VALUE_HIDDEN("hidden"),
       @SerializedName("visible")
       VALUE_VISIBLE("visible"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7074,7 +7074,7 @@ public class Post extends APINode {
       VALUE_NORMAL("normal"),
       @SerializedName("forced_allow")
       VALUE_FORCED_ALLOW("forced_allow"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7119,7 +7119,7 @@ public class Post extends APINode {
       VALUE_MULT_CUSTOM_AUDIENCES("MULT_CUSTOM_AUDIENCES"),
       @SerializedName("EVENT_CUSTOM_AUDIENCES")
       VALUE_EVENT_CUSTOM_AUDIENCES("EVENT_CUSTOM_AUDIENCES"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7230,7 +7230,7 @@ public class Post extends APINode {
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -1613,7 +1613,7 @@ public class ReachFrequencyPrediction extends APINode {
       VALUE_RESERVE("reserve"),
       @SerializedName("cancel")
       VALUE_CANCEL("cancel"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1642,7 +1642,7 @@ public class ReachFrequencyPrediction extends APINode {
       VALUE_RESEARCH_POLL("RESEARCH_POLL"),
       @SerializedName("MIXED")
       VALUE_MIXED("MIXED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1679,7 +1679,7 @@ public class ReachFrequencyPrediction extends APINode {
       VALUE_REGULAR_STYLE("REGULAR_STYLE"),
       @SerializedName("REGULAR_TV_MOVIES")
       VALUE_REGULAR_TV_MOVIES("REGULAR_TV_MOVIES"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -504,7 +504,7 @@ public class PlaceTopic extends APINode {
       VALUE_48("48"),
       @SerializedName("72")
       VALUE_72("72"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

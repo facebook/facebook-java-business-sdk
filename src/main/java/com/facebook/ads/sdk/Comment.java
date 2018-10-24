@@ -1900,7 +1900,7 @@ public class Comment extends APINode {
       VALUE_SIDE_CONVERSATION_AND_POST_OWNER("SIDE_CONVERSATION_AND_POST_OWNER"),
       @SerializedName("GRAPHQL_MULTIPLE_VALUE_HACK_DO_NOT_USE")
       VALUE_GRAPHQL_MULTIPLE_VALUE_HACK_DO_NOT_USE("GRAPHQL_MULTIPLE_VALUE_HACK_DO_NOT_USE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1919,7 +1919,7 @@ public class Comment extends APINode {
       VALUE_STREAM("stream"),
       @SerializedName("toplevel")
       VALUE_TOPLEVEL("toplevel"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1938,7 +1938,7 @@ public class Comment extends APINode {
       VALUE_FILTER_LOW_QUALITY("filter_low_quality"),
       @SerializedName("no_filter")
       VALUE_NO_FILTER("no_filter"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1957,7 +1957,7 @@ public class Comment extends APINode {
       VALUE_CHRONOLOGICAL("chronological"),
       @SerializedName("reverse_chronological")
       VALUE_REVERSE_CHRONOLOGICAL("reverse_chronological"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

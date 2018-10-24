@@ -2633,7 +2633,7 @@ public class AdStudy extends APINode {
       VALUE_MOST_RESPONSIVE("MOST_RESPONSIVE"),
       @SerializedName("NOT_MOST_RESPONSIVE")
       VALUE_NOT_MOST_RESPONSIVE("NOT_MOST_RESPONSIVE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -2652,7 +2652,7 @@ public class AdStudy extends APINode {
       VALUE_ADMIN("ADMIN"),
       @SerializedName("ANALYST")
       VALUE_ANALYST("ANALYST"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

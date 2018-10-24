@@ -954,7 +954,7 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_ZOHO_ZAP("zoho_zap"),
       @SerializedName("ticketmaster")
       VALUE_TICKETMASTER("ticketmaster"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -977,7 +977,7 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_2("2"),
       @SerializedName("3")
       VALUE_3("3"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -996,7 +996,7 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_START("START"),
       @SerializedName("COMPLETE")
       VALUE_COMPLETE("COMPLETE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -1019,7 +1019,7 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_2("2"),
       @SerializedName("3")
       VALUE_3("3"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

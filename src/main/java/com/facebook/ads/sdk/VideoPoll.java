@@ -746,7 +746,7 @@ public class VideoPoll extends APINode {
       VALUE_SHOW_RESULTS("SHOW_RESULTS"),
       @SerializedName("DELETE_POLL")
       VALUE_DELETE_POLL("DELETE_POLL"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

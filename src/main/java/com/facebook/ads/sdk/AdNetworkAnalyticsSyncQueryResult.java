@@ -422,7 +422,7 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_DAY("DAY"),
       @SerializedName("TOTAL")
       VALUE_TOTAL("TOTAL"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -465,7 +465,7 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_CLICKED_VIEW_TAG("CLICKED_VIEW_TAG"),
       @SerializedName("NO_FILL_REASON")
       VALUE_NO_FILL_REASON("NO_FILL_REASON"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -544,7 +544,7 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR("FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR"),
       @SerializedName("FB_AD_NETWORK_NO_FILL")
       VALUE_FB_AD_NETWORK_NO_FILL("FB_AD_NETWORK_NO_FILL"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -565,7 +565,7 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_VALUE("VALUE"),
       @SerializedName("METRIC")
       VALUE_METRIC("METRIC"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -584,7 +584,7 @@ public class AdNetworkAnalyticsSyncQueryResult extends APINode {
       VALUE_ASCENDING("ASCENDING"),
       @SerializedName("DESCENDING")
       VALUE_DESCENDING("DESCENDING"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -633,7 +633,7 @@ public class FoodDrinkOrder extends APINode {
       VALUE_READY_FOR_PICKUP("READY_FOR_PICKUP"),
       @SerializedName("SERVING")
       VALUE_SERVING("SERVING"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

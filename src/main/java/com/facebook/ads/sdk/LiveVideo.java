@@ -4983,7 +4983,7 @@ public class LiveVideo extends APINode {
       VALUE_SCHEDULED_EXPIRED("SCHEDULED_EXPIRED"),
       @SerializedName("SCHEDULED_CANCELED")
       VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5004,7 +5004,7 @@ public class LiveVideo extends APINode {
       VALUE_CUBEMAP("CUBEMAP"),
       @SerializedName("HALF_EQUIRECTANGULAR")
       VALUE_HALF_EQUIRECTANGULAR("HALF_EQUIRECTANGULAR"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5023,7 +5023,7 @@ public class LiveVideo extends APINode {
       VALUE_TARGET("target"),
       @SerializedName("owner")
       VALUE_OWNER("owner"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5040,7 +5040,7 @@ public class LiveVideo extends APINode {
   public static enum EnumSpatialAudioFormat {
       @SerializedName("ambiX_4")
       VALUE_AMBIX_4("ambiX_4"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5065,7 +5065,7 @@ public class LiveVideo extends APINode {
       VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
       @SerializedName("SCHEDULED_CANCELED")
       VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5086,7 +5086,7 @@ public class LiveVideo extends APINode {
       VALUE_LEFT_RIGHT("LEFT_RIGHT"),
       @SerializedName("TOP_BOTTOM")
       VALUE_TOP_BOTTOM("TOP_BOTTOM"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5105,7 +5105,7 @@ public class LiveVideo extends APINode {
       VALUE_REGULAR("REGULAR"),
       @SerializedName("AMBIENT")
       VALUE_AMBIENT("AMBIENT"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5124,7 +5124,7 @@ public class LiveVideo extends APINode {
       VALUE_TAGGED("tagged"),
       @SerializedName("uploaded")
       VALUE_UPLOADED("uploaded"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -5147,7 +5147,7 @@ public class LiveVideo extends APINode {
       VALUE_DISCUSSION("DISCUSSION"),
       @SerializedName("RESTRICTED")
       VALUE_RESTRICTED("RESTRICTED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

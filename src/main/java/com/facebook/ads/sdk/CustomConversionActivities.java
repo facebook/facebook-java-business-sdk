@@ -450,7 +450,7 @@ public class CustomConversionActivities extends APINode {
       VALUE_CONVERSION_DELETE("conversion_delete"),
       @SerializedName("conversion_update")
       VALUE_CONVERSION_UPDATE("conversion_update"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

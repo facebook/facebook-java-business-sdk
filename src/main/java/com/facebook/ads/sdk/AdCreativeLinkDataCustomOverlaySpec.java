@@ -518,7 +518,7 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
       VALUE_BACKGROUND_595959("background_595959"),
       @SerializedName("background_000000")
       VALUE_BACKGROUND_000000("background_000000"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -549,7 +549,7 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
       VALUE_ROBOTO_CONDENSED_REGULAR("roboto_condensed_regular"),
       @SerializedName("noto_sans_regular")
       VALUE_NOTO_SANS_REGULAR("noto_sans_regular"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -584,7 +584,7 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
       VALUE_PAY_AT_HOTEL("pay_at_hotel"),
       @SerializedName("fast_delivery")
       VALUE_FAST_DELIVERY("fast_delivery"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -607,7 +607,7 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
       VALUE_BOTTOM_LEFT("bottom_left"),
       @SerializedName("bottom_right")
       VALUE_BOTTOM_RIGHT("bottom_right"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -624,7 +624,7 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
   public static enum EnumTemplate {
       @SerializedName("pill_with_text")
       VALUE_PILL_WITH_TEXT("pill_with_text"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -657,7 +657,7 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
       VALUE_TEXT_646464("text_646464"),
       @SerializedName("text_000000")
       VALUE_TEXT_000000("text_000000"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

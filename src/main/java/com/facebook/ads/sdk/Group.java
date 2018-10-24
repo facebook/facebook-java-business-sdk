@@ -7699,7 +7699,7 @@ public class Group extends APINode {
       VALUE_EPHEMERAL("EPHEMERAL"),
       @SerializedName("WORK_EPHEMERAL")
       VALUE_WORK_EPHEMERAL("WORK_EPHEMERAL"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7720,7 +7720,7 @@ public class Group extends APINode {
       VALUE_ANYONE("ANYONE"),
       @SerializedName("ADMIN_ONLY")
       VALUE_ADMIN_ONLY("ADMIN_ONLY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7741,7 +7741,7 @@ public class Group extends APINode {
       VALUE_ADMIN_ONLY("ADMIN_ONLY"),
       @SerializedName("ANYONE")
       VALUE_ANYONE("ANYONE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7796,7 +7796,7 @@ public class Group extends APINode {
       VALUE_WORKPLACE_MANAGER("WORKPLACE_MANAGER"),
       @SerializedName("WORKPLACE")
       VALUE_WORKPLACE("WORKPLACE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7823,7 +7823,7 @@ public class Group extends APINode {
       VALUE_MIN("min"),
       @SerializedName("none")
       VALUE_NONE("none"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7848,7 +7848,7 @@ public class Group extends APINode {
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7867,7 +7867,7 @@ public class Group extends APINode {
       VALUE_ENABLED("enabled"),
       @SerializedName("disabled")
       VALUE_DISABLED("disabled"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7886,7 +7886,7 @@ public class Group extends APINode {
       VALUE_1("1"),
       @SerializedName("2")
       VALUE_2("2"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7909,7 +7909,7 @@ public class Group extends APINode {
       VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
       @SerializedName("BRANDING_OTHER")
       VALUE_BRANDING_OTHER("BRANDING_OTHER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7934,7 +7934,7 @@ public class Group extends APINode {
       VALUE_4("4"),
       @SerializedName("5")
       VALUE_5("5"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7953,7 +7953,7 @@ public class Group extends APINode {
       VALUE_PLAINTEXT("PLAINTEXT"),
       @SerializedName("MARKDOWN")
       VALUE_MARKDOWN("MARKDOWN"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7972,7 +7972,7 @@ public class Group extends APINode {
       VALUE_STORY("STORY"),
       @SerializedName("TIMELINE")
       VALUE_TIMELINE("TIMELINE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -7995,7 +7995,7 @@ public class Group extends APINode {
       VALUE_50("50"),
       @SerializedName("68")
       VALUE_68("68"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

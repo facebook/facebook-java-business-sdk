@@ -502,7 +502,7 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   public static enum EnumCustomTextType {
       @SerializedName("free_shipping")
       VALUE_FREE_SHIPPING("free_shipping"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

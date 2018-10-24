@@ -24880,7 +24880,7 @@ public class Business extends APINode {
       VALUE_ADMIN_REQUIRED("admin_required"),
       @SerializedName("all_required")
       VALUE_ALL_REQUIRED("all_required"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -24939,7 +24939,7 @@ public class Business extends APINode {
       VALUE_LUXURY("LUXURY"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -24958,7 +24958,7 @@ public class Business extends APINode {
       VALUE_OWNER("OWNER"),
       @SerializedName("AGENCY")
       VALUE_AGENCY("AGENCY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -24979,7 +24979,7 @@ public class Business extends APINode {
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -25002,7 +25002,7 @@ public class Business extends APINode {
       VALUE_APP_DEVELOPER("APP_DEVELOPER"),
       @SerializedName("PUBLISHER")
       VALUE_PUBLISHER("PUBLISHER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -25027,7 +25027,7 @@ public class Business extends APINode {
       VALUE_ADVERTISER("ADVERTISER"),
       @SerializedName("INSIGHTS_ANALYST")
       VALUE_INSIGHTS_ANALYST("INSIGHTS_ANALYST"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -25052,7 +25052,7 @@ public class Business extends APINode {
       VALUE_ADVERTISER("ADVERTISER"),
       @SerializedName("INSIGHTS_ANALYST")
       VALUE_INSIGHTS_ANALYST("INSIGHTS_ANALYST"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -25079,7 +25079,7 @@ public class Business extends APINode {
       VALUE_EMPLOYEE("EMPLOYEE"),
       @SerializedName("FB_EMPLOYEE_SALES_REP")
       VALUE_FB_EMPLOYEE_SALES_REP("FB_EMPLOYEE_SALES_REP"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

@@ -3977,7 +3977,7 @@ public class AdsPixel extends APINode {
       VALUE_LAST_FIRED_TIME("LAST_FIRED_TIME"),
       @SerializedName("NAME")
       VALUE_NAME("NAME"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -3998,7 +3998,7 @@ public class AdsPixel extends APINode {
       VALUE_ADVERTISING_AND_ANALYTICS("ADVERTISING_AND_ANALYTICS"),
       @SerializedName("ANALYTICS_ONLY")
       VALUE_ANALYTICS_ONLY("ANALYTICS_ONLY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4019,7 +4019,7 @@ public class AdsPixel extends APINode {
       VALUE_FIRST_PARTY_COOKIE_ENABLED("FIRST_PARTY_COOKIE_ENABLED"),
       @SerializedName("FIRST_PARTY_COOKIE_DISABLED")
       VALUE_FIRST_PARTY_COOKIE_DISABLED("FIRST_PARTY_COOKIE_DISABLED"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4038,7 +4038,7 @@ public class AdsPixel extends APINode {
       VALUE_EDIT("EDIT"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4057,7 +4057,7 @@ public class AdsPixel extends APINode {
       VALUE_PRIMARY("PRIMARY"),
       @SerializedName("SECONDARY")
       VALUE_SECONDARY("SECONDARY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -4080,7 +4080,7 @@ public class AdsPixel extends APINode {
       VALUE_AGENCY("AGENCY"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

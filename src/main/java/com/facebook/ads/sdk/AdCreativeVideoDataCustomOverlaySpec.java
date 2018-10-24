@@ -532,7 +532,7 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
       VALUE_SOLID("solid"),
       @SerializedName("half")
       VALUE_HALF("half"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -567,7 +567,7 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
       VALUE_PAY_AT_HOTEL("pay_at_hotel"),
       @SerializedName("fast_delivery")
       VALUE_FAST_DELIVERY("fast_delivery"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -594,7 +594,7 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
       VALUE_MIDDLE_CENTER("middle_center"),
       @SerializedName("middle_right")
       VALUE_MIDDLE_RIGHT("middle_right"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -611,7 +611,7 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
   public static enum EnumTemplate {
       @SerializedName("rectangle_with_text")
       VALUE_RECTANGLE_WITH_TEXT("rectangle_with_text"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

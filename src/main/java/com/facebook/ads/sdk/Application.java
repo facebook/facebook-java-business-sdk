@@ -16782,7 +16782,7 @@ public class Application extends APINode {
       VALUE_GAMEROOM("GAMEROOM"),
       @SerializedName("INSTANT_GAME")
       VALUE_INSTANT_GAME("INSTANT_GAME"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -16809,7 +16809,7 @@ public class Application extends APINode {
       VALUE_INSTANT_ARTICLES("INSTANT_ARTICLES"),
       @SerializedName("UNKNOWN")
       VALUE_UNKNOWN("UNKNOWN"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -16828,7 +16828,7 @@ public class Application extends APINode {
       VALUE_ANDROID("ANDROID"),
       @SerializedName("IOS")
       VALUE_IOS("IOS"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -16849,7 +16849,7 @@ public class Application extends APINode {
       VALUE_PLUGIN("PLUGIN"),
       @SerializedName("BUTTON_SAMPLING")
       VALUE_BUTTON_SAMPLING("BUTTON_SAMPLING"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -16870,7 +16870,7 @@ public class Application extends APINode {
       VALUE_ADD("ADD"),
       @SerializedName("DELETE")
       VALUE_DELETE("DELETE"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -16891,7 +16891,7 @@ public class Application extends APINode {
       VALUE_NUMERIC("NUMERIC"),
       @SerializedName("TIME")
       VALUE_TIME("TIME"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -16910,7 +16910,7 @@ public class Application extends APINode {
       VALUE_HIGHER_IS_BETTER("HIGHER_IS_BETTER"),
       @SerializedName("LOWER_IS_BETTER")
       VALUE_LOWER_IS_BETTER("LOWER_IS_BETTER"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -16933,7 +16933,7 @@ public class Application extends APINode {
       VALUE_TESTERS("testers"),
       @SerializedName("insights users")
       VALUE_INSIGHTS_USERS("insights users"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -16950,7 +16950,7 @@ public class Application extends APINode {
   public static enum EnumApiName {
       @SerializedName("AVAILABILITY")
       VALUE_AVAILABILITY("AVAILABILITY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -16967,7 +16967,7 @@ public class Application extends APINode {
   public static enum EnumType {
       @SerializedName("test-users")
       VALUE_TEST_USERS("test-users"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -16988,7 +16988,7 @@ public class Application extends APINode {
       VALUE_CUSTOM_APP_EVENTS("CUSTOM_APP_EVENTS"),
       @SerializedName("DEFERRED_APP_LINK")
       VALUE_DEFERRED_APP_LINK("DEFERRED_APP_LINK"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -17005,7 +17005,7 @@ public class Application extends APINode {
   public static enum EnumUserIdType {
       @SerializedName("INSTANT_GAMES_PLAYER_ID")
       VALUE_INSTANT_GAMES_PLAYER_ID("INSTANT_GAMES_PLAYER_ID"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -17026,7 +17026,7 @@ public class Application extends APINode {
       VALUE_ADS_API_ERROR("ads_api_error"),
       @SerializedName("ads_api_error_rate")
       VALUE_ADS_API_ERROR_RATE("ads_api_error_rate"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -17045,7 +17045,7 @@ public class Application extends APINode {
       VALUE_DAILY("daily"),
       @SerializedName("hourly")
       VALUE_HOURLY("hourly"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -17070,7 +17070,7 @@ public class Application extends APINode {
       VALUE_VERSION("version"),
       @SerializedName("error")
       VALUE_ERROR("error"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -17091,7 +17091,7 @@ public class Application extends APINode {
       VALUE_METHOD("method"),
       @SerializedName("version")
       VALUE_VERSION("version"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -17122,7 +17122,7 @@ public class Application extends APINode {
       VALUE_DAYS_28("days_28"),
       @SerializedName("range")
       VALUE_RANGE("range"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -17205,7 +17205,7 @@ public class Application extends APINode {
       VALUE_JOURNEY_INCLUSION("JOURNEY_INCLUSION"),
       @SerializedName("USER_PROPERTY_USER_COUNT")
       VALUE_USER_PROPERTY_USER_COUNT("USER_PROPERTY_USER_COUNT"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -17224,7 +17224,7 @@ public class Application extends APINode {
       VALUE_GAME("GAME"),
       @SerializedName("NON_GAME")
       VALUE_NON_GAME("NON_GAME"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -17251,7 +17251,7 @@ public class Application extends APINode {
       VALUE_READY_FOR_PICKUP("READY_FOR_PICKUP"),
       @SerializedName("OUT_FOR_DELIVERY")
       VALUE_OUT_FOR_DELIVERY("OUT_FOR_DELIVERY"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -17268,7 +17268,7 @@ public class Application extends APINode {
   public static enum EnumSessionType {
       @SerializedName("attachment")
       VALUE_ATTACHMENT("attachment"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

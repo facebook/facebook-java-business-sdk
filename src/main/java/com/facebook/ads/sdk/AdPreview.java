@@ -467,7 +467,7 @@ public class AdPreview extends APINode {
   public static enum EnumRenderType {
       @SerializedName("FALLBACK")
       VALUE_FALLBACK("FALLBACK"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

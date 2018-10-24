@@ -781,7 +781,7 @@ public class PageSavedFilter extends APINode {
       VALUE_REGISTRATIONS("REGISTRATIONS"),
       @SerializedName("IA_REGIWALL_SETTINGS")
       VALUE_IA_REGIWALL_SETTINGS("IA_REGIWALL_SETTINGS"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 

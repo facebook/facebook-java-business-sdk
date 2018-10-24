@@ -486,7 +486,7 @@ public class InstagramInsightsResult extends APINode {
       VALUE_SAVED("saved"),
       @SerializedName("video_views")
       VALUE_VIDEO_VIEWS("video_views"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
@@ -511,7 +511,7 @@ public class InstagramInsightsResult extends APINode {
       VALUE_MONTH("month"),
       @SerializedName("lifetime")
       VALUE_LIFETIME("lifetime"),
-      NULL(null);
+      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
