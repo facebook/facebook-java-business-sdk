@@ -65,6 +65,8 @@ public class OffsitePixel extends APINode {
   private String mLastFiringTime = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("status")
+  private String mStatus = null;
   @SerializedName("tag")
   private String mTag = null;
   protected static Gson gson = null;
@@ -78,6 +80,7 @@ public class OffsitePixel extends APINode {
 
   public OffsitePixel(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -96,19 +99,17 @@ public class OffsitePixel extends APINode {
   }
 
   public static OffsitePixel fetchById(String id, APIContext context) throws APIException {
-    OffsitePixel offsitePixel =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return offsitePixel;
   }
 
   public static ListenableFuture<OffsitePixel> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<OffsitePixel> offsitePixel =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return offsitePixel;
   }
 
   public static APINodeList<OffsitePixel> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -121,12 +122,11 @@ public class OffsitePixel extends APINode {
   }
 
   public static ListenableFuture<APINodeList<OffsitePixel>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<OffsitePixel>> offsitePixel =
+    return
       new APIRequest(context, "", "/", "GET", OffsitePixel.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return offsitePixel;
   }
 
   private String getPrefixedId() {
@@ -302,6 +302,10 @@ public class OffsitePixel extends APINode {
     return mName;
   }
 
+  public String getFieldStatus() {
+    return mStatus;
+  }
+
   public String getFieldTag() {
     return mTag;
   }
@@ -325,6 +329,7 @@ public class OffsitePixel extends APINode {
       "js_pixel",
       "last_firing_time",
       "name",
+      "status",
       "tag",
     };
 
@@ -458,6 +463,13 @@ public class OffsitePixel extends APINode {
     }
     public APIRequestGet requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
       return this;
     }
     public APIRequestGet requestTagField () {
@@ -632,6 +644,7 @@ public class OffsitePixel extends APINode {
     this.mJsPixel = instance.mJsPixel;
     this.mLastFiringTime = instance.mLastFiringTime;
     this.mName = instance.mName;
+    this.mStatus = instance.mStatus;
     this.mTag = instance.mTag;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

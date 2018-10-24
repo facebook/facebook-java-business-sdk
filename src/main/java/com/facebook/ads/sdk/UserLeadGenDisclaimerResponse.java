@@ -59,13 +59,74 @@ public class UserLeadGenDisclaimerResponse extends APINode {
   private String mCheckboxKey = null;
   @SerializedName("is_checked")
   private String mIsChecked = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public UserLeadGenDisclaimerResponse() {
+  UserLeadGenDisclaimerResponse() {
+  }
+
+  public UserLeadGenDisclaimerResponse(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public UserLeadGenDisclaimerResponse(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public UserLeadGenDisclaimerResponse fetch() throws APIException{
+    UserLeadGenDisclaimerResponse newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static UserLeadGenDisclaimerResponse fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<UserLeadGenDisclaimerResponse> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static UserLeadGenDisclaimerResponse fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<UserLeadGenDisclaimerResponse> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<UserLeadGenDisclaimerResponse> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<UserLeadGenDisclaimerResponse>)(
+      new APIRequest<UserLeadGenDisclaimerResponse>(context, "", "/", "GET", UserLeadGenDisclaimerResponse.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<UserLeadGenDisclaimerResponse>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", UserLeadGenDisclaimerResponse.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static UserLeadGenDisclaimerResponse loadJSON(String json, APIContext context) {
     UserLeadGenDisclaimerResponse userLeadGenDisclaimerResponse = getGson().fromJson(json, UserLeadGenDisclaimerResponse.class);
@@ -208,26 +269,151 @@ public class UserLeadGenDisclaimerResponse extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldCheckboxKey() {
     return mCheckboxKey;
-  }
-
-  public UserLeadGenDisclaimerResponse setFieldCheckboxKey(String value) {
-    this.mCheckboxKey = value;
-    return this;
   }
 
   public String getFieldIsChecked() {
     return mIsChecked;
   }
 
-  public UserLeadGenDisclaimerResponse setFieldIsChecked(String value) {
-    this.mIsChecked = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<UserLeadGenDisclaimerResponse> {
+
+    UserLeadGenDisclaimerResponse lastResponse = null;
+    @Override
+    public UserLeadGenDisclaimerResponse getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "checkbox_key",
+      "is_checked",
+      "id",
+    };
+
+    @Override
+    public UserLeadGenDisclaimerResponse parseResponse(String response) throws APIException {
+      return UserLeadGenDisclaimerResponse.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public UserLeadGenDisclaimerResponse execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public UserLeadGenDisclaimerResponse execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<UserLeadGenDisclaimerResponse> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<UserLeadGenDisclaimerResponse> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, UserLeadGenDisclaimerResponse>() {
+           public UserLeadGenDisclaimerResponse apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestCheckboxKeyField () {
+      return this.requestCheckboxKeyField(true);
+    }
+    public APIRequestGet requestCheckboxKeyField (boolean value) {
+      this.requestField("checkbox_key", value);
+      return this;
+    }
+    public APIRequestGet requestIsCheckedField () {
+      return this.requestIsCheckedField(true);
+    }
+    public APIRequestGet requestIsCheckedField (boolean value) {
+      this.requestField("is_checked", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -246,6 +432,7 @@ public class UserLeadGenDisclaimerResponse extends APINode {
   public UserLeadGenDisclaimerResponse copyFrom(UserLeadGenDisclaimerResponse instance) {
     this.mCheckboxKey = instance.mCheckboxKey;
     this.mIsChecked = instance.mIsChecked;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

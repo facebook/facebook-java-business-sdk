@@ -81,8 +81,10 @@ public class Lead extends APINode {
   private Boolean mIsOrganic = null;
   @SerializedName("partner_name")
   private String mPartnerName = null;
+  @SerializedName("platform")
+  private String mPlatform = null;
   @SerializedName("post")
-  private Object mPost = null;
+  private Link mPost = null;
   @SerializedName("retailer_item_id")
   private String mRetailerItemId = null;
   protected static Gson gson = null;
@@ -96,6 +98,7 @@ public class Lead extends APINode {
 
   public Lead(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -114,19 +117,17 @@ public class Lead extends APINode {
   }
 
   public static Lead fetchById(String id, APIContext context) throws APIException {
-    Lead lead =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return lead;
   }
 
   public static ListenableFuture<Lead> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<Lead> lead =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return lead;
   }
 
   public static APINodeList<Lead> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -139,12 +140,11 @@ public class Lead extends APINode {
   }
 
   public static ListenableFuture<APINodeList<Lead>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<Lead>> lead =
+    return
       new APIRequest(context, "", "/", "GET", Lead.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return lead;
   }
 
   private String getPrefixedId() {
@@ -356,7 +356,14 @@ public class Lead extends APINode {
     return mPartnerName;
   }
 
-  public Object getFieldPost() {
+  public String getFieldPlatform() {
+    return mPlatform;
+  }
+
+  public Link getFieldPost() {
+    if (mPost != null) {
+      mPost.context = getContext();
+    }
     return mPost;
   }
 
@@ -493,6 +500,7 @@ public class Lead extends APINode {
       "id",
       "is_organic",
       "partner_name",
+      "platform",
       "post",
       "retailer_item_id",
     };
@@ -676,6 +684,13 @@ public class Lead extends APINode {
       this.requestField("partner_name", value);
       return this;
     }
+    public APIRequestGet requestPlatformField () {
+      return this.requestPlatformField(true);
+    }
+    public APIRequestGet requestPlatformField (boolean value) {
+      this.requestField("platform", value);
+      return this;
+    }
     public APIRequestGet requestPostField () {
       return this.requestPostField(true);
     }
@@ -720,6 +735,7 @@ public class Lead extends APINode {
     this.mId = instance.mId;
     this.mIsOrganic = instance.mIsOrganic;
     this.mPartnerName = instance.mPartnerName;
+    this.mPlatform = instance.mPlatform;
     this.mPost = instance.mPost;
     this.mRetailerItemId = instance.mRetailerItemId;
     this.context = instance.context;

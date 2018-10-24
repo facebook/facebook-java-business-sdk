@@ -61,13 +61,74 @@ public class AdRuleHistoryResult extends APINode {
   private String mObjectId = null;
   @SerializedName("object_type")
   private EnumObjectType mObjectType = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdRuleHistoryResult() {
+  AdRuleHistoryResult() {
+  }
+
+  public AdRuleHistoryResult(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdRuleHistoryResult(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdRuleHistoryResult fetch() throws APIException{
+    AdRuleHistoryResult newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdRuleHistoryResult fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdRuleHistoryResult> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdRuleHistoryResult fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdRuleHistoryResult> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdRuleHistoryResult> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdRuleHistoryResult>)(
+      new APIRequest<AdRuleHistoryResult>(context, "", "/", "GET", AdRuleHistoryResult.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdRuleHistoryResult>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdRuleHistoryResult.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdRuleHistoryResult loadJSON(String json, APIContext context) {
     AdRuleHistoryResult adRuleHistoryResult = getGson().fromJson(json, AdRuleHistoryResult.class);
@@ -210,40 +271,163 @@ public class AdRuleHistoryResult extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public List<AdRuleHistoryResultAction> getFieldActions() {
     return mActions;
   }
 
-  public AdRuleHistoryResult setFieldActions(List<AdRuleHistoryResultAction> value) {
-    this.mActions = value;
-    return this;
-  }
-
-  public AdRuleHistoryResult setFieldActions(String value) {
-    Type type = new TypeToken<List<AdRuleHistoryResultAction>>(){}.getType();
-    this.mActions = AdRuleHistoryResultAction.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldObjectId() {
     return mObjectId;
-  }
-
-  public AdRuleHistoryResult setFieldObjectId(String value) {
-    this.mObjectId = value;
-    return this;
   }
 
   public EnumObjectType getFieldObjectType() {
     return mObjectType;
   }
 
-  public AdRuleHistoryResult setFieldObjectType(EnumObjectType value) {
-    this.mObjectType = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdRuleHistoryResult> {
+
+    AdRuleHistoryResult lastResponse = null;
+    @Override
+    public AdRuleHistoryResult getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "actions",
+      "object_id",
+      "object_type",
+      "id",
+    };
+
+    @Override
+    public AdRuleHistoryResult parseResponse(String response) throws APIException {
+      return AdRuleHistoryResult.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdRuleHistoryResult execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdRuleHistoryResult execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdRuleHistoryResult> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdRuleHistoryResult> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdRuleHistoryResult>() {
+           public AdRuleHistoryResult apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestActionsField () {
+      return this.requestActionsField(true);
+    }
+    public APIRequestGet requestActionsField (boolean value) {
+      this.requestField("actions", value);
+      return this;
+    }
+    public APIRequestGet requestObjectIdField () {
+      return this.requestObjectIdField(true);
+    }
+    public APIRequestGet requestObjectIdField (boolean value) {
+      this.requestField("object_id", value);
+      return this;
+    }
+    public APIRequestGet requestObjectTypeField () {
+      return this.requestObjectTypeField(true);
+    }
+    public APIRequestGet requestObjectTypeField (boolean value) {
+      this.requestField("object_type", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumObjectType {
       @SerializedName("CAMPAIGN")
@@ -284,6 +468,7 @@ public class AdRuleHistoryResult extends APINode {
     this.mActions = instance.mActions;
     this.mObjectId = instance.mObjectId;
     this.mObjectType = instance.mObjectType;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

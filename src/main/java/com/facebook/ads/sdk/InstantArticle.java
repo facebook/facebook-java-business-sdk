@@ -84,6 +84,7 @@ public class InstantArticle extends APINode {
 
   public InstantArticle(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -102,19 +103,17 @@ public class InstantArticle extends APINode {
   }
 
   public static InstantArticle fetchById(String id, APIContext context) throws APIException {
-    InstantArticle instantArticle =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return instantArticle;
   }
 
   public static ListenableFuture<InstantArticle> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<InstantArticle> instantArticle =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return instantArticle;
   }
 
   public static APINodeList<InstantArticle> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -127,12 +126,11 @@ public class InstantArticle extends APINode {
   }
 
   public static ListenableFuture<APINodeList<InstantArticle>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<InstantArticle>> instantArticle =
+    return
       new APIRequest(context, "", "/", "GET", InstantArticle.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return instantArticle;
   }
 
   private String getPrefixedId() {
@@ -283,8 +281,12 @@ public class InstantArticle extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestDeleteInstantArticles deleteInstantArticles() {
-    return new APIRequestDeleteInstantArticles(this.getPrefixedId().toString(), context);
+  public APIRequestGetInsights getInsights() {
+    return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -330,11 +332,196 @@ public class InstantArticle extends APINode {
 
 
 
-  public static class APIRequestDeleteInstantArticles extends APIRequest<APINode> {
+  public static class APIRequestGetInsights extends APIRequest<InstantArticleInsightsQueryResult> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<InstantArticleInsightsQueryResult> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<InstantArticleInsightsQueryResult> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "metric",
+      "period",
+      "since",
+      "until",
+      "breakdown",
+    };
+
+    public static final String[] FIELDS = {
+      "breakdowns",
+      "name",
+      "time",
+      "value",
+      "id",
+    };
+
+    @Override
+    public APINodeList<InstantArticleInsightsQueryResult> parseResponse(String response) throws APIException {
+      return InstantArticleInsightsQueryResult.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<InstantArticleInsightsQueryResult> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<InstantArticleInsightsQueryResult> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<InstantArticleInsightsQueryResult>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<InstantArticleInsightsQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<InstantArticleInsightsQueryResult>>() {
+           public APINodeList<InstantArticleInsightsQueryResult> apply(String result) {
+             try {
+               return APIRequestGetInsights.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetInsights(String nodeId, APIContext context) {
+      super(context, nodeId, "/insights", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetInsights setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsights setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInsights setMetric (List<Object> metric) {
+      this.setParam("metric", metric);
+      return this;
+    }
+    public APIRequestGetInsights setMetric (String metric) {
+      this.setParam("metric", metric);
+      return this;
+    }
+
+    public APIRequestGetInsights setPeriod (InstantArticleInsightsQueryResult.EnumPeriod period) {
+      this.setParam("period", period);
+      return this;
+    }
+    public APIRequestGetInsights setPeriod (String period) {
+      this.setParam("period", period);
+      return this;
+    }
+
+    public APIRequestGetInsights setSince (String since) {
+      this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetInsights setUntil (String until) {
+      this.setParam("until", until);
+      return this;
+    }
+
+    public APIRequestGetInsights setBreakdown (InstantArticleInsightsQueryResult.EnumBreakdown breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
+    public APIRequestGetInsights setBreakdown (String breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
+
+    public APIRequestGetInsights requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInsights requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsights requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetInsights requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsights requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsights requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetInsights requestBreakdownsField () {
+      return this.requestBreakdownsField(true);
+    }
+    public APIRequestGetInsights requestBreakdownsField (boolean value) {
+      this.requestField("breakdowns", value);
+      return this;
+    }
+    public APIRequestGetInsights requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetInsights requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetInsights requestTimeField () {
+      return this.requestTimeField(true);
+    }
+    public APIRequestGetInsights requestTimeField (boolean value) {
+      this.requestField("time", value);
+      return this;
+    }
+    public APIRequestGetInsights requestValueField () {
+      return this.requestValueField(true);
+    }
+    public APIRequestGetInsights requestValueField (boolean value) {
+      this.requestField("value", value);
+      return this;
+    }
+    public APIRequestGetInsights requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetInsights requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -344,32 +531,32 @@ public class InstantArticle extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
              try {
-               return APIRequestDeleteInstantArticles.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -378,28 +565,28 @@ public class InstantArticle extends APINode {
       );
     };
 
-    public APIRequestDeleteInstantArticles(String nodeId, APIContext context) {
-      super(context, nodeId, "/instant_articles", "DELETE", Arrays.asList(PARAMS));
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestDeleteInstantArticles setParam(String param, Object value) {
+    public APIRequestDelete setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestDeleteInstantArticles setParams(Map<String, Object> params) {
+    public APIRequestDelete setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestDeleteInstantArticles requestAllFields () {
+    public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestDeleteInstantArticles requestAllFields (boolean value) {
+    public APIRequestDelete requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -407,12 +594,12 @@ public class InstantArticle extends APINode {
     }
 
     @Override
-    public APIRequestDeleteInstantArticles requestFields (List<String> fields) {
+    public APIRequestDelete requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestDeleteInstantArticles requestFields (List<String> fields, boolean value) {
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -420,13 +607,13 @@ public class InstantArticle extends APINode {
     }
 
     @Override
-    public APIRequestDeleteInstantArticles requestField (String field) {
+    public APIRequestDelete requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestDeleteInstantArticles requestField (String field, boolean value) {
+    public APIRequestDelete requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }

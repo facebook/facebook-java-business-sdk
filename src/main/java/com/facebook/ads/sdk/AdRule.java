@@ -86,6 +86,7 @@ public class AdRule extends APINode {
 
   public AdRule(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -104,19 +105,17 @@ public class AdRule extends APINode {
   }
 
   public static AdRule fetchById(String id, APIContext context) throws APIException {
-    AdRule adRule =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return adRule;
   }
 
   public static ListenableFuture<AdRule> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<AdRule> adRule =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return adRule;
   }
 
   public static APINodeList<AdRule> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -129,12 +128,11 @@ public class AdRule extends APINode {
   }
 
   public static ListenableFuture<APINodeList<AdRule>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<AdRule>> adRule =
+    return
       new APIRequest(context, "", "/", "GET", AdRule.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return adRule;
   }
 
   private String getPrefixedId() {
@@ -285,8 +283,16 @@ public class AdRule extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateExecute createExecute() {
+    return new APIRequestCreateExecute(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetHistory getHistory() {
     return new APIRequestGetHistory(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreatePreview createPreview() {
+    return new APIRequestCreatePreview(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDelete delete() {
@@ -318,10 +324,16 @@ public class AdRule extends APINode {
   }
 
   public AdRuleEvaluationSpec getFieldEvaluationSpec() {
+    if (mEvaluationSpec != null) {
+      mEvaluationSpec.context = getContext();
+    }
     return mEvaluationSpec;
   }
 
   public AdRuleExecutionSpec getFieldExecutionSpec() {
+    if (mExecutionSpec != null) {
+      mExecutionSpec.context = getContext();
+    }
     return mExecutionSpec;
   }
 
@@ -334,6 +346,9 @@ public class AdRule extends APINode {
   }
 
   public AdRuleScheduleSpec getFieldScheduleSpec() {
+    if (mScheduleSpec != null) {
+      mScheduleSpec.context = getContext();
+    }
     return mScheduleSpec;
   }
 
@@ -347,6 +362,109 @@ public class AdRule extends APINode {
 
 
 
+  public static class APIRequestCreateExecute extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestCreateExecute.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateExecute(String nodeId, APIContext context) {
+      super(context, nodeId, "/execute", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateExecute setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateExecute setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateExecute requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateExecute requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateExecute requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateExecute requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateExecute requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateExecute requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetHistory extends APIRequest<AdRuleHistory> {
 
     APINodeList<AdRuleHistory> lastResponse = null;
@@ -355,9 +473,9 @@ public class AdRule extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "object_id",
       "action",
       "hide_no_changes",
-      "object_id",
     };
 
     public static final String[] FIELDS = {
@@ -369,6 +487,7 @@ public class AdRule extends APINode {
       "results",
       "schedule_spec",
       "timestamp",
+      "id",
     };
 
     @Override
@@ -423,6 +542,11 @@ public class AdRule extends APINode {
     }
 
 
+    public APIRequestGetHistory setObjectId (String objectId) {
+      this.setParam("object_id", objectId);
+      return this;
+    }
+
     public APIRequestGetHistory setAction (AdRuleHistory.EnumAction action) {
       this.setParam("action", action);
       return this;
@@ -438,11 +562,6 @@ public class AdRule extends APINode {
     }
     public APIRequestGetHistory setHideNoChanges (String hideNoChanges) {
       this.setParam("hide_no_changes", hideNoChanges);
-      return this;
-    }
-
-    public APIRequestGetHistory setObjectId (String objectId) {
-      this.setParam("object_id", objectId);
       return this;
     }
 
@@ -538,6 +657,116 @@ public class AdRule extends APINode {
       this.requestField("timestamp", value);
       return this;
     }
+    public APIRequestGetHistory requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetHistory requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreatePreview extends APIRequest<AdRule> {
+
+    AdRule lastResponse = null;
+    @Override
+    public AdRule getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdRule parseResponse(String response) throws APIException {
+      return AdRule.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdRule execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdRule execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdRule> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdRule> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdRule>() {
+           public AdRule apply(String result) {
+             try {
+               return APIRequestCreatePreview.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreatePreview(String nodeId, APIContext context) {
+      super(context, nodeId, "/preview", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreatePreview setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePreview setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreatePreview requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreatePreview requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePreview requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreatePreview requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePreview requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreatePreview requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
@@ -836,8 +1065,8 @@ public class AdRule extends APINode {
     public static final String[] PARAMS = {
       "evaluation_spec",
       "execution_spec",
-      "name",
       "schedule_spec",
+      "name",
       "status",
     };
 
@@ -914,17 +1143,17 @@ public class AdRule extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
     public APIRequestUpdate setScheduleSpec (Object scheduleSpec) {
       this.setParam("schedule_spec", scheduleSpec);
       return this;
     }
     public APIRequestUpdate setScheduleSpec (String scheduleSpec) {
       this.setParam("schedule_spec", scheduleSpec);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
       return this;
     }
 

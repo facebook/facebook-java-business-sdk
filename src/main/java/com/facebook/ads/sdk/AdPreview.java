@@ -57,13 +57,74 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdPreview extends APINode {
   @SerializedName("body")
   private String mBody = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdPreview() {
+  AdPreview() {
+  }
+
+  public AdPreview(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdPreview(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdPreview fetch() throws APIException{
+    AdPreview newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdPreview fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdPreview> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdPreview fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdPreview> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdPreview> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdPreview>)(
+      new APIRequest<AdPreview>(context, "", "/", "GET", AdPreview.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdPreview>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdPreview.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdPreview loadJSON(String json, APIContext context) {
     AdPreview adPreview = getGson().fromJson(json, AdPreview.class);
@@ -206,17 +267,139 @@ public class AdPreview extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldBody() {
     return mBody;
   }
 
-  public AdPreview setFieldBody(String value) {
-    this.mBody = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdPreview> {
+
+    AdPreview lastResponse = null;
+    @Override
+    public AdPreview getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "body",
+      "id",
+    };
+
+    @Override
+    public AdPreview parseResponse(String response) throws APIException {
+      return AdPreview.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdPreview execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdPreview execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdPreview> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdPreview> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdPreview>() {
+           public AdPreview apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestBodyField () {
+      return this.requestBodyField(true);
+    }
+    public APIRequestGet requestBodyField (boolean value) {
+      this.requestField("body", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumAdFormat {
       @SerializedName("RIGHT_COLUMN_STANDARD")
@@ -263,11 +446,32 @@ public class AdPreview extends APINode {
       VALUE_SUGGESTED_VIDEO_MOBILE("SUGGESTED_VIDEO_MOBILE"),
       @SerializedName("MARKETPLACE_MOBILE")
       VALUE_MARKETPLACE_MOBILE("MARKETPLACE_MOBILE"),
+      @SerializedName("FACEBOOK_STORY_MOBILE")
+      VALUE_FACEBOOK_STORY_MOBILE("FACEBOOK_STORY_MOBILE"),
+      @SerializedName("WATCH_FEED_MOBILE")
+      VALUE_WATCH_FEED_MOBILE("WATCH_FEED_MOBILE"),
       NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
 
       private String value;
 
       private EnumAdFormat(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumRenderType {
+      @SerializedName("FALLBACK")
+      VALUE_FALLBACK("FALLBACK"),
+      NULL(null);
+
+      private String value;
+
+      private EnumRenderType(String value) {
         this.value = value;
       }
 
@@ -293,6 +497,7 @@ public class AdPreview extends APINode {
 
   public AdPreview copyFrom(AdPreview instance) {
     this.mBody = instance.mBody;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -56,11 +56,11 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class LeadGenDraftQuestion extends APINode {
   @SerializedName("conditional_questions_choices")
-  private List<Object> mConditionalQuestionsChoices = null;
+  private List<LeadGenConditionalQuestionsGroupChoices> mConditionalQuestionsChoices = null;
   @SerializedName("conditional_questions_group_id")
   private String mConditionalQuestionsGroupId = null;
   @SerializedName("dependent_conditional_questions")
-  private List<Object> mDependentConditionalQuestions = null;
+  private List<LeadGenConditionalQuestionsGroupQuestions> mDependentConditionalQuestions = null;
   @SerializedName("inline_context")
   private String mInlineContext = null;
   @SerializedName("key")
@@ -71,13 +71,74 @@ public class LeadGenDraftQuestion extends APINode {
   private List<LeadGenQuestionOption> mOptions = null;
   @SerializedName("type")
   private String mType = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public LeadGenDraftQuestion() {
+  LeadGenDraftQuestion() {
+  }
+
+  public LeadGenDraftQuestion(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public LeadGenDraftQuestion(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public LeadGenDraftQuestion fetch() throws APIException{
+    LeadGenDraftQuestion newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static LeadGenDraftQuestion fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<LeadGenDraftQuestion> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static LeadGenDraftQuestion fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<LeadGenDraftQuestion> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<LeadGenDraftQuestion> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<LeadGenDraftQuestion>)(
+      new APIRequest<LeadGenDraftQuestion>(context, "", "/", "GET", LeadGenDraftQuestion.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<LeadGenDraftQuestion>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", LeadGenDraftQuestion.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static LeadGenDraftQuestion loadJSON(String json, APIContext context) {
     LeadGenDraftQuestion leadGenDraftQuestion = getGson().fromJson(json, LeadGenDraftQuestion.class);
@@ -220,85 +281,223 @@ public class LeadGenDraftQuestion extends APINode {
     return getGson().toJson(this);
   }
 
-
-  public List<Object> getFieldConditionalQuestionsChoices() {
-    return mConditionalQuestionsChoices;
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public LeadGenDraftQuestion setFieldConditionalQuestionsChoices(List<Object> value) {
-    this.mConditionalQuestionsChoices = value;
-    return this;
+
+  public List<LeadGenConditionalQuestionsGroupChoices> getFieldConditionalQuestionsChoices() {
+    return mConditionalQuestionsChoices;
   }
 
   public String getFieldConditionalQuestionsGroupId() {
     return mConditionalQuestionsGroupId;
   }
 
-  public LeadGenDraftQuestion setFieldConditionalQuestionsGroupId(String value) {
-    this.mConditionalQuestionsGroupId = value;
-    return this;
-  }
-
-  public List<Object> getFieldDependentConditionalQuestions() {
+  public List<LeadGenConditionalQuestionsGroupQuestions> getFieldDependentConditionalQuestions() {
     return mDependentConditionalQuestions;
-  }
-
-  public LeadGenDraftQuestion setFieldDependentConditionalQuestions(List<Object> value) {
-    this.mDependentConditionalQuestions = value;
-    return this;
   }
 
   public String getFieldInlineContext() {
     return mInlineContext;
   }
 
-  public LeadGenDraftQuestion setFieldInlineContext(String value) {
-    this.mInlineContext = value;
-    return this;
-  }
-
   public String getFieldKey() {
     return mKey;
-  }
-
-  public LeadGenDraftQuestion setFieldKey(String value) {
-    this.mKey = value;
-    return this;
   }
 
   public String getFieldLabel() {
     return mLabel;
   }
 
-  public LeadGenDraftQuestion setFieldLabel(String value) {
-    this.mLabel = value;
-    return this;
-  }
-
   public List<LeadGenQuestionOption> getFieldOptions() {
     return mOptions;
   }
 
-  public LeadGenDraftQuestion setFieldOptions(List<LeadGenQuestionOption> value) {
-    this.mOptions = value;
-    return this;
-  }
-
-  public LeadGenDraftQuestion setFieldOptions(String value) {
-    Type type = new TypeToken<List<LeadGenQuestionOption>>(){}.getType();
-    this.mOptions = LeadGenQuestionOption.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldType() {
     return mType;
   }
 
-  public LeadGenDraftQuestion setFieldType(String value) {
-    this.mType = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<LeadGenDraftQuestion> {
+
+    LeadGenDraftQuestion lastResponse = null;
+    @Override
+    public LeadGenDraftQuestion getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "conditional_questions_choices",
+      "conditional_questions_group_id",
+      "dependent_conditional_questions",
+      "inline_context",
+      "key",
+      "label",
+      "options",
+      "type",
+      "id",
+    };
+
+    @Override
+    public LeadGenDraftQuestion parseResponse(String response) throws APIException {
+      return LeadGenDraftQuestion.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public LeadGenDraftQuestion execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public LeadGenDraftQuestion execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<LeadGenDraftQuestion> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<LeadGenDraftQuestion> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, LeadGenDraftQuestion>() {
+           public LeadGenDraftQuestion apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestConditionalQuestionsChoicesField () {
+      return this.requestConditionalQuestionsChoicesField(true);
+    }
+    public APIRequestGet requestConditionalQuestionsChoicesField (boolean value) {
+      this.requestField("conditional_questions_choices", value);
+      return this;
+    }
+    public APIRequestGet requestConditionalQuestionsGroupIdField () {
+      return this.requestConditionalQuestionsGroupIdField(true);
+    }
+    public APIRequestGet requestConditionalQuestionsGroupIdField (boolean value) {
+      this.requestField("conditional_questions_group_id", value);
+      return this;
+    }
+    public APIRequestGet requestDependentConditionalQuestionsField () {
+      return this.requestDependentConditionalQuestionsField(true);
+    }
+    public APIRequestGet requestDependentConditionalQuestionsField (boolean value) {
+      this.requestField("dependent_conditional_questions", value);
+      return this;
+    }
+    public APIRequestGet requestInlineContextField () {
+      return this.requestInlineContextField(true);
+    }
+    public APIRequestGet requestInlineContextField (boolean value) {
+      this.requestField("inline_context", value);
+      return this;
+    }
+    public APIRequestGet requestKeyField () {
+      return this.requestKeyField(true);
+    }
+    public APIRequestGet requestKeyField (boolean value) {
+      this.requestField("key", value);
+      return this;
+    }
+    public APIRequestGet requestLabelField () {
+      return this.requestLabelField(true);
+    }
+    public APIRequestGet requestLabelField (boolean value) {
+      this.requestField("label", value);
+      return this;
+    }
+    public APIRequestGet requestOptionsField () {
+      return this.requestOptionsField(true);
+    }
+    public APIRequestGet requestOptionsField (boolean value) {
+      this.requestField("options", value);
+      return this;
+    }
+    public APIRequestGet requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGet requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -323,6 +522,7 @@ public class LeadGenDraftQuestion extends APINode {
     this.mLabel = instance.mLabel;
     this.mOptions = instance.mOptions;
     this.mType = instance.mType;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

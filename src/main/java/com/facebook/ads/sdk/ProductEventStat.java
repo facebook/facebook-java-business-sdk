@@ -77,13 +77,74 @@ public class ProductEventStat extends APINode {
   private Long mUniqueMatchedContentIds = null;
   @SerializedName("unique_unmatched_content_ids")
   private Long mUniqueUnmatchedContentIds = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public ProductEventStat() {
+  ProductEventStat() {
+  }
+
+  public ProductEventStat(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public ProductEventStat(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public ProductEventStat fetch() throws APIException{
+    ProductEventStat newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static ProductEventStat fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<ProductEventStat> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static ProductEventStat fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<ProductEventStat> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<ProductEventStat> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ProductEventStat>)(
+      new APIRequest<ProductEventStat>(context, "", "/", "GET", ProductEventStat.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<ProductEventStat>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", ProductEventStat.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static ProductEventStat loadJSON(String json, APIContext context) {
     ProductEventStat productEventStat = getGson().fromJson(json, ProductEventStat.class);
@@ -226,41 +287,25 @@ public class ProductEventStat extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldDateStart() {
     return mDateStart;
-  }
-
-  public ProductEventStat setFieldDateStart(String value) {
-    this.mDateStart = value;
-    return this;
   }
 
   public String getFieldDateStop() {
     return mDateStop;
   }
 
-  public ProductEventStat setFieldDateStop(String value) {
-    this.mDateStop = value;
-    return this;
-  }
-
   public EnumDeviceType getFieldDeviceType() {
     return mDeviceType;
   }
 
-  public ProductEventStat setFieldDeviceType(EnumDeviceType value) {
-    this.mDeviceType = value;
-    return this;
-  }
-
   public EnumEvent getFieldEvent() {
     return mEvent;
-  }
-
-  public ProductEventStat setFieldEvent(EnumEvent value) {
-    this.mEvent = value;
-    return this;
   }
 
   public ExternalEventSource getFieldEventSource() {
@@ -270,71 +315,234 @@ public class ProductEventStat extends APINode {
     return mEventSource;
   }
 
-  public ProductEventStat setFieldEventSource(ExternalEventSource value) {
-    this.mEventSource = value;
-    return this;
-  }
-
-  public ProductEventStat setFieldEventSource(String value) {
-    Type type = new TypeToken<ExternalEventSource>(){}.getType();
-    this.mEventSource = ExternalEventSource.getGson().fromJson(value, type);
-    return this;
-  }
   public Long getFieldTotalContentIdsMatchedOtherCatalogs() {
     return mTotalContentIdsMatchedOtherCatalogs;
-  }
-
-  public ProductEventStat setFieldTotalContentIdsMatchedOtherCatalogs(Long value) {
-    this.mTotalContentIdsMatchedOtherCatalogs = value;
-    return this;
   }
 
   public Long getFieldTotalMatchedContentIds() {
     return mTotalMatchedContentIds;
   }
 
-  public ProductEventStat setFieldTotalMatchedContentIds(Long value) {
-    this.mTotalMatchedContentIds = value;
-    return this;
-  }
-
   public Long getFieldTotalUnmatchedContentIds() {
     return mTotalUnmatchedContentIds;
-  }
-
-  public ProductEventStat setFieldTotalUnmatchedContentIds(Long value) {
-    this.mTotalUnmatchedContentIds = value;
-    return this;
   }
 
   public Long getFieldUniqueContentIdsMatchedOtherCatalogs() {
     return mUniqueContentIdsMatchedOtherCatalogs;
   }
 
-  public ProductEventStat setFieldUniqueContentIdsMatchedOtherCatalogs(Long value) {
-    this.mUniqueContentIdsMatchedOtherCatalogs = value;
-    return this;
-  }
-
   public Long getFieldUniqueMatchedContentIds() {
     return mUniqueMatchedContentIds;
-  }
-
-  public ProductEventStat setFieldUniqueMatchedContentIds(Long value) {
-    this.mUniqueMatchedContentIds = value;
-    return this;
   }
 
   public Long getFieldUniqueUnmatchedContentIds() {
     return mUniqueUnmatchedContentIds;
   }
 
-  public ProductEventStat setFieldUniqueUnmatchedContentIds(Long value) {
-    this.mUniqueUnmatchedContentIds = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<ProductEventStat> {
+
+    ProductEventStat lastResponse = null;
+    @Override
+    public ProductEventStat getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "date_start",
+      "date_stop",
+      "device_type",
+      "event",
+      "event_source",
+      "total_content_ids_matched_other_catalogs",
+      "total_matched_content_ids",
+      "total_unmatched_content_ids",
+      "unique_content_ids_matched_other_catalogs",
+      "unique_matched_content_ids",
+      "unique_unmatched_content_ids",
+      "id",
+    };
+
+    @Override
+    public ProductEventStat parseResponse(String response) throws APIException {
+      return ProductEventStat.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public ProductEventStat execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductEventStat execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductEventStat> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductEventStat> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProductEventStat>() {
+           public ProductEventStat apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestDateStartField () {
+      return this.requestDateStartField(true);
+    }
+    public APIRequestGet requestDateStartField (boolean value) {
+      this.requestField("date_start", value);
+      return this;
+    }
+    public APIRequestGet requestDateStopField () {
+      return this.requestDateStopField(true);
+    }
+    public APIRequestGet requestDateStopField (boolean value) {
+      this.requestField("date_stop", value);
+      return this;
+    }
+    public APIRequestGet requestDeviceTypeField () {
+      return this.requestDeviceTypeField(true);
+    }
+    public APIRequestGet requestDeviceTypeField (boolean value) {
+      this.requestField("device_type", value);
+      return this;
+    }
+    public APIRequestGet requestEventField () {
+      return this.requestEventField(true);
+    }
+    public APIRequestGet requestEventField (boolean value) {
+      this.requestField("event", value);
+      return this;
+    }
+    public APIRequestGet requestEventSourceField () {
+      return this.requestEventSourceField(true);
+    }
+    public APIRequestGet requestEventSourceField (boolean value) {
+      this.requestField("event_source", value);
+      return this;
+    }
+    public APIRequestGet requestTotalContentIdsMatchedOtherCatalogsField () {
+      return this.requestTotalContentIdsMatchedOtherCatalogsField(true);
+    }
+    public APIRequestGet requestTotalContentIdsMatchedOtherCatalogsField (boolean value) {
+      this.requestField("total_content_ids_matched_other_catalogs", value);
+      return this;
+    }
+    public APIRequestGet requestTotalMatchedContentIdsField () {
+      return this.requestTotalMatchedContentIdsField(true);
+    }
+    public APIRequestGet requestTotalMatchedContentIdsField (boolean value) {
+      this.requestField("total_matched_content_ids", value);
+      return this;
+    }
+    public APIRequestGet requestTotalUnmatchedContentIdsField () {
+      return this.requestTotalUnmatchedContentIdsField(true);
+    }
+    public APIRequestGet requestTotalUnmatchedContentIdsField (boolean value) {
+      this.requestField("total_unmatched_content_ids", value);
+      return this;
+    }
+    public APIRequestGet requestUniqueContentIdsMatchedOtherCatalogsField () {
+      return this.requestUniqueContentIdsMatchedOtherCatalogsField(true);
+    }
+    public APIRequestGet requestUniqueContentIdsMatchedOtherCatalogsField (boolean value) {
+      this.requestField("unique_content_ids_matched_other_catalogs", value);
+      return this;
+    }
+    public APIRequestGet requestUniqueMatchedContentIdsField () {
+      return this.requestUniqueMatchedContentIdsField(true);
+    }
+    public APIRequestGet requestUniqueMatchedContentIdsField (boolean value) {
+      this.requestField("unique_matched_content_ids", value);
+      return this;
+    }
+    public APIRequestGet requestUniqueUnmatchedContentIdsField () {
+      return this.requestUniqueUnmatchedContentIdsField(true);
+    }
+    public APIRequestGet requestUniqueUnmatchedContentIdsField (boolean value) {
+      this.requestField("unique_unmatched_content_ids", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumDeviceType {
       @SerializedName("desktop")
@@ -443,6 +651,7 @@ public class ProductEventStat extends APINode {
     this.mUniqueContentIdsMatchedOtherCatalogs = instance.mUniqueContentIdsMatchedOtherCatalogs;
     this.mUniqueMatchedContentIds = instance.mUniqueMatchedContentIds;
     this.mUniqueUnmatchedContentIds = instance.mUniqueUnmatchedContentIds;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

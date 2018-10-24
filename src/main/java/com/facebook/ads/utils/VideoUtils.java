@@ -29,7 +29,7 @@ import com.facebook.ads.sdk.APIException;
 import com.facebook.ads.sdk.APINode;
 import com.facebook.ads.sdk.APINodeList;
 import com.facebook.ads.sdk.APIRequest;
-import com.facebook.ads.sdk.AdAccount.EnumUploadPhase;
+import com.facebook.ads.sdk.AdVideo.EnumUploadPhase;
 import com.google.gson.JsonObject;
 import java.io.File;
 import java.io.FileInputStream;

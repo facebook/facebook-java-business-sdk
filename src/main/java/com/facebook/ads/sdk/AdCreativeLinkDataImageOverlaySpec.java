@@ -71,13 +71,74 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   private EnumTextType mTextType = null;
   @SerializedName("theme_color")
   private EnumThemeColor mThemeColor = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdCreativeLinkDataImageOverlaySpec() {
+  AdCreativeLinkDataImageOverlaySpec() {
+  }
+
+  public AdCreativeLinkDataImageOverlaySpec(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdCreativeLinkDataImageOverlaySpec(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdCreativeLinkDataImageOverlaySpec fetch() throws APIException{
+    AdCreativeLinkDataImageOverlaySpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdCreativeLinkDataImageOverlaySpec fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdCreativeLinkDataImageOverlaySpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdCreativeLinkDataImageOverlaySpec fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdCreativeLinkDataImageOverlaySpec> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdCreativeLinkDataImageOverlaySpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdCreativeLinkDataImageOverlaySpec>)(
+      new APIRequest<AdCreativeLinkDataImageOverlaySpec>(context, "", "/", "GET", AdCreativeLinkDataImageOverlaySpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdCreativeLinkDataImageOverlaySpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdCreativeLinkDataImageOverlaySpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdCreativeLinkDataImageOverlaySpec loadJSON(String json, APIContext context) {
     AdCreativeLinkDataImageOverlaySpec adCreativeLinkDataImageOverlaySpec = getGson().fromJson(json, AdCreativeLinkDataImageOverlaySpec.class);
@@ -220,80 +281,223 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public EnumCustomTextType getFieldCustomTextType() {
     return mCustomTextType;
-  }
-
-  public AdCreativeLinkDataImageOverlaySpec setFieldCustomTextType(EnumCustomTextType value) {
-    this.mCustomTextType = value;
-    return this;
   }
 
   public Boolean getFieldFloatWithMargin() {
     return mFloatWithMargin;
   }
 
-  public AdCreativeLinkDataImageOverlaySpec setFieldFloatWithMargin(Boolean value) {
-    this.mFloatWithMargin = value;
-    return this;
-  }
-
   public EnumOverlayTemplate getFieldOverlayTemplate() {
     return mOverlayTemplate;
-  }
-
-  public AdCreativeLinkDataImageOverlaySpec setFieldOverlayTemplate(EnumOverlayTemplate value) {
-    this.mOverlayTemplate = value;
-    return this;
   }
 
   public EnumPosition getFieldPosition() {
     return mPosition;
   }
 
-  public AdCreativeLinkDataImageOverlaySpec setFieldPosition(EnumPosition value) {
-    this.mPosition = value;
-    return this;
-  }
-
   public EnumTextFont getFieldTextFont() {
     return mTextFont;
-  }
-
-  public AdCreativeLinkDataImageOverlaySpec setFieldTextFont(EnumTextFont value) {
-    this.mTextFont = value;
-    return this;
   }
 
   public List<String> getFieldTextTemplateTags() {
     return mTextTemplateTags;
   }
 
-  public AdCreativeLinkDataImageOverlaySpec setFieldTextTemplateTags(List<String> value) {
-    this.mTextTemplateTags = value;
-    return this;
-  }
-
   public EnumTextType getFieldTextType() {
     return mTextType;
-  }
-
-  public AdCreativeLinkDataImageOverlaySpec setFieldTextType(EnumTextType value) {
-    this.mTextType = value;
-    return this;
   }
 
   public EnumThemeColor getFieldThemeColor() {
     return mThemeColor;
   }
 
-  public AdCreativeLinkDataImageOverlaySpec setFieldThemeColor(EnumThemeColor value) {
-    this.mThemeColor = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdCreativeLinkDataImageOverlaySpec> {
+
+    AdCreativeLinkDataImageOverlaySpec lastResponse = null;
+    @Override
+    public AdCreativeLinkDataImageOverlaySpec getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "custom_text_type",
+      "float_with_margin",
+      "overlay_template",
+      "position",
+      "text_font",
+      "text_template_tags",
+      "text_type",
+      "theme_color",
+      "id",
+    };
+
+    @Override
+    public AdCreativeLinkDataImageOverlaySpec parseResponse(String response) throws APIException {
+      return AdCreativeLinkDataImageOverlaySpec.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdCreativeLinkDataImageOverlaySpec execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdCreativeLinkDataImageOverlaySpec execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdCreativeLinkDataImageOverlaySpec> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdCreativeLinkDataImageOverlaySpec> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdCreativeLinkDataImageOverlaySpec>() {
+           public AdCreativeLinkDataImageOverlaySpec apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestCustomTextTypeField () {
+      return this.requestCustomTextTypeField(true);
+    }
+    public APIRequestGet requestCustomTextTypeField (boolean value) {
+      this.requestField("custom_text_type", value);
+      return this;
+    }
+    public APIRequestGet requestFloatWithMarginField () {
+      return this.requestFloatWithMarginField(true);
+    }
+    public APIRequestGet requestFloatWithMarginField (boolean value) {
+      this.requestField("float_with_margin", value);
+      return this;
+    }
+    public APIRequestGet requestOverlayTemplateField () {
+      return this.requestOverlayTemplateField(true);
+    }
+    public APIRequestGet requestOverlayTemplateField (boolean value) {
+      this.requestField("overlay_template", value);
+      return this;
+    }
+    public APIRequestGet requestPositionField () {
+      return this.requestPositionField(true);
+    }
+    public APIRequestGet requestPositionField (boolean value) {
+      this.requestField("position", value);
+      return this;
+    }
+    public APIRequestGet requestTextFontField () {
+      return this.requestTextFontField(true);
+    }
+    public APIRequestGet requestTextFontField (boolean value) {
+      this.requestField("text_font", value);
+      return this;
+    }
+    public APIRequestGet requestTextTemplateTagsField () {
+      return this.requestTextTemplateTagsField(true);
+    }
+    public APIRequestGet requestTextTemplateTagsField (boolean value) {
+      this.requestField("text_template_tags", value);
+      return this;
+    }
+    public APIRequestGet requestTextTypeField () {
+      return this.requestTextTypeField(true);
+    }
+    public APIRequestGet requestTextTypeField (boolean value) {
+      this.requestField("text_type", value);
+      return this;
+    }
+    public APIRequestGet requestThemeColorField () {
+      return this.requestThemeColorField(true);
+    }
+    public APIRequestGet requestThemeColorField (boolean value) {
+      this.requestField("theme_color", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumCustomTextType {
       @SerializedName("free_shipping")
@@ -486,6 +690,7 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
     this.mTextTemplateTags = instance.mTextTemplateTags;
     this.mTextType = instance.mTextType;
     this.mThemeColor = instance.mThemeColor;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -69,13 +69,74 @@ public class AdCreativePhotoData extends APINode {
   private String mPageWelcomeMessage = null;
   @SerializedName("url")
   private String mUrl = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdCreativePhotoData() {
+  AdCreativePhotoData() {
+  }
+
+  public AdCreativePhotoData(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdCreativePhotoData(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdCreativePhotoData fetch() throws APIException{
+    AdCreativePhotoData newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdCreativePhotoData fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdCreativePhotoData> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdCreativePhotoData fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdCreativePhotoData> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdCreativePhotoData> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdCreativePhotoData>)(
+      new APIRequest<AdCreativePhotoData>(context, "", "/", "GET", AdCreativePhotoData.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdCreativePhotoData>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdCreativePhotoData.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdCreativePhotoData loadJSON(String json, APIContext context) {
     AdCreativePhotoData adCreativePhotoData = getGson().fromJson(json, AdCreativePhotoData.class);
@@ -218,71 +279,211 @@ public class AdCreativePhotoData extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldBrandedContentSharedToSponsorStatus() {
     return mBrandedContentSharedToSponsorStatus;
-  }
-
-  public AdCreativePhotoData setFieldBrandedContentSharedToSponsorStatus(String value) {
-    this.mBrandedContentSharedToSponsorStatus = value;
-    return this;
   }
 
   public String getFieldBrandedContentSponsorPageId() {
     return mBrandedContentSponsorPageId;
   }
 
-  public AdCreativePhotoData setFieldBrandedContentSponsorPageId(String value) {
-    this.mBrandedContentSponsorPageId = value;
-    return this;
-  }
-
   public String getFieldBrandedContentSponsorRelationship() {
     return mBrandedContentSponsorRelationship;
-  }
-
-  public AdCreativePhotoData setFieldBrandedContentSponsorRelationship(String value) {
-    this.mBrandedContentSponsorRelationship = value;
-    return this;
   }
 
   public String getFieldCaption() {
     return mCaption;
   }
 
-  public AdCreativePhotoData setFieldCaption(String value) {
-    this.mCaption = value;
-    return this;
-  }
-
   public String getFieldImageHash() {
     return mImageHash;
-  }
-
-  public AdCreativePhotoData setFieldImageHash(String value) {
-    this.mImageHash = value;
-    return this;
   }
 
   public String getFieldPageWelcomeMessage() {
     return mPageWelcomeMessage;
   }
 
-  public AdCreativePhotoData setFieldPageWelcomeMessage(String value) {
-    this.mPageWelcomeMessage = value;
-    return this;
-  }
-
   public String getFieldUrl() {
     return mUrl;
   }
 
-  public AdCreativePhotoData setFieldUrl(String value) {
-    this.mUrl = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdCreativePhotoData> {
+
+    AdCreativePhotoData lastResponse = null;
+    @Override
+    public AdCreativePhotoData getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "branded_content_shared_to_sponsor_status",
+      "branded_content_sponsor_page_id",
+      "branded_content_sponsor_relationship",
+      "caption",
+      "image_hash",
+      "page_welcome_message",
+      "url",
+      "id",
+    };
+
+    @Override
+    public AdCreativePhotoData parseResponse(String response) throws APIException {
+      return AdCreativePhotoData.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdCreativePhotoData execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdCreativePhotoData execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdCreativePhotoData> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdCreativePhotoData> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdCreativePhotoData>() {
+           public AdCreativePhotoData apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestBrandedContentSharedToSponsorStatusField () {
+      return this.requestBrandedContentSharedToSponsorStatusField(true);
+    }
+    public APIRequestGet requestBrandedContentSharedToSponsorStatusField (boolean value) {
+      this.requestField("branded_content_shared_to_sponsor_status", value);
+      return this;
+    }
+    public APIRequestGet requestBrandedContentSponsorPageIdField () {
+      return this.requestBrandedContentSponsorPageIdField(true);
+    }
+    public APIRequestGet requestBrandedContentSponsorPageIdField (boolean value) {
+      this.requestField("branded_content_sponsor_page_id", value);
+      return this;
+    }
+    public APIRequestGet requestBrandedContentSponsorRelationshipField () {
+      return this.requestBrandedContentSponsorRelationshipField(true);
+    }
+    public APIRequestGet requestBrandedContentSponsorRelationshipField (boolean value) {
+      this.requestField("branded_content_sponsor_relationship", value);
+      return this;
+    }
+    public APIRequestGet requestCaptionField () {
+      return this.requestCaptionField(true);
+    }
+    public APIRequestGet requestCaptionField (boolean value) {
+      this.requestField("caption", value);
+      return this;
+    }
+    public APIRequestGet requestImageHashField () {
+      return this.requestImageHashField(true);
+    }
+    public APIRequestGet requestImageHashField (boolean value) {
+      this.requestField("image_hash", value);
+      return this;
+    }
+    public APIRequestGet requestPageWelcomeMessageField () {
+      return this.requestPageWelcomeMessageField(true);
+    }
+    public APIRequestGet requestPageWelcomeMessageField (boolean value) {
+      this.requestField("page_welcome_message", value);
+      return this;
+    }
+    public APIRequestGet requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGet requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -306,6 +507,7 @@ public class AdCreativePhotoData extends APINode {
     this.mImageHash = instance.mImageHash;
     this.mPageWelcomeMessage = instance.mPageWelcomeMessage;
     this.mUrl = instance.mUrl;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

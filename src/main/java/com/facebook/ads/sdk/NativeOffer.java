@@ -63,12 +63,14 @@ public class NativeOffer extends APINode {
   private String mBarcodeType = null;
   @SerializedName("barcode_value")
   private String mBarcodeValue = null;
+  @SerializedName("block_reshares")
+  private Boolean mBlockReshares = null;
   @SerializedName("details")
   private String mDetails = null;
   @SerializedName("disable_location")
   private Boolean mDisableLocation = null;
   @SerializedName("discounts")
-  private List<Object> mDiscounts = null;
+  private List<NativeOfferDiscount> mDiscounts = null;
   @SerializedName("expiration_time")
   private String mExpirationTime = null;
   @SerializedName("id")
@@ -85,6 +87,8 @@ public class NativeOffer extends APINode {
   private Page mPage = null;
   @SerializedName("page_set_id")
   private String mPageSetId = null;
+  @SerializedName("redemption_code")
+  private String mRedemptionCode = null;
   @SerializedName("redemption_link")
   private String mRedemptionLink = null;
   @SerializedName("save_count")
@@ -114,6 +118,7 @@ public class NativeOffer extends APINode {
 
   public NativeOffer(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -132,19 +137,17 @@ public class NativeOffer extends APINode {
   }
 
   public static NativeOffer fetchById(String id, APIContext context) throws APIException {
-    NativeOffer nativeOffer =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return nativeOffer;
   }
 
   public static ListenableFuture<NativeOffer> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<NativeOffer> nativeOffer =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return nativeOffer;
   }
 
   public static APINodeList<NativeOffer> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -157,12 +160,11 @@ public class NativeOffer extends APINode {
   }
 
   public static ListenableFuture<APINodeList<NativeOffer>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<NativeOffer>> nativeOffer =
+    return
       new APIRequest(context, "", "/", "GET", NativeOffer.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return nativeOffer;
   }
 
   private String getPrefixedId() {
@@ -321,6 +323,10 @@ public class NativeOffer extends APINode {
     return new APIRequestCreateNativeOfferView(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetViews getViews() {
+    return new APIRequestGetViews(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -342,6 +348,10 @@ public class NativeOffer extends APINode {
     return mBarcodeValue;
   }
 
+  public Boolean getFieldBlockReshares() {
+    return mBlockReshares;
+  }
+
   public String getFieldDetails() {
     return mDetails;
   }
@@ -350,7 +360,7 @@ public class NativeOffer extends APINode {
     return mDisableLocation;
   }
 
-  public List<Object> getFieldDiscounts() {
+  public List<NativeOfferDiscount> getFieldDiscounts() {
     return mDiscounts;
   }
 
@@ -387,6 +397,10 @@ public class NativeOffer extends APINode {
 
   public String getFieldPageSetId() {
     return mPageSetId;
+  }
+
+  public String getFieldRedemptionCode() {
+    return mRedemptionCode;
   }
 
   public String getFieldRedemptionLink() {
@@ -558,16 +572,19 @@ public class NativeOffer extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "urls",
+      "photos",
       "ad_account",
       "ad_image_hashes",
+      "image_crops",
+      "published_ads",
+      "published",
+      "message",
+      "place_data",
+      "deeplinks",
       "carousel_captions",
       "carousel_links",
-      "image_crops",
-      "message",
-      "photos",
-      "published",
-      "published_ads",
-      "urls",
+      "carousel_data",
       "videos",
     };
 
@@ -626,6 +643,24 @@ public class NativeOffer extends APINode {
     }
 
 
+    public APIRequestCreateNativeOfferView setUrls (List<String> urls) {
+      this.setParam("urls", urls);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setUrls (String urls) {
+      this.setParam("urls", urls);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setPhotos (List<String> photos) {
+      this.setParam("photos", photos);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setPhotos (String photos) {
+      this.setParam("photos", photos);
+      return this;
+    }
+
     public APIRequestCreateNativeOfferView setAdAccount (String adAccount) {
       this.setParam("ad_account", adAccount);
       return this;
@@ -637,6 +672,56 @@ public class NativeOffer extends APINode {
     }
     public APIRequestCreateNativeOfferView setAdImageHashes (String adImageHashes) {
       this.setParam("ad_image_hashes", adImageHashes);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setImageCrops (List<Map<String, String>> imageCrops) {
+      this.setParam("image_crops", imageCrops);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setImageCrops (String imageCrops) {
+      this.setParam("image_crops", imageCrops);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setPublishedAds (Boolean publishedAds) {
+      this.setParam("published_ads", publishedAds);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setPublishedAds (String publishedAds) {
+      this.setParam("published_ads", publishedAds);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setPublished (Boolean published) {
+      this.setParam("published", published);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setPublished (String published) {
+      this.setParam("published", published);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setPlaceData (Object placeData) {
+      this.setParam("place_data", placeData);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setPlaceData (String placeData) {
+      this.setParam("place_data", placeData);
+      return this;
+    }
+
+    public APIRequestCreateNativeOfferView setDeeplinks (List<String> deeplinks) {
+      this.setParam("deeplinks", deeplinks);
+      return this;
+    }
+    public APIRequestCreateNativeOfferView setDeeplinks (String deeplinks) {
+      this.setParam("deeplinks", deeplinks);
       return this;
     }
 
@@ -658,53 +743,12 @@ public class NativeOffer extends APINode {
       return this;
     }
 
-    public APIRequestCreateNativeOfferView setImageCrops (List<Map<String, String>> imageCrops) {
-      this.setParam("image_crops", imageCrops);
+    public APIRequestCreateNativeOfferView setCarouselData (List<Object> carouselData) {
+      this.setParam("carousel_data", carouselData);
       return this;
     }
-    public APIRequestCreateNativeOfferView setImageCrops (String imageCrops) {
-      this.setParam("image_crops", imageCrops);
-      return this;
-    }
-
-    public APIRequestCreateNativeOfferView setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestCreateNativeOfferView setPhotos (List<String> photos) {
-      this.setParam("photos", photos);
-      return this;
-    }
-    public APIRequestCreateNativeOfferView setPhotos (String photos) {
-      this.setParam("photos", photos);
-      return this;
-    }
-
-    public APIRequestCreateNativeOfferView setPublished (Boolean published) {
-      this.setParam("published", published);
-      return this;
-    }
-    public APIRequestCreateNativeOfferView setPublished (String published) {
-      this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestCreateNativeOfferView setPublishedAds (Boolean publishedAds) {
-      this.setParam("published_ads", publishedAds);
-      return this;
-    }
-    public APIRequestCreateNativeOfferView setPublishedAds (String publishedAds) {
-      this.setParam("published_ads", publishedAds);
-      return this;
-    }
-
-    public APIRequestCreateNativeOfferView setUrls (List<String> urls) {
-      this.setParam("urls", urls);
-      return this;
-    }
-    public APIRequestCreateNativeOfferView setUrls (String urls) {
-      this.setParam("urls", urls);
+    public APIRequestCreateNativeOfferView setCarouselData (String carouselData) {
+      this.setParam("carousel_data", carouselData);
       return this;
     }
 
@@ -755,6 +799,133 @@ public class NativeOffer extends APINode {
 
   }
 
+  public static class APIRequestGetViews extends APIRequest<NativeOfferView> {
+
+    APINodeList<NativeOfferView> lastResponse = null;
+    @Override
+    public APINodeList<NativeOfferView> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "offer",
+      "save_count",
+    };
+
+    @Override
+    public APINodeList<NativeOfferView> parseResponse(String response) throws APIException {
+      return NativeOfferView.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<NativeOfferView> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<NativeOfferView> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<NativeOfferView>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<NativeOfferView>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<NativeOfferView>>() {
+           public APINodeList<NativeOfferView> apply(String result) {
+             try {
+               return APIRequestGetViews.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetViews(String nodeId, APIContext context) {
+      super(context, nodeId, "/views", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetViews setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViews setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetViews requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetViews requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViews requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetViews requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViews requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViews requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetViews requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetViews requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetViews requestOfferField () {
+      return this.requestOfferField(true);
+    }
+    public APIRequestGetViews requestOfferField (boolean value) {
+      this.requestField("offer", value);
+      return this;
+    }
+    public APIRequestGetViews requestSaveCountField () {
+      return this.requestSaveCountField(true);
+    }
+    public APIRequestGetViews requestSaveCountField (boolean value) {
+      this.requestField("save_count", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGet extends APIRequest<NativeOffer> {
 
     NativeOffer lastResponse = null;
@@ -770,6 +941,7 @@ public class NativeOffer extends APINode {
       "barcode_photo_uri",
       "barcode_type",
       "barcode_value",
+      "block_reshares",
       "details",
       "disable_location",
       "discounts",
@@ -781,6 +953,7 @@ public class NativeOffer extends APINode {
       "online_code",
       "page",
       "page_set_id",
+      "redemption_code",
       "redemption_link",
       "save_count",
       "terms",
@@ -908,6 +1081,13 @@ public class NativeOffer extends APINode {
       this.requestField("barcode_value", value);
       return this;
     }
+    public APIRequestGet requestBlockResharesField () {
+      return this.requestBlockResharesField(true);
+    }
+    public APIRequestGet requestBlockResharesField (boolean value) {
+      this.requestField("block_reshares", value);
+      return this;
+    }
     public APIRequestGet requestDetailsField () {
       return this.requestDetailsField(true);
     }
@@ -983,6 +1163,13 @@ public class NativeOffer extends APINode {
     }
     public APIRequestGet requestPageSetIdField (boolean value) {
       this.requestField("page_set_id", value);
+      return this;
+    }
+    public APIRequestGet requestRedemptionCodeField () {
+      return this.requestRedemptionCodeField(true);
+    }
+    public APIRequestGet requestRedemptionCodeField (boolean value) {
+      this.requestField("redemption_code", value);
       return this;
     }
     public APIRequestGet requestRedemptionLinkField () {
@@ -1160,6 +1347,7 @@ public class NativeOffer extends APINode {
     this.mBarcodePhotoUri = instance.mBarcodePhotoUri;
     this.mBarcodeType = instance.mBarcodeType;
     this.mBarcodeValue = instance.mBarcodeValue;
+    this.mBlockReshares = instance.mBlockReshares;
     this.mDetails = instance.mDetails;
     this.mDisableLocation = instance.mDisableLocation;
     this.mDiscounts = instance.mDiscounts;
@@ -1171,6 +1359,7 @@ public class NativeOffer extends APINode {
     this.mOnlineCode = instance.mOnlineCode;
     this.mPage = instance.mPage;
     this.mPageSetId = instance.mPageSetId;
+    this.mRedemptionCode = instance.mRedemptionCode;
     this.mRedemptionLink = instance.mRedemptionLink;
     this.mSaveCount = instance.mSaveCount;
     this.mTerms = instance.mTerms;

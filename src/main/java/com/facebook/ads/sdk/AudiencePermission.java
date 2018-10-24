@@ -61,13 +61,74 @@ public class AudiencePermission extends APINode {
   private String mShareAccountId = null;
   @SerializedName("share_account_name")
   private String mShareAccountName = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AudiencePermission() {
+  AudiencePermission() {
+  }
+
+  public AudiencePermission(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AudiencePermission(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AudiencePermission fetch() throws APIException{
+    AudiencePermission newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AudiencePermission fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AudiencePermission> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AudiencePermission fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AudiencePermission> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AudiencePermission> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AudiencePermission>)(
+      new APIRequest<AudiencePermission>(context, "", "/", "GET", AudiencePermission.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AudiencePermission>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AudiencePermission.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AudiencePermission loadJSON(String json, APIContext context) {
     AudiencePermission audiencePermission = getGson().fromJson(json, AudiencePermission.class);
@@ -210,6 +271,10 @@ public class AudiencePermission extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public CustomAudience getFieldAudience() {
     if (mAudience != null) {
@@ -218,35 +283,154 @@ public class AudiencePermission extends APINode {
     return mAudience;
   }
 
-  public AudiencePermission setFieldAudience(CustomAudience value) {
-    this.mAudience = value;
-    return this;
-  }
-
-  public AudiencePermission setFieldAudience(String value) {
-    Type type = new TypeToken<CustomAudience>(){}.getType();
-    this.mAudience = CustomAudience.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldShareAccountId() {
     return mShareAccountId;
-  }
-
-  public AudiencePermission setFieldShareAccountId(String value) {
-    this.mShareAccountId = value;
-    return this;
   }
 
   public String getFieldShareAccountName() {
     return mShareAccountName;
   }
 
-  public AudiencePermission setFieldShareAccountName(String value) {
-    this.mShareAccountName = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AudiencePermission> {
+
+    AudiencePermission lastResponse = null;
+    @Override
+    public AudiencePermission getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "audience",
+      "share_account_id",
+      "share_account_name",
+      "id",
+    };
+
+    @Override
+    public AudiencePermission parseResponse(String response) throws APIException {
+      return AudiencePermission.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AudiencePermission execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AudiencePermission execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AudiencePermission> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AudiencePermission> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AudiencePermission>() {
+           public AudiencePermission apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestAudienceField () {
+      return this.requestAudienceField(true);
+    }
+    public APIRequestGet requestAudienceField (boolean value) {
+      this.requestField("audience", value);
+      return this;
+    }
+    public APIRequestGet requestShareAccountIdField () {
+      return this.requestShareAccountIdField(true);
+    }
+    public APIRequestGet requestShareAccountIdField (boolean value) {
+      this.requestField("share_account_id", value);
+      return this;
+    }
+    public APIRequestGet requestShareAccountNameField () {
+      return this.requestShareAccountNameField(true);
+    }
+    public APIRequestGet requestShareAccountNameField (boolean value) {
+      this.requestField("share_account_name", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -266,6 +450,7 @@ public class AudiencePermission extends APINode {
     this.mAudience = instance.mAudience;
     this.mShareAccountId = instance.mShareAccountId;
     this.mShareAccountName = instance.mShareAccountName;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

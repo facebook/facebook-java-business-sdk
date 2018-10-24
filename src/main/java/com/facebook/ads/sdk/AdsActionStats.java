@@ -67,6 +67,8 @@ public class AdsActionStats extends APINode {
   private String m7dClick = null;
   @SerializedName("7d_view")
   private String m7dView = null;
+  @SerializedName("action_canvas_component_id")
+  private String mActionCanvasComponentId = null;
   @SerializedName("action_canvas_component_name")
   private String mActionCanvasComponentName = null;
   @SerializedName("action_carousel_card_id")
@@ -77,14 +79,20 @@ public class AdsActionStats extends APINode {
   private String mActionDestination = null;
   @SerializedName("action_device")
   private String mActionDevice = null;
+  @SerializedName("action_event_channel")
+  private String mActionEventChannel = null;
   @SerializedName("action_link_click_destination")
   private String mActionLinkClickDestination = null;
+  @SerializedName("action_location_code")
+  private String mActionLocationCode = null;
   @SerializedName("action_reaction")
   private String mActionReaction = null;
   @SerializedName("action_target_id")
   private String mActionTargetId = null;
   @SerializedName("action_type")
   private String mActionType = null;
+  @SerializedName("action_video_asset_id")
+  private String mActionVideoAssetId = null;
   @SerializedName("action_video_sound")
   private String mActionVideoSound = null;
   @SerializedName("action_video_type")
@@ -93,13 +101,74 @@ public class AdsActionStats extends APINode {
   private String mInline = null;
   @SerializedName("value")
   private String mValue = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdsActionStats() {
+  AdsActionStats() {
+  }
+
+  public AdsActionStats(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdsActionStats(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdsActionStats fetch() throws APIException{
+    AdsActionStats newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdsActionStats fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdsActionStats> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdsActionStats fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdsActionStats> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdsActionStats> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdsActionStats>)(
+      new APIRequest<AdsActionStats>(context, "", "/", "GET", AdsActionStats.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdsActionStats>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdsActionStats.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdsActionStats loadJSON(String json, APIContext context) {
     AdsActionStats adsActionStats = getGson().fromJson(json, AdsActionStats.class);
@@ -242,179 +311,403 @@ public class AdsActionStats extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getField1dClick() {
     return m1dClick;
-  }
-
-  public AdsActionStats setField1dClick(String value) {
-    this.m1dClick = value;
-    return this;
   }
 
   public String getField1dView() {
     return m1dView;
   }
 
-  public AdsActionStats setField1dView(String value) {
-    this.m1dView = value;
-    return this;
-  }
-
   public String getField28dClick() {
     return m28dClick;
-  }
-
-  public AdsActionStats setField28dClick(String value) {
-    this.m28dClick = value;
-    return this;
   }
 
   public String getField28dView() {
     return m28dView;
   }
 
-  public AdsActionStats setField28dView(String value) {
-    this.m28dView = value;
-    return this;
-  }
-
   public String getField7dClick() {
     return m7dClick;
-  }
-
-  public AdsActionStats setField7dClick(String value) {
-    this.m7dClick = value;
-    return this;
   }
 
   public String getField7dView() {
     return m7dView;
   }
 
-  public AdsActionStats setField7dView(String value) {
-    this.m7dView = value;
-    return this;
+  public String getFieldActionCanvasComponentId() {
+    return mActionCanvasComponentId;
   }
 
   public String getFieldActionCanvasComponentName() {
     return mActionCanvasComponentName;
   }
 
-  public AdsActionStats setFieldActionCanvasComponentName(String value) {
-    this.mActionCanvasComponentName = value;
-    return this;
-  }
-
   public String getFieldActionCarouselCardId() {
     return mActionCarouselCardId;
-  }
-
-  public AdsActionStats setFieldActionCarouselCardId(String value) {
-    this.mActionCarouselCardId = value;
-    return this;
   }
 
   public String getFieldActionCarouselCardName() {
     return mActionCarouselCardName;
   }
 
-  public AdsActionStats setFieldActionCarouselCardName(String value) {
-    this.mActionCarouselCardName = value;
-    return this;
-  }
-
   public String getFieldActionDestination() {
     return mActionDestination;
-  }
-
-  public AdsActionStats setFieldActionDestination(String value) {
-    this.mActionDestination = value;
-    return this;
   }
 
   public String getFieldActionDevice() {
     return mActionDevice;
   }
 
-  public AdsActionStats setFieldActionDevice(String value) {
-    this.mActionDevice = value;
-    return this;
+  public String getFieldActionEventChannel() {
+    return mActionEventChannel;
   }
 
   public String getFieldActionLinkClickDestination() {
     return mActionLinkClickDestination;
   }
 
-  public AdsActionStats setFieldActionLinkClickDestination(String value) {
-    this.mActionLinkClickDestination = value;
-    return this;
+  public String getFieldActionLocationCode() {
+    return mActionLocationCode;
   }
 
   public String getFieldActionReaction() {
     return mActionReaction;
   }
 
-  public AdsActionStats setFieldActionReaction(String value) {
-    this.mActionReaction = value;
-    return this;
-  }
-
   public String getFieldActionTargetId() {
     return mActionTargetId;
-  }
-
-  public AdsActionStats setFieldActionTargetId(String value) {
-    this.mActionTargetId = value;
-    return this;
   }
 
   public String getFieldActionType() {
     return mActionType;
   }
 
-  public AdsActionStats setFieldActionType(String value) {
-    this.mActionType = value;
-    return this;
+  public String getFieldActionVideoAssetId() {
+    return mActionVideoAssetId;
   }
 
   public String getFieldActionVideoSound() {
     return mActionVideoSound;
   }
 
-  public AdsActionStats setFieldActionVideoSound(String value) {
-    this.mActionVideoSound = value;
-    return this;
-  }
-
   public String getFieldActionVideoType() {
     return mActionVideoType;
-  }
-
-  public AdsActionStats setFieldActionVideoType(String value) {
-    this.mActionVideoType = value;
-    return this;
   }
 
   public String getFieldInline() {
     return mInline;
   }
 
-  public AdsActionStats setFieldInline(String value) {
-    this.mInline = value;
-    return this;
-  }
-
   public String getFieldValue() {
     return mValue;
   }
 
-  public AdsActionStats setFieldValue(String value) {
-    this.mValue = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdsActionStats> {
+
+    AdsActionStats lastResponse = null;
+    @Override
+    public AdsActionStats getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "1d_click",
+      "1d_view",
+      "28d_click",
+      "28d_view",
+      "7d_click",
+      "7d_view",
+      "action_canvas_component_id",
+      "action_canvas_component_name",
+      "action_carousel_card_id",
+      "action_carousel_card_name",
+      "action_destination",
+      "action_device",
+      "action_event_channel",
+      "action_link_click_destination",
+      "action_location_code",
+      "action_reaction",
+      "action_target_id",
+      "action_type",
+      "action_video_asset_id",
+      "action_video_sound",
+      "action_video_type",
+      "inline",
+      "value",
+      "id",
+    };
+
+    @Override
+    public AdsActionStats parseResponse(String response) throws APIException {
+      return AdsActionStats.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdsActionStats execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdsActionStats execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdsActionStats> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdsActionStats> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdsActionStats>() {
+           public AdsActionStats apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet request1dClickField () {
+      return this.request1dClickField(true);
+    }
+    public APIRequestGet request1dClickField (boolean value) {
+      this.requestField("1d_click", value);
+      return this;
+    }
+    public APIRequestGet request1dViewField () {
+      return this.request1dViewField(true);
+    }
+    public APIRequestGet request1dViewField (boolean value) {
+      this.requestField("1d_view", value);
+      return this;
+    }
+    public APIRequestGet request28dClickField () {
+      return this.request28dClickField(true);
+    }
+    public APIRequestGet request28dClickField (boolean value) {
+      this.requestField("28d_click", value);
+      return this;
+    }
+    public APIRequestGet request28dViewField () {
+      return this.request28dViewField(true);
+    }
+    public APIRequestGet request28dViewField (boolean value) {
+      this.requestField("28d_view", value);
+      return this;
+    }
+    public APIRequestGet request7dClickField () {
+      return this.request7dClickField(true);
+    }
+    public APIRequestGet request7dClickField (boolean value) {
+      this.requestField("7d_click", value);
+      return this;
+    }
+    public APIRequestGet request7dViewField () {
+      return this.request7dViewField(true);
+    }
+    public APIRequestGet request7dViewField (boolean value) {
+      this.requestField("7d_view", value);
+      return this;
+    }
+    public APIRequestGet requestActionCanvasComponentIdField () {
+      return this.requestActionCanvasComponentIdField(true);
+    }
+    public APIRequestGet requestActionCanvasComponentIdField (boolean value) {
+      this.requestField("action_canvas_component_id", value);
+      return this;
+    }
+    public APIRequestGet requestActionCanvasComponentNameField () {
+      return this.requestActionCanvasComponentNameField(true);
+    }
+    public APIRequestGet requestActionCanvasComponentNameField (boolean value) {
+      this.requestField("action_canvas_component_name", value);
+      return this;
+    }
+    public APIRequestGet requestActionCarouselCardIdField () {
+      return this.requestActionCarouselCardIdField(true);
+    }
+    public APIRequestGet requestActionCarouselCardIdField (boolean value) {
+      this.requestField("action_carousel_card_id", value);
+      return this;
+    }
+    public APIRequestGet requestActionCarouselCardNameField () {
+      return this.requestActionCarouselCardNameField(true);
+    }
+    public APIRequestGet requestActionCarouselCardNameField (boolean value) {
+      this.requestField("action_carousel_card_name", value);
+      return this;
+    }
+    public APIRequestGet requestActionDestinationField () {
+      return this.requestActionDestinationField(true);
+    }
+    public APIRequestGet requestActionDestinationField (boolean value) {
+      this.requestField("action_destination", value);
+      return this;
+    }
+    public APIRequestGet requestActionDeviceField () {
+      return this.requestActionDeviceField(true);
+    }
+    public APIRequestGet requestActionDeviceField (boolean value) {
+      this.requestField("action_device", value);
+      return this;
+    }
+    public APIRequestGet requestActionEventChannelField () {
+      return this.requestActionEventChannelField(true);
+    }
+    public APIRequestGet requestActionEventChannelField (boolean value) {
+      this.requestField("action_event_channel", value);
+      return this;
+    }
+    public APIRequestGet requestActionLinkClickDestinationField () {
+      return this.requestActionLinkClickDestinationField(true);
+    }
+    public APIRequestGet requestActionLinkClickDestinationField (boolean value) {
+      this.requestField("action_link_click_destination", value);
+      return this;
+    }
+    public APIRequestGet requestActionLocationCodeField () {
+      return this.requestActionLocationCodeField(true);
+    }
+    public APIRequestGet requestActionLocationCodeField (boolean value) {
+      this.requestField("action_location_code", value);
+      return this;
+    }
+    public APIRequestGet requestActionReactionField () {
+      return this.requestActionReactionField(true);
+    }
+    public APIRequestGet requestActionReactionField (boolean value) {
+      this.requestField("action_reaction", value);
+      return this;
+    }
+    public APIRequestGet requestActionTargetIdField () {
+      return this.requestActionTargetIdField(true);
+    }
+    public APIRequestGet requestActionTargetIdField (boolean value) {
+      this.requestField("action_target_id", value);
+      return this;
+    }
+    public APIRequestGet requestActionTypeField () {
+      return this.requestActionTypeField(true);
+    }
+    public APIRequestGet requestActionTypeField (boolean value) {
+      this.requestField("action_type", value);
+      return this;
+    }
+    public APIRequestGet requestActionVideoAssetIdField () {
+      return this.requestActionVideoAssetIdField(true);
+    }
+    public APIRequestGet requestActionVideoAssetIdField (boolean value) {
+      this.requestField("action_video_asset_id", value);
+      return this;
+    }
+    public APIRequestGet requestActionVideoSoundField () {
+      return this.requestActionVideoSoundField(true);
+    }
+    public APIRequestGet requestActionVideoSoundField (boolean value) {
+      this.requestField("action_video_sound", value);
+      return this;
+    }
+    public APIRequestGet requestActionVideoTypeField () {
+      return this.requestActionVideoTypeField(true);
+    }
+    public APIRequestGet requestActionVideoTypeField (boolean value) {
+      this.requestField("action_video_type", value);
+      return this;
+    }
+    public APIRequestGet requestInlineField () {
+      return this.requestInlineField(true);
+    }
+    public APIRequestGet requestInlineField (boolean value) {
+      this.requestField("inline", value);
+      return this;
+    }
+    public APIRequestGet requestValueField () {
+      return this.requestValueField(true);
+    }
+    public APIRequestGet requestValueField (boolean value) {
+      this.requestField("value", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -437,19 +730,24 @@ public class AdsActionStats extends APINode {
     this.m28dView = instance.m28dView;
     this.m7dClick = instance.m7dClick;
     this.m7dView = instance.m7dView;
+    this.mActionCanvasComponentId = instance.mActionCanvasComponentId;
     this.mActionCanvasComponentName = instance.mActionCanvasComponentName;
     this.mActionCarouselCardId = instance.mActionCarouselCardId;
     this.mActionCarouselCardName = instance.mActionCarouselCardName;
     this.mActionDestination = instance.mActionDestination;
     this.mActionDevice = instance.mActionDevice;
+    this.mActionEventChannel = instance.mActionEventChannel;
     this.mActionLinkClickDestination = instance.mActionLinkClickDestination;
+    this.mActionLocationCode = instance.mActionLocationCode;
     this.mActionReaction = instance.mActionReaction;
     this.mActionTargetId = instance.mActionTargetId;
     this.mActionType = instance.mActionType;
+    this.mActionVideoAssetId = instance.mActionVideoAssetId;
     this.mActionVideoSound = instance.mActionVideoSound;
     this.mActionVideoType = instance.mActionVideoType;
     this.mInline = instance.mInline;
     this.mValue = instance.mValue;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

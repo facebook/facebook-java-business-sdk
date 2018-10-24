@@ -90,6 +90,7 @@ public class AudioCopyright extends APINode {
 
   public AudioCopyright(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -108,19 +109,17 @@ public class AudioCopyright extends APINode {
   }
 
   public static AudioCopyright fetchById(String id, APIContext context) throws APIException {
-    AudioCopyright audioCopyright =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return audioCopyright;
   }
 
   public static ListenableFuture<AudioCopyright> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<AudioCopyright> audioCopyright =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return audioCopyright;
   }
 
   public static APINodeList<AudioCopyright> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -133,12 +132,11 @@ public class AudioCopyright extends APINode {
   }
 
   public static ListenableFuture<APINodeList<AudioCopyright>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<AudioCopyright>> audioCopyright =
+    return
       new APIRequest(context, "", "/", "GET", AudioCopyright.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return audioCopyright;
   }
 
   private String getPrefixedId() {
@@ -291,6 +289,10 @@ public class AudioCopyright extends APINode {
 
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -544,6 +546,196 @@ public class AudioCopyright extends APINode {
       this.requestField("whitelisted_ig_users", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<AudioCopyright> {
+
+    AudioCopyright lastResponse = null;
+    @Override
+    public AudioCopyright getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "update_source",
+      "match_rule",
+      "ownership_countries",
+      "whitelisted_fb_users",
+      "whitelisted_ig_users",
+      "append_excluded_ownership_segments",
+      "excluded_ownership_segments",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AudioCopyright parseResponse(String response) throws APIException {
+      return AudioCopyright.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AudioCopyright execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AudioCopyright execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AudioCopyright> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AudioCopyright> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AudioCopyright>() {
+           public AudioCopyright apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setUpdateSource (AudioCopyright.EnumUpdateSource updateSource) {
+      this.setParam("update_source", updateSource);
+      return this;
+    }
+    public APIRequestUpdate setUpdateSource (String updateSource) {
+      this.setParam("update_source", updateSource);
+      return this;
+    }
+
+    public APIRequestUpdate setMatchRule (String matchRule) {
+      this.setParam("match_rule", matchRule);
+      return this;
+    }
+
+    public APIRequestUpdate setOwnershipCountries (List<String> ownershipCountries) {
+      this.setParam("ownership_countries", ownershipCountries);
+      return this;
+    }
+    public APIRequestUpdate setOwnershipCountries (String ownershipCountries) {
+      this.setParam("ownership_countries", ownershipCountries);
+      return this;
+    }
+
+    public APIRequestUpdate setWhitelistedFbUsers (List<String> whitelistedFbUsers) {
+      this.setParam("whitelisted_fb_users", whitelistedFbUsers);
+      return this;
+    }
+    public APIRequestUpdate setWhitelistedFbUsers (String whitelistedFbUsers) {
+      this.setParam("whitelisted_fb_users", whitelistedFbUsers);
+      return this;
+    }
+
+    public APIRequestUpdate setWhitelistedIgUsers (List<String> whitelistedIgUsers) {
+      this.setParam("whitelisted_ig_users", whitelistedIgUsers);
+      return this;
+    }
+    public APIRequestUpdate setWhitelistedIgUsers (String whitelistedIgUsers) {
+      this.setParam("whitelisted_ig_users", whitelistedIgUsers);
+      return this;
+    }
+
+    public APIRequestUpdate setAppendExcludedOwnershipSegments (Boolean appendExcludedOwnershipSegments) {
+      this.setParam("append_excluded_ownership_segments", appendExcludedOwnershipSegments);
+      return this;
+    }
+    public APIRequestUpdate setAppendExcludedOwnershipSegments (String appendExcludedOwnershipSegments) {
+      this.setParam("append_excluded_ownership_segments", appendExcludedOwnershipSegments);
+      return this;
+    }
+
+    public APIRequestUpdate setExcludedOwnershipSegments (List<Object> excludedOwnershipSegments) {
+      this.setParam("excluded_ownership_segments", excludedOwnershipSegments);
+      return this;
+    }
+    public APIRequestUpdate setExcludedOwnershipSegments (String excludedOwnershipSegments) {
+      this.setParam("excluded_ownership_segments", excludedOwnershipSegments);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static enum EnumUpdateSource {
+      @SerializedName("edit_reference_dialog")
+      VALUE_EDIT_REFERENCE_DIALOG("edit_reference_dialog"),
+      @SerializedName("ddex")
+      VALUE_DDEX("ddex"),
+      @SerializedName("reference_conflict_dialog")
+      VALUE_REFERENCE_CONFLICT_DIALOG("reference_conflict_dialog"),
+      NULL(null);
+
+      private String value;
+
+      private EnumUpdateSource(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 

@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdAccountCreationRequest extends APINode {
+  @SerializedName("ad_accounts_currency")
+  private String mAdAccountsCurrency = null;
   @SerializedName("ad_accounts_info")
   private List<Object> mAdAccountsInfo = null;
   @SerializedName("additional_comment")
@@ -63,6 +65,8 @@ public class AdAccountCreationRequest extends APINode {
   private String mAddressInChinese = null;
   @SerializedName("address_in_english")
   private Object mAddressInEnglish = null;
+  @SerializedName("address_in_local_language")
+  private String mAddressInLocalLanguage = null;
   @SerializedName("advertiser_business")
   private Business mAdvertiserBusiness = null;
   @SerializedName("appeal_reason")
@@ -77,6 +81,8 @@ public class AdAccountCreationRequest extends APINode {
   private Object mContact = null;
   @SerializedName("creator")
   private User mCreator = null;
+  @SerializedName("credit_card_id")
+  private String mCreditCardId = null;
   @SerializedName("disapproval_reasons")
   private List<Object> mDisapprovalReasons = null;
   @SerializedName("english_legal_entity_name")
@@ -91,6 +97,8 @@ public class AdAccountCreationRequest extends APINode {
   private Boolean mIsTest = null;
   @SerializedName("is_under_authorization")
   private Boolean mIsUnderAuthorization = null;
+  @SerializedName("legal_entity_name_in_local_language")
+  private String mLegalEntityNameInLocalLanguage = null;
   @SerializedName("official_website_url")
   private String mOfficialWebsiteUrl = null;
   @SerializedName("planning_agency_business")
@@ -124,6 +132,7 @@ public class AdAccountCreationRequest extends APINode {
 
   public AdAccountCreationRequest(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -142,19 +151,17 @@ public class AdAccountCreationRequest extends APINode {
   }
 
   public static AdAccountCreationRequest fetchById(String id, APIContext context) throws APIException {
-    AdAccountCreationRequest adAccountCreationRequest =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return adAccountCreationRequest;
   }
 
   public static ListenableFuture<AdAccountCreationRequest> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<AdAccountCreationRequest> adAccountCreationRequest =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return adAccountCreationRequest;
   }
 
   public static APINodeList<AdAccountCreationRequest> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -167,12 +174,11 @@ public class AdAccountCreationRequest extends APINode {
   }
 
   public static ListenableFuture<APINodeList<AdAccountCreationRequest>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<AdAccountCreationRequest>> adAccountCreationRequest =
+    return
       new APIRequest(context, "", "/", "GET", AdAccountCreationRequest.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return adAccountCreationRequest;
   }
 
   private String getPrefixedId() {
@@ -323,6 +329,14 @@ public class AdAccountCreationRequest extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetAdAccounts getAdAccounts() {
+    return new APIRequestGetAdAccounts(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateVietnam createVietnam() {
+    return new APIRequestCreateVietnam(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDelete delete() {
     return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
@@ -335,6 +349,10 @@ public class AdAccountCreationRequest extends APINode {
     return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
+
+  public String getFieldAdAccountsCurrency() {
+    return mAdAccountsCurrency;
+  }
 
   public List<Object> getFieldAdAccountsInfo() {
     return mAdAccountsInfo;
@@ -350,6 +368,10 @@ public class AdAccountCreationRequest extends APINode {
 
   public Object getFieldAddressInEnglish() {
     return mAddressInEnglish;
+  }
+
+  public String getFieldAddressInLocalLanguage() {
+    return mAddressInLocalLanguage;
   }
 
   public Business getFieldAdvertiserBusiness() {
@@ -389,6 +411,10 @@ public class AdAccountCreationRequest extends APINode {
     return mCreator;
   }
 
+  public String getFieldCreditCardId() {
+    return mCreditCardId;
+  }
+
   public List<Object> getFieldDisapprovalReasons() {
     return mDisapprovalReasons;
   }
@@ -415,6 +441,10 @@ public class AdAccountCreationRequest extends APINode {
 
   public Boolean getFieldIsUnderAuthorization() {
     return mIsUnderAuthorization;
+  }
+
+  public String getFieldLegalEntityNameInLocalLanguage() {
+    return mLegalEntityNameInLocalLanguage;
   }
 
   public String getFieldOfficialWebsiteUrl() {
@@ -465,6 +495,868 @@ public class AdAccountCreationRequest extends APINode {
   }
 
 
+
+  public static class APIRequestGetAdAccounts extends APIRequest<AdAccount> {
+
+    APINodeList<AdAccount> lastResponse = null;
+    @Override
+    public APINodeList<AdAccount> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "account_id",
+      "account_status",
+      "ad_account_creation_request",
+      "ad_account_promotable_objects",
+      "age",
+      "agency_client_declaration",
+      "amount_spent",
+      "attribution_spec",
+      "balance",
+      "business",
+      "business_city",
+      "business_country_code",
+      "business_name",
+      "business_state",
+      "business_street",
+      "business_street2",
+      "business_zip",
+      "capabilities",
+      "created_time",
+      "currency",
+      "daily_spend_limit",
+      "direct_deals_tos_accepted",
+      "disable_reason",
+      "end_advertiser",
+      "end_advertiser_name",
+      "extended_credit_invoice_group",
+      "failed_delivery_checks",
+      "funding_source",
+      "funding_source_details",
+      "has_migrated_permissions",
+      "has_page_authorized_adaccount",
+      "id",
+      "io_number",
+      "is_attribution_spec_system_default",
+      "is_direct_deals_enabled",
+      "is_in_3ds_authorization_enabled_market",
+      "is_in_middle_of_local_entity_migration",
+      "is_notifications_enabled",
+      "is_personal",
+      "is_prepay_account",
+      "is_tax_id_required",
+      "line_numbers",
+      "media_agency",
+      "min_campaign_group_spend_cap",
+      "min_daily_budget",
+      "name",
+      "offsite_pixels_tos_accepted",
+      "owner",
+      "partner",
+      "rate_limit_reset_time",
+      "rf_spec",
+      "show_checkout_experience",
+      "spend_cap",
+      "tax_id",
+      "tax_id_status",
+      "tax_id_type",
+      "timezone_id",
+      "timezone_name",
+      "timezone_offset_hours_utc",
+      "tos_accepted",
+      "user_role",
+      "user_tos_accepted",
+    };
+
+    @Override
+    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<AdAccount> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdAccount>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdAccount>>() {
+           public APINodeList<AdAccount> apply(String result) {
+             try {
+               return APIRequestGetAdAccounts.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAdAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/adaccounts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdAccounts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAdAccounts requestAccountIdField () {
+      return this.requestAccountIdField(true);
+    }
+    public APIRequestGetAdAccounts requestAccountIdField (boolean value) {
+      this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAccountStatusField () {
+      return this.requestAccountStatusField(true);
+    }
+    public APIRequestGetAdAccounts requestAccountStatusField (boolean value) {
+      this.requestField("account_status", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAdAccountCreationRequestField () {
+      return this.requestAdAccountCreationRequestField(true);
+    }
+    public APIRequestGetAdAccounts requestAdAccountCreationRequestField (boolean value) {
+      this.requestField("ad_account_creation_request", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAdAccountPromotableObjectsField () {
+      return this.requestAdAccountPromotableObjectsField(true);
+    }
+    public APIRequestGetAdAccounts requestAdAccountPromotableObjectsField (boolean value) {
+      this.requestField("ad_account_promotable_objects", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAgeField () {
+      return this.requestAgeField(true);
+    }
+    public APIRequestGetAdAccounts requestAgeField (boolean value) {
+      this.requestField("age", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAgencyClientDeclarationField () {
+      return this.requestAgencyClientDeclarationField(true);
+    }
+    public APIRequestGetAdAccounts requestAgencyClientDeclarationField (boolean value) {
+      this.requestField("agency_client_declaration", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAmountSpentField () {
+      return this.requestAmountSpentField(true);
+    }
+    public APIRequestGetAdAccounts requestAmountSpentField (boolean value) {
+      this.requestField("amount_spent", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestAttributionSpecField () {
+      return this.requestAttributionSpecField(true);
+    }
+    public APIRequestGetAdAccounts requestAttributionSpecField (boolean value) {
+      this.requestField("attribution_spec", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestBalanceField () {
+      return this.requestBalanceField(true);
+    }
+    public APIRequestGetAdAccounts requestBalanceField (boolean value) {
+      this.requestField("balance", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetAdAccounts requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestBusinessCityField () {
+      return this.requestBusinessCityField(true);
+    }
+    public APIRequestGetAdAccounts requestBusinessCityField (boolean value) {
+      this.requestField("business_city", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestBusinessCountryCodeField () {
+      return this.requestBusinessCountryCodeField(true);
+    }
+    public APIRequestGetAdAccounts requestBusinessCountryCodeField (boolean value) {
+      this.requestField("business_country_code", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestBusinessNameField () {
+      return this.requestBusinessNameField(true);
+    }
+    public APIRequestGetAdAccounts requestBusinessNameField (boolean value) {
+      this.requestField("business_name", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestBusinessStateField () {
+      return this.requestBusinessStateField(true);
+    }
+    public APIRequestGetAdAccounts requestBusinessStateField (boolean value) {
+      this.requestField("business_state", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestBusinessStreetField () {
+      return this.requestBusinessStreetField(true);
+    }
+    public APIRequestGetAdAccounts requestBusinessStreetField (boolean value) {
+      this.requestField("business_street", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestBusinessStreet2Field () {
+      return this.requestBusinessStreet2Field(true);
+    }
+    public APIRequestGetAdAccounts requestBusinessStreet2Field (boolean value) {
+      this.requestField("business_street2", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestBusinessZipField () {
+      return this.requestBusinessZipField(true);
+    }
+    public APIRequestGetAdAccounts requestBusinessZipField (boolean value) {
+      this.requestField("business_zip", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestCapabilitiesField () {
+      return this.requestCapabilitiesField(true);
+    }
+    public APIRequestGetAdAccounts requestCapabilitiesField (boolean value) {
+      this.requestField("capabilities", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetAdAccounts requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestDailySpendLimitField () {
+      return this.requestDailySpendLimitField(true);
+    }
+    public APIRequestGetAdAccounts requestDailySpendLimitField (boolean value) {
+      this.requestField("daily_spend_limit", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField () {
+      return this.requestDirectDealsTosAcceptedField(true);
+    }
+    public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField (boolean value) {
+      this.requestField("direct_deals_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestDisableReasonField () {
+      return this.requestDisableReasonField(true);
+    }
+    public APIRequestGetAdAccounts requestDisableReasonField (boolean value) {
+      this.requestField("disable_reason", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestEndAdvertiserField () {
+      return this.requestEndAdvertiserField(true);
+    }
+    public APIRequestGetAdAccounts requestEndAdvertiserField (boolean value) {
+      this.requestField("end_advertiser", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestEndAdvertiserNameField () {
+      return this.requestEndAdvertiserNameField(true);
+    }
+    public APIRequestGetAdAccounts requestEndAdvertiserNameField (boolean value) {
+      this.requestField("end_advertiser_name", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
+      return this.requestExtendedCreditInvoiceGroupField(true);
+    }
+    public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField (boolean value) {
+      this.requestField("extended_credit_invoice_group", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestFailedDeliveryChecksField () {
+      return this.requestFailedDeliveryChecksField(true);
+    }
+    public APIRequestGetAdAccounts requestFailedDeliveryChecksField (boolean value) {
+      this.requestField("failed_delivery_checks", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestFundingSourceField () {
+      return this.requestFundingSourceField(true);
+    }
+    public APIRequestGetAdAccounts requestFundingSourceField (boolean value) {
+      this.requestField("funding_source", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestFundingSourceDetailsField () {
+      return this.requestFundingSourceDetailsField(true);
+    }
+    public APIRequestGetAdAccounts requestFundingSourceDetailsField (boolean value) {
+      this.requestField("funding_source_details", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {
+      return this.requestHasMigratedPermissionsField(true);
+    }
+    public APIRequestGetAdAccounts requestHasMigratedPermissionsField (boolean value) {
+      this.requestField("has_migrated_permissions", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestHasPageAuthorizedAdaccountField () {
+      return this.requestHasPageAuthorizedAdaccountField(true);
+    }
+    public APIRequestGetAdAccounts requestHasPageAuthorizedAdaccountField (boolean value) {
+      this.requestField("has_page_authorized_adaccount", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAdAccounts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIoNumberField () {
+      return this.requestIoNumberField(true);
+    }
+    public APIRequestGetAdAccounts requestIoNumberField (boolean value) {
+      this.requestField("io_number", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsAttributionSpecSystemDefaultField () {
+      return this.requestIsAttributionSpecSystemDefaultField(true);
+    }
+    public APIRequestGetAdAccounts requestIsAttributionSpecSystemDefaultField (boolean value) {
+      this.requestField("is_attribution_spec_system_default", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsDirectDealsEnabledField () {
+      return this.requestIsDirectDealsEnabledField(true);
+    }
+    public APIRequestGetAdAccounts requestIsDirectDealsEnabledField (boolean value) {
+      this.requestField("is_direct_deals_enabled", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsIn3dsAuthorizationEnabledMarketField () {
+      return this.requestIsIn3dsAuthorizationEnabledMarketField(true);
+    }
+    public APIRequestGetAdAccounts requestIsIn3dsAuthorizationEnabledMarketField (boolean value) {
+      this.requestField("is_in_3ds_authorization_enabled_market", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField () {
+      return this.requestIsInMiddleOfLocalEntityMigrationField(true);
+    }
+    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField (boolean value) {
+      this.requestField("is_in_middle_of_local_entity_migration", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {
+      return this.requestIsNotificationsEnabledField(true);
+    }
+    public APIRequestGetAdAccounts requestIsNotificationsEnabledField (boolean value) {
+      this.requestField("is_notifications_enabled", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsPersonalField () {
+      return this.requestIsPersonalField(true);
+    }
+    public APIRequestGetAdAccounts requestIsPersonalField (boolean value) {
+      this.requestField("is_personal", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsPrepayAccountField () {
+      return this.requestIsPrepayAccountField(true);
+    }
+    public APIRequestGetAdAccounts requestIsPrepayAccountField (boolean value) {
+      this.requestField("is_prepay_account", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestIsTaxIdRequiredField () {
+      return this.requestIsTaxIdRequiredField(true);
+    }
+    public APIRequestGetAdAccounts requestIsTaxIdRequiredField (boolean value) {
+      this.requestField("is_tax_id_required", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestLineNumbersField () {
+      return this.requestLineNumbersField(true);
+    }
+    public APIRequestGetAdAccounts requestLineNumbersField (boolean value) {
+      this.requestField("line_numbers", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestMediaAgencyField () {
+      return this.requestMediaAgencyField(true);
+    }
+    public APIRequestGetAdAccounts requestMediaAgencyField (boolean value) {
+      this.requestField("media_agency", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestMinCampaignGroupSpendCapField () {
+      return this.requestMinCampaignGroupSpendCapField(true);
+    }
+    public APIRequestGetAdAccounts requestMinCampaignGroupSpendCapField (boolean value) {
+      this.requestField("min_campaign_group_spend_cap", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestMinDailyBudgetField () {
+      return this.requestMinDailyBudgetField(true);
+    }
+    public APIRequestGetAdAccounts requestMinDailyBudgetField (boolean value) {
+      this.requestField("min_daily_budget", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAdAccounts requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestOffsitePixelsTosAcceptedField () {
+      return this.requestOffsitePixelsTosAcceptedField(true);
+    }
+    public APIRequestGetAdAccounts requestOffsitePixelsTosAcceptedField (boolean value) {
+      this.requestField("offsite_pixels_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestOwnerField () {
+      return this.requestOwnerField(true);
+    }
+    public APIRequestGetAdAccounts requestOwnerField (boolean value) {
+      this.requestField("owner", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestPartnerField () {
+      return this.requestPartnerField(true);
+    }
+    public APIRequestGetAdAccounts requestPartnerField (boolean value) {
+      this.requestField("partner", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestRateLimitResetTimeField () {
+      return this.requestRateLimitResetTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestRateLimitResetTimeField (boolean value) {
+      this.requestField("rate_limit_reset_time", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestRfSpecField () {
+      return this.requestRfSpecField(true);
+    }
+    public APIRequestGetAdAccounts requestRfSpecField (boolean value) {
+      this.requestField("rf_spec", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestShowCheckoutExperienceField () {
+      return this.requestShowCheckoutExperienceField(true);
+    }
+    public APIRequestGetAdAccounts requestShowCheckoutExperienceField (boolean value) {
+      this.requestField("show_checkout_experience", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestSpendCapField () {
+      return this.requestSpendCapField(true);
+    }
+    public APIRequestGetAdAccounts requestSpendCapField (boolean value) {
+      this.requestField("spend_cap", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestTaxIdField () {
+      return this.requestTaxIdField(true);
+    }
+    public APIRequestGetAdAccounts requestTaxIdField (boolean value) {
+      this.requestField("tax_id", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestTaxIdStatusField () {
+      return this.requestTaxIdStatusField(true);
+    }
+    public APIRequestGetAdAccounts requestTaxIdStatusField (boolean value) {
+      this.requestField("tax_id_status", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestTaxIdTypeField () {
+      return this.requestTaxIdTypeField(true);
+    }
+    public APIRequestGetAdAccounts requestTaxIdTypeField (boolean value) {
+      this.requestField("tax_id_type", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestTimezoneIdField () {
+      return this.requestTimezoneIdField(true);
+    }
+    public APIRequestGetAdAccounts requestTimezoneIdField (boolean value) {
+      this.requestField("timezone_id", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestTimezoneNameField () {
+      return this.requestTimezoneNameField(true);
+    }
+    public APIRequestGetAdAccounts requestTimezoneNameField (boolean value) {
+      this.requestField("timezone_name", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestTimezoneOffsetHoursUtcField () {
+      return this.requestTimezoneOffsetHoursUtcField(true);
+    }
+    public APIRequestGetAdAccounts requestTimezoneOffsetHoursUtcField (boolean value) {
+      this.requestField("timezone_offset_hours_utc", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestTosAcceptedField () {
+      return this.requestTosAcceptedField(true);
+    }
+    public APIRequestGetAdAccounts requestTosAcceptedField (boolean value) {
+      this.requestField("tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestUserRoleField () {
+      return this.requestUserRoleField(true);
+    }
+    public APIRequestGetAdAccounts requestUserRoleField (boolean value) {
+      this.requestField("user_role", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestUserTosAcceptedField () {
+      return this.requestUserTosAcceptedField(true);
+    }
+    public APIRequestGetAdAccounts requestUserTosAcceptedField (boolean value) {
+      this.requestField("user_tos_accepted", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateVietnam extends APIRequest<AdAccountCreationRequest> {
+
+    AdAccountCreationRequest lastResponse = null;
+    @Override
+    public AdAccountCreationRequest getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "ad_accounts_info",
+      "business_registration",
+      "planning_agency_business_id",
+      "english_legal_entity_name",
+      "address_in_english",
+      "official_website_url",
+      "business_registration_id",
+      "vertical",
+      "subvertical",
+      "promotable_page_urls",
+      "promotable_page_ids",
+      "promotable_app_ids",
+      "promotable_urls",
+      "contact",
+      "additional_comment",
+      "advertiser_business_id",
+      "address_in_local_language",
+      "legal_entity_name_in_local_language",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdAccountCreationRequest parseResponse(String response) throws APIException {
+      return AdAccountCreationRequest.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdAccountCreationRequest execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAccountCreationRequest execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdAccountCreationRequest> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdAccountCreationRequest> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdAccountCreationRequest>() {
+           public AdAccountCreationRequest apply(String result) {
+             try {
+               return APIRequestCreateVietnam.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateVietnam(String nodeId, APIContext context) {
+      super(context, nodeId, "/vietnam", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateVietnam setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVietnam setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateVietnam setAdAccountsInfo (List<Object> adAccountsInfo) {
+      this.setParam("ad_accounts_info", adAccountsInfo);
+      return this;
+    }
+    public APIRequestCreateVietnam setAdAccountsInfo (String adAccountsInfo) {
+      this.setParam("ad_accounts_info", adAccountsInfo);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setBusinessRegistration (File businessRegistration) {
+      this.setParam("business_registration", businessRegistration);
+      return this;
+    }
+    public APIRequestCreateVietnam setBusinessRegistration (String businessRegistration) {
+      this.setParam("business_registration", businessRegistration);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setPlanningAgencyBusinessId (Object planningAgencyBusinessId) {
+      this.setParam("planning_agency_business_id", planningAgencyBusinessId);
+      return this;
+    }
+    public APIRequestCreateVietnam setPlanningAgencyBusinessId (String planningAgencyBusinessId) {
+      this.setParam("planning_agency_business_id", planningAgencyBusinessId);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setEnglishLegalEntityName (String englishLegalEntityName) {
+      this.setParam("english_legal_entity_name", englishLegalEntityName);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setAddressInEnglish (Object addressInEnglish) {
+      this.setParam("address_in_english", addressInEnglish);
+      return this;
+    }
+    public APIRequestCreateVietnam setAddressInEnglish (String addressInEnglish) {
+      this.setParam("address_in_english", addressInEnglish);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setOfficialWebsiteUrl (Object officialWebsiteUrl) {
+      this.setParam("official_website_url", officialWebsiteUrl);
+      return this;
+    }
+    public APIRequestCreateVietnam setOfficialWebsiteUrl (String officialWebsiteUrl) {
+      this.setParam("official_website_url", officialWebsiteUrl);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setBusinessRegistrationId (String businessRegistrationId) {
+      this.setParam("business_registration_id", businessRegistrationId);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setVertical (AdAccountCreationRequest.EnumVertical vertical) {
+      this.setParam("vertical", vertical);
+      return this;
+    }
+    public APIRequestCreateVietnam setVertical (String vertical) {
+      this.setParam("vertical", vertical);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setSubvertical (AdAccountCreationRequest.EnumSubvertical subvertical) {
+      this.setParam("subvertical", subvertical);
+      return this;
+    }
+    public APIRequestCreateVietnam setSubvertical (String subvertical) {
+      this.setParam("subvertical", subvertical);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setPromotablePageUrls (List<Object> promotablePageUrls) {
+      this.setParam("promotable_page_urls", promotablePageUrls);
+      return this;
+    }
+    public APIRequestCreateVietnam setPromotablePageUrls (String promotablePageUrls) {
+      this.setParam("promotable_page_urls", promotablePageUrls);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setPromotablePageIds (List<Long> promotablePageIds) {
+      this.setParam("promotable_page_ids", promotablePageIds);
+      return this;
+    }
+    public APIRequestCreateVietnam setPromotablePageIds (String promotablePageIds) {
+      this.setParam("promotable_page_ids", promotablePageIds);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setPromotableAppIds (List<Object> promotableAppIds) {
+      this.setParam("promotable_app_ids", promotableAppIds);
+      return this;
+    }
+    public APIRequestCreateVietnam setPromotableAppIds (String promotableAppIds) {
+      this.setParam("promotable_app_ids", promotableAppIds);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setPromotableUrls (List<Object> promotableUrls) {
+      this.setParam("promotable_urls", promotableUrls);
+      return this;
+    }
+    public APIRequestCreateVietnam setPromotableUrls (String promotableUrls) {
+      this.setParam("promotable_urls", promotableUrls);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setContact (Object contact) {
+      this.setParam("contact", contact);
+      return this;
+    }
+    public APIRequestCreateVietnam setContact (String contact) {
+      this.setParam("contact", contact);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setAdditionalComment (String additionalComment) {
+      this.setParam("additional_comment", additionalComment);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setAdvertiserBusinessId (Object advertiserBusinessId) {
+      this.setParam("advertiser_business_id", advertiserBusinessId);
+      return this;
+    }
+    public APIRequestCreateVietnam setAdvertiserBusinessId (String advertiserBusinessId) {
+      this.setParam("advertiser_business_id", advertiserBusinessId);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setAddressInLocalLanguage (String addressInLocalLanguage) {
+      this.setParam("address_in_local_language", addressInLocalLanguage);
+      return this;
+    }
+
+    public APIRequestCreateVietnam setLegalEntityNameInLocalLanguage (String legalEntityNameInLocalLanguage) {
+      this.setParam("legal_entity_name_in_local_language", legalEntityNameInLocalLanguage);
+      return this;
+    }
+
+    public APIRequestCreateVietnam requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateVietnam requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVietnam requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateVietnam requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVietnam requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVietnam requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
 
@@ -580,10 +1472,12 @@ public class AdAccountCreationRequest extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "ad_accounts_currency",
       "ad_accounts_info",
       "additional_comment",
       "address_in_chinese",
       "address_in_english",
+      "address_in_local_language",
       "advertiser_business",
       "appeal_reason",
       "business",
@@ -591,6 +1485,7 @@ public class AdAccountCreationRequest extends APINode {
       "chinese_legal_entity_name",
       "contact",
       "creator",
+      "credit_card_id",
       "disapproval_reasons",
       "english_legal_entity_name",
       "extended_credit_id",
@@ -598,6 +1493,7 @@ public class AdAccountCreationRequest extends APINode {
       "is_smb",
       "is_test",
       "is_under_authorization",
+      "legal_entity_name_in_local_language",
       "official_website_url",
       "planning_agency_business",
       "planning_agency_business_id",
@@ -699,6 +1595,13 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAdAccountsCurrencyField () {
+      return this.requestAdAccountsCurrencyField(true);
+    }
+    public APIRequestGet requestAdAccountsCurrencyField (boolean value) {
+      this.requestField("ad_accounts_currency", value);
+      return this;
+    }
     public APIRequestGet requestAdAccountsInfoField () {
       return this.requestAdAccountsInfoField(true);
     }
@@ -725,6 +1628,13 @@ public class AdAccountCreationRequest extends APINode {
     }
     public APIRequestGet requestAddressInEnglishField (boolean value) {
       this.requestField("address_in_english", value);
+      return this;
+    }
+    public APIRequestGet requestAddressInLocalLanguageField () {
+      return this.requestAddressInLocalLanguageField(true);
+    }
+    public APIRequestGet requestAddressInLocalLanguageField (boolean value) {
+      this.requestField("address_in_local_language", value);
       return this;
     }
     public APIRequestGet requestAdvertiserBusinessField () {
@@ -776,6 +1686,13 @@ public class AdAccountCreationRequest extends APINode {
       this.requestField("creator", value);
       return this;
     }
+    public APIRequestGet requestCreditCardIdField () {
+      return this.requestCreditCardIdField(true);
+    }
+    public APIRequestGet requestCreditCardIdField (boolean value) {
+      this.requestField("credit_card_id", value);
+      return this;
+    }
     public APIRequestGet requestDisapprovalReasonsField () {
       return this.requestDisapprovalReasonsField(true);
     }
@@ -823,6 +1740,13 @@ public class AdAccountCreationRequest extends APINode {
     }
     public APIRequestGet requestIsUnderAuthorizationField (boolean value) {
       this.requestField("is_under_authorization", value);
+      return this;
+    }
+    public APIRequestGet requestLegalEntityNameInLocalLanguageField () {
+      return this.requestLegalEntityNameInLocalLanguageField(true);
+    }
+    public APIRequestGet requestLegalEntityNameInLocalLanguageField (boolean value) {
+      this.requestField("legal_entity_name_in_local_language", value);
       return this;
     }
     public APIRequestGet requestOfficialWebsiteUrlField () {
@@ -912,27 +1836,29 @@ public class AdAccountCreationRequest extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "extended_credit_id",
       "ad_accounts_info",
-      "additional_comment",
+      "business_registration",
+      "planning_agency_business_id",
+      "english_legal_entity_name",
+      "legal_entity_name_in_local_language",
+      "address_in_local_language",
+      "chinese_legal_entity_name",
       "address_in_chinese",
       "address_in_english",
-      "advertiser_business_id",
-      "business_registration",
-      "business_registration_id",
-      "chinese_legal_entity_name",
-      "contact",
-      "disapprove_appeal_comment",
-      "english_legal_entity_name",
-      "extended_credit_id",
-      "is_smb",
       "official_website_url",
-      "planning_agency_business_id",
-      "promotable_app_ids",
-      "promotable_page_ids",
-      "promotable_page_urls",
-      "promotable_urls",
-      "subvertical",
+      "business_registration_id",
       "vertical",
+      "subvertical",
+      "promotable_page_urls",
+      "promotable_page_ids",
+      "promotable_app_ids",
+      "promotable_urls",
+      "contact",
+      "additional_comment",
+      "is_smb",
+      "advertiser_business_id",
+      "disapprove_appeal_comment",
     };
 
     public static final String[] FIELDS = {
@@ -990,6 +1916,11 @@ public class AdAccountCreationRequest extends APINode {
     }
 
 
+    public APIRequestUpdate setExtendedCreditId (String extendedCreditId) {
+      this.setParam("extended_credit_id", extendedCreditId);
+      return this;
+    }
+
     public APIRequestUpdate setAdAccountsInfo (List<Object> adAccountsInfo) {
       this.setParam("ad_accounts_info", adAccountsInfo);
       return this;
@@ -999,8 +1930,37 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAdditionalComment (String additionalComment) {
-      this.setParam("additional_comment", additionalComment);
+    public APIRequestUpdate setBusinessRegistration (File businessRegistration) {
+      this.setParam("business_registration", businessRegistration);
+      return this;
+    }
+    public APIRequestUpdate setBusinessRegistration (String businessRegistration) {
+      this.setParam("business_registration", businessRegistration);
+      return this;
+    }
+
+    public APIRequestUpdate setPlanningAgencyBusinessId (String planningAgencyBusinessId) {
+      this.setParam("planning_agency_business_id", planningAgencyBusinessId);
+      return this;
+    }
+
+    public APIRequestUpdate setEnglishLegalEntityName (String englishLegalEntityName) {
+      this.setParam("english_legal_entity_name", englishLegalEntityName);
+      return this;
+    }
+
+    public APIRequestUpdate setLegalEntityNameInLocalLanguage (String legalEntityNameInLocalLanguage) {
+      this.setParam("legal_entity_name_in_local_language", legalEntityNameInLocalLanguage);
+      return this;
+    }
+
+    public APIRequestUpdate setAddressInLocalLanguage (String addressInLocalLanguage) {
+      this.setParam("address_in_local_language", addressInLocalLanguage);
+      return this;
+    }
+
+    public APIRequestUpdate setChineseLegalEntityName (String chineseLegalEntityName) {
+      this.setParam("chinese_legal_entity_name", chineseLegalEntityName);
       return this;
     }
 
@@ -1018,63 +1978,6 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAdvertiserBusinessId (String advertiserBusinessId) {
-      this.setParam("advertiser_business_id", advertiserBusinessId);
-      return this;
-    }
-
-    public APIRequestUpdate setBusinessRegistration (File businessRegistration) {
-      this.setParam("business_registration", businessRegistration);
-      return this;
-    }
-    public APIRequestUpdate setBusinessRegistration (String businessRegistration) {
-      this.setParam("business_registration", businessRegistration);
-      return this;
-    }
-
-    public APIRequestUpdate setBusinessRegistrationId (String businessRegistrationId) {
-      this.setParam("business_registration_id", businessRegistrationId);
-      return this;
-    }
-
-    public APIRequestUpdate setChineseLegalEntityName (String chineseLegalEntityName) {
-      this.setParam("chinese_legal_entity_name", chineseLegalEntityName);
-      return this;
-    }
-
-    public APIRequestUpdate setContact (Object contact) {
-      this.setParam("contact", contact);
-      return this;
-    }
-    public APIRequestUpdate setContact (String contact) {
-      this.setParam("contact", contact);
-      return this;
-    }
-
-    public APIRequestUpdate setDisapproveAppealComment (String disapproveAppealComment) {
-      this.setParam("disapprove_appeal_comment", disapproveAppealComment);
-      return this;
-    }
-
-    public APIRequestUpdate setEnglishLegalEntityName (String englishLegalEntityName) {
-      this.setParam("english_legal_entity_name", englishLegalEntityName);
-      return this;
-    }
-
-    public APIRequestUpdate setExtendedCreditId (String extendedCreditId) {
-      this.setParam("extended_credit_id", extendedCreditId);
-      return this;
-    }
-
-    public APIRequestUpdate setIsSmb (Boolean isSmb) {
-      this.setParam("is_smb", isSmb);
-      return this;
-    }
-    public APIRequestUpdate setIsSmb (String isSmb) {
-      this.setParam("is_smb", isSmb);
-      return this;
-    }
-
     public APIRequestUpdate setOfficialWebsiteUrl (Object officialWebsiteUrl) {
       this.setParam("official_website_url", officialWebsiteUrl);
       return this;
@@ -1084,44 +1987,17 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setPlanningAgencyBusinessId (String planningAgencyBusinessId) {
-      this.setParam("planning_agency_business_id", planningAgencyBusinessId);
+    public APIRequestUpdate setBusinessRegistrationId (String businessRegistrationId) {
+      this.setParam("business_registration_id", businessRegistrationId);
       return this;
     }
 
-    public APIRequestUpdate setPromotableAppIds (List<String> promotableAppIds) {
-      this.setParam("promotable_app_ids", promotableAppIds);
+    public APIRequestUpdate setVertical (AdAccountCreationRequest.EnumVertical vertical) {
+      this.setParam("vertical", vertical);
       return this;
     }
-    public APIRequestUpdate setPromotableAppIds (String promotableAppIds) {
-      this.setParam("promotable_app_ids", promotableAppIds);
-      return this;
-    }
-
-    public APIRequestUpdate setPromotablePageIds (List<String> promotablePageIds) {
-      this.setParam("promotable_page_ids", promotablePageIds);
-      return this;
-    }
-    public APIRequestUpdate setPromotablePageIds (String promotablePageIds) {
-      this.setParam("promotable_page_ids", promotablePageIds);
-      return this;
-    }
-
-    public APIRequestUpdate setPromotablePageUrls (List<Object> promotablePageUrls) {
-      this.setParam("promotable_page_urls", promotablePageUrls);
-      return this;
-    }
-    public APIRequestUpdate setPromotablePageUrls (String promotablePageUrls) {
-      this.setParam("promotable_page_urls", promotablePageUrls);
-      return this;
-    }
-
-    public APIRequestUpdate setPromotableUrls (List<Object> promotableUrls) {
-      this.setParam("promotable_urls", promotableUrls);
-      return this;
-    }
-    public APIRequestUpdate setPromotableUrls (String promotableUrls) {
-      this.setParam("promotable_urls", promotableUrls);
+    public APIRequestUpdate setVertical (String vertical) {
+      this.setParam("vertical", vertical);
       return this;
     }
 
@@ -1134,12 +2010,72 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setVertical (AdAccountCreationRequest.EnumVertical vertical) {
-      this.setParam("vertical", vertical);
+    public APIRequestUpdate setPromotablePageUrls (List<Object> promotablePageUrls) {
+      this.setParam("promotable_page_urls", promotablePageUrls);
       return this;
     }
-    public APIRequestUpdate setVertical (String vertical) {
-      this.setParam("vertical", vertical);
+    public APIRequestUpdate setPromotablePageUrls (String promotablePageUrls) {
+      this.setParam("promotable_page_urls", promotablePageUrls);
+      return this;
+    }
+
+    public APIRequestUpdate setPromotablePageIds (List<String> promotablePageIds) {
+      this.setParam("promotable_page_ids", promotablePageIds);
+      return this;
+    }
+    public APIRequestUpdate setPromotablePageIds (String promotablePageIds) {
+      this.setParam("promotable_page_ids", promotablePageIds);
+      return this;
+    }
+
+    public APIRequestUpdate setPromotableAppIds (List<String> promotableAppIds) {
+      this.setParam("promotable_app_ids", promotableAppIds);
+      return this;
+    }
+    public APIRequestUpdate setPromotableAppIds (String promotableAppIds) {
+      this.setParam("promotable_app_ids", promotableAppIds);
+      return this;
+    }
+
+    public APIRequestUpdate setPromotableUrls (List<Object> promotableUrls) {
+      this.setParam("promotable_urls", promotableUrls);
+      return this;
+    }
+    public APIRequestUpdate setPromotableUrls (String promotableUrls) {
+      this.setParam("promotable_urls", promotableUrls);
+      return this;
+    }
+
+    public APIRequestUpdate setContact (Object contact) {
+      this.setParam("contact", contact);
+      return this;
+    }
+    public APIRequestUpdate setContact (String contact) {
+      this.setParam("contact", contact);
+      return this;
+    }
+
+    public APIRequestUpdate setAdditionalComment (String additionalComment) {
+      this.setParam("additional_comment", additionalComment);
+      return this;
+    }
+
+    public APIRequestUpdate setIsSmb (Boolean isSmb) {
+      this.setParam("is_smb", isSmb);
+      return this;
+    }
+    public APIRequestUpdate setIsSmb (String isSmb) {
+      this.setParam("is_smb", isSmb);
+      return this;
+    }
+
+    public APIRequestUpdate setAdvertiserBusinessId (String advertiserBusinessId) {
+      this.setParam("advertiser_business_id", advertiserBusinessId);
+      return this;
+    }
+
+    public APIRequestUpdate setDisapproveAppealComment (String disapproveAppealComment) {
+      this.setParam("disapprove_appeal_comment", disapproveAppealComment);
       return this;
     }
 
@@ -1545,10 +2481,12 @@ public class AdAccountCreationRequest extends APINode {
   }
 
   public AdAccountCreationRequest copyFrom(AdAccountCreationRequest instance) {
+    this.mAdAccountsCurrency = instance.mAdAccountsCurrency;
     this.mAdAccountsInfo = instance.mAdAccountsInfo;
     this.mAdditionalComment = instance.mAdditionalComment;
     this.mAddressInChinese = instance.mAddressInChinese;
     this.mAddressInEnglish = instance.mAddressInEnglish;
+    this.mAddressInLocalLanguage = instance.mAddressInLocalLanguage;
     this.mAdvertiserBusiness = instance.mAdvertiserBusiness;
     this.mAppealReason = instance.mAppealReason;
     this.mBusiness = instance.mBusiness;
@@ -1556,6 +2494,7 @@ public class AdAccountCreationRequest extends APINode {
     this.mChineseLegalEntityName = instance.mChineseLegalEntityName;
     this.mContact = instance.mContact;
     this.mCreator = instance.mCreator;
+    this.mCreditCardId = instance.mCreditCardId;
     this.mDisapprovalReasons = instance.mDisapprovalReasons;
     this.mEnglishLegalEntityName = instance.mEnglishLegalEntityName;
     this.mExtendedCreditId = instance.mExtendedCreditId;
@@ -1563,6 +2502,7 @@ public class AdAccountCreationRequest extends APINode {
     this.mIsSmb = instance.mIsSmb;
     this.mIsTest = instance.mIsTest;
     this.mIsUnderAuthorization = instance.mIsUnderAuthorization;
+    this.mLegalEntityNameInLocalLanguage = instance.mLegalEntityNameInLocalLanguage;
     this.mOfficialWebsiteUrl = instance.mOfficialWebsiteUrl;
     this.mPlanningAgencyBusiness = instance.mPlanningAgencyBusiness;
     this.mPlanningAgencyBusinessId = instance.mPlanningAgencyBusinessId;

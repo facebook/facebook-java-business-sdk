@@ -56,7 +56,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class ExtendedCreditAllocationConfig extends APINode {
   @SerializedName("currency_amount")
-  private Object mCurrencyAmount = null;
+  private CurrencyAmount mCurrencyAmount = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("liability_type")
@@ -86,6 +86,7 @@ public class ExtendedCreditAllocationConfig extends APINode {
 
   public ExtendedCreditAllocationConfig(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -104,19 +105,17 @@ public class ExtendedCreditAllocationConfig extends APINode {
   }
 
   public static ExtendedCreditAllocationConfig fetchById(String id, APIContext context) throws APIException {
-    ExtendedCreditAllocationConfig extendedCreditAllocationConfig =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return extendedCreditAllocationConfig;
   }
 
   public static ListenableFuture<ExtendedCreditAllocationConfig> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<ExtendedCreditAllocationConfig> extendedCreditAllocationConfig =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return extendedCreditAllocationConfig;
   }
 
   public static APINodeList<ExtendedCreditAllocationConfig> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -129,12 +128,11 @@ public class ExtendedCreditAllocationConfig extends APINode {
   }
 
   public static ListenableFuture<APINodeList<ExtendedCreditAllocationConfig>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<ExtendedCreditAllocationConfig>> extendedCreditAllocationConfig =
+    return
       new APIRequest(context, "", "/", "GET", ExtendedCreditAllocationConfig.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return extendedCreditAllocationConfig;
   }
 
   private String getPrefixedId() {
@@ -294,7 +292,10 @@ public class ExtendedCreditAllocationConfig extends APINode {
   }
 
 
-  public Object getFieldCurrencyAmount() {
+  public CurrencyAmount getFieldCurrencyAmount() {
+    if (mCurrencyAmount != null) {
+      mCurrencyAmount.context = getContext();
+    }
     return mCurrencyAmount;
   }
 

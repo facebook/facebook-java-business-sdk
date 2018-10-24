@@ -83,13 +83,74 @@ public class AdAssetFeedSpec extends APINode {
   private List<AdAssetFeedSpecTitle> mTitles = null;
   @SerializedName("videos")
   private List<AdAssetFeedSpecVideo> mVideos = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdAssetFeedSpec() {
+  AdAssetFeedSpec() {
+  }
+
+  public AdAssetFeedSpec(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdAssetFeedSpec(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdAssetFeedSpec fetch() throws APIException{
+    AdAssetFeedSpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdAssetFeedSpec fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdAssetFeedSpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdAssetFeedSpec fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdAssetFeedSpec> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdAssetFeedSpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdAssetFeedSpec>)(
+      new APIRequest<AdAssetFeedSpec>(context, "", "/", "GET", AdAssetFeedSpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdAssetFeedSpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdAssetFeedSpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdAssetFeedSpec loadJSON(String json, APIContext context) {
     AdAssetFeedSpec adAssetFeedSpec = getGson().fromJson(json, AdAssetFeedSpec.class);
@@ -232,174 +293,295 @@ public class AdAssetFeedSpec extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public List<String> getFieldAdFormats() {
     return mAdFormats;
-  }
-
-  public AdAssetFeedSpec setFieldAdFormats(List<String> value) {
-    this.mAdFormats = value;
-    return this;
   }
 
   public Object getFieldAdditionalData() {
     return mAdditionalData;
   }
 
-  public AdAssetFeedSpec setFieldAdditionalData(Object value) {
-    this.mAdditionalData = value;
-    return this;
-  }
-
   public List<Object> getFieldAssetCustomizationRules() {
     return mAssetCustomizationRules;
-  }
-
-  public AdAssetFeedSpec setFieldAssetCustomizationRules(List<Object> value) {
-    this.mAssetCustomizationRules = value;
-    return this;
   }
 
   public List<String> getFieldAutotranslate() {
     return mAutotranslate;
   }
 
-  public AdAssetFeedSpec setFieldAutotranslate(List<String> value) {
-    this.mAutotranslate = value;
-    return this;
-  }
-
   public List<AdAssetFeedSpecBody> getFieldBodies() {
     return mBodies;
   }
 
-  public AdAssetFeedSpec setFieldBodies(List<AdAssetFeedSpecBody> value) {
-    this.mBodies = value;
-    return this;
-  }
-
-  public AdAssetFeedSpec setFieldBodies(String value) {
-    Type type = new TypeToken<List<AdAssetFeedSpecBody>>(){}.getType();
-    this.mBodies = AdAssetFeedSpecBody.getGson().fromJson(value, type);
-    return this;
-  }
   public List<EnumCallToActionTypes> getFieldCallToActionTypes() {
     return mCallToActionTypes;
-  }
-
-  public AdAssetFeedSpec setFieldCallToActionTypes(List<EnumCallToActionTypes> value) {
-    this.mCallToActionTypes = value;
-    return this;
   }
 
   public List<AdAssetFeedSpecCaption> getFieldCaptions() {
     return mCaptions;
   }
 
-  public AdAssetFeedSpec setFieldCaptions(List<AdAssetFeedSpecCaption> value) {
-    this.mCaptions = value;
-    return this;
-  }
-
-  public AdAssetFeedSpec setFieldCaptions(String value) {
-    Type type = new TypeToken<List<AdAssetFeedSpecCaption>>(){}.getType();
-    this.mCaptions = AdAssetFeedSpecCaption.getGson().fromJson(value, type);
-    return this;
-  }
   public List<AdAssetFeedSpecDescription> getFieldDescriptions() {
     return mDescriptions;
   }
 
-  public AdAssetFeedSpec setFieldDescriptions(List<AdAssetFeedSpecDescription> value) {
-    this.mDescriptions = value;
-    return this;
-  }
-
-  public AdAssetFeedSpec setFieldDescriptions(String value) {
-    Type type = new TypeToken<List<AdAssetFeedSpecDescription>>(){}.getType();
-    this.mDescriptions = AdAssetFeedSpecDescription.getGson().fromJson(value, type);
-    return this;
-  }
   public List<AdAssetFeedSpecGroupRule> getFieldGroups() {
     return mGroups;
   }
 
-  public AdAssetFeedSpec setFieldGroups(List<AdAssetFeedSpecGroupRule> value) {
-    this.mGroups = value;
-    return this;
-  }
-
-  public AdAssetFeedSpec setFieldGroups(String value) {
-    Type type = new TypeToken<List<AdAssetFeedSpecGroupRule>>(){}.getType();
-    this.mGroups = AdAssetFeedSpecGroupRule.getGson().fromJson(value, type);
-    return this;
-  }
   public List<AdAssetFeedSpecImage> getFieldImages() {
     return mImages;
   }
 
-  public AdAssetFeedSpec setFieldImages(List<AdAssetFeedSpecImage> value) {
-    this.mImages = value;
-    return this;
-  }
-
-  public AdAssetFeedSpec setFieldImages(String value) {
-    Type type = new TypeToken<List<AdAssetFeedSpecImage>>(){}.getType();
-    this.mImages = AdAssetFeedSpecImage.getGson().fromJson(value, type);
-    return this;
-  }
   public List<AdAssetFeedSpecLinkURL> getFieldLinkUrls() {
     return mLinkUrls;
   }
 
-  public AdAssetFeedSpec setFieldLinkUrls(List<AdAssetFeedSpecLinkURL> value) {
-    this.mLinkUrls = value;
-    return this;
-  }
-
-  public AdAssetFeedSpec setFieldLinkUrls(String value) {
-    Type type = new TypeToken<List<AdAssetFeedSpecLinkURL>>(){}.getType();
-    this.mLinkUrls = AdAssetFeedSpecLinkURL.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldOptimizationType() {
     return mOptimizationType;
-  }
-
-  public AdAssetFeedSpec setFieldOptimizationType(String value) {
-    this.mOptimizationType = value;
-    return this;
   }
 
   public List<AdAssetFeedSpecTitle> getFieldTitles() {
     return mTitles;
   }
 
-  public AdAssetFeedSpec setFieldTitles(List<AdAssetFeedSpecTitle> value) {
-    this.mTitles = value;
-    return this;
-  }
-
-  public AdAssetFeedSpec setFieldTitles(String value) {
-    Type type = new TypeToken<List<AdAssetFeedSpecTitle>>(){}.getType();
-    this.mTitles = AdAssetFeedSpecTitle.getGson().fromJson(value, type);
-    return this;
-  }
   public List<AdAssetFeedSpecVideo> getFieldVideos() {
     return mVideos;
   }
 
-  public AdAssetFeedSpec setFieldVideos(List<AdAssetFeedSpecVideo> value) {
-    this.mVideos = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
-  public AdAssetFeedSpec setFieldVideos(String value) {
-    Type type = new TypeToken<List<AdAssetFeedSpecVideo>>(){}.getType();
-    this.mVideos = AdAssetFeedSpecVideo.getGson().fromJson(value, type);
-    return this;
-  }
 
+
+  public static class APIRequestGet extends APIRequest<AdAssetFeedSpec> {
+
+    AdAssetFeedSpec lastResponse = null;
+    @Override
+    public AdAssetFeedSpec getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "ad_formats",
+      "additional_data",
+      "asset_customization_rules",
+      "autotranslate",
+      "bodies",
+      "call_to_action_types",
+      "captions",
+      "descriptions",
+      "groups",
+      "images",
+      "link_urls",
+      "optimization_type",
+      "titles",
+      "videos",
+      "id",
+    };
+
+    @Override
+    public AdAssetFeedSpec parseResponse(String response) throws APIException {
+      return AdAssetFeedSpec.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdAssetFeedSpec execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAssetFeedSpec execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdAssetFeedSpec> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdAssetFeedSpec> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdAssetFeedSpec>() {
+           public AdAssetFeedSpec apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestAdFormatsField () {
+      return this.requestAdFormatsField(true);
+    }
+    public APIRequestGet requestAdFormatsField (boolean value) {
+      this.requestField("ad_formats", value);
+      return this;
+    }
+    public APIRequestGet requestAdditionalDataField () {
+      return this.requestAdditionalDataField(true);
+    }
+    public APIRequestGet requestAdditionalDataField (boolean value) {
+      this.requestField("additional_data", value);
+      return this;
+    }
+    public APIRequestGet requestAssetCustomizationRulesField () {
+      return this.requestAssetCustomizationRulesField(true);
+    }
+    public APIRequestGet requestAssetCustomizationRulesField (boolean value) {
+      this.requestField("asset_customization_rules", value);
+      return this;
+    }
+    public APIRequestGet requestAutotranslateField () {
+      return this.requestAutotranslateField(true);
+    }
+    public APIRequestGet requestAutotranslateField (boolean value) {
+      this.requestField("autotranslate", value);
+      return this;
+    }
+    public APIRequestGet requestBodiesField () {
+      return this.requestBodiesField(true);
+    }
+    public APIRequestGet requestBodiesField (boolean value) {
+      this.requestField("bodies", value);
+      return this;
+    }
+    public APIRequestGet requestCallToActionTypesField () {
+      return this.requestCallToActionTypesField(true);
+    }
+    public APIRequestGet requestCallToActionTypesField (boolean value) {
+      this.requestField("call_to_action_types", value);
+      return this;
+    }
+    public APIRequestGet requestCaptionsField () {
+      return this.requestCaptionsField(true);
+    }
+    public APIRequestGet requestCaptionsField (boolean value) {
+      this.requestField("captions", value);
+      return this;
+    }
+    public APIRequestGet requestDescriptionsField () {
+      return this.requestDescriptionsField(true);
+    }
+    public APIRequestGet requestDescriptionsField (boolean value) {
+      this.requestField("descriptions", value);
+      return this;
+    }
+    public APIRequestGet requestGroupsField () {
+      return this.requestGroupsField(true);
+    }
+    public APIRequestGet requestGroupsField (boolean value) {
+      this.requestField("groups", value);
+      return this;
+    }
+    public APIRequestGet requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGet requestImagesField (boolean value) {
+      this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGet requestLinkUrlsField () {
+      return this.requestLinkUrlsField(true);
+    }
+    public APIRequestGet requestLinkUrlsField (boolean value) {
+      this.requestField("link_urls", value);
+      return this;
+    }
+    public APIRequestGet requestOptimizationTypeField () {
+      return this.requestOptimizationTypeField(true);
+    }
+    public APIRequestGet requestOptimizationTypeField (boolean value) {
+      this.requestField("optimization_type", value);
+      return this;
+    }
+    public APIRequestGet requestTitlesField () {
+      return this.requestTitlesField(true);
+    }
+    public APIRequestGet requestTitlesField (boolean value) {
+      this.requestField("titles", value);
+      return this;
+    }
+    public APIRequestGet requestVideosField () {
+      return this.requestVideosField(true);
+    }
+    public APIRequestGet requestVideosField (boolean value) {
+      this.requestField("videos", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumCallToActionTypes {
       @SerializedName("OPEN_LINK")
@@ -490,6 +672,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_GET_SHOWTIMES("GET_SHOWTIMES"),
       @SerializedName("LISTEN_NOW")
       VALUE_LISTEN_NOW("LISTEN_NOW"),
+      @SerializedName("WOODHENGE_SUPPORT")
+      VALUE_WOODHENGE_SUPPORT("WOODHENGE_SUPPORT"),
       @SerializedName("EVENT_RSVP")
       VALUE_EVENT_RSVP("EVENT_RSVP"),
       @SerializedName("WHATSAPP_MESSAGE")
@@ -541,6 +725,7 @@ public class AdAssetFeedSpec extends APINode {
     this.mOptimizationType = instance.mOptimizationType;
     this.mTitles = instance.mTitles;
     this.mVideos = instance.mVideos;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

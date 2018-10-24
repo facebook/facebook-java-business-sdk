@@ -61,13 +61,74 @@ public class TargetingGeoLocationRegion extends APINode {
   private String mKey = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public TargetingGeoLocationRegion() {
+  TargetingGeoLocationRegion() {
+  }
+
+  public TargetingGeoLocationRegion(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public TargetingGeoLocationRegion(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public TargetingGeoLocationRegion fetch() throws APIException{
+    TargetingGeoLocationRegion newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static TargetingGeoLocationRegion fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<TargetingGeoLocationRegion> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static TargetingGeoLocationRegion fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<TargetingGeoLocationRegion> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<TargetingGeoLocationRegion> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<TargetingGeoLocationRegion>)(
+      new APIRequest<TargetingGeoLocationRegion>(context, "", "/", "GET", TargetingGeoLocationRegion.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<TargetingGeoLocationRegion>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", TargetingGeoLocationRegion.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static TargetingGeoLocationRegion loadJSON(String json, APIContext context) {
     TargetingGeoLocationRegion targetingGeoLocationRegion = getGson().fromJson(json, TargetingGeoLocationRegion.class);
@@ -210,35 +271,163 @@ public class TargetingGeoLocationRegion extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldCountry() {
     return mCountry;
-  }
-
-  public TargetingGeoLocationRegion setFieldCountry(String value) {
-    this.mCountry = value;
-    return this;
   }
 
   public String getFieldKey() {
     return mKey;
   }
 
-  public TargetingGeoLocationRegion setFieldKey(String value) {
-    this.mKey = value;
-    return this;
-  }
-
   public String getFieldName() {
     return mName;
   }
 
-  public TargetingGeoLocationRegion setFieldName(String value) {
-    this.mName = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<TargetingGeoLocationRegion> {
+
+    TargetingGeoLocationRegion lastResponse = null;
+    @Override
+    public TargetingGeoLocationRegion getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "country",
+      "key",
+      "name",
+      "id",
+    };
+
+    @Override
+    public TargetingGeoLocationRegion parseResponse(String response) throws APIException {
+      return TargetingGeoLocationRegion.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public TargetingGeoLocationRegion execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public TargetingGeoLocationRegion execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<TargetingGeoLocationRegion> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<TargetingGeoLocationRegion> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, TargetingGeoLocationRegion>() {
+           public TargetingGeoLocationRegion apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestCountryField () {
+      return this.requestCountryField(true);
+    }
+    public APIRequestGet requestCountryField (boolean value) {
+      this.requestField("country", value);
+      return this;
+    }
+    public APIRequestGet requestKeyField () {
+      return this.requestKeyField(true);
+    }
+    public APIRequestGet requestKeyField (boolean value) {
+      this.requestField("key", value);
+      return this;
+    }
+    public APIRequestGet requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGet requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -258,6 +447,7 @@ public class TargetingGeoLocationRegion extends APINode {
     this.mCountry = instance.mCountry;
     this.mKey = instance.mKey;
     this.mName = instance.mName;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

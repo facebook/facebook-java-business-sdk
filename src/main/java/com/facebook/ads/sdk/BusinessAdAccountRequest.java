@@ -61,7 +61,66 @@ public class BusinessAdAccountRequest extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  public BusinessAdAccountRequest() {
+  BusinessAdAccountRequest() {
+  }
+
+  public BusinessAdAccountRequest(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public BusinessAdAccountRequest(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public BusinessAdAccountRequest fetch() throws APIException{
+    BusinessAdAccountRequest newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static BusinessAdAccountRequest fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<BusinessAdAccountRequest> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static BusinessAdAccountRequest fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<BusinessAdAccountRequest> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<BusinessAdAccountRequest> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<BusinessAdAccountRequest>)(
+      new APIRequest<BusinessAdAccountRequest>(context, "", "/", "GET", BusinessAdAccountRequest.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<BusinessAdAccountRequest>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", BusinessAdAccountRequest.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
@@ -208,6 +267,10 @@ public class BusinessAdAccountRequest extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public AdAccount getFieldAdAccount() {
     if (mAdAccount != null) {
@@ -216,26 +279,130 @@ public class BusinessAdAccountRequest extends APINode {
     return mAdAccount;
   }
 
-  public BusinessAdAccountRequest setFieldAdAccount(AdAccount value) {
-    this.mAdAccount = value;
-    return this;
-  }
-
-  public BusinessAdAccountRequest setFieldAdAccount(String value) {
-    Type type = new TypeToken<AdAccount>(){}.getType();
-    this.mAdAccount = AdAccount.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldId() {
     return mId;
   }
 
-  public BusinessAdAccountRequest setFieldId(String value) {
-    this.mId = value;
-    return this;
+
+
+  public static class APIRequestGet extends APIRequest<BusinessAdAccountRequest> {
+
+    BusinessAdAccountRequest lastResponse = null;
+    @Override
+    public BusinessAdAccountRequest getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "ad_account",
+      "id",
+    };
+
+    @Override
+    public BusinessAdAccountRequest parseResponse(String response) throws APIException {
+      return BusinessAdAccountRequest.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public BusinessAdAccountRequest execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public BusinessAdAccountRequest execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<BusinessAdAccountRequest> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<BusinessAdAccountRequest> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, BusinessAdAccountRequest>() {
+           public BusinessAdAccountRequest apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestAdAccountField () {
+      return this.requestAdAccountField(true);
+    }
+    public APIRequestGet requestAdAccountField (boolean value) {
+      this.requestField("ad_account", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
   }
-
-
 
 
   synchronized /*package*/ static Gson getGson() {

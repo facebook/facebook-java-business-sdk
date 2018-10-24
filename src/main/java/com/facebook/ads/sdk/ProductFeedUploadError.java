@@ -57,12 +57,16 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ProductFeedUploadError extends APINode {
   @SerializedName("affected_surfaces")
   private List<EnumAffectedSurfaces> mAffectedSurfaces = null;
+  @SerializedName("column_number")
+  private Long mColumnNumber = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("error_type")
   private String mErrorType = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("row_number")
+  private Long mRowNumber = null;
   @SerializedName("severity")
   private EnumSeverity mSeverity = null;
   @SerializedName("summary")
@@ -80,6 +84,7 @@ public class ProductFeedUploadError extends APINode {
 
   public ProductFeedUploadError(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -98,19 +103,17 @@ public class ProductFeedUploadError extends APINode {
   }
 
   public static ProductFeedUploadError fetchById(String id, APIContext context) throws APIException {
-    ProductFeedUploadError productFeedUploadError =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return productFeedUploadError;
   }
 
   public static ListenableFuture<ProductFeedUploadError> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<ProductFeedUploadError> productFeedUploadError =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return productFeedUploadError;
   }
 
   public static APINodeList<ProductFeedUploadError> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -123,12 +126,11 @@ public class ProductFeedUploadError extends APINode {
   }
 
   public static ListenableFuture<APINodeList<ProductFeedUploadError>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<ProductFeedUploadError>> productFeedUploadError =
+    return
       new APIRequest(context, "", "/", "GET", ProductFeedUploadError.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return productFeedUploadError;
   }
 
   private String getPrefixedId() {
@@ -292,6 +294,10 @@ public class ProductFeedUploadError extends APINode {
     return mAffectedSurfaces;
   }
 
+  public Long getFieldColumnNumber() {
+    return mColumnNumber;
+  }
+
   public String getFieldDescription() {
     return mDescription;
   }
@@ -302,6 +308,10 @@ public class ProductFeedUploadError extends APINode {
 
   public String getFieldId() {
     return mId;
+  }
+
+  public Long getFieldRowNumber() {
+    return mRowNumber;
   }
 
   public EnumSeverity getFieldSeverity() {
@@ -318,44 +328,47 @@ public class ProductFeedUploadError extends APINode {
 
 
 
-  public static class APIRequestGetSamples extends APIRequest<APINode> {
+  public static class APIRequestGetSamples extends APIRequest<ProductFeedUploadErrorSample> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<ProductFeedUploadErrorSample> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<ProductFeedUploadErrorSample> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "id",
+      "retailer_id",
+      "row_number",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<ProductFeedUploadErrorSample> parseResponse(String response) throws APIException {
+      return ProductFeedUploadErrorSample.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<ProductFeedUploadErrorSample> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<ProductFeedUploadErrorSample> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<ProductFeedUploadErrorSample>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<ProductFeedUploadErrorSample>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<String, APINodeList<ProductFeedUploadErrorSample>>() {
+           public APINodeList<ProductFeedUploadErrorSample> apply(String result) {
              try {
                return APIRequestGetSamples.this.parseResponse(result);
              } catch (Exception e) {
@@ -419,6 +432,27 @@ public class ProductFeedUploadError extends APINode {
       return this;
     }
 
+    public APIRequestGetSamples requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetSamples requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetSamples requestRetailerIdField () {
+      return this.requestRetailerIdField(true);
+    }
+    public APIRequestGetSamples requestRetailerIdField (boolean value) {
+      this.requestField("retailer_id", value);
+      return this;
+    }
+    public APIRequestGetSamples requestRowNumberField () {
+      return this.requestRowNumberField(true);
+    }
+    public APIRequestGetSamples requestRowNumberField (boolean value) {
+      this.requestField("row_number", value);
+      return this;
+    }
   }
 
   public static class APIRequestGet extends APIRequest<ProductFeedUploadError> {
@@ -433,9 +467,11 @@ public class ProductFeedUploadError extends APINode {
 
     public static final String[] FIELDS = {
       "affected_surfaces",
+      "column_number",
       "description",
       "error_type",
       "id",
+      "row_number",
       "severity",
       "summary",
       "total_count",
@@ -536,6 +572,13 @@ public class ProductFeedUploadError extends APINode {
       this.requestField("affected_surfaces", value);
       return this;
     }
+    public APIRequestGet requestColumnNumberField () {
+      return this.requestColumnNumberField(true);
+    }
+    public APIRequestGet requestColumnNumberField (boolean value) {
+      this.requestField("column_number", value);
+      return this;
+    }
     public APIRequestGet requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -555,6 +598,13 @@ public class ProductFeedUploadError extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestRowNumberField () {
+      return this.requestRowNumberField(true);
+    }
+    public APIRequestGet requestRowNumberField (boolean value) {
+      this.requestField("row_number", value);
       return this;
     }
     public APIRequestGet requestSeverityField () {
@@ -636,9 +686,11 @@ public class ProductFeedUploadError extends APINode {
 
   public ProductFeedUploadError copyFrom(ProductFeedUploadError instance) {
     this.mAffectedSurfaces = instance.mAffectedSurfaces;
+    this.mColumnNumber = instance.mColumnNumber;
     this.mDescription = instance.mDescription;
     this.mErrorType = instance.mErrorType;
     this.mId = instance.mId;
+    this.mRowNumber = instance.mRowNumber;
     this.mSeverity = instance.mSeverity;
     this.mSummary = instance.mSummary;
     this.mTotalCount = instance.mTotalCount;

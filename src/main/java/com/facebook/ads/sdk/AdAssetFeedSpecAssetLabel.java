@@ -61,7 +61,66 @@ public class AdAssetFeedSpecAssetLabel extends APINode {
   private String mName = null;
   protected static Gson gson = null;
 
-  public AdAssetFeedSpecAssetLabel() {
+  AdAssetFeedSpecAssetLabel() {
+  }
+
+  public AdAssetFeedSpecAssetLabel(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdAssetFeedSpecAssetLabel(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdAssetFeedSpecAssetLabel fetch() throws APIException{
+    AdAssetFeedSpecAssetLabel newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdAssetFeedSpecAssetLabel fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdAssetFeedSpecAssetLabel> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdAssetFeedSpecAssetLabel fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdAssetFeedSpecAssetLabel> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdAssetFeedSpecAssetLabel> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdAssetFeedSpecAssetLabel>)(
+      new APIRequest<AdAssetFeedSpecAssetLabel>(context, "", "/", "GET", AdAssetFeedSpecAssetLabel.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdAssetFeedSpecAssetLabel>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdAssetFeedSpecAssetLabel.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
@@ -208,26 +267,139 @@ public class AdAssetFeedSpecAssetLabel extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldId() {
     return mId;
-  }
-
-  public AdAssetFeedSpecAssetLabel setFieldId(String value) {
-    this.mId = value;
-    return this;
   }
 
   public String getFieldName() {
     return mName;
   }
 
-  public AdAssetFeedSpecAssetLabel setFieldName(String value) {
-    this.mName = value;
-    return this;
+
+
+  public static class APIRequestGet extends APIRequest<AdAssetFeedSpecAssetLabel> {
+
+    AdAssetFeedSpecAssetLabel lastResponse = null;
+    @Override
+    public AdAssetFeedSpecAssetLabel getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "id",
+      "name",
+    };
+
+    @Override
+    public AdAssetFeedSpecAssetLabel parseResponse(String response) throws APIException {
+      return AdAssetFeedSpecAssetLabel.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdAssetFeedSpecAssetLabel execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAssetFeedSpecAssetLabel execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdAssetFeedSpecAssetLabel> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdAssetFeedSpecAssetLabel> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdAssetFeedSpecAssetLabel>() {
+           public AdAssetFeedSpecAssetLabel apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGet requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
   }
-
-
 
 
   synchronized /*package*/ static Gson getGson() {

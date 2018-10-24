@@ -84,6 +84,7 @@ public class VideoList extends APINode {
 
   public VideoList(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -102,19 +103,17 @@ public class VideoList extends APINode {
   }
 
   public static VideoList fetchById(String id, APIContext context) throws APIException {
-    VideoList videoList =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return videoList;
   }
 
   public static ListenableFuture<VideoList> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<VideoList> videoList =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return videoList;
   }
 
   public static APINodeList<VideoList> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -127,12 +126,11 @@ public class VideoList extends APINode {
   }
 
   public static ListenableFuture<APINodeList<VideoList>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<VideoList>> videoList =
+    return
       new APIRequest(context, "", "/", "GET", VideoList.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return videoList;
   }
 
   private String getPrefixedId() {
@@ -283,8 +281,16 @@ public class VideoList extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateComment createComment() {
+    return new APIRequestCreateComment(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteVideos deleteVideos() {
     return new APIRequestDeleteVideos(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetVideos getVideos() {
+    return new APIRequestGetVideos(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateVideo createVideo() {
@@ -333,6 +339,203 @@ public class VideoList extends APINode {
   }
 
 
+
+  public static class APIRequestCreateComment extends APIRequest<Comment> {
+
+    Comment lastResponse = null;
+    @Override
+    public Comment getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "object_id",
+      "parent_comment_id",
+      "nectar_module",
+      "attachment_id",
+      "attachment_url",
+      "attachment_share_url",
+      "feedback_source",
+      "facepile_mentioned_ids",
+      "is_offline",
+      "comment_privacy_value",
+      "message",
+      "text",
+      "tracking",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Comment parseResponse(String response) throws APIException {
+      return Comment.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public Comment execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Comment execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<Comment> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, Comment>() {
+           public Comment apply(String result) {
+             try {
+               return APIRequestCreateComment.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateComment(String nodeId, APIContext context) {
+      super(context, nodeId, "/comments", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateComment setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateComment setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateComment setObjectId (String objectId) {
+      this.setParam("object_id", objectId);
+      return this;
+    }
+
+    public APIRequestCreateComment setParentCommentId (Object parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
+      return this;
+    }
+    public APIRequestCreateComment setParentCommentId (String parentCommentId) {
+      this.setParam("parent_comment_id", parentCommentId);
+      return this;
+    }
+
+    public APIRequestCreateComment setNectarModule (String nectarModule) {
+      this.setParam("nectar_module", nectarModule);
+      return this;
+    }
+
+    public APIRequestCreateComment setAttachmentId (String attachmentId) {
+      this.setParam("attachment_id", attachmentId);
+      return this;
+    }
+
+    public APIRequestCreateComment setAttachmentUrl (String attachmentUrl) {
+      this.setParam("attachment_url", attachmentUrl);
+      return this;
+    }
+
+    public APIRequestCreateComment setAttachmentShareUrl (String attachmentShareUrl) {
+      this.setParam("attachment_share_url", attachmentShareUrl);
+      return this;
+    }
+
+    public APIRequestCreateComment setFeedbackSource (String feedbackSource) {
+      this.setParam("feedback_source", feedbackSource);
+      return this;
+    }
+
+    public APIRequestCreateComment setFacepileMentionedIds (List<String> facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+    public APIRequestCreateComment setFacepileMentionedIds (String facepileMentionedIds) {
+      this.setParam("facepile_mentioned_ids", facepileMentionedIds);
+      return this;
+    }
+
+    public APIRequestCreateComment setIsOffline (Boolean isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+    public APIRequestCreateComment setIsOffline (String isOffline) {
+      this.setParam("is_offline", isOffline);
+      return this;
+    }
+
+    public APIRequestCreateComment setCommentPrivacyValue (Comment.EnumCommentPrivacyValue commentPrivacyValue) {
+      this.setParam("comment_privacy_value", commentPrivacyValue);
+      return this;
+    }
+    public APIRequestCreateComment setCommentPrivacyValue (String commentPrivacyValue) {
+      this.setParam("comment_privacy_value", commentPrivacyValue);
+      return this;
+    }
+
+    public APIRequestCreateComment setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateComment setText (String text) {
+      this.setParam("text", text);
+      return this;
+    }
+
+    public APIRequestCreateComment setTracking (String tracking) {
+      this.setParam("tracking", tracking);
+      return this;
+    }
+
+    public APIRequestCreateComment requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateComment requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateComment requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateComment requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateComment requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateComment requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestDeleteVideos extends APIRequest<APINode> {
 
@@ -445,6 +648,405 @@ public class VideoList extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetVideos extends APIRequest<AdVideo> {
+
+    APINodeList<AdVideo> lastResponse = null;
+    @Override
+    public APINodeList<AdVideo> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "ad_breaks",
+      "backdated_time",
+      "backdated_time_granularity",
+      "content_category",
+      "content_tags",
+      "created_time",
+      "custom_labels",
+      "description",
+      "embed_html",
+      "embeddable",
+      "event",
+      "expiration",
+      "format",
+      "from",
+      "icon",
+      "id",
+      "is_crosspost_video",
+      "is_crossposting_eligible",
+      "is_episode",
+      "is_instagram_eligible",
+      "length",
+      "live_audience_count",
+      "live_status",
+      "name",
+      "permalink_url",
+      "picture",
+      "place",
+      "privacy",
+      "published",
+      "scheduled_publish_time",
+      "source",
+      "spherical",
+      "status",
+      "title",
+      "tv_banner_ad",
+      "universal_video_id",
+      "updated_time",
+    };
+
+    @Override
+    public APINodeList<AdVideo> parseResponse(String response) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<AdVideo> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdVideo> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdVideo>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdVideo>>() {
+           public APINodeList<AdVideo> apply(String result) {
+             try {
+               return APIRequestGetVideos.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetVideos(String nodeId, APIContext context) {
+      super(context, nodeId, "/videos", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetVideos setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideos setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetVideos requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetVideos requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideos requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetVideos requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideos requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetVideos requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetVideos requestAdBreaksField () {
+      return this.requestAdBreaksField(true);
+    }
+    public APIRequestGetVideos requestAdBreaksField (boolean value) {
+      this.requestField("ad_breaks", value);
+      return this;
+    }
+    public APIRequestGetVideos requestBackdatedTimeField () {
+      return this.requestBackdatedTimeField(true);
+    }
+    public APIRequestGetVideos requestBackdatedTimeField (boolean value) {
+      this.requestField("backdated_time", value);
+      return this;
+    }
+    public APIRequestGetVideos requestBackdatedTimeGranularityField () {
+      return this.requestBackdatedTimeGranularityField(true);
+    }
+    public APIRequestGetVideos requestBackdatedTimeGranularityField (boolean value) {
+      this.requestField("backdated_time_granularity", value);
+      return this;
+    }
+    public APIRequestGetVideos requestContentCategoryField () {
+      return this.requestContentCategoryField(true);
+    }
+    public APIRequestGetVideos requestContentCategoryField (boolean value) {
+      this.requestField("content_category", value);
+      return this;
+    }
+    public APIRequestGetVideos requestContentTagsField () {
+      return this.requestContentTagsField(true);
+    }
+    public APIRequestGetVideos requestContentTagsField (boolean value) {
+      this.requestField("content_tags", value);
+      return this;
+    }
+    public APIRequestGetVideos requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetVideos requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetVideos requestCustomLabelsField () {
+      return this.requestCustomLabelsField(true);
+    }
+    public APIRequestGetVideos requestCustomLabelsField (boolean value) {
+      this.requestField("custom_labels", value);
+      return this;
+    }
+    public APIRequestGetVideos requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetVideos requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetVideos requestEmbedHtmlField () {
+      return this.requestEmbedHtmlField(true);
+    }
+    public APIRequestGetVideos requestEmbedHtmlField (boolean value) {
+      this.requestField("embed_html", value);
+      return this;
+    }
+    public APIRequestGetVideos requestEmbeddableField () {
+      return this.requestEmbeddableField(true);
+    }
+    public APIRequestGetVideos requestEmbeddableField (boolean value) {
+      this.requestField("embeddable", value);
+      return this;
+    }
+    public APIRequestGetVideos requestEventField () {
+      return this.requestEventField(true);
+    }
+    public APIRequestGetVideos requestEventField (boolean value) {
+      this.requestField("event", value);
+      return this;
+    }
+    public APIRequestGetVideos requestExpirationField () {
+      return this.requestExpirationField(true);
+    }
+    public APIRequestGetVideos requestExpirationField (boolean value) {
+      this.requestField("expiration", value);
+      return this;
+    }
+    public APIRequestGetVideos requestFormatField () {
+      return this.requestFormatField(true);
+    }
+    public APIRequestGetVideos requestFormatField (boolean value) {
+      this.requestField("format", value);
+      return this;
+    }
+    public APIRequestGetVideos requestFromField () {
+      return this.requestFromField(true);
+    }
+    public APIRequestGetVideos requestFromField (boolean value) {
+      this.requestField("from", value);
+      return this;
+    }
+    public APIRequestGetVideos requestIconField () {
+      return this.requestIconField(true);
+    }
+    public APIRequestGetVideos requestIconField (boolean value) {
+      this.requestField("icon", value);
+      return this;
+    }
+    public APIRequestGetVideos requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetVideos requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetVideos requestIsCrosspostVideoField () {
+      return this.requestIsCrosspostVideoField(true);
+    }
+    public APIRequestGetVideos requestIsCrosspostVideoField (boolean value) {
+      this.requestField("is_crosspost_video", value);
+      return this;
+    }
+    public APIRequestGetVideos requestIsCrosspostingEligibleField () {
+      return this.requestIsCrosspostingEligibleField(true);
+    }
+    public APIRequestGetVideos requestIsCrosspostingEligibleField (boolean value) {
+      this.requestField("is_crossposting_eligible", value);
+      return this;
+    }
+    public APIRequestGetVideos requestIsEpisodeField () {
+      return this.requestIsEpisodeField(true);
+    }
+    public APIRequestGetVideos requestIsEpisodeField (boolean value) {
+      this.requestField("is_episode", value);
+      return this;
+    }
+    public APIRequestGetVideos requestIsInstagramEligibleField () {
+      return this.requestIsInstagramEligibleField(true);
+    }
+    public APIRequestGetVideos requestIsInstagramEligibleField (boolean value) {
+      this.requestField("is_instagram_eligible", value);
+      return this;
+    }
+    public APIRequestGetVideos requestLengthField () {
+      return this.requestLengthField(true);
+    }
+    public APIRequestGetVideos requestLengthField (boolean value) {
+      this.requestField("length", value);
+      return this;
+    }
+    public APIRequestGetVideos requestLiveAudienceCountField () {
+      return this.requestLiveAudienceCountField(true);
+    }
+    public APIRequestGetVideos requestLiveAudienceCountField (boolean value) {
+      this.requestField("live_audience_count", value);
+      return this;
+    }
+    public APIRequestGetVideos requestLiveStatusField () {
+      return this.requestLiveStatusField(true);
+    }
+    public APIRequestGetVideos requestLiveStatusField (boolean value) {
+      this.requestField("live_status", value);
+      return this;
+    }
+    public APIRequestGetVideos requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetVideos requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetVideos requestPermalinkUrlField () {
+      return this.requestPermalinkUrlField(true);
+    }
+    public APIRequestGetVideos requestPermalinkUrlField (boolean value) {
+      this.requestField("permalink_url", value);
+      return this;
+    }
+    public APIRequestGetVideos requestPictureField () {
+      return this.requestPictureField(true);
+    }
+    public APIRequestGetVideos requestPictureField (boolean value) {
+      this.requestField("picture", value);
+      return this;
+    }
+    public APIRequestGetVideos requestPlaceField () {
+      return this.requestPlaceField(true);
+    }
+    public APIRequestGetVideos requestPlaceField (boolean value) {
+      this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetVideos requestPrivacyField () {
+      return this.requestPrivacyField(true);
+    }
+    public APIRequestGetVideos requestPrivacyField (boolean value) {
+      this.requestField("privacy", value);
+      return this;
+    }
+    public APIRequestGetVideos requestPublishedField () {
+      return this.requestPublishedField(true);
+    }
+    public APIRequestGetVideos requestPublishedField (boolean value) {
+      this.requestField("published", value);
+      return this;
+    }
+    public APIRequestGetVideos requestScheduledPublishTimeField () {
+      return this.requestScheduledPublishTimeField(true);
+    }
+    public APIRequestGetVideos requestScheduledPublishTimeField (boolean value) {
+      this.requestField("scheduled_publish_time", value);
+      return this;
+    }
+    public APIRequestGetVideos requestSourceField () {
+      return this.requestSourceField(true);
+    }
+    public APIRequestGetVideos requestSourceField (boolean value) {
+      this.requestField("source", value);
+      return this;
+    }
+    public APIRequestGetVideos requestSphericalField () {
+      return this.requestSphericalField(true);
+    }
+    public APIRequestGetVideos requestSphericalField (boolean value) {
+      this.requestField("spherical", value);
+      return this;
+    }
+    public APIRequestGetVideos requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetVideos requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetVideos requestTitleField () {
+      return this.requestTitleField(true);
+    }
+    public APIRequestGetVideos requestTitleField (boolean value) {
+      this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetVideos requestTvBannerAdField () {
+      return this.requestTvBannerAdField(true);
+    }
+    public APIRequestGetVideos requestTvBannerAdField (boolean value) {
+      this.requestField("tv_banner_ad", value);
+      return this;
+    }
+    public APIRequestGetVideos requestUniversalVideoIdField () {
+      return this.requestUniversalVideoIdField(true);
+    }
+    public APIRequestGetVideos requestUniversalVideoIdField (boolean value) {
+      this.requestField("universal_video_id", value);
+      return this;
+    }
+    public APIRequestGetVideos requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetVideos requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateVideo extends APIRequest<VideoList> {

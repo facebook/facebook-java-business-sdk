@@ -79,7 +79,66 @@ public class PartnerCategory extends APINode {
   private String mTargetingType = null;
   protected static Gson gson = null;
 
-  public PartnerCategory() {
+  PartnerCategory() {
+  }
+
+  public PartnerCategory(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public PartnerCategory(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public PartnerCategory fetch() throws APIException{
+    PartnerCategory newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static PartnerCategory fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<PartnerCategory> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static PartnerCategory fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<PartnerCategory> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<PartnerCategory> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<PartnerCategory>)(
+      new APIRequest<PartnerCategory>(context, "", "/", "GET", PartnerCategory.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<PartnerCategory>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", PartnerCategory.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
@@ -226,107 +285,247 @@ public class PartnerCategory extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public Long getFieldApproximateCount() {
     return mApproximateCount;
-  }
-
-  public PartnerCategory setFieldApproximateCount(Long value) {
-    this.mApproximateCount = value;
-    return this;
   }
 
   public String getFieldCountry() {
     return mCountry;
   }
 
-  public PartnerCategory setFieldCountry(String value) {
-    this.mCountry = value;
-    return this;
-  }
-
   public String getFieldDescription() {
     return mDescription;
-  }
-
-  public PartnerCategory setFieldDescription(String value) {
-    this.mDescription = value;
-    return this;
   }
 
   public String getFieldDetails() {
     return mDetails;
   }
 
-  public PartnerCategory setFieldDetails(String value) {
-    this.mDetails = value;
-    return this;
-  }
-
   public String getFieldId() {
     return mId;
-  }
-
-  public PartnerCategory setFieldId(String value) {
-    this.mId = value;
-    return this;
   }
 
   public Boolean getFieldIsPrivate() {
     return mIsPrivate;
   }
 
-  public PartnerCategory setFieldIsPrivate(Boolean value) {
-    this.mIsPrivate = value;
-    return this;
-  }
-
   public String getFieldName() {
     return mName;
-  }
-
-  public PartnerCategory setFieldName(String value) {
-    this.mName = value;
-    return this;
   }
 
   public String getFieldParentCategory() {
     return mParentCategory;
   }
 
-  public PartnerCategory setFieldParentCategory(String value) {
-    this.mParentCategory = value;
-    return this;
-  }
-
   public String getFieldSource() {
     return mSource;
-  }
-
-  public PartnerCategory setFieldSource(String value) {
-    this.mSource = value;
-    return this;
   }
 
   public String getFieldStatus() {
     return mStatus;
   }
 
-  public PartnerCategory setFieldStatus(String value) {
-    this.mStatus = value;
-    return this;
-  }
-
   public String getFieldTargetingType() {
     return mTargetingType;
   }
 
-  public PartnerCategory setFieldTargetingType(String value) {
-    this.mTargetingType = value;
-    return this;
+
+
+  public static class APIRequestGet extends APIRequest<PartnerCategory> {
+
+    PartnerCategory lastResponse = null;
+    @Override
+    public PartnerCategory getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "approximate_count",
+      "country",
+      "description",
+      "details",
+      "id",
+      "is_private",
+      "name",
+      "parent_category",
+      "source",
+      "status",
+      "targeting_type",
+    };
+
+    @Override
+    public PartnerCategory parseResponse(String response) throws APIException {
+      return PartnerCategory.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public PartnerCategory execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public PartnerCategory execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<PartnerCategory> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<PartnerCategory> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, PartnerCategory>() {
+           public PartnerCategory apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestApproximateCountField () {
+      return this.requestApproximateCountField(true);
+    }
+    public APIRequestGet requestApproximateCountField (boolean value) {
+      this.requestField("approximate_count", value);
+      return this;
+    }
+    public APIRequestGet requestCountryField () {
+      return this.requestCountryField(true);
+    }
+    public APIRequestGet requestCountryField (boolean value) {
+      this.requestField("country", value);
+      return this;
+    }
+    public APIRequestGet requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGet requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGet requestDetailsField () {
+      return this.requestDetailsField(true);
+    }
+    public APIRequestGet requestDetailsField (boolean value) {
+      this.requestField("details", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestIsPrivateField () {
+      return this.requestIsPrivateField(true);
+    }
+    public APIRequestGet requestIsPrivateField (boolean value) {
+      this.requestField("is_private", value);
+      return this;
+    }
+    public APIRequestGet requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGet requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestParentCategoryField () {
+      return this.requestParentCategoryField(true);
+    }
+    public APIRequestGet requestParentCategoryField (boolean value) {
+      this.requestField("parent_category", value);
+      return this;
+    }
+    public APIRequestGet requestSourceField () {
+      return this.requestSourceField(true);
+    }
+    public APIRequestGet requestSourceField (boolean value) {
+      this.requestField("source", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGet requestTargetingTypeField () {
+      return this.requestTargetingTypeField(true);
+    }
+    public APIRequestGet requestTargetingTypeField (boolean value) {
+      this.requestField("targeting_type", value);
+      return this;
+    }
   }
-
-
 
   public static enum EnumPrivateOrPublic {
       @SerializedName("PRIVATE")

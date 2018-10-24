@@ -72,6 +72,7 @@ public class ExternalEventSource extends APINode {
 
   public ExternalEventSource(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -90,19 +91,17 @@ public class ExternalEventSource extends APINode {
   }
 
   public static ExternalEventSource fetchById(String id, APIContext context) throws APIException {
-    ExternalEventSource externalEventSource =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return externalEventSource;
   }
 
   public static ListenableFuture<ExternalEventSource> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<ExternalEventSource> externalEventSource =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return externalEventSource;
   }
 
   public static APINodeList<ExternalEventSource> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -115,12 +114,11 @@ public class ExternalEventSource extends APINode {
   }
 
   public static ListenableFuture<APINodeList<ExternalEventSource>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<ExternalEventSource>> externalEventSource =
+    return
       new APIRequest(context, "", "/", "GET", ExternalEventSource.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return externalEventSource;
   }
 
   private String getPrefixedId() {

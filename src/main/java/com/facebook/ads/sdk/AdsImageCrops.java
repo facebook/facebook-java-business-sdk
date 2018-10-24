@@ -69,13 +69,74 @@ public class AdsImageCrops extends APINode {
   private List<JsonArray> m600x360 = null;
   @SerializedName("90x160")
   private List<JsonArray> m90x160 = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdsImageCrops() {
+  AdsImageCrops() {
+  }
+
+  public AdsImageCrops(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdsImageCrops(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdsImageCrops fetch() throws APIException{
+    AdsImageCrops newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdsImageCrops fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdsImageCrops> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdsImageCrops fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdsImageCrops> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdsImageCrops> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdsImageCrops>)(
+      new APIRequest<AdsImageCrops>(context, "", "/", "GET", AdsImageCrops.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdsImageCrops>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdsImageCrops.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdsImageCrops loadJSON(String json, APIContext context) {
     AdsImageCrops adsImageCrops = getGson().fromJson(json, AdsImageCrops.class);
@@ -218,71 +279,211 @@ public class AdsImageCrops extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public List<JsonArray> getField100x100() {
     return m100x100;
-  }
-
-  public AdsImageCrops setField100x100(List<JsonArray> value) {
-    this.m100x100 = value;
-    return this;
   }
 
   public List<JsonArray> getField100x72() {
     return m100x72;
   }
 
-  public AdsImageCrops setField100x72(List<JsonArray> value) {
-    this.m100x72 = value;
-    return this;
-  }
-
   public List<JsonArray> getField191x100() {
     return m191x100;
-  }
-
-  public AdsImageCrops setField191x100(List<JsonArray> value) {
-    this.m191x100 = value;
-    return this;
   }
 
   public List<JsonArray> getField400x150() {
     return m400x150;
   }
 
-  public AdsImageCrops setField400x150(List<JsonArray> value) {
-    this.m400x150 = value;
-    return this;
-  }
-
   public List<JsonArray> getField400x500() {
     return m400x500;
-  }
-
-  public AdsImageCrops setField400x500(List<JsonArray> value) {
-    this.m400x500 = value;
-    return this;
   }
 
   public List<JsonArray> getField600x360() {
     return m600x360;
   }
 
-  public AdsImageCrops setField600x360(List<JsonArray> value) {
-    this.m600x360 = value;
-    return this;
-  }
-
   public List<JsonArray> getField90x160() {
     return m90x160;
   }
 
-  public AdsImageCrops setField90x160(List<JsonArray> value) {
-    this.m90x160 = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdsImageCrops> {
+
+    AdsImageCrops lastResponse = null;
+    @Override
+    public AdsImageCrops getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "100x100",
+      "100x72",
+      "191x100",
+      "400x150",
+      "400x500",
+      "600x360",
+      "90x160",
+      "id",
+    };
+
+    @Override
+    public AdsImageCrops parseResponse(String response) throws APIException {
+      return AdsImageCrops.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdsImageCrops execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdsImageCrops execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdsImageCrops> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdsImageCrops> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdsImageCrops>() {
+           public AdsImageCrops apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet request100x100Field () {
+      return this.request100x100Field(true);
+    }
+    public APIRequestGet request100x100Field (boolean value) {
+      this.requestField("100x100", value);
+      return this;
+    }
+    public APIRequestGet request100x72Field () {
+      return this.request100x72Field(true);
+    }
+    public APIRequestGet request100x72Field (boolean value) {
+      this.requestField("100x72", value);
+      return this;
+    }
+    public APIRequestGet request191x100Field () {
+      return this.request191x100Field(true);
+    }
+    public APIRequestGet request191x100Field (boolean value) {
+      this.requestField("191x100", value);
+      return this;
+    }
+    public APIRequestGet request400x150Field () {
+      return this.request400x150Field(true);
+    }
+    public APIRequestGet request400x150Field (boolean value) {
+      this.requestField("400x150", value);
+      return this;
+    }
+    public APIRequestGet request400x500Field () {
+      return this.request400x500Field(true);
+    }
+    public APIRequestGet request400x500Field (boolean value) {
+      this.requestField("400x500", value);
+      return this;
+    }
+    public APIRequestGet request600x360Field () {
+      return this.request600x360Field(true);
+    }
+    public APIRequestGet request600x360Field (boolean value) {
+      this.requestField("600x360", value);
+      return this;
+    }
+    public APIRequestGet request90x160Field () {
+      return this.request90x160Field(true);
+    }
+    public APIRequestGet request90x160Field (boolean value) {
+      this.requestField("90x160", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -306,6 +507,7 @@ public class AdsImageCrops extends APINode {
     this.m400x500 = instance.m400x500;
     this.m600x360 = instance.m600x360;
     this.m90x160 = instance.m90x160;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

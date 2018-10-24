@@ -65,13 +65,74 @@ public class PageRestaurantSpecialties extends APINode {
   private Long mDrinks = null;
   @SerializedName("lunch")
   private Long mLunch = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public PageRestaurantSpecialties() {
+  PageRestaurantSpecialties() {
+  }
+
+  public PageRestaurantSpecialties(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public PageRestaurantSpecialties(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public PageRestaurantSpecialties fetch() throws APIException{
+    PageRestaurantSpecialties newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static PageRestaurantSpecialties fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<PageRestaurantSpecialties> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static PageRestaurantSpecialties fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<PageRestaurantSpecialties> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<PageRestaurantSpecialties> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<PageRestaurantSpecialties>)(
+      new APIRequest<PageRestaurantSpecialties>(context, "", "/", "GET", PageRestaurantSpecialties.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<PageRestaurantSpecialties>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", PageRestaurantSpecialties.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static PageRestaurantSpecialties loadJSON(String json, APIContext context) {
     PageRestaurantSpecialties pageRestaurantSpecialties = getGson().fromJson(json, PageRestaurantSpecialties.class);
@@ -214,53 +275,187 @@ public class PageRestaurantSpecialties extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public Long getFieldBreakfast() {
     return mBreakfast;
-  }
-
-  public PageRestaurantSpecialties setFieldBreakfast(Long value) {
-    this.mBreakfast = value;
-    return this;
   }
 
   public Long getFieldCoffee() {
     return mCoffee;
   }
 
-  public PageRestaurantSpecialties setFieldCoffee(Long value) {
-    this.mCoffee = value;
-    return this;
-  }
-
   public Long getFieldDinner() {
     return mDinner;
-  }
-
-  public PageRestaurantSpecialties setFieldDinner(Long value) {
-    this.mDinner = value;
-    return this;
   }
 
   public Long getFieldDrinks() {
     return mDrinks;
   }
 
-  public PageRestaurantSpecialties setFieldDrinks(Long value) {
-    this.mDrinks = value;
-    return this;
-  }
-
   public Long getFieldLunch() {
     return mLunch;
   }
 
-  public PageRestaurantSpecialties setFieldLunch(Long value) {
-    this.mLunch = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<PageRestaurantSpecialties> {
+
+    PageRestaurantSpecialties lastResponse = null;
+    @Override
+    public PageRestaurantSpecialties getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "breakfast",
+      "coffee",
+      "dinner",
+      "drinks",
+      "lunch",
+      "id",
+    };
+
+    @Override
+    public PageRestaurantSpecialties parseResponse(String response) throws APIException {
+      return PageRestaurantSpecialties.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public PageRestaurantSpecialties execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public PageRestaurantSpecialties execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<PageRestaurantSpecialties> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<PageRestaurantSpecialties> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, PageRestaurantSpecialties>() {
+           public PageRestaurantSpecialties apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestBreakfastField () {
+      return this.requestBreakfastField(true);
+    }
+    public APIRequestGet requestBreakfastField (boolean value) {
+      this.requestField("breakfast", value);
+      return this;
+    }
+    public APIRequestGet requestCoffeeField () {
+      return this.requestCoffeeField(true);
+    }
+    public APIRequestGet requestCoffeeField (boolean value) {
+      this.requestField("coffee", value);
+      return this;
+    }
+    public APIRequestGet requestDinnerField () {
+      return this.requestDinnerField(true);
+    }
+    public APIRequestGet requestDinnerField (boolean value) {
+      this.requestField("dinner", value);
+      return this;
+    }
+    public APIRequestGet requestDrinksField () {
+      return this.requestDrinksField(true);
+    }
+    public APIRequestGet requestDrinksField (boolean value) {
+      this.requestField("drinks", value);
+      return this;
+    }
+    public APIRequestGet requestLunchField () {
+      return this.requestLunchField(true);
+    }
+    public APIRequestGet requestLunchField (boolean value) {
+      this.requestField("lunch", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -282,6 +477,7 @@ public class PageRestaurantSpecialties extends APINode {
     this.mDinner = instance.mDinner;
     this.mDrinks = instance.mDrinks;
     this.mLunch = instance.mLunch;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

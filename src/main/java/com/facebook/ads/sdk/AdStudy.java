@@ -96,6 +96,7 @@ public class AdStudy extends APINode {
 
   public AdStudy(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -114,19 +115,17 @@ public class AdStudy extends APINode {
   }
 
   public static AdStudy fetchById(String id, APIContext context) throws APIException {
-    AdStudy adStudy =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return adStudy;
   }
 
   public static ListenableFuture<AdStudy> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<AdStudy> adStudy =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return adStudy;
   }
 
   public static APINodeList<AdStudy> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -139,12 +138,11 @@ public class AdStudy extends APINode {
   }
 
   public static ListenableFuture<APINodeList<AdStudy>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<AdStudy>> adStudy =
+    return
       new APIRequest(context, "", "/", "GET", AdStudy.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return adStudy;
   }
 
   private String getPrefixedId() {
@@ -295,8 +293,20 @@ public class AdStudy extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetCells getCells() {
+    return new APIRequestGetCells(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateCustomAudience createCustomAudience() {
     return new APIRequestCreateCustomAudience(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetHealthCheckErrors getHealthCheckErrors() {
+    return new APIRequestGetHealthCheckErrors(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetObjectives getObjectives() {
+    return new APIRequestGetObjectives(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateObjective createObjective() {
@@ -307,8 +317,16 @@ public class AdStudy extends APINode {
     return new APIRequestDeleteUserPermissions(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetUserPermissions getUserPermissions() {
+    return new APIRequestGetUserPermissions(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateUserPermission createUserPermission() {
     return new APIRequestCreateUserPermission(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetViewers getViewers() {
+    return new APIRequestGetViewers(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -391,6 +409,149 @@ public class AdStudy extends APINode {
 
 
 
+  public static class APIRequestGetCells extends APIRequest<AdStudyCell> {
+
+    APINodeList<AdStudyCell> lastResponse = null;
+    @Override
+    public APINodeList<AdStudyCell> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "ad_entities_count",
+      "control_percentage",
+      "id",
+      "name",
+      "treatment_percentage",
+    };
+
+    @Override
+    public APINodeList<AdStudyCell> parseResponse(String response) throws APIException {
+      return AdStudyCell.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<AdStudyCell> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdStudyCell> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdStudyCell>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdStudyCell>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdStudyCell>>() {
+           public APINodeList<AdStudyCell> apply(String result) {
+             try {
+               return APIRequestGetCells.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetCells(String nodeId, APIContext context) {
+      super(context, nodeId, "/cells", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetCells setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCells setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetCells requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetCells requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCells requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetCells requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCells requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetCells requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetCells requestAdEntitiesCountField () {
+      return this.requestAdEntitiesCountField(true);
+    }
+    public APIRequestGetCells requestAdEntitiesCountField (boolean value) {
+      this.requestField("ad_entities_count", value);
+      return this;
+    }
+    public APIRequestGetCells requestControlPercentageField () {
+      return this.requestControlPercentageField(true);
+    }
+    public APIRequestGetCells requestControlPercentageField (boolean value) {
+      this.requestField("control_percentage", value);
+      return this;
+    }
+    public APIRequestGetCells requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetCells requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCells requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetCells requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetCells requestTreatmentPercentageField () {
+      return this.requestTreatmentPercentageField(true);
+    }
+    public APIRequestGetCells requestTreatmentPercentageField (boolean value) {
+      this.requestField("treatment_percentage", value);
+      return this;
+    }
+  }
+
   public static class APIRequestCreateCustomAudience extends APIRequest<AdStudy> {
 
     AdStudy lastResponse = null;
@@ -399,11 +560,11 @@ public class AdStudy extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "cell_id",
+      "objective_id",
       "account_id",
       "audience_name",
       "audience_type",
-      "cell_id",
-      "objective_id",
     };
 
     public static final String[] FIELDS = {
@@ -461,6 +622,16 @@ public class AdStudy extends APINode {
     }
 
 
+    public APIRequestCreateCustomAudience setCellId (String cellId) {
+      this.setParam("cell_id", cellId);
+      return this;
+    }
+
+    public APIRequestCreateCustomAudience setObjectiveId (String objectiveId) {
+      this.setParam("objective_id", objectiveId);
+      return this;
+    }
+
     public APIRequestCreateCustomAudience setAccountId (String accountId) {
       this.setParam("account_id", accountId);
       return this;
@@ -477,16 +648,6 @@ public class AdStudy extends APINode {
     }
     public APIRequestCreateCustomAudience setAudienceType (String audienceType) {
       this.setParam("audience_type", audienceType);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setCellId (String cellId) {
-      this.setParam("cell_id", cellId);
-      return this;
-    }
-
-    public APIRequestCreateCustomAudience setObjectiveId (String objectiveId) {
-      this.setParam("objective_id", objectiveId);
       return this;
     }
 
@@ -528,6 +689,292 @@ public class AdStudy extends APINode {
 
   }
 
+  public static class APIRequestGetHealthCheckErrors extends APIRequest<AdsTALHealthCheckError> {
+
+    APINodeList<AdsTALHealthCheckError> lastResponse = null;
+    @Override
+    public APINodeList<AdsTALHealthCheckError> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "error_code",
+      "target_id",
+      "id",
+    };
+
+    @Override
+    public APINodeList<AdsTALHealthCheckError> parseResponse(String response) throws APIException {
+      return AdsTALHealthCheckError.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<AdsTALHealthCheckError> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdsTALHealthCheckError> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdsTALHealthCheckError>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdsTALHealthCheckError>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdsTALHealthCheckError>>() {
+           public APINodeList<AdsTALHealthCheckError> apply(String result) {
+             try {
+               return APIRequestGetHealthCheckErrors.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetHealthCheckErrors(String nodeId, APIContext context) {
+      super(context, nodeId, "/health_check_errors", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetHealthCheckErrors setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHealthCheckErrors setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetHealthCheckErrors requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetHealthCheckErrors requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHealthCheckErrors requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetHealthCheckErrors requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHealthCheckErrors requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHealthCheckErrors requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetHealthCheckErrors requestErrorCodeField () {
+      return this.requestErrorCodeField(true);
+    }
+    public APIRequestGetHealthCheckErrors requestErrorCodeField (boolean value) {
+      this.requestField("error_code", value);
+      return this;
+    }
+    public APIRequestGetHealthCheckErrors requestTargetIdField () {
+      return this.requestTargetIdField(true);
+    }
+    public APIRequestGetHealthCheckErrors requestTargetIdField (boolean value) {
+      this.requestField("target_id", value);
+      return this;
+    }
+    public APIRequestGetHealthCheckErrors requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetHealthCheckErrors requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetObjectives extends APIRequest<AdStudyObjective> {
+
+    APINodeList<AdStudyObjective> lastResponse = null;
+    @Override
+    public APINodeList<AdStudyObjective> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "custom_attributes",
+      "id",
+      "is_primary",
+      "last_updated_results",
+      "name",
+      "results",
+      "type",
+    };
+
+    @Override
+    public APINodeList<AdStudyObjective> parseResponse(String response) throws APIException {
+      return AdStudyObjective.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<AdStudyObjective> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdStudyObjective> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdStudyObjective>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdStudyObjective>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdStudyObjective>>() {
+           public APINodeList<AdStudyObjective> apply(String result) {
+             try {
+               return APIRequestGetObjectives.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetObjectives(String nodeId, APIContext context) {
+      super(context, nodeId, "/objectives", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetObjectives setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetObjectives setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetObjectives requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetObjectives requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetObjectives requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetObjectives requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetObjectives requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetObjectives requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetObjectives requestCustomAttributesField () {
+      return this.requestCustomAttributesField(true);
+    }
+    public APIRequestGetObjectives requestCustomAttributesField (boolean value) {
+      this.requestField("custom_attributes", value);
+      return this;
+    }
+    public APIRequestGetObjectives requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetObjectives requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetObjectives requestIsPrimaryField () {
+      return this.requestIsPrimaryField(true);
+    }
+    public APIRequestGetObjectives requestIsPrimaryField (boolean value) {
+      this.requestField("is_primary", value);
+      return this;
+    }
+    public APIRequestGetObjectives requestLastUpdatedResultsField () {
+      return this.requestLastUpdatedResultsField(true);
+    }
+    public APIRequestGetObjectives requestLastUpdatedResultsField (boolean value) {
+      this.requestField("last_updated_results", value);
+      return this;
+    }
+    public APIRequestGetObjectives requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetObjectives requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetObjectives requestResultsField () {
+      return this.requestResultsField(true);
+    }
+    public APIRequestGetObjectives requestResultsField (boolean value) {
+      this.requestField("results", value);
+      return this;
+    }
+    public APIRequestGetObjectives requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetObjectives requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+  }
+
   public static class APIRequestCreateObjective extends APIRequest<AdStudyObjective> {
 
     AdStudyObjective lastResponse = null;
@@ -536,14 +983,14 @@ public class AdStudy extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "adspixels",
-      "applications",
-      "customconversions",
       "is_primary",
       "name",
-      "offline_conversion_data_sets",
-      "offsitepixels",
       "type",
+      "adspixels",
+      "customconversions",
+      "applications",
+      "offsitepixels",
+      "offline_conversion_data_sets",
     };
 
     public static final String[] FIELDS = {
@@ -601,33 +1048,6 @@ public class AdStudy extends APINode {
     }
 
 
-    public APIRequestCreateObjective setAdspixels (List<Object> adspixels) {
-      this.setParam("adspixels", adspixels);
-      return this;
-    }
-    public APIRequestCreateObjective setAdspixels (String adspixels) {
-      this.setParam("adspixels", adspixels);
-      return this;
-    }
-
-    public APIRequestCreateObjective setApplications (List<Object> applications) {
-      this.setParam("applications", applications);
-      return this;
-    }
-    public APIRequestCreateObjective setApplications (String applications) {
-      this.setParam("applications", applications);
-      return this;
-    }
-
-    public APIRequestCreateObjective setCustomconversions (List<Object> customconversions) {
-      this.setParam("customconversions", customconversions);
-      return this;
-    }
-    public APIRequestCreateObjective setCustomconversions (String customconversions) {
-      this.setParam("customconversions", customconversions);
-      return this;
-    }
-
     public APIRequestCreateObjective setIsPrimary (Boolean isPrimary) {
       this.setParam("is_primary", isPrimary);
       return this;
@@ -642,12 +1062,39 @@ public class AdStudy extends APINode {
       return this;
     }
 
-    public APIRequestCreateObjective setOfflineConversionDataSets (List<Object> offlineConversionDataSets) {
-      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
+    public APIRequestCreateObjective setType (AdStudyObjective.EnumType type) {
+      this.setParam("type", type);
       return this;
     }
-    public APIRequestCreateObjective setOfflineConversionDataSets (String offlineConversionDataSets) {
-      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
+    public APIRequestCreateObjective setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestCreateObjective setAdspixels (List<Object> adspixels) {
+      this.setParam("adspixels", adspixels);
+      return this;
+    }
+    public APIRequestCreateObjective setAdspixels (String adspixels) {
+      this.setParam("adspixels", adspixels);
+      return this;
+    }
+
+    public APIRequestCreateObjective setCustomconversions (List<Object> customconversions) {
+      this.setParam("customconversions", customconversions);
+      return this;
+    }
+    public APIRequestCreateObjective setCustomconversions (String customconversions) {
+      this.setParam("customconversions", customconversions);
+      return this;
+    }
+
+    public APIRequestCreateObjective setApplications (List<Object> applications) {
+      this.setParam("applications", applications);
+      return this;
+    }
+    public APIRequestCreateObjective setApplications (String applications) {
+      this.setParam("applications", applications);
       return this;
     }
 
@@ -660,12 +1107,12 @@ public class AdStudy extends APINode {
       return this;
     }
 
-    public APIRequestCreateObjective setType (AdStudyObjective.EnumType type) {
-      this.setParam("type", type);
+    public APIRequestCreateObjective setOfflineConversionDataSets (List<Object> offlineConversionDataSets) {
+      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
       return this;
     }
-    public APIRequestCreateObjective setType (String type) {
-      this.setParam("type", type);
+    public APIRequestCreateObjective setOfflineConversionDataSets (String offlineConversionDataSets) {
+      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
       return this;
     }
 
@@ -715,9 +1162,9 @@ public class AdStudy extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "business",
-      "email",
       "user",
+      "email",
+      "business",
     };
 
     public static final String[] FIELDS = {
@@ -775,8 +1222,12 @@ public class AdStudy extends APINode {
     }
 
 
-    public APIRequestDeleteUserPermissions setBusiness (String business) {
-      this.setParam("business", business);
+    public APIRequestDeleteUserPermissions setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestDeleteUserPermissions setUser (String user) {
+      this.setParam("user", user);
       return this;
     }
 
@@ -785,12 +1236,8 @@ public class AdStudy extends APINode {
       return this;
     }
 
-    public APIRequestDeleteUserPermissions setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestDeleteUserPermissions setUser (String user) {
-      this.setParam("user", user);
+    public APIRequestDeleteUserPermissions setBusiness (String business) {
+      this.setParam("business", business);
       return this;
     }
 
@@ -832,6 +1279,197 @@ public class AdStudy extends APINode {
 
   }
 
+  public static class APIRequestGetUserPermissions extends APIRequest<AdStudyAdsAssetUserPermissions> {
+
+    APINodeList<AdStudyAdsAssetUserPermissions> lastResponse = null;
+    @Override
+    public APINodeList<AdStudyAdsAssetUserPermissions> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "business",
+      "business_persona",
+      "created_by",
+      "created_time",
+      "email",
+      "role",
+      "status",
+      "updated_by",
+      "updated_time",
+      "user",
+      "id",
+    };
+
+    @Override
+    public APINodeList<AdStudyAdsAssetUserPermissions> parseResponse(String response) throws APIException {
+      return AdStudyAdsAssetUserPermissions.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<AdStudyAdsAssetUserPermissions> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdStudyAdsAssetUserPermissions> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdStudyAdsAssetUserPermissions>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdStudyAdsAssetUserPermissions>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdStudyAdsAssetUserPermissions>>() {
+           public APINodeList<AdStudyAdsAssetUserPermissions> apply(String result) {
+             try {
+               return APIRequestGetUserPermissions.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetUserPermissions(String nodeId, APIContext context) {
+      super(context, nodeId, "/userpermissions", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetUserPermissions setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetUserPermissions setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetUserPermissions requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetUserPermissions requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetUserPermissions requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetUserPermissions requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetUserPermissions requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetUserPermissions requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetUserPermissions requestBusinessField () {
+      return this.requestBusinessField(true);
+    }
+    public APIRequestGetUserPermissions requestBusinessField (boolean value) {
+      this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetUserPermissions requestBusinessPersonaField () {
+      return this.requestBusinessPersonaField(true);
+    }
+    public APIRequestGetUserPermissions requestBusinessPersonaField (boolean value) {
+      this.requestField("business_persona", value);
+      return this;
+    }
+    public APIRequestGetUserPermissions requestCreatedByField () {
+      return this.requestCreatedByField(true);
+    }
+    public APIRequestGetUserPermissions requestCreatedByField (boolean value) {
+      this.requestField("created_by", value);
+      return this;
+    }
+    public APIRequestGetUserPermissions requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetUserPermissions requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetUserPermissions requestEmailField () {
+      return this.requestEmailField(true);
+    }
+    public APIRequestGetUserPermissions requestEmailField (boolean value) {
+      this.requestField("email", value);
+      return this;
+    }
+    public APIRequestGetUserPermissions requestRoleField () {
+      return this.requestRoleField(true);
+    }
+    public APIRequestGetUserPermissions requestRoleField (boolean value) {
+      this.requestField("role", value);
+      return this;
+    }
+    public APIRequestGetUserPermissions requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetUserPermissions requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetUserPermissions requestUpdatedByField () {
+      return this.requestUpdatedByField(true);
+    }
+    public APIRequestGetUserPermissions requestUpdatedByField (boolean value) {
+      this.requestField("updated_by", value);
+      return this;
+    }
+    public APIRequestGetUserPermissions requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetUserPermissions requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetUserPermissions requestUserField () {
+      return this.requestUserField(true);
+    }
+    public APIRequestGetUserPermissions requestUserField (boolean value) {
+      this.requestField("user", value);
+      return this;
+    }
+    public APIRequestGetUserPermissions requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetUserPermissions requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
   public static class APIRequestCreateUserPermission extends APIRequest<AdStudy> {
 
     AdStudy lastResponse = null;
@@ -840,10 +1478,10 @@ public class AdStudy extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "business",
+      "user",
       "email",
       "role",
-      "user",
+      "business",
     };
 
     public static final String[] FIELDS = {
@@ -901,8 +1539,12 @@ public class AdStudy extends APINode {
     }
 
 
-    public APIRequestCreateUserPermission setBusiness (String business) {
-      this.setParam("business", business);
+    public APIRequestCreateUserPermission setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestCreateUserPermission setUser (String user) {
+      this.setParam("user", user);
       return this;
     }
 
@@ -920,12 +1562,8 @@ public class AdStudy extends APINode {
       return this;
     }
 
-    public APIRequestCreateUserPermission setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestCreateUserPermission setUser (String user) {
-      this.setParam("user", user);
+    public APIRequestCreateUserPermission setBusiness (String business) {
+      this.setParam("business", business);
       return this;
     }
 
@@ -965,6 +1603,605 @@ public class AdStudy extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetViewers extends APIRequest<User> {
+
+    APINodeList<User> lastResponse = null;
+    @Override
+    public APINodeList<User> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "about",
+      "address",
+      "admin_notes",
+      "age_range",
+      "bio",
+      "birthday",
+      "can_review_measurement_request",
+      "context",
+      "cover",
+      "currency",
+      "devices",
+      "education",
+      "email",
+      "employee_number",
+      "favorite_athletes",
+      "favorite_teams",
+      "first_name",
+      "gender",
+      "hometown",
+      "id",
+      "inspirational_people",
+      "install_type",
+      "installed",
+      "interested_in",
+      "is_famedeeplinkinguser",
+      "is_shared_login",
+      "is_verified",
+      "labels",
+      "languages",
+      "last_name",
+      "link",
+      "local_news_megaphone_dismiss_status",
+      "local_news_subscription_status",
+      "locale",
+      "location",
+      "meeting_for",
+      "middle_name",
+      "name",
+      "name_format",
+      "payment_pricepoints",
+      "political",
+      "profile_pic",
+      "public_key",
+      "quotes",
+      "relationship_status",
+      "religion",
+      "security_settings",
+      "shared_login_upgrade_required_by",
+      "short_name",
+      "significant_other",
+      "sports",
+      "test_group",
+      "third_party_id",
+      "timezone",
+      "token_for_business",
+      "updated_time",
+      "username",
+      "verified",
+      "video_upload_limits",
+      "viewer_can_send_gift",
+      "website",
+      "work",
+    };
+
+    @Override
+    public APINodeList<User> parseResponse(String response) throws APIException {
+      return User.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<User> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<User>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<User>>() {
+           public APINodeList<User> apply(String result) {
+             try {
+               return APIRequestGetViewers.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetViewers(String nodeId, APIContext context) {
+      super(context, nodeId, "/viewers", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetViewers setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViewers setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetViewers requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetViewers requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViewers requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetViewers requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViewers requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetViewers requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetViewers requestAboutField () {
+      return this.requestAboutField(true);
+    }
+    public APIRequestGetViewers requestAboutField (boolean value) {
+      this.requestField("about", value);
+      return this;
+    }
+    public APIRequestGetViewers requestAddressField () {
+      return this.requestAddressField(true);
+    }
+    public APIRequestGetViewers requestAddressField (boolean value) {
+      this.requestField("address", value);
+      return this;
+    }
+    public APIRequestGetViewers requestAdminNotesField () {
+      return this.requestAdminNotesField(true);
+    }
+    public APIRequestGetViewers requestAdminNotesField (boolean value) {
+      this.requestField("admin_notes", value);
+      return this;
+    }
+    public APIRequestGetViewers requestAgeRangeField () {
+      return this.requestAgeRangeField(true);
+    }
+    public APIRequestGetViewers requestAgeRangeField (boolean value) {
+      this.requestField("age_range", value);
+      return this;
+    }
+    public APIRequestGetViewers requestBioField () {
+      return this.requestBioField(true);
+    }
+    public APIRequestGetViewers requestBioField (boolean value) {
+      this.requestField("bio", value);
+      return this;
+    }
+    public APIRequestGetViewers requestBirthdayField () {
+      return this.requestBirthdayField(true);
+    }
+    public APIRequestGetViewers requestBirthdayField (boolean value) {
+      this.requestField("birthday", value);
+      return this;
+    }
+    public APIRequestGetViewers requestCanReviewMeasurementRequestField () {
+      return this.requestCanReviewMeasurementRequestField(true);
+    }
+    public APIRequestGetViewers requestCanReviewMeasurementRequestField (boolean value) {
+      this.requestField("can_review_measurement_request", value);
+      return this;
+    }
+    public APIRequestGetViewers requestContextField () {
+      return this.requestContextField(true);
+    }
+    public APIRequestGetViewers requestContextField (boolean value) {
+      this.requestField("context", value);
+      return this;
+    }
+    public APIRequestGetViewers requestCoverField () {
+      return this.requestCoverField(true);
+    }
+    public APIRequestGetViewers requestCoverField (boolean value) {
+      this.requestField("cover", value);
+      return this;
+    }
+    public APIRequestGetViewers requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetViewers requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetViewers requestDevicesField () {
+      return this.requestDevicesField(true);
+    }
+    public APIRequestGetViewers requestDevicesField (boolean value) {
+      this.requestField("devices", value);
+      return this;
+    }
+    public APIRequestGetViewers requestEducationField () {
+      return this.requestEducationField(true);
+    }
+    public APIRequestGetViewers requestEducationField (boolean value) {
+      this.requestField("education", value);
+      return this;
+    }
+    public APIRequestGetViewers requestEmailField () {
+      return this.requestEmailField(true);
+    }
+    public APIRequestGetViewers requestEmailField (boolean value) {
+      this.requestField("email", value);
+      return this;
+    }
+    public APIRequestGetViewers requestEmployeeNumberField () {
+      return this.requestEmployeeNumberField(true);
+    }
+    public APIRequestGetViewers requestEmployeeNumberField (boolean value) {
+      this.requestField("employee_number", value);
+      return this;
+    }
+    public APIRequestGetViewers requestFavoriteAthletesField () {
+      return this.requestFavoriteAthletesField(true);
+    }
+    public APIRequestGetViewers requestFavoriteAthletesField (boolean value) {
+      this.requestField("favorite_athletes", value);
+      return this;
+    }
+    public APIRequestGetViewers requestFavoriteTeamsField () {
+      return this.requestFavoriteTeamsField(true);
+    }
+    public APIRequestGetViewers requestFavoriteTeamsField (boolean value) {
+      this.requestField("favorite_teams", value);
+      return this;
+    }
+    public APIRequestGetViewers requestFirstNameField () {
+      return this.requestFirstNameField(true);
+    }
+    public APIRequestGetViewers requestFirstNameField (boolean value) {
+      this.requestField("first_name", value);
+      return this;
+    }
+    public APIRequestGetViewers requestGenderField () {
+      return this.requestGenderField(true);
+    }
+    public APIRequestGetViewers requestGenderField (boolean value) {
+      this.requestField("gender", value);
+      return this;
+    }
+    public APIRequestGetViewers requestHometownField () {
+      return this.requestHometownField(true);
+    }
+    public APIRequestGetViewers requestHometownField (boolean value) {
+      this.requestField("hometown", value);
+      return this;
+    }
+    public APIRequestGetViewers requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetViewers requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetViewers requestInspirationalPeopleField () {
+      return this.requestInspirationalPeopleField(true);
+    }
+    public APIRequestGetViewers requestInspirationalPeopleField (boolean value) {
+      this.requestField("inspirational_people", value);
+      return this;
+    }
+    public APIRequestGetViewers requestInstallTypeField () {
+      return this.requestInstallTypeField(true);
+    }
+    public APIRequestGetViewers requestInstallTypeField (boolean value) {
+      this.requestField("install_type", value);
+      return this;
+    }
+    public APIRequestGetViewers requestInstalledField () {
+      return this.requestInstalledField(true);
+    }
+    public APIRequestGetViewers requestInstalledField (boolean value) {
+      this.requestField("installed", value);
+      return this;
+    }
+    public APIRequestGetViewers requestInterestedInField () {
+      return this.requestInterestedInField(true);
+    }
+    public APIRequestGetViewers requestInterestedInField (boolean value) {
+      this.requestField("interested_in", value);
+      return this;
+    }
+    public APIRequestGetViewers requestIsFamedeeplinkinguserField () {
+      return this.requestIsFamedeeplinkinguserField(true);
+    }
+    public APIRequestGetViewers requestIsFamedeeplinkinguserField (boolean value) {
+      this.requestField("is_famedeeplinkinguser", value);
+      return this;
+    }
+    public APIRequestGetViewers requestIsSharedLoginField () {
+      return this.requestIsSharedLoginField(true);
+    }
+    public APIRequestGetViewers requestIsSharedLoginField (boolean value) {
+      this.requestField("is_shared_login", value);
+      return this;
+    }
+    public APIRequestGetViewers requestIsVerifiedField () {
+      return this.requestIsVerifiedField(true);
+    }
+    public APIRequestGetViewers requestIsVerifiedField (boolean value) {
+      this.requestField("is_verified", value);
+      return this;
+    }
+    public APIRequestGetViewers requestLabelsField () {
+      return this.requestLabelsField(true);
+    }
+    public APIRequestGetViewers requestLabelsField (boolean value) {
+      this.requestField("labels", value);
+      return this;
+    }
+    public APIRequestGetViewers requestLanguagesField () {
+      return this.requestLanguagesField(true);
+    }
+    public APIRequestGetViewers requestLanguagesField (boolean value) {
+      this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetViewers requestLastNameField () {
+      return this.requestLastNameField(true);
+    }
+    public APIRequestGetViewers requestLastNameField (boolean value) {
+      this.requestField("last_name", value);
+      return this;
+    }
+    public APIRequestGetViewers requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetViewers requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetViewers requestLocalNewsMegaphoneDismissStatusField () {
+      return this.requestLocalNewsMegaphoneDismissStatusField(true);
+    }
+    public APIRequestGetViewers requestLocalNewsMegaphoneDismissStatusField (boolean value) {
+      this.requestField("local_news_megaphone_dismiss_status", value);
+      return this;
+    }
+    public APIRequestGetViewers requestLocalNewsSubscriptionStatusField () {
+      return this.requestLocalNewsSubscriptionStatusField(true);
+    }
+    public APIRequestGetViewers requestLocalNewsSubscriptionStatusField (boolean value) {
+      this.requestField("local_news_subscription_status", value);
+      return this;
+    }
+    public APIRequestGetViewers requestLocaleField () {
+      return this.requestLocaleField(true);
+    }
+    public APIRequestGetViewers requestLocaleField (boolean value) {
+      this.requestField("locale", value);
+      return this;
+    }
+    public APIRequestGetViewers requestLocationField () {
+      return this.requestLocationField(true);
+    }
+    public APIRequestGetViewers requestLocationField (boolean value) {
+      this.requestField("location", value);
+      return this;
+    }
+    public APIRequestGetViewers requestMeetingForField () {
+      return this.requestMeetingForField(true);
+    }
+    public APIRequestGetViewers requestMeetingForField (boolean value) {
+      this.requestField("meeting_for", value);
+      return this;
+    }
+    public APIRequestGetViewers requestMiddleNameField () {
+      return this.requestMiddleNameField(true);
+    }
+    public APIRequestGetViewers requestMiddleNameField (boolean value) {
+      this.requestField("middle_name", value);
+      return this;
+    }
+    public APIRequestGetViewers requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetViewers requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetViewers requestNameFormatField () {
+      return this.requestNameFormatField(true);
+    }
+    public APIRequestGetViewers requestNameFormatField (boolean value) {
+      this.requestField("name_format", value);
+      return this;
+    }
+    public APIRequestGetViewers requestPaymentPricepointsField () {
+      return this.requestPaymentPricepointsField(true);
+    }
+    public APIRequestGetViewers requestPaymentPricepointsField (boolean value) {
+      this.requestField("payment_pricepoints", value);
+      return this;
+    }
+    public APIRequestGetViewers requestPoliticalField () {
+      return this.requestPoliticalField(true);
+    }
+    public APIRequestGetViewers requestPoliticalField (boolean value) {
+      this.requestField("political", value);
+      return this;
+    }
+    public APIRequestGetViewers requestProfilePicField () {
+      return this.requestProfilePicField(true);
+    }
+    public APIRequestGetViewers requestProfilePicField (boolean value) {
+      this.requestField("profile_pic", value);
+      return this;
+    }
+    public APIRequestGetViewers requestPublicKeyField () {
+      return this.requestPublicKeyField(true);
+    }
+    public APIRequestGetViewers requestPublicKeyField (boolean value) {
+      this.requestField("public_key", value);
+      return this;
+    }
+    public APIRequestGetViewers requestQuotesField () {
+      return this.requestQuotesField(true);
+    }
+    public APIRequestGetViewers requestQuotesField (boolean value) {
+      this.requestField("quotes", value);
+      return this;
+    }
+    public APIRequestGetViewers requestRelationshipStatusField () {
+      return this.requestRelationshipStatusField(true);
+    }
+    public APIRequestGetViewers requestRelationshipStatusField (boolean value) {
+      this.requestField("relationship_status", value);
+      return this;
+    }
+    public APIRequestGetViewers requestReligionField () {
+      return this.requestReligionField(true);
+    }
+    public APIRequestGetViewers requestReligionField (boolean value) {
+      this.requestField("religion", value);
+      return this;
+    }
+    public APIRequestGetViewers requestSecuritySettingsField () {
+      return this.requestSecuritySettingsField(true);
+    }
+    public APIRequestGetViewers requestSecuritySettingsField (boolean value) {
+      this.requestField("security_settings", value);
+      return this;
+    }
+    public APIRequestGetViewers requestSharedLoginUpgradeRequiredByField () {
+      return this.requestSharedLoginUpgradeRequiredByField(true);
+    }
+    public APIRequestGetViewers requestSharedLoginUpgradeRequiredByField (boolean value) {
+      this.requestField("shared_login_upgrade_required_by", value);
+      return this;
+    }
+    public APIRequestGetViewers requestShortNameField () {
+      return this.requestShortNameField(true);
+    }
+    public APIRequestGetViewers requestShortNameField (boolean value) {
+      this.requestField("short_name", value);
+      return this;
+    }
+    public APIRequestGetViewers requestSignificantOtherField () {
+      return this.requestSignificantOtherField(true);
+    }
+    public APIRequestGetViewers requestSignificantOtherField (boolean value) {
+      this.requestField("significant_other", value);
+      return this;
+    }
+    public APIRequestGetViewers requestSportsField () {
+      return this.requestSportsField(true);
+    }
+    public APIRequestGetViewers requestSportsField (boolean value) {
+      this.requestField("sports", value);
+      return this;
+    }
+    public APIRequestGetViewers requestTestGroupField () {
+      return this.requestTestGroupField(true);
+    }
+    public APIRequestGetViewers requestTestGroupField (boolean value) {
+      this.requestField("test_group", value);
+      return this;
+    }
+    public APIRequestGetViewers requestThirdPartyIdField () {
+      return this.requestThirdPartyIdField(true);
+    }
+    public APIRequestGetViewers requestThirdPartyIdField (boolean value) {
+      this.requestField("third_party_id", value);
+      return this;
+    }
+    public APIRequestGetViewers requestTimezoneField () {
+      return this.requestTimezoneField(true);
+    }
+    public APIRequestGetViewers requestTimezoneField (boolean value) {
+      this.requestField("timezone", value);
+      return this;
+    }
+    public APIRequestGetViewers requestTokenForBusinessField () {
+      return this.requestTokenForBusinessField(true);
+    }
+    public APIRequestGetViewers requestTokenForBusinessField (boolean value) {
+      this.requestField("token_for_business", value);
+      return this;
+    }
+    public APIRequestGetViewers requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetViewers requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetViewers requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetViewers requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+    public APIRequestGetViewers requestVerifiedField () {
+      return this.requestVerifiedField(true);
+    }
+    public APIRequestGetViewers requestVerifiedField (boolean value) {
+      this.requestField("verified", value);
+      return this;
+    }
+    public APIRequestGetViewers requestVideoUploadLimitsField () {
+      return this.requestVideoUploadLimitsField(true);
+    }
+    public APIRequestGetViewers requestVideoUploadLimitsField (boolean value) {
+      this.requestField("video_upload_limits", value);
+      return this;
+    }
+    public APIRequestGetViewers requestViewerCanSendGiftField () {
+      return this.requestViewerCanSendGiftField(true);
+    }
+    public APIRequestGetViewers requestViewerCanSendGiftField (boolean value) {
+      this.requestField("viewer_can_send_gift", value);
+      return this;
+    }
+    public APIRequestGetViewers requestWebsiteField () {
+      return this.requestWebsiteField(true);
+    }
+    public APIRequestGetViewers requestWebsiteField (boolean value) {
+      this.requestField("website", value);
+      return this;
+    }
+    public APIRequestGetViewers requestWorkField () {
+      return this.requestWorkField(true);
+    }
+    public APIRequestGetViewers requestWorkField (boolean value) {
+      this.requestField("work", value);
+      return this;
+    }
   }
 
   public static class APIRequestGet extends APIRequest<AdStudy> {
@@ -1199,16 +2436,16 @@ public class AdStudy extends APINode {
     }
     public static final String[] PARAMS = {
       "cells",
-      "client_business",
-      "confidence_level",
-      "cooldown_start_time",
-      "description",
-      "end_time",
-      "name",
       "objectives",
-      "observation_end_time",
+      "end_time",
+      "description",
+      "name",
       "start_time",
       "viewers",
+      "cooldown_start_time",
+      "observation_end_time",
+      "confidence_level",
+      "client_business",
     };
 
     public static final String[] FIELDS = {
@@ -1275,31 +2512,12 @@ public class AdStudy extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setClientBusiness (String clientBusiness) {
-      this.setParam("client_business", clientBusiness);
+    public APIRequestUpdate setObjectives (List<Object> objectives) {
+      this.setParam("objectives", objectives);
       return this;
     }
-
-    public APIRequestUpdate setConfidenceLevel (Double confidenceLevel) {
-      this.setParam("confidence_level", confidenceLevel);
-      return this;
-    }
-    public APIRequestUpdate setConfidenceLevel (String confidenceLevel) {
-      this.setParam("confidence_level", confidenceLevel);
-      return this;
-    }
-
-    public APIRequestUpdate setCooldownStartTime (Long cooldownStartTime) {
-      this.setParam("cooldown_start_time", cooldownStartTime);
-      return this;
-    }
-    public APIRequestUpdate setCooldownStartTime (String cooldownStartTime) {
-      this.setParam("cooldown_start_time", cooldownStartTime);
-      return this;
-    }
-
-    public APIRequestUpdate setDescription (String description) {
-      this.setParam("description", description);
+    public APIRequestUpdate setObjectives (String objectives) {
+      this.setParam("objectives", objectives);
       return this;
     }
 
@@ -1312,26 +2530,13 @@ public class AdStudy extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestUpdate setObjectives (List<Object> objectives) {
-      this.setParam("objectives", objectives);
-      return this;
-    }
-    public APIRequestUpdate setObjectives (String objectives) {
-      this.setParam("objectives", objectives);
-      return this;
-    }
-
-    public APIRequestUpdate setObservationEndTime (Long observationEndTime) {
-      this.setParam("observation_end_time", observationEndTime);
-      return this;
-    }
-    public APIRequestUpdate setObservationEndTime (String observationEndTime) {
-      this.setParam("observation_end_time", observationEndTime);
       return this;
     }
 
@@ -1350,6 +2555,38 @@ public class AdStudy extends APINode {
     }
     public APIRequestUpdate setViewers (String viewers) {
       this.setParam("viewers", viewers);
+      return this;
+    }
+
+    public APIRequestUpdate setCooldownStartTime (Long cooldownStartTime) {
+      this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+    public APIRequestUpdate setCooldownStartTime (String cooldownStartTime) {
+      this.setParam("cooldown_start_time", cooldownStartTime);
+      return this;
+    }
+
+    public APIRequestUpdate setObservationEndTime (Long observationEndTime) {
+      this.setParam("observation_end_time", observationEndTime);
+      return this;
+    }
+    public APIRequestUpdate setObservationEndTime (String observationEndTime) {
+      this.setParam("observation_end_time", observationEndTime);
+      return this;
+    }
+
+    public APIRequestUpdate setConfidenceLevel (Double confidenceLevel) {
+      this.setParam("confidence_level", confidenceLevel);
+      return this;
+    }
+    public APIRequestUpdate setConfidenceLevel (String confidenceLevel) {
+      this.setParam("confidence_level", confidenceLevel);
+      return this;
+    }
+
+    public APIRequestUpdate setClientBusiness (String clientBusiness) {
+      this.setParam("client_business", clientBusiness);
       return this;
     }
 

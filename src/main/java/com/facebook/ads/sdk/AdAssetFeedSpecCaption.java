@@ -61,13 +61,74 @@ public class AdAssetFeedSpecCaption extends APINode {
   private String mText = null;
   @SerializedName("url_tags")
   private String mUrlTags = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdAssetFeedSpecCaption() {
+  AdAssetFeedSpecCaption() {
+  }
+
+  public AdAssetFeedSpecCaption(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdAssetFeedSpecCaption(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdAssetFeedSpecCaption fetch() throws APIException{
+    AdAssetFeedSpecCaption newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdAssetFeedSpecCaption fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdAssetFeedSpecCaption> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdAssetFeedSpecCaption fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdAssetFeedSpecCaption> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdAssetFeedSpecCaption> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdAssetFeedSpecCaption>)(
+      new APIRequest<AdAssetFeedSpecCaption>(context, "", "/", "GET", AdAssetFeedSpecCaption.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdAssetFeedSpecCaption>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdAssetFeedSpecCaption.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdAssetFeedSpecCaption loadJSON(String json, APIContext context) {
     AdAssetFeedSpecCaption adAssetFeedSpecCaption = getGson().fromJson(json, AdAssetFeedSpecCaption.class);
@@ -210,40 +271,163 @@ public class AdAssetFeedSpecCaption extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public List<AdAssetFeedSpecAssetLabel> getFieldAdlabels() {
     return mAdlabels;
   }
 
-  public AdAssetFeedSpecCaption setFieldAdlabels(List<AdAssetFeedSpecAssetLabel> value) {
-    this.mAdlabels = value;
-    return this;
-  }
-
-  public AdAssetFeedSpecCaption setFieldAdlabels(String value) {
-    Type type = new TypeToken<List<AdAssetFeedSpecAssetLabel>>(){}.getType();
-    this.mAdlabels = AdAssetFeedSpecAssetLabel.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldText() {
     return mText;
-  }
-
-  public AdAssetFeedSpecCaption setFieldText(String value) {
-    this.mText = value;
-    return this;
   }
 
   public String getFieldUrlTags() {
     return mUrlTags;
   }
 
-  public AdAssetFeedSpecCaption setFieldUrlTags(String value) {
-    this.mUrlTags = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdAssetFeedSpecCaption> {
+
+    AdAssetFeedSpecCaption lastResponse = null;
+    @Override
+    public AdAssetFeedSpecCaption getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "adlabels",
+      "text",
+      "url_tags",
+      "id",
+    };
+
+    @Override
+    public AdAssetFeedSpecCaption parseResponse(String response) throws APIException {
+      return AdAssetFeedSpecCaption.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdAssetFeedSpecCaption execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAssetFeedSpecCaption execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdAssetFeedSpecCaption> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdAssetFeedSpecCaption> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdAssetFeedSpecCaption>() {
+           public AdAssetFeedSpecCaption apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestAdlabelsField () {
+      return this.requestAdlabelsField(true);
+    }
+    public APIRequestGet requestAdlabelsField (boolean value) {
+      this.requestField("adlabels", value);
+      return this;
+    }
+    public APIRequestGet requestTextField () {
+      return this.requestTextField(true);
+    }
+    public APIRequestGet requestTextField (boolean value) {
+      this.requestField("text", value);
+      return this;
+    }
+    public APIRequestGet requestUrlTagsField () {
+      return this.requestUrlTagsField(true);
+    }
+    public APIRequestGet requestUrlTagsField (boolean value) {
+      this.requestField("url_tags", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -263,6 +447,7 @@ public class AdAssetFeedSpecCaption extends APINode {
     this.mAdlabels = instance.mAdlabels;
     this.mText = instance.mText;
     this.mUrlTags = instance.mUrlTags;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

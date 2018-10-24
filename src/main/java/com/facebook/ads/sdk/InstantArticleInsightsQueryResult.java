@@ -63,13 +63,74 @@ public class InstantArticleInsightsQueryResult extends APINode {
   private String mTime = null;
   @SerializedName("value")
   private String mValue = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public InstantArticleInsightsQueryResult() {
+  InstantArticleInsightsQueryResult() {
+  }
+
+  public InstantArticleInsightsQueryResult(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public InstantArticleInsightsQueryResult(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public InstantArticleInsightsQueryResult fetch() throws APIException{
+    InstantArticleInsightsQueryResult newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static InstantArticleInsightsQueryResult fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<InstantArticleInsightsQueryResult> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static InstantArticleInsightsQueryResult fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<InstantArticleInsightsQueryResult> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<InstantArticleInsightsQueryResult> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<InstantArticleInsightsQueryResult>)(
+      new APIRequest<InstantArticleInsightsQueryResult>(context, "", "/", "GET", InstantArticleInsightsQueryResult.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<InstantArticleInsightsQueryResult>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", InstantArticleInsightsQueryResult.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static InstantArticleInsightsQueryResult loadJSON(String json, APIContext context) {
     InstantArticleInsightsQueryResult instantArticleInsightsQueryResult = getGson().fromJson(json, InstantArticleInsightsQueryResult.class);
@@ -212,44 +273,175 @@ public class InstantArticleInsightsQueryResult extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public Map<String, String> getFieldBreakdowns() {
     return mBreakdowns;
-  }
-
-  public InstantArticleInsightsQueryResult setFieldBreakdowns(Map<String, String> value) {
-    this.mBreakdowns = value;
-    return this;
   }
 
   public String getFieldName() {
     return mName;
   }
 
-  public InstantArticleInsightsQueryResult setFieldName(String value) {
-    this.mName = value;
-    return this;
-  }
-
   public String getFieldTime() {
     return mTime;
-  }
-
-  public InstantArticleInsightsQueryResult setFieldTime(String value) {
-    this.mTime = value;
-    return this;
   }
 
   public String getFieldValue() {
     return mValue;
   }
 
-  public InstantArticleInsightsQueryResult setFieldValue(String value) {
-    this.mValue = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<InstantArticleInsightsQueryResult> {
+
+    InstantArticleInsightsQueryResult lastResponse = null;
+    @Override
+    public InstantArticleInsightsQueryResult getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "breakdowns",
+      "name",
+      "time",
+      "value",
+      "id",
+    };
+
+    @Override
+    public InstantArticleInsightsQueryResult parseResponse(String response) throws APIException {
+      return InstantArticleInsightsQueryResult.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public InstantArticleInsightsQueryResult execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public InstantArticleInsightsQueryResult execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<InstantArticleInsightsQueryResult> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<InstantArticleInsightsQueryResult> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, InstantArticleInsightsQueryResult>() {
+           public InstantArticleInsightsQueryResult apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestBreakdownsField () {
+      return this.requestBreakdownsField(true);
+    }
+    public APIRequestGet requestBreakdownsField (boolean value) {
+      this.requestField("breakdowns", value);
+      return this;
+    }
+    public APIRequestGet requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGet requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGet requestTimeField () {
+      return this.requestTimeField(true);
+    }
+    public APIRequestGet requestTimeField (boolean value) {
+      this.requestField("time", value);
+      return this;
+    }
+    public APIRequestGet requestValueField () {
+      return this.requestValueField(true);
+    }
+    public APIRequestGet requestValueField (boolean value) {
+      this.requestField("value", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumBreakdown {
       @SerializedName("no_breakdown")
@@ -295,8 +487,6 @@ public class InstantArticleInsightsQueryResult extends APINode {
       VALUE_MONTH("month"),
       @SerializedName("lifetime")
       VALUE_LIFETIME("lifetime"),
-      @SerializedName("total_over_range")
-      VALUE_TOTAL_OVER_RANGE("total_over_range"),
       NULL(null);
 
       private String value;
@@ -330,6 +520,7 @@ public class InstantArticleInsightsQueryResult extends APINode {
     this.mName = instance.mName;
     this.mTime = instance.mTime;
     this.mValue = instance.mValue;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

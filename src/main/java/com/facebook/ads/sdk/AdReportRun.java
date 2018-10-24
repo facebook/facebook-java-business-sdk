@@ -92,6 +92,7 @@ public class AdReportRun extends APINode {
 
   public AdReportRun(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -110,19 +111,17 @@ public class AdReportRun extends APINode {
   }
 
   public static AdReportRun fetchById(String id, APIContext context) throws APIException {
-    AdReportRun adReportRun =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return adReportRun;
   }
 
   public static ListenableFuture<AdReportRun> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<AdReportRun> adReportRun =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return adReportRun;
   }
 
   public static APINodeList<AdReportRun> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -135,12 +134,11 @@ public class AdReportRun extends APINode {
   }
 
   public static ListenableFuture<APINodeList<AdReportRun>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<AdReportRun>> adReportRun =
+    return
       new APIRequest(context, "", "/", "GET", AdReportRun.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return adReportRun;
   }
 
   private String getPrefixedId() {
@@ -304,8 +302,20 @@ public class AdReportRun extends APINode {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateRetry createRetry() {
+    return new APIRequestCreateRetry(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -379,50 +389,100 @@ public class AdReportRun extends APINode {
       "account_name",
       "action_values",
       "actions",
+      "activity_recency",
+      "ad_click_actions",
+      "ad_format_asset",
       "ad_id",
+      "ad_impression_actions",
       "ad_name",
       "adset_id",
       "adset_name",
+      "age",
+      "age_targeting",
+      "auction_bid",
+      "auction_competitiveness",
+      "auction_max_competitor_bid",
+      "bid_type",
+      "body_asset",
       "buying_type",
+      "call_to_action_asset",
       "campaign_id",
       "campaign_name",
       "canvas_avg_view_percent",
       "canvas_avg_view_time",
+      "canvas_component_avg_pct_view",
       "clicks",
       "cost_per_10_sec_video_view",
+      "cost_per_15_sec_video_view",
+      "cost_per_2_sec_continuous_video_view",
       "cost_per_action_type",
+      "cost_per_ad_click",
+      "cost_per_dda_countby_convs",
       "cost_per_estimated_ad_recallers",
       "cost_per_inline_link_click",
       "cost_per_inline_post_engagement",
+      "cost_per_one_thousand_ad_impression",
       "cost_per_outbound_click",
+      "cost_per_thruplay",
       "cost_per_unique_action_type",
       "cost_per_unique_click",
       "cost_per_unique_inline_link_click",
       "cost_per_unique_outbound_click",
+      "country",
       "cpc",
       "cpm",
       "cpp",
+      "created_time",
+      "creative_fingerprint",
       "ctr",
       "date_start",
       "date_stop",
+      "dda_countby_convs",
+      "description_asset",
+      "device_platform",
+      "dma",
       "estimated_ad_recall_rate",
+      "estimated_ad_recall_rate_lower_bound",
+      "estimated_ad_recall_rate_upper_bound",
       "estimated_ad_recallers",
+      "estimated_ad_recallers_lower_bound",
+      "estimated_ad_recallers_upper_bound",
       "frequency",
+      "frequency_value",
+      "gender",
+      "gender_targeting",
+      "hourly_stats_aggregated_by_advertiser_time_zone",
+      "hourly_stats_aggregated_by_audience_time_zone",
+      "image_asset",
+      "impression_device",
       "impressions",
+      "impressions_dummy",
       "inline_link_click_ctr",
       "inline_link_clicks",
       "inline_post_engagement",
+      "labels",
+      "link_url_asset",
+      "location",
+      "media_asset",
       "mobile_app_purchase_roas",
       "objective",
       "outbound_clicks",
       "outbound_clicks_ctr",
+      "place_page_id",
       "place_page_name",
+      "placement",
+      "platform_position",
+      "product_format",
+      "product_id",
+      "publisher_platform",
+      "purchasing_interface",
       "reach",
+      "region",
       "relevance_score",
-      "social_impressions",
+      "rule_asset",
       "social_spend",
       "spend",
-      "total_action_value",
+      "title_asset",
       "unique_actions",
       "unique_clicks",
       "unique_ctr",
@@ -431,17 +491,32 @@ public class AdReportRun extends APINode {
       "unique_link_clicks_ctr",
       "unique_outbound_clicks",
       "unique_outbound_clicks_ctr",
+      "unique_video_continuous_2_sec_watched_actions",
+      "unique_video_view_10_sec",
+      "unique_video_view_15_sec",
+      "updated_time",
       "video_10_sec_watched_actions",
+      "video_15_sec_watched_actions",
       "video_30_sec_watched_actions",
+      "video_asset",
       "video_avg_percent_watched_actions",
       "video_avg_time_watched_actions",
+      "video_continuous_2_sec_watched_actions",
       "video_p100_watched_actions",
       "video_p25_watched_actions",
       "video_p50_watched_actions",
       "video_p75_watched_actions",
       "video_p95_watched_actions",
+      "video_play_actions",
+      "video_play_retention_0_to_15s_actions",
+      "video_play_retention_20_to_60s_actions",
+      "video_play_retention_graph_actions",
+      "video_thruplay_watched_actions",
+      "video_time_watched_actions",
       "website_ctr",
       "website_purchase_roas",
+      "wish_bid",
+      "id",
     };
 
     @Override
@@ -567,11 +642,39 @@ public class AdReportRun extends APINode {
       this.requestField("actions", value);
       return this;
     }
+    public APIRequestGetInsights requestActivityRecencyField () {
+      return this.requestActivityRecencyField(true);
+    }
+    public APIRequestGetInsights requestActivityRecencyField (boolean value) {
+      this.requestField("activity_recency", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAdClickActionsField () {
+      return this.requestAdClickActionsField(true);
+    }
+    public APIRequestGetInsights requestAdClickActionsField (boolean value) {
+      this.requestField("ad_click_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAdFormatAssetField () {
+      return this.requestAdFormatAssetField(true);
+    }
+    public APIRequestGetInsights requestAdFormatAssetField (boolean value) {
+      this.requestField("ad_format_asset", value);
+      return this;
+    }
     public APIRequestGetInsights requestAdIdField () {
       return this.requestAdIdField(true);
     }
     public APIRequestGetInsights requestAdIdField (boolean value) {
       this.requestField("ad_id", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAdImpressionActionsField () {
+      return this.requestAdImpressionActionsField(true);
+    }
+    public APIRequestGetInsights requestAdImpressionActionsField (boolean value) {
+      this.requestField("ad_impression_actions", value);
       return this;
     }
     public APIRequestGetInsights requestAdNameField () {
@@ -595,11 +698,67 @@ public class AdReportRun extends APINode {
       this.requestField("adset_name", value);
       return this;
     }
+    public APIRequestGetInsights requestAgeField () {
+      return this.requestAgeField(true);
+    }
+    public APIRequestGetInsights requestAgeField (boolean value) {
+      this.requestField("age", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAgeTargetingField () {
+      return this.requestAgeTargetingField(true);
+    }
+    public APIRequestGetInsights requestAgeTargetingField (boolean value) {
+      this.requestField("age_targeting", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAuctionBidField () {
+      return this.requestAuctionBidField(true);
+    }
+    public APIRequestGetInsights requestAuctionBidField (boolean value) {
+      this.requestField("auction_bid", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAuctionCompetitivenessField () {
+      return this.requestAuctionCompetitivenessField(true);
+    }
+    public APIRequestGetInsights requestAuctionCompetitivenessField (boolean value) {
+      this.requestField("auction_competitiveness", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAuctionMaxCompetitorBidField () {
+      return this.requestAuctionMaxCompetitorBidField(true);
+    }
+    public APIRequestGetInsights requestAuctionMaxCompetitorBidField (boolean value) {
+      this.requestField("auction_max_competitor_bid", value);
+      return this;
+    }
+    public APIRequestGetInsights requestBidTypeField () {
+      return this.requestBidTypeField(true);
+    }
+    public APIRequestGetInsights requestBidTypeField (boolean value) {
+      this.requestField("bid_type", value);
+      return this;
+    }
+    public APIRequestGetInsights requestBodyAssetField () {
+      return this.requestBodyAssetField(true);
+    }
+    public APIRequestGetInsights requestBodyAssetField (boolean value) {
+      this.requestField("body_asset", value);
+      return this;
+    }
     public APIRequestGetInsights requestBuyingTypeField () {
       return this.requestBuyingTypeField(true);
     }
     public APIRequestGetInsights requestBuyingTypeField (boolean value) {
       this.requestField("buying_type", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCallToActionAssetField () {
+      return this.requestCallToActionAssetField(true);
+    }
+    public APIRequestGetInsights requestCallToActionAssetField (boolean value) {
+      this.requestField("call_to_action_asset", value);
       return this;
     }
     public APIRequestGetInsights requestCampaignIdField () {
@@ -630,6 +789,13 @@ public class AdReportRun extends APINode {
       this.requestField("canvas_avg_view_time", value);
       return this;
     }
+    public APIRequestGetInsights requestCanvasComponentAvgPctViewField () {
+      return this.requestCanvasComponentAvgPctViewField(true);
+    }
+    public APIRequestGetInsights requestCanvasComponentAvgPctViewField (boolean value) {
+      this.requestField("canvas_component_avg_pct_view", value);
+      return this;
+    }
     public APIRequestGetInsights requestClicksField () {
       return this.requestClicksField(true);
     }
@@ -644,11 +810,39 @@ public class AdReportRun extends APINode {
       this.requestField("cost_per_10_sec_video_view", value);
       return this;
     }
+    public APIRequestGetInsights requestCostPer15SecVideoViewField () {
+      return this.requestCostPer15SecVideoViewField(true);
+    }
+    public APIRequestGetInsights requestCostPer15SecVideoViewField (boolean value) {
+      this.requestField("cost_per_15_sec_video_view", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPer2SecContinuousVideoViewField () {
+      return this.requestCostPer2SecContinuousVideoViewField(true);
+    }
+    public APIRequestGetInsights requestCostPer2SecContinuousVideoViewField (boolean value) {
+      this.requestField("cost_per_2_sec_continuous_video_view", value);
+      return this;
+    }
     public APIRequestGetInsights requestCostPerActionTypeField () {
       return this.requestCostPerActionTypeField(true);
     }
     public APIRequestGetInsights requestCostPerActionTypeField (boolean value) {
       this.requestField("cost_per_action_type", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerAdClickField () {
+      return this.requestCostPerAdClickField(true);
+    }
+    public APIRequestGetInsights requestCostPerAdClickField (boolean value) {
+      this.requestField("cost_per_ad_click", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerDdaCountbyConvsField () {
+      return this.requestCostPerDdaCountbyConvsField(true);
+    }
+    public APIRequestGetInsights requestCostPerDdaCountbyConvsField (boolean value) {
+      this.requestField("cost_per_dda_countby_convs", value);
       return this;
     }
     public APIRequestGetInsights requestCostPerEstimatedAdRecallersField () {
@@ -672,11 +866,25 @@ public class AdReportRun extends APINode {
       this.requestField("cost_per_inline_post_engagement", value);
       return this;
     }
+    public APIRequestGetInsights requestCostPerOneThousandAdImpressionField () {
+      return this.requestCostPerOneThousandAdImpressionField(true);
+    }
+    public APIRequestGetInsights requestCostPerOneThousandAdImpressionField (boolean value) {
+      this.requestField("cost_per_one_thousand_ad_impression", value);
+      return this;
+    }
     public APIRequestGetInsights requestCostPerOutboundClickField () {
       return this.requestCostPerOutboundClickField(true);
     }
     public APIRequestGetInsights requestCostPerOutboundClickField (boolean value) {
       this.requestField("cost_per_outbound_click", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerThruplayField () {
+      return this.requestCostPerThruplayField(true);
+    }
+    public APIRequestGetInsights requestCostPerThruplayField (boolean value) {
+      this.requestField("cost_per_thruplay", value);
       return this;
     }
     public APIRequestGetInsights requestCostPerUniqueActionTypeField () {
@@ -707,6 +915,13 @@ public class AdReportRun extends APINode {
       this.requestField("cost_per_unique_outbound_click", value);
       return this;
     }
+    public APIRequestGetInsights requestCountryField () {
+      return this.requestCountryField(true);
+    }
+    public APIRequestGetInsights requestCountryField (boolean value) {
+      this.requestField("country", value);
+      return this;
+    }
     public APIRequestGetInsights requestCpcField () {
       return this.requestCpcField(true);
     }
@@ -726,6 +941,20 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCppField (boolean value) {
       this.requestField("cpp", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetInsights requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCreativeFingerprintField () {
+      return this.requestCreativeFingerprintField(true);
+    }
+    public APIRequestGetInsights requestCreativeFingerprintField (boolean value) {
+      this.requestField("creative_fingerprint", value);
       return this;
     }
     public APIRequestGetInsights requestCtrField () {
@@ -749,11 +978,53 @@ public class AdReportRun extends APINode {
       this.requestField("date_stop", value);
       return this;
     }
+    public APIRequestGetInsights requestDdaCountbyConvsField () {
+      return this.requestDdaCountbyConvsField(true);
+    }
+    public APIRequestGetInsights requestDdaCountbyConvsField (boolean value) {
+      this.requestField("dda_countby_convs", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDescriptionAssetField () {
+      return this.requestDescriptionAssetField(true);
+    }
+    public APIRequestGetInsights requestDescriptionAssetField (boolean value) {
+      this.requestField("description_asset", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDevicePlatformField () {
+      return this.requestDevicePlatformField(true);
+    }
+    public APIRequestGetInsights requestDevicePlatformField (boolean value) {
+      this.requestField("device_platform", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDmaField () {
+      return this.requestDmaField(true);
+    }
+    public APIRequestGetInsights requestDmaField (boolean value) {
+      this.requestField("dma", value);
+      return this;
+    }
     public APIRequestGetInsights requestEstimatedAdRecallRateField () {
       return this.requestEstimatedAdRecallRateField(true);
     }
     public APIRequestGetInsights requestEstimatedAdRecallRateField (boolean value) {
       this.requestField("estimated_ad_recall_rate", value);
+      return this;
+    }
+    public APIRequestGetInsights requestEstimatedAdRecallRateLowerBoundField () {
+      return this.requestEstimatedAdRecallRateLowerBoundField(true);
+    }
+    public APIRequestGetInsights requestEstimatedAdRecallRateLowerBoundField (boolean value) {
+      this.requestField("estimated_ad_recall_rate_lower_bound", value);
+      return this;
+    }
+    public APIRequestGetInsights requestEstimatedAdRecallRateUpperBoundField () {
+      return this.requestEstimatedAdRecallRateUpperBoundField(true);
+    }
+    public APIRequestGetInsights requestEstimatedAdRecallRateUpperBoundField (boolean value) {
+      this.requestField("estimated_ad_recall_rate_upper_bound", value);
       return this;
     }
     public APIRequestGetInsights requestEstimatedAdRecallersField () {
@@ -763,6 +1034,20 @@ public class AdReportRun extends APINode {
       this.requestField("estimated_ad_recallers", value);
       return this;
     }
+    public APIRequestGetInsights requestEstimatedAdRecallersLowerBoundField () {
+      return this.requestEstimatedAdRecallersLowerBoundField(true);
+    }
+    public APIRequestGetInsights requestEstimatedAdRecallersLowerBoundField (boolean value) {
+      this.requestField("estimated_ad_recallers_lower_bound", value);
+      return this;
+    }
+    public APIRequestGetInsights requestEstimatedAdRecallersUpperBoundField () {
+      return this.requestEstimatedAdRecallersUpperBoundField(true);
+    }
+    public APIRequestGetInsights requestEstimatedAdRecallersUpperBoundField (boolean value) {
+      this.requestField("estimated_ad_recallers_upper_bound", value);
+      return this;
+    }
     public APIRequestGetInsights requestFrequencyField () {
       return this.requestFrequencyField(true);
     }
@@ -770,11 +1055,67 @@ public class AdReportRun extends APINode {
       this.requestField("frequency", value);
       return this;
     }
+    public APIRequestGetInsights requestFrequencyValueField () {
+      return this.requestFrequencyValueField(true);
+    }
+    public APIRequestGetInsights requestFrequencyValueField (boolean value) {
+      this.requestField("frequency_value", value);
+      return this;
+    }
+    public APIRequestGetInsights requestGenderField () {
+      return this.requestGenderField(true);
+    }
+    public APIRequestGetInsights requestGenderField (boolean value) {
+      this.requestField("gender", value);
+      return this;
+    }
+    public APIRequestGetInsights requestGenderTargetingField () {
+      return this.requestGenderTargetingField(true);
+    }
+    public APIRequestGetInsights requestGenderTargetingField (boolean value) {
+      this.requestField("gender_targeting", value);
+      return this;
+    }
+    public APIRequestGetInsights requestHourlyStatsAggregatedByAdvertiserTimeZoneField () {
+      return this.requestHourlyStatsAggregatedByAdvertiserTimeZoneField(true);
+    }
+    public APIRequestGetInsights requestHourlyStatsAggregatedByAdvertiserTimeZoneField (boolean value) {
+      this.requestField("hourly_stats_aggregated_by_advertiser_time_zone", value);
+      return this;
+    }
+    public APIRequestGetInsights requestHourlyStatsAggregatedByAudienceTimeZoneField () {
+      return this.requestHourlyStatsAggregatedByAudienceTimeZoneField(true);
+    }
+    public APIRequestGetInsights requestHourlyStatsAggregatedByAudienceTimeZoneField (boolean value) {
+      this.requestField("hourly_stats_aggregated_by_audience_time_zone", value);
+      return this;
+    }
+    public APIRequestGetInsights requestImageAssetField () {
+      return this.requestImageAssetField(true);
+    }
+    public APIRequestGetInsights requestImageAssetField (boolean value) {
+      this.requestField("image_asset", value);
+      return this;
+    }
+    public APIRequestGetInsights requestImpressionDeviceField () {
+      return this.requestImpressionDeviceField(true);
+    }
+    public APIRequestGetInsights requestImpressionDeviceField (boolean value) {
+      this.requestField("impression_device", value);
+      return this;
+    }
     public APIRequestGetInsights requestImpressionsField () {
       return this.requestImpressionsField(true);
     }
     public APIRequestGetInsights requestImpressionsField (boolean value) {
       this.requestField("impressions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestImpressionsDummyField () {
+      return this.requestImpressionsDummyField(true);
+    }
+    public APIRequestGetInsights requestImpressionsDummyField (boolean value) {
+      this.requestField("impressions_dummy", value);
       return this;
     }
     public APIRequestGetInsights requestInlineLinkClickCtrField () {
@@ -796,6 +1137,34 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestInlinePostEngagementField (boolean value) {
       this.requestField("inline_post_engagement", value);
+      return this;
+    }
+    public APIRequestGetInsights requestLabelsField () {
+      return this.requestLabelsField(true);
+    }
+    public APIRequestGetInsights requestLabelsField (boolean value) {
+      this.requestField("labels", value);
+      return this;
+    }
+    public APIRequestGetInsights requestLinkUrlAssetField () {
+      return this.requestLinkUrlAssetField(true);
+    }
+    public APIRequestGetInsights requestLinkUrlAssetField (boolean value) {
+      this.requestField("link_url_asset", value);
+      return this;
+    }
+    public APIRequestGetInsights requestLocationField () {
+      return this.requestLocationField(true);
+    }
+    public APIRequestGetInsights requestLocationField (boolean value) {
+      this.requestField("location", value);
+      return this;
+    }
+    public APIRequestGetInsights requestMediaAssetField () {
+      return this.requestMediaAssetField(true);
+    }
+    public APIRequestGetInsights requestMediaAssetField (boolean value) {
+      this.requestField("media_asset", value);
       return this;
     }
     public APIRequestGetInsights requestMobileAppPurchaseRoasField () {
@@ -826,11 +1195,60 @@ public class AdReportRun extends APINode {
       this.requestField("outbound_clicks_ctr", value);
       return this;
     }
+    public APIRequestGetInsights requestPlacePageIdField () {
+      return this.requestPlacePageIdField(true);
+    }
+    public APIRequestGetInsights requestPlacePageIdField (boolean value) {
+      this.requestField("place_page_id", value);
+      return this;
+    }
     public APIRequestGetInsights requestPlacePageNameField () {
       return this.requestPlacePageNameField(true);
     }
     public APIRequestGetInsights requestPlacePageNameField (boolean value) {
       this.requestField("place_page_name", value);
+      return this;
+    }
+    public APIRequestGetInsights requestPlacementField () {
+      return this.requestPlacementField(true);
+    }
+    public APIRequestGetInsights requestPlacementField (boolean value) {
+      this.requestField("placement", value);
+      return this;
+    }
+    public APIRequestGetInsights requestPlatformPositionField () {
+      return this.requestPlatformPositionField(true);
+    }
+    public APIRequestGetInsights requestPlatformPositionField (boolean value) {
+      this.requestField("platform_position", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductFormatField () {
+      return this.requestProductFormatField(true);
+    }
+    public APIRequestGetInsights requestProductFormatField (boolean value) {
+      this.requestField("product_format", value);
+      return this;
+    }
+    public APIRequestGetInsights requestProductIdField () {
+      return this.requestProductIdField(true);
+    }
+    public APIRequestGetInsights requestProductIdField (boolean value) {
+      this.requestField("product_id", value);
+      return this;
+    }
+    public APIRequestGetInsights requestPublisherPlatformField () {
+      return this.requestPublisherPlatformField(true);
+    }
+    public APIRequestGetInsights requestPublisherPlatformField (boolean value) {
+      this.requestField("publisher_platform", value);
+      return this;
+    }
+    public APIRequestGetInsights requestPurchasingInterfaceField () {
+      return this.requestPurchasingInterfaceField(true);
+    }
+    public APIRequestGetInsights requestPurchasingInterfaceField (boolean value) {
+      this.requestField("purchasing_interface", value);
       return this;
     }
     public APIRequestGetInsights requestReachField () {
@@ -840,6 +1258,13 @@ public class AdReportRun extends APINode {
       this.requestField("reach", value);
       return this;
     }
+    public APIRequestGetInsights requestRegionField () {
+      return this.requestRegionField(true);
+    }
+    public APIRequestGetInsights requestRegionField (boolean value) {
+      this.requestField("region", value);
+      return this;
+    }
     public APIRequestGetInsights requestRelevanceScoreField () {
       return this.requestRelevanceScoreField(true);
     }
@@ -847,11 +1272,11 @@ public class AdReportRun extends APINode {
       this.requestField("relevance_score", value);
       return this;
     }
-    public APIRequestGetInsights requestSocialImpressionsField () {
-      return this.requestSocialImpressionsField(true);
+    public APIRequestGetInsights requestRuleAssetField () {
+      return this.requestRuleAssetField(true);
     }
-    public APIRequestGetInsights requestSocialImpressionsField (boolean value) {
-      this.requestField("social_impressions", value);
+    public APIRequestGetInsights requestRuleAssetField (boolean value) {
+      this.requestField("rule_asset", value);
       return this;
     }
     public APIRequestGetInsights requestSocialSpendField () {
@@ -868,11 +1293,11 @@ public class AdReportRun extends APINode {
       this.requestField("spend", value);
       return this;
     }
-    public APIRequestGetInsights requestTotalActionValueField () {
-      return this.requestTotalActionValueField(true);
+    public APIRequestGetInsights requestTitleAssetField () {
+      return this.requestTitleAssetField(true);
     }
-    public APIRequestGetInsights requestTotalActionValueField (boolean value) {
-      this.requestField("total_action_value", value);
+    public APIRequestGetInsights requestTitleAssetField (boolean value) {
+      this.requestField("title_asset", value);
       return this;
     }
     public APIRequestGetInsights requestUniqueActionsField () {
@@ -931,6 +1356,34 @@ public class AdReportRun extends APINode {
       this.requestField("unique_outbound_clicks_ctr", value);
       return this;
     }
+    public APIRequestGetInsights requestUniqueVideoContinuous2SecWatchedActionsField () {
+      return this.requestUniqueVideoContinuous2SecWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestUniqueVideoContinuous2SecWatchedActionsField (boolean value) {
+      this.requestField("unique_video_continuous_2_sec_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestUniqueVideoView10SecField () {
+      return this.requestUniqueVideoView10SecField(true);
+    }
+    public APIRequestGetInsights requestUniqueVideoView10SecField (boolean value) {
+      this.requestField("unique_video_view_10_sec", value);
+      return this;
+    }
+    public APIRequestGetInsights requestUniqueVideoView15SecField () {
+      return this.requestUniqueVideoView15SecField(true);
+    }
+    public APIRequestGetInsights requestUniqueVideoView15SecField (boolean value) {
+      this.requestField("unique_video_view_15_sec", value);
+      return this;
+    }
+    public APIRequestGetInsights requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetInsights requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
     public APIRequestGetInsights requestVideo10SecWatchedActionsField () {
       return this.requestVideo10SecWatchedActionsField(true);
     }
@@ -938,11 +1391,25 @@ public class AdReportRun extends APINode {
       this.requestField("video_10_sec_watched_actions", value);
       return this;
     }
+    public APIRequestGetInsights requestVideo15SecWatchedActionsField () {
+      return this.requestVideo15SecWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideo15SecWatchedActionsField (boolean value) {
+      this.requestField("video_15_sec_watched_actions", value);
+      return this;
+    }
     public APIRequestGetInsights requestVideo30SecWatchedActionsField () {
       return this.requestVideo30SecWatchedActionsField(true);
     }
     public APIRequestGetInsights requestVideo30SecWatchedActionsField (boolean value) {
       this.requestField("video_30_sec_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoAssetField () {
+      return this.requestVideoAssetField(true);
+    }
+    public APIRequestGetInsights requestVideoAssetField (boolean value) {
+      this.requestField("video_asset", value);
       return this;
     }
     public APIRequestGetInsights requestVideoAvgPercentWatchedActionsField () {
@@ -957,6 +1424,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestVideoAvgTimeWatchedActionsField (boolean value) {
       this.requestField("video_avg_time_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoContinuous2SecWatchedActionsField () {
+      return this.requestVideoContinuous2SecWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoContinuous2SecWatchedActionsField (boolean value) {
+      this.requestField("video_continuous_2_sec_watched_actions", value);
       return this;
     }
     public APIRequestGetInsights requestVideoP100WatchedActionsField () {
@@ -994,6 +1468,48 @@ public class AdReportRun extends APINode {
       this.requestField("video_p95_watched_actions", value);
       return this;
     }
+    public APIRequestGetInsights requestVideoPlayActionsField () {
+      return this.requestVideoPlayActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoPlayActionsField (boolean value) {
+      this.requestField("video_play_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoPlayRetention0To15sActionsField () {
+      return this.requestVideoPlayRetention0To15sActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoPlayRetention0To15sActionsField (boolean value) {
+      this.requestField("video_play_retention_0_to_15s_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoPlayRetention20To60sActionsField () {
+      return this.requestVideoPlayRetention20To60sActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoPlayRetention20To60sActionsField (boolean value) {
+      this.requestField("video_play_retention_20_to_60s_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoPlayRetentionGraphActionsField () {
+      return this.requestVideoPlayRetentionGraphActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoPlayRetentionGraphActionsField (boolean value) {
+      this.requestField("video_play_retention_graph_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoThruplayWatchedActionsField () {
+      return this.requestVideoThruplayWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoThruplayWatchedActionsField (boolean value) {
+      this.requestField("video_thruplay_watched_actions", value);
+      return this;
+    }
+    public APIRequestGetInsights requestVideoTimeWatchedActionsField () {
+      return this.requestVideoTimeWatchedActionsField(true);
+    }
+    public APIRequestGetInsights requestVideoTimeWatchedActionsField (boolean value) {
+      this.requestField("video_time_watched_actions", value);
+      return this;
+    }
     public APIRequestGetInsights requestWebsiteCtrField () {
       return this.requestWebsiteCtrField(true);
     }
@@ -1008,6 +1524,226 @@ public class AdReportRun extends APINode {
       this.requestField("website_purchase_roas", value);
       return this;
     }
+    public APIRequestGetInsights requestWishBidField () {
+      return this.requestWishBidField(true);
+    }
+    public APIRequestGetInsights requestWishBidField (boolean value) {
+      this.requestField("wish_bid", value);
+      return this;
+    }
+    public APIRequestGetInsights requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetInsights requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateRetry extends APIRequest<AdReportRun> {
+
+    AdReportRun lastResponse = null;
+    @Override
+    public AdReportRun getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdReportRun parseResponse(String response) throws APIException {
+      return AdReportRun.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdReportRun execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdReportRun execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdReportRun> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdReportRun> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdReportRun>() {
+           public AdReportRun apply(String result) {
+             try {
+               return APIRequestCreateRetry.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateRetry(String nodeId, APIContext context) {
+      super(context, nodeId, "/retry", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateRetry setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateRetry setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateRetry requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateRetry requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateRetry requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateRetry requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateRetry requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateRetry requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGet extends APIRequest<AdReportRun> {
@@ -1217,6 +1953,129 @@ public class AdReportRun extends APINode {
     }
   }
 
+  public static class APIRequestUpdate extends APIRequest<AdReportRun> {
+
+    AdReportRun lastResponse = null;
+    @Override
+    public AdReportRun getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "emails",
+      "is_bookmarked",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdReportRun parseResponse(String response) throws APIException {
+      return AdReportRun.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdReportRun execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdReportRun execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdReportRun> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdReportRun> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdReportRun>() {
+           public AdReportRun apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setEmails (List<String> emails) {
+      this.setParam("emails", emails);
+      return this;
+    }
+    public APIRequestUpdate setEmails (String emails) {
+      this.setParam("emails", emails);
+      return this;
+    }
+
+    public APIRequestUpdate setIsBookmarked (Boolean isBookmarked) {
+      this.setParam("is_bookmarked", isBookmarked);
+      return this;
+    }
+    public APIRequestUpdate setIsBookmarked (String isBookmarked) {
+      this.setParam("is_bookmarked", isBookmarked);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static enum EnumActionAttributionWindows {
       @SerializedName("1d_view")
       VALUE_1D_VIEW("1d_view"),
@@ -1405,47 +2264,6 @@ public class AdReportRun extends APINode {
       private String value;
 
       private EnumDatePreset(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumSummary {
-      @SerializedName("id")
-      VALUE_ID("id"),
-      @SerializedName("account_id")
-      VALUE_ACCOUNT_ID("account_id"),
-      @SerializedName("async_percent_completion")
-      VALUE_ASYNC_PERCENT_COMPLETION("async_percent_completion"),
-      @SerializedName("async_status")
-      VALUE_ASYNC_STATUS("async_status"),
-      @SerializedName("date_start")
-      VALUE_DATE_START("date_start"),
-      @SerializedName("date_stop")
-      VALUE_DATE_STOP("date_stop"),
-      @SerializedName("emails")
-      VALUE_EMAILS("emails"),
-      @SerializedName("friendly_name")
-      VALUE_FRIENDLY_NAME("friendly_name"),
-      @SerializedName("is_bookmarked")
-      VALUE_IS_BOOKMARKED("is_bookmarked"),
-      @SerializedName("is_running")
-      VALUE_IS_RUNNING("is_running"),
-      @SerializedName("schedule_id")
-      VALUE_SCHEDULE_ID("schedule_id"),
-      @SerializedName("time_completed")
-      VALUE_TIME_COMPLETED("time_completed"),
-      @SerializedName("time_ref")
-      VALUE_TIME_REF("time_ref"),
-      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
-
-      private String value;
-
-      private EnumSummary(String value) {
         this.value = value;
       }
 

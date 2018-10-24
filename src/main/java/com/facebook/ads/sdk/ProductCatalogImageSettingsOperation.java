@@ -57,13 +57,74 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ProductCatalogImageSettingsOperation extends APINode {
   @SerializedName("transformation_type")
   private String mTransformationType = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public ProductCatalogImageSettingsOperation() {
+  ProductCatalogImageSettingsOperation() {
+  }
+
+  public ProductCatalogImageSettingsOperation(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public ProductCatalogImageSettingsOperation(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public ProductCatalogImageSettingsOperation fetch() throws APIException{
+    ProductCatalogImageSettingsOperation newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static ProductCatalogImageSettingsOperation fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<ProductCatalogImageSettingsOperation> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static ProductCatalogImageSettingsOperation fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<ProductCatalogImageSettingsOperation> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<ProductCatalogImageSettingsOperation> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ProductCatalogImageSettingsOperation>)(
+      new APIRequest<ProductCatalogImageSettingsOperation>(context, "", "/", "GET", ProductCatalogImageSettingsOperation.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<ProductCatalogImageSettingsOperation>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", ProductCatalogImageSettingsOperation.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static ProductCatalogImageSettingsOperation loadJSON(String json, APIContext context) {
     ProductCatalogImageSettingsOperation productCatalogImageSettingsOperation = getGson().fromJson(json, ProductCatalogImageSettingsOperation.class);
@@ -206,17 +267,139 @@ public class ProductCatalogImageSettingsOperation extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldTransformationType() {
     return mTransformationType;
   }
 
-  public ProductCatalogImageSettingsOperation setFieldTransformationType(String value) {
-    this.mTransformationType = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<ProductCatalogImageSettingsOperation> {
+
+    ProductCatalogImageSettingsOperation lastResponse = null;
+    @Override
+    public ProductCatalogImageSettingsOperation getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "transformation_type",
+      "id",
+    };
+
+    @Override
+    public ProductCatalogImageSettingsOperation parseResponse(String response) throws APIException {
+      return ProductCatalogImageSettingsOperation.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public ProductCatalogImageSettingsOperation execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public ProductCatalogImageSettingsOperation execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<ProductCatalogImageSettingsOperation> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<ProductCatalogImageSettingsOperation> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, ProductCatalogImageSettingsOperation>() {
+           public ProductCatalogImageSettingsOperation apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestTransformationTypeField () {
+      return this.requestTransformationTypeField(true);
+    }
+    public APIRequestGet requestTransformationTypeField (boolean value) {
+      this.requestField("transformation_type", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -234,6 +417,7 @@ public class ProductCatalogImageSettingsOperation extends APINode {
 
   public ProductCatalogImageSettingsOperation copyFrom(ProductCatalogImageSettingsOperation instance) {
     this.mTransformationType = instance.mTransformationType;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

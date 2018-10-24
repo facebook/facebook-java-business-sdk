@@ -63,6 +63,8 @@ public class BusinessRoleRequest extends APINode {
   private String mEmail = null;
   @SerializedName("expiration_time")
   private String mExpirationTime = null;
+  @SerializedName("expiry_time")
+  private String mExpiryTime = null;
   @SerializedName("finance_role")
   private String mFinanceRole = null;
   @SerializedName("id")
@@ -92,6 +94,7 @@ public class BusinessRoleRequest extends APINode {
 
   public BusinessRoleRequest(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -110,19 +113,17 @@ public class BusinessRoleRequest extends APINode {
   }
 
   public static BusinessRoleRequest fetchById(String id, APIContext context) throws APIException {
-    BusinessRoleRequest businessRoleRequest =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return businessRoleRequest;
   }
 
   public static ListenableFuture<BusinessRoleRequest> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<BusinessRoleRequest> businessRoleRequest =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return businessRoleRequest;
   }
 
   public static APINodeList<BusinessRoleRequest> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -135,12 +136,11 @@ public class BusinessRoleRequest extends APINode {
   }
 
   public static ListenableFuture<APINodeList<BusinessRoleRequest>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<BusinessRoleRequest>> businessRoleRequest =
+    return
       new APIRequest(context, "", "/", "GET", BusinessRoleRequest.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return businessRoleRequest;
   }
 
   private String getPrefixedId() {
@@ -320,6 +320,10 @@ public class BusinessRoleRequest extends APINode {
     return mExpirationTime;
   }
 
+  public String getFieldExpiryTime() {
+    return mExpiryTime;
+  }
+
   public String getFieldFinanceRole() {
     return mFinanceRole;
   }
@@ -479,6 +483,7 @@ public class BusinessRoleRequest extends APINode {
       "created_time",
       "email",
       "expiration_time",
+      "expiry_time",
       "finance_role",
       "id",
       "invite_link",
@@ -604,6 +609,13 @@ public class BusinessRoleRequest extends APINode {
     }
     public APIRequestGet requestExpirationTimeField (boolean value) {
       this.requestField("expiration_time", value);
+      return this;
+    }
+    public APIRequestGet requestExpiryTimeField () {
+      return this.requestExpiryTimeField(true);
+    }
+    public APIRequestGet requestExpiryTimeField (boolean value) {
+      this.requestField("expiry_time", value);
       return this;
     }
     public APIRequestGet requestFinanceRoleField () {
@@ -853,6 +865,7 @@ public class BusinessRoleRequest extends APINode {
     this.mCreatedTime = instance.mCreatedTime;
     this.mEmail = instance.mEmail;
     this.mExpirationTime = instance.mExpirationTime;
+    this.mExpiryTime = instance.mExpiryTime;
     this.mFinanceRole = instance.mFinanceRole;
     this.mId = instance.mId;
     this.mInviteLink = instance.mInviteLink;

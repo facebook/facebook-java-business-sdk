@@ -74,6 +74,7 @@ public class AssignedUser extends APINode {
 
   public AssignedUser(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -92,19 +93,17 @@ public class AssignedUser extends APINode {
   }
 
   public static AssignedUser fetchById(String id, APIContext context) throws APIException {
-    AssignedUser assignedUser =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return assignedUser;
   }
 
   public static ListenableFuture<AssignedUser> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<AssignedUser> assignedUser =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return assignedUser;
   }
 
   public static APINodeList<AssignedUser> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -117,12 +116,11 @@ public class AssignedUser extends APINode {
   }
 
   public static ListenableFuture<APINodeList<AssignedUser>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<AssignedUser>> assignedUser =
+    return
       new APIRequest(context, "", "/", "GET", AssignedUser.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return assignedUser;
   }
 
   private String getPrefixedId() {

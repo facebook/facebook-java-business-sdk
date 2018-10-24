@@ -72,6 +72,7 @@ public class Domain extends APINode {
 
   public Domain(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -90,19 +91,17 @@ public class Domain extends APINode {
   }
 
   public static Domain fetchById(String id, APIContext context) throws APIException {
-    Domain domain =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return domain;
   }
 
   public static ListenableFuture<Domain> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<Domain> domain =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return domain;
   }
 
   public static APINodeList<Domain> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -115,12 +114,11 @@ public class Domain extends APINode {
   }
 
   public static ListenableFuture<APINodeList<Domain>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<Domain>> domain =
+    return
       new APIRequest(context, "", "/", "GET", Domain.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return domain;
   }
 
   private String getPrefixedId() {

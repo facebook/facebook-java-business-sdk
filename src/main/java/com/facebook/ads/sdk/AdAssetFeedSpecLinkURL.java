@@ -67,13 +67,74 @@ public class AdAssetFeedSpecLinkURL extends APINode {
   private String mUrlTags = null;
   @SerializedName("website_url")
   private String mWebsiteUrl = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdAssetFeedSpecLinkURL() {
+  AdAssetFeedSpecLinkURL() {
+  }
+
+  public AdAssetFeedSpecLinkURL(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdAssetFeedSpecLinkURL(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdAssetFeedSpecLinkURL fetch() throws APIException{
+    AdAssetFeedSpecLinkURL newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdAssetFeedSpecLinkURL fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdAssetFeedSpecLinkURL> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdAssetFeedSpecLinkURL fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdAssetFeedSpecLinkURL> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdAssetFeedSpecLinkURL> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdAssetFeedSpecLinkURL>)(
+      new APIRequest<AdAssetFeedSpecLinkURL>(context, "", "/", "GET", AdAssetFeedSpecLinkURL.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdAssetFeedSpecLinkURL>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdAssetFeedSpecLinkURL.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdAssetFeedSpecLinkURL loadJSON(String json, APIContext context) {
     AdAssetFeedSpecLinkURL adAssetFeedSpecLinkURL = getGson().fromJson(json, AdAssetFeedSpecLinkURL.class);
@@ -216,67 +277,199 @@ public class AdAssetFeedSpecLinkURL extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public List<AdAssetFeedSpecAssetLabel> getFieldAdlabels() {
     return mAdlabels;
   }
 
-  public AdAssetFeedSpecLinkURL setFieldAdlabels(List<AdAssetFeedSpecAssetLabel> value) {
-    this.mAdlabels = value;
-    return this;
-  }
-
-  public AdAssetFeedSpecLinkURL setFieldAdlabels(String value) {
-    Type type = new TypeToken<List<AdAssetFeedSpecAssetLabel>>(){}.getType();
-    this.mAdlabels = AdAssetFeedSpecAssetLabel.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldCarouselSeeMoreUrl() {
     return mCarouselSeeMoreUrl;
-  }
-
-  public AdAssetFeedSpecLinkURL setFieldCarouselSeeMoreUrl(String value) {
-    this.mCarouselSeeMoreUrl = value;
-    return this;
   }
 
   public String getFieldDeeplinkUrl() {
     return mDeeplinkUrl;
   }
 
-  public AdAssetFeedSpecLinkURL setFieldDeeplinkUrl(String value) {
-    this.mDeeplinkUrl = value;
-    return this;
-  }
-
   public String getFieldDisplayUrl() {
     return mDisplayUrl;
-  }
-
-  public AdAssetFeedSpecLinkURL setFieldDisplayUrl(String value) {
-    this.mDisplayUrl = value;
-    return this;
   }
 
   public String getFieldUrlTags() {
     return mUrlTags;
   }
 
-  public AdAssetFeedSpecLinkURL setFieldUrlTags(String value) {
-    this.mUrlTags = value;
-    return this;
-  }
-
   public String getFieldWebsiteUrl() {
     return mWebsiteUrl;
   }
 
-  public AdAssetFeedSpecLinkURL setFieldWebsiteUrl(String value) {
-    this.mWebsiteUrl = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdAssetFeedSpecLinkURL> {
+
+    AdAssetFeedSpecLinkURL lastResponse = null;
+    @Override
+    public AdAssetFeedSpecLinkURL getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "adlabels",
+      "carousel_see_more_url",
+      "deeplink_url",
+      "display_url",
+      "url_tags",
+      "website_url",
+      "id",
+    };
+
+    @Override
+    public AdAssetFeedSpecLinkURL parseResponse(String response) throws APIException {
+      return AdAssetFeedSpecLinkURL.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdAssetFeedSpecLinkURL execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdAssetFeedSpecLinkURL execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdAssetFeedSpecLinkURL> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdAssetFeedSpecLinkURL> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdAssetFeedSpecLinkURL>() {
+           public AdAssetFeedSpecLinkURL apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestAdlabelsField () {
+      return this.requestAdlabelsField(true);
+    }
+    public APIRequestGet requestAdlabelsField (boolean value) {
+      this.requestField("adlabels", value);
+      return this;
+    }
+    public APIRequestGet requestCarouselSeeMoreUrlField () {
+      return this.requestCarouselSeeMoreUrlField(true);
+    }
+    public APIRequestGet requestCarouselSeeMoreUrlField (boolean value) {
+      this.requestField("carousel_see_more_url", value);
+      return this;
+    }
+    public APIRequestGet requestDeeplinkUrlField () {
+      return this.requestDeeplinkUrlField(true);
+    }
+    public APIRequestGet requestDeeplinkUrlField (boolean value) {
+      this.requestField("deeplink_url", value);
+      return this;
+    }
+    public APIRequestGet requestDisplayUrlField () {
+      return this.requestDisplayUrlField(true);
+    }
+    public APIRequestGet requestDisplayUrlField (boolean value) {
+      this.requestField("display_url", value);
+      return this;
+    }
+    public APIRequestGet requestUrlTagsField () {
+      return this.requestUrlTagsField(true);
+    }
+    public APIRequestGet requestUrlTagsField (boolean value) {
+      this.requestField("url_tags", value);
+      return this;
+    }
+    public APIRequestGet requestWebsiteUrlField () {
+      return this.requestWebsiteUrlField(true);
+    }
+    public APIRequestGet requestWebsiteUrlField (boolean value) {
+      this.requestField("website_url", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -299,6 +492,7 @@ public class AdAssetFeedSpecLinkURL extends APINode {
     this.mDisplayUrl = instance.mDisplayUrl;
     this.mUrlTags = instance.mUrlTags;
     this.mWebsiteUrl = instance.mWebsiteUrl;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

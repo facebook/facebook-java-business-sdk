@@ -78,6 +78,7 @@ public class SavedMessageResponse extends APINode {
 
   public SavedMessageResponse(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -96,19 +97,17 @@ public class SavedMessageResponse extends APINode {
   }
 
   public static SavedMessageResponse fetchById(String id, APIContext context) throws APIException {
-    SavedMessageResponse savedMessageResponse =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return savedMessageResponse;
   }
 
   public static ListenableFuture<SavedMessageResponse> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<SavedMessageResponse> savedMessageResponse =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return savedMessageResponse;
   }
 
   public static APINodeList<SavedMessageResponse> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -121,12 +120,11 @@ public class SavedMessageResponse extends APINode {
   }
 
   public static ListenableFuture<APINodeList<SavedMessageResponse>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<SavedMessageResponse>> savedMessageResponse =
+    return
       new APIRequest(context, "", "/", "GET", SavedMessageResponse.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return savedMessageResponse;
   }
 
   private String getPrefixedId() {
@@ -277,6 +275,10 @@ public class SavedMessageResponse extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetMacros getMacros() {
+    return new APIRequestGetMacros(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDelete delete() {
     return new APIRequestDelete(this.getPrefixedId().toString(), context);
   }
@@ -315,6 +317,141 @@ public class SavedMessageResponse extends APINode {
   }
 
 
+
+  public static class APIRequestGetMacros extends APIRequest<SavedMessageResponseMacro> {
+
+    APINodeList<SavedMessageResponseMacro> lastResponse = null;
+    @Override
+    public APINodeList<SavedMessageResponseMacro> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "length",
+      "macro",
+      "offset",
+      "id",
+    };
+
+    @Override
+    public APINodeList<SavedMessageResponseMacro> parseResponse(String response) throws APIException {
+      return SavedMessageResponseMacro.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<SavedMessageResponseMacro> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<SavedMessageResponseMacro> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<SavedMessageResponseMacro>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<SavedMessageResponseMacro>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<SavedMessageResponseMacro>>() {
+           public APINodeList<SavedMessageResponseMacro> apply(String result) {
+             try {
+               return APIRequestGetMacros.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetMacros(String nodeId, APIContext context) {
+      super(context, nodeId, "/macros", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetMacros setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMacros setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetMacros requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetMacros requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMacros requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetMacros requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMacros requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMacros requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetMacros requestLengthField () {
+      return this.requestLengthField(true);
+    }
+    public APIRequestGetMacros requestLengthField (boolean value) {
+      this.requestField("length", value);
+      return this;
+    }
+    public APIRequestGetMacros requestMacroField () {
+      return this.requestMacroField(true);
+    }
+    public APIRequestGetMacros requestMacroField (boolean value) {
+      this.requestField("macro", value);
+      return this;
+    }
+    public APIRequestGetMacros requestOffsetField () {
+      return this.requestOffsetField(true);
+    }
+    public APIRequestGetMacros requestOffsetField (boolean value) {
+      this.requestField("offset", value);
+      return this;
+    }
+    public APIRequestGetMacros requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetMacros requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
 
@@ -578,10 +715,10 @@ public class SavedMessageResponse extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "image",
       "message",
-      "remove_image",
       "title",
+      "image",
+      "remove_image",
     };
 
     public static final String[] FIELDS = {
@@ -639,13 +776,18 @@ public class SavedMessageResponse extends APINode {
     }
 
 
-    public APIRequestUpdate setImage (String image) {
-      this.setParam("image", image);
+    public APIRequestUpdate setMessage (String message) {
+      this.setParam("message", message);
       return this;
     }
 
-    public APIRequestUpdate setMessage (String message) {
-      this.setParam("message", message);
+    public APIRequestUpdate setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestUpdate setImage (String image) {
+      this.setParam("image", image);
       return this;
     }
 
@@ -655,11 +797,6 @@ public class SavedMessageResponse extends APINode {
     }
     public APIRequestUpdate setRemoveImage (String removeImage) {
       this.setParam("remove_image", removeImage);
-      return this;
-    }
-
-    public APIRequestUpdate setTitle (String title) {
-      this.setParam("title", title);
       return this;
     }
 
@@ -718,6 +855,18 @@ public class SavedMessageResponse extends APINode {
       VALUE_REFERRAL("REFERRAL"),
       @SerializedName("APPOINTMENT_REMINDER")
       VALUE_APPOINTMENT_REMINDER("APPOINTMENT_REMINDER"),
+      @SerializedName("SMART_REPLY_CONTACT")
+      VALUE_SMART_REPLY_CONTACT("SMART_REPLY_CONTACT"),
+      @SerializedName("SMART_REPLY_HOURS")
+      VALUE_SMART_REPLY_HOURS("SMART_REPLY_HOURS"),
+      @SerializedName("SMART_REPLY_LOCATION")
+      VALUE_SMART_REPLY_LOCATION("SMART_REPLY_LOCATION"),
+      @SerializedName("SMART_REPLY_NEGATIVE_FEEDBACK")
+      VALUE_SMART_REPLY_NEGATIVE_FEEDBACK("SMART_REPLY_NEGATIVE_FEEDBACK"),
+      @SerializedName("SMART_REPLY_POSITIVE_FEEDBACK")
+      VALUE_SMART_REPLY_POSITIVE_FEEDBACK("SMART_REPLY_POSITIVE_FEEDBACK"),
+      @SerializedName("JOB_APPLICATION")
+      VALUE_JOB_APPLICATION("JOB_APPLICATION"),
       NULL(null);
 
       private String value;

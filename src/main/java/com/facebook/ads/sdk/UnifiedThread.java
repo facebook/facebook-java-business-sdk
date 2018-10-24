@@ -79,6 +79,10 @@ public class UnifiedThread extends APINode {
   private String mSnippet = null;
   @SerializedName("subject")
   private String mSubject = null;
+  @SerializedName("tags")
+  private Object mTags = null;
+  @SerializedName("thread_key")
+  private String mThreadKey = null;
   @SerializedName("unread_count")
   private Long mUnreadCount = null;
   @SerializedName("updated_time")
@@ -96,6 +100,7 @@ public class UnifiedThread extends APINode {
 
   public UnifiedThread(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -114,19 +119,17 @@ public class UnifiedThread extends APINode {
   }
 
   public static UnifiedThread fetchById(String id, APIContext context) throws APIException {
-    UnifiedThread unifiedThread =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return unifiedThread;
   }
 
   public static ListenableFuture<UnifiedThread> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<UnifiedThread> unifiedThread =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return unifiedThread;
   }
 
   public static APINodeList<UnifiedThread> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -139,12 +142,11 @@ public class UnifiedThread extends APINode {
   }
 
   public static ListenableFuture<APINodeList<UnifiedThread>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<UnifiedThread>> unifiedThread =
+    return
       new APIRequest(context, "", "/", "GET", UnifiedThread.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return unifiedThread;
   }
 
   private String getPrefixedId() {
@@ -295,6 +297,14 @@ public class UnifiedThread extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetMessages getMessages() {
+    return new APIRequestGetMessages(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateMessage createMessage() {
+    return new APIRequestCreateMessage(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -348,6 +358,14 @@ public class UnifiedThread extends APINode {
     return mSubject;
   }
 
+  public Object getFieldTags() {
+    return mTags;
+  }
+
+  public String getFieldThreadKey() {
+    return mThreadKey;
+  }
+
   public Long getFieldUnreadCount() {
     return mUnreadCount;
   }
@@ -361,6 +379,712 @@ public class UnifiedThread extends APINode {
   }
 
 
+
+  public static class APIRequestGetMessages extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "user",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(String result) {
+             try {
+               return APIRequestGetMessages.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetMessages(String nodeId, APIContext context) {
+      super(context, nodeId, "/messages", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetMessages setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessages setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetMessages setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestGetMessages setUser (String user) {
+      this.setParam("user", user);
+      return this;
+    }
+
+    public APIRequestGetMessages requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetMessages requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessages requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetMessages requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessages requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMessages requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateMessage extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "aloha_action",
+      "android_key_hash",
+      "applied_art_data",
+      "associated_object_id",
+      "attribution_app_id",
+      "attribution_app_metadata",
+      "audio_duration",
+      "audio_type",
+      "body",
+      "broadcast_recipients",
+      "client_tags",
+      "coordinates",
+      "copy_attachment",
+      "copy_message",
+      "customizations",
+      "entry_point",
+      "external_attachment_url",
+      "image_type",
+      "ios_bundle_id",
+      "is_broadcast",
+      "is_montage",
+      "is_voicemail",
+      "lightweight_action_attachment",
+      "link",
+      "live_location_attachment",
+      "location_attachment",
+      "log_info",
+      "mark_read_watermark_timestamp",
+      "media",
+      "message_source_data",
+      "montage_frame_style",
+      "montage_business_platform_data",
+      "montage_overlays",
+      "montage_supported_features",
+      "montage_mentions",
+      "montage_reply_data",
+      "object_attachment",
+      "offline_threading_id",
+      "platform_xmd",
+      "prng",
+      "proxied_app_id",
+      "recipients",
+      "replied_to_message_id",
+      "selected_cta_token",
+      "shareable_attachment",
+      "shown_cta_tokens",
+      "skip_android_hash_check",
+      "story_id",
+      "tags",
+      "tid",
+      "tracking",
+      "ttl",
+      "use_existing_group",
+      "video_thumbnail",
+      "video_type",
+      "message_attempt_id",
+      "is_admin_model_v2_enabled",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestCreateMessage.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateMessage(String nodeId, APIContext context) {
+      super(context, nodeId, "/messages", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMessage setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessage setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMessage setAlohaAction (String alohaAction) {
+      this.setParam("aloha_action", alohaAction);
+      return this;
+    }
+
+    public APIRequestCreateMessage setAndroidKeyHash (String androidKeyHash) {
+      this.setParam("android_key_hash", androidKeyHash);
+      return this;
+    }
+
+    public APIRequestCreateMessage setAppliedArtData (Object appliedArtData) {
+      this.setParam("applied_art_data", appliedArtData);
+      return this;
+    }
+    public APIRequestCreateMessage setAppliedArtData (String appliedArtData) {
+      this.setParam("applied_art_data", appliedArtData);
+      return this;
+    }
+
+    public APIRequestCreateMessage setAssociatedObjectId (Object associatedObjectId) {
+      this.setParam("associated_object_id", associatedObjectId);
+      return this;
+    }
+    public APIRequestCreateMessage setAssociatedObjectId (String associatedObjectId) {
+      this.setParam("associated_object_id", associatedObjectId);
+      return this;
+    }
+
+    public APIRequestCreateMessage setAttributionAppId (String attributionAppId) {
+      this.setParam("attribution_app_id", attributionAppId);
+      return this;
+    }
+
+    public APIRequestCreateMessage setAttributionAppMetadata (String attributionAppMetadata) {
+      this.setParam("attribution_app_metadata", attributionAppMetadata);
+      return this;
+    }
+
+    public APIRequestCreateMessage setAudioDuration (Long audioDuration) {
+      this.setParam("audio_duration", audioDuration);
+      return this;
+    }
+    public APIRequestCreateMessage setAudioDuration (String audioDuration) {
+      this.setParam("audio_duration", audioDuration);
+      return this;
+    }
+
+    public APIRequestCreateMessage setAudioType (EnumAudioType audioType) {
+      this.setParam("audio_type", audioType);
+      return this;
+    }
+    public APIRequestCreateMessage setAudioType (String audioType) {
+      this.setParam("audio_type", audioType);
+      return this;
+    }
+
+    public APIRequestCreateMessage setBody (String body) {
+      this.setParam("body", body);
+      return this;
+    }
+
+    public APIRequestCreateMessage setBroadcastRecipients (Map<String, String> broadcastRecipients) {
+      this.setParam("broadcast_recipients", broadcastRecipients);
+      return this;
+    }
+    public APIRequestCreateMessage setBroadcastRecipients (String broadcastRecipients) {
+      this.setParam("broadcast_recipients", broadcastRecipients);
+      return this;
+    }
+
+    public APIRequestCreateMessage setClientTags (Map<String, String> clientTags) {
+      this.setParam("client_tags", clientTags);
+      return this;
+    }
+    public APIRequestCreateMessage setClientTags (String clientTags) {
+      this.setParam("client_tags", clientTags);
+      return this;
+    }
+
+    public APIRequestCreateMessage setCoordinates (Object coordinates) {
+      this.setParam("coordinates", coordinates);
+      return this;
+    }
+    public APIRequestCreateMessage setCoordinates (String coordinates) {
+      this.setParam("coordinates", coordinates);
+      return this;
+    }
+
+    public APIRequestCreateMessage setCopyAttachment (String copyAttachment) {
+      this.setParam("copy_attachment", copyAttachment);
+      return this;
+    }
+
+    public APIRequestCreateMessage setCopyMessage (String copyMessage) {
+      this.setParam("copy_message", copyMessage);
+      return this;
+    }
+
+    public APIRequestCreateMessage setCustomizations (Map<String, String> customizations) {
+      this.setParam("customizations", customizations);
+      return this;
+    }
+    public APIRequestCreateMessage setCustomizations (String customizations) {
+      this.setParam("customizations", customizations);
+      return this;
+    }
+
+    public APIRequestCreateMessage setEntryPoint (String entryPoint) {
+      this.setParam("entry_point", entryPoint);
+      return this;
+    }
+
+    public APIRequestCreateMessage setExternalAttachmentUrl (String externalAttachmentUrl) {
+      this.setParam("external_attachment_url", externalAttachmentUrl);
+      return this;
+    }
+
+    public APIRequestCreateMessage setImageType (EnumImageType imageType) {
+      this.setParam("image_type", imageType);
+      return this;
+    }
+    public APIRequestCreateMessage setImageType (String imageType) {
+      this.setParam("image_type", imageType);
+      return this;
+    }
+
+    public APIRequestCreateMessage setIosBundleId (String iosBundleId) {
+      this.setParam("ios_bundle_id", iosBundleId);
+      return this;
+    }
+
+    public APIRequestCreateMessage setIsBroadcast (Boolean isBroadcast) {
+      this.setParam("is_broadcast", isBroadcast);
+      return this;
+    }
+    public APIRequestCreateMessage setIsBroadcast (String isBroadcast) {
+      this.setParam("is_broadcast", isBroadcast);
+      return this;
+    }
+
+    public APIRequestCreateMessage setIsMontage (Boolean isMontage) {
+      this.setParam("is_montage", isMontage);
+      return this;
+    }
+    public APIRequestCreateMessage setIsMontage (String isMontage) {
+      this.setParam("is_montage", isMontage);
+      return this;
+    }
+
+    public APIRequestCreateMessage setIsVoicemail (Boolean isVoicemail) {
+      this.setParam("is_voicemail", isVoicemail);
+      return this;
+    }
+    public APIRequestCreateMessage setIsVoicemail (String isVoicemail) {
+      this.setParam("is_voicemail", isVoicemail);
+      return this;
+    }
+
+    public APIRequestCreateMessage setLightweightActionAttachment (Object lightweightActionAttachment) {
+      this.setParam("lightweight_action_attachment", lightweightActionAttachment);
+      return this;
+    }
+    public APIRequestCreateMessage setLightweightActionAttachment (String lightweightActionAttachment) {
+      this.setParam("lightweight_action_attachment", lightweightActionAttachment);
+      return this;
+    }
+
+    public APIRequestCreateMessage setLink (String link) {
+      this.setParam("link", link);
+      return this;
+    }
+
+    public APIRequestCreateMessage setLiveLocationAttachment (Object liveLocationAttachment) {
+      this.setParam("live_location_attachment", liveLocationAttachment);
+      return this;
+    }
+    public APIRequestCreateMessage setLiveLocationAttachment (String liveLocationAttachment) {
+      this.setParam("live_location_attachment", liveLocationAttachment);
+      return this;
+    }
+
+    public APIRequestCreateMessage setLocationAttachment (Object locationAttachment) {
+      this.setParam("location_attachment", locationAttachment);
+      return this;
+    }
+    public APIRequestCreateMessage setLocationAttachment (String locationAttachment) {
+      this.setParam("location_attachment", locationAttachment);
+      return this;
+    }
+
+    public APIRequestCreateMessage setLogInfo (Object logInfo) {
+      this.setParam("log_info", logInfo);
+      return this;
+    }
+    public APIRequestCreateMessage setLogInfo (String logInfo) {
+      this.setParam("log_info", logInfo);
+      return this;
+    }
+
+    public APIRequestCreateMessage setMarkReadWatermarkTimestamp (Long markReadWatermarkTimestamp) {
+      this.setParam("mark_read_watermark_timestamp", markReadWatermarkTimestamp);
+      return this;
+    }
+    public APIRequestCreateMessage setMarkReadWatermarkTimestamp (String markReadWatermarkTimestamp) {
+      this.setParam("mark_read_watermark_timestamp", markReadWatermarkTimestamp);
+      return this;
+    }
+
+    public APIRequestCreateMessage setMedia (List<String> media) {
+      this.setParam("media", media);
+      return this;
+    }
+    public APIRequestCreateMessage setMedia (String media) {
+      this.setParam("media", media);
+      return this;
+    }
+
+    public APIRequestCreateMessage setMessageSourceData (Object messageSourceData) {
+      this.setParam("message_source_data", messageSourceData);
+      return this;
+    }
+    public APIRequestCreateMessage setMessageSourceData (String messageSourceData) {
+      this.setParam("message_source_data", messageSourceData);
+      return this;
+    }
+
+    public APIRequestCreateMessage setMontageFrameStyle (EnumMontageFrameStyle montageFrameStyle) {
+      this.setParam("montage_frame_style", montageFrameStyle);
+      return this;
+    }
+    public APIRequestCreateMessage setMontageFrameStyle (String montageFrameStyle) {
+      this.setParam("montage_frame_style", montageFrameStyle);
+      return this;
+    }
+
+    public APIRequestCreateMessage setMontageBusinessPlatformData (Map<String, String> montageBusinessPlatformData) {
+      this.setParam("montage_business_platform_data", montageBusinessPlatformData);
+      return this;
+    }
+    public APIRequestCreateMessage setMontageBusinessPlatformData (String montageBusinessPlatformData) {
+      this.setParam("montage_business_platform_data", montageBusinessPlatformData);
+      return this;
+    }
+
+    public APIRequestCreateMessage setMontageOverlays (List<Map<String, String>> montageOverlays) {
+      this.setParam("montage_overlays", montageOverlays);
+      return this;
+    }
+    public APIRequestCreateMessage setMontageOverlays (String montageOverlays) {
+      this.setParam("montage_overlays", montageOverlays);
+      return this;
+    }
+
+    public APIRequestCreateMessage setMontageSupportedFeatures (List<EnumMontageSupportedFeatures> montageSupportedFeatures) {
+      this.setParam("montage_supported_features", montageSupportedFeatures);
+      return this;
+    }
+    public APIRequestCreateMessage setMontageSupportedFeatures (String montageSupportedFeatures) {
+      this.setParam("montage_supported_features", montageSupportedFeatures);
+      return this;
+    }
+
+    public APIRequestCreateMessage setMontageMentions (Map<String, String> montageMentions) {
+      this.setParam("montage_mentions", montageMentions);
+      return this;
+    }
+    public APIRequestCreateMessage setMontageMentions (String montageMentions) {
+      this.setParam("montage_mentions", montageMentions);
+      return this;
+    }
+
+    public APIRequestCreateMessage setMontageReplyData (Object montageReplyData) {
+      this.setParam("montage_reply_data", montageReplyData);
+      return this;
+    }
+    public APIRequestCreateMessage setMontageReplyData (String montageReplyData) {
+      this.setParam("montage_reply_data", montageReplyData);
+      return this;
+    }
+
+    public APIRequestCreateMessage setObjectAttachment (String objectAttachment) {
+      this.setParam("object_attachment", objectAttachment);
+      return this;
+    }
+
+    public APIRequestCreateMessage setOfflineThreadingId (String offlineThreadingId) {
+      this.setParam("offline_threading_id", offlineThreadingId);
+      return this;
+    }
+
+    public APIRequestCreateMessage setPlatformXmd (String platformXmd) {
+      this.setParam("platform_xmd", platformXmd);
+      return this;
+    }
+
+    public APIRequestCreateMessage setPrng (Object prng) {
+      this.setParam("prng", prng);
+      return this;
+    }
+    public APIRequestCreateMessage setPrng (String prng) {
+      this.setParam("prng", prng);
+      return this;
+    }
+
+    public APIRequestCreateMessage setProxiedAppId (String proxiedAppId) {
+      this.setParam("proxied_app_id", proxiedAppId);
+      return this;
+    }
+
+    public APIRequestCreateMessage setRecipients (Object recipients) {
+      this.setParam("recipients", recipients);
+      return this;
+    }
+    public APIRequestCreateMessage setRecipients (String recipients) {
+      this.setParam("recipients", recipients);
+      return this;
+    }
+
+    public APIRequestCreateMessage setRepliedToMessageId (String repliedToMessageId) {
+      this.setParam("replied_to_message_id", repliedToMessageId);
+      return this;
+    }
+
+    public APIRequestCreateMessage setSelectedCtaToken (String selectedCtaToken) {
+      this.setParam("selected_cta_token", selectedCtaToken);
+      return this;
+    }
+
+    public APIRequestCreateMessage setShareableAttachment (Object shareableAttachment) {
+      this.setParam("shareable_attachment", shareableAttachment);
+      return this;
+    }
+    public APIRequestCreateMessage setShareableAttachment (String shareableAttachment) {
+      this.setParam("shareable_attachment", shareableAttachment);
+      return this;
+    }
+
+    public APIRequestCreateMessage setShownCtaTokens (List<String> shownCtaTokens) {
+      this.setParam("shown_cta_tokens", shownCtaTokens);
+      return this;
+    }
+    public APIRequestCreateMessage setShownCtaTokens (String shownCtaTokens) {
+      this.setParam("shown_cta_tokens", shownCtaTokens);
+      return this;
+    }
+
+    public APIRequestCreateMessage setSkipAndroidHashCheck (Boolean skipAndroidHashCheck) {
+      this.setParam("skip_android_hash_check", skipAndroidHashCheck);
+      return this;
+    }
+    public APIRequestCreateMessage setSkipAndroidHashCheck (String skipAndroidHashCheck) {
+      this.setParam("skip_android_hash_check", skipAndroidHashCheck);
+      return this;
+    }
+
+    public APIRequestCreateMessage setStoryId (Object storyId) {
+      this.setParam("story_id", storyId);
+      return this;
+    }
+    public APIRequestCreateMessage setStoryId (String storyId) {
+      this.setParam("story_id", storyId);
+      return this;
+    }
+
+    public APIRequestCreateMessage setTags (List<String> tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+    public APIRequestCreateMessage setTags (String tags) {
+      this.setParam("tags", tags);
+      return this;
+    }
+
+    public APIRequestCreateMessage setTid (String tid) {
+      this.setParam("tid", tid);
+      return this;
+    }
+
+    public APIRequestCreateMessage setTracking (String tracking) {
+      this.setParam("tracking", tracking);
+      return this;
+    }
+
+    public APIRequestCreateMessage setTtl (Long ttl) {
+      this.setParam("ttl", ttl);
+      return this;
+    }
+    public APIRequestCreateMessage setTtl (String ttl) {
+      this.setParam("ttl", ttl);
+      return this;
+    }
+
+    public APIRequestCreateMessage setUseExistingGroup (Boolean useExistingGroup) {
+      this.setParam("use_existing_group", useExistingGroup);
+      return this;
+    }
+    public APIRequestCreateMessage setUseExistingGroup (String useExistingGroup) {
+      this.setParam("use_existing_group", useExistingGroup);
+      return this;
+    }
+
+    public APIRequestCreateMessage setVideoThumbnail (File videoThumbnail) {
+      this.setParam("video_thumbnail", videoThumbnail);
+      return this;
+    }
+    public APIRequestCreateMessage setVideoThumbnail (String videoThumbnail) {
+      this.setParam("video_thumbnail", videoThumbnail);
+      return this;
+    }
+
+    public APIRequestCreateMessage setVideoType (EnumVideoType videoType) {
+      this.setParam("video_type", videoType);
+      return this;
+    }
+    public APIRequestCreateMessage setVideoType (String videoType) {
+      this.setParam("video_type", videoType);
+      return this;
+    }
+
+    public APIRequestCreateMessage setMessageAttemptId (String messageAttemptId) {
+      this.setParam("message_attempt_id", messageAttemptId);
+      return this;
+    }
+
+    public APIRequestCreateMessage setIsAdminModelV2Enabled (Boolean isAdminModelV2Enabled) {
+      this.setParam("is_admin_model_v2_enabled", isAdminModelV2Enabled);
+      return this;
+    }
+    public APIRequestCreateMessage setIsAdminModelV2Enabled (String isAdminModelV2Enabled) {
+      this.setParam("is_admin_model_v2_enabled", isAdminModelV2Enabled);
+      return this;
+    }
+
+    public APIRequestCreateMessage requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMessage requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessage requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMessage requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessage requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMessage requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
 
   public static class APIRequestGet extends APIRequest<UnifiedThread> {
 
@@ -385,6 +1109,8 @@ public class UnifiedThread extends APINode {
       "senders",
       "snippet",
       "subject",
+      "tags",
+      "thread_key",
       "unread_count",
       "updated_time",
       "wallpaper",
@@ -562,6 +1288,20 @@ public class UnifiedThread extends APINode {
       this.requestField("subject", value);
       return this;
     }
+    public APIRequestGet requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGet requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
+    public APIRequestGet requestThreadKeyField () {
+      return this.requestThreadKeyField(true);
+    }
+    public APIRequestGet requestThreadKeyField (boolean value) {
+      this.requestField("thread_key", value);
+      return this;
+    }
     public APIRequestGet requestUnreadCountField () {
       return this.requestUnreadCountField(true);
     }
@@ -583,6 +1323,109 @@ public class UnifiedThread extends APINode {
       this.requestField("wallpaper", value);
       return this;
     }
+  }
+
+  public static enum EnumAudioType {
+      @SerializedName("FILE_ATTACHMENT")
+      VALUE_FILE_ATTACHMENT("FILE_ATTACHMENT"),
+      @SerializedName("VOICE_MESSAGE")
+      VALUE_VOICE_MESSAGE("VOICE_MESSAGE"),
+      @SerializedName("VOICE_MESSAGE_WITH_TRANSCRIPT")
+      VALUE_VOICE_MESSAGE_WITH_TRANSCRIPT("VOICE_MESSAGE_WITH_TRANSCRIPT"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAudioType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumImageType {
+      @SerializedName("FILE_ATTACHMENT")
+      VALUE_FILE_ATTACHMENT("FILE_ATTACHMENT"),
+      @SerializedName("MESSENGER_CAM")
+      VALUE_MESSENGER_CAM("MESSENGER_CAM"),
+      @SerializedName("TRANSPARENT")
+      VALUE_TRANSPARENT("TRANSPARENT"),
+      NULL(null);
+
+      private String value;
+
+      private EnumImageType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMontageFrameStyle {
+      @SerializedName("no_border")
+      VALUE_NO_BORDER("no_border"),
+      NULL(null);
+
+      private String value;
+
+      private EnumMontageFrameStyle(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMontageSupportedFeatures {
+      @SerializedName("LIGHTWEIGHT_REPLY")
+      VALUE_LIGHTWEIGHT_REPLY("LIGHTWEIGHT_REPLY"),
+      @SerializedName("SHOW_STORY_IN_MESSENGER_THREAD")
+      VALUE_SHOW_STORY_IN_MESSENGER_THREAD("SHOW_STORY_IN_MESSENGER_THREAD"),
+      NULL(null);
+
+      private String value;
+
+      private EnumMontageSupportedFeatures(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumVideoType {
+      @SerializedName("FILE_ATTACHMENT")
+      VALUE_FILE_ATTACHMENT("FILE_ATTACHMENT"),
+      @SerializedName("RECORDED_VIDEO")
+      VALUE_RECORDED_VIDEO("RECORDED_VIDEO"),
+      @SerializedName("SPEAKING_STICKER")
+      VALUE_SPEAKING_STICKER("SPEAKING_STICKER"),
+      @SerializedName("RECORDED_STICKER")
+      VALUE_RECORDED_STICKER("RECORDED_STICKER"),
+      @SerializedName("VIDEO_MAIL")
+      VALUE_VIDEO_MAIL("VIDEO_MAIL"),
+      NULL(null);
+
+      private String value;
+
+      private EnumVideoType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 
@@ -612,6 +1455,8 @@ public class UnifiedThread extends APINode {
     this.mSenders = instance.mSenders;
     this.mSnippet = instance.mSnippet;
     this.mSubject = instance.mSubject;
+    this.mTags = instance.mTags;
+    this.mThreadKey = instance.mThreadKey;
     this.mUnreadCount = instance.mUnreadCount;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mWallpaper = instance.mWallpaper;

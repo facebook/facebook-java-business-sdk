@@ -84,6 +84,7 @@ public class AppLinks extends APINode {
 
   public AppLinks(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -102,19 +103,17 @@ public class AppLinks extends APINode {
   }
 
   public static AppLinks fetchById(String id, APIContext context) throws APIException {
-    AppLinks appLinks =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return appLinks;
   }
 
   public static ListenableFuture<AppLinks> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<AppLinks> appLinks =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return appLinks;
   }
 
   public static APINodeList<AppLinks> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -127,12 +126,11 @@ public class AppLinks extends APINode {
   }
 
   public static ListenableFuture<APINodeList<AppLinks>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<AppLinks>> appLinks =
+    return
       new APIRequest(context, "", "/", "GET", AppLinks.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return appLinks;
   }
 
   private String getPrefixedId() {
@@ -309,6 +307,9 @@ public class AppLinks extends APINode {
   }
 
   public WebAppLink getFieldWeb() {
+    if (mWeb != null) {
+      mWeb.context = getContext();
+    }
     return mWeb;
   }
 

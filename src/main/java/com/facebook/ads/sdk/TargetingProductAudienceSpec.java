@@ -61,13 +61,74 @@ public class TargetingProductAudienceSpec extends APINode {
   private List<TargetingProductAudienceSubSpec> mInclusions = null;
   @SerializedName("product_set_id")
   private String mProductSetId = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public TargetingProductAudienceSpec() {
+  TargetingProductAudienceSpec() {
+  }
+
+  public TargetingProductAudienceSpec(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public TargetingProductAudienceSpec(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public TargetingProductAudienceSpec fetch() throws APIException{
+    TargetingProductAudienceSpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static TargetingProductAudienceSpec fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<TargetingProductAudienceSpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static TargetingProductAudienceSpec fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<TargetingProductAudienceSpec> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<TargetingProductAudienceSpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<TargetingProductAudienceSpec>)(
+      new APIRequest<TargetingProductAudienceSpec>(context, "", "/", "GET", TargetingProductAudienceSpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<TargetingProductAudienceSpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", TargetingProductAudienceSpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static TargetingProductAudienceSpec loadJSON(String json, APIContext context) {
     TargetingProductAudienceSpec targetingProductAudienceSpec = getGson().fromJson(json, TargetingProductAudienceSpec.class);
@@ -210,45 +271,163 @@ public class TargetingProductAudienceSpec extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public List<TargetingProductAudienceSubSpec> getFieldExclusions() {
     return mExclusions;
   }
 
-  public TargetingProductAudienceSpec setFieldExclusions(List<TargetingProductAudienceSubSpec> value) {
-    this.mExclusions = value;
-    return this;
-  }
-
-  public TargetingProductAudienceSpec setFieldExclusions(String value) {
-    Type type = new TypeToken<List<TargetingProductAudienceSubSpec>>(){}.getType();
-    this.mExclusions = TargetingProductAudienceSubSpec.getGson().fromJson(value, type);
-    return this;
-  }
   public List<TargetingProductAudienceSubSpec> getFieldInclusions() {
     return mInclusions;
   }
 
-  public TargetingProductAudienceSpec setFieldInclusions(List<TargetingProductAudienceSubSpec> value) {
-    this.mInclusions = value;
-    return this;
-  }
-
-  public TargetingProductAudienceSpec setFieldInclusions(String value) {
-    Type type = new TypeToken<List<TargetingProductAudienceSubSpec>>(){}.getType();
-    this.mInclusions = TargetingProductAudienceSubSpec.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldProductSetId() {
     return mProductSetId;
   }
 
-  public TargetingProductAudienceSpec setFieldProductSetId(String value) {
-    this.mProductSetId = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<TargetingProductAudienceSpec> {
+
+    TargetingProductAudienceSpec lastResponse = null;
+    @Override
+    public TargetingProductAudienceSpec getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "exclusions",
+      "inclusions",
+      "product_set_id",
+      "id",
+    };
+
+    @Override
+    public TargetingProductAudienceSpec parseResponse(String response) throws APIException {
+      return TargetingProductAudienceSpec.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public TargetingProductAudienceSpec execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public TargetingProductAudienceSpec execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<TargetingProductAudienceSpec> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<TargetingProductAudienceSpec> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, TargetingProductAudienceSpec>() {
+           public TargetingProductAudienceSpec apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestExclusionsField () {
+      return this.requestExclusionsField(true);
+    }
+    public APIRequestGet requestExclusionsField (boolean value) {
+      this.requestField("exclusions", value);
+      return this;
+    }
+    public APIRequestGet requestInclusionsField () {
+      return this.requestInclusionsField(true);
+    }
+    public APIRequestGet requestInclusionsField (boolean value) {
+      this.requestField("inclusions", value);
+      return this;
+    }
+    public APIRequestGet requestProductSetIdField () {
+      return this.requestProductSetIdField(true);
+    }
+    public APIRequestGet requestProductSetIdField (boolean value) {
+      this.requestField("product_set_id", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -268,6 +447,7 @@ public class TargetingProductAudienceSpec extends APINode {
     this.mExclusions = instance.mExclusions;
     this.mInclusions = instance.mInclusions;
     this.mProductSetId = instance.mProductSetId;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

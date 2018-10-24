@@ -88,6 +88,7 @@ public class Profile extends APINode {
 
   public Profile(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -106,19 +107,17 @@ public class Profile extends APINode {
   }
 
   public static Profile fetchById(String id, APIContext context) throws APIException {
-    Profile profile =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return profile;
   }
 
   public static ListenableFuture<Profile> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<Profile> profile =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return profile;
   }
 
   public static APINodeList<Profile> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -131,12 +130,11 @@ public class Profile extends APINode {
   }
 
   public static ListenableFuture<APINodeList<Profile>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<Profile>> profile =
+    return
       new APIRequest(context, "", "/", "GET", Profile.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return profile;
   }
 
   private String getPrefixedId() {
@@ -317,6 +315,9 @@ public class Profile extends APINode {
   }
 
   public ProfilePictureSource getFieldPicCrop() {
+    if (mPicCrop != null) {
+      mPicCrop.context = getContext();
+    }
     return mPicCrop;
   }
 
@@ -351,9 +352,9 @@ public class Profile extends APINode {
     }
     public static final String[] PARAMS = {
       "height",
-      "redirect",
-      "type",
       "width",
+      "type",
+      "redirect",
     };
 
     public static final String[] FIELDS = {
@@ -364,8 +365,10 @@ public class Profile extends APINode {
       "left",
       "right",
       "top",
+      "uri",
       "url",
       "width",
+      "id",
     };
 
     @Override
@@ -429,12 +432,12 @@ public class Profile extends APINode {
       return this;
     }
 
-    public APIRequestGetPicture setRedirect (Boolean redirect) {
-      this.setParam("redirect", redirect);
+    public APIRequestGetPicture setWidth (Long width) {
+      this.setParam("width", width);
       return this;
     }
-    public APIRequestGetPicture setRedirect (String redirect) {
-      this.setParam("redirect", redirect);
+    public APIRequestGetPicture setWidth (String width) {
+      this.setParam("width", width);
       return this;
     }
 
@@ -447,12 +450,12 @@ public class Profile extends APINode {
       return this;
     }
 
-    public APIRequestGetPicture setWidth (Long width) {
-      this.setParam("width", width);
+    public APIRequestGetPicture setRedirect (Boolean redirect) {
+      this.setParam("redirect", redirect);
       return this;
     }
-    public APIRequestGetPicture setWidth (String width) {
-      this.setParam("width", width);
+    public APIRequestGetPicture setRedirect (String redirect) {
+      this.setParam("redirect", redirect);
       return this;
     }
 
@@ -541,6 +544,13 @@ public class Profile extends APINode {
       this.requestField("top", value);
       return this;
     }
+    public APIRequestGetPicture requestUriField () {
+      return this.requestUriField(true);
+    }
+    public APIRequestGetPicture requestUriField (boolean value) {
+      this.requestField("uri", value);
+      return this;
+    }
     public APIRequestGetPicture requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -553,6 +563,13 @@ public class Profile extends APINode {
     }
     public APIRequestGetPicture requestWidthField (boolean value) {
       this.requestField("width", value);
+      return this;
+    }
+    public APIRequestGetPicture requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetPicture requestIdField (boolean value) {
+      this.requestField("id", value);
       return this;
     }
   }
@@ -764,6 +781,39 @@ public class Profile extends APINode {
       private String value;
 
       private EnumProfileType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumType {
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("LIKE")
+      VALUE_LIKE("LIKE"),
+      @SerializedName("LOVE")
+      VALUE_LOVE("LOVE"),
+      @SerializedName("WOW")
+      VALUE_WOW("WOW"),
+      @SerializedName("HAHA")
+      VALUE_HAHA("HAHA"),
+      @SerializedName("SAD")
+      VALUE_SAD("SAD"),
+      @SerializedName("ANGRY")
+      VALUE_ANGRY("ANGRY"),
+      @SerializedName("THANKFUL")
+      VALUE_THANKFUL("THANKFUL"),
+      @SerializedName("PRIDE")
+      VALUE_PRIDE("PRIDE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumType(String value) {
         this.value = value;
       }
 

@@ -67,13 +67,74 @@ public class AdCreativePlaceData extends APINode {
   private Double mLongitude = null;
   @SerializedName("type")
   private String mType = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdCreativePlaceData() {
+  AdCreativePlaceData() {
+  }
+
+  public AdCreativePlaceData(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdCreativePlaceData(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdCreativePlaceData fetch() throws APIException{
+    AdCreativePlaceData newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdCreativePlaceData fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdCreativePlaceData> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdCreativePlaceData fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdCreativePlaceData> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdCreativePlaceData> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdCreativePlaceData>)(
+      new APIRequest<AdCreativePlaceData>(context, "", "/", "GET", AdCreativePlaceData.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdCreativePlaceData>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdCreativePlaceData.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdCreativePlaceData loadJSON(String json, APIContext context) {
     AdCreativePlaceData adCreativePlaceData = getGson().fromJson(json, AdCreativePlaceData.class);
@@ -216,62 +277,199 @@ public class AdCreativePlaceData extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldAddressString() {
     return mAddressString;
-  }
-
-  public AdCreativePlaceData setFieldAddressString(String value) {
-    this.mAddressString = value;
-    return this;
   }
 
   public String getFieldLabel() {
     return mLabel;
   }
 
-  public AdCreativePlaceData setFieldLabel(String value) {
-    this.mLabel = value;
-    return this;
-  }
-
   public Double getFieldLatitude() {
     return mLatitude;
-  }
-
-  public AdCreativePlaceData setFieldLatitude(Double value) {
-    this.mLatitude = value;
-    return this;
   }
 
   public String getFieldLocationSourceId() {
     return mLocationSourceId;
   }
 
-  public AdCreativePlaceData setFieldLocationSourceId(String value) {
-    this.mLocationSourceId = value;
-    return this;
-  }
-
   public Double getFieldLongitude() {
     return mLongitude;
-  }
-
-  public AdCreativePlaceData setFieldLongitude(Double value) {
-    this.mLongitude = value;
-    return this;
   }
 
   public String getFieldType() {
     return mType;
   }
 
-  public AdCreativePlaceData setFieldType(String value) {
-    this.mType = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdCreativePlaceData> {
+
+    AdCreativePlaceData lastResponse = null;
+    @Override
+    public AdCreativePlaceData getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "address_string",
+      "label",
+      "latitude",
+      "location_source_id",
+      "longitude",
+      "type",
+      "id",
+    };
+
+    @Override
+    public AdCreativePlaceData parseResponse(String response) throws APIException {
+      return AdCreativePlaceData.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdCreativePlaceData execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdCreativePlaceData execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdCreativePlaceData> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdCreativePlaceData> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdCreativePlaceData>() {
+           public AdCreativePlaceData apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestAddressStringField () {
+      return this.requestAddressStringField(true);
+    }
+    public APIRequestGet requestAddressStringField (boolean value) {
+      this.requestField("address_string", value);
+      return this;
+    }
+    public APIRequestGet requestLabelField () {
+      return this.requestLabelField(true);
+    }
+    public APIRequestGet requestLabelField (boolean value) {
+      this.requestField("label", value);
+      return this;
+    }
+    public APIRequestGet requestLatitudeField () {
+      return this.requestLatitudeField(true);
+    }
+    public APIRequestGet requestLatitudeField (boolean value) {
+      this.requestField("latitude", value);
+      return this;
+    }
+    public APIRequestGet requestLocationSourceIdField () {
+      return this.requestLocationSourceIdField(true);
+    }
+    public APIRequestGet requestLocationSourceIdField (boolean value) {
+      this.requestField("location_source_id", value);
+      return this;
+    }
+    public APIRequestGet requestLongitudeField () {
+      return this.requestLongitudeField(true);
+    }
+    public APIRequestGet requestLongitudeField (boolean value) {
+      this.requestField("longitude", value);
+      return this;
+    }
+    public APIRequestGet requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGet requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -294,6 +492,7 @@ public class AdCreativePlaceData extends APINode {
     this.mLocationSourceId = instance.mLocationSourceId;
     this.mLongitude = instance.mLongitude;
     this.mType = instance.mType;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

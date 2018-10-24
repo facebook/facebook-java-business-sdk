@@ -61,13 +61,74 @@ public class CustomAudiencePrefillState extends APINode {
   private Long mNumAdded = null;
   @SerializedName("status")
   private String mStatus = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public CustomAudiencePrefillState() {
+  CustomAudiencePrefillState() {
+  }
+
+  public CustomAudiencePrefillState(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public CustomAudiencePrefillState(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public CustomAudiencePrefillState fetch() throws APIException{
+    CustomAudiencePrefillState newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static CustomAudiencePrefillState fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<CustomAudiencePrefillState> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static CustomAudiencePrefillState fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<CustomAudiencePrefillState> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<CustomAudiencePrefillState> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CustomAudiencePrefillState>)(
+      new APIRequest<CustomAudiencePrefillState>(context, "", "/", "GET", CustomAudiencePrefillState.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<CustomAudiencePrefillState>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", CustomAudiencePrefillState.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static CustomAudiencePrefillState loadJSON(String json, APIContext context) {
     CustomAudiencePrefillState customAudiencePrefillState = getGson().fromJson(json, CustomAudiencePrefillState.class);
@@ -210,35 +271,163 @@ public class CustomAudiencePrefillState extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldDescription() {
     return mDescription;
-  }
-
-  public CustomAudiencePrefillState setFieldDescription(String value) {
-    this.mDescription = value;
-    return this;
   }
 
   public Long getFieldNumAdded() {
     return mNumAdded;
   }
 
-  public CustomAudiencePrefillState setFieldNumAdded(Long value) {
-    this.mNumAdded = value;
-    return this;
-  }
-
   public String getFieldStatus() {
     return mStatus;
   }
 
-  public CustomAudiencePrefillState setFieldStatus(String value) {
-    this.mStatus = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<CustomAudiencePrefillState> {
+
+    CustomAudiencePrefillState lastResponse = null;
+    @Override
+    public CustomAudiencePrefillState getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "description",
+      "num_added",
+      "status",
+      "id",
+    };
+
+    @Override
+    public CustomAudiencePrefillState parseResponse(String response) throws APIException {
+      return CustomAudiencePrefillState.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public CustomAudiencePrefillState execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public CustomAudiencePrefillState execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<CustomAudiencePrefillState> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<CustomAudiencePrefillState> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, CustomAudiencePrefillState>() {
+           public CustomAudiencePrefillState apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGet requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGet requestNumAddedField () {
+      return this.requestNumAddedField(true);
+    }
+    public APIRequestGet requestNumAddedField (boolean value) {
+      this.requestField("num_added", value);
+      return this;
+    }
+    public APIRequestGet requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGet requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -258,6 +447,7 @@ public class CustomAudiencePrefillState extends APINode {
     this.mDescription = instance.mDescription;
     this.mNumAdded = instance.mNumAdded;
     this.mStatus = instance.mStatus;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

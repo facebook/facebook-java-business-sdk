@@ -82,6 +82,7 @@ public class ShadowIGComment extends APINode {
 
   public ShadowIGComment(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -100,19 +101,17 @@ public class ShadowIGComment extends APINode {
   }
 
   public static ShadowIGComment fetchById(String id, APIContext context) throws APIException {
-    ShadowIGComment shadowIGComment =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return shadowIGComment;
   }
 
   public static ListenableFuture<ShadowIGComment> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<ShadowIGComment> shadowIGComment =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return shadowIGComment;
   }
 
   public static APINodeList<ShadowIGComment> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -125,12 +124,11 @@ public class ShadowIGComment extends APINode {
   }
 
   public static ListenableFuture<APINodeList<ShadowIGComment>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<ShadowIGComment>> shadowIGComment =
+    return
       new APIRequest(context, "", "/", "GET", ShadowIGComment.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return shadowIGComment;
   }
 
   private String getPrefixedId() {

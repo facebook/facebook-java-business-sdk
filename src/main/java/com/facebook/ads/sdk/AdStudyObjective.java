@@ -80,6 +80,7 @@ public class AdStudyObjective extends APINode {
 
   public AdStudyObjective(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -98,19 +99,17 @@ public class AdStudyObjective extends APINode {
   }
 
   public static AdStudyObjective fetchById(String id, APIContext context) throws APIException {
-    AdStudyObjective adStudyObjective =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return adStudyObjective;
   }
 
   public static ListenableFuture<AdStudyObjective> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<AdStudyObjective> adStudyObjective =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return adStudyObjective;
   }
 
   public static APINodeList<AdStudyObjective> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -123,12 +122,11 @@ public class AdStudyObjective extends APINode {
   }
 
   public static ListenableFuture<APINodeList<AdStudyObjective>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<AdStudyObjective>> adStudyObjective =
+    return
       new APIRequest(context, "", "/", "GET", AdStudyObjective.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return adStudyObjective;
   }
 
   private String getPrefixedId() {
@@ -602,14 +600,14 @@ public class AdStudyObjective extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "adspixels",
-      "applications",
-      "customconversions",
       "is_primary",
       "name",
-      "offline_conversion_data_sets",
-      "offsitepixels",
       "type",
+      "adspixels",
+      "customconversions",
+      "applications",
+      "offsitepixels",
+      "offline_conversion_data_sets",
     };
 
     public static final String[] FIELDS = {
@@ -667,33 +665,6 @@ public class AdStudyObjective extends APINode {
     }
 
 
-    public APIRequestUpdate setAdspixels (List<Object> adspixels) {
-      this.setParam("adspixels", adspixels);
-      return this;
-    }
-    public APIRequestUpdate setAdspixels (String adspixels) {
-      this.setParam("adspixels", adspixels);
-      return this;
-    }
-
-    public APIRequestUpdate setApplications (List<Object> applications) {
-      this.setParam("applications", applications);
-      return this;
-    }
-    public APIRequestUpdate setApplications (String applications) {
-      this.setParam("applications", applications);
-      return this;
-    }
-
-    public APIRequestUpdate setCustomconversions (List<Object> customconversions) {
-      this.setParam("customconversions", customconversions);
-      return this;
-    }
-    public APIRequestUpdate setCustomconversions (String customconversions) {
-      this.setParam("customconversions", customconversions);
-      return this;
-    }
-
     public APIRequestUpdate setIsPrimary (Boolean isPrimary) {
       this.setParam("is_primary", isPrimary);
       return this;
@@ -708,12 +679,39 @@ public class AdStudyObjective extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setOfflineConversionDataSets (List<Object> offlineConversionDataSets) {
-      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
+    public APIRequestUpdate setType (AdStudyObjective.EnumType type) {
+      this.setParam("type", type);
       return this;
     }
-    public APIRequestUpdate setOfflineConversionDataSets (String offlineConversionDataSets) {
-      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
+    public APIRequestUpdate setType (String type) {
+      this.setParam("type", type);
+      return this;
+    }
+
+    public APIRequestUpdate setAdspixels (List<Object> adspixels) {
+      this.setParam("adspixels", adspixels);
+      return this;
+    }
+    public APIRequestUpdate setAdspixels (String adspixels) {
+      this.setParam("adspixels", adspixels);
+      return this;
+    }
+
+    public APIRequestUpdate setCustomconversions (List<Object> customconversions) {
+      this.setParam("customconversions", customconversions);
+      return this;
+    }
+    public APIRequestUpdate setCustomconversions (String customconversions) {
+      this.setParam("customconversions", customconversions);
+      return this;
+    }
+
+    public APIRequestUpdate setApplications (List<Object> applications) {
+      this.setParam("applications", applications);
+      return this;
+    }
+    public APIRequestUpdate setApplications (String applications) {
+      this.setParam("applications", applications);
       return this;
     }
 
@@ -726,12 +724,12 @@ public class AdStudyObjective extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setType (AdStudyObjective.EnumType type) {
-      this.setParam("type", type);
+    public APIRequestUpdate setOfflineConversionDataSets (List<Object> offlineConversionDataSets) {
+      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
       return this;
     }
-    public APIRequestUpdate setType (String type) {
-      this.setParam("type", type);
+    public APIRequestUpdate setOfflineConversionDataSets (String offlineConversionDataSets) {
+      this.setParam("offline_conversion_data_sets", offlineConversionDataSets);
       return this;
     }
 
@@ -773,29 +771,6 @@ public class AdStudyObjective extends APINode {
 
   }
 
-  public static enum EnumBreakdowns {
-      @SerializedName("age")
-      VALUE_AGE("age"),
-      @SerializedName("cell_id")
-      VALUE_CELL_ID("cell_id"),
-      @SerializedName("gender")
-      VALUE_GENDER("gender"),
-      @SerializedName("country")
-      VALUE_COUNTRY("country"),
-      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
-
-      private String value;
-
-      private EnumBreakdowns(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumType {
       @SerializedName("SALES")
       VALUE_SALES("SALES"),
@@ -820,6 +795,29 @@ public class AdStudyObjective extends APINode {
       private String value;
 
       private EnumType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumBreakdowns {
+      @SerializedName("age")
+      VALUE_AGE("age"),
+      @SerializedName("cell_id")
+      VALUE_CELL_ID("cell_id"),
+      @SerializedName("gender")
+      VALUE_GENDER("gender"),
+      @SerializedName("country")
+      VALUE_COUNTRY("country"),
+      NULL(null);
+
+      private String value;
+
+      private EnumBreakdowns(String value) {
         this.value = value;
       }
 

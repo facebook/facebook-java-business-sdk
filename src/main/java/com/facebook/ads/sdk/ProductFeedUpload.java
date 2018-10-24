@@ -90,6 +90,7 @@ public class ProductFeedUpload extends APINode {
 
   public ProductFeedUpload(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -108,19 +109,17 @@ public class ProductFeedUpload extends APINode {
   }
 
   public static ProductFeedUpload fetchById(String id, APIContext context) throws APIException {
-    ProductFeedUpload productFeedUpload =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return productFeedUpload;
   }
 
   public static ListenableFuture<ProductFeedUpload> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<ProductFeedUpload> productFeedUpload =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return productFeedUpload;
   }
 
   public static APINodeList<ProductFeedUpload> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -133,12 +132,11 @@ public class ProductFeedUpload extends APINode {
   }
 
   public static ListenableFuture<APINodeList<ProductFeedUpload>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<ProductFeedUpload>> productFeedUpload =
+    return
       new APIRequest(context, "", "/", "GET", ProductFeedUpload.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return productFeedUpload;
   }
 
   private String getPrefixedId() {
@@ -360,9 +358,11 @@ public class ProductFeedUpload extends APINode {
 
     public static final String[] FIELDS = {
       "affected_surfaces",
+      "column_number",
       "description",
       "error_type",
       "id",
+      "row_number",
       "severity",
       "summary",
       "total_count",
@@ -463,6 +463,13 @@ public class ProductFeedUpload extends APINode {
       this.requestField("affected_surfaces", value);
       return this;
     }
+    public APIRequestGetErrors requestColumnNumberField () {
+      return this.requestColumnNumberField(true);
+    }
+    public APIRequestGetErrors requestColumnNumberField (boolean value) {
+      this.requestField("column_number", value);
+      return this;
+    }
     public APIRequestGetErrors requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -482,6 +489,13 @@ public class ProductFeedUpload extends APINode {
     }
     public APIRequestGetErrors requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetErrors requestRowNumberField () {
+      return this.requestRowNumberField(true);
+    }
+    public APIRequestGetErrors requestRowNumberField (boolean value) {
+      this.requestField("row_number", value);
       return this;
     }
     public APIRequestGetErrors requestSeverityField () {

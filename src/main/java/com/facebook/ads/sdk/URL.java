@@ -69,6 +69,8 @@ public class URL extends APINode {
   private Object mOgObject = null;
   @SerializedName("ownership_permissions")
   private Object mOwnershipPermissions = null;
+  @SerializedName("share")
+  private Object mShare = null;
   protected static Gson gson = null;
 
   URL() {
@@ -80,6 +82,7 @@ public class URL extends APINode {
 
   public URL(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -98,19 +101,17 @@ public class URL extends APINode {
   }
 
   public static URL fetchById(String id, APIContext context) throws APIException {
-    URL url =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return url;
   }
 
   public static ListenableFuture<URL> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<URL> url =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return url;
   }
 
   public static APINodeList<URL> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -123,12 +124,11 @@ public class URL extends APINode {
   }
 
   public static ListenableFuture<APINodeList<URL>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<URL>> url =
+    return
       new APIRequest(context, "", "/", "GET", URL.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return url;
   }
 
   private String getPrefixedId() {
@@ -283,6 +283,10 @@ public class URL extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  }
+
 
   public AppLinks getFieldAppLinks() {
     if (mAppLinks != null) {
@@ -321,6 +325,10 @@ public class URL extends APINode {
     return mOwnershipPermissions;
   }
 
+  public Object getFieldShare() {
+    return mShare;
+  }
+
 
 
   public static class APIRequestGet extends APIRequest<URL> {
@@ -341,6 +349,7 @@ public class URL extends APINode {
       "instant_article",
       "og_object",
       "ownership_permissions",
+      "share",
     };
 
     @Override
@@ -480,6 +489,142 @@ public class URL extends APINode {
       this.requestField("ownership_permissions", value);
       return this;
     }
+    public APIRequestGet requestShareField () {
+      return this.requestShareField(true);
+    }
+    public APIRequestGet requestShareField (boolean value) {
+      this.requestField("share", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<URL> {
+
+    URL lastResponse = null;
+    @Override
+    public URL getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "locale",
+      "hmac",
+      "ts",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public URL parseResponse(String response) throws APIException {
+      return URL.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public URL execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public URL execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<URL> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<URL> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, URL>() {
+           public URL apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setLocale (Object locale) {
+      this.setParam("locale", locale);
+      return this;
+    }
+    public APIRequestUpdate setLocale (String locale) {
+      this.setParam("locale", locale);
+      return this;
+    }
+
+    public APIRequestUpdate setHmac (String hmac) {
+      this.setParam("hmac", hmac);
+      return this;
+    }
+
+    public APIRequestUpdate setTs (Object ts) {
+      this.setParam("ts", ts);
+      return this;
+    }
+    public APIRequestUpdate setTs (String ts) {
+      this.setParam("ts", ts);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
 
@@ -504,6 +649,7 @@ public class URL extends APINode {
     this.mInstantArticle = instance.mInstantArticle;
     this.mOgObject = instance.mOgObject;
     this.mOwnershipPermissions = instance.mOwnershipPermissions;
+    this.mShare = instance.mShare;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

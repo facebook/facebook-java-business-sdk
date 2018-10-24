@@ -79,13 +79,74 @@ public class AdActivity extends APINode {
   private String mObjectType = null;
   @SerializedName("translated_event_type")
   private String mTranslatedEventType = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdActivity() {
+  AdActivity() {
+  }
+
+  public AdActivity(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdActivity(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdActivity fetch() throws APIException{
+    AdActivity newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdActivity fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdActivity> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdActivity fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdActivity> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdActivity> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdActivity>)(
+      new APIRequest<AdActivity>(context, "", "/", "GET", AdActivity.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdActivity>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdActivity.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdActivity loadJSON(String json, APIContext context) {
     AdActivity adActivity = getGson().fromJson(json, AdActivity.class);
@@ -228,116 +289,271 @@ public class AdActivity extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldActorId() {
     return mActorId;
-  }
-
-  public AdActivity setFieldActorId(String value) {
-    this.mActorId = value;
-    return this;
   }
 
   public String getFieldActorName() {
     return mActorName;
   }
 
-  public AdActivity setFieldActorName(String value) {
-    this.mActorName = value;
-    return this;
-  }
-
   public String getFieldApplicationId() {
     return mApplicationId;
-  }
-
-  public AdActivity setFieldApplicationId(String value) {
-    this.mApplicationId = value;
-    return this;
   }
 
   public String getFieldApplicationName() {
     return mApplicationName;
   }
 
-  public AdActivity setFieldApplicationName(String value) {
-    this.mApplicationName = value;
-    return this;
-  }
-
   public String getFieldDateTimeInTimezone() {
     return mDateTimeInTimezone;
-  }
-
-  public AdActivity setFieldDateTimeInTimezone(String value) {
-    this.mDateTimeInTimezone = value;
-    return this;
   }
 
   public String getFieldEventTime() {
     return mEventTime;
   }
 
-  public AdActivity setFieldEventTime(String value) {
-    this.mEventTime = value;
-    return this;
-  }
-
   public EnumEventType getFieldEventType() {
     return mEventType;
-  }
-
-  public AdActivity setFieldEventType(EnumEventType value) {
-    this.mEventType = value;
-    return this;
   }
 
   public String getFieldExtraData() {
     return mExtraData;
   }
 
-  public AdActivity setFieldExtraData(String value) {
-    this.mExtraData = value;
-    return this;
-  }
-
   public String getFieldObjectId() {
     return mObjectId;
-  }
-
-  public AdActivity setFieldObjectId(String value) {
-    this.mObjectId = value;
-    return this;
   }
 
   public String getFieldObjectName() {
     return mObjectName;
   }
 
-  public AdActivity setFieldObjectName(String value) {
-    this.mObjectName = value;
-    return this;
-  }
-
   public String getFieldObjectType() {
     return mObjectType;
-  }
-
-  public AdActivity setFieldObjectType(String value) {
-    this.mObjectType = value;
-    return this;
   }
 
   public String getFieldTranslatedEventType() {
     return mTranslatedEventType;
   }
 
-  public AdActivity setFieldTranslatedEventType(String value) {
-    this.mTranslatedEventType = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdActivity> {
+
+    AdActivity lastResponse = null;
+    @Override
+    public AdActivity getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "actor_id",
+      "actor_name",
+      "application_id",
+      "application_name",
+      "date_time_in_timezone",
+      "event_time",
+      "event_type",
+      "extra_data",
+      "object_id",
+      "object_name",
+      "object_type",
+      "translated_event_type",
+      "id",
+    };
+
+    @Override
+    public AdActivity parseResponse(String response) throws APIException {
+      return AdActivity.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdActivity execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdActivity execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdActivity> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdActivity> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdActivity>() {
+           public AdActivity apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestActorIdField () {
+      return this.requestActorIdField(true);
+    }
+    public APIRequestGet requestActorIdField (boolean value) {
+      this.requestField("actor_id", value);
+      return this;
+    }
+    public APIRequestGet requestActorNameField () {
+      return this.requestActorNameField(true);
+    }
+    public APIRequestGet requestActorNameField (boolean value) {
+      this.requestField("actor_name", value);
+      return this;
+    }
+    public APIRequestGet requestApplicationIdField () {
+      return this.requestApplicationIdField(true);
+    }
+    public APIRequestGet requestApplicationIdField (boolean value) {
+      this.requestField("application_id", value);
+      return this;
+    }
+    public APIRequestGet requestApplicationNameField () {
+      return this.requestApplicationNameField(true);
+    }
+    public APIRequestGet requestApplicationNameField (boolean value) {
+      this.requestField("application_name", value);
+      return this;
+    }
+    public APIRequestGet requestDateTimeInTimezoneField () {
+      return this.requestDateTimeInTimezoneField(true);
+    }
+    public APIRequestGet requestDateTimeInTimezoneField (boolean value) {
+      this.requestField("date_time_in_timezone", value);
+      return this;
+    }
+    public APIRequestGet requestEventTimeField () {
+      return this.requestEventTimeField(true);
+    }
+    public APIRequestGet requestEventTimeField (boolean value) {
+      this.requestField("event_time", value);
+      return this;
+    }
+    public APIRequestGet requestEventTypeField () {
+      return this.requestEventTypeField(true);
+    }
+    public APIRequestGet requestEventTypeField (boolean value) {
+      this.requestField("event_type", value);
+      return this;
+    }
+    public APIRequestGet requestExtraDataField () {
+      return this.requestExtraDataField(true);
+    }
+    public APIRequestGet requestExtraDataField (boolean value) {
+      this.requestField("extra_data", value);
+      return this;
+    }
+    public APIRequestGet requestObjectIdField () {
+      return this.requestObjectIdField(true);
+    }
+    public APIRequestGet requestObjectIdField (boolean value) {
+      this.requestField("object_id", value);
+      return this;
+    }
+    public APIRequestGet requestObjectNameField () {
+      return this.requestObjectNameField(true);
+    }
+    public APIRequestGet requestObjectNameField (boolean value) {
+      this.requestField("object_name", value);
+      return this;
+    }
+    public APIRequestGet requestObjectTypeField () {
+      return this.requestObjectTypeField(true);
+    }
+    public APIRequestGet requestObjectTypeField (boolean value) {
+      this.requestField("object_type", value);
+      return this;
+    }
+    public APIRequestGet requestTranslatedEventTypeField () {
+      return this.requestTranslatedEventTypeField(true);
+    }
+    public APIRequestGet requestTranslatedEventTypeField (boolean value) {
+      this.requestField("translated_event_type", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumEventType {
       @SerializedName("ad_account_update_spend_limit")
@@ -546,6 +762,7 @@ public class AdActivity extends APINode {
     this.mObjectName = instance.mObjectName;
     this.mObjectType = instance.mObjectType;
     this.mTranslatedEventType = instance.mTranslatedEventType;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

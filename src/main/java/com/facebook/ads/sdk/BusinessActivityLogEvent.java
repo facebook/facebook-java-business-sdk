@@ -93,13 +93,74 @@ public class BusinessActivityLogEvent extends APINode {
   private String mTargetBusinessObjectName = null;
   @SerializedName("target_business_object_type")
   private String mTargetBusinessObjectType = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public BusinessActivityLogEvent() {
+  BusinessActivityLogEvent() {
+  }
+
+  public BusinessActivityLogEvent(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public BusinessActivityLogEvent(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public BusinessActivityLogEvent fetch() throws APIException{
+    BusinessActivityLogEvent newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static BusinessActivityLogEvent fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<BusinessActivityLogEvent> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static BusinessActivityLogEvent fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<BusinessActivityLogEvent> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<BusinessActivityLogEvent> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<BusinessActivityLogEvent>)(
+      new APIRequest<BusinessActivityLogEvent>(context, "", "/", "GET", BusinessActivityLogEvent.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<BusinessActivityLogEvent>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", BusinessActivityLogEvent.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static BusinessActivityLogEvent loadJSON(String json, APIContext context) {
     BusinessActivityLogEvent businessActivityLogEvent = getGson().fromJson(json, BusinessActivityLogEvent.class);
@@ -242,179 +303,355 @@ public class BusinessActivityLogEvent extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public String getFieldActedUponBusinessId() {
     return mActedUponBusinessId;
-  }
-
-  public BusinessActivityLogEvent setFieldActedUponBusinessId(String value) {
-    this.mActedUponBusinessId = value;
-    return this;
   }
 
   public String getFieldActedUponBusinessName() {
     return mActedUponBusinessName;
   }
 
-  public BusinessActivityLogEvent setFieldActedUponBusinessName(String value) {
-    this.mActedUponBusinessName = value;
-    return this;
-  }
-
   public String getFieldActedUponBusinessObjectId() {
     return mActedUponBusinessObjectId;
-  }
-
-  public BusinessActivityLogEvent setFieldActedUponBusinessObjectId(String value) {
-    this.mActedUponBusinessObjectId = value;
-    return this;
   }
 
   public String getFieldActedUponBusinessObjectName() {
     return mActedUponBusinessObjectName;
   }
 
-  public BusinessActivityLogEvent setFieldActedUponBusinessObjectName(String value) {
-    this.mActedUponBusinessObjectName = value;
-    return this;
-  }
-
   public String getFieldActedUponBusinessObjectType() {
     return mActedUponBusinessObjectType;
-  }
-
-  public BusinessActivityLogEvent setFieldActedUponBusinessObjectType(String value) {
-    this.mActedUponBusinessObjectType = value;
-    return this;
   }
 
   public String getFieldActedUponUserId() {
     return mActedUponUserId;
   }
 
-  public BusinessActivityLogEvent setFieldActedUponUserId(String value) {
-    this.mActedUponUserId = value;
-    return this;
-  }
-
   public String getFieldActedUponUserName() {
     return mActedUponUserName;
-  }
-
-  public BusinessActivityLogEvent setFieldActedUponUserName(String value) {
-    this.mActedUponUserName = value;
-    return this;
   }
 
   public String getFieldActingBusinessId() {
     return mActingBusinessId;
   }
 
-  public BusinessActivityLogEvent setFieldActingBusinessId(String value) {
-    this.mActingBusinessId = value;
-    return this;
-  }
-
   public String getFieldActingBusinessName() {
     return mActingBusinessName;
-  }
-
-  public BusinessActivityLogEvent setFieldActingBusinessName(String value) {
-    this.mActingBusinessName = value;
-    return this;
   }
 
   public String getFieldActingUserId() {
     return mActingUserId;
   }
 
-  public BusinessActivityLogEvent setFieldActingUserId(String value) {
-    this.mActingUserId = value;
-    return this;
-  }
-
   public String getFieldActingUserName() {
     return mActingUserName;
-  }
-
-  public BusinessActivityLogEvent setFieldActingUserName(String value) {
-    this.mActingUserName = value;
-    return this;
   }
 
   public Long getFieldEventTime() {
     return mEventTime;
   }
 
-  public BusinessActivityLogEvent setFieldEventTime(Long value) {
-    this.mEventTime = value;
-    return this;
-  }
-
   public String getFieldEventType() {
     return mEventType;
-  }
-
-  public BusinessActivityLogEvent setFieldEventType(String value) {
-    this.mEventType = value;
-    return this;
   }
 
   public List<Object> getFieldExtraData() {
     return mExtraData;
   }
 
-  public BusinessActivityLogEvent setFieldExtraData(List<Object> value) {
-    this.mExtraData = value;
-    return this;
-  }
-
   public String getFieldTargetBusinessId() {
     return mTargetBusinessId;
-  }
-
-  public BusinessActivityLogEvent setFieldTargetBusinessId(String value) {
-    this.mTargetBusinessId = value;
-    return this;
   }
 
   public String getFieldTargetBusinessName() {
     return mTargetBusinessName;
   }
 
-  public BusinessActivityLogEvent setFieldTargetBusinessName(String value) {
-    this.mTargetBusinessName = value;
-    return this;
-  }
-
   public String getFieldTargetBusinessObjectId() {
     return mTargetBusinessObjectId;
-  }
-
-  public BusinessActivityLogEvent setFieldTargetBusinessObjectId(String value) {
-    this.mTargetBusinessObjectId = value;
-    return this;
   }
 
   public String getFieldTargetBusinessObjectName() {
     return mTargetBusinessObjectName;
   }
 
-  public BusinessActivityLogEvent setFieldTargetBusinessObjectName(String value) {
-    this.mTargetBusinessObjectName = value;
-    return this;
-  }
-
   public String getFieldTargetBusinessObjectType() {
     return mTargetBusinessObjectType;
   }
 
-  public BusinessActivityLogEvent setFieldTargetBusinessObjectType(String value) {
-    this.mTargetBusinessObjectType = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<BusinessActivityLogEvent> {
+
+    BusinessActivityLogEvent lastResponse = null;
+    @Override
+    public BusinessActivityLogEvent getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "acted_upon_business_id",
+      "acted_upon_business_name",
+      "acted_upon_business_object_id",
+      "acted_upon_business_object_name",
+      "acted_upon_business_object_type",
+      "acted_upon_user_id",
+      "acted_upon_user_name",
+      "acting_business_id",
+      "acting_business_name",
+      "acting_user_id",
+      "acting_user_name",
+      "event_time",
+      "event_type",
+      "extra_data",
+      "target_business_id",
+      "target_business_name",
+      "target_business_object_id",
+      "target_business_object_name",
+      "target_business_object_type",
+      "id",
+    };
+
+    @Override
+    public BusinessActivityLogEvent parseResponse(String response) throws APIException {
+      return BusinessActivityLogEvent.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public BusinessActivityLogEvent execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public BusinessActivityLogEvent execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<BusinessActivityLogEvent> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<BusinessActivityLogEvent> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, BusinessActivityLogEvent>() {
+           public BusinessActivityLogEvent apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestActedUponBusinessIdField () {
+      return this.requestActedUponBusinessIdField(true);
+    }
+    public APIRequestGet requestActedUponBusinessIdField (boolean value) {
+      this.requestField("acted_upon_business_id", value);
+      return this;
+    }
+    public APIRequestGet requestActedUponBusinessNameField () {
+      return this.requestActedUponBusinessNameField(true);
+    }
+    public APIRequestGet requestActedUponBusinessNameField (boolean value) {
+      this.requestField("acted_upon_business_name", value);
+      return this;
+    }
+    public APIRequestGet requestActedUponBusinessObjectIdField () {
+      return this.requestActedUponBusinessObjectIdField(true);
+    }
+    public APIRequestGet requestActedUponBusinessObjectIdField (boolean value) {
+      this.requestField("acted_upon_business_object_id", value);
+      return this;
+    }
+    public APIRequestGet requestActedUponBusinessObjectNameField () {
+      return this.requestActedUponBusinessObjectNameField(true);
+    }
+    public APIRequestGet requestActedUponBusinessObjectNameField (boolean value) {
+      this.requestField("acted_upon_business_object_name", value);
+      return this;
+    }
+    public APIRequestGet requestActedUponBusinessObjectTypeField () {
+      return this.requestActedUponBusinessObjectTypeField(true);
+    }
+    public APIRequestGet requestActedUponBusinessObjectTypeField (boolean value) {
+      this.requestField("acted_upon_business_object_type", value);
+      return this;
+    }
+    public APIRequestGet requestActedUponUserIdField () {
+      return this.requestActedUponUserIdField(true);
+    }
+    public APIRequestGet requestActedUponUserIdField (boolean value) {
+      this.requestField("acted_upon_user_id", value);
+      return this;
+    }
+    public APIRequestGet requestActedUponUserNameField () {
+      return this.requestActedUponUserNameField(true);
+    }
+    public APIRequestGet requestActedUponUserNameField (boolean value) {
+      this.requestField("acted_upon_user_name", value);
+      return this;
+    }
+    public APIRequestGet requestActingBusinessIdField () {
+      return this.requestActingBusinessIdField(true);
+    }
+    public APIRequestGet requestActingBusinessIdField (boolean value) {
+      this.requestField("acting_business_id", value);
+      return this;
+    }
+    public APIRequestGet requestActingBusinessNameField () {
+      return this.requestActingBusinessNameField(true);
+    }
+    public APIRequestGet requestActingBusinessNameField (boolean value) {
+      this.requestField("acting_business_name", value);
+      return this;
+    }
+    public APIRequestGet requestActingUserIdField () {
+      return this.requestActingUserIdField(true);
+    }
+    public APIRequestGet requestActingUserIdField (boolean value) {
+      this.requestField("acting_user_id", value);
+      return this;
+    }
+    public APIRequestGet requestActingUserNameField () {
+      return this.requestActingUserNameField(true);
+    }
+    public APIRequestGet requestActingUserNameField (boolean value) {
+      this.requestField("acting_user_name", value);
+      return this;
+    }
+    public APIRequestGet requestEventTimeField () {
+      return this.requestEventTimeField(true);
+    }
+    public APIRequestGet requestEventTimeField (boolean value) {
+      this.requestField("event_time", value);
+      return this;
+    }
+    public APIRequestGet requestEventTypeField () {
+      return this.requestEventTypeField(true);
+    }
+    public APIRequestGet requestEventTypeField (boolean value) {
+      this.requestField("event_type", value);
+      return this;
+    }
+    public APIRequestGet requestExtraDataField () {
+      return this.requestExtraDataField(true);
+    }
+    public APIRequestGet requestExtraDataField (boolean value) {
+      this.requestField("extra_data", value);
+      return this;
+    }
+    public APIRequestGet requestTargetBusinessIdField () {
+      return this.requestTargetBusinessIdField(true);
+    }
+    public APIRequestGet requestTargetBusinessIdField (boolean value) {
+      this.requestField("target_business_id", value);
+      return this;
+    }
+    public APIRequestGet requestTargetBusinessNameField () {
+      return this.requestTargetBusinessNameField(true);
+    }
+    public APIRequestGet requestTargetBusinessNameField (boolean value) {
+      this.requestField("target_business_name", value);
+      return this;
+    }
+    public APIRequestGet requestTargetBusinessObjectIdField () {
+      return this.requestTargetBusinessObjectIdField(true);
+    }
+    public APIRequestGet requestTargetBusinessObjectIdField (boolean value) {
+      this.requestField("target_business_object_id", value);
+      return this;
+    }
+    public APIRequestGet requestTargetBusinessObjectNameField () {
+      return this.requestTargetBusinessObjectNameField(true);
+    }
+    public APIRequestGet requestTargetBusinessObjectNameField (boolean value) {
+      this.requestField("target_business_object_name", value);
+      return this;
+    }
+    public APIRequestGet requestTargetBusinessObjectTypeField () {
+      return this.requestTargetBusinessObjectTypeField(true);
+    }
+    public APIRequestGet requestTargetBusinessObjectTypeField (boolean value) {
+      this.requestField("target_business_object_type", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -450,6 +687,7 @@ public class BusinessActivityLogEvent extends APINode {
     this.mTargetBusinessObjectId = instance.mTargetBusinessObjectId;
     this.mTargetBusinessObjectName = instance.mTargetBusinessObjectName;
     this.mTargetBusinessObjectType = instance.mTargetBusinessObjectType;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

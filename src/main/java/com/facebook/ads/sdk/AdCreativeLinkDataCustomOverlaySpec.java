@@ -71,13 +71,74 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
   private EnumTemplate mTemplate = null;
   @SerializedName("text_color")
   private EnumTextColor mTextColor = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public AdCreativeLinkDataCustomOverlaySpec() {
+  AdCreativeLinkDataCustomOverlaySpec() {
+  }
+
+  public AdCreativeLinkDataCustomOverlaySpec(Long id, APIContext context) {
+    this(id.toString(), context);
+  }
+
+  public AdCreativeLinkDataCustomOverlaySpec(String id, APIContext context) {
+    this.mId = id;
+
+    this.context = context;
+  }
+
+  public AdCreativeLinkDataCustomOverlaySpec fetch() throws APIException{
+    AdCreativeLinkDataCustomOverlaySpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+    this.copyFrom(newInstance);
+    return this;
+  }
+
+  public static AdCreativeLinkDataCustomOverlaySpec fetchById(Long id, APIContext context) throws APIException {
+    return fetchById(id.toString(), context);
+  }
+
+  public static ListenableFuture<AdCreativeLinkDataCustomOverlaySpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
+    return fetchByIdAsync(id.toString(), context);
+  }
+
+  public static AdCreativeLinkDataCustomOverlaySpec fetchById(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .execute();
+  }
+
+  public static ListenableFuture<AdCreativeLinkDataCustomOverlaySpec> fetchByIdAsync(String id, APIContext context) throws APIException {
+    return
+      new APIRequestGet(id, context)
+      .requestAllFields()
+      .executeAsync();
+  }
+
+  public static APINodeList<AdCreativeLinkDataCustomOverlaySpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<AdCreativeLinkDataCustomOverlaySpec>)(
+      new APIRequest<AdCreativeLinkDataCustomOverlaySpec>(context, "", "/", "GET", AdCreativeLinkDataCustomOverlaySpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .execute()
+    );
+  }
+
+  public static ListenableFuture<APINodeList<AdCreativeLinkDataCustomOverlaySpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return
+      new APIRequest(context, "", "/", "GET", AdCreativeLinkDataCustomOverlaySpec.getParser())
+        .setParam("ids", APIRequest.joinStringList(ids))
+        .requestFields(fields)
+        .executeAsyncBase();
+  }
+
+  private String getPrefixedId() {
+    return getId();
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
   public static AdCreativeLinkDataCustomOverlaySpec loadJSON(String json, APIContext context) {
     AdCreativeLinkDataCustomOverlaySpec adCreativeLinkDataCustomOverlaySpec = getGson().fromJson(json, AdCreativeLinkDataCustomOverlaySpec.class);
@@ -220,80 +281,223 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGet get() {
+    return new APIRequestGet(this.getPrefixedId().toString(), context);
+  }
+
 
   public EnumBackgroundColor getFieldBackgroundColor() {
     return mBackgroundColor;
-  }
-
-  public AdCreativeLinkDataCustomOverlaySpec setFieldBackgroundColor(EnumBackgroundColor value) {
-    this.mBackgroundColor = value;
-    return this;
   }
 
   public Boolean getFieldFloatWithMargin() {
     return mFloatWithMargin;
   }
 
-  public AdCreativeLinkDataCustomOverlaySpec setFieldFloatWithMargin(Boolean value) {
-    this.mFloatWithMargin = value;
-    return this;
-  }
-
   public EnumFont getFieldFont() {
     return mFont;
-  }
-
-  public AdCreativeLinkDataCustomOverlaySpec setFieldFont(EnumFont value) {
-    this.mFont = value;
-    return this;
   }
 
   public EnumOption getFieldOption() {
     return mOption;
   }
 
-  public AdCreativeLinkDataCustomOverlaySpec setFieldOption(EnumOption value) {
-    this.mOption = value;
-    return this;
-  }
-
   public EnumPosition getFieldPosition() {
     return mPosition;
-  }
-
-  public AdCreativeLinkDataCustomOverlaySpec setFieldPosition(EnumPosition value) {
-    this.mPosition = value;
-    return this;
   }
 
   public Boolean getFieldRenderWithIcon() {
     return mRenderWithIcon;
   }
 
-  public AdCreativeLinkDataCustomOverlaySpec setFieldRenderWithIcon(Boolean value) {
-    this.mRenderWithIcon = value;
-    return this;
-  }
-
   public EnumTemplate getFieldTemplate() {
     return mTemplate;
-  }
-
-  public AdCreativeLinkDataCustomOverlaySpec setFieldTemplate(EnumTemplate value) {
-    this.mTemplate = value;
-    return this;
   }
 
   public EnumTextColor getFieldTextColor() {
     return mTextColor;
   }
 
-  public AdCreativeLinkDataCustomOverlaySpec setFieldTextColor(EnumTextColor value) {
-    this.mTextColor = value;
-    return this;
+  public String getFieldId() {
+    return mId;
   }
 
 
+
+  public static class APIRequestGet extends APIRequest<AdCreativeLinkDataCustomOverlaySpec> {
+
+    AdCreativeLinkDataCustomOverlaySpec lastResponse = null;
+    @Override
+    public AdCreativeLinkDataCustomOverlaySpec getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "background_color",
+      "float_with_margin",
+      "font",
+      "option",
+      "position",
+      "render_with_icon",
+      "template",
+      "text_color",
+      "id",
+    };
+
+    @Override
+    public AdCreativeLinkDataCustomOverlaySpec parseResponse(String response) throws APIException {
+      return AdCreativeLinkDataCustomOverlaySpec.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public AdCreativeLinkDataCustomOverlaySpec execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdCreativeLinkDataCustomOverlaySpec execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdCreativeLinkDataCustomOverlaySpec> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdCreativeLinkDataCustomOverlaySpec> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, AdCreativeLinkDataCustomOverlaySpec>() {
+           public AdCreativeLinkDataCustomOverlaySpec apply(String result) {
+             try {
+               return APIRequestGet.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGet(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGet requestBackgroundColorField () {
+      return this.requestBackgroundColorField(true);
+    }
+    public APIRequestGet requestBackgroundColorField (boolean value) {
+      this.requestField("background_color", value);
+      return this;
+    }
+    public APIRequestGet requestFloatWithMarginField () {
+      return this.requestFloatWithMarginField(true);
+    }
+    public APIRequestGet requestFloatWithMarginField (boolean value) {
+      this.requestField("float_with_margin", value);
+      return this;
+    }
+    public APIRequestGet requestFontField () {
+      return this.requestFontField(true);
+    }
+    public APIRequestGet requestFontField (boolean value) {
+      this.requestField("font", value);
+      return this;
+    }
+    public APIRequestGet requestOptionField () {
+      return this.requestOptionField(true);
+    }
+    public APIRequestGet requestOptionField (boolean value) {
+      this.requestField("option", value);
+      return this;
+    }
+    public APIRequestGet requestPositionField () {
+      return this.requestPositionField(true);
+    }
+    public APIRequestGet requestPositionField (boolean value) {
+      this.requestField("position", value);
+      return this;
+    }
+    public APIRequestGet requestRenderWithIconField () {
+      return this.requestRenderWithIconField(true);
+    }
+    public APIRequestGet requestRenderWithIconField (boolean value) {
+      this.requestField("render_with_icon", value);
+      return this;
+    }
+    public APIRequestGet requestTemplateField () {
+      return this.requestTemplateField(true);
+    }
+    public APIRequestGet requestTemplateField (boolean value) {
+      this.requestField("template", value);
+      return this;
+    }
+    public APIRequestGet requestTextColorField () {
+      return this.requestTextColorField(true);
+    }
+    public APIRequestGet requestTextColorField (boolean value) {
+      this.requestField("text_color", value);
+      return this;
+    }
+    public APIRequestGet requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGet requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
 
   public static enum EnumBackgroundColor {
       @SerializedName("background_ffffff")
@@ -374,6 +578,12 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
       VALUE_FREE_SHIPPING("free_shipping"),
       @SerializedName("inventory")
       VALUE_INVENTORY("inventory"),
+      @SerializedName("pay_on_arrival")
+      VALUE_PAY_ON_ARRIVAL("pay_on_arrival"),
+      @SerializedName("pay_at_hotel")
+      VALUE_PAY_AT_HOTEL("pay_at_hotel"),
+      @SerializedName("fast_delivery")
+      VALUE_FAST_DELIVERY("fast_delivery"),
       NULL(null);
 
       private String value;
@@ -484,6 +694,7 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
     this.mRenderWithIcon = instance.mRenderWithIcon;
     this.mTemplate = instance.mTemplate;
     this.mTextColor = instance.mTextColor;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

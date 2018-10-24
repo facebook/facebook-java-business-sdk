@@ -74,6 +74,7 @@ public class PageAdminNote extends APINode {
 
   public PageAdminNote(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -92,19 +93,17 @@ public class PageAdminNote extends APINode {
   }
 
   public static PageAdminNote fetchById(String id, APIContext context) throws APIException {
-    PageAdminNote pageAdminNote =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return pageAdminNote;
   }
 
   public static ListenableFuture<PageAdminNote> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<PageAdminNote> pageAdminNote =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return pageAdminNote;
   }
 
   public static APINodeList<PageAdminNote> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -117,12 +116,11 @@ public class PageAdminNote extends APINode {
   }
 
   public static ListenableFuture<APINodeList<PageAdminNote>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<PageAdminNote>> pageAdminNote =
+    return
       new APIRequest(context, "", "/", "GET", PageAdminNote.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return pageAdminNote;
   }
 
   private String getPrefixedId() {

@@ -78,6 +78,7 @@ public class ProductSet extends APINode {
 
   public ProductSet(String id, APIContext context) {
     this.mId = id;
+
     this.context = context;
   }
 
@@ -96,19 +97,17 @@ public class ProductSet extends APINode {
   }
 
   public static ProductSet fetchById(String id, APIContext context) throws APIException {
-    ProductSet productSet =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
-    return productSet;
   }
 
   public static ListenableFuture<ProductSet> fetchByIdAsync(String id, APIContext context) throws APIException {
-    ListenableFuture<ProductSet> productSet =
+    return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
-    return productSet;
   }
 
   public static APINodeList<ProductSet> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
@@ -121,12 +120,11 @@ public class ProductSet extends APINode {
   }
 
   public static ListenableFuture<APINodeList<ProductSet>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    ListenableFuture<APINodeList<ProductSet>> productSet =
+    return
       new APIRequest(context, "", "/", "GET", ProductSet.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
-    return productSet;
   }
 
   private String getPrefixedId() {
@@ -277,6 +275,30 @@ public class ProductSet extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetAutomotiveModels getAutomotiveModels() {
+    return new APIRequestGetAutomotiveModels(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetDaChecks getDaChecks() {
+    return new APIRequestGetDaChecks(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetDestinations getDestinations() {
+    return new APIRequestGetDestinations(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetFlights getFlights() {
+    return new APIRequestGetFlights(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetHomeListings getHomeListings() {
+    return new APIRequestGetHomeListings(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetHotels getHotels() {
+    return new APIRequestGetHotels(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetProducts getProducts() {
     return new APIRequestGetProducts(this.getPrefixedId().toString(), context);
   }
@@ -327,6 +349,1678 @@ public class ProductSet extends APINode {
 
 
 
+  public static class APIRequestGetAutomotiveModels extends APIRequest<AutomotiveModel> {
+
+    APINodeList<AutomotiveModel> lastResponse = null;
+    @Override
+    public APINodeList<AutomotiveModel> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "bulk_pagination",
+      "filter",
+    };
+
+    public static final String[] FIELDS = {
+      "applinks",
+      "automotive_model_id",
+      "availability",
+      "body_style",
+      "currency",
+      "custom_label_0",
+      "description",
+      "drivetrain",
+      "exterior_color",
+      "fuel_type",
+      "generation",
+      "id",
+      "images",
+      "interior_color",
+      "interior_upholstery",
+      "make",
+      "model",
+      "price",
+      "sanitized_images",
+      "title",
+      "transmission",
+      "trim",
+      "url",
+      "year",
+    };
+
+    @Override
+    public APINodeList<AutomotiveModel> parseResponse(String response) throws APIException {
+      return AutomotiveModel.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<AutomotiveModel> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AutomotiveModel> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AutomotiveModel>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AutomotiveModel>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AutomotiveModel>>() {
+           public APINodeList<AutomotiveModel> apply(String result) {
+             try {
+               return APIRequestGetAutomotiveModels.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAutomotiveModels(String nodeId, APIContext context) {
+      super(context, nodeId, "/automotive_models", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAutomotiveModels setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAutomotiveModels setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAutomotiveModels setBulkPagination (Boolean bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels setBulkPagination (String bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+
+    public APIRequestGetAutomotiveModels setFilter (Object filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels setFilter (String filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+
+    public APIRequestGetAutomotiveModels requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAutomotiveModels requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAutomotiveModels requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAutomotiveModels requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAutomotiveModels requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAutomotiveModels requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAutomotiveModels requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetAutomotiveModels requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestAutomotiveModelIdField () {
+      return this.requestAutomotiveModelIdField(true);
+    }
+    public APIRequestGetAutomotiveModels requestAutomotiveModelIdField (boolean value) {
+      this.requestField("automotive_model_id", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestAvailabilityField () {
+      return this.requestAvailabilityField(true);
+    }
+    public APIRequestGetAutomotiveModels requestAvailabilityField (boolean value) {
+      this.requestField("availability", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestBodyStyleField () {
+      return this.requestBodyStyleField(true);
+    }
+    public APIRequestGetAutomotiveModels requestBodyStyleField (boolean value) {
+      this.requestField("body_style", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetAutomotiveModels requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestCustomLabel0Field () {
+      return this.requestCustomLabel0Field(true);
+    }
+    public APIRequestGetAutomotiveModels requestCustomLabel0Field (boolean value) {
+      this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetAutomotiveModels requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestDrivetrainField () {
+      return this.requestDrivetrainField(true);
+    }
+    public APIRequestGetAutomotiveModels requestDrivetrainField (boolean value) {
+      this.requestField("drivetrain", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestExteriorColorField () {
+      return this.requestExteriorColorField(true);
+    }
+    public APIRequestGetAutomotiveModels requestExteriorColorField (boolean value) {
+      this.requestField("exterior_color", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestFuelTypeField () {
+      return this.requestFuelTypeField(true);
+    }
+    public APIRequestGetAutomotiveModels requestFuelTypeField (boolean value) {
+      this.requestField("fuel_type", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestGenerationField () {
+      return this.requestGenerationField(true);
+    }
+    public APIRequestGetAutomotiveModels requestGenerationField (boolean value) {
+      this.requestField("generation", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAutomotiveModels requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetAutomotiveModels requestImagesField (boolean value) {
+      this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestInteriorColorField () {
+      return this.requestInteriorColorField(true);
+    }
+    public APIRequestGetAutomotiveModels requestInteriorColorField (boolean value) {
+      this.requestField("interior_color", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestInteriorUpholsteryField () {
+      return this.requestInteriorUpholsteryField(true);
+    }
+    public APIRequestGetAutomotiveModels requestInteriorUpholsteryField (boolean value) {
+      this.requestField("interior_upholstery", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestMakeField () {
+      return this.requestMakeField(true);
+    }
+    public APIRequestGetAutomotiveModels requestMakeField (boolean value) {
+      this.requestField("make", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestModelField () {
+      return this.requestModelField(true);
+    }
+    public APIRequestGetAutomotiveModels requestModelField (boolean value) {
+      this.requestField("model", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestPriceField () {
+      return this.requestPriceField(true);
+    }
+    public APIRequestGetAutomotiveModels requestPriceField (boolean value) {
+      this.requestField("price", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestSanitizedImagesField () {
+      return this.requestSanitizedImagesField(true);
+    }
+    public APIRequestGetAutomotiveModels requestSanitizedImagesField (boolean value) {
+      this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestTitleField () {
+      return this.requestTitleField(true);
+    }
+    public APIRequestGetAutomotiveModels requestTitleField (boolean value) {
+      this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestTransmissionField () {
+      return this.requestTransmissionField(true);
+    }
+    public APIRequestGetAutomotiveModels requestTransmissionField (boolean value) {
+      this.requestField("transmission", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestTrimField () {
+      return this.requestTrimField(true);
+    }
+    public APIRequestGetAutomotiveModels requestTrimField (boolean value) {
+      this.requestField("trim", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetAutomotiveModels requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestYearField () {
+      return this.requestYearField(true);
+    }
+    public APIRequestGetAutomotiveModels requestYearField (boolean value) {
+      this.requestField("year", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetDaChecks extends APIRequest<DACheck> {
+
+    APINodeList<DACheck> lastResponse = null;
+    @Override
+    public APINodeList<DACheck> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "checks",
+    };
+
+    public static final String[] FIELDS = {
+      "action_uri",
+      "description",
+      "key",
+      "result",
+      "title",
+      "user_message",
+      "id",
+    };
+
+    @Override
+    public APINodeList<DACheck> parseResponse(String response) throws APIException {
+      return DACheck.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<DACheck> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<DACheck> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<DACheck>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<DACheck>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<DACheck>>() {
+           public APINodeList<DACheck> apply(String result) {
+             try {
+               return APIRequestGetDaChecks.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetDaChecks(String nodeId, APIContext context) {
+      super(context, nodeId, "/da_checks", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetDaChecks setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDaChecks setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetDaChecks setChecks (List<String> checks) {
+      this.setParam("checks", checks);
+      return this;
+    }
+    public APIRequestGetDaChecks setChecks (String checks) {
+      this.setParam("checks", checks);
+      return this;
+    }
+
+    public APIRequestGetDaChecks requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetDaChecks requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDaChecks requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetDaChecks requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDaChecks requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDaChecks requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetDaChecks requestActionUriField () {
+      return this.requestActionUriField(true);
+    }
+    public APIRequestGetDaChecks requestActionUriField (boolean value) {
+      this.requestField("action_uri", value);
+      return this;
+    }
+    public APIRequestGetDaChecks requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetDaChecks requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetDaChecks requestKeyField () {
+      return this.requestKeyField(true);
+    }
+    public APIRequestGetDaChecks requestKeyField (boolean value) {
+      this.requestField("key", value);
+      return this;
+    }
+    public APIRequestGetDaChecks requestResultField () {
+      return this.requestResultField(true);
+    }
+    public APIRequestGetDaChecks requestResultField (boolean value) {
+      this.requestField("result", value);
+      return this;
+    }
+    public APIRequestGetDaChecks requestTitleField () {
+      return this.requestTitleField(true);
+    }
+    public APIRequestGetDaChecks requestTitleField (boolean value) {
+      this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetDaChecks requestUserMessageField () {
+      return this.requestUserMessageField(true);
+    }
+    public APIRequestGetDaChecks requestUserMessageField (boolean value) {
+      this.requestField("user_message", value);
+      return this;
+    }
+    public APIRequestGetDaChecks requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetDaChecks requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetDestinations extends APIRequest<Destination> {
+
+    APINodeList<Destination> lastResponse = null;
+    @Override
+    public APINodeList<Destination> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "bulk_pagination",
+      "filter",
+    };
+
+    public static final String[] FIELDS = {
+      "address",
+      "applinks",
+      "currency",
+      "description",
+      "destination_id",
+      "id",
+      "images",
+      "name",
+      "price",
+      "price_change",
+      "sanitized_images",
+      "types",
+      "url",
+    };
+
+    @Override
+    public APINodeList<Destination> parseResponse(String response) throws APIException {
+      return Destination.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<Destination> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Destination> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Destination>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Destination>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<Destination>>() {
+           public APINodeList<Destination> apply(String result) {
+             try {
+               return APIRequestGetDestinations.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetDestinations(String nodeId, APIContext context) {
+      super(context, nodeId, "/destinations", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetDestinations setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDestinations setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetDestinations setBulkPagination (Boolean bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+    public APIRequestGetDestinations setBulkPagination (String bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+
+    public APIRequestGetDestinations setFilter (Object filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+    public APIRequestGetDestinations setFilter (String filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+
+    public APIRequestGetDestinations requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetDestinations requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDestinations requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetDestinations requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDestinations requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetDestinations requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetDestinations requestAddressField () {
+      return this.requestAddressField(true);
+    }
+    public APIRequestGetDestinations requestAddressField (boolean value) {
+      this.requestField("address", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetDestinations requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetDestinations requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetDestinations requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestDestinationIdField () {
+      return this.requestDestinationIdField(true);
+    }
+    public APIRequestGetDestinations requestDestinationIdField (boolean value) {
+      this.requestField("destination_id", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetDestinations requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetDestinations requestImagesField (boolean value) {
+      this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetDestinations requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestPriceField () {
+      return this.requestPriceField(true);
+    }
+    public APIRequestGetDestinations requestPriceField (boolean value) {
+      this.requestField("price", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestPriceChangeField () {
+      return this.requestPriceChangeField(true);
+    }
+    public APIRequestGetDestinations requestPriceChangeField (boolean value) {
+      this.requestField("price_change", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestSanitizedImagesField () {
+      return this.requestSanitizedImagesField(true);
+    }
+    public APIRequestGetDestinations requestSanitizedImagesField (boolean value) {
+      this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestTypesField () {
+      return this.requestTypesField(true);
+    }
+    public APIRequestGetDestinations requestTypesField (boolean value) {
+      this.requestField("types", value);
+      return this;
+    }
+    public APIRequestGetDestinations requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetDestinations requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetFlights extends APIRequest<Flight> {
+
+    APINodeList<Flight> lastResponse = null;
+    @Override
+    public APINodeList<Flight> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "bulk_pagination",
+      "filter",
+    };
+
+    public static final String[] FIELDS = {
+      "applinks",
+      "currency",
+      "description",
+      "destination_airport",
+      "destination_city",
+      "flight_id",
+      "id",
+      "images",
+      "oneway_currency",
+      "oneway_price",
+      "origin_airport",
+      "origin_city",
+      "price",
+      "sanitized_images",
+      "url",
+    };
+
+    @Override
+    public APINodeList<Flight> parseResponse(String response) throws APIException {
+      return Flight.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<Flight> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Flight> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Flight>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Flight>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<Flight>>() {
+           public APINodeList<Flight> apply(String result) {
+             try {
+               return APIRequestGetFlights.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetFlights(String nodeId, APIContext context) {
+      super(context, nodeId, "/flights", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetFlights setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFlights setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetFlights setBulkPagination (Boolean bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+    public APIRequestGetFlights setBulkPagination (String bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+
+    public APIRequestGetFlights setFilter (Object filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+    public APIRequestGetFlights setFilter (String filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+
+    public APIRequestGetFlights requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetFlights requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFlights requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetFlights requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFlights requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetFlights requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetFlights requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetFlights requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGetFlights requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetFlights requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetFlights requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetFlights requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetFlights requestDestinationAirportField () {
+      return this.requestDestinationAirportField(true);
+    }
+    public APIRequestGetFlights requestDestinationAirportField (boolean value) {
+      this.requestField("destination_airport", value);
+      return this;
+    }
+    public APIRequestGetFlights requestDestinationCityField () {
+      return this.requestDestinationCityField(true);
+    }
+    public APIRequestGetFlights requestDestinationCityField (boolean value) {
+      this.requestField("destination_city", value);
+      return this;
+    }
+    public APIRequestGetFlights requestFlightIdField () {
+      return this.requestFlightIdField(true);
+    }
+    public APIRequestGetFlights requestFlightIdField (boolean value) {
+      this.requestField("flight_id", value);
+      return this;
+    }
+    public APIRequestGetFlights requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetFlights requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetFlights requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetFlights requestImagesField (boolean value) {
+      this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetFlights requestOnewayCurrencyField () {
+      return this.requestOnewayCurrencyField(true);
+    }
+    public APIRequestGetFlights requestOnewayCurrencyField (boolean value) {
+      this.requestField("oneway_currency", value);
+      return this;
+    }
+    public APIRequestGetFlights requestOnewayPriceField () {
+      return this.requestOnewayPriceField(true);
+    }
+    public APIRequestGetFlights requestOnewayPriceField (boolean value) {
+      this.requestField("oneway_price", value);
+      return this;
+    }
+    public APIRequestGetFlights requestOriginAirportField () {
+      return this.requestOriginAirportField(true);
+    }
+    public APIRequestGetFlights requestOriginAirportField (boolean value) {
+      this.requestField("origin_airport", value);
+      return this;
+    }
+    public APIRequestGetFlights requestOriginCityField () {
+      return this.requestOriginCityField(true);
+    }
+    public APIRequestGetFlights requestOriginCityField (boolean value) {
+      this.requestField("origin_city", value);
+      return this;
+    }
+    public APIRequestGetFlights requestPriceField () {
+      return this.requestPriceField(true);
+    }
+    public APIRequestGetFlights requestPriceField (boolean value) {
+      this.requestField("price", value);
+      return this;
+    }
+    public APIRequestGetFlights requestSanitizedImagesField () {
+      return this.requestSanitizedImagesField(true);
+    }
+    public APIRequestGetFlights requestSanitizedImagesField (boolean value) {
+      this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetFlights requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetFlights requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetHomeListings extends APIRequest<HomeListing> {
+
+    APINodeList<HomeListing> lastResponse = null;
+    @Override
+    public APINodeList<HomeListing> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "bulk_pagination",
+      "filter",
+    };
+
+    public static final String[] FIELDS = {
+      "ac_type",
+      "additional_fees_description",
+      "address",
+      "agent_company",
+      "agent_email",
+      "agent_fb_page_id",
+      "agent_name",
+      "agent_phone",
+      "applinks",
+      "area_size",
+      "area_unit",
+      "availability",
+      "co_2_emission_rating_eu",
+      "currency",
+      "days_on_market",
+      "description",
+      "energy_rating_eu",
+      "furnish_type",
+      "group_id",
+      "heating_type",
+      "home_listing_id",
+      "id",
+      "images",
+      "laundry_type",
+      "listing_type",
+      "max_currency",
+      "max_price",
+      "min_currency",
+      "min_price",
+      "name",
+      "num_baths",
+      "num_beds",
+      "num_rooms",
+      "num_units",
+      "parking_type",
+      "partner_verification",
+      "pet_policy",
+      "price",
+      "property_type",
+      "sanitized_images",
+      "url",
+      "year_built",
+    };
+
+    @Override
+    public APINodeList<HomeListing> parseResponse(String response) throws APIException {
+      return HomeListing.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<HomeListing> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<HomeListing> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<HomeListing>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<HomeListing>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<HomeListing>>() {
+           public APINodeList<HomeListing> apply(String result) {
+             try {
+               return APIRequestGetHomeListings.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetHomeListings(String nodeId, APIContext context) {
+      super(context, nodeId, "/home_listings", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetHomeListings setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHomeListings setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetHomeListings setBulkPagination (Boolean bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+    public APIRequestGetHomeListings setBulkPagination (String bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+
+    public APIRequestGetHomeListings setFilter (Object filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+    public APIRequestGetHomeListings setFilter (String filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+
+    public APIRequestGetHomeListings requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetHomeListings requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHomeListings requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetHomeListings requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHomeListings requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHomeListings requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetHomeListings requestAcTypeField () {
+      return this.requestAcTypeField(true);
+    }
+    public APIRequestGetHomeListings requestAcTypeField (boolean value) {
+      this.requestField("ac_type", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestAdditionalFeesDescriptionField () {
+      return this.requestAdditionalFeesDescriptionField(true);
+    }
+    public APIRequestGetHomeListings requestAdditionalFeesDescriptionField (boolean value) {
+      this.requestField("additional_fees_description", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestAddressField () {
+      return this.requestAddressField(true);
+    }
+    public APIRequestGetHomeListings requestAddressField (boolean value) {
+      this.requestField("address", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestAgentCompanyField () {
+      return this.requestAgentCompanyField(true);
+    }
+    public APIRequestGetHomeListings requestAgentCompanyField (boolean value) {
+      this.requestField("agent_company", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestAgentEmailField () {
+      return this.requestAgentEmailField(true);
+    }
+    public APIRequestGetHomeListings requestAgentEmailField (boolean value) {
+      this.requestField("agent_email", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestAgentFbPageIdField () {
+      return this.requestAgentFbPageIdField(true);
+    }
+    public APIRequestGetHomeListings requestAgentFbPageIdField (boolean value) {
+      this.requestField("agent_fb_page_id", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestAgentNameField () {
+      return this.requestAgentNameField(true);
+    }
+    public APIRequestGetHomeListings requestAgentNameField (boolean value) {
+      this.requestField("agent_name", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestAgentPhoneField () {
+      return this.requestAgentPhoneField(true);
+    }
+    public APIRequestGetHomeListings requestAgentPhoneField (boolean value) {
+      this.requestField("agent_phone", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetHomeListings requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestAreaSizeField () {
+      return this.requestAreaSizeField(true);
+    }
+    public APIRequestGetHomeListings requestAreaSizeField (boolean value) {
+      this.requestField("area_size", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestAreaUnitField () {
+      return this.requestAreaUnitField(true);
+    }
+    public APIRequestGetHomeListings requestAreaUnitField (boolean value) {
+      this.requestField("area_unit", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestAvailabilityField () {
+      return this.requestAvailabilityField(true);
+    }
+    public APIRequestGetHomeListings requestAvailabilityField (boolean value) {
+      this.requestField("availability", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCo2EmissionRatingEuField () {
+      return this.requestCo2EmissionRatingEuField(true);
+    }
+    public APIRequestGetHomeListings requestCo2EmissionRatingEuField (boolean value) {
+      this.requestField("co_2_emission_rating_eu", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetHomeListings requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestDaysOnMarketField () {
+      return this.requestDaysOnMarketField(true);
+    }
+    public APIRequestGetHomeListings requestDaysOnMarketField (boolean value) {
+      this.requestField("days_on_market", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetHomeListings requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestEnergyRatingEuField () {
+      return this.requestEnergyRatingEuField(true);
+    }
+    public APIRequestGetHomeListings requestEnergyRatingEuField (boolean value) {
+      this.requestField("energy_rating_eu", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestFurnishTypeField () {
+      return this.requestFurnishTypeField(true);
+    }
+    public APIRequestGetHomeListings requestFurnishTypeField (boolean value) {
+      this.requestField("furnish_type", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestGroupIdField () {
+      return this.requestGroupIdField(true);
+    }
+    public APIRequestGetHomeListings requestGroupIdField (boolean value) {
+      this.requestField("group_id", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestHeatingTypeField () {
+      return this.requestHeatingTypeField(true);
+    }
+    public APIRequestGetHomeListings requestHeatingTypeField (boolean value) {
+      this.requestField("heating_type", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestHomeListingIdField () {
+      return this.requestHomeListingIdField(true);
+    }
+    public APIRequestGetHomeListings requestHomeListingIdField (boolean value) {
+      this.requestField("home_listing_id", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetHomeListings requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetHomeListings requestImagesField (boolean value) {
+      this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestLaundryTypeField () {
+      return this.requestLaundryTypeField(true);
+    }
+    public APIRequestGetHomeListings requestLaundryTypeField (boolean value) {
+      this.requestField("laundry_type", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestListingTypeField () {
+      return this.requestListingTypeField(true);
+    }
+    public APIRequestGetHomeListings requestListingTypeField (boolean value) {
+      this.requestField("listing_type", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestMaxCurrencyField () {
+      return this.requestMaxCurrencyField(true);
+    }
+    public APIRequestGetHomeListings requestMaxCurrencyField (boolean value) {
+      this.requestField("max_currency", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestMaxPriceField () {
+      return this.requestMaxPriceField(true);
+    }
+    public APIRequestGetHomeListings requestMaxPriceField (boolean value) {
+      this.requestField("max_price", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestMinCurrencyField () {
+      return this.requestMinCurrencyField(true);
+    }
+    public APIRequestGetHomeListings requestMinCurrencyField (boolean value) {
+      this.requestField("min_currency", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestMinPriceField () {
+      return this.requestMinPriceField(true);
+    }
+    public APIRequestGetHomeListings requestMinPriceField (boolean value) {
+      this.requestField("min_price", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetHomeListings requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestNumBathsField () {
+      return this.requestNumBathsField(true);
+    }
+    public APIRequestGetHomeListings requestNumBathsField (boolean value) {
+      this.requestField("num_baths", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestNumBedsField () {
+      return this.requestNumBedsField(true);
+    }
+    public APIRequestGetHomeListings requestNumBedsField (boolean value) {
+      this.requestField("num_beds", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestNumRoomsField () {
+      return this.requestNumRoomsField(true);
+    }
+    public APIRequestGetHomeListings requestNumRoomsField (boolean value) {
+      this.requestField("num_rooms", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestNumUnitsField () {
+      return this.requestNumUnitsField(true);
+    }
+    public APIRequestGetHomeListings requestNumUnitsField (boolean value) {
+      this.requestField("num_units", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestParkingTypeField () {
+      return this.requestParkingTypeField(true);
+    }
+    public APIRequestGetHomeListings requestParkingTypeField (boolean value) {
+      this.requestField("parking_type", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestPartnerVerificationField () {
+      return this.requestPartnerVerificationField(true);
+    }
+    public APIRequestGetHomeListings requestPartnerVerificationField (boolean value) {
+      this.requestField("partner_verification", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestPetPolicyField () {
+      return this.requestPetPolicyField(true);
+    }
+    public APIRequestGetHomeListings requestPetPolicyField (boolean value) {
+      this.requestField("pet_policy", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestPriceField () {
+      return this.requestPriceField(true);
+    }
+    public APIRequestGetHomeListings requestPriceField (boolean value) {
+      this.requestField("price", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestPropertyTypeField () {
+      return this.requestPropertyTypeField(true);
+    }
+    public APIRequestGetHomeListings requestPropertyTypeField (boolean value) {
+      this.requestField("property_type", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestSanitizedImagesField () {
+      return this.requestSanitizedImagesField(true);
+    }
+    public APIRequestGetHomeListings requestSanitizedImagesField (boolean value) {
+      this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetHomeListings requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetHomeListings requestYearBuiltField () {
+      return this.requestYearBuiltField(true);
+    }
+    public APIRequestGetHomeListings requestYearBuiltField (boolean value) {
+      this.requestField("year_built", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetHotels extends APIRequest<Hotel> {
+
+    APINodeList<Hotel> lastResponse = null;
+    @Override
+    public APINodeList<Hotel> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "bulk_pagination",
+      "filter",
+    };
+
+    public static final String[] FIELDS = {
+      "address",
+      "applinks",
+      "brand",
+      "currency",
+      "description",
+      "guest_ratings",
+      "hotel_id",
+      "id",
+      "images",
+      "lowest_base_price",
+      "loyalty_program",
+      "margin_level",
+      "name",
+      "phone",
+      "sanitized_images",
+      "star_rating",
+      "url",
+    };
+
+    @Override
+    public APINodeList<Hotel> parseResponse(String response) throws APIException {
+      return Hotel.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<Hotel> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Hotel> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Hotel>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Hotel>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<Hotel>>() {
+           public APINodeList<Hotel> apply(String result) {
+             try {
+               return APIRequestGetHotels.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetHotels(String nodeId, APIContext context) {
+      super(context, nodeId, "/hotels", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetHotels setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHotels setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetHotels setBulkPagination (Boolean bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+    public APIRequestGetHotels setBulkPagination (String bulkPagination) {
+      this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+
+    public APIRequestGetHotels setFilter (Object filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+    public APIRequestGetHotels setFilter (String filter) {
+      this.setParam("filter", filter);
+      return this;
+    }
+
+    public APIRequestGetHotels requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetHotels requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHotels requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetHotels requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHotels requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetHotels requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetHotels requestAddressField () {
+      return this.requestAddressField(true);
+    }
+    public APIRequestGetHotels requestAddressField (boolean value) {
+      this.requestField("address", value);
+      return this;
+    }
+    public APIRequestGetHotels requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetHotels requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGetHotels requestBrandField () {
+      return this.requestBrandField(true);
+    }
+    public APIRequestGetHotels requestBrandField (boolean value) {
+      this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGetHotels requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetHotels requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetHotels requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetHotels requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetHotels requestGuestRatingsField () {
+      return this.requestGuestRatingsField(true);
+    }
+    public APIRequestGetHotels requestGuestRatingsField (boolean value) {
+      this.requestField("guest_ratings", value);
+      return this;
+    }
+    public APIRequestGetHotels requestHotelIdField () {
+      return this.requestHotelIdField(true);
+    }
+    public APIRequestGetHotels requestHotelIdField (boolean value) {
+      this.requestField("hotel_id", value);
+      return this;
+    }
+    public APIRequestGetHotels requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetHotels requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetHotels requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetHotels requestImagesField (boolean value) {
+      this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetHotels requestLowestBasePriceField () {
+      return this.requestLowestBasePriceField(true);
+    }
+    public APIRequestGetHotels requestLowestBasePriceField (boolean value) {
+      this.requestField("lowest_base_price", value);
+      return this;
+    }
+    public APIRequestGetHotels requestLoyaltyProgramField () {
+      return this.requestLoyaltyProgramField(true);
+    }
+    public APIRequestGetHotels requestLoyaltyProgramField (boolean value) {
+      this.requestField("loyalty_program", value);
+      return this;
+    }
+    public APIRequestGetHotels requestMarginLevelField () {
+      return this.requestMarginLevelField(true);
+    }
+    public APIRequestGetHotels requestMarginLevelField (boolean value) {
+      this.requestField("margin_level", value);
+      return this;
+    }
+    public APIRequestGetHotels requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetHotels requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetHotels requestPhoneField () {
+      return this.requestPhoneField(true);
+    }
+    public APIRequestGetHotels requestPhoneField (boolean value) {
+      this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetHotels requestSanitizedImagesField () {
+      return this.requestSanitizedImagesField(true);
+    }
+    public APIRequestGetHotels requestSanitizedImagesField (boolean value) {
+      this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetHotels requestStarRatingField () {
+      return this.requestStarRatingField(true);
+    }
+    public APIRequestGetHotels requestStarRatingField (boolean value) {
+      this.requestField("star_rating", value);
+      return this;
+    }
+    public APIRequestGetHotels requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetHotels requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetProducts extends APIRequest<ProductItem> {
 
     APINodeList<ProductItem> lastResponse = null;
@@ -347,6 +2041,7 @@ public class ProductSet extends APINode {
       "applinks",
       "availability",
       "brand",
+      "capability_to_review_status",
       "category",
       "color",
       "commerce_insights",
@@ -546,6 +2241,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestBrandField (boolean value) {
       this.requestField("brand", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCapabilityToReviewStatusField () {
+      return this.requestCapabilityToReviewStatusField(true);
+    }
+    public APIRequestGetProducts requestCapabilityToReviewStatusField (boolean value) {
+      this.requestField("capability_to_review_status", value);
       return this;
     }
     public APIRequestGetProducts requestCategoryField () {
@@ -858,11 +2560,11 @@ public class ProductSet extends APINode {
     }
   }
 
-  public static class APIRequestGetVehicles extends APIRequest<APINode> {
+  public static class APIRequestGetVehicles extends APIRequest<Vehicle> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<Vehicle> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<Vehicle> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -871,33 +2573,76 @@ public class ProductSet extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "address",
+      "applinks",
+      "availability",
+      "body_style",
+      "condition",
+      "currency",
+      "custom_label_0",
+      "date_first_on_lot",
+      "dealer_communication_channel",
+      "dealer_id",
+      "dealer_name",
+      "dealer_phone",
+      "dealer_privacy_policy_url",
+      "description",
+      "drivetrain",
+      "exterior_color",
+      "fb_page_id",
+      "features",
+      "fuel_type",
+      "id",
+      "images",
+      "interior_color",
+      "legal_disclosure_impressum_url",
+      "make",
+      "mileage",
+      "model",
+      "previous_currency",
+      "previous_price",
+      "price",
+      "sale_currency",
+      "sale_price",
+      "sanitized_images",
+      "state_of_vehicle",
+      "title",
+      "transmission",
+      "trim",
+      "url",
+      "vehicle_id",
+      "vehicle_registration_plate",
+      "vehicle_specifications",
+      "vehicle_type",
+      "vin",
+      "year",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<Vehicle> parseResponse(String response) throws APIException {
+      return Vehicle.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<Vehicle> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<Vehicle> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<Vehicle>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<Vehicle>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<String, APINodeList<Vehicle>>() {
+           public APINodeList<Vehicle> apply(String result) {
              try {
                return APIRequestGetVehicles.this.parseResponse(result);
              } catch (Exception e) {
@@ -979,6 +2724,307 @@ public class ProductSet extends APINode {
       return this;
     }
 
+    public APIRequestGetVehicles requestAddressField () {
+      return this.requestAddressField(true);
+    }
+    public APIRequestGetVehicles requestAddressField (boolean value) {
+      this.requestField("address", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestApplinksField () {
+      return this.requestApplinksField(true);
+    }
+    public APIRequestGetVehicles requestApplinksField (boolean value) {
+      this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestAvailabilityField () {
+      return this.requestAvailabilityField(true);
+    }
+    public APIRequestGetVehicles requestAvailabilityField (boolean value) {
+      this.requestField("availability", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestBodyStyleField () {
+      return this.requestBodyStyleField(true);
+    }
+    public APIRequestGetVehicles requestBodyStyleField (boolean value) {
+      this.requestField("body_style", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestConditionField () {
+      return this.requestConditionField(true);
+    }
+    public APIRequestGetVehicles requestConditionField (boolean value) {
+      this.requestField("condition", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCurrencyField () {
+      return this.requestCurrencyField(true);
+    }
+    public APIRequestGetVehicles requestCurrencyField (boolean value) {
+      this.requestField("currency", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestCustomLabel0Field () {
+      return this.requestCustomLabel0Field(true);
+    }
+    public APIRequestGetVehicles requestCustomLabel0Field (boolean value) {
+      this.requestField("custom_label_0", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestDateFirstOnLotField () {
+      return this.requestDateFirstOnLotField(true);
+    }
+    public APIRequestGetVehicles requestDateFirstOnLotField (boolean value) {
+      this.requestField("date_first_on_lot", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestDealerCommunicationChannelField () {
+      return this.requestDealerCommunicationChannelField(true);
+    }
+    public APIRequestGetVehicles requestDealerCommunicationChannelField (boolean value) {
+      this.requestField("dealer_communication_channel", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestDealerIdField () {
+      return this.requestDealerIdField(true);
+    }
+    public APIRequestGetVehicles requestDealerIdField (boolean value) {
+      this.requestField("dealer_id", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestDealerNameField () {
+      return this.requestDealerNameField(true);
+    }
+    public APIRequestGetVehicles requestDealerNameField (boolean value) {
+      this.requestField("dealer_name", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestDealerPhoneField () {
+      return this.requestDealerPhoneField(true);
+    }
+    public APIRequestGetVehicles requestDealerPhoneField (boolean value) {
+      this.requestField("dealer_phone", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestDealerPrivacyPolicyUrlField () {
+      return this.requestDealerPrivacyPolicyUrlField(true);
+    }
+    public APIRequestGetVehicles requestDealerPrivacyPolicyUrlField (boolean value) {
+      this.requestField("dealer_privacy_policy_url", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestDescriptionField () {
+      return this.requestDescriptionField(true);
+    }
+    public APIRequestGetVehicles requestDescriptionField (boolean value) {
+      this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestDrivetrainField () {
+      return this.requestDrivetrainField(true);
+    }
+    public APIRequestGetVehicles requestDrivetrainField (boolean value) {
+      this.requestField("drivetrain", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestExteriorColorField () {
+      return this.requestExteriorColorField(true);
+    }
+    public APIRequestGetVehicles requestExteriorColorField (boolean value) {
+      this.requestField("exterior_color", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestFbPageIdField () {
+      return this.requestFbPageIdField(true);
+    }
+    public APIRequestGetVehicles requestFbPageIdField (boolean value) {
+      this.requestField("fb_page_id", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestFeaturesField () {
+      return this.requestFeaturesField(true);
+    }
+    public APIRequestGetVehicles requestFeaturesField (boolean value) {
+      this.requestField("features", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestFuelTypeField () {
+      return this.requestFuelTypeField(true);
+    }
+    public APIRequestGetVehicles requestFuelTypeField (boolean value) {
+      this.requestField("fuel_type", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetVehicles requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetVehicles requestImagesField (boolean value) {
+      this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestInteriorColorField () {
+      return this.requestInteriorColorField(true);
+    }
+    public APIRequestGetVehicles requestInteriorColorField (boolean value) {
+      this.requestField("interior_color", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestLegalDisclosureImpressumUrlField () {
+      return this.requestLegalDisclosureImpressumUrlField(true);
+    }
+    public APIRequestGetVehicles requestLegalDisclosureImpressumUrlField (boolean value) {
+      this.requestField("legal_disclosure_impressum_url", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestMakeField () {
+      return this.requestMakeField(true);
+    }
+    public APIRequestGetVehicles requestMakeField (boolean value) {
+      this.requestField("make", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestMileageField () {
+      return this.requestMileageField(true);
+    }
+    public APIRequestGetVehicles requestMileageField (boolean value) {
+      this.requestField("mileage", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestModelField () {
+      return this.requestModelField(true);
+    }
+    public APIRequestGetVehicles requestModelField (boolean value) {
+      this.requestField("model", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestPreviousCurrencyField () {
+      return this.requestPreviousCurrencyField(true);
+    }
+    public APIRequestGetVehicles requestPreviousCurrencyField (boolean value) {
+      this.requestField("previous_currency", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestPreviousPriceField () {
+      return this.requestPreviousPriceField(true);
+    }
+    public APIRequestGetVehicles requestPreviousPriceField (boolean value) {
+      this.requestField("previous_price", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestPriceField () {
+      return this.requestPriceField(true);
+    }
+    public APIRequestGetVehicles requestPriceField (boolean value) {
+      this.requestField("price", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestSaleCurrencyField () {
+      return this.requestSaleCurrencyField(true);
+    }
+    public APIRequestGetVehicles requestSaleCurrencyField (boolean value) {
+      this.requestField("sale_currency", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestSalePriceField () {
+      return this.requestSalePriceField(true);
+    }
+    public APIRequestGetVehicles requestSalePriceField (boolean value) {
+      this.requestField("sale_price", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestSanitizedImagesField () {
+      return this.requestSanitizedImagesField(true);
+    }
+    public APIRequestGetVehicles requestSanitizedImagesField (boolean value) {
+      this.requestField("sanitized_images", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestStateOfVehicleField () {
+      return this.requestStateOfVehicleField(true);
+    }
+    public APIRequestGetVehicles requestStateOfVehicleField (boolean value) {
+      this.requestField("state_of_vehicle", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestTitleField () {
+      return this.requestTitleField(true);
+    }
+    public APIRequestGetVehicles requestTitleField (boolean value) {
+      this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestTransmissionField () {
+      return this.requestTransmissionField(true);
+    }
+    public APIRequestGetVehicles requestTransmissionField (boolean value) {
+      this.requestField("transmission", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestTrimField () {
+      return this.requestTrimField(true);
+    }
+    public APIRequestGetVehicles requestTrimField (boolean value) {
+      this.requestField("trim", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestUrlField () {
+      return this.requestUrlField(true);
+    }
+    public APIRequestGetVehicles requestUrlField (boolean value) {
+      this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestVehicleIdField () {
+      return this.requestVehicleIdField(true);
+    }
+    public APIRequestGetVehicles requestVehicleIdField (boolean value) {
+      this.requestField("vehicle_id", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestVehicleRegistrationPlateField () {
+      return this.requestVehicleRegistrationPlateField(true);
+    }
+    public APIRequestGetVehicles requestVehicleRegistrationPlateField (boolean value) {
+      this.requestField("vehicle_registration_plate", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestVehicleSpecificationsField () {
+      return this.requestVehicleSpecificationsField(true);
+    }
+    public APIRequestGetVehicles requestVehicleSpecificationsField (boolean value) {
+      this.requestField("vehicle_specifications", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestVehicleTypeField () {
+      return this.requestVehicleTypeField(true);
+    }
+    public APIRequestGetVehicles requestVehicleTypeField (boolean value) {
+      this.requestField("vehicle_type", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestVinField () {
+      return this.requestVinField(true);
+    }
+    public APIRequestGetVehicles requestVinField (boolean value) {
+      this.requestField("vin", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestYearField () {
+      return this.requestYearField(true);
+    }
+    public APIRequestGetVehicles requestYearField (boolean value) {
+      this.requestField("year", value);
+      return this;
+    }
   }
 
   public static class APIRequestDelete extends APIRequest<APINode> {
