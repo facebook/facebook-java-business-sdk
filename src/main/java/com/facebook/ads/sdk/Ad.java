@@ -4255,15 +4255,6 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestUpdate setStatus (Ad.EnumStatus status) {
-      this.setParam("status", status);
-      return this;
-    }
     public APIRequestUpdate setStatus (String status) {
       this.setParam("status", status);
       return this;
@@ -4344,6 +4335,8 @@ public class Ad extends APINode {
 
     public APIRequestUpdate setStatus (Ad.EnumStatus status) {
       this.setParam("status", status);
+      return this;
+    }
 
     public APIRequestUpdate setAdlabels (List<Object> adlabels) {
       this.setParam("adlabels", adlabels);
