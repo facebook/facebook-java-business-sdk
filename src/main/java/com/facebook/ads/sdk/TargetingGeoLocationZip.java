@@ -69,7 +69,7 @@ public class TargetingGeoLocationZip extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  TargetingGeoLocationZip() {
+  public TargetingGeoLocationZip() {
   }
 
   public TargetingGeoLocationZip(Long id, APIContext context) {

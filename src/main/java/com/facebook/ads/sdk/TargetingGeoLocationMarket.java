@@ -67,7 +67,7 @@ public class TargetingGeoLocationMarket extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  TargetingGeoLocationMarket() {
+  public TargetingGeoLocationMarket() {
   }
 
   public TargetingGeoLocationMarket(Long id, APIContext context) {
