@@ -316,8 +316,18 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
     return mLink;
   }
 
+  public AdCreativeLinkDataCallToActionValue setFieldLink(String value) {
+    this.mLink = value;
+    return this;
+  }
+
   public String getFieldLinkCaption() {
     return mLinkCaption;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldLinkCaption(String value) {
+    this.mLinkCaption = value;
+    return this;
   }
 
   public String getFieldLinkFormat() {

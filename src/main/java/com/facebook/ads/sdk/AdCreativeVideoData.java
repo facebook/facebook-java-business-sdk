@@ -490,6 +490,10 @@ public class AdCreativeVideoData extends APINode {
   public String getFieldVideoId() {
     return mVideoId;
   }
+  public AdCreativeVideoData setFieldVideoId(String value) {
+    this.mVideoId = value;
+    return this;
+  }
 
   public String getFieldId() {
     return mId;

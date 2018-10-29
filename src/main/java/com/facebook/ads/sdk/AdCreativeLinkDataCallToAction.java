@@ -278,7 +278,23 @@ public class AdCreativeLinkDataCallToAction extends APINode {
     return mType;
   }
 
-  public AdCreativeLinkDataCallToActionValue getFieldValue() {
+  public AdCreativeLinkDataCallToAction setFieldType(EnumType value) {
+    this.mType = value;
+    return this;
+  }
+    public AdCreativeLinkDataCallToAction setFieldValue(AdCreativeLinkDataCallToActionValue value) {
+        this.mValue = value;
+        return this;
+    }
+
+    public AdCreativeLinkDataCallToAction setFieldValue(String value) {
+        Type type = new TypeToken<AdCreativeLinkDataCallToActionValue>(){}.getType();
+        this.mValue = AdCreativeLinkDataCallToActionValue.getGson().fromJson(value, type);
+        return this;
+    }
+
+
+    public AdCreativeLinkDataCallToActionValue getFieldValue() {
     if (mValue != null) {
       mValue.context = getContext();
     }
