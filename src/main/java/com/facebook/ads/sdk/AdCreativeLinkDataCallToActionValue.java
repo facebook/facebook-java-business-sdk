@@ -81,7 +81,7 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCreativeLinkDataCallToActionValue() {
+  public AdCreativeLinkDataCallToActionValue() {
   }
 
   public AdCreativeLinkDataCallToActionValue(Long id, APIContext context) {

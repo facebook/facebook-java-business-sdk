@@ -93,7 +93,7 @@ public class AdPromotedObject extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdPromotedObject() {
+  public AdPromotedObject() {
   }
 
   public AdPromotedObject(Long id, APIContext context) {
