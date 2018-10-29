@@ -308,18 +308,36 @@ public class AdPromotedObject extends APINode {
     return mApplicationId;
   }
 
+  public AdPromotedObject setFieldApplicationId(String value) {
+    this.mApplicationId = value;
+    return this;
+  }
+
   public String getFieldCustomConversionId() {
     return mCustomConversionId;
+  }
+
+  public AdPromotedObject setFieldCustomConversionId(String value) {
+    this.mCustomConversionId = value;
+    return this;
   }
 
   public EnumCustomEventType getFieldCustomEventType() {
     return mCustomEventType;
   }
 
+  public AdPromotedObject setFieldCustomEventType(EnumCustomEventType value) {
+    this.mCustomEventType = value;
+    return this;
+  }
+
   public String getFieldEventId() {
     return mEventId;
   }
-
+  public AdPromotedObject setFieldEventId(String value) {
+    this.mEventId = value;
+    return this;
+  }
   public String getFieldFundraiserCampaignId() {
     return mFundraiserCampaignId;
   }
@@ -328,16 +346,35 @@ public class AdPromotedObject extends APINode {
     return mObjectStoreUrl;
   }
 
+  public AdPromotedObject setFieldObjectStoreUrl(String value) {
+    this.mObjectStoreUrl = value;
+    return this;
+  }
+
   public String getFieldOfferId() {
     return mOfferId;
+  }
+
+  public AdPromotedObject setFieldOfferId(String value) {
+    this.mOfferId = value;
+    return this;
   }
 
   public String getFieldOfflineConversionDataSetId() {
     return mOfflineConversionDataSetId;
   }
 
+  public AdPromotedObject setFieldOfflineConversionDataSetId(String value) {
+    this.mOfflineConversionDataSetId = value;
+    return this;
+  }
+
   public String getFieldPageId() {
     return mPageId;
+  }
+  public AdPromotedObject setFieldPageId(String value) {
+    this.mPageId = value;
+    return this;
   }
 
   public String getFieldPixelAggregationRule() {
@@ -347,7 +384,10 @@ public class AdPromotedObject extends APINode {
   public String getFieldPixelId() {
     return mPixelId;
   }
-
+  public AdPromotedObject setFieldPixelId(String value) {
+    this.mPixelId = value;
+    return this;
+  }
   public String getFieldPixelRule() {
     return mPixelRule;
   }
@@ -356,10 +396,18 @@ public class AdPromotedObject extends APINode {
     return mPlacePageSetId;
   }
 
+  public AdPromotedObject setFieldPlacePageSetId(String value) {
+    this.mPlacePageSetId = value;
+    return this;
+  }
+
   public String getFieldProductCatalogId() {
     return mProductCatalogId;
   }
-
+  public AdPromotedObject setFieldProductCatalogId(String value) {
+    this.mProductCatalogId = value;
+    return this;
+  }
   public String getFieldProductItemId() {
     return mProductItemId;
   }
@@ -367,7 +415,14 @@ public class AdPromotedObject extends APINode {
   public String getFieldProductSetId() {
     return mProductSetId;
   }
-
+  public AdPromotedObject setFieldProductSetId(String value) {
+    this.mProductSetId = value;
+    return this;
+  }
+  public AdPromotedObject setFieldPixelRule(String value) {
+    this.mPixelRule = value;
+    return this;
+  }
   public String getFieldRetentionDays() {
     return mRetentionDays;
   }

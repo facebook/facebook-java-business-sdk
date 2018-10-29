@@ -312,16 +312,36 @@ public class AdCreativeVideoData extends APINode {
     return mAdditionalImageIndex;
   }
 
+  public AdCreativeVideoData setFieldAdditionalImageIndex(Long value) {
+    this.mAdditionalImageIndex = value;
+    return this;
+  }
+
   public String getFieldBrandedContentSharedToSponsorStatus() {
     return mBrandedContentSharedToSponsorStatus;
+  }
+
+  public AdCreativeVideoData setFieldBrandedContentSharedToSponsorStatus(String value) {
+    this.mBrandedContentSharedToSponsorStatus = value;
+    return this;
   }
 
   public String getFieldBrandedContentSponsorPageId() {
     return mBrandedContentSponsorPageId;
   }
 
+  public AdCreativeVideoData setFieldBrandedContentSponsorPageId(String value) {
+    this.mBrandedContentSponsorPageId = value;
+    return this;
+  }
+
   public String getFieldBrandedContentSponsorRelationship() {
     return mBrandedContentSponsorRelationship;
+  }
+
+  public AdCreativeVideoData setFieldBrandedContentSponsorRelationship(String value) {
+    this.mBrandedContentSponsorRelationship = value;
+    return this;
   }
 
   public AdCreativeLinkDataCallToAction getFieldCallToAction() {
@@ -331,10 +351,28 @@ public class AdCreativeVideoData extends APINode {
     return mCallToAction;
   }
 
+  public AdCreativeVideoData setFieldCallToAction(AdCreativeLinkDataCallToAction value) {
+    this.mCallToAction = value;
+    return this;
+  }
+
+  public AdCreativeVideoData setFieldCallToAction(String value) {
+    Type type = new TypeToken<AdCreativeLinkDataCallToAction>(){}.getType();
+    this.mCallToAction = AdCreativeLinkDataCallToAction.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdCreativeCollectionThumbnailInfo> getFieldCollectionThumbnails() {
     return mCollectionThumbnails;
   }
-
+  public AdCreativeVideoData setFieldCollectionThumbnails(List<AdCreativeCollectionThumbnailInfo> value) {
+    this.mCollectionThumbnails = value;
+    return this;
+  }
+  public AdCreativeVideoData setFieldCollectionThumbnails(String value) {
+    Type type = new TypeToken<List<AdCreativeCollectionThumbnailInfo>>(){}.getType();
+    this.mCollectionThumbnails = AdCreativeCollectionThumbnailInfo.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdCreativeVideoDataCustomOverlaySpec> getFieldCustomOverlaySpec() {
     return mCustomOverlaySpec;
   }
@@ -347,24 +385,54 @@ public class AdCreativeVideoData extends APINode {
     return mImageHash;
   }
 
+  public AdCreativeVideoData setFieldImageHash(String value) {
+    this.mImageHash = value;
+    return this;
+  }
+
   public String getFieldImageUrl() {
     return mImageUrl;
+  }
+
+  public AdCreativeVideoData setFieldImageUrl(String value) {
+    this.mImageUrl = value;
+    return this;
   }
 
   public String getFieldLinkDescription() {
     return mLinkDescription;
   }
 
+  public AdCreativeVideoData setFieldLinkDescription(String value) {
+    this.mLinkDescription = value;
+    return this;
+  }
+
   public String getFieldMessage() {
     return mMessage;
+  }
+
+  public AdCreativeVideoData setFieldMessage(String value) {
+    this.mMessage = value;
+    return this;
   }
 
   public String getFieldOfferId() {
     return mOfferId;
   }
 
+  public AdCreativeVideoData setFieldOfferId(String value) {
+    this.mOfferId = value;
+    return this;
+  }
+
   public String getFieldPageWelcomeMessage() {
     return mPageWelcomeMessage;
+  }
+
+  public AdCreativeVideoData setFieldPageWelcomeMessage(String value) {
+    this.mPageWelcomeMessage = value;
+    return this;
   }
 
   public AdCreativePostClickConfiguration getFieldPostClickConfiguration() {
@@ -374,8 +442,23 @@ public class AdCreativeVideoData extends APINode {
     return mPostClickConfiguration;
   }
 
+  public AdCreativeVideoData setFieldPostClickConfiguration(AdCreativePostClickConfiguration value) {
+    this.mPostClickConfiguration = value;
+    return this;
+  }
+
+  public AdCreativeVideoData setFieldPostClickConfiguration(String value) {
+    Type type = new TypeToken<AdCreativePostClickConfiguration>(){}.getType();
+    this.mPostClickConfiguration = AdCreativePostClickConfiguration.getGson().fromJson(value, type);
+    return this;
+  }
   public List<String> getFieldRetailerItemIds() {
     return mRetailerItemIds;
+  }
+
+  public AdCreativeVideoData setFieldRetailerItemIds(List<String> value) {
+    this.mRetailerItemIds = value;
+    return this;
   }
 
   public Targeting getFieldTargeting() {
@@ -385,8 +468,23 @@ public class AdCreativeVideoData extends APINode {
     return mTargeting;
   }
 
+  public AdCreativeVideoData setFieldTargeting(Targeting value) {
+    this.mTargeting = value;
+    return this;
+  }
+
+  public AdCreativeVideoData setFieldTargeting(String value) {
+    Type type = new TypeToken<Targeting>(){}.getType();
+    this.mTargeting = Targeting.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldTitle() {
     return mTitle;
+  }
+
+  public AdCreativeVideoData setFieldTitle(String value) {
+    this.mTitle = value;
+    return this;
   }
 
   public String getFieldVideoId() {
