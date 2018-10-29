@@ -65,7 +65,7 @@ public class TargetingGeoLocationRegion extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  TargetingGeoLocationRegion() {
+  public TargetingGeoLocationRegion() {
   }
 
   public TargetingGeoLocationRegion(Long id, APIContext context) {
