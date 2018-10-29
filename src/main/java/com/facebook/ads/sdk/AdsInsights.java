@@ -323,16 +323,6 @@ public class AdsInsights extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-    //[SSKY]
-    @SerializedName("device_platform")
-    private String mDevicePlatform = null;
-    @SerializedName("impression_device")
-    private String mImpressionDevice = null;
-    @SerializedName("publisher_platform")
-    private String mPublisherPlatform = null;
-    @SerializedName("platform_position")
-    private String mPlatformPosition = null;
-
 
     AdsInsights() {
   }
@@ -675,43 +665,6 @@ public class AdsInsights extends APINode {
 
   public List<AdsActionStats> getFieldCostPerAdClick() {
     return mCostPerAdClick;
-  }
-
-  //[SSKY]
-  public String getFieldDevicePlatform() {
-    return mDevicePlatform;
-  }
-
-  public AdsInsights setFieldDevicePlatform(String value) {
-    this.mDevicePlatform = value;
-    return this;
-  }
-
-  public String getFieldImpressionDevice() {
-    return mImpressionDevice;
-  }
-
-  public AdsInsights setFieldImpressionDevice(String value) {
-    this.mImpressionDevice = value;
-    return this;
-  }
-
-  public String getFieldPublisherPlatform() {
-    return mPublisherPlatform;
-  }
-
-  public AdsInsights setFieldPublisherPlatform(String value) {
-    this.mPublisherPlatform = value;
-    return this;
-  }
-
-  public String getFieldPlatformPosition() {
-    return mPlatformPosition;
-  }
-
-  public AdsInsights setFieldPlatformPosition(String value) {
-    this.mPlatformPosition = value;
-    return this;
   }
 
 

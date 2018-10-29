@@ -31179,46 +31179,6 @@ public class AdAccount extends APINode {
       }
   }
 
-  public static enum EnumSubtype {
-      @SerializedName("CUSTOM")
-      VALUE_CUSTOM("CUSTOM"),
-      @SerializedName("WEBSITE")
-      VALUE_WEBSITE("WEBSITE"),
-      @SerializedName("APP")
-      VALUE_APP("APP"),
-      @SerializedName("OFFLINE_CONVERSION")
-      VALUE_OFFLINE_CONVERSION("OFFLINE_CONVERSION"),
-      @SerializedName("CLAIM")
-      VALUE_CLAIM("CLAIM"),
-      @SerializedName("PARTNER")
-      VALUE_PARTNER("PARTNER"),
-      @SerializedName("MANAGED")
-      VALUE_MANAGED("MANAGED"),
-      @SerializedName("VIDEO")
-      VALUE_VIDEO("VIDEO"),
-      @SerializedName("LOOKALIKE")
-      VALUE_LOOKALIKE("LOOKALIKE"),
-      @SerializedName("ENGAGEMENT")
-      VALUE_ENGAGEMENT("ENGAGEMENT"),
-      @SerializedName("BAG_OF_ACCOUNTS")
-      VALUE_BAG_OF_ACCOUNTS("BAG_OF_ACCOUNTS"),
-      @SerializedName("STUDY_RULE_AUDIENCE")
-      VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
-      @SerializedName("FOX")
-      VALUE_FOX("FOX"),
-      NULL(com.facebook.ads.sdk.Consts.NULL_FOR_SWAGGER);
-
-      private String value;
-
-      private EnumSubtype(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
   public static enum EnumBuiltinColumnSet {
       @SerializedName("APP_ENGAGEMENT")
