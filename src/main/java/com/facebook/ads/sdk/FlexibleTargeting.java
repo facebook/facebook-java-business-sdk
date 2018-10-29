@@ -342,6 +342,16 @@ public class FlexibleTargeting extends APINode {
     return mCustomAudiences;
   }
 
+  public FlexibleTargeting setFieldCustomAudiences(List<IDName> value) {
+    this.mCustomAudiences = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldCustomAudiences(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mCustomAudiences = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldEducationMajors() {
     return mEducationMajors;
   }

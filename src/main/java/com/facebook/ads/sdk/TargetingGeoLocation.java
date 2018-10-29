@@ -99,7 +99,7 @@ public class TargetingGeoLocation extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  TargetingGeoLocation() {
+  public TargetingGeoLocation() {
   }
 
   public TargetingGeoLocation(Long id, APIContext context) {
@@ -314,26 +314,76 @@ public class TargetingGeoLocation extends APINode {
     return mCities;
   }
 
+  public TargetingGeoLocation setFieldCities(List<TargetingGeoLocationCity> value) {
+    this.mCities = value;
+    return this;
+  }
+
+  public TargetingGeoLocation setFieldCities(String value) {
+    Type type = new TypeToken<List<TargetingGeoLocationCity>>(){}.getType();
+    this.mCities = TargetingGeoLocationCity.getGson().fromJson(value, type);
+    return this;
+  }
   public List<String> getFieldCountries() {
     return mCountries;
+  }
+
+  public TargetingGeoLocation setFieldCountries(List<String> value) {
+    this.mCountries = value;
+    return this;
   }
 
   public List<String> getFieldCountryGroups() {
     return mCountryGroups;
   }
 
+  public TargetingGeoLocation setFieldCountryGroups(List<String> value) {
+    this.mCountryGroups = value;
+    return this;
+  }
+
   public List<TargetingGeoLocationCustomLocation> getFieldCustomLocations() {
     return mCustomLocations;
   }
 
+  public TargetingGeoLocation setFieldCustomLocations(List<TargetingGeoLocationCustomLocation> value) {
+    this.mCustomLocations = value;
+    return this;
+  }
+
+  public TargetingGeoLocation setFieldCustomLocations(String value) {
+    Type type = new TypeToken<List<TargetingGeoLocationCustomLocation>>(){}.getType();
+    this.mCustomLocations = TargetingGeoLocationCustomLocation.getGson().fromJson(value, type);
+    return this;
+  }
   public List<TargetingGeoLocationElectoralDistrict> getFieldElectoralDistricts() {
     return mElectoralDistricts;
   }
 
+  public TargetingGeoLocation setFieldElectoralDistricts(List<TargetingGeoLocationElectoralDistrict> value) {
+    this.mElectoralDistricts = value;
+    return this;
+  }
+
+  public TargetingGeoLocation setFieldElectoralDistricts(String value) {
+    Type type = new TypeToken<List<TargetingGeoLocationElectoralDistrict>>(){}.getType();
+    this.mElectoralDistricts = TargetingGeoLocationElectoralDistrict.getGson().fromJson(value, type);
+    return this;
+  }
   public List<TargetingGeoLocationMarket> getFieldGeoMarkets() {
     return mGeoMarkets;
   }
 
+  public TargetingGeoLocation setFieldGeoMarkets(List<TargetingGeoLocationMarket> value) {
+    this.mGeoMarkets = value;
+    return this;
+  }
+
+  public TargetingGeoLocation setFieldGeoMarkets(String value) {
+    Type type = new TypeToken<List<TargetingGeoLocationMarket>>(){}.getType();
+    this.mGeoMarkets = TargetingGeoLocationMarket.getGson().fromJson(value, type);
+    return this;
+  }
   public List<TargetingGeoLocationGeoEntities> getFieldLargeGeoAreas() {
     return mLargeGeoAreas;
   }
@@ -346,8 +396,17 @@ public class TargetingGeoLocation extends APINode {
     return mLocationSetIds;
   }
 
+  public TargetingGeoLocation setFieldLocationSetIds(List<String> value) {
+    this.mLocationSetIds = value;
+    return this;
+  }
+
   public List<String> getFieldLocationTypes() {
     return mLocationTypes;
+  }
+  public TargetingGeoLocation setFieldLocationTypes(List<String> value) {
+    this.mLocationTypes = value;
+    return this;
   }
 
   public List<TargetingGeoLocationGeoEntities> getFieldMediumGeoAreas() {
@@ -364,6 +423,53 @@ public class TargetingGeoLocation extends APINode {
 
   public List<TargetingGeoLocationPlace> getFieldPlaces() {
     return mPlaces;
+  }
+
+  public TargetingGeoLocation setFieldPlaces(List<TargetingGeoLocationPlace> value) {
+    this.mPlaces = value;
+    return this;
+  }
+
+  public TargetingGeoLocation setFieldPlaces(String value) {
+    Type type = new TypeToken<List<TargetingGeoLocationPlace>>(){}.getType();
+    this.mPlaces = TargetingGeoLocationPlace.getGson().fromJson(value, type);
+    return this;
+  }
+
+  public TargetingGeoLocation setFieldPoliticalDistricts(List<TargetingGeoLocationPoliticalDistrict> value) {
+    this.mPoliticalDistricts = value;
+    return this;
+  }
+
+  public TargetingGeoLocation setFieldPoliticalDistricts(String value) {
+    Type type = new TypeToken<List<TargetingGeoLocationPoliticalDistrict>>(){}.getType();
+    this.mPoliticalDistricts = TargetingGeoLocationPoliticalDistrict.getGson().fromJson(value, type);
+    return this;
+  }
+
+  public TargetingGeoLocation setFieldRegions(List<TargetingGeoLocationRegion> value) {
+    this.mRegions = value;
+    return this;
+  }
+
+  public TargetingGeoLocation setFieldRegions(String value) {
+    Type type = new TypeToken<List<TargetingGeoLocationRegion>>(){}.getType();
+    this.mRegions = TargetingGeoLocationRegion.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<TargetingGeoLocationZip> getFieldZips() {
+    return mZips;
+  }
+
+  public TargetingGeoLocation setFieldZips(List<TargetingGeoLocationZip> value) {
+    this.mZips = value;
+    return this;
+  }
+
+  public TargetingGeoLocation setFieldZips(String value) {
+    Type type = new TypeToken<List<TargetingGeoLocationZip>>(){}.getType();
+    this.mZips = TargetingGeoLocationZip.getGson().fromJson(value, type);
+    return this;
   }
 
   public List<TargetingGeoLocationPoliticalDistrict> getFieldPoliticalDistricts() {
@@ -386,9 +492,6 @@ public class TargetingGeoLocation extends APINode {
     return mSubneighborhoods;
   }
 
-  public List<TargetingGeoLocationZip> getFieldZips() {
-    return mZips;
-  }
 
   public String getFieldId() {
     return mId;
