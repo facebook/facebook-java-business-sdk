@@ -61,7 +61,7 @@ public class IDName extends APINode {
   private String mName = null;
   protected static Gson gson = null;
 
-  IDName() {
+  public IDName() {
   }
 
   public IDName(Long id, APIContext context) {

@@ -97,7 +97,7 @@ public class AdCreativeVideoData extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCreativeVideoData() {
+  public AdCreativeVideoData() {
   }
 
   public AdCreativeVideoData(Long id, APIContext context) {

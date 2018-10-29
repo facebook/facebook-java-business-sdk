@@ -115,7 +115,7 @@ public class FlexibleTargeting extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  FlexibleTargeting() {
+  public FlexibleTargeting() {
   }
 
   public FlexibleTargeting(Long id, APIContext context) {
