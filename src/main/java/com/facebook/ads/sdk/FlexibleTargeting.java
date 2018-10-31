@@ -330,14 +330,39 @@ public class FlexibleTargeting extends APINode {
     return mBehaviors;
   }
 
+  public FlexibleTargeting setFieldBehaviors(List<IDName> value) {
+    this.mBehaviors = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldBehaviors(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mBehaviors = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<Long> getFieldCollegeYears() {
     return mCollegeYears;
+  }
+
+  public FlexibleTargeting setFieldCollegeYears(List<Long> value) {
+    this.mCollegeYears = value;
+    return this;
   }
 
   public List<IDName> getFieldConnections() {
     return mConnections;
   }
 
+  public FlexibleTargeting setFieldConnections(List<IDName> value) {
+    this.mConnections = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldConnections(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mConnections = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldCustomAudiences() {
     return mCustomAudiences;
   }
@@ -356,93 +381,322 @@ public class FlexibleTargeting extends APINode {
     return mEducationMajors;
   }
 
+  public FlexibleTargeting setFieldEducationMajors(List<IDName> value) {
+    this.mEducationMajors = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldEducationMajors(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mEducationMajors = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldEducationSchools() {
     return mEducationSchools;
   }
 
+  public FlexibleTargeting setFieldEducationSchools(List<IDName> value) {
+    this.mEducationSchools = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldEducationSchools(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mEducationSchools = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<Long> getFieldEducationStatuses() {
     return mEducationStatuses;
+  }
+
+  public FlexibleTargeting setFieldEducationStatuses(List<Long> value) {
+    this.mEducationStatuses = value;
+    return this;
   }
 
   public List<IDName> getFieldEthnicAffinity() {
     return mEthnicAffinity;
   }
 
+  public FlexibleTargeting setFieldEthnicAffinity(List<IDName> value) {
+    this.mEthnicAffinity = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldEthnicAffinity(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mEthnicAffinity = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldFamilyStatuses() {
     return mFamilyStatuses;
   }
 
+  public FlexibleTargeting setFieldFamilyStatuses(List<IDName> value) {
+    this.mFamilyStatuses = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldFamilyStatuses(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mFamilyStatuses = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldFriendsOfConnections() {
     return mFriendsOfConnections;
   }
 
+  public FlexibleTargeting setFieldFriendsOfConnections(List<IDName> value) {
+    this.mFriendsOfConnections = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldFriendsOfConnections(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mFriendsOfConnections = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldGeneration() {
     return mGeneration;
   }
 
+  public FlexibleTargeting setFieldGeneration(List<IDName> value) {
+    this.mGeneration = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldGeneration(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mGeneration = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldHomeOwnership() {
     return mHomeOwnership;
   }
 
+  public FlexibleTargeting setFieldHomeOwnership(List<IDName> value) {
+    this.mHomeOwnership = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldHomeOwnership(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mHomeOwnership = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldHomeType() {
     return mHomeType;
   }
 
+  public FlexibleTargeting setFieldHomeType(List<IDName> value) {
+    this.mHomeType = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldHomeType(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mHomeType = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldHomeValue() {
     return mHomeValue;
   }
 
+  public FlexibleTargeting setFieldHomeValue(List<IDName> value) {
+    this.mHomeValue = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldHomeValue(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mHomeValue = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldHouseholdComposition() {
     return mHouseholdComposition;
   }
 
+  public FlexibleTargeting setFieldHouseholdComposition(List<IDName> value) {
+    this.mHouseholdComposition = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldHouseholdComposition(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mHouseholdComposition = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldIncome() {
     return mIncome;
   }
 
+  public FlexibleTargeting setFieldIncome(List<IDName> value) {
+    this.mIncome = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldIncome(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mIncome = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldIndustries() {
     return mIndustries;
   }
 
+  public FlexibleTargeting setFieldIndustries(List<IDName> value) {
+    this.mIndustries = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldIndustries(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mIndustries = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<Long> getFieldInterestedIn() {
     return mInterestedIn;
+  }
+
+  public FlexibleTargeting setFieldInterestedIn(List<Long> value) {
+    this.mInterestedIn = value;
+    return this;
   }
 
   public List<IDName> getFieldInterests() {
     return mInterests;
   }
 
+  public FlexibleTargeting setFieldInterests(List<IDName> value) {
+    this.mInterests = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldInterests(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mInterests = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldLifeEvents() {
     return mLifeEvents;
   }
 
+  public FlexibleTargeting setFieldLifeEvents(List<IDName> value) {
+    this.mLifeEvents = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldLifeEvents(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mLifeEvents = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldMoms() {
     return mMoms;
   }
 
+  public FlexibleTargeting setFieldMoms(List<IDName> value) {
+    this.mMoms = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldMoms(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mMoms = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldNetWorth() {
     return mNetWorth;
   }
 
+  public FlexibleTargeting setFieldNetWorth(List<IDName> value) {
+    this.mNetWorth = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldNetWorth(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mNetWorth = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldOfficeType() {
     return mOfficeType;
   }
 
+  public FlexibleTargeting setFieldOfficeType(List<IDName> value) {
+    this.mOfficeType = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldOfficeType(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mOfficeType = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldPolitics() {
     return mPolitics;
   }
 
+  public FlexibleTargeting setFieldPolitics(List<IDName> value) {
+    this.mPolitics = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldPolitics(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mPolitics = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<Long> getFieldRelationshipStatuses() {
     return mRelationshipStatuses;
+  }
+
+  public FlexibleTargeting setFieldRelationshipStatuses(List<Long> value) {
+    this.mRelationshipStatuses = value;
+    return this;
   }
 
   public List<IDName> getFieldUserAdclusters() {
     return mUserAdclusters;
   }
 
+  public FlexibleTargeting setFieldUserAdclusters(List<IDName> value) {
+    this.mUserAdclusters = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldUserAdclusters(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mUserAdclusters = IDName.getGson().fromJson(value, type);
+    return this;
+  }
   public List<IDName> getFieldWorkEmployers() {
     return mWorkEmployers;
   }
+
+  public FlexibleTargeting setFieldWorkEmployers(List<IDName> value) {
+    this.mWorkEmployers = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldWorkEmployers(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mWorkEmployers = IDName.getGson().fromJson(value, type);
+    return this;
+  }
+
+  public FlexibleTargeting setFieldWorkPositions(List<IDName> value) {
+    this.mWorkPositions = value;
+    return this;
+  }
+
+  public FlexibleTargeting setFieldWorkPositions(String value) {
+    Type type = new TypeToken<List<IDName>>(){}.getType();
+    this.mWorkPositions = IDName.getGson().fromJson(value, type);
+    return this;
+  }
+
+
 
   public List<IDName> getFieldWorkPositions() {
     return mWorkPositions;

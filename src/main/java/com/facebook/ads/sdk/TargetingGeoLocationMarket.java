@@ -282,17 +282,37 @@ public class TargetingGeoLocationMarket extends APINode {
     return mCountry;
   }
 
+  public TargetingGeoLocationMarket setFieldCountry(String value) {
+    this.mCountry = value;
+    return this;
+  }
+
   public String getFieldKey() {
     return mKey;
+  }
+
+  public TargetingGeoLocationMarket setFieldKey(String value) {
+    this.mKey = value;
+    return this;
   }
 
   public String getFieldMarketType() {
     return mMarketType;
   }
 
+  public TargetingGeoLocationMarket setFieldMarketType(String value) {
+    this.mMarketType = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
   }
+
+    public TargetingGeoLocationMarket setFieldName(String value) {
+        this.mName = value;
+        return this;
+    }
 
   public String getFieldId() {
     return mId;

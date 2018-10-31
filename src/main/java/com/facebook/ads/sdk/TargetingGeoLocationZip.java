@@ -284,21 +284,47 @@ public class TargetingGeoLocationZip extends APINode {
     return mCountry;
   }
 
+  public TargetingGeoLocationZip setFieldCountry(String value) {
+    this.mCountry = value;
+    return this;
+  }
+
   public String getFieldKey() {
     return mKey;
+  }
+
+  public TargetingGeoLocationZip setFieldKey(String value) {
+    this.mKey = value;
+    return this;
   }
 
   public String getFieldName() {
     return mName;
   }
 
+  public TargetingGeoLocationZip setFieldName(String value) {
+    this.mName = value;
+    return this;
+  }
+
   public Long getFieldPrimaryCityId() {
     return mPrimaryCityId;
+  }
+
+  public TargetingGeoLocationZip setFieldPrimaryCityId(Long value) {
+    this.mPrimaryCityId = value;
+    return this;
   }
 
   public Long getFieldRegionId() {
     return mRegionId;
   }
+
+  public TargetingGeoLocationZip setFieldRegionId(Long value) {
+    this.mRegionId = value;
+    return this;
+  }
+
 
   public String getFieldId() {
     return mId;
