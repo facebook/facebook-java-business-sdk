@@ -286,6 +286,10 @@ public class IDName extends APINode {
   }
 
 
+  public IDName setFieldName(String value) {
+    this.mName = value;
+    return this;
+  }
 
   public static class APIRequestGet extends APIRequest<IDName> {
 
