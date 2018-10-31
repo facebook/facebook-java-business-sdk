@@ -73,7 +73,7 @@ public class TargetingGeoLocationCity extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  TargetingGeoLocationCity() {
+  public TargetingGeoLocationCity() {
   }
 
   public TargetingGeoLocationCity(Long id, APIContext context) {
@@ -288,29 +288,65 @@ public class TargetingGeoLocationCity extends APINode {
     return mCountry;
   }
 
+  public TargetingGeoLocationCity setFieldCountry(String value) {
+    this.mCountry = value;
+    return this;
+  }
+
   public String getFieldDistanceUnit() {
     return mDistanceUnit;
+  }
+
+  public TargetingGeoLocationCity setFieldDistanceUnit(String value) {
+    this.mDistanceUnit = value;
+    return this;
   }
 
   public String getFieldKey() {
     return mKey;
   }
 
+  public TargetingGeoLocationCity setFieldKey(String value) {
+    this.mKey = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public TargetingGeoLocationCity setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public Long getFieldRadius() {
     return mRadius;
   }
 
+  public TargetingGeoLocationCity setFieldRadius(Long value) {
+    this.mRadius = value;
+    return this;
+  }
+
   public String getFieldRegion() {
     return mRegion;
+  }
+
+  public TargetingGeoLocationCity setFieldRegion(String value) {
+    this.mRegion = value;
+    return this;
   }
 
   public String getFieldRegionId() {
     return mRegionId;
   }
+
+  public TargetingGeoLocationCity setFieldRegionId(String value) {
+    this.mRegionId = value;
+    return this;
+  }
+
 
   public String getFieldId() {
     return mId;

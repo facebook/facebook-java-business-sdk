@@ -280,12 +280,27 @@ public class TargetingGeoLocationRegion extends APINode {
     return mCountry;
   }
 
+  public TargetingGeoLocationRegion setFieldCountry(String value) {
+    this.mCountry = value;
+    return this;
+  }
+
   public String getFieldKey() {
     return mKey;
   }
 
+  public TargetingGeoLocationRegion setFieldKey(String value) {
+    this.mKey = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public TargetingGeoLocationRegion setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public String getFieldId() {
