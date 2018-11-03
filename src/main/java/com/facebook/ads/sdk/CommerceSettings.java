@@ -63,66 +63,7 @@ public class CommerceSettings extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  CommerceSettings() {
-  }
-
-  public CommerceSettings(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public CommerceSettings(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public CommerceSettings fetch() throws APIException{
-    CommerceSettings newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static CommerceSettings fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<CommerceSettings> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static CommerceSettings fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<CommerceSettings> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<CommerceSettings> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CommerceSettings>)(
-      new APIRequest<CommerceSettings>(context, "", "/", "GET", CommerceSettings.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<CommerceSettings>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", CommerceSettings.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public CommerceSettings() {
   }
 
   public String getId() {
@@ -269,151 +210,35 @@ public class CommerceSettings extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldInventory() {
     return mInventory;
+  }
+
+  public CommerceSettings setFieldInventory(Long value) {
+    this.mInventory = value;
+    return this;
   }
 
   public Long getFieldTotalInventory() {
     return mTotalInventory;
   }
 
+  public CommerceSettings setFieldTotalInventory(Long value) {
+    this.mTotalInventory = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<CommerceSettings> {
-
-    CommerceSettings lastResponse = null;
-    @Override
-    public CommerceSettings getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "inventory",
-      "total_inventory",
-      "id",
-    };
-
-    @Override
-    public CommerceSettings parseResponse(String response) throws APIException {
-      return CommerceSettings.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public CommerceSettings execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CommerceSettings execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<CommerceSettings> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CommerceSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, CommerceSettings>() {
-           public CommerceSettings apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestInventoryField () {
-      return this.requestInventoryField(true);
-    }
-    public APIRequestGet requestInventoryField (boolean value) {
-      this.requestField("inventory", value);
-      return this;
-    }
-    public APIRequestGet requestTotalInventoryField () {
-      return this.requestTotalInventoryField(true);
-    }
-    public APIRequestGet requestTotalInventoryField (boolean value) {
-      this.requestField("total_inventory", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public CommerceSettings setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

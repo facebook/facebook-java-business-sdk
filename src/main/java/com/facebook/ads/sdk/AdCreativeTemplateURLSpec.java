@@ -73,66 +73,7 @@ public class AdCreativeTemplateURLSpec extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCreativeTemplateURLSpec() {
-  }
-
-  public AdCreativeTemplateURLSpec(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCreativeTemplateURLSpec(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCreativeTemplateURLSpec fetch() throws APIException{
-    AdCreativeTemplateURLSpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCreativeTemplateURLSpec fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCreativeTemplateURLSpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCreativeTemplateURLSpec fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCreativeTemplateURLSpec> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCreativeTemplateURLSpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCreativeTemplateURLSpec>)(
-      new APIRequest<AdCreativeTemplateURLSpec>(context, "", "/", "GET", AdCreativeTemplateURLSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCreativeTemplateURLSpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCreativeTemplateURLSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCreativeTemplateURLSpec() {
   }
 
   public String getId() {
@@ -279,211 +220,80 @@ public class AdCreativeTemplateURLSpec extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Object getFieldAndroid() {
     return mAndroid;
+  }
+
+  public AdCreativeTemplateURLSpec setFieldAndroid(Object value) {
+    this.mAndroid = value;
+    return this;
   }
 
   public Object getFieldConfig() {
     return mConfig;
   }
 
+  public AdCreativeTemplateURLSpec setFieldConfig(Object value) {
+    this.mConfig = value;
+    return this;
+  }
+
   public Object getFieldIos() {
     return mIos;
+  }
+
+  public AdCreativeTemplateURLSpec setFieldIos(Object value) {
+    this.mIos = value;
+    return this;
   }
 
   public Object getFieldIpad() {
     return mIpad;
   }
 
+  public AdCreativeTemplateURLSpec setFieldIpad(Object value) {
+    this.mIpad = value;
+    return this;
+  }
+
   public Object getFieldIphone() {
     return mIphone;
+  }
+
+  public AdCreativeTemplateURLSpec setFieldIphone(Object value) {
+    this.mIphone = value;
+    return this;
   }
 
   public Object getFieldWeb() {
     return mWeb;
   }
 
+  public AdCreativeTemplateURLSpec setFieldWeb(Object value) {
+    this.mWeb = value;
+    return this;
+  }
+
   public Object getFieldWindowsPhone() {
     return mWindowsPhone;
+  }
+
+  public AdCreativeTemplateURLSpec setFieldWindowsPhone(Object value) {
+    this.mWindowsPhone = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCreativeTemplateURLSpec> {
-
-    AdCreativeTemplateURLSpec lastResponse = null;
-    @Override
-    public AdCreativeTemplateURLSpec getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "android",
-      "config",
-      "ios",
-      "ipad",
-      "iphone",
-      "web",
-      "windows_phone",
-      "id",
-    };
-
-    @Override
-    public AdCreativeTemplateURLSpec parseResponse(String response) throws APIException {
-      return AdCreativeTemplateURLSpec.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCreativeTemplateURLSpec execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCreativeTemplateURLSpec execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCreativeTemplateURLSpec> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCreativeTemplateURLSpec> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCreativeTemplateURLSpec>() {
-           public AdCreativeTemplateURLSpec apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAndroidField () {
-      return this.requestAndroidField(true);
-    }
-    public APIRequestGet requestAndroidField (boolean value) {
-      this.requestField("android", value);
-      return this;
-    }
-    public APIRequestGet requestConfigField () {
-      return this.requestConfigField(true);
-    }
-    public APIRequestGet requestConfigField (boolean value) {
-      this.requestField("config", value);
-      return this;
-    }
-    public APIRequestGet requestIosField () {
-      return this.requestIosField(true);
-    }
-    public APIRequestGet requestIosField (boolean value) {
-      this.requestField("ios", value);
-      return this;
-    }
-    public APIRequestGet requestIpadField () {
-      return this.requestIpadField(true);
-    }
-    public APIRequestGet requestIpadField (boolean value) {
-      this.requestField("ipad", value);
-      return this;
-    }
-    public APIRequestGet requestIphoneField () {
-      return this.requestIphoneField(true);
-    }
-    public APIRequestGet requestIphoneField (boolean value) {
-      this.requestField("iphone", value);
-      return this;
-    }
-    public APIRequestGet requestWebField () {
-      return this.requestWebField(true);
-    }
-    public APIRequestGet requestWebField (boolean value) {
-      this.requestField("web", value);
-      return this;
-    }
-    public APIRequestGet requestWindowsPhoneField () {
-      return this.requestWindowsPhoneField(true);
-    }
-    public APIRequestGet requestWindowsPhoneField (boolean value) {
-      this.requestField("windows_phone", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCreativeTemplateURLSpec setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

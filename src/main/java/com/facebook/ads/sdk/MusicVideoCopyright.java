@@ -338,9 +338,6 @@ public class MusicVideoCopyright extends APINode {
   }
 
   public CopyrightReferenceContainer getFieldVideoAsset() {
-    if (mVideoAsset != null) {
-      mVideoAsset.context = getContext();
-    }
     return mVideoAsset;
   }
 

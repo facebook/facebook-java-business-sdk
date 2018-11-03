@@ -296,9 +296,6 @@ public class BrandAudience extends APINode {
   }
 
   public Targeting getFieldDeliveryTargeting() {
-    if (mDeliveryTargeting != null) {
-      mDeliveryTargeting.context = getContext();
-    }
     return mDeliveryTargeting;
   }
 
@@ -323,9 +320,6 @@ public class BrandAudience extends APINode {
   }
 
   public Targeting getFieldTargeting() {
-    if (mTargeting != null) {
-      mTargeting.context = getContext();
-    }
     return mTargeting;
   }
 

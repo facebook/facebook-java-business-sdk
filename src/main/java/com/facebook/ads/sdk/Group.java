@@ -403,9 +403,6 @@ public class Group extends APINode {
   }
 
   public CoverPhoto getFieldCover() {
-    if (mCover != null) {
-      mCover.context = getContext();
-    }
     return mCover;
   }
 
@@ -474,9 +471,6 @@ public class Group extends APINode {
   }
 
   public Location getFieldVenue() {
-    if (mVenue != null) {
-      mVenue.context = getContext();
-    }
     return mVenue;
   }
 
@@ -4926,10 +4920,12 @@ public class Group extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -5228,6 +5224,13 @@ public class Group extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetOptedInMembers requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetOptedInMembers requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetOptedInMembers requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -5254,6 +5257,13 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetOptedInMembers requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetOptedInMembers requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestLastNameField () {

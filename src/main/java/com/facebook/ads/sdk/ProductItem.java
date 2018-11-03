@@ -432,9 +432,6 @@ public class ProductItem extends APINode {
   }
 
   public ProductItemCommerceInsights getFieldCommerceInsights() {
-    if (mCommerceInsights != null) {
-      mCommerceInsights.context = getContext();
-    }
     return mCommerceInsights;
   }
 

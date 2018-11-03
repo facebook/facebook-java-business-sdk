@@ -65,66 +65,7 @@ public class LeadGenConditionalQuestionsGroupChoices extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  LeadGenConditionalQuestionsGroupChoices() {
-  }
-
-  public LeadGenConditionalQuestionsGroupChoices(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public LeadGenConditionalQuestionsGroupChoices(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public LeadGenConditionalQuestionsGroupChoices fetch() throws APIException{
-    LeadGenConditionalQuestionsGroupChoices newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static LeadGenConditionalQuestionsGroupChoices fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<LeadGenConditionalQuestionsGroupChoices> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static LeadGenConditionalQuestionsGroupChoices fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<LeadGenConditionalQuestionsGroupChoices> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<LeadGenConditionalQuestionsGroupChoices> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<LeadGenConditionalQuestionsGroupChoices>)(
-      new APIRequest<LeadGenConditionalQuestionsGroupChoices>(context, "", "/", "GET", LeadGenConditionalQuestionsGroupChoices.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<LeadGenConditionalQuestionsGroupChoices>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", LeadGenConditionalQuestionsGroupChoices.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public LeadGenConditionalQuestionsGroupChoices() {
   }
 
   public String getId() {
@@ -271,163 +212,49 @@ public class LeadGenConditionalQuestionsGroupChoices extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldCustomizedToken() {
     return mCustomizedToken;
+  }
+
+  public LeadGenConditionalQuestionsGroupChoices setFieldCustomizedToken(String value) {
+    this.mCustomizedToken = value;
+    return this;
   }
 
   public List<LeadGenConditionalQuestionsGroupChoices> getFieldNextQuestionChoices() {
     return mNextQuestionChoices;
   }
 
+  public LeadGenConditionalQuestionsGroupChoices setFieldNextQuestionChoices(List<LeadGenConditionalQuestionsGroupChoices> value) {
+    this.mNextQuestionChoices = value;
+    return this;
+  }
+
+  public LeadGenConditionalQuestionsGroupChoices setFieldNextQuestionChoices(String value) {
+    Type type = new TypeToken<List<LeadGenConditionalQuestionsGroupChoices>>(){}.getType();
+    this.mNextQuestionChoices = LeadGenConditionalQuestionsGroupChoices.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldValue() {
     return mValue;
+  }
+
+  public LeadGenConditionalQuestionsGroupChoices setFieldValue(String value) {
+    this.mValue = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<LeadGenConditionalQuestionsGroupChoices> {
-
-    LeadGenConditionalQuestionsGroupChoices lastResponse = null;
-    @Override
-    public LeadGenConditionalQuestionsGroupChoices getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "customized_token",
-      "next_question_choices",
-      "value",
-      "id",
-    };
-
-    @Override
-    public LeadGenConditionalQuestionsGroupChoices parseResponse(String response) throws APIException {
-      return LeadGenConditionalQuestionsGroupChoices.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public LeadGenConditionalQuestionsGroupChoices execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public LeadGenConditionalQuestionsGroupChoices execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<LeadGenConditionalQuestionsGroupChoices> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<LeadGenConditionalQuestionsGroupChoices> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, LeadGenConditionalQuestionsGroupChoices>() {
-           public LeadGenConditionalQuestionsGroupChoices apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCustomizedTokenField () {
-      return this.requestCustomizedTokenField(true);
-    }
-    public APIRequestGet requestCustomizedTokenField (boolean value) {
-      this.requestField("customized_token", value);
-      return this;
-    }
-    public APIRequestGet requestNextQuestionChoicesField () {
-      return this.requestNextQuestionChoicesField(true);
-    }
-    public APIRequestGet requestNextQuestionChoicesField (boolean value) {
-      this.requestField("next_question_choices", value);
-      return this;
-    }
-    public APIRequestGet requestValueField () {
-      return this.requestValueField(true);
-    }
-    public APIRequestGet requestValueField (boolean value) {
-      this.requestField("value", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public LeadGenConditionalQuestionsGroupChoices setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

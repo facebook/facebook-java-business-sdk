@@ -3228,6 +3228,7 @@ public class Photo extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "privacy_info_url",
       "produced_by",
       "products",
       "promotion_eligible",
@@ -4113,6 +4114,13 @@ public class Photo extends APINode {
     }
     public APIRequestGetSponsorTags requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetSponsorTags requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
       return this;
     }
     public APIRequestGetSponsorTags requestProducedByField () {

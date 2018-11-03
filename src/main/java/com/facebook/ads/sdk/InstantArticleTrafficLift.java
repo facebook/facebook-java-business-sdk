@@ -71,66 +71,7 @@ public class InstantArticleTrafficLift extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  InstantArticleTrafficLift() {
-  }
-
-  public InstantArticleTrafficLift(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public InstantArticleTrafficLift(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public InstantArticleTrafficLift fetch() throws APIException{
-    InstantArticleTrafficLift newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static InstantArticleTrafficLift fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<InstantArticleTrafficLift> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static InstantArticleTrafficLift fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<InstantArticleTrafficLift> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<InstantArticleTrafficLift> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<InstantArticleTrafficLift>)(
-      new APIRequest<InstantArticleTrafficLift>(context, "", "/", "GET", InstantArticleTrafficLift.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<InstantArticleTrafficLift>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", InstantArticleTrafficLift.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public InstantArticleTrafficLift() {
   }
 
   public String getId() {
@@ -277,199 +218,71 @@ public class InstantArticleTrafficLift extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Double getFieldAndroidConfidence() {
     return mAndroidConfidence;
+  }
+
+  public InstantArticleTrafficLift setFieldAndroidConfidence(Double value) {
+    this.mAndroidConfidence = value;
+    return this;
   }
 
   public Double getFieldAndroidLift() {
     return mAndroidLift;
   }
 
+  public InstantArticleTrafficLift setFieldAndroidLift(Double value) {
+    this.mAndroidLift = value;
+    return this;
+  }
+
   public Double getFieldIphoneConfidence() {
     return mIphoneConfidence;
+  }
+
+  public InstantArticleTrafficLift setFieldIphoneConfidence(Double value) {
+    this.mIphoneConfidence = value;
+    return this;
   }
 
   public Double getFieldIphoneLift() {
     return mIphoneLift;
   }
 
+  public InstantArticleTrafficLift setFieldIphoneLift(Double value) {
+    this.mIphoneLift = value;
+    return this;
+  }
+
   public Double getFieldOverallConfidence() {
     return mOverallConfidence;
+  }
+
+  public InstantArticleTrafficLift setFieldOverallConfidence(Double value) {
+    this.mOverallConfidence = value;
+    return this;
   }
 
   public Double getFieldOverallLift() {
     return mOverallLift;
   }
 
+  public InstantArticleTrafficLift setFieldOverallLift(Double value) {
+    this.mOverallLift = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<InstantArticleTrafficLift> {
-
-    InstantArticleTrafficLift lastResponse = null;
-    @Override
-    public InstantArticleTrafficLift getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "android_confidence",
-      "android_lift",
-      "iphone_confidence",
-      "iphone_lift",
-      "overall_confidence",
-      "overall_lift",
-      "id",
-    };
-
-    @Override
-    public InstantArticleTrafficLift parseResponse(String response) throws APIException {
-      return InstantArticleTrafficLift.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public InstantArticleTrafficLift execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public InstantArticleTrafficLift execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<InstantArticleTrafficLift> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<InstantArticleTrafficLift> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, InstantArticleTrafficLift>() {
-           public InstantArticleTrafficLift apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAndroidConfidenceField () {
-      return this.requestAndroidConfidenceField(true);
-    }
-    public APIRequestGet requestAndroidConfidenceField (boolean value) {
-      this.requestField("android_confidence", value);
-      return this;
-    }
-    public APIRequestGet requestAndroidLiftField () {
-      return this.requestAndroidLiftField(true);
-    }
-    public APIRequestGet requestAndroidLiftField (boolean value) {
-      this.requestField("android_lift", value);
-      return this;
-    }
-    public APIRequestGet requestIphoneConfidenceField () {
-      return this.requestIphoneConfidenceField(true);
-    }
-    public APIRequestGet requestIphoneConfidenceField (boolean value) {
-      this.requestField("iphone_confidence", value);
-      return this;
-    }
-    public APIRequestGet requestIphoneLiftField () {
-      return this.requestIphoneLiftField(true);
-    }
-    public APIRequestGet requestIphoneLiftField (boolean value) {
-      this.requestField("iphone_lift", value);
-      return this;
-    }
-    public APIRequestGet requestOverallConfidenceField () {
-      return this.requestOverallConfidenceField(true);
-    }
-    public APIRequestGet requestOverallConfidenceField (boolean value) {
-      this.requestField("overall_confidence", value);
-      return this;
-    }
-    public APIRequestGet requestOverallLiftField () {
-      return this.requestOverallLiftField(true);
-    }
-    public APIRequestGet requestOverallLiftField (boolean value) {
-      this.requestField("overall_lift", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public InstantArticleTrafficLift setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

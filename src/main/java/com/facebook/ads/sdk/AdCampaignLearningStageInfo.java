@@ -71,66 +71,7 @@ public class AdCampaignLearningStageInfo extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCampaignLearningStageInfo() {
-  }
-
-  public AdCampaignLearningStageInfo(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCampaignLearningStageInfo(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCampaignLearningStageInfo fetch() throws APIException{
-    AdCampaignLearningStageInfo newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCampaignLearningStageInfo fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCampaignLearningStageInfo> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCampaignLearningStageInfo fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCampaignLearningStageInfo> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCampaignLearningStageInfo> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCampaignLearningStageInfo>)(
-      new APIRequest<AdCampaignLearningStageInfo>(context, "", "/", "GET", AdCampaignLearningStageInfo.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCampaignLearningStageInfo>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCampaignLearningStageInfo.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCampaignLearningStageInfo() {
   }
 
   public String getId() {
@@ -277,199 +218,71 @@ public class AdCampaignLearningStageInfo extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<String> getFieldAttributionWindows() {
     return mAttributionWindows;
+  }
+
+  public AdCampaignLearningStageInfo setFieldAttributionWindows(List<String> value) {
+    this.mAttributionWindows = value;
+    return this;
   }
 
   public Object getFieldConversions() {
     return mConversions;
   }
 
+  public AdCampaignLearningStageInfo setFieldConversions(Object value) {
+    this.mConversions = value;
+    return this;
+  }
+
   public String getFieldExitReason() {
     return mExitReason;
+  }
+
+  public AdCampaignLearningStageInfo setFieldExitReason(String value) {
+    this.mExitReason = value;
+    return this;
   }
 
   public Long getFieldLastSigEditTs() {
     return mLastSigEditTs;
   }
 
+  public AdCampaignLearningStageInfo setFieldLastSigEditTs(Long value) {
+    this.mLastSigEditTs = value;
+    return this;
+  }
+
   public String getFieldStatus() {
     return mStatus;
+  }
+
+  public AdCampaignLearningStageInfo setFieldStatus(String value) {
+    this.mStatus = value;
+    return this;
   }
 
   public List<String> getFieldTypes() {
     return mTypes;
   }
 
+  public AdCampaignLearningStageInfo setFieldTypes(List<String> value) {
+    this.mTypes = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCampaignLearningStageInfo> {
-
-    AdCampaignLearningStageInfo lastResponse = null;
-    @Override
-    public AdCampaignLearningStageInfo getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "attribution_windows",
-      "conversions",
-      "exit_reason",
-      "last_sig_edit_ts",
-      "status",
-      "types",
-      "id",
-    };
-
-    @Override
-    public AdCampaignLearningStageInfo parseResponse(String response) throws APIException {
-      return AdCampaignLearningStageInfo.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCampaignLearningStageInfo execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCampaignLearningStageInfo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCampaignLearningStageInfo> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCampaignLearningStageInfo> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCampaignLearningStageInfo>() {
-           public AdCampaignLearningStageInfo apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAttributionWindowsField () {
-      return this.requestAttributionWindowsField(true);
-    }
-    public APIRequestGet requestAttributionWindowsField (boolean value) {
-      this.requestField("attribution_windows", value);
-      return this;
-    }
-    public APIRequestGet requestConversionsField () {
-      return this.requestConversionsField(true);
-    }
-    public APIRequestGet requestConversionsField (boolean value) {
-      this.requestField("conversions", value);
-      return this;
-    }
-    public APIRequestGet requestExitReasonField () {
-      return this.requestExitReasonField(true);
-    }
-    public APIRequestGet requestExitReasonField (boolean value) {
-      this.requestField("exit_reason", value);
-      return this;
-    }
-    public APIRequestGet requestLastSigEditTsField () {
-      return this.requestLastSigEditTsField(true);
-    }
-    public APIRequestGet requestLastSigEditTsField (boolean value) {
-      this.requestField("last_sig_edit_ts", value);
-      return this;
-    }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGet requestTypesField () {
-      return this.requestTypesField(true);
-    }
-    public APIRequestGet requestTypesField (boolean value) {
-      this.requestField("types", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCampaignLearningStageInfo setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

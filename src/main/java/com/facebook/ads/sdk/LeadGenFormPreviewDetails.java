@@ -81,66 +81,7 @@ public class LeadGenFormPreviewDetails extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  LeadGenFormPreviewDetails() {
-  }
-
-  public LeadGenFormPreviewDetails(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public LeadGenFormPreviewDetails(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public LeadGenFormPreviewDetails fetch() throws APIException{
-    LeadGenFormPreviewDetails newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static LeadGenFormPreviewDetails fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<LeadGenFormPreviewDetails> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static LeadGenFormPreviewDetails fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<LeadGenFormPreviewDetails> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<LeadGenFormPreviewDetails> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<LeadGenFormPreviewDetails>)(
-      new APIRequest<LeadGenFormPreviewDetails>(context, "", "/", "GET", LeadGenFormPreviewDetails.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<LeadGenFormPreviewDetails>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", LeadGenFormPreviewDetails.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public LeadGenFormPreviewDetails() {
   }
 
   public String getId() {
@@ -287,259 +228,116 @@ public class LeadGenFormPreviewDetails extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldCallToActionTitle() {
     return mCallToActionTitle;
+  }
+
+  public LeadGenFormPreviewDetails setFieldCallToActionTitle(String value) {
+    this.mCallToActionTitle = value;
+    return this;
   }
 
   public String getFieldDefaultAppointmentSchedulingInlineContext() {
     return mDefaultAppointmentSchedulingInlineContext;
   }
 
+  public LeadGenFormPreviewDetails setFieldDefaultAppointmentSchedulingInlineContext(String value) {
+    this.mDefaultAppointmentSchedulingInlineContext = value;
+    return this;
+  }
+
   public Object getFieldDefaultThankYouPage() {
     return mDefaultThankYouPage;
+  }
+
+  public LeadGenFormPreviewDetails setFieldDefaultThankYouPage(Object value) {
+    this.mDefaultThankYouPage = value;
+    return this;
   }
 
   public String getFieldEditText() {
     return mEditText;
   }
 
+  public LeadGenFormPreviewDetails setFieldEditText(String value) {
+    this.mEditText = value;
+    return this;
+  }
+
   public String getFieldEmailInlineContextText() {
     return mEmailInlineContextText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldEmailInlineContextText(String value) {
+    this.mEmailInlineContextText = value;
+    return this;
   }
 
   public String getFieldNextButtonText() {
     return mNextButtonText;
   }
 
+  public LeadGenFormPreviewDetails setFieldNextButtonText(String value) {
+    this.mNextButtonText = value;
+    return this;
+  }
+
   public String getFieldPersonalInfoText() {
     return mPersonalInfoText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldPersonalInfoText(String value) {
+    this.mPersonalInfoText = value;
+    return this;
   }
 
   public String getFieldPhoneNumberInlineContextText() {
     return mPhoneNumberInlineContextText;
   }
 
+  public LeadGenFormPreviewDetails setFieldPhoneNumberInlineContextText(String value) {
+    this.mPhoneNumberInlineContextText = value;
+    return this;
+  }
+
   public String getFieldReviewYourInfoText() {
     return mReviewYourInfoText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldReviewYourInfoText(String value) {
+    this.mReviewYourInfoText = value;
+    return this;
   }
 
   public String getFieldSlideToSubmitText() {
     return mSlideToSubmitText;
   }
 
+  public LeadGenFormPreviewDetails setFieldSlideToSubmitText(String value) {
+    this.mSlideToSubmitText = value;
+    return this;
+  }
+
   public String getFieldSubmitButtonText() {
     return mSubmitButtonText;
+  }
+
+  public LeadGenFormPreviewDetails setFieldSubmitButtonText(String value) {
+    this.mSubmitButtonText = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<LeadGenFormPreviewDetails> {
-
-    LeadGenFormPreviewDetails lastResponse = null;
-    @Override
-    public LeadGenFormPreviewDetails getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "call_to_action_title",
-      "default_appointment_scheduling_inline_context",
-      "default_thank_you_page",
-      "edit_text",
-      "email_inline_context_text",
-      "next_button_text",
-      "personal_info_text",
-      "phone_number_inline_context_text",
-      "review_your_info_text",
-      "slide_to_submit_text",
-      "submit_button_text",
-      "id",
-    };
-
-    @Override
-    public LeadGenFormPreviewDetails parseResponse(String response) throws APIException {
-      return LeadGenFormPreviewDetails.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public LeadGenFormPreviewDetails execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public LeadGenFormPreviewDetails execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<LeadGenFormPreviewDetails> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<LeadGenFormPreviewDetails> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, LeadGenFormPreviewDetails>() {
-           public LeadGenFormPreviewDetails apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCallToActionTitleField () {
-      return this.requestCallToActionTitleField(true);
-    }
-    public APIRequestGet requestCallToActionTitleField (boolean value) {
-      this.requestField("call_to_action_title", value);
-      return this;
-    }
-    public APIRequestGet requestDefaultAppointmentSchedulingInlineContextField () {
-      return this.requestDefaultAppointmentSchedulingInlineContextField(true);
-    }
-    public APIRequestGet requestDefaultAppointmentSchedulingInlineContextField (boolean value) {
-      this.requestField("default_appointment_scheduling_inline_context", value);
-      return this;
-    }
-    public APIRequestGet requestDefaultThankYouPageField () {
-      return this.requestDefaultThankYouPageField(true);
-    }
-    public APIRequestGet requestDefaultThankYouPageField (boolean value) {
-      this.requestField("default_thank_you_page", value);
-      return this;
-    }
-    public APIRequestGet requestEditTextField () {
-      return this.requestEditTextField(true);
-    }
-    public APIRequestGet requestEditTextField (boolean value) {
-      this.requestField("edit_text", value);
-      return this;
-    }
-    public APIRequestGet requestEmailInlineContextTextField () {
-      return this.requestEmailInlineContextTextField(true);
-    }
-    public APIRequestGet requestEmailInlineContextTextField (boolean value) {
-      this.requestField("email_inline_context_text", value);
-      return this;
-    }
-    public APIRequestGet requestNextButtonTextField () {
-      return this.requestNextButtonTextField(true);
-    }
-    public APIRequestGet requestNextButtonTextField (boolean value) {
-      this.requestField("next_button_text", value);
-      return this;
-    }
-    public APIRequestGet requestPersonalInfoTextField () {
-      return this.requestPersonalInfoTextField(true);
-    }
-    public APIRequestGet requestPersonalInfoTextField (boolean value) {
-      this.requestField("personal_info_text", value);
-      return this;
-    }
-    public APIRequestGet requestPhoneNumberInlineContextTextField () {
-      return this.requestPhoneNumberInlineContextTextField(true);
-    }
-    public APIRequestGet requestPhoneNumberInlineContextTextField (boolean value) {
-      this.requestField("phone_number_inline_context_text", value);
-      return this;
-    }
-    public APIRequestGet requestReviewYourInfoTextField () {
-      return this.requestReviewYourInfoTextField(true);
-    }
-    public APIRequestGet requestReviewYourInfoTextField (boolean value) {
-      this.requestField("review_your_info_text", value);
-      return this;
-    }
-    public APIRequestGet requestSlideToSubmitTextField () {
-      return this.requestSlideToSubmitTextField(true);
-    }
-    public APIRequestGet requestSlideToSubmitTextField (boolean value) {
-      this.requestField("slide_to_submit_text", value);
-      return this;
-    }
-    public APIRequestGet requestSubmitButtonTextField () {
-      return this.requestSubmitButtonTextField(true);
-    }
-    public APIRequestGet requestSubmitButtonTextField (boolean value) {
-      this.requestField("submit_button_text", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public LeadGenFormPreviewDetails setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

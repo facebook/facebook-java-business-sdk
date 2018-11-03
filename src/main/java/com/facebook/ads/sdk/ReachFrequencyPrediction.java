@@ -447,9 +447,6 @@ public class ReachFrequencyPrediction extends APINode {
   }
 
   public ReachFrequencyActivity getFieldActivityStatus() {
-    if (mActivityStatus != null) {
-      mActivityStatus.context = getContext();
-    }
     return mActivityStatus;
   }
 
@@ -490,9 +487,6 @@ public class ReachFrequencyPrediction extends APINode {
   }
 
   public ReachFrequencyEstimatesCurve getFieldCurveBudgetReach() {
-    if (mCurveBudgetReach != null) {
-      mCurveBudgetReach.context = getContext();
-    }
     return mCurveBudgetReach;
   }
 
@@ -517,9 +511,6 @@ public class ReachFrequencyPrediction extends APINode {
   }
 
   public ReachFrequencyEstimatesDemoBreakdown getFieldDemoBreakdown() {
-    if (mDemoBreakdown != null) {
-      mDemoBreakdown.context = getContext();
-    }
     return mDemoBreakdown;
   }
 
@@ -708,9 +699,6 @@ public class ReachFrequencyPrediction extends APINode {
   }
 
   public ReachFrequencyEstimatesPlacementBreakdown getFieldPlacementBreakdown() {
-    if (mPlacementBreakdown != null) {
-      mPlacementBreakdown.context = getContext();
-    }
     return mPlacementBreakdown;
   }
 
@@ -763,9 +751,6 @@ public class ReachFrequencyPrediction extends APINode {
   }
 
   public Targeting getFieldTargetSpec() {
-    if (mTargetSpec != null) {
-      mTargetSpec.context = getContext();
-    }
     return mTargetSpec;
   }
 
@@ -1671,6 +1656,8 @@ public class ReachFrequencyPrediction extends APINode {
       VALUE_REGULAR_ANIMALS_PETS("REGULAR_ANIMALS_PETS"),
       @SerializedName("REGULAR_FOOD")
       VALUE_REGULAR_FOOD("REGULAR_FOOD"),
+      @SerializedName("REGULAR_GAMES")
+      VALUE_REGULAR_GAMES("REGULAR_GAMES"),
       @SerializedName("REGULAR_POLITICS")
       VALUE_REGULAR_POLITICS("REGULAR_POLITICS"),
       @SerializedName("REGULAR_SPORTS")

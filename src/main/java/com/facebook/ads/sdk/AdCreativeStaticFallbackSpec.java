@@ -71,66 +71,7 @@ public class AdCreativeStaticFallbackSpec extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCreativeStaticFallbackSpec() {
-  }
-
-  public AdCreativeStaticFallbackSpec(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCreativeStaticFallbackSpec(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCreativeStaticFallbackSpec fetch() throws APIException{
-    AdCreativeStaticFallbackSpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCreativeStaticFallbackSpec fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCreativeStaticFallbackSpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCreativeStaticFallbackSpec fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCreativeStaticFallbackSpec> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCreativeStaticFallbackSpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCreativeStaticFallbackSpec>)(
-      new APIRequest<AdCreativeStaticFallbackSpec>(context, "", "/", "GET", AdCreativeStaticFallbackSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCreativeStaticFallbackSpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCreativeStaticFallbackSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCreativeStaticFallbackSpec() {
   }
 
   public String getId() {
@@ -277,202 +218,76 @@ public class AdCreativeStaticFallbackSpec extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public AdCreativeLinkDataCallToAction getFieldCallToAction() {
-    if (mCallToAction != null) {
-      mCallToAction.context = getContext();
-    }
     return mCallToAction;
   }
 
+  public AdCreativeStaticFallbackSpec setFieldCallToAction(AdCreativeLinkDataCallToAction value) {
+    this.mCallToAction = value;
+    return this;
+  }
+
+  public AdCreativeStaticFallbackSpec setFieldCallToAction(String value) {
+    Type type = new TypeToken<AdCreativeLinkDataCallToAction>(){}.getType();
+    this.mCallToAction = AdCreativeLinkDataCallToAction.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public AdCreativeStaticFallbackSpec setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
   }
 
   public String getFieldImageHash() {
     return mImageHash;
   }
 
+  public AdCreativeStaticFallbackSpec setFieldImageHash(String value) {
+    this.mImageHash = value;
+    return this;
+  }
+
   public String getFieldLink() {
     return mLink;
+  }
+
+  public AdCreativeStaticFallbackSpec setFieldLink(String value) {
+    this.mLink = value;
+    return this;
   }
 
   public String getFieldMessage() {
     return mMessage;
   }
 
+  public AdCreativeStaticFallbackSpec setFieldMessage(String value) {
+    this.mMessage = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public AdCreativeStaticFallbackSpec setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCreativeStaticFallbackSpec> {
-
-    AdCreativeStaticFallbackSpec lastResponse = null;
-    @Override
-    public AdCreativeStaticFallbackSpec getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "call_to_action",
-      "description",
-      "image_hash",
-      "link",
-      "message",
-      "name",
-      "id",
-    };
-
-    @Override
-    public AdCreativeStaticFallbackSpec parseResponse(String response) throws APIException {
-      return AdCreativeStaticFallbackSpec.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCreativeStaticFallbackSpec execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCreativeStaticFallbackSpec execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCreativeStaticFallbackSpec> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCreativeStaticFallbackSpec> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCreativeStaticFallbackSpec>() {
-           public AdCreativeStaticFallbackSpec apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCallToActionField () {
-      return this.requestCallToActionField(true);
-    }
-    public APIRequestGet requestCallToActionField (boolean value) {
-      this.requestField("call_to_action", value);
-      return this;
-    }
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestImageHashField () {
-      return this.requestImageHashField(true);
-    }
-    public APIRequestGet requestImageHashField (boolean value) {
-      this.requestField("image_hash", value);
-      return this;
-    }
-    public APIRequestGet requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGet requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGet requestMessageField () {
-      return this.requestMessageField(true);
-    }
-    public APIRequestGet requestMessageField (boolean value) {
-      this.requestField("message", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCreativeStaticFallbackSpec setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

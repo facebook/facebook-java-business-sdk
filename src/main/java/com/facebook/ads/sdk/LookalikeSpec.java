@@ -75,66 +75,7 @@ public class LookalikeSpec extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  LookalikeSpec() {
-  }
-
-  public LookalikeSpec(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public LookalikeSpec(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public LookalikeSpec fetch() throws APIException{
-    LookalikeSpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static LookalikeSpec fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<LookalikeSpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static LookalikeSpec fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<LookalikeSpec> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<LookalikeSpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<LookalikeSpec>)(
-      new APIRequest<LookalikeSpec>(context, "", "/", "GET", LookalikeSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<LookalikeSpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", LookalikeSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public LookalikeSpec() {
   }
 
   public String getId() {
@@ -281,223 +222,89 @@ public class LookalikeSpec extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldCountry() {
     return mCountry;
+  }
+
+  public LookalikeSpec setFieldCountry(String value) {
+    this.mCountry = value;
+    return this;
   }
 
   public Boolean getFieldIsFinancialService() {
     return mIsFinancialService;
   }
 
+  public LookalikeSpec setFieldIsFinancialService(Boolean value) {
+    this.mIsFinancialService = value;
+    return this;
+  }
+
   public List<Object> getFieldOrigin() {
     return mOrigin;
+  }
+
+  public LookalikeSpec setFieldOrigin(List<Object> value) {
+    this.mOrigin = value;
+    return this;
   }
 
   public String getFieldOriginEventSourceType() {
     return mOriginEventSourceType;
   }
 
+  public LookalikeSpec setFieldOriginEventSourceType(String value) {
+    this.mOriginEventSourceType = value;
+    return this;
+  }
+
   public Double getFieldRatio() {
     return mRatio;
+  }
+
+  public LookalikeSpec setFieldRatio(Double value) {
+    this.mRatio = value;
+    return this;
   }
 
   public Double getFieldStartingRatio() {
     return mStartingRatio;
   }
 
+  public LookalikeSpec setFieldStartingRatio(Double value) {
+    this.mStartingRatio = value;
+    return this;
+  }
+
   public List<String> getFieldTargetCountries() {
     return mTargetCountries;
+  }
+
+  public LookalikeSpec setFieldTargetCountries(List<String> value) {
+    this.mTargetCountries = value;
+    return this;
   }
 
   public String getFieldType() {
     return mType;
   }
 
+  public LookalikeSpec setFieldType(String value) {
+    this.mType = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<LookalikeSpec> {
-
-    LookalikeSpec lastResponse = null;
-    @Override
-    public LookalikeSpec getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "country",
-      "is_financial_service",
-      "origin",
-      "origin_event_source_type",
-      "ratio",
-      "starting_ratio",
-      "target_countries",
-      "type",
-      "id",
-    };
-
-    @Override
-    public LookalikeSpec parseResponse(String response) throws APIException {
-      return LookalikeSpec.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public LookalikeSpec execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public LookalikeSpec execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<LookalikeSpec> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<LookalikeSpec> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, LookalikeSpec>() {
-           public LookalikeSpec apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCountryField () {
-      return this.requestCountryField(true);
-    }
-    public APIRequestGet requestCountryField (boolean value) {
-      this.requestField("country", value);
-      return this;
-    }
-    public APIRequestGet requestIsFinancialServiceField () {
-      return this.requestIsFinancialServiceField(true);
-    }
-    public APIRequestGet requestIsFinancialServiceField (boolean value) {
-      this.requestField("is_financial_service", value);
-      return this;
-    }
-    public APIRequestGet requestOriginField () {
-      return this.requestOriginField(true);
-    }
-    public APIRequestGet requestOriginField (boolean value) {
-      this.requestField("origin", value);
-      return this;
-    }
-    public APIRequestGet requestOriginEventSourceTypeField () {
-      return this.requestOriginEventSourceTypeField(true);
-    }
-    public APIRequestGet requestOriginEventSourceTypeField (boolean value) {
-      this.requestField("origin_event_source_type", value);
-      return this;
-    }
-    public APIRequestGet requestRatioField () {
-      return this.requestRatioField(true);
-    }
-    public APIRequestGet requestRatioField (boolean value) {
-      this.requestField("ratio", value);
-      return this;
-    }
-    public APIRequestGet requestStartingRatioField () {
-      return this.requestStartingRatioField(true);
-    }
-    public APIRequestGet requestStartingRatioField (boolean value) {
-      this.requestField("starting_ratio", value);
-      return this;
-    }
-    public APIRequestGet requestTargetCountriesField () {
-      return this.requestTargetCountriesField(true);
-    }
-    public APIRequestGet requestTargetCountriesField (boolean value) {
-      this.requestField("target_countries", value);
-      return this;
-    }
-    public APIRequestGet requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGet requestTypeField (boolean value) {
-      this.requestField("type", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public LookalikeSpec setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

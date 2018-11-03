@@ -61,66 +61,7 @@ public class CustomAudienceCapabilities extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  CustomAudienceCapabilities() {
-  }
-
-  public CustomAudienceCapabilities(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public CustomAudienceCapabilities(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public CustomAudienceCapabilities fetch() throws APIException{
-    CustomAudienceCapabilities newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static CustomAudienceCapabilities fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<CustomAudienceCapabilities> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static CustomAudienceCapabilities fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<CustomAudienceCapabilities> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<CustomAudienceCapabilities> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CustomAudienceCapabilities>)(
-      new APIRequest<CustomAudienceCapabilities>(context, "", "/", "GET", CustomAudienceCapabilities.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<CustomAudienceCapabilities>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", CustomAudienceCapabilities.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public CustomAudienceCapabilities() {
   }
 
   public String getId() {
@@ -267,139 +208,26 @@ public class CustomAudienceCapabilities extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Map<String, String> getFieldCapabilities() {
     return mCapabilities;
+  }
+
+  public CustomAudienceCapabilities setFieldCapabilities(Map<String, String> value) {
+    this.mCapabilities = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<CustomAudienceCapabilities> {
-
-    CustomAudienceCapabilities lastResponse = null;
-    @Override
-    public CustomAudienceCapabilities getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "capabilities",
-      "id",
-    };
-
-    @Override
-    public CustomAudienceCapabilities parseResponse(String response) throws APIException {
-      return CustomAudienceCapabilities.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public CustomAudienceCapabilities execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CustomAudienceCapabilities execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<CustomAudienceCapabilities> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CustomAudienceCapabilities> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, CustomAudienceCapabilities>() {
-           public CustomAudienceCapabilities apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCapabilitiesField () {
-      return this.requestCapabilitiesField(true);
-    }
-    public APIRequestGet requestCapabilitiesField (boolean value) {
-      this.requestField("capabilities", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public CustomAudienceCapabilities setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

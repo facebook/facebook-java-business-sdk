@@ -75,66 +75,7 @@ public class Recommendation extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  Recommendation() {
-  }
-
-  public Recommendation(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public Recommendation(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public Recommendation fetch() throws APIException{
-    Recommendation newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static Recommendation fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<Recommendation> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static Recommendation fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<Recommendation> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<Recommendation> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<Recommendation>)(
-      new APIRequest<Recommendation>(context, "", "/", "GET", Recommendation.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<Recommendation>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", Recommendation.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public Recommendation() {
   }
 
   public String getId() {
@@ -281,37 +222,68 @@ public class Recommendation extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldCreatedTime() {
     return mCreatedTime;
+  }
+
+  public Recommendation setFieldCreatedTime(String value) {
+    this.mCreatedTime = value;
+    return this;
   }
 
   public Boolean getFieldHasRating() {
     return mHasRating;
   }
 
+  public Recommendation setFieldHasRating(Boolean value) {
+    this.mHasRating = value;
+    return this;
+  }
+
   public Boolean getFieldHasReview() {
     return mHasReview;
+  }
+
+  public Recommendation setFieldHasReview(Boolean value) {
+    this.mHasReview = value;
+    return this;
   }
 
   public Object getFieldOpenGraphStory() {
     return mOpenGraphStory;
   }
 
+  public Recommendation setFieldOpenGraphStory(Object value) {
+    this.mOpenGraphStory = value;
+    return this;
+  }
+
   public Long getFieldRating() {
     return mRating;
+  }
+
+  public Recommendation setFieldRating(Long value) {
+    this.mRating = value;
+    return this;
   }
 
   public String getFieldRecommendationType() {
     return mRecommendationType;
   }
 
+  public Recommendation setFieldRecommendationType(String value) {
+    this.mRecommendationType = value;
+    return this;
+  }
+
   public String getFieldReviewText() {
     return mReviewText;
+  }
+
+  public Recommendation setFieldReviewText(String value) {
+    this.mReviewText = value;
+    return this;
   }
 
   public User getFieldReviewer() {
@@ -321,186 +293,26 @@ public class Recommendation extends APINode {
     return mReviewer;
   }
 
+  public Recommendation setFieldReviewer(User value) {
+    this.mReviewer = value;
+    return this;
+  }
+
+  public Recommendation setFieldReviewer(String value) {
+    Type type = new TypeToken<User>(){}.getType();
+    this.mReviewer = User.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<Recommendation> {
-
-    Recommendation lastResponse = null;
-    @Override
-    public Recommendation getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "created_time",
-      "has_rating",
-      "has_review",
-      "open_graph_story",
-      "rating",
-      "recommendation_type",
-      "review_text",
-      "reviewer",
-      "id",
-    };
-
-    @Override
-    public Recommendation parseResponse(String response) throws APIException {
-      return Recommendation.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public Recommendation execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Recommendation execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<Recommendation> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Recommendation> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, Recommendation>() {
-           public Recommendation apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGet requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGet requestHasRatingField () {
-      return this.requestHasRatingField(true);
-    }
-    public APIRequestGet requestHasRatingField (boolean value) {
-      this.requestField("has_rating", value);
-      return this;
-    }
-    public APIRequestGet requestHasReviewField () {
-      return this.requestHasReviewField(true);
-    }
-    public APIRequestGet requestHasReviewField (boolean value) {
-      this.requestField("has_review", value);
-      return this;
-    }
-    public APIRequestGet requestOpenGraphStoryField () {
-      return this.requestOpenGraphStoryField(true);
-    }
-    public APIRequestGet requestOpenGraphStoryField (boolean value) {
-      this.requestField("open_graph_story", value);
-      return this;
-    }
-    public APIRequestGet requestRatingField () {
-      return this.requestRatingField(true);
-    }
-    public APIRequestGet requestRatingField (boolean value) {
-      this.requestField("rating", value);
-      return this;
-    }
-    public APIRequestGet requestRecommendationTypeField () {
-      return this.requestRecommendationTypeField(true);
-    }
-    public APIRequestGet requestRecommendationTypeField (boolean value) {
-      this.requestField("recommendation_type", value);
-      return this;
-    }
-    public APIRequestGet requestReviewTextField () {
-      return this.requestReviewTextField(true);
-    }
-    public APIRequestGet requestReviewTextField (boolean value) {
-      this.requestField("review_text", value);
-      return this;
-    }
-    public APIRequestGet requestReviewerField () {
-      return this.requestReviewerField(true);
-    }
-    public APIRequestGet requestReviewerField (boolean value) {
-      this.requestField("reviewer", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public Recommendation setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

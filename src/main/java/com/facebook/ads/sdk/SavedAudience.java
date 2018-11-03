@@ -328,9 +328,6 @@ public class SavedAudience extends APINode {
   }
 
   public AudiencePermissionForActions getFieldPermissionForActions() {
-    if (mPermissionForActions != null) {
-      mPermissionForActions.context = getContext();
-    }
     return mPermissionForActions;
   }
 
@@ -343,9 +340,6 @@ public class SavedAudience extends APINode {
   }
 
   public Targeting getFieldTargeting() {
-    if (mTargeting != null) {
-      mTargeting.context = getContext();
-    }
     return mTargeting;
   }
 
@@ -380,6 +374,7 @@ public class SavedAudience extends APINode {
       "best_creative",
       "bid_adjustments",
       "bid_amount",
+      "bid_constraints",
       "bid_info",
       "bid_strategy",
       "billing_event",
@@ -405,6 +400,7 @@ public class SavedAudience extends APINode {
       "is_average_price_pacing",
       "is_dynamic_creative",
       "is_dynamic_creative_optimization",
+      "issues_info",
       "lifetime_budget",
       "lifetime_frequency_cap",
       "lifetime_imps",
@@ -589,6 +585,13 @@ public class SavedAudience extends APINode {
       this.requestField("bid_amount", value);
       return this;
     }
+    public APIRequestGetAdSets requestBidConstraintsField () {
+      return this.requestBidConstraintsField(true);
+    }
+    public APIRequestGetAdSets requestBidConstraintsField (boolean value) {
+      this.requestField("bid_constraints", value);
+      return this;
+    }
     public APIRequestGetAdSets requestBidInfoField () {
       return this.requestBidInfoField(true);
     }
@@ -762,6 +765,13 @@ public class SavedAudience extends APINode {
     }
     public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField (boolean value) {
       this.requestField("is_dynamic_creative_optimization", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestIssuesInfoField () {
+      return this.requestIssuesInfoField(true);
+    }
+    public APIRequestGetAdSets requestIssuesInfoField (boolean value) {
+      this.requestField("issues_info", value);
       return this;
     }
     public APIRequestGetAdSets requestLifetimeBudgetField () {

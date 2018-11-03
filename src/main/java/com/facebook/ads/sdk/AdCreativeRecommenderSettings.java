@@ -63,66 +63,7 @@ public class AdCreativeRecommenderSettings extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCreativeRecommenderSettings() {
-  }
-
-  public AdCreativeRecommenderSettings(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCreativeRecommenderSettings(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCreativeRecommenderSettings fetch() throws APIException{
-    AdCreativeRecommenderSettings newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCreativeRecommenderSettings fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCreativeRecommenderSettings> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCreativeRecommenderSettings fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCreativeRecommenderSettings> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCreativeRecommenderSettings> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCreativeRecommenderSettings>)(
-      new APIRequest<AdCreativeRecommenderSettings>(context, "", "/", "GET", AdCreativeRecommenderSettings.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCreativeRecommenderSettings>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCreativeRecommenderSettings.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCreativeRecommenderSettings() {
   }
 
   public String getId() {
@@ -269,151 +210,35 @@ public class AdCreativeRecommenderSettings extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<String> getFieldPreferredEvents() {
     return mPreferredEvents;
+  }
+
+  public AdCreativeRecommenderSettings setFieldPreferredEvents(List<String> value) {
+    this.mPreferredEvents = value;
+    return this;
   }
 
   public String getFieldProductSalesChannel() {
     return mProductSalesChannel;
   }
 
+  public AdCreativeRecommenderSettings setFieldProductSalesChannel(String value) {
+    this.mProductSalesChannel = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCreativeRecommenderSettings> {
-
-    AdCreativeRecommenderSettings lastResponse = null;
-    @Override
-    public AdCreativeRecommenderSettings getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "preferred_events",
-      "product_sales_channel",
-      "id",
-    };
-
-    @Override
-    public AdCreativeRecommenderSettings parseResponse(String response) throws APIException {
-      return AdCreativeRecommenderSettings.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCreativeRecommenderSettings execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCreativeRecommenderSettings execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCreativeRecommenderSettings> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCreativeRecommenderSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCreativeRecommenderSettings>() {
-           public AdCreativeRecommenderSettings apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestPreferredEventsField () {
-      return this.requestPreferredEventsField(true);
-    }
-    public APIRequestGet requestPreferredEventsField (boolean value) {
-      this.requestField("preferred_events", value);
-      return this;
-    }
-    public APIRequestGet requestProductSalesChannelField () {
-      return this.requestProductSalesChannelField(true);
-    }
-    public APIRequestGet requestProductSalesChannelField (boolean value) {
-      this.requestField("product_sales_channel", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCreativeRecommenderSettings setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

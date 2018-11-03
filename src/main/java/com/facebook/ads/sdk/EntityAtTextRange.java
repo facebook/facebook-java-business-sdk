@@ -69,66 +69,7 @@ public class EntityAtTextRange extends APINode {
   private EnumType mType = null;
   protected static Gson gson = null;
 
-  EntityAtTextRange() {
-  }
-
-  public EntityAtTextRange(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public EntityAtTextRange(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public EntityAtTextRange fetch() throws APIException{
-    EntityAtTextRange newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static EntityAtTextRange fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<EntityAtTextRange> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static EntityAtTextRange fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<EntityAtTextRange> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<EntityAtTextRange> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<EntityAtTextRange>)(
-      new APIRequest<EntityAtTextRange>(context, "", "/", "GET", EntityAtTextRange.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<EntityAtTextRange>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", EntityAtTextRange.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public EntityAtTextRange() {
   }
 
   public String getId() {
@@ -275,21 +216,32 @@ public class EntityAtTextRange extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldId() {
     return mId;
+  }
+
+  public EntityAtTextRange setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public Long getFieldLength() {
     return mLength;
   }
 
+  public EntityAtTextRange setFieldLength(Long value) {
+    this.mLength = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public EntityAtTextRange setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public Profile getFieldObject() {
@@ -299,166 +251,35 @@ public class EntityAtTextRange extends APINode {
     return mObject;
   }
 
+  public EntityAtTextRange setFieldObject(Profile value) {
+    this.mObject = value;
+    return this;
+  }
+
+  public EntityAtTextRange setFieldObject(String value) {
+    Type type = new TypeToken<Profile>(){}.getType();
+    this.mObject = Profile.getGson().fromJson(value, type);
+    return this;
+  }
   public Long getFieldOffset() {
     return mOffset;
+  }
+
+  public EntityAtTextRange setFieldOffset(Long value) {
+    this.mOffset = value;
+    return this;
   }
 
   public EnumType getFieldType() {
     return mType;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<EntityAtTextRange> {
-
-    EntityAtTextRange lastResponse = null;
-    @Override
-    public EntityAtTextRange getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-      "length",
-      "name",
-      "object",
-      "offset",
-      "type",
-    };
-
-    @Override
-    public EntityAtTextRange parseResponse(String response) throws APIException {
-      return EntityAtTextRange.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public EntityAtTextRange execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public EntityAtTextRange execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<EntityAtTextRange> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<EntityAtTextRange> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, EntityAtTextRange>() {
-           public EntityAtTextRange apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestLengthField () {
-      return this.requestLengthField(true);
-    }
-    public APIRequestGet requestLengthField (boolean value) {
-      this.requestField("length", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestObjectField () {
-      return this.requestObjectField(true);
-    }
-    public APIRequestGet requestObjectField (boolean value) {
-      this.requestField("object", value);
-      return this;
-    }
-    public APIRequestGet requestOffsetField () {
-      return this.requestOffsetField(true);
-    }
-    public APIRequestGet requestOffsetField (boolean value) {
-      this.requestField("offset", value);
-      return this;
-    }
-    public APIRequestGet requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGet requestTypeField (boolean value) {
-      this.requestField("type", value);
-      return this;
-    }
+  public EntityAtTextRange setFieldType(EnumType value) {
+    this.mType = value;
+    return this;
   }
+
+
 
   public static enum EnumType {
       @SerializedName("user")

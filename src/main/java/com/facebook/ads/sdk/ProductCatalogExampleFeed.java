@@ -61,66 +61,7 @@ public class ProductCatalogExampleFeed extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ProductCatalogExampleFeed() {
-  }
-
-  public ProductCatalogExampleFeed(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ProductCatalogExampleFeed(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ProductCatalogExampleFeed fetch() throws APIException{
-    ProductCatalogExampleFeed newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ProductCatalogExampleFeed fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ProductCatalogExampleFeed> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ProductCatalogExampleFeed fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ProductCatalogExampleFeed> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ProductCatalogExampleFeed> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ProductCatalogExampleFeed>)(
-      new APIRequest<ProductCatalogExampleFeed>(context, "", "/", "GET", ProductCatalogExampleFeed.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ProductCatalogExampleFeed>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ProductCatalogExampleFeed.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ProductCatalogExampleFeed() {
   }
 
   public String getId() {
@@ -267,139 +208,26 @@ public class ProductCatalogExampleFeed extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldExampleFeed() {
     return mExampleFeed;
+  }
+
+  public ProductCatalogExampleFeed setFieldExampleFeed(String value) {
+    this.mExampleFeed = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ProductCatalogExampleFeed> {
-
-    ProductCatalogExampleFeed lastResponse = null;
-    @Override
-    public ProductCatalogExampleFeed getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "example_feed",
-      "id",
-    };
-
-    @Override
-    public ProductCatalogExampleFeed parseResponse(String response) throws APIException {
-      return ProductCatalogExampleFeed.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ProductCatalogExampleFeed execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductCatalogExampleFeed execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ProductCatalogExampleFeed> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ProductCatalogExampleFeed> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ProductCatalogExampleFeed>() {
-           public ProductCatalogExampleFeed apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestExampleFeedField () {
-      return this.requestExampleFeedField(true);
-    }
-    public APIRequestGet requestExampleFeedField (boolean value) {
-      this.requestField("example_feed", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ProductCatalogExampleFeed setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

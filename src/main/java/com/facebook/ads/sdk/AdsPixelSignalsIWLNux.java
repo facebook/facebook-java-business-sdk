@@ -69,66 +69,7 @@ public class AdsPixelSignalsIWLNux extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdsPixelSignalsIWLNux() {
-  }
-
-  public AdsPixelSignalsIWLNux(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdsPixelSignalsIWLNux(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdsPixelSignalsIWLNux fetch() throws APIException{
-    AdsPixelSignalsIWLNux newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdsPixelSignalsIWLNux fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdsPixelSignalsIWLNux> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdsPixelSignalsIWLNux fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdsPixelSignalsIWLNux> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdsPixelSignalsIWLNux> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdsPixelSignalsIWLNux>)(
-      new APIRequest<AdsPixelSignalsIWLNux>(context, "", "/", "GET", AdsPixelSignalsIWLNux.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdsPixelSignalsIWLNux>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdsPixelSignalsIWLNux.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdsPixelSignalsIWLNux() {
   }
 
   public String getId() {
@@ -275,187 +216,62 @@ public class AdsPixelSignalsIWLNux extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldBackgroundColor() {
     return mBackgroundColor;
+  }
+
+  public AdsPixelSignalsIWLNux setFieldBackgroundColor(String value) {
+    this.mBackgroundColor = value;
+    return this;
   }
 
   public String getFieldContent() {
     return mContent;
   }
 
+  public AdsPixelSignalsIWLNux setFieldContent(String value) {
+    this.mContent = value;
+    return this;
+  }
+
   public String getFieldContentColor() {
     return mContentColor;
+  }
+
+  public AdsPixelSignalsIWLNux setFieldContentColor(String value) {
+    this.mContentColor = value;
+    return this;
   }
 
   public String getFieldContentSize() {
     return mContentSize;
   }
 
+  public AdsPixelSignalsIWLNux setFieldContentSize(String value) {
+    this.mContentSize = value;
+    return this;
+  }
+
   public String getFieldImgUrl() {
     return mImgUrl;
+  }
+
+  public AdsPixelSignalsIWLNux setFieldImgUrl(String value) {
+    this.mImgUrl = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdsPixelSignalsIWLNux> {
-
-    AdsPixelSignalsIWLNux lastResponse = null;
-    @Override
-    public AdsPixelSignalsIWLNux getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "background_color",
-      "content",
-      "content_color",
-      "content_size",
-      "img_url",
-      "id",
-    };
-
-    @Override
-    public AdsPixelSignalsIWLNux parseResponse(String response) throws APIException {
-      return AdsPixelSignalsIWLNux.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdsPixelSignalsIWLNux execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdsPixelSignalsIWLNux execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdsPixelSignalsIWLNux> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdsPixelSignalsIWLNux> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdsPixelSignalsIWLNux>() {
-           public AdsPixelSignalsIWLNux apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestBackgroundColorField () {
-      return this.requestBackgroundColorField(true);
-    }
-    public APIRequestGet requestBackgroundColorField (boolean value) {
-      this.requestField("background_color", value);
-      return this;
-    }
-    public APIRequestGet requestContentField () {
-      return this.requestContentField(true);
-    }
-    public APIRequestGet requestContentField (boolean value) {
-      this.requestField("content", value);
-      return this;
-    }
-    public APIRequestGet requestContentColorField () {
-      return this.requestContentColorField(true);
-    }
-    public APIRequestGet requestContentColorField (boolean value) {
-      this.requestField("content_color", value);
-      return this;
-    }
-    public APIRequestGet requestContentSizeField () {
-      return this.requestContentSizeField(true);
-    }
-    public APIRequestGet requestContentSizeField (boolean value) {
-      this.requestField("content_size", value);
-      return this;
-    }
-    public APIRequestGet requestImgUrlField () {
-      return this.requestImgUrlField(true);
-    }
-    public APIRequestGet requestImgUrlField (boolean value) {
-      this.requestField("img_url", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdsPixelSignalsIWLNux setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

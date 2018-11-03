@@ -67,66 +67,7 @@ public class AdsTALNudge extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdsTALNudge() {
-  }
-
-  public AdsTALNudge(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdsTALNudge(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdsTALNudge fetch() throws APIException{
-    AdsTALNudge newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdsTALNudge fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdsTALNudge> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdsTALNudge fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdsTALNudge> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdsTALNudge> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdsTALNudge>)(
-      new APIRequest<AdsTALNudge>(context, "", "/", "GET", AdsTALNudge.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdsTALNudge>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdsTALNudge.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdsTALNudge() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class AdsTALNudge extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldNudgeType() {
     return mNudgeType;
+  }
+
+  public AdsTALNudge setFieldNudgeType(String value) {
+    this.mNudgeType = value;
+    return this;
   }
 
   public String getFieldObjectiveId() {
     return mObjectiveId;
   }
 
+  public AdsTALNudge setFieldObjectiveId(String value) {
+    this.mObjectiveId = value;
+    return this;
+  }
+
   public String getFieldStudyId() {
     return mStudyId;
+  }
+
+  public AdsTALNudge setFieldStudyId(String value) {
+    this.mStudyId = value;
+    return this;
   }
 
   public String getFieldWinnerCellId() {
     return mWinnerCellId;
   }
 
+  public AdsTALNudge setFieldWinnerCellId(String value) {
+    this.mWinnerCellId = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdsTALNudge> {
-
-    AdsTALNudge lastResponse = null;
-    @Override
-    public AdsTALNudge getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "nudge_type",
-      "objective_id",
-      "study_id",
-      "winner_cell_id",
-      "id",
-    };
-
-    @Override
-    public AdsTALNudge parseResponse(String response) throws APIException {
-      return AdsTALNudge.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdsTALNudge execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdsTALNudge execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdsTALNudge> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdsTALNudge> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdsTALNudge>() {
-           public AdsTALNudge apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestNudgeTypeField () {
-      return this.requestNudgeTypeField(true);
-    }
-    public APIRequestGet requestNudgeTypeField (boolean value) {
-      this.requestField("nudge_type", value);
-      return this;
-    }
-    public APIRequestGet requestObjectiveIdField () {
-      return this.requestObjectiveIdField(true);
-    }
-    public APIRequestGet requestObjectiveIdField (boolean value) {
-      this.requestField("objective_id", value);
-      return this;
-    }
-    public APIRequestGet requestStudyIdField () {
-      return this.requestStudyIdField(true);
-    }
-    public APIRequestGet requestStudyIdField (boolean value) {
-      this.requestField("study_id", value);
-      return this;
-    }
-    public APIRequestGet requestWinnerCellIdField () {
-      return this.requestWinnerCellIdField(true);
-    }
-    public APIRequestGet requestWinnerCellIdField (boolean value) {
-      this.requestField("winner_cell_id", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdsTALNudge setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

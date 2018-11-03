@@ -95,66 +95,7 @@ public class ExpirablePost extends APINode {
   private String mVideoId = null;
   protected static Gson gson = null;
 
-  ExpirablePost() {
-  }
-
-  public ExpirablePost(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ExpirablePost(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ExpirablePost fetch() throws APIException{
-    ExpirablePost newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ExpirablePost fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ExpirablePost> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ExpirablePost fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ExpirablePost> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ExpirablePost> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ExpirablePost>)(
-      new APIRequest<ExpirablePost>(context, "", "/", "GET", ExpirablePost.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ExpirablePost>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ExpirablePost.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ExpirablePost() {
   }
 
   public String getId() {
@@ -301,10 +242,6 @@ public class ExpirablePost extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public User getFieldAdminCreator() {
     if (mAdminCreator != null) {
@@ -313,51 +250,118 @@ public class ExpirablePost extends APINode {
     return mAdminCreator;
   }
 
+  public ExpirablePost setFieldAdminCreator(User value) {
+    this.mAdminCreator = value;
+    return this;
+  }
+
+  public ExpirablePost setFieldAdminCreator(String value) {
+    Type type = new TypeToken<User>(){}.getType();
+    this.mAdminCreator = User.getGson().fromJson(value, type);
+    return this;
+  }
   public Boolean getFieldCanRepublish() {
     return mCanRepublish;
+  }
+
+  public ExpirablePost setFieldCanRepublish(Boolean value) {
+    this.mCanRepublish = value;
+    return this;
   }
 
   public String getFieldContentType() {
     return mContentType;
   }
 
+  public ExpirablePost setFieldContentType(String value) {
+    this.mContentType = value;
+    return this;
+  }
+
   public String getFieldCreationTime() {
     return mCreationTime;
+  }
+
+  public ExpirablePost setFieldCreationTime(String value) {
+    this.mCreationTime = value;
+    return this;
   }
 
   public Object getFieldExpiration() {
     return mExpiration;
   }
 
+  public ExpirablePost setFieldExpiration(Object value) {
+    this.mExpiration = value;
+    return this;
+  }
+
   public String getFieldFeedAudienceDescription() {
     return mFeedAudienceDescription;
   }
 
+  public ExpirablePost setFieldFeedAudienceDescription(String value) {
+    this.mFeedAudienceDescription = value;
+    return this;
+  }
+
   public Targeting getFieldFeedTargeting() {
-    if (mFeedTargeting != null) {
-      mFeedTargeting.context = getContext();
-    }
     return mFeedTargeting;
   }
 
+  public ExpirablePost setFieldFeedTargeting(Targeting value) {
+    this.mFeedTargeting = value;
+    return this;
+  }
+
+  public ExpirablePost setFieldFeedTargeting(String value) {
+    Type type = new TypeToken<Targeting>(){}.getType();
+    this.mFeedTargeting = Targeting.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
+  }
+
+  public ExpirablePost setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public String getFieldMessage() {
     return mMessage;
   }
 
+  public ExpirablePost setFieldMessage(String value) {
+    this.mMessage = value;
+    return this;
+  }
+
   public String getFieldModifiedTime() {
     return mModifiedTime;
+  }
+
+  public ExpirablePost setFieldModifiedTime(String value) {
+    this.mModifiedTime = value;
+    return this;
   }
 
   public String getFieldOgActionSummary() {
     return mOgActionSummary;
   }
 
+  public ExpirablePost setFieldOgActionSummary(String value) {
+    this.mOgActionSummary = value;
+    return this;
+  }
+
   public String getFieldPermalinkUrl() {
     return mPermalinkUrl;
+  }
+
+  public ExpirablePost setFieldPermalinkUrl(String value) {
+    this.mPermalinkUrl = value;
+    return this;
   }
 
   public Place getFieldPlace() {
@@ -367,286 +371,71 @@ public class ExpirablePost extends APINode {
     return mPlace;
   }
 
+  public ExpirablePost setFieldPlace(Place value) {
+    this.mPlace = value;
+    return this;
+  }
+
+  public ExpirablePost setFieldPlace(String value) {
+    Type type = new TypeToken<Place>(){}.getType();
+    this.mPlace = Place.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldPrivacyDescription() {
     return mPrivacyDescription;
+  }
+
+  public ExpirablePost setFieldPrivacyDescription(String value) {
+    this.mPrivacyDescription = value;
+    return this;
   }
 
   public Object getFieldPromotionInfo() {
     return mPromotionInfo;
   }
 
+  public ExpirablePost setFieldPromotionInfo(Object value) {
+    this.mPromotionInfo = value;
+    return this;
+  }
+
   public String getFieldScheduledPublishTime() {
     return mScheduledPublishTime;
+  }
+
+  public ExpirablePost setFieldScheduledPublishTime(String value) {
+    this.mScheduledPublishTime = value;
+    return this;
   }
 
   public String getFieldStoryToken() {
     return mStoryToken;
   }
 
+  public ExpirablePost setFieldStoryToken(String value) {
+    this.mStoryToken = value;
+    return this;
+  }
+
   public String getFieldThumbnail() {
     return mThumbnail;
+  }
+
+  public ExpirablePost setFieldThumbnail(String value) {
+    this.mThumbnail = value;
+    return this;
   }
 
   public String getFieldVideoId() {
     return mVideoId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ExpirablePost> {
-
-    ExpirablePost lastResponse = null;
-    @Override
-    public ExpirablePost getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "admin_creator",
-      "can_republish",
-      "content_type",
-      "creation_time",
-      "expiration",
-      "feed_audience_description",
-      "feed_targeting",
-      "id",
-      "message",
-      "modified_time",
-      "og_action_summary",
-      "permalink_url",
-      "place",
-      "privacy_description",
-      "promotion_info",
-      "scheduled_publish_time",
-      "story_token",
-      "thumbnail",
-      "video_id",
-    };
-
-    @Override
-    public ExpirablePost parseResponse(String response) throws APIException {
-      return ExpirablePost.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ExpirablePost execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ExpirablePost execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ExpirablePost> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ExpirablePost> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ExpirablePost>() {
-           public ExpirablePost apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAdminCreatorField () {
-      return this.requestAdminCreatorField(true);
-    }
-    public APIRequestGet requestAdminCreatorField (boolean value) {
-      this.requestField("admin_creator", value);
-      return this;
-    }
-    public APIRequestGet requestCanRepublishField () {
-      return this.requestCanRepublishField(true);
-    }
-    public APIRequestGet requestCanRepublishField (boolean value) {
-      this.requestField("can_republish", value);
-      return this;
-    }
-    public APIRequestGet requestContentTypeField () {
-      return this.requestContentTypeField(true);
-    }
-    public APIRequestGet requestContentTypeField (boolean value) {
-      this.requestField("content_type", value);
-      return this;
-    }
-    public APIRequestGet requestCreationTimeField () {
-      return this.requestCreationTimeField(true);
-    }
-    public APIRequestGet requestCreationTimeField (boolean value) {
-      this.requestField("creation_time", value);
-      return this;
-    }
-    public APIRequestGet requestExpirationField () {
-      return this.requestExpirationField(true);
-    }
-    public APIRequestGet requestExpirationField (boolean value) {
-      this.requestField("expiration", value);
-      return this;
-    }
-    public APIRequestGet requestFeedAudienceDescriptionField () {
-      return this.requestFeedAudienceDescriptionField(true);
-    }
-    public APIRequestGet requestFeedAudienceDescriptionField (boolean value) {
-      this.requestField("feed_audience_description", value);
-      return this;
-    }
-    public APIRequestGet requestFeedTargetingField () {
-      return this.requestFeedTargetingField(true);
-    }
-    public APIRequestGet requestFeedTargetingField (boolean value) {
-      this.requestField("feed_targeting", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestMessageField () {
-      return this.requestMessageField(true);
-    }
-    public APIRequestGet requestMessageField (boolean value) {
-      this.requestField("message", value);
-      return this;
-    }
-    public APIRequestGet requestModifiedTimeField () {
-      return this.requestModifiedTimeField(true);
-    }
-    public APIRequestGet requestModifiedTimeField (boolean value) {
-      this.requestField("modified_time", value);
-      return this;
-    }
-    public APIRequestGet requestOgActionSummaryField () {
-      return this.requestOgActionSummaryField(true);
-    }
-    public APIRequestGet requestOgActionSummaryField (boolean value) {
-      this.requestField("og_action_summary", value);
-      return this;
-    }
-    public APIRequestGet requestPermalinkUrlField () {
-      return this.requestPermalinkUrlField(true);
-    }
-    public APIRequestGet requestPermalinkUrlField (boolean value) {
-      this.requestField("permalink_url", value);
-      return this;
-    }
-    public APIRequestGet requestPlaceField () {
-      return this.requestPlaceField(true);
-    }
-    public APIRequestGet requestPlaceField (boolean value) {
-      this.requestField("place", value);
-      return this;
-    }
-    public APIRequestGet requestPrivacyDescriptionField () {
-      return this.requestPrivacyDescriptionField(true);
-    }
-    public APIRequestGet requestPrivacyDescriptionField (boolean value) {
-      this.requestField("privacy_description", value);
-      return this;
-    }
-    public APIRequestGet requestPromotionInfoField () {
-      return this.requestPromotionInfoField(true);
-    }
-    public APIRequestGet requestPromotionInfoField (boolean value) {
-      this.requestField("promotion_info", value);
-      return this;
-    }
-    public APIRequestGet requestScheduledPublishTimeField () {
-      return this.requestScheduledPublishTimeField(true);
-    }
-    public APIRequestGet requestScheduledPublishTimeField (boolean value) {
-      this.requestField("scheduled_publish_time", value);
-      return this;
-    }
-    public APIRequestGet requestStoryTokenField () {
-      return this.requestStoryTokenField(true);
-    }
-    public APIRequestGet requestStoryTokenField (boolean value) {
-      this.requestField("story_token", value);
-      return this;
-    }
-    public APIRequestGet requestThumbnailField () {
-      return this.requestThumbnailField(true);
-    }
-    public APIRequestGet requestThumbnailField (boolean value) {
-      this.requestField("thumbnail", value);
-      return this;
-    }
-    public APIRequestGet requestVideoIdField () {
-      return this.requestVideoIdField(true);
-    }
-    public APIRequestGet requestVideoIdField (boolean value) {
-      this.requestField("video_id", value);
-      return this;
-    }
+  public ExpirablePost setFieldVideoId(String value) {
+    this.mVideoId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

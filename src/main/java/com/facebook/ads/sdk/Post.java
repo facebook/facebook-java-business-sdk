@@ -632,9 +632,6 @@ public class Post extends APINode {
   }
 
   public Privacy getFieldPrivacy() {
-    if (mPrivacy != null) {
-      mPrivacy.context = getContext();
-    }
     return mPrivacy;
   }
 
@@ -3221,10 +3218,12 @@ public class Post extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -3523,6 +3522,13 @@ public class Post extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetSeen requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetSeen requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetSeen requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -3549,6 +3555,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSeen requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetSeen requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetSeen requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetSeen requestLastNameField () {
@@ -4479,6 +4492,7 @@ public class Post extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "privacy_info_url",
       "produced_by",
       "products",
       "promotion_eligible",
@@ -5364,6 +5378,13 @@ public class Post extends APINode {
     }
     public APIRequestGetSponsorTags requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetSponsorTags requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
       return this;
     }
     public APIRequestGetSponsorTags requestProducedByField () {

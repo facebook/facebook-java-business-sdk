@@ -63,66 +63,7 @@ public class AdCampaignDeliveryStatsUnsupportedReasons extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCampaignDeliveryStatsUnsupportedReasons() {
-  }
-
-  public AdCampaignDeliveryStatsUnsupportedReasons(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCampaignDeliveryStatsUnsupportedReasons(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCampaignDeliveryStatsUnsupportedReasons fetch() throws APIException{
-    AdCampaignDeliveryStatsUnsupportedReasons newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCampaignDeliveryStatsUnsupportedReasons fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCampaignDeliveryStatsUnsupportedReasons> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCampaignDeliveryStatsUnsupportedReasons fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCampaignDeliveryStatsUnsupportedReasons> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCampaignDeliveryStatsUnsupportedReasons> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCampaignDeliveryStatsUnsupportedReasons>)(
-      new APIRequest<AdCampaignDeliveryStatsUnsupportedReasons>(context, "", "/", "GET", AdCampaignDeliveryStatsUnsupportedReasons.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCampaignDeliveryStatsUnsupportedReasons>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCampaignDeliveryStatsUnsupportedReasons.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCampaignDeliveryStatsUnsupportedReasons() {
   }
 
   public String getId() {
@@ -269,151 +210,35 @@ public class AdCampaignDeliveryStatsUnsupportedReasons extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<Object> getFieldReasonData() {
     return mReasonData;
+  }
+
+  public AdCampaignDeliveryStatsUnsupportedReasons setFieldReasonData(List<Object> value) {
+    this.mReasonData = value;
+    return this;
   }
 
   public String getFieldReasonType() {
     return mReasonType;
   }
 
+  public AdCampaignDeliveryStatsUnsupportedReasons setFieldReasonType(String value) {
+    this.mReasonType = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCampaignDeliveryStatsUnsupportedReasons> {
-
-    AdCampaignDeliveryStatsUnsupportedReasons lastResponse = null;
-    @Override
-    public AdCampaignDeliveryStatsUnsupportedReasons getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "reason_data",
-      "reason_type",
-      "id",
-    };
-
-    @Override
-    public AdCampaignDeliveryStatsUnsupportedReasons parseResponse(String response) throws APIException {
-      return AdCampaignDeliveryStatsUnsupportedReasons.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCampaignDeliveryStatsUnsupportedReasons execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCampaignDeliveryStatsUnsupportedReasons execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCampaignDeliveryStatsUnsupportedReasons> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCampaignDeliveryStatsUnsupportedReasons> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCampaignDeliveryStatsUnsupportedReasons>() {
-           public AdCampaignDeliveryStatsUnsupportedReasons apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestReasonDataField () {
-      return this.requestReasonDataField(true);
-    }
-    public APIRequestGet requestReasonDataField (boolean value) {
-      this.requestField("reason_data", value);
-      return this;
-    }
-    public APIRequestGet requestReasonTypeField () {
-      return this.requestReasonTypeField(true);
-    }
-    public APIRequestGet requestReasonTypeField (boolean value) {
-      this.requestField("reason_type", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCampaignDeliveryStatsUnsupportedReasons setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

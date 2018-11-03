@@ -71,66 +71,7 @@ public class NativeOfferDiscount extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  NativeOfferDiscount() {
-  }
-
-  public NativeOfferDiscount(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public NativeOfferDiscount(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public NativeOfferDiscount fetch() throws APIException{
-    NativeOfferDiscount newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static NativeOfferDiscount fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<NativeOfferDiscount> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static NativeOfferDiscount fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<NativeOfferDiscount> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<NativeOfferDiscount> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<NativeOfferDiscount>)(
-      new APIRequest<NativeOfferDiscount>(context, "", "/", "GET", NativeOfferDiscount.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<NativeOfferDiscount>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", NativeOfferDiscount.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public NativeOfferDiscount() {
   }
 
   public String getId() {
@@ -277,199 +218,71 @@ public class NativeOfferDiscount extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldCurrency() {
     return mCurrency;
+  }
+
+  public NativeOfferDiscount setFieldCurrency(String value) {
+    this.mCurrency = value;
+    return this;
   }
 
   public String getFieldOverride() {
     return mOverride;
   }
 
+  public NativeOfferDiscount setFieldOverride(String value) {
+    this.mOverride = value;
+    return this;
+  }
+
   public String getFieldText() {
     return mText;
+  }
+
+  public NativeOfferDiscount setFieldText(String value) {
+    this.mText = value;
+    return this;
   }
 
   public String getFieldType() {
     return mType;
   }
 
+  public NativeOfferDiscount setFieldType(String value) {
+    this.mType = value;
+    return this;
+  }
+
   public Double getFieldValue1() {
     return mValue1;
+  }
+
+  public NativeOfferDiscount setFieldValue1(Double value) {
+    this.mValue1 = value;
+    return this;
   }
 
   public Double getFieldValue2() {
     return mValue2;
   }
 
+  public NativeOfferDiscount setFieldValue2(Double value) {
+    this.mValue2 = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<NativeOfferDiscount> {
-
-    NativeOfferDiscount lastResponse = null;
-    @Override
-    public NativeOfferDiscount getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "currency",
-      "override",
-      "text",
-      "type",
-      "value1",
-      "value2",
-      "id",
-    };
-
-    @Override
-    public NativeOfferDiscount parseResponse(String response) throws APIException {
-      return NativeOfferDiscount.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public NativeOfferDiscount execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public NativeOfferDiscount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<NativeOfferDiscount> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<NativeOfferDiscount> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, NativeOfferDiscount>() {
-           public NativeOfferDiscount apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCurrencyField () {
-      return this.requestCurrencyField(true);
-    }
-    public APIRequestGet requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGet requestOverrideField () {
-      return this.requestOverrideField(true);
-    }
-    public APIRequestGet requestOverrideField (boolean value) {
-      this.requestField("override", value);
-      return this;
-    }
-    public APIRequestGet requestTextField () {
-      return this.requestTextField(true);
-    }
-    public APIRequestGet requestTextField (boolean value) {
-      this.requestField("text", value);
-      return this;
-    }
-    public APIRequestGet requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGet requestTypeField (boolean value) {
-      this.requestField("type", value);
-      return this;
-    }
-    public APIRequestGet requestValue1Field () {
-      return this.requestValue1Field(true);
-    }
-    public APIRequestGet requestValue1Field (boolean value) {
-      this.requestField("value1", value);
-      return this;
-    }
-    public APIRequestGet requestValue2Field () {
-      return this.requestValue2Field(true);
-    }
-    public APIRequestGet requestValue2Field (boolean value) {
-      this.requestField("value2", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public NativeOfferDiscount setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

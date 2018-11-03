@@ -73,66 +73,7 @@ public class RequestHistory extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  RequestHistory() {
-  }
-
-  public RequestHistory(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public RequestHistory(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public RequestHistory fetch() throws APIException{
-    RequestHistory newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static RequestHistory fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<RequestHistory> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static RequestHistory fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<RequestHistory> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<RequestHistory> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<RequestHistory>)(
-      new APIRequest<RequestHistory>(context, "", "/", "GET", RequestHistory.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<RequestHistory>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", RequestHistory.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public RequestHistory() {
   }
 
   public String getId() {
@@ -279,211 +220,80 @@ public class RequestHistory extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldApiVersion() {
     return mApiVersion;
+  }
+
+  public RequestHistory setFieldApiVersion(String value) {
+    this.mApiVersion = value;
+    return this;
   }
 
   public String getFieldCreatedTime() {
     return mCreatedTime;
   }
 
+  public RequestHistory setFieldCreatedTime(String value) {
+    this.mCreatedTime = value;
+    return this;
+  }
+
   public Long getFieldErrorCode() {
     return mErrorCode;
+  }
+
+  public RequestHistory setFieldErrorCode(Long value) {
+    this.mErrorCode = value;
+    return this;
   }
 
   public String getFieldGraphPath() {
     return mGraphPath;
   }
 
+  public RequestHistory setFieldGraphPath(String value) {
+    this.mGraphPath = value;
+    return this;
+  }
+
   public EnumHttpMethod getFieldHttpMethod() {
     return mHttpMethod;
+  }
+
+  public RequestHistory setFieldHttpMethod(EnumHttpMethod value) {
+    this.mHttpMethod = value;
+    return this;
   }
 
   public List<Object> getFieldPostParams() {
     return mPostParams;
   }
 
+  public RequestHistory setFieldPostParams(List<Object> value) {
+    this.mPostParams = value;
+    return this;
+  }
+
   public List<Object> getFieldQueryParams() {
     return mQueryParams;
+  }
+
+  public RequestHistory setFieldQueryParams(List<Object> value) {
+    this.mQueryParams = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<RequestHistory> {
-
-    RequestHistory lastResponse = null;
-    @Override
-    public RequestHistory getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "api_version",
-      "created_time",
-      "error_code",
-      "graph_path",
-      "http_method",
-      "post_params",
-      "query_params",
-      "id",
-    };
-
-    @Override
-    public RequestHistory parseResponse(String response) throws APIException {
-      return RequestHistory.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public RequestHistory execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public RequestHistory execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<RequestHistory> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<RequestHistory> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, RequestHistory>() {
-           public RequestHistory apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestApiVersionField () {
-      return this.requestApiVersionField(true);
-    }
-    public APIRequestGet requestApiVersionField (boolean value) {
-      this.requestField("api_version", value);
-      return this;
-    }
-    public APIRequestGet requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGet requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGet requestErrorCodeField () {
-      return this.requestErrorCodeField(true);
-    }
-    public APIRequestGet requestErrorCodeField (boolean value) {
-      this.requestField("error_code", value);
-      return this;
-    }
-    public APIRequestGet requestGraphPathField () {
-      return this.requestGraphPathField(true);
-    }
-    public APIRequestGet requestGraphPathField (boolean value) {
-      this.requestField("graph_path", value);
-      return this;
-    }
-    public APIRequestGet requestHttpMethodField () {
-      return this.requestHttpMethodField(true);
-    }
-    public APIRequestGet requestHttpMethodField (boolean value) {
-      this.requestField("http_method", value);
-      return this;
-    }
-    public APIRequestGet requestPostParamsField () {
-      return this.requestPostParamsField(true);
-    }
-    public APIRequestGet requestPostParamsField (boolean value) {
-      this.requestField("post_params", value);
-      return this;
-    }
-    public APIRequestGet requestQueryParamsField () {
-      return this.requestQueryParamsField(true);
-    }
-    public APIRequestGet requestQueryParamsField (boolean value) {
-      this.requestField("query_params", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public RequestHistory setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
   public static enum EnumHttpMethod {
       @SerializedName("GET")

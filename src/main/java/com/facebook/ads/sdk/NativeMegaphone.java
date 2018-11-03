@@ -67,66 +67,7 @@ public class NativeMegaphone extends APINode {
   private String mTitle = null;
   protected static Gson gson = null;
 
-  NativeMegaphone() {
-  }
-
-  public NativeMegaphone(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public NativeMegaphone(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public NativeMegaphone fetch() throws APIException{
-    NativeMegaphone newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static NativeMegaphone fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<NativeMegaphone> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static NativeMegaphone fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<NativeMegaphone> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<NativeMegaphone> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<NativeMegaphone>)(
-      new APIRequest<NativeMegaphone>(context, "", "/", "GET", NativeMegaphone.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<NativeMegaphone>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", NativeMegaphone.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public NativeMegaphone() {
   }
 
   public String getId() {
@@ -273,178 +214,58 @@ public class NativeMegaphone extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Object getFieldAction() {
     return mAction;
   }
 
+  public NativeMegaphone setFieldAction(Object value) {
+    this.mAction = value;
+    return this;
+  }
+
   public TextWithEntities getFieldContent() {
-    if (mContent != null) {
-      mContent.context = getContext();
-    }
     return mContent;
   }
 
+  public NativeMegaphone setFieldContent(TextWithEntities value) {
+    this.mContent = value;
+    return this;
+  }
+
+  public NativeMegaphone setFieldContent(String value) {
+    Type type = new TypeToken<TextWithEntities>(){}.getType();
+    this.mContent = TextWithEntities.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
+  }
+
+  public NativeMegaphone setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public List<String> getFieldImage() {
     return mImage;
   }
 
+  public NativeMegaphone setFieldImage(List<String> value) {
+    this.mImage = value;
+    return this;
+  }
+
   public String getFieldTitle() {
     return mTitle;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<NativeMegaphone> {
-
-    NativeMegaphone lastResponse = null;
-    @Override
-    public NativeMegaphone getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "action",
-      "content",
-      "id",
-      "image",
-      "title",
-    };
-
-    @Override
-    public NativeMegaphone parseResponse(String response) throws APIException {
-      return NativeMegaphone.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public NativeMegaphone execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public NativeMegaphone execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<NativeMegaphone> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<NativeMegaphone> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, NativeMegaphone>() {
-           public NativeMegaphone apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestActionField () {
-      return this.requestActionField(true);
-    }
-    public APIRequestGet requestActionField (boolean value) {
-      this.requestField("action", value);
-      return this;
-    }
-    public APIRequestGet requestContentField () {
-      return this.requestContentField(true);
-    }
-    public APIRequestGet requestContentField (boolean value) {
-      this.requestField("content", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestImageField () {
-      return this.requestImageField(true);
-    }
-    public APIRequestGet requestImageField (boolean value) {
-      this.requestField("image", value);
-      return this;
-    }
-    public APIRequestGet requestTitleField () {
-      return this.requestTitleField(true);
-    }
-    public APIRequestGet requestTitleField (boolean value) {
-      this.requestField("title", value);
-      return this;
-    }
+  public NativeMegaphone setFieldTitle(String value) {
+    this.mTitle = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

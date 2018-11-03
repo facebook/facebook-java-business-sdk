@@ -65,66 +65,7 @@ public class CanvasCollectionThumbnail extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  CanvasCollectionThumbnail() {
-  }
-
-  public CanvasCollectionThumbnail(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public CanvasCollectionThumbnail(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public CanvasCollectionThumbnail fetch() throws APIException{
-    CanvasCollectionThumbnail newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static CanvasCollectionThumbnail fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<CanvasCollectionThumbnail> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static CanvasCollectionThumbnail fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<CanvasCollectionThumbnail> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<CanvasCollectionThumbnail> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CanvasCollectionThumbnail>)(
-      new APIRequest<CanvasCollectionThumbnail>(context, "", "/", "GET", CanvasCollectionThumbnail.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<CanvasCollectionThumbnail>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", CanvasCollectionThumbnail.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public CanvasCollectionThumbnail() {
   }
 
   public String getId() {
@@ -271,17 +212,23 @@ public class CanvasCollectionThumbnail extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldElementChildIndex() {
     return mElementChildIndex;
   }
 
+  public CanvasCollectionThumbnail setFieldElementChildIndex(Long value) {
+    this.mElementChildIndex = value;
+    return this;
+  }
+
   public String getFieldElementId() {
     return mElementId;
+  }
+
+  public CanvasCollectionThumbnail setFieldElementId(String value) {
+    this.mElementId = value;
+    return this;
   }
 
   public Photo getFieldPhoto() {
@@ -291,146 +238,26 @@ public class CanvasCollectionThumbnail extends APINode {
     return mPhoto;
   }
 
+  public CanvasCollectionThumbnail setFieldPhoto(Photo value) {
+    this.mPhoto = value;
+    return this;
+  }
+
+  public CanvasCollectionThumbnail setFieldPhoto(String value) {
+    Type type = new TypeToken<Photo>(){}.getType();
+    this.mPhoto = Photo.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<CanvasCollectionThumbnail> {
-
-    CanvasCollectionThumbnail lastResponse = null;
-    @Override
-    public CanvasCollectionThumbnail getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "element_child_index",
-      "element_id",
-      "photo",
-      "id",
-    };
-
-    @Override
-    public CanvasCollectionThumbnail parseResponse(String response) throws APIException {
-      return CanvasCollectionThumbnail.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public CanvasCollectionThumbnail execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CanvasCollectionThumbnail execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<CanvasCollectionThumbnail> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CanvasCollectionThumbnail> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, CanvasCollectionThumbnail>() {
-           public CanvasCollectionThumbnail apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestElementChildIndexField () {
-      return this.requestElementChildIndexField(true);
-    }
-    public APIRequestGet requestElementChildIndexField (boolean value) {
-      this.requestField("element_child_index", value);
-      return this;
-    }
-    public APIRequestGet requestElementIdField () {
-      return this.requestElementIdField(true);
-    }
-    public APIRequestGet requestElementIdField (boolean value) {
-      this.requestField("element_id", value);
-      return this;
-    }
-    public APIRequestGet requestPhotoField () {
-      return this.requestPhotoField(true);
-    }
-    public APIRequestGet requestPhotoField (boolean value) {
-      this.requestField("photo", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public CanvasCollectionThumbnail setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

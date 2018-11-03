@@ -67,66 +67,7 @@ public class AnalyticsEventTypes extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AnalyticsEventTypes() {
-  }
-
-  public AnalyticsEventTypes(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AnalyticsEventTypes(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AnalyticsEventTypes fetch() throws APIException{
-    AnalyticsEventTypes newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AnalyticsEventTypes fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AnalyticsEventTypes> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AnalyticsEventTypes fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AnalyticsEventTypes> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AnalyticsEventTypes> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AnalyticsEventTypes>)(
-      new APIRequest<AnalyticsEventTypes>(context, "", "/", "GET", AnalyticsEventTypes.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AnalyticsEventTypes>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AnalyticsEventTypes.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AnalyticsEventTypes() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class AnalyticsEventTypes extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public AnalyticsEventTypes setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
   }
 
   public String getFieldDisplayName() {
     return mDisplayName;
   }
 
+  public AnalyticsEventTypes setFieldDisplayName(String value) {
+    this.mDisplayName = value;
+    return this;
+  }
+
   public String getFieldEventName() {
     return mEventName;
+  }
+
+  public AnalyticsEventTypes setFieldEventName(String value) {
+    this.mEventName = value;
+    return this;
   }
 
   public List<Object> getFieldParameters() {
     return mParameters;
   }
 
+  public AnalyticsEventTypes setFieldParameters(List<Object> value) {
+    this.mParameters = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AnalyticsEventTypes> {
-
-    AnalyticsEventTypes lastResponse = null;
-    @Override
-    public AnalyticsEventTypes getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "description",
-      "display_name",
-      "event_name",
-      "parameters",
-      "id",
-    };
-
-    @Override
-    public AnalyticsEventTypes parseResponse(String response) throws APIException {
-      return AnalyticsEventTypes.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AnalyticsEventTypes execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AnalyticsEventTypes execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AnalyticsEventTypes> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AnalyticsEventTypes> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AnalyticsEventTypes>() {
-           public AnalyticsEventTypes apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestDisplayNameField () {
-      return this.requestDisplayNameField(true);
-    }
-    public APIRequestGet requestDisplayNameField (boolean value) {
-      this.requestField("display_name", value);
-      return this;
-    }
-    public APIRequestGet requestEventNameField () {
-      return this.requestEventNameField(true);
-    }
-    public APIRequestGet requestEventNameField (boolean value) {
-      this.requestField("event_name", value);
-      return this;
-    }
-    public APIRequestGet requestParametersField () {
-      return this.requestParametersField(true);
-    }
-    public APIRequestGet requestParametersField (boolean value) {
-      this.requestField("parameters", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AnalyticsEventTypes setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

@@ -77,66 +77,7 @@ public class PageLocationsBreakdown extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  PageLocationsBreakdown() {
-  }
-
-  public PageLocationsBreakdown(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public PageLocationsBreakdown(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public PageLocationsBreakdown fetch() throws APIException{
-    PageLocationsBreakdown newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static PageLocationsBreakdown fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<PageLocationsBreakdown> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static PageLocationsBreakdown fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<PageLocationsBreakdown> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<PageLocationsBreakdown> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PageLocationsBreakdown>)(
-      new APIRequest<PageLocationsBreakdown>(context, "", "/", "GET", PageLocationsBreakdown.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<PageLocationsBreakdown>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", PageLocationsBreakdown.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public PageLocationsBreakdown() {
   }
 
   public String getId() {
@@ -283,235 +224,98 @@ public class PageLocationsBreakdown extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldLocationId() {
     return mLocationId;
+  }
+
+  public PageLocationsBreakdown setFieldLocationId(String value) {
+    this.mLocationId = value;
+    return this;
   }
 
   public String getFieldLocationName() {
     return mLocationName;
   }
 
+  public PageLocationsBreakdown setFieldLocationName(String value) {
+    this.mLocationName = value;
+    return this;
+  }
+
   public String getFieldLocationType() {
     return mLocationType;
+  }
+
+  public PageLocationsBreakdown setFieldLocationType(String value) {
+    this.mLocationType = value;
+    return this;
   }
 
   public Long getFieldNumPages() {
     return mNumPages;
   }
 
+  public PageLocationsBreakdown setFieldNumPages(Long value) {
+    this.mNumPages = value;
+    return this;
+  }
+
   public Long getFieldNumPagesEligibleForStoreVisitReporting() {
     return mNumPagesEligibleForStoreVisitReporting;
+  }
+
+  public PageLocationsBreakdown setFieldNumPagesEligibleForStoreVisitReporting(Long value) {
+    this.mNumPagesEligibleForStoreVisitReporting = value;
+    return this;
   }
 
   public Long getFieldNumUnpublishedOrClosedPages() {
     return mNumUnpublishedOrClosedPages;
   }
 
+  public PageLocationsBreakdown setFieldNumUnpublishedOrClosedPages(Long value) {
+    this.mNumUnpublishedOrClosedPages = value;
+    return this;
+  }
+
   public String getFieldParentCountryCode() {
     return mParentCountryCode;
+  }
+
+  public PageLocationsBreakdown setFieldParentCountryCode(String value) {
+    this.mParentCountryCode = value;
+    return this;
   }
 
   public Long getFieldParentRegionId() {
     return mParentRegionId;
   }
 
+  public PageLocationsBreakdown setFieldParentRegionId(Long value) {
+    this.mParentRegionId = value;
+    return this;
+  }
+
   public String getFieldParentRegionName() {
     return mParentRegionName;
+  }
+
+  public PageLocationsBreakdown setFieldParentRegionName(String value) {
+    this.mParentRegionName = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<PageLocationsBreakdown> {
-
-    PageLocationsBreakdown lastResponse = null;
-    @Override
-    public PageLocationsBreakdown getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "location_id",
-      "location_name",
-      "location_type",
-      "num_pages",
-      "num_pages_eligible_for_store_visit_reporting",
-      "num_unpublished_or_closed_pages",
-      "parent_country_code",
-      "parent_region_id",
-      "parent_region_name",
-      "id",
-    };
-
-    @Override
-    public PageLocationsBreakdown parseResponse(String response) throws APIException {
-      return PageLocationsBreakdown.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public PageLocationsBreakdown execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public PageLocationsBreakdown execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<PageLocationsBreakdown> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<PageLocationsBreakdown> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, PageLocationsBreakdown>() {
-           public PageLocationsBreakdown apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestLocationIdField () {
-      return this.requestLocationIdField(true);
-    }
-    public APIRequestGet requestLocationIdField (boolean value) {
-      this.requestField("location_id", value);
-      return this;
-    }
-    public APIRequestGet requestLocationNameField () {
-      return this.requestLocationNameField(true);
-    }
-    public APIRequestGet requestLocationNameField (boolean value) {
-      this.requestField("location_name", value);
-      return this;
-    }
-    public APIRequestGet requestLocationTypeField () {
-      return this.requestLocationTypeField(true);
-    }
-    public APIRequestGet requestLocationTypeField (boolean value) {
-      this.requestField("location_type", value);
-      return this;
-    }
-    public APIRequestGet requestNumPagesField () {
-      return this.requestNumPagesField(true);
-    }
-    public APIRequestGet requestNumPagesField (boolean value) {
-      this.requestField("num_pages", value);
-      return this;
-    }
-    public APIRequestGet requestNumPagesEligibleForStoreVisitReportingField () {
-      return this.requestNumPagesEligibleForStoreVisitReportingField(true);
-    }
-    public APIRequestGet requestNumPagesEligibleForStoreVisitReportingField (boolean value) {
-      this.requestField("num_pages_eligible_for_store_visit_reporting", value);
-      return this;
-    }
-    public APIRequestGet requestNumUnpublishedOrClosedPagesField () {
-      return this.requestNumUnpublishedOrClosedPagesField(true);
-    }
-    public APIRequestGet requestNumUnpublishedOrClosedPagesField (boolean value) {
-      this.requestField("num_unpublished_or_closed_pages", value);
-      return this;
-    }
-    public APIRequestGet requestParentCountryCodeField () {
-      return this.requestParentCountryCodeField(true);
-    }
-    public APIRequestGet requestParentCountryCodeField (boolean value) {
-      this.requestField("parent_country_code", value);
-      return this;
-    }
-    public APIRequestGet requestParentRegionIdField () {
-      return this.requestParentRegionIdField(true);
-    }
-    public APIRequestGet requestParentRegionIdField (boolean value) {
-      this.requestField("parent_region_id", value);
-      return this;
-    }
-    public APIRequestGet requestParentRegionNameField () {
-      return this.requestParentRegionNameField(true);
-    }
-    public APIRequestGet requestParentRegionNameField (boolean value) {
-      this.requestField("parent_region_name", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public PageLocationsBreakdown setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

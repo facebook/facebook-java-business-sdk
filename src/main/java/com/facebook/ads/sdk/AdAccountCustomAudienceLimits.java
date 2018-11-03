@@ -69,66 +69,7 @@ public class AdAccountCustomAudienceLimits extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdAccountCustomAudienceLimits() {
-  }
-
-  public AdAccountCustomAudienceLimits(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdAccountCustomAudienceLimits(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdAccountCustomAudienceLimits fetch() throws APIException{
-    AdAccountCustomAudienceLimits newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdAccountCustomAudienceLimits fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdAccountCustomAudienceLimits> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdAccountCustomAudienceLimits fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdAccountCustomAudienceLimits> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdAccountCustomAudienceLimits> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdAccountCustomAudienceLimits>)(
-      new APIRequest<AdAccountCustomAudienceLimits>(context, "", "/", "GET", AdAccountCustomAudienceLimits.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdAccountCustomAudienceLimits>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdAccountCustomAudienceLimits.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdAccountCustomAudienceLimits() {
   }
 
   public String getId() {
@@ -275,187 +216,62 @@ public class AdAccountCustomAudienceLimits extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldAudienceUpdateQuotaInTotal() {
     return mAudienceUpdateQuotaInTotal;
+  }
+
+  public AdAccountCustomAudienceLimits setFieldAudienceUpdateQuotaInTotal(Long value) {
+    this.mAudienceUpdateQuotaInTotal = value;
+    return this;
   }
 
   public Double getFieldAudienceUpdateQuotaLeft() {
     return mAudienceUpdateQuotaLeft;
   }
 
+  public AdAccountCustomAudienceLimits setFieldAudienceUpdateQuotaLeft(Double value) {
+    this.mAudienceUpdateQuotaLeft = value;
+    return this;
+  }
+
   public Boolean getFieldHasHitAudienceUpdateLimit() {
     return mHasHitAudienceUpdateLimit;
+  }
+
+  public AdAccountCustomAudienceLimits setFieldHasHitAudienceUpdateLimit(Boolean value) {
+    this.mHasHitAudienceUpdateLimit = value;
+    return this;
   }
 
   public String getFieldNextAudienceUpdateAvailableTime() {
     return mNextAudienceUpdateAvailableTime;
   }
 
+  public AdAccountCustomAudienceLimits setFieldNextAudienceUpdateAvailableTime(String value) {
+    this.mNextAudienceUpdateAvailableTime = value;
+    return this;
+  }
+
   public String getFieldRateLimitResetTime() {
     return mRateLimitResetTime;
+  }
+
+  public AdAccountCustomAudienceLimits setFieldRateLimitResetTime(String value) {
+    this.mRateLimitResetTime = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdAccountCustomAudienceLimits> {
-
-    AdAccountCustomAudienceLimits lastResponse = null;
-    @Override
-    public AdAccountCustomAudienceLimits getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "audience_update_quota_in_total",
-      "audience_update_quota_left",
-      "has_hit_audience_update_limit",
-      "next_audience_update_available_time",
-      "rate_limit_reset_time",
-      "id",
-    };
-
-    @Override
-    public AdAccountCustomAudienceLimits parseResponse(String response) throws APIException {
-      return AdAccountCustomAudienceLimits.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdAccountCustomAudienceLimits execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdAccountCustomAudienceLimits execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdAccountCustomAudienceLimits> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdAccountCustomAudienceLimits> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdAccountCustomAudienceLimits>() {
-           public AdAccountCustomAudienceLimits apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAudienceUpdateQuotaInTotalField () {
-      return this.requestAudienceUpdateQuotaInTotalField(true);
-    }
-    public APIRequestGet requestAudienceUpdateQuotaInTotalField (boolean value) {
-      this.requestField("audience_update_quota_in_total", value);
-      return this;
-    }
-    public APIRequestGet requestAudienceUpdateQuotaLeftField () {
-      return this.requestAudienceUpdateQuotaLeftField(true);
-    }
-    public APIRequestGet requestAudienceUpdateQuotaLeftField (boolean value) {
-      this.requestField("audience_update_quota_left", value);
-      return this;
-    }
-    public APIRequestGet requestHasHitAudienceUpdateLimitField () {
-      return this.requestHasHitAudienceUpdateLimitField(true);
-    }
-    public APIRequestGet requestHasHitAudienceUpdateLimitField (boolean value) {
-      this.requestField("has_hit_audience_update_limit", value);
-      return this;
-    }
-    public APIRequestGet requestNextAudienceUpdateAvailableTimeField () {
-      return this.requestNextAudienceUpdateAvailableTimeField(true);
-    }
-    public APIRequestGet requestNextAudienceUpdateAvailableTimeField (boolean value) {
-      this.requestField("next_audience_update_available_time", value);
-      return this;
-    }
-    public APIRequestGet requestRateLimitResetTimeField () {
-      return this.requestRateLimitResetTimeField(true);
-    }
-    public APIRequestGet requestRateLimitResetTimeField (boolean value) {
-      this.requestField("rate_limit_reset_time", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdAccountCustomAudienceLimits setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

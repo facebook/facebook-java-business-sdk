@@ -69,66 +69,7 @@ public class AudiencePermissionForActions extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AudiencePermissionForActions() {
-  }
-
-  public AudiencePermissionForActions(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AudiencePermissionForActions(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AudiencePermissionForActions fetch() throws APIException{
-    AudiencePermissionForActions newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AudiencePermissionForActions fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AudiencePermissionForActions> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AudiencePermissionForActions fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AudiencePermissionForActions> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AudiencePermissionForActions> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AudiencePermissionForActions>)(
-      new APIRequest<AudiencePermissionForActions>(context, "", "/", "GET", AudiencePermissionForActions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AudiencePermissionForActions>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AudiencePermissionForActions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AudiencePermissionForActions() {
   }
 
   public String getId() {
@@ -275,187 +216,62 @@ public class AudiencePermissionForActions extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Boolean getFieldCanEdit() {
     return mCanEdit;
+  }
+
+  public AudiencePermissionForActions setFieldCanEdit(Boolean value) {
+    this.mCanEdit = value;
+    return this;
   }
 
   public Boolean getFieldCanSeeInsight() {
     return mCanSeeInsight;
   }
 
+  public AudiencePermissionForActions setFieldCanSeeInsight(Boolean value) {
+    this.mCanSeeInsight = value;
+    return this;
+  }
+
   public Boolean getFieldCanShare() {
     return mCanShare;
+  }
+
+  public AudiencePermissionForActions setFieldCanShare(Boolean value) {
+    this.mCanShare = value;
+    return this;
   }
 
   public Boolean getFieldSubtypeSupportsLookalike() {
     return mSubtypeSupportsLookalike;
   }
 
+  public AudiencePermissionForActions setFieldSubtypeSupportsLookalike(Boolean value) {
+    this.mSubtypeSupportsLookalike = value;
+    return this;
+  }
+
   public Boolean getFieldSupportsRecipientLookalike() {
     return mSupportsRecipientLookalike;
+  }
+
+  public AudiencePermissionForActions setFieldSupportsRecipientLookalike(Boolean value) {
+    this.mSupportsRecipientLookalike = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AudiencePermissionForActions> {
-
-    AudiencePermissionForActions lastResponse = null;
-    @Override
-    public AudiencePermissionForActions getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "can_edit",
-      "can_see_insight",
-      "can_share",
-      "subtype_supports_lookalike",
-      "supports_recipient_lookalike",
-      "id",
-    };
-
-    @Override
-    public AudiencePermissionForActions parseResponse(String response) throws APIException {
-      return AudiencePermissionForActions.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AudiencePermissionForActions execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AudiencePermissionForActions execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AudiencePermissionForActions> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AudiencePermissionForActions> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AudiencePermissionForActions>() {
-           public AudiencePermissionForActions apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCanEditField () {
-      return this.requestCanEditField(true);
-    }
-    public APIRequestGet requestCanEditField (boolean value) {
-      this.requestField("can_edit", value);
-      return this;
-    }
-    public APIRequestGet requestCanSeeInsightField () {
-      return this.requestCanSeeInsightField(true);
-    }
-    public APIRequestGet requestCanSeeInsightField (boolean value) {
-      this.requestField("can_see_insight", value);
-      return this;
-    }
-    public APIRequestGet requestCanShareField () {
-      return this.requestCanShareField(true);
-    }
-    public APIRequestGet requestCanShareField (boolean value) {
-      this.requestField("can_share", value);
-      return this;
-    }
-    public APIRequestGet requestSubtypeSupportsLookalikeField () {
-      return this.requestSubtypeSupportsLookalikeField(true);
-    }
-    public APIRequestGet requestSubtypeSupportsLookalikeField (boolean value) {
-      this.requestField("subtype_supports_lookalike", value);
-      return this;
-    }
-    public APIRequestGet requestSupportsRecipientLookalikeField () {
-      return this.requestSupportsRecipientLookalikeField(true);
-    }
-    public APIRequestGet requestSupportsRecipientLookalikeField (boolean value) {
-      this.requestField("supports_recipient_lookalike", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AudiencePermissionForActions setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

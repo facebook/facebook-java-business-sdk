@@ -319,16 +319,10 @@ public class OracleTransaction extends APINode {
   }
 
   public CurrencyAmount getFieldAmountDue() {
-    if (mAmountDue != null) {
-      mAmountDue.context = getContext();
-    }
     return mAmountDue;
   }
 
   public BilledAmountDetails getFieldBilledAmountDetails() {
-    if (mBilledAmountDetails != null) {
-      mBilledAmountDetails.context = getContext();
-    }
     return mBilledAmountDetails;
   }
 

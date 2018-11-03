@@ -879,6 +879,7 @@ public class EventTour extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "privacy_info_url",
       "produced_by",
       "products",
       "promotion_eligible",
@@ -1764,6 +1765,13 @@ public class EventTour extends APINode {
     }
     public APIRequestGetPages requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetPages requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetPages requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
       return this;
     }
     public APIRequestGetPages requestProducedByField () {

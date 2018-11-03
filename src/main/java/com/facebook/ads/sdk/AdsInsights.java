@@ -123,6 +123,14 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mCostPerAdClick = null;
   @SerializedName("cost_per_dda_countby_convs")
   private String mCostPerDdaCountbyConvs = null;
+  @SerializedName("cost_per_dwell")
+  private String mCostPerDwell = null;
+  @SerializedName("cost_per_dwell_3_sec")
+  private String mCostPerDwell3Sec = null;
+  @SerializedName("cost_per_dwell_5_sec")
+  private String mCostPerDwell5Sec = null;
+  @SerializedName("cost_per_dwell_7_sec")
+  private String mCostPerDwell7Sec = null;
   @SerializedName("cost_per_estimated_ad_recallers")
   private String mCostPerEstimatedAdRecallers = null;
   @SerializedName("cost_per_inline_link_click")
@@ -169,6 +177,14 @@ public class AdsInsights extends APINode {
   private String mDevicePlatform = null;
   @SerializedName("dma")
   private String mDma = null;
+  @SerializedName("dwell_3_sec")
+  private String mDwell3Sec = null;
+  @SerializedName("dwell_5_sec")
+  private String mDwell5Sec = null;
+  @SerializedName("dwell_7_sec")
+  private String mDwell7Sec = null;
+  @SerializedName("dwell_rate")
+  private String mDwellRate = null;
   @SerializedName("estimated_ad_recall_rate")
   private String mEstimatedAdRecallRate = null;
   @SerializedName("estimated_ad_recall_rate_lower_bound")
@@ -251,6 +267,8 @@ public class AdsInsights extends APINode {
   private String mSocialSpend = null;
   @SerializedName("spend")
   private String mSpend = null;
+  @SerializedName("thumb_stops")
+  private String mThumbStops = null;
   @SerializedName("title_asset")
   private Object mTitleAsset = null;
   @SerializedName("unique_actions")
@@ -323,66 +341,7 @@ public class AdsInsights extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdsInsights() {
-  }
-
-  public AdsInsights(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdsInsights(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdsInsights fetch() throws APIException{
-    AdsInsights newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdsInsights fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdsInsights> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdsInsights fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdsInsights> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdsInsights> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdsInsights>)(
-      new APIRequest<AdsInsights>(context, "", "/", "GET", AdsInsights.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdsInsights>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdsInsights.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdsInsights() {
   }
 
   public String getId() {
@@ -529,1714 +488,1491 @@ public class AdsInsights extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAccountCurrency() {
     return mAccountCurrency;
+  }
+
+  public AdsInsights setFieldAccountCurrency(String value) {
+    this.mAccountCurrency = value;
+    return this;
   }
 
   public String getFieldAccountId() {
     return mAccountId;
   }
 
+  public AdsInsights setFieldAccountId(String value) {
+    this.mAccountId = value;
+    return this;
+  }
+
   public String getFieldAccountName() {
     return mAccountName;
+  }
+
+  public AdsInsights setFieldAccountName(String value) {
+    this.mAccountName = value;
+    return this;
   }
 
   public List<AdsActionStats> getFieldActionValues() {
     return mActionValues;
   }
 
+  public AdsInsights setFieldActionValues(List<AdsActionStats> value) {
+    this.mActionValues = value;
+    return this;
+  }
+
+  public AdsInsights setFieldActionValues(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mActionValues = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldActions() {
     return mActions;
   }
 
+  public AdsInsights setFieldActions(List<AdsActionStats> value) {
+    this.mActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldActivityRecency() {
     return mActivityRecency;
+  }
+
+  public AdsInsights setFieldActivityRecency(String value) {
+    this.mActivityRecency = value;
+    return this;
   }
 
   public List<AdsActionStats> getFieldAdClickActions() {
     return mAdClickActions;
   }
 
+  public AdsInsights setFieldAdClickActions(List<AdsActionStats> value) {
+    this.mAdClickActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldAdClickActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mAdClickActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldAdFormatAsset() {
     return mAdFormatAsset;
+  }
+
+  public AdsInsights setFieldAdFormatAsset(String value) {
+    this.mAdFormatAsset = value;
+    return this;
   }
 
   public String getFieldAdId() {
     return mAdId;
   }
 
+  public AdsInsights setFieldAdId(String value) {
+    this.mAdId = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldAdImpressionActions() {
     return mAdImpressionActions;
   }
 
+  public AdsInsights setFieldAdImpressionActions(List<AdsActionStats> value) {
+    this.mAdImpressionActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldAdImpressionActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mAdImpressionActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldAdName() {
     return mAdName;
+  }
+
+  public AdsInsights setFieldAdName(String value) {
+    this.mAdName = value;
+    return this;
   }
 
   public String getFieldAdsetId() {
     return mAdsetId;
   }
 
+  public AdsInsights setFieldAdsetId(String value) {
+    this.mAdsetId = value;
+    return this;
+  }
+
   public String getFieldAdsetName() {
     return mAdsetName;
+  }
+
+  public AdsInsights setFieldAdsetName(String value) {
+    this.mAdsetName = value;
+    return this;
   }
 
   public String getFieldAge() {
     return mAge;
   }
 
+  public AdsInsights setFieldAge(String value) {
+    this.mAge = value;
+    return this;
+  }
+
   public String getFieldAgeTargeting() {
     return mAgeTargeting;
+  }
+
+  public AdsInsights setFieldAgeTargeting(String value) {
+    this.mAgeTargeting = value;
+    return this;
   }
 
   public String getFieldAuctionBid() {
     return mAuctionBid;
   }
 
+  public AdsInsights setFieldAuctionBid(String value) {
+    this.mAuctionBid = value;
+    return this;
+  }
+
   public String getFieldAuctionCompetitiveness() {
     return mAuctionCompetitiveness;
+  }
+
+  public AdsInsights setFieldAuctionCompetitiveness(String value) {
+    this.mAuctionCompetitiveness = value;
+    return this;
   }
 
   public String getFieldAuctionMaxCompetitorBid() {
     return mAuctionMaxCompetitorBid;
   }
 
+  public AdsInsights setFieldAuctionMaxCompetitorBid(String value) {
+    this.mAuctionMaxCompetitorBid = value;
+    return this;
+  }
+
   public String getFieldBidType() {
     return mBidType;
+  }
+
+  public AdsInsights setFieldBidType(String value) {
+    this.mBidType = value;
+    return this;
   }
 
   public Object getFieldBodyAsset() {
     return mBodyAsset;
   }
 
+  public AdsInsights setFieldBodyAsset(Object value) {
+    this.mBodyAsset = value;
+    return this;
+  }
+
   public String getFieldBuyingType() {
     return mBuyingType;
+  }
+
+  public AdsInsights setFieldBuyingType(String value) {
+    this.mBuyingType = value;
+    return this;
   }
 
   public Object getFieldCallToActionAsset() {
     return mCallToActionAsset;
   }
 
+  public AdsInsights setFieldCallToActionAsset(Object value) {
+    this.mCallToActionAsset = value;
+    return this;
+  }
+
   public String getFieldCampaignId() {
     return mCampaignId;
+  }
+
+  public AdsInsights setFieldCampaignId(String value) {
+    this.mCampaignId = value;
+    return this;
   }
 
   public String getFieldCampaignName() {
     return mCampaignName;
   }
 
+  public AdsInsights setFieldCampaignName(String value) {
+    this.mCampaignName = value;
+    return this;
+  }
+
   public String getFieldCanvasAvgViewPercent() {
     return mCanvasAvgViewPercent;
+  }
+
+  public AdsInsights setFieldCanvasAvgViewPercent(String value) {
+    this.mCanvasAvgViewPercent = value;
+    return this;
   }
 
   public String getFieldCanvasAvgViewTime() {
     return mCanvasAvgViewTime;
   }
 
+  public AdsInsights setFieldCanvasAvgViewTime(String value) {
+    this.mCanvasAvgViewTime = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldCanvasComponentAvgPctView() {
     return mCanvasComponentAvgPctView;
   }
 
+  public AdsInsights setFieldCanvasComponentAvgPctView(List<AdsActionStats> value) {
+    this.mCanvasComponentAvgPctView = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCanvasComponentAvgPctView(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCanvasComponentAvgPctView = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldClicks() {
     return mClicks;
+  }
+
+  public AdsInsights setFieldClicks(String value) {
+    this.mClicks = value;
+    return this;
   }
 
   public List<AdsActionStats> getFieldCostPer10SecVideoView() {
     return mCostPer10SecVideoView;
   }
 
+  public AdsInsights setFieldCostPer10SecVideoView(List<AdsActionStats> value) {
+    this.mCostPer10SecVideoView = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCostPer10SecVideoView(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCostPer10SecVideoView = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldCostPer15SecVideoView() {
     return mCostPer15SecVideoView;
   }
 
+  public AdsInsights setFieldCostPer15SecVideoView(List<AdsActionStats> value) {
+    this.mCostPer15SecVideoView = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCostPer15SecVideoView(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCostPer15SecVideoView = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldCostPer2SecContinuousVideoView() {
     return mCostPer2SecContinuousVideoView;
   }
 
+  public AdsInsights setFieldCostPer2SecContinuousVideoView(List<AdsActionStats> value) {
+    this.mCostPer2SecContinuousVideoView = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCostPer2SecContinuousVideoView(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCostPer2SecContinuousVideoView = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldCostPerActionType() {
     return mCostPerActionType;
   }
 
+  public AdsInsights setFieldCostPerActionType(List<AdsActionStats> value) {
+    this.mCostPerActionType = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCostPerActionType(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCostPerActionType = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldCostPerAdClick() {
     return mCostPerAdClick;
   }
 
+  public AdsInsights setFieldCostPerAdClick(List<AdsActionStats> value) {
+    this.mCostPerAdClick = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCostPerAdClick(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCostPerAdClick = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldCostPerDdaCountbyConvs() {
     return mCostPerDdaCountbyConvs;
+  }
+
+  public AdsInsights setFieldCostPerDdaCountbyConvs(String value) {
+    this.mCostPerDdaCountbyConvs = value;
+    return this;
+  }
+
+  public String getFieldCostPerDwell() {
+    return mCostPerDwell;
+  }
+
+  public AdsInsights setFieldCostPerDwell(String value) {
+    this.mCostPerDwell = value;
+    return this;
+  }
+
+  public String getFieldCostPerDwell3Sec() {
+    return mCostPerDwell3Sec;
+  }
+
+  public AdsInsights setFieldCostPerDwell3Sec(String value) {
+    this.mCostPerDwell3Sec = value;
+    return this;
+  }
+
+  public String getFieldCostPerDwell5Sec() {
+    return mCostPerDwell5Sec;
+  }
+
+  public AdsInsights setFieldCostPerDwell5Sec(String value) {
+    this.mCostPerDwell5Sec = value;
+    return this;
+  }
+
+  public String getFieldCostPerDwell7Sec() {
+    return mCostPerDwell7Sec;
+  }
+
+  public AdsInsights setFieldCostPerDwell7Sec(String value) {
+    this.mCostPerDwell7Sec = value;
+    return this;
   }
 
   public String getFieldCostPerEstimatedAdRecallers() {
     return mCostPerEstimatedAdRecallers;
   }
 
+  public AdsInsights setFieldCostPerEstimatedAdRecallers(String value) {
+    this.mCostPerEstimatedAdRecallers = value;
+    return this;
+  }
+
   public String getFieldCostPerInlineLinkClick() {
     return mCostPerInlineLinkClick;
+  }
+
+  public AdsInsights setFieldCostPerInlineLinkClick(String value) {
+    this.mCostPerInlineLinkClick = value;
+    return this;
   }
 
   public String getFieldCostPerInlinePostEngagement() {
     return mCostPerInlinePostEngagement;
   }
 
+  public AdsInsights setFieldCostPerInlinePostEngagement(String value) {
+    this.mCostPerInlinePostEngagement = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldCostPerOneThousandAdImpression() {
     return mCostPerOneThousandAdImpression;
   }
 
+  public AdsInsights setFieldCostPerOneThousandAdImpression(List<AdsActionStats> value) {
+    this.mCostPerOneThousandAdImpression = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCostPerOneThousandAdImpression(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCostPerOneThousandAdImpression = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldCostPerOutboundClick() {
     return mCostPerOutboundClick;
   }
 
+  public AdsInsights setFieldCostPerOutboundClick(List<AdsActionStats> value) {
+    this.mCostPerOutboundClick = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCostPerOutboundClick(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCostPerOutboundClick = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldCostPerThruplay() {
     return mCostPerThruplay;
   }
 
+  public AdsInsights setFieldCostPerThruplay(List<AdsActionStats> value) {
+    this.mCostPerThruplay = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCostPerThruplay(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCostPerThruplay = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldCostPerUniqueActionType() {
     return mCostPerUniqueActionType;
   }
 
+  public AdsInsights setFieldCostPerUniqueActionType(List<AdsActionStats> value) {
+    this.mCostPerUniqueActionType = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCostPerUniqueActionType(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCostPerUniqueActionType = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldCostPerUniqueClick() {
     return mCostPerUniqueClick;
+  }
+
+  public AdsInsights setFieldCostPerUniqueClick(String value) {
+    this.mCostPerUniqueClick = value;
+    return this;
   }
 
   public String getFieldCostPerUniqueInlineLinkClick() {
     return mCostPerUniqueInlineLinkClick;
   }
 
+  public AdsInsights setFieldCostPerUniqueInlineLinkClick(String value) {
+    this.mCostPerUniqueInlineLinkClick = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldCostPerUniqueOutboundClick() {
     return mCostPerUniqueOutboundClick;
   }
 
+  public AdsInsights setFieldCostPerUniqueOutboundClick(List<AdsActionStats> value) {
+    this.mCostPerUniqueOutboundClick = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCostPerUniqueOutboundClick(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCostPerUniqueOutboundClick = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldCountry() {
     return mCountry;
+  }
+
+  public AdsInsights setFieldCountry(String value) {
+    this.mCountry = value;
+    return this;
   }
 
   public String getFieldCpc() {
     return mCpc;
   }
 
+  public AdsInsights setFieldCpc(String value) {
+    this.mCpc = value;
+    return this;
+  }
+
   public String getFieldCpm() {
     return mCpm;
+  }
+
+  public AdsInsights setFieldCpm(String value) {
+    this.mCpm = value;
+    return this;
   }
 
   public String getFieldCpp() {
     return mCpp;
   }
 
+  public AdsInsights setFieldCpp(String value) {
+    this.mCpp = value;
+    return this;
+  }
+
   public String getFieldCreatedTime() {
     return mCreatedTime;
+  }
+
+  public AdsInsights setFieldCreatedTime(String value) {
+    this.mCreatedTime = value;
+    return this;
   }
 
   public String getFieldCreativeFingerprint() {
     return mCreativeFingerprint;
   }
 
+  public AdsInsights setFieldCreativeFingerprint(String value) {
+    this.mCreativeFingerprint = value;
+    return this;
+  }
+
   public String getFieldCtr() {
     return mCtr;
+  }
+
+  public AdsInsights setFieldCtr(String value) {
+    this.mCtr = value;
+    return this;
   }
 
   public String getFieldDateStart() {
     return mDateStart;
   }
 
+  public AdsInsights setFieldDateStart(String value) {
+    this.mDateStart = value;
+    return this;
+  }
+
   public String getFieldDateStop() {
     return mDateStop;
+  }
+
+  public AdsInsights setFieldDateStop(String value) {
+    this.mDateStop = value;
+    return this;
   }
 
   public String getFieldDdaCountbyConvs() {
     return mDdaCountbyConvs;
   }
 
+  public AdsInsights setFieldDdaCountbyConvs(String value) {
+    this.mDdaCountbyConvs = value;
+    return this;
+  }
+
   public Object getFieldDescriptionAsset() {
     return mDescriptionAsset;
+  }
+
+  public AdsInsights setFieldDescriptionAsset(Object value) {
+    this.mDescriptionAsset = value;
+    return this;
   }
 
   public String getFieldDevicePlatform() {
     return mDevicePlatform;
   }
 
+  public AdsInsights setFieldDevicePlatform(String value) {
+    this.mDevicePlatform = value;
+    return this;
+  }
+
   public String getFieldDma() {
     return mDma;
+  }
+
+  public AdsInsights setFieldDma(String value) {
+    this.mDma = value;
+    return this;
+  }
+
+  public String getFieldDwell3Sec() {
+    return mDwell3Sec;
+  }
+
+  public AdsInsights setFieldDwell3Sec(String value) {
+    this.mDwell3Sec = value;
+    return this;
+  }
+
+  public String getFieldDwell5Sec() {
+    return mDwell5Sec;
+  }
+
+  public AdsInsights setFieldDwell5Sec(String value) {
+    this.mDwell5Sec = value;
+    return this;
+  }
+
+  public String getFieldDwell7Sec() {
+    return mDwell7Sec;
+  }
+
+  public AdsInsights setFieldDwell7Sec(String value) {
+    this.mDwell7Sec = value;
+    return this;
+  }
+
+  public String getFieldDwellRate() {
+    return mDwellRate;
+  }
+
+  public AdsInsights setFieldDwellRate(String value) {
+    this.mDwellRate = value;
+    return this;
   }
 
   public String getFieldEstimatedAdRecallRate() {
     return mEstimatedAdRecallRate;
   }
 
+  public AdsInsights setFieldEstimatedAdRecallRate(String value) {
+    this.mEstimatedAdRecallRate = value;
+    return this;
+  }
+
   public String getFieldEstimatedAdRecallRateLowerBound() {
     return mEstimatedAdRecallRateLowerBound;
+  }
+
+  public AdsInsights setFieldEstimatedAdRecallRateLowerBound(String value) {
+    this.mEstimatedAdRecallRateLowerBound = value;
+    return this;
   }
 
   public String getFieldEstimatedAdRecallRateUpperBound() {
     return mEstimatedAdRecallRateUpperBound;
   }
 
+  public AdsInsights setFieldEstimatedAdRecallRateUpperBound(String value) {
+    this.mEstimatedAdRecallRateUpperBound = value;
+    return this;
+  }
+
   public String getFieldEstimatedAdRecallers() {
     return mEstimatedAdRecallers;
+  }
+
+  public AdsInsights setFieldEstimatedAdRecallers(String value) {
+    this.mEstimatedAdRecallers = value;
+    return this;
   }
 
   public String getFieldEstimatedAdRecallersLowerBound() {
     return mEstimatedAdRecallersLowerBound;
   }
 
+  public AdsInsights setFieldEstimatedAdRecallersLowerBound(String value) {
+    this.mEstimatedAdRecallersLowerBound = value;
+    return this;
+  }
+
   public String getFieldEstimatedAdRecallersUpperBound() {
     return mEstimatedAdRecallersUpperBound;
+  }
+
+  public AdsInsights setFieldEstimatedAdRecallersUpperBound(String value) {
+    this.mEstimatedAdRecallersUpperBound = value;
+    return this;
   }
 
   public String getFieldFrequency() {
     return mFrequency;
   }
 
+  public AdsInsights setFieldFrequency(String value) {
+    this.mFrequency = value;
+    return this;
+  }
+
   public String getFieldFrequencyValue() {
     return mFrequencyValue;
+  }
+
+  public AdsInsights setFieldFrequencyValue(String value) {
+    this.mFrequencyValue = value;
+    return this;
   }
 
   public String getFieldGender() {
     return mGender;
   }
 
+  public AdsInsights setFieldGender(String value) {
+    this.mGender = value;
+    return this;
+  }
+
   public String getFieldGenderTargeting() {
     return mGenderTargeting;
+  }
+
+  public AdsInsights setFieldGenderTargeting(String value) {
+    this.mGenderTargeting = value;
+    return this;
   }
 
   public String getFieldHourlyStatsAggregatedByAdvertiserTimeZone() {
     return mHourlyStatsAggregatedByAdvertiserTimeZone;
   }
 
+  public AdsInsights setFieldHourlyStatsAggregatedByAdvertiserTimeZone(String value) {
+    this.mHourlyStatsAggregatedByAdvertiserTimeZone = value;
+    return this;
+  }
+
   public String getFieldHourlyStatsAggregatedByAudienceTimeZone() {
     return mHourlyStatsAggregatedByAudienceTimeZone;
+  }
+
+  public AdsInsights setFieldHourlyStatsAggregatedByAudienceTimeZone(String value) {
+    this.mHourlyStatsAggregatedByAudienceTimeZone = value;
+    return this;
   }
 
   public Object getFieldImageAsset() {
     return mImageAsset;
   }
 
+  public AdsInsights setFieldImageAsset(Object value) {
+    this.mImageAsset = value;
+    return this;
+  }
+
   public String getFieldImpressionDevice() {
     return mImpressionDevice;
+  }
+
+  public AdsInsights setFieldImpressionDevice(String value) {
+    this.mImpressionDevice = value;
+    return this;
   }
 
   public String getFieldImpressions() {
     return mImpressions;
   }
 
+  public AdsInsights setFieldImpressions(String value) {
+    this.mImpressions = value;
+    return this;
+  }
+
   public String getFieldImpressionsDummy() {
     return mImpressionsDummy;
+  }
+
+  public AdsInsights setFieldImpressionsDummy(String value) {
+    this.mImpressionsDummy = value;
+    return this;
   }
 
   public String getFieldInlineLinkClickCtr() {
     return mInlineLinkClickCtr;
   }
 
+  public AdsInsights setFieldInlineLinkClickCtr(String value) {
+    this.mInlineLinkClickCtr = value;
+    return this;
+  }
+
   public String getFieldInlineLinkClicks() {
     return mInlineLinkClicks;
+  }
+
+  public AdsInsights setFieldInlineLinkClicks(String value) {
+    this.mInlineLinkClicks = value;
+    return this;
   }
 
   public String getFieldInlinePostEngagement() {
     return mInlinePostEngagement;
   }
 
+  public AdsInsights setFieldInlinePostEngagement(String value) {
+    this.mInlinePostEngagement = value;
+    return this;
+  }
+
   public String getFieldLabels() {
     return mLabels;
+  }
+
+  public AdsInsights setFieldLabels(String value) {
+    this.mLabels = value;
+    return this;
   }
 
   public Object getFieldLinkUrlAsset() {
     return mLinkUrlAsset;
   }
 
+  public AdsInsights setFieldLinkUrlAsset(Object value) {
+    this.mLinkUrlAsset = value;
+    return this;
+  }
+
   public String getFieldLocation() {
     return mLocation;
+  }
+
+  public AdsInsights setFieldLocation(String value) {
+    this.mLocation = value;
+    return this;
   }
 
   public Object getFieldMediaAsset() {
     return mMediaAsset;
   }
 
+  public AdsInsights setFieldMediaAsset(Object value) {
+    this.mMediaAsset = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldMobileAppPurchaseRoas() {
     return mMobileAppPurchaseRoas;
   }
 
+  public AdsInsights setFieldMobileAppPurchaseRoas(List<AdsActionStats> value) {
+    this.mMobileAppPurchaseRoas = value;
+    return this;
+  }
+
+  public AdsInsights setFieldMobileAppPurchaseRoas(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mMobileAppPurchaseRoas = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldObjective() {
     return mObjective;
+  }
+
+  public AdsInsights setFieldObjective(String value) {
+    this.mObjective = value;
+    return this;
   }
 
   public List<AdsActionStats> getFieldOutboundClicks() {
     return mOutboundClicks;
   }
 
+  public AdsInsights setFieldOutboundClicks(List<AdsActionStats> value) {
+    this.mOutboundClicks = value;
+    return this;
+  }
+
+  public AdsInsights setFieldOutboundClicks(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mOutboundClicks = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldOutboundClicksCtr() {
     return mOutboundClicksCtr;
   }
 
+  public AdsInsights setFieldOutboundClicksCtr(List<AdsActionStats> value) {
+    this.mOutboundClicksCtr = value;
+    return this;
+  }
+
+  public AdsInsights setFieldOutboundClicksCtr(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mOutboundClicksCtr = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldPlacePageId() {
     return mPlacePageId;
+  }
+
+  public AdsInsights setFieldPlacePageId(String value) {
+    this.mPlacePageId = value;
+    return this;
   }
 
   public String getFieldPlacePageName() {
     return mPlacePageName;
   }
 
+  public AdsInsights setFieldPlacePageName(String value) {
+    this.mPlacePageName = value;
+    return this;
+  }
+
   public String getFieldPlacement() {
     return mPlacement;
+  }
+
+  public AdsInsights setFieldPlacement(String value) {
+    this.mPlacement = value;
+    return this;
   }
 
   public String getFieldPlatformPosition() {
     return mPlatformPosition;
   }
 
+  public AdsInsights setFieldPlatformPosition(String value) {
+    this.mPlatformPosition = value;
+    return this;
+  }
+
   public String getFieldProductFormat() {
     return mProductFormat;
+  }
+
+  public AdsInsights setFieldProductFormat(String value) {
+    this.mProductFormat = value;
+    return this;
   }
 
   public String getFieldProductId() {
     return mProductId;
   }
 
+  public AdsInsights setFieldProductId(String value) {
+    this.mProductId = value;
+    return this;
+  }
+
   public String getFieldPublisherPlatform() {
     return mPublisherPlatform;
+  }
+
+  public AdsInsights setFieldPublisherPlatform(String value) {
+    this.mPublisherPlatform = value;
+    return this;
   }
 
   public String getFieldPurchasingInterface() {
     return mPurchasingInterface;
   }
 
+  public AdsInsights setFieldPurchasingInterface(String value) {
+    this.mPurchasingInterface = value;
+    return this;
+  }
+
   public String getFieldReach() {
     return mReach;
+  }
+
+  public AdsInsights setFieldReach(String value) {
+    this.mReach = value;
+    return this;
   }
 
   public String getFieldRegion() {
     return mRegion;
   }
 
+  public AdsInsights setFieldRegion(String value) {
+    this.mRegion = value;
+    return this;
+  }
+
   public AdgroupRelevanceScore getFieldRelevanceScore() {
-    if (mRelevanceScore != null) {
-      mRelevanceScore.context = getContext();
-    }
     return mRelevanceScore;
   }
 
+  public AdsInsights setFieldRelevanceScore(AdgroupRelevanceScore value) {
+    this.mRelevanceScore = value;
+    return this;
+  }
+
+  public AdsInsights setFieldRelevanceScore(String value) {
+    Type type = new TypeToken<AdgroupRelevanceScore>(){}.getType();
+    this.mRelevanceScore = AdgroupRelevanceScore.getGson().fromJson(value, type);
+    return this;
+  }
   public Object getFieldRuleAsset() {
     return mRuleAsset;
+  }
+
+  public AdsInsights setFieldRuleAsset(Object value) {
+    this.mRuleAsset = value;
+    return this;
   }
 
   public String getFieldSocialSpend() {
     return mSocialSpend;
   }
 
+  public AdsInsights setFieldSocialSpend(String value) {
+    this.mSocialSpend = value;
+    return this;
+  }
+
   public String getFieldSpend() {
     return mSpend;
+  }
+
+  public AdsInsights setFieldSpend(String value) {
+    this.mSpend = value;
+    return this;
+  }
+
+  public String getFieldThumbStops() {
+    return mThumbStops;
+  }
+
+  public AdsInsights setFieldThumbStops(String value) {
+    this.mThumbStops = value;
+    return this;
   }
 
   public Object getFieldTitleAsset() {
     return mTitleAsset;
   }
 
+  public AdsInsights setFieldTitleAsset(Object value) {
+    this.mTitleAsset = value;
+    return this;
+  }
+
   public List<AdsActionStats> getFieldUniqueActions() {
     return mUniqueActions;
   }
 
+  public AdsInsights setFieldUniqueActions(List<AdsActionStats> value) {
+    this.mUniqueActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldUniqueActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mUniqueActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldUniqueClicks() {
     return mUniqueClicks;
+  }
+
+  public AdsInsights setFieldUniqueClicks(String value) {
+    this.mUniqueClicks = value;
+    return this;
   }
 
   public String getFieldUniqueCtr() {
     return mUniqueCtr;
   }
 
+  public AdsInsights setFieldUniqueCtr(String value) {
+    this.mUniqueCtr = value;
+    return this;
+  }
+
   public String getFieldUniqueInlineLinkClickCtr() {
     return mUniqueInlineLinkClickCtr;
+  }
+
+  public AdsInsights setFieldUniqueInlineLinkClickCtr(String value) {
+    this.mUniqueInlineLinkClickCtr = value;
+    return this;
   }
 
   public String getFieldUniqueInlineLinkClicks() {
     return mUniqueInlineLinkClicks;
   }
 
+  public AdsInsights setFieldUniqueInlineLinkClicks(String value) {
+    this.mUniqueInlineLinkClicks = value;
+    return this;
+  }
+
   public String getFieldUniqueLinkClicksCtr() {
     return mUniqueLinkClicksCtr;
+  }
+
+  public AdsInsights setFieldUniqueLinkClicksCtr(String value) {
+    this.mUniqueLinkClicksCtr = value;
+    return this;
   }
 
   public List<AdsActionStats> getFieldUniqueOutboundClicks() {
     return mUniqueOutboundClicks;
   }
 
+  public AdsInsights setFieldUniqueOutboundClicks(List<AdsActionStats> value) {
+    this.mUniqueOutboundClicks = value;
+    return this;
+  }
+
+  public AdsInsights setFieldUniqueOutboundClicks(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mUniqueOutboundClicks = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldUniqueOutboundClicksCtr() {
     return mUniqueOutboundClicksCtr;
   }
 
+  public AdsInsights setFieldUniqueOutboundClicksCtr(List<AdsActionStats> value) {
+    this.mUniqueOutboundClicksCtr = value;
+    return this;
+  }
+
+  public AdsInsights setFieldUniqueOutboundClicksCtr(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mUniqueOutboundClicksCtr = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldUniqueVideoContinuous2SecWatchedActions() {
     return mUniqueVideoContinuous2SecWatchedActions;
   }
 
+  public AdsInsights setFieldUniqueVideoContinuous2SecWatchedActions(List<AdsActionStats> value) {
+    this.mUniqueVideoContinuous2SecWatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldUniqueVideoContinuous2SecWatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mUniqueVideoContinuous2SecWatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldUniqueVideoView10Sec() {
     return mUniqueVideoView10Sec;
   }
 
+  public AdsInsights setFieldUniqueVideoView10Sec(List<AdsActionStats> value) {
+    this.mUniqueVideoView10Sec = value;
+    return this;
+  }
+
+  public AdsInsights setFieldUniqueVideoView10Sec(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mUniqueVideoView10Sec = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldUniqueVideoView15Sec() {
     return mUniqueVideoView15Sec;
   }
 
+  public AdsInsights setFieldUniqueVideoView15Sec(List<AdsActionStats> value) {
+    this.mUniqueVideoView15Sec = value;
+    return this;
+  }
+
+  public AdsInsights setFieldUniqueVideoView15Sec(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mUniqueVideoView15Sec = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldUpdatedTime() {
     return mUpdatedTime;
+  }
+
+  public AdsInsights setFieldUpdatedTime(String value) {
+    this.mUpdatedTime = value;
+    return this;
   }
 
   public List<AdsActionStats> getFieldVideo10SecWatchedActions() {
     return mVideo10SecWatchedActions;
   }
 
+  public AdsInsights setFieldVideo10SecWatchedActions(List<AdsActionStats> value) {
+    this.mVideo10SecWatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideo10SecWatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideo10SecWatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldVideo15SecWatchedActions() {
     return mVideo15SecWatchedActions;
   }
 
+  public AdsInsights setFieldVideo15SecWatchedActions(List<AdsActionStats> value) {
+    this.mVideo15SecWatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideo15SecWatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideo15SecWatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldVideo30SecWatchedActions() {
     return mVideo30SecWatchedActions;
   }
 
+  public AdsInsights setFieldVideo30SecWatchedActions(List<AdsActionStats> value) {
+    this.mVideo30SecWatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideo30SecWatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideo30SecWatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public Object getFieldVideoAsset() {
     return mVideoAsset;
+  }
+
+  public AdsInsights setFieldVideoAsset(Object value) {
+    this.mVideoAsset = value;
+    return this;
   }
 
   public List<AdsActionStats> getFieldVideoAvgPercentWatchedActions() {
     return mVideoAvgPercentWatchedActions;
   }
 
+  public AdsInsights setFieldVideoAvgPercentWatchedActions(List<AdsActionStats> value) {
+    this.mVideoAvgPercentWatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideoAvgPercentWatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideoAvgPercentWatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldVideoAvgTimeWatchedActions() {
     return mVideoAvgTimeWatchedActions;
   }
 
+  public AdsInsights setFieldVideoAvgTimeWatchedActions(List<AdsActionStats> value) {
+    this.mVideoAvgTimeWatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideoAvgTimeWatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideoAvgTimeWatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldVideoContinuous2SecWatchedActions() {
     return mVideoContinuous2SecWatchedActions;
   }
 
+  public AdsInsights setFieldVideoContinuous2SecWatchedActions(List<AdsActionStats> value) {
+    this.mVideoContinuous2SecWatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideoContinuous2SecWatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideoContinuous2SecWatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldVideoP100WatchedActions() {
     return mVideoP100WatchedActions;
   }
 
+  public AdsInsights setFieldVideoP100WatchedActions(List<AdsActionStats> value) {
+    this.mVideoP100WatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideoP100WatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideoP100WatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldVideoP25WatchedActions() {
     return mVideoP25WatchedActions;
   }
 
+  public AdsInsights setFieldVideoP25WatchedActions(List<AdsActionStats> value) {
+    this.mVideoP25WatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideoP25WatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideoP25WatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldVideoP50WatchedActions() {
     return mVideoP50WatchedActions;
   }
 
+  public AdsInsights setFieldVideoP50WatchedActions(List<AdsActionStats> value) {
+    this.mVideoP50WatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideoP50WatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideoP50WatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldVideoP75WatchedActions() {
     return mVideoP75WatchedActions;
   }
 
+  public AdsInsights setFieldVideoP75WatchedActions(List<AdsActionStats> value) {
+    this.mVideoP75WatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideoP75WatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideoP75WatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldVideoP95WatchedActions() {
     return mVideoP95WatchedActions;
   }
 
+  public AdsInsights setFieldVideoP95WatchedActions(List<AdsActionStats> value) {
+    this.mVideoP95WatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideoP95WatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideoP95WatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldVideoPlayActions() {
     return mVideoPlayActions;
   }
 
+  public AdsInsights setFieldVideoPlayActions(List<AdsActionStats> value) {
+    this.mVideoPlayActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideoPlayActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideoPlayActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<Object> getFieldVideoPlayRetention0To15sActions() {
     return mVideoPlayRetention0To15sActions;
+  }
+
+  public AdsInsights setFieldVideoPlayRetention0To15sActions(List<Object> value) {
+    this.mVideoPlayRetention0To15sActions = value;
+    return this;
   }
 
   public List<Object> getFieldVideoPlayRetention20To60sActions() {
     return mVideoPlayRetention20To60sActions;
   }
 
+  public AdsInsights setFieldVideoPlayRetention20To60sActions(List<Object> value) {
+    this.mVideoPlayRetention20To60sActions = value;
+    return this;
+  }
+
   public List<Object> getFieldVideoPlayRetentionGraphActions() {
     return mVideoPlayRetentionGraphActions;
+  }
+
+  public AdsInsights setFieldVideoPlayRetentionGraphActions(List<Object> value) {
+    this.mVideoPlayRetentionGraphActions = value;
+    return this;
   }
 
   public List<AdsActionStats> getFieldVideoThruplayWatchedActions() {
     return mVideoThruplayWatchedActions;
   }
 
+  public AdsInsights setFieldVideoThruplayWatchedActions(List<AdsActionStats> value) {
+    this.mVideoThruplayWatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideoThruplayWatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideoThruplayWatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldVideoTimeWatchedActions() {
     return mVideoTimeWatchedActions;
   }
 
+  public AdsInsights setFieldVideoTimeWatchedActions(List<AdsActionStats> value) {
+    this.mVideoTimeWatchedActions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldVideoTimeWatchedActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mVideoTimeWatchedActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldWebsiteCtr() {
     return mWebsiteCtr;
   }
 
+  public AdsInsights setFieldWebsiteCtr(List<AdsActionStats> value) {
+    this.mWebsiteCtr = value;
+    return this;
+  }
+
+  public AdsInsights setFieldWebsiteCtr(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mWebsiteCtr = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldWebsitePurchaseRoas() {
     return mWebsitePurchaseRoas;
   }
 
+  public AdsInsights setFieldWebsitePurchaseRoas(List<AdsActionStats> value) {
+    this.mWebsitePurchaseRoas = value;
+    return this;
+  }
+
+  public AdsInsights setFieldWebsitePurchaseRoas(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mWebsitePurchaseRoas = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldWishBid() {
     return mWishBid;
+  }
+
+  public AdsInsights setFieldWishBid(String value) {
+    this.mWishBid = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdsInsights> {
-
-    AdsInsights lastResponse = null;
-    @Override
-    public AdsInsights getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "account_currency",
-      "account_id",
-      "account_name",
-      "action_values",
-      "actions",
-      "activity_recency",
-      "ad_click_actions",
-      "ad_format_asset",
-      "ad_id",
-      "ad_impression_actions",
-      "ad_name",
-      "adset_id",
-      "adset_name",
-      "age",
-      "age_targeting",
-      "auction_bid",
-      "auction_competitiveness",
-      "auction_max_competitor_bid",
-      "bid_type",
-      "body_asset",
-      "buying_type",
-      "call_to_action_asset",
-      "campaign_id",
-      "campaign_name",
-      "canvas_avg_view_percent",
-      "canvas_avg_view_time",
-      "canvas_component_avg_pct_view",
-      "clicks",
-      "cost_per_10_sec_video_view",
-      "cost_per_15_sec_video_view",
-      "cost_per_2_sec_continuous_video_view",
-      "cost_per_action_type",
-      "cost_per_ad_click",
-      "cost_per_dda_countby_convs",
-      "cost_per_estimated_ad_recallers",
-      "cost_per_inline_link_click",
-      "cost_per_inline_post_engagement",
-      "cost_per_one_thousand_ad_impression",
-      "cost_per_outbound_click",
-      "cost_per_thruplay",
-      "cost_per_unique_action_type",
-      "cost_per_unique_click",
-      "cost_per_unique_inline_link_click",
-      "cost_per_unique_outbound_click",
-      "country",
-      "cpc",
-      "cpm",
-      "cpp",
-      "created_time",
-      "creative_fingerprint",
-      "ctr",
-      "date_start",
-      "date_stop",
-      "dda_countby_convs",
-      "description_asset",
-      "device_platform",
-      "dma",
-      "estimated_ad_recall_rate",
-      "estimated_ad_recall_rate_lower_bound",
-      "estimated_ad_recall_rate_upper_bound",
-      "estimated_ad_recallers",
-      "estimated_ad_recallers_lower_bound",
-      "estimated_ad_recallers_upper_bound",
-      "frequency",
-      "frequency_value",
-      "gender",
-      "gender_targeting",
-      "hourly_stats_aggregated_by_advertiser_time_zone",
-      "hourly_stats_aggregated_by_audience_time_zone",
-      "image_asset",
-      "impression_device",
-      "impressions",
-      "impressions_dummy",
-      "inline_link_click_ctr",
-      "inline_link_clicks",
-      "inline_post_engagement",
-      "labels",
-      "link_url_asset",
-      "location",
-      "media_asset",
-      "mobile_app_purchase_roas",
-      "objective",
-      "outbound_clicks",
-      "outbound_clicks_ctr",
-      "place_page_id",
-      "place_page_name",
-      "placement",
-      "platform_position",
-      "product_format",
-      "product_id",
-      "publisher_platform",
-      "purchasing_interface",
-      "reach",
-      "region",
-      "relevance_score",
-      "rule_asset",
-      "social_spend",
-      "spend",
-      "title_asset",
-      "unique_actions",
-      "unique_clicks",
-      "unique_ctr",
-      "unique_inline_link_click_ctr",
-      "unique_inline_link_clicks",
-      "unique_link_clicks_ctr",
-      "unique_outbound_clicks",
-      "unique_outbound_clicks_ctr",
-      "unique_video_continuous_2_sec_watched_actions",
-      "unique_video_view_10_sec",
-      "unique_video_view_15_sec",
-      "updated_time",
-      "video_10_sec_watched_actions",
-      "video_15_sec_watched_actions",
-      "video_30_sec_watched_actions",
-      "video_asset",
-      "video_avg_percent_watched_actions",
-      "video_avg_time_watched_actions",
-      "video_continuous_2_sec_watched_actions",
-      "video_p100_watched_actions",
-      "video_p25_watched_actions",
-      "video_p50_watched_actions",
-      "video_p75_watched_actions",
-      "video_p95_watched_actions",
-      "video_play_actions",
-      "video_play_retention_0_to_15s_actions",
-      "video_play_retention_20_to_60s_actions",
-      "video_play_retention_graph_actions",
-      "video_thruplay_watched_actions",
-      "video_time_watched_actions",
-      "website_ctr",
-      "website_purchase_roas",
-      "wish_bid",
-      "id",
-    };
-
-    @Override
-    public AdsInsights parseResponse(String response) throws APIException {
-      return AdsInsights.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdsInsights execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdsInsights execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdsInsights> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdsInsights> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdsInsights>() {
-           public AdsInsights apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAccountCurrencyField () {
-      return this.requestAccountCurrencyField(true);
-    }
-    public APIRequestGet requestAccountCurrencyField (boolean value) {
-      this.requestField("account_currency", value);
-      return this;
-    }
-    public APIRequestGet requestAccountIdField () {
-      return this.requestAccountIdField(true);
-    }
-    public APIRequestGet requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGet requestAccountNameField () {
-      return this.requestAccountNameField(true);
-    }
-    public APIRequestGet requestAccountNameField (boolean value) {
-      this.requestField("account_name", value);
-      return this;
-    }
-    public APIRequestGet requestActionValuesField () {
-      return this.requestActionValuesField(true);
-    }
-    public APIRequestGet requestActionValuesField (boolean value) {
-      this.requestField("action_values", value);
-      return this;
-    }
-    public APIRequestGet requestActionsField () {
-      return this.requestActionsField(true);
-    }
-    public APIRequestGet requestActionsField (boolean value) {
-      this.requestField("actions", value);
-      return this;
-    }
-    public APIRequestGet requestActivityRecencyField () {
-      return this.requestActivityRecencyField(true);
-    }
-    public APIRequestGet requestActivityRecencyField (boolean value) {
-      this.requestField("activity_recency", value);
-      return this;
-    }
-    public APIRequestGet requestAdClickActionsField () {
-      return this.requestAdClickActionsField(true);
-    }
-    public APIRequestGet requestAdClickActionsField (boolean value) {
-      this.requestField("ad_click_actions", value);
-      return this;
-    }
-    public APIRequestGet requestAdFormatAssetField () {
-      return this.requestAdFormatAssetField(true);
-    }
-    public APIRequestGet requestAdFormatAssetField (boolean value) {
-      this.requestField("ad_format_asset", value);
-      return this;
-    }
-    public APIRequestGet requestAdIdField () {
-      return this.requestAdIdField(true);
-    }
-    public APIRequestGet requestAdIdField (boolean value) {
-      this.requestField("ad_id", value);
-      return this;
-    }
-    public APIRequestGet requestAdImpressionActionsField () {
-      return this.requestAdImpressionActionsField(true);
-    }
-    public APIRequestGet requestAdImpressionActionsField (boolean value) {
-      this.requestField("ad_impression_actions", value);
-      return this;
-    }
-    public APIRequestGet requestAdNameField () {
-      return this.requestAdNameField(true);
-    }
-    public APIRequestGet requestAdNameField (boolean value) {
-      this.requestField("ad_name", value);
-      return this;
-    }
-    public APIRequestGet requestAdsetIdField () {
-      return this.requestAdsetIdField(true);
-    }
-    public APIRequestGet requestAdsetIdField (boolean value) {
-      this.requestField("adset_id", value);
-      return this;
-    }
-    public APIRequestGet requestAdsetNameField () {
-      return this.requestAdsetNameField(true);
-    }
-    public APIRequestGet requestAdsetNameField (boolean value) {
-      this.requestField("adset_name", value);
-      return this;
-    }
-    public APIRequestGet requestAgeField () {
-      return this.requestAgeField(true);
-    }
-    public APIRequestGet requestAgeField (boolean value) {
-      this.requestField("age", value);
-      return this;
-    }
-    public APIRequestGet requestAgeTargetingField () {
-      return this.requestAgeTargetingField(true);
-    }
-    public APIRequestGet requestAgeTargetingField (boolean value) {
-      this.requestField("age_targeting", value);
-      return this;
-    }
-    public APIRequestGet requestAuctionBidField () {
-      return this.requestAuctionBidField(true);
-    }
-    public APIRequestGet requestAuctionBidField (boolean value) {
-      this.requestField("auction_bid", value);
-      return this;
-    }
-    public APIRequestGet requestAuctionCompetitivenessField () {
-      return this.requestAuctionCompetitivenessField(true);
-    }
-    public APIRequestGet requestAuctionCompetitivenessField (boolean value) {
-      this.requestField("auction_competitiveness", value);
-      return this;
-    }
-    public APIRequestGet requestAuctionMaxCompetitorBidField () {
-      return this.requestAuctionMaxCompetitorBidField(true);
-    }
-    public APIRequestGet requestAuctionMaxCompetitorBidField (boolean value) {
-      this.requestField("auction_max_competitor_bid", value);
-      return this;
-    }
-    public APIRequestGet requestBidTypeField () {
-      return this.requestBidTypeField(true);
-    }
-    public APIRequestGet requestBidTypeField (boolean value) {
-      this.requestField("bid_type", value);
-      return this;
-    }
-    public APIRequestGet requestBodyAssetField () {
-      return this.requestBodyAssetField(true);
-    }
-    public APIRequestGet requestBodyAssetField (boolean value) {
-      this.requestField("body_asset", value);
-      return this;
-    }
-    public APIRequestGet requestBuyingTypeField () {
-      return this.requestBuyingTypeField(true);
-    }
-    public APIRequestGet requestBuyingTypeField (boolean value) {
-      this.requestField("buying_type", value);
-      return this;
-    }
-    public APIRequestGet requestCallToActionAssetField () {
-      return this.requestCallToActionAssetField(true);
-    }
-    public APIRequestGet requestCallToActionAssetField (boolean value) {
-      this.requestField("call_to_action_asset", value);
-      return this;
-    }
-    public APIRequestGet requestCampaignIdField () {
-      return this.requestCampaignIdField(true);
-    }
-    public APIRequestGet requestCampaignIdField (boolean value) {
-      this.requestField("campaign_id", value);
-      return this;
-    }
-    public APIRequestGet requestCampaignNameField () {
-      return this.requestCampaignNameField(true);
-    }
-    public APIRequestGet requestCampaignNameField (boolean value) {
-      this.requestField("campaign_name", value);
-      return this;
-    }
-    public APIRequestGet requestCanvasAvgViewPercentField () {
-      return this.requestCanvasAvgViewPercentField(true);
-    }
-    public APIRequestGet requestCanvasAvgViewPercentField (boolean value) {
-      this.requestField("canvas_avg_view_percent", value);
-      return this;
-    }
-    public APIRequestGet requestCanvasAvgViewTimeField () {
-      return this.requestCanvasAvgViewTimeField(true);
-    }
-    public APIRequestGet requestCanvasAvgViewTimeField (boolean value) {
-      this.requestField("canvas_avg_view_time", value);
-      return this;
-    }
-    public APIRequestGet requestCanvasComponentAvgPctViewField () {
-      return this.requestCanvasComponentAvgPctViewField(true);
-    }
-    public APIRequestGet requestCanvasComponentAvgPctViewField (boolean value) {
-      this.requestField("canvas_component_avg_pct_view", value);
-      return this;
-    }
-    public APIRequestGet requestClicksField () {
-      return this.requestClicksField(true);
-    }
-    public APIRequestGet requestClicksField (boolean value) {
-      this.requestField("clicks", value);
-      return this;
-    }
-    public APIRequestGet requestCostPer10SecVideoViewField () {
-      return this.requestCostPer10SecVideoViewField(true);
-    }
-    public APIRequestGet requestCostPer10SecVideoViewField (boolean value) {
-      this.requestField("cost_per_10_sec_video_view", value);
-      return this;
-    }
-    public APIRequestGet requestCostPer15SecVideoViewField () {
-      return this.requestCostPer15SecVideoViewField(true);
-    }
-    public APIRequestGet requestCostPer15SecVideoViewField (boolean value) {
-      this.requestField("cost_per_15_sec_video_view", value);
-      return this;
-    }
-    public APIRequestGet requestCostPer2SecContinuousVideoViewField () {
-      return this.requestCostPer2SecContinuousVideoViewField(true);
-    }
-    public APIRequestGet requestCostPer2SecContinuousVideoViewField (boolean value) {
-      this.requestField("cost_per_2_sec_continuous_video_view", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerActionTypeField () {
-      return this.requestCostPerActionTypeField(true);
-    }
-    public APIRequestGet requestCostPerActionTypeField (boolean value) {
-      this.requestField("cost_per_action_type", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerAdClickField () {
-      return this.requestCostPerAdClickField(true);
-    }
-    public APIRequestGet requestCostPerAdClickField (boolean value) {
-      this.requestField("cost_per_ad_click", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerDdaCountbyConvsField () {
-      return this.requestCostPerDdaCountbyConvsField(true);
-    }
-    public APIRequestGet requestCostPerDdaCountbyConvsField (boolean value) {
-      this.requestField("cost_per_dda_countby_convs", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerEstimatedAdRecallersField () {
-      return this.requestCostPerEstimatedAdRecallersField(true);
-    }
-    public APIRequestGet requestCostPerEstimatedAdRecallersField (boolean value) {
-      this.requestField("cost_per_estimated_ad_recallers", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerInlineLinkClickField () {
-      return this.requestCostPerInlineLinkClickField(true);
-    }
-    public APIRequestGet requestCostPerInlineLinkClickField (boolean value) {
-      this.requestField("cost_per_inline_link_click", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerInlinePostEngagementField () {
-      return this.requestCostPerInlinePostEngagementField(true);
-    }
-    public APIRequestGet requestCostPerInlinePostEngagementField (boolean value) {
-      this.requestField("cost_per_inline_post_engagement", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerOneThousandAdImpressionField () {
-      return this.requestCostPerOneThousandAdImpressionField(true);
-    }
-    public APIRequestGet requestCostPerOneThousandAdImpressionField (boolean value) {
-      this.requestField("cost_per_one_thousand_ad_impression", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerOutboundClickField () {
-      return this.requestCostPerOutboundClickField(true);
-    }
-    public APIRequestGet requestCostPerOutboundClickField (boolean value) {
-      this.requestField("cost_per_outbound_click", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerThruplayField () {
-      return this.requestCostPerThruplayField(true);
-    }
-    public APIRequestGet requestCostPerThruplayField (boolean value) {
-      this.requestField("cost_per_thruplay", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerUniqueActionTypeField () {
-      return this.requestCostPerUniqueActionTypeField(true);
-    }
-    public APIRequestGet requestCostPerUniqueActionTypeField (boolean value) {
-      this.requestField("cost_per_unique_action_type", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerUniqueClickField () {
-      return this.requestCostPerUniqueClickField(true);
-    }
-    public APIRequestGet requestCostPerUniqueClickField (boolean value) {
-      this.requestField("cost_per_unique_click", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerUniqueInlineLinkClickField () {
-      return this.requestCostPerUniqueInlineLinkClickField(true);
-    }
-    public APIRequestGet requestCostPerUniqueInlineLinkClickField (boolean value) {
-      this.requestField("cost_per_unique_inline_link_click", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerUniqueOutboundClickField () {
-      return this.requestCostPerUniqueOutboundClickField(true);
-    }
-    public APIRequestGet requestCostPerUniqueOutboundClickField (boolean value) {
-      this.requestField("cost_per_unique_outbound_click", value);
-      return this;
-    }
-    public APIRequestGet requestCountryField () {
-      return this.requestCountryField(true);
-    }
-    public APIRequestGet requestCountryField (boolean value) {
-      this.requestField("country", value);
-      return this;
-    }
-    public APIRequestGet requestCpcField () {
-      return this.requestCpcField(true);
-    }
-    public APIRequestGet requestCpcField (boolean value) {
-      this.requestField("cpc", value);
-      return this;
-    }
-    public APIRequestGet requestCpmField () {
-      return this.requestCpmField(true);
-    }
-    public APIRequestGet requestCpmField (boolean value) {
-      this.requestField("cpm", value);
-      return this;
-    }
-    public APIRequestGet requestCppField () {
-      return this.requestCppField(true);
-    }
-    public APIRequestGet requestCppField (boolean value) {
-      this.requestField("cpp", value);
-      return this;
-    }
-    public APIRequestGet requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGet requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGet requestCreativeFingerprintField () {
-      return this.requestCreativeFingerprintField(true);
-    }
-    public APIRequestGet requestCreativeFingerprintField (boolean value) {
-      this.requestField("creative_fingerprint", value);
-      return this;
-    }
-    public APIRequestGet requestCtrField () {
-      return this.requestCtrField(true);
-    }
-    public APIRequestGet requestCtrField (boolean value) {
-      this.requestField("ctr", value);
-      return this;
-    }
-    public APIRequestGet requestDateStartField () {
-      return this.requestDateStartField(true);
-    }
-    public APIRequestGet requestDateStartField (boolean value) {
-      this.requestField("date_start", value);
-      return this;
-    }
-    public APIRequestGet requestDateStopField () {
-      return this.requestDateStopField(true);
-    }
-    public APIRequestGet requestDateStopField (boolean value) {
-      this.requestField("date_stop", value);
-      return this;
-    }
-    public APIRequestGet requestDdaCountbyConvsField () {
-      return this.requestDdaCountbyConvsField(true);
-    }
-    public APIRequestGet requestDdaCountbyConvsField (boolean value) {
-      this.requestField("dda_countby_convs", value);
-      return this;
-    }
-    public APIRequestGet requestDescriptionAssetField () {
-      return this.requestDescriptionAssetField(true);
-    }
-    public APIRequestGet requestDescriptionAssetField (boolean value) {
-      this.requestField("description_asset", value);
-      return this;
-    }
-    public APIRequestGet requestDevicePlatformField () {
-      return this.requestDevicePlatformField(true);
-    }
-    public APIRequestGet requestDevicePlatformField (boolean value) {
-      this.requestField("device_platform", value);
-      return this;
-    }
-    public APIRequestGet requestDmaField () {
-      return this.requestDmaField(true);
-    }
-    public APIRequestGet requestDmaField (boolean value) {
-      this.requestField("dma", value);
-      return this;
-    }
-    public APIRequestGet requestEstimatedAdRecallRateField () {
-      return this.requestEstimatedAdRecallRateField(true);
-    }
-    public APIRequestGet requestEstimatedAdRecallRateField (boolean value) {
-      this.requestField("estimated_ad_recall_rate", value);
-      return this;
-    }
-    public APIRequestGet requestEstimatedAdRecallRateLowerBoundField () {
-      return this.requestEstimatedAdRecallRateLowerBoundField(true);
-    }
-    public APIRequestGet requestEstimatedAdRecallRateLowerBoundField (boolean value) {
-      this.requestField("estimated_ad_recall_rate_lower_bound", value);
-      return this;
-    }
-    public APIRequestGet requestEstimatedAdRecallRateUpperBoundField () {
-      return this.requestEstimatedAdRecallRateUpperBoundField(true);
-    }
-    public APIRequestGet requestEstimatedAdRecallRateUpperBoundField (boolean value) {
-      this.requestField("estimated_ad_recall_rate_upper_bound", value);
-      return this;
-    }
-    public APIRequestGet requestEstimatedAdRecallersField () {
-      return this.requestEstimatedAdRecallersField(true);
-    }
-    public APIRequestGet requestEstimatedAdRecallersField (boolean value) {
-      this.requestField("estimated_ad_recallers", value);
-      return this;
-    }
-    public APIRequestGet requestEstimatedAdRecallersLowerBoundField () {
-      return this.requestEstimatedAdRecallersLowerBoundField(true);
-    }
-    public APIRequestGet requestEstimatedAdRecallersLowerBoundField (boolean value) {
-      this.requestField("estimated_ad_recallers_lower_bound", value);
-      return this;
-    }
-    public APIRequestGet requestEstimatedAdRecallersUpperBoundField () {
-      return this.requestEstimatedAdRecallersUpperBoundField(true);
-    }
-    public APIRequestGet requestEstimatedAdRecallersUpperBoundField (boolean value) {
-      this.requestField("estimated_ad_recallers_upper_bound", value);
-      return this;
-    }
-    public APIRequestGet requestFrequencyField () {
-      return this.requestFrequencyField(true);
-    }
-    public APIRequestGet requestFrequencyField (boolean value) {
-      this.requestField("frequency", value);
-      return this;
-    }
-    public APIRequestGet requestFrequencyValueField () {
-      return this.requestFrequencyValueField(true);
-    }
-    public APIRequestGet requestFrequencyValueField (boolean value) {
-      this.requestField("frequency_value", value);
-      return this;
-    }
-    public APIRequestGet requestGenderField () {
-      return this.requestGenderField(true);
-    }
-    public APIRequestGet requestGenderField (boolean value) {
-      this.requestField("gender", value);
-      return this;
-    }
-    public APIRequestGet requestGenderTargetingField () {
-      return this.requestGenderTargetingField(true);
-    }
-    public APIRequestGet requestGenderTargetingField (boolean value) {
-      this.requestField("gender_targeting", value);
-      return this;
-    }
-    public APIRequestGet requestHourlyStatsAggregatedByAdvertiserTimeZoneField () {
-      return this.requestHourlyStatsAggregatedByAdvertiserTimeZoneField(true);
-    }
-    public APIRequestGet requestHourlyStatsAggregatedByAdvertiserTimeZoneField (boolean value) {
-      this.requestField("hourly_stats_aggregated_by_advertiser_time_zone", value);
-      return this;
-    }
-    public APIRequestGet requestHourlyStatsAggregatedByAudienceTimeZoneField () {
-      return this.requestHourlyStatsAggregatedByAudienceTimeZoneField(true);
-    }
-    public APIRequestGet requestHourlyStatsAggregatedByAudienceTimeZoneField (boolean value) {
-      this.requestField("hourly_stats_aggregated_by_audience_time_zone", value);
-      return this;
-    }
-    public APIRequestGet requestImageAssetField () {
-      return this.requestImageAssetField(true);
-    }
-    public APIRequestGet requestImageAssetField (boolean value) {
-      this.requestField("image_asset", value);
-      return this;
-    }
-    public APIRequestGet requestImpressionDeviceField () {
-      return this.requestImpressionDeviceField(true);
-    }
-    public APIRequestGet requestImpressionDeviceField (boolean value) {
-      this.requestField("impression_device", value);
-      return this;
-    }
-    public APIRequestGet requestImpressionsField () {
-      return this.requestImpressionsField(true);
-    }
-    public APIRequestGet requestImpressionsField (boolean value) {
-      this.requestField("impressions", value);
-      return this;
-    }
-    public APIRequestGet requestImpressionsDummyField () {
-      return this.requestImpressionsDummyField(true);
-    }
-    public APIRequestGet requestImpressionsDummyField (boolean value) {
-      this.requestField("impressions_dummy", value);
-      return this;
-    }
-    public APIRequestGet requestInlineLinkClickCtrField () {
-      return this.requestInlineLinkClickCtrField(true);
-    }
-    public APIRequestGet requestInlineLinkClickCtrField (boolean value) {
-      this.requestField("inline_link_click_ctr", value);
-      return this;
-    }
-    public APIRequestGet requestInlineLinkClicksField () {
-      return this.requestInlineLinkClicksField(true);
-    }
-    public APIRequestGet requestInlineLinkClicksField (boolean value) {
-      this.requestField("inline_link_clicks", value);
-      return this;
-    }
-    public APIRequestGet requestInlinePostEngagementField () {
-      return this.requestInlinePostEngagementField(true);
-    }
-    public APIRequestGet requestInlinePostEngagementField (boolean value) {
-      this.requestField("inline_post_engagement", value);
-      return this;
-    }
-    public APIRequestGet requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGet requestLabelsField (boolean value) {
-      this.requestField("labels", value);
-      return this;
-    }
-    public APIRequestGet requestLinkUrlAssetField () {
-      return this.requestLinkUrlAssetField(true);
-    }
-    public APIRequestGet requestLinkUrlAssetField (boolean value) {
-      this.requestField("link_url_asset", value);
-      return this;
-    }
-    public APIRequestGet requestLocationField () {
-      return this.requestLocationField(true);
-    }
-    public APIRequestGet requestLocationField (boolean value) {
-      this.requestField("location", value);
-      return this;
-    }
-    public APIRequestGet requestMediaAssetField () {
-      return this.requestMediaAssetField(true);
-    }
-    public APIRequestGet requestMediaAssetField (boolean value) {
-      this.requestField("media_asset", value);
-      return this;
-    }
-    public APIRequestGet requestMobileAppPurchaseRoasField () {
-      return this.requestMobileAppPurchaseRoasField(true);
-    }
-    public APIRequestGet requestMobileAppPurchaseRoasField (boolean value) {
-      this.requestField("mobile_app_purchase_roas", value);
-      return this;
-    }
-    public APIRequestGet requestObjectiveField () {
-      return this.requestObjectiveField(true);
-    }
-    public APIRequestGet requestObjectiveField (boolean value) {
-      this.requestField("objective", value);
-      return this;
-    }
-    public APIRequestGet requestOutboundClicksField () {
-      return this.requestOutboundClicksField(true);
-    }
-    public APIRequestGet requestOutboundClicksField (boolean value) {
-      this.requestField("outbound_clicks", value);
-      return this;
-    }
-    public APIRequestGet requestOutboundClicksCtrField () {
-      return this.requestOutboundClicksCtrField(true);
-    }
-    public APIRequestGet requestOutboundClicksCtrField (boolean value) {
-      this.requestField("outbound_clicks_ctr", value);
-      return this;
-    }
-    public APIRequestGet requestPlacePageIdField () {
-      return this.requestPlacePageIdField(true);
-    }
-    public APIRequestGet requestPlacePageIdField (boolean value) {
-      this.requestField("place_page_id", value);
-      return this;
-    }
-    public APIRequestGet requestPlacePageNameField () {
-      return this.requestPlacePageNameField(true);
-    }
-    public APIRequestGet requestPlacePageNameField (boolean value) {
-      this.requestField("place_page_name", value);
-      return this;
-    }
-    public APIRequestGet requestPlacementField () {
-      return this.requestPlacementField(true);
-    }
-    public APIRequestGet requestPlacementField (boolean value) {
-      this.requestField("placement", value);
-      return this;
-    }
-    public APIRequestGet requestPlatformPositionField () {
-      return this.requestPlatformPositionField(true);
-    }
-    public APIRequestGet requestPlatformPositionField (boolean value) {
-      this.requestField("platform_position", value);
-      return this;
-    }
-    public APIRequestGet requestProductFormatField () {
-      return this.requestProductFormatField(true);
-    }
-    public APIRequestGet requestProductFormatField (boolean value) {
-      this.requestField("product_format", value);
-      return this;
-    }
-    public APIRequestGet requestProductIdField () {
-      return this.requestProductIdField(true);
-    }
-    public APIRequestGet requestProductIdField (boolean value) {
-      this.requestField("product_id", value);
-      return this;
-    }
-    public APIRequestGet requestPublisherPlatformField () {
-      return this.requestPublisherPlatformField(true);
-    }
-    public APIRequestGet requestPublisherPlatformField (boolean value) {
-      this.requestField("publisher_platform", value);
-      return this;
-    }
-    public APIRequestGet requestPurchasingInterfaceField () {
-      return this.requestPurchasingInterfaceField(true);
-    }
-    public APIRequestGet requestPurchasingInterfaceField (boolean value) {
-      this.requestField("purchasing_interface", value);
-      return this;
-    }
-    public APIRequestGet requestReachField () {
-      return this.requestReachField(true);
-    }
-    public APIRequestGet requestReachField (boolean value) {
-      this.requestField("reach", value);
-      return this;
-    }
-    public APIRequestGet requestRegionField () {
-      return this.requestRegionField(true);
-    }
-    public APIRequestGet requestRegionField (boolean value) {
-      this.requestField("region", value);
-      return this;
-    }
-    public APIRequestGet requestRelevanceScoreField () {
-      return this.requestRelevanceScoreField(true);
-    }
-    public APIRequestGet requestRelevanceScoreField (boolean value) {
-      this.requestField("relevance_score", value);
-      return this;
-    }
-    public APIRequestGet requestRuleAssetField () {
-      return this.requestRuleAssetField(true);
-    }
-    public APIRequestGet requestRuleAssetField (boolean value) {
-      this.requestField("rule_asset", value);
-      return this;
-    }
-    public APIRequestGet requestSocialSpendField () {
-      return this.requestSocialSpendField(true);
-    }
-    public APIRequestGet requestSocialSpendField (boolean value) {
-      this.requestField("social_spend", value);
-      return this;
-    }
-    public APIRequestGet requestSpendField () {
-      return this.requestSpendField(true);
-    }
-    public APIRequestGet requestSpendField (boolean value) {
-      this.requestField("spend", value);
-      return this;
-    }
-    public APIRequestGet requestTitleAssetField () {
-      return this.requestTitleAssetField(true);
-    }
-    public APIRequestGet requestTitleAssetField (boolean value) {
-      this.requestField("title_asset", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueActionsField () {
-      return this.requestUniqueActionsField(true);
-    }
-    public APIRequestGet requestUniqueActionsField (boolean value) {
-      this.requestField("unique_actions", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueClicksField () {
-      return this.requestUniqueClicksField(true);
-    }
-    public APIRequestGet requestUniqueClicksField (boolean value) {
-      this.requestField("unique_clicks", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueCtrField () {
-      return this.requestUniqueCtrField(true);
-    }
-    public APIRequestGet requestUniqueCtrField (boolean value) {
-      this.requestField("unique_ctr", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueInlineLinkClickCtrField () {
-      return this.requestUniqueInlineLinkClickCtrField(true);
-    }
-    public APIRequestGet requestUniqueInlineLinkClickCtrField (boolean value) {
-      this.requestField("unique_inline_link_click_ctr", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueInlineLinkClicksField () {
-      return this.requestUniqueInlineLinkClicksField(true);
-    }
-    public APIRequestGet requestUniqueInlineLinkClicksField (boolean value) {
-      this.requestField("unique_inline_link_clicks", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueLinkClicksCtrField () {
-      return this.requestUniqueLinkClicksCtrField(true);
-    }
-    public APIRequestGet requestUniqueLinkClicksCtrField (boolean value) {
-      this.requestField("unique_link_clicks_ctr", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueOutboundClicksField () {
-      return this.requestUniqueOutboundClicksField(true);
-    }
-    public APIRequestGet requestUniqueOutboundClicksField (boolean value) {
-      this.requestField("unique_outbound_clicks", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueOutboundClicksCtrField () {
-      return this.requestUniqueOutboundClicksCtrField(true);
-    }
-    public APIRequestGet requestUniqueOutboundClicksCtrField (boolean value) {
-      this.requestField("unique_outbound_clicks_ctr", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueVideoContinuous2SecWatchedActionsField () {
-      return this.requestUniqueVideoContinuous2SecWatchedActionsField(true);
-    }
-    public APIRequestGet requestUniqueVideoContinuous2SecWatchedActionsField (boolean value) {
-      this.requestField("unique_video_continuous_2_sec_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueVideoView10SecField () {
-      return this.requestUniqueVideoView10SecField(true);
-    }
-    public APIRequestGet requestUniqueVideoView10SecField (boolean value) {
-      this.requestField("unique_video_view_10_sec", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueVideoView15SecField () {
-      return this.requestUniqueVideoView15SecField(true);
-    }
-    public APIRequestGet requestUniqueVideoView15SecField (boolean value) {
-      this.requestField("unique_video_view_15_sec", value);
-      return this;
-    }
-    public APIRequestGet requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGet requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGet requestVideo10SecWatchedActionsField () {
-      return this.requestVideo10SecWatchedActionsField(true);
-    }
-    public APIRequestGet requestVideo10SecWatchedActionsField (boolean value) {
-      this.requestField("video_10_sec_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideo15SecWatchedActionsField () {
-      return this.requestVideo15SecWatchedActionsField(true);
-    }
-    public APIRequestGet requestVideo15SecWatchedActionsField (boolean value) {
-      this.requestField("video_15_sec_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideo30SecWatchedActionsField () {
-      return this.requestVideo30SecWatchedActionsField(true);
-    }
-    public APIRequestGet requestVideo30SecWatchedActionsField (boolean value) {
-      this.requestField("video_30_sec_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoAssetField () {
-      return this.requestVideoAssetField(true);
-    }
-    public APIRequestGet requestVideoAssetField (boolean value) {
-      this.requestField("video_asset", value);
-      return this;
-    }
-    public APIRequestGet requestVideoAvgPercentWatchedActionsField () {
-      return this.requestVideoAvgPercentWatchedActionsField(true);
-    }
-    public APIRequestGet requestVideoAvgPercentWatchedActionsField (boolean value) {
-      this.requestField("video_avg_percent_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoAvgTimeWatchedActionsField () {
-      return this.requestVideoAvgTimeWatchedActionsField(true);
-    }
-    public APIRequestGet requestVideoAvgTimeWatchedActionsField (boolean value) {
-      this.requestField("video_avg_time_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoContinuous2SecWatchedActionsField () {
-      return this.requestVideoContinuous2SecWatchedActionsField(true);
-    }
-    public APIRequestGet requestVideoContinuous2SecWatchedActionsField (boolean value) {
-      this.requestField("video_continuous_2_sec_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoP100WatchedActionsField () {
-      return this.requestVideoP100WatchedActionsField(true);
-    }
-    public APIRequestGet requestVideoP100WatchedActionsField (boolean value) {
-      this.requestField("video_p100_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoP25WatchedActionsField () {
-      return this.requestVideoP25WatchedActionsField(true);
-    }
-    public APIRequestGet requestVideoP25WatchedActionsField (boolean value) {
-      this.requestField("video_p25_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoP50WatchedActionsField () {
-      return this.requestVideoP50WatchedActionsField(true);
-    }
-    public APIRequestGet requestVideoP50WatchedActionsField (boolean value) {
-      this.requestField("video_p50_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoP75WatchedActionsField () {
-      return this.requestVideoP75WatchedActionsField(true);
-    }
-    public APIRequestGet requestVideoP75WatchedActionsField (boolean value) {
-      this.requestField("video_p75_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoP95WatchedActionsField () {
-      return this.requestVideoP95WatchedActionsField(true);
-    }
-    public APIRequestGet requestVideoP95WatchedActionsField (boolean value) {
-      this.requestField("video_p95_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoPlayActionsField () {
-      return this.requestVideoPlayActionsField(true);
-    }
-    public APIRequestGet requestVideoPlayActionsField (boolean value) {
-      this.requestField("video_play_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoPlayRetention0To15sActionsField () {
-      return this.requestVideoPlayRetention0To15sActionsField(true);
-    }
-    public APIRequestGet requestVideoPlayRetention0To15sActionsField (boolean value) {
-      this.requestField("video_play_retention_0_to_15s_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoPlayRetention20To60sActionsField () {
-      return this.requestVideoPlayRetention20To60sActionsField(true);
-    }
-    public APIRequestGet requestVideoPlayRetention20To60sActionsField (boolean value) {
-      this.requestField("video_play_retention_20_to_60s_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoPlayRetentionGraphActionsField () {
-      return this.requestVideoPlayRetentionGraphActionsField(true);
-    }
-    public APIRequestGet requestVideoPlayRetentionGraphActionsField (boolean value) {
-      this.requestField("video_play_retention_graph_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoThruplayWatchedActionsField () {
-      return this.requestVideoThruplayWatchedActionsField(true);
-    }
-    public APIRequestGet requestVideoThruplayWatchedActionsField (boolean value) {
-      this.requestField("video_thruplay_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestVideoTimeWatchedActionsField () {
-      return this.requestVideoTimeWatchedActionsField(true);
-    }
-    public APIRequestGet requestVideoTimeWatchedActionsField (boolean value) {
-      this.requestField("video_time_watched_actions", value);
-      return this;
-    }
-    public APIRequestGet requestWebsiteCtrField () {
-      return this.requestWebsiteCtrField(true);
-    }
-    public APIRequestGet requestWebsiteCtrField (boolean value) {
-      this.requestField("website_ctr", value);
-      return this;
-    }
-    public APIRequestGet requestWebsitePurchaseRoasField () {
-      return this.requestWebsitePurchaseRoasField(true);
-    }
-    public APIRequestGet requestWebsitePurchaseRoasField (boolean value) {
-      this.requestField("website_purchase_roas", value);
-      return this;
-    }
-    public APIRequestGet requestWishBidField () {
-      return this.requestWishBidField(true);
-    }
-    public APIRequestGet requestWishBidField (boolean value) {
-      this.requestField("wish_bid", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdsInsights setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
   public static enum EnumActionAttributionWindows {
       @SerializedName("1d_view")
@@ -2544,6 +2280,10 @@ public class AdsInsights extends APINode {
     this.mCostPerActionType = instance.mCostPerActionType;
     this.mCostPerAdClick = instance.mCostPerAdClick;
     this.mCostPerDdaCountbyConvs = instance.mCostPerDdaCountbyConvs;
+    this.mCostPerDwell = instance.mCostPerDwell;
+    this.mCostPerDwell3Sec = instance.mCostPerDwell3Sec;
+    this.mCostPerDwell5Sec = instance.mCostPerDwell5Sec;
+    this.mCostPerDwell7Sec = instance.mCostPerDwell7Sec;
     this.mCostPerEstimatedAdRecallers = instance.mCostPerEstimatedAdRecallers;
     this.mCostPerInlineLinkClick = instance.mCostPerInlineLinkClick;
     this.mCostPerInlinePostEngagement = instance.mCostPerInlinePostEngagement;
@@ -2567,6 +2307,10 @@ public class AdsInsights extends APINode {
     this.mDescriptionAsset = instance.mDescriptionAsset;
     this.mDevicePlatform = instance.mDevicePlatform;
     this.mDma = instance.mDma;
+    this.mDwell3Sec = instance.mDwell3Sec;
+    this.mDwell5Sec = instance.mDwell5Sec;
+    this.mDwell7Sec = instance.mDwell7Sec;
+    this.mDwellRate = instance.mDwellRate;
     this.mEstimatedAdRecallRate = instance.mEstimatedAdRecallRate;
     this.mEstimatedAdRecallRateLowerBound = instance.mEstimatedAdRecallRateLowerBound;
     this.mEstimatedAdRecallRateUpperBound = instance.mEstimatedAdRecallRateUpperBound;
@@ -2608,6 +2352,7 @@ public class AdsInsights extends APINode {
     this.mRuleAsset = instance.mRuleAsset;
     this.mSocialSpend = instance.mSocialSpend;
     this.mSpend = instance.mSpend;
+    this.mThumbStops = instance.mThumbStops;
     this.mTitleAsset = instance.mTitleAsset;
     this.mUniqueActions = instance.mUniqueActions;
     this.mUniqueClicks = instance.mUniqueClicks;

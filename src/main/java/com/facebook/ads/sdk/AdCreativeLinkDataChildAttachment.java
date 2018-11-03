@@ -83,66 +83,7 @@ public class AdCreativeLinkDataChildAttachment extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCreativeLinkDataChildAttachment() {
-  }
-
-  public AdCreativeLinkDataChildAttachment(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCreativeLinkDataChildAttachment(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCreativeLinkDataChildAttachment fetch() throws APIException{
-    AdCreativeLinkDataChildAttachment newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCreativeLinkDataChildAttachment fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCreativeLinkDataChildAttachment> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCreativeLinkDataChildAttachment fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCreativeLinkDataChildAttachment> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCreativeLinkDataChildAttachment> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCreativeLinkDataChildAttachment>)(
-      new APIRequest<AdCreativeLinkDataChildAttachment>(context, "", "/", "GET", AdCreativeLinkDataChildAttachment.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCreativeLinkDataChildAttachment>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCreativeLinkDataChildAttachment.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCreativeLinkDataChildAttachment() {
   }
 
   public String getId() {
@@ -289,280 +230,140 @@ public class AdCreativeLinkDataChildAttachment extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public AdCreativeLinkDataCallToAction getFieldCallToAction() {
-    if (mCallToAction != null) {
-      mCallToAction.context = getContext();
-    }
     return mCallToAction;
   }
 
+  public AdCreativeLinkDataChildAttachment setFieldCallToAction(AdCreativeLinkDataCallToAction value) {
+    this.mCallToAction = value;
+    return this;
+  }
+
+  public AdCreativeLinkDataChildAttachment setFieldCallToAction(String value) {
+    Type type = new TypeToken<AdCreativeLinkDataCallToAction>(){}.getType();
+    this.mCallToAction = AdCreativeLinkDataCallToAction.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldCaption() {
     return mCaption;
+  }
+
+  public AdCreativeLinkDataChildAttachment setFieldCaption(String value) {
+    this.mCaption = value;
+    return this;
   }
 
   public String getFieldDescription() {
     return mDescription;
   }
 
+  public AdCreativeLinkDataChildAttachment setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
+  }
+
   public AdsImageCrops getFieldImageCrops() {
-    if (mImageCrops != null) {
-      mImageCrops.context = getContext();
-    }
     return mImageCrops;
   }
 
+  public AdCreativeLinkDataChildAttachment setFieldImageCrops(AdsImageCrops value) {
+    this.mImageCrops = value;
+    return this;
+  }
+
+  public AdCreativeLinkDataChildAttachment setFieldImageCrops(String value) {
+    Type type = new TypeToken<AdsImageCrops>(){}.getType();
+    this.mImageCrops = AdsImageCrops.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldImageHash() {
     return mImageHash;
+  }
+
+  public AdCreativeLinkDataChildAttachment setFieldImageHash(String value) {
+    this.mImageHash = value;
+    return this;
   }
 
   public String getFieldLink() {
     return mLink;
   }
 
+  public AdCreativeLinkDataChildAttachment setFieldLink(String value) {
+    this.mLink = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public AdCreativeLinkDataChildAttachment setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public String getFieldPicture() {
     return mPicture;
   }
 
+  public AdCreativeLinkDataChildAttachment setFieldPicture(String value) {
+    this.mPicture = value;
+    return this;
+  }
+
   public AdCreativePlaceData getFieldPlaceData() {
-    if (mPlaceData != null) {
-      mPlaceData.context = getContext();
-    }
     return mPlaceData;
   }
 
+  public AdCreativeLinkDataChildAttachment setFieldPlaceData(AdCreativePlaceData value) {
+    this.mPlaceData = value;
+    return this;
+  }
+
+  public AdCreativeLinkDataChildAttachment setFieldPlaceData(String value) {
+    Type type = new TypeToken<AdCreativePlaceData>(){}.getType();
+    this.mPlaceData = AdCreativePlaceData.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldReferralId() {
     return mReferralId;
+  }
+
+  public AdCreativeLinkDataChildAttachment setFieldReferralId(String value) {
+    this.mReferralId = value;
+    return this;
   }
 
   public Boolean getFieldStaticCard() {
     return mStaticCard;
   }
 
+  public AdCreativeLinkDataChildAttachment setFieldStaticCard(Boolean value) {
+    this.mStaticCard = value;
+    return this;
+  }
+
   public String getFieldVideoId() {
     return mVideoId;
+  }
+
+  public AdCreativeLinkDataChildAttachment setFieldVideoId(String value) {
+    this.mVideoId = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCreativeLinkDataChildAttachment> {
-
-    AdCreativeLinkDataChildAttachment lastResponse = null;
-    @Override
-    public AdCreativeLinkDataChildAttachment getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "call_to_action",
-      "caption",
-      "description",
-      "image_crops",
-      "image_hash",
-      "link",
-      "name",
-      "picture",
-      "place_data",
-      "referral_id",
-      "static_card",
-      "video_id",
-      "id",
-    };
-
-    @Override
-    public AdCreativeLinkDataChildAttachment parseResponse(String response) throws APIException {
-      return AdCreativeLinkDataChildAttachment.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCreativeLinkDataChildAttachment execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCreativeLinkDataChildAttachment execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCreativeLinkDataChildAttachment> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCreativeLinkDataChildAttachment> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCreativeLinkDataChildAttachment>() {
-           public AdCreativeLinkDataChildAttachment apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCallToActionField () {
-      return this.requestCallToActionField(true);
-    }
-    public APIRequestGet requestCallToActionField (boolean value) {
-      this.requestField("call_to_action", value);
-      return this;
-    }
-    public APIRequestGet requestCaptionField () {
-      return this.requestCaptionField(true);
-    }
-    public APIRequestGet requestCaptionField (boolean value) {
-      this.requestField("caption", value);
-      return this;
-    }
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestImageCropsField () {
-      return this.requestImageCropsField(true);
-    }
-    public APIRequestGet requestImageCropsField (boolean value) {
-      this.requestField("image_crops", value);
-      return this;
-    }
-    public APIRequestGet requestImageHashField () {
-      return this.requestImageHashField(true);
-    }
-    public APIRequestGet requestImageHashField (boolean value) {
-      this.requestField("image_hash", value);
-      return this;
-    }
-    public APIRequestGet requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGet requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestPictureField () {
-      return this.requestPictureField(true);
-    }
-    public APIRequestGet requestPictureField (boolean value) {
-      this.requestField("picture", value);
-      return this;
-    }
-    public APIRequestGet requestPlaceDataField () {
-      return this.requestPlaceDataField(true);
-    }
-    public APIRequestGet requestPlaceDataField (boolean value) {
-      this.requestField("place_data", value);
-      return this;
-    }
-    public APIRequestGet requestReferralIdField () {
-      return this.requestReferralIdField(true);
-    }
-    public APIRequestGet requestReferralIdField (boolean value) {
-      this.requestField("referral_id", value);
-      return this;
-    }
-    public APIRequestGet requestStaticCardField () {
-      return this.requestStaticCardField(true);
-    }
-    public APIRequestGet requestStaticCardField (boolean value) {
-      this.requestField("static_card", value);
-      return this;
-    }
-    public APIRequestGet requestVideoIdField () {
-      return this.requestVideoIdField(true);
-    }
-    public APIRequestGet requestVideoIdField (boolean value) {
-      this.requestField("video_id", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCreativeLinkDataChildAttachment setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

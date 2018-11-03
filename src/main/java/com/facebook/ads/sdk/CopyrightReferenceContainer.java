@@ -79,66 +79,7 @@ public class CopyrightReferenceContainer extends APINode {
   private String mUniversalContentId = null;
   protected static Gson gson = null;
 
-  CopyrightReferenceContainer() {
-  }
-
-  public CopyrightReferenceContainer(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public CopyrightReferenceContainer(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public CopyrightReferenceContainer fetch() throws APIException{
-    CopyrightReferenceContainer newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static CopyrightReferenceContainer fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<CopyrightReferenceContainer> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static CopyrightReferenceContainer fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<CopyrightReferenceContainer> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<CopyrightReferenceContainer> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CopyrightReferenceContainer>)(
-      new APIRequest<CopyrightReferenceContainer>(context, "", "/", "GET", CopyrightReferenceContainer.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<CopyrightReferenceContainer>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", CopyrightReferenceContainer.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public CopyrightReferenceContainer() {
   }
 
   public String getId() {
@@ -285,247 +226,107 @@ public class CopyrightReferenceContainer extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldContentType() {
     return mContentType;
+  }
+
+  public CopyrightReferenceContainer setFieldContentType(String value) {
+    this.mContentType = value;
+    return this;
   }
 
   public String getFieldCopyrightCreationTime() {
     return mCopyrightCreationTime;
   }
 
+  public CopyrightReferenceContainer setFieldCopyrightCreationTime(String value) {
+    this.mCopyrightCreationTime = value;
+    return this;
+  }
+
   public String getFieldDownloadHdUrl() {
     return mDownloadHdUrl;
+  }
+
+  public CopyrightReferenceContainer setFieldDownloadHdUrl(String value) {
+    this.mDownloadHdUrl = value;
+    return this;
   }
 
   public Double getFieldDurationInSec() {
     return mDurationInSec;
   }
 
+  public CopyrightReferenceContainer setFieldDurationInSec(Double value) {
+    this.mDurationInSec = value;
+    return this;
+  }
+
   public String getFieldFingerprintValidity() {
     return mFingerprintValidity;
+  }
+
+  public CopyrightReferenceContainer setFieldFingerprintValidity(String value) {
+    this.mFingerprintValidity = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public CopyrightReferenceContainer setFieldId(String value) {
+    this.mId = value;
+    return this;
+  }
+
   public Object getFieldMetadata() {
     return mMetadata;
+  }
+
+  public CopyrightReferenceContainer setFieldMetadata(Object value) {
+    this.mMetadata = value;
+    return this;
   }
 
   public String getFieldPublishedTime() {
     return mPublishedTime;
   }
 
+  public CopyrightReferenceContainer setFieldPublishedTime(String value) {
+    this.mPublishedTime = value;
+    return this;
+  }
+
   public String getFieldThumbnailUrl() {
     return mThumbnailUrl;
+  }
+
+  public CopyrightReferenceContainer setFieldThumbnailUrl(String value) {
+    this.mThumbnailUrl = value;
+    return this;
   }
 
   public String getFieldTitle() {
     return mTitle;
   }
 
+  public CopyrightReferenceContainer setFieldTitle(String value) {
+    this.mTitle = value;
+    return this;
+  }
+
   public String getFieldUniversalContentId() {
     return mUniversalContentId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<CopyrightReferenceContainer> {
-
-    CopyrightReferenceContainer lastResponse = null;
-    @Override
-    public CopyrightReferenceContainer getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "content_type",
-      "copyright_creation_time",
-      "download_hd_url",
-      "duration_in_sec",
-      "fingerprint_validity",
-      "id",
-      "metadata",
-      "published_time",
-      "thumbnail_url",
-      "title",
-      "universal_content_id",
-    };
-
-    @Override
-    public CopyrightReferenceContainer parseResponse(String response) throws APIException {
-      return CopyrightReferenceContainer.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public CopyrightReferenceContainer execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CopyrightReferenceContainer execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<CopyrightReferenceContainer> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CopyrightReferenceContainer> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, CopyrightReferenceContainer>() {
-           public CopyrightReferenceContainer apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestContentTypeField () {
-      return this.requestContentTypeField(true);
-    }
-    public APIRequestGet requestContentTypeField (boolean value) {
-      this.requestField("content_type", value);
-      return this;
-    }
-    public APIRequestGet requestCopyrightCreationTimeField () {
-      return this.requestCopyrightCreationTimeField(true);
-    }
-    public APIRequestGet requestCopyrightCreationTimeField (boolean value) {
-      this.requestField("copyright_creation_time", value);
-      return this;
-    }
-    public APIRequestGet requestDownloadHdUrlField () {
-      return this.requestDownloadHdUrlField(true);
-    }
-    public APIRequestGet requestDownloadHdUrlField (boolean value) {
-      this.requestField("download_hd_url", value);
-      return this;
-    }
-    public APIRequestGet requestDurationInSecField () {
-      return this.requestDurationInSecField(true);
-    }
-    public APIRequestGet requestDurationInSecField (boolean value) {
-      this.requestField("duration_in_sec", value);
-      return this;
-    }
-    public APIRequestGet requestFingerprintValidityField () {
-      return this.requestFingerprintValidityField(true);
-    }
-    public APIRequestGet requestFingerprintValidityField (boolean value) {
-      this.requestField("fingerprint_validity", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestMetadataField () {
-      return this.requestMetadataField(true);
-    }
-    public APIRequestGet requestMetadataField (boolean value) {
-      this.requestField("metadata", value);
-      return this;
-    }
-    public APIRequestGet requestPublishedTimeField () {
-      return this.requestPublishedTimeField(true);
-    }
-    public APIRequestGet requestPublishedTimeField (boolean value) {
-      this.requestField("published_time", value);
-      return this;
-    }
-    public APIRequestGet requestThumbnailUrlField () {
-      return this.requestThumbnailUrlField(true);
-    }
-    public APIRequestGet requestThumbnailUrlField (boolean value) {
-      this.requestField("thumbnail_url", value);
-      return this;
-    }
-    public APIRequestGet requestTitleField () {
-      return this.requestTitleField(true);
-    }
-    public APIRequestGet requestTitleField (boolean value) {
-      this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGet requestUniversalContentIdField () {
-      return this.requestUniversalContentIdField(true);
-    }
-    public APIRequestGet requestUniversalContentIdField (boolean value) {
-      this.requestField("universal_content_id", value);
-      return this;
-    }
+  public CopyrightReferenceContainer setFieldUniversalContentId(String value) {
+    this.mUniversalContentId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

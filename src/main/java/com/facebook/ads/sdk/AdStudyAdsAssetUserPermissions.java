@@ -79,66 +79,7 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdStudyAdsAssetUserPermissions() {
-  }
-
-  public AdStudyAdsAssetUserPermissions(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdStudyAdsAssetUserPermissions(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdStudyAdsAssetUserPermissions fetch() throws APIException{
-    AdStudyAdsAssetUserPermissions newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdStudyAdsAssetUserPermissions fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdStudyAdsAssetUserPermissions> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdStudyAdsAssetUserPermissions fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdStudyAdsAssetUserPermissions> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdStudyAdsAssetUserPermissions> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdStudyAdsAssetUserPermissions>)(
-      new APIRequest<AdStudyAdsAssetUserPermissions>(context, "", "/", "GET", AdStudyAdsAssetUserPermissions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdStudyAdsAssetUserPermissions>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdStudyAdsAssetUserPermissions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdStudyAdsAssetUserPermissions() {
   }
 
   public String getId() {
@@ -285,10 +226,6 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Business getFieldBusiness() {
     if (mBusiness != null) {
@@ -297,8 +234,23 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
     return mBusiness;
   }
 
+  public AdStudyAdsAssetUserPermissions setFieldBusiness(Business value) {
+    this.mBusiness = value;
+    return this;
+  }
+
+  public AdStudyAdsAssetUserPermissions setFieldBusiness(String value) {
+    Type type = new TypeToken<Business>(){}.getType();
+    this.mBusiness = Business.getGson().fromJson(value, type);
+    return this;
+  }
   public Object getFieldBusinessPersona() {
     return mBusinessPersona;
+  }
+
+  public AdStudyAdsAssetUserPermissions setFieldBusinessPersona(Object value) {
+    this.mBusinessPersona = value;
+    return this;
   }
 
   public User getFieldCreatedBy() {
@@ -308,20 +260,50 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
     return mCreatedBy;
   }
 
+  public AdStudyAdsAssetUserPermissions setFieldCreatedBy(User value) {
+    this.mCreatedBy = value;
+    return this;
+  }
+
+  public AdStudyAdsAssetUserPermissions setFieldCreatedBy(String value) {
+    Type type = new TypeToken<User>(){}.getType();
+    this.mCreatedBy = User.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldCreatedTime() {
     return mCreatedTime;
+  }
+
+  public AdStudyAdsAssetUserPermissions setFieldCreatedTime(String value) {
+    this.mCreatedTime = value;
+    return this;
   }
 
   public String getFieldEmail() {
     return mEmail;
   }
 
+  public AdStudyAdsAssetUserPermissions setFieldEmail(String value) {
+    this.mEmail = value;
+    return this;
+  }
+
   public String getFieldRole() {
     return mRole;
   }
 
+  public AdStudyAdsAssetUserPermissions setFieldRole(String value) {
+    this.mRole = value;
+    return this;
+  }
+
   public String getFieldStatus() {
     return mStatus;
+  }
+
+  public AdStudyAdsAssetUserPermissions setFieldStatus(String value) {
+    this.mStatus = value;
+    return this;
   }
 
   public User getFieldUpdatedBy() {
@@ -331,8 +313,23 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
     return mUpdatedBy;
   }
 
+  public AdStudyAdsAssetUserPermissions setFieldUpdatedBy(User value) {
+    this.mUpdatedBy = value;
+    return this;
+  }
+
+  public AdStudyAdsAssetUserPermissions setFieldUpdatedBy(String value) {
+    Type type = new TypeToken<User>(){}.getType();
+    this.mUpdatedBy = User.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldUpdatedTime() {
     return mUpdatedTime;
+  }
+
+  public AdStudyAdsAssetUserPermissions setFieldUpdatedTime(String value) {
+    this.mUpdatedTime = value;
+    return this;
   }
 
   public User getFieldUser() {
@@ -342,202 +339,26 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
     return mUser;
   }
 
+  public AdStudyAdsAssetUserPermissions setFieldUser(User value) {
+    this.mUser = value;
+    return this;
+  }
+
+  public AdStudyAdsAssetUserPermissions setFieldUser(String value) {
+    Type type = new TypeToken<User>(){}.getType();
+    this.mUser = User.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdStudyAdsAssetUserPermissions> {
-
-    AdStudyAdsAssetUserPermissions lastResponse = null;
-    @Override
-    public AdStudyAdsAssetUserPermissions getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "business",
-      "business_persona",
-      "created_by",
-      "created_time",
-      "email",
-      "role",
-      "status",
-      "updated_by",
-      "updated_time",
-      "user",
-      "id",
-    };
-
-    @Override
-    public AdStudyAdsAssetUserPermissions parseResponse(String response) throws APIException {
-      return AdStudyAdsAssetUserPermissions.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdStudyAdsAssetUserPermissions execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdStudyAdsAssetUserPermissions execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdStudyAdsAssetUserPermissions> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdStudyAdsAssetUserPermissions> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdStudyAdsAssetUserPermissions>() {
-           public AdStudyAdsAssetUserPermissions apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGet requestBusinessField (boolean value) {
-      this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGet requestBusinessPersonaField () {
-      return this.requestBusinessPersonaField(true);
-    }
-    public APIRequestGet requestBusinessPersonaField (boolean value) {
-      this.requestField("business_persona", value);
-      return this;
-    }
-    public APIRequestGet requestCreatedByField () {
-      return this.requestCreatedByField(true);
-    }
-    public APIRequestGet requestCreatedByField (boolean value) {
-      this.requestField("created_by", value);
-      return this;
-    }
-    public APIRequestGet requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGet requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGet requestEmailField () {
-      return this.requestEmailField(true);
-    }
-    public APIRequestGet requestEmailField (boolean value) {
-      this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGet requestRoleField () {
-      return this.requestRoleField(true);
-    }
-    public APIRequestGet requestRoleField (boolean value) {
-      this.requestField("role", value);
-      return this;
-    }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGet requestUpdatedByField () {
-      return this.requestUpdatedByField(true);
-    }
-    public APIRequestGet requestUpdatedByField (boolean value) {
-      this.requestField("updated_by", value);
-      return this;
-    }
-    public APIRequestGet requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGet requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGet requestUserField () {
-      return this.requestUserField(true);
-    }
-    public APIRequestGet requestUserField (boolean value) {
-      this.requestField("user", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdStudyAdsAssetUserPermissions setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

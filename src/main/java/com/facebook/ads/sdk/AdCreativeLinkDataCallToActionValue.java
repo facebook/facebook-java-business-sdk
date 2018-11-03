@@ -81,66 +81,7 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCreativeLinkDataCallToActionValue() {
-  }
-
-  public AdCreativeLinkDataCallToActionValue(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCreativeLinkDataCallToActionValue(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCreativeLinkDataCallToActionValue fetch() throws APIException{
-    AdCreativeLinkDataCallToActionValue newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCreativeLinkDataCallToActionValue fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCreativeLinkDataCallToActionValue> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCreativeLinkDataCallToActionValue fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCreativeLinkDataCallToActionValue> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCreativeLinkDataCallToActionValue> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCreativeLinkDataCallToActionValue>)(
-      new APIRequest<AdCreativeLinkDataCallToActionValue>(context, "", "/", "GET", AdCreativeLinkDataCallToActionValue.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCreativeLinkDataCallToActionValue>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCreativeLinkDataCallToActionValue.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCreativeLinkDataCallToActionValue() {
   }
 
   public String getId() {
@@ -287,259 +228,116 @@ public class AdCreativeLinkDataCallToActionValue extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAppDestination() {
     return mAppDestination;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldAppDestination(String value) {
+    this.mAppDestination = value;
+    return this;
   }
 
   public String getFieldAppLink() {
     return mAppLink;
   }
 
+  public AdCreativeLinkDataCallToActionValue setFieldAppLink(String value) {
+    this.mAppLink = value;
+    return this;
+  }
+
   public String getFieldApplication() {
     return mApplication;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldApplication(String value) {
+    this.mApplication = value;
+    return this;
   }
 
   public String getFieldEventId() {
     return mEventId;
   }
 
+  public AdCreativeLinkDataCallToActionValue setFieldEventId(String value) {
+    this.mEventId = value;
+    return this;
+  }
+
   public String getFieldLeadGenFormId() {
     return mLeadGenFormId;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldLeadGenFormId(String value) {
+    this.mLeadGenFormId = value;
+    return this;
   }
 
   public String getFieldLink() {
     return mLink;
   }
 
+  public AdCreativeLinkDataCallToActionValue setFieldLink(String value) {
+    this.mLink = value;
+    return this;
+  }
+
   public String getFieldLinkCaption() {
     return mLinkCaption;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldLinkCaption(String value) {
+    this.mLinkCaption = value;
+    return this;
   }
 
   public String getFieldLinkFormat() {
     return mLinkFormat;
   }
 
+  public AdCreativeLinkDataCallToActionValue setFieldLinkFormat(String value) {
+    this.mLinkFormat = value;
+    return this;
+  }
+
   public String getFieldPage() {
     return mPage;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldPage(String value) {
+    this.mPage = value;
+    return this;
   }
 
   public String getFieldProductLink() {
     return mProductLink;
   }
 
+  public AdCreativeLinkDataCallToActionValue setFieldProductLink(String value) {
+    this.mProductLink = value;
+    return this;
+  }
+
   public String getFieldWhatsappNumber() {
     return mWhatsappNumber;
+  }
+
+  public AdCreativeLinkDataCallToActionValue setFieldWhatsappNumber(String value) {
+    this.mWhatsappNumber = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCreativeLinkDataCallToActionValue> {
-
-    AdCreativeLinkDataCallToActionValue lastResponse = null;
-    @Override
-    public AdCreativeLinkDataCallToActionValue getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "app_destination",
-      "app_link",
-      "application",
-      "event_id",
-      "lead_gen_form_id",
-      "link",
-      "link_caption",
-      "link_format",
-      "page",
-      "product_link",
-      "whatsapp_number",
-      "id",
-    };
-
-    @Override
-    public AdCreativeLinkDataCallToActionValue parseResponse(String response) throws APIException {
-      return AdCreativeLinkDataCallToActionValue.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCreativeLinkDataCallToActionValue execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCreativeLinkDataCallToActionValue execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCreativeLinkDataCallToActionValue> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCreativeLinkDataCallToActionValue> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCreativeLinkDataCallToActionValue>() {
-           public AdCreativeLinkDataCallToActionValue apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAppDestinationField () {
-      return this.requestAppDestinationField(true);
-    }
-    public APIRequestGet requestAppDestinationField (boolean value) {
-      this.requestField("app_destination", value);
-      return this;
-    }
-    public APIRequestGet requestAppLinkField () {
-      return this.requestAppLinkField(true);
-    }
-    public APIRequestGet requestAppLinkField (boolean value) {
-      this.requestField("app_link", value);
-      return this;
-    }
-    public APIRequestGet requestApplicationField () {
-      return this.requestApplicationField(true);
-    }
-    public APIRequestGet requestApplicationField (boolean value) {
-      this.requestField("application", value);
-      return this;
-    }
-    public APIRequestGet requestEventIdField () {
-      return this.requestEventIdField(true);
-    }
-    public APIRequestGet requestEventIdField (boolean value) {
-      this.requestField("event_id", value);
-      return this;
-    }
-    public APIRequestGet requestLeadGenFormIdField () {
-      return this.requestLeadGenFormIdField(true);
-    }
-    public APIRequestGet requestLeadGenFormIdField (boolean value) {
-      this.requestField("lead_gen_form_id", value);
-      return this;
-    }
-    public APIRequestGet requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGet requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGet requestLinkCaptionField () {
-      return this.requestLinkCaptionField(true);
-    }
-    public APIRequestGet requestLinkCaptionField (boolean value) {
-      this.requestField("link_caption", value);
-      return this;
-    }
-    public APIRequestGet requestLinkFormatField () {
-      return this.requestLinkFormatField(true);
-    }
-    public APIRequestGet requestLinkFormatField (boolean value) {
-      this.requestField("link_format", value);
-      return this;
-    }
-    public APIRequestGet requestPageField () {
-      return this.requestPageField(true);
-    }
-    public APIRequestGet requestPageField (boolean value) {
-      this.requestField("page", value);
-      return this;
-    }
-    public APIRequestGet requestProductLinkField () {
-      return this.requestProductLinkField(true);
-    }
-    public APIRequestGet requestProductLinkField (boolean value) {
-      this.requestField("product_link", value);
-      return this;
-    }
-    public APIRequestGet requestWhatsappNumberField () {
-      return this.requestWhatsappNumberField(true);
-    }
-    public APIRequestGet requestWhatsappNumberField (boolean value) {
-      this.requestField("whatsapp_number", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCreativeLinkDataCallToActionValue setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

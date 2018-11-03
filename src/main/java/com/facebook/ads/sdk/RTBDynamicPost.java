@@ -659,44 +659,51 @@ public class RTBDynamicPost extends APINode {
     }
   }
 
-  public static class APIRequestGetInstagramComments extends APIRequest<APINode> {
+  public static class APIRequestGetInstagramComments extends APIRequest<InstagramComment> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<InstagramComment> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<InstagramComment> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "comment_type",
+      "created_at",
+      "id",
+      "instagram_comment_id",
+      "instagram_user",
+      "mentioned_instagram_users",
+      "message",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<InstagramComment> parseResponse(String response) throws APIException {
+      return InstagramComment.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<InstagramComment> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<InstagramComment> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<InstagramComment>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<InstagramComment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<String, APINodeList<InstagramComment>>() {
+           public APINodeList<InstagramComment> apply(String result) {
              try {
                return APIRequestGetInstagramComments.this.parseResponse(result);
              } catch (Exception e) {
@@ -760,6 +767,55 @@ public class RTBDynamicPost extends APINode {
       return this;
     }
 
+    public APIRequestGetInstagramComments requestCommentTypeField () {
+      return this.requestCommentTypeField(true);
+    }
+    public APIRequestGetInstagramComments requestCommentTypeField (boolean value) {
+      this.requestField("comment_type", value);
+      return this;
+    }
+    public APIRequestGetInstagramComments requestCreatedAtField () {
+      return this.requestCreatedAtField(true);
+    }
+    public APIRequestGetInstagramComments requestCreatedAtField (boolean value) {
+      this.requestField("created_at", value);
+      return this;
+    }
+    public APIRequestGetInstagramComments requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetInstagramComments requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetInstagramComments requestInstagramCommentIdField () {
+      return this.requestInstagramCommentIdField(true);
+    }
+    public APIRequestGetInstagramComments requestInstagramCommentIdField (boolean value) {
+      this.requestField("instagram_comment_id", value);
+      return this;
+    }
+    public APIRequestGetInstagramComments requestInstagramUserField () {
+      return this.requestInstagramUserField(true);
+    }
+    public APIRequestGetInstagramComments requestInstagramUserField (boolean value) {
+      this.requestField("instagram_user", value);
+      return this;
+    }
+    public APIRequestGetInstagramComments requestMentionedInstagramUsersField () {
+      return this.requestMentionedInstagramUsersField(true);
+    }
+    public APIRequestGetInstagramComments requestMentionedInstagramUsersField (boolean value) {
+      this.requestField("mentioned_instagram_users", value);
+      return this;
+    }
+    public APIRequestGetInstagramComments requestMessageField () {
+      return this.requestMessageField(true);
+    }
+    public APIRequestGetInstagramComments requestMessageField (boolean value) {
+      this.requestField("message", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetLikes extends APIRequest<Profile> {

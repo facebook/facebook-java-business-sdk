@@ -79,66 +79,7 @@ public class LiveVideoAdBreakConfig extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  LiveVideoAdBreakConfig() {
-  }
-
-  public LiveVideoAdBreakConfig(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public LiveVideoAdBreakConfig(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public LiveVideoAdBreakConfig fetch() throws APIException{
-    LiveVideoAdBreakConfig newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static LiveVideoAdBreakConfig fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<LiveVideoAdBreakConfig> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static LiveVideoAdBreakConfig fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<LiveVideoAdBreakConfig> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<LiveVideoAdBreakConfig> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<LiveVideoAdBreakConfig>)(
-      new APIRequest<LiveVideoAdBreakConfig>(context, "", "/", "GET", LiveVideoAdBreakConfig.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<LiveVideoAdBreakConfig>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", LiveVideoAdBreakConfig.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public LiveVideoAdBreakConfig() {
   }
 
   public String getId() {
@@ -285,247 +226,107 @@ public class LiveVideoAdBreakConfig extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldDefaultAdBreakDuration() {
     return mDefaultAdBreakDuration;
+  }
+
+  public LiveVideoAdBreakConfig setFieldDefaultAdBreakDuration(Long value) {
+    this.mDefaultAdBreakDuration = value;
+    return this;
   }
 
   public Long getFieldFailureReasonPollingInterval() {
     return mFailureReasonPollingInterval;
   }
 
+  public LiveVideoAdBreakConfig setFieldFailureReasonPollingInterval(Long value) {
+    this.mFailureReasonPollingInterval = value;
+    return this;
+  }
+
   public Long getFieldFirstBreakEligibleSecs() {
     return mFirstBreakEligibleSecs;
+  }
+
+  public LiveVideoAdBreakConfig setFieldFirstBreakEligibleSecs(Long value) {
+    this.mFirstBreakEligibleSecs = value;
+    return this;
   }
 
   public String getFieldGuideUrl() {
     return mGuideUrl;
   }
 
+  public LiveVideoAdBreakConfig setFieldGuideUrl(String value) {
+    this.mGuideUrl = value;
+    return this;
+  }
+
   public Boolean getFieldIsEligibleToOnboard() {
     return mIsEligibleToOnboard;
+  }
+
+  public LiveVideoAdBreakConfig setFieldIsEligibleToOnboard(Boolean value) {
+    this.mIsEligibleToOnboard = value;
+    return this;
   }
 
   public Boolean getFieldIsEnabled() {
     return mIsEnabled;
   }
 
+  public LiveVideoAdBreakConfig setFieldIsEnabled(Boolean value) {
+    this.mIsEnabled = value;
+    return this;
+  }
+
   public String getFieldOnboardingUrl() {
     return mOnboardingUrl;
+  }
+
+  public LiveVideoAdBreakConfig setFieldOnboardingUrl(String value) {
+    this.mOnboardingUrl = value;
+    return this;
   }
 
   public Long getFieldPreparingDuration() {
     return mPreparingDuration;
   }
 
+  public LiveVideoAdBreakConfig setFieldPreparingDuration(Long value) {
+    this.mPreparingDuration = value;
+    return this;
+  }
+
   public Long getFieldTimeBetweenAdBreaksSecs() {
     return mTimeBetweenAdBreaksSecs;
+  }
+
+  public LiveVideoAdBreakConfig setFieldTimeBetweenAdBreaksSecs(Long value) {
+    this.mTimeBetweenAdBreaksSecs = value;
+    return this;
   }
 
   public Long getFieldViewerCountThreshold() {
     return mViewerCountThreshold;
   }
 
+  public LiveVideoAdBreakConfig setFieldViewerCountThreshold(Long value) {
+    this.mViewerCountThreshold = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<LiveVideoAdBreakConfig> {
-
-    LiveVideoAdBreakConfig lastResponse = null;
-    @Override
-    public LiveVideoAdBreakConfig getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "default_ad_break_duration",
-      "failure_reason_polling_interval",
-      "first_break_eligible_secs",
-      "guide_url",
-      "is_eligible_to_onboard",
-      "is_enabled",
-      "onboarding_url",
-      "preparing_duration",
-      "time_between_ad_breaks_secs",
-      "viewer_count_threshold",
-      "id",
-    };
-
-    @Override
-    public LiveVideoAdBreakConfig parseResponse(String response) throws APIException {
-      return LiveVideoAdBreakConfig.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public LiveVideoAdBreakConfig execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public LiveVideoAdBreakConfig execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<LiveVideoAdBreakConfig> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<LiveVideoAdBreakConfig> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, LiveVideoAdBreakConfig>() {
-           public LiveVideoAdBreakConfig apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestDefaultAdBreakDurationField () {
-      return this.requestDefaultAdBreakDurationField(true);
-    }
-    public APIRequestGet requestDefaultAdBreakDurationField (boolean value) {
-      this.requestField("default_ad_break_duration", value);
-      return this;
-    }
-    public APIRequestGet requestFailureReasonPollingIntervalField () {
-      return this.requestFailureReasonPollingIntervalField(true);
-    }
-    public APIRequestGet requestFailureReasonPollingIntervalField (boolean value) {
-      this.requestField("failure_reason_polling_interval", value);
-      return this;
-    }
-    public APIRequestGet requestFirstBreakEligibleSecsField () {
-      return this.requestFirstBreakEligibleSecsField(true);
-    }
-    public APIRequestGet requestFirstBreakEligibleSecsField (boolean value) {
-      this.requestField("first_break_eligible_secs", value);
-      return this;
-    }
-    public APIRequestGet requestGuideUrlField () {
-      return this.requestGuideUrlField(true);
-    }
-    public APIRequestGet requestGuideUrlField (boolean value) {
-      this.requestField("guide_url", value);
-      return this;
-    }
-    public APIRequestGet requestIsEligibleToOnboardField () {
-      return this.requestIsEligibleToOnboardField(true);
-    }
-    public APIRequestGet requestIsEligibleToOnboardField (boolean value) {
-      this.requestField("is_eligible_to_onboard", value);
-      return this;
-    }
-    public APIRequestGet requestIsEnabledField () {
-      return this.requestIsEnabledField(true);
-    }
-    public APIRequestGet requestIsEnabledField (boolean value) {
-      this.requestField("is_enabled", value);
-      return this;
-    }
-    public APIRequestGet requestOnboardingUrlField () {
-      return this.requestOnboardingUrlField(true);
-    }
-    public APIRequestGet requestOnboardingUrlField (boolean value) {
-      this.requestField("onboarding_url", value);
-      return this;
-    }
-    public APIRequestGet requestPreparingDurationField () {
-      return this.requestPreparingDurationField(true);
-    }
-    public APIRequestGet requestPreparingDurationField (boolean value) {
-      this.requestField("preparing_duration", value);
-      return this;
-    }
-    public APIRequestGet requestTimeBetweenAdBreaksSecsField () {
-      return this.requestTimeBetweenAdBreaksSecsField(true);
-    }
-    public APIRequestGet requestTimeBetweenAdBreaksSecsField (boolean value) {
-      this.requestField("time_between_ad_breaks_secs", value);
-      return this;
-    }
-    public APIRequestGet requestViewerCountThresholdField () {
-      return this.requestViewerCountThresholdField(true);
-    }
-    public APIRequestGet requestViewerCountThresholdField (boolean value) {
-      this.requestField("viewer_count_threshold", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public LiveVideoAdBreakConfig setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

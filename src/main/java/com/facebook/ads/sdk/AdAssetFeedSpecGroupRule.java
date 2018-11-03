@@ -73,66 +73,7 @@ public class AdAssetFeedSpecGroupRule extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdAssetFeedSpecGroupRule() {
-  }
-
-  public AdAssetFeedSpecGroupRule(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdAssetFeedSpecGroupRule(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdAssetFeedSpecGroupRule fetch() throws APIException{
-    AdAssetFeedSpecGroupRule newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdAssetFeedSpecGroupRule fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdAssetFeedSpecGroupRule> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdAssetFeedSpecGroupRule fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdAssetFeedSpecGroupRule> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdAssetFeedSpecGroupRule> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdAssetFeedSpecGroupRule>)(
-      new APIRequest<AdAssetFeedSpecGroupRule>(context, "", "/", "GET", AdAssetFeedSpecGroupRule.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdAssetFeedSpecGroupRule>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdAssetFeedSpecGroupRule.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdAssetFeedSpecGroupRule() {
   }
 
   public String getId() {
@@ -279,232 +220,115 @@ public class AdAssetFeedSpecGroupRule extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public AdAssetFeedSpecAssetLabel getFieldBodyLabel() {
-    if (mBodyLabel != null) {
-      mBodyLabel.context = getContext();
-    }
     return mBodyLabel;
   }
 
+  public AdAssetFeedSpecGroupRule setFieldBodyLabel(AdAssetFeedSpecAssetLabel value) {
+    this.mBodyLabel = value;
+    return this;
+  }
+
+  public AdAssetFeedSpecGroupRule setFieldBodyLabel(String value) {
+    Type type = new TypeToken<AdAssetFeedSpecAssetLabel>(){}.getType();
+    this.mBodyLabel = AdAssetFeedSpecAssetLabel.getGson().fromJson(value, type);
+    return this;
+  }
   public AdAssetFeedSpecAssetLabel getFieldCaptionLabel() {
-    if (mCaptionLabel != null) {
-      mCaptionLabel.context = getContext();
-    }
     return mCaptionLabel;
   }
 
+  public AdAssetFeedSpecGroupRule setFieldCaptionLabel(AdAssetFeedSpecAssetLabel value) {
+    this.mCaptionLabel = value;
+    return this;
+  }
+
+  public AdAssetFeedSpecGroupRule setFieldCaptionLabel(String value) {
+    Type type = new TypeToken<AdAssetFeedSpecAssetLabel>(){}.getType();
+    this.mCaptionLabel = AdAssetFeedSpecAssetLabel.getGson().fromJson(value, type);
+    return this;
+  }
   public AdAssetFeedSpecAssetLabel getFieldDescriptionLabel() {
-    if (mDescriptionLabel != null) {
-      mDescriptionLabel.context = getContext();
-    }
     return mDescriptionLabel;
   }
 
+  public AdAssetFeedSpecGroupRule setFieldDescriptionLabel(AdAssetFeedSpecAssetLabel value) {
+    this.mDescriptionLabel = value;
+    return this;
+  }
+
+  public AdAssetFeedSpecGroupRule setFieldDescriptionLabel(String value) {
+    Type type = new TypeToken<AdAssetFeedSpecAssetLabel>(){}.getType();
+    this.mDescriptionLabel = AdAssetFeedSpecAssetLabel.getGson().fromJson(value, type);
+    return this;
+  }
   public AdAssetFeedSpecAssetLabel getFieldImageLabel() {
-    if (mImageLabel != null) {
-      mImageLabel.context = getContext();
-    }
     return mImageLabel;
   }
 
+  public AdAssetFeedSpecGroupRule setFieldImageLabel(AdAssetFeedSpecAssetLabel value) {
+    this.mImageLabel = value;
+    return this;
+  }
+
+  public AdAssetFeedSpecGroupRule setFieldImageLabel(String value) {
+    Type type = new TypeToken<AdAssetFeedSpecAssetLabel>(){}.getType();
+    this.mImageLabel = AdAssetFeedSpecAssetLabel.getGson().fromJson(value, type);
+    return this;
+  }
   public AdAssetFeedSpecAssetLabel getFieldLinkUrlLabel() {
-    if (mLinkUrlLabel != null) {
-      mLinkUrlLabel.context = getContext();
-    }
     return mLinkUrlLabel;
   }
 
+  public AdAssetFeedSpecGroupRule setFieldLinkUrlLabel(AdAssetFeedSpecAssetLabel value) {
+    this.mLinkUrlLabel = value;
+    return this;
+  }
+
+  public AdAssetFeedSpecGroupRule setFieldLinkUrlLabel(String value) {
+    Type type = new TypeToken<AdAssetFeedSpecAssetLabel>(){}.getType();
+    this.mLinkUrlLabel = AdAssetFeedSpecAssetLabel.getGson().fromJson(value, type);
+    return this;
+  }
   public AdAssetFeedSpecAssetLabel getFieldTitleLabel() {
-    if (mTitleLabel != null) {
-      mTitleLabel.context = getContext();
-    }
     return mTitleLabel;
   }
 
+  public AdAssetFeedSpecGroupRule setFieldTitleLabel(AdAssetFeedSpecAssetLabel value) {
+    this.mTitleLabel = value;
+    return this;
+  }
+
+  public AdAssetFeedSpecGroupRule setFieldTitleLabel(String value) {
+    Type type = new TypeToken<AdAssetFeedSpecAssetLabel>(){}.getType();
+    this.mTitleLabel = AdAssetFeedSpecAssetLabel.getGson().fromJson(value, type);
+    return this;
+  }
   public AdAssetFeedSpecAssetLabel getFieldVideoLabel() {
-    if (mVideoLabel != null) {
-      mVideoLabel.context = getContext();
-    }
     return mVideoLabel;
   }
 
+  public AdAssetFeedSpecGroupRule setFieldVideoLabel(AdAssetFeedSpecAssetLabel value) {
+    this.mVideoLabel = value;
+    return this;
+  }
+
+  public AdAssetFeedSpecGroupRule setFieldVideoLabel(String value) {
+    Type type = new TypeToken<AdAssetFeedSpecAssetLabel>(){}.getType();
+    this.mVideoLabel = AdAssetFeedSpecAssetLabel.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdAssetFeedSpecGroupRule> {
-
-    AdAssetFeedSpecGroupRule lastResponse = null;
-    @Override
-    public AdAssetFeedSpecGroupRule getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "body_label",
-      "caption_label",
-      "description_label",
-      "image_label",
-      "link_url_label",
-      "title_label",
-      "video_label",
-      "id",
-    };
-
-    @Override
-    public AdAssetFeedSpecGroupRule parseResponse(String response) throws APIException {
-      return AdAssetFeedSpecGroupRule.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdAssetFeedSpecGroupRule execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdAssetFeedSpecGroupRule execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdAssetFeedSpecGroupRule> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdAssetFeedSpecGroupRule> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdAssetFeedSpecGroupRule>() {
-           public AdAssetFeedSpecGroupRule apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestBodyLabelField () {
-      return this.requestBodyLabelField(true);
-    }
-    public APIRequestGet requestBodyLabelField (boolean value) {
-      this.requestField("body_label", value);
-      return this;
-    }
-    public APIRequestGet requestCaptionLabelField () {
-      return this.requestCaptionLabelField(true);
-    }
-    public APIRequestGet requestCaptionLabelField (boolean value) {
-      this.requestField("caption_label", value);
-      return this;
-    }
-    public APIRequestGet requestDescriptionLabelField () {
-      return this.requestDescriptionLabelField(true);
-    }
-    public APIRequestGet requestDescriptionLabelField (boolean value) {
-      this.requestField("description_label", value);
-      return this;
-    }
-    public APIRequestGet requestImageLabelField () {
-      return this.requestImageLabelField(true);
-    }
-    public APIRequestGet requestImageLabelField (boolean value) {
-      this.requestField("image_label", value);
-      return this;
-    }
-    public APIRequestGet requestLinkUrlLabelField () {
-      return this.requestLinkUrlLabelField(true);
-    }
-    public APIRequestGet requestLinkUrlLabelField (boolean value) {
-      this.requestField("link_url_label", value);
-      return this;
-    }
-    public APIRequestGet requestTitleLabelField () {
-      return this.requestTitleLabelField(true);
-    }
-    public APIRequestGet requestTitleLabelField (boolean value) {
-      this.requestField("title_label", value);
-      return this;
-    }
-    public APIRequestGet requestVideoLabelField () {
-      return this.requestVideoLabelField(true);
-    }
-    public APIRequestGet requestVideoLabelField (boolean value) {
-      this.requestField("video_label", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdAssetFeedSpecGroupRule setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

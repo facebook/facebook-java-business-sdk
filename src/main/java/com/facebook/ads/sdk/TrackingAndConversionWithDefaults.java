@@ -67,66 +67,7 @@ public class TrackingAndConversionWithDefaults extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  TrackingAndConversionWithDefaults() {
-  }
-
-  public TrackingAndConversionWithDefaults(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public TrackingAndConversionWithDefaults(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public TrackingAndConversionWithDefaults fetch() throws APIException{
-    TrackingAndConversionWithDefaults newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static TrackingAndConversionWithDefaults fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<TrackingAndConversionWithDefaults> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static TrackingAndConversionWithDefaults fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<TrackingAndConversionWithDefaults> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<TrackingAndConversionWithDefaults> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<TrackingAndConversionWithDefaults>)(
-      new APIRequest<TrackingAndConversionWithDefaults>(context, "", "/", "GET", TrackingAndConversionWithDefaults.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<TrackingAndConversionWithDefaults>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", TrackingAndConversionWithDefaults.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public TrackingAndConversionWithDefaults() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class TrackingAndConversionWithDefaults extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<Object> getFieldCustomConversion() {
     return mCustomConversion;
+  }
+
+  public TrackingAndConversionWithDefaults setFieldCustomConversion(List<Object> value) {
+    this.mCustomConversion = value;
+    return this;
   }
 
   public List<Object> getFieldCustomTracking() {
     return mCustomTracking;
   }
 
+  public TrackingAndConversionWithDefaults setFieldCustomTracking(List<Object> value) {
+    this.mCustomTracking = value;
+    return this;
+  }
+
   public List<Object> getFieldDefaultConversion() {
     return mDefaultConversion;
+  }
+
+  public TrackingAndConversionWithDefaults setFieldDefaultConversion(List<Object> value) {
+    this.mDefaultConversion = value;
+    return this;
   }
 
   public List<Object> getFieldDefaultTracking() {
     return mDefaultTracking;
   }
 
+  public TrackingAndConversionWithDefaults setFieldDefaultTracking(List<Object> value) {
+    this.mDefaultTracking = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<TrackingAndConversionWithDefaults> {
-
-    TrackingAndConversionWithDefaults lastResponse = null;
-    @Override
-    public TrackingAndConversionWithDefaults getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "custom_conversion",
-      "custom_tracking",
-      "default_conversion",
-      "default_tracking",
-      "id",
-    };
-
-    @Override
-    public TrackingAndConversionWithDefaults parseResponse(String response) throws APIException {
-      return TrackingAndConversionWithDefaults.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public TrackingAndConversionWithDefaults execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public TrackingAndConversionWithDefaults execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<TrackingAndConversionWithDefaults> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<TrackingAndConversionWithDefaults> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, TrackingAndConversionWithDefaults>() {
-           public TrackingAndConversionWithDefaults apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCustomConversionField () {
-      return this.requestCustomConversionField(true);
-    }
-    public APIRequestGet requestCustomConversionField (boolean value) {
-      this.requestField("custom_conversion", value);
-      return this;
-    }
-    public APIRequestGet requestCustomTrackingField () {
-      return this.requestCustomTrackingField(true);
-    }
-    public APIRequestGet requestCustomTrackingField (boolean value) {
-      this.requestField("custom_tracking", value);
-      return this;
-    }
-    public APIRequestGet requestDefaultConversionField () {
-      return this.requestDefaultConversionField(true);
-    }
-    public APIRequestGet requestDefaultConversionField (boolean value) {
-      this.requestField("default_conversion", value);
-      return this;
-    }
-    public APIRequestGet requestDefaultTrackingField () {
-      return this.requestDefaultTrackingField(true);
-    }
-    public APIRequestGet requestDefaultTrackingField (boolean value) {
-      this.requestField("default_tracking", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public TrackingAndConversionWithDefaults setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

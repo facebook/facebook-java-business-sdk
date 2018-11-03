@@ -67,66 +67,7 @@ public class PageStoreVisitsDemographicInsights extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  PageStoreVisitsDemographicInsights() {
-  }
-
-  public PageStoreVisitsDemographicInsights(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public PageStoreVisitsDemographicInsights(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public PageStoreVisitsDemographicInsights fetch() throws APIException{
-    PageStoreVisitsDemographicInsights newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static PageStoreVisitsDemographicInsights fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<PageStoreVisitsDemographicInsights> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static PageStoreVisitsDemographicInsights fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<PageStoreVisitsDemographicInsights> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<PageStoreVisitsDemographicInsights> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PageStoreVisitsDemographicInsights>)(
-      new APIRequest<PageStoreVisitsDemographicInsights>(context, "", "/", "GET", PageStoreVisitsDemographicInsights.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<PageStoreVisitsDemographicInsights>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", PageStoreVisitsDemographicInsights.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public PageStoreVisitsDemographicInsights() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class PageStoreVisitsDemographicInsights extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldBreakdown() {
     return mBreakdown;
+  }
+
+  public PageStoreVisitsDemographicInsights setFieldBreakdown(String value) {
+    this.mBreakdown = value;
+    return this;
   }
 
   public String getFieldDataAvailableSince() {
     return mDataAvailableSince;
   }
 
+  public PageStoreVisitsDemographicInsights setFieldDataAvailableSince(String value) {
+    this.mDataAvailableSince = value;
+    return this;
+  }
+
   public String getFieldDataAvailableUntil() {
     return mDataAvailableUntil;
+  }
+
+  public PageStoreVisitsDemographicInsights setFieldDataAvailableUntil(String value) {
+    this.mDataAvailableUntil = value;
+    return this;
   }
 
   public List<Object> getFieldValues() {
     return mValues;
   }
 
+  public PageStoreVisitsDemographicInsights setFieldValues(List<Object> value) {
+    this.mValues = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<PageStoreVisitsDemographicInsights> {
-
-    PageStoreVisitsDemographicInsights lastResponse = null;
-    @Override
-    public PageStoreVisitsDemographicInsights getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "breakdown",
-      "data_available_since",
-      "data_available_until",
-      "values",
-      "id",
-    };
-
-    @Override
-    public PageStoreVisitsDemographicInsights parseResponse(String response) throws APIException {
-      return PageStoreVisitsDemographicInsights.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public PageStoreVisitsDemographicInsights execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public PageStoreVisitsDemographicInsights execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<PageStoreVisitsDemographicInsights> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<PageStoreVisitsDemographicInsights> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, PageStoreVisitsDemographicInsights>() {
-           public PageStoreVisitsDemographicInsights apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestBreakdownField () {
-      return this.requestBreakdownField(true);
-    }
-    public APIRequestGet requestBreakdownField (boolean value) {
-      this.requestField("breakdown", value);
-      return this;
-    }
-    public APIRequestGet requestDataAvailableSinceField () {
-      return this.requestDataAvailableSinceField(true);
-    }
-    public APIRequestGet requestDataAvailableSinceField (boolean value) {
-      this.requestField("data_available_since", value);
-      return this;
-    }
-    public APIRequestGet requestDataAvailableUntilField () {
-      return this.requestDataAvailableUntilField(true);
-    }
-    public APIRequestGet requestDataAvailableUntilField (boolean value) {
-      this.requestField("data_available_until", value);
-      return this;
-    }
-    public APIRequestGet requestValuesField () {
-      return this.requestValuesField(true);
-    }
-    public APIRequestGet requestValuesField (boolean value) {
-      this.requestField("values", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public PageStoreVisitsDemographicInsights setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

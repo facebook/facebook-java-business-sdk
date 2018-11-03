@@ -328,10 +328,12 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -630,6 +632,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetFriendsTaggedAt requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetFriendsTaggedAt requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetFriendsTaggedAt requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -656,6 +665,13 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetFriendsTaggedAt requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetFriendsTaggedAt requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetFriendsTaggedAt requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetFriendsTaggedAt requestLastNameField () {
@@ -927,10 +943,12 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -1229,6 +1247,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetFriendsWhoLike requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetFriendsWhoLike requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetFriendsWhoLike requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -1255,6 +1280,13 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetFriendsWhoLike requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetFriendsWhoLike requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetFriendsWhoLike requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetFriendsWhoLike requestLastNameField () {
@@ -1526,10 +1558,12 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -1828,6 +1862,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetMusicListenFriends requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetMusicListenFriends requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetMusicListenFriends requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -1854,6 +1895,13 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetMusicListenFriends requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetMusicListenFriends requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetMusicListenFriends requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetMusicListenFriends requestLastNameField () {
@@ -2125,10 +2173,12 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -2427,6 +2477,13 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetVideoWatchFriends requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetVideoWatchFriends requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetVideoWatchFriends requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -2453,6 +2510,13 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetVideoWatchFriends requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetVideoWatchFriends requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetVideoWatchFriends requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetVideoWatchFriends requestLastNameField () {

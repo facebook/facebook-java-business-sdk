@@ -61,66 +61,7 @@ public class TargetingProspectingAudience extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  TargetingProspectingAudience() {
-  }
-
-  public TargetingProspectingAudience(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public TargetingProspectingAudience(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public TargetingProspectingAudience fetch() throws APIException{
-    TargetingProspectingAudience newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static TargetingProspectingAudience fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<TargetingProspectingAudience> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static TargetingProspectingAudience fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<TargetingProspectingAudience> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<TargetingProspectingAudience> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<TargetingProspectingAudience>)(
-      new APIRequest<TargetingProspectingAudience>(context, "", "/", "GET", TargetingProspectingAudience.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<TargetingProspectingAudience>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", TargetingProspectingAudience.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public TargetingProspectingAudience() {
   }
 
   public String getId() {
@@ -267,139 +208,26 @@ public class TargetingProspectingAudience extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<Object> getFieldSources() {
     return mSources;
+  }
+
+  public TargetingProspectingAudience setFieldSources(List<Object> value) {
+    this.mSources = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<TargetingProspectingAudience> {
-
-    TargetingProspectingAudience lastResponse = null;
-    @Override
-    public TargetingProspectingAudience getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "sources",
-      "id",
-    };
-
-    @Override
-    public TargetingProspectingAudience parseResponse(String response) throws APIException {
-      return TargetingProspectingAudience.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public TargetingProspectingAudience execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public TargetingProspectingAudience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<TargetingProspectingAudience> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<TargetingProspectingAudience> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, TargetingProspectingAudience>() {
-           public TargetingProspectingAudience apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestSourcesField () {
-      return this.requestSourcesField(true);
-    }
-    public APIRequestGet requestSourcesField (boolean value) {
-      this.requestField("sources", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public TargetingProspectingAudience setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

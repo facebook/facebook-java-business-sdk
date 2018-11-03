@@ -414,6 +414,7 @@ public class BusinessAgreement extends APINode {
     }
     public static final String[] PARAMS = {
       "request_status",
+      "asset_id",
     };
 
     public static final String[] FIELDS = {
@@ -477,6 +478,15 @@ public class BusinessAgreement extends APINode {
     }
     public APIRequestUpdate setRequestStatus (String requestStatus) {
       this.setParam("request_status", requestStatus);
+      return this;
+    }
+
+    public APIRequestUpdate setAssetId (Long assetId) {
+      this.setParam("asset_id", assetId);
+      return this;
+    }
+    public APIRequestUpdate setAssetId (String assetId) {
+      this.setParam("asset_id", assetId);
       return this;
     }
 

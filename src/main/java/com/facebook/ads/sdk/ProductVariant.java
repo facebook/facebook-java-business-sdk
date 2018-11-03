@@ -65,66 +65,7 @@ public class ProductVariant extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ProductVariant() {
-  }
-
-  public ProductVariant(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ProductVariant(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ProductVariant fetch() throws APIException{
-    ProductVariant newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ProductVariant fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ProductVariant> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ProductVariant fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ProductVariant> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ProductVariant> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ProductVariant>)(
-      new APIRequest<ProductVariant>(context, "", "/", "GET", ProductVariant.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ProductVariant>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ProductVariant.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ProductVariant() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class ProductVariant extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldLabel() {
     return mLabel;
+  }
+
+  public ProductVariant setFieldLabel(String value) {
+    this.mLabel = value;
+    return this;
   }
 
   public List<String> getFieldOptions() {
     return mOptions;
   }
 
+  public ProductVariant setFieldOptions(List<String> value) {
+    this.mOptions = value;
+    return this;
+  }
+
   public String getFieldProductField() {
     return mProductField;
+  }
+
+  public ProductVariant setFieldProductField(String value) {
+    this.mProductField = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ProductVariant> {
-
-    ProductVariant lastResponse = null;
-    @Override
-    public ProductVariant getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "label",
-      "options",
-      "product_field",
-      "id",
-    };
-
-    @Override
-    public ProductVariant parseResponse(String response) throws APIException {
-      return ProductVariant.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ProductVariant execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductVariant execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ProductVariant> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ProductVariant> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ProductVariant>() {
-           public ProductVariant apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestLabelField () {
-      return this.requestLabelField(true);
-    }
-    public APIRequestGet requestLabelField (boolean value) {
-      this.requestField("label", value);
-      return this;
-    }
-    public APIRequestGet requestOptionsField () {
-      return this.requestOptionsField(true);
-    }
-    public APIRequestGet requestOptionsField (boolean value) {
-      this.requestField("options", value);
-      return this;
-    }
-    public APIRequestGet requestProductFieldField () {
-      return this.requestProductFieldField(true);
-    }
-    public APIRequestGet requestProductFieldField (boolean value) {
-      this.requestField("product_field", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ProductVariant setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

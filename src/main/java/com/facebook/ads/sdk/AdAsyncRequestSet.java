@@ -349,9 +349,6 @@ public class AdAsyncRequestSet extends APINode {
   }
 
   public AdAsyncRequestSetNotificationResult getFieldNotificationResult() {
-    if (mNotificationResult != null) {
-      mNotificationResult.context = getContext();
-    }
     return mNotificationResult;
   }
 

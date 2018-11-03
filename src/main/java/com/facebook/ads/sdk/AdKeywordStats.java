@@ -97,66 +97,7 @@ public class AdKeywordStats extends APINode {
   private Long mUniqueImpressions = null;
   protected static Gson gson = null;
 
-  AdKeywordStats() {
-  }
-
-  public AdKeywordStats(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdKeywordStats(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdKeywordStats fetch() throws APIException{
-    AdKeywordStats newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdKeywordStats fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdKeywordStats> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdKeywordStats fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdKeywordStats> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdKeywordStats> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdKeywordStats>)(
-      new APIRequest<AdKeywordStats>(context, "", "/", "GET", AdKeywordStats.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdKeywordStats>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdKeywordStats.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdKeywordStats() {
   }
 
   public String getId() {
@@ -303,355 +244,198 @@ public class AdKeywordStats extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<AdsActionStats> getFieldActions() {
     return mActions;
   }
 
+  public AdKeywordStats setFieldActions(List<AdsActionStats> value) {
+    this.mActions = value;
+    return this;
+  }
+
+  public AdKeywordStats setFieldActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public Long getFieldClicks() {
     return mClicks;
+  }
+
+  public AdKeywordStats setFieldClicks(Long value) {
+    this.mClicks = value;
+    return this;
   }
 
   public Double getFieldCostPerTotalAction() {
     return mCostPerTotalAction;
   }
 
+  public AdKeywordStats setFieldCostPerTotalAction(Double value) {
+    this.mCostPerTotalAction = value;
+    return this;
+  }
+
   public Double getFieldCostPerUniqueClick() {
     return mCostPerUniqueClick;
+  }
+
+  public AdKeywordStats setFieldCostPerUniqueClick(Double value) {
+    this.mCostPerUniqueClick = value;
+    return this;
   }
 
   public Double getFieldCpc() {
     return mCpc;
   }
 
+  public AdKeywordStats setFieldCpc(Double value) {
+    this.mCpc = value;
+    return this;
+  }
+
   public Double getFieldCpm() {
     return mCpm;
+  }
+
+  public AdKeywordStats setFieldCpm(Double value) {
+    this.mCpm = value;
+    return this;
   }
 
   public Double getFieldCpp() {
     return mCpp;
   }
 
+  public AdKeywordStats setFieldCpp(Double value) {
+    this.mCpp = value;
+    return this;
+  }
+
   public Double getFieldCtr() {
     return mCtr;
+  }
+
+  public AdKeywordStats setFieldCtr(Double value) {
+    this.mCtr = value;
+    return this;
   }
 
   public Double getFieldFrequency() {
     return mFrequency;
   }
 
+  public AdKeywordStats setFieldFrequency(Double value) {
+    this.mFrequency = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
+  }
+
+  public AdKeywordStats setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public Long getFieldImpressions() {
     return mImpressions;
   }
 
+  public AdKeywordStats setFieldImpressions(Long value) {
+    this.mImpressions = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public AdKeywordStats setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public Long getFieldReach() {
     return mReach;
   }
 
+  public AdKeywordStats setFieldReach(Long value) {
+    this.mReach = value;
+    return this;
+  }
+
   public Double getFieldSpend() {
     return mSpend;
+  }
+
+  public AdKeywordStats setFieldSpend(Double value) {
+    this.mSpend = value;
+    return this;
   }
 
   public Long getFieldTotalActions() {
     return mTotalActions;
   }
 
+  public AdKeywordStats setFieldTotalActions(Long value) {
+    this.mTotalActions = value;
+    return this;
+  }
+
   public Long getFieldTotalUniqueActions() {
     return mTotalUniqueActions;
+  }
+
+  public AdKeywordStats setFieldTotalUniqueActions(Long value) {
+    this.mTotalUniqueActions = value;
+    return this;
   }
 
   public List<AdsActionStats> getFieldUniqueActions() {
     return mUniqueActions;
   }
 
+  public AdKeywordStats setFieldUniqueActions(List<AdsActionStats> value) {
+    this.mUniqueActions = value;
+    return this;
+  }
+
+  public AdKeywordStats setFieldUniqueActions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mUniqueActions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public Long getFieldUniqueClicks() {
     return mUniqueClicks;
+  }
+
+  public AdKeywordStats setFieldUniqueClicks(Long value) {
+    this.mUniqueClicks = value;
+    return this;
   }
 
   public Double getFieldUniqueCtr() {
     return mUniqueCtr;
   }
 
+  public AdKeywordStats setFieldUniqueCtr(Double value) {
+    this.mUniqueCtr = value;
+    return this;
+  }
+
   public Long getFieldUniqueImpressions() {
     return mUniqueImpressions;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdKeywordStats> {
-
-    AdKeywordStats lastResponse = null;
-    @Override
-    public AdKeywordStats getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "actions",
-      "clicks",
-      "cost_per_total_action",
-      "cost_per_unique_click",
-      "cpc",
-      "cpm",
-      "cpp",
-      "ctr",
-      "frequency",
-      "id",
-      "impressions",
-      "name",
-      "reach",
-      "spend",
-      "total_actions",
-      "total_unique_actions",
-      "unique_actions",
-      "unique_clicks",
-      "unique_ctr",
-      "unique_impressions",
-    };
-
-    @Override
-    public AdKeywordStats parseResponse(String response) throws APIException {
-      return AdKeywordStats.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdKeywordStats execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdKeywordStats execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdKeywordStats> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdKeywordStats> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdKeywordStats>() {
-           public AdKeywordStats apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestActionsField () {
-      return this.requestActionsField(true);
-    }
-    public APIRequestGet requestActionsField (boolean value) {
-      this.requestField("actions", value);
-      return this;
-    }
-    public APIRequestGet requestClicksField () {
-      return this.requestClicksField(true);
-    }
-    public APIRequestGet requestClicksField (boolean value) {
-      this.requestField("clicks", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerTotalActionField () {
-      return this.requestCostPerTotalActionField(true);
-    }
-    public APIRequestGet requestCostPerTotalActionField (boolean value) {
-      this.requestField("cost_per_total_action", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerUniqueClickField () {
-      return this.requestCostPerUniqueClickField(true);
-    }
-    public APIRequestGet requestCostPerUniqueClickField (boolean value) {
-      this.requestField("cost_per_unique_click", value);
-      return this;
-    }
-    public APIRequestGet requestCpcField () {
-      return this.requestCpcField(true);
-    }
-    public APIRequestGet requestCpcField (boolean value) {
-      this.requestField("cpc", value);
-      return this;
-    }
-    public APIRequestGet requestCpmField () {
-      return this.requestCpmField(true);
-    }
-    public APIRequestGet requestCpmField (boolean value) {
-      this.requestField("cpm", value);
-      return this;
-    }
-    public APIRequestGet requestCppField () {
-      return this.requestCppField(true);
-    }
-    public APIRequestGet requestCppField (boolean value) {
-      this.requestField("cpp", value);
-      return this;
-    }
-    public APIRequestGet requestCtrField () {
-      return this.requestCtrField(true);
-    }
-    public APIRequestGet requestCtrField (boolean value) {
-      this.requestField("ctr", value);
-      return this;
-    }
-    public APIRequestGet requestFrequencyField () {
-      return this.requestFrequencyField(true);
-    }
-    public APIRequestGet requestFrequencyField (boolean value) {
-      this.requestField("frequency", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestImpressionsField () {
-      return this.requestImpressionsField(true);
-    }
-    public APIRequestGet requestImpressionsField (boolean value) {
-      this.requestField("impressions", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestReachField () {
-      return this.requestReachField(true);
-    }
-    public APIRequestGet requestReachField (boolean value) {
-      this.requestField("reach", value);
-      return this;
-    }
-    public APIRequestGet requestSpendField () {
-      return this.requestSpendField(true);
-    }
-    public APIRequestGet requestSpendField (boolean value) {
-      this.requestField("spend", value);
-      return this;
-    }
-    public APIRequestGet requestTotalActionsField () {
-      return this.requestTotalActionsField(true);
-    }
-    public APIRequestGet requestTotalActionsField (boolean value) {
-      this.requestField("total_actions", value);
-      return this;
-    }
-    public APIRequestGet requestTotalUniqueActionsField () {
-      return this.requestTotalUniqueActionsField(true);
-    }
-    public APIRequestGet requestTotalUniqueActionsField (boolean value) {
-      this.requestField("total_unique_actions", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueActionsField () {
-      return this.requestUniqueActionsField(true);
-    }
-    public APIRequestGet requestUniqueActionsField (boolean value) {
-      this.requestField("unique_actions", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueClicksField () {
-      return this.requestUniqueClicksField(true);
-    }
-    public APIRequestGet requestUniqueClicksField (boolean value) {
-      this.requestField("unique_clicks", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueCtrField () {
-      return this.requestUniqueCtrField(true);
-    }
-    public APIRequestGet requestUniqueCtrField (boolean value) {
-      this.requestField("unique_ctr", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueImpressionsField () {
-      return this.requestUniqueImpressionsField(true);
-    }
-    public APIRequestGet requestUniqueImpressionsField (boolean value) {
-      this.requestField("unique_impressions", value);
-      return this;
-    }
+  public AdKeywordStats setFieldUniqueImpressions(Long value) {
+    this.mUniqueImpressions = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

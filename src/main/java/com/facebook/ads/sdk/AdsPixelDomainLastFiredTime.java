@@ -63,66 +63,7 @@ public class AdsPixelDomainLastFiredTime extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdsPixelDomainLastFiredTime() {
-  }
-
-  public AdsPixelDomainLastFiredTime(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdsPixelDomainLastFiredTime(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdsPixelDomainLastFiredTime fetch() throws APIException{
-    AdsPixelDomainLastFiredTime newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdsPixelDomainLastFiredTime fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdsPixelDomainLastFiredTime> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdsPixelDomainLastFiredTime fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdsPixelDomainLastFiredTime> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdsPixelDomainLastFiredTime> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdsPixelDomainLastFiredTime>)(
-      new APIRequest<AdsPixelDomainLastFiredTime>(context, "", "/", "GET", AdsPixelDomainLastFiredTime.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdsPixelDomainLastFiredTime>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdsPixelDomainLastFiredTime.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdsPixelDomainLastFiredTime() {
   }
 
   public String getId() {
@@ -269,151 +210,35 @@ public class AdsPixelDomainLastFiredTime extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldDomainName() {
     return mDomainName;
+  }
+
+  public AdsPixelDomainLastFiredTime setFieldDomainName(String value) {
+    this.mDomainName = value;
+    return this;
   }
 
   public Long getFieldLastFiredTime() {
     return mLastFiredTime;
   }
 
+  public AdsPixelDomainLastFiredTime setFieldLastFiredTime(Long value) {
+    this.mLastFiredTime = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdsPixelDomainLastFiredTime> {
-
-    AdsPixelDomainLastFiredTime lastResponse = null;
-    @Override
-    public AdsPixelDomainLastFiredTime getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "domain_name",
-      "last_fired_time",
-      "id",
-    };
-
-    @Override
-    public AdsPixelDomainLastFiredTime parseResponse(String response) throws APIException {
-      return AdsPixelDomainLastFiredTime.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdsPixelDomainLastFiredTime execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdsPixelDomainLastFiredTime execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdsPixelDomainLastFiredTime> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdsPixelDomainLastFiredTime> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdsPixelDomainLastFiredTime>() {
-           public AdsPixelDomainLastFiredTime apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestDomainNameField () {
-      return this.requestDomainNameField(true);
-    }
-    public APIRequestGet requestDomainNameField (boolean value) {
-      this.requestField("domain_name", value);
-      return this;
-    }
-    public APIRequestGet requestLastFiredTimeField () {
-      return this.requestLastFiredTimeField(true);
-    }
-    public APIRequestGet requestLastFiredTimeField (boolean value) {
-      this.requestField("last_fired_time", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdsPixelDomainLastFiredTime setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

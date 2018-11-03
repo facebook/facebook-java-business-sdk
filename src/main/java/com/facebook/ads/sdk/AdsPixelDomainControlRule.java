@@ -63,66 +63,7 @@ public class AdsPixelDomainControlRule extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdsPixelDomainControlRule() {
-  }
-
-  public AdsPixelDomainControlRule(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdsPixelDomainControlRule(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdsPixelDomainControlRule fetch() throws APIException{
-    AdsPixelDomainControlRule newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdsPixelDomainControlRule fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdsPixelDomainControlRule> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdsPixelDomainControlRule fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdsPixelDomainControlRule> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdsPixelDomainControlRule> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdsPixelDomainControlRule>)(
-      new APIRequest<AdsPixelDomainControlRule>(context, "", "/", "GET", AdsPixelDomainControlRule.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdsPixelDomainControlRule>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdsPixelDomainControlRule.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdsPixelDomainControlRule() {
   }
 
   public String getId() {
@@ -269,151 +210,35 @@ public class AdsPixelDomainControlRule extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<Object> getFieldDomainList() {
     return mDomainList;
+  }
+
+  public AdsPixelDomainControlRule setFieldDomainList(List<Object> value) {
+    this.mDomainList = value;
+    return this;
   }
 
   public String getFieldType() {
     return mType;
   }
 
+  public AdsPixelDomainControlRule setFieldType(String value) {
+    this.mType = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdsPixelDomainControlRule> {
-
-    AdsPixelDomainControlRule lastResponse = null;
-    @Override
-    public AdsPixelDomainControlRule getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "domain_list",
-      "type",
-      "id",
-    };
-
-    @Override
-    public AdsPixelDomainControlRule parseResponse(String response) throws APIException {
-      return AdsPixelDomainControlRule.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdsPixelDomainControlRule execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdsPixelDomainControlRule execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdsPixelDomainControlRule> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdsPixelDomainControlRule> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdsPixelDomainControlRule>() {
-           public AdsPixelDomainControlRule apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestDomainListField () {
-      return this.requestDomainListField(true);
-    }
-    public APIRequestGet requestDomainListField (boolean value) {
-      this.requestField("domain_list", value);
-      return this;
-    }
-    public APIRequestGet requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGet requestTypeField (boolean value) {
-      this.requestField("type", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdsPixelDomainControlRule setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

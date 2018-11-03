@@ -324,16 +324,10 @@ public class AdRule extends APINode {
   }
 
   public AdRuleEvaluationSpec getFieldEvaluationSpec() {
-    if (mEvaluationSpec != null) {
-      mEvaluationSpec.context = getContext();
-    }
     return mEvaluationSpec;
   }
 
   public AdRuleExecutionSpec getFieldExecutionSpec() {
-    if (mExecutionSpec != null) {
-      mExecutionSpec.context = getContext();
-    }
     return mExecutionSpec;
   }
 
@@ -346,9 +340,6 @@ public class AdRule extends APINode {
   }
 
   public AdRuleScheduleSpec getFieldScheduleSpec() {
-    if (mScheduleSpec != null) {
-      mScheduleSpec.context = getContext();
-    }
     return mScheduleSpec;
   }
 

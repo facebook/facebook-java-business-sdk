@@ -61,66 +61,7 @@ public class BusinessApplicationRequest extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  BusinessApplicationRequest() {
-  }
-
-  public BusinessApplicationRequest(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public BusinessApplicationRequest(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public BusinessApplicationRequest fetch() throws APIException{
-    BusinessApplicationRequest newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static BusinessApplicationRequest fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<BusinessApplicationRequest> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static BusinessApplicationRequest fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<BusinessApplicationRequest> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<BusinessApplicationRequest> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<BusinessApplicationRequest>)(
-      new APIRequest<BusinessApplicationRequest>(context, "", "/", "GET", BusinessApplicationRequest.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<BusinessApplicationRequest>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", BusinessApplicationRequest.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public BusinessApplicationRequest() {
   }
 
   public String getId() {
@@ -267,10 +208,6 @@ public class BusinessApplicationRequest extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Application getFieldApplication() {
     if (mApplication != null) {
@@ -279,130 +216,26 @@ public class BusinessApplicationRequest extends APINode {
     return mApplication;
   }
 
+  public BusinessApplicationRequest setFieldApplication(Application value) {
+    this.mApplication = value;
+    return this;
+  }
+
+  public BusinessApplicationRequest setFieldApplication(String value) {
+    Type type = new TypeToken<Application>(){}.getType();
+    this.mApplication = Application.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<BusinessApplicationRequest> {
-
-    BusinessApplicationRequest lastResponse = null;
-    @Override
-    public BusinessApplicationRequest getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "application",
-      "id",
-    };
-
-    @Override
-    public BusinessApplicationRequest parseResponse(String response) throws APIException {
-      return BusinessApplicationRequest.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public BusinessApplicationRequest execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public BusinessApplicationRequest execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<BusinessApplicationRequest> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<BusinessApplicationRequest> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, BusinessApplicationRequest>() {
-           public BusinessApplicationRequest apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestApplicationField () {
-      return this.requestApplicationField(true);
-    }
-    public APIRequestGet requestApplicationField (boolean value) {
-      this.requestField("application", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public BusinessApplicationRequest setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

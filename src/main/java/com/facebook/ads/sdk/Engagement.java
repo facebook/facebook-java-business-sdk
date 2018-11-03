@@ -73,66 +73,7 @@ public class Engagement extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  Engagement() {
-  }
-
-  public Engagement(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public Engagement(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public Engagement fetch() throws APIException{
-    Engagement newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static Engagement fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<Engagement> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static Engagement fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<Engagement> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<Engagement> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<Engagement>)(
-      new APIRequest<Engagement>(context, "", "/", "GET", Engagement.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<Engagement>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", Engagement.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public Engagement() {
   }
 
   public String getId() {
@@ -279,211 +220,80 @@ public class Engagement extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldCount() {
     return mCount;
+  }
+
+  public Engagement setFieldCount(Long value) {
+    this.mCount = value;
+    return this;
   }
 
   public String getFieldCountString() {
     return mCountString;
   }
 
+  public Engagement setFieldCountString(String value) {
+    this.mCountString = value;
+    return this;
+  }
+
   public String getFieldCountStringWithLike() {
     return mCountStringWithLike;
+  }
+
+  public Engagement setFieldCountStringWithLike(String value) {
+    this.mCountStringWithLike = value;
+    return this;
   }
 
   public String getFieldCountStringWithoutLike() {
     return mCountStringWithoutLike;
   }
 
+  public Engagement setFieldCountStringWithoutLike(String value) {
+    this.mCountStringWithoutLike = value;
+    return this;
+  }
+
   public String getFieldSocialSentence() {
     return mSocialSentence;
+  }
+
+  public Engagement setFieldSocialSentence(String value) {
+    this.mSocialSentence = value;
+    return this;
   }
 
   public String getFieldSocialSentenceWithLike() {
     return mSocialSentenceWithLike;
   }
 
+  public Engagement setFieldSocialSentenceWithLike(String value) {
+    this.mSocialSentenceWithLike = value;
+    return this;
+  }
+
   public String getFieldSocialSentenceWithoutLike() {
     return mSocialSentenceWithoutLike;
+  }
+
+  public Engagement setFieldSocialSentenceWithoutLike(String value) {
+    this.mSocialSentenceWithoutLike = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<Engagement> {
-
-    Engagement lastResponse = null;
-    @Override
-    public Engagement getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "count",
-      "count_string",
-      "count_string_with_like",
-      "count_string_without_like",
-      "social_sentence",
-      "social_sentence_with_like",
-      "social_sentence_without_like",
-      "id",
-    };
-
-    @Override
-    public Engagement parseResponse(String response) throws APIException {
-      return Engagement.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public Engagement execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Engagement execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<Engagement> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Engagement> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, Engagement>() {
-           public Engagement apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCountField () {
-      return this.requestCountField(true);
-    }
-    public APIRequestGet requestCountField (boolean value) {
-      this.requestField("count", value);
-      return this;
-    }
-    public APIRequestGet requestCountStringField () {
-      return this.requestCountStringField(true);
-    }
-    public APIRequestGet requestCountStringField (boolean value) {
-      this.requestField("count_string", value);
-      return this;
-    }
-    public APIRequestGet requestCountStringWithLikeField () {
-      return this.requestCountStringWithLikeField(true);
-    }
-    public APIRequestGet requestCountStringWithLikeField (boolean value) {
-      this.requestField("count_string_with_like", value);
-      return this;
-    }
-    public APIRequestGet requestCountStringWithoutLikeField () {
-      return this.requestCountStringWithoutLikeField(true);
-    }
-    public APIRequestGet requestCountStringWithoutLikeField (boolean value) {
-      this.requestField("count_string_without_like", value);
-      return this;
-    }
-    public APIRequestGet requestSocialSentenceField () {
-      return this.requestSocialSentenceField(true);
-    }
-    public APIRequestGet requestSocialSentenceField (boolean value) {
-      this.requestField("social_sentence", value);
-      return this;
-    }
-    public APIRequestGet requestSocialSentenceWithLikeField () {
-      return this.requestSocialSentenceWithLikeField(true);
-    }
-    public APIRequestGet requestSocialSentenceWithLikeField (boolean value) {
-      this.requestField("social_sentence_with_like", value);
-      return this;
-    }
-    public APIRequestGet requestSocialSentenceWithoutLikeField () {
-      return this.requestSocialSentenceWithoutLikeField(true);
-    }
-    public APIRequestGet requestSocialSentenceWithoutLikeField (boolean value) {
-      this.requestField("social_sentence_without_like", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public Engagement setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

@@ -69,66 +69,7 @@ public class TimezoneOffset extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  TimezoneOffset() {
-  }
-
-  public TimezoneOffset(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public TimezoneOffset(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public TimezoneOffset fetch() throws APIException{
-    TimezoneOffset newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static TimezoneOffset fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<TimezoneOffset> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static TimezoneOffset fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<TimezoneOffset> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<TimezoneOffset> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<TimezoneOffset>)(
-      new APIRequest<TimezoneOffset>(context, "", "/", "GET", TimezoneOffset.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<TimezoneOffset>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", TimezoneOffset.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public TimezoneOffset() {
   }
 
   public String getId() {
@@ -275,187 +216,62 @@ public class TimezoneOffset extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAbbr() {
     return mAbbr;
+  }
+
+  public TimezoneOffset setFieldAbbr(String value) {
+    this.mAbbr = value;
+    return this;
   }
 
   public Boolean getFieldIsdst() {
     return mIsdst;
   }
 
+  public TimezoneOffset setFieldIsdst(Boolean value) {
+    this.mIsdst = value;
+    return this;
+  }
+
   public Long getFieldOffset() {
     return mOffset;
+  }
+
+  public TimezoneOffset setFieldOffset(Long value) {
+    this.mOffset = value;
+    return this;
   }
 
   public String getFieldTime() {
     return mTime;
   }
 
+  public TimezoneOffset setFieldTime(String value) {
+    this.mTime = value;
+    return this;
+  }
+
   public Long getFieldTs() {
     return mTs;
+  }
+
+  public TimezoneOffset setFieldTs(Long value) {
+    this.mTs = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<TimezoneOffset> {
-
-    TimezoneOffset lastResponse = null;
-    @Override
-    public TimezoneOffset getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "abbr",
-      "isdst",
-      "offset",
-      "time",
-      "ts",
-      "id",
-    };
-
-    @Override
-    public TimezoneOffset parseResponse(String response) throws APIException {
-      return TimezoneOffset.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public TimezoneOffset execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public TimezoneOffset execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<TimezoneOffset> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<TimezoneOffset> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, TimezoneOffset>() {
-           public TimezoneOffset apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAbbrField () {
-      return this.requestAbbrField(true);
-    }
-    public APIRequestGet requestAbbrField (boolean value) {
-      this.requestField("abbr", value);
-      return this;
-    }
-    public APIRequestGet requestIsdstField () {
-      return this.requestIsdstField(true);
-    }
-    public APIRequestGet requestIsdstField (boolean value) {
-      this.requestField("isdst", value);
-      return this;
-    }
-    public APIRequestGet requestOffsetField () {
-      return this.requestOffsetField(true);
-    }
-    public APIRequestGet requestOffsetField (boolean value) {
-      this.requestField("offset", value);
-      return this;
-    }
-    public APIRequestGet requestTimeField () {
-      return this.requestTimeField(true);
-    }
-    public APIRequestGet requestTimeField (boolean value) {
-      this.requestField("time", value);
-      return this;
-    }
-    public APIRequestGet requestTsField () {
-      return this.requestTsField(true);
-    }
-    public APIRequestGet requestTsField (boolean value) {
-      this.requestField("ts", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public TimezoneOffset setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

@@ -67,66 +67,7 @@ public class UserPaymentMobilePricepoints extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  UserPaymentMobilePricepoints() {
-  }
-
-  public UserPaymentMobilePricepoints(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public UserPaymentMobilePricepoints(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public UserPaymentMobilePricepoints fetch() throws APIException{
-    UserPaymentMobilePricepoints newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static UserPaymentMobilePricepoints fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<UserPaymentMobilePricepoints> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static UserPaymentMobilePricepoints fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<UserPaymentMobilePricepoints> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<UserPaymentMobilePricepoints> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<UserPaymentMobilePricepoints>)(
-      new APIRequest<UserPaymentMobilePricepoints>(context, "", "/", "GET", UserPaymentMobilePricepoints.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<UserPaymentMobilePricepoints>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", UserPaymentMobilePricepoints.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public UserPaymentMobilePricepoints() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class UserPaymentMobilePricepoints extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldMobileCountry() {
     return mMobileCountry;
+  }
+
+  public UserPaymentMobilePricepoints setFieldMobileCountry(String value) {
+    this.mMobileCountry = value;
+    return this;
   }
 
   public String getFieldPhoneNumberLast4() {
     return mPhoneNumberLast4;
   }
 
+  public UserPaymentMobilePricepoints setFieldPhoneNumberLast4(String value) {
+    this.mPhoneNumberLast4 = value;
+    return this;
+  }
+
   public List<Object> getFieldPricepoints() {
     return mPricepoints;
+  }
+
+  public UserPaymentMobilePricepoints setFieldPricepoints(List<Object> value) {
+    this.mPricepoints = value;
+    return this;
   }
 
   public String getFieldUserCurrency() {
     return mUserCurrency;
   }
 
+  public UserPaymentMobilePricepoints setFieldUserCurrency(String value) {
+    this.mUserCurrency = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<UserPaymentMobilePricepoints> {
-
-    UserPaymentMobilePricepoints lastResponse = null;
-    @Override
-    public UserPaymentMobilePricepoints getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "mobile_country",
-      "phone_number_last4",
-      "pricepoints",
-      "user_currency",
-      "id",
-    };
-
-    @Override
-    public UserPaymentMobilePricepoints parseResponse(String response) throws APIException {
-      return UserPaymentMobilePricepoints.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public UserPaymentMobilePricepoints execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public UserPaymentMobilePricepoints execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<UserPaymentMobilePricepoints> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<UserPaymentMobilePricepoints> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, UserPaymentMobilePricepoints>() {
-           public UserPaymentMobilePricepoints apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestMobileCountryField () {
-      return this.requestMobileCountryField(true);
-    }
-    public APIRequestGet requestMobileCountryField (boolean value) {
-      this.requestField("mobile_country", value);
-      return this;
-    }
-    public APIRequestGet requestPhoneNumberLast4Field () {
-      return this.requestPhoneNumberLast4Field(true);
-    }
-    public APIRequestGet requestPhoneNumberLast4Field (boolean value) {
-      this.requestField("phone_number_last4", value);
-      return this;
-    }
-    public APIRequestGet requestPricepointsField () {
-      return this.requestPricepointsField(true);
-    }
-    public APIRequestGet requestPricepointsField (boolean value) {
-      this.requestField("pricepoints", value);
-      return this;
-    }
-    public APIRequestGet requestUserCurrencyField () {
-      return this.requestUserCurrencyField(true);
-    }
-    public APIRequestGet requestUserCurrencyField (boolean value) {
-      this.requestField("user_currency", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public UserPaymentMobilePricepoints setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

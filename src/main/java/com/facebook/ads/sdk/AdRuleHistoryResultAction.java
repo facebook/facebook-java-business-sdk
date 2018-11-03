@@ -67,66 +67,7 @@ public class AdRuleHistoryResultAction extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdRuleHistoryResultAction() {
-  }
-
-  public AdRuleHistoryResultAction(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdRuleHistoryResultAction(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdRuleHistoryResultAction fetch() throws APIException{
-    AdRuleHistoryResultAction newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdRuleHistoryResultAction fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdRuleHistoryResultAction> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdRuleHistoryResultAction fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdRuleHistoryResultAction> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdRuleHistoryResultAction> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdRuleHistoryResultAction>)(
-      new APIRequest<AdRuleHistoryResultAction>(context, "", "/", "GET", AdRuleHistoryResultAction.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdRuleHistoryResultAction>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdRuleHistoryResultAction.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdRuleHistoryResultAction() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class AdRuleHistoryResultAction extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAction() {
     return mAction;
+  }
+
+  public AdRuleHistoryResultAction setFieldAction(String value) {
+    this.mAction = value;
+    return this;
   }
 
   public String getFieldField() {
     return mField;
   }
 
+  public AdRuleHistoryResultAction setFieldField(String value) {
+    this.mField = value;
+    return this;
+  }
+
   public String getFieldNewValue() {
     return mNewValue;
+  }
+
+  public AdRuleHistoryResultAction setFieldNewValue(String value) {
+    this.mNewValue = value;
+    return this;
   }
 
   public String getFieldOldValue() {
     return mOldValue;
   }
 
+  public AdRuleHistoryResultAction setFieldOldValue(String value) {
+    this.mOldValue = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdRuleHistoryResultAction> {
-
-    AdRuleHistoryResultAction lastResponse = null;
-    @Override
-    public AdRuleHistoryResultAction getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "action",
-      "field",
-      "new_value",
-      "old_value",
-      "id",
-    };
-
-    @Override
-    public AdRuleHistoryResultAction parseResponse(String response) throws APIException {
-      return AdRuleHistoryResultAction.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdRuleHistoryResultAction execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdRuleHistoryResultAction execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdRuleHistoryResultAction> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdRuleHistoryResultAction> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdRuleHistoryResultAction>() {
-           public AdRuleHistoryResultAction apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestActionField () {
-      return this.requestActionField(true);
-    }
-    public APIRequestGet requestActionField (boolean value) {
-      this.requestField("action", value);
-      return this;
-    }
-    public APIRequestGet requestFieldField () {
-      return this.requestFieldField(true);
-    }
-    public APIRequestGet requestFieldField (boolean value) {
-      this.requestField("field", value);
-      return this;
-    }
-    public APIRequestGet requestNewValueField () {
-      return this.requestNewValueField(true);
-    }
-    public APIRequestGet requestNewValueField (boolean value) {
-      this.requestField("new_value", value);
-      return this;
-    }
-    public APIRequestGet requestOldValueField () {
-      return this.requestOldValueField(true);
-    }
-    public APIRequestGet requestOldValueField (boolean value) {
-      this.requestField("old_value", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdRuleHistoryResultAction setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

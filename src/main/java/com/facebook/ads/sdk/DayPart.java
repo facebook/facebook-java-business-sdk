@@ -67,66 +67,7 @@ public class DayPart extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  DayPart() {
-  }
-
-  public DayPart(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public DayPart(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public DayPart fetch() throws APIException{
-    DayPart newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static DayPart fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<DayPart> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static DayPart fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<DayPart> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<DayPart> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<DayPart>)(
-      new APIRequest<DayPart>(context, "", "/", "GET", DayPart.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<DayPart>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", DayPart.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public DayPart() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class DayPart extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<Long> getFieldDays() {
     return mDays;
+  }
+
+  public DayPart setFieldDays(List<Long> value) {
+    this.mDays = value;
+    return this;
   }
 
   public Long getFieldEndMinute() {
     return mEndMinute;
   }
 
+  public DayPart setFieldEndMinute(Long value) {
+    this.mEndMinute = value;
+    return this;
+  }
+
   public Long getFieldStartMinute() {
     return mStartMinute;
+  }
+
+  public DayPart setFieldStartMinute(Long value) {
+    this.mStartMinute = value;
+    return this;
   }
 
   public String getFieldTimezoneType() {
     return mTimezoneType;
   }
 
+  public DayPart setFieldTimezoneType(String value) {
+    this.mTimezoneType = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<DayPart> {
-
-    DayPart lastResponse = null;
-    @Override
-    public DayPart getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "days",
-      "end_minute",
-      "start_minute",
-      "timezone_type",
-      "id",
-    };
-
-    @Override
-    public DayPart parseResponse(String response) throws APIException {
-      return DayPart.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public DayPart execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public DayPart execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<DayPart> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<DayPart> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, DayPart>() {
-           public DayPart apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestDaysField () {
-      return this.requestDaysField(true);
-    }
-    public APIRequestGet requestDaysField (boolean value) {
-      this.requestField("days", value);
-      return this;
-    }
-    public APIRequestGet requestEndMinuteField () {
-      return this.requestEndMinuteField(true);
-    }
-    public APIRequestGet requestEndMinuteField (boolean value) {
-      this.requestField("end_minute", value);
-      return this;
-    }
-    public APIRequestGet requestStartMinuteField () {
-      return this.requestStartMinuteField(true);
-    }
-    public APIRequestGet requestStartMinuteField (boolean value) {
-      this.requestField("start_minute", value);
-      return this;
-    }
-    public APIRequestGet requestTimezoneTypeField () {
-      return this.requestTimezoneTypeField(true);
-    }
-    public APIRequestGet requestTimezoneTypeField (boolean value) {
-      this.requestField("timezone_type", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public DayPart setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

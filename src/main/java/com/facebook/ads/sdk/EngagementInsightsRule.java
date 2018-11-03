@@ -67,66 +67,7 @@ public class EngagementInsightsRule extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  EngagementInsightsRule() {
-  }
-
-  public EngagementInsightsRule(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public EngagementInsightsRule(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public EngagementInsightsRule fetch() throws APIException{
-    EngagementInsightsRule newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static EngagementInsightsRule fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<EngagementInsightsRule> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static EngagementInsightsRule fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<EngagementInsightsRule> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<EngagementInsightsRule> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<EngagementInsightsRule>)(
-      new APIRequest<EngagementInsightsRule>(context, "", "/", "GET", EngagementInsightsRule.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<EngagementInsightsRule>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", EngagementInsightsRule.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public EngagementInsightsRule() {
   }
 
   public String getId() {
@@ -273,178 +214,58 @@ public class EngagementInsightsRule extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldAudienceSize() {
     return mAudienceSize;
+  }
+
+  public EngagementInsightsRule setFieldAudienceSize(Long value) {
+    this.mAudienceSize = value;
+    return this;
   }
 
   public String getFieldDescription() {
     return mDescription;
   }
 
+  public EngagementInsightsRule setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
+  }
+
   public TargetingDynamicRule getFieldRule() {
-    if (mRule != null) {
-      mRule.context = getContext();
-    }
     return mRule;
   }
 
+  public EngagementInsightsRule setFieldRule(TargetingDynamicRule value) {
+    this.mRule = value;
+    return this;
+  }
+
+  public EngagementInsightsRule setFieldRule(String value) {
+    Type type = new TypeToken<TargetingDynamicRule>(){}.getType();
+    this.mRule = TargetingDynamicRule.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldRuleId() {
     return mRuleId;
+  }
+
+  public EngagementInsightsRule setFieldRuleId(String value) {
+    this.mRuleId = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<EngagementInsightsRule> {
-
-    EngagementInsightsRule lastResponse = null;
-    @Override
-    public EngagementInsightsRule getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "audience_size",
-      "description",
-      "rule",
-      "rule_id",
-      "id",
-    };
-
-    @Override
-    public EngagementInsightsRule parseResponse(String response) throws APIException {
-      return EngagementInsightsRule.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public EngagementInsightsRule execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public EngagementInsightsRule execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<EngagementInsightsRule> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<EngagementInsightsRule> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, EngagementInsightsRule>() {
-           public EngagementInsightsRule apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAudienceSizeField () {
-      return this.requestAudienceSizeField(true);
-    }
-    public APIRequestGet requestAudienceSizeField (boolean value) {
-      this.requestField("audience_size", value);
-      return this;
-    }
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestRuleField () {
-      return this.requestRuleField(true);
-    }
-    public APIRequestGet requestRuleField (boolean value) {
-      this.requestField("rule", value);
-      return this;
-    }
-    public APIRequestGet requestRuleIdField () {
-      return this.requestRuleIdField(true);
-    }
-    public APIRequestGet requestRuleIdField (boolean value) {
-      this.requestField("rule_id", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public EngagementInsightsRule setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

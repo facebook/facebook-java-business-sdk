@@ -65,66 +65,7 @@ public class CreditPartitionActionOptions extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  CreditPartitionActionOptions() {
-  }
-
-  public CreditPartitionActionOptions(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public CreditPartitionActionOptions(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public CreditPartitionActionOptions fetch() throws APIException{
-    CreditPartitionActionOptions newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static CreditPartitionActionOptions fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<CreditPartitionActionOptions> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static CreditPartitionActionOptions fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<CreditPartitionActionOptions> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<CreditPartitionActionOptions> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CreditPartitionActionOptions>)(
-      new APIRequest<CreditPartitionActionOptions>(context, "", "/", "GET", CreditPartitionActionOptions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<CreditPartitionActionOptions>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", CreditPartitionActionOptions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public CreditPartitionActionOptions() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class CreditPartitionActionOptions extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Object getFieldLiabilityType() {
     return mLiabilityType;
+  }
+
+  public CreditPartitionActionOptions setFieldLiabilityType(Object value) {
+    this.mLiabilityType = value;
+    return this;
   }
 
   public Object getFieldPartitionType() {
     return mPartitionType;
   }
 
+  public CreditPartitionActionOptions setFieldPartitionType(Object value) {
+    this.mPartitionType = value;
+    return this;
+  }
+
   public Object getFieldSendBillTo() {
     return mSendBillTo;
+  }
+
+  public CreditPartitionActionOptions setFieldSendBillTo(Object value) {
+    this.mSendBillTo = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<CreditPartitionActionOptions> {
-
-    CreditPartitionActionOptions lastResponse = null;
-    @Override
-    public CreditPartitionActionOptions getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "liability_type",
-      "partition_type",
-      "send_bill_to",
-      "id",
-    };
-
-    @Override
-    public CreditPartitionActionOptions parseResponse(String response) throws APIException {
-      return CreditPartitionActionOptions.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public CreditPartitionActionOptions execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CreditPartitionActionOptions execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<CreditPartitionActionOptions> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CreditPartitionActionOptions> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, CreditPartitionActionOptions>() {
-           public CreditPartitionActionOptions apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestLiabilityTypeField () {
-      return this.requestLiabilityTypeField(true);
-    }
-    public APIRequestGet requestLiabilityTypeField (boolean value) {
-      this.requestField("liability_type", value);
-      return this;
-    }
-    public APIRequestGet requestPartitionTypeField () {
-      return this.requestPartitionTypeField(true);
-    }
-    public APIRequestGet requestPartitionTypeField (boolean value) {
-      this.requestField("partition_type", value);
-      return this;
-    }
-    public APIRequestGet requestSendBillToField () {
-      return this.requestSendBillToField(true);
-    }
-    public APIRequestGet requestSendBillToField (boolean value) {
-      this.requestField("send_bill_to", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public CreditPartitionActionOptions setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

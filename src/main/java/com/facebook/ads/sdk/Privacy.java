@@ -71,66 +71,7 @@ public class Privacy extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  Privacy() {
-  }
-
-  public Privacy(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public Privacy(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public Privacy fetch() throws APIException{
-    Privacy newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static Privacy fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<Privacy> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static Privacy fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<Privacy> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<Privacy> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<Privacy>)(
-      new APIRequest<Privacy>(context, "", "/", "GET", Privacy.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<Privacy>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", Privacy.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public Privacy() {
   }
 
   public String getId() {
@@ -277,199 +218,71 @@ public class Privacy extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Object getFieldAllow() {
     return mAllow;
+  }
+
+  public Privacy setFieldAllow(Object value) {
+    this.mAllow = value;
+    return this;
   }
 
   public Object getFieldDeny() {
     return mDeny;
   }
 
+  public Privacy setFieldDeny(Object value) {
+    this.mDeny = value;
+    return this;
+  }
+
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public Privacy setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
   }
 
   public String getFieldFriends() {
     return mFriends;
   }
 
+  public Privacy setFieldFriends(String value) {
+    this.mFriends = value;
+    return this;
+  }
+
   public String getFieldNetworks() {
     return mNetworks;
+  }
+
+  public Privacy setFieldNetworks(String value) {
+    this.mNetworks = value;
+    return this;
   }
 
   public String getFieldValue() {
     return mValue;
   }
 
+  public Privacy setFieldValue(String value) {
+    this.mValue = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<Privacy> {
-
-    Privacy lastResponse = null;
-    @Override
-    public Privacy getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "allow",
-      "deny",
-      "description",
-      "friends",
-      "networks",
-      "value",
-      "id",
-    };
-
-    @Override
-    public Privacy parseResponse(String response) throws APIException {
-      return Privacy.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public Privacy execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Privacy execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<Privacy> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Privacy> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, Privacy>() {
-           public Privacy apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAllowField () {
-      return this.requestAllowField(true);
-    }
-    public APIRequestGet requestAllowField (boolean value) {
-      this.requestField("allow", value);
-      return this;
-    }
-    public APIRequestGet requestDenyField () {
-      return this.requestDenyField(true);
-    }
-    public APIRequestGet requestDenyField (boolean value) {
-      this.requestField("deny", value);
-      return this;
-    }
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestFriendsField () {
-      return this.requestFriendsField(true);
-    }
-    public APIRequestGet requestFriendsField (boolean value) {
-      this.requestField("friends", value);
-      return this;
-    }
-    public APIRequestGet requestNetworksField () {
-      return this.requestNetworksField(true);
-    }
-    public APIRequestGet requestNetworksField (boolean value) {
-      this.requestField("networks", value);
-      return this;
-    }
-    public APIRequestGet requestValueField () {
-      return this.requestValueField(true);
-    }
-    public APIRequestGet requestValueField (boolean value) {
-      this.requestField("value", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public Privacy setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

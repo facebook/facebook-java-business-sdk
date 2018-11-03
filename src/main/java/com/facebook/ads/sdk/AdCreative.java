@@ -448,9 +448,6 @@ public class AdCreative extends APINode {
   }
 
   public AdAssetFeedSpec getFieldAssetFeedSpec() {
-    if (mAssetFeedSpec != null) {
-      mAssetFeedSpec.context = getContext();
-    }
     return mAssetFeedSpec;
   }
 
@@ -610,9 +607,6 @@ public class AdCreative extends APINode {
   }
 
   public AdsImageCrops getFieldImageCrops() {
-    if (mImageCrops != null) {
-      mImageCrops.context = getContext();
-    }
     return mImageCrops;
   }
 
@@ -744,9 +738,6 @@ public class AdCreative extends APINode {
   }
 
   public AdCreativeObjectStorySpec getFieldObjectStorySpec() {
-    if (mObjectStorySpec != null) {
-      mObjectStorySpec.context = getContext();
-    }
     return mObjectStorySpec;
   }
 
@@ -788,9 +779,6 @@ public class AdCreative extends APINode {
   }
 
   public AdCreativePlatformCustomization getFieldPlatformCustomizations() {
-    if (mPlatformCustomizations != null) {
-      mPlatformCustomizations.context = getContext();
-    }
     return mPlatformCustomizations;
   }
 
@@ -823,9 +811,6 @@ public class AdCreative extends APINode {
   }
 
   public AdCreativeRecommenderSettings getFieldRecommenderSettings() {
-    if (mRecommenderSettings != null) {
-      mRecommenderSettings.context = getContext();
-    }
     return mRecommenderSettings;
   }
 
@@ -858,9 +843,6 @@ public class AdCreative extends APINode {
   }
 
   public AdCreativeTemplateURLSpec getFieldTemplateUrlSpec() {
-    if (mTemplateUrlSpec != null) {
-      mTemplateUrlSpec.context = getContext();
-    }
     return mTemplateUrlSpec;
   }
 

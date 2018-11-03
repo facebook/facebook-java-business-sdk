@@ -67,66 +67,7 @@ public class UserPaymentModulesOptions extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  UserPaymentModulesOptions() {
-  }
-
-  public UserPaymentModulesOptions(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public UserPaymentModulesOptions(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public UserPaymentModulesOptions fetch() throws APIException{
-    UserPaymentModulesOptions newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static UserPaymentModulesOptions fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<UserPaymentModulesOptions> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static UserPaymentModulesOptions fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<UserPaymentModulesOptions> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<UserPaymentModulesOptions> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<UserPaymentModulesOptions>)(
-      new APIRequest<UserPaymentModulesOptions>(context, "", "/", "GET", UserPaymentModulesOptions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<UserPaymentModulesOptions>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", UserPaymentModulesOptions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public UserPaymentModulesOptions() {
   }
 
   public String getId() {
@@ -273,370 +214,53 @@ public class UserPaymentModulesOptions extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAccountId() {
     return mAccountId;
+  }
+
+  public UserPaymentModulesOptions setFieldAccountId(String value) {
+    this.mAccountId = value;
+    return this;
   }
 
   public List<Object> getFieldAvailablePaymentOptions() {
     return mAvailablePaymentOptions;
   }
 
+  public UserPaymentModulesOptions setFieldAvailablePaymentOptions(List<Object> value) {
+    this.mAvailablePaymentOptions = value;
+    return this;
+  }
+
   public String getFieldCountry() {
     return mCountry;
+  }
+
+  public UserPaymentModulesOptions setFieldCountry(String value) {
+    this.mCountry = value;
+    return this;
   }
 
   public String getFieldCurrency() {
     return mCurrency;
   }
 
+  public UserPaymentModulesOptions setFieldCurrency(String value) {
+    this.mCurrency = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<UserPaymentModulesOptions> {
-
-    UserPaymentModulesOptions lastResponse = null;
-    @Override
-    public UserPaymentModulesOptions getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "country_code",
-      "extra_data",
-      "order_id",
-      "payment_type",
-      "receiver_id",
-      "session_id",
-    };
-
-    public static final String[] FIELDS = {
-      "account_id",
-      "available_payment_options",
-      "country",
-      "currency",
-      "id",
-    };
-
-    @Override
-    public UserPaymentModulesOptions parseResponse(String response) throws APIException {
-      return UserPaymentModulesOptions.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public UserPaymentModulesOptions execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public UserPaymentModulesOptions execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<UserPaymentModulesOptions> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<UserPaymentModulesOptions> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, UserPaymentModulesOptions>() {
-           public UserPaymentModulesOptions apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet setCountryCode (String countryCode) {
-      this.setParam("country_code", countryCode);
-      return this;
-    }
-
-    public APIRequestGet setExtraData (String extraData) {
-      this.setParam("extra_data", extraData);
-      return this;
-    }
-
-    public APIRequestGet setOrderId (String orderId) {
-      this.setParam("order_id", orderId);
-      return this;
-    }
-
-    public APIRequestGet setPaymentType (EnumPaymentType paymentType) {
-      this.setParam("payment_type", paymentType);
-      return this;
-    }
-    public APIRequestGet setPaymentType (String paymentType) {
-      this.setParam("payment_type", paymentType);
-      return this;
-    }
-
-    public APIRequestGet setReceiverId (Object receiverId) {
-      this.setParam("receiver_id", receiverId);
-      return this;
-    }
-    public APIRequestGet setReceiverId (String receiverId) {
-      this.setParam("receiver_id", receiverId);
-      return this;
-    }
-
-    public APIRequestGet setSessionId (String sessionId) {
-      this.setParam("session_id", sessionId);
-      return this;
-    }
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAccountIdField () {
-      return this.requestAccountIdField(true);
-    }
-    public APIRequestGet requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGet requestAvailablePaymentOptionsField () {
-      return this.requestAvailablePaymentOptionsField(true);
-    }
-    public APIRequestGet requestAvailablePaymentOptionsField (boolean value) {
-      this.requestField("available_payment_options", value);
-      return this;
-    }
-    public APIRequestGet requestCountryField () {
-      return this.requestCountryField(true);
-    }
-    public APIRequestGet requestCountryField (boolean value) {
-      this.requestField("country", value);
-      return this;
-    }
-    public APIRequestGet requestCurrencyField () {
-      return this.requestCurrencyField(true);
-    }
-    public APIRequestGet requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public UserPaymentModulesOptions setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
-  public static enum EnumPaymentType {
-      @SerializedName("PAYMENT_SETTINGS")
-      VALUE_PAYMENT_SETTINGS("PAYMENT_SETTINGS"),
-      @SerializedName("IG_PAYMENT_SETTINGS")
-      VALUE_IG_PAYMENT_SETTINGS("IG_PAYMENT_SETTINGS"),
-      @SerializedName("UNKNOWN")
-      VALUE_UNKNOWN("UNKNOWN"),
-      @SerializedName("MP_PAYMENT_SETTINGS")
-      VALUE_MP_PAYMENT_SETTINGS("MP_PAYMENT_SETTINGS"),
-      @SerializedName("IAP_INSTANT_GAME")
-      VALUE_IAP_INSTANT_GAME("IAP_INSTANT_GAME"),
-      @SerializedName("IAP_FAN_FUNDING")
-      VALUE_IAP_FAN_FUNDING("IAP_FAN_FUNDING"),
-      @SerializedName("IAP_GROUP_SUBSCRIPTION")
-      VALUE_IAP_GROUP_SUBSCRIPTION("IAP_GROUP_SUBSCRIPTION"),
-      @SerializedName("MOR_NONE")
-      VALUE_MOR_NONE("MOR_NONE"),
-      @SerializedName("MOR_ADS_CONSENT")
-      VALUE_MOR_ADS_CONSENT("MOR_ADS_CONSENT"),
-      @SerializedName("MOR_ADS_INVOICE")
-      VALUE_MOR_ADS_INVOICE("MOR_ADS_INVOICE"),
-      @SerializedName("MOR_DONATIONS")
-      VALUE_MOR_DONATIONS("MOR_DONATIONS"),
-      @SerializedName("MOR_DONATIONS_MATCHING_CONFIRMATION")
-      VALUE_MOR_DONATIONS_MATCHING_CONFIRMATION("MOR_DONATIONS_MATCHING_CONFIRMATION"),
-      @SerializedName("MOR_DONATIONS_MATCHING_PLEDGE")
-      VALUE_MOR_DONATIONS_MATCHING_PLEDGE("MOR_DONATIONS_MATCHING_PLEDGE"),
-      @SerializedName("MOR_OCULUS_CV1")
-      VALUE_MOR_OCULUS_CV1("MOR_OCULUS_CV1"),
-      @SerializedName("MOR_OCULUS_LAUNCH_V1")
-      VALUE_MOR_OCULUS_LAUNCH_V1("MOR_OCULUS_LAUNCH_V1"),
-      @SerializedName("MOR_OCULUS_LAUNCH_V2")
-      VALUE_MOR_OCULUS_LAUNCH_V2("MOR_OCULUS_LAUNCH_V2"),
-      @SerializedName("MOR_OZONE")
-      VALUE_MOR_OZONE("MOR_OZONE"),
-      @SerializedName("MOR_OPEN_GRAPH_PRODUCT")
-      VALUE_MOR_OPEN_GRAPH_PRODUCT("MOR_OPEN_GRAPH_PRODUCT"),
-      @SerializedName("MOR_MESSENGER_COMMERCE")
-      VALUE_MOR_MESSENGER_COMMERCE("MOR_MESSENGER_COMMERCE"),
-      @SerializedName("MOR_P2P_TRANSFER")
-      VALUE_MOR_P2P_TRANSFER("MOR_P2P_TRANSFER"),
-      @SerializedName("MOR_DUMMY_FIRST_PARTY")
-      VALUE_MOR_DUMMY_FIRST_PARTY("MOR_DUMMY_FIRST_PARTY"),
-      @SerializedName("MOR_DUMMY_THIRD_PARTY")
-      VALUE_MOR_DUMMY_THIRD_PARTY("MOR_DUMMY_THIRD_PARTY"),
-      @SerializedName("MOR_GIFTS")
-      VALUE_MOR_GIFTS("MOR_GIFTS"),
-      @SerializedName("MOR_BILL")
-      VALUE_MOR_BILL("MOR_BILL"),
-      @SerializedName("MOR_AIRMAIL")
-      VALUE_MOR_AIRMAIL("MOR_AIRMAIL"),
-      @SerializedName("MOR_EVENT_TICKETING")
-      VALUE_MOR_EVENT_TICKETING("MOR_EVENT_TICKETING"),
-      @SerializedName("MOR_PAYMENT_LITE")
-      VALUE_MOR_PAYMENT_LITE("MOR_PAYMENT_LITE"),
-      @SerializedName("MOR_MESSENGER_API_FEE")
-      VALUE_MOR_MESSENGER_API_FEE("MOR_MESSENGER_API_FEE"),
-      @SerializedName("MOR_WORKPLACE_USAGE")
-      VALUE_MOR_WORKPLACE_USAGE("MOR_WORKPLACE_USAGE"),
-      @SerializedName("MOR_FACEBOOK_SHOP")
-      VALUE_MOR_FACEBOOK_SHOP("MOR_FACEBOOK_SHOP"),
-      @SerializedName("MOR_FAN_FUNDING")
-      VALUE_MOR_FAN_FUNDING("MOR_FAN_FUNDING"),
-      @SerializedName("MOR_GAME_TIPPING_TOKEN")
-      VALUE_MOR_GAME_TIPPING_TOKEN("MOR_GAME_TIPPING_TOKEN"),
-      @SerializedName("MOR_INSTANT_GAMES")
-      VALUE_MOR_INSTANT_GAMES("MOR_INSTANT_GAMES"),
-      @SerializedName("MOR_BLUEBIRD")
-      VALUE_MOR_BLUEBIRD("MOR_BLUEBIRD"),
-      @SerializedName("MOR_GROUP_SUBSCRIPTION")
-      VALUE_MOR_GROUP_SUBSCRIPTION("MOR_GROUP_SUBSCRIPTION"),
-      @SerializedName("NMOR_UNKNOWN")
-      VALUE_NMOR_UNKNOWN("NMOR_UNKNOWN"),
-      @SerializedName("NMOR_NONE")
-      VALUE_NMOR_NONE("NMOR_NONE"),
-      @SerializedName("NMOR_PAGES_COMMERCE")
-      VALUE_NMOR_PAGES_COMMERCE("NMOR_PAGES_COMMERCE"),
-      @SerializedName("NMOR_COMPONENT_FLOW")
-      VALUE_NMOR_COMPONENT_FLOW("NMOR_COMPONENT_FLOW"),
-      @SerializedName("NMOR_BUSINESS_PLATFORM_COMMERCE")
-      VALUE_NMOR_BUSINESS_PLATFORM_COMMERCE("NMOR_BUSINESS_PLATFORM_COMMERCE"),
-      @SerializedName("NMOR_SYNCHRONOUS_COMPONENT_FLOW")
-      VALUE_NMOR_SYNCHRONOUS_COMPONENT_FLOW("NMOR_SYNCHRONOUS_COMPONENT_FLOW"),
-      @SerializedName("NMOR_EVENT_TICKETING")
-      VALUE_NMOR_EVENT_TICKETING("NMOR_EVENT_TICKETING"),
-      @SerializedName("NMOR_PLATFORM_SELF_SERVE")
-      VALUE_NMOR_PLATFORM_SELF_SERVE("NMOR_PLATFORM_SELF_SERVE"),
-      @SerializedName("NMOR_MESSENGER_PLATFORM")
-      VALUE_NMOR_MESSENGER_PLATFORM("NMOR_MESSENGER_PLATFORM"),
-      @SerializedName("NMOR_MESSENGER_OMNIM")
-      VALUE_NMOR_MESSENGER_OMNIM("NMOR_MESSENGER_OMNIM"),
-      @SerializedName("NMOR_BILLING_ENGINE")
-      VALUE_NMOR_BILLING_ENGINE("NMOR_BILLING_ENGINE"),
-      @SerializedName("NMOR_TIP_JAR")
-      VALUE_NMOR_TIP_JAR("NMOR_TIP_JAR"),
-      @SerializedName("NMOR_INSTANT_EXPERIENCES")
-      VALUE_NMOR_INSTANT_EXPERIENCES("NMOR_INSTANT_EXPERIENCES"),
-      @SerializedName("NMOR_CHECKOUT_EXPERIENCES")
-      VALUE_NMOR_CHECKOUT_EXPERIENCES("NMOR_CHECKOUT_EXPERIENCES"),
-      @SerializedName("NMOR_BUY_ON_FACEBOOK")
-      VALUE_NMOR_BUY_ON_FACEBOOK("NMOR_BUY_ON_FACEBOOK"),
-      @SerializedName("NMOR_PAYMENT_APP")
-      VALUE_NMOR_PAYMENT_APP("NMOR_PAYMENT_APP"),
-      @SerializedName("NMOR_DONATION_P4P")
-      VALUE_NMOR_DONATION_P4P("NMOR_DONATION_P4P"),
-      @SerializedName("NMOR_WHATSAPP_P2P")
-      VALUE_NMOR_WHATSAPP_P2P("NMOR_WHATSAPP_P2P"),
-      @SerializedName("NMOR_P2P")
-      VALUE_NMOR_P2P("NMOR_P2P"),
-      @SerializedName("NMOR_MOBILE_TOP_UP")
-      VALUE_NMOR_MOBILE_TOP_UP("NMOR_MOBILE_TOP_UP"),
-      @SerializedName("NMOR_MFS")
-      VALUE_NMOR_MFS("NMOR_MFS"),
-      @SerializedName("NMOR_SHIPPING_LABEL")
-      VALUE_NMOR_SHIPPING_LABEL("NMOR_SHIPPING_LABEL"),
-      @SerializedName("NMOR_MARKETPLACE_DROPOFF")
-      VALUE_NMOR_MARKETPLACE_DROPOFF("NMOR_MARKETPLACE_DROPOFF"),
-      @SerializedName("NMOR_PAGES_SOLUTION")
-      VALUE_NMOR_PAGES_SOLUTION("NMOR_PAGES_SOLUTION"),
-      @SerializedName("NMOR_BLACKBAUD_RWR_DONATION")
-      VALUE_NMOR_BLACKBAUD_RWR_DONATION("NMOR_BLACKBAUD_RWR_DONATION"),
-      @SerializedName("NMOR_MARKETPLACE_SHIPPING")
-      VALUE_NMOR_MARKETPLACE_SHIPPING("NMOR_MARKETPLACE_SHIPPING"),
-      @SerializedName("NMOR_DUMMY")
-      VALUE_NMOR_DUMMY("NMOR_DUMMY"),
-      @SerializedName("NMOR_PPGF_DONATION")
-      VALUE_NMOR_PPGF_DONATION("NMOR_PPGF_DONATION"),
-      @SerializedName("NMOR_ADVERTISER_SUBSCRIPTION")
-      VALUE_NMOR_ADVERTISER_SUBSCRIPTION("NMOR_ADVERTISER_SUBSCRIPTION"),
-      @SerializedName("NMOR_WHATSAPP_P2M")
-      VALUE_NMOR_WHATSAPP_P2M("NMOR_WHATSAPP_P2M"),
-      @SerializedName("NMOR_MOVIE_TICKETING")
-      VALUE_NMOR_MOVIE_TICKETING("NMOR_MOVIE_TICKETING"),
-      @SerializedName("IG_NMOR_P2B")
-      VALUE_IG_NMOR_P2B("IG_NMOR_P2B"),
-      @SerializedName("NMOR_INSTAGRAM_P2B")
-      VALUE_NMOR_INSTAGRAM_P2B("NMOR_INSTAGRAM_P2B"),
-      NULL(null);
 
-      private String value;
-
-      private EnumPaymentType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
 
 
   synchronized /*package*/ static Gson getGson() {

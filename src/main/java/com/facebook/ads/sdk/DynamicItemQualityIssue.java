@@ -67,66 +67,7 @@ public class DynamicItemQualityIssue extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  DynamicItemQualityIssue() {
-  }
-
-  public DynamicItemQualityIssue(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public DynamicItemQualityIssue(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public DynamicItemQualityIssue fetch() throws APIException{
-    DynamicItemQualityIssue newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static DynamicItemQualityIssue fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<DynamicItemQualityIssue> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static DynamicItemQualityIssue fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<DynamicItemQualityIssue> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<DynamicItemQualityIssue> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<DynamicItemQualityIssue>)(
-      new APIRequest<DynamicItemQualityIssue>(context, "", "/", "GET", DynamicItemQualityIssue.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<DynamicItemQualityIssue>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", DynamicItemQualityIssue.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public DynamicItemQualityIssue() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class DynamicItemQualityIssue extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public DynamicItemQualityIssue setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
   }
 
   public String getFieldIssueType() {
     return mIssueType;
   }
 
+  public DynamicItemQualityIssue setFieldIssueType(String value) {
+    this.mIssueType = value;
+    return this;
+  }
+
   public List<String> getFieldPropertyNames() {
     return mPropertyNames;
+  }
+
+  public DynamicItemQualityIssue setFieldPropertyNames(List<String> value) {
+    this.mPropertyNames = value;
+    return this;
   }
 
   public String getFieldSummary() {
     return mSummary;
   }
 
+  public DynamicItemQualityIssue setFieldSummary(String value) {
+    this.mSummary = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<DynamicItemQualityIssue> {
-
-    DynamicItemQualityIssue lastResponse = null;
-    @Override
-    public DynamicItemQualityIssue getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "description",
-      "issue_type",
-      "property_names",
-      "summary",
-      "id",
-    };
-
-    @Override
-    public DynamicItemQualityIssue parseResponse(String response) throws APIException {
-      return DynamicItemQualityIssue.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public DynamicItemQualityIssue execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public DynamicItemQualityIssue execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<DynamicItemQualityIssue> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<DynamicItemQualityIssue> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, DynamicItemQualityIssue>() {
-           public DynamicItemQualityIssue apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestIssueTypeField () {
-      return this.requestIssueTypeField(true);
-    }
-    public APIRequestGet requestIssueTypeField (boolean value) {
-      this.requestField("issue_type", value);
-      return this;
-    }
-    public APIRequestGet requestPropertyNamesField () {
-      return this.requestPropertyNamesField(true);
-    }
-    public APIRequestGet requestPropertyNamesField (boolean value) {
-      this.requestField("property_names", value);
-      return this;
-    }
-    public APIRequestGet requestSummaryField () {
-      return this.requestSummaryField(true);
-    }
-    public APIRequestGet requestSummaryField (boolean value) {
-      this.requestField("summary", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public DynamicItemQualityIssue setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

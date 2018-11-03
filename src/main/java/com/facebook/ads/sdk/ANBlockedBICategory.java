@@ -61,66 +61,7 @@ public class ANBlockedBICategory extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ANBlockedBICategory() {
-  }
-
-  public ANBlockedBICategory(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ANBlockedBICategory(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ANBlockedBICategory fetch() throws APIException{
-    ANBlockedBICategory newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ANBlockedBICategory fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ANBlockedBICategory> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ANBlockedBICategory fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ANBlockedBICategory> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ANBlockedBICategory> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ANBlockedBICategory>)(
-      new APIRequest<ANBlockedBICategory>(context, "", "/", "GET", ANBlockedBICategory.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ANBlockedBICategory>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ANBlockedBICategory.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ANBlockedBICategory() {
   }
 
   public String getId() {
@@ -267,139 +208,26 @@ public class ANBlockedBICategory extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldKey() {
     return mKey;
+  }
+
+  public ANBlockedBICategory setFieldKey(String value) {
+    this.mKey = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ANBlockedBICategory> {
-
-    ANBlockedBICategory lastResponse = null;
-    @Override
-    public ANBlockedBICategory getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "key",
-      "id",
-    };
-
-    @Override
-    public ANBlockedBICategory parseResponse(String response) throws APIException {
-      return ANBlockedBICategory.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ANBlockedBICategory execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ANBlockedBICategory execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ANBlockedBICategory> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ANBlockedBICategory> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ANBlockedBICategory>() {
-           public ANBlockedBICategory apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestKeyField () {
-      return this.requestKeyField(true);
-    }
-    public APIRequestGet requestKeyField (boolean value) {
-      this.requestField("key", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ANBlockedBICategory setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

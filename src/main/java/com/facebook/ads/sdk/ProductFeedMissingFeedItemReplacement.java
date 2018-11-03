@@ -67,66 +67,7 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ProductFeedMissingFeedItemReplacement() {
-  }
-
-  public ProductFeedMissingFeedItemReplacement(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ProductFeedMissingFeedItemReplacement(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ProductFeedMissingFeedItemReplacement fetch() throws APIException{
-    ProductFeedMissingFeedItemReplacement newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ProductFeedMissingFeedItemReplacement fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ProductFeedMissingFeedItemReplacement> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ProductFeedMissingFeedItemReplacement fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ProductFeedMissingFeedItemReplacement> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ProductFeedMissingFeedItemReplacement> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ProductFeedMissingFeedItemReplacement>)(
-      new APIRequest<ProductFeedMissingFeedItemReplacement>(context, "", "/", "GET", ProductFeedMissingFeedItemReplacement.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ProductFeedMissingFeedItemReplacement>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ProductFeedMissingFeedItemReplacement.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ProductFeedMissingFeedItemReplacement() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class ProductFeedMissingFeedItemReplacement extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Object getFieldHomeListing() {
     return mHomeListing;
+  }
+
+  public ProductFeedMissingFeedItemReplacement setFieldHomeListing(Object value) {
+    this.mHomeListing = value;
+    return this;
   }
 
   public Object getFieldProductItem() {
     return mProductItem;
   }
 
+  public ProductFeedMissingFeedItemReplacement setFieldProductItem(Object value) {
+    this.mProductItem = value;
+    return this;
+  }
+
   public Object getFieldStoreProductItem() {
     return mStoreProductItem;
+  }
+
+  public ProductFeedMissingFeedItemReplacement setFieldStoreProductItem(Object value) {
+    this.mStoreProductItem = value;
+    return this;
   }
 
   public Object getFieldVehicle() {
     return mVehicle;
   }
 
+  public ProductFeedMissingFeedItemReplacement setFieldVehicle(Object value) {
+    this.mVehicle = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ProductFeedMissingFeedItemReplacement> {
-
-    ProductFeedMissingFeedItemReplacement lastResponse = null;
-    @Override
-    public ProductFeedMissingFeedItemReplacement getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "home_listing",
-      "product_item",
-      "store_product_item",
-      "vehicle",
-      "id",
-    };
-
-    @Override
-    public ProductFeedMissingFeedItemReplacement parseResponse(String response) throws APIException {
-      return ProductFeedMissingFeedItemReplacement.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ProductFeedMissingFeedItemReplacement execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductFeedMissingFeedItemReplacement execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ProductFeedMissingFeedItemReplacement> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ProductFeedMissingFeedItemReplacement> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ProductFeedMissingFeedItemReplacement>() {
-           public ProductFeedMissingFeedItemReplacement apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestHomeListingField () {
-      return this.requestHomeListingField(true);
-    }
-    public APIRequestGet requestHomeListingField (boolean value) {
-      this.requestField("home_listing", value);
-      return this;
-    }
-    public APIRequestGet requestProductItemField () {
-      return this.requestProductItemField(true);
-    }
-    public APIRequestGet requestProductItemField (boolean value) {
-      this.requestField("product_item", value);
-      return this;
-    }
-    public APIRequestGet requestStoreProductItemField () {
-      return this.requestStoreProductItemField(true);
-    }
-    public APIRequestGet requestStoreProductItemField (boolean value) {
-      this.requestField("store_product_item", value);
-      return this;
-    }
-    public APIRequestGet requestVehicleField () {
-      return this.requestVehicleField(true);
-    }
-    public APIRequestGet requestVehicleField (boolean value) {
-      this.requestField("vehicle", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ProductFeedMissingFeedItemReplacement setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

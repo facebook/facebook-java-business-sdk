@@ -91,66 +91,7 @@ public class MerchantReport extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  MerchantReport() {
-  }
-
-  public MerchantReport(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public MerchantReport(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public MerchantReport fetch() throws APIException{
-    MerchantReport newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static MerchantReport fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<MerchantReport> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static MerchantReport fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<MerchantReport> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<MerchantReport> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<MerchantReport>)(
-      new APIRequest<MerchantReport>(context, "", "/", "GET", MerchantReport.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<MerchantReport>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", MerchantReport.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public MerchantReport() {
   }
 
   public String getId() {
@@ -297,17 +238,23 @@ public class MerchantReport extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldAddToCart() {
     return mAddToCart;
   }
 
+  public MerchantReport setFieldAddToCart(Long value) {
+    this.mAddToCart = value;
+    return this;
+  }
+
   public String getFieldBrand() {
     return mBrand;
+  }
+
+  public MerchantReport setFieldBrand(String value) {
+    this.mBrand = value;
+    return this;
   }
 
   public ProductCatalog getFieldCatalogSegment() {
@@ -317,28 +264,68 @@ public class MerchantReport extends APINode {
     return mCatalogSegment;
   }
 
+  public MerchantReport setFieldCatalogSegment(ProductCatalog value) {
+    this.mCatalogSegment = value;
+    return this;
+  }
+
+  public MerchantReport setFieldCatalogSegment(String value) {
+    Type type = new TypeToken<ProductCatalog>(){}.getType();
+    this.mCatalogSegment = ProductCatalog.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldCatalogSegmentId() {
     return mCatalogSegmentId;
+  }
+
+  public MerchantReport setFieldCatalogSegmentId(String value) {
+    this.mCatalogSegmentId = value;
+    return this;
   }
 
   public Double getFieldCatalogSegmentPurchaseValue() {
     return mCatalogSegmentPurchaseValue;
   }
 
+  public MerchantReport setFieldCatalogSegmentPurchaseValue(Double value) {
+    this.mCatalogSegmentPurchaseValue = value;
+    return this;
+  }
+
   public String getFieldCategory() {
     return mCategory;
+  }
+
+  public MerchantReport setFieldCategory(String value) {
+    this.mCategory = value;
+    return this;
   }
 
   public String getFieldDate() {
     return mDate;
   }
 
+  public MerchantReport setFieldDate(String value) {
+    this.mDate = value;
+    return this;
+  }
+
   public Long getFieldLinkClicks() {
     return mLinkClicks;
   }
 
+  public MerchantReport setFieldLinkClicks(Long value) {
+    this.mLinkClicks = value;
+    return this;
+  }
+
   public String getFieldMerchantCurrency() {
     return mMerchantCurrency;
+  }
+
+  public MerchantReport setFieldMerchantCurrency(String value) {
+    this.mMerchantCurrency = value;
+    return this;
   }
 
   public Page getFieldPage() {
@@ -348,274 +335,80 @@ public class MerchantReport extends APINode {
     return mPage;
   }
 
+  public MerchantReport setFieldPage(Page value) {
+    this.mPage = value;
+    return this;
+  }
+
+  public MerchantReport setFieldPage(String value) {
+    Type type = new TypeToken<Page>(){}.getType();
+    this.mPage = Page.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldPageId() {
     return mPageId;
+  }
+
+  public MerchantReport setFieldPageId(String value) {
+    this.mPageId = value;
+    return this;
   }
 
   public String getFieldProductId() {
     return mProductId;
   }
 
+  public MerchantReport setFieldProductId(String value) {
+    this.mProductId = value;
+    return this;
+  }
+
   public Long getFieldProductQuantity() {
     return mProductQuantity;
+  }
+
+  public MerchantReport setFieldProductQuantity(Long value) {
+    this.mProductQuantity = value;
+    return this;
   }
 
   public Double getFieldProductTotalValue() {
     return mProductTotalValue;
   }
 
+  public MerchantReport setFieldProductTotalValue(Double value) {
+    this.mProductTotalValue = value;
+    return this;
+  }
+
   public Long getFieldPurchase() {
     return mPurchase;
+  }
+
+  public MerchantReport setFieldPurchase(Long value) {
+    this.mPurchase = value;
+    return this;
   }
 
   public Double getFieldPurchaseValue() {
     return mPurchaseValue;
   }
 
+  public MerchantReport setFieldPurchaseValue(Double value) {
+    this.mPurchaseValue = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<MerchantReport> {
-
-    MerchantReport lastResponse = null;
-    @Override
-    public MerchantReport getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "add_to_cart",
-      "brand",
-      "catalog_segment",
-      "catalog_segment_id",
-      "catalog_segment_purchase_value",
-      "category",
-      "date",
-      "link_clicks",
-      "merchant_currency",
-      "page",
-      "page_id",
-      "product_id",
-      "product_quantity",
-      "product_total_value",
-      "purchase",
-      "purchase_value",
-      "id",
-    };
-
-    @Override
-    public MerchantReport parseResponse(String response) throws APIException {
-      return MerchantReport.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public MerchantReport execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public MerchantReport execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<MerchantReport> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<MerchantReport> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, MerchantReport>() {
-           public MerchantReport apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAddToCartField () {
-      return this.requestAddToCartField(true);
-    }
-    public APIRequestGet requestAddToCartField (boolean value) {
-      this.requestField("add_to_cart", value);
-      return this;
-    }
-    public APIRequestGet requestBrandField () {
-      return this.requestBrandField(true);
-    }
-    public APIRequestGet requestBrandField (boolean value) {
-      this.requestField("brand", value);
-      return this;
-    }
-    public APIRequestGet requestCatalogSegmentField () {
-      return this.requestCatalogSegmentField(true);
-    }
-    public APIRequestGet requestCatalogSegmentField (boolean value) {
-      this.requestField("catalog_segment", value);
-      return this;
-    }
-    public APIRequestGet requestCatalogSegmentIdField () {
-      return this.requestCatalogSegmentIdField(true);
-    }
-    public APIRequestGet requestCatalogSegmentIdField (boolean value) {
-      this.requestField("catalog_segment_id", value);
-      return this;
-    }
-    public APIRequestGet requestCatalogSegmentPurchaseValueField () {
-      return this.requestCatalogSegmentPurchaseValueField(true);
-    }
-    public APIRequestGet requestCatalogSegmentPurchaseValueField (boolean value) {
-      this.requestField("catalog_segment_purchase_value", value);
-      return this;
-    }
-    public APIRequestGet requestCategoryField () {
-      return this.requestCategoryField(true);
-    }
-    public APIRequestGet requestCategoryField (boolean value) {
-      this.requestField("category", value);
-      return this;
-    }
-    public APIRequestGet requestDateField () {
-      return this.requestDateField(true);
-    }
-    public APIRequestGet requestDateField (boolean value) {
-      this.requestField("date", value);
-      return this;
-    }
-    public APIRequestGet requestLinkClicksField () {
-      return this.requestLinkClicksField(true);
-    }
-    public APIRequestGet requestLinkClicksField (boolean value) {
-      this.requestField("link_clicks", value);
-      return this;
-    }
-    public APIRequestGet requestMerchantCurrencyField () {
-      return this.requestMerchantCurrencyField(true);
-    }
-    public APIRequestGet requestMerchantCurrencyField (boolean value) {
-      this.requestField("merchant_currency", value);
-      return this;
-    }
-    public APIRequestGet requestPageField () {
-      return this.requestPageField(true);
-    }
-    public APIRequestGet requestPageField (boolean value) {
-      this.requestField("page", value);
-      return this;
-    }
-    public APIRequestGet requestPageIdField () {
-      return this.requestPageIdField(true);
-    }
-    public APIRequestGet requestPageIdField (boolean value) {
-      this.requestField("page_id", value);
-      return this;
-    }
-    public APIRequestGet requestProductIdField () {
-      return this.requestProductIdField(true);
-    }
-    public APIRequestGet requestProductIdField (boolean value) {
-      this.requestField("product_id", value);
-      return this;
-    }
-    public APIRequestGet requestProductQuantityField () {
-      return this.requestProductQuantityField(true);
-    }
-    public APIRequestGet requestProductQuantityField (boolean value) {
-      this.requestField("product_quantity", value);
-      return this;
-    }
-    public APIRequestGet requestProductTotalValueField () {
-      return this.requestProductTotalValueField(true);
-    }
-    public APIRequestGet requestProductTotalValueField (boolean value) {
-      this.requestField("product_total_value", value);
-      return this;
-    }
-    public APIRequestGet requestPurchaseField () {
-      return this.requestPurchaseField(true);
-    }
-    public APIRequestGet requestPurchaseField (boolean value) {
-      this.requestField("purchase", value);
-      return this;
-    }
-    public APIRequestGet requestPurchaseValueField () {
-      return this.requestPurchaseValueField(true);
-    }
-    public APIRequestGet requestPurchaseValueField (boolean value) {
-      this.requestField("purchase_value", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public MerchantReport setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

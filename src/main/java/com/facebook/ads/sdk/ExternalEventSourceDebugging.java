@@ -75,66 +75,7 @@ public class ExternalEventSourceDebugging extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ExternalEventSourceDebugging() {
-  }
-
-  public ExternalEventSourceDebugging(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ExternalEventSourceDebugging(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ExternalEventSourceDebugging fetch() throws APIException{
-    ExternalEventSourceDebugging newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ExternalEventSourceDebugging fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ExternalEventSourceDebugging> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ExternalEventSourceDebugging fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ExternalEventSourceDebugging> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ExternalEventSourceDebugging> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ExternalEventSourceDebugging>)(
-      new APIRequest<ExternalEventSourceDebugging>(context, "", "/", "GET", ExternalEventSourceDebugging.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ExternalEventSourceDebugging>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ExternalEventSourceDebugging.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ExternalEventSourceDebugging() {
   }
 
   public String getId() {
@@ -281,223 +222,89 @@ public class ExternalEventSourceDebugging extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAppVersion() {
     return mAppVersion;
+  }
+
+  public ExternalEventSourceDebugging setFieldAppVersion(String value) {
+    this.mAppVersion = value;
+    return this;
   }
 
   public String getFieldContentUrl() {
     return mContentUrl;
   }
 
+  public ExternalEventSourceDebugging setFieldContentUrl(String value) {
+    this.mContentUrl = value;
+    return this;
+  }
+
   public String getFieldDeviceOs() {
     return mDeviceOs;
+  }
+
+  public ExternalEventSourceDebugging setFieldDeviceOs(String value) {
+    this.mDeviceOs = value;
+    return this;
   }
 
   public String getFieldDiagnostic() {
     return mDiagnostic;
   }
 
+  public ExternalEventSourceDebugging setFieldDiagnostic(String value) {
+    this.mDiagnostic = value;
+    return this;
+  }
+
   public String getFieldEventName() {
     return mEventName;
+  }
+
+  public ExternalEventSourceDebugging setFieldEventName(String value) {
+    this.mEventName = value;
+    return this;
   }
 
   public Long getFieldEventTime() {
     return mEventTime;
   }
 
+  public ExternalEventSourceDebugging setFieldEventTime(Long value) {
+    this.mEventTime = value;
+    return this;
+  }
+
   public String getFieldMissingIds() {
     return mMissingIds;
+  }
+
+  public ExternalEventSourceDebugging setFieldMissingIds(String value) {
+    this.mMissingIds = value;
+    return this;
   }
 
   public String getFieldSeverity() {
     return mSeverity;
   }
 
+  public ExternalEventSourceDebugging setFieldSeverity(String value) {
+    this.mSeverity = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ExternalEventSourceDebugging> {
-
-    ExternalEventSourceDebugging lastResponse = null;
-    @Override
-    public ExternalEventSourceDebugging getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "app_version",
-      "content_url",
-      "device_os",
-      "diagnostic",
-      "event_name",
-      "event_time",
-      "missing_ids",
-      "severity",
-      "id",
-    };
-
-    @Override
-    public ExternalEventSourceDebugging parseResponse(String response) throws APIException {
-      return ExternalEventSourceDebugging.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ExternalEventSourceDebugging execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ExternalEventSourceDebugging execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ExternalEventSourceDebugging> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ExternalEventSourceDebugging> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ExternalEventSourceDebugging>() {
-           public ExternalEventSourceDebugging apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAppVersionField () {
-      return this.requestAppVersionField(true);
-    }
-    public APIRequestGet requestAppVersionField (boolean value) {
-      this.requestField("app_version", value);
-      return this;
-    }
-    public APIRequestGet requestContentUrlField () {
-      return this.requestContentUrlField(true);
-    }
-    public APIRequestGet requestContentUrlField (boolean value) {
-      this.requestField("content_url", value);
-      return this;
-    }
-    public APIRequestGet requestDeviceOsField () {
-      return this.requestDeviceOsField(true);
-    }
-    public APIRequestGet requestDeviceOsField (boolean value) {
-      this.requestField("device_os", value);
-      return this;
-    }
-    public APIRequestGet requestDiagnosticField () {
-      return this.requestDiagnosticField(true);
-    }
-    public APIRequestGet requestDiagnosticField (boolean value) {
-      this.requestField("diagnostic", value);
-      return this;
-    }
-    public APIRequestGet requestEventNameField () {
-      return this.requestEventNameField(true);
-    }
-    public APIRequestGet requestEventNameField (boolean value) {
-      this.requestField("event_name", value);
-      return this;
-    }
-    public APIRequestGet requestEventTimeField () {
-      return this.requestEventTimeField(true);
-    }
-    public APIRequestGet requestEventTimeField (boolean value) {
-      this.requestField("event_time", value);
-      return this;
-    }
-    public APIRequestGet requestMissingIdsField () {
-      return this.requestMissingIdsField(true);
-    }
-    public APIRequestGet requestMissingIdsField (boolean value) {
-      this.requestField("missing_ids", value);
-      return this;
-    }
-    public APIRequestGet requestSeverityField () {
-      return this.requestSeverityField(true);
-    }
-    public APIRequestGet requestSeverityField (boolean value) {
-      this.requestField("severity", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ExternalEventSourceDebugging setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

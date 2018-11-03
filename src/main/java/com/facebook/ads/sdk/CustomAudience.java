@@ -419,9 +419,6 @@ public class CustomAudience extends APINode {
   }
 
   public CustomAudienceDataSource getFieldDataSource() {
-    if (mDataSource != null) {
-      mDataSource.context = getContext();
-    }
     return mDataSource;
   }
 
@@ -434,9 +431,6 @@ public class CustomAudience extends APINode {
   }
 
   public CustomAudienceStatus getFieldDeliveryStatus() {
-    if (mDeliveryStatus != null) {
-      mDeliveryStatus.context = getContext();
-    }
     return mDeliveryStatus;
   }
 
@@ -492,9 +486,6 @@ public class CustomAudience extends APINode {
   }
 
   public LookalikeSpec getFieldLookalikeSpec() {
-    if (mLookalikeSpec != null) {
-      mLookalikeSpec.context = getContext();
-    }
     return mLookalikeSpec;
   }
 
@@ -503,9 +494,6 @@ public class CustomAudience extends APINode {
   }
 
   public CustomAudienceStatus getFieldOperationStatus() {
-    if (mOperationStatus != null) {
-      mOperationStatus.context = getContext();
-    }
     return mOperationStatus;
   }
 
@@ -514,9 +502,6 @@ public class CustomAudience extends APINode {
   }
 
   public AudiencePermissionForActions getFieldPermissionForActions() {
-    if (mPermissionForActions != null) {
-      mPermissionForActions.context = getContext();
-    }
     return mPermissionForActions;
   }
 
@@ -549,16 +534,10 @@ public class CustomAudience extends APINode {
   }
 
   public CustomAudienceSharingStatus getFieldSharingStatus() {
-    if (mSharingStatus != null) {
-      mSharingStatus.context = getContext();
-    }
     return mSharingStatus;
   }
 
   public AudienceInsightsStudySpec getFieldStudySpec() {
-    if (mStudySpec != null) {
-      mStudySpec.context = getContext();
-    }
     return mStudySpec;
   }
 
@@ -4118,6 +4097,8 @@ public class CustomAudience extends APINode {
       VALUE_AUTOMOTIVE_MODEL("AUTOMOTIVE_MODEL"),
       @SerializedName("HOME_LISTING")
       VALUE_HOME_LISTING("HOME_LISTING"),
+      @SerializedName("MEDIA_TITLE")
+      VALUE_MEDIA_TITLE("MEDIA_TITLE"),
       @SerializedName("PRODUCT")
       VALUE_PRODUCT("PRODUCT"),
       @SerializedName("TRAVEL")

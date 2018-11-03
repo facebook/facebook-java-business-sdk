@@ -63,66 +63,7 @@ public class AttributionSpec extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AttributionSpec() {
-  }
-
-  public AttributionSpec(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AttributionSpec(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AttributionSpec fetch() throws APIException{
-    AttributionSpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AttributionSpec fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AttributionSpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AttributionSpec fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AttributionSpec> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AttributionSpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AttributionSpec>)(
-      new APIRequest<AttributionSpec>(context, "", "/", "GET", AttributionSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AttributionSpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AttributionSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AttributionSpec() {
   }
 
   public String getId() {
@@ -269,151 +210,35 @@ public class AttributionSpec extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldEventType() {
     return mEventType;
+  }
+
+  public AttributionSpec setFieldEventType(String value) {
+    this.mEventType = value;
+    return this;
   }
 
   public Long getFieldWindowDays() {
     return mWindowDays;
   }
 
+  public AttributionSpec setFieldWindowDays(Long value) {
+    this.mWindowDays = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AttributionSpec> {
-
-    AttributionSpec lastResponse = null;
-    @Override
-    public AttributionSpec getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "event_type",
-      "window_days",
-      "id",
-    };
-
-    @Override
-    public AttributionSpec parseResponse(String response) throws APIException {
-      return AttributionSpec.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AttributionSpec execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AttributionSpec execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AttributionSpec> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AttributionSpec> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AttributionSpec>() {
-           public AttributionSpec apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestEventTypeField () {
-      return this.requestEventTypeField(true);
-    }
-    public APIRequestGet requestEventTypeField (boolean value) {
-      this.requestField("event_type", value);
-      return this;
-    }
-    public APIRequestGet requestWindowDaysField () {
-      return this.requestWindowDaysField(true);
-    }
-    public APIRequestGet requestWindowDaysField (boolean value) {
-      this.requestField("window_days", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AttributionSpec setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

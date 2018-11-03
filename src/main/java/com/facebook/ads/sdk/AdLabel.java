@@ -1234,6 +1234,7 @@ public class AdLabel extends APINode {
       "best_creative",
       "bid_adjustments",
       "bid_amount",
+      "bid_constraints",
       "bid_info",
       "bid_strategy",
       "billing_event",
@@ -1259,6 +1260,7 @@ public class AdLabel extends APINode {
       "is_average_price_pacing",
       "is_dynamic_creative",
       "is_dynamic_creative_optimization",
+      "issues_info",
       "lifetime_budget",
       "lifetime_frequency_cap",
       "lifetime_imps",
@@ -1443,6 +1445,13 @@ public class AdLabel extends APINode {
       this.requestField("bid_amount", value);
       return this;
     }
+    public APIRequestGetAdSets requestBidConstraintsField () {
+      return this.requestBidConstraintsField(true);
+    }
+    public APIRequestGetAdSets requestBidConstraintsField (boolean value) {
+      this.requestField("bid_constraints", value);
+      return this;
+    }
     public APIRequestGetAdSets requestBidInfoField () {
       return this.requestBidInfoField(true);
     }
@@ -1616,6 +1625,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField (boolean value) {
       this.requestField("is_dynamic_creative_optimization", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestIssuesInfoField () {
+      return this.requestIssuesInfoField(true);
+    }
+    public APIRequestGetAdSets requestIssuesInfoField (boolean value) {
+      this.requestField("issues_info", value);
       return this;
     }
     public APIRequestGetAdSets requestLifetimeBudgetField () {
@@ -1820,6 +1836,7 @@ public class AdLabel extends APINode {
       "kpi_type",
       "last_budget_toggling_time",
       "lifetime_budget",
+      "metrics_metadata",
       "name",
       "objective",
       "pacing_type",
@@ -2068,6 +2085,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestMetricsMetadataField () {
+      return this.requestMetricsMetadataField(true);
+    }
+    public APIRequestGetCampaigns requestMetricsMetadataField (boolean value) {
+      this.requestField("metrics_metadata", value);
       return this;
     }
     public APIRequestGetCampaigns requestNameField () {

@@ -63,66 +63,7 @@ public class LegacyBusinessAdAccountRequest extends APINode {
   private List<String> mPermittedRoles = null;
   protected static Gson gson = null;
 
-  LegacyBusinessAdAccountRequest() {
-  }
-
-  public LegacyBusinessAdAccountRequest(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public LegacyBusinessAdAccountRequest(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public LegacyBusinessAdAccountRequest fetch() throws APIException{
-    LegacyBusinessAdAccountRequest newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static LegacyBusinessAdAccountRequest fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<LegacyBusinessAdAccountRequest> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static LegacyBusinessAdAccountRequest fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<LegacyBusinessAdAccountRequest> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<LegacyBusinessAdAccountRequest> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<LegacyBusinessAdAccountRequest>)(
-      new APIRequest<LegacyBusinessAdAccountRequest>(context, "", "/", "GET", LegacyBusinessAdAccountRequest.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<LegacyBusinessAdAccountRequest>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", LegacyBusinessAdAccountRequest.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public LegacyBusinessAdAccountRequest() {
   }
 
   public String getId() {
@@ -269,10 +210,6 @@ public class LegacyBusinessAdAccountRequest extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public AdAccount getFieldAdAccount() {
     if (mAdAccount != null) {
@@ -281,142 +218,35 @@ public class LegacyBusinessAdAccountRequest extends APINode {
     return mAdAccount;
   }
 
+  public LegacyBusinessAdAccountRequest setFieldAdAccount(AdAccount value) {
+    this.mAdAccount = value;
+    return this;
+  }
+
+  public LegacyBusinessAdAccountRequest setFieldAdAccount(String value) {
+    Type type = new TypeToken<AdAccount>(){}.getType();
+    this.mAdAccount = AdAccount.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
+  }
+
+  public LegacyBusinessAdAccountRequest setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public List<String> getFieldPermittedRoles() {
     return mPermittedRoles;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<LegacyBusinessAdAccountRequest> {
-
-    LegacyBusinessAdAccountRequest lastResponse = null;
-    @Override
-    public LegacyBusinessAdAccountRequest getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "ad_account",
-      "id",
-      "permitted_roles",
-    };
-
-    @Override
-    public LegacyBusinessAdAccountRequest parseResponse(String response) throws APIException {
-      return LegacyBusinessAdAccountRequest.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public LegacyBusinessAdAccountRequest execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public LegacyBusinessAdAccountRequest execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<LegacyBusinessAdAccountRequest> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<LegacyBusinessAdAccountRequest> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, LegacyBusinessAdAccountRequest>() {
-           public LegacyBusinessAdAccountRequest apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAdAccountField () {
-      return this.requestAdAccountField(true);
-    }
-    public APIRequestGet requestAdAccountField (boolean value) {
-      this.requestField("ad_account", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestPermittedRolesField () {
-      return this.requestPermittedRolesField(true);
-    }
-    public APIRequestGet requestPermittedRolesField (boolean value) {
-      this.requestField("permitted_roles", value);
-      return this;
-    }
+  public LegacyBusinessAdAccountRequest setFieldPermittedRoles(List<String> value) {
+    this.mPermittedRoles = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

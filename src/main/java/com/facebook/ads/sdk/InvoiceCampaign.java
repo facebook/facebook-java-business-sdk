@@ -75,66 +75,7 @@ public class InvoiceCampaign extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  InvoiceCampaign() {
-  }
-
-  public InvoiceCampaign(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public InvoiceCampaign(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public InvoiceCampaign fetch() throws APIException{
-    InvoiceCampaign newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static InvoiceCampaign fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<InvoiceCampaign> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static InvoiceCampaign fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<InvoiceCampaign> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<InvoiceCampaign> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<InvoiceCampaign>)(
-      new APIRequest<InvoiceCampaign>(context, "", "/", "GET", InvoiceCampaign.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<InvoiceCampaign>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", InvoiceCampaign.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public InvoiceCampaign() {
   }
 
   public String getId() {
@@ -281,226 +222,94 @@ public class InvoiceCampaign extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAdAccountId() {
     return mAdAccountId;
   }
 
+  public InvoiceCampaign setFieldAdAccountId(String value) {
+    this.mAdAccountId = value;
+    return this;
+  }
+
   public BilledAmountDetails getFieldBilledAmountDetails() {
-    if (mBilledAmountDetails != null) {
-      mBilledAmountDetails.context = getContext();
-    }
     return mBilledAmountDetails;
   }
 
+  public InvoiceCampaign setFieldBilledAmountDetails(BilledAmountDetails value) {
+    this.mBilledAmountDetails = value;
+    return this;
+  }
+
+  public InvoiceCampaign setFieldBilledAmountDetails(String value) {
+    Type type = new TypeToken<BilledAmountDetails>(){}.getType();
+    this.mBilledAmountDetails = BilledAmountDetails.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldCampaignId() {
     return mCampaignId;
+  }
+
+  public InvoiceCampaign setFieldCampaignId(String value) {
+    this.mCampaignId = value;
+    return this;
   }
 
   public String getFieldCampaignName() {
     return mCampaignName;
   }
 
+  public InvoiceCampaign setFieldCampaignName(String value) {
+    this.mCampaignName = value;
+    return this;
+  }
+
   public Long getFieldClicks() {
     return mClicks;
+  }
+
+  public InvoiceCampaign setFieldClicks(Long value) {
+    this.mClicks = value;
+    return this;
   }
 
   public Long getFieldConversions() {
     return mConversions;
   }
 
+  public InvoiceCampaign setFieldConversions(Long value) {
+    this.mConversions = value;
+    return this;
+  }
+
   public Long getFieldImpressions() {
     return mImpressions;
+  }
+
+  public InvoiceCampaign setFieldImpressions(Long value) {
+    this.mImpressions = value;
+    return this;
   }
 
   public List<String> getFieldTags() {
     return mTags;
   }
 
+  public InvoiceCampaign setFieldTags(List<String> value) {
+    this.mTags = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<InvoiceCampaign> {
-
-    InvoiceCampaign lastResponse = null;
-    @Override
-    public InvoiceCampaign getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "ad_account_id",
-      "billed_amount_details",
-      "campaign_id",
-      "campaign_name",
-      "clicks",
-      "conversions",
-      "impressions",
-      "tags",
-      "id",
-    };
-
-    @Override
-    public InvoiceCampaign parseResponse(String response) throws APIException {
-      return InvoiceCampaign.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public InvoiceCampaign execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public InvoiceCampaign execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<InvoiceCampaign> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<InvoiceCampaign> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, InvoiceCampaign>() {
-           public InvoiceCampaign apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAdAccountIdField () {
-      return this.requestAdAccountIdField(true);
-    }
-    public APIRequestGet requestAdAccountIdField (boolean value) {
-      this.requestField("ad_account_id", value);
-      return this;
-    }
-    public APIRequestGet requestBilledAmountDetailsField () {
-      return this.requestBilledAmountDetailsField(true);
-    }
-    public APIRequestGet requestBilledAmountDetailsField (boolean value) {
-      this.requestField("billed_amount_details", value);
-      return this;
-    }
-    public APIRequestGet requestCampaignIdField () {
-      return this.requestCampaignIdField(true);
-    }
-    public APIRequestGet requestCampaignIdField (boolean value) {
-      this.requestField("campaign_id", value);
-      return this;
-    }
-    public APIRequestGet requestCampaignNameField () {
-      return this.requestCampaignNameField(true);
-    }
-    public APIRequestGet requestCampaignNameField (boolean value) {
-      this.requestField("campaign_name", value);
-      return this;
-    }
-    public APIRequestGet requestClicksField () {
-      return this.requestClicksField(true);
-    }
-    public APIRequestGet requestClicksField (boolean value) {
-      this.requestField("clicks", value);
-      return this;
-    }
-    public APIRequestGet requestConversionsField () {
-      return this.requestConversionsField(true);
-    }
-    public APIRequestGet requestConversionsField (boolean value) {
-      this.requestField("conversions", value);
-      return this;
-    }
-    public APIRequestGet requestImpressionsField () {
-      return this.requestImpressionsField(true);
-    }
-    public APIRequestGet requestImpressionsField (boolean value) {
-      this.requestField("impressions", value);
-      return this;
-    }
-    public APIRequestGet requestTagsField () {
-      return this.requestTagsField(true);
-    }
-    public APIRequestGet requestTagsField (boolean value) {
-      this.requestField("tags", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public InvoiceCampaign setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

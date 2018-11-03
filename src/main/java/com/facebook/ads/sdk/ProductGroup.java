@@ -1050,6 +1050,7 @@ public class ProductGroup extends APINode {
       "name",
       "price",
       "product_type",
+      "url",
       "visibility",
       "additional_image_urls",
       "additional_variant_attributes",
@@ -1081,7 +1082,6 @@ public class ProductGroup extends APINode {
       "short_description",
       "size",
       "start_date",
-      "url",
       "ios_url",
       "ios_app_store_id",
       "ios_app_name",
@@ -1213,6 +1213,15 @@ public class ProductGroup extends APINode {
 
     public APIRequestCreateProduct setProductType (String productType) {
       this.setParam("product_type", productType);
+      return this;
+    }
+
+    public APIRequestCreateProduct setUrl (Object url) {
+      this.setParam("url", url);
+      return this;
+    }
+    public APIRequestCreateProduct setUrl (String url) {
+      this.setParam("url", url);
       return this;
     }
 
@@ -1416,15 +1425,6 @@ public class ProductGroup extends APINode {
 
     public APIRequestCreateProduct setStartDate (String startDate) {
       this.setParam("start_date", startDate);
-      return this;
-    }
-
-    public APIRequestCreateProduct setUrl (Object url) {
-      this.setParam("url", url);
-      return this;
-    }
-    public APIRequestCreateProduct setUrl (String url) {
-      this.setParam("url", url);
       return this;
     }
 

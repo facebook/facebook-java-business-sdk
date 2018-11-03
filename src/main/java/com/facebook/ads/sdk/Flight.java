@@ -603,6 +603,8 @@ public class Flight extends APINode {
       "description",
       "url",
       "images",
+      "currency",
+      "price",
     };
 
     public static final String[] FIELDS = {
@@ -690,6 +692,20 @@ public class Flight extends APINode {
     }
     public APIRequestUpdate setImages (String images) {
       this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestUpdate setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestUpdate setPrice (Long price) {
+      this.setParam("price", price);
+      return this;
+    }
+    public APIRequestUpdate setPrice (String price) {
+      this.setParam("price", price);
       return this;
     }
 

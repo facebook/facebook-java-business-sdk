@@ -493,6 +493,10 @@ public class Business extends APINode {
     return new APIRequestDeleteInstagramAccounts(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetInstagramAccounts getInstagramAccounts() {
+    return new APIRequestGetInstagramAccounts(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateManagedBusiness createManagedBusiness() {
     return new APIRequestCreateManagedBusiness(this.getPrefixedId().toString(), context);
   }
@@ -559,6 +563,10 @@ public class Business extends APINode {
 
   public APIRequestCreateOwnedDomain createOwnedDomain() {
     return new APIRequestCreateOwnedDomain(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetOwnedInstagramAccounts getOwnedInstagramAccounts() {
+    return new APIRequestGetOwnedInstagramAccounts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetOwnedPages getOwnedPages() {
@@ -2419,7 +2427,7 @@ public class Business extends APINode {
     }
 
 
-    public APIRequestGetAdNetworkAnalytics setAggregationPeriod (AdNetworkAnalyticsSyncQueryResult.EnumAggregationPeriod aggregationPeriod) {
+    public APIRequestGetAdNetworkAnalytics setAggregationPeriod (Business.EnumAggregationPeriod aggregationPeriod) {
       this.setParam("aggregation_period", aggregationPeriod);
       return this;
     }
@@ -2428,7 +2436,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setBreakdowns (List<AdNetworkAnalyticsSyncQueryResult.EnumBreakdowns> breakdowns) {
+    public APIRequestGetAdNetworkAnalytics setBreakdowns (List<Business.EnumBreakdowns> breakdowns) {
       this.setParam("breakdowns", breakdowns);
       return this;
     }
@@ -2455,7 +2463,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setMetrics (List<AdNetworkAnalyticsSyncQueryResult.EnumMetrics> metrics) {
+    public APIRequestGetAdNetworkAnalytics setMetrics (List<Business.EnumMetrics> metrics) {
       this.setParam("metrics", metrics);
       return this;
     }
@@ -2464,7 +2472,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setOrderingColumn (AdNetworkAnalyticsSyncQueryResult.EnumOrderingColumn orderingColumn) {
+    public APIRequestGetAdNetworkAnalytics setOrderingColumn (Business.EnumOrderingColumn orderingColumn) {
       this.setParam("ordering_column", orderingColumn);
       return this;
     }
@@ -2473,7 +2481,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setOrderingType (AdNetworkAnalyticsSyncQueryResult.EnumOrderingType orderingType) {
+    public APIRequestGetAdNetworkAnalytics setOrderingType (Business.EnumOrderingType orderingType) {
       this.setParam("ordering_type", orderingType);
       return this;
     }
@@ -2633,7 +2641,7 @@ public class Business extends APINode {
     }
 
 
-    public APIRequestCreateAdNetworkAnalytic setAggregationPeriod (AdNetworkAnalyticsSyncQueryResult.EnumAggregationPeriod aggregationPeriod) {
+    public APIRequestCreateAdNetworkAnalytic setAggregationPeriod (Business.EnumAggregationPeriod aggregationPeriod) {
       this.setParam("aggregation_period", aggregationPeriod);
       return this;
     }
@@ -2642,7 +2650,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setBreakdowns (List<AdNetworkAnalyticsSyncQueryResult.EnumBreakdowns> breakdowns) {
+    public APIRequestCreateAdNetworkAnalytic setBreakdowns (List<Business.EnumBreakdowns> breakdowns) {
       this.setParam("breakdowns", breakdowns);
       return this;
     }
@@ -2651,7 +2659,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setMetrics (List<AdNetworkAnalyticsSyncQueryResult.EnumMetrics> metrics) {
+    public APIRequestCreateAdNetworkAnalytic setMetrics (List<Business.EnumMetrics> metrics) {
       this.setParam("metrics", metrics);
       return this;
     }
@@ -2678,7 +2686,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setOrderingColumn (AdNetworkAnalyticsSyncQueryResult.EnumOrderingColumn orderingColumn) {
+    public APIRequestCreateAdNetworkAnalytic setOrderingColumn (Business.EnumOrderingColumn orderingColumn) {
       this.setParam("ordering_column", orderingColumn);
       return this;
     }
@@ -2687,7 +2695,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setOrderingType (AdNetworkAnalyticsSyncQueryResult.EnumOrderingType orderingType) {
+    public APIRequestCreateAdNetworkAnalytic setOrderingType (Business.EnumOrderingType orderingType) {
       this.setParam("ordering_type", orderingType);
       return this;
     }
@@ -2927,11 +2935,13 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "automatic_matching_fields",
       "can_proxy",
       "code",
       "creation_time",
       "creator",
       "data_use_setting",
+      "enable_automatic_matching",
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
@@ -3048,6 +3058,13 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetAdsPixels requestAutomaticMatchingFieldsField () {
+      return this.requestAutomaticMatchingFieldsField(true);
+    }
+    public APIRequestGetAdsPixels requestAutomaticMatchingFieldsField (boolean value) {
+      this.requestField("automatic_matching_fields", value);
+      return this;
+    }
     public APIRequestGetAdsPixels requestCanProxyField () {
       return this.requestCanProxyField(true);
     }
@@ -3081,6 +3098,13 @@ public class Business extends APINode {
     }
     public APIRequestGetAdsPixels requestDataUseSettingField (boolean value) {
       this.requestField("data_use_setting", value);
+      return this;
+    }
+    public APIRequestGetAdsPixels requestEnableAutomaticMatchingField () {
+      return this.requestEnableAutomaticMatchingField(true);
+    }
+    public APIRequestGetAdsPixels requestEnableAutomaticMatchingField (boolean value) {
+      this.requestField("enable_automatic_matching", value);
       return this;
     }
     public APIRequestGetAdsPixels requestFirstPartyCookieStatusField () {
@@ -3628,6 +3652,7 @@ public class Business extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "privacy_info_url",
       "produced_by",
       "products",
       "promotion_eligible",
@@ -4518,6 +4543,13 @@ public class Business extends APINode {
     }
     public APIRequestGetAgencyPages requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetAgencyPages requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetAgencyPages requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
       return this;
     }
     public APIRequestGetAgencyPages requestProducedByField () {
@@ -8555,6 +8587,7 @@ public class Business extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "privacy_info_url",
       "produced_by",
       "products",
       "promotion_eligible",
@@ -9442,6 +9475,13 @@ public class Business extends APINode {
       this.requestField("price_range", value);
       return this;
     }
+    public APIRequestGetClientPages requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetClientPages requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
+      return this;
+    }
     public APIRequestGetClientPages requestProducedByField () {
       return this.requestProducedByField(true);
     }
@@ -9816,11 +9856,13 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "automatic_matching_fields",
       "can_proxy",
       "code",
       "creation_time",
       "creator",
       "data_use_setting",
+      "enable_automatic_matching",
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
@@ -9918,6 +9960,13 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetClientPixels requestAutomaticMatchingFieldsField () {
+      return this.requestAutomaticMatchingFieldsField(true);
+    }
+    public APIRequestGetClientPixels requestAutomaticMatchingFieldsField (boolean value) {
+      this.requestField("automatic_matching_fields", value);
+      return this;
+    }
     public APIRequestGetClientPixels requestCanProxyField () {
       return this.requestCanProxyField(true);
     }
@@ -9951,6 +10000,13 @@ public class Business extends APINode {
     }
     public APIRequestGetClientPixels requestDataUseSettingField (boolean value) {
       this.requestField("data_use_setting", value);
+      return this;
+    }
+    public APIRequestGetClientPixels requestEnableAutomaticMatchingField () {
+      return this.requestEnableAutomaticMatchingField(true);
+    }
+    public APIRequestGetClientPixels requestEnableAutomaticMatchingField (boolean value) {
+      this.requestField("enable_automatic_matching", value);
       return this;
     }
     public APIRequestGetClientPixels requestFirstPartyCookieStatusField () {
@@ -10840,6 +10896,7 @@ public class Business extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "privacy_info_url",
       "produced_by",
       "products",
       "promotion_eligible",
@@ -11725,6 +11782,13 @@ public class Business extends APINode {
     }
     public APIRequestGetDealShowsPages requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetDealShowsPages requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetDealShowsPages requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
       return this;
     }
     public APIRequestGetDealShowsPages requestProducedByField () {
@@ -13983,6 +14047,181 @@ public class Business extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetInstagramAccounts extends APIRequest<InstagramUser> {
+
+    APINodeList<InstagramUser> lastResponse = null;
+    @Override
+    public APINodeList<InstagramUser> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "follow_count",
+      "followed_by_count",
+      "has_profile_picture",
+      "id",
+      "is_private",
+      "is_published",
+      "media_count",
+      "profile_pic",
+      "username",
+    };
+
+    @Override
+    public APINodeList<InstagramUser> parseResponse(String response) throws APIException {
+      return InstagramUser.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<InstagramUser> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<InstagramUser> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<InstagramUser>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<InstagramUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<InstagramUser>>() {
+           public APINodeList<InstagramUser> apply(String result) {
+             try {
+               return APIRequestGetInstagramAccounts.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetInstagramAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/instagram_accounts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetInstagramAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInstagramAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInstagramAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetInstagramAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInstagramAccounts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetInstagramAccounts requestFollowCountField () {
+      return this.requestFollowCountField(true);
+    }
+    public APIRequestGetInstagramAccounts requestFollowCountField (boolean value) {
+      this.requestField("follow_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestFollowedByCountField () {
+      return this.requestFollowedByCountField(true);
+    }
+    public APIRequestGetInstagramAccounts requestFollowedByCountField (boolean value) {
+      this.requestField("followed_by_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestHasProfilePictureField () {
+      return this.requestHasProfilePictureField(true);
+    }
+    public APIRequestGetInstagramAccounts requestHasProfilePictureField (boolean value) {
+      this.requestField("has_profile_picture", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetInstagramAccounts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestIsPrivateField () {
+      return this.requestIsPrivateField(true);
+    }
+    public APIRequestGetInstagramAccounts requestIsPrivateField (boolean value) {
+      this.requestField("is_private", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestIsPublishedField () {
+      return this.requestIsPublishedField(true);
+    }
+    public APIRequestGetInstagramAccounts requestIsPublishedField (boolean value) {
+      this.requestField("is_published", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestMediaCountField () {
+      return this.requestMediaCountField(true);
+    }
+    public APIRequestGetInstagramAccounts requestMediaCountField (boolean value) {
+      this.requestField("media_count", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestProfilePicField () {
+      return this.requestProfilePicField(true);
+    }
+    public APIRequestGetInstagramAccounts requestProfilePicField (boolean value) {
+      this.requestField("profile_pic", value);
+      return this;
+    }
+    public APIRequestGetInstagramAccounts requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetInstagramAccounts requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
   }
 
   public static class APIRequestCreateManagedBusiness extends APIRequest<Business> {
@@ -17956,6 +18195,181 @@ public class Business extends APINode {
 
   }
 
+  public static class APIRequestGetOwnedInstagramAccounts extends APIRequest<InstagramUser> {
+
+    APINodeList<InstagramUser> lastResponse = null;
+    @Override
+    public APINodeList<InstagramUser> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "follow_count",
+      "followed_by_count",
+      "has_profile_picture",
+      "id",
+      "is_private",
+      "is_published",
+      "media_count",
+      "profile_pic",
+      "username",
+    };
+
+    @Override
+    public APINodeList<InstagramUser> parseResponse(String response) throws APIException {
+      return InstagramUser.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<InstagramUser> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<InstagramUser> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<InstagramUser>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<InstagramUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<InstagramUser>>() {
+           public APINodeList<InstagramUser> apply(String result) {
+             try {
+               return APIRequestGetOwnedInstagramAccounts.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetOwnedInstagramAccounts(String nodeId, APIContext context) {
+      super(context, nodeId, "/owned_instagram_accounts", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetOwnedInstagramAccounts setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOwnedInstagramAccounts setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetOwnedInstagramAccounts requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetOwnedInstagramAccounts requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOwnedInstagramAccounts requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetOwnedInstagramAccounts requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOwnedInstagramAccounts requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOwnedInstagramAccounts requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetOwnedInstagramAccounts requestFollowCountField () {
+      return this.requestFollowCountField(true);
+    }
+    public APIRequestGetOwnedInstagramAccounts requestFollowCountField (boolean value) {
+      this.requestField("follow_count", value);
+      return this;
+    }
+    public APIRequestGetOwnedInstagramAccounts requestFollowedByCountField () {
+      return this.requestFollowedByCountField(true);
+    }
+    public APIRequestGetOwnedInstagramAccounts requestFollowedByCountField (boolean value) {
+      this.requestField("followed_by_count", value);
+      return this;
+    }
+    public APIRequestGetOwnedInstagramAccounts requestHasProfilePictureField () {
+      return this.requestHasProfilePictureField(true);
+    }
+    public APIRequestGetOwnedInstagramAccounts requestHasProfilePictureField (boolean value) {
+      this.requestField("has_profile_picture", value);
+      return this;
+    }
+    public APIRequestGetOwnedInstagramAccounts requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetOwnedInstagramAccounts requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOwnedInstagramAccounts requestIsPrivateField () {
+      return this.requestIsPrivateField(true);
+    }
+    public APIRequestGetOwnedInstagramAccounts requestIsPrivateField (boolean value) {
+      this.requestField("is_private", value);
+      return this;
+    }
+    public APIRequestGetOwnedInstagramAccounts requestIsPublishedField () {
+      return this.requestIsPublishedField(true);
+    }
+    public APIRequestGetOwnedInstagramAccounts requestIsPublishedField (boolean value) {
+      this.requestField("is_published", value);
+      return this;
+    }
+    public APIRequestGetOwnedInstagramAccounts requestMediaCountField () {
+      return this.requestMediaCountField(true);
+    }
+    public APIRequestGetOwnedInstagramAccounts requestMediaCountField (boolean value) {
+      this.requestField("media_count", value);
+      return this;
+    }
+    public APIRequestGetOwnedInstagramAccounts requestProfilePicField () {
+      return this.requestProfilePicField(true);
+    }
+    public APIRequestGetOwnedInstagramAccounts requestProfilePicField (boolean value) {
+      this.requestField("profile_pic", value);
+      return this;
+    }
+    public APIRequestGetOwnedInstagramAccounts requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetOwnedInstagramAccounts requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetOwnedPages extends APIRequest<Page> {
 
     APINodeList<Page> lastResponse = null;
@@ -18076,6 +18490,7 @@ public class Business extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "privacy_info_url",
       "produced_by",
       "products",
       "promotion_eligible",
@@ -18963,6 +19378,13 @@ public class Business extends APINode {
       this.requestField("price_range", value);
       return this;
     }
+    public APIRequestGetOwnedPages requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetOwnedPages requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
+      return this;
+    }
     public APIRequestGetOwnedPages requestProducedByField () {
       return this.requestProducedByField(true);
     }
@@ -19333,11 +19755,13 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "automatic_matching_fields",
       "can_proxy",
       "code",
       "creation_time",
       "creator",
       "data_use_setting",
+      "enable_automatic_matching",
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
@@ -19435,6 +19859,13 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetOwnedPixels requestAutomaticMatchingFieldsField () {
+      return this.requestAutomaticMatchingFieldsField(true);
+    }
+    public APIRequestGetOwnedPixels requestAutomaticMatchingFieldsField (boolean value) {
+      this.requestField("automatic_matching_fields", value);
+      return this;
+    }
     public APIRequestGetOwnedPixels requestCanProxyField () {
       return this.requestCanProxyField(true);
     }
@@ -19468,6 +19899,13 @@ public class Business extends APINode {
     }
     public APIRequestGetOwnedPixels requestDataUseSettingField (boolean value) {
       this.requestField("data_use_setting", value);
+      return this;
+    }
+    public APIRequestGetOwnedPixels requestEnableAutomaticMatchingField () {
+      return this.requestEnableAutomaticMatchingField(true);
+    }
+    public APIRequestGetOwnedPixels requestEnableAutomaticMatchingField (boolean value) {
+      this.requestField("enable_automatic_matching", value);
       return this;
     }
     public APIRequestGetOwnedPixels requestFirstPartyCookieStatusField () {
@@ -21818,11 +22256,13 @@ public class Business extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "automatic_matching_fields",
       "can_proxy",
       "code",
       "creation_time",
       "creator",
       "data_use_setting",
+      "enable_automatic_matching",
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
@@ -21920,6 +22360,13 @@ public class Business extends APINode {
       return this;
     }
 
+    public APIRequestGetPendingShareDPixels requestAutomaticMatchingFieldsField () {
+      return this.requestAutomaticMatchingFieldsField(true);
+    }
+    public APIRequestGetPendingShareDPixels requestAutomaticMatchingFieldsField (boolean value) {
+      this.requestField("automatic_matching_fields", value);
+      return this;
+    }
     public APIRequestGetPendingShareDPixels requestCanProxyField () {
       return this.requestCanProxyField(true);
     }
@@ -21953,6 +22400,13 @@ public class Business extends APINode {
     }
     public APIRequestGetPendingShareDPixels requestDataUseSettingField (boolean value) {
       this.requestField("data_use_setting", value);
+      return this;
+    }
+    public APIRequestGetPendingShareDPixels requestEnableAutomaticMatchingField () {
+      return this.requestEnableAutomaticMatchingField(true);
+    }
+    public APIRequestGetPendingShareDPixels requestEnableAutomaticMatchingField (boolean value) {
+      this.requestField("enable_automatic_matching", value);
       return this;
     }
     public APIRequestGetPendingShareDPixels requestFirstPartyCookieStatusField () {
@@ -24944,6 +25398,191 @@ public class Business extends APINode {
       private String value;
 
       private EnumVertical(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumAggregationPeriod {
+      @SerializedName("HOUR")
+      VALUE_HOUR("HOUR"),
+      @SerializedName("DAY")
+      VALUE_DAY("DAY"),
+      @SerializedName("TOTAL")
+      VALUE_TOTAL("TOTAL"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAggregationPeriod(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumBreakdowns {
+      @SerializedName("AGE")
+      VALUE_AGE("AGE"),
+      @SerializedName("APP")
+      VALUE_APP("APP"),
+      @SerializedName("COUNTRY")
+      VALUE_COUNTRY("COUNTRY"),
+      @SerializedName("DELIVERY_METHOD")
+      VALUE_DELIVERY_METHOD("DELIVERY_METHOD"),
+      @SerializedName("DISPLAY_FORMAT")
+      VALUE_DISPLAY_FORMAT("DISPLAY_FORMAT"),
+      @SerializedName("DEAL")
+      VALUE_DEAL("DEAL"),
+      @SerializedName("DEAL_AD")
+      VALUE_DEAL_AD("DEAL_AD"),
+      @SerializedName("DEAL_PAGE")
+      VALUE_DEAL_PAGE("DEAL_PAGE"),
+      @SerializedName("GENDER")
+      VALUE_GENDER("GENDER"),
+      @SerializedName("PLACEMENT")
+      VALUE_PLACEMENT("PLACEMENT"),
+      @SerializedName("PLATFORM")
+      VALUE_PLATFORM("PLATFORM"),
+      @SerializedName("PROPERTY")
+      VALUE_PROPERTY("PROPERTY"),
+      @SerializedName("CLICKED_VIEW_TAG")
+      VALUE_CLICKED_VIEW_TAG("CLICKED_VIEW_TAG"),
+      @SerializedName("FAIL_REASON")
+      VALUE_FAIL_REASON("FAIL_REASON"),
+      NULL(null);
+
+      private String value;
+
+      private EnumBreakdowns(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMetrics {
+      @SerializedName("FB_AD_NETWORK_BIDDING_REQUEST")
+      VALUE_FB_AD_NETWORK_BIDDING_REQUEST("FB_AD_NETWORK_BIDDING_REQUEST"),
+      @SerializedName("FB_AD_NETWORK_BIDDING_RESPONSE")
+      VALUE_FB_AD_NETWORK_BIDDING_RESPONSE("FB_AD_NETWORK_BIDDING_RESPONSE"),
+      @SerializedName("FB_AD_NETWORK_BIDDING_BID_RATE")
+      VALUE_FB_AD_NETWORK_BIDDING_BID_RATE("FB_AD_NETWORK_BIDDING_BID_RATE"),
+      @SerializedName("FB_AD_NETWORK_BIDDING_WIN_RATE")
+      VALUE_FB_AD_NETWORK_BIDDING_WIN_RATE("FB_AD_NETWORK_BIDDING_WIN_RATE"),
+      @SerializedName("FB_AD_NETWORK_REQUEST")
+      VALUE_FB_AD_NETWORK_REQUEST("FB_AD_NETWORK_REQUEST"),
+      @SerializedName("FB_AD_NETWORK_FILLED_REQUEST")
+      VALUE_FB_AD_NETWORK_FILLED_REQUEST("FB_AD_NETWORK_FILLED_REQUEST"),
+      @SerializedName("FB_AD_NETWORK_FILL_RATE")
+      VALUE_FB_AD_NETWORK_FILL_RATE("FB_AD_NETWORK_FILL_RATE"),
+      @SerializedName("FB_AD_NETWORK_IMP")
+      VALUE_FB_AD_NETWORK_IMP("FB_AD_NETWORK_IMP"),
+      @SerializedName("FB_AD_NETWORK_SHOW_RATE")
+      VALUE_FB_AD_NETWORK_SHOW_RATE("FB_AD_NETWORK_SHOW_RATE"),
+      @SerializedName("FB_AD_NETWORK_CLICK")
+      VALUE_FB_AD_NETWORK_CLICK("FB_AD_NETWORK_CLICK"),
+      @SerializedName("FB_AD_NETWORK_CTR")
+      VALUE_FB_AD_NETWORK_CTR("FB_AD_NETWORK_CTR"),
+      @SerializedName("FB_AD_NETWORK_BIDDING_REVENUE")
+      VALUE_FB_AD_NETWORK_BIDDING_REVENUE("FB_AD_NETWORK_BIDDING_REVENUE"),
+      @SerializedName("FB_AD_NETWORK_REVENUE")
+      VALUE_FB_AD_NETWORK_REVENUE("FB_AD_NETWORK_REVENUE"),
+      @SerializedName("FB_AD_NETWORK_CPM")
+      VALUE_FB_AD_NETWORK_CPM("FB_AD_NETWORK_CPM"),
+      @SerializedName("FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE")
+      VALUE_FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE("FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE"),
+      @SerializedName("FB_AD_NETWORK_VIDEO_VIEW")
+      VALUE_FB_AD_NETWORK_VIDEO_VIEW("FB_AD_NETWORK_VIDEO_VIEW"),
+      @SerializedName("FB_AD_NETWORK_VIDEO_VIEW_RATE")
+      VALUE_FB_AD_NETWORK_VIDEO_VIEW_RATE("FB_AD_NETWORK_VIDEO_VIEW_RATE"),
+      @SerializedName("FB_AD_NETWORK_VIDEO_MRC")
+      VALUE_FB_AD_NETWORK_VIDEO_MRC("FB_AD_NETWORK_VIDEO_MRC"),
+      @SerializedName("FB_AD_NETWORK_VIDEO_MRC_RATE")
+      VALUE_FB_AD_NETWORK_VIDEO_MRC_RATE("FB_AD_NETWORK_VIDEO_MRC_RATE"),
+      @SerializedName("FB_AD_NETWORK_WIN_RATE")
+      VALUE_FB_AD_NETWORK_WIN_RATE("FB_AD_NETWORK_WIN_RATE"),
+      @SerializedName("FB_AD_NETWORK_DIRECT_TOTAL_REVENUE")
+      VALUE_FB_AD_NETWORK_DIRECT_TOTAL_REVENUE("FB_AD_NETWORK_DIRECT_TOTAL_REVENUE"),
+      @SerializedName("FB_AD_NETWORK_DIRECT_PUBLISHER_BILL")
+      VALUE_FB_AD_NETWORK_DIRECT_PUBLISHER_BILL("FB_AD_NETWORK_DIRECT_PUBLISHER_BILL"),
+      @SerializedName("FB_AD_NETWORK_FAST_CLICK_RATE")
+      VALUE_FB_AD_NETWORK_FAST_CLICK_RATE("FB_AD_NETWORK_FAST_CLICK_RATE"),
+      @SerializedName("FB_AD_NETWORK_FAST_RETURN_RATE")
+      VALUE_FB_AD_NETWORK_FAST_RETURN_RATE("FB_AD_NETWORK_FAST_RETURN_RATE"),
+      @SerializedName("FB_AD_NETWORK_CLICK_VALUE_SCORE")
+      VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE("FB_AD_NETWORK_CLICK_VALUE_SCORE"),
+      @SerializedName("FB_AD_NETWORK_FAST_CLICK_NUMERATOR")
+      VALUE_FB_AD_NETWORK_FAST_CLICK_NUMERATOR("FB_AD_NETWORK_FAST_CLICK_NUMERATOR"),
+      @SerializedName("FB_AD_NETWORK_FAST_CLICK_DENOMINATOR")
+      VALUE_FB_AD_NETWORK_FAST_CLICK_DENOMINATOR("FB_AD_NETWORK_FAST_CLICK_DENOMINATOR"),
+      @SerializedName("FB_AD_NETWORK_FAST_RETURN_NUMERATOR")
+      VALUE_FB_AD_NETWORK_FAST_RETURN_NUMERATOR("FB_AD_NETWORK_FAST_RETURN_NUMERATOR"),
+      @SerializedName("FB_AD_NETWORK_FAST_RETURN_DENOMINATOR")
+      VALUE_FB_AD_NETWORK_FAST_RETURN_DENOMINATOR("FB_AD_NETWORK_FAST_RETURN_DENOMINATOR"),
+      @SerializedName("FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR")
+      VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR("FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR"),
+      @SerializedName("FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR")
+      VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR("FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR"),
+      @SerializedName("FB_AD_NETWORK_NO_FILL")
+      VALUE_FB_AD_NETWORK_NO_FILL("FB_AD_NETWORK_NO_FILL"),
+      @SerializedName("FB_AD_NETWORK_NO_BID")
+      VALUE_FB_AD_NETWORK_NO_BID("FB_AD_NETWORK_NO_BID"),
+      NULL(null);
+
+      private String value;
+
+      private EnumMetrics(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumOrderingColumn {
+      @SerializedName("TIME")
+      VALUE_TIME("TIME"),
+      @SerializedName("VALUE")
+      VALUE_VALUE("VALUE"),
+      @SerializedName("METRIC")
+      VALUE_METRIC("METRIC"),
+      NULL(null);
+
+      private String value;
+
+      private EnumOrderingColumn(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumOrderingType {
+      @SerializedName("ASCENDING")
+      VALUE_ASCENDING("ASCENDING"),
+      @SerializedName("DESCENDING")
+      VALUE_DESCENDING("DESCENDING"),
+      NULL(null);
+
+      private String value;
+
+      private EnumOrderingType(String value) {
         this.value = value;
       }
 

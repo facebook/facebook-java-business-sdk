@@ -79,66 +79,7 @@ public class ReportStatsMetadata extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ReportStatsMetadata() {
-  }
-
-  public ReportStatsMetadata(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ReportStatsMetadata(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ReportStatsMetadata fetch() throws APIException{
-    ReportStatsMetadata newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ReportStatsMetadata fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ReportStatsMetadata> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ReportStatsMetadata fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ReportStatsMetadata> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ReportStatsMetadata> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ReportStatsMetadata>)(
-      new APIRequest<ReportStatsMetadata>(context, "", "/", "GET", ReportStatsMetadata.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ReportStatsMetadata>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ReportStatsMetadata.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ReportStatsMetadata() {
   }
 
   public String getId() {
@@ -285,247 +226,107 @@ public class ReportStatsMetadata extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldCutoffDateAccountData() {
     return mCutoffDateAccountData;
+  }
+
+  public ReportStatsMetadata setFieldCutoffDateAccountData(String value) {
+    this.mCutoffDateAccountData = value;
+    return this;
   }
 
   public String getFieldCutoffDateActions() {
     return mCutoffDateActions;
   }
 
+  public ReportStatsMetadata setFieldCutoffDateActions(String value) {
+    this.mCutoffDateActions = value;
+    return this;
+  }
+
   public String getFieldCutoffDateCarouselActionBreakdown() {
     return mCutoffDateCarouselActionBreakdown;
+  }
+
+  public ReportStatsMetadata setFieldCutoffDateCarouselActionBreakdown(String value) {
+    this.mCutoffDateCarouselActionBreakdown = value;
+    return this;
   }
 
   public String getFieldCutoffDateCarouselCardName() {
     return mCutoffDateCarouselCardName;
   }
 
+  public ReportStatsMetadata setFieldCutoffDateCarouselCardName(String value) {
+    this.mCutoffDateCarouselCardName = value;
+    return this;
+  }
+
   public String getFieldCutoffDateDemographics() {
     return mCutoffDateDemographics;
+  }
+
+  public ReportStatsMetadata setFieldCutoffDateDemographics(String value) {
+    this.mCutoffDateDemographics = value;
+    return this;
   }
 
   public String getFieldCutoffDateGeneral() {
     return mCutoffDateGeneral;
   }
 
+  public ReportStatsMetadata setFieldCutoffDateGeneral(String value) {
+    this.mCutoffDateGeneral = value;
+    return this;
+  }
+
   public String getFieldCutoffDatePlacement() {
     return mCutoffDatePlacement;
+  }
+
+  public ReportStatsMetadata setFieldCutoffDatePlacement(String value) {
+    this.mCutoffDatePlacement = value;
+    return this;
   }
 
   public String getFieldCutoffDateRelevanceScore() {
     return mCutoffDateRelevanceScore;
   }
 
+  public ReportStatsMetadata setFieldCutoffDateRelevanceScore(String value) {
+    this.mCutoffDateRelevanceScore = value;
+    return this;
+  }
+
   public String getFieldCutoffDateVideoTypeBreakdown() {
     return mCutoffDateVideoTypeBreakdown;
+  }
+
+  public ReportStatsMetadata setFieldCutoffDateVideoTypeBreakdown(String value) {
+    this.mCutoffDateVideoTypeBreakdown = value;
+    return this;
   }
 
   public String getFieldCutoffDateWebsiteCtr() {
     return mCutoffDateWebsiteCtr;
   }
 
+  public ReportStatsMetadata setFieldCutoffDateWebsiteCtr(String value) {
+    this.mCutoffDateWebsiteCtr = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ReportStatsMetadata> {
-
-    ReportStatsMetadata lastResponse = null;
-    @Override
-    public ReportStatsMetadata getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "cutoff_date_account_data",
-      "cutoff_date_actions",
-      "cutoff_date_carousel_action_breakdown",
-      "cutoff_date_carousel_card_name",
-      "cutoff_date_demographics",
-      "cutoff_date_general",
-      "cutoff_date_placement",
-      "cutoff_date_relevance_score",
-      "cutoff_date_video_type_breakdown",
-      "cutoff_date_website_ctr",
-      "id",
-    };
-
-    @Override
-    public ReportStatsMetadata parseResponse(String response) throws APIException {
-      return ReportStatsMetadata.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ReportStatsMetadata execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ReportStatsMetadata execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ReportStatsMetadata> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ReportStatsMetadata> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ReportStatsMetadata>() {
-           public ReportStatsMetadata apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCutoffDateAccountDataField () {
-      return this.requestCutoffDateAccountDataField(true);
-    }
-    public APIRequestGet requestCutoffDateAccountDataField (boolean value) {
-      this.requestField("cutoff_date_account_data", value);
-      return this;
-    }
-    public APIRequestGet requestCutoffDateActionsField () {
-      return this.requestCutoffDateActionsField(true);
-    }
-    public APIRequestGet requestCutoffDateActionsField (boolean value) {
-      this.requestField("cutoff_date_actions", value);
-      return this;
-    }
-    public APIRequestGet requestCutoffDateCarouselActionBreakdownField () {
-      return this.requestCutoffDateCarouselActionBreakdownField(true);
-    }
-    public APIRequestGet requestCutoffDateCarouselActionBreakdownField (boolean value) {
-      this.requestField("cutoff_date_carousel_action_breakdown", value);
-      return this;
-    }
-    public APIRequestGet requestCutoffDateCarouselCardNameField () {
-      return this.requestCutoffDateCarouselCardNameField(true);
-    }
-    public APIRequestGet requestCutoffDateCarouselCardNameField (boolean value) {
-      this.requestField("cutoff_date_carousel_card_name", value);
-      return this;
-    }
-    public APIRequestGet requestCutoffDateDemographicsField () {
-      return this.requestCutoffDateDemographicsField(true);
-    }
-    public APIRequestGet requestCutoffDateDemographicsField (boolean value) {
-      this.requestField("cutoff_date_demographics", value);
-      return this;
-    }
-    public APIRequestGet requestCutoffDateGeneralField () {
-      return this.requestCutoffDateGeneralField(true);
-    }
-    public APIRequestGet requestCutoffDateGeneralField (boolean value) {
-      this.requestField("cutoff_date_general", value);
-      return this;
-    }
-    public APIRequestGet requestCutoffDatePlacementField () {
-      return this.requestCutoffDatePlacementField(true);
-    }
-    public APIRequestGet requestCutoffDatePlacementField (boolean value) {
-      this.requestField("cutoff_date_placement", value);
-      return this;
-    }
-    public APIRequestGet requestCutoffDateRelevanceScoreField () {
-      return this.requestCutoffDateRelevanceScoreField(true);
-    }
-    public APIRequestGet requestCutoffDateRelevanceScoreField (boolean value) {
-      this.requestField("cutoff_date_relevance_score", value);
-      return this;
-    }
-    public APIRequestGet requestCutoffDateVideoTypeBreakdownField () {
-      return this.requestCutoffDateVideoTypeBreakdownField(true);
-    }
-    public APIRequestGet requestCutoffDateVideoTypeBreakdownField (boolean value) {
-      this.requestField("cutoff_date_video_type_breakdown", value);
-      return this;
-    }
-    public APIRequestGet requestCutoffDateWebsiteCtrField () {
-      return this.requestCutoffDateWebsiteCtrField(true);
-    }
-    public APIRequestGet requestCutoffDateWebsiteCtrField (boolean value) {
-      this.requestField("cutoff_date_website_ctr", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ReportStatsMetadata setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

@@ -69,66 +69,7 @@ public class AnalyticsQueryResult extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AnalyticsQueryResult() {
-  }
-
-  public AnalyticsQueryResult(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AnalyticsQueryResult(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AnalyticsQueryResult fetch() throws APIException{
-    AnalyticsQueryResult newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AnalyticsQueryResult fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AnalyticsQueryResult> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AnalyticsQueryResult fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AnalyticsQueryResult> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AnalyticsQueryResult> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AnalyticsQueryResult>)(
-      new APIRequest<AnalyticsQueryResult>(context, "", "/", "GET", AnalyticsQueryResult.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AnalyticsQueryResult>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AnalyticsQueryResult.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AnalyticsQueryResult() {
   }
 
   public String getId() {
@@ -275,187 +216,62 @@ public class AnalyticsQueryResult extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Object getFieldColumns() {
     return mColumns;
+  }
+
+  public AnalyticsQueryResult setFieldColumns(Object value) {
+    this.mColumns = value;
+    return this;
   }
 
   public List<Object> getFieldDatapoints() {
     return mDatapoints;
   }
 
+  public AnalyticsQueryResult setFieldDatapoints(List<Object> value) {
+    this.mDatapoints = value;
+    return this;
+  }
+
   public Object getFieldError() {
     return mError;
+  }
+
+  public AnalyticsQueryResult setFieldError(Object value) {
+    this.mError = value;
+    return this;
   }
 
   public String getFieldQueryId() {
     return mQueryId;
   }
 
+  public AnalyticsQueryResult setFieldQueryId(String value) {
+    this.mQueryId = value;
+    return this;
+  }
+
   public String getFieldStatus() {
     return mStatus;
+  }
+
+  public AnalyticsQueryResult setFieldStatus(String value) {
+    this.mStatus = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AnalyticsQueryResult> {
-
-    AnalyticsQueryResult lastResponse = null;
-    @Override
-    public AnalyticsQueryResult getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "columns",
-      "datapoints",
-      "error",
-      "query_id",
-      "status",
-      "id",
-    };
-
-    @Override
-    public AnalyticsQueryResult parseResponse(String response) throws APIException {
-      return AnalyticsQueryResult.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AnalyticsQueryResult execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AnalyticsQueryResult execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AnalyticsQueryResult> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AnalyticsQueryResult> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AnalyticsQueryResult>() {
-           public AnalyticsQueryResult apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestColumnsField () {
-      return this.requestColumnsField(true);
-    }
-    public APIRequestGet requestColumnsField (boolean value) {
-      this.requestField("columns", value);
-      return this;
-    }
-    public APIRequestGet requestDatapointsField () {
-      return this.requestDatapointsField(true);
-    }
-    public APIRequestGet requestDatapointsField (boolean value) {
-      this.requestField("datapoints", value);
-      return this;
-    }
-    public APIRequestGet requestErrorField () {
-      return this.requestErrorField(true);
-    }
-    public APIRequestGet requestErrorField (boolean value) {
-      this.requestField("error", value);
-      return this;
-    }
-    public APIRequestGet requestQueryIdField () {
-      return this.requestQueryIdField(true);
-    }
-    public APIRequestGet requestQueryIdField (boolean value) {
-      this.requestField("query_id", value);
-      return this;
-    }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AnalyticsQueryResult setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

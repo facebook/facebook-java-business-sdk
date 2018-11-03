@@ -75,66 +75,7 @@ public class TargetingDynamicRule extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  TargetingDynamicRule() {
-  }
-
-  public TargetingDynamicRule(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public TargetingDynamicRule(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public TargetingDynamicRule fetch() throws APIException{
-    TargetingDynamicRule newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static TargetingDynamicRule fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<TargetingDynamicRule> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static TargetingDynamicRule fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<TargetingDynamicRule> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<TargetingDynamicRule> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<TargetingDynamicRule>)(
-      new APIRequest<TargetingDynamicRule>(context, "", "/", "GET", TargetingDynamicRule.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<TargetingDynamicRule>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", TargetingDynamicRule.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public TargetingDynamicRule() {
   }
 
   public String getId() {
@@ -281,223 +222,89 @@ public class TargetingDynamicRule extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldActionType() {
     return mActionType;
+  }
+
+  public TargetingDynamicRule setFieldActionType(String value) {
+    this.mActionType = value;
+    return this;
   }
 
   public String getFieldAdGroupId() {
     return mAdGroupId;
   }
 
+  public TargetingDynamicRule setFieldAdGroupId(String value) {
+    this.mAdGroupId = value;
+    return this;
+  }
+
   public String getFieldCampaignGroupId() {
     return mCampaignGroupId;
+  }
+
+  public TargetingDynamicRule setFieldCampaignGroupId(String value) {
+    this.mCampaignGroupId = value;
+    return this;
   }
 
   public String getFieldCampaignId() {
     return mCampaignId;
   }
 
+  public TargetingDynamicRule setFieldCampaignId(String value) {
+    this.mCampaignId = value;
+    return this;
+  }
+
   public String getFieldImpressionCount() {
     return mImpressionCount;
+  }
+
+  public TargetingDynamicRule setFieldImpressionCount(String value) {
+    this.mImpressionCount = value;
+    return this;
   }
 
   public String getFieldPageId() {
     return mPageId;
   }
 
+  public TargetingDynamicRule setFieldPageId(String value) {
+    this.mPageId = value;
+    return this;
+  }
+
   public String getFieldPost() {
     return mPost;
+  }
+
+  public TargetingDynamicRule setFieldPost(String value) {
+    this.mPost = value;
+    return this;
   }
 
   public String getFieldRetentionSeconds() {
     return mRetentionSeconds;
   }
 
+  public TargetingDynamicRule setFieldRetentionSeconds(String value) {
+    this.mRetentionSeconds = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<TargetingDynamicRule> {
-
-    TargetingDynamicRule lastResponse = null;
-    @Override
-    public TargetingDynamicRule getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "action.type",
-      "ad_group_id",
-      "campaign_group_id",
-      "campaign_id",
-      "impression_count",
-      "page_id",
-      "post",
-      "retention_seconds",
-      "id",
-    };
-
-    @Override
-    public TargetingDynamicRule parseResponse(String response) throws APIException {
-      return TargetingDynamicRule.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public TargetingDynamicRule execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public TargetingDynamicRule execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<TargetingDynamicRule> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<TargetingDynamicRule> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, TargetingDynamicRule>() {
-           public TargetingDynamicRule apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestActionTypeField () {
-      return this.requestActionTypeField(true);
-    }
-    public APIRequestGet requestActionTypeField (boolean value) {
-      this.requestField("action.type", value);
-      return this;
-    }
-    public APIRequestGet requestAdGroupIdField () {
-      return this.requestAdGroupIdField(true);
-    }
-    public APIRequestGet requestAdGroupIdField (boolean value) {
-      this.requestField("ad_group_id", value);
-      return this;
-    }
-    public APIRequestGet requestCampaignGroupIdField () {
-      return this.requestCampaignGroupIdField(true);
-    }
-    public APIRequestGet requestCampaignGroupIdField (boolean value) {
-      this.requestField("campaign_group_id", value);
-      return this;
-    }
-    public APIRequestGet requestCampaignIdField () {
-      return this.requestCampaignIdField(true);
-    }
-    public APIRequestGet requestCampaignIdField (boolean value) {
-      this.requestField("campaign_id", value);
-      return this;
-    }
-    public APIRequestGet requestImpressionCountField () {
-      return this.requestImpressionCountField(true);
-    }
-    public APIRequestGet requestImpressionCountField (boolean value) {
-      this.requestField("impression_count", value);
-      return this;
-    }
-    public APIRequestGet requestPageIdField () {
-      return this.requestPageIdField(true);
-    }
-    public APIRequestGet requestPageIdField (boolean value) {
-      this.requestField("page_id", value);
-      return this;
-    }
-    public APIRequestGet requestPostField () {
-      return this.requestPostField(true);
-    }
-    public APIRequestGet requestPostField (boolean value) {
-      this.requestField("post", value);
-      return this;
-    }
-    public APIRequestGet requestRetentionSecondsField () {
-      return this.requestRetentionSecondsField(true);
-    }
-    public APIRequestGet requestRetentionSecondsField (boolean value) {
-      this.requestField("retention_seconds", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public TargetingDynamicRule setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

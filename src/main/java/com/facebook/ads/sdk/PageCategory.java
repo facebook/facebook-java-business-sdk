@@ -65,66 +65,7 @@ public class PageCategory extends APINode {
   private String mName = null;
   protected static Gson gson = null;
 
-  PageCategory() {
-  }
-
-  public PageCategory(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public PageCategory(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public PageCategory fetch() throws APIException{
-    PageCategory newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static PageCategory fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<PageCategory> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static PageCategory fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<PageCategory> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<PageCategory> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PageCategory>)(
-      new APIRequest<PageCategory>(context, "", "/", "GET", PageCategory.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<PageCategory>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", PageCategory.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public PageCategory() {
   }
 
   public String getId() {
@@ -271,163 +212,49 @@ public class PageCategory extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldApiEnum() {
     return mApiEnum;
+  }
+
+  public PageCategory setFieldApiEnum(String value) {
+    this.mApiEnum = value;
+    return this;
   }
 
   public List<PageCategory> getFieldFbPageCategories() {
     return mFbPageCategories;
   }
 
+  public PageCategory setFieldFbPageCategories(List<PageCategory> value) {
+    this.mFbPageCategories = value;
+    return this;
+  }
+
+  public PageCategory setFieldFbPageCategories(String value) {
+    Type type = new TypeToken<List<PageCategory>>(){}.getType();
+    this.mFbPageCategories = PageCategory.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
+  }
+
+  public PageCategory setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public String getFieldName() {
     return mName;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<PageCategory> {
-
-    PageCategory lastResponse = null;
-    @Override
-    public PageCategory getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "api_enum",
-      "fb_page_categories",
-      "id",
-      "name",
-    };
-
-    @Override
-    public PageCategory parseResponse(String response) throws APIException {
-      return PageCategory.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public PageCategory execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public PageCategory execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<PageCategory> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<PageCategory> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, PageCategory>() {
-           public PageCategory apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestApiEnumField () {
-      return this.requestApiEnumField(true);
-    }
-    public APIRequestGet requestApiEnumField (boolean value) {
-      this.requestField("api_enum", value);
-      return this;
-    }
-    public APIRequestGet requestFbPageCategoriesField () {
-      return this.requestFbPageCategoriesField(true);
-    }
-    public APIRequestGet requestFbPageCategoriesField (boolean value) {
-      this.requestField("fb_page_categories", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
+  public PageCategory setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

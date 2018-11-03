@@ -79,66 +79,7 @@ public class BroadTargetingCategories extends APINode {
   private String mUntranslatedParentName = null;
   protected static Gson gson = null;
 
-  BroadTargetingCategories() {
-  }
-
-  public BroadTargetingCategories(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public BroadTargetingCategories(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public BroadTargetingCategories fetch() throws APIException{
-    BroadTargetingCategories newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static BroadTargetingCategories fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<BroadTargetingCategories> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static BroadTargetingCategories fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<BroadTargetingCategories> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<BroadTargetingCategories> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<BroadTargetingCategories>)(
-      new APIRequest<BroadTargetingCategories>(context, "", "/", "GET", BroadTargetingCategories.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<BroadTargetingCategories>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", BroadTargetingCategories.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public BroadTargetingCategories() {
   }
 
   public String getId() {
@@ -285,247 +226,107 @@ public class BroadTargetingCategories extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldCategoryDescription() {
     return mCategoryDescription;
+  }
+
+  public BroadTargetingCategories setFieldCategoryDescription(String value) {
+    this.mCategoryDescription = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public BroadTargetingCategories setFieldId(String value) {
+    this.mId = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public BroadTargetingCategories setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public String getFieldParentCategory() {
     return mParentCategory;
   }
 
+  public BroadTargetingCategories setFieldParentCategory(String value) {
+    this.mParentCategory = value;
+    return this;
+  }
+
   public List<String> getFieldPath() {
     return mPath;
+  }
+
+  public BroadTargetingCategories setFieldPath(List<String> value) {
+    this.mPath = value;
+    return this;
   }
 
   public Long getFieldSize() {
     return mSize;
   }
 
+  public BroadTargetingCategories setFieldSize(Long value) {
+    this.mSize = value;
+    return this;
+  }
+
   public String getFieldSource() {
     return mSource;
+  }
+
+  public BroadTargetingCategories setFieldSource(String value) {
+    this.mSource = value;
+    return this;
   }
 
   public Long getFieldType() {
     return mType;
   }
 
+  public BroadTargetingCategories setFieldType(Long value) {
+    this.mType = value;
+    return this;
+  }
+
   public String getFieldTypeName() {
     return mTypeName;
+  }
+
+  public BroadTargetingCategories setFieldTypeName(String value) {
+    this.mTypeName = value;
+    return this;
   }
 
   public String getFieldUntranslatedName() {
     return mUntranslatedName;
   }
 
+  public BroadTargetingCategories setFieldUntranslatedName(String value) {
+    this.mUntranslatedName = value;
+    return this;
+  }
+
   public String getFieldUntranslatedParentName() {
     return mUntranslatedParentName;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<BroadTargetingCategories> {
-
-    BroadTargetingCategories lastResponse = null;
-    @Override
-    public BroadTargetingCategories getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "category_description",
-      "id",
-      "name",
-      "parent_category",
-      "path",
-      "size",
-      "source",
-      "type",
-      "type_name",
-      "untranslated_name",
-      "untranslated_parent_name",
-    };
-
-    @Override
-    public BroadTargetingCategories parseResponse(String response) throws APIException {
-      return BroadTargetingCategories.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public BroadTargetingCategories execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public BroadTargetingCategories execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<BroadTargetingCategories> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<BroadTargetingCategories> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, BroadTargetingCategories>() {
-           public BroadTargetingCategories apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCategoryDescriptionField () {
-      return this.requestCategoryDescriptionField(true);
-    }
-    public APIRequestGet requestCategoryDescriptionField (boolean value) {
-      this.requestField("category_description", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestParentCategoryField () {
-      return this.requestParentCategoryField(true);
-    }
-    public APIRequestGet requestParentCategoryField (boolean value) {
-      this.requestField("parent_category", value);
-      return this;
-    }
-    public APIRequestGet requestPathField () {
-      return this.requestPathField(true);
-    }
-    public APIRequestGet requestPathField (boolean value) {
-      this.requestField("path", value);
-      return this;
-    }
-    public APIRequestGet requestSizeField () {
-      return this.requestSizeField(true);
-    }
-    public APIRequestGet requestSizeField (boolean value) {
-      this.requestField("size", value);
-      return this;
-    }
-    public APIRequestGet requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGet requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
-    public APIRequestGet requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGet requestTypeField (boolean value) {
-      this.requestField("type", value);
-      return this;
-    }
-    public APIRequestGet requestTypeNameField () {
-      return this.requestTypeNameField(true);
-    }
-    public APIRequestGet requestTypeNameField (boolean value) {
-      this.requestField("type_name", value);
-      return this;
-    }
-    public APIRequestGet requestUntranslatedNameField () {
-      return this.requestUntranslatedNameField(true);
-    }
-    public APIRequestGet requestUntranslatedNameField (boolean value) {
-      this.requestField("untranslated_name", value);
-      return this;
-    }
-    public APIRequestGet requestUntranslatedParentNameField () {
-      return this.requestUntranslatedParentNameField(true);
-    }
-    public APIRequestGet requestUntranslatedParentNameField (boolean value) {
-      this.requestField("untranslated_parent_name", value);
-      return this;
-    }
+  public BroadTargetingCategories setFieldUntranslatedParentName(String value) {
+    this.mUntranslatedParentName = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

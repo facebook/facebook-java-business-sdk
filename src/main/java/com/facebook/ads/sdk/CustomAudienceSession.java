@@ -75,66 +75,7 @@ public class CustomAudienceSession extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  CustomAudienceSession() {
-  }
-
-  public CustomAudienceSession(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public CustomAudienceSession(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public CustomAudienceSession fetch() throws APIException{
-    CustomAudienceSession newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static CustomAudienceSession fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<CustomAudienceSession> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static CustomAudienceSession fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<CustomAudienceSession> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<CustomAudienceSession> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CustomAudienceSession>)(
-      new APIRequest<CustomAudienceSession>(context, "", "/", "GET", CustomAudienceSession.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<CustomAudienceSession>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", CustomAudienceSession.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public CustomAudienceSession() {
   }
 
   public String getId() {
@@ -281,223 +222,89 @@ public class CustomAudienceSession extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldEndTime() {
     return mEndTime;
+  }
+
+  public CustomAudienceSession setFieldEndTime(String value) {
+    this.mEndTime = value;
+    return this;
   }
 
   public String getFieldNumInvalidEntries() {
     return mNumInvalidEntries;
   }
 
+  public CustomAudienceSession setFieldNumInvalidEntries(String value) {
+    this.mNumInvalidEntries = value;
+    return this;
+  }
+
   public String getFieldNumMatched() {
     return mNumMatched;
+  }
+
+  public CustomAudienceSession setFieldNumMatched(String value) {
+    this.mNumMatched = value;
+    return this;
   }
 
   public String getFieldNumReceived() {
     return mNumReceived;
   }
 
+  public CustomAudienceSession setFieldNumReceived(String value) {
+    this.mNumReceived = value;
+    return this;
+  }
+
   public String getFieldProgress() {
     return mProgress;
+  }
+
+  public CustomAudienceSession setFieldProgress(String value) {
+    this.mProgress = value;
+    return this;
   }
 
   public String getFieldSessionId() {
     return mSessionId;
   }
 
+  public CustomAudienceSession setFieldSessionId(String value) {
+    this.mSessionId = value;
+    return this;
+  }
+
   public String getFieldStage() {
     return mStage;
+  }
+
+  public CustomAudienceSession setFieldStage(String value) {
+    this.mStage = value;
+    return this;
   }
 
   public String getFieldStartTime() {
     return mStartTime;
   }
 
+  public CustomAudienceSession setFieldStartTime(String value) {
+    this.mStartTime = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<CustomAudienceSession> {
-
-    CustomAudienceSession lastResponse = null;
-    @Override
-    public CustomAudienceSession getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "end_time",
-      "num_invalid_entries",
-      "num_matched",
-      "num_received",
-      "progress",
-      "session_id",
-      "stage",
-      "start_time",
-      "id",
-    };
-
-    @Override
-    public CustomAudienceSession parseResponse(String response) throws APIException {
-      return CustomAudienceSession.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public CustomAudienceSession execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CustomAudienceSession execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<CustomAudienceSession> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CustomAudienceSession> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, CustomAudienceSession>() {
-           public CustomAudienceSession apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestEndTimeField () {
-      return this.requestEndTimeField(true);
-    }
-    public APIRequestGet requestEndTimeField (boolean value) {
-      this.requestField("end_time", value);
-      return this;
-    }
-    public APIRequestGet requestNumInvalidEntriesField () {
-      return this.requestNumInvalidEntriesField(true);
-    }
-    public APIRequestGet requestNumInvalidEntriesField (boolean value) {
-      this.requestField("num_invalid_entries", value);
-      return this;
-    }
-    public APIRequestGet requestNumMatchedField () {
-      return this.requestNumMatchedField(true);
-    }
-    public APIRequestGet requestNumMatchedField (boolean value) {
-      this.requestField("num_matched", value);
-      return this;
-    }
-    public APIRequestGet requestNumReceivedField () {
-      return this.requestNumReceivedField(true);
-    }
-    public APIRequestGet requestNumReceivedField (boolean value) {
-      this.requestField("num_received", value);
-      return this;
-    }
-    public APIRequestGet requestProgressField () {
-      return this.requestProgressField(true);
-    }
-    public APIRequestGet requestProgressField (boolean value) {
-      this.requestField("progress", value);
-      return this;
-    }
-    public APIRequestGet requestSessionIdField () {
-      return this.requestSessionIdField(true);
-    }
-    public APIRequestGet requestSessionIdField (boolean value) {
-      this.requestField("session_id", value);
-      return this;
-    }
-    public APIRequestGet requestStageField () {
-      return this.requestStageField(true);
-    }
-    public APIRequestGet requestStageField (boolean value) {
-      this.requestField("stage", value);
-      return this;
-    }
-    public APIRequestGet requestStartTimeField () {
-      return this.requestStartTimeField(true);
-    }
-    public APIRequestGet requestStartTimeField (boolean value) {
-      this.requestField("start_time", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public CustomAudienceSession setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

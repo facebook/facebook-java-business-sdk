@@ -79,66 +79,7 @@ public class PageRestaurantServices extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  PageRestaurantServices() {
-  }
-
-  public PageRestaurantServices(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public PageRestaurantServices(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public PageRestaurantServices fetch() throws APIException{
-    PageRestaurantServices newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static PageRestaurantServices fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<PageRestaurantServices> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static PageRestaurantServices fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<PageRestaurantServices> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<PageRestaurantServices> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PageRestaurantServices>)(
-      new APIRequest<PageRestaurantServices>(context, "", "/", "GET", PageRestaurantServices.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<PageRestaurantServices>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", PageRestaurantServices.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public PageRestaurantServices() {
   }
 
   public String getId() {
@@ -285,247 +226,107 @@ public class PageRestaurantServices extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Boolean getFieldCatering() {
     return mCatering;
+  }
+
+  public PageRestaurantServices setFieldCatering(Boolean value) {
+    this.mCatering = value;
+    return this;
   }
 
   public Boolean getFieldDelivery() {
     return mDelivery;
   }
 
+  public PageRestaurantServices setFieldDelivery(Boolean value) {
+    this.mDelivery = value;
+    return this;
+  }
+
   public Boolean getFieldGroups() {
     return mGroups;
+  }
+
+  public PageRestaurantServices setFieldGroups(Boolean value) {
+    this.mGroups = value;
+    return this;
   }
 
   public Boolean getFieldKids() {
     return mKids;
   }
 
+  public PageRestaurantServices setFieldKids(Boolean value) {
+    this.mKids = value;
+    return this;
+  }
+
   public Boolean getFieldOutdoor() {
     return mOutdoor;
+  }
+
+  public PageRestaurantServices setFieldOutdoor(Boolean value) {
+    this.mOutdoor = value;
+    return this;
   }
 
   public Boolean getFieldPickup() {
     return mPickup;
   }
 
+  public PageRestaurantServices setFieldPickup(Boolean value) {
+    this.mPickup = value;
+    return this;
+  }
+
   public Boolean getFieldReserve() {
     return mReserve;
+  }
+
+  public PageRestaurantServices setFieldReserve(Boolean value) {
+    this.mReserve = value;
+    return this;
   }
 
   public Boolean getFieldTakeout() {
     return mTakeout;
   }
 
+  public PageRestaurantServices setFieldTakeout(Boolean value) {
+    this.mTakeout = value;
+    return this;
+  }
+
   public Boolean getFieldWaiter() {
     return mWaiter;
+  }
+
+  public PageRestaurantServices setFieldWaiter(Boolean value) {
+    this.mWaiter = value;
+    return this;
   }
 
   public Boolean getFieldWalkins() {
     return mWalkins;
   }
 
+  public PageRestaurantServices setFieldWalkins(Boolean value) {
+    this.mWalkins = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<PageRestaurantServices> {
-
-    PageRestaurantServices lastResponse = null;
-    @Override
-    public PageRestaurantServices getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "catering",
-      "delivery",
-      "groups",
-      "kids",
-      "outdoor",
-      "pickup",
-      "reserve",
-      "takeout",
-      "waiter",
-      "walkins",
-      "id",
-    };
-
-    @Override
-    public PageRestaurantServices parseResponse(String response) throws APIException {
-      return PageRestaurantServices.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public PageRestaurantServices execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public PageRestaurantServices execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<PageRestaurantServices> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<PageRestaurantServices> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, PageRestaurantServices>() {
-           public PageRestaurantServices apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCateringField () {
-      return this.requestCateringField(true);
-    }
-    public APIRequestGet requestCateringField (boolean value) {
-      this.requestField("catering", value);
-      return this;
-    }
-    public APIRequestGet requestDeliveryField () {
-      return this.requestDeliveryField(true);
-    }
-    public APIRequestGet requestDeliveryField (boolean value) {
-      this.requestField("delivery", value);
-      return this;
-    }
-    public APIRequestGet requestGroupsField () {
-      return this.requestGroupsField(true);
-    }
-    public APIRequestGet requestGroupsField (boolean value) {
-      this.requestField("groups", value);
-      return this;
-    }
-    public APIRequestGet requestKidsField () {
-      return this.requestKidsField(true);
-    }
-    public APIRequestGet requestKidsField (boolean value) {
-      this.requestField("kids", value);
-      return this;
-    }
-    public APIRequestGet requestOutdoorField () {
-      return this.requestOutdoorField(true);
-    }
-    public APIRequestGet requestOutdoorField (boolean value) {
-      this.requestField("outdoor", value);
-      return this;
-    }
-    public APIRequestGet requestPickupField () {
-      return this.requestPickupField(true);
-    }
-    public APIRequestGet requestPickupField (boolean value) {
-      this.requestField("pickup", value);
-      return this;
-    }
-    public APIRequestGet requestReserveField () {
-      return this.requestReserveField(true);
-    }
-    public APIRequestGet requestReserveField (boolean value) {
-      this.requestField("reserve", value);
-      return this;
-    }
-    public APIRequestGet requestTakeoutField () {
-      return this.requestTakeoutField(true);
-    }
-    public APIRequestGet requestTakeoutField (boolean value) {
-      this.requestField("takeout", value);
-      return this;
-    }
-    public APIRequestGet requestWaiterField () {
-      return this.requestWaiterField(true);
-    }
-    public APIRequestGet requestWaiterField (boolean value) {
-      this.requestField("waiter", value);
-      return this;
-    }
-    public APIRequestGet requestWalkinsField () {
-      return this.requestWalkinsField(true);
-    }
-    public APIRequestGet requestWalkinsField (boolean value) {
-      this.requestField("walkins", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public PageRestaurantServices setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

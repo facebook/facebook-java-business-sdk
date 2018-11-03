@@ -1209,6 +1209,7 @@ public class BusinessUser extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "privacy_info_url",
       "produced_by",
       "products",
       "promotion_eligible",
@@ -2094,6 +2095,13 @@ public class BusinessUser extends APINode {
     }
     public APIRequestGetAssignedPages requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetAssignedPages requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetAssignedPages requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
       return this;
     }
     public APIRequestGetAssignedPages requestProducedByField () {

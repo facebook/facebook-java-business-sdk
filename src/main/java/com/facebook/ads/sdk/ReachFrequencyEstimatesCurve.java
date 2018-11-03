@@ -77,66 +77,7 @@ public class ReachFrequencyEstimatesCurve extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ReachFrequencyEstimatesCurve() {
-  }
-
-  public ReachFrequencyEstimatesCurve(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ReachFrequencyEstimatesCurve(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ReachFrequencyEstimatesCurve fetch() throws APIException{
-    ReachFrequencyEstimatesCurve newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ReachFrequencyEstimatesCurve fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ReachFrequencyEstimatesCurve> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ReachFrequencyEstimatesCurve fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ReachFrequencyEstimatesCurve> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ReachFrequencyEstimatesCurve> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ReachFrequencyEstimatesCurve>)(
-      new APIRequest<ReachFrequencyEstimatesCurve>(context, "", "/", "GET", ReachFrequencyEstimatesCurve.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ReachFrequencyEstimatesCurve>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ReachFrequencyEstimatesCurve.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ReachFrequencyEstimatesCurve() {
   }
 
   public String getId() {
@@ -283,235 +224,98 @@ public class ReachFrequencyEstimatesCurve extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<Long> getFieldBudget() {
     return mBudget;
+  }
+
+  public ReachFrequencyEstimatesCurve setFieldBudget(List<Long> value) {
+    this.mBudget = value;
+    return this;
   }
 
   public List<Long> getFieldClick() {
     return mClick;
   }
 
+  public ReachFrequencyEstimatesCurve setFieldClick(List<Long> value) {
+    this.mClick = value;
+    return this;
+  }
+
   public List<Long> getFieldConversion() {
     return mConversion;
+  }
+
+  public ReachFrequencyEstimatesCurve setFieldConversion(List<Long> value) {
+    this.mConversion = value;
+    return this;
   }
 
   public List<Long> getFieldImpression() {
     return mImpression;
   }
 
+  public ReachFrequencyEstimatesCurve setFieldImpression(List<Long> value) {
+    this.mImpression = value;
+    return this;
+  }
+
   public Double getFieldInterpolatedReach() {
     return mInterpolatedReach;
+  }
+
+  public ReachFrequencyEstimatesCurve setFieldInterpolatedReach(Double value) {
+    this.mInterpolatedReach = value;
+    return this;
   }
 
   public Long getFieldNumPoints() {
     return mNumPoints;
   }
 
+  public ReachFrequencyEstimatesCurve setFieldNumPoints(Long value) {
+    this.mNumPoints = value;
+    return this;
+  }
+
   public List<Long> getFieldRawImpression() {
     return mRawImpression;
+  }
+
+  public ReachFrequencyEstimatesCurve setFieldRawImpression(List<Long> value) {
+    this.mRawImpression = value;
+    return this;
   }
 
   public List<Long> getFieldRawReach() {
     return mRawReach;
   }
 
+  public ReachFrequencyEstimatesCurve setFieldRawReach(List<Long> value) {
+    this.mRawReach = value;
+    return this;
+  }
+
   public List<Long> getFieldReach() {
     return mReach;
+  }
+
+  public ReachFrequencyEstimatesCurve setFieldReach(List<Long> value) {
+    this.mReach = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ReachFrequencyEstimatesCurve> {
-
-    ReachFrequencyEstimatesCurve lastResponse = null;
-    @Override
-    public ReachFrequencyEstimatesCurve getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "budget",
-      "click",
-      "conversion",
-      "impression",
-      "interpolated_reach",
-      "num_points",
-      "raw_impression",
-      "raw_reach",
-      "reach",
-      "id",
-    };
-
-    @Override
-    public ReachFrequencyEstimatesCurve parseResponse(String response) throws APIException {
-      return ReachFrequencyEstimatesCurve.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ReachFrequencyEstimatesCurve execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ReachFrequencyEstimatesCurve execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ReachFrequencyEstimatesCurve> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ReachFrequencyEstimatesCurve> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ReachFrequencyEstimatesCurve>() {
-           public ReachFrequencyEstimatesCurve apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestBudgetField () {
-      return this.requestBudgetField(true);
-    }
-    public APIRequestGet requestBudgetField (boolean value) {
-      this.requestField("budget", value);
-      return this;
-    }
-    public APIRequestGet requestClickField () {
-      return this.requestClickField(true);
-    }
-    public APIRequestGet requestClickField (boolean value) {
-      this.requestField("click", value);
-      return this;
-    }
-    public APIRequestGet requestConversionField () {
-      return this.requestConversionField(true);
-    }
-    public APIRequestGet requestConversionField (boolean value) {
-      this.requestField("conversion", value);
-      return this;
-    }
-    public APIRequestGet requestImpressionField () {
-      return this.requestImpressionField(true);
-    }
-    public APIRequestGet requestImpressionField (boolean value) {
-      this.requestField("impression", value);
-      return this;
-    }
-    public APIRequestGet requestInterpolatedReachField () {
-      return this.requestInterpolatedReachField(true);
-    }
-    public APIRequestGet requestInterpolatedReachField (boolean value) {
-      this.requestField("interpolated_reach", value);
-      return this;
-    }
-    public APIRequestGet requestNumPointsField () {
-      return this.requestNumPointsField(true);
-    }
-    public APIRequestGet requestNumPointsField (boolean value) {
-      this.requestField("num_points", value);
-      return this;
-    }
-    public APIRequestGet requestRawImpressionField () {
-      return this.requestRawImpressionField(true);
-    }
-    public APIRequestGet requestRawImpressionField (boolean value) {
-      this.requestField("raw_impression", value);
-      return this;
-    }
-    public APIRequestGet requestRawReachField () {
-      return this.requestRawReachField(true);
-    }
-    public APIRequestGet requestRawReachField (boolean value) {
-      this.requestField("raw_reach", value);
-      return this;
-    }
-    public APIRequestGet requestReachField () {
-      return this.requestReachField(true);
-    }
-    public APIRequestGet requestReachField (boolean value) {
-      this.requestField("reach", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ReachFrequencyEstimatesCurve setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

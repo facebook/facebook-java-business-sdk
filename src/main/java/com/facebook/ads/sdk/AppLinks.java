@@ -307,9 +307,6 @@ public class AppLinks extends APINode {
   }
 
   public WebAppLink getFieldWeb() {
-    if (mWeb != null) {
-      mWeb.context = getContext();
-    }
     return mWeb;
   }
 

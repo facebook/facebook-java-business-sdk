@@ -63,6 +63,8 @@ public class LiveVideoInputStream extends APINode {
   private String mId = null;
   @SerializedName("is_master")
   private Boolean mIsMaster = null;
+  @SerializedName("live_encoder")
+  private LiveEncoder mLiveEncoder = null;
   @SerializedName("secure_stream_url")
   private String mSecureStreamUrl = null;
   @SerializedName("stream_id")
@@ -298,6 +300,13 @@ public class LiveVideoInputStream extends APINode {
     return mIsMaster;
   }
 
+  public LiveEncoder getFieldLiveEncoder() {
+    if (mLiveEncoder != null) {
+      mLiveEncoder.context = getContext();
+    }
+    return mLiveEncoder;
+  }
+
   public String getFieldSecureStreamUrl() {
     return mSecureStreamUrl;
   }
@@ -327,6 +336,7 @@ public class LiveVideoInputStream extends APINode {
       "dash_preview_url",
       "id",
       "is_master",
+      "live_encoder",
       "secure_stream_url",
       "stream_id",
       "stream_url",
@@ -448,6 +458,13 @@ public class LiveVideoInputStream extends APINode {
       this.requestField("is_master", value);
       return this;
     }
+    public APIRequestGet requestLiveEncoderField () {
+      return this.requestLiveEncoderField(true);
+    }
+    public APIRequestGet requestLiveEncoderField (boolean value) {
+      this.requestField("live_encoder", value);
+      return this;
+    }
     public APIRequestGet requestSecureStreamUrlField () {
       return this.requestSecureStreamUrlField(true);
     }
@@ -490,6 +507,7 @@ public class LiveVideoInputStream extends APINode {
     this.mDashPreviewUrl = instance.mDashPreviewUrl;
     this.mId = instance.mId;
     this.mIsMaster = instance.mIsMaster;
+    this.mLiveEncoder = instance.mLiveEncoder;
     this.mSecureStreamUrl = instance.mSecureStreamUrl;
     this.mStreamId = instance.mStreamId;
     this.mStreamUrl = instance.mStreamUrl;

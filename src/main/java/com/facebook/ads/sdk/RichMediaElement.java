@@ -65,66 +65,7 @@ public class RichMediaElement extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  RichMediaElement() {
-  }
-
-  public RichMediaElement(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public RichMediaElement(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public RichMediaElement fetch() throws APIException{
-    RichMediaElement newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static RichMediaElement fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<RichMediaElement> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static RichMediaElement fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<RichMediaElement> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<RichMediaElement> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<RichMediaElement>)(
-      new APIRequest<RichMediaElement>(context, "", "/", "GET", RichMediaElement.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<RichMediaElement>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", RichMediaElement.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public RichMediaElement() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class RichMediaElement extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Object getFieldElement() {
     return mElement;
+  }
+
+  public RichMediaElement setFieldElement(Object value) {
+    this.mElement = value;
+    return this;
   }
 
   public String getFieldElementType() {
     return mElementType;
   }
 
+  public RichMediaElement setFieldElementType(String value) {
+    this.mElementType = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public RichMediaElement setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<RichMediaElement> {
-
-    RichMediaElement lastResponse = null;
-    @Override
-    public RichMediaElement getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "element",
-      "element_type",
-      "name",
-      "id",
-    };
-
-    @Override
-    public RichMediaElement parseResponse(String response) throws APIException {
-      return RichMediaElement.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public RichMediaElement execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public RichMediaElement execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<RichMediaElement> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<RichMediaElement> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, RichMediaElement>() {
-           public RichMediaElement apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestElementField () {
-      return this.requestElementField(true);
-    }
-    public APIRequestGet requestElementField (boolean value) {
-      this.requestField("element", value);
-      return this;
-    }
-    public APIRequestGet requestElementTypeField () {
-      return this.requestElementTypeField(true);
-    }
-    public APIRequestGet requestElementTypeField (boolean value) {
-      this.requestField("element_type", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public RichMediaElement setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

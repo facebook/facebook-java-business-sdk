@@ -293,9 +293,6 @@ public class ExtendedCreditAllocationConfig extends APINode {
 
 
   public CurrencyAmount getFieldCurrencyAmount() {
-    if (mCurrencyAmount != null) {
-      mCurrencyAmount.context = getContext();
-    }
     return mCurrencyAmount;
   }
 

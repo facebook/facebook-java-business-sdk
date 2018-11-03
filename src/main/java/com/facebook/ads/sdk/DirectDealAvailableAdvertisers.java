@@ -65,66 +65,7 @@ public class DirectDealAvailableAdvertisers extends APINode {
   private String mStatus = null;
   protected static Gson gson = null;
 
-  DirectDealAvailableAdvertisers() {
-  }
-
-  public DirectDealAvailableAdvertisers(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public DirectDealAvailableAdvertisers(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public DirectDealAvailableAdvertisers fetch() throws APIException{
-    DirectDealAvailableAdvertisers newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static DirectDealAvailableAdvertisers fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<DirectDealAvailableAdvertisers> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static DirectDealAvailableAdvertisers fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<DirectDealAvailableAdvertisers> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<DirectDealAvailableAdvertisers> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<DirectDealAvailableAdvertisers>)(
-      new APIRequest<DirectDealAvailableAdvertisers>(context, "", "/", "GET", DirectDealAvailableAdvertisers.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<DirectDealAvailableAdvertisers>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", DirectDealAvailableAdvertisers.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public DirectDealAvailableAdvertisers() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class DirectDealAvailableAdvertisers extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldId() {
     return mId;
+  }
+
+  public DirectDealAvailableAdvertisers setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public String getFieldLogo() {
     return mLogo;
   }
 
+  public DirectDealAvailableAdvertisers setFieldLogo(String value) {
+    this.mLogo = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public DirectDealAvailableAdvertisers setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public String getFieldStatus() {
     return mStatus;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<DirectDealAvailableAdvertisers> {
-
-    DirectDealAvailableAdvertisers lastResponse = null;
-    @Override
-    public DirectDealAvailableAdvertisers getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-      "logo",
-      "name",
-      "status",
-    };
-
-    @Override
-    public DirectDealAvailableAdvertisers parseResponse(String response) throws APIException {
-      return DirectDealAvailableAdvertisers.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public DirectDealAvailableAdvertisers execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public DirectDealAvailableAdvertisers execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<DirectDealAvailableAdvertisers> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<DirectDealAvailableAdvertisers> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, DirectDealAvailableAdvertisers>() {
-           public DirectDealAvailableAdvertisers apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestLogoField () {
-      return this.requestLogoField(true);
-    }
-    public APIRequestGet requestLogoField (boolean value) {
-      this.requestField("logo", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
+  public DirectDealAvailableAdvertisers setFieldStatus(String value) {
+    this.mStatus = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

@@ -61,66 +61,7 @@ public class BusinessPageRequest extends APINode {
   private Page mPage = null;
   protected static Gson gson = null;
 
-  BusinessPageRequest() {
-  }
-
-  public BusinessPageRequest(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public BusinessPageRequest(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public BusinessPageRequest fetch() throws APIException{
-    BusinessPageRequest newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static BusinessPageRequest fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<BusinessPageRequest> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static BusinessPageRequest fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<BusinessPageRequest> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<BusinessPageRequest> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<BusinessPageRequest>)(
-      new APIRequest<BusinessPageRequest>(context, "", "/", "GET", BusinessPageRequest.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<BusinessPageRequest>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", BusinessPageRequest.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public BusinessPageRequest() {
   }
 
   public String getId() {
@@ -267,13 +208,14 @@ public class BusinessPageRequest extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldId() {
     return mId;
+  }
+
+  public BusinessPageRequest setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public Page getFieldPage() {
@@ -283,126 +225,17 @@ public class BusinessPageRequest extends APINode {
     return mPage;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<BusinessPageRequest> {
-
-    BusinessPageRequest lastResponse = null;
-    @Override
-    public BusinessPageRequest getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-      "page",
-    };
-
-    @Override
-    public BusinessPageRequest parseResponse(String response) throws APIException {
-      return BusinessPageRequest.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public BusinessPageRequest execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public BusinessPageRequest execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<BusinessPageRequest> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<BusinessPageRequest> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, BusinessPageRequest>() {
-           public BusinessPageRequest apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestPageField () {
-      return this.requestPageField(true);
-    }
-    public APIRequestGet requestPageField (boolean value) {
-      this.requestField("page", value);
-      return this;
-    }
+  public BusinessPageRequest setFieldPage(Page value) {
+    this.mPage = value;
+    return this;
   }
+
+  public BusinessPageRequest setFieldPage(String value) {
+    Type type = new TypeToken<Page>(){}.getType();
+    this.mPage = Page.getGson().fromJson(value, type);
+    return this;
+  }
+
 
 
   synchronized /*package*/ static Gson getGson() {

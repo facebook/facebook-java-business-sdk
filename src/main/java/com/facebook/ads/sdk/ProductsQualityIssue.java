@@ -71,66 +71,7 @@ public class ProductsQualityIssue extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ProductsQualityIssue() {
-  }
-
-  public ProductsQualityIssue(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ProductsQualityIssue(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ProductsQualityIssue fetch() throws APIException{
-    ProductsQualityIssue newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ProductsQualityIssue fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ProductsQualityIssue> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ProductsQualityIssue fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ProductsQualityIssue> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ProductsQualityIssue> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ProductsQualityIssue>)(
-      new APIRequest<ProductsQualityIssue>(context, "", "/", "GET", ProductsQualityIssue.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ProductsQualityIssue>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ProductsQualityIssue.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ProductsQualityIssue() {
   }
 
   public String getId() {
@@ -277,199 +218,76 @@ public class ProductsQualityIssue extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldCount() {
     return mCount;
+  }
+
+  public ProductsQualityIssue setFieldCount(Long value) {
+    this.mCount = value;
+    return this;
   }
 
   public String getFieldDescription() {
     return mDescription;
   }
 
+  public ProductsQualityIssue setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
+  }
+
   public String getFieldIssueType() {
     return mIssueType;
+  }
+
+  public ProductsQualityIssue setFieldIssueType(String value) {
+    this.mIssueType = value;
+    return this;
   }
 
   public List<String> getFieldPropertyNames() {
     return mPropertyNames;
   }
 
+  public ProductsQualityIssue setFieldPropertyNames(List<String> value) {
+    this.mPropertyNames = value;
+    return this;
+  }
+
   public List<ProductItem> getFieldSamples() {
     return mSamples;
   }
 
+  public ProductsQualityIssue setFieldSamples(List<ProductItem> value) {
+    this.mSamples = value;
+    return this;
+  }
+
+  public ProductsQualityIssue setFieldSamples(String value) {
+    Type type = new TypeToken<List<ProductItem>>(){}.getType();
+    this.mSamples = ProductItem.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldSummary() {
     return mSummary;
+  }
+
+  public ProductsQualityIssue setFieldSummary(String value) {
+    this.mSummary = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ProductsQualityIssue> {
-
-    ProductsQualityIssue lastResponse = null;
-    @Override
-    public ProductsQualityIssue getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "count",
-      "description",
-      "issue_type",
-      "property_names",
-      "samples",
-      "summary",
-      "id",
-    };
-
-    @Override
-    public ProductsQualityIssue parseResponse(String response) throws APIException {
-      return ProductsQualityIssue.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ProductsQualityIssue execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductsQualityIssue execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ProductsQualityIssue> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ProductsQualityIssue> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ProductsQualityIssue>() {
-           public ProductsQualityIssue apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCountField () {
-      return this.requestCountField(true);
-    }
-    public APIRequestGet requestCountField (boolean value) {
-      this.requestField("count", value);
-      return this;
-    }
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestIssueTypeField () {
-      return this.requestIssueTypeField(true);
-    }
-    public APIRequestGet requestIssueTypeField (boolean value) {
-      this.requestField("issue_type", value);
-      return this;
-    }
-    public APIRequestGet requestPropertyNamesField () {
-      return this.requestPropertyNamesField(true);
-    }
-    public APIRequestGet requestPropertyNamesField (boolean value) {
-      this.requestField("property_names", value);
-      return this;
-    }
-    public APIRequestGet requestSamplesField () {
-      return this.requestSamplesField(true);
-    }
-    public APIRequestGet requestSamplesField (boolean value) {
-      this.requestField("samples", value);
-      return this;
-    }
-    public APIRequestGet requestSummaryField () {
-      return this.requestSummaryField(true);
-    }
-    public APIRequestGet requestSummaryField (boolean value) {
-      this.requestField("summary", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ProductsQualityIssue setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

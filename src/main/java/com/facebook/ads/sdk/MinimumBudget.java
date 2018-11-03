@@ -69,66 +69,7 @@ public class MinimumBudget extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  MinimumBudget() {
-  }
-
-  public MinimumBudget(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public MinimumBudget(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public MinimumBudget fetch() throws APIException{
-    MinimumBudget newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static MinimumBudget fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<MinimumBudget> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static MinimumBudget fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<MinimumBudget> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<MinimumBudget> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<MinimumBudget>)(
-      new APIRequest<MinimumBudget>(context, "", "/", "GET", MinimumBudget.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<MinimumBudget>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", MinimumBudget.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public MinimumBudget() {
   }
 
   public String getId() {
@@ -275,187 +216,62 @@ public class MinimumBudget extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldCurrency() {
     return mCurrency;
+  }
+
+  public MinimumBudget setFieldCurrency(String value) {
+    this.mCurrency = value;
+    return this;
   }
 
   public Long getFieldMinDailyBudgetHighFreq() {
     return mMinDailyBudgetHighFreq;
   }
 
+  public MinimumBudget setFieldMinDailyBudgetHighFreq(Long value) {
+    this.mMinDailyBudgetHighFreq = value;
+    return this;
+  }
+
   public Long getFieldMinDailyBudgetImp() {
     return mMinDailyBudgetImp;
+  }
+
+  public MinimumBudget setFieldMinDailyBudgetImp(Long value) {
+    this.mMinDailyBudgetImp = value;
+    return this;
   }
 
   public Long getFieldMinDailyBudgetLowFreq() {
     return mMinDailyBudgetLowFreq;
   }
 
+  public MinimumBudget setFieldMinDailyBudgetLowFreq(Long value) {
+    this.mMinDailyBudgetLowFreq = value;
+    return this;
+  }
+
   public Long getFieldMinDailyBudgetVideoViews() {
     return mMinDailyBudgetVideoViews;
+  }
+
+  public MinimumBudget setFieldMinDailyBudgetVideoViews(Long value) {
+    this.mMinDailyBudgetVideoViews = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<MinimumBudget> {
-
-    MinimumBudget lastResponse = null;
-    @Override
-    public MinimumBudget getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "currency",
-      "min_daily_budget_high_freq",
-      "min_daily_budget_imp",
-      "min_daily_budget_low_freq",
-      "min_daily_budget_video_views",
-      "id",
-    };
-
-    @Override
-    public MinimumBudget parseResponse(String response) throws APIException {
-      return MinimumBudget.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public MinimumBudget execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public MinimumBudget execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<MinimumBudget> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<MinimumBudget> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, MinimumBudget>() {
-           public MinimumBudget apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCurrencyField () {
-      return this.requestCurrencyField(true);
-    }
-    public APIRequestGet requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGet requestMinDailyBudgetHighFreqField () {
-      return this.requestMinDailyBudgetHighFreqField(true);
-    }
-    public APIRequestGet requestMinDailyBudgetHighFreqField (boolean value) {
-      this.requestField("min_daily_budget_high_freq", value);
-      return this;
-    }
-    public APIRequestGet requestMinDailyBudgetImpField () {
-      return this.requestMinDailyBudgetImpField(true);
-    }
-    public APIRequestGet requestMinDailyBudgetImpField (boolean value) {
-      this.requestField("min_daily_budget_imp", value);
-      return this;
-    }
-    public APIRequestGet requestMinDailyBudgetLowFreqField () {
-      return this.requestMinDailyBudgetLowFreqField(true);
-    }
-    public APIRequestGet requestMinDailyBudgetLowFreqField (boolean value) {
-      this.requestField("min_daily_budget_low_freq", value);
-      return this;
-    }
-    public APIRequestGet requestMinDailyBudgetVideoViewsField () {
-      return this.requestMinDailyBudgetVideoViewsField(true);
-    }
-    public APIRequestGet requestMinDailyBudgetVideoViewsField (boolean value) {
-      this.requestField("min_daily_budget_video_views", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public MinimumBudget setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

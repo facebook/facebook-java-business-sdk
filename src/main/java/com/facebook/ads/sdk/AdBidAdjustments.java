@@ -65,66 +65,7 @@ public class AdBidAdjustments extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdBidAdjustments() {
-  }
-
-  public AdBidAdjustments(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdBidAdjustments(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdBidAdjustments fetch() throws APIException{
-    AdBidAdjustments newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdBidAdjustments fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdBidAdjustments> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdBidAdjustments fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdBidAdjustments> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdBidAdjustments> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdBidAdjustments>)(
-      new APIRequest<AdBidAdjustments>(context, "", "/", "GET", AdBidAdjustments.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdBidAdjustments>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdBidAdjustments.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdBidAdjustments() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class AdBidAdjustments extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Map<String, Double> getFieldAgeRange() {
     return mAgeRange;
+  }
+
+  public AdBidAdjustments setFieldAgeRange(Map<String, Double> value) {
+    this.mAgeRange = value;
+    return this;
   }
 
   public Object getFieldPageTypes() {
     return mPageTypes;
   }
 
+  public AdBidAdjustments setFieldPageTypes(Object value) {
+    this.mPageTypes = value;
+    return this;
+  }
+
   public String getFieldUserGroups() {
     return mUserGroups;
+  }
+
+  public AdBidAdjustments setFieldUserGroups(String value) {
+    this.mUserGroups = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdBidAdjustments> {
-
-    AdBidAdjustments lastResponse = null;
-    @Override
-    public AdBidAdjustments getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "age_range",
-      "page_types",
-      "user_groups",
-      "id",
-    };
-
-    @Override
-    public AdBidAdjustments parseResponse(String response) throws APIException {
-      return AdBidAdjustments.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdBidAdjustments execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdBidAdjustments execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdBidAdjustments> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdBidAdjustments> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdBidAdjustments>() {
-           public AdBidAdjustments apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAgeRangeField () {
-      return this.requestAgeRangeField(true);
-    }
-    public APIRequestGet requestAgeRangeField (boolean value) {
-      this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGet requestPageTypesField () {
-      return this.requestPageTypesField(true);
-    }
-    public APIRequestGet requestPageTypesField (boolean value) {
-      this.requestField("page_types", value);
-      return this;
-    }
-    public APIRequestGet requestUserGroupsField () {
-      return this.requestUserGroupsField(true);
-    }
-    public APIRequestGet requestUserGroupsField (boolean value) {
-      this.requestField("user_groups", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdBidAdjustments setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

@@ -75,66 +75,7 @@ public class AdsSegments extends APINode {
   private Long mProjectedDailyRevenue = null;
   protected static Gson gson = null;
 
-  AdsSegments() {
-  }
-
-  public AdsSegments(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdsSegments(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdsSegments fetch() throws APIException{
-    AdsSegments newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdsSegments fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdsSegments> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdsSegments fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdsSegments> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdsSegments> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdsSegments>)(
-      new APIRequest<AdsSegments>(context, "", "/", "GET", AdsSegments.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdsSegments>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdsSegments.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdsSegments() {
   }
 
   public String getId() {
@@ -281,223 +222,89 @@ public class AdsSegments extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldDailyAudienceSize() {
     return mDailyAudienceSize;
+  }
+
+  public AdsSegments setFieldDailyAudienceSize(Long value) {
+    this.mDailyAudienceSize = value;
+    return this;
   }
 
   public Long getFieldDailyImpressions() {
     return mDailyImpressions;
   }
 
+  public AdsSegments setFieldDailyImpressions(Long value) {
+    this.mDailyImpressions = value;
+    return this;
+  }
+
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public AdsSegments setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public AdsSegments setFieldId(String value) {
+    this.mId = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public AdsSegments setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public List<String> getFieldPath() {
     return mPath;
   }
 
+  public AdsSegments setFieldPath(List<String> value) {
+    this.mPath = value;
+    return this;
+  }
+
   public Double getFieldPopularity() {
     return mPopularity;
+  }
+
+  public AdsSegments setFieldPopularity(Double value) {
+    this.mPopularity = value;
+    return this;
   }
 
   public Long getFieldProjectedCpm() {
     return mProjectedCpm;
   }
 
+  public AdsSegments setFieldProjectedCpm(Long value) {
+    this.mProjectedCpm = value;
+    return this;
+  }
+
   public Long getFieldProjectedDailyRevenue() {
     return mProjectedDailyRevenue;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdsSegments> {
-
-    AdsSegments lastResponse = null;
-    @Override
-    public AdsSegments getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "daily_audience_size",
-      "daily_impressions",
-      "description",
-      "id",
-      "name",
-      "path",
-      "popularity",
-      "projected_cpm",
-      "projected_daily_revenue",
-    };
-
-    @Override
-    public AdsSegments parseResponse(String response) throws APIException {
-      return AdsSegments.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdsSegments execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdsSegments execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdsSegments> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdsSegments> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdsSegments>() {
-           public AdsSegments apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestDailyAudienceSizeField () {
-      return this.requestDailyAudienceSizeField(true);
-    }
-    public APIRequestGet requestDailyAudienceSizeField (boolean value) {
-      this.requestField("daily_audience_size", value);
-      return this;
-    }
-    public APIRequestGet requestDailyImpressionsField () {
-      return this.requestDailyImpressionsField(true);
-    }
-    public APIRequestGet requestDailyImpressionsField (boolean value) {
-      this.requestField("daily_impressions", value);
-      return this;
-    }
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestPathField () {
-      return this.requestPathField(true);
-    }
-    public APIRequestGet requestPathField (boolean value) {
-      this.requestField("path", value);
-      return this;
-    }
-    public APIRequestGet requestPopularityField () {
-      return this.requestPopularityField(true);
-    }
-    public APIRequestGet requestPopularityField (boolean value) {
-      this.requestField("popularity", value);
-      return this;
-    }
-    public APIRequestGet requestProjectedCpmField () {
-      return this.requestProjectedCpmField(true);
-    }
-    public APIRequestGet requestProjectedCpmField (boolean value) {
-      this.requestField("projected_cpm", value);
-      return this;
-    }
-    public APIRequestGet requestProjectedDailyRevenueField () {
-      return this.requestProjectedDailyRevenueField(true);
-    }
-    public APIRequestGet requestProjectedDailyRevenueField (boolean value) {
-      this.requestField("projected_daily_revenue", value);
-      return this;
-    }
+  public AdsSegments setFieldProjectedDailyRevenue(Long value) {
+    this.mProjectedDailyRevenue = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

@@ -79,66 +79,7 @@ public class AdAccountUserPermissions extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdAccountUserPermissions() {
-  }
-
-  public AdAccountUserPermissions(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdAccountUserPermissions(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdAccountUserPermissions fetch() throws APIException{
-    AdAccountUserPermissions newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdAccountUserPermissions fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdAccountUserPermissions> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdAccountUserPermissions fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdAccountUserPermissions> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdAccountUserPermissions> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdAccountUserPermissions>)(
-      new APIRequest<AdAccountUserPermissions>(context, "", "/", "GET", AdAccountUserPermissions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdAccountUserPermissions>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdAccountUserPermissions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdAccountUserPermissions() {
   }
 
   public String getId() {
@@ -285,10 +226,6 @@ public class AdAccountUserPermissions extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Business getFieldBusiness() {
     if (mBusiness != null) {
@@ -297,8 +234,23 @@ public class AdAccountUserPermissions extends APINode {
     return mBusiness;
   }
 
+  public AdAccountUserPermissions setFieldBusiness(Business value) {
+    this.mBusiness = value;
+    return this;
+  }
+
+  public AdAccountUserPermissions setFieldBusiness(String value) {
+    Type type = new TypeToken<Business>(){}.getType();
+    this.mBusiness = Business.getGson().fromJson(value, type);
+    return this;
+  }
   public Object getFieldBusinessPersona() {
     return mBusinessPersona;
+  }
+
+  public AdAccountUserPermissions setFieldBusinessPersona(Object value) {
+    this.mBusinessPersona = value;
+    return this;
   }
 
   public User getFieldCreatedBy() {
@@ -308,20 +260,50 @@ public class AdAccountUserPermissions extends APINode {
     return mCreatedBy;
   }
 
+  public AdAccountUserPermissions setFieldCreatedBy(User value) {
+    this.mCreatedBy = value;
+    return this;
+  }
+
+  public AdAccountUserPermissions setFieldCreatedBy(String value) {
+    Type type = new TypeToken<User>(){}.getType();
+    this.mCreatedBy = User.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldCreatedTime() {
     return mCreatedTime;
+  }
+
+  public AdAccountUserPermissions setFieldCreatedTime(String value) {
+    this.mCreatedTime = value;
+    return this;
   }
 
   public String getFieldEmail() {
     return mEmail;
   }
 
+  public AdAccountUserPermissions setFieldEmail(String value) {
+    this.mEmail = value;
+    return this;
+  }
+
   public String getFieldStatus() {
     return mStatus;
   }
 
+  public AdAccountUserPermissions setFieldStatus(String value) {
+    this.mStatus = value;
+    return this;
+  }
+
   public List<String> getFieldTasks() {
     return mTasks;
+  }
+
+  public AdAccountUserPermissions setFieldTasks(List<String> value) {
+    this.mTasks = value;
+    return this;
   }
 
   public User getFieldUpdatedBy() {
@@ -331,8 +313,23 @@ public class AdAccountUserPermissions extends APINode {
     return mUpdatedBy;
   }
 
+  public AdAccountUserPermissions setFieldUpdatedBy(User value) {
+    this.mUpdatedBy = value;
+    return this;
+  }
+
+  public AdAccountUserPermissions setFieldUpdatedBy(String value) {
+    Type type = new TypeToken<User>(){}.getType();
+    this.mUpdatedBy = User.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldUpdatedTime() {
     return mUpdatedTime;
+  }
+
+  public AdAccountUserPermissions setFieldUpdatedTime(String value) {
+    this.mUpdatedTime = value;
+    return this;
   }
 
   public User getFieldUser() {
@@ -342,202 +339,26 @@ public class AdAccountUserPermissions extends APINode {
     return mUser;
   }
 
+  public AdAccountUserPermissions setFieldUser(User value) {
+    this.mUser = value;
+    return this;
+  }
+
+  public AdAccountUserPermissions setFieldUser(String value) {
+    Type type = new TypeToken<User>(){}.getType();
+    this.mUser = User.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdAccountUserPermissions> {
-
-    AdAccountUserPermissions lastResponse = null;
-    @Override
-    public AdAccountUserPermissions getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "business",
-      "business_persona",
-      "created_by",
-      "created_time",
-      "email",
-      "status",
-      "tasks",
-      "updated_by",
-      "updated_time",
-      "user",
-      "id",
-    };
-
-    @Override
-    public AdAccountUserPermissions parseResponse(String response) throws APIException {
-      return AdAccountUserPermissions.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdAccountUserPermissions execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdAccountUserPermissions execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdAccountUserPermissions> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdAccountUserPermissions> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdAccountUserPermissions>() {
-           public AdAccountUserPermissions apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGet requestBusinessField (boolean value) {
-      this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGet requestBusinessPersonaField () {
-      return this.requestBusinessPersonaField(true);
-    }
-    public APIRequestGet requestBusinessPersonaField (boolean value) {
-      this.requestField("business_persona", value);
-      return this;
-    }
-    public APIRequestGet requestCreatedByField () {
-      return this.requestCreatedByField(true);
-    }
-    public APIRequestGet requestCreatedByField (boolean value) {
-      this.requestField("created_by", value);
-      return this;
-    }
-    public APIRequestGet requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGet requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGet requestEmailField () {
-      return this.requestEmailField(true);
-    }
-    public APIRequestGet requestEmailField (boolean value) {
-      this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGet requestTasksField () {
-      return this.requestTasksField(true);
-    }
-    public APIRequestGet requestTasksField (boolean value) {
-      this.requestField("tasks", value);
-      return this;
-    }
-    public APIRequestGet requestUpdatedByField () {
-      return this.requestUpdatedByField(true);
-    }
-    public APIRequestGet requestUpdatedByField (boolean value) {
-      this.requestField("updated_by", value);
-      return this;
-    }
-    public APIRequestGet requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGet requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGet requestUserField () {
-      return this.requestUserField(true);
-    }
-    public APIRequestGet requestUserField (boolean value) {
-      this.requestField("user", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdAccountUserPermissions setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

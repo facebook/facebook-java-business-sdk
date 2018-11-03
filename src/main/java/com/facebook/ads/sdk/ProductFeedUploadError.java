@@ -285,6 +285,10 @@ public class ProductFeedUploadError extends APINode {
     return new APIRequestGetSamples(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetSuggestedRules getSuggestedRules() {
+    return new APIRequestGetSuggestedRules(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -451,6 +455,141 @@ public class ProductFeedUploadError extends APINode {
     }
     public APIRequestGetSamples requestRowNumberField (boolean value) {
       this.requestField("row_number", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetSuggestedRules extends APIRequest<ProductFeedRuleSuggestion> {
+
+    APINodeList<ProductFeedRuleSuggestion> lastResponse = null;
+    @Override
+    public APINodeList<ProductFeedRuleSuggestion> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "attribute",
+      "params",
+      "type",
+      "id",
+    };
+
+    @Override
+    public APINodeList<ProductFeedRuleSuggestion> parseResponse(String response) throws APIException {
+      return ProductFeedRuleSuggestion.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<ProductFeedRuleSuggestion> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ProductFeedRuleSuggestion> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ProductFeedRuleSuggestion>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ProductFeedRuleSuggestion>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<ProductFeedRuleSuggestion>>() {
+           public APINodeList<ProductFeedRuleSuggestion> apply(String result) {
+             try {
+               return APIRequestGetSuggestedRules.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetSuggestedRules(String nodeId, APIContext context) {
+      super(context, nodeId, "/suggested_rules", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSuggestedRules setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSuggestedRules setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSuggestedRules requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSuggestedRules requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSuggestedRules requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSuggestedRules requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSuggestedRules requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSuggestedRules requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetSuggestedRules requestAttributeField () {
+      return this.requestAttributeField(true);
+    }
+    public APIRequestGetSuggestedRules requestAttributeField (boolean value) {
+      this.requestField("attribute", value);
+      return this;
+    }
+    public APIRequestGetSuggestedRules requestParamsField () {
+      return this.requestParamsField(true);
+    }
+    public APIRequestGetSuggestedRules requestParamsField (boolean value) {
+      this.requestField("params", value);
+      return this;
+    }
+    public APIRequestGetSuggestedRules requestTypeField () {
+      return this.requestTypeField(true);
+    }
+    public APIRequestGetSuggestedRules requestTypeField (boolean value) {
+      this.requestField("type", value);
+      return this;
+    }
+    public APIRequestGetSuggestedRules requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetSuggestedRules requestIdField (boolean value) {
+      this.requestField("id", value);
       return this;
     }
   }

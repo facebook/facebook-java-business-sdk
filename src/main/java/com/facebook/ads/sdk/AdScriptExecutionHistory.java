@@ -77,66 +77,7 @@ public class AdScriptExecutionHistory extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdScriptExecutionHistory() {
-  }
-
-  public AdScriptExecutionHistory(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdScriptExecutionHistory(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdScriptExecutionHistory fetch() throws APIException{
-    AdScriptExecutionHistory newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdScriptExecutionHistory fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdScriptExecutionHistory> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdScriptExecutionHistory fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdScriptExecutionHistory> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdScriptExecutionHistory> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdScriptExecutionHistory>)(
-      new APIRequest<AdScriptExecutionHistory>(context, "", "/", "GET", AdScriptExecutionHistory.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdScriptExecutionHistory>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdScriptExecutionHistory.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdScriptExecutionHistory() {
   }
 
   public String getId() {
@@ -283,235 +224,98 @@ public class AdScriptExecutionHistory extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAccountId() {
     return mAccountId;
+  }
+
+  public AdScriptExecutionHistory setFieldAccountId(String value) {
+    this.mAccountId = value;
+    return this;
   }
 
   public List<Object> getFieldChanges() {
     return mChanges;
   }
 
+  public AdScriptExecutionHistory setFieldChanges(List<Object> value) {
+    this.mChanges = value;
+    return this;
+  }
+
   public String getFieldCompleteTime() {
     return mCompleteTime;
+  }
+
+  public AdScriptExecutionHistory setFieldCompleteTime(String value) {
+    this.mCompleteTime = value;
+    return this;
   }
 
   public String getFieldExecutionStatus() {
     return mExecutionStatus;
   }
 
+  public AdScriptExecutionHistory setFieldExecutionStatus(String value) {
+    this.mExecutionStatus = value;
+    return this;
+  }
+
   public String getFieldExecutionToken() {
     return mExecutionToken;
+  }
+
+  public AdScriptExecutionHistory setFieldExecutionToken(String value) {
+    this.mExecutionToken = value;
+    return this;
   }
 
   public Object getFieldLogs() {
     return mLogs;
   }
 
+  public AdScriptExecutionHistory setFieldLogs(Object value) {
+    this.mLogs = value;
+    return this;
+  }
+
   public String getFieldScriptId() {
     return mScriptId;
+  }
+
+  public AdScriptExecutionHistory setFieldScriptId(String value) {
+    this.mScriptId = value;
+    return this;
   }
 
   public String getFieldScriptScheduleSpecId() {
     return mScriptScheduleSpecId;
   }
 
+  public AdScriptExecutionHistory setFieldScriptScheduleSpecId(String value) {
+    this.mScriptScheduleSpecId = value;
+    return this;
+  }
+
   public String getFieldStartTime() {
     return mStartTime;
+  }
+
+  public AdScriptExecutionHistory setFieldStartTime(String value) {
+    this.mStartTime = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdScriptExecutionHistory> {
-
-    AdScriptExecutionHistory lastResponse = null;
-    @Override
-    public AdScriptExecutionHistory getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "account_id",
-      "changes",
-      "complete_time",
-      "execution_status",
-      "execution_token",
-      "logs",
-      "script_id",
-      "script_schedule_spec_id",
-      "start_time",
-      "id",
-    };
-
-    @Override
-    public AdScriptExecutionHistory parseResponse(String response) throws APIException {
-      return AdScriptExecutionHistory.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdScriptExecutionHistory execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdScriptExecutionHistory execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdScriptExecutionHistory> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdScriptExecutionHistory> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdScriptExecutionHistory>() {
-           public AdScriptExecutionHistory apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAccountIdField () {
-      return this.requestAccountIdField(true);
-    }
-    public APIRequestGet requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGet requestChangesField () {
-      return this.requestChangesField(true);
-    }
-    public APIRequestGet requestChangesField (boolean value) {
-      this.requestField("changes", value);
-      return this;
-    }
-    public APIRequestGet requestCompleteTimeField () {
-      return this.requestCompleteTimeField(true);
-    }
-    public APIRequestGet requestCompleteTimeField (boolean value) {
-      this.requestField("complete_time", value);
-      return this;
-    }
-    public APIRequestGet requestExecutionStatusField () {
-      return this.requestExecutionStatusField(true);
-    }
-    public APIRequestGet requestExecutionStatusField (boolean value) {
-      this.requestField("execution_status", value);
-      return this;
-    }
-    public APIRequestGet requestExecutionTokenField () {
-      return this.requestExecutionTokenField(true);
-    }
-    public APIRequestGet requestExecutionTokenField (boolean value) {
-      this.requestField("execution_token", value);
-      return this;
-    }
-    public APIRequestGet requestLogsField () {
-      return this.requestLogsField(true);
-    }
-    public APIRequestGet requestLogsField (boolean value) {
-      this.requestField("logs", value);
-      return this;
-    }
-    public APIRequestGet requestScriptIdField () {
-      return this.requestScriptIdField(true);
-    }
-    public APIRequestGet requestScriptIdField (boolean value) {
-      this.requestField("script_id", value);
-      return this;
-    }
-    public APIRequestGet requestScriptScheduleSpecIdField () {
-      return this.requestScriptScheduleSpecIdField(true);
-    }
-    public APIRequestGet requestScriptScheduleSpecIdField (boolean value) {
-      this.requestField("script_schedule_spec_id", value);
-      return this;
-    }
-    public APIRequestGet requestStartTimeField () {
-      return this.requestStartTimeField(true);
-    }
-    public APIRequestGet requestStartTimeField (boolean value) {
-      this.requestField("start_time", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdScriptExecutionHistory setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

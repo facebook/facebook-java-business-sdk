@@ -343,6 +343,10 @@ public class Event extends APINode {
     return new APIRequestGetAttending(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateAttending createAttending() {
+    return new APIRequestCreateAttending(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetComments getComments() {
     return new APIRequestGetComments(this.getPrefixedId().toString(), context);
   }
@@ -353,6 +357,10 @@ public class Event extends APINode {
 
   public APIRequestGetDeclined getDeclined() {
     return new APIRequestGetDeclined(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateDeclined createDeclined() {
+    return new APIRequestCreateDeclined(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetFeed getFeed() {
@@ -377,6 +385,10 @@ public class Event extends APINode {
 
   public APIRequestGetMaybe getMaybe() {
     return new APIRequestGetMaybe(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateMaybe createMaybe() {
+    return new APIRequestCreateMaybe(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetNoreply getNoreply() {
@@ -441,9 +453,6 @@ public class Event extends APINode {
   }
 
   public CoverPhoto getFieldCover() {
-    if (mCover != null) {
-      mCover.context = getContext();
-    }
     return mCover;
   }
 
@@ -574,9 +583,6 @@ public class Event extends APINode {
   }
 
   public Location getFieldVenue() {
-    if (mVenue != null) {
-      mVenue.context = getContext();
-    }
     return mVenue;
   }
 
@@ -810,10 +816,12 @@ public class Event extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -1121,6 +1129,13 @@ public class Event extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetAttending requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetAttending requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetAttending requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -1147,6 +1162,13 @@ public class Event extends APINode {
     }
     public APIRequestGetAttending requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetAttending requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetAttending requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetAttending requestLastNameField () {
@@ -1380,6 +1402,151 @@ public class Event extends APINode {
       this.requestField("work", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateAttending extends APIRequest<Event> {
+
+    Event lastResponse = null;
+    @Override
+    public Event getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "eid",
+      "action_context",
+      "app_context",
+      "tracking",
+      "uid",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Event parseResponse(String response) throws APIException {
+      return Event.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public Event execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Event execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<Event> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Event> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, Event>() {
+           public Event apply(String result) {
+             try {
+               return APIRequestCreateAttending.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAttending(String nodeId, APIContext context) {
+      super(context, nodeId, "/attending", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAttending setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAttending setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAttending setEid (String eid) {
+      this.setParam("eid", eid);
+      return this;
+    }
+
+    public APIRequestCreateAttending setActionContext (Object actionContext) {
+      this.setParam("action_context", actionContext);
+      return this;
+    }
+    public APIRequestCreateAttending setActionContext (String actionContext) {
+      this.setParam("action_context", actionContext);
+      return this;
+    }
+
+    public APIRequestCreateAttending setAppContext (Object appContext) {
+      this.setParam("app_context", appContext);
+      return this;
+    }
+    public APIRequestCreateAttending setAppContext (String appContext) {
+      this.setParam("app_context", appContext);
+      return this;
+    }
+
+    public APIRequestCreateAttending setTracking (String tracking) {
+      this.setParam("tracking", tracking);
+      return this;
+    }
+
+    public APIRequestCreateAttending setUid (Long uid) {
+      this.setParam("uid", uid);
+      return this;
+    }
+    public APIRequestCreateAttending setUid (String uid) {
+      this.setParam("uid", uid);
+      return this;
+    }
+
+    public APIRequestCreateAttending requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAttending requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAttending requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAttending requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAttending requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAttending requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetComments extends APIRequest<NullNode> {
@@ -1727,10 +1894,12 @@ public class Event extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -2038,6 +2207,13 @@ public class Event extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetDeclined requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetDeclined requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetDeclined requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -2064,6 +2240,13 @@ public class Event extends APINode {
     }
     public APIRequestGetDeclined requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetDeclined requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetDeclined requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetDeclined requestLastNameField () {
@@ -2297,6 +2480,151 @@ public class Event extends APINode {
       this.requestField("work", value);
       return this;
     }
+  }
+
+  public static class APIRequestCreateDeclined extends APIRequest<Event> {
+
+    Event lastResponse = null;
+    @Override
+    public Event getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "eid",
+      "action_context",
+      "app_context",
+      "tracking",
+      "uid",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Event parseResponse(String response) throws APIException {
+      return Event.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public Event execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Event execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<Event> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Event> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, Event>() {
+           public Event apply(String result) {
+             try {
+               return APIRequestCreateDeclined.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateDeclined(String nodeId, APIContext context) {
+      super(context, nodeId, "/declined", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateDeclined setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDeclined setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateDeclined setEid (String eid) {
+      this.setParam("eid", eid);
+      return this;
+    }
+
+    public APIRequestCreateDeclined setActionContext (Object actionContext) {
+      this.setParam("action_context", actionContext);
+      return this;
+    }
+    public APIRequestCreateDeclined setActionContext (String actionContext) {
+      this.setParam("action_context", actionContext);
+      return this;
+    }
+
+    public APIRequestCreateDeclined setAppContext (Object appContext) {
+      this.setParam("app_context", appContext);
+      return this;
+    }
+    public APIRequestCreateDeclined setAppContext (String appContext) {
+      this.setParam("app_context", appContext);
+      return this;
+    }
+
+    public APIRequestCreateDeclined setTracking (String tracking) {
+      this.setParam("tracking", tracking);
+      return this;
+    }
+
+    public APIRequestCreateDeclined setUid (Long uid) {
+      this.setParam("uid", uid);
+      return this;
+    }
+    public APIRequestCreateDeclined setUid (String uid) {
+      this.setParam("uid", uid);
+      return this;
+    }
+
+    public APIRequestCreateDeclined requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateDeclined requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDeclined requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateDeclined requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDeclined requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateDeclined requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetFeed extends APIRequest<NullNode> {
@@ -3458,10 +3786,12 @@ public class Event extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -3769,6 +4099,13 @@ public class Event extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetInterested requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetInterested requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetInterested requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -3795,6 +4132,13 @@ public class Event extends APINode {
     }
     public APIRequestGetInterested requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetInterested requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetInterested requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetInterested requestLastNameField () {
@@ -4485,10 +4829,12 @@ public class Event extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -4796,6 +5142,13 @@ public class Event extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetMaybe requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetMaybe requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetMaybe requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -4822,6 +5175,13 @@ public class Event extends APINode {
     }
     public APIRequestGetMaybe requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetMaybe requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetMaybe requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetMaybe requestLastNameField () {
@@ -5057,6 +5417,151 @@ public class Event extends APINode {
     }
   }
 
+  public static class APIRequestCreateMaybe extends APIRequest<Event> {
+
+    Event lastResponse = null;
+    @Override
+    public Event getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "eid",
+      "action_context",
+      "app_context",
+      "tracking",
+      "uid",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Event parseResponse(String response) throws APIException {
+      return Event.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public Event execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Event execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<Event> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Event> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, Event>() {
+           public Event apply(String result) {
+             try {
+               return APIRequestCreateMaybe.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateMaybe(String nodeId, APIContext context) {
+      super(context, nodeId, "/maybe", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMaybe setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMaybe setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMaybe setEid (String eid) {
+      this.setParam("eid", eid);
+      return this;
+    }
+
+    public APIRequestCreateMaybe setActionContext (Object actionContext) {
+      this.setParam("action_context", actionContext);
+      return this;
+    }
+    public APIRequestCreateMaybe setActionContext (String actionContext) {
+      this.setParam("action_context", actionContext);
+      return this;
+    }
+
+    public APIRequestCreateMaybe setAppContext (Object appContext) {
+      this.setParam("app_context", appContext);
+      return this;
+    }
+    public APIRequestCreateMaybe setAppContext (String appContext) {
+      this.setParam("app_context", appContext);
+      return this;
+    }
+
+    public APIRequestCreateMaybe setTracking (String tracking) {
+      this.setParam("tracking", tracking);
+      return this;
+    }
+
+    public APIRequestCreateMaybe setUid (Long uid) {
+      this.setParam("uid", uid);
+      return this;
+    }
+    public APIRequestCreateMaybe setUid (String uid) {
+      this.setParam("uid", uid);
+      return this;
+    }
+
+    public APIRequestCreateMaybe requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMaybe requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMaybe requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMaybe requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMaybe requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMaybe requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetNoreply extends APIRequest<User> {
 
     APINodeList<User> lastResponse = null;
@@ -5094,10 +5599,12 @@ public class Event extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -5405,6 +5912,13 @@ public class Event extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetNoreply requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetNoreply requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetNoreply requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -5431,6 +5945,13 @@ public class Event extends APINode {
     }
     public APIRequestGetNoreply requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetNoreply requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetNoreply requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetNoreply requestLastNameField () {

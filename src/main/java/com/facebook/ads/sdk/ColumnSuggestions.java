@@ -67,66 +67,7 @@ public class ColumnSuggestions extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ColumnSuggestions() {
-  }
-
-  public ColumnSuggestions(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ColumnSuggestions(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ColumnSuggestions fetch() throws APIException{
-    ColumnSuggestions newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ColumnSuggestions fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ColumnSuggestions> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ColumnSuggestions fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ColumnSuggestions> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ColumnSuggestions> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ColumnSuggestions>)(
-      new APIRequest<ColumnSuggestions>(context, "", "/", "GET", ColumnSuggestions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ColumnSuggestions>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ColumnSuggestions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ColumnSuggestions() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class ColumnSuggestions extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Object getFieldExplanations() {
     return mExplanations;
+  }
+
+  public ColumnSuggestions setFieldExplanations(Object value) {
+    this.mExplanations = value;
+    return this;
   }
 
   public List<String> getFieldFormat() {
     return mFormat;
   }
 
+  public ColumnSuggestions setFieldFormat(List<String> value) {
+    this.mFormat = value;
+    return this;
+  }
+
   public List<String> getFieldObjective() {
     return mObjective;
+  }
+
+  public ColumnSuggestions setFieldObjective(List<String> value) {
+    this.mObjective = value;
+    return this;
   }
 
   public List<String> getFieldOptimizationGoals() {
     return mOptimizationGoals;
   }
 
+  public ColumnSuggestions setFieldOptimizationGoals(List<String> value) {
+    this.mOptimizationGoals = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ColumnSuggestions> {
-
-    ColumnSuggestions lastResponse = null;
-    @Override
-    public ColumnSuggestions getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "explanations",
-      "format",
-      "objective",
-      "optimization_goals",
-      "id",
-    };
-
-    @Override
-    public ColumnSuggestions parseResponse(String response) throws APIException {
-      return ColumnSuggestions.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ColumnSuggestions execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ColumnSuggestions execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ColumnSuggestions> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ColumnSuggestions> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ColumnSuggestions>() {
-           public ColumnSuggestions apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestExplanationsField () {
-      return this.requestExplanationsField(true);
-    }
-    public APIRequestGet requestExplanationsField (boolean value) {
-      this.requestField("explanations", value);
-      return this;
-    }
-    public APIRequestGet requestFormatField () {
-      return this.requestFormatField(true);
-    }
-    public APIRequestGet requestFormatField (boolean value) {
-      this.requestField("format", value);
-      return this;
-    }
-    public APIRequestGet requestObjectiveField () {
-      return this.requestObjectiveField(true);
-    }
-    public APIRequestGet requestObjectiveField (boolean value) {
-      this.requestField("objective", value);
-      return this;
-    }
-    public APIRequestGet requestOptimizationGoalsField () {
-      return this.requestOptimizationGoalsField(true);
-    }
-    public APIRequestGet requestOptimizationGoalsField (boolean value) {
-      this.requestField("optimization_goals", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ColumnSuggestions setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

@@ -67,66 +67,7 @@ public class BlockedUserInfo extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  BlockedUserInfo() {
-  }
-
-  public BlockedUserInfo(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public BlockedUserInfo(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public BlockedUserInfo fetch() throws APIException{
-    BlockedUserInfo newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static BlockedUserInfo fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<BlockedUserInfo> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static BlockedUserInfo fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<BlockedUserInfo> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<BlockedUserInfo> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<BlockedUserInfo>)(
-      new APIRequest<BlockedUserInfo>(context, "", "/", "GET", BlockedUserInfo.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<BlockedUserInfo>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", BlockedUserInfo.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public BlockedUserInfo() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class BlockedUserInfo extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldBlockTime() {
     return mBlockTime;
+  }
+
+  public BlockedUserInfo setFieldBlockTime(String value) {
+    this.mBlockTime = value;
+    return this;
   }
 
   public String getFieldBlockType() {
     return mBlockType;
   }
 
+  public BlockedUserInfo setFieldBlockType(String value) {
+    this.mBlockType = value;
+    return this;
+  }
+
   public String getFieldFbid() {
     return mFbid;
+  }
+
+  public BlockedUserInfo setFieldFbid(String value) {
+    this.mFbid = value;
+    return this;
   }
 
   public String getFieldName() {
     return mName;
   }
 
+  public BlockedUserInfo setFieldName(String value) {
+    this.mName = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<BlockedUserInfo> {
-
-    BlockedUserInfo lastResponse = null;
-    @Override
-    public BlockedUserInfo getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "block_time",
-      "block_type",
-      "fbid",
-      "name",
-      "id",
-    };
-
-    @Override
-    public BlockedUserInfo parseResponse(String response) throws APIException {
-      return BlockedUserInfo.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public BlockedUserInfo execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public BlockedUserInfo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<BlockedUserInfo> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<BlockedUserInfo> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, BlockedUserInfo>() {
-           public BlockedUserInfo apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestBlockTimeField () {
-      return this.requestBlockTimeField(true);
-    }
-    public APIRequestGet requestBlockTimeField (boolean value) {
-      this.requestField("block_time", value);
-      return this;
-    }
-    public APIRequestGet requestBlockTypeField () {
-      return this.requestBlockTypeField(true);
-    }
-    public APIRequestGet requestBlockTypeField (boolean value) {
-      this.requestField("block_type", value);
-      return this;
-    }
-    public APIRequestGet requestFbidField () {
-      return this.requestFbidField(true);
-    }
-    public APIRequestGet requestFbidField (boolean value) {
-      this.requestField("fbid", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public BlockedUserInfo setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

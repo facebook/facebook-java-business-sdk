@@ -75,66 +75,7 @@ public class AudienceInsightsStudySpec extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AudienceInsightsStudySpec() {
-  }
-
-  public AudienceInsightsStudySpec(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AudienceInsightsStudySpec(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AudienceInsightsStudySpec fetch() throws APIException{
-    AudienceInsightsStudySpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AudienceInsightsStudySpec fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AudienceInsightsStudySpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AudienceInsightsStudySpec fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AudienceInsightsStudySpec> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AudienceInsightsStudySpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AudienceInsightsStudySpec>)(
-      new APIRequest<AudienceInsightsStudySpec>(context, "", "/", "GET", AudienceInsightsStudySpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AudienceInsightsStudySpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AudienceInsightsStudySpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AudienceInsightsStudySpec() {
   }
 
   public String getId() {
@@ -281,223 +222,89 @@ public class AudienceInsightsStudySpec extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Object getFieldAudienceDefinition() {
     return mAudienceDefinition;
+  }
+
+  public AudienceInsightsStudySpec setFieldAudienceDefinition(Object value) {
+    this.mAudienceDefinition = value;
+    return this;
   }
 
   public Object getFieldAuthorInfo() {
     return mAuthorInfo;
   }
 
+  public AudienceInsightsStudySpec setFieldAuthorInfo(Object value) {
+    this.mAuthorInfo = value;
+    return this;
+  }
+
   public Long getFieldCreationTime() {
     return mCreationTime;
+  }
+
+  public AudienceInsightsStudySpec setFieldCreationTime(Long value) {
+    this.mCreationTime = value;
+    return this;
   }
 
   public Long getFieldEndTime() {
     return mEndTime;
   }
 
+  public AudienceInsightsStudySpec setFieldEndTime(Long value) {
+    this.mEndTime = value;
+    return this;
+  }
+
   public List<Object> getFieldExcludedRules() {
     return mExcludedRules;
+  }
+
+  public AudienceInsightsStudySpec setFieldExcludedRules(List<Object> value) {
+    this.mExcludedRules = value;
+    return this;
   }
 
   public List<Object> getFieldIncludedRules() {
     return mIncludedRules;
   }
 
+  public AudienceInsightsStudySpec setFieldIncludedRules(List<Object> value) {
+    this.mIncludedRules = value;
+    return this;
+  }
+
   public Long getFieldStartTime() {
     return mStartTime;
+  }
+
+  public AudienceInsightsStudySpec setFieldStartTime(Long value) {
+    this.mStartTime = value;
+    return this;
   }
 
   public String getFieldStatus() {
     return mStatus;
   }
 
+  public AudienceInsightsStudySpec setFieldStatus(String value) {
+    this.mStatus = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AudienceInsightsStudySpec> {
-
-    AudienceInsightsStudySpec lastResponse = null;
-    @Override
-    public AudienceInsightsStudySpec getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "audience_definition",
-      "author_info",
-      "creation_time",
-      "end_time",
-      "excluded_rules",
-      "included_rules",
-      "start_time",
-      "status",
-      "id",
-    };
-
-    @Override
-    public AudienceInsightsStudySpec parseResponse(String response) throws APIException {
-      return AudienceInsightsStudySpec.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AudienceInsightsStudySpec execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AudienceInsightsStudySpec execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AudienceInsightsStudySpec> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AudienceInsightsStudySpec> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AudienceInsightsStudySpec>() {
-           public AudienceInsightsStudySpec apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAudienceDefinitionField () {
-      return this.requestAudienceDefinitionField(true);
-    }
-    public APIRequestGet requestAudienceDefinitionField (boolean value) {
-      this.requestField("audience_definition", value);
-      return this;
-    }
-    public APIRequestGet requestAuthorInfoField () {
-      return this.requestAuthorInfoField(true);
-    }
-    public APIRequestGet requestAuthorInfoField (boolean value) {
-      this.requestField("author_info", value);
-      return this;
-    }
-    public APIRequestGet requestCreationTimeField () {
-      return this.requestCreationTimeField(true);
-    }
-    public APIRequestGet requestCreationTimeField (boolean value) {
-      this.requestField("creation_time", value);
-      return this;
-    }
-    public APIRequestGet requestEndTimeField () {
-      return this.requestEndTimeField(true);
-    }
-    public APIRequestGet requestEndTimeField (boolean value) {
-      this.requestField("end_time", value);
-      return this;
-    }
-    public APIRequestGet requestExcludedRulesField () {
-      return this.requestExcludedRulesField(true);
-    }
-    public APIRequestGet requestExcludedRulesField (boolean value) {
-      this.requestField("excluded_rules", value);
-      return this;
-    }
-    public APIRequestGet requestIncludedRulesField () {
-      return this.requestIncludedRulesField(true);
-    }
-    public APIRequestGet requestIncludedRulesField (boolean value) {
-      this.requestField("included_rules", value);
-      return this;
-    }
-    public APIRequestGet requestStartTimeField () {
-      return this.requestStartTimeField(true);
-    }
-    public APIRequestGet requestStartTimeField (boolean value) {
-      this.requestField("start_time", value);
-      return this;
-    }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AudienceInsightsStudySpec setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

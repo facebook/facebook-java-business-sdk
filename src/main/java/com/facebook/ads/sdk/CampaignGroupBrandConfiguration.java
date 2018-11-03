@@ -65,66 +65,7 @@ public class CampaignGroupBrandConfiguration extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  CampaignGroupBrandConfiguration() {
-  }
-
-  public CampaignGroupBrandConfiguration(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public CampaignGroupBrandConfiguration(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public CampaignGroupBrandConfiguration fetch() throws APIException{
-    CampaignGroupBrandConfiguration newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static CampaignGroupBrandConfiguration fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<CampaignGroupBrandConfiguration> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static CampaignGroupBrandConfiguration fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<CampaignGroupBrandConfiguration> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<CampaignGroupBrandConfiguration> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CampaignGroupBrandConfiguration>)(
-      new APIRequest<CampaignGroupBrandConfiguration>(context, "", "/", "GET", CampaignGroupBrandConfiguration.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<CampaignGroupBrandConfiguration>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", CampaignGroupBrandConfiguration.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public CampaignGroupBrandConfiguration() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class CampaignGroupBrandConfiguration extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldBrandProductName() {
     return mBrandProductName;
+  }
+
+  public CampaignGroupBrandConfiguration setFieldBrandProductName(String value) {
+    this.mBrandProductName = value;
+    return this;
   }
 
   public String getFieldLocale() {
     return mLocale;
   }
 
+  public CampaignGroupBrandConfiguration setFieldLocale(String value) {
+    this.mLocale = value;
+    return this;
+  }
+
   public String getFieldVertical() {
     return mVertical;
+  }
+
+  public CampaignGroupBrandConfiguration setFieldVertical(String value) {
+    this.mVertical = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<CampaignGroupBrandConfiguration> {
-
-    CampaignGroupBrandConfiguration lastResponse = null;
-    @Override
-    public CampaignGroupBrandConfiguration getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "brand_product_name",
-      "locale",
-      "vertical",
-      "id",
-    };
-
-    @Override
-    public CampaignGroupBrandConfiguration parseResponse(String response) throws APIException {
-      return CampaignGroupBrandConfiguration.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public CampaignGroupBrandConfiguration execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CampaignGroupBrandConfiguration execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<CampaignGroupBrandConfiguration> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CampaignGroupBrandConfiguration> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, CampaignGroupBrandConfiguration>() {
-           public CampaignGroupBrandConfiguration apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestBrandProductNameField () {
-      return this.requestBrandProductNameField(true);
-    }
-    public APIRequestGet requestBrandProductNameField (boolean value) {
-      this.requestField("brand_product_name", value);
-      return this;
-    }
-    public APIRequestGet requestLocaleField () {
-      return this.requestLocaleField(true);
-    }
-    public APIRequestGet requestLocaleField (boolean value) {
-      this.requestField("locale", value);
-      return this;
-    }
-    public APIRequestGet requestVerticalField () {
-      return this.requestVerticalField(true);
-    }
-    public APIRequestGet requestVerticalField (boolean value) {
-      this.requestField("vertical", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public CampaignGroupBrandConfiguration setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

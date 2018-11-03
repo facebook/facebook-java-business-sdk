@@ -63,66 +63,7 @@ public class PageSettings extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  PageSettings() {
-  }
-
-  public PageSettings(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public PageSettings(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public PageSettings fetch() throws APIException{
-    PageSettings newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static PageSettings fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<PageSettings> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static PageSettings fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<PageSettings> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<PageSettings> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PageSettings>)(
-      new APIRequest<PageSettings>(context, "", "/", "GET", PageSettings.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<PageSettings>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", PageSettings.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public PageSettings() {
   }
 
   public String getId() {
@@ -269,151 +210,35 @@ public class PageSettings extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldSetting() {
     return mSetting;
+  }
+
+  public PageSettings setFieldSetting(String value) {
+    this.mSetting = value;
+    return this;
   }
 
   public Object getFieldValue() {
     return mValue;
   }
 
+  public PageSettings setFieldValue(Object value) {
+    this.mValue = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<PageSettings> {
-
-    PageSettings lastResponse = null;
-    @Override
-    public PageSettings getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "setting",
-      "value",
-      "id",
-    };
-
-    @Override
-    public PageSettings parseResponse(String response) throws APIException {
-      return PageSettings.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public PageSettings execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public PageSettings execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<PageSettings> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<PageSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, PageSettings>() {
-           public PageSettings apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestSettingField () {
-      return this.requestSettingField(true);
-    }
-    public APIRequestGet requestSettingField (boolean value) {
-      this.requestField("setting", value);
-      return this;
-    }
-    public APIRequestGet requestValueField () {
-      return this.requestValueField(true);
-    }
-    public APIRequestGet requestValueField (boolean value) {
-      this.requestField("value", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public PageSettings setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

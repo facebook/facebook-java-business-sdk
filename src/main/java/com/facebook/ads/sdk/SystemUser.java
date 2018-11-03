@@ -1159,6 +1159,7 @@ public class SystemUser extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "privacy_info_url",
       "produced_by",
       "products",
       "promotion_eligible",
@@ -2046,6 +2047,13 @@ public class SystemUser extends APINode {
       this.requestField("price_range", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetAssignedPages requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestProducedByField () {
       return this.requestProducedByField(true);
     }
@@ -2529,10 +2537,12 @@ public class SystemUser extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -2831,6 +2841,13 @@ public class SystemUser extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetUpdatedBy requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetUpdatedBy requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetUpdatedBy requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -2857,6 +2874,13 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetUpdatedBy requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetUpdatedBy requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetUpdatedBy requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetUpdatedBy requestLastNameField () {

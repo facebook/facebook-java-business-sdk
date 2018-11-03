@@ -83,66 +83,7 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ReachFrequencyEstimatesPlacementBreakdown() {
-  }
-
-  public ReachFrequencyEstimatesPlacementBreakdown(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ReachFrequencyEstimatesPlacementBreakdown(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ReachFrequencyEstimatesPlacementBreakdown fetch() throws APIException{
-    ReachFrequencyEstimatesPlacementBreakdown newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ReachFrequencyEstimatesPlacementBreakdown fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ReachFrequencyEstimatesPlacementBreakdown> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ReachFrequencyEstimatesPlacementBreakdown fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ReachFrequencyEstimatesPlacementBreakdown> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ReachFrequencyEstimatesPlacementBreakdown> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ReachFrequencyEstimatesPlacementBreakdown>)(
-      new APIRequest<ReachFrequencyEstimatesPlacementBreakdown>(context, "", "/", "GET", ReachFrequencyEstimatesPlacementBreakdown.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ReachFrequencyEstimatesPlacementBreakdown>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ReachFrequencyEstimatesPlacementBreakdown.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ReachFrequencyEstimatesPlacementBreakdown() {
   }
 
   public String getId() {
@@ -289,271 +230,125 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<Double> getFieldAndroid() {
     return mAndroid;
+  }
+
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldAndroid(List<Double> value) {
+    this.mAndroid = value;
+    return this;
   }
 
   public List<Double> getFieldAudienceNetwork() {
     return mAudienceNetwork;
   }
 
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldAudienceNetwork(List<Double> value) {
+    this.mAudienceNetwork = value;
+    return this;
+  }
+
   public List<Double> getFieldDesktop() {
     return mDesktop;
+  }
+
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldDesktop(List<Double> value) {
+    this.mDesktop = value;
+    return this;
   }
 
   public List<Double> getFieldIgAndroid() {
     return mIgAndroid;
   }
 
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldIgAndroid(List<Double> value) {
+    this.mIgAndroid = value;
+    return this;
+  }
+
   public List<Double> getFieldIgIos() {
     return mIgIos;
+  }
+
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldIgIos(List<Double> value) {
+    this.mIgIos = value;
+    return this;
   }
 
   public List<Double> getFieldIgOther() {
     return mIgOther;
   }
 
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldIgOther(List<Double> value) {
+    this.mIgOther = value;
+    return this;
+  }
+
   public List<Double> getFieldIgStory() {
     return mIgStory;
+  }
+
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldIgStory(List<Double> value) {
+    this.mIgStory = value;
+    return this;
   }
 
   public List<Double> getFieldInstantArticles() {
     return mInstantArticles;
   }
 
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldInstantArticles(List<Double> value) {
+    this.mInstantArticles = value;
+    return this;
+  }
+
   public List<Double> getFieldInstreamVideos() {
     return mInstreamVideos;
+  }
+
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldInstreamVideos(List<Double> value) {
+    this.mInstreamVideos = value;
+    return this;
   }
 
   public List<Double> getFieldIos() {
     return mIos;
   }
 
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldIos(List<Double> value) {
+    this.mIos = value;
+    return this;
+  }
+
   public List<Double> getFieldMsite() {
     return mMsite;
+  }
+
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldMsite(List<Double> value) {
+    this.mMsite = value;
+    return this;
   }
 
   public List<Double> getFieldSuggestedVideos() {
     return mSuggestedVideos;
   }
 
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldSuggestedVideos(List<Double> value) {
+    this.mSuggestedVideos = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ReachFrequencyEstimatesPlacementBreakdown> {
-
-    ReachFrequencyEstimatesPlacementBreakdown lastResponse = null;
-    @Override
-    public ReachFrequencyEstimatesPlacementBreakdown getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "android",
-      "audience_network",
-      "desktop",
-      "ig_android",
-      "ig_ios",
-      "ig_other",
-      "ig_story",
-      "instant_articles",
-      "instream_videos",
-      "ios",
-      "msite",
-      "suggested_videos",
-      "id",
-    };
-
-    @Override
-    public ReachFrequencyEstimatesPlacementBreakdown parseResponse(String response) throws APIException {
-      return ReachFrequencyEstimatesPlacementBreakdown.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ReachFrequencyEstimatesPlacementBreakdown execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ReachFrequencyEstimatesPlacementBreakdown execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ReachFrequencyEstimatesPlacementBreakdown> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ReachFrequencyEstimatesPlacementBreakdown> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ReachFrequencyEstimatesPlacementBreakdown>() {
-           public ReachFrequencyEstimatesPlacementBreakdown apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAndroidField () {
-      return this.requestAndroidField(true);
-    }
-    public APIRequestGet requestAndroidField (boolean value) {
-      this.requestField("android", value);
-      return this;
-    }
-    public APIRequestGet requestAudienceNetworkField () {
-      return this.requestAudienceNetworkField(true);
-    }
-    public APIRequestGet requestAudienceNetworkField (boolean value) {
-      this.requestField("audience_network", value);
-      return this;
-    }
-    public APIRequestGet requestDesktopField () {
-      return this.requestDesktopField(true);
-    }
-    public APIRequestGet requestDesktopField (boolean value) {
-      this.requestField("desktop", value);
-      return this;
-    }
-    public APIRequestGet requestIgAndroidField () {
-      return this.requestIgAndroidField(true);
-    }
-    public APIRequestGet requestIgAndroidField (boolean value) {
-      this.requestField("ig_android", value);
-      return this;
-    }
-    public APIRequestGet requestIgIosField () {
-      return this.requestIgIosField(true);
-    }
-    public APIRequestGet requestIgIosField (boolean value) {
-      this.requestField("ig_ios", value);
-      return this;
-    }
-    public APIRequestGet requestIgOtherField () {
-      return this.requestIgOtherField(true);
-    }
-    public APIRequestGet requestIgOtherField (boolean value) {
-      this.requestField("ig_other", value);
-      return this;
-    }
-    public APIRequestGet requestIgStoryField () {
-      return this.requestIgStoryField(true);
-    }
-    public APIRequestGet requestIgStoryField (boolean value) {
-      this.requestField("ig_story", value);
-      return this;
-    }
-    public APIRequestGet requestInstantArticlesField () {
-      return this.requestInstantArticlesField(true);
-    }
-    public APIRequestGet requestInstantArticlesField (boolean value) {
-      this.requestField("instant_articles", value);
-      return this;
-    }
-    public APIRequestGet requestInstreamVideosField () {
-      return this.requestInstreamVideosField(true);
-    }
-    public APIRequestGet requestInstreamVideosField (boolean value) {
-      this.requestField("instream_videos", value);
-      return this;
-    }
-    public APIRequestGet requestIosField () {
-      return this.requestIosField(true);
-    }
-    public APIRequestGet requestIosField (boolean value) {
-      this.requestField("ios", value);
-      return this;
-    }
-    public APIRequestGet requestMsiteField () {
-      return this.requestMsiteField(true);
-    }
-    public APIRequestGet requestMsiteField (boolean value) {
-      this.requestField("msite", value);
-      return this;
-    }
-    public APIRequestGet requestSuggestedVideosField () {
-      return this.requestSuggestedVideosField(true);
-    }
-    public APIRequestGet requestSuggestedVideosField (boolean value) {
-      this.requestField("suggested_videos", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

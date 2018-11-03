@@ -69,66 +69,7 @@ public class CustomAudiencesharedAccountInfo extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  CustomAudiencesharedAccountInfo() {
-  }
-
-  public CustomAudiencesharedAccountInfo(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public CustomAudiencesharedAccountInfo(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public CustomAudiencesharedAccountInfo fetch() throws APIException{
-    CustomAudiencesharedAccountInfo newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static CustomAudiencesharedAccountInfo fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<CustomAudiencesharedAccountInfo> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static CustomAudiencesharedAccountInfo fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<CustomAudiencesharedAccountInfo> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<CustomAudiencesharedAccountInfo> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CustomAudiencesharedAccountInfo>)(
-      new APIRequest<CustomAudiencesharedAccountInfo>(context, "", "/", "GET", CustomAudiencesharedAccountInfo.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<CustomAudiencesharedAccountInfo>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", CustomAudiencesharedAccountInfo.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public CustomAudiencesharedAccountInfo() {
   }
 
   public String getId() {
@@ -275,187 +216,62 @@ public class CustomAudiencesharedAccountInfo extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAccountId() {
     return mAccountId;
+  }
+
+  public CustomAudiencesharedAccountInfo setFieldAccountId(String value) {
+    this.mAccountId = value;
+    return this;
   }
 
   public String getFieldAccountName() {
     return mAccountName;
   }
 
+  public CustomAudiencesharedAccountInfo setFieldAccountName(String value) {
+    this.mAccountName = value;
+    return this;
+  }
+
   public String getFieldBusinessId() {
     return mBusinessId;
+  }
+
+  public CustomAudiencesharedAccountInfo setFieldBusinessId(String value) {
+    this.mBusinessId = value;
+    return this;
   }
 
   public String getFieldBusinessName() {
     return mBusinessName;
   }
 
+  public CustomAudiencesharedAccountInfo setFieldBusinessName(String value) {
+    this.mBusinessName = value;
+    return this;
+  }
+
   public String getFieldSharingStatus() {
     return mSharingStatus;
+  }
+
+  public CustomAudiencesharedAccountInfo setFieldSharingStatus(String value) {
+    this.mSharingStatus = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<CustomAudiencesharedAccountInfo> {
-
-    CustomAudiencesharedAccountInfo lastResponse = null;
-    @Override
-    public CustomAudiencesharedAccountInfo getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "account_id",
-      "account_name",
-      "business_id",
-      "business_name",
-      "sharing_status",
-      "id",
-    };
-
-    @Override
-    public CustomAudiencesharedAccountInfo parseResponse(String response) throws APIException {
-      return CustomAudiencesharedAccountInfo.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public CustomAudiencesharedAccountInfo execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CustomAudiencesharedAccountInfo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<CustomAudiencesharedAccountInfo> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CustomAudiencesharedAccountInfo> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, CustomAudiencesharedAccountInfo>() {
-           public CustomAudiencesharedAccountInfo apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAccountIdField () {
-      return this.requestAccountIdField(true);
-    }
-    public APIRequestGet requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGet requestAccountNameField () {
-      return this.requestAccountNameField(true);
-    }
-    public APIRequestGet requestAccountNameField (boolean value) {
-      this.requestField("account_name", value);
-      return this;
-    }
-    public APIRequestGet requestBusinessIdField () {
-      return this.requestBusinessIdField(true);
-    }
-    public APIRequestGet requestBusinessIdField (boolean value) {
-      this.requestField("business_id", value);
-      return this;
-    }
-    public APIRequestGet requestBusinessNameField () {
-      return this.requestBusinessNameField(true);
-    }
-    public APIRequestGet requestBusinessNameField (boolean value) {
-      this.requestField("business_name", value);
-      return this;
-    }
-    public APIRequestGet requestSharingStatusField () {
-      return this.requestSharingStatusField(true);
-    }
-    public APIRequestGet requestSharingStatusField (boolean value) {
-      this.requestField("sharing_status", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public CustomAudiencesharedAccountInfo setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

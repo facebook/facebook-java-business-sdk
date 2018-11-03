@@ -65,66 +65,7 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCreativeLinkDataTemplateVideoSpec() {
-  }
-
-  public AdCreativeLinkDataTemplateVideoSpec(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCreativeLinkDataTemplateVideoSpec(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCreativeLinkDataTemplateVideoSpec fetch() throws APIException{
-    AdCreativeLinkDataTemplateVideoSpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCreativeLinkDataTemplateVideoSpec fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCreativeLinkDataTemplateVideoSpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCreativeLinkDataTemplateVideoSpec fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCreativeLinkDataTemplateVideoSpec> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCreativeLinkDataTemplateVideoSpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCreativeLinkDataTemplateVideoSpec>)(
-      new APIRequest<AdCreativeLinkDataTemplateVideoSpec>(context, "", "/", "GET", AdCreativeLinkDataTemplateVideoSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCreativeLinkDataTemplateVideoSpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCreativeLinkDataTemplateVideoSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCreativeLinkDataTemplateVideoSpec() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldCategorizationCriteria() {
     return mCategorizationCriteria;
+  }
+
+  public AdCreativeLinkDataTemplateVideoSpec setFieldCategorizationCriteria(String value) {
+    this.mCategorizationCriteria = value;
+    return this;
   }
 
   public List<Object> getFieldCustomization() {
     return mCustomization;
   }
 
+  public AdCreativeLinkDataTemplateVideoSpec setFieldCustomization(List<Object> value) {
+    this.mCustomization = value;
+    return this;
+  }
+
   public String getFieldTemplateId() {
     return mTemplateId;
+  }
+
+  public AdCreativeLinkDataTemplateVideoSpec setFieldTemplateId(String value) {
+    this.mTemplateId = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCreativeLinkDataTemplateVideoSpec> {
-
-    AdCreativeLinkDataTemplateVideoSpec lastResponse = null;
-    @Override
-    public AdCreativeLinkDataTemplateVideoSpec getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "categorization_criteria",
-      "customization",
-      "template_id",
-      "id",
-    };
-
-    @Override
-    public AdCreativeLinkDataTemplateVideoSpec parseResponse(String response) throws APIException {
-      return AdCreativeLinkDataTemplateVideoSpec.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCreativeLinkDataTemplateVideoSpec execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCreativeLinkDataTemplateVideoSpec execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCreativeLinkDataTemplateVideoSpec> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCreativeLinkDataTemplateVideoSpec> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCreativeLinkDataTemplateVideoSpec>() {
-           public AdCreativeLinkDataTemplateVideoSpec apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCategorizationCriteriaField () {
-      return this.requestCategorizationCriteriaField(true);
-    }
-    public APIRequestGet requestCategorizationCriteriaField (boolean value) {
-      this.requestField("categorization_criteria", value);
-      return this;
-    }
-    public APIRequestGet requestCustomizationField () {
-      return this.requestCustomizationField(true);
-    }
-    public APIRequestGet requestCustomizationField (boolean value) {
-      this.requestField("customization", value);
-      return this;
-    }
-    public APIRequestGet requestTemplateIdField () {
-      return this.requestTemplateIdField(true);
-    }
-    public APIRequestGet requestTemplateIdField (boolean value) {
-      this.requestField("template_id", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCreativeLinkDataTemplateVideoSpec setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

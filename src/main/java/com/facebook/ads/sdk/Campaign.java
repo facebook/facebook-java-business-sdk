@@ -97,6 +97,8 @@ public class Campaign extends APINode {
   private String mLastBudgetTogglingTime = null;
   @SerializedName("lifetime_budget")
   private String mLifetimeBudget = null;
+  @SerializedName("metrics_metadata")
+  private AdCampaignGroupMetricsMetadata mMetricsMetadata = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("objective")
@@ -343,6 +345,10 @@ public class Campaign extends APINode {
     return new APIRequestCreateAdLabel(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAdRulesGoverned getAdRulesGoverned() {
+    return new APIRequestGetAdRulesGoverned(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAds getAds() {
     return new APIRequestGetAds(this.getPrefixedId().toString(), context);
   }
@@ -464,6 +470,10 @@ public class Campaign extends APINode {
     return mLifetimeBudget;
   }
 
+  public AdCampaignGroupMetricsMetadata getFieldMetricsMetadata() {
+    return mMetricsMetadata;
+  }
+
   public String getFieldName() {
     return mName;
   }
@@ -477,9 +487,6 @@ public class Campaign extends APINode {
   }
 
   public AdPromotedObject getFieldPromotedObject() {
-    if (mPromotedObject != null) {
-      mPromotedObject.context = getContext();
-    }
     return mPromotedObject;
   }
 
@@ -993,6 +1000,199 @@ public class Campaign extends APINode {
 
   }
 
+  public static class APIRequestGetAdRulesGoverned extends APIRequest<AdRule> {
+
+    APINodeList<AdRule> lastResponse = null;
+    @Override
+    public APINodeList<AdRule> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "pass_evaluation",
+    };
+
+    public static final String[] FIELDS = {
+      "account_id",
+      "created_by",
+      "created_time",
+      "evaluation_spec",
+      "execution_spec",
+      "id",
+      "name",
+      "schedule_spec",
+      "status",
+      "updated_time",
+    };
+
+    @Override
+    public APINodeList<AdRule> parseResponse(String response) throws APIException {
+      return AdRule.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<AdRule> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdRule> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdRule>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdRule>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdRule>>() {
+           public APINodeList<AdRule> apply(String result) {
+             try {
+               return APIRequestGetAdRulesGoverned.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAdRulesGoverned(String nodeId, APIContext context) {
+      super(context, nodeId, "/adrules_governed", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdRulesGoverned setPassEvaluation (Boolean passEvaluation) {
+      this.setParam("pass_evaluation", passEvaluation);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned setPassEvaluation (String passEvaluation) {
+      this.setParam("pass_evaluation", passEvaluation);
+      return this;
+    }
+
+    public APIRequestGetAdRulesGoverned requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdRulesGoverned requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAdRulesGoverned requestAccountIdField () {
+      return this.requestAccountIdField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestAccountIdField (boolean value) {
+      this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestCreatedByField () {
+      return this.requestCreatedByField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestCreatedByField (boolean value) {
+      this.requestField("created_by", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestEvaluationSpecField () {
+      return this.requestEvaluationSpecField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestEvaluationSpecField (boolean value) {
+      this.requestField("evaluation_spec", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestExecutionSpecField () {
+      return this.requestExecutionSpecField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestExecutionSpecField (boolean value) {
+      this.requestField("execution_spec", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestScheduleSpecField () {
+      return this.requestScheduleSpecField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestScheduleSpecField (boolean value) {
+      this.requestField("schedule_spec", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetAds extends APIRequest<Ad> {
 
     APINodeList<Ad> lastResponse = null;
@@ -1442,6 +1642,7 @@ public class Campaign extends APINode {
       "best_creative",
       "bid_adjustments",
       "bid_amount",
+      "bid_constraints",
       "bid_info",
       "bid_strategy",
       "billing_event",
@@ -1467,6 +1668,7 @@ public class Campaign extends APINode {
       "is_average_price_pacing",
       "is_dynamic_creative",
       "is_dynamic_creative_optimization",
+      "issues_info",
       "lifetime_budget",
       "lifetime_frequency_cap",
       "lifetime_imps",
@@ -1692,6 +1894,13 @@ public class Campaign extends APINode {
       this.requestField("bid_amount", value);
       return this;
     }
+    public APIRequestGetAdSets requestBidConstraintsField () {
+      return this.requestBidConstraintsField(true);
+    }
+    public APIRequestGetAdSets requestBidConstraintsField (boolean value) {
+      this.requestField("bid_constraints", value);
+      return this;
+    }
     public APIRequestGetAdSets requestBidInfoField () {
       return this.requestBidInfoField(true);
     }
@@ -1865,6 +2074,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField (boolean value) {
       this.requestField("is_dynamic_creative_optimization", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestIssuesInfoField () {
+      return this.requestIssuesInfoField(true);
+    }
+    public APIRequestGetAdSets requestIssuesInfoField (boolean value) {
+      this.requestField("issues_info", value);
       return this;
     }
     public APIRequestGetAdSets requestLifetimeBudgetField () {
@@ -2073,6 +2289,7 @@ public class Campaign extends APINode {
       "kpi_type",
       "last_budget_toggling_time",
       "lifetime_budget",
+      "metrics_metadata",
       "name",
       "objective",
       "pacing_type",
@@ -2357,6 +2574,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
+      return this;
+    }
+    public APIRequestGetCopies requestMetricsMetadataField () {
+      return this.requestMetricsMetadataField(true);
+    }
+    public APIRequestGetCopies requestMetricsMetadataField (boolean value) {
+      this.requestField("metrics_metadata", value);
       return this;
     }
     public APIRequestGetCopies requestNameField () {
@@ -3317,6 +3541,7 @@ public class Campaign extends APINode {
       "kpi_type",
       "last_budget_toggling_time",
       "lifetime_budget",
+      "metrics_metadata",
       "name",
       "objective",
       "pacing_type",
@@ -3592,6 +3817,13 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
+      return this;
+    }
+    public APIRequestGet requestMetricsMetadataField () {
+      return this.requestMetricsMetadataField(true);
+    }
+    public APIRequestGet requestMetricsMetadataField (boolean value) {
+      this.requestField("metrics_metadata", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -4255,6 +4487,7 @@ public class Campaign extends APINode {
     this.mKpiType = instance.mKpiType;
     this.mLastBudgetTogglingTime = instance.mLastBudgetTogglingTime;
     this.mLifetimeBudget = instance.mLifetimeBudget;
+    this.mMetricsMetadata = instance.mMetricsMetadata;
     this.mName = instance.mName;
     this.mObjective = instance.mObjective;
     this.mPacingType = instance.mPacingType;

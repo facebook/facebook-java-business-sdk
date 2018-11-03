@@ -75,66 +75,7 @@ public class AdCustomizationRuleSpec extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCustomizationRuleSpec() {
-  }
-
-  public AdCustomizationRuleSpec(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCustomizationRuleSpec(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCustomizationRuleSpec fetch() throws APIException{
-    AdCustomizationRuleSpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCustomizationRuleSpec fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCustomizationRuleSpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCustomizationRuleSpec fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCustomizationRuleSpec> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCustomizationRuleSpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCustomizationRuleSpec>)(
-      new APIRequest<AdCustomizationRuleSpec>(context, "", "/", "GET", AdCustomizationRuleSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCustomizationRuleSpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCustomizationRuleSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCustomizationRuleSpec() {
   }
 
   public String getId() {
@@ -281,226 +222,94 @@ public class AdCustomizationRuleSpec extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldCaption() {
     return mCaption;
+  }
+
+  public AdCustomizationRuleSpec setFieldCaption(String value) {
+    this.mCaption = value;
+    return this;
   }
 
   public Object getFieldCustomizationSpec() {
     return mCustomizationSpec;
   }
 
+  public AdCustomizationRuleSpec setFieldCustomizationSpec(Object value) {
+    this.mCustomizationSpec = value;
+    return this;
+  }
+
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public AdCustomizationRuleSpec setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
   }
 
   public String getFieldLink() {
     return mLink;
   }
 
+  public AdCustomizationRuleSpec setFieldLink(String value) {
+    this.mLink = value;
+    return this;
+  }
+
   public String getFieldMessage() {
     return mMessage;
+  }
+
+  public AdCustomizationRuleSpec setFieldMessage(String value) {
+    this.mMessage = value;
+    return this;
   }
 
   public String getFieldName() {
     return mName;
   }
 
+  public AdCustomizationRuleSpec setFieldName(String value) {
+    this.mName = value;
+    return this;
+  }
+
   public Long getFieldPriority() {
     return mPriority;
   }
 
+  public AdCustomizationRuleSpec setFieldPriority(Long value) {
+    this.mPriority = value;
+    return this;
+  }
+
   public AdCreativeTemplateURLSpec getFieldTemplateUrlSpec() {
-    if (mTemplateUrlSpec != null) {
-      mTemplateUrlSpec.context = getContext();
-    }
     return mTemplateUrlSpec;
   }
 
+  public AdCustomizationRuleSpec setFieldTemplateUrlSpec(AdCreativeTemplateURLSpec value) {
+    this.mTemplateUrlSpec = value;
+    return this;
+  }
+
+  public AdCustomizationRuleSpec setFieldTemplateUrlSpec(String value) {
+    Type type = new TypeToken<AdCreativeTemplateURLSpec>(){}.getType();
+    this.mTemplateUrlSpec = AdCreativeTemplateURLSpec.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCustomizationRuleSpec> {
-
-    AdCustomizationRuleSpec lastResponse = null;
-    @Override
-    public AdCustomizationRuleSpec getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "caption",
-      "customization_spec",
-      "description",
-      "link",
-      "message",
-      "name",
-      "priority",
-      "template_url_spec",
-      "id",
-    };
-
-    @Override
-    public AdCustomizationRuleSpec parseResponse(String response) throws APIException {
-      return AdCustomizationRuleSpec.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCustomizationRuleSpec execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCustomizationRuleSpec execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCustomizationRuleSpec> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCustomizationRuleSpec> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCustomizationRuleSpec>() {
-           public AdCustomizationRuleSpec apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCaptionField () {
-      return this.requestCaptionField(true);
-    }
-    public APIRequestGet requestCaptionField (boolean value) {
-      this.requestField("caption", value);
-      return this;
-    }
-    public APIRequestGet requestCustomizationSpecField () {
-      return this.requestCustomizationSpecField(true);
-    }
-    public APIRequestGet requestCustomizationSpecField (boolean value) {
-      this.requestField("customization_spec", value);
-      return this;
-    }
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGet requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGet requestMessageField () {
-      return this.requestMessageField(true);
-    }
-    public APIRequestGet requestMessageField (boolean value) {
-      this.requestField("message", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestPriorityField () {
-      return this.requestPriorityField(true);
-    }
-    public APIRequestGet requestPriorityField (boolean value) {
-      this.requestField("priority", value);
-      return this;
-    }
-    public APIRequestGet requestTemplateUrlSpecField () {
-      return this.requestTemplateUrlSpecField(true);
-    }
-    public APIRequestGet requestTemplateUrlSpecField (boolean value) {
-      this.requestField("template_url_spec", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCustomizationRuleSpec setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

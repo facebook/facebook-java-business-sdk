@@ -73,66 +73,7 @@ public class CanvasAdSettings extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  CanvasAdSettings() {
-  }
-
-  public CanvasAdSettings(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public CanvasAdSettings(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public CanvasAdSettings fetch() throws APIException{
-    CanvasAdSettings newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static CanvasAdSettings fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<CanvasAdSettings> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static CanvasAdSettings fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<CanvasAdSettings> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<CanvasAdSettings> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CanvasAdSettings>)(
-      new APIRequest<CanvasAdSettings>(context, "", "/", "GET", CanvasAdSettings.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<CanvasAdSettings>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", CanvasAdSettings.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public CanvasAdSettings() {
   }
 
   public String getId() {
@@ -279,211 +220,80 @@ public class CanvasAdSettings extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Boolean getFieldIsCanvasCollectionEligible() {
     return mIsCanvasCollectionEligible;
+  }
+
+  public CanvasAdSettings setFieldIsCanvasCollectionEligible(Boolean value) {
+    this.mIsCanvasCollectionEligible = value;
+    return this;
   }
 
   public Object getFieldLeadFormCreatedTime() {
     return mLeadFormCreatedTime;
   }
 
+  public CanvasAdSettings setFieldLeadFormCreatedTime(Object value) {
+    this.mLeadFormCreatedTime = value;
+    return this;
+  }
+
   public String getFieldLeadFormName() {
     return mLeadFormName;
+  }
+
+  public CanvasAdSettings setFieldLeadFormName(String value) {
+    this.mLeadFormName = value;
+    return this;
   }
 
   public String getFieldLeadGenFormId() {
     return mLeadGenFormId;
   }
 
+  public CanvasAdSettings setFieldLeadGenFormId(String value) {
+    this.mLeadGenFormId = value;
+    return this;
+  }
+
   public Long getFieldLeadsCount() {
     return mLeadsCount;
+  }
+
+  public CanvasAdSettings setFieldLeadsCount(Long value) {
+    this.mLeadsCount = value;
+    return this;
   }
 
   public String getFieldProductSetId() {
     return mProductSetId;
   }
 
+  public CanvasAdSettings setFieldProductSetId(String value) {
+    this.mProductSetId = value;
+    return this;
+  }
+
   public Boolean getFieldUseRetailerItemIds() {
     return mUseRetailerItemIds;
+  }
+
+  public CanvasAdSettings setFieldUseRetailerItemIds(Boolean value) {
+    this.mUseRetailerItemIds = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<CanvasAdSettings> {
-
-    CanvasAdSettings lastResponse = null;
-    @Override
-    public CanvasAdSettings getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "is_canvas_collection_eligible",
-      "lead_form_created_time",
-      "lead_form_name",
-      "lead_gen_form_id",
-      "leads_count",
-      "product_set_id",
-      "use_retailer_item_ids",
-      "id",
-    };
-
-    @Override
-    public CanvasAdSettings parseResponse(String response) throws APIException {
-      return CanvasAdSettings.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public CanvasAdSettings execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CanvasAdSettings execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<CanvasAdSettings> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CanvasAdSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, CanvasAdSettings>() {
-           public CanvasAdSettings apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestIsCanvasCollectionEligibleField () {
-      return this.requestIsCanvasCollectionEligibleField(true);
-    }
-    public APIRequestGet requestIsCanvasCollectionEligibleField (boolean value) {
-      this.requestField("is_canvas_collection_eligible", value);
-      return this;
-    }
-    public APIRequestGet requestLeadFormCreatedTimeField () {
-      return this.requestLeadFormCreatedTimeField(true);
-    }
-    public APIRequestGet requestLeadFormCreatedTimeField (boolean value) {
-      this.requestField("lead_form_created_time", value);
-      return this;
-    }
-    public APIRequestGet requestLeadFormNameField () {
-      return this.requestLeadFormNameField(true);
-    }
-    public APIRequestGet requestLeadFormNameField (boolean value) {
-      this.requestField("lead_form_name", value);
-      return this;
-    }
-    public APIRequestGet requestLeadGenFormIdField () {
-      return this.requestLeadGenFormIdField(true);
-    }
-    public APIRequestGet requestLeadGenFormIdField (boolean value) {
-      this.requestField("lead_gen_form_id", value);
-      return this;
-    }
-    public APIRequestGet requestLeadsCountField () {
-      return this.requestLeadsCountField(true);
-    }
-    public APIRequestGet requestLeadsCountField (boolean value) {
-      this.requestField("leads_count", value);
-      return this;
-    }
-    public APIRequestGet requestProductSetIdField () {
-      return this.requestProductSetIdField(true);
-    }
-    public APIRequestGet requestProductSetIdField (boolean value) {
-      this.requestField("product_set_id", value);
-      return this;
-    }
-    public APIRequestGet requestUseRetailerItemIdsField () {
-      return this.requestUseRetailerItemIdsField(true);
-    }
-    public APIRequestGet requestUseRetailerItemIdsField (boolean value) {
-      this.requestField("use_retailer_item_ids", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public CanvasAdSettings setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

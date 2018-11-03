@@ -75,66 +75,7 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdsPixelRealTimeEventLogResult() {
-  }
-
-  public AdsPixelRealTimeEventLogResult(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdsPixelRealTimeEventLogResult(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdsPixelRealTimeEventLogResult fetch() throws APIException{
-    AdsPixelRealTimeEventLogResult newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdsPixelRealTimeEventLogResult fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdsPixelRealTimeEventLogResult> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdsPixelRealTimeEventLogResult fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdsPixelRealTimeEventLogResult> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdsPixelRealTimeEventLogResult> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdsPixelRealTimeEventLogResult>)(
-      new APIRequest<AdsPixelRealTimeEventLogResult>(context, "", "/", "GET", AdsPixelRealTimeEventLogResult.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdsPixelRealTimeEventLogResult>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdsPixelRealTimeEventLogResult.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdsPixelRealTimeEventLogResult() {
   }
 
   public String getId() {
@@ -281,223 +222,89 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldDataJson() {
     return mDataJson;
+  }
+
+  public AdsPixelRealTimeEventLogResult setFieldDataJson(String value) {
+    this.mDataJson = value;
+    return this;
   }
 
   public String getFieldDeviceType() {
     return mDeviceType;
   }
 
+  public AdsPixelRealTimeEventLogResult setFieldDeviceType(String value) {
+    this.mDeviceType = value;
+    return this;
+  }
+
   public String getFieldEvent() {
     return mEvent;
+  }
+
+  public AdsPixelRealTimeEventLogResult setFieldEvent(String value) {
+    this.mEvent = value;
+    return this;
   }
 
   public String getFieldEventDetectionMethod() {
     return mEventDetectionMethod;
   }
 
+  public AdsPixelRealTimeEventLogResult setFieldEventDetectionMethod(String value) {
+    this.mEventDetectionMethod = value;
+    return this;
+  }
+
   public String getFieldMatchedRuleConditions() {
     return mMatchedRuleConditions;
+  }
+
+  public AdsPixelRealTimeEventLogResult setFieldMatchedRuleConditions(String value) {
+    this.mMatchedRuleConditions = value;
+    return this;
   }
 
   public String getFieldSourceRuleCondition() {
     return mSourceRuleCondition;
   }
 
+  public AdsPixelRealTimeEventLogResult setFieldSourceRuleCondition(String value) {
+    this.mSourceRuleCondition = value;
+    return this;
+  }
+
   public String getFieldTimestamp() {
     return mTimestamp;
+  }
+
+  public AdsPixelRealTimeEventLogResult setFieldTimestamp(String value) {
+    this.mTimestamp = value;
+    return this;
   }
 
   public String getFieldUrl() {
     return mUrl;
   }
 
+  public AdsPixelRealTimeEventLogResult setFieldUrl(String value) {
+    this.mUrl = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdsPixelRealTimeEventLogResult> {
-
-    AdsPixelRealTimeEventLogResult lastResponse = null;
-    @Override
-    public AdsPixelRealTimeEventLogResult getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "data_json",
-      "device_type",
-      "event",
-      "event_detection_method",
-      "matched_rule_conditions",
-      "source_rule_condition",
-      "timestamp",
-      "url",
-      "id",
-    };
-
-    @Override
-    public AdsPixelRealTimeEventLogResult parseResponse(String response) throws APIException {
-      return AdsPixelRealTimeEventLogResult.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdsPixelRealTimeEventLogResult execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdsPixelRealTimeEventLogResult execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdsPixelRealTimeEventLogResult> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdsPixelRealTimeEventLogResult> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdsPixelRealTimeEventLogResult>() {
-           public AdsPixelRealTimeEventLogResult apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestDataJsonField () {
-      return this.requestDataJsonField(true);
-    }
-    public APIRequestGet requestDataJsonField (boolean value) {
-      this.requestField("data_json", value);
-      return this;
-    }
-    public APIRequestGet requestDeviceTypeField () {
-      return this.requestDeviceTypeField(true);
-    }
-    public APIRequestGet requestDeviceTypeField (boolean value) {
-      this.requestField("device_type", value);
-      return this;
-    }
-    public APIRequestGet requestEventField () {
-      return this.requestEventField(true);
-    }
-    public APIRequestGet requestEventField (boolean value) {
-      this.requestField("event", value);
-      return this;
-    }
-    public APIRequestGet requestEventDetectionMethodField () {
-      return this.requestEventDetectionMethodField(true);
-    }
-    public APIRequestGet requestEventDetectionMethodField (boolean value) {
-      this.requestField("event_detection_method", value);
-      return this;
-    }
-    public APIRequestGet requestMatchedRuleConditionsField () {
-      return this.requestMatchedRuleConditionsField(true);
-    }
-    public APIRequestGet requestMatchedRuleConditionsField (boolean value) {
-      this.requestField("matched_rule_conditions", value);
-      return this;
-    }
-    public APIRequestGet requestSourceRuleConditionField () {
-      return this.requestSourceRuleConditionField(true);
-    }
-    public APIRequestGet requestSourceRuleConditionField (boolean value) {
-      this.requestField("source_rule_condition", value);
-      return this;
-    }
-    public APIRequestGet requestTimestampField () {
-      return this.requestTimestampField(true);
-    }
-    public APIRequestGet requestTimestampField (boolean value) {
-      this.requestField("timestamp", value);
-      return this;
-    }
-    public APIRequestGet requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGet requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdsPixelRealTimeEventLogResult setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

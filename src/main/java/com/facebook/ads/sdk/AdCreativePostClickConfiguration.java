@@ -63,66 +63,7 @@ public class AdCreativePostClickConfiguration extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCreativePostClickConfiguration() {
-  }
-
-  public AdCreativePostClickConfiguration(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCreativePostClickConfiguration(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCreativePostClickConfiguration fetch() throws APIException{
-    AdCreativePostClickConfiguration newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCreativePostClickConfiguration fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCreativePostClickConfiguration> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCreativePostClickConfiguration fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCreativePostClickConfiguration> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCreativePostClickConfiguration> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCreativePostClickConfiguration>)(
-      new APIRequest<AdCreativePostClickConfiguration>(context, "", "/", "GET", AdCreativePostClickConfiguration.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCreativePostClickConfiguration>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCreativePostClickConfiguration.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCreativePostClickConfiguration() {
   }
 
   public String getId() {
@@ -269,151 +210,35 @@ public class AdCreativePostClickConfiguration extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldPostClickItemDescription() {
     return mPostClickItemDescription;
+  }
+
+  public AdCreativePostClickConfiguration setFieldPostClickItemDescription(String value) {
+    this.mPostClickItemDescription = value;
+    return this;
   }
 
   public String getFieldPostClickItemHeadline() {
     return mPostClickItemHeadline;
   }
 
+  public AdCreativePostClickConfiguration setFieldPostClickItemHeadline(String value) {
+    this.mPostClickItemHeadline = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCreativePostClickConfiguration> {
-
-    AdCreativePostClickConfiguration lastResponse = null;
-    @Override
-    public AdCreativePostClickConfiguration getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "post_click_item_description",
-      "post_click_item_headline",
-      "id",
-    };
-
-    @Override
-    public AdCreativePostClickConfiguration parseResponse(String response) throws APIException {
-      return AdCreativePostClickConfiguration.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCreativePostClickConfiguration execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCreativePostClickConfiguration execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCreativePostClickConfiguration> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCreativePostClickConfiguration> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCreativePostClickConfiguration>() {
-           public AdCreativePostClickConfiguration apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestPostClickItemDescriptionField () {
-      return this.requestPostClickItemDescriptionField(true);
-    }
-    public APIRequestGet requestPostClickItemDescriptionField (boolean value) {
-      this.requestField("post_click_item_description", value);
-      return this;
-    }
-    public APIRequestGet requestPostClickItemHeadlineField () {
-      return this.requestPostClickItemHeadlineField(true);
-    }
-    public APIRequestGet requestPostClickItemHeadlineField (boolean value) {
-      this.requestField("post_click_item_headline", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCreativePostClickConfiguration setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

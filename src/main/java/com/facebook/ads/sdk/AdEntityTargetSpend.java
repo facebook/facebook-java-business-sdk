@@ -69,66 +69,7 @@ public class AdEntityTargetSpend extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdEntityTargetSpend() {
-  }
-
-  public AdEntityTargetSpend(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdEntityTargetSpend(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdEntityTargetSpend fetch() throws APIException{
-    AdEntityTargetSpend newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdEntityTargetSpend fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdEntityTargetSpend> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdEntityTargetSpend fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdEntityTargetSpend> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdEntityTargetSpend> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdEntityTargetSpend>)(
-      new APIRequest<AdEntityTargetSpend>(context, "", "/", "GET", AdEntityTargetSpend.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdEntityTargetSpend>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdEntityTargetSpend.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdEntityTargetSpend() {
   }
 
   public String getId() {
@@ -275,187 +216,62 @@ public class AdEntityTargetSpend extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAmount() {
     return mAmount;
+  }
+
+  public AdEntityTargetSpend setFieldAmount(String value) {
+    this.mAmount = value;
+    return this;
   }
 
   public Boolean getFieldHasError() {
     return mHasError;
   }
 
+  public AdEntityTargetSpend setFieldHasError(Boolean value) {
+    this.mHasError = value;
+    return this;
+  }
+
   public Boolean getFieldIsAccurate() {
     return mIsAccurate;
+  }
+
+  public AdEntityTargetSpend setFieldIsAccurate(Boolean value) {
+    this.mIsAccurate = value;
+    return this;
   }
 
   public Boolean getFieldIsProrated() {
     return mIsProrated;
   }
 
+  public AdEntityTargetSpend setFieldIsProrated(Boolean value) {
+    this.mIsProrated = value;
+    return this;
+  }
+
   public Boolean getFieldIsUpdating() {
     return mIsUpdating;
+  }
+
+  public AdEntityTargetSpend setFieldIsUpdating(Boolean value) {
+    this.mIsUpdating = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdEntityTargetSpend> {
-
-    AdEntityTargetSpend lastResponse = null;
-    @Override
-    public AdEntityTargetSpend getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "amount",
-      "has_error",
-      "is_accurate",
-      "is_prorated",
-      "is_updating",
-      "id",
-    };
-
-    @Override
-    public AdEntityTargetSpend parseResponse(String response) throws APIException {
-      return AdEntityTargetSpend.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdEntityTargetSpend execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdEntityTargetSpend execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdEntityTargetSpend> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdEntityTargetSpend> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdEntityTargetSpend>() {
-           public AdEntityTargetSpend apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAmountField () {
-      return this.requestAmountField(true);
-    }
-    public APIRequestGet requestAmountField (boolean value) {
-      this.requestField("amount", value);
-      return this;
-    }
-    public APIRequestGet requestHasErrorField () {
-      return this.requestHasErrorField(true);
-    }
-    public APIRequestGet requestHasErrorField (boolean value) {
-      this.requestField("has_error", value);
-      return this;
-    }
-    public APIRequestGet requestIsAccurateField () {
-      return this.requestIsAccurateField(true);
-    }
-    public APIRequestGet requestIsAccurateField (boolean value) {
-      this.requestField("is_accurate", value);
-      return this;
-    }
-    public APIRequestGet requestIsProratedField () {
-      return this.requestIsProratedField(true);
-    }
-    public APIRequestGet requestIsProratedField (boolean value) {
-      this.requestField("is_prorated", value);
-      return this;
-    }
-    public APIRequestGet requestIsUpdatingField () {
-      return this.requestIsUpdatingField(true);
-    }
-    public APIRequestGet requestIsUpdatingField (boolean value) {
-      this.requestField("is_updating", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdEntityTargetSpend setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

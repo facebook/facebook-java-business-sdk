@@ -323,23 +323,14 @@ public class ExtendedCredit extends APINode {
 
 
   public CurrencyAmount getFieldAllocatedAmount() {
-    if (mAllocatedAmount != null) {
-      mAllocatedAmount.context = getContext();
-    }
     return mAllocatedAmount;
   }
 
   public CurrencyAmount getFieldBalance() {
-    if (mBalance != null) {
-      mBalance.context = getContext();
-    }
     return mBalance;
   }
 
   public CurrencyAmount getFieldCreditAvailable() {
-    if (mCreditAvailable != null) {
-      mCreditAvailable.context = getContext();
-    }
     return mCreditAvailable;
   }
 
@@ -372,16 +363,10 @@ public class ExtendedCredit extends APINode {
   }
 
   public CurrencyAmount getFieldMaxBalance() {
-    if (mMaxBalance != null) {
-      mMaxBalance.context = getContext();
-    }
     return mMaxBalance;
   }
 
   public CurrencyAmount getFieldOnlineMaxBalance() {
-    if (mOnlineMaxBalance != null) {
-      mOnlineMaxBalance.context = getContext();
-    }
     return mOnlineMaxBalance;
   }
 

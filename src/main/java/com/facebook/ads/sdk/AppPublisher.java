@@ -71,66 +71,7 @@ public class AppPublisher extends APINode {
   private String mStoreUrl = null;
   protected static Gson gson = null;
 
-  AppPublisher() {
-  }
-
-  public AppPublisher(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AppPublisher(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AppPublisher fetch() throws APIException{
-    AppPublisher newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AppPublisher fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AppPublisher> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AppPublisher fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AppPublisher> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AppPublisher> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AppPublisher>)(
-      new APIRequest<AppPublisher>(context, "", "/", "GET", AppPublisher.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AppPublisher>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AppPublisher.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AppPublisher() {
   }
 
   public String getId() {
@@ -277,199 +218,71 @@ public class AppPublisher extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldContentId() {
     return mContentId;
+  }
+
+  public AppPublisher setFieldContentId(String value) {
+    this.mContentId = value;
+    return this;
   }
 
   public String getFieldIconUrl() {
     return mIconUrl;
   }
 
+  public AppPublisher setFieldIconUrl(String value) {
+    this.mIconUrl = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
+  }
+
+  public AppPublisher setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public String getFieldName() {
     return mName;
   }
 
+  public AppPublisher setFieldName(String value) {
+    this.mName = value;
+    return this;
+  }
+
   public String getFieldPlatform() {
     return mPlatform;
+  }
+
+  public AppPublisher setFieldPlatform(String value) {
+    this.mPlatform = value;
+    return this;
   }
 
   public String getFieldStoreName() {
     return mStoreName;
   }
 
+  public AppPublisher setFieldStoreName(String value) {
+    this.mStoreName = value;
+    return this;
+  }
+
   public String getFieldStoreUrl() {
     return mStoreUrl;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AppPublisher> {
-
-    AppPublisher lastResponse = null;
-    @Override
-    public AppPublisher getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "content_id",
-      "icon_url",
-      "id",
-      "name",
-      "platform",
-      "store_name",
-      "store_url",
-    };
-
-    @Override
-    public AppPublisher parseResponse(String response) throws APIException {
-      return AppPublisher.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AppPublisher execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AppPublisher execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AppPublisher> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AppPublisher> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AppPublisher>() {
-           public AppPublisher apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestContentIdField () {
-      return this.requestContentIdField(true);
-    }
-    public APIRequestGet requestContentIdField (boolean value) {
-      this.requestField("content_id", value);
-      return this;
-    }
-    public APIRequestGet requestIconUrlField () {
-      return this.requestIconUrlField(true);
-    }
-    public APIRequestGet requestIconUrlField (boolean value) {
-      this.requestField("icon_url", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestPlatformField () {
-      return this.requestPlatformField(true);
-    }
-    public APIRequestGet requestPlatformField (boolean value) {
-      this.requestField("platform", value);
-      return this;
-    }
-    public APIRequestGet requestStoreNameField () {
-      return this.requestStoreNameField(true);
-    }
-    public APIRequestGet requestStoreNameField (boolean value) {
-      this.requestField("store_name", value);
-      return this;
-    }
-    public APIRequestGet requestStoreUrlField () {
-      return this.requestStoreUrlField(true);
-    }
-    public APIRequestGet requestStoreUrlField (boolean value) {
-      this.requestField("store_url", value);
-      return this;
-    }
+  public AppPublisher setFieldStoreUrl(String value) {
+    this.mStoreUrl = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

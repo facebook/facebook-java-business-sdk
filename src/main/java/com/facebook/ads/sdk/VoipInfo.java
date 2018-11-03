@@ -73,66 +73,7 @@ public class VoipInfo extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  VoipInfo() {
-  }
-
-  public VoipInfo(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public VoipInfo(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public VoipInfo fetch() throws APIException{
-    VoipInfo newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static VoipInfo fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<VoipInfo> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static VoipInfo fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<VoipInfo> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<VoipInfo> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<VoipInfo>)(
-      new APIRequest<VoipInfo>(context, "", "/", "GET", VoipInfo.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<VoipInfo>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", VoipInfo.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public VoipInfo() {
   }
 
   public String getId() {
@@ -279,211 +220,80 @@ public class VoipInfo extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Boolean getFieldHasMobileApp() {
     return mHasMobileApp;
+  }
+
+  public VoipInfo setFieldHasMobileApp(Boolean value) {
+    this.mHasMobileApp = value;
+    return this;
   }
 
   public Boolean getFieldHasPermission() {
     return mHasPermission;
   }
 
+  public VoipInfo setFieldHasPermission(Boolean value) {
+    this.mHasPermission = value;
+    return this;
+  }
+
   public Boolean getFieldIsCallable() {
     return mIsCallable;
+  }
+
+  public VoipInfo setFieldIsCallable(Boolean value) {
+    this.mIsCallable = value;
+    return this;
   }
 
   public Boolean getFieldIsCallableWebrtc() {
     return mIsCallableWebrtc;
   }
 
+  public VoipInfo setFieldIsCallableWebrtc(Boolean value) {
+    this.mIsCallableWebrtc = value;
+    return this;
+  }
+
   public Boolean getFieldIsPushable() {
     return mIsPushable;
+  }
+
+  public VoipInfo setFieldIsPushable(Boolean value) {
+    this.mIsPushable = value;
+    return this;
   }
 
   public Long getFieldReasonCode() {
     return mReasonCode;
   }
 
+  public VoipInfo setFieldReasonCode(Long value) {
+    this.mReasonCode = value;
+    return this;
+  }
+
   public String getFieldReasonDescription() {
     return mReasonDescription;
+  }
+
+  public VoipInfo setFieldReasonDescription(String value) {
+    this.mReasonDescription = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<VoipInfo> {
-
-    VoipInfo lastResponse = null;
-    @Override
-    public VoipInfo getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "has_mobile_app",
-      "has_permission",
-      "is_callable",
-      "is_callable_webrtc",
-      "is_pushable",
-      "reason_code",
-      "reason_description",
-      "id",
-    };
-
-    @Override
-    public VoipInfo parseResponse(String response) throws APIException {
-      return VoipInfo.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public VoipInfo execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public VoipInfo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<VoipInfo> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<VoipInfo> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, VoipInfo>() {
-           public VoipInfo apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestHasMobileAppField () {
-      return this.requestHasMobileAppField(true);
-    }
-    public APIRequestGet requestHasMobileAppField (boolean value) {
-      this.requestField("has_mobile_app", value);
-      return this;
-    }
-    public APIRequestGet requestHasPermissionField () {
-      return this.requestHasPermissionField(true);
-    }
-    public APIRequestGet requestHasPermissionField (boolean value) {
-      this.requestField("has_permission", value);
-      return this;
-    }
-    public APIRequestGet requestIsCallableField () {
-      return this.requestIsCallableField(true);
-    }
-    public APIRequestGet requestIsCallableField (boolean value) {
-      this.requestField("is_callable", value);
-      return this;
-    }
-    public APIRequestGet requestIsCallableWebrtcField () {
-      return this.requestIsCallableWebrtcField(true);
-    }
-    public APIRequestGet requestIsCallableWebrtcField (boolean value) {
-      this.requestField("is_callable_webrtc", value);
-      return this;
-    }
-    public APIRequestGet requestIsPushableField () {
-      return this.requestIsPushableField(true);
-    }
-    public APIRequestGet requestIsPushableField (boolean value) {
-      this.requestField("is_pushable", value);
-      return this;
-    }
-    public APIRequestGet requestReasonCodeField () {
-      return this.requestReasonCodeField(true);
-    }
-    public APIRequestGet requestReasonCodeField (boolean value) {
-      this.requestField("reason_code", value);
-      return this;
-    }
-    public APIRequestGet requestReasonDescriptionField () {
-      return this.requestReasonDescriptionField(true);
-    }
-    public APIRequestGet requestReasonDescriptionField (boolean value) {
-      this.requestField("reason_description", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public VoipInfo setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

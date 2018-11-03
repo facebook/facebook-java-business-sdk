@@ -85,66 +85,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCreativeLinkDataImageLayerSpec() {
-  }
-
-  public AdCreativeLinkDataImageLayerSpec(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCreativeLinkDataImageLayerSpec(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCreativeLinkDataImageLayerSpec fetch() throws APIException{
-    AdCreativeLinkDataImageLayerSpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCreativeLinkDataImageLayerSpec fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCreativeLinkDataImageLayerSpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCreativeLinkDataImageLayerSpec fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCreativeLinkDataImageLayerSpec> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCreativeLinkDataImageLayerSpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCreativeLinkDataImageLayerSpec>)(
-      new APIRequest<AdCreativeLinkDataImageLayerSpec>(context, "", "/", "GET", AdCreativeLinkDataImageLayerSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCreativeLinkDataImageLayerSpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCreativeLinkDataImageLayerSpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCreativeLinkDataImageLayerSpec() {
   }
 
   public String getId() {
@@ -291,283 +232,134 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public EnumBlendingMode getFieldBlendingMode() {
     return mBlendingMode;
+  }
+
+  public AdCreativeLinkDataImageLayerSpec setFieldBlendingMode(EnumBlendingMode value) {
+    this.mBlendingMode = value;
+    return this;
   }
 
   public Object getFieldContent() {
     return mContent;
   }
 
+  public AdCreativeLinkDataImageLayerSpec setFieldContent(Object value) {
+    this.mContent = value;
+    return this;
+  }
+
   public String getFieldFrameImageHash() {
     return mFrameImageHash;
+  }
+
+  public AdCreativeLinkDataImageLayerSpec setFieldFrameImageHash(String value) {
+    this.mFrameImageHash = value;
+    return this;
   }
 
   public EnumFrameSource getFieldFrameSource() {
     return mFrameSource;
   }
 
+  public AdCreativeLinkDataImageLayerSpec setFieldFrameSource(EnumFrameSource value) {
+    this.mFrameSource = value;
+    return this;
+  }
+
   public EnumImageSource getFieldImageSource() {
     return mImageSource;
+  }
+
+  public AdCreativeLinkDataImageLayerSpec setFieldImageSource(EnumImageSource value) {
+    this.mImageSource = value;
+    return this;
   }
 
   public EnumLayerType getFieldLayerType() {
     return mLayerType;
   }
 
+  public AdCreativeLinkDataImageLayerSpec setFieldLayerType(EnumLayerType value) {
+    this.mLayerType = value;
+    return this;
+  }
+
   public Long getFieldOpacity() {
     return mOpacity;
+  }
+
+  public AdCreativeLinkDataImageLayerSpec setFieldOpacity(Long value) {
+    this.mOpacity = value;
+    return this;
   }
 
   public EnumOverlayPosition getFieldOverlayPosition() {
     return mOverlayPosition;
   }
 
+  public AdCreativeLinkDataImageLayerSpec setFieldOverlayPosition(EnumOverlayPosition value) {
+    this.mOverlayPosition = value;
+    return this;
+  }
+
   public EnumOverlayShape getFieldOverlayShape() {
     return mOverlayShape;
+  }
+
+  public AdCreativeLinkDataImageLayerSpec setFieldOverlayShape(EnumOverlayShape value) {
+    this.mOverlayShape = value;
+    return this;
   }
 
   public Long getFieldScale() {
     return mScale;
   }
 
+  public AdCreativeLinkDataImageLayerSpec setFieldScale(Long value) {
+    this.mScale = value;
+    return this;
+  }
+
   public String getFieldShapeColor() {
     return mShapeColor;
+  }
+
+  public AdCreativeLinkDataImageLayerSpec setFieldShapeColor(String value) {
+    this.mShapeColor = value;
+    return this;
   }
 
   public String getFieldTextColor() {
     return mTextColor;
   }
 
+  public AdCreativeLinkDataImageLayerSpec setFieldTextColor(String value) {
+    this.mTextColor = value;
+    return this;
+  }
+
   public EnumTextFont getFieldTextFont() {
     return mTextFont;
+  }
+
+  public AdCreativeLinkDataImageLayerSpec setFieldTextFont(EnumTextFont value) {
+    this.mTextFont = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCreativeLinkDataImageLayerSpec> {
-
-    AdCreativeLinkDataImageLayerSpec lastResponse = null;
-    @Override
-    public AdCreativeLinkDataImageLayerSpec getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "blending_mode",
-      "content",
-      "frame_image_hash",
-      "frame_source",
-      "image_source",
-      "layer_type",
-      "opacity",
-      "overlay_position",
-      "overlay_shape",
-      "scale",
-      "shape_color",
-      "text_color",
-      "text_font",
-      "id",
-    };
-
-    @Override
-    public AdCreativeLinkDataImageLayerSpec parseResponse(String response) throws APIException {
-      return AdCreativeLinkDataImageLayerSpec.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCreativeLinkDataImageLayerSpec execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCreativeLinkDataImageLayerSpec execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCreativeLinkDataImageLayerSpec> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCreativeLinkDataImageLayerSpec> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCreativeLinkDataImageLayerSpec>() {
-           public AdCreativeLinkDataImageLayerSpec apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestBlendingModeField () {
-      return this.requestBlendingModeField(true);
-    }
-    public APIRequestGet requestBlendingModeField (boolean value) {
-      this.requestField("blending_mode", value);
-      return this;
-    }
-    public APIRequestGet requestContentField () {
-      return this.requestContentField(true);
-    }
-    public APIRequestGet requestContentField (boolean value) {
-      this.requestField("content", value);
-      return this;
-    }
-    public APIRequestGet requestFrameImageHashField () {
-      return this.requestFrameImageHashField(true);
-    }
-    public APIRequestGet requestFrameImageHashField (boolean value) {
-      this.requestField("frame_image_hash", value);
-      return this;
-    }
-    public APIRequestGet requestFrameSourceField () {
-      return this.requestFrameSourceField(true);
-    }
-    public APIRequestGet requestFrameSourceField (boolean value) {
-      this.requestField("frame_source", value);
-      return this;
-    }
-    public APIRequestGet requestImageSourceField () {
-      return this.requestImageSourceField(true);
-    }
-    public APIRequestGet requestImageSourceField (boolean value) {
-      this.requestField("image_source", value);
-      return this;
-    }
-    public APIRequestGet requestLayerTypeField () {
-      return this.requestLayerTypeField(true);
-    }
-    public APIRequestGet requestLayerTypeField (boolean value) {
-      this.requestField("layer_type", value);
-      return this;
-    }
-    public APIRequestGet requestOpacityField () {
-      return this.requestOpacityField(true);
-    }
-    public APIRequestGet requestOpacityField (boolean value) {
-      this.requestField("opacity", value);
-      return this;
-    }
-    public APIRequestGet requestOverlayPositionField () {
-      return this.requestOverlayPositionField(true);
-    }
-    public APIRequestGet requestOverlayPositionField (boolean value) {
-      this.requestField("overlay_position", value);
-      return this;
-    }
-    public APIRequestGet requestOverlayShapeField () {
-      return this.requestOverlayShapeField(true);
-    }
-    public APIRequestGet requestOverlayShapeField (boolean value) {
-      this.requestField("overlay_shape", value);
-      return this;
-    }
-    public APIRequestGet requestScaleField () {
-      return this.requestScaleField(true);
-    }
-    public APIRequestGet requestScaleField (boolean value) {
-      this.requestField("scale", value);
-      return this;
-    }
-    public APIRequestGet requestShapeColorField () {
-      return this.requestShapeColorField(true);
-    }
-    public APIRequestGet requestShapeColorField (boolean value) {
-      this.requestField("shape_color", value);
-      return this;
-    }
-    public APIRequestGet requestTextColorField () {
-      return this.requestTextColorField(true);
-    }
-    public APIRequestGet requestTextColorField (boolean value) {
-      this.requestField("text_color", value);
-      return this;
-    }
-    public APIRequestGet requestTextFontField () {
-      return this.requestTextFontField(true);
-    }
-    public APIRequestGet requestTextFontField (boolean value) {
-      this.requestField("text_font", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCreativeLinkDataImageLayerSpec setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
   public static enum EnumBlendingMode {
       @SerializedName("lighten")

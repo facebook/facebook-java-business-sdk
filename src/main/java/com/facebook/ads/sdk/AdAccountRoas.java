@@ -117,66 +117,7 @@ public class AdAccountRoas extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdAccountRoas() {
-  }
-
-  public AdAccountRoas(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdAccountRoas(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdAccountRoas fetch() throws APIException{
-    AdAccountRoas newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdAccountRoas fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdAccountRoas> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdAccountRoas fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdAccountRoas> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdAccountRoas> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdAccountRoas>)(
-      new APIRequest<AdAccountRoas>(context, "", "/", "GET", AdAccountRoas.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdAccountRoas>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdAccountRoas.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdAccountRoas() {
   }
 
   public String getId() {
@@ -323,475 +264,278 @@ public class AdAccountRoas extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAdgroupId() {
     return mAdgroupId;
+  }
+
+  public AdAccountRoas setFieldAdgroupId(String value) {
+    this.mAdgroupId = value;
+    return this;
   }
 
   public Double getFieldArpu180d() {
     return mArpu180d;
   }
 
+  public AdAccountRoas setFieldArpu180d(Double value) {
+    this.mArpu180d = value;
+    return this;
+  }
+
   public Double getFieldArpu1d() {
     return mArpu1d;
+  }
+
+  public AdAccountRoas setFieldArpu1d(Double value) {
+    this.mArpu1d = value;
+    return this;
   }
 
   public Double getFieldArpu30d() {
     return mArpu30d;
   }
 
+  public AdAccountRoas setFieldArpu30d(Double value) {
+    this.mArpu30d = value;
+    return this;
+  }
+
   public Double getFieldArpu365d() {
     return mArpu365d;
+  }
+
+  public AdAccountRoas setFieldArpu365d(Double value) {
+    this.mArpu365d = value;
+    return this;
   }
 
   public Double getFieldArpu3d() {
     return mArpu3d;
   }
 
+  public AdAccountRoas setFieldArpu3d(Double value) {
+    this.mArpu3d = value;
+    return this;
+  }
+
   public Double getFieldArpu7d() {
     return mArpu7d;
+  }
+
+  public AdAccountRoas setFieldArpu7d(Double value) {
+    this.mArpu7d = value;
+    return this;
   }
 
   public Double getFieldArpu90d() {
     return mArpu90d;
   }
 
+  public AdAccountRoas setFieldArpu90d(Double value) {
+    this.mArpu90d = value;
+    return this;
+  }
+
   public String getFieldCampaignGroupId() {
     return mCampaignGroupId;
+  }
+
+  public AdAccountRoas setFieldCampaignGroupId(String value) {
+    this.mCampaignGroupId = value;
+    return this;
   }
 
   public String getFieldCampaignId() {
     return mCampaignId;
   }
 
+  public AdAccountRoas setFieldCampaignId(String value) {
+    this.mCampaignId = value;
+    return this;
+  }
+
   public String getFieldDateStart() {
     return mDateStart;
+  }
+
+  public AdAccountRoas setFieldDateStart(String value) {
+    this.mDateStart = value;
+    return this;
   }
 
   public String getFieldDateStop() {
     return mDateStop;
   }
 
+  public AdAccountRoas setFieldDateStop(String value) {
+    this.mDateStop = value;
+    return this;
+  }
+
   public Long getFieldInstalls() {
     return mInstalls;
+  }
+
+  public AdAccountRoas setFieldInstalls(Long value) {
+    this.mInstalls = value;
+    return this;
   }
 
   public Double getFieldRevenue() {
     return mRevenue;
   }
 
+  public AdAccountRoas setFieldRevenue(Double value) {
+    this.mRevenue = value;
+    return this;
+  }
+
   public Double getFieldRevenue180d() {
     return mRevenue180d;
+  }
+
+  public AdAccountRoas setFieldRevenue180d(Double value) {
+    this.mRevenue180d = value;
+    return this;
   }
 
   public Double getFieldRevenue1d() {
     return mRevenue1d;
   }
 
+  public AdAccountRoas setFieldRevenue1d(Double value) {
+    this.mRevenue1d = value;
+    return this;
+  }
+
   public Double getFieldRevenue30d() {
     return mRevenue30d;
+  }
+
+  public AdAccountRoas setFieldRevenue30d(Double value) {
+    this.mRevenue30d = value;
+    return this;
   }
 
   public Double getFieldRevenue365d() {
     return mRevenue365d;
   }
 
+  public AdAccountRoas setFieldRevenue365d(Double value) {
+    this.mRevenue365d = value;
+    return this;
+  }
+
   public Double getFieldRevenue3d() {
     return mRevenue3d;
+  }
+
+  public AdAccountRoas setFieldRevenue3d(Double value) {
+    this.mRevenue3d = value;
+    return this;
   }
 
   public Double getFieldRevenue7d() {
     return mRevenue7d;
   }
 
+  public AdAccountRoas setFieldRevenue7d(Double value) {
+    this.mRevenue7d = value;
+    return this;
+  }
+
   public Double getFieldRevenue90d() {
     return mRevenue90d;
+  }
+
+  public AdAccountRoas setFieldRevenue90d(Double value) {
+    this.mRevenue90d = value;
+    return this;
   }
 
   public Double getFieldSpend() {
     return mSpend;
   }
 
+  public AdAccountRoas setFieldSpend(Double value) {
+    this.mSpend = value;
+    return this;
+  }
+
   public Double getFieldYield180d() {
     return mYield180d;
+  }
+
+  public AdAccountRoas setFieldYield180d(Double value) {
+    this.mYield180d = value;
+    return this;
   }
 
   public Double getFieldYield1d() {
     return mYield1d;
   }
 
+  public AdAccountRoas setFieldYield1d(Double value) {
+    this.mYield1d = value;
+    return this;
+  }
+
   public Double getFieldYield30d() {
     return mYield30d;
+  }
+
+  public AdAccountRoas setFieldYield30d(Double value) {
+    this.mYield30d = value;
+    return this;
   }
 
   public Double getFieldYield365d() {
     return mYield365d;
   }
 
+  public AdAccountRoas setFieldYield365d(Double value) {
+    this.mYield365d = value;
+    return this;
+  }
+
   public Double getFieldYield3d() {
     return mYield3d;
+  }
+
+  public AdAccountRoas setFieldYield3d(Double value) {
+    this.mYield3d = value;
+    return this;
   }
 
   public Double getFieldYield7d() {
     return mYield7d;
   }
 
+  public AdAccountRoas setFieldYield7d(Double value) {
+    this.mYield7d = value;
+    return this;
+  }
+
   public Double getFieldYield90d() {
     return mYield90d;
+  }
+
+  public AdAccountRoas setFieldYield90d(Double value) {
+    this.mYield90d = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdAccountRoas> {
-
-    AdAccountRoas lastResponse = null;
-    @Override
-    public AdAccountRoas getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "adgroup_id",
-      "arpu_180d",
-      "arpu_1d",
-      "arpu_30d",
-      "arpu_365d",
-      "arpu_3d",
-      "arpu_7d",
-      "arpu_90d",
-      "campaign_group_id",
-      "campaign_id",
-      "date_start",
-      "date_stop",
-      "installs",
-      "revenue",
-      "revenue_180d",
-      "revenue_1d",
-      "revenue_30d",
-      "revenue_365d",
-      "revenue_3d",
-      "revenue_7d",
-      "revenue_90d",
-      "spend",
-      "yield_180d",
-      "yield_1d",
-      "yield_30d",
-      "yield_365d",
-      "yield_3d",
-      "yield_7d",
-      "yield_90d",
-      "id",
-    };
-
-    @Override
-    public AdAccountRoas parseResponse(String response) throws APIException {
-      return AdAccountRoas.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdAccountRoas execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdAccountRoas execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdAccountRoas> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdAccountRoas> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdAccountRoas>() {
-           public AdAccountRoas apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAdgroupIdField () {
-      return this.requestAdgroupIdField(true);
-    }
-    public APIRequestGet requestAdgroupIdField (boolean value) {
-      this.requestField("adgroup_id", value);
-      return this;
-    }
-    public APIRequestGet requestArpu180dField () {
-      return this.requestArpu180dField(true);
-    }
-    public APIRequestGet requestArpu180dField (boolean value) {
-      this.requestField("arpu_180d", value);
-      return this;
-    }
-    public APIRequestGet requestArpu1dField () {
-      return this.requestArpu1dField(true);
-    }
-    public APIRequestGet requestArpu1dField (boolean value) {
-      this.requestField("arpu_1d", value);
-      return this;
-    }
-    public APIRequestGet requestArpu30dField () {
-      return this.requestArpu30dField(true);
-    }
-    public APIRequestGet requestArpu30dField (boolean value) {
-      this.requestField("arpu_30d", value);
-      return this;
-    }
-    public APIRequestGet requestArpu365dField () {
-      return this.requestArpu365dField(true);
-    }
-    public APIRequestGet requestArpu365dField (boolean value) {
-      this.requestField("arpu_365d", value);
-      return this;
-    }
-    public APIRequestGet requestArpu3dField () {
-      return this.requestArpu3dField(true);
-    }
-    public APIRequestGet requestArpu3dField (boolean value) {
-      this.requestField("arpu_3d", value);
-      return this;
-    }
-    public APIRequestGet requestArpu7dField () {
-      return this.requestArpu7dField(true);
-    }
-    public APIRequestGet requestArpu7dField (boolean value) {
-      this.requestField("arpu_7d", value);
-      return this;
-    }
-    public APIRequestGet requestArpu90dField () {
-      return this.requestArpu90dField(true);
-    }
-    public APIRequestGet requestArpu90dField (boolean value) {
-      this.requestField("arpu_90d", value);
-      return this;
-    }
-    public APIRequestGet requestCampaignGroupIdField () {
-      return this.requestCampaignGroupIdField(true);
-    }
-    public APIRequestGet requestCampaignGroupIdField (boolean value) {
-      this.requestField("campaign_group_id", value);
-      return this;
-    }
-    public APIRequestGet requestCampaignIdField () {
-      return this.requestCampaignIdField(true);
-    }
-    public APIRequestGet requestCampaignIdField (boolean value) {
-      this.requestField("campaign_id", value);
-      return this;
-    }
-    public APIRequestGet requestDateStartField () {
-      return this.requestDateStartField(true);
-    }
-    public APIRequestGet requestDateStartField (boolean value) {
-      this.requestField("date_start", value);
-      return this;
-    }
-    public APIRequestGet requestDateStopField () {
-      return this.requestDateStopField(true);
-    }
-    public APIRequestGet requestDateStopField (boolean value) {
-      this.requestField("date_stop", value);
-      return this;
-    }
-    public APIRequestGet requestInstallsField () {
-      return this.requestInstallsField(true);
-    }
-    public APIRequestGet requestInstallsField (boolean value) {
-      this.requestField("installs", value);
-      return this;
-    }
-    public APIRequestGet requestRevenueField () {
-      return this.requestRevenueField(true);
-    }
-    public APIRequestGet requestRevenueField (boolean value) {
-      this.requestField("revenue", value);
-      return this;
-    }
-    public APIRequestGet requestRevenue180dField () {
-      return this.requestRevenue180dField(true);
-    }
-    public APIRequestGet requestRevenue180dField (boolean value) {
-      this.requestField("revenue_180d", value);
-      return this;
-    }
-    public APIRequestGet requestRevenue1dField () {
-      return this.requestRevenue1dField(true);
-    }
-    public APIRequestGet requestRevenue1dField (boolean value) {
-      this.requestField("revenue_1d", value);
-      return this;
-    }
-    public APIRequestGet requestRevenue30dField () {
-      return this.requestRevenue30dField(true);
-    }
-    public APIRequestGet requestRevenue30dField (boolean value) {
-      this.requestField("revenue_30d", value);
-      return this;
-    }
-    public APIRequestGet requestRevenue365dField () {
-      return this.requestRevenue365dField(true);
-    }
-    public APIRequestGet requestRevenue365dField (boolean value) {
-      this.requestField("revenue_365d", value);
-      return this;
-    }
-    public APIRequestGet requestRevenue3dField () {
-      return this.requestRevenue3dField(true);
-    }
-    public APIRequestGet requestRevenue3dField (boolean value) {
-      this.requestField("revenue_3d", value);
-      return this;
-    }
-    public APIRequestGet requestRevenue7dField () {
-      return this.requestRevenue7dField(true);
-    }
-    public APIRequestGet requestRevenue7dField (boolean value) {
-      this.requestField("revenue_7d", value);
-      return this;
-    }
-    public APIRequestGet requestRevenue90dField () {
-      return this.requestRevenue90dField(true);
-    }
-    public APIRequestGet requestRevenue90dField (boolean value) {
-      this.requestField("revenue_90d", value);
-      return this;
-    }
-    public APIRequestGet requestSpendField () {
-      return this.requestSpendField(true);
-    }
-    public APIRequestGet requestSpendField (boolean value) {
-      this.requestField("spend", value);
-      return this;
-    }
-    public APIRequestGet requestYield180dField () {
-      return this.requestYield180dField(true);
-    }
-    public APIRequestGet requestYield180dField (boolean value) {
-      this.requestField("yield_180d", value);
-      return this;
-    }
-    public APIRequestGet requestYield1dField () {
-      return this.requestYield1dField(true);
-    }
-    public APIRequestGet requestYield1dField (boolean value) {
-      this.requestField("yield_1d", value);
-      return this;
-    }
-    public APIRequestGet requestYield30dField () {
-      return this.requestYield30dField(true);
-    }
-    public APIRequestGet requestYield30dField (boolean value) {
-      this.requestField("yield_30d", value);
-      return this;
-    }
-    public APIRequestGet requestYield365dField () {
-      return this.requestYield365dField(true);
-    }
-    public APIRequestGet requestYield365dField (boolean value) {
-      this.requestField("yield_365d", value);
-      return this;
-    }
-    public APIRequestGet requestYield3dField () {
-      return this.requestYield3dField(true);
-    }
-    public APIRequestGet requestYield3dField (boolean value) {
-      this.requestField("yield_3d", value);
-      return this;
-    }
-    public APIRequestGet requestYield7dField () {
-      return this.requestYield7dField(true);
-    }
-    public APIRequestGet requestYield7dField (boolean value) {
-      this.requestField("yield_7d", value);
-      return this;
-    }
-    public APIRequestGet requestYield90dField () {
-      return this.requestYield90dField(true);
-    }
-    public APIRequestGet requestYield90dField (boolean value) {
-      this.requestField("yield_90d", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdAccountRoas setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

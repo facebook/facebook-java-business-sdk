@@ -65,66 +65,7 @@ public class UserNuxStatuses extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  UserNuxStatuses() {
-  }
-
-  public UserNuxStatuses(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public UserNuxStatuses(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public UserNuxStatuses fetch() throws APIException{
-    UserNuxStatuses newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static UserNuxStatuses fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<UserNuxStatuses> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static UserNuxStatuses fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<UserNuxStatuses> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<UserNuxStatuses> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<UserNuxStatuses>)(
-      new APIRequest<UserNuxStatuses>(context, "", "/", "GET", UserNuxStatuses.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<UserNuxStatuses>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", UserNuxStatuses.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public UserNuxStatuses() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class UserNuxStatuses extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldMaxViews() {
     return mMaxViews;
+  }
+
+  public UserNuxStatuses setFieldMaxViews(Long value) {
+    this.mMaxViews = value;
+    return this;
   }
 
   public Object getFieldNuxData() {
     return mNuxData;
   }
 
+  public UserNuxStatuses setFieldNuxData(Object value) {
+    this.mNuxData = value;
+    return this;
+  }
+
   public String getFieldNuxId() {
     return mNuxId;
+  }
+
+  public UserNuxStatuses setFieldNuxId(String value) {
+    this.mNuxId = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<UserNuxStatuses> {
-
-    UserNuxStatuses lastResponse = null;
-    @Override
-    public UserNuxStatuses getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "max_views",
-      "nux_data",
-      "nux_id",
-      "id",
-    };
-
-    @Override
-    public UserNuxStatuses parseResponse(String response) throws APIException {
-      return UserNuxStatuses.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public UserNuxStatuses execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public UserNuxStatuses execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<UserNuxStatuses> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<UserNuxStatuses> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, UserNuxStatuses>() {
-           public UserNuxStatuses apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestMaxViewsField () {
-      return this.requestMaxViewsField(true);
-    }
-    public APIRequestGet requestMaxViewsField (boolean value) {
-      this.requestField("max_views", value);
-      return this;
-    }
-    public APIRequestGet requestNuxDataField () {
-      return this.requestNuxDataField(true);
-    }
-    public APIRequestGet requestNuxDataField (boolean value) {
-      this.requestField("nux_data", value);
-      return this;
-    }
-    public APIRequestGet requestNuxIdField () {
-      return this.requestNuxIdField(true);
-    }
-    public APIRequestGet requestNuxIdField (boolean value) {
-      this.requestField("nux_id", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public UserNuxStatuses setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

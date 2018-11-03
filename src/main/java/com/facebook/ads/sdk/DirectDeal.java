@@ -408,9 +408,6 @@ public class DirectDeal extends APINode {
   }
 
   public Targeting getFieldTargeting() {
-    if (mTargeting != null) {
-      mTargeting.context = getContext();
-    }
     return mTargeting;
   }
 

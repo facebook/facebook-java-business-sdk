@@ -77,66 +77,7 @@ public class OrderIDAttributions extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  OrderIDAttributions() {
-  }
-
-  public OrderIDAttributions(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public OrderIDAttributions(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public OrderIDAttributions fetch() throws APIException{
-    OrderIDAttributions newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static OrderIDAttributions fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<OrderIDAttributions> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static OrderIDAttributions fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<OrderIDAttributions> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<OrderIDAttributions> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<OrderIDAttributions>)(
-      new APIRequest<OrderIDAttributions>(context, "", "/", "GET", OrderIDAttributions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<OrderIDAttributions>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", OrderIDAttributions.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public OrderIDAttributions() {
   }
 
   public String getId() {
@@ -283,235 +224,98 @@ public class OrderIDAttributions extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAppId() {
     return mAppId;
+  }
+
+  public OrderIDAttributions setFieldAppId(String value) {
+    this.mAppId = value;
+    return this;
   }
 
   public String getFieldAttributionType() {
     return mAttributionType;
   }
 
+  public OrderIDAttributions setFieldAttributionType(String value) {
+    this.mAttributionType = value;
+    return this;
+  }
+
   public List<Object> getFieldAttributions() {
     return mAttributions;
+  }
+
+  public OrderIDAttributions setFieldAttributions(List<Object> value) {
+    this.mAttributions = value;
+    return this;
   }
 
   public String getFieldConversionDevice() {
     return mConversionDevice;
   }
 
+  public OrderIDAttributions setFieldConversionDevice(String value) {
+    this.mConversionDevice = value;
+    return this;
+  }
+
   public String getFieldDatasetId() {
     return mDatasetId;
+  }
+
+  public OrderIDAttributions setFieldDatasetId(String value) {
+    this.mDatasetId = value;
+    return this;
   }
 
   public List<Object> getFieldHoldoutStatus() {
     return mHoldoutStatus;
   }
 
+  public OrderIDAttributions setFieldHoldoutStatus(List<Object> value) {
+    this.mHoldoutStatus = value;
+    return this;
+  }
+
   public String getFieldOrderId() {
     return mOrderId;
+  }
+
+  public OrderIDAttributions setFieldOrderId(String value) {
+    this.mOrderId = value;
+    return this;
   }
 
   public String getFieldOrderTimestamp() {
     return mOrderTimestamp;
   }
 
+  public OrderIDAttributions setFieldOrderTimestamp(String value) {
+    this.mOrderTimestamp = value;
+    return this;
+  }
+
   public String getFieldPixelId() {
     return mPixelId;
+  }
+
+  public OrderIDAttributions setFieldPixelId(String value) {
+    this.mPixelId = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<OrderIDAttributions> {
-
-    OrderIDAttributions lastResponse = null;
-    @Override
-    public OrderIDAttributions getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "app_id",
-      "attribution_type",
-      "attributions",
-      "conversion_device",
-      "dataset_id",
-      "holdout_status",
-      "order_id",
-      "order_timestamp",
-      "pixel_id",
-      "id",
-    };
-
-    @Override
-    public OrderIDAttributions parseResponse(String response) throws APIException {
-      return OrderIDAttributions.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public OrderIDAttributions execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public OrderIDAttributions execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<OrderIDAttributions> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<OrderIDAttributions> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, OrderIDAttributions>() {
-           public OrderIDAttributions apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAppIdField () {
-      return this.requestAppIdField(true);
-    }
-    public APIRequestGet requestAppIdField (boolean value) {
-      this.requestField("app_id", value);
-      return this;
-    }
-    public APIRequestGet requestAttributionTypeField () {
-      return this.requestAttributionTypeField(true);
-    }
-    public APIRequestGet requestAttributionTypeField (boolean value) {
-      this.requestField("attribution_type", value);
-      return this;
-    }
-    public APIRequestGet requestAttributionsField () {
-      return this.requestAttributionsField(true);
-    }
-    public APIRequestGet requestAttributionsField (boolean value) {
-      this.requestField("attributions", value);
-      return this;
-    }
-    public APIRequestGet requestConversionDeviceField () {
-      return this.requestConversionDeviceField(true);
-    }
-    public APIRequestGet requestConversionDeviceField (boolean value) {
-      this.requestField("conversion_device", value);
-      return this;
-    }
-    public APIRequestGet requestDatasetIdField () {
-      return this.requestDatasetIdField(true);
-    }
-    public APIRequestGet requestDatasetIdField (boolean value) {
-      this.requestField("dataset_id", value);
-      return this;
-    }
-    public APIRequestGet requestHoldoutStatusField () {
-      return this.requestHoldoutStatusField(true);
-    }
-    public APIRequestGet requestHoldoutStatusField (boolean value) {
-      this.requestField("holdout_status", value);
-      return this;
-    }
-    public APIRequestGet requestOrderIdField () {
-      return this.requestOrderIdField(true);
-    }
-    public APIRequestGet requestOrderIdField (boolean value) {
-      this.requestField("order_id", value);
-      return this;
-    }
-    public APIRequestGet requestOrderTimestampField () {
-      return this.requestOrderTimestampField(true);
-    }
-    public APIRequestGet requestOrderTimestampField (boolean value) {
-      this.requestField("order_timestamp", value);
-      return this;
-    }
-    public APIRequestGet requestPixelIdField () {
-      return this.requestPixelIdField(true);
-    }
-    public APIRequestGet requestPixelIdField (boolean value) {
-      this.requestField("pixel_id", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public OrderIDAttributions setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

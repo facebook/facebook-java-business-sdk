@@ -71,66 +71,7 @@ public class AdKpiShift extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdKpiShift() {
-  }
-
-  public AdKpiShift(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdKpiShift(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdKpiShift fetch() throws APIException{
-    AdKpiShift newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdKpiShift fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdKpiShift> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdKpiShift fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdKpiShift> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdKpiShift> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdKpiShift>)(
-      new APIRequest<AdKpiShift>(context, "", "/", "GET", AdKpiShift.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdKpiShift>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdKpiShift.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdKpiShift() {
   }
 
   public String getId() {
@@ -277,10 +218,6 @@ public class AdKpiShift extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public AdSet getFieldAdSet() {
     if (mAdSet != null) {
@@ -289,190 +226,71 @@ public class AdKpiShift extends APINode {
     return mAdSet;
   }
 
+  public AdKpiShift setFieldAdSet(AdSet value) {
+    this.mAdSet = value;
+    return this;
+  }
+
+  public AdKpiShift setFieldAdSet(String value) {
+    Type type = new TypeToken<AdSet>(){}.getType();
+    this.mAdSet = AdSet.getGson().fromJson(value, type);
+    return this;
+  }
   public Double getFieldCostPerResultShift() {
     return mCostPerResultShift;
+  }
+
+  public AdKpiShift setFieldCostPerResultShift(Double value) {
+    this.mCostPerResultShift = value;
+    return this;
   }
 
   public Boolean getFieldEnoughEffectiveDays() {
     return mEnoughEffectiveDays;
   }
 
+  public AdKpiShift setFieldEnoughEffectiveDays(Boolean value) {
+    this.mEnoughEffectiveDays = value;
+    return this;
+  }
+
   public String getFieldResultIndicator() {
     return mResultIndicator;
+  }
+
+  public AdKpiShift setFieldResultIndicator(String value) {
+    this.mResultIndicator = value;
+    return this;
   }
 
   public Double getFieldResultShift() {
     return mResultShift;
   }
 
+  public AdKpiShift setFieldResultShift(Double value) {
+    this.mResultShift = value;
+    return this;
+  }
+
   public Double getFieldSpendShift() {
     return mSpendShift;
+  }
+
+  public AdKpiShift setFieldSpendShift(Double value) {
+    this.mSpendShift = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdKpiShift> {
-
-    AdKpiShift lastResponse = null;
-    @Override
-    public AdKpiShift getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "ad_set",
-      "cost_per_result_shift",
-      "enough_effective_days",
-      "result_indicator",
-      "result_shift",
-      "spend_shift",
-      "id",
-    };
-
-    @Override
-    public AdKpiShift parseResponse(String response) throws APIException {
-      return AdKpiShift.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdKpiShift execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdKpiShift execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdKpiShift> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdKpiShift> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdKpiShift>() {
-           public AdKpiShift apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAdSetField () {
-      return this.requestAdSetField(true);
-    }
-    public APIRequestGet requestAdSetField (boolean value) {
-      this.requestField("ad_set", value);
-      return this;
-    }
-    public APIRequestGet requestCostPerResultShiftField () {
-      return this.requestCostPerResultShiftField(true);
-    }
-    public APIRequestGet requestCostPerResultShiftField (boolean value) {
-      this.requestField("cost_per_result_shift", value);
-      return this;
-    }
-    public APIRequestGet requestEnoughEffectiveDaysField () {
-      return this.requestEnoughEffectiveDaysField(true);
-    }
-    public APIRequestGet requestEnoughEffectiveDaysField (boolean value) {
-      this.requestField("enough_effective_days", value);
-      return this;
-    }
-    public APIRequestGet requestResultIndicatorField () {
-      return this.requestResultIndicatorField(true);
-    }
-    public APIRequestGet requestResultIndicatorField (boolean value) {
-      this.requestField("result_indicator", value);
-      return this;
-    }
-    public APIRequestGet requestResultShiftField () {
-      return this.requestResultShiftField(true);
-    }
-    public APIRequestGet requestResultShiftField (boolean value) {
-      this.requestField("result_shift", value);
-      return this;
-    }
-    public APIRequestGet requestSpendShiftField () {
-      return this.requestSpendShiftField(true);
-    }
-    public APIRequestGet requestSpendShiftField (boolean value) {
-      this.requestField("spend_shift", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdKpiShift setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

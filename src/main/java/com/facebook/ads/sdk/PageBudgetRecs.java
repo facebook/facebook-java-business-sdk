@@ -75,66 +75,7 @@ public class PageBudgetRecs extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  PageBudgetRecs() {
-  }
-
-  public PageBudgetRecs(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public PageBudgetRecs(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public PageBudgetRecs fetch() throws APIException{
-    PageBudgetRecs newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static PageBudgetRecs fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<PageBudgetRecs> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static PageBudgetRecs fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<PageBudgetRecs> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<PageBudgetRecs> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PageBudgetRecs>)(
-      new APIRequest<PageBudgetRecs>(context, "", "/", "GET", PageBudgetRecs.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<PageBudgetRecs>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", PageBudgetRecs.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public PageBudgetRecs() {
   }
 
   public String getId() {
@@ -281,223 +222,89 @@ public class PageBudgetRecs extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldAmountOffset() {
     return mAmountOffset;
+  }
+
+  public PageBudgetRecs setFieldAmountOffset(Long value) {
+    this.mAmountOffset = value;
+    return this;
   }
 
   public Long getFieldBudgetDelta() {
     return mBudgetDelta;
   }
 
+  public PageBudgetRecs setFieldBudgetDelta(Long value) {
+    this.mBudgetDelta = value;
+    return this;
+  }
+
   public Long getFieldCampaignLength() {
     return mCampaignLength;
+  }
+
+  public PageBudgetRecs setFieldCampaignLength(Long value) {
+    this.mCampaignLength = value;
+    return this;
   }
 
   public String getFieldCurrency() {
     return mCurrency;
   }
 
+  public PageBudgetRecs setFieldCurrency(String value) {
+    this.mCurrency = value;
+    return this;
+  }
+
   public String getFieldDisplayAmount() {
     return mDisplayAmount;
+  }
+
+  public PageBudgetRecs setFieldDisplayAmount(String value) {
+    this.mDisplayAmount = value;
+    return this;
   }
 
   public Long getFieldReach() {
     return mReach;
   }
 
+  public PageBudgetRecs setFieldReach(Long value) {
+    this.mReach = value;
+    return this;
+  }
+
   public Object getFieldReachInterval() {
     return mReachInterval;
+  }
+
+  public PageBudgetRecs setFieldReachInterval(Object value) {
+    this.mReachInterval = value;
+    return this;
   }
 
   public Long getFieldValue() {
     return mValue;
   }
 
+  public PageBudgetRecs setFieldValue(Long value) {
+    this.mValue = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<PageBudgetRecs> {
-
-    PageBudgetRecs lastResponse = null;
-    @Override
-    public PageBudgetRecs getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "amount_offset",
-      "budget_delta",
-      "campaign_length",
-      "currency",
-      "display_amount",
-      "reach",
-      "reach_interval",
-      "value",
-      "id",
-    };
-
-    @Override
-    public PageBudgetRecs parseResponse(String response) throws APIException {
-      return PageBudgetRecs.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public PageBudgetRecs execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public PageBudgetRecs execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<PageBudgetRecs> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<PageBudgetRecs> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, PageBudgetRecs>() {
-           public PageBudgetRecs apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAmountOffsetField () {
-      return this.requestAmountOffsetField(true);
-    }
-    public APIRequestGet requestAmountOffsetField (boolean value) {
-      this.requestField("amount_offset", value);
-      return this;
-    }
-    public APIRequestGet requestBudgetDeltaField () {
-      return this.requestBudgetDeltaField(true);
-    }
-    public APIRequestGet requestBudgetDeltaField (boolean value) {
-      this.requestField("budget_delta", value);
-      return this;
-    }
-    public APIRequestGet requestCampaignLengthField () {
-      return this.requestCampaignLengthField(true);
-    }
-    public APIRequestGet requestCampaignLengthField (boolean value) {
-      this.requestField("campaign_length", value);
-      return this;
-    }
-    public APIRequestGet requestCurrencyField () {
-      return this.requestCurrencyField(true);
-    }
-    public APIRequestGet requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGet requestDisplayAmountField () {
-      return this.requestDisplayAmountField(true);
-    }
-    public APIRequestGet requestDisplayAmountField (boolean value) {
-      this.requestField("display_amount", value);
-      return this;
-    }
-    public APIRequestGet requestReachField () {
-      return this.requestReachField(true);
-    }
-    public APIRequestGet requestReachField (boolean value) {
-      this.requestField("reach", value);
-      return this;
-    }
-    public APIRequestGet requestReachIntervalField () {
-      return this.requestReachIntervalField(true);
-    }
-    public APIRequestGet requestReachIntervalField (boolean value) {
-      this.requestField("reach_interval", value);
-      return this;
-    }
-    public APIRequestGet requestValueField () {
-      return this.requestValueField(true);
-    }
-    public APIRequestGet requestValueField (boolean value) {
-      this.requestField("value", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public PageBudgetRecs setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

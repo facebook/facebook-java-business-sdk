@@ -71,66 +71,7 @@ public class VideoThumbnail extends APINode {
   private Long mWidth = null;
   protected static Gson gson = null;
 
-  VideoThumbnail() {
-  }
-
-  public VideoThumbnail(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public VideoThumbnail(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public VideoThumbnail fetch() throws APIException{
-    VideoThumbnail newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static VideoThumbnail fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<VideoThumbnail> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static VideoThumbnail fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<VideoThumbnail> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<VideoThumbnail> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<VideoThumbnail>)(
-      new APIRequest<VideoThumbnail>(context, "", "/", "GET", VideoThumbnail.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<VideoThumbnail>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", VideoThumbnail.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public VideoThumbnail() {
   }
 
   public String getId() {
@@ -277,199 +218,71 @@ public class VideoThumbnail extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldHeight() {
     return mHeight;
+  }
+
+  public VideoThumbnail setFieldHeight(Long value) {
+    this.mHeight = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public VideoThumbnail setFieldId(String value) {
+    this.mId = value;
+    return this;
+  }
+
   public Boolean getFieldIsPreferred() {
     return mIsPreferred;
+  }
+
+  public VideoThumbnail setFieldIsPreferred(Boolean value) {
+    this.mIsPreferred = value;
+    return this;
   }
 
   public String getFieldName() {
     return mName;
   }
 
+  public VideoThumbnail setFieldName(String value) {
+    this.mName = value;
+    return this;
+  }
+
   public Double getFieldScale() {
     return mScale;
+  }
+
+  public VideoThumbnail setFieldScale(Double value) {
+    this.mScale = value;
+    return this;
   }
 
   public String getFieldUri() {
     return mUri;
   }
 
+  public VideoThumbnail setFieldUri(String value) {
+    this.mUri = value;
+    return this;
+  }
+
   public Long getFieldWidth() {
     return mWidth;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<VideoThumbnail> {
-
-    VideoThumbnail lastResponse = null;
-    @Override
-    public VideoThumbnail getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "height",
-      "id",
-      "is_preferred",
-      "name",
-      "scale",
-      "uri",
-      "width",
-    };
-
-    @Override
-    public VideoThumbnail parseResponse(String response) throws APIException {
-      return VideoThumbnail.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public VideoThumbnail execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public VideoThumbnail execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<VideoThumbnail> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<VideoThumbnail> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, VideoThumbnail>() {
-           public VideoThumbnail apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestHeightField () {
-      return this.requestHeightField(true);
-    }
-    public APIRequestGet requestHeightField (boolean value) {
-      this.requestField("height", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestIsPreferredField () {
-      return this.requestIsPreferredField(true);
-    }
-    public APIRequestGet requestIsPreferredField (boolean value) {
-      this.requestField("is_preferred", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestScaleField () {
-      return this.requestScaleField(true);
-    }
-    public APIRequestGet requestScaleField (boolean value) {
-      this.requestField("scale", value);
-      return this;
-    }
-    public APIRequestGet requestUriField () {
-      return this.requestUriField(true);
-    }
-    public APIRequestGet requestUriField (boolean value) {
-      this.requestField("uri", value);
-      return this;
-    }
-    public APIRequestGet requestWidthField () {
-      return this.requestWidthField(true);
-    }
-    public APIRequestGet requestWidthField (boolean value) {
-      this.requestField("width", value);
-      return this;
-    }
+  public VideoThumbnail setFieldWidth(Long value) {
+    this.mWidth = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

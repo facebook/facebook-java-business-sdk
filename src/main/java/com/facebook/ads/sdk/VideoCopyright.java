@@ -338,16 +338,10 @@ public class VideoCopyright extends APINode {
   }
 
   public VideoCopyrightGeoGate getFieldOwnershipCountries() {
-    if (mOwnershipCountries != null) {
-      mOwnershipCountries.context = getContext();
-    }
     return mOwnershipCountries;
   }
 
   public CopyrightReferenceContainer getFieldReferenceFile() {
-    if (mReferenceFile != null) {
-      mReferenceFile.context = getContext();
-    }
     return mReferenceFile;
   }
 

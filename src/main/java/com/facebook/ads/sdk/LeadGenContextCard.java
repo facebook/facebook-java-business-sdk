@@ -505,48 +505,6 @@ public class LeadGenContextCard extends APINode {
     }
   }
 
-  public static enum EnumStatus {
-      @SerializedName("ACTIVE")
-      VALUE_ACTIVE("ACTIVE"),
-      @SerializedName("ARCHIVED")
-      VALUE_ARCHIVED("ARCHIVED"),
-      @SerializedName("DELETED")
-      VALUE_DELETED("DELETED"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      NULL(null);
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStyle {
-      @SerializedName("LIST_STYLE")
-      VALUE_LIST_STYLE("LIST_STYLE"),
-      @SerializedName("PARAGRAPH_STYLE")
-      VALUE_PARAGRAPH_STYLE("PARAGRAPH_STYLE"),
-      NULL(null);
-
-      private String value;
-
-      private EnumStyle(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

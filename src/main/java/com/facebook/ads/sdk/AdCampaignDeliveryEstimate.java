@@ -69,66 +69,7 @@ public class AdCampaignDeliveryEstimate extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCampaignDeliveryEstimate() {
-  }
-
-  public AdCampaignDeliveryEstimate(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCampaignDeliveryEstimate(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCampaignDeliveryEstimate fetch() throws APIException{
-    AdCampaignDeliveryEstimate newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCampaignDeliveryEstimate fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCampaignDeliveryEstimate> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCampaignDeliveryEstimate fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCampaignDeliveryEstimate> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCampaignDeliveryEstimate> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCampaignDeliveryEstimate>)(
-      new APIRequest<AdCampaignDeliveryEstimate>(context, "", "/", "GET", AdCampaignDeliveryEstimate.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCampaignDeliveryEstimate>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCampaignDeliveryEstimate.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCampaignDeliveryEstimate() {
   }
 
   public String getId() {
@@ -275,187 +216,67 @@ public class AdCampaignDeliveryEstimate extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Object getFieldBidEstimate() {
     return mBidEstimate;
+  }
+
+  public AdCampaignDeliveryEstimate setFieldBidEstimate(Object value) {
+    this.mBidEstimate = value;
+    return this;
   }
 
   public List<OutcomePredictionPoint> getFieldDailyOutcomesCurve() {
     return mDailyOutcomesCurve;
   }
 
+  public AdCampaignDeliveryEstimate setFieldDailyOutcomesCurve(List<OutcomePredictionPoint> value) {
+    this.mDailyOutcomesCurve = value;
+    return this;
+  }
+
+  public AdCampaignDeliveryEstimate setFieldDailyOutcomesCurve(String value) {
+    Type type = new TypeToken<List<OutcomePredictionPoint>>(){}.getType();
+    this.mDailyOutcomesCurve = OutcomePredictionPoint.getGson().fromJson(value, type);
+    return this;
+  }
   public Long getFieldEstimateDau() {
     return mEstimateDau;
+  }
+
+  public AdCampaignDeliveryEstimate setFieldEstimateDau(Long value) {
+    this.mEstimateDau = value;
+    return this;
   }
 
   public Long getFieldEstimateMau() {
     return mEstimateMau;
   }
 
+  public AdCampaignDeliveryEstimate setFieldEstimateMau(Long value) {
+    this.mEstimateMau = value;
+    return this;
+  }
+
   public Boolean getFieldEstimateReady() {
     return mEstimateReady;
+  }
+
+  public AdCampaignDeliveryEstimate setFieldEstimateReady(Boolean value) {
+    this.mEstimateReady = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCampaignDeliveryEstimate> {
-
-    AdCampaignDeliveryEstimate lastResponse = null;
-    @Override
-    public AdCampaignDeliveryEstimate getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "bid_estimate",
-      "daily_outcomes_curve",
-      "estimate_dau",
-      "estimate_mau",
-      "estimate_ready",
-      "id",
-    };
-
-    @Override
-    public AdCampaignDeliveryEstimate parseResponse(String response) throws APIException {
-      return AdCampaignDeliveryEstimate.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCampaignDeliveryEstimate execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCampaignDeliveryEstimate execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCampaignDeliveryEstimate> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCampaignDeliveryEstimate> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCampaignDeliveryEstimate>() {
-           public AdCampaignDeliveryEstimate apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestBidEstimateField () {
-      return this.requestBidEstimateField(true);
-    }
-    public APIRequestGet requestBidEstimateField (boolean value) {
-      this.requestField("bid_estimate", value);
-      return this;
-    }
-    public APIRequestGet requestDailyOutcomesCurveField () {
-      return this.requestDailyOutcomesCurveField(true);
-    }
-    public APIRequestGet requestDailyOutcomesCurveField (boolean value) {
-      this.requestField("daily_outcomes_curve", value);
-      return this;
-    }
-    public APIRequestGet requestEstimateDauField () {
-      return this.requestEstimateDauField(true);
-    }
-    public APIRequestGet requestEstimateDauField (boolean value) {
-      this.requestField("estimate_dau", value);
-      return this;
-    }
-    public APIRequestGet requestEstimateMauField () {
-      return this.requestEstimateMauField(true);
-    }
-    public APIRequestGet requestEstimateMauField (boolean value) {
-      this.requestField("estimate_mau", value);
-      return this;
-    }
-    public APIRequestGet requestEstimateReadyField () {
-      return this.requestEstimateReadyField(true);
-    }
-    public APIRequestGet requestEstimateReadyField (boolean value) {
-      this.requestField("estimate_ready", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCampaignDeliveryEstimate setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
   public static enum EnumOptimizationGoal {
       @SerializedName("NONE")

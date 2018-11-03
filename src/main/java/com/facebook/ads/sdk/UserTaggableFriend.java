@@ -67,66 +67,7 @@ public class UserTaggableFriend extends APINode {
   private String mName = null;
   protected static Gson gson = null;
 
-  UserTaggableFriend() {
-  }
-
-  public UserTaggableFriend(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public UserTaggableFriend(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public UserTaggableFriend fetch() throws APIException{
-    UserTaggableFriend newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static UserTaggableFriend fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<UserTaggableFriend> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static UserTaggableFriend fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<UserTaggableFriend> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<UserTaggableFriend> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<UserTaggableFriend>)(
-      new APIRequest<UserTaggableFriend>(context, "", "/", "GET", UserTaggableFriend.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<UserTaggableFriend>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", UserTaggableFriend.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public UserTaggableFriend() {
   }
 
   public String getId() {
@@ -274,11 +215,7 @@ public class UserTaggableFriend extends APINode {
   }
 
   public APIRequestGetPicture getPicture() {
-    return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
+    return new APIRequestGetPicture(this.getId(), context);
   }
 
 
@@ -286,20 +223,45 @@ public class UserTaggableFriend extends APINode {
     return mFirstName;
   }
 
+  public UserTaggableFriend setFieldFirstName(String value) {
+    this.mFirstName = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
+  }
+
+  public UserTaggableFriend setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public String getFieldLastName() {
     return mLastName;
   }
 
+  public UserTaggableFriend setFieldLastName(String value) {
+    this.mLastName = value;
+    return this;
+  }
+
   public String getFieldMiddleName() {
     return mMiddleName;
   }
 
+  public UserTaggableFriend setFieldMiddleName(String value) {
+    this.mMiddleName = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public UserTaggableFriend setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
 
@@ -531,149 +493,6 @@ public class UserTaggableFriend extends APINode {
     }
     public APIRequestGetPicture requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGet extends APIRequest<UserTaggableFriend> {
-
-    UserTaggableFriend lastResponse = null;
-    @Override
-    public UserTaggableFriend getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "first_name",
-      "id",
-      "last_name",
-      "middle_name",
-      "name",
-    };
-
-    @Override
-    public UserTaggableFriend parseResponse(String response) throws APIException {
-      return UserTaggableFriend.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public UserTaggableFriend execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public UserTaggableFriend execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<UserTaggableFriend> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<UserTaggableFriend> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, UserTaggableFriend>() {
-           public UserTaggableFriend apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestFirstNameField () {
-      return this.requestFirstNameField(true);
-    }
-    public APIRequestGet requestFirstNameField (boolean value) {
-      this.requestField("first_name", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestLastNameField () {
-      return this.requestLastNameField(true);
-    }
-    public APIRequestGet requestLastNameField (boolean value) {
-      this.requestField("last_name", value);
-      return this;
-    }
-    public APIRequestGet requestMiddleNameField () {
-      return this.requestMiddleNameField(true);
-    }
-    public APIRequestGet requestMiddleNameField (boolean value) {
-      this.requestField("middle_name", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
       return this;
     }
   }

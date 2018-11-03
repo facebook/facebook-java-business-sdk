@@ -73,66 +73,7 @@ public class AdDeliveryInsights extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdDeliveryInsights() {
-  }
-
-  public AdDeliveryInsights(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdDeliveryInsights(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdDeliveryInsights fetch() throws APIException{
-    AdDeliveryInsights newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdDeliveryInsights fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdDeliveryInsights> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdDeliveryInsights fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdDeliveryInsights> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdDeliveryInsights> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdDeliveryInsights>)(
-      new APIRequest<AdDeliveryInsights>(context, "", "/", "GET", AdDeliveryInsights.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdDeliveryInsights>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdDeliveryInsights.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdDeliveryInsights() {
   }
 
   public String getId() {
@@ -279,211 +220,80 @@ public class AdDeliveryInsights extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAdSetId() {
     return mAdSetId;
+  }
+
+  public AdDeliveryInsights setFieldAdSetId(String value) {
+    this.mAdSetId = value;
+    return this;
   }
 
   public Object getFieldAuctionCompetitiveness() {
     return mAuctionCompetitiveness;
   }
 
+  public AdDeliveryInsights setFieldAuctionCompetitiveness(Object value) {
+    this.mAuctionCompetitiveness = value;
+    return this;
+  }
+
   public Object getFieldAuctionOverlap() {
     return mAuctionOverlap;
+  }
+
+  public AdDeliveryInsights setFieldAuctionOverlap(Object value) {
+    this.mAuctionOverlap = value;
+    return this;
   }
 
   public Object getFieldAudienceSaturation() {
     return mAudienceSaturation;
   }
 
+  public AdDeliveryInsights setFieldAudienceSaturation(Object value) {
+    this.mAudienceSaturation = value;
+    return this;
+  }
+
   public String getFieldDateStart() {
     return mDateStart;
+  }
+
+  public AdDeliveryInsights setFieldDateStart(String value) {
+    this.mDateStart = value;
+    return this;
   }
 
   public String getFieldDateStop() {
     return mDateStop;
   }
 
+  public AdDeliveryInsights setFieldDateStop(String value) {
+    this.mDateStop = value;
+    return this;
+  }
+
   public List<String> getFieldReportUris() {
     return mReportUris;
+  }
+
+  public AdDeliveryInsights setFieldReportUris(List<String> value) {
+    this.mReportUris = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdDeliveryInsights> {
-
-    AdDeliveryInsights lastResponse = null;
-    @Override
-    public AdDeliveryInsights getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "ad_set_id",
-      "auction_competitiveness",
-      "auction_overlap",
-      "audience_saturation",
-      "date_start",
-      "date_stop",
-      "report_uris",
-      "id",
-    };
-
-    @Override
-    public AdDeliveryInsights parseResponse(String response) throws APIException {
-      return AdDeliveryInsights.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdDeliveryInsights execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdDeliveryInsights execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdDeliveryInsights> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdDeliveryInsights> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdDeliveryInsights>() {
-           public AdDeliveryInsights apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAdSetIdField () {
-      return this.requestAdSetIdField(true);
-    }
-    public APIRequestGet requestAdSetIdField (boolean value) {
-      this.requestField("ad_set_id", value);
-      return this;
-    }
-    public APIRequestGet requestAuctionCompetitivenessField () {
-      return this.requestAuctionCompetitivenessField(true);
-    }
-    public APIRequestGet requestAuctionCompetitivenessField (boolean value) {
-      this.requestField("auction_competitiveness", value);
-      return this;
-    }
-    public APIRequestGet requestAuctionOverlapField () {
-      return this.requestAuctionOverlapField(true);
-    }
-    public APIRequestGet requestAuctionOverlapField (boolean value) {
-      this.requestField("auction_overlap", value);
-      return this;
-    }
-    public APIRequestGet requestAudienceSaturationField () {
-      return this.requestAudienceSaturationField(true);
-    }
-    public APIRequestGet requestAudienceSaturationField (boolean value) {
-      this.requestField("audience_saturation", value);
-      return this;
-    }
-    public APIRequestGet requestDateStartField () {
-      return this.requestDateStartField(true);
-    }
-    public APIRequestGet requestDateStartField (boolean value) {
-      this.requestField("date_start", value);
-      return this;
-    }
-    public APIRequestGet requestDateStopField () {
-      return this.requestDateStopField(true);
-    }
-    public APIRequestGet requestDateStopField (boolean value) {
-      this.requestField("date_stop", value);
-      return this;
-    }
-    public APIRequestGet requestReportUrisField () {
-      return this.requestReportUrisField(true);
-    }
-    public APIRequestGet requestReportUrisField (boolean value) {
-      this.requestField("report_uris", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdDeliveryInsights setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

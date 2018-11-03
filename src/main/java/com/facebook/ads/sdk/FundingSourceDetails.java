@@ -65,66 +65,7 @@ public class FundingSourceDetails extends APINode {
   private Long mType = null;
   protected static Gson gson = null;
 
-  FundingSourceDetails() {
-  }
-
-  public FundingSourceDetails(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public FundingSourceDetails(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public FundingSourceDetails fetch() throws APIException{
-    FundingSourceDetails newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static FundingSourceDetails fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<FundingSourceDetails> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static FundingSourceDetails fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<FundingSourceDetails> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<FundingSourceDetails> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<FundingSourceDetails>)(
-      new APIRequest<FundingSourceDetails>(context, "", "/", "GET", FundingSourceDetails.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<FundingSourceDetails>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", FundingSourceDetails.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public FundingSourceDetails() {
   }
 
   public String getId() {
@@ -271,166 +212,49 @@ public class FundingSourceDetails extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public FundingSourceDetailsCoupon getFieldCoupon() {
-    if (mCoupon != null) {
-      mCoupon.context = getContext();
-    }
     return mCoupon;
   }
 
+  public FundingSourceDetails setFieldCoupon(FundingSourceDetailsCoupon value) {
+    this.mCoupon = value;
+    return this;
+  }
+
+  public FundingSourceDetails setFieldCoupon(String value) {
+    Type type = new TypeToken<FundingSourceDetailsCoupon>(){}.getType();
+    this.mCoupon = FundingSourceDetailsCoupon.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldDisplayString() {
     return mDisplayString;
+  }
+
+  public FundingSourceDetails setFieldDisplayString(String value) {
+    this.mDisplayString = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public FundingSourceDetails setFieldId(String value) {
+    this.mId = value;
+    return this;
+  }
+
   public Long getFieldType() {
     return mType;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<FundingSourceDetails> {
-
-    FundingSourceDetails lastResponse = null;
-    @Override
-    public FundingSourceDetails getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "coupon",
-      "display_string",
-      "id",
-      "type",
-    };
-
-    @Override
-    public FundingSourceDetails parseResponse(String response) throws APIException {
-      return FundingSourceDetails.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public FundingSourceDetails execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public FundingSourceDetails execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<FundingSourceDetails> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<FundingSourceDetails> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, FundingSourceDetails>() {
-           public FundingSourceDetails apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCouponField () {
-      return this.requestCouponField(true);
-    }
-    public APIRequestGet requestCouponField (boolean value) {
-      this.requestField("coupon", value);
-      return this;
-    }
-    public APIRequestGet requestDisplayStringField () {
-      return this.requestDisplayStringField(true);
-    }
-    public APIRequestGet requestDisplayStringField (boolean value) {
-      this.requestField("display_string", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGet requestTypeField (boolean value) {
-      this.requestField("type", value);
-      return this;
-    }
+  public FundingSourceDetails setFieldType(Long value) {
+    this.mType = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

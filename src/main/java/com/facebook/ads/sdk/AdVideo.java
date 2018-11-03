@@ -557,9 +557,6 @@ public class AdVideo extends APINode {
   }
 
   public Privacy getFieldPrivacy() {
-    if (mPrivacy != null) {
-      mPrivacy.context = getContext();
-    }
     return mPrivacy;
   }
 
@@ -1911,6 +1908,7 @@ public class AdVideo extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "privacy_info_url",
       "produced_by",
       "products",
       "promotion_eligible",
@@ -2796,6 +2794,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostShareDPages requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetCrosspostShareDPages requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetCrosspostShareDPages requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
       return this;
     }
     public APIRequestGetCrosspostShareDPages requestProducedByField () {
@@ -4715,6 +4720,7 @@ public class AdVideo extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "privacy_info_url",
       "produced_by",
       "products",
       "promotion_eligible",
@@ -5600,6 +5606,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetSponsorTags requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
       return this;
     }
     public APIRequestGetSponsorTags requestProducedByField () {
@@ -7728,6 +7741,8 @@ public class AdVideo extends APINode {
       VALUE_BELL_POLL("BELL_POLL"),
       @SerializedName("CIVIC_PROPOSAL_COVER_VIDEO")
       VALUE_CIVIC_PROPOSAL_COVER_VIDEO("CIVIC_PROPOSAL_COVER_VIDEO"),
+      @SerializedName("HEURISTIC_CLUSTER_VIDEO")
+      VALUE_HEURISTIC_CLUSTER_VIDEO("HEURISTIC_CLUSTER_VIDEO"),
       NULL(null);
 
       private String value;

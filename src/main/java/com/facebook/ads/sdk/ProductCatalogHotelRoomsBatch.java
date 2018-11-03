@@ -67,66 +67,7 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ProductCatalogHotelRoomsBatch() {
-  }
-
-  public ProductCatalogHotelRoomsBatch(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ProductCatalogHotelRoomsBatch(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ProductCatalogHotelRoomsBatch fetch() throws APIException{
-    ProductCatalogHotelRoomsBatch newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ProductCatalogHotelRoomsBatch fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ProductCatalogHotelRoomsBatch> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ProductCatalogHotelRoomsBatch fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ProductCatalogHotelRoomsBatch> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ProductCatalogHotelRoomsBatch> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ProductCatalogHotelRoomsBatch>)(
-      new APIRequest<ProductCatalogHotelRoomsBatch>(context, "", "/", "GET", ProductCatalogHotelRoomsBatch.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ProductCatalogHotelRoomsBatch>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ProductCatalogHotelRoomsBatch.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ProductCatalogHotelRoomsBatch() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<Object> getFieldErrors() {
     return mErrors;
+  }
+
+  public ProductCatalogHotelRoomsBatch setFieldErrors(List<Object> value) {
+    this.mErrors = value;
+    return this;
   }
 
   public Long getFieldErrorsTotalCount() {
     return mErrorsTotalCount;
   }
 
+  public ProductCatalogHotelRoomsBatch setFieldErrorsTotalCount(Long value) {
+    this.mErrorsTotalCount = value;
+    return this;
+  }
+
   public String getFieldHandle() {
     return mHandle;
+  }
+
+  public ProductCatalogHotelRoomsBatch setFieldHandle(String value) {
+    this.mHandle = value;
+    return this;
   }
 
   public String getFieldStatus() {
     return mStatus;
   }
 
+  public ProductCatalogHotelRoomsBatch setFieldStatus(String value) {
+    this.mStatus = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ProductCatalogHotelRoomsBatch> {
-
-    ProductCatalogHotelRoomsBatch lastResponse = null;
-    @Override
-    public ProductCatalogHotelRoomsBatch getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "errors",
-      "errors_total_count",
-      "handle",
-      "status",
-      "id",
-    };
-
-    @Override
-    public ProductCatalogHotelRoomsBatch parseResponse(String response) throws APIException {
-      return ProductCatalogHotelRoomsBatch.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ProductCatalogHotelRoomsBatch execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductCatalogHotelRoomsBatch execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ProductCatalogHotelRoomsBatch> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ProductCatalogHotelRoomsBatch> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ProductCatalogHotelRoomsBatch>() {
-           public ProductCatalogHotelRoomsBatch apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestErrorsField () {
-      return this.requestErrorsField(true);
-    }
-    public APIRequestGet requestErrorsField (boolean value) {
-      this.requestField("errors", value);
-      return this;
-    }
-    public APIRequestGet requestErrorsTotalCountField () {
-      return this.requestErrorsTotalCountField(true);
-    }
-    public APIRequestGet requestErrorsTotalCountField (boolean value) {
-      this.requestField("errors_total_count", value);
-      return this;
-    }
-    public APIRequestGet requestHandleField () {
-      return this.requestHandleField(true);
-    }
-    public APIRequestGet requestHandleField (boolean value) {
-      this.requestField("handle", value);
-      return this;
-    }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ProductCatalogHotelRoomsBatch setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

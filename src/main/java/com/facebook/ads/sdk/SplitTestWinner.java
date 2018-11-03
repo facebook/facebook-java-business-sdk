@@ -65,66 +65,7 @@ public class SplitTestWinner extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  SplitTestWinner() {
-  }
-
-  public SplitTestWinner(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public SplitTestWinner(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public SplitTestWinner fetch() throws APIException{
-    SplitTestWinner newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static SplitTestWinner fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<SplitTestWinner> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static SplitTestWinner fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<SplitTestWinner> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<SplitTestWinner> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<SplitTestWinner>)(
-      new APIRequest<SplitTestWinner>(context, "", "/", "GET", SplitTestWinner.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<SplitTestWinner>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", SplitTestWinner.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public SplitTestWinner() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class SplitTestWinner extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAdObjectLevel() {
     return mAdObjectLevel;
+  }
+
+  public SplitTestWinner setFieldAdObjectLevel(String value) {
+    this.mAdObjectLevel = value;
+    return this;
   }
 
   public List<Object> getFieldConfidences() {
     return mConfidences;
   }
 
+  public SplitTestWinner setFieldConfidences(List<Object> value) {
+    this.mConfidences = value;
+    return this;
+  }
+
   public String getFieldWinnerAdObjectId() {
     return mWinnerAdObjectId;
+  }
+
+  public SplitTestWinner setFieldWinnerAdObjectId(String value) {
+    this.mWinnerAdObjectId = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<SplitTestWinner> {
-
-    SplitTestWinner lastResponse = null;
-    @Override
-    public SplitTestWinner getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "ad_object_level",
-      "confidences",
-      "winner_ad_object_id",
-      "id",
-    };
-
-    @Override
-    public SplitTestWinner parseResponse(String response) throws APIException {
-      return SplitTestWinner.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public SplitTestWinner execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public SplitTestWinner execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<SplitTestWinner> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<SplitTestWinner> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, SplitTestWinner>() {
-           public SplitTestWinner apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAdObjectLevelField () {
-      return this.requestAdObjectLevelField(true);
-    }
-    public APIRequestGet requestAdObjectLevelField (boolean value) {
-      this.requestField("ad_object_level", value);
-      return this;
-    }
-    public APIRequestGet requestConfidencesField () {
-      return this.requestConfidencesField(true);
-    }
-    public APIRequestGet requestConfidencesField (boolean value) {
-      this.requestField("confidences", value);
-      return this;
-    }
-    public APIRequestGet requestWinnerAdObjectIdField () {
-      return this.requestWinnerAdObjectIdField(true);
-    }
-    public APIRequestGet requestWinnerAdObjectIdField (boolean value) {
-      this.requestField("winner_ad_object_id", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public SplitTestWinner setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

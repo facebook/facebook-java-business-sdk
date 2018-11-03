@@ -73,6 +73,8 @@ public class Vehicle extends APINode {
   private String mDateFirstOnLot = null;
   @SerializedName("dealer_communication_channel")
   private String mDealerCommunicationChannel = null;
+  @SerializedName("dealer_email")
+  private String mDealerEmail = null;
   @SerializedName("dealer_id")
   private String mDealerId = null;
   @SerializedName("dealer_name")
@@ -393,6 +395,10 @@ public class Vehicle extends APINode {
     return mDealerCommunicationChannel;
   }
 
+  public String getFieldDealerEmail() {
+    return mDealerEmail;
+  }
+
   public String getFieldDealerId() {
     return mDealerId;
   }
@@ -554,6 +560,7 @@ public class Vehicle extends APINode {
       "custom_label_0",
       "date_first_on_lot",
       "dealer_communication_channel",
+      "dealer_email",
       "dealer_id",
       "dealer_name",
       "dealer_phone",
@@ -739,6 +746,13 @@ public class Vehicle extends APINode {
     }
     public APIRequestGet requestDealerCommunicationChannelField (boolean value) {
       this.requestField("dealer_communication_channel", value);
+      return this;
+    }
+    public APIRequestGet requestDealerEmailField () {
+      return this.requestDealerEmailField(true);
+    }
+    public APIRequestGet requestDealerEmailField (boolean value) {
+      this.requestField("dealer_email", value);
       return this;
     }
     public APIRequestGet requestDealerIdField () {
@@ -1005,6 +1019,7 @@ public class Vehicle extends APINode {
     this.mCustomLabel0 = instance.mCustomLabel0;
     this.mDateFirstOnLot = instance.mDateFirstOnLot;
     this.mDealerCommunicationChannel = instance.mDealerCommunicationChannel;
+    this.mDealerEmail = instance.mDealerEmail;
     this.mDealerId = instance.mDealerId;
     this.mDealerName = instance.mDealerName;
     this.mDealerPhone = instance.mDealerPhone;

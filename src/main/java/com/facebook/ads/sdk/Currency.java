@@ -71,66 +71,7 @@ public class Currency extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  Currency() {
-  }
-
-  public Currency(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public Currency(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public Currency fetch() throws APIException{
-    Currency newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static Currency fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<Currency> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static Currency fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<Currency> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<Currency> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<Currency>)(
-      new APIRequest<Currency>(context, "", "/", "GET", Currency.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<Currency>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", Currency.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public Currency() {
   }
 
   public String getId() {
@@ -277,199 +218,71 @@ public class Currency extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Double getFieldCurrencyExchange() {
     return mCurrencyExchange;
+  }
+
+  public Currency setFieldCurrencyExchange(Double value) {
+    this.mCurrencyExchange = value;
+    return this;
   }
 
   public Double getFieldCurrencyExchangeInverse() {
     return mCurrencyExchangeInverse;
   }
 
+  public Currency setFieldCurrencyExchangeInverse(Double value) {
+    this.mCurrencyExchangeInverse = value;
+    return this;
+  }
+
   public Long getFieldCurrencyOffset() {
     return mCurrencyOffset;
+  }
+
+  public Currency setFieldCurrencyOffset(Long value) {
+    this.mCurrencyOffset = value;
+    return this;
   }
 
   public Double getFieldUsdExchange() {
     return mUsdExchange;
   }
 
+  public Currency setFieldUsdExchange(Double value) {
+    this.mUsdExchange = value;
+    return this;
+  }
+
   public Double getFieldUsdExchangeInverse() {
     return mUsdExchangeInverse;
+  }
+
+  public Currency setFieldUsdExchangeInverse(Double value) {
+    this.mUsdExchangeInverse = value;
+    return this;
   }
 
   public String getFieldUserCurrency() {
     return mUserCurrency;
   }
 
+  public Currency setFieldUserCurrency(String value) {
+    this.mUserCurrency = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<Currency> {
-
-    Currency lastResponse = null;
-    @Override
-    public Currency getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "currency_exchange",
-      "currency_exchange_inverse",
-      "currency_offset",
-      "usd_exchange",
-      "usd_exchange_inverse",
-      "user_currency",
-      "id",
-    };
-
-    @Override
-    public Currency parseResponse(String response) throws APIException {
-      return Currency.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public Currency execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Currency execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<Currency> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Currency> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, Currency>() {
-           public Currency apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCurrencyExchangeField () {
-      return this.requestCurrencyExchangeField(true);
-    }
-    public APIRequestGet requestCurrencyExchangeField (boolean value) {
-      this.requestField("currency_exchange", value);
-      return this;
-    }
-    public APIRequestGet requestCurrencyExchangeInverseField () {
-      return this.requestCurrencyExchangeInverseField(true);
-    }
-    public APIRequestGet requestCurrencyExchangeInverseField (boolean value) {
-      this.requestField("currency_exchange_inverse", value);
-      return this;
-    }
-    public APIRequestGet requestCurrencyOffsetField () {
-      return this.requestCurrencyOffsetField(true);
-    }
-    public APIRequestGet requestCurrencyOffsetField (boolean value) {
-      this.requestField("currency_offset", value);
-      return this;
-    }
-    public APIRequestGet requestUsdExchangeField () {
-      return this.requestUsdExchangeField(true);
-    }
-    public APIRequestGet requestUsdExchangeField (boolean value) {
-      this.requestField("usd_exchange", value);
-      return this;
-    }
-    public APIRequestGet requestUsdExchangeInverseField () {
-      return this.requestUsdExchangeInverseField(true);
-    }
-    public APIRequestGet requestUsdExchangeInverseField (boolean value) {
-      this.requestField("usd_exchange_inverse", value);
-      return this;
-    }
-    public APIRequestGet requestUserCurrencyField () {
-      return this.requestUserCurrencyField(true);
-    }
-    public APIRequestGet requestUserCurrencyField (boolean value) {
-      this.requestField("user_currency", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public Currency setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

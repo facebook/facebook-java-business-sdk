@@ -89,66 +89,7 @@ public class AdCampaignGroupStats extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCampaignGroupStats() {
-  }
-
-  public AdCampaignGroupStats(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCampaignGroupStats(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCampaignGroupStats fetch() throws APIException{
-    AdCampaignGroupStats newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCampaignGroupStats fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCampaignGroupStats> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCampaignGroupStats fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCampaignGroupStats> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCampaignGroupStats> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCampaignGroupStats>)(
-      new APIRequest<AdCampaignGroupStats>(context, "", "/", "GET", AdCampaignGroupStats.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCampaignGroupStats>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCampaignGroupStats.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCampaignGroupStats() {
   }
 
   public String getId() {
@@ -295,307 +236,152 @@ public class AdCampaignGroupStats extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Map<String, Long> getFieldActions() {
     return mActions;
+  }
+
+  public AdCampaignGroupStats setFieldActions(Map<String, Long> value) {
+    this.mActions = value;
+    return this;
   }
 
   public String getFieldCampaignGroupId() {
     return mCampaignGroupId;
   }
 
+  public AdCampaignGroupStats setFieldCampaignGroupId(String value) {
+    this.mCampaignGroupId = value;
+    return this;
+  }
+
   public Long getFieldClicks() {
     return mClicks;
+  }
+
+  public AdCampaignGroupStats setFieldClicks(Long value) {
+    this.mClicks = value;
+    return this;
   }
 
   public String getFieldEndTime() {
     return mEndTime;
   }
 
+  public AdCampaignGroupStats setFieldEndTime(String value) {
+    this.mEndTime = value;
+    return this;
+  }
+
   public Long getFieldImpressions() {
     return mImpressions;
+  }
+
+  public AdCampaignGroupStats setFieldImpressions(Long value) {
+    this.mImpressions = value;
+    return this;
   }
 
   public Map<String, Long> getFieldInlineActions() {
     return mInlineActions;
   }
 
+  public AdCampaignGroupStats setFieldInlineActions(Map<String, Long> value) {
+    this.mInlineActions = value;
+    return this;
+  }
+
   public Long getFieldSocialClicks() {
     return mSocialClicks;
+  }
+
+  public AdCampaignGroupStats setFieldSocialClicks(Long value) {
+    this.mSocialClicks = value;
+    return this;
   }
 
   public Long getFieldSocialImpressions() {
     return mSocialImpressions;
   }
 
+  public AdCampaignGroupStats setFieldSocialImpressions(Long value) {
+    this.mSocialImpressions = value;
+    return this;
+  }
+
   public Long getFieldSocialSpent() {
     return mSocialSpent;
+  }
+
+  public AdCampaignGroupStats setFieldSocialSpent(Long value) {
+    this.mSocialSpent = value;
+    return this;
   }
 
   public Long getFieldSocialUniqueClicks() {
     return mSocialUniqueClicks;
   }
 
+  public AdCampaignGroupStats setFieldSocialUniqueClicks(Long value) {
+    this.mSocialUniqueClicks = value;
+    return this;
+  }
+
   public Long getFieldSocialUniqueImpressions() {
     return mSocialUniqueImpressions;
+  }
+
+  public AdCampaignGroupStats setFieldSocialUniqueImpressions(Long value) {
+    this.mSocialUniqueImpressions = value;
+    return this;
   }
 
   public Long getFieldSpent() {
     return mSpent;
   }
 
+  public AdCampaignGroupStats setFieldSpent(Long value) {
+    this.mSpent = value;
+    return this;
+  }
+
   public String getFieldStartTime() {
     return mStartTime;
+  }
+
+  public AdCampaignGroupStats setFieldStartTime(String value) {
+    this.mStartTime = value;
+    return this;
   }
 
   public Long getFieldUniqueClicks() {
     return mUniqueClicks;
   }
 
+  public AdCampaignGroupStats setFieldUniqueClicks(Long value) {
+    this.mUniqueClicks = value;
+    return this;
+  }
+
   public Long getFieldUniqueImpressions() {
     return mUniqueImpressions;
+  }
+
+  public AdCampaignGroupStats setFieldUniqueImpressions(Long value) {
+    this.mUniqueImpressions = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCampaignGroupStats> {
-
-    AdCampaignGroupStats lastResponse = null;
-    @Override
-    public AdCampaignGroupStats getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "actions",
-      "campaign_group_id",
-      "clicks",
-      "end_time",
-      "impressions",
-      "inline_actions",
-      "social_clicks",
-      "social_impressions",
-      "social_spent",
-      "social_unique_clicks",
-      "social_unique_impressions",
-      "spent",
-      "start_time",
-      "unique_clicks",
-      "unique_impressions",
-      "id",
-    };
-
-    @Override
-    public AdCampaignGroupStats parseResponse(String response) throws APIException {
-      return AdCampaignGroupStats.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCampaignGroupStats execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCampaignGroupStats execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCampaignGroupStats> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCampaignGroupStats> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCampaignGroupStats>() {
-           public AdCampaignGroupStats apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestActionsField () {
-      return this.requestActionsField(true);
-    }
-    public APIRequestGet requestActionsField (boolean value) {
-      this.requestField("actions", value);
-      return this;
-    }
-    public APIRequestGet requestCampaignGroupIdField () {
-      return this.requestCampaignGroupIdField(true);
-    }
-    public APIRequestGet requestCampaignGroupIdField (boolean value) {
-      this.requestField("campaign_group_id", value);
-      return this;
-    }
-    public APIRequestGet requestClicksField () {
-      return this.requestClicksField(true);
-    }
-    public APIRequestGet requestClicksField (boolean value) {
-      this.requestField("clicks", value);
-      return this;
-    }
-    public APIRequestGet requestEndTimeField () {
-      return this.requestEndTimeField(true);
-    }
-    public APIRequestGet requestEndTimeField (boolean value) {
-      this.requestField("end_time", value);
-      return this;
-    }
-    public APIRequestGet requestImpressionsField () {
-      return this.requestImpressionsField(true);
-    }
-    public APIRequestGet requestImpressionsField (boolean value) {
-      this.requestField("impressions", value);
-      return this;
-    }
-    public APIRequestGet requestInlineActionsField () {
-      return this.requestInlineActionsField(true);
-    }
-    public APIRequestGet requestInlineActionsField (boolean value) {
-      this.requestField("inline_actions", value);
-      return this;
-    }
-    public APIRequestGet requestSocialClicksField () {
-      return this.requestSocialClicksField(true);
-    }
-    public APIRequestGet requestSocialClicksField (boolean value) {
-      this.requestField("social_clicks", value);
-      return this;
-    }
-    public APIRequestGet requestSocialImpressionsField () {
-      return this.requestSocialImpressionsField(true);
-    }
-    public APIRequestGet requestSocialImpressionsField (boolean value) {
-      this.requestField("social_impressions", value);
-      return this;
-    }
-    public APIRequestGet requestSocialSpentField () {
-      return this.requestSocialSpentField(true);
-    }
-    public APIRequestGet requestSocialSpentField (boolean value) {
-      this.requestField("social_spent", value);
-      return this;
-    }
-    public APIRequestGet requestSocialUniqueClicksField () {
-      return this.requestSocialUniqueClicksField(true);
-    }
-    public APIRequestGet requestSocialUniqueClicksField (boolean value) {
-      this.requestField("social_unique_clicks", value);
-      return this;
-    }
-    public APIRequestGet requestSocialUniqueImpressionsField () {
-      return this.requestSocialUniqueImpressionsField(true);
-    }
-    public APIRequestGet requestSocialUniqueImpressionsField (boolean value) {
-      this.requestField("social_unique_impressions", value);
-      return this;
-    }
-    public APIRequestGet requestSpentField () {
-      return this.requestSpentField(true);
-    }
-    public APIRequestGet requestSpentField (boolean value) {
-      this.requestField("spent", value);
-      return this;
-    }
-    public APIRequestGet requestStartTimeField () {
-      return this.requestStartTimeField(true);
-    }
-    public APIRequestGet requestStartTimeField (boolean value) {
-      this.requestField("start_time", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueClicksField () {
-      return this.requestUniqueClicksField(true);
-    }
-    public APIRequestGet requestUniqueClicksField (boolean value) {
-      this.requestField("unique_clicks", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueImpressionsField () {
-      return this.requestUniqueImpressionsField(true);
-    }
-    public APIRequestGet requestUniqueImpressionsField (boolean value) {
-      this.requestField("unique_impressions", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCampaignGroupStats setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

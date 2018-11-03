@@ -67,66 +67,7 @@ public class BilledAmountDetails extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  BilledAmountDetails() {
-  }
-
-  public BilledAmountDetails(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public BilledAmountDetails(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public BilledAmountDetails fetch() throws APIException{
-    BilledAmountDetails newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static BilledAmountDetails fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<BilledAmountDetails> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static BilledAmountDetails fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<BilledAmountDetails> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<BilledAmountDetails> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<BilledAmountDetails>)(
-      new APIRequest<BilledAmountDetails>(context, "", "/", "GET", BilledAmountDetails.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<BilledAmountDetails>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", BilledAmountDetails.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public BilledAmountDetails() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class BilledAmountDetails extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldCurrency() {
     return mCurrency;
+  }
+
+  public BilledAmountDetails setFieldCurrency(String value) {
+    this.mCurrency = value;
+    return this;
   }
 
   public String getFieldNetAmount() {
     return mNetAmount;
   }
 
+  public BilledAmountDetails setFieldNetAmount(String value) {
+    this.mNetAmount = value;
+    return this;
+  }
+
   public String getFieldTaxAmount() {
     return mTaxAmount;
+  }
+
+  public BilledAmountDetails setFieldTaxAmount(String value) {
+    this.mTaxAmount = value;
+    return this;
   }
 
   public String getFieldTotalAmount() {
     return mTotalAmount;
   }
 
+  public BilledAmountDetails setFieldTotalAmount(String value) {
+    this.mTotalAmount = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<BilledAmountDetails> {
-
-    BilledAmountDetails lastResponse = null;
-    @Override
-    public BilledAmountDetails getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "currency",
-      "net_amount",
-      "tax_amount",
-      "total_amount",
-      "id",
-    };
-
-    @Override
-    public BilledAmountDetails parseResponse(String response) throws APIException {
-      return BilledAmountDetails.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public BilledAmountDetails execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public BilledAmountDetails execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<BilledAmountDetails> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<BilledAmountDetails> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, BilledAmountDetails>() {
-           public BilledAmountDetails apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCurrencyField () {
-      return this.requestCurrencyField(true);
-    }
-    public APIRequestGet requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGet requestNetAmountField () {
-      return this.requestNetAmountField(true);
-    }
-    public APIRequestGet requestNetAmountField (boolean value) {
-      this.requestField("net_amount", value);
-      return this;
-    }
-    public APIRequestGet requestTaxAmountField () {
-      return this.requestTaxAmountField(true);
-    }
-    public APIRequestGet requestTaxAmountField (boolean value) {
-      this.requestField("tax_amount", value);
-      return this;
-    }
-    public APIRequestGet requestTotalAmountField () {
-      return this.requestTotalAmountField(true);
-    }
-    public APIRequestGet requestTotalAmountField (boolean value) {
-      this.requestField("total_amount", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public BilledAmountDetails setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

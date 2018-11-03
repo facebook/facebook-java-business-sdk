@@ -65,66 +65,7 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCampaignFrequencyControlSpecs() {
-  }
-
-  public AdCampaignFrequencyControlSpecs(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCampaignFrequencyControlSpecs(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCampaignFrequencyControlSpecs fetch() throws APIException{
-    AdCampaignFrequencyControlSpecs newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCampaignFrequencyControlSpecs fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCampaignFrequencyControlSpecs> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCampaignFrequencyControlSpecs fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCampaignFrequencyControlSpecs> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCampaignFrequencyControlSpecs> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCampaignFrequencyControlSpecs>)(
-      new APIRequest<AdCampaignFrequencyControlSpecs>(context, "", "/", "GET", AdCampaignFrequencyControlSpecs.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCampaignFrequencyControlSpecs>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCampaignFrequencyControlSpecs.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCampaignFrequencyControlSpecs() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldEvent() {
     return mEvent;
+  }
+
+  public AdCampaignFrequencyControlSpecs setFieldEvent(String value) {
+    this.mEvent = value;
+    return this;
   }
 
   public Long getFieldIntervalDays() {
     return mIntervalDays;
   }
 
+  public AdCampaignFrequencyControlSpecs setFieldIntervalDays(Long value) {
+    this.mIntervalDays = value;
+    return this;
+  }
+
   public Long getFieldMaxFrequency() {
     return mMaxFrequency;
+  }
+
+  public AdCampaignFrequencyControlSpecs setFieldMaxFrequency(Long value) {
+    this.mMaxFrequency = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCampaignFrequencyControlSpecs> {
-
-    AdCampaignFrequencyControlSpecs lastResponse = null;
-    @Override
-    public AdCampaignFrequencyControlSpecs getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "event",
-      "interval_days",
-      "max_frequency",
-      "id",
-    };
-
-    @Override
-    public AdCampaignFrequencyControlSpecs parseResponse(String response) throws APIException {
-      return AdCampaignFrequencyControlSpecs.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCampaignFrequencyControlSpecs execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCampaignFrequencyControlSpecs execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCampaignFrequencyControlSpecs> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCampaignFrequencyControlSpecs> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCampaignFrequencyControlSpecs>() {
-           public AdCampaignFrequencyControlSpecs apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestEventField () {
-      return this.requestEventField(true);
-    }
-    public APIRequestGet requestEventField (boolean value) {
-      this.requestField("event", value);
-      return this;
-    }
-    public APIRequestGet requestIntervalDaysField () {
-      return this.requestIntervalDaysField(true);
-    }
-    public APIRequestGet requestIntervalDaysField (boolean value) {
-      this.requestField("interval_days", value);
-      return this;
-    }
-    public APIRequestGet requestMaxFrequencyField () {
-      return this.requestMaxFrequencyField(true);
-    }
-    public APIRequestGet requestMaxFrequencyField (boolean value) {
-      this.requestField("max_frequency", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCampaignFrequencyControlSpecs setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

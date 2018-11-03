@@ -293,12 +293,20 @@ public class ShadowIGUser extends APINode {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetMedia getMedia() {
+    return new APIRequestGetMedia(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateMedia createMedia() {
     return new APIRequestCreateMedia(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateMediaPublish createMediaPublish() {
     return new APIRequestCreateMediaPublish(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetStories getStories() {
+    return new APIRequestGetStories(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -552,6 +560,221 @@ public class ShadowIGUser extends APINode {
     }
   }
 
+  public static class APIRequestGetMedia extends APIRequest<ShadowIGMedia> {
+
+    APINodeList<ShadowIGMedia> lastResponse = null;
+    @Override
+    public APINodeList<ShadowIGMedia> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "caption",
+      "comments_count",
+      "id",
+      "ig_id",
+      "is_comment_enabled",
+      "like_count",
+      "media_type",
+      "media_url",
+      "owner",
+      "permalink",
+      "shortcode",
+      "thumbnail_url",
+      "timestamp",
+      "username",
+    };
+
+    @Override
+    public APINodeList<ShadowIGMedia> parseResponse(String response) throws APIException {
+      return ShadowIGMedia.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<ShadowIGMedia> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ShadowIGMedia> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ShadowIGMedia>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ShadowIGMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<ShadowIGMedia>>() {
+           public APINodeList<ShadowIGMedia> apply(String result) {
+             try {
+               return APIRequestGetMedia.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetMedia(String nodeId, APIContext context) {
+      super(context, nodeId, "/media", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetMedia setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMedia setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetMedia requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetMedia requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMedia requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetMedia requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMedia requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetMedia requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetMedia requestCaptionField () {
+      return this.requestCaptionField(true);
+    }
+    public APIRequestGetMedia requestCaptionField (boolean value) {
+      this.requestField("caption", value);
+      return this;
+    }
+    public APIRequestGetMedia requestCommentsCountField () {
+      return this.requestCommentsCountField(true);
+    }
+    public APIRequestGetMedia requestCommentsCountField (boolean value) {
+      this.requestField("comments_count", value);
+      return this;
+    }
+    public APIRequestGetMedia requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetMedia requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetMedia requestIgIdField () {
+      return this.requestIgIdField(true);
+    }
+    public APIRequestGetMedia requestIgIdField (boolean value) {
+      this.requestField("ig_id", value);
+      return this;
+    }
+    public APIRequestGetMedia requestIsCommentEnabledField () {
+      return this.requestIsCommentEnabledField(true);
+    }
+    public APIRequestGetMedia requestIsCommentEnabledField (boolean value) {
+      this.requestField("is_comment_enabled", value);
+      return this;
+    }
+    public APIRequestGetMedia requestLikeCountField () {
+      return this.requestLikeCountField(true);
+    }
+    public APIRequestGetMedia requestLikeCountField (boolean value) {
+      this.requestField("like_count", value);
+      return this;
+    }
+    public APIRequestGetMedia requestMediaTypeField () {
+      return this.requestMediaTypeField(true);
+    }
+    public APIRequestGetMedia requestMediaTypeField (boolean value) {
+      this.requestField("media_type", value);
+      return this;
+    }
+    public APIRequestGetMedia requestMediaUrlField () {
+      return this.requestMediaUrlField(true);
+    }
+    public APIRequestGetMedia requestMediaUrlField (boolean value) {
+      this.requestField("media_url", value);
+      return this;
+    }
+    public APIRequestGetMedia requestOwnerField () {
+      return this.requestOwnerField(true);
+    }
+    public APIRequestGetMedia requestOwnerField (boolean value) {
+      this.requestField("owner", value);
+      return this;
+    }
+    public APIRequestGetMedia requestPermalinkField () {
+      return this.requestPermalinkField(true);
+    }
+    public APIRequestGetMedia requestPermalinkField (boolean value) {
+      this.requestField("permalink", value);
+      return this;
+    }
+    public APIRequestGetMedia requestShortcodeField () {
+      return this.requestShortcodeField(true);
+    }
+    public APIRequestGetMedia requestShortcodeField (boolean value) {
+      this.requestField("shortcode", value);
+      return this;
+    }
+    public APIRequestGetMedia requestThumbnailUrlField () {
+      return this.requestThumbnailUrlField(true);
+    }
+    public APIRequestGetMedia requestThumbnailUrlField (boolean value) {
+      this.requestField("thumbnail_url", value);
+      return this;
+    }
+    public APIRequestGetMedia requestTimestampField () {
+      return this.requestTimestampField(true);
+    }
+    public APIRequestGetMedia requestTimestampField (boolean value) {
+      this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGetMedia requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetMedia requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+  }
+
   public static class APIRequestCreateMedia extends APIRequest<ShadowIGMedia> {
 
     ShadowIGMedia lastResponse = null;
@@ -794,6 +1017,221 @@ public class ShadowIGUser extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetStories extends APIRequest<ShadowIGMedia> {
+
+    APINodeList<ShadowIGMedia> lastResponse = null;
+    @Override
+    public APINodeList<ShadowIGMedia> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "caption",
+      "comments_count",
+      "id",
+      "ig_id",
+      "is_comment_enabled",
+      "like_count",
+      "media_type",
+      "media_url",
+      "owner",
+      "permalink",
+      "shortcode",
+      "thumbnail_url",
+      "timestamp",
+      "username",
+    };
+
+    @Override
+    public APINodeList<ShadowIGMedia> parseResponse(String response) throws APIException {
+      return ShadowIGMedia.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<ShadowIGMedia> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ShadowIGMedia> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ShadowIGMedia>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ShadowIGMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<ShadowIGMedia>>() {
+           public APINodeList<ShadowIGMedia> apply(String result) {
+             try {
+               return APIRequestGetStories.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetStories(String nodeId, APIContext context) {
+      super(context, nodeId, "/stories", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetStories setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetStories setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetStories requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetStories requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetStories requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetStories requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetStories requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetStories requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetStories requestCaptionField () {
+      return this.requestCaptionField(true);
+    }
+    public APIRequestGetStories requestCaptionField (boolean value) {
+      this.requestField("caption", value);
+      return this;
+    }
+    public APIRequestGetStories requestCommentsCountField () {
+      return this.requestCommentsCountField(true);
+    }
+    public APIRequestGetStories requestCommentsCountField (boolean value) {
+      this.requestField("comments_count", value);
+      return this;
+    }
+    public APIRequestGetStories requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetStories requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetStories requestIgIdField () {
+      return this.requestIgIdField(true);
+    }
+    public APIRequestGetStories requestIgIdField (boolean value) {
+      this.requestField("ig_id", value);
+      return this;
+    }
+    public APIRequestGetStories requestIsCommentEnabledField () {
+      return this.requestIsCommentEnabledField(true);
+    }
+    public APIRequestGetStories requestIsCommentEnabledField (boolean value) {
+      this.requestField("is_comment_enabled", value);
+      return this;
+    }
+    public APIRequestGetStories requestLikeCountField () {
+      return this.requestLikeCountField(true);
+    }
+    public APIRequestGetStories requestLikeCountField (boolean value) {
+      this.requestField("like_count", value);
+      return this;
+    }
+    public APIRequestGetStories requestMediaTypeField () {
+      return this.requestMediaTypeField(true);
+    }
+    public APIRequestGetStories requestMediaTypeField (boolean value) {
+      this.requestField("media_type", value);
+      return this;
+    }
+    public APIRequestGetStories requestMediaUrlField () {
+      return this.requestMediaUrlField(true);
+    }
+    public APIRequestGetStories requestMediaUrlField (boolean value) {
+      this.requestField("media_url", value);
+      return this;
+    }
+    public APIRequestGetStories requestOwnerField () {
+      return this.requestOwnerField(true);
+    }
+    public APIRequestGetStories requestOwnerField (boolean value) {
+      this.requestField("owner", value);
+      return this;
+    }
+    public APIRequestGetStories requestPermalinkField () {
+      return this.requestPermalinkField(true);
+    }
+    public APIRequestGetStories requestPermalinkField (boolean value) {
+      this.requestField("permalink", value);
+      return this;
+    }
+    public APIRequestGetStories requestShortcodeField () {
+      return this.requestShortcodeField(true);
+    }
+    public APIRequestGetStories requestShortcodeField (boolean value) {
+      this.requestField("shortcode", value);
+      return this;
+    }
+    public APIRequestGetStories requestThumbnailUrlField () {
+      return this.requestThumbnailUrlField(true);
+    }
+    public APIRequestGetStories requestThumbnailUrlField (boolean value) {
+      this.requestField("thumbnail_url", value);
+      return this;
+    }
+    public APIRequestGetStories requestTimestampField () {
+      return this.requestTimestampField(true);
+    }
+    public APIRequestGetStories requestTimestampField (boolean value) {
+      this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGetStories requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetStories requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
   }
 
   public static class APIRequestGet extends APIRequest<ShadowIGUser> {

@@ -65,66 +65,7 @@ public class AdsPixelStatsResult extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdsPixelStatsResult() {
-  }
-
-  public AdsPixelStatsResult(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdsPixelStatsResult(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdsPixelStatsResult fetch() throws APIException{
-    AdsPixelStatsResult newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdsPixelStatsResult fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdsPixelStatsResult> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdsPixelStatsResult fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdsPixelStatsResult> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdsPixelStatsResult> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdsPixelStatsResult>)(
-      new APIRequest<AdsPixelStatsResult>(context, "", "/", "GET", AdsPixelStatsResult.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdsPixelStatsResult>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdsPixelStatsResult.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdsPixelStatsResult() {
   }
 
   public String getId() {
@@ -271,163 +212,49 @@ public class AdsPixelStatsResult extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAggregation() {
     return mAggregation;
+  }
+
+  public AdsPixelStatsResult setFieldAggregation(String value) {
+    this.mAggregation = value;
+    return this;
   }
 
   public List<AdsPixelStats> getFieldData() {
     return mData;
   }
 
+  public AdsPixelStatsResult setFieldData(List<AdsPixelStats> value) {
+    this.mData = value;
+    return this;
+  }
+
+  public AdsPixelStatsResult setFieldData(String value) {
+    Type type = new TypeToken<List<AdsPixelStats>>(){}.getType();
+    this.mData = AdsPixelStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldStartTime() {
     return mStartTime;
+  }
+
+  public AdsPixelStatsResult setFieldStartTime(String value) {
+    this.mStartTime = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdsPixelStatsResult> {
-
-    AdsPixelStatsResult lastResponse = null;
-    @Override
-    public AdsPixelStatsResult getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "aggregation",
-      "data",
-      "start_time",
-      "id",
-    };
-
-    @Override
-    public AdsPixelStatsResult parseResponse(String response) throws APIException {
-      return AdsPixelStatsResult.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdsPixelStatsResult execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdsPixelStatsResult execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdsPixelStatsResult> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdsPixelStatsResult> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdsPixelStatsResult>() {
-           public AdsPixelStatsResult apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAggregationField () {
-      return this.requestAggregationField(true);
-    }
-    public APIRequestGet requestAggregationField (boolean value) {
-      this.requestField("aggregation", value);
-      return this;
-    }
-    public APIRequestGet requestDataField () {
-      return this.requestDataField(true);
-    }
-    public APIRequestGet requestDataField (boolean value) {
-      this.requestField("data", value);
-      return this;
-    }
-    public APIRequestGet requestStartTimeField () {
-      return this.requestStartTimeField(true);
-    }
-    public APIRequestGet requestStartTimeField (boolean value) {
-      this.requestField("start_time", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdsPixelStatsResult setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
   public static enum EnumAggregation {
       @SerializedName("browser_type")

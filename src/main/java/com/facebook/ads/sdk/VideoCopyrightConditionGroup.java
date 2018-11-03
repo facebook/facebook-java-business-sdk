@@ -59,70 +59,13 @@ public class VideoCopyrightConditionGroup extends APINode {
   private String mAction = null;
   @SerializedName("conditions")
   private List<Object> mConditions = null;
+  @SerializedName("validity_status")
+  private String mValidityStatus = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
 
-  VideoCopyrightConditionGroup() {
-  }
-
-  public VideoCopyrightConditionGroup(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public VideoCopyrightConditionGroup(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public VideoCopyrightConditionGroup fetch() throws APIException{
-    VideoCopyrightConditionGroup newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static VideoCopyrightConditionGroup fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<VideoCopyrightConditionGroup> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static VideoCopyrightConditionGroup fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<VideoCopyrightConditionGroup> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<VideoCopyrightConditionGroup> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<VideoCopyrightConditionGroup>)(
-      new APIRequest<VideoCopyrightConditionGroup>(context, "", "/", "GET", VideoCopyrightConditionGroup.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<VideoCopyrightConditionGroup>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", VideoCopyrightConditionGroup.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public VideoCopyrightConditionGroup() {
   }
 
   public String getId() {
@@ -269,151 +212,44 @@ public class VideoCopyrightConditionGroup extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAction() {
     return mAction;
+  }
+
+  public VideoCopyrightConditionGroup setFieldAction(String value) {
+    this.mAction = value;
+    return this;
   }
 
   public List<Object> getFieldConditions() {
     return mConditions;
   }
 
+  public VideoCopyrightConditionGroup setFieldConditions(List<Object> value) {
+    this.mConditions = value;
+    return this;
+  }
+
+  public String getFieldValidityStatus() {
+    return mValidityStatus;
+  }
+
+  public VideoCopyrightConditionGroup setFieldValidityStatus(String value) {
+    this.mValidityStatus = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<VideoCopyrightConditionGroup> {
-
-    VideoCopyrightConditionGroup lastResponse = null;
-    @Override
-    public VideoCopyrightConditionGroup getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "action",
-      "conditions",
-      "id",
-    };
-
-    @Override
-    public VideoCopyrightConditionGroup parseResponse(String response) throws APIException {
-      return VideoCopyrightConditionGroup.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public VideoCopyrightConditionGroup execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public VideoCopyrightConditionGroup execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<VideoCopyrightConditionGroup> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<VideoCopyrightConditionGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, VideoCopyrightConditionGroup>() {
-           public VideoCopyrightConditionGroup apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestActionField () {
-      return this.requestActionField(true);
-    }
-    public APIRequestGet requestActionField (boolean value) {
-      this.requestField("action", value);
-      return this;
-    }
-    public APIRequestGet requestConditionsField () {
-      return this.requestConditionsField(true);
-    }
-    public APIRequestGet requestConditionsField (boolean value) {
-      this.requestField("conditions", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public VideoCopyrightConditionGroup setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -432,6 +268,7 @@ public class VideoCopyrightConditionGroup extends APINode {
   public VideoCopyrightConditionGroup copyFrom(VideoCopyrightConditionGroup instance) {
     this.mAction = instance.mAction;
     this.mConditions = instance.mConditions;
+    this.mValidityStatus = instance.mValidityStatus;
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

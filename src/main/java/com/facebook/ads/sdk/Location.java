@@ -85,66 +85,7 @@ public class Location extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  Location() {
-  }
-
-  public Location(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public Location(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public Location fetch() throws APIException{
-    Location newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static Location fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<Location> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static Location fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<Location> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<Location> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<Location>)(
-      new APIRequest<Location>(context, "", "/", "GET", Location.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<Location>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", Location.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public Location() {
   }
 
   public String getId() {
@@ -291,283 +232,134 @@ public class Location extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldCity() {
     return mCity;
+  }
+
+  public Location setFieldCity(String value) {
+    this.mCity = value;
+    return this;
   }
 
   public Long getFieldCityId() {
     return mCityId;
   }
 
+  public Location setFieldCityId(Long value) {
+    this.mCityId = value;
+    return this;
+  }
+
   public String getFieldCountry() {
     return mCountry;
+  }
+
+  public Location setFieldCountry(String value) {
+    this.mCountry = value;
+    return this;
   }
 
   public String getFieldCountryCode() {
     return mCountryCode;
   }
 
+  public Location setFieldCountryCode(String value) {
+    this.mCountryCode = value;
+    return this;
+  }
+
   public Double getFieldLatitude() {
     return mLatitude;
+  }
+
+  public Location setFieldLatitude(Double value) {
+    this.mLatitude = value;
+    return this;
   }
 
   public String getFieldLocatedIn() {
     return mLocatedIn;
   }
 
+  public Location setFieldLocatedIn(String value) {
+    this.mLocatedIn = value;
+    return this;
+  }
+
   public Double getFieldLongitude() {
     return mLongitude;
+  }
+
+  public Location setFieldLongitude(Double value) {
+    this.mLongitude = value;
+    return this;
   }
 
   public String getFieldName() {
     return mName;
   }
 
+  public Location setFieldName(String value) {
+    this.mName = value;
+    return this;
+  }
+
   public String getFieldRegion() {
     return mRegion;
+  }
+
+  public Location setFieldRegion(String value) {
+    this.mRegion = value;
+    return this;
   }
 
   public Long getFieldRegionId() {
     return mRegionId;
   }
 
+  public Location setFieldRegionId(Long value) {
+    this.mRegionId = value;
+    return this;
+  }
+
   public String getFieldState() {
     return mState;
+  }
+
+  public Location setFieldState(String value) {
+    this.mState = value;
+    return this;
   }
 
   public String getFieldStreet() {
     return mStreet;
   }
 
+  public Location setFieldStreet(String value) {
+    this.mStreet = value;
+    return this;
+  }
+
   public String getFieldZip() {
     return mZip;
+  }
+
+  public Location setFieldZip(String value) {
+    this.mZip = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<Location> {
-
-    Location lastResponse = null;
-    @Override
-    public Location getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "city",
-      "city_id",
-      "country",
-      "country_code",
-      "latitude",
-      "located_in",
-      "longitude",
-      "name",
-      "region",
-      "region_id",
-      "state",
-      "street",
-      "zip",
-      "id",
-    };
-
-    @Override
-    public Location parseResponse(String response) throws APIException {
-      return Location.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public Location execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Location execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<Location> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Location> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, Location>() {
-           public Location apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCityField () {
-      return this.requestCityField(true);
-    }
-    public APIRequestGet requestCityField (boolean value) {
-      this.requestField("city", value);
-      return this;
-    }
-    public APIRequestGet requestCityIdField () {
-      return this.requestCityIdField(true);
-    }
-    public APIRequestGet requestCityIdField (boolean value) {
-      this.requestField("city_id", value);
-      return this;
-    }
-    public APIRequestGet requestCountryField () {
-      return this.requestCountryField(true);
-    }
-    public APIRequestGet requestCountryField (boolean value) {
-      this.requestField("country", value);
-      return this;
-    }
-    public APIRequestGet requestCountryCodeField () {
-      return this.requestCountryCodeField(true);
-    }
-    public APIRequestGet requestCountryCodeField (boolean value) {
-      this.requestField("country_code", value);
-      return this;
-    }
-    public APIRequestGet requestLatitudeField () {
-      return this.requestLatitudeField(true);
-    }
-    public APIRequestGet requestLatitudeField (boolean value) {
-      this.requestField("latitude", value);
-      return this;
-    }
-    public APIRequestGet requestLocatedInField () {
-      return this.requestLocatedInField(true);
-    }
-    public APIRequestGet requestLocatedInField (boolean value) {
-      this.requestField("located_in", value);
-      return this;
-    }
-    public APIRequestGet requestLongitudeField () {
-      return this.requestLongitudeField(true);
-    }
-    public APIRequestGet requestLongitudeField (boolean value) {
-      this.requestField("longitude", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestRegionField () {
-      return this.requestRegionField(true);
-    }
-    public APIRequestGet requestRegionField (boolean value) {
-      this.requestField("region", value);
-      return this;
-    }
-    public APIRequestGet requestRegionIdField () {
-      return this.requestRegionIdField(true);
-    }
-    public APIRequestGet requestRegionIdField (boolean value) {
-      this.requestField("region_id", value);
-      return this;
-    }
-    public APIRequestGet requestStateField () {
-      return this.requestStateField(true);
-    }
-    public APIRequestGet requestStateField (boolean value) {
-      this.requestField("state", value);
-      return this;
-    }
-    public APIRequestGet requestStreetField () {
-      return this.requestStreetField(true);
-    }
-    public APIRequestGet requestStreetField (boolean value) {
-      this.requestField("street", value);
-      return this;
-    }
-    public APIRequestGet requestZipField () {
-      return this.requestZipField(true);
-    }
-    public APIRequestGet requestZipField (boolean value) {
-      this.requestField("zip", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public Location setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

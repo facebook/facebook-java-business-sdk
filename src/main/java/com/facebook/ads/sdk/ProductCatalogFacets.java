@@ -63,66 +63,7 @@ public class ProductCatalogFacets extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ProductCatalogFacets() {
-  }
-
-  public ProductCatalogFacets(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ProductCatalogFacets(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ProductCatalogFacets fetch() throws APIException{
-    ProductCatalogFacets newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ProductCatalogFacets fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ProductCatalogFacets> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ProductCatalogFacets fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ProductCatalogFacets> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ProductCatalogFacets> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ProductCatalogFacets>)(
-      new APIRequest<ProductCatalogFacets>(context, "", "/", "GET", ProductCatalogFacets.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ProductCatalogFacets>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ProductCatalogFacets.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ProductCatalogFacets() {
   }
 
   public String getId() {
@@ -269,151 +210,35 @@ public class ProductCatalogFacets extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<Object> getFieldFacets() {
     return mFacets;
+  }
+
+  public ProductCatalogFacets setFieldFacets(List<Object> value) {
+    this.mFacets = value;
+    return this;
   }
 
   public Long getFieldItemCount() {
     return mItemCount;
   }
 
+  public ProductCatalogFacets setFieldItemCount(Long value) {
+    this.mItemCount = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ProductCatalogFacets> {
-
-    ProductCatalogFacets lastResponse = null;
-    @Override
-    public ProductCatalogFacets getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "facets",
-      "item_count",
-      "id",
-    };
-
-    @Override
-    public ProductCatalogFacets parseResponse(String response) throws APIException {
-      return ProductCatalogFacets.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ProductCatalogFacets execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductCatalogFacets execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ProductCatalogFacets> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ProductCatalogFacets> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ProductCatalogFacets>() {
-           public ProductCatalogFacets apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestFacetsField () {
-      return this.requestFacetsField(true);
-    }
-    public APIRequestGet requestFacetsField (boolean value) {
-      this.requestField("facets", value);
-      return this;
-    }
-    public APIRequestGet requestItemCountField () {
-      return this.requestItemCountField(true);
-    }
-    public APIRequestGet requestItemCountField (boolean value) {
-      this.requestField("item_count", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ProductCatalogFacets setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

@@ -281,9 +281,6 @@ public class Place extends APINode {
   }
 
   public Location getFieldLocation() {
-    if (mLocation != null) {
-      mLocation.context = getContext();
-    }
     return mLocation;
   }
 

@@ -65,66 +65,7 @@ public class UserCoverPhoto extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  UserCoverPhoto() {
-  }
-
-  public UserCoverPhoto(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public UserCoverPhoto(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public UserCoverPhoto fetch() throws APIException{
-    UserCoverPhoto newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static UserCoverPhoto fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<UserCoverPhoto> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static UserCoverPhoto fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<UserCoverPhoto> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<UserCoverPhoto> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<UserCoverPhoto>)(
-      new APIRequest<UserCoverPhoto>(context, "", "/", "GET", UserCoverPhoto.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<UserCoverPhoto>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", UserCoverPhoto.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public UserCoverPhoto() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class UserCoverPhoto extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Double getFieldOffsetX() {
     return mOffsetX;
+  }
+
+  public UserCoverPhoto setFieldOffsetX(Double value) {
+    this.mOffsetX = value;
+    return this;
   }
 
   public Double getFieldOffsetY() {
     return mOffsetY;
   }
 
+  public UserCoverPhoto setFieldOffsetY(Double value) {
+    this.mOffsetY = value;
+    return this;
+  }
+
   public String getFieldSource() {
     return mSource;
+  }
+
+  public UserCoverPhoto setFieldSource(String value) {
+    this.mSource = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<UserCoverPhoto> {
-
-    UserCoverPhoto lastResponse = null;
-    @Override
-    public UserCoverPhoto getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "offset_x",
-      "offset_y",
-      "source",
-      "id",
-    };
-
-    @Override
-    public UserCoverPhoto parseResponse(String response) throws APIException {
-      return UserCoverPhoto.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public UserCoverPhoto execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public UserCoverPhoto execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<UserCoverPhoto> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<UserCoverPhoto> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, UserCoverPhoto>() {
-           public UserCoverPhoto apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestOffsetXField () {
-      return this.requestOffsetXField(true);
-    }
-    public APIRequestGet requestOffsetXField (boolean value) {
-      this.requestField("offset_x", value);
-      return this;
-    }
-    public APIRequestGet requestOffsetYField () {
-      return this.requestOffsetYField(true);
-    }
-    public APIRequestGet requestOffsetYField (boolean value) {
-      this.requestField("offset_y", value);
-      return this;
-    }
-    public APIRequestGet requestSourceField () {
-      return this.requestSourceField(true);
-    }
-    public APIRequestGet requestSourceField (boolean value) {
-      this.requestField("source", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public UserCoverPhoto setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

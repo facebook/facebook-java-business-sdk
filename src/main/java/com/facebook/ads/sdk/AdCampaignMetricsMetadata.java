@@ -67,66 +67,7 @@ public class AdCampaignMetricsMetadata extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCampaignMetricsMetadata() {
-  }
-
-  public AdCampaignMetricsMetadata(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCampaignMetricsMetadata(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCampaignMetricsMetadata fetch() throws APIException{
-    AdCampaignMetricsMetadata newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCampaignMetricsMetadata fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCampaignMetricsMetadata> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCampaignMetricsMetadata fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCampaignMetricsMetadata> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCampaignMetricsMetadata> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCampaignMetricsMetadata>)(
-      new APIRequest<AdCampaignMetricsMetadata>(context, "", "/", "GET", AdCampaignMetricsMetadata.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCampaignMetricsMetadata>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCampaignMetricsMetadata.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCampaignMetricsMetadata() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class AdCampaignMetricsMetadata extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<String> getFieldBoostedComponentOptimization() {
     return mBoostedComponentOptimization;
+  }
+
+  public AdCampaignMetricsMetadata setFieldBoostedComponentOptimization(List<String> value) {
+    this.mBoostedComponentOptimization = value;
+    return this;
   }
 
   public List<String> getFieldCreationFlowTips() {
     return mCreationFlowTips;
   }
 
+  public AdCampaignMetricsMetadata setFieldCreationFlowTips(List<String> value) {
+    this.mCreationFlowTips = value;
+    return this;
+  }
+
   public List<Object> getFieldDefaultOptedInPlacements() {
     return mDefaultOptedInPlacements;
+  }
+
+  public AdCampaignMetricsMetadata setFieldDefaultOptedInPlacements(List<Object> value) {
+    this.mDefaultOptedInPlacements = value;
+    return this;
   }
 
   public List<String> getFieldDuplicationFlowTips() {
     return mDuplicationFlowTips;
   }
 
+  public AdCampaignMetricsMetadata setFieldDuplicationFlowTips(List<String> value) {
+    this.mDuplicationFlowTips = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCampaignMetricsMetadata> {
-
-    AdCampaignMetricsMetadata lastResponse = null;
-    @Override
-    public AdCampaignMetricsMetadata getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "boosted_component_optimization",
-      "creation_flow_tips",
-      "default_opted_in_placements",
-      "duplication_flow_tips",
-      "id",
-    };
-
-    @Override
-    public AdCampaignMetricsMetadata parseResponse(String response) throws APIException {
-      return AdCampaignMetricsMetadata.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCampaignMetricsMetadata execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCampaignMetricsMetadata execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCampaignMetricsMetadata> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCampaignMetricsMetadata> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCampaignMetricsMetadata>() {
-           public AdCampaignMetricsMetadata apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestBoostedComponentOptimizationField () {
-      return this.requestBoostedComponentOptimizationField(true);
-    }
-    public APIRequestGet requestBoostedComponentOptimizationField (boolean value) {
-      this.requestField("boosted_component_optimization", value);
-      return this;
-    }
-    public APIRequestGet requestCreationFlowTipsField () {
-      return this.requestCreationFlowTipsField(true);
-    }
-    public APIRequestGet requestCreationFlowTipsField (boolean value) {
-      this.requestField("creation_flow_tips", value);
-      return this;
-    }
-    public APIRequestGet requestDefaultOptedInPlacementsField () {
-      return this.requestDefaultOptedInPlacementsField(true);
-    }
-    public APIRequestGet requestDefaultOptedInPlacementsField (boolean value) {
-      this.requestField("default_opted_in_placements", value);
-      return this;
-    }
-    public APIRequestGet requestDuplicationFlowTipsField () {
-      return this.requestDuplicationFlowTipsField(true);
-    }
-    public APIRequestGet requestDuplicationFlowTipsField (boolean value) {
-      this.requestField("duplication_flow_tips", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCampaignMetricsMetadata setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

@@ -1044,6 +1044,8 @@ public class AdReportSpec extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
+      @SerializedName("action_converted_product_id")
+      VALUE_ACTION_CONVERTED_PRODUCT_ID("action_converted_product_id"),
       NULL(null);
 
       private String value;

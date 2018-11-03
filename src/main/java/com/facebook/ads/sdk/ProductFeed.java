@@ -418,16 +418,10 @@ public class ProductFeed extends APINode {
   }
 
   public ProductFeedSchedule getFieldSchedule() {
-    if (mSchedule != null) {
-      mSchedule.context = getContext();
-    }
     return mSchedule;
   }
 
   public ProductFeedSchedule getFieldUpdateSchedule() {
-    if (mUpdateSchedule != null) {
-      mUpdateSchedule.context = getContext();
-    }
     return mUpdateSchedule;
   }
 
@@ -2475,44 +2469,48 @@ public class ProductFeed extends APINode {
     }
   }
 
-  public static class APIRequestGetRules extends APIRequest<APINode> {
+  public static class APIRequestGetRules extends APIRequest<ProductFeedRule> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINodeList<ProductFeedRule> lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
+    public APINodeList<ProductFeedRule> getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "attribute",
+      "id",
+      "params",
+      "rule_type",
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<ProductFeedRule> parseResponse(String response) throws APIException {
+      return ProductFeedRule.parseResponse(response, getContext(), this);
     }
 
     @Override
-    public APINodeList<APINode> execute() throws APIException {
+    public APINodeList<ProductFeedRule> execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+    public APINodeList<ProductFeedRule> execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+    public ListenableFuture<APINodeList<ProductFeedRule>> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINodeList<ProductFeedRule>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<String, APINodeList<ProductFeedRule>>() {
+           public APINodeList<ProductFeedRule> apply(String result) {
              try {
                return APIRequestGetRules.this.parseResponse(result);
              } catch (Exception e) {
@@ -2576,13 +2574,41 @@ public class ProductFeed extends APINode {
       return this;
     }
 
+    public APIRequestGetRules requestAttributeField () {
+      return this.requestAttributeField(true);
+    }
+    public APIRequestGetRules requestAttributeField (boolean value) {
+      this.requestField("attribute", value);
+      return this;
+    }
+    public APIRequestGetRules requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetRules requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetRules requestParamsField () {
+      return this.requestParamsField(true);
+    }
+    public APIRequestGetRules requestParamsField (boolean value) {
+      this.requestField("params", value);
+      return this;
+    }
+    public APIRequestGetRules requestRuleTypeField () {
+      return this.requestRuleTypeField(true);
+    }
+    public APIRequestGetRules requestRuleTypeField (boolean value) {
+      this.requestField("rule_type", value);
+      return this;
+    }
   }
 
-  public static class APIRequestCreateRule extends APIRequest<APINode> {
+  public static class APIRequestCreateRule extends APIRequest<ProductFeedRule> {
 
-    APINode lastResponse = null;
+    ProductFeedRule lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public ProductFeedRule getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -2595,30 +2621,30 @@ public class ProductFeed extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public ProductFeedRule parseResponse(String response) throws APIException {
+      return ProductFeedRule.parseResponse(response, getContext(), this).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public ProductFeedRule execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
+    public ProductFeedRule execute(Map<String, Object> extraParams) throws APIException {
       lastResponse = parseResponse(executeInternal(extraParams));
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<ProductFeedRule> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<ProductFeedRule> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<String, ProductFeedRule>() {
+           public ProductFeedRule apply(String result) {
              try {
                return APIRequestCreateRule.this.parseResponse(result);
              } catch (Exception e) {
@@ -2660,7 +2686,7 @@ public class ProductFeed extends APINode {
       return this;
     }
 
-    public APIRequestCreateRule setRuleType (EnumRuleType ruleType) {
+    public APIRequestCreateRule setRuleType (ProductFeedRule.EnumRuleType ruleType) {
       this.setParam("rule_type", ruleType);
       return this;
     }
@@ -3069,6 +3095,7 @@ public class ProductFeed extends APINode {
       "custom_label_0",
       "date_first_on_lot",
       "dealer_communication_channel",
+      "dealer_email",
       "dealer_id",
       "dealer_name",
       "dealer_phone",
@@ -3272,6 +3299,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetVehicles requestDealerCommunicationChannelField (boolean value) {
       this.requestField("dealer_communication_channel", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestDealerEmailField () {
+      return this.requestDealerEmailField(true);
+    }
+    public APIRequestGetVehicles requestDealerEmailField (boolean value) {
+      this.requestField("dealer_email", value);
       return this;
     }
     public APIRequestGetVehicles requestDealerIdField () {
@@ -4140,31 +4174,6 @@ public class ProductFeed extends APINode {
       private String value;
 
       private EnumFeedType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumRuleType {
-      @SerializedName("mapping_rule")
-      VALUE_MAPPING_RULE("mapping_rule"),
-      @SerializedName("value_mapping_rule")
-      VALUE_VALUE_MAPPING_RULE("value_mapping_rule"),
-      @SerializedName("letter_case_rule")
-      VALUE_LETTER_CASE_RULE("letter_case_rule"),
-      @SerializedName("fallback_rule")
-      VALUE_FALLBACK_RULE("fallback_rule"),
-      @SerializedName("regex_replace_rule")
-      VALUE_REGEX_REPLACE_RULE("regex_replace_rule"),
-      NULL(null);
-
-      private String value;
-
-      private EnumRuleType(String value) {
         this.value = value;
       }
 

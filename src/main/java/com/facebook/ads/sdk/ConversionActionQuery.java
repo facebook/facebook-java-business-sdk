@@ -111,66 +111,7 @@ public class ConversionActionQuery extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ConversionActionQuery() {
-  }
-
-  public ConversionActionQuery(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ConversionActionQuery(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ConversionActionQuery fetch() throws APIException{
-    ConversionActionQuery newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ConversionActionQuery fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ConversionActionQuery> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ConversionActionQuery fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ConversionActionQuery> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ConversionActionQuery> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ConversionActionQuery>)(
-      new APIRequest<ConversionActionQuery>(context, "", "/", "GET", ConversionActionQuery.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ConversionActionQuery>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ConversionActionQuery.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ConversionActionQuery() {
   }
 
   public String getId() {
@@ -317,439 +258,251 @@ public class ConversionActionQuery extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<Object> getFieldActionType() {
     return mActionType;
+  }
+
+  public ConversionActionQuery setFieldActionType(List<Object> value) {
+    this.mActionType = value;
+    return this;
   }
 
   public List<Object> getFieldApplication() {
     return mApplication;
   }
 
+  public ConversionActionQuery setFieldApplication(List<Object> value) {
+    this.mApplication = value;
+    return this;
+  }
+
   public List<String> getFieldConversionId() {
     return mConversionId;
+  }
+
+  public ConversionActionQuery setFieldConversionId(List<String> value) {
+    this.mConversionId = value;
+    return this;
   }
 
   public List<Object> getFieldCreative() {
     return mCreative;
   }
 
+  public ConversionActionQuery setFieldCreative(List<Object> value) {
+    this.mCreative = value;
+    return this;
+  }
+
   public List<String> getFieldDataset() {
     return mDataset;
+  }
+
+  public ConversionActionQuery setFieldDataset(List<String> value) {
+    this.mDataset = value;
+    return this;
   }
 
   public List<String> getFieldEvent() {
     return mEvent;
   }
 
+  public ConversionActionQuery setFieldEvent(List<String> value) {
+    this.mEvent = value;
+    return this;
+  }
+
   public List<String> getFieldEventCreator() {
     return mEventCreator;
+  }
+
+  public ConversionActionQuery setFieldEventCreator(List<String> value) {
+    this.mEventCreator = value;
+    return this;
   }
 
   public List<String> getFieldEventType() {
     return mEventType;
   }
 
+  public ConversionActionQuery setFieldEventType(List<String> value) {
+    this.mEventType = value;
+    return this;
+  }
+
   public List<String> getFieldFbPixel() {
     return mFbPixel;
+  }
+
+  public ConversionActionQuery setFieldFbPixel(List<String> value) {
+    this.mFbPixel = value;
+    return this;
   }
 
   public List<String> getFieldFbPixelEvent() {
     return mFbPixelEvent;
   }
 
+  public ConversionActionQuery setFieldFbPixelEvent(List<String> value) {
+    this.mFbPixelEvent = value;
+    return this;
+  }
+
   public List<String> getFieldLeadgen() {
     return mLeadgen;
+  }
+
+  public ConversionActionQuery setFieldLeadgen(List<String> value) {
+    this.mLeadgen = value;
+    return this;
   }
 
   public List<String> getFieldObject() {
     return mObject;
   }
 
+  public ConversionActionQuery setFieldObject(List<String> value) {
+    this.mObject = value;
+    return this;
+  }
+
   public List<String> getFieldObjectDomain() {
     return mObjectDomain;
+  }
+
+  public ConversionActionQuery setFieldObjectDomain(List<String> value) {
+    this.mObjectDomain = value;
+    return this;
   }
 
   public List<String> getFieldOffer() {
     return mOffer;
   }
 
+  public ConversionActionQuery setFieldOffer(List<String> value) {
+    this.mOffer = value;
+    return this;
+  }
+
   public List<String> getFieldOfferCreator() {
     return mOfferCreator;
+  }
+
+  public ConversionActionQuery setFieldOfferCreator(List<String> value) {
+    this.mOfferCreator = value;
+    return this;
   }
 
   public List<String> getFieldOffsitePixel() {
     return mOffsitePixel;
   }
 
+  public ConversionActionQuery setFieldOffsitePixel(List<String> value) {
+    this.mOffsitePixel = value;
+    return this;
+  }
+
   public List<String> getFieldPage() {
     return mPage;
+  }
+
+  public ConversionActionQuery setFieldPage(List<String> value) {
+    this.mPage = value;
+    return this;
   }
 
   public List<String> getFieldPageParent() {
     return mPageParent;
   }
 
+  public ConversionActionQuery setFieldPageParent(List<String> value) {
+    this.mPageParent = value;
+    return this;
+  }
+
   public List<String> getFieldPost() {
     return mPost;
+  }
+
+  public ConversionActionQuery setFieldPost(List<String> value) {
+    this.mPost = value;
+    return this;
   }
 
   public List<String> getFieldPostObject() {
     return mPostObject;
   }
 
+  public ConversionActionQuery setFieldPostObject(List<String> value) {
+    this.mPostObject = value;
+    return this;
+  }
+
   public List<String> getFieldPostObjectWall() {
     return mPostObjectWall;
+  }
+
+  public ConversionActionQuery setFieldPostObjectWall(List<String> value) {
+    this.mPostObjectWall = value;
+    return this;
   }
 
   public List<String> getFieldPostWall() {
     return mPostWall;
   }
 
+  public ConversionActionQuery setFieldPostWall(List<String> value) {
+    this.mPostWall = value;
+    return this;
+  }
+
   public List<String> getFieldQuestion() {
     return mQuestion;
+  }
+
+  public ConversionActionQuery setFieldQuestion(List<String> value) {
+    this.mQuestion = value;
+    return this;
   }
 
   public List<String> getFieldQuestionCreator() {
     return mQuestionCreator;
   }
 
+  public ConversionActionQuery setFieldQuestionCreator(List<String> value) {
+    this.mQuestionCreator = value;
+    return this;
+  }
+
   public List<String> getFieldResponse() {
     return mResponse;
+  }
+
+  public ConversionActionQuery setFieldResponse(List<String> value) {
+    this.mResponse = value;
+    return this;
   }
 
   public List<String> getFieldSubtype() {
     return mSubtype;
   }
 
+  public ConversionActionQuery setFieldSubtype(List<String> value) {
+    this.mSubtype = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ConversionActionQuery> {
-
-    ConversionActionQuery lastResponse = null;
-    @Override
-    public ConversionActionQuery getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "action.type",
-      "application",
-      "conversion_id",
-      "creative",
-      "dataset",
-      "event",
-      "event.creator",
-      "event_type",
-      "fb_pixel",
-      "fb_pixel_event",
-      "leadgen",
-      "object",
-      "object.domain",
-      "offer",
-      "offer.creator",
-      "offsite_pixel",
-      "page",
-      "page.parent",
-      "post",
-      "post.object",
-      "post.object.wall",
-      "post.wall",
-      "question",
-      "question.creator",
-      "response",
-      "subtype",
-      "id",
-    };
-
-    @Override
-    public ConversionActionQuery parseResponse(String response) throws APIException {
-      return ConversionActionQuery.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ConversionActionQuery execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ConversionActionQuery execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ConversionActionQuery> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ConversionActionQuery> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ConversionActionQuery>() {
-           public ConversionActionQuery apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestActionTypeField () {
-      return this.requestActionTypeField(true);
-    }
-    public APIRequestGet requestActionTypeField (boolean value) {
-      this.requestField("action.type", value);
-      return this;
-    }
-    public APIRequestGet requestApplicationField () {
-      return this.requestApplicationField(true);
-    }
-    public APIRequestGet requestApplicationField (boolean value) {
-      this.requestField("application", value);
-      return this;
-    }
-    public APIRequestGet requestConversionIdField () {
-      return this.requestConversionIdField(true);
-    }
-    public APIRequestGet requestConversionIdField (boolean value) {
-      this.requestField("conversion_id", value);
-      return this;
-    }
-    public APIRequestGet requestCreativeField () {
-      return this.requestCreativeField(true);
-    }
-    public APIRequestGet requestCreativeField (boolean value) {
-      this.requestField("creative", value);
-      return this;
-    }
-    public APIRequestGet requestDatasetField () {
-      return this.requestDatasetField(true);
-    }
-    public APIRequestGet requestDatasetField (boolean value) {
-      this.requestField("dataset", value);
-      return this;
-    }
-    public APIRequestGet requestEventField () {
-      return this.requestEventField(true);
-    }
-    public APIRequestGet requestEventField (boolean value) {
-      this.requestField("event", value);
-      return this;
-    }
-    public APIRequestGet requestEventCreatorField () {
-      return this.requestEventCreatorField(true);
-    }
-    public APIRequestGet requestEventCreatorField (boolean value) {
-      this.requestField("event.creator", value);
-      return this;
-    }
-    public APIRequestGet requestEventTypeField () {
-      return this.requestEventTypeField(true);
-    }
-    public APIRequestGet requestEventTypeField (boolean value) {
-      this.requestField("event_type", value);
-      return this;
-    }
-    public APIRequestGet requestFbPixelField () {
-      return this.requestFbPixelField(true);
-    }
-    public APIRequestGet requestFbPixelField (boolean value) {
-      this.requestField("fb_pixel", value);
-      return this;
-    }
-    public APIRequestGet requestFbPixelEventField () {
-      return this.requestFbPixelEventField(true);
-    }
-    public APIRequestGet requestFbPixelEventField (boolean value) {
-      this.requestField("fb_pixel_event", value);
-      return this;
-    }
-    public APIRequestGet requestLeadgenField () {
-      return this.requestLeadgenField(true);
-    }
-    public APIRequestGet requestLeadgenField (boolean value) {
-      this.requestField("leadgen", value);
-      return this;
-    }
-    public APIRequestGet requestObjectField () {
-      return this.requestObjectField(true);
-    }
-    public APIRequestGet requestObjectField (boolean value) {
-      this.requestField("object", value);
-      return this;
-    }
-    public APIRequestGet requestObjectDomainField () {
-      return this.requestObjectDomainField(true);
-    }
-    public APIRequestGet requestObjectDomainField (boolean value) {
-      this.requestField("object.domain", value);
-      return this;
-    }
-    public APIRequestGet requestOfferField () {
-      return this.requestOfferField(true);
-    }
-    public APIRequestGet requestOfferField (boolean value) {
-      this.requestField("offer", value);
-      return this;
-    }
-    public APIRequestGet requestOfferCreatorField () {
-      return this.requestOfferCreatorField(true);
-    }
-    public APIRequestGet requestOfferCreatorField (boolean value) {
-      this.requestField("offer.creator", value);
-      return this;
-    }
-    public APIRequestGet requestOffsitePixelField () {
-      return this.requestOffsitePixelField(true);
-    }
-    public APIRequestGet requestOffsitePixelField (boolean value) {
-      this.requestField("offsite_pixel", value);
-      return this;
-    }
-    public APIRequestGet requestPageField () {
-      return this.requestPageField(true);
-    }
-    public APIRequestGet requestPageField (boolean value) {
-      this.requestField("page", value);
-      return this;
-    }
-    public APIRequestGet requestPageParentField () {
-      return this.requestPageParentField(true);
-    }
-    public APIRequestGet requestPageParentField (boolean value) {
-      this.requestField("page.parent", value);
-      return this;
-    }
-    public APIRequestGet requestPostField () {
-      return this.requestPostField(true);
-    }
-    public APIRequestGet requestPostField (boolean value) {
-      this.requestField("post", value);
-      return this;
-    }
-    public APIRequestGet requestPostObjectField () {
-      return this.requestPostObjectField(true);
-    }
-    public APIRequestGet requestPostObjectField (boolean value) {
-      this.requestField("post.object", value);
-      return this;
-    }
-    public APIRequestGet requestPostObjectWallField () {
-      return this.requestPostObjectWallField(true);
-    }
-    public APIRequestGet requestPostObjectWallField (boolean value) {
-      this.requestField("post.object.wall", value);
-      return this;
-    }
-    public APIRequestGet requestPostWallField () {
-      return this.requestPostWallField(true);
-    }
-    public APIRequestGet requestPostWallField (boolean value) {
-      this.requestField("post.wall", value);
-      return this;
-    }
-    public APIRequestGet requestQuestionField () {
-      return this.requestQuestionField(true);
-    }
-    public APIRequestGet requestQuestionField (boolean value) {
-      this.requestField("question", value);
-      return this;
-    }
-    public APIRequestGet requestQuestionCreatorField () {
-      return this.requestQuestionCreatorField(true);
-    }
-    public APIRequestGet requestQuestionCreatorField (boolean value) {
-      this.requestField("question.creator", value);
-      return this;
-    }
-    public APIRequestGet requestResponseField () {
-      return this.requestResponseField(true);
-    }
-    public APIRequestGet requestResponseField (boolean value) {
-      this.requestField("response", value);
-      return this;
-    }
-    public APIRequestGet requestSubtypeField () {
-      return this.requestSubtypeField(true);
-    }
-    public APIRequestGet requestSubtypeField (boolean value) {
-      this.requestField("subtype", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ConversionActionQuery setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

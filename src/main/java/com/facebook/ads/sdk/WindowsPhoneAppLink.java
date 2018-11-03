@@ -65,66 +65,7 @@ public class WindowsPhoneAppLink extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  WindowsPhoneAppLink() {
-  }
-
-  public WindowsPhoneAppLink(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public WindowsPhoneAppLink(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public WindowsPhoneAppLink fetch() throws APIException{
-    WindowsPhoneAppLink newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static WindowsPhoneAppLink fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<WindowsPhoneAppLink> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static WindowsPhoneAppLink fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<WindowsPhoneAppLink> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<WindowsPhoneAppLink> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<WindowsPhoneAppLink>)(
-      new APIRequest<WindowsPhoneAppLink>(context, "", "/", "GET", WindowsPhoneAppLink.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<WindowsPhoneAppLink>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", WindowsPhoneAppLink.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public WindowsPhoneAppLink() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class WindowsPhoneAppLink extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAppId() {
     return mAppId;
+  }
+
+  public WindowsPhoneAppLink setFieldAppId(String value) {
+    this.mAppId = value;
+    return this;
   }
 
   public String getFieldAppName() {
     return mAppName;
   }
 
+  public WindowsPhoneAppLink setFieldAppName(String value) {
+    this.mAppName = value;
+    return this;
+  }
+
   public String getFieldUrl() {
     return mUrl;
+  }
+
+  public WindowsPhoneAppLink setFieldUrl(String value) {
+    this.mUrl = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<WindowsPhoneAppLink> {
-
-    WindowsPhoneAppLink lastResponse = null;
-    @Override
-    public WindowsPhoneAppLink getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "app_id",
-      "app_name",
-      "url",
-      "id",
-    };
-
-    @Override
-    public WindowsPhoneAppLink parseResponse(String response) throws APIException {
-      return WindowsPhoneAppLink.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public WindowsPhoneAppLink execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public WindowsPhoneAppLink execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<WindowsPhoneAppLink> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<WindowsPhoneAppLink> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, WindowsPhoneAppLink>() {
-           public WindowsPhoneAppLink apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAppIdField () {
-      return this.requestAppIdField(true);
-    }
-    public APIRequestGet requestAppIdField (boolean value) {
-      this.requestField("app_id", value);
-      return this;
-    }
-    public APIRequestGet requestAppNameField () {
-      return this.requestAppNameField(true);
-    }
-    public APIRequestGet requestAppNameField (boolean value) {
-      this.requestField("app_name", value);
-      return this;
-    }
-    public APIRequestGet requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGet requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public WindowsPhoneAppLink setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

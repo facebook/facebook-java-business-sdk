@@ -67,66 +67,7 @@ public class CheckBatchRequestStatus extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  CheckBatchRequestStatus() {
-  }
-
-  public CheckBatchRequestStatus(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public CheckBatchRequestStatus(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public CheckBatchRequestStatus fetch() throws APIException{
-    CheckBatchRequestStatus newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static CheckBatchRequestStatus fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<CheckBatchRequestStatus> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static CheckBatchRequestStatus fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<CheckBatchRequestStatus> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<CheckBatchRequestStatus> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CheckBatchRequestStatus>)(
-      new APIRequest<CheckBatchRequestStatus>(context, "", "/", "GET", CheckBatchRequestStatus.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<CheckBatchRequestStatus>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", CheckBatchRequestStatus.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public CheckBatchRequestStatus() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class CheckBatchRequestStatus extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<Object> getFieldErrors() {
     return mErrors;
+  }
+
+  public CheckBatchRequestStatus setFieldErrors(List<Object> value) {
+    this.mErrors = value;
+    return this;
   }
 
   public Long getFieldErrorsTotalCount() {
     return mErrorsTotalCount;
   }
 
+  public CheckBatchRequestStatus setFieldErrorsTotalCount(Long value) {
+    this.mErrorsTotalCount = value;
+    return this;
+  }
+
   public String getFieldHandle() {
     return mHandle;
+  }
+
+  public CheckBatchRequestStatus setFieldHandle(String value) {
+    this.mHandle = value;
+    return this;
   }
 
   public String getFieldStatus() {
     return mStatus;
   }
 
+  public CheckBatchRequestStatus setFieldStatus(String value) {
+    this.mStatus = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<CheckBatchRequestStatus> {
-
-    CheckBatchRequestStatus lastResponse = null;
-    @Override
-    public CheckBatchRequestStatus getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "errors",
-      "errors_total_count",
-      "handle",
-      "status",
-      "id",
-    };
-
-    @Override
-    public CheckBatchRequestStatus parseResponse(String response) throws APIException {
-      return CheckBatchRequestStatus.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public CheckBatchRequestStatus execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CheckBatchRequestStatus execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<CheckBatchRequestStatus> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CheckBatchRequestStatus> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, CheckBatchRequestStatus>() {
-           public CheckBatchRequestStatus apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestErrorsField () {
-      return this.requestErrorsField(true);
-    }
-    public APIRequestGet requestErrorsField (boolean value) {
-      this.requestField("errors", value);
-      return this;
-    }
-    public APIRequestGet requestErrorsTotalCountField () {
-      return this.requestErrorsTotalCountField(true);
-    }
-    public APIRequestGet requestErrorsTotalCountField (boolean value) {
-      this.requestField("errors_total_count", value);
-      return this;
-    }
-    public APIRequestGet requestHandleField () {
-      return this.requestHandleField(true);
-    }
-    public APIRequestGet requestHandleField (boolean value) {
-      this.requestField("handle", value);
-      return this;
-    }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public CheckBatchRequestStatus setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

@@ -375,9 +375,6 @@ public class Link extends APINode {
   }
 
   public Privacy getFieldPrivacy() {
-    if (mPrivacy != null) {
-      mPrivacy.context = getContext();
-    }
     return mPrivacy;
   }
 

@@ -73,66 +73,7 @@ public class ProductCatalogCategory extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ProductCatalogCategory() {
-  }
-
-  public ProductCatalogCategory(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ProductCatalogCategory(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ProductCatalogCategory fetch() throws APIException{
-    ProductCatalogCategory newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ProductCatalogCategory fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ProductCatalogCategory> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ProductCatalogCategory fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ProductCatalogCategory> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ProductCatalogCategory> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ProductCatalogCategory>)(
-      new APIRequest<ProductCatalogCategory>(context, "", "/", "GET", ProductCatalogCategory.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ProductCatalogCategory>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ProductCatalogCategory.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ProductCatalogCategory() {
   }
 
   public String getId() {
@@ -279,210 +220,100 @@ public class ProductCatalogCategory extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldCriteriaValue() {
     return mCriteriaValue;
+  }
+
+  public ProductCatalogCategory setFieldCriteriaValue(String value) {
+    this.mCriteriaValue = value;
+    return this;
   }
 
   public String getFieldDescription() {
     return mDescription;
   }
 
+  public ProductCatalogCategory setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
+  }
+
   public String getFieldDestinationUri() {
     return mDestinationUri;
+  }
+
+  public ProductCatalogCategory setFieldDestinationUri(String value) {
+    this.mDestinationUri = value;
+    return this;
   }
 
   public String getFieldImageUrl() {
     return mImageUrl;
   }
 
+  public ProductCatalogCategory setFieldImageUrl(String value) {
+    this.mImageUrl = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public ProductCatalogCategory setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public Long getFieldNumItems() {
     return mNumItems;
   }
 
+  public ProductCatalogCategory setFieldNumItems(Long value) {
+    this.mNumItems = value;
+    return this;
+  }
+
   public List<Object> getFieldTokens() {
     return mTokens;
+  }
+
+  public ProductCatalogCategory setFieldTokens(List<Object> value) {
+    this.mTokens = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public ProductCatalogCategory setFieldId(String value) {
+    this.mId = value;
+    return this;
+  }
 
 
-  public static class APIRequestGet extends APIRequest<ProductCatalogCategory> {
 
-    ProductCatalogCategory lastResponse = null;
-    @Override
-    public ProductCatalogCategory getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
+  public static enum EnumCategorizationCriteria {
+      @SerializedName("BRAND")
+      VALUE_BRAND("BRAND"),
+      @SerializedName("CATEGORY")
+      VALUE_CATEGORY("CATEGORY"),
+      @SerializedName("PRODUCT_TYPE")
+      VALUE_PRODUCT_TYPE("PRODUCT_TYPE"),
+      NULL(null);
 
-    public static final String[] FIELDS = {
-      "criteria_value",
-      "description",
-      "destination_uri",
-      "image_url",
-      "name",
-      "num_items",
-      "tokens",
-      "id",
-    };
+      private String value;
 
-    @Override
-    public ProductCatalogCategory parseResponse(String response) throws APIException {
-      return ProductCatalogCategory.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ProductCatalogCategory execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductCatalogCategory execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ProductCatalogCategory> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ProductCatalogCategory> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ProductCatalogCategory>() {
-           public ProductCatalogCategory apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
+      private EnumCategorizationCriteria(String value) {
+        this.value = value;
       }
-      return this;
-    }
 
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
+      @Override
+      public String toString() {
+        return value;
       }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCriteriaValueField () {
-      return this.requestCriteriaValueField(true);
-    }
-    public APIRequestGet requestCriteriaValueField (boolean value) {
-      this.requestField("criteria_value", value);
-      return this;
-    }
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestDestinationUriField () {
-      return this.requestDestinationUriField(true);
-    }
-    public APIRequestGet requestDestinationUriField (boolean value) {
-      this.requestField("destination_uri", value);
-      return this;
-    }
-    public APIRequestGet requestImageUrlField () {
-      return this.requestImageUrlField(true);
-    }
-    public APIRequestGet requestImageUrlField (boolean value) {
-      this.requestField("image_url", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestNumItemsField () {
-      return this.requestNumItemsField(true);
-    }
-    public APIRequestGet requestNumItemsField (boolean value) {
-      this.requestField("num_items", value);
-      return this;
-    }
-    public APIRequestGet requestTokensField () {
-      return this.requestTokensField(true);
-    }
-    public APIRequestGet requestTokensField (boolean value) {
-      this.requestField("tokens", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
   }
 
 

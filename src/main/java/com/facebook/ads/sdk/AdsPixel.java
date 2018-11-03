@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdsPixel extends APINode {
+  @SerializedName("automatic_matching_fields")
+  private List<String> mAutomaticMatchingFields = null;
   @SerializedName("can_proxy")
   private Boolean mCanProxy = null;
   @SerializedName("code")
@@ -65,6 +67,8 @@ public class AdsPixel extends APINode {
   private User mCreator = null;
   @SerializedName("data_use_setting")
   private String mDataUseSetting = null;
+  @SerializedName("enable_automatic_matching")
+  private Boolean mEnableAutomaticMatching = null;
   @SerializedName("first_party_cookie_status")
   private String mFirstPartyCookieStatus = null;
   @SerializedName("id")
@@ -364,6 +368,10 @@ public class AdsPixel extends APINode {
   }
 
 
+  public List<String> getFieldAutomaticMatchingFields() {
+    return mAutomaticMatchingFields;
+  }
+
   public Boolean getFieldCanProxy() {
     return mCanProxy;
   }
@@ -385,6 +393,10 @@ public class AdsPixel extends APINode {
 
   public String getFieldDataUseSetting() {
     return mDataUseSetting;
+  }
+
+  public Boolean getFieldEnableAutomaticMatching() {
+    return mEnableAutomaticMatching;
   }
 
   public String getFieldFirstPartyCookieStatus() {
@@ -3655,11 +3667,13 @@ public class AdsPixel extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "automatic_matching_fields",
       "can_proxy",
       "code",
       "creation_time",
       "creator",
       "data_use_setting",
+      "enable_automatic_matching",
       "first_party_cookie_status",
       "id",
       "is_created_by_business",
@@ -3757,6 +3771,13 @@ public class AdsPixel extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAutomaticMatchingFieldsField () {
+      return this.requestAutomaticMatchingFieldsField(true);
+    }
+    public APIRequestGet requestAutomaticMatchingFieldsField (boolean value) {
+      this.requestField("automatic_matching_fields", value);
+      return this;
+    }
     public APIRequestGet requestCanProxyField () {
       return this.requestCanProxyField(true);
     }
@@ -3790,6 +3811,13 @@ public class AdsPixel extends APINode {
     }
     public APIRequestGet requestDataUseSettingField (boolean value) {
       this.requestField("data_use_setting", value);
+      return this;
+    }
+    public APIRequestGet requestEnableAutomaticMatchingField () {
+      return this.requestEnableAutomaticMatchingField(true);
+    }
+    public APIRequestGet requestEnableAutomaticMatchingField (boolean value) {
+      this.requestField("enable_automatic_matching", value);
       return this;
     }
     public APIRequestGet requestFirstPartyCookieStatusField () {
@@ -3852,6 +3880,8 @@ public class AdsPixel extends APINode {
     }
     public static final String[] PARAMS = {
       "name",
+      "enable_automatic_matching",
+      "automatic_matching_fields",
       "first_party_cookie_status",
       "data_use_setting",
     };
@@ -3913,6 +3943,24 @@ public class AdsPixel extends APINode {
 
     public APIRequestUpdate setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setEnableAutomaticMatching (Boolean enableAutomaticMatching) {
+      this.setParam("enable_automatic_matching", enableAutomaticMatching);
+      return this;
+    }
+    public APIRequestUpdate setEnableAutomaticMatching (String enableAutomaticMatching) {
+      this.setParam("enable_automatic_matching", enableAutomaticMatching);
+      return this;
+    }
+
+    public APIRequestUpdate setAutomaticMatchingFields (List<AdsPixel.EnumAutomaticMatchingFields> automaticMatchingFields) {
+      this.setParam("automatic_matching_fields", automaticMatchingFields);
+      return this;
+    }
+    public APIRequestUpdate setAutomaticMatchingFields (String automaticMatchingFields) {
+      this.setParam("automatic_matching_fields", automaticMatchingFields);
       return this;
     }
 
@@ -3982,6 +4030,37 @@ public class AdsPixel extends APINode {
       private String value;
 
       private EnumSortBy(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumAutomaticMatchingFields {
+      @SerializedName("em")
+      VALUE_EM("em"),
+      @SerializedName("fn")
+      VALUE_FN("fn"),
+      @SerializedName("ln")
+      VALUE_LN("ln"),
+      @SerializedName("ph")
+      VALUE_PH("ph"),
+      @SerializedName("ge")
+      VALUE_GE("ge"),
+      @SerializedName("zp")
+      VALUE_ZP("zp"),
+      @SerializedName("ct")
+      VALUE_CT("ct"),
+      @SerializedName("st")
+      VALUE_ST("st"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAutomaticMatchingFields(String value) {
         this.value = value;
       }
 
@@ -4109,11 +4188,13 @@ public class AdsPixel extends APINode {
   }
 
   public AdsPixel copyFrom(AdsPixel instance) {
+    this.mAutomaticMatchingFields = instance.mAutomaticMatchingFields;
     this.mCanProxy = instance.mCanProxy;
     this.mCode = instance.mCode;
     this.mCreationTime = instance.mCreationTime;
     this.mCreator = instance.mCreator;
     this.mDataUseSetting = instance.mDataUseSetting;
+    this.mEnableAutomaticMatching = instance.mEnableAutomaticMatching;
     this.mFirstPartyCookieStatus = instance.mFirstPartyCookieStatus;
     this.mId = instance.mId;
     this.mIsCreatedByBusiness = instance.mIsCreatedByBusiness;

@@ -55,6 +55,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class PagePublisher extends APINode {
+  @SerializedName("global_parent_id")
+  private String mGlobalParentId = null;
   @SerializedName("icon")
   private String mIcon = null;
   @SerializedName("id")
@@ -65,66 +67,7 @@ public class PagePublisher extends APINode {
   private String mUrl = null;
   protected static Gson gson = null;
 
-  PagePublisher() {
-  }
-
-  public PagePublisher(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public PagePublisher(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public PagePublisher fetch() throws APIException{
-    PagePublisher newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static PagePublisher fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<PagePublisher> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static PagePublisher fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<PagePublisher> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<PagePublisher> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PagePublisher>)(
-      new APIRequest<PagePublisher>(context, "", "/", "GET", PagePublisher.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<PagePublisher>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", PagePublisher.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public PagePublisher() {
   }
 
   public String getId() {
@@ -271,163 +214,53 @@ public class PagePublisher extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
+
+  public String getFieldGlobalParentId() {
+    return mGlobalParentId;
   }
 
+  public PagePublisher setFieldGlobalParentId(String value) {
+    this.mGlobalParentId = value;
+    return this;
+  }
 
   public String getFieldIcon() {
     return mIcon;
+  }
+
+  public PagePublisher setFieldIcon(String value) {
+    this.mIcon = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
+  public PagePublisher setFieldId(String value) {
+    this.mId = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public PagePublisher setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public String getFieldUrl() {
     return mUrl;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<PagePublisher> {
-
-    PagePublisher lastResponse = null;
-    @Override
-    public PagePublisher getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "icon",
-      "id",
-      "name",
-      "url",
-    };
-
-    @Override
-    public PagePublisher parseResponse(String response) throws APIException {
-      return PagePublisher.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public PagePublisher execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public PagePublisher execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<PagePublisher> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<PagePublisher> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, PagePublisher>() {
-           public PagePublisher apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestIconField () {
-      return this.requestIconField(true);
-    }
-    public APIRequestGet requestIconField (boolean value) {
-      this.requestField("icon", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGet requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
+  public PagePublisher setFieldUrl(String value) {
+    this.mUrl = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {
@@ -444,6 +277,7 @@ public class PagePublisher extends APINode {
   }
 
   public PagePublisher copyFrom(PagePublisher instance) {
+    this.mGlobalParentId = instance.mGlobalParentId;
     this.mIcon = instance.mIcon;
     this.mId = instance.mId;
     this.mName = instance.mName;

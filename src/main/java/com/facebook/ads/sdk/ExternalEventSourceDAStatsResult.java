@@ -71,66 +71,7 @@ public class ExternalEventSourceDAStatsResult extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ExternalEventSourceDAStatsResult() {
-  }
-
-  public ExternalEventSourceDAStatsResult(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ExternalEventSourceDAStatsResult(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ExternalEventSourceDAStatsResult fetch() throws APIException{
-    ExternalEventSourceDAStatsResult newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ExternalEventSourceDAStatsResult fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ExternalEventSourceDAStatsResult> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ExternalEventSourceDAStatsResult fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ExternalEventSourceDAStatsResult> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ExternalEventSourceDAStatsResult> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ExternalEventSourceDAStatsResult>)(
-      new APIRequest<ExternalEventSourceDAStatsResult>(context, "", "/", "GET", ExternalEventSourceDAStatsResult.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ExternalEventSourceDAStatsResult>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ExternalEventSourceDAStatsResult.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ExternalEventSourceDAStatsResult() {
   }
 
   public String getId() {
@@ -277,199 +218,71 @@ public class ExternalEventSourceDAStatsResult extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldCountContentIds() {
     return mCountContentIds;
+  }
+
+  public ExternalEventSourceDAStatsResult setFieldCountContentIds(Long value) {
+    this.mCountContentIds = value;
+    return this;
   }
 
   public Long getFieldCountContentIdsMatchAnyCatalog() {
     return mCountContentIdsMatchAnyCatalog;
   }
 
+  public ExternalEventSourceDAStatsResult setFieldCountContentIdsMatchAnyCatalog(Long value) {
+    this.mCountContentIdsMatchAnyCatalog = value;
+    return this;
+  }
+
   public Long getFieldCountFires() {
     return mCountFires;
+  }
+
+  public ExternalEventSourceDAStatsResult setFieldCountFires(Long value) {
+    this.mCountFires = value;
+    return this;
   }
 
   public Long getFieldCountFiresMatchAnyCatalog() {
     return mCountFiresMatchAnyCatalog;
   }
 
+  public ExternalEventSourceDAStatsResult setFieldCountFiresMatchAnyCatalog(Long value) {
+    this.mCountFiresMatchAnyCatalog = value;
+    return this;
+  }
+
   public String getFieldDate() {
     return mDate;
+  }
+
+  public ExternalEventSourceDAStatsResult setFieldDate(String value) {
+    this.mDate = value;
+    return this;
   }
 
   public Double getFieldPercentageMissedUsers() {
     return mPercentageMissedUsers;
   }
 
+  public ExternalEventSourceDAStatsResult setFieldPercentageMissedUsers(Double value) {
+    this.mPercentageMissedUsers = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ExternalEventSourceDAStatsResult> {
-
-    ExternalEventSourceDAStatsResult lastResponse = null;
-    @Override
-    public ExternalEventSourceDAStatsResult getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "count_content_ids",
-      "count_content_ids_match_any_catalog",
-      "count_fires",
-      "count_fires_match_any_catalog",
-      "date",
-      "percentage_missed_users",
-      "id",
-    };
-
-    @Override
-    public ExternalEventSourceDAStatsResult parseResponse(String response) throws APIException {
-      return ExternalEventSourceDAStatsResult.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ExternalEventSourceDAStatsResult execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ExternalEventSourceDAStatsResult execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ExternalEventSourceDAStatsResult> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ExternalEventSourceDAStatsResult> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ExternalEventSourceDAStatsResult>() {
-           public ExternalEventSourceDAStatsResult apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCountContentIdsField () {
-      return this.requestCountContentIdsField(true);
-    }
-    public APIRequestGet requestCountContentIdsField (boolean value) {
-      this.requestField("count_content_ids", value);
-      return this;
-    }
-    public APIRequestGet requestCountContentIdsMatchAnyCatalogField () {
-      return this.requestCountContentIdsMatchAnyCatalogField(true);
-    }
-    public APIRequestGet requestCountContentIdsMatchAnyCatalogField (boolean value) {
-      this.requestField("count_content_ids_match_any_catalog", value);
-      return this;
-    }
-    public APIRequestGet requestCountFiresField () {
-      return this.requestCountFiresField(true);
-    }
-    public APIRequestGet requestCountFiresField (boolean value) {
-      this.requestField("count_fires", value);
-      return this;
-    }
-    public APIRequestGet requestCountFiresMatchAnyCatalogField () {
-      return this.requestCountFiresMatchAnyCatalogField(true);
-    }
-    public APIRequestGet requestCountFiresMatchAnyCatalogField (boolean value) {
-      this.requestField("count_fires_match_any_catalog", value);
-      return this;
-    }
-    public APIRequestGet requestDateField () {
-      return this.requestDateField(true);
-    }
-    public APIRequestGet requestDateField (boolean value) {
-      this.requestField("date", value);
-      return this;
-    }
-    public APIRequestGet requestPercentageMissedUsersField () {
-      return this.requestPercentageMissedUsersField(true);
-    }
-    public APIRequestGet requestPercentageMissedUsersField (boolean value) {
-      this.requestField("percentage_missed_users", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ExternalEventSourceDAStatsResult setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

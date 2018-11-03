@@ -341,6 +341,10 @@ public class Ad extends APINode {
     return new APIRequestCreateAdLabel(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAdRulesGoverned getAdRulesGoverned() {
+    return new APIRequestGetAdRulesGoverned(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCopies getCopies() {
     return new APIRequestGetCopies(this.getPrefixedId().toString(), context);
   }
@@ -403,9 +407,6 @@ public class Ad extends APINode {
   }
 
   public AdgroupReviewFeedback getFieldAdReviewFeedback() {
-    if (mAdReviewFeedback != null) {
-      mAdReviewFeedback.context = getContext();
-    }
     return mAdReviewFeedback;
   }
 
@@ -530,16 +531,10 @@ public class Ad extends APINode {
   }
 
   public Targeting getFieldTargeting() {
-    if (mTargeting != null) {
-      mTargeting.context = getContext();
-    }
     return mTargeting;
   }
 
   public TrackingAndConversionWithDefaults getFieldTrackingAndConversionWithDefaults() {
-    if (mTrackingAndConversionWithDefaults != null) {
-      mTrackingAndConversionWithDefaults.context = getContext();
-    }
     return mTrackingAndConversionWithDefaults;
   }
 
@@ -1148,7 +1143,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestDeleteAdLabels setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
+    public APIRequestDeleteAdLabels setExecutionOptions (List<Ad.EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -1271,7 +1266,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdLabel setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
+    public APIRequestCreateAdLabel setExecutionOptions (List<Ad.EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -1316,6 +1311,199 @@ public class Ad extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetAdRulesGoverned extends APIRequest<AdRule> {
+
+    APINodeList<AdRule> lastResponse = null;
+    @Override
+    public APINodeList<AdRule> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "pass_evaluation",
+    };
+
+    public static final String[] FIELDS = {
+      "account_id",
+      "created_by",
+      "created_time",
+      "evaluation_spec",
+      "execution_spec",
+      "id",
+      "name",
+      "schedule_spec",
+      "status",
+      "updated_time",
+    };
+
+    @Override
+    public APINodeList<AdRule> parseResponse(String response) throws APIException {
+      return AdRule.parseResponse(response, getContext(), this);
+    }
+
+    @Override
+    public APINodeList<AdRule> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdRule> execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdRule>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdRule>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<AdRule>>() {
+           public APINodeList<AdRule> apply(String result) {
+             try {
+               return APIRequestGetAdRulesGoverned.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAdRulesGoverned(String nodeId, APIContext context) {
+      super(context, nodeId, "/adrules_governed", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdRulesGoverned setPassEvaluation (Boolean passEvaluation) {
+      this.setParam("pass_evaluation", passEvaluation);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned setPassEvaluation (String passEvaluation) {
+      this.setParam("pass_evaluation", passEvaluation);
+      return this;
+    }
+
+    public APIRequestGetAdRulesGoverned requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdRulesGoverned requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdRulesGoverned requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAdRulesGoverned requestAccountIdField () {
+      return this.requestAccountIdField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestAccountIdField (boolean value) {
+      this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestCreatedByField () {
+      return this.requestCreatedByField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestCreatedByField (boolean value) {
+      this.requestField("created_by", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestEvaluationSpecField () {
+      return this.requestEvaluationSpecField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestEvaluationSpecField (boolean value) {
+      this.requestField("evaluation_spec", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestExecutionSpecField () {
+      return this.requestExecutionSpecField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestExecutionSpecField (boolean value) {
+      this.requestField("execution_spec", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestScheduleSpecField () {
+      return this.requestScheduleSpecField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestScheduleSpecField (boolean value) {
+      this.requestField("schedule_spec", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetAdRulesGoverned requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetAdRulesGoverned requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetCopies extends APIRequest<Ad> {

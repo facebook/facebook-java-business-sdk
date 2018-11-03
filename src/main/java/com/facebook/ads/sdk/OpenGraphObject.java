@@ -378,9 +378,6 @@ public class OpenGraphObject extends APINode {
   }
 
   public Engagement getFieldEngagement() {
-    if (mEngagement != null) {
-      mEngagement.context = getContext();
-    }
     return mEngagement;
   }
 
@@ -401,9 +398,6 @@ public class OpenGraphObject extends APINode {
   }
 
   public Location getFieldLocation() {
-    if (mLocation != null) {
-      mLocation.context = getContext();
-    }
     return mLocation;
   }
 

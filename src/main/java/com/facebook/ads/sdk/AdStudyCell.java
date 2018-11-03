@@ -285,6 +285,10 @@ public class AdStudyCell extends APINode {
     return new APIRequestGetCampaigns(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -936,6 +940,7 @@ public class AdStudyCell extends APINode {
       "best_creative",
       "bid_adjustments",
       "bid_amount",
+      "bid_constraints",
       "bid_info",
       "bid_strategy",
       "billing_event",
@@ -961,6 +966,7 @@ public class AdStudyCell extends APINode {
       "is_average_price_pacing",
       "is_dynamic_creative",
       "is_dynamic_creative_optimization",
+      "issues_info",
       "lifetime_budget",
       "lifetime_frequency_cap",
       "lifetime_imps",
@@ -1145,6 +1151,13 @@ public class AdStudyCell extends APINode {
       this.requestField("bid_amount", value);
       return this;
     }
+    public APIRequestGetAdSets requestBidConstraintsField () {
+      return this.requestBidConstraintsField(true);
+    }
+    public APIRequestGetAdSets requestBidConstraintsField (boolean value) {
+      this.requestField("bid_constraints", value);
+      return this;
+    }
     public APIRequestGetAdSets requestBidInfoField () {
       return this.requestBidInfoField(true);
     }
@@ -1318,6 +1331,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField (boolean value) {
       this.requestField("is_dynamic_creative_optimization", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestIssuesInfoField () {
+      return this.requestIssuesInfoField(true);
+    }
+    public APIRequestGetAdSets requestIssuesInfoField (boolean value) {
+      this.requestField("issues_info", value);
       return this;
     }
     public APIRequestGetAdSets requestLifetimeBudgetField () {
@@ -1522,6 +1542,7 @@ public class AdStudyCell extends APINode {
       "kpi_type",
       "last_budget_toggling_time",
       "lifetime_budget",
+      "metrics_metadata",
       "name",
       "objective",
       "pacing_type",
@@ -1772,6 +1793,13 @@ public class AdStudyCell extends APINode {
       this.requestField("lifetime_budget", value);
       return this;
     }
+    public APIRequestGetCampaigns requestMetricsMetadataField () {
+      return this.requestMetricsMetadataField(true);
+    }
+    public APIRequestGetCampaigns requestMetricsMetadataField (boolean value) {
+      this.requestField("metrics_metadata", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestNameField () {
       return this.requestNameField(true);
     }
@@ -1863,6 +1891,109 @@ public class AdStudyCell extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+  }
+
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGet extends APIRequest<AdStudyCell> {

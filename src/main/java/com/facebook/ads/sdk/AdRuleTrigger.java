@@ -67,66 +67,7 @@ public class AdRuleTrigger extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdRuleTrigger() {
-  }
-
-  public AdRuleTrigger(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdRuleTrigger(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdRuleTrigger fetch() throws APIException{
-    AdRuleTrigger newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdRuleTrigger fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdRuleTrigger> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdRuleTrigger fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdRuleTrigger> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdRuleTrigger> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdRuleTrigger>)(
-      new APIRequest<AdRuleTrigger>(context, "", "/", "GET", AdRuleTrigger.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdRuleTrigger>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdRuleTrigger.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdRuleTrigger() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class AdRuleTrigger extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldField() {
     return mField;
+  }
+
+  public AdRuleTrigger setFieldField(String value) {
+    this.mField = value;
+    return this;
   }
 
   public EnumOperator getFieldOperator() {
     return mOperator;
   }
 
+  public AdRuleTrigger setFieldOperator(EnumOperator value) {
+    this.mOperator = value;
+    return this;
+  }
+
   public EnumType getFieldType() {
     return mType;
+  }
+
+  public AdRuleTrigger setFieldType(EnumType value) {
+    this.mType = value;
+    return this;
   }
 
   public Object getFieldValue() {
     return mValue;
   }
 
+  public AdRuleTrigger setFieldValue(Object value) {
+    this.mValue = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdRuleTrigger> {
-
-    AdRuleTrigger lastResponse = null;
-    @Override
-    public AdRuleTrigger getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "field",
-      "operator",
-      "type",
-      "value",
-      "id",
-    };
-
-    @Override
-    public AdRuleTrigger parseResponse(String response) throws APIException {
-      return AdRuleTrigger.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdRuleTrigger execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdRuleTrigger execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdRuleTrigger> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdRuleTrigger> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdRuleTrigger>() {
-           public AdRuleTrigger apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestFieldField () {
-      return this.requestFieldField(true);
-    }
-    public APIRequestGet requestFieldField (boolean value) {
-      this.requestField("field", value);
-      return this;
-    }
-    public APIRequestGet requestOperatorField () {
-      return this.requestOperatorField(true);
-    }
-    public APIRequestGet requestOperatorField (boolean value) {
-      this.requestField("operator", value);
-      return this;
-    }
-    public APIRequestGet requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGet requestTypeField (boolean value) {
-      this.requestField("type", value);
-      return this;
-    }
-    public APIRequestGet requestValueField () {
-      return this.requestValueField(true);
-    }
-    public APIRequestGet requestValueField (boolean value) {
-      this.requestField("value", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdRuleTrigger setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
   public static enum EnumOperator {
       @SerializedName("GREATER_THAN")

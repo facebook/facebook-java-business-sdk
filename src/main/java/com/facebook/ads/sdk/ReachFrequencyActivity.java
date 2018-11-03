@@ -83,66 +83,7 @@ public class ReachFrequencyActivity extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ReachFrequencyActivity() {
-  }
-
-  public ReachFrequencyActivity(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ReachFrequencyActivity(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ReachFrequencyActivity fetch() throws APIException{
-    ReachFrequencyActivity newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ReachFrequencyActivity fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ReachFrequencyActivity> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ReachFrequencyActivity fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ReachFrequencyActivity> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ReachFrequencyActivity> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ReachFrequencyActivity>)(
-      new APIRequest<ReachFrequencyActivity>(context, "", "/", "GET", ReachFrequencyActivity.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ReachFrequencyActivity>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ReachFrequencyActivity.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ReachFrequencyActivity() {
   }
 
   public String getId() {
@@ -289,271 +230,125 @@ public class ReachFrequencyActivity extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAccountId() {
     return mAccountId;
+  }
+
+  public ReachFrequencyActivity setFieldAccountId(String value) {
+    this.mAccountId = value;
+    return this;
   }
 
   public Boolean getFieldCampaignActive() {
     return mCampaignActive;
   }
 
+  public ReachFrequencyActivity setFieldCampaignActive(Boolean value) {
+    this.mCampaignActive = value;
+    return this;
+  }
+
   public Boolean getFieldCampaignStarted() {
     return mCampaignStarted;
+  }
+
+  public ReachFrequencyActivity setFieldCampaignStarted(Boolean value) {
+    this.mCampaignStarted = value;
+    return this;
   }
 
   public Boolean getFieldCreativeUploaded() {
     return mCreativeUploaded;
   }
 
+  public ReachFrequencyActivity setFieldCreativeUploaded(Boolean value) {
+    this.mCreativeUploaded = value;
+    return this;
+  }
+
   public Long getFieldDeliveredBudget() {
     return mDeliveredBudget;
+  }
+
+  public ReachFrequencyActivity setFieldDeliveredBudget(Long value) {
+    this.mDeliveredBudget = value;
+    return this;
   }
 
   public List<Double> getFieldDeliveredDailyGrp() {
     return mDeliveredDailyGrp;
   }
 
+  public ReachFrequencyActivity setFieldDeliveredDailyGrp(List<Double> value) {
+    this.mDeliveredDailyGrp = value;
+    return this;
+  }
+
   public List<Double> getFieldDeliveredDailyImpression() {
     return mDeliveredDailyImpression;
+  }
+
+  public ReachFrequencyActivity setFieldDeliveredDailyImpression(List<Double> value) {
+    this.mDeliveredDailyImpression = value;
+    return this;
   }
 
   public Long getFieldDeliveredImpression() {
     return mDeliveredImpression;
   }
 
+  public ReachFrequencyActivity setFieldDeliveredImpression(Long value) {
+    this.mDeliveredImpression = value;
+    return this;
+  }
+
   public Long getFieldDeliveredReach() {
     return mDeliveredReach;
+  }
+
+  public ReachFrequencyActivity setFieldDeliveredReach(Long value) {
+    this.mDeliveredReach = value;
+    return this;
   }
 
   public Long getFieldDeliveredTotalImpression() {
     return mDeliveredTotalImpression;
   }
 
+  public ReachFrequencyActivity setFieldDeliveredTotalImpression(Long value) {
+    this.mDeliveredTotalImpression = value;
+    return this;
+  }
+
   public Boolean getFieldIoApproved() {
     return mIoApproved;
+  }
+
+  public ReachFrequencyActivity setFieldIoApproved(Boolean value) {
+    this.mIoApproved = value;
+    return this;
   }
 
   public String getFieldSfLink() {
     return mSfLink;
   }
 
+  public ReachFrequencyActivity setFieldSfLink(String value) {
+    this.mSfLink = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ReachFrequencyActivity> {
-
-    ReachFrequencyActivity lastResponse = null;
-    @Override
-    public ReachFrequencyActivity getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "account_id",
-      "campaign_active",
-      "campaign_started",
-      "creative_uploaded",
-      "delivered_budget",
-      "delivered_daily_grp",
-      "delivered_daily_impression",
-      "delivered_impression",
-      "delivered_reach",
-      "delivered_total_impression",
-      "io_approved",
-      "sf_link",
-      "id",
-    };
-
-    @Override
-    public ReachFrequencyActivity parseResponse(String response) throws APIException {
-      return ReachFrequencyActivity.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ReachFrequencyActivity execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ReachFrequencyActivity execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ReachFrequencyActivity> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ReachFrequencyActivity> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ReachFrequencyActivity>() {
-           public ReachFrequencyActivity apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAccountIdField () {
-      return this.requestAccountIdField(true);
-    }
-    public APIRequestGet requestAccountIdField (boolean value) {
-      this.requestField("account_id", value);
-      return this;
-    }
-    public APIRequestGet requestCampaignActiveField () {
-      return this.requestCampaignActiveField(true);
-    }
-    public APIRequestGet requestCampaignActiveField (boolean value) {
-      this.requestField("campaign_active", value);
-      return this;
-    }
-    public APIRequestGet requestCampaignStartedField () {
-      return this.requestCampaignStartedField(true);
-    }
-    public APIRequestGet requestCampaignStartedField (boolean value) {
-      this.requestField("campaign_started", value);
-      return this;
-    }
-    public APIRequestGet requestCreativeUploadedField () {
-      return this.requestCreativeUploadedField(true);
-    }
-    public APIRequestGet requestCreativeUploadedField (boolean value) {
-      this.requestField("creative_uploaded", value);
-      return this;
-    }
-    public APIRequestGet requestDeliveredBudgetField () {
-      return this.requestDeliveredBudgetField(true);
-    }
-    public APIRequestGet requestDeliveredBudgetField (boolean value) {
-      this.requestField("delivered_budget", value);
-      return this;
-    }
-    public APIRequestGet requestDeliveredDailyGrpField () {
-      return this.requestDeliveredDailyGrpField(true);
-    }
-    public APIRequestGet requestDeliveredDailyGrpField (boolean value) {
-      this.requestField("delivered_daily_grp", value);
-      return this;
-    }
-    public APIRequestGet requestDeliveredDailyImpressionField () {
-      return this.requestDeliveredDailyImpressionField(true);
-    }
-    public APIRequestGet requestDeliveredDailyImpressionField (boolean value) {
-      this.requestField("delivered_daily_impression", value);
-      return this;
-    }
-    public APIRequestGet requestDeliveredImpressionField () {
-      return this.requestDeliveredImpressionField(true);
-    }
-    public APIRequestGet requestDeliveredImpressionField (boolean value) {
-      this.requestField("delivered_impression", value);
-      return this;
-    }
-    public APIRequestGet requestDeliveredReachField () {
-      return this.requestDeliveredReachField(true);
-    }
-    public APIRequestGet requestDeliveredReachField (boolean value) {
-      this.requestField("delivered_reach", value);
-      return this;
-    }
-    public APIRequestGet requestDeliveredTotalImpressionField () {
-      return this.requestDeliveredTotalImpressionField(true);
-    }
-    public APIRequestGet requestDeliveredTotalImpressionField (boolean value) {
-      this.requestField("delivered_total_impression", value);
-      return this;
-    }
-    public APIRequestGet requestIoApprovedField () {
-      return this.requestIoApprovedField(true);
-    }
-    public APIRequestGet requestIoApprovedField (boolean value) {
-      this.requestField("io_approved", value);
-      return this;
-    }
-    public APIRequestGet requestSfLinkField () {
-      return this.requestSfLinkField(true);
-    }
-    public APIRequestGet requestSfLinkField (boolean value) {
-      this.requestField("sf_link", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ReachFrequencyActivity setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

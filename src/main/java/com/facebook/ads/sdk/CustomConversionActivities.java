@@ -67,66 +67,7 @@ public class CustomConversionActivities extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  CustomConversionActivities() {
-  }
-
-  public CustomConversionActivities(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public CustomConversionActivities(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public CustomConversionActivities fetch() throws APIException{
-    CustomConversionActivities newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static CustomConversionActivities fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<CustomConversionActivities> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static CustomConversionActivities fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<CustomConversionActivities> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<CustomConversionActivities> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CustomConversionActivities>)(
-      new APIRequest<CustomConversionActivities>(context, "", "/", "GET", CustomConversionActivities.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<CustomConversionActivities>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", CustomConversionActivities.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public CustomConversionActivities() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class CustomConversionActivities extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Object getFieldAppId() {
     return mAppId;
+  }
+
+  public CustomConversionActivities setFieldAppId(Object value) {
+    this.mAppId = value;
+    return this;
   }
 
   public String getFieldData() {
     return mData;
   }
 
+  public CustomConversionActivities setFieldData(String value) {
+    this.mData = value;
+    return this;
+  }
+
   public String getFieldEventType() {
     return mEventType;
+  }
+
+  public CustomConversionActivities setFieldEventType(String value) {
+    this.mEventType = value;
+    return this;
   }
 
   public String getFieldTimestamp() {
     return mTimestamp;
   }
 
+  public CustomConversionActivities setFieldTimestamp(String value) {
+    this.mTimestamp = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<CustomConversionActivities> {
-
-    CustomConversionActivities lastResponse = null;
-    @Override
-    public CustomConversionActivities getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "app_id",
-      "data",
-      "event_type",
-      "timestamp",
-      "id",
-    };
-
-    @Override
-    public CustomConversionActivities parseResponse(String response) throws APIException {
-      return CustomConversionActivities.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public CustomConversionActivities execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CustomConversionActivities execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<CustomConversionActivities> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CustomConversionActivities> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, CustomConversionActivities>() {
-           public CustomConversionActivities apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAppIdField () {
-      return this.requestAppIdField(true);
-    }
-    public APIRequestGet requestAppIdField (boolean value) {
-      this.requestField("app_id", value);
-      return this;
-    }
-    public APIRequestGet requestDataField () {
-      return this.requestDataField(true);
-    }
-    public APIRequestGet requestDataField (boolean value) {
-      this.requestField("data", value);
-      return this;
-    }
-    public APIRequestGet requestEventTypeField () {
-      return this.requestEventTypeField(true);
-    }
-    public APIRequestGet requestEventTypeField (boolean value) {
-      this.requestField("event_type", value);
-      return this;
-    }
-    public APIRequestGet requestTimestampField () {
-      return this.requestTimestampField(true);
-    }
-    public APIRequestGet requestTimestampField (boolean value) {
-      this.requestField("timestamp", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public CustomConversionActivities setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
   public static enum EnumEventType {
       @SerializedName("conversion_create")

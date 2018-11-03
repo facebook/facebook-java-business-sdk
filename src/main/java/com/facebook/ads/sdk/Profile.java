@@ -315,9 +315,6 @@ public class Profile extends APINode {
   }
 
   public ProfilePictureSource getFieldPicCrop() {
-    if (mPicCrop != null) {
-      mPicCrop.context = getContext();
-    }
     return mPicCrop;
   }
 

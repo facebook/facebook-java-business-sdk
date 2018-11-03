@@ -67,66 +67,7 @@ public class AdgroupRelevanceScore extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdgroupRelevanceScore() {
-  }
-
-  public AdgroupRelevanceScore(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdgroupRelevanceScore(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdgroupRelevanceScore fetch() throws APIException{
-    AdgroupRelevanceScore newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdgroupRelevanceScore fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdgroupRelevanceScore> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdgroupRelevanceScore fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdgroupRelevanceScore> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdgroupRelevanceScore> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdgroupRelevanceScore>)(
-      new APIRequest<AdgroupRelevanceScore>(context, "", "/", "GET", AdgroupRelevanceScore.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdgroupRelevanceScore>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdgroupRelevanceScore.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdgroupRelevanceScore() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class AdgroupRelevanceScore extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldNegativeFeedback() {
     return mNegativeFeedback;
+  }
+
+  public AdgroupRelevanceScore setFieldNegativeFeedback(String value) {
+    this.mNegativeFeedback = value;
+    return this;
   }
 
   public String getFieldPositiveFeedback() {
     return mPositiveFeedback;
   }
 
+  public AdgroupRelevanceScore setFieldPositiveFeedback(String value) {
+    this.mPositiveFeedback = value;
+    return this;
+  }
+
   public String getFieldScore() {
     return mScore;
+  }
+
+  public AdgroupRelevanceScore setFieldScore(String value) {
+    this.mScore = value;
+    return this;
   }
 
   public String getFieldStatus() {
     return mStatus;
   }
 
+  public AdgroupRelevanceScore setFieldStatus(String value) {
+    this.mStatus = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdgroupRelevanceScore> {
-
-    AdgroupRelevanceScore lastResponse = null;
-    @Override
-    public AdgroupRelevanceScore getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "negative_feedback",
-      "positive_feedback",
-      "score",
-      "status",
-      "id",
-    };
-
-    @Override
-    public AdgroupRelevanceScore parseResponse(String response) throws APIException {
-      return AdgroupRelevanceScore.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdgroupRelevanceScore execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdgroupRelevanceScore execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdgroupRelevanceScore> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdgroupRelevanceScore> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdgroupRelevanceScore>() {
-           public AdgroupRelevanceScore apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestNegativeFeedbackField () {
-      return this.requestNegativeFeedbackField(true);
-    }
-    public APIRequestGet requestNegativeFeedbackField (boolean value) {
-      this.requestField("negative_feedback", value);
-      return this;
-    }
-    public APIRequestGet requestPositiveFeedbackField () {
-      return this.requestPositiveFeedbackField(true);
-    }
-    public APIRequestGet requestPositiveFeedbackField (boolean value) {
-      this.requestField("positive_feedback", value);
-      return this;
-    }
-    public APIRequestGet requestScoreField () {
-      return this.requestScoreField(true);
-    }
-    public APIRequestGet requestScoreField (boolean value) {
-      this.requestField("score", value);
-      return this;
-    }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdgroupRelevanceScore setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

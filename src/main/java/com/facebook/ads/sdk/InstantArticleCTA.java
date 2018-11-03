@@ -65,66 +65,7 @@ public class InstantArticleCTA extends APINode {
   private String mUpdateTime = null;
   protected static Gson gson = null;
 
-  InstantArticleCTA() {
-  }
-
-  public InstantArticleCTA(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public InstantArticleCTA(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public InstantArticleCTA fetch() throws APIException{
-    InstantArticleCTA newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static InstantArticleCTA fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<InstantArticleCTA> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static InstantArticleCTA fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<InstantArticleCTA> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<InstantArticleCTA> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<InstantArticleCTA>)(
-      new APIRequest<InstantArticleCTA>(context, "", "/", "GET", InstantArticleCTA.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<InstantArticleCTA>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", InstantArticleCTA.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public InstantArticleCTA() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class InstantArticleCTA extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldId() {
     return mId;
+  }
+
+  public InstantArticleCTA setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public Boolean getFieldIsEnabled() {
     return mIsEnabled;
   }
 
+  public InstantArticleCTA setFieldIsEnabled(Boolean value) {
+    this.mIsEnabled = value;
+    return this;
+  }
+
   public String getFieldType() {
     return mType;
+  }
+
+  public InstantArticleCTA setFieldType(String value) {
+    this.mType = value;
+    return this;
   }
 
   public String getFieldUpdateTime() {
     return mUpdateTime;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<InstantArticleCTA> {
-
-    InstantArticleCTA lastResponse = null;
-    @Override
-    public InstantArticleCTA getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "id",
-      "is_enabled",
-      "type",
-      "update_time",
-    };
-
-    @Override
-    public InstantArticleCTA parseResponse(String response) throws APIException {
-      return InstantArticleCTA.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public InstantArticleCTA execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public InstantArticleCTA execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<InstantArticleCTA> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<InstantArticleCTA> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, InstantArticleCTA>() {
-           public InstantArticleCTA apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestIsEnabledField () {
-      return this.requestIsEnabledField(true);
-    }
-    public APIRequestGet requestIsEnabledField (boolean value) {
-      this.requestField("is_enabled", value);
-      return this;
-    }
-    public APIRequestGet requestTypeField () {
-      return this.requestTypeField(true);
-    }
-    public APIRequestGet requestTypeField (boolean value) {
-      this.requestField("type", value);
-      return this;
-    }
-    public APIRequestGet requestUpdateTimeField () {
-      return this.requestUpdateTimeField(true);
-    }
-    public APIRequestGet requestUpdateTimeField (boolean value) {
-      this.requestField("update_time", value);
-      return this;
-    }
+  public InstantArticleCTA setFieldUpdateTime(String value) {
+    this.mUpdateTime = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

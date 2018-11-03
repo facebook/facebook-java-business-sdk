@@ -84,7 +84,7 @@ public class LiveVideo extends APINode {
   @SerializedName("is_reference_only")
   private Boolean mIsReferenceOnly = null;
   @SerializedName("live_encoders")
-  private List<Object> mLiveEncoders = null;
+  private List<LiveEncoder> mLiveEncoders = null;
   @SerializedName("live_views")
   private Long mLiveViews = null;
   @SerializedName("permalink_url")
@@ -375,9 +375,6 @@ public class LiveVideo extends APINode {
 
 
   public LiveVideoAdBreakConfig getFieldAdBreakConfig() {
-    if (mAdBreakConfig != null) {
-      mAdBreakConfig.context = getContext();
-    }
     return mAdBreakConfig;
   }
 
@@ -436,7 +433,7 @@ public class LiveVideo extends APINode {
     return mIsReferenceOnly;
   }
 
-  public List<Object> getFieldLiveEncoders() {
+  public List<LiveEncoder> getFieldLiveEncoders() {
     return mLiveEncoders;
   }
 
@@ -473,9 +470,6 @@ public class LiveVideo extends APINode {
   }
 
   public LiveVideoTargeting getFieldTargeting() {
-    if (mTargeting != null) {
-      mTargeting.context = getContext();
-    }
     return mTargeting;
   }
 
@@ -533,10 +527,12 @@ public class LiveVideo extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -844,6 +840,13 @@ public class LiveVideo extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetBlockedUsers requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetBlockedUsers requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetBlockedUsers requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -870,6 +873,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetBlockedUsers requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestLastNameField () {
@@ -1532,6 +1542,7 @@ public class LiveVideo extends APINode {
       "preferred_audience",
       "press_contact",
       "price_range",
+      "privacy_info_url",
       "produced_by",
       "products",
       "promotion_eligible",
@@ -2417,6 +2428,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostShareDPages requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
+      return this;
+    }
+    public APIRequestGetCrosspostShareDPages requestPrivacyInfoUrlField () {
+      return this.requestPrivacyInfoUrlField(true);
+    }
+    public APIRequestGetCrosspostShareDPages requestPrivacyInfoUrlField (boolean value) {
+      this.requestField("privacy_info_url", value);
       return this;
     }
     public APIRequestGetCrosspostShareDPages requestProducedByField () {

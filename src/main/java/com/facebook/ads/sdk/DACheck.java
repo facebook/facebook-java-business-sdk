@@ -71,66 +71,7 @@ public class DACheck extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  DACheck() {
-  }
-
-  public DACheck(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public DACheck(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public DACheck fetch() throws APIException{
-    DACheck newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static DACheck fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<DACheck> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static DACheck fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<DACheck> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<DACheck> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<DACheck>)(
-      new APIRequest<DACheck>(context, "", "/", "GET", DACheck.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<DACheck>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", DACheck.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public DACheck() {
   }
 
   public String getId() {
@@ -277,199 +218,71 @@ public class DACheck extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldActionUri() {
     return mActionUri;
+  }
+
+  public DACheck setFieldActionUri(String value) {
+    this.mActionUri = value;
+    return this;
   }
 
   public String getFieldDescription() {
     return mDescription;
   }
 
+  public DACheck setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
+  }
+
   public String getFieldKey() {
     return mKey;
+  }
+
+  public DACheck setFieldKey(String value) {
+    this.mKey = value;
+    return this;
   }
 
   public String getFieldResult() {
     return mResult;
   }
 
+  public DACheck setFieldResult(String value) {
+    this.mResult = value;
+    return this;
+  }
+
   public String getFieldTitle() {
     return mTitle;
+  }
+
+  public DACheck setFieldTitle(String value) {
+    this.mTitle = value;
+    return this;
   }
 
   public String getFieldUserMessage() {
     return mUserMessage;
   }
 
+  public DACheck setFieldUserMessage(String value) {
+    this.mUserMessage = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<DACheck> {
-
-    DACheck lastResponse = null;
-    @Override
-    public DACheck getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "action_uri",
-      "description",
-      "key",
-      "result",
-      "title",
-      "user_message",
-      "id",
-    };
-
-    @Override
-    public DACheck parseResponse(String response) throws APIException {
-      return DACheck.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public DACheck execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public DACheck execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<DACheck> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<DACheck> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, DACheck>() {
-           public DACheck apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestActionUriField () {
-      return this.requestActionUriField(true);
-    }
-    public APIRequestGet requestActionUriField (boolean value) {
-      this.requestField("action_uri", value);
-      return this;
-    }
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestKeyField () {
-      return this.requestKeyField(true);
-    }
-    public APIRequestGet requestKeyField (boolean value) {
-      this.requestField("key", value);
-      return this;
-    }
-    public APIRequestGet requestResultField () {
-      return this.requestResultField(true);
-    }
-    public APIRequestGet requestResultField (boolean value) {
-      this.requestField("result", value);
-      return this;
-    }
-    public APIRequestGet requestTitleField () {
-      return this.requestTitleField(true);
-    }
-    public APIRequestGet requestTitleField (boolean value) {
-      this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGet requestUserMessageField () {
-      return this.requestUserMessageField(true);
-    }
-    public APIRequestGet requestUserMessageField (boolean value) {
-      this.requestField("user_message", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public DACheck setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

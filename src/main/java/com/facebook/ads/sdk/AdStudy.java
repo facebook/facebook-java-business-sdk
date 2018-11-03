@@ -329,6 +329,10 @@ public class AdStudy extends APINode {
     return new APIRequestGetViewers(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDelete delete() {
+    return new APIRequestDelete(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
@@ -1641,10 +1645,12 @@ public class AdStudy extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
+      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
+      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -1943,6 +1949,13 @@ public class AdStudy extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
+    public APIRequestGetViewers requestIsPaymentEnabledField () {
+      return this.requestIsPaymentEnabledField(true);
+    }
+    public APIRequestGetViewers requestIsPaymentEnabledField (boolean value) {
+      this.requestField("is_payment_enabled", value);
+      return this;
+    }
     public APIRequestGetViewers requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -1969,6 +1982,13 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetViewers requestLanguagesField (boolean value) {
       this.requestField("languages", value);
+      return this;
+    }
+    public APIRequestGetViewers requestLastAdReferralField () {
+      return this.requestLastAdReferralField(true);
+    }
+    public APIRequestGetViewers requestLastAdReferralField (boolean value) {
+      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetViewers requestLastNameField () {
@@ -2202,6 +2222,109 @@ public class AdStudy extends APINode {
       this.requestField("work", value);
       return this;
     }
+  }
+
+  public static class APIRequestDelete extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response) throws APIException {
+      return APINode.parseResponse(response, getContext(), this).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      lastResponse = parseResponse(executeInternal(extraParams));
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
+             try {
+               return APIRequestDelete.this.parseResponse(result);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDelete(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDelete setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDelete requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDelete requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDelete requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDelete requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGet extends APIRequest<AdStudy> {

@@ -65,66 +65,7 @@ public class ReachEstimate extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ReachEstimate() {
-  }
-
-  public ReachEstimate(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ReachEstimate(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ReachEstimate fetch() throws APIException{
-    ReachEstimate newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ReachEstimate fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ReachEstimate> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ReachEstimate fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ReachEstimate> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ReachEstimate> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ReachEstimate>)(
-      new APIRequest<ReachEstimate>(context, "", "/", "GET", ReachEstimate.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ReachEstimate>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ReachEstimate.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ReachEstimate() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class ReachEstimate extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Boolean getFieldEstimateReady() {
     return mEstimateReady;
+  }
+
+  public ReachEstimate setFieldEstimateReady(Boolean value) {
+    this.mEstimateReady = value;
+    return this;
   }
 
   public Boolean getFieldUnsupported() {
     return mUnsupported;
   }
 
+  public ReachEstimate setFieldUnsupported(Boolean value) {
+    this.mUnsupported = value;
+    return this;
+  }
+
   public Long getFieldUsers() {
     return mUsers;
+  }
+
+  public ReachEstimate setFieldUsers(Long value) {
+    this.mUsers = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ReachEstimate> {
-
-    ReachEstimate lastResponse = null;
-    @Override
-    public ReachEstimate getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "estimate_ready",
-      "unsupported",
-      "users",
-      "id",
-    };
-
-    @Override
-    public ReachEstimate parseResponse(String response) throws APIException {
-      return ReachEstimate.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ReachEstimate execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ReachEstimate execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ReachEstimate> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ReachEstimate> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ReachEstimate>() {
-           public ReachEstimate apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestEstimateReadyField () {
-      return this.requestEstimateReadyField(true);
-    }
-    public APIRequestGet requestEstimateReadyField (boolean value) {
-      this.requestField("estimate_ready", value);
-      return this;
-    }
-    public APIRequestGet requestUnsupportedField () {
-      return this.requestUnsupportedField(true);
-    }
-    public APIRequestGet requestUnsupportedField (boolean value) {
-      this.requestField("unsupported", value);
-      return this;
-    }
-    public APIRequestGet requestUsersField () {
-      return this.requestUsersField(true);
-    }
-    public APIRequestGet requestUsersField (boolean value) {
-      this.requestField("users", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ReachEstimate setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
   public static enum EnumOptimizeFor {
       @SerializedName("NONE")

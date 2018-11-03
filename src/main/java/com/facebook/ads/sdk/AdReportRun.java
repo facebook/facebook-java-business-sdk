@@ -418,6 +418,10 @@ public class AdReportRun extends APINode {
       "cost_per_action_type",
       "cost_per_ad_click",
       "cost_per_dda_countby_convs",
+      "cost_per_dwell",
+      "cost_per_dwell_3_sec",
+      "cost_per_dwell_5_sec",
+      "cost_per_dwell_7_sec",
       "cost_per_estimated_ad_recallers",
       "cost_per_inline_link_click",
       "cost_per_inline_post_engagement",
@@ -441,6 +445,10 @@ public class AdReportRun extends APINode {
       "description_asset",
       "device_platform",
       "dma",
+      "dwell_3_sec",
+      "dwell_5_sec",
+      "dwell_7_sec",
+      "dwell_rate",
       "estimated_ad_recall_rate",
       "estimated_ad_recall_rate_lower_bound",
       "estimated_ad_recall_rate_upper_bound",
@@ -482,6 +490,7 @@ public class AdReportRun extends APINode {
       "rule_asset",
       "social_spend",
       "spend",
+      "thumb_stops",
       "title_asset",
       "unique_actions",
       "unique_clicks",
@@ -845,6 +854,34 @@ public class AdReportRun extends APINode {
       this.requestField("cost_per_dda_countby_convs", value);
       return this;
     }
+    public APIRequestGetInsights requestCostPerDwellField () {
+      return this.requestCostPerDwellField(true);
+    }
+    public APIRequestGetInsights requestCostPerDwellField (boolean value) {
+      this.requestField("cost_per_dwell", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerDwell3SecField () {
+      return this.requestCostPerDwell3SecField(true);
+    }
+    public APIRequestGetInsights requestCostPerDwell3SecField (boolean value) {
+      this.requestField("cost_per_dwell_3_sec", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerDwell5SecField () {
+      return this.requestCostPerDwell5SecField(true);
+    }
+    public APIRequestGetInsights requestCostPerDwell5SecField (boolean value) {
+      this.requestField("cost_per_dwell_5_sec", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerDwell7SecField () {
+      return this.requestCostPerDwell7SecField(true);
+    }
+    public APIRequestGetInsights requestCostPerDwell7SecField (boolean value) {
+      this.requestField("cost_per_dwell_7_sec", value);
+      return this;
+    }
     public APIRequestGetInsights requestCostPerEstimatedAdRecallersField () {
       return this.requestCostPerEstimatedAdRecallersField(true);
     }
@@ -1004,6 +1041,34 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestDmaField (boolean value) {
       this.requestField("dma", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDwell3SecField () {
+      return this.requestDwell3SecField(true);
+    }
+    public APIRequestGetInsights requestDwell3SecField (boolean value) {
+      this.requestField("dwell_3_sec", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDwell5SecField () {
+      return this.requestDwell5SecField(true);
+    }
+    public APIRequestGetInsights requestDwell5SecField (boolean value) {
+      this.requestField("dwell_5_sec", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDwell7SecField () {
+      return this.requestDwell7SecField(true);
+    }
+    public APIRequestGetInsights requestDwell7SecField (boolean value) {
+      this.requestField("dwell_7_sec", value);
+      return this;
+    }
+    public APIRequestGetInsights requestDwellRateField () {
+      return this.requestDwellRateField(true);
+    }
+    public APIRequestGetInsights requestDwellRateField (boolean value) {
+      this.requestField("dwell_rate", value);
       return this;
     }
     public APIRequestGetInsights requestEstimatedAdRecallRateField () {
@@ -1291,6 +1356,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestSpendField (boolean value) {
       this.requestField("spend", value);
+      return this;
+    }
+    public APIRequestGetInsights requestThumbStopsField () {
+      return this.requestThumbStopsField(true);
+    }
+    public APIRequestGetInsights requestThumbStopsField (boolean value) {
+      this.requestField("thumb_stops", value);
       return this;
     }
     public APIRequestGetInsights requestTitleAssetField () {

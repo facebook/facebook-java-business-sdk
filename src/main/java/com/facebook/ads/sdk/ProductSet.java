@@ -2582,6 +2582,7 @@ public class ProductSet extends APINode {
       "custom_label_0",
       "date_first_on_lot",
       "dealer_communication_channel",
+      "dealer_email",
       "dealer_id",
       "dealer_name",
       "dealer_phone",
@@ -2785,6 +2786,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetVehicles requestDealerCommunicationChannelField (boolean value) {
       this.requestField("dealer_communication_channel", value);
+      return this;
+    }
+    public APIRequestGetVehicles requestDealerEmailField () {
+      return this.requestDealerEmailField(true);
+    }
+    public APIRequestGetVehicles requestDealerEmailField (boolean value) {
+      this.requestField("dealer_email", value);
       return this;
     }
     public APIRequestGetVehicles requestDealerIdField () {

@@ -73,66 +73,7 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  BusinessMatchedSearchApplicationsEdgeData() {
-  }
-
-  public BusinessMatchedSearchApplicationsEdgeData(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public BusinessMatchedSearchApplicationsEdgeData(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public BusinessMatchedSearchApplicationsEdgeData fetch() throws APIException{
-    BusinessMatchedSearchApplicationsEdgeData newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static BusinessMatchedSearchApplicationsEdgeData fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<BusinessMatchedSearchApplicationsEdgeData> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static BusinessMatchedSearchApplicationsEdgeData fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<BusinessMatchedSearchApplicationsEdgeData> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<BusinessMatchedSearchApplicationsEdgeData> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<BusinessMatchedSearchApplicationsEdgeData>)(
-      new APIRequest<BusinessMatchedSearchApplicationsEdgeData>(context, "", "/", "GET", BusinessMatchedSearchApplicationsEdgeData.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<BusinessMatchedSearchApplicationsEdgeData>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", BusinessMatchedSearchApplicationsEdgeData.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public BusinessMatchedSearchApplicationsEdgeData() {
   }
 
   public String getId() {
@@ -279,211 +220,80 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldAppId() {
     return mAppId;
+  }
+
+  public BusinessMatchedSearchApplicationsEdgeData setFieldAppId(String value) {
+    this.mAppId = value;
+    return this;
   }
 
   public String getFieldIconUrl() {
     return mIconUrl;
   }
 
+  public BusinessMatchedSearchApplicationsEdgeData setFieldIconUrl(String value) {
+    this.mIconUrl = value;
+    return this;
+  }
+
   public String getFieldName() {
     return mName;
+  }
+
+  public BusinessMatchedSearchApplicationsEdgeData setFieldName(String value) {
+    this.mName = value;
+    return this;
   }
 
   public String getFieldSearchSourceStore() {
     return mSearchSourceStore;
   }
 
+  public BusinessMatchedSearchApplicationsEdgeData setFieldSearchSourceStore(String value) {
+    this.mSearchSourceStore = value;
+    return this;
+  }
+
   public String getFieldStore() {
     return mStore;
+  }
+
+  public BusinessMatchedSearchApplicationsEdgeData setFieldStore(String value) {
+    this.mStore = value;
+    return this;
   }
 
   public String getFieldUniqueId() {
     return mUniqueId;
   }
 
+  public BusinessMatchedSearchApplicationsEdgeData setFieldUniqueId(String value) {
+    this.mUniqueId = value;
+    return this;
+  }
+
   public String getFieldUrl() {
     return mUrl;
+  }
+
+  public BusinessMatchedSearchApplicationsEdgeData setFieldUrl(String value) {
+    this.mUrl = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<BusinessMatchedSearchApplicationsEdgeData> {
-
-    BusinessMatchedSearchApplicationsEdgeData lastResponse = null;
-    @Override
-    public BusinessMatchedSearchApplicationsEdgeData getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "app_id",
-      "icon_url",
-      "name",
-      "search_source_store",
-      "store",
-      "unique_id",
-      "url",
-      "id",
-    };
-
-    @Override
-    public BusinessMatchedSearchApplicationsEdgeData parseResponse(String response) throws APIException {
-      return BusinessMatchedSearchApplicationsEdgeData.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public BusinessMatchedSearchApplicationsEdgeData execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public BusinessMatchedSearchApplicationsEdgeData execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<BusinessMatchedSearchApplicationsEdgeData> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<BusinessMatchedSearchApplicationsEdgeData> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, BusinessMatchedSearchApplicationsEdgeData>() {
-           public BusinessMatchedSearchApplicationsEdgeData apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAppIdField () {
-      return this.requestAppIdField(true);
-    }
-    public APIRequestGet requestAppIdField (boolean value) {
-      this.requestField("app_id", value);
-      return this;
-    }
-    public APIRequestGet requestIconUrlField () {
-      return this.requestIconUrlField(true);
-    }
-    public APIRequestGet requestIconUrlField (boolean value) {
-      this.requestField("icon_url", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestSearchSourceStoreField () {
-      return this.requestSearchSourceStoreField(true);
-    }
-    public APIRequestGet requestSearchSourceStoreField (boolean value) {
-      this.requestField("search_source_store", value);
-      return this;
-    }
-    public APIRequestGet requestStoreField () {
-      return this.requestStoreField(true);
-    }
-    public APIRequestGet requestStoreField (boolean value) {
-      this.requestField("store", value);
-      return this;
-    }
-    public APIRequestGet requestUniqueIdField () {
-      return this.requestUniqueIdField(true);
-    }
-    public APIRequestGet requestUniqueIdField (boolean value) {
-      this.requestField("unique_id", value);
-      return this;
-    }
-    public APIRequestGet requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGet requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public BusinessMatchedSearchApplicationsEdgeData setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
   public static enum EnumAppStore {
       @SerializedName("AMAZON_APP_STORE")

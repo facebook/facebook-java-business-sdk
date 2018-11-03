@@ -71,66 +71,7 @@ public class DynamicPostChildAttachment extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  DynamicPostChildAttachment() {
-  }
-
-  public DynamicPostChildAttachment(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public DynamicPostChildAttachment(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public DynamicPostChildAttachment fetch() throws APIException{
-    DynamicPostChildAttachment newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static DynamicPostChildAttachment fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<DynamicPostChildAttachment> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static DynamicPostChildAttachment fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<DynamicPostChildAttachment> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<DynamicPostChildAttachment> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<DynamicPostChildAttachment>)(
-      new APIRequest<DynamicPostChildAttachment>(context, "", "/", "GET", DynamicPostChildAttachment.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<DynamicPostChildAttachment>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", DynamicPostChildAttachment.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public DynamicPostChildAttachment() {
   }
 
   public String getId() {
@@ -277,199 +218,71 @@ public class DynamicPostChildAttachment extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public DynamicPostChildAttachment setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
   }
 
   public String getFieldImageUrl() {
     return mImageUrl;
   }
 
+  public DynamicPostChildAttachment setFieldImageUrl(String value) {
+    this.mImageUrl = value;
+    return this;
+  }
+
   public String getFieldLink() {
     return mLink;
+  }
+
+  public DynamicPostChildAttachment setFieldLink(String value) {
+    this.mLink = value;
+    return this;
   }
 
   public String getFieldPlaceId() {
     return mPlaceId;
   }
 
+  public DynamicPostChildAttachment setFieldPlaceId(String value) {
+    this.mPlaceId = value;
+    return this;
+  }
+
   public String getFieldProductId() {
     return mProductId;
+  }
+
+  public DynamicPostChildAttachment setFieldProductId(String value) {
+    this.mProductId = value;
+    return this;
   }
 
   public String getFieldTitle() {
     return mTitle;
   }
 
+  public DynamicPostChildAttachment setFieldTitle(String value) {
+    this.mTitle = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<DynamicPostChildAttachment> {
-
-    DynamicPostChildAttachment lastResponse = null;
-    @Override
-    public DynamicPostChildAttachment getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "description",
-      "image_url",
-      "link",
-      "place_id",
-      "product_id",
-      "title",
-      "id",
-    };
-
-    @Override
-    public DynamicPostChildAttachment parseResponse(String response) throws APIException {
-      return DynamicPostChildAttachment.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public DynamicPostChildAttachment execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public DynamicPostChildAttachment execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<DynamicPostChildAttachment> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<DynamicPostChildAttachment> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, DynamicPostChildAttachment>() {
-           public DynamicPostChildAttachment apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestImageUrlField () {
-      return this.requestImageUrlField(true);
-    }
-    public APIRequestGet requestImageUrlField (boolean value) {
-      this.requestField("image_url", value);
-      return this;
-    }
-    public APIRequestGet requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGet requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGet requestPlaceIdField () {
-      return this.requestPlaceIdField(true);
-    }
-    public APIRequestGet requestPlaceIdField (boolean value) {
-      this.requestField("place_id", value);
-      return this;
-    }
-    public APIRequestGet requestProductIdField () {
-      return this.requestProductIdField(true);
-    }
-    public APIRequestGet requestProductIdField (boolean value) {
-      this.requestField("product_id", value);
-      return this;
-    }
-    public APIRequestGet requestTitleField () {
-      return this.requestTitleField(true);
-    }
-    public APIRequestGet requestTitleField (boolean value) {
-      this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public DynamicPostChildAttachment setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

@@ -79,66 +79,7 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdCreativeVideoDataCustomOverlaySpec() {
-  }
-
-  public AdCreativeVideoDataCustomOverlaySpec(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdCreativeVideoDataCustomOverlaySpec(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdCreativeVideoDataCustomOverlaySpec fetch() throws APIException{
-    AdCreativeVideoDataCustomOverlaySpec newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdCreativeVideoDataCustomOverlaySpec fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdCreativeVideoDataCustomOverlaySpec> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdCreativeVideoDataCustomOverlaySpec fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdCreativeVideoDataCustomOverlaySpec> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdCreativeVideoDataCustomOverlaySpec> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdCreativeVideoDataCustomOverlaySpec>)(
-      new APIRequest<AdCreativeVideoDataCustomOverlaySpec>(context, "", "/", "GET", AdCreativeVideoDataCustomOverlaySpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdCreativeVideoDataCustomOverlaySpec>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdCreativeVideoDataCustomOverlaySpec.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdCreativeVideoDataCustomOverlaySpec() {
   }
 
   public String getId() {
@@ -285,247 +226,107 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldBackgroundColor() {
     return mBackgroundColor;
+  }
+
+  public AdCreativeVideoDataCustomOverlaySpec setFieldBackgroundColor(String value) {
+    this.mBackgroundColor = value;
+    return this;
   }
 
   public EnumBackgroundOpacity getFieldBackgroundOpacity() {
     return mBackgroundOpacity;
   }
 
+  public AdCreativeVideoDataCustomOverlaySpec setFieldBackgroundOpacity(EnumBackgroundOpacity value) {
+    this.mBackgroundOpacity = value;
+    return this;
+  }
+
   public Long getFieldDuration() {
     return mDuration;
+  }
+
+  public AdCreativeVideoDataCustomOverlaySpec setFieldDuration(Long value) {
+    this.mDuration = value;
+    return this;
   }
 
   public Boolean getFieldFloatWithMargin() {
     return mFloatWithMargin;
   }
 
+  public AdCreativeVideoDataCustomOverlaySpec setFieldFloatWithMargin(Boolean value) {
+    this.mFloatWithMargin = value;
+    return this;
+  }
+
   public Boolean getFieldFullWidth() {
     return mFullWidth;
+  }
+
+  public AdCreativeVideoDataCustomOverlaySpec setFieldFullWidth(Boolean value) {
+    this.mFullWidth = value;
+    return this;
   }
 
   public EnumOption getFieldOption() {
     return mOption;
   }
 
+  public AdCreativeVideoDataCustomOverlaySpec setFieldOption(EnumOption value) {
+    this.mOption = value;
+    return this;
+  }
+
   public EnumPosition getFieldPosition() {
     return mPosition;
+  }
+
+  public AdCreativeVideoDataCustomOverlaySpec setFieldPosition(EnumPosition value) {
+    this.mPosition = value;
+    return this;
   }
 
   public Long getFieldStart() {
     return mStart;
   }
 
+  public AdCreativeVideoDataCustomOverlaySpec setFieldStart(Long value) {
+    this.mStart = value;
+    return this;
+  }
+
   public EnumTemplate getFieldTemplate() {
     return mTemplate;
+  }
+
+  public AdCreativeVideoDataCustomOverlaySpec setFieldTemplate(EnumTemplate value) {
+    this.mTemplate = value;
+    return this;
   }
 
   public String getFieldTextColor() {
     return mTextColor;
   }
 
+  public AdCreativeVideoDataCustomOverlaySpec setFieldTextColor(String value) {
+    this.mTextColor = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdCreativeVideoDataCustomOverlaySpec> {
-
-    AdCreativeVideoDataCustomOverlaySpec lastResponse = null;
-    @Override
-    public AdCreativeVideoDataCustomOverlaySpec getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "background_color",
-      "background_opacity",
-      "duration",
-      "float_with_margin",
-      "full_width",
-      "option",
-      "position",
-      "start",
-      "template",
-      "text_color",
-      "id",
-    };
-
-    @Override
-    public AdCreativeVideoDataCustomOverlaySpec parseResponse(String response) throws APIException {
-      return AdCreativeVideoDataCustomOverlaySpec.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdCreativeVideoDataCustomOverlaySpec execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdCreativeVideoDataCustomOverlaySpec execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdCreativeVideoDataCustomOverlaySpec> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdCreativeVideoDataCustomOverlaySpec> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdCreativeVideoDataCustomOverlaySpec>() {
-           public AdCreativeVideoDataCustomOverlaySpec apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestBackgroundColorField () {
-      return this.requestBackgroundColorField(true);
-    }
-    public APIRequestGet requestBackgroundColorField (boolean value) {
-      this.requestField("background_color", value);
-      return this;
-    }
-    public APIRequestGet requestBackgroundOpacityField () {
-      return this.requestBackgroundOpacityField(true);
-    }
-    public APIRequestGet requestBackgroundOpacityField (boolean value) {
-      this.requestField("background_opacity", value);
-      return this;
-    }
-    public APIRequestGet requestDurationField () {
-      return this.requestDurationField(true);
-    }
-    public APIRequestGet requestDurationField (boolean value) {
-      this.requestField("duration", value);
-      return this;
-    }
-    public APIRequestGet requestFloatWithMarginField () {
-      return this.requestFloatWithMarginField(true);
-    }
-    public APIRequestGet requestFloatWithMarginField (boolean value) {
-      this.requestField("float_with_margin", value);
-      return this;
-    }
-    public APIRequestGet requestFullWidthField () {
-      return this.requestFullWidthField(true);
-    }
-    public APIRequestGet requestFullWidthField (boolean value) {
-      this.requestField("full_width", value);
-      return this;
-    }
-    public APIRequestGet requestOptionField () {
-      return this.requestOptionField(true);
-    }
-    public APIRequestGet requestOptionField (boolean value) {
-      this.requestField("option", value);
-      return this;
-    }
-    public APIRequestGet requestPositionField () {
-      return this.requestPositionField(true);
-    }
-    public APIRequestGet requestPositionField (boolean value) {
-      this.requestField("position", value);
-      return this;
-    }
-    public APIRequestGet requestStartField () {
-      return this.requestStartField(true);
-    }
-    public APIRequestGet requestStartField (boolean value) {
-      this.requestField("start", value);
-      return this;
-    }
-    public APIRequestGet requestTemplateField () {
-      return this.requestTemplateField(true);
-    }
-    public APIRequestGet requestTemplateField (boolean value) {
-      this.requestField("template", value);
-      return this;
-    }
-    public APIRequestGet requestTextColorField () {
-      return this.requestTextColorField(true);
-    }
-    public APIRequestGet requestTextColorField (boolean value) {
-      this.requestField("text_color", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdCreativeVideoDataCustomOverlaySpec setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
   public static enum EnumBackgroundOpacity {
       @SerializedName("solid")

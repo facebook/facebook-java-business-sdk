@@ -67,66 +67,7 @@ public class MobileAppAlert extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  MobileAppAlert() {
-  }
-
-  public MobileAppAlert(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public MobileAppAlert(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public MobileAppAlert fetch() throws APIException{
-    MobileAppAlert newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static MobileAppAlert fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<MobileAppAlert> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static MobileAppAlert fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<MobileAppAlert> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<MobileAppAlert> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<MobileAppAlert>)(
-      new APIRequest<MobileAppAlert>(context, "", "/", "GET", MobileAppAlert.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<MobileAppAlert>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", MobileAppAlert.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public MobileAppAlert() {
   }
 
   public String getId() {
@@ -273,175 +214,53 @@ public class MobileAppAlert extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Object getFieldCancelButton() {
     return mCancelButton;
+  }
+
+  public MobileAppAlert setFieldCancelButton(Object value) {
+    this.mCancelButton = value;
+    return this;
   }
 
   public String getFieldMessage() {
     return mMessage;
   }
 
+  public MobileAppAlert setFieldMessage(String value) {
+    this.mMessage = value;
+    return this;
+  }
+
   public Object getFieldOkButton() {
     return mOkButton;
+  }
+
+  public MobileAppAlert setFieldOkButton(Object value) {
+    this.mOkButton = value;
+    return this;
   }
 
   public String getFieldTitle() {
     return mTitle;
   }
 
+  public MobileAppAlert setFieldTitle(String value) {
+    this.mTitle = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<MobileAppAlert> {
-
-    MobileAppAlert lastResponse = null;
-    @Override
-    public MobileAppAlert getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "cancel_button",
-      "message",
-      "ok_button",
-      "title",
-      "id",
-    };
-
-    @Override
-    public MobileAppAlert parseResponse(String response) throws APIException {
-      return MobileAppAlert.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public MobileAppAlert execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public MobileAppAlert execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<MobileAppAlert> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<MobileAppAlert> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, MobileAppAlert>() {
-           public MobileAppAlert apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestCancelButtonField () {
-      return this.requestCancelButtonField(true);
-    }
-    public APIRequestGet requestCancelButtonField (boolean value) {
-      this.requestField("cancel_button", value);
-      return this;
-    }
-    public APIRequestGet requestMessageField () {
-      return this.requestMessageField(true);
-    }
-    public APIRequestGet requestMessageField (boolean value) {
-      this.requestField("message", value);
-      return this;
-    }
-    public APIRequestGet requestOkButtonField () {
-      return this.requestOkButtonField(true);
-    }
-    public APIRequestGet requestOkButtonField (boolean value) {
-      this.requestField("ok_button", value);
-      return this;
-    }
-    public APIRequestGet requestTitleField () {
-      return this.requestTitleField(true);
-    }
-    public APIRequestGet requestTitleField (boolean value) {
-      this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public MobileAppAlert setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

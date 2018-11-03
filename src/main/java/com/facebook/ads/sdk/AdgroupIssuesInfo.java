@@ -65,66 +65,7 @@ public class AdgroupIssuesInfo extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdgroupIssuesInfo() {
-  }
-
-  public AdgroupIssuesInfo(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdgroupIssuesInfo(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdgroupIssuesInfo fetch() throws APIException{
-    AdgroupIssuesInfo newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdgroupIssuesInfo fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdgroupIssuesInfo> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdgroupIssuesInfo fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdgroupIssuesInfo> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdgroupIssuesInfo> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdgroupIssuesInfo>)(
-      new APIRequest<AdgroupIssuesInfo>(context, "", "/", "GET", AdgroupIssuesInfo.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdgroupIssuesInfo>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdgroupIssuesInfo.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdgroupIssuesInfo() {
   }
 
   public String getId() {
@@ -271,163 +212,44 @@ public class AdgroupIssuesInfo extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public Long getFieldErrorCode() {
     return mErrorCode;
+  }
+
+  public AdgroupIssuesInfo setFieldErrorCode(Long value) {
+    this.mErrorCode = value;
+    return this;
   }
 
   public String getFieldErrorMessage() {
     return mErrorMessage;
   }
 
+  public AdgroupIssuesInfo setFieldErrorMessage(String value) {
+    this.mErrorMessage = value;
+    return this;
+  }
+
   public String getFieldErrorSummary() {
     return mErrorSummary;
+  }
+
+  public AdgroupIssuesInfo setFieldErrorSummary(String value) {
+    this.mErrorSummary = value;
+    return this;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdgroupIssuesInfo> {
-
-    AdgroupIssuesInfo lastResponse = null;
-    @Override
-    public AdgroupIssuesInfo getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "error_code",
-      "error_message",
-      "error_summary",
-      "id",
-    };
-
-    @Override
-    public AdgroupIssuesInfo parseResponse(String response) throws APIException {
-      return AdgroupIssuesInfo.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdgroupIssuesInfo execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdgroupIssuesInfo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdgroupIssuesInfo> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdgroupIssuesInfo> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdgroupIssuesInfo>() {
-           public AdgroupIssuesInfo apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestErrorCodeField () {
-      return this.requestErrorCodeField(true);
-    }
-    public APIRequestGet requestErrorCodeField (boolean value) {
-      this.requestField("error_code", value);
-      return this;
-    }
-    public APIRequestGet requestErrorMessageField () {
-      return this.requestErrorMessageField(true);
-    }
-    public APIRequestGet requestErrorMessageField (boolean value) {
-      this.requestField("error_message", value);
-      return this;
-    }
-    public APIRequestGet requestErrorSummaryField () {
-      return this.requestErrorSummaryField(true);
-    }
-    public APIRequestGet requestErrorSummaryField (boolean value) {
-      this.requestField("error_summary", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdgroupIssuesInfo setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

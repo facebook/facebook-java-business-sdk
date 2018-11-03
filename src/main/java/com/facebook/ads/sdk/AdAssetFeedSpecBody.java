@@ -65,66 +65,7 @@ public class AdAssetFeedSpecBody extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  AdAssetFeedSpecBody() {
-  }
-
-  public AdAssetFeedSpecBody(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public AdAssetFeedSpecBody(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public AdAssetFeedSpecBody fetch() throws APIException{
-    AdAssetFeedSpecBody newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static AdAssetFeedSpecBody fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<AdAssetFeedSpecBody> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static AdAssetFeedSpecBody fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<AdAssetFeedSpecBody> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<AdAssetFeedSpecBody> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<AdAssetFeedSpecBody>)(
-      new APIRequest<AdAssetFeedSpecBody>(context, "", "/", "GET", AdAssetFeedSpecBody.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<AdAssetFeedSpecBody>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", AdAssetFeedSpecBody.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public AdAssetFeedSpecBody() {
   }
 
   public String getId() {
@@ -271,163 +212,49 @@ public class AdAssetFeedSpecBody extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<AdAssetFeedSpecAssetLabel> getFieldAdlabels() {
     return mAdlabels;
   }
 
+  public AdAssetFeedSpecBody setFieldAdlabels(List<AdAssetFeedSpecAssetLabel> value) {
+    this.mAdlabels = value;
+    return this;
+  }
+
+  public AdAssetFeedSpecBody setFieldAdlabels(String value) {
+    Type type = new TypeToken<List<AdAssetFeedSpecAssetLabel>>(){}.getType();
+    this.mAdlabels = AdAssetFeedSpecAssetLabel.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldText() {
     return mText;
+  }
+
+  public AdAssetFeedSpecBody setFieldText(String value) {
+    this.mText = value;
+    return this;
   }
 
   public String getFieldUrlTags() {
     return mUrlTags;
   }
 
+  public AdAssetFeedSpecBody setFieldUrlTags(String value) {
+    this.mUrlTags = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<AdAssetFeedSpecBody> {
-
-    AdAssetFeedSpecBody lastResponse = null;
-    @Override
-    public AdAssetFeedSpecBody getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "adlabels",
-      "text",
-      "url_tags",
-      "id",
-    };
-
-    @Override
-    public AdAssetFeedSpecBody parseResponse(String response) throws APIException {
-      return AdAssetFeedSpecBody.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public AdAssetFeedSpecBody execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdAssetFeedSpecBody execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdAssetFeedSpecBody> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdAssetFeedSpecBody> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, AdAssetFeedSpecBody>() {
-           public AdAssetFeedSpecBody apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestAdlabelsField () {
-      return this.requestAdlabelsField(true);
-    }
-    public APIRequestGet requestAdlabelsField (boolean value) {
-      this.requestField("adlabels", value);
-      return this;
-    }
-    public APIRequestGet requestTextField () {
-      return this.requestTextField(true);
-    }
-    public APIRequestGet requestTextField (boolean value) {
-      this.requestField("text", value);
-      return this;
-    }
-    public APIRequestGet requestUrlTagsField () {
-      return this.requestUrlTagsField(true);
-    }
-    public APIRequestGet requestUrlTagsField (boolean value) {
-      this.requestField("url_tags", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public AdAssetFeedSpecBody setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

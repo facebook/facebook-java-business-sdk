@@ -71,66 +71,7 @@ public class ReachFrequencyCurveUpperConfidenceRange extends APINode {
   private String mId = null;
   protected static Gson gson = null;
 
-  ReachFrequencyCurveUpperConfidenceRange() {
-  }
-
-  public ReachFrequencyCurveUpperConfidenceRange(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public ReachFrequencyCurveUpperConfidenceRange(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public ReachFrequencyCurveUpperConfidenceRange fetch() throws APIException{
-    ReachFrequencyCurveUpperConfidenceRange newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static ReachFrequencyCurveUpperConfidenceRange fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<ReachFrequencyCurveUpperConfidenceRange> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static ReachFrequencyCurveUpperConfidenceRange fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<ReachFrequencyCurveUpperConfidenceRange> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<ReachFrequencyCurveUpperConfidenceRange> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<ReachFrequencyCurveUpperConfidenceRange>)(
-      new APIRequest<ReachFrequencyCurveUpperConfidenceRange>(context, "", "/", "GET", ReachFrequencyCurveUpperConfidenceRange.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<ReachFrequencyCurveUpperConfidenceRange>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", ReachFrequencyCurveUpperConfidenceRange.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public ReachFrequencyCurveUpperConfidenceRange() {
   }
 
   public String getId() {
@@ -277,199 +218,71 @@ public class ReachFrequencyCurveUpperConfidenceRange extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public List<Long> getFieldImpressionUpper() {
     return mImpressionUpper;
+  }
+
+  public ReachFrequencyCurveUpperConfidenceRange setFieldImpressionUpper(List<Long> value) {
+    this.mImpressionUpper = value;
+    return this;
   }
 
   public Long getFieldNumPoints() {
     return mNumPoints;
   }
 
+  public ReachFrequencyCurveUpperConfidenceRange setFieldNumPoints(Long value) {
+    this.mNumPoints = value;
+    return this;
+  }
+
   public List<Long> getFieldReach() {
     return mReach;
+  }
+
+  public ReachFrequencyCurveUpperConfidenceRange setFieldReach(List<Long> value) {
+    this.mReach = value;
+    return this;
   }
 
   public List<Long> getFieldReachUpper() {
     return mReachUpper;
   }
 
+  public ReachFrequencyCurveUpperConfidenceRange setFieldReachUpper(List<Long> value) {
+    this.mReachUpper = value;
+    return this;
+  }
+
   public List<Long> getFieldUniqVideoViews2sUpper() {
     return mUniqVideoViews2sUpper;
+  }
+
+  public ReachFrequencyCurveUpperConfidenceRange setFieldUniqVideoViews2sUpper(List<Long> value) {
+    this.mUniqVideoViews2sUpper = value;
+    return this;
   }
 
   public List<Long> getFieldVideoViews2sUpper() {
     return mVideoViews2sUpper;
   }
 
+  public ReachFrequencyCurveUpperConfidenceRange setFieldVideoViews2sUpper(List<Long> value) {
+    this.mVideoViews2sUpper = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<ReachFrequencyCurveUpperConfidenceRange> {
-
-    ReachFrequencyCurveUpperConfidenceRange lastResponse = null;
-    @Override
-    public ReachFrequencyCurveUpperConfidenceRange getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "impression_upper",
-      "num_points",
-      "reach",
-      "reach_upper",
-      "uniq_video_views_2s_upper",
-      "video_views_2s_upper",
-      "id",
-    };
-
-    @Override
-    public ReachFrequencyCurveUpperConfidenceRange parseResponse(String response) throws APIException {
-      return ReachFrequencyCurveUpperConfidenceRange.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public ReachFrequencyCurveUpperConfidenceRange execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ReachFrequencyCurveUpperConfidenceRange execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<ReachFrequencyCurveUpperConfidenceRange> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ReachFrequencyCurveUpperConfidenceRange> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, ReachFrequencyCurveUpperConfidenceRange>() {
-           public ReachFrequencyCurveUpperConfidenceRange apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestImpressionUpperField () {
-      return this.requestImpressionUpperField(true);
-    }
-    public APIRequestGet requestImpressionUpperField (boolean value) {
-      this.requestField("impression_upper", value);
-      return this;
-    }
-    public APIRequestGet requestNumPointsField () {
-      return this.requestNumPointsField(true);
-    }
-    public APIRequestGet requestNumPointsField (boolean value) {
-      this.requestField("num_points", value);
-      return this;
-    }
-    public APIRequestGet requestReachField () {
-      return this.requestReachField(true);
-    }
-    public APIRequestGet requestReachField (boolean value) {
-      this.requestField("reach", value);
-      return this;
-    }
-    public APIRequestGet requestReachUpperField () {
-      return this.requestReachUpperField(true);
-    }
-    public APIRequestGet requestReachUpperField (boolean value) {
-      this.requestField("reach_upper", value);
-      return this;
-    }
-    public APIRequestGet requestUniqVideoViews2sUpperField () {
-      return this.requestUniqVideoViews2sUpperField(true);
-    }
-    public APIRequestGet requestUniqVideoViews2sUpperField (boolean value) {
-      this.requestField("uniq_video_views_2s_upper", value);
-      return this;
-    }
-    public APIRequestGet requestVideoViews2sUpperField () {
-      return this.requestVideoViews2sUpperField(true);
-    }
-    public APIRequestGet requestVideoViews2sUpperField (boolean value) {
-      this.requestField("video_views_2s_upper", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
+  public ReachFrequencyCurveUpperConfidenceRange setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
+
+
 
 
   synchronized /*package*/ static Gson getGson() {

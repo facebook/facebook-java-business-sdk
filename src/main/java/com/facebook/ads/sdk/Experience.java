@@ -67,66 +67,7 @@ public class Experience extends APINode {
   private List<User> mWith = null;
   protected static Gson gson = null;
 
-  Experience() {
-  }
-
-  public Experience(Long id, APIContext context) {
-    this(id.toString(), context);
-  }
-
-  public Experience(String id, APIContext context) {
-    this.mId = id;
-
-    this.context = context;
-  }
-
-  public Experience fetch() throws APIException{
-    Experience newInstance = fetchById(this.getPrefixedId().toString(), this.context);
-    this.copyFrom(newInstance);
-    return this;
-  }
-
-  public static Experience fetchById(Long id, APIContext context) throws APIException {
-    return fetchById(id.toString(), context);
-  }
-
-  public static ListenableFuture<Experience> fetchByIdAsync(Long id, APIContext context) throws APIException {
-    return fetchByIdAsync(id.toString(), context);
-  }
-
-  public static Experience fetchById(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .execute();
-  }
-
-  public static ListenableFuture<Experience> fetchByIdAsync(String id, APIContext context) throws APIException {
-    return
-      new APIRequestGet(id, context)
-      .requestAllFields()
-      .executeAsync();
-  }
-
-  public static APINodeList<Experience> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<Experience>)(
-      new APIRequest<Experience>(context, "", "/", "GET", Experience.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .execute()
-    );
-  }
-
-  public static ListenableFuture<APINodeList<Experience>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return
-      new APIRequest(context, "", "/", "GET", Experience.getParser())
-        .setParam("ids", APIRequest.joinStringList(ids))
-        .requestFields(fields)
-        .executeAsyncBase();
-  }
-
-  private String getPrefixedId() {
-    return getId();
+  public Experience() {
   }
 
   public String getId() {
@@ -273,13 +214,14 @@ public class Experience extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGet get() {
-    return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
 
   public String getFieldDescription() {
     return mDescription;
+  }
+
+  public Experience setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
   }
 
   public User getFieldFrom() {
@@ -289,162 +231,49 @@ public class Experience extends APINode {
     return mFrom;
   }
 
+  public Experience setFieldFrom(User value) {
+    this.mFrom = value;
+    return this;
+  }
+
+  public Experience setFieldFrom(String value) {
+    Type type = new TypeToken<User>(){}.getType();
+    this.mFrom = User.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
+  }
+
+  public Experience setFieldId(String value) {
+    this.mId = value;
+    return this;
   }
 
   public String getFieldName() {
     return mName;
   }
 
+  public Experience setFieldName(String value) {
+    this.mName = value;
+    return this;
+  }
+
   public List<User> getFieldWith() {
     return mWith;
   }
 
-
-
-  public static class APIRequestGet extends APIRequest<Experience> {
-
-    Experience lastResponse = null;
-    @Override
-    public Experience getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "description",
-      "from",
-      "id",
-      "name",
-      "with",
-    };
-
-    @Override
-    public Experience parseResponse(String response) throws APIException {
-      return Experience.parseResponse(response, getContext(), this).head();
-    }
-
-    @Override
-    public Experience execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Experience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<Experience> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Experience> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, Experience>() {
-           public Experience apply(String result) {
-             try {
-               return APIRequestGet.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGet(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGet setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGet requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGet requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGet requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGet requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGet requestDescriptionField () {
-      return this.requestDescriptionField(true);
-    }
-    public APIRequestGet requestDescriptionField (boolean value) {
-      this.requestField("description", value);
-      return this;
-    }
-    public APIRequestGet requestFromField () {
-      return this.requestFromField(true);
-    }
-    public APIRequestGet requestFromField (boolean value) {
-      this.requestField("from", value);
-      return this;
-    }
-    public APIRequestGet requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGet requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGet requestWithField () {
-      return this.requestWithField(true);
-    }
-    public APIRequestGet requestWithField (boolean value) {
-      this.requestField("with", value);
-      return this;
-    }
+  public Experience setFieldWith(List<User> value) {
+    this.mWith = value;
+    return this;
   }
+
+  public Experience setFieldWith(String value) {
+    Type type = new TypeToken<List<User>>(){}.getType();
+    this.mWith = User.getGson().fromJson(value, type);
+    return this;
+  }
+
 
 
   synchronized /*package*/ static Gson getGson() {
