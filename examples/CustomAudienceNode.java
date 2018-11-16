@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class PagePostsEdge {
+public class CustomAudienceNode {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -34,7 +34,7 @@ public class PagePostsEdge {
     String id = "<ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new Page(id, context).getPosts()
+    new CustomAudience(id, context).get()
       .execute();
 
   }
