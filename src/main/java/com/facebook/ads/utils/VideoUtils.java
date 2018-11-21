@@ -42,8 +42,8 @@ public class VideoUtils {
   private static String PROCESSING = "processing";
   private static String ERROR = "error";
 
-  public static int defaultWaitForEncodingCheckInterval = 10;
-  public static int defaultWaitForEncodingCheckTries = 20;
+  public static int defaultWaitForEncodingCheckInterval = 15;
+  public static int defaultWaitForEncodingCheckTries = 60;
   public static int defaultChunkUploadRetries = 5;
 
   public static interface ProgressCallback {
