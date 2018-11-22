@@ -6044,6 +6044,8 @@ public class AdSet extends APINode {
       VALUE_LOWEST_COST_WITH_BID_CAP("LOWEST_COST_WITH_BID_CAP"),
       @SerializedName("TARGET_COST")
       VALUE_TARGET_COST("TARGET_COST"),
+      @SerializedName("LOWEST_COST_WITH_MIN_ROAS")
+      VALUE_TARGET_COST("LOWEST_COST_WITH_MIN_ROAS"),
       NULL(null);
 
       private String value;
