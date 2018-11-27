@@ -73,7 +73,7 @@ public class CustomConversionActivities extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CustomConversionActivities loadJSON(String json, APIContext context) {
+  public static CustomConversionActivities loadJSON(String json, APIContext context, String header) {
     CustomConversionActivities customConversionActivities = getGson().fromJson(json, CustomConversionActivities.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class CustomConversionActivities extends APINode {
     }
     customConversionActivities.context = context;
     customConversionActivities.rawValue = json;
+    customConversionActivities.header = header;
     return customConversionActivities;
   }
 
-  public static APINodeList<CustomConversionActivities> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CustomConversionActivities> customConversionActivitiess = new APINodeList<CustomConversionActivities>(request, json);
+  public static APINodeList<CustomConversionActivities> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CustomConversionActivities> customConversionActivitiess = new APINodeList<CustomConversionActivities>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class CustomConversionActivities extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          customConversionActivitiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          customConversionActivitiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return customConversionActivitiess;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class CustomConversionActivities extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              customConversionActivitiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              customConversionActivitiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class CustomConversionActivities extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  customConversionActivitiess.add(loadJSON(entry.getValue().toString(), context));
+                  customConversionActivitiess.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              customConversionActivitiess.add(loadJSON(obj.toString(), context));
+              customConversionActivitiess.add(loadJSON(obj.toString(), context, header));
             }
           }
           return customConversionActivitiess;
@@ -155,7 +156,7 @@ public class CustomConversionActivities extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              customConversionActivitiess.add(loadJSON(entry.getValue().toString(), context));
+              customConversionActivitiess.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return customConversionActivitiess;
         } else {
@@ -174,7 +175,7 @@ public class CustomConversionActivities extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              customConversionActivitiess.add(loadJSON(value.toString(), context));
+              customConversionActivitiess.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class CustomConversionActivities extends APINode {
 
           // Sixth, check if it's pure JsonObject
           customConversionActivitiess.clear();
-          customConversionActivitiess.add(loadJSON(json, context));
+          customConversionActivitiess.add(loadJSON(json, context, header));
           return customConversionActivitiess;
         }
       }
@@ -310,8 +311,8 @@ public class CustomConversionActivities extends APINode {
 
   public static APIRequest.ResponseParser<CustomConversionActivities> getParser() {
     return new APIRequest.ResponseParser<CustomConversionActivities>() {
-      public APINodeList<CustomConversionActivities> parseResponse(String response, APIContext context, APIRequest<CustomConversionActivities> request) throws MalformedResponseException {
-        return CustomConversionActivities.parseResponse(response, context, request);
+      public APINodeList<CustomConversionActivities> parseResponse(String response, APIContext context, APIRequest<CustomConversionActivities> request, String header) throws MalformedResponseException {
+        return CustomConversionActivities.parseResponse(response, context, request, header);
       }
     };
   }

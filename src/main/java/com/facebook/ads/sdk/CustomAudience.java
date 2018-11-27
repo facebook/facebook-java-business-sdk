@@ -196,7 +196,7 @@ public class CustomAudience extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CustomAudience loadJSON(String json, APIContext context) {
+  public static CustomAudience loadJSON(String json, APIContext context, String header) {
     CustomAudience customAudience = getGson().fromJson(json, CustomAudience.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -213,11 +213,12 @@ public class CustomAudience extends APINode {
     }
     customAudience.context = context;
     customAudience.rawValue = json;
+    customAudience.header = header;
     return customAudience;
   }
 
-  public static APINodeList<CustomAudience> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CustomAudience> customAudiences = new APINodeList<CustomAudience>(request, json);
+  public static APINodeList<CustomAudience> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CustomAudience> customAudiences = new APINodeList<CustomAudience>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -228,7 +229,7 @@ public class CustomAudience extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          customAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          customAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return customAudiences;
       } else if (result.isJsonObject()) {
@@ -253,7 +254,7 @@ public class CustomAudience extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              customAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              customAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -264,13 +265,13 @@ public class CustomAudience extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  customAudiences.add(loadJSON(entry.getValue().toString(), context));
+                  customAudiences.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              customAudiences.add(loadJSON(obj.toString(), context));
+              customAudiences.add(loadJSON(obj.toString(), context, header));
             }
           }
           return customAudiences;
@@ -278,7 +279,7 @@ public class CustomAudience extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              customAudiences.add(loadJSON(entry.getValue().toString(), context));
+              customAudiences.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return customAudiences;
         } else {
@@ -297,7 +298,7 @@ public class CustomAudience extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              customAudiences.add(loadJSON(value.toString(), context));
+              customAudiences.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -309,7 +310,7 @@ public class CustomAudience extends APINode {
 
           // Sixth, check if it's pure JsonObject
           customAudiences.clear();
-          customAudiences.add(loadJSON(json, context));
+          customAudiences.add(loadJSON(json, context, header));
           return customAudiences;
         }
       }
@@ -574,8 +575,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -585,7 +586,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -599,7 +601,7 @@ public class CustomAudience extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAdAccounts.this.parseResponse(result);
+               return APIRequestDeleteAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -704,7 +706,6 @@ public class CustomAudience extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "daily_spend_limit",
       "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
@@ -733,7 +734,6 @@ public class CustomAudience extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
-      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -749,8 +749,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccount> parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -760,7 +760,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -774,7 +775,7 @@ public class CustomAudience extends APINode {
         new Function<String, APINodeList<AdAccount>>() {
            public APINodeList<AdAccount> apply(String result) {
              try {
-               return APIRequestGetAdAccounts.this.parseResponse(result);
+               return APIRequestGetAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -981,13 +982,6 @@ public class CustomAudience extends APINode {
       this.requestField("currency", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestDailySpendLimitField () {
-      return this.requestDailySpendLimitField(true);
-    }
-    public APIRequestGetAdAccounts requestDailySpendLimitField (boolean value) {
-      this.requestField("daily_spend_limit", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField () {
       return this.requestDirectDealsTosAcceptedField(true);
     }
@@ -1184,13 +1178,6 @@ public class CustomAudience extends APINode {
       this.requestField("partner", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestRateLimitResetTimeField () {
-      return this.requestRateLimitResetTimeField(true);
-    }
-    public APIRequestGetAdAccounts requestRateLimitResetTimeField (boolean value) {
-      this.requestField("rate_limit_reset_time", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
@@ -1295,8 +1282,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public CustomAudience parseResponse(String response) throws APIException {
-      return CustomAudience.parseResponse(response, getContext(), this).head();
+    public CustomAudience parseResponse(String response, String header) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1306,7 +1293,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public CustomAudience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1320,7 +1308,7 @@ public class CustomAudience extends APINode {
         new Function<String, CustomAudience>() {
            public CustomAudience apply(String result) {
              try {
-               return APIRequestCreateAdAccount.this.parseResponse(result);
+               return APIRequestCreateAdAccount.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1452,7 +1440,6 @@ public class CustomAudience extends APINode {
       "issues_info",
       "last_updated_by_app_id",
       "name",
-      "objective_source",
       "priority",
       "recommendations",
       "source_ad",
@@ -1465,8 +1452,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public APINodeList<Ad> parseResponse(String response) throws APIException {
-      return Ad.parseResponse(response, getContext(), this);
+    public APINodeList<Ad> parseResponse(String response, String header) throws APIException {
+      return Ad.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1476,7 +1463,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public APINodeList<Ad> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1490,7 +1478,7 @@ public class CustomAudience extends APINode {
         new Function<String, APINodeList<Ad>>() {
            public APINodeList<Ad> apply(String result) {
              try {
-               return APIRequestGetAds.this.parseResponse(result);
+               return APIRequestGetAds.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1731,13 +1719,6 @@ public class CustomAudience extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetAds requestObjectiveSourceField () {
-      return this.requestObjectiveSourceField(true);
-    }
-    public APIRequestGetAds requestObjectiveSourceField (boolean value) {
-      this.requestField("objective_source", value);
-      return this;
-    }
     public APIRequestGetAds requestPriorityField () {
       return this.requestPriorityField(true);
     }
@@ -1818,8 +1799,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1829,7 +1810,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1843,7 +1825,7 @@ public class CustomAudience extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteCapabilities.this.parseResponse(result);
+               return APIRequestDeleteCapabilities.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1932,8 +1914,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1943,7 +1925,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1957,7 +1940,7 @@ public class CustomAudience extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateCapability.this.parseResponse(result);
+               return APIRequestCreateCapability.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2056,8 +2039,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2067,7 +2050,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2081,7 +2065,7 @@ public class CustomAudience extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateDatum.this.parseResponse(result);
+               return APIRequestCreateDatum.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2226,8 +2210,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public APINodeList<CustomAudiencePrefillState> parseResponse(String response) throws APIException {
-      return CustomAudiencePrefillState.parseResponse(response, getContext(), this);
+    public APINodeList<CustomAudiencePrefillState> parseResponse(String response, String header) throws APIException {
+      return CustomAudiencePrefillState.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2237,7 +2221,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public APINodeList<CustomAudiencePrefillState> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2251,7 +2236,7 @@ public class CustomAudience extends APINode {
         new Function<String, APINodeList<CustomAudiencePrefillState>>() {
            public APINodeList<CustomAudiencePrefillState> apply(String result) {
              try {
-               return APIRequestGetPrefills.this.parseResponse(result);
+               return APIRequestGetPrefills.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2367,8 +2352,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public APINodeList<CustomAudienceSession> parseResponse(String response) throws APIException {
-      return CustomAudienceSession.parseResponse(response, getContext(), this);
+    public APINodeList<CustomAudienceSession> parseResponse(String response, String header) throws APIException {
+      return CustomAudienceSession.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2378,7 +2363,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public APINodeList<CustomAudienceSession> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2392,7 +2378,7 @@ public class CustomAudience extends APINode {
         new Function<String, APINodeList<CustomAudienceSession>>() {
            public APINodeList<CustomAudienceSession> apply(String result) {
              try {
-               return APIRequestGetSessions.this.parseResponse(result);
+               return APIRequestGetSessions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2548,8 +2534,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public APINodeList<CustomAudiencesharedAccountInfo> parseResponse(String response) throws APIException {
-      return CustomAudiencesharedAccountInfo.parseResponse(response, getContext(), this);
+    public APINodeList<CustomAudiencesharedAccountInfo> parseResponse(String response, String header) throws APIException {
+      return CustomAudiencesharedAccountInfo.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2559,7 +2545,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public APINodeList<CustomAudiencesharedAccountInfo> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2573,7 +2560,7 @@ public class CustomAudience extends APINode {
         new Function<String, APINodeList<CustomAudiencesharedAccountInfo>>() {
            public APINodeList<CustomAudiencesharedAccountInfo> apply(String result) {
              try {
-               return APIRequestGetShareDAccountInfo.this.parseResponse(result);
+               return APIRequestGetShareDAccountInfo.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2696,8 +2683,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2707,7 +2694,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2721,7 +2709,7 @@ public class CustomAudience extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteUpload.this.parseResponse(result);
+               return APIRequestDeleteUpload.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2825,8 +2813,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public CustomAudience parseResponse(String response) throws APIException {
-      return CustomAudience.parseResponse(response, getContext(), this).head();
+    public CustomAudience parseResponse(String response, String header) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2836,7 +2824,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public CustomAudience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2850,7 +2839,7 @@ public class CustomAudience extends APINode {
         new Function<String, CustomAudience>() {
            public CustomAudience apply(String result) {
              try {
-               return APIRequestCreateUpload.this.parseResponse(result);
+               return APIRequestCreateUpload.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2954,8 +2943,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2965,7 +2954,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2979,7 +2969,7 @@ public class CustomAudience extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteUsers.this.parseResponse(result);
+               return APIRequestDeleteUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3083,8 +3073,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public CustomAudience parseResponse(String response) throws APIException {
-      return CustomAudience.parseResponse(response, getContext(), this).head();
+    public CustomAudience parseResponse(String response, String header) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3094,7 +3084,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public CustomAudience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3108,7 +3099,7 @@ public class CustomAudience extends APINode {
         new Function<String, CustomAudience>() {
            public CustomAudience apply(String result) {
              try {
-               return APIRequestCreateUser.this.parseResponse(result);
+               return APIRequestCreateUser.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3209,8 +3200,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3220,7 +3211,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3234,7 +3226,7 @@ public class CustomAudience extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3350,8 +3342,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public CustomAudience parseResponse(String response) throws APIException {
-      return CustomAudience.parseResponse(response, getContext(), this).head();
+    public CustomAudience parseResponse(String response, String header) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3361,7 +3353,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public CustomAudience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3375,7 +3368,7 @@ public class CustomAudience extends APINode {
         new Function<String, CustomAudience>() {
            public CustomAudience apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3752,8 +3745,8 @@ public class CustomAudience extends APINode {
     };
 
     @Override
-    public CustomAudience parseResponse(String response) throws APIException {
-      return CustomAudience.parseResponse(response, getContext(), this).head();
+    public CustomAudience parseResponse(String response, String header) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3763,7 +3756,8 @@ public class CustomAudience extends APINode {
 
     @Override
     public CustomAudience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3777,7 +3771,7 @@ public class CustomAudience extends APINode {
         new Function<String, CustomAudience>() {
            public CustomAudience apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4348,8 +4342,8 @@ public class CustomAudience extends APINode {
 
   public static APIRequest.ResponseParser<CustomAudience> getParser() {
     return new APIRequest.ResponseParser<CustomAudience>() {
-      public APINodeList<CustomAudience> parseResponse(String response, APIContext context, APIRequest<CustomAudience> request) throws MalformedResponseException {
-        return CustomAudience.parseResponse(response, context, request);
+      public APINodeList<CustomAudience> parseResponse(String response, APIContext context, APIRequest<CustomAudience> request, String header) throws MalformedResponseException {
+        return CustomAudience.parseResponse(response, context, request, header);
       }
     };
   }

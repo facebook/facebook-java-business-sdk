@@ -148,7 +148,7 @@ public class AdReportRun extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdReportRun loadJSON(String json, APIContext context) {
+  public static AdReportRun loadJSON(String json, APIContext context, String header) {
     AdReportRun adReportRun = getGson().fromJson(json, AdReportRun.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -165,6 +165,7 @@ public class AdReportRun extends APINode {
     }
     adReportRun.context = context;
     adReportRun.rawValue = json;
+    adReportRun.header = header;
     JsonParser parser = new JsonParser();
     JsonObject o = parser.parse(json).getAsJsonObject();
     String reportRunId = null;
@@ -177,8 +178,8 @@ public class AdReportRun extends APINode {
     return adReportRun;
   }
 
-  public static APINodeList<AdReportRun> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdReportRun> adReportRuns = new APINodeList<AdReportRun>(request, json);
+  public static APINodeList<AdReportRun> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdReportRun> adReportRuns = new APINodeList<AdReportRun>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -189,7 +190,7 @@ public class AdReportRun extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adReportRuns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adReportRuns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adReportRuns;
       } else if (result.isJsonObject()) {
@@ -214,7 +215,7 @@ public class AdReportRun extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adReportRuns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adReportRuns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -225,13 +226,13 @@ public class AdReportRun extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adReportRuns.add(loadJSON(entry.getValue().toString(), context));
+                  adReportRuns.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adReportRuns.add(loadJSON(obj.toString(), context));
+              adReportRuns.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adReportRuns;
@@ -239,7 +240,7 @@ public class AdReportRun extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adReportRuns.add(loadJSON(entry.getValue().toString(), context));
+              adReportRuns.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adReportRuns;
         } else {
@@ -258,7 +259,7 @@ public class AdReportRun extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adReportRuns.add(loadJSON(value.toString(), context));
+              adReportRuns.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -270,7 +271,7 @@ public class AdReportRun extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adReportRuns.clear();
-          adReportRuns.add(loadJSON(json, context));
+          adReportRuns.add(loadJSON(json, context, header));
           return adReportRuns;
         }
       }
@@ -410,18 +411,16 @@ public class AdReportRun extends APINode {
       "campaign_name",
       "canvas_avg_view_percent",
       "canvas_avg_view_time",
-      "canvas_component_avg_pct_view",
       "clicks",
+      "conversion_values",
+      "conversions",
       "cost_per_10_sec_video_view",
       "cost_per_15_sec_video_view",
       "cost_per_2_sec_continuous_video_view",
       "cost_per_action_type",
       "cost_per_ad_click",
+      "cost_per_conversion",
       "cost_per_dda_countby_convs",
-      "cost_per_dwell",
-      "cost_per_dwell_3_sec",
-      "cost_per_dwell_5_sec",
-      "cost_per_dwell_7_sec",
       "cost_per_estimated_ad_recallers",
       "cost_per_inline_link_click",
       "cost_per_inline_post_engagement",
@@ -430,6 +429,7 @@ public class AdReportRun extends APINode {
       "cost_per_thruplay",
       "cost_per_unique_action_type",
       "cost_per_unique_click",
+      "cost_per_unique_conversion",
       "cost_per_unique_inline_link_click",
       "cost_per_unique_outbound_click",
       "country",
@@ -445,10 +445,6 @@ public class AdReportRun extends APINode {
       "description_asset",
       "device_platform",
       "dma",
-      "dwell_3_sec",
-      "dwell_5_sec",
-      "dwell_7_sec",
-      "dwell_rate",
       "estimated_ad_recall_rate",
       "estimated_ad_recall_rate_lower_bound",
       "estimated_ad_recall_rate_upper_bound",
@@ -483,6 +479,7 @@ public class AdReportRun extends APINode {
       "product_format",
       "product_id",
       "publisher_platform",
+      "purchase_roas",
       "purchasing_interface",
       "reach",
       "region",
@@ -490,10 +487,10 @@ public class AdReportRun extends APINode {
       "rule_asset",
       "social_spend",
       "spend",
-      "thumb_stops",
       "title_asset",
       "unique_actions",
       "unique_clicks",
+      "unique_conversions",
       "unique_ctr",
       "unique_inline_link_click_ctr",
       "unique_inline_link_clicks",
@@ -529,8 +526,8 @@ public class AdReportRun extends APINode {
     };
 
     @Override
-    public APINodeList<AdsInsights> parseResponse(String response) throws APIException {
-      return AdsInsights.parseResponse(response, getContext(), this);
+    public APINodeList<AdsInsights> parseResponse(String response, String header) throws APIException {
+      return AdsInsights.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -540,7 +537,8 @@ public class AdReportRun extends APINode {
 
     @Override
     public APINodeList<AdsInsights> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -554,7 +552,7 @@ public class AdReportRun extends APINode {
         new Function<String, APINodeList<AdsInsights>>() {
            public APINodeList<AdsInsights> apply(String result) {
              try {
-               return APIRequestGetInsights.this.parseResponse(result);
+               return APIRequestGetInsights.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -798,18 +796,25 @@ public class AdReportRun extends APINode {
       this.requestField("canvas_avg_view_time", value);
       return this;
     }
-    public APIRequestGetInsights requestCanvasComponentAvgPctViewField () {
-      return this.requestCanvasComponentAvgPctViewField(true);
-    }
-    public APIRequestGetInsights requestCanvasComponentAvgPctViewField (boolean value) {
-      this.requestField("canvas_component_avg_pct_view", value);
-      return this;
-    }
     public APIRequestGetInsights requestClicksField () {
       return this.requestClicksField(true);
     }
     public APIRequestGetInsights requestClicksField (boolean value) {
       this.requestField("clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConversionValuesField () {
+      return this.requestConversionValuesField(true);
+    }
+    public APIRequestGetInsights requestConversionValuesField (boolean value) {
+      this.requestField("conversion_values", value);
+      return this;
+    }
+    public APIRequestGetInsights requestConversionsField () {
+      return this.requestConversionsField(true);
+    }
+    public APIRequestGetInsights requestConversionsField (boolean value) {
+      this.requestField("conversions", value);
       return this;
     }
     public APIRequestGetInsights requestCostPer10SecVideoViewField () {
@@ -847,39 +852,18 @@ public class AdReportRun extends APINode {
       this.requestField("cost_per_ad_click", value);
       return this;
     }
+    public APIRequestGetInsights requestCostPerConversionField () {
+      return this.requestCostPerConversionField(true);
+    }
+    public APIRequestGetInsights requestCostPerConversionField (boolean value) {
+      this.requestField("cost_per_conversion", value);
+      return this;
+    }
     public APIRequestGetInsights requestCostPerDdaCountbyConvsField () {
       return this.requestCostPerDdaCountbyConvsField(true);
     }
     public APIRequestGetInsights requestCostPerDdaCountbyConvsField (boolean value) {
       this.requestField("cost_per_dda_countby_convs", value);
-      return this;
-    }
-    public APIRequestGetInsights requestCostPerDwellField () {
-      return this.requestCostPerDwellField(true);
-    }
-    public APIRequestGetInsights requestCostPerDwellField (boolean value) {
-      this.requestField("cost_per_dwell", value);
-      return this;
-    }
-    public APIRequestGetInsights requestCostPerDwell3SecField () {
-      return this.requestCostPerDwell3SecField(true);
-    }
-    public APIRequestGetInsights requestCostPerDwell3SecField (boolean value) {
-      this.requestField("cost_per_dwell_3_sec", value);
-      return this;
-    }
-    public APIRequestGetInsights requestCostPerDwell5SecField () {
-      return this.requestCostPerDwell5SecField(true);
-    }
-    public APIRequestGetInsights requestCostPerDwell5SecField (boolean value) {
-      this.requestField("cost_per_dwell_5_sec", value);
-      return this;
-    }
-    public APIRequestGetInsights requestCostPerDwell7SecField () {
-      return this.requestCostPerDwell7SecField(true);
-    }
-    public APIRequestGetInsights requestCostPerDwell7SecField (boolean value) {
-      this.requestField("cost_per_dwell_7_sec", value);
       return this;
     }
     public APIRequestGetInsights requestCostPerEstimatedAdRecallersField () {
@@ -936,6 +920,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestCostPerUniqueClickField (boolean value) {
       this.requestField("cost_per_unique_click", value);
+      return this;
+    }
+    public APIRequestGetInsights requestCostPerUniqueConversionField () {
+      return this.requestCostPerUniqueConversionField(true);
+    }
+    public APIRequestGetInsights requestCostPerUniqueConversionField (boolean value) {
+      this.requestField("cost_per_unique_conversion", value);
       return this;
     }
     public APIRequestGetInsights requestCostPerUniqueInlineLinkClickField () {
@@ -1041,34 +1032,6 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestDmaField (boolean value) {
       this.requestField("dma", value);
-      return this;
-    }
-    public APIRequestGetInsights requestDwell3SecField () {
-      return this.requestDwell3SecField(true);
-    }
-    public APIRequestGetInsights requestDwell3SecField (boolean value) {
-      this.requestField("dwell_3_sec", value);
-      return this;
-    }
-    public APIRequestGetInsights requestDwell5SecField () {
-      return this.requestDwell5SecField(true);
-    }
-    public APIRequestGetInsights requestDwell5SecField (boolean value) {
-      this.requestField("dwell_5_sec", value);
-      return this;
-    }
-    public APIRequestGetInsights requestDwell7SecField () {
-      return this.requestDwell7SecField(true);
-    }
-    public APIRequestGetInsights requestDwell7SecField (boolean value) {
-      this.requestField("dwell_7_sec", value);
-      return this;
-    }
-    public APIRequestGetInsights requestDwellRateField () {
-      return this.requestDwellRateField(true);
-    }
-    public APIRequestGetInsights requestDwellRateField (boolean value) {
-      this.requestField("dwell_rate", value);
       return this;
     }
     public APIRequestGetInsights requestEstimatedAdRecallRateField () {
@@ -1309,6 +1272,13 @@ public class AdReportRun extends APINode {
       this.requestField("publisher_platform", value);
       return this;
     }
+    public APIRequestGetInsights requestPurchaseRoasField () {
+      return this.requestPurchaseRoasField(true);
+    }
+    public APIRequestGetInsights requestPurchaseRoasField (boolean value) {
+      this.requestField("purchase_roas", value);
+      return this;
+    }
     public APIRequestGetInsights requestPurchasingInterfaceField () {
       return this.requestPurchasingInterfaceField(true);
     }
@@ -1358,13 +1328,6 @@ public class AdReportRun extends APINode {
       this.requestField("spend", value);
       return this;
     }
-    public APIRequestGetInsights requestThumbStopsField () {
-      return this.requestThumbStopsField(true);
-    }
-    public APIRequestGetInsights requestThumbStopsField (boolean value) {
-      this.requestField("thumb_stops", value);
-      return this;
-    }
     public APIRequestGetInsights requestTitleAssetField () {
       return this.requestTitleAssetField(true);
     }
@@ -1384,6 +1347,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestUniqueClicksField (boolean value) {
       this.requestField("unique_clicks", value);
+      return this;
+    }
+    public APIRequestGetInsights requestUniqueConversionsField () {
+      return this.requestUniqueConversionsField(true);
+    }
+    public APIRequestGetInsights requestUniqueConversionsField (boolean value) {
+      this.requestField("unique_conversions", value);
       return this;
     }
     public APIRequestGetInsights requestUniqueCtrField () {
@@ -1626,8 +1596,8 @@ public class AdReportRun extends APINode {
     };
 
     @Override
-    public AdReportRun parseResponse(String response) throws APIException {
-      return AdReportRun.parseResponse(response, getContext(), this).head();
+    public AdReportRun parseResponse(String response, String header) throws APIException {
+      return AdReportRun.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1637,7 +1607,8 @@ public class AdReportRun extends APINode {
 
     @Override
     public AdReportRun execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1651,7 +1622,7 @@ public class AdReportRun extends APINode {
         new Function<String, AdReportRun>() {
            public AdReportRun apply(String result) {
              try {
-               return APIRequestCreateRetry.this.parseResponse(result);
+               return APIRequestCreateRetry.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1729,8 +1700,8 @@ public class AdReportRun extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1740,7 +1711,8 @@ public class AdReportRun extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1754,7 +1726,7 @@ public class AdReportRun extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1845,8 +1817,8 @@ public class AdReportRun extends APINode {
     };
 
     @Override
-    public AdReportRun parseResponse(String response) throws APIException {
-      return AdReportRun.parseResponse(response, getContext(), this).head();
+    public AdReportRun parseResponse(String response, String header) throws APIException {
+      return AdReportRun.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1856,7 +1828,8 @@ public class AdReportRun extends APINode {
 
     @Override
     public AdReportRun execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1870,7 +1843,7 @@ public class AdReportRun extends APINode {
         new Function<String, AdReportRun>() {
            public AdReportRun apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2041,8 +2014,8 @@ public class AdReportRun extends APINode {
     };
 
     @Override
-    public AdReportRun parseResponse(String response) throws APIException {
-      return AdReportRun.parseResponse(response, getContext(), this).head();
+    public AdReportRun parseResponse(String response, String header) throws APIException {
+      return AdReportRun.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2052,7 +2025,8 @@ public class AdReportRun extends APINode {
 
     @Override
     public AdReportRun execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2066,7 +2040,7 @@ public class AdReportRun extends APINode {
         new Function<String, AdReportRun>() {
            public AdReportRun apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2440,8 +2414,8 @@ public class AdReportRun extends APINode {
 
   public static APIRequest.ResponseParser<AdReportRun> getParser() {
     return new APIRequest.ResponseParser<AdReportRun>() {
-      public APINodeList<AdReportRun> parseResponse(String response, APIContext context, APIRequest<AdReportRun> request) throws MalformedResponseException {
-        return AdReportRun.parseResponse(response, context, request);
+      public APINodeList<AdReportRun> parseResponse(String response, APIContext context, APIRequest<AdReportRun> request, String header) throws MalformedResponseException {
+        return AdReportRun.parseResponse(response, context, request, header);
       }
     };
   }

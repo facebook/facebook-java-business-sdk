@@ -128,7 +128,7 @@ public class NativeOfferView extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static NativeOfferView loadJSON(String json, APIContext context) {
+  public static NativeOfferView loadJSON(String json, APIContext context, String header) {
     NativeOfferView nativeOfferView = getGson().fromJson(json, NativeOfferView.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -145,11 +145,12 @@ public class NativeOfferView extends APINode {
     }
     nativeOfferView.context = context;
     nativeOfferView.rawValue = json;
+    nativeOfferView.header = header;
     return nativeOfferView;
   }
 
-  public static APINodeList<NativeOfferView> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<NativeOfferView> nativeOfferViews = new APINodeList<NativeOfferView>(request, json);
+  public static APINodeList<NativeOfferView> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<NativeOfferView> nativeOfferViews = new APINodeList<NativeOfferView>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -160,7 +161,7 @@ public class NativeOfferView extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          nativeOfferViews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          nativeOfferViews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return nativeOfferViews;
       } else if (result.isJsonObject()) {
@@ -185,7 +186,7 @@ public class NativeOfferView extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              nativeOfferViews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              nativeOfferViews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -196,13 +197,13 @@ public class NativeOfferView extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  nativeOfferViews.add(loadJSON(entry.getValue().toString(), context));
+                  nativeOfferViews.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              nativeOfferViews.add(loadJSON(obj.toString(), context));
+              nativeOfferViews.add(loadJSON(obj.toString(), context, header));
             }
           }
           return nativeOfferViews;
@@ -210,7 +211,7 @@ public class NativeOfferView extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              nativeOfferViews.add(loadJSON(entry.getValue().toString(), context));
+              nativeOfferViews.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return nativeOfferViews;
         } else {
@@ -229,7 +230,7 @@ public class NativeOfferView extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              nativeOfferViews.add(loadJSON(value.toString(), context));
+              nativeOfferViews.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -241,7 +242,7 @@ public class NativeOfferView extends APINode {
 
           // Sixth, check if it's pure JsonObject
           nativeOfferViews.clear();
-          nativeOfferViews.add(loadJSON(json, context));
+          nativeOfferViews.add(loadJSON(json, context, header));
           return nativeOfferViews;
         }
       }
@@ -346,8 +347,8 @@ public class NativeOfferView extends APINode {
     };
 
     @Override
-    public APINodeList<Photo> parseResponse(String response) throws APIException {
-      return Photo.parseResponse(response, getContext(), this);
+    public APINodeList<Photo> parseResponse(String response, String header) throws APIException {
+      return Photo.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -357,7 +358,8 @@ public class NativeOfferView extends APINode {
 
     @Override
     public APINodeList<Photo> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -371,7 +373,7 @@ public class NativeOfferView extends APINode {
         new Function<String, APINodeList<Photo>>() {
            public APINodeList<Photo> apply(String result) {
              try {
-               return APIRequestGetPhotos.this.parseResponse(result);
+               return APIRequestGetPhotos.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -630,8 +632,8 @@ public class NativeOfferView extends APINode {
     };
 
     @Override
-    public NativeOfferView parseResponse(String response) throws APIException {
-      return NativeOfferView.parseResponse(response, getContext(), this).head();
+    public NativeOfferView parseResponse(String response, String header) throws APIException {
+      return NativeOfferView.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -641,7 +643,8 @@ public class NativeOfferView extends APINode {
 
     @Override
     public NativeOfferView execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -655,7 +658,7 @@ public class NativeOfferView extends APINode {
         new Function<String, NativeOfferView>() {
            public NativeOfferView apply(String result) {
              try {
-               return APIRequestCreatePhoto.this.parseResponse(result);
+               return APIRequestCreatePhoto.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -784,8 +787,8 @@ public class NativeOfferView extends APINode {
     };
 
     @Override
-    public NativeOfferView parseResponse(String response) throws APIException {
-      return NativeOfferView.parseResponse(response, getContext(), this).head();
+    public NativeOfferView parseResponse(String response, String header) throws APIException {
+      return NativeOfferView.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -795,7 +798,8 @@ public class NativeOfferView extends APINode {
 
     @Override
     public NativeOfferView execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -809,7 +813,7 @@ public class NativeOfferView extends APINode {
         new Function<String, NativeOfferView>() {
            public NativeOfferView apply(String result) {
              try {
-               return APIRequestCreateVideo.this.parseResponse(result);
+               return APIRequestCreateVideo.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -899,8 +903,8 @@ public class NativeOfferView extends APINode {
     };
 
     @Override
-    public NativeOfferView parseResponse(String response) throws APIException {
-      return NativeOfferView.parseResponse(response, getContext(), this).head();
+    public NativeOfferView parseResponse(String response, String header) throws APIException {
+      return NativeOfferView.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -910,7 +914,8 @@ public class NativeOfferView extends APINode {
 
     @Override
     public NativeOfferView execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -924,7 +929,7 @@ public class NativeOfferView extends APINode {
         new Function<String, NativeOfferView>() {
            public NativeOfferView apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1026,8 +1031,8 @@ public class NativeOfferView extends APINode {
     };
 
     @Override
-    public NativeOfferView parseResponse(String response) throws APIException {
-      return NativeOfferView.parseResponse(response, getContext(), this).head();
+    public NativeOfferView parseResponse(String response, String header) throws APIException {
+      return NativeOfferView.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1037,7 +1042,8 @@ public class NativeOfferView extends APINode {
 
     @Override
     public NativeOfferView execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1051,7 +1057,7 @@ public class NativeOfferView extends APINode {
         new Function<String, NativeOfferView>() {
            public NativeOfferView apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1163,8 +1169,8 @@ public class NativeOfferView extends APINode {
 
   public static APIRequest.ResponseParser<NativeOfferView> getParser() {
     return new APIRequest.ResponseParser<NativeOfferView>() {
-      public APINodeList<NativeOfferView> parseResponse(String response, APIContext context, APIRequest<NativeOfferView> request) throws MalformedResponseException {
-        return NativeOfferView.parseResponse(response, context, request);
+      public APINodeList<NativeOfferView> parseResponse(String response, APIContext context, APIRequest<NativeOfferView> request, String header) throws MalformedResponseException {
+        return NativeOfferView.parseResponse(response, context, request, header);
       }
     };
   }

@@ -210,7 +210,7 @@ public class Vehicle extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Vehicle loadJSON(String json, APIContext context) {
+  public static Vehicle loadJSON(String json, APIContext context, String header) {
     Vehicle vehicle = getGson().fromJson(json, Vehicle.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -227,11 +227,12 @@ public class Vehicle extends APINode {
     }
     vehicle.context = context;
     vehicle.rawValue = json;
+    vehicle.header = header;
     return vehicle;
   }
 
-  public static APINodeList<Vehicle> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Vehicle> vehicles = new APINodeList<Vehicle>(request, json);
+  public static APINodeList<Vehicle> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Vehicle> vehicles = new APINodeList<Vehicle>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -242,7 +243,7 @@ public class Vehicle extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          vehicles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          vehicles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return vehicles;
       } else if (result.isJsonObject()) {
@@ -267,7 +268,7 @@ public class Vehicle extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              vehicles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              vehicles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -278,13 +279,13 @@ public class Vehicle extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  vehicles.add(loadJSON(entry.getValue().toString(), context));
+                  vehicles.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              vehicles.add(loadJSON(obj.toString(), context));
+              vehicles.add(loadJSON(obj.toString(), context, header));
             }
           }
           return vehicles;
@@ -292,7 +293,7 @@ public class Vehicle extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              vehicles.add(loadJSON(entry.getValue().toString(), context));
+              vehicles.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return vehicles;
         } else {
@@ -311,7 +312,7 @@ public class Vehicle extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              vehicles.add(loadJSON(value.toString(), context));
+              vehicles.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -323,7 +324,7 @@ public class Vehicle extends APINode {
 
           // Sixth, check if it's pure JsonObject
           vehicles.clear();
-          vehicles.add(loadJSON(json, context));
+          vehicles.add(loadJSON(json, context, header));
           return vehicles;
         }
       }
@@ -598,8 +599,8 @@ public class Vehicle extends APINode {
     };
 
     @Override
-    public Vehicle parseResponse(String response) throws APIException {
-      return Vehicle.parseResponse(response, getContext(), this).head();
+    public Vehicle parseResponse(String response, String header) throws APIException {
+      return Vehicle.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -609,7 +610,8 @@ public class Vehicle extends APINode {
 
     @Override
     public Vehicle execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -623,7 +625,7 @@ public class Vehicle extends APINode {
         new Function<String, Vehicle>() {
            public Vehicle apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1061,8 +1063,8 @@ public class Vehicle extends APINode {
 
   public static APIRequest.ResponseParser<Vehicle> getParser() {
     return new APIRequest.ResponseParser<Vehicle>() {
-      public APINodeList<Vehicle> parseResponse(String response, APIContext context, APIRequest<Vehicle> request) throws MalformedResponseException {
-        return Vehicle.parseResponse(response, context, request);
+      public APINodeList<Vehicle> parseResponse(String response, APIContext context, APIRequest<Vehicle> request, String header) throws MalformedResponseException {
+        return Vehicle.parseResponse(response, context, request, header);
       }
     };
   }

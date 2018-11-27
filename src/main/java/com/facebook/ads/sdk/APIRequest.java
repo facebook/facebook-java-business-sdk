@@ -55,7 +55,7 @@ public class APIRequest<T extends APINode> {
   public static final String USER_AGENT = APIConfig.USER_AGENT;
 
   private static IRequestExecutor executor = new DefaultRequestExecutor();
-  private static IAsyncRequestExecutor asyncExecutor = null;
+  private static IAsyncRequestExecutor asyncExecutor = new DefaultAsyncRequestExecutor();
 
   protected APIContext context;
   protected boolean useVideoEndpoint = false;
@@ -112,11 +112,11 @@ public class APIRequest<T extends APINode> {
     return lastResponse;
   };
 
-  public APIResponse parseResponse(String response) throws APIException {
+  public APIResponse parseResponse(String response, String header) throws APIException {
     if (parser != null) {
-      return parser.parseResponse(response, context, this);
+      return parser.parseResponse(response, context, this, header);
     } else {
-      return APINode.parseResponse(response, context, new APIRequest<APINode>(context, nodeId, endpoint, method, paramNames));
+      return APINode.parseResponse(response, context, new APIRequest<APINode>(context, nodeId, endpoint, method, paramNames), header);
     }
   };
 
@@ -125,7 +125,8 @@ public class APIRequest<T extends APINode> {
   };
 
   public APIResponse execute(Map<String, Object> extraParams) throws APIException {
-    lastResponse = parseResponse(executeInternal(extraParams));
+    ResponseWrapper rw = executeInternal(extraParams);
+    lastResponse = parseResponse(rw.getBody(), rw.getHeader());
     return lastResponse;
   };
 
@@ -139,7 +140,7 @@ public class APIRequest<T extends APINode> {
       new Function<String, APIResponse>() {
          public APIResponse apply(String result) {
            try {
-             return APIRequest.this.parseResponse(result);
+             return APIRequest.this.parseResponse(result, null);
            } catch (Exception e) {
              throw new RuntimeException(e);
            }
@@ -184,19 +185,19 @@ public class APIRequest<T extends APINode> {
     return this;
   }
 
-  protected String executeInternal() throws APIException {
+  protected ResponseWrapper executeInternal() throws APIException {
     return executeInternal(null);
   }
 
-  protected String executeInternal(Map<String, Object> extraParams) throws APIException {
+  protected ResponseWrapper executeInternal(Map<String, Object> extraParams) throws APIException {
     // extraParams are one-time params for this call,
     // so that the APIRequest can be reused later on.
-    String response = null;
+    ResponseWrapper response = null;
     try {
       context.log("========Start of API Call========");
       response = executor.execute(method, getApiUrl(), getAllParams(extraParams), context);
       context.log("Response:");
-      context.log(response);
+      context.log(response.getBody());
       context.log("========End of API Call========");
     } catch(IOException e) {
       throw new APIException.FailedRequestException(e);
@@ -279,10 +280,11 @@ public class APIRequest<T extends APINode> {
     return allParams;
   }
 
-  private static String readResponse(HttpsURLConnection con) throws APIException, IOException {
+  private static ResponseWrapper readResponse(HttpsURLConnection con) throws APIException, IOException {
     try {
       int responseCode = con.getResponseCode();
 
+      String header = convertToString(con.getHeaderFields());
       BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
       String inputLine;
       StringBuilder response = new StringBuilder();
@@ -291,7 +293,7 @@ public class APIRequest<T extends APINode> {
         response.append(inputLine);
       }
       in.close();
-      return response.toString();
+      return new ResponseWrapper(response.toString(), header);
     } catch(Exception e) {
       BufferedReader in = new BufferedReader(new InputStreamReader(con.getErrorStream()));
       String inputLine;
@@ -389,14 +391,14 @@ public class APIRequest<T extends APINode> {
   }
 
   public static interface ResponseParser<T extends APINode> {
-    public APINodeList<T> parseResponse(String response, APIContext context, APIRequest<T> request)  throws APIException.MalformedResponseException;
+    public APINodeList<T> parseResponse(String response, APIContext context, APIRequest<T> request, String header)  throws APIException.MalformedResponseException;
   }
 
   public static interface IRequestExecutor {
-    public String execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
-    public String sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
-    public String sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
-    public String sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
+    public ResponseWrapper execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
+    public ResponseWrapper sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
+    public ResponseWrapper sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
+    public ResponseWrapper sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
   }
 
   public static interface IAsyncRequestExecutor {
@@ -504,14 +506,14 @@ public class APIRequest<T extends APINode> {
 
   public static class DefaultRequestExecutor implements IRequestExecutor {
 
-    public String execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
+    public ResponseWrapper execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
       if ("GET".equals(method)) return sendGet(apiUrl, allParams, context);
       else if ("POST".equals(method)) return sendPost(apiUrl, allParams, context);
       else if ("DELETE".equals(method)) return sendDelete(apiUrl, allParams, context);
       else throw new IllegalArgumentException("Unsupported http method. Currently only GET, POST, and DELETE are supported");
     }
 
-    public String sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
+    public ResponseWrapper sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
       URL url = new URL(RequestHelper.constructUrlString(apiUrl, allParams));
       context.log("Request:");
       context.log("GET: " + url.toString());
@@ -524,7 +526,7 @@ public class APIRequest<T extends APINode> {
       return readResponse(con);
     }
 
-    public String sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
+    public ResponseWrapper sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
       String boundary = "--------------------------" + new Random().nextLong();
       URL url = new URL(apiUrl);
       context.log("Post: " + url.toString());
@@ -577,7 +579,7 @@ public class APIRequest<T extends APINode> {
       return readResponse(con);
     }
 
-    public String sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
+    public ResponseWrapper sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
       URL url = new URL(RequestHelper.constructUrlString(apiUrl, allParams));
       context.log("Delete: " + url.toString());
       HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
@@ -667,6 +669,24 @@ public class APIRequest<T extends APINode> {
           .build();
 
       return RequestHelper.invoke(client, request);
+    }
+  }
+
+  public static class ResponseWrapper {
+    private String body;
+    private String header;
+
+    public ResponseWrapper(String body, String header) {
+      this.body = body;
+      this.header = header;
+    }
+
+    public String getBody() {
+      return this.body;
+    }
+
+    public String getHeader() {
+      return this.header;
     }
   }
 }

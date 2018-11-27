@@ -59,8 +59,6 @@ public class Event extends APINode {
   private Long mAttendingCount = null;
   @SerializedName("can_guests_invite")
   private Boolean mCanGuestsInvite = null;
-  @SerializedName("can_viewer_post")
-  private Boolean mCanViewerPost = null;
   @SerializedName("category")
   private String mCategory = null;
   @SerializedName("cover")
@@ -81,18 +79,12 @@ public class Event extends APINode {
   private String mId = null;
   @SerializedName("interested_count")
   private Long mInterestedCount = null;
-  @SerializedName("invited_count")
-  private Long mInvitedCount = null;
   @SerializedName("is_canceled")
   private Boolean mIsCanceled = null;
-  @SerializedName("is_date_only")
-  private Boolean mIsDateOnly = null;
   @SerializedName("is_draft")
   private Boolean mIsDraft = null;
   @SerializedName("is_page_owned")
   private Boolean mIsPageOwned = null;
-  @SerializedName("location")
-  private String mLocation = null;
   @SerializedName("maybe_count")
   private Long mMaybeCount = null;
   @SerializedName("name")
@@ -105,8 +97,6 @@ public class Event extends APINode {
   private Group mParentGroup = null;
   @SerializedName("place")
   private Place mPlace = null;
-  @SerializedName("privacy")
-  private String mPrivacy = null;
   @SerializedName("scheduled_publish_time")
   private String mScheduledPublishTime = null;
   @SerializedName("start_time")
@@ -125,8 +115,6 @@ public class Event extends APINode {
   private EnumType mType = null;
   @SerializedName("updated_time")
   private String mUpdatedTime = null;
-  @SerializedName("venue")
-  private Location mVenue = null;
   protected static Gson gson = null;
 
   Event() {
@@ -194,7 +182,7 @@ public class Event extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Event loadJSON(String json, APIContext context) {
+  public static Event loadJSON(String json, APIContext context, String header) {
     Event event = getGson().fromJson(json, Event.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -211,11 +199,12 @@ public class Event extends APINode {
     }
     event.context = context;
     event.rawValue = json;
+    event.header = header;
     return event;
   }
 
-  public static APINodeList<Event> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Event> events = new APINodeList<Event>(request, json);
+  public static APINodeList<Event> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Event> events = new APINodeList<Event>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -226,7 +215,7 @@ public class Event extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          events.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          events.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return events;
       } else if (result.isJsonObject()) {
@@ -251,7 +240,7 @@ public class Event extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              events.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              events.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -262,13 +251,13 @@ public class Event extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  events.add(loadJSON(entry.getValue().toString(), context));
+                  events.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              events.add(loadJSON(obj.toString(), context));
+              events.add(loadJSON(obj.toString(), context, header));
             }
           }
           return events;
@@ -276,7 +265,7 @@ public class Event extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              events.add(loadJSON(entry.getValue().toString(), context));
+              events.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return events;
         } else {
@@ -295,7 +284,7 @@ public class Event extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              events.add(loadJSON(value.toString(), context));
+              events.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -307,7 +296,7 @@ public class Event extends APINode {
 
           // Sixth, check if it's pure JsonObject
           events.clear();
-          events.add(loadJSON(json, context));
+          events.add(loadJSON(json, context, header));
           return events;
         }
       }
@@ -444,10 +433,6 @@ public class Event extends APINode {
     return mCanGuestsInvite;
   }
 
-  public Boolean getFieldCanViewerPost() {
-    return mCanViewerPost;
-  }
-
   public String getFieldCategory() {
     return mCategory;
   }
@@ -488,16 +473,8 @@ public class Event extends APINode {
     return mInterestedCount;
   }
 
-  public Long getFieldInvitedCount() {
-    return mInvitedCount;
-  }
-
   public Boolean getFieldIsCanceled() {
     return mIsCanceled;
-  }
-
-  public Boolean getFieldIsDateOnly() {
-    return mIsDateOnly;
   }
 
   public Boolean getFieldIsDraft() {
@@ -506,10 +483,6 @@ public class Event extends APINode {
 
   public Boolean getFieldIsPageOwned() {
     return mIsPageOwned;
-  }
-
-  public String getFieldLocation() {
-    return mLocation;
   }
 
   public Long getFieldMaybeCount() {
@@ -540,10 +513,6 @@ public class Event extends APINode {
       mPlace.context = getContext();
     }
     return mPlace;
-  }
-
-  public String getFieldPrivacy() {
-    return mPrivacy;
   }
 
   public String getFieldScheduledPublishTime() {
@@ -582,10 +551,6 @@ public class Event extends APINode {
     return mUpdatedTime;
   }
 
-  public Location getFieldVenue() {
-    return mVenue;
-  }
-
 
 
   public static class APIRequestGetAdmins extends APIRequest<Profile> {
@@ -613,8 +578,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -624,7 +589,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -638,7 +604,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetAdmins.this.parseResponse(result);
+               return APIRequestGetAdmins.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -795,7 +761,6 @@ public class Event extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -816,12 +781,10 @@ public class Event extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -849,7 +812,6 @@ public class Event extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -858,8 +820,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -869,7 +831,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -883,7 +846,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetAttending.this.parseResponse(result);
+               return APIRequestGetAttending.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -980,13 +943,6 @@ public class Event extends APINode {
     }
     public APIRequestGetAttending requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetAttending requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetAttending requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetAttending requestBirthdayField () {
@@ -1129,13 +1085,6 @@ public class Event extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetAttending requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetAttending requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetAttending requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -1162,13 +1111,6 @@ public class Event extends APINode {
     }
     public APIRequestGetAttending requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetAttending requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetAttending requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetAttending requestLastNameField () {
@@ -1360,13 +1302,6 @@ public class Event extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetAttending requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetAttending requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetAttending requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -1423,8 +1358,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public Event parseResponse(String response) throws APIException {
-      return Event.parseResponse(response, getContext(), this).head();
+    public Event parseResponse(String response, String header) throws APIException {
+      return Event.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1434,7 +1369,8 @@ public class Event extends APINode {
 
     @Override
     public Event execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1448,7 +1384,7 @@ public class Event extends APINode {
         new Function<String, Event>() {
            public Event apply(String result) {
              try {
-               return APIRequestCreateAttending.this.parseResponse(result);
+               return APIRequestCreateAttending.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1564,8 +1500,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<NullNode> parseResponse(String response) throws APIException {
-      return NullNode.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1575,7 +1511,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1589,7 +1526,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<NullNode>>() {
            public APINodeList<NullNode> apply(String result) {
              try {
-               return APIRequestGetComments.this.parseResponse(result);
+               return APIRequestGetComments.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1687,8 +1624,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public Comment parseResponse(String response) throws APIException {
-      return Comment.parseResponse(response, getContext(), this).head();
+    public Comment parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1698,7 +1635,8 @@ public class Event extends APINode {
 
     @Override
     public Comment execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1712,7 +1650,7 @@ public class Event extends APINode {
         new Function<String, Comment>() {
            public Comment apply(String result) {
              try {
-               return APIRequestCreateComment.this.parseResponse(result);
+               return APIRequestCreateComment.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1873,7 +1811,6 @@ public class Event extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -1894,12 +1831,10 @@ public class Event extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -1927,7 +1862,6 @@ public class Event extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -1936,8 +1870,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1947,7 +1881,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1961,7 +1896,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetDeclined.this.parseResponse(result);
+               return APIRequestGetDeclined.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2058,13 +1993,6 @@ public class Event extends APINode {
     }
     public APIRequestGetDeclined requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetDeclined requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetDeclined requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetDeclined requestBirthdayField () {
@@ -2207,13 +2135,6 @@ public class Event extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetDeclined requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetDeclined requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetDeclined requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -2240,13 +2161,6 @@ public class Event extends APINode {
     }
     public APIRequestGetDeclined requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetDeclined requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetDeclined requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetDeclined requestLastNameField () {
@@ -2438,13 +2352,6 @@ public class Event extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetDeclined requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetDeclined requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetDeclined requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -2501,8 +2408,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public Event parseResponse(String response) throws APIException {
-      return Event.parseResponse(response, getContext(), this).head();
+    public Event parseResponse(String response, String header) throws APIException {
+      return Event.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2512,7 +2419,8 @@ public class Event extends APINode {
 
     @Override
     public Event execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2526,7 +2434,7 @@ public class Event extends APINode {
         new Function<String, Event>() {
            public Event apply(String result) {
              try {
-               return APIRequestCreateDeclined.this.parseResponse(result);
+               return APIRequestCreateDeclined.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2642,8 +2550,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<NullNode> parseResponse(String response) throws APIException {
-      return NullNode.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2653,7 +2561,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2667,7 +2576,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<NullNode>>() {
            public APINodeList<NullNode> apply(String result) {
              try {
-               return APIRequestGetFeed.this.parseResponse(result);
+               return APIRequestGetFeed.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2864,8 +2773,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2875,7 +2784,8 @@ public class Event extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2889,7 +2799,7 @@ public class Event extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateFeed.this.parseResponse(result);
+               return APIRequestCreateFeed.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3765,7 +3675,6 @@ public class Event extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -3786,12 +3695,10 @@ public class Event extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -3819,7 +3726,6 @@ public class Event extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -3828,8 +3734,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3839,7 +3745,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3853,7 +3760,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetInterested.this.parseResponse(result);
+               return APIRequestGetInterested.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3950,13 +3857,6 @@ public class Event extends APINode {
     }
     public APIRequestGetInterested requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetInterested requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetInterested requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetInterested requestBirthdayField () {
@@ -4099,13 +3999,6 @@ public class Event extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetInterested requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetInterested requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetInterested requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -4132,13 +4025,6 @@ public class Event extends APINode {
     }
     public APIRequestGetInterested requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetInterested requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetInterested requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetInterested requestLastNameField () {
@@ -4330,13 +4216,6 @@ public class Event extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetInterested requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetInterested requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetInterested requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -4389,8 +4268,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<NullNode> parseResponse(String response) throws APIException {
-      return NullNode.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4400,7 +4279,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4414,7 +4294,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<NullNode>>() {
            public APINodeList<NullNode> apply(String result) {
              try {
-               return APIRequestGetLiveVideos.this.parseResponse(result);
+               return APIRequestGetLiveVideos.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4485,11 +4365,11 @@ public class Event extends APINode {
     }
   }
 
-  public static class APIRequestCreateLiveVideo extends APIRequest<APINode> {
+  public static class APIRequestCreateLiveVideo extends APIRequest<Event> {
 
-    APINode lastResponse = null;
+    Event lastResponse = null;
     @Override
-    public APINode getLastResponse() {
+    public Event getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -4521,32 +4401,33 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public Event parseResponse(String response, String header) throws APIException {
+      return Event.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public APINode execute() throws APIException {
+    public Event execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+    public Event execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<APINode> executeAsync() throws APIException {
+    public ListenableFuture<Event> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<Event> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<String, Event>() {
+           public Event apply(String result) {
              try {
-               return APIRequestCreateLiveVideo.this.parseResponse(result);
+               return APIRequestCreateLiveVideo.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4600,7 +4481,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStatus (EnumStatus status) {
+    public APIRequestCreateLiveVideo setStatus (Event.EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
@@ -4627,7 +4508,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStreamType (EnumStreamType streamType) {
+    public APIRequestCreateLiveVideo setStreamType (Event.EnumStreamType streamType) {
       this.setParam("stream_type", streamType);
       return this;
     }
@@ -4681,7 +4562,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setProjection (EnumProjection projection) {
+    public APIRequestCreateLiveVideo setProjection (Event.EnumProjection projection) {
       this.setParam("projection", projection);
       return this;
     }
@@ -4690,7 +4571,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setSpatialAudioFormat (EnumSpatialAudioFormat spatialAudioFormat) {
+    public APIRequestCreateLiveVideo setSpatialAudioFormat (Event.EnumSpatialAudioFormat spatialAudioFormat) {
       this.setParam("spatial_audio_format", spatialAudioFormat);
       return this;
     }
@@ -4745,7 +4626,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setStereoscopicMode (EnumStereoscopicMode stereoscopicMode) {
+    public APIRequestCreateLiveVideo setStereoscopicMode (Event.EnumStereoscopicMode stereoscopicMode) {
       this.setParam("stereoscopic_mode", stereoscopicMode);
       return this;
     }
@@ -4808,7 +4689,6 @@ public class Event extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -4829,12 +4709,10 @@ public class Event extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -4862,7 +4740,6 @@ public class Event extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -4871,8 +4748,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4882,7 +4759,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4896,7 +4774,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetMaybe.this.parseResponse(result);
+               return APIRequestGetMaybe.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4993,13 +4871,6 @@ public class Event extends APINode {
     }
     public APIRequestGetMaybe requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetMaybe requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetMaybe requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetMaybe requestBirthdayField () {
@@ -5142,13 +5013,6 @@ public class Event extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetMaybe requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetMaybe requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetMaybe requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -5175,13 +5039,6 @@ public class Event extends APINode {
     }
     public APIRequestGetMaybe requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetMaybe requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetMaybe requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetMaybe requestLastNameField () {
@@ -5373,13 +5230,6 @@ public class Event extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetMaybe requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetMaybe requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetMaybe requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -5436,8 +5286,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public Event parseResponse(String response) throws APIException {
-      return Event.parseResponse(response, getContext(), this).head();
+    public Event parseResponse(String response, String header) throws APIException {
+      return Event.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -5447,7 +5297,8 @@ public class Event extends APINode {
 
     @Override
     public Event execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -5461,7 +5312,7 @@ public class Event extends APINode {
         new Function<String, Event>() {
            public Event apply(String result) {
              try {
-               return APIRequestCreateMaybe.this.parseResponse(result);
+               return APIRequestCreateMaybe.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5578,7 +5429,6 @@ public class Event extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -5599,12 +5449,10 @@ public class Event extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -5632,7 +5480,6 @@ public class Event extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -5641,8 +5488,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -5652,7 +5499,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -5666,7 +5514,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetNoreply.this.parseResponse(result);
+               return APIRequestGetNoreply.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5763,13 +5611,6 @@ public class Event extends APINode {
     }
     public APIRequestGetNoreply requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetNoreply requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetNoreply requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetNoreply requestBirthdayField () {
@@ -5912,13 +5753,6 @@ public class Event extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetNoreply requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetNoreply requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetNoreply requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -5945,13 +5779,6 @@ public class Event extends APINode {
     }
     public APIRequestGetNoreply requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetNoreply requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetNoreply requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetNoreply requestLastNameField () {
@@ -6143,13 +5970,6 @@ public class Event extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetNoreply requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetNoreply requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetNoreply requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -6202,8 +6022,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<NullNode> parseResponse(String response) throws APIException {
-      return NullNode.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -6213,7 +6033,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -6227,7 +6048,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<NullNode>>() {
            public APINodeList<NullNode> apply(String result) {
              try {
-               return APIRequestGetPhotos.this.parseResponse(result);
+               return APIRequestGetPhotos.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6363,8 +6184,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public Photo parseResponse(String response) throws APIException {
-      return Photo.parseResponse(response, getContext(), this).head();
+    public Photo parseResponse(String response, String header) throws APIException {
+      return Photo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -6374,7 +6195,8 @@ public class Event extends APINode {
 
     @Override
     public Photo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -6388,7 +6210,7 @@ public class Event extends APINode {
         new Function<String, Photo>() {
            public Photo apply(String result) {
              try {
-               return APIRequestCreatePhoto.this.parseResponse(result);
+               return APIRequestCreatePhoto.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6850,8 +6672,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<NullNode> parseResponse(String response) throws APIException {
-      return NullNode.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -6861,7 +6683,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -6875,7 +6698,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<NullNode>>() {
            public APINodeList<NullNode> apply(String result) {
              try {
-               return APIRequestGetPicture.this.parseResponse(result);
+               return APIRequestGetPicture.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6961,8 +6784,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<NullNode> parseResponse(String response) throws APIException {
-      return NullNode.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -6972,7 +6795,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -6986,7 +6810,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<NullNode>>() {
            public APINodeList<NullNode> apply(String result) {
              try {
-               return APIRequestGetPosts.this.parseResponse(result);
+               return APIRequestGetPosts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7082,8 +6906,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -7093,7 +6917,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -7107,7 +6932,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetRoles.this.parseResponse(result);
+               return APIRequestGetRoles.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7263,8 +7088,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINodeList<NullNode> parseResponse(String response) throws APIException {
-      return NullNode.parseResponse(response, getContext(), this);
+    public APINodeList<NullNode> parseResponse(String response, String header) throws APIException {
+      return NullNode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -7274,7 +7099,8 @@ public class Event extends APINode {
 
     @Override
     public APINodeList<NullNode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -7288,7 +7114,7 @@ public class Event extends APINode {
         new Function<String, APINodeList<NullNode>>() {
            public APINodeList<NullNode> apply(String result) {
              try {
-               return APIRequestGetVideos.this.parseResponse(result);
+               return APIRequestGetVideos.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7444,8 +7270,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public AdVideo parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this).head();
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -7455,7 +7281,8 @@ public class Event extends APINode {
 
     @Override
     public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -7469,7 +7296,7 @@ public class Event extends APINode {
         new Function<String, AdVideo>() {
            public AdVideo apply(String result) {
              try {
-               return APIRequestCreateVideo.this.parseResponse(result);
+               return APIRequestCreateVideo.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8050,8 +7877,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -8061,7 +7888,8 @@ public class Event extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -8075,7 +7903,7 @@ public class Event extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8180,7 +8008,6 @@ public class Event extends APINode {
     public static final String[] FIELDS = {
       "attending_count",
       "can_guests_invite",
-      "can_viewer_post",
       "category",
       "cover",
       "declined_count",
@@ -8191,19 +8018,15 @@ public class Event extends APINode {
       "guest_list_enabled",
       "id",
       "interested_count",
-      "invited_count",
       "is_canceled",
-      "is_date_only",
       "is_draft",
       "is_page_owned",
-      "location",
       "maybe_count",
       "name",
       "noreply_count",
       "owner",
       "parent_group",
       "place",
-      "privacy",
       "scheduled_publish_time",
       "start_time",
       "ticket_uri",
@@ -8213,12 +8036,11 @@ public class Event extends APINode {
       "timezone",
       "type",
       "updated_time",
-      "venue",
     };
 
     @Override
-    public Event parseResponse(String response) throws APIException {
-      return Event.parseResponse(response, getContext(), this).head();
+    public Event parseResponse(String response, String header) throws APIException {
+      return Event.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -8228,7 +8050,8 @@ public class Event extends APINode {
 
     @Override
     public Event execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -8242,7 +8065,7 @@ public class Event extends APINode {
         new Function<String, Event>() {
            public Event apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8318,13 +8141,6 @@ public class Event extends APINode {
       this.requestField("can_guests_invite", value);
       return this;
     }
-    public APIRequestGet requestCanViewerPostField () {
-      return this.requestCanViewerPostField(true);
-    }
-    public APIRequestGet requestCanViewerPostField (boolean value) {
-      this.requestField("can_viewer_post", value);
-      return this;
-    }
     public APIRequestGet requestCategoryField () {
       return this.requestCategoryField(true);
     }
@@ -8395,25 +8211,11 @@ public class Event extends APINode {
       this.requestField("interested_count", value);
       return this;
     }
-    public APIRequestGet requestInvitedCountField () {
-      return this.requestInvitedCountField(true);
-    }
-    public APIRequestGet requestInvitedCountField (boolean value) {
-      this.requestField("invited_count", value);
-      return this;
-    }
     public APIRequestGet requestIsCanceledField () {
       return this.requestIsCanceledField(true);
     }
     public APIRequestGet requestIsCanceledField (boolean value) {
       this.requestField("is_canceled", value);
-      return this;
-    }
-    public APIRequestGet requestIsDateOnlyField () {
-      return this.requestIsDateOnlyField(true);
-    }
-    public APIRequestGet requestIsDateOnlyField (boolean value) {
-      this.requestField("is_date_only", value);
       return this;
     }
     public APIRequestGet requestIsDraftField () {
@@ -8428,13 +8230,6 @@ public class Event extends APINode {
     }
     public APIRequestGet requestIsPageOwnedField (boolean value) {
       this.requestField("is_page_owned", value);
-      return this;
-    }
-    public APIRequestGet requestLocationField () {
-      return this.requestLocationField(true);
-    }
-    public APIRequestGet requestLocationField (boolean value) {
-      this.requestField("location", value);
       return this;
     }
     public APIRequestGet requestMaybeCountField () {
@@ -8477,13 +8272,6 @@ public class Event extends APINode {
     }
     public APIRequestGet requestPlaceField (boolean value) {
       this.requestField("place", value);
-      return this;
-    }
-    public APIRequestGet requestPrivacyField () {
-      return this.requestPrivacyField(true);
-    }
-    public APIRequestGet requestPrivacyField (boolean value) {
-      this.requestField("privacy", value);
       return this;
     }
     public APIRequestGet requestScheduledPublishTimeField () {
@@ -8549,13 +8337,6 @@ public class Event extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGet requestVenueField () {
-      return this.requestVenueField(true);
-    }
-    public APIRequestGet requestVenueField (boolean value) {
-      this.requestField("venue", value);
-      return this;
-    }
   }
 
   public static class APIRequestUpdate extends APIRequest<Event> {
@@ -8576,8 +8357,8 @@ public class Event extends APINode {
     };
 
     @Override
-    public Event parseResponse(String response) throws APIException {
-      return Event.parseResponse(response, getContext(), this).head();
+    public Event parseResponse(String response, String header) throws APIException {
+      return Event.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -8587,7 +8368,8 @@ public class Event extends APINode {
 
     @Override
     public Event execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -8601,7 +8383,7 @@ public class Event extends APINode {
         new Function<String, Event>() {
            public Event apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8711,6 +8493,109 @@ public class Event extends APINode {
       private String value;
 
       private EnumType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumProjection {
+      @SerializedName("EQUIRECTANGULAR")
+      VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
+      @SerializedName("CUBEMAP")
+      VALUE_CUBEMAP("CUBEMAP"),
+      @SerializedName("HALF_EQUIRECTANGULAR")
+      VALUE_HALF_EQUIRECTANGULAR("HALF_EQUIRECTANGULAR"),
+      NULL(null);
+
+      private String value;
+
+      private EnumProjection(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumSpatialAudioFormat {
+      @SerializedName("ambiX_4")
+      VALUE_AMBIX_4("ambiX_4"),
+      NULL(null);
+
+      private String value;
+
+      private EnumSpatialAudioFormat(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumStatus {
+      @SerializedName("UNPUBLISHED")
+      VALUE_UNPUBLISHED("UNPUBLISHED"),
+      @SerializedName("LIVE_NOW")
+      VALUE_LIVE_NOW("LIVE_NOW"),
+      @SerializedName("SCHEDULED_UNPUBLISHED")
+      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
+      @SerializedName("SCHEDULED_LIVE")
+      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
+      @SerializedName("SCHEDULED_CANCELED")
+      VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
+      NULL(null);
+
+      private String value;
+
+      private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumStereoscopicMode {
+      @SerializedName("MONO")
+      VALUE_MONO("MONO"),
+      @SerializedName("LEFT_RIGHT")
+      VALUE_LEFT_RIGHT("LEFT_RIGHT"),
+      @SerializedName("TOP_BOTTOM")
+      VALUE_TOP_BOTTOM("TOP_BOTTOM"),
+      NULL(null);
+
+      private String value;
+
+      private EnumStereoscopicMode(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumStreamType {
+      @SerializedName("REGULAR")
+      VALUE_REGULAR("REGULAR"),
+      @SerializedName("AMBIENT")
+      VALUE_AMBIENT("AMBIENT"),
+      NULL(null);
+
+      private String value;
+
+      private EnumStreamType(String value) {
         this.value = value;
       }
 
@@ -8959,109 +8844,6 @@ public class Event extends APINode {
       }
   }
 
-  public static enum EnumStatus {
-      @SerializedName("UNPUBLISHED")
-      VALUE_UNPUBLISHED("UNPUBLISHED"),
-      @SerializedName("LIVE_NOW")
-      VALUE_LIVE_NOW("LIVE_NOW"),
-      @SerializedName("SCHEDULED_UNPUBLISHED")
-      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
-      @SerializedName("SCHEDULED_LIVE")
-      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
-      @SerializedName("SCHEDULED_CANCELED")
-      VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
-      NULL(null);
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStreamType {
-      @SerializedName("REGULAR")
-      VALUE_REGULAR("REGULAR"),
-      @SerializedName("AMBIENT")
-      VALUE_AMBIENT("AMBIENT"),
-      NULL(null);
-
-      private String value;
-
-      private EnumStreamType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumProjection {
-      @SerializedName("EQUIRECTANGULAR")
-      VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
-      @SerializedName("CUBEMAP")
-      VALUE_CUBEMAP("CUBEMAP"),
-      @SerializedName("HALF_EQUIRECTANGULAR")
-      VALUE_HALF_EQUIRECTANGULAR("HALF_EQUIRECTANGULAR"),
-      NULL(null);
-
-      private String value;
-
-      private EnumProjection(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumSpatialAudioFormat {
-      @SerializedName("ambiX_4")
-      VALUE_AMBIX_4("ambiX_4"),
-      NULL(null);
-
-      private String value;
-
-      private EnumSpatialAudioFormat(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumStereoscopicMode {
-      @SerializedName("MONO")
-      VALUE_MONO("MONO"),
-      @SerializedName("LEFT_RIGHT")
-      VALUE_LEFT_RIGHT("LEFT_RIGHT"),
-      @SerializedName("TOP_BOTTOM")
-      VALUE_TOP_BOTTOM("TOP_BOTTOM"),
-      NULL(null);
-
-      private String value;
-
-      private EnumStereoscopicMode(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -9079,7 +8861,6 @@ public class Event extends APINode {
   public Event copyFrom(Event instance) {
     this.mAttendingCount = instance.mAttendingCount;
     this.mCanGuestsInvite = instance.mCanGuestsInvite;
-    this.mCanViewerPost = instance.mCanViewerPost;
     this.mCategory = instance.mCategory;
     this.mCover = instance.mCover;
     this.mDeclinedCount = instance.mDeclinedCount;
@@ -9090,19 +8871,15 @@ public class Event extends APINode {
     this.mGuestListEnabled = instance.mGuestListEnabled;
     this.mId = instance.mId;
     this.mInterestedCount = instance.mInterestedCount;
-    this.mInvitedCount = instance.mInvitedCount;
     this.mIsCanceled = instance.mIsCanceled;
-    this.mIsDateOnly = instance.mIsDateOnly;
     this.mIsDraft = instance.mIsDraft;
     this.mIsPageOwned = instance.mIsPageOwned;
-    this.mLocation = instance.mLocation;
     this.mMaybeCount = instance.mMaybeCount;
     this.mName = instance.mName;
     this.mNoreplyCount = instance.mNoreplyCount;
     this.mOwner = instance.mOwner;
     this.mParentGroup = instance.mParentGroup;
     this.mPlace = instance.mPlace;
-    this.mPrivacy = instance.mPrivacy;
     this.mScheduledPublishTime = instance.mScheduledPublishTime;
     this.mStartTime = instance.mStartTime;
     this.mTicketUri = instance.mTicketUri;
@@ -9112,7 +8889,6 @@ public class Event extends APINode {
     this.mTimezone = instance.mTimezone;
     this.mType = instance.mType;
     this.mUpdatedTime = instance.mUpdatedTime;
-    this.mVenue = instance.mVenue;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
@@ -9120,8 +8896,8 @@ public class Event extends APINode {
 
   public static APIRequest.ResponseParser<Event> getParser() {
     return new APIRequest.ResponseParser<Event>() {
-      public APINodeList<Event> parseResponse(String response, APIContext context, APIRequest<Event> request) throws MalformedResponseException {
-        return Event.parseResponse(response, context, request);
+      public APINodeList<Event> parseResponse(String response, APIContext context, APIRequest<Event> request, String header) throws MalformedResponseException {
+        return Event.parseResponse(response, context, request, header);
       }
     };
   }

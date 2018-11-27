@@ -69,7 +69,7 @@ public class ProductCatalogImageSettings extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductCatalogImageSettings loadJSON(String json, APIContext context) {
+  public static ProductCatalogImageSettings loadJSON(String json, APIContext context, String header) {
     ProductCatalogImageSettings productCatalogImageSettings = getGson().fromJson(json, ProductCatalogImageSettings.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class ProductCatalogImageSettings extends APINode {
     }
     productCatalogImageSettings.context = context;
     productCatalogImageSettings.rawValue = json;
+    productCatalogImageSettings.header = header;
     return productCatalogImageSettings;
   }
 
-  public static APINodeList<ProductCatalogImageSettings> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ProductCatalogImageSettings> productCatalogImageSettingss = new APINodeList<ProductCatalogImageSettings>(request, json);
+  public static APINodeList<ProductCatalogImageSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductCatalogImageSettings> productCatalogImageSettingss = new APINodeList<ProductCatalogImageSettings>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class ProductCatalogImageSettings extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogImageSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          productCatalogImageSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return productCatalogImageSettingss;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class ProductCatalogImageSettings extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogImageSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              productCatalogImageSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class ProductCatalogImageSettings extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogImageSettingss.add(loadJSON(entry.getValue().toString(), context));
+                  productCatalogImageSettingss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogImageSettingss.add(loadJSON(obj.toString(), context));
+              productCatalogImageSettingss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return productCatalogImageSettingss;
@@ -151,7 +152,7 @@ public class ProductCatalogImageSettings extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogImageSettingss.add(loadJSON(entry.getValue().toString(), context));
+              productCatalogImageSettingss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return productCatalogImageSettingss;
         } else {
@@ -170,7 +171,7 @@ public class ProductCatalogImageSettings extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogImageSettingss.add(loadJSON(value.toString(), context));
+              productCatalogImageSettingss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class ProductCatalogImageSettings extends APINode {
 
           // Sixth, check if it's pure JsonObject
           productCatalogImageSettingss.clear();
-          productCatalogImageSettingss.add(loadJSON(json, context));
+          productCatalogImageSettingss.add(loadJSON(json, context, header));
           return productCatalogImageSettingss;
         }
       }
@@ -275,8 +276,8 @@ public class ProductCatalogImageSettings extends APINode {
 
   public static APIRequest.ResponseParser<ProductCatalogImageSettings> getParser() {
     return new APIRequest.ResponseParser<ProductCatalogImageSettings>() {
-      public APINodeList<ProductCatalogImageSettings> parseResponse(String response, APIContext context, APIRequest<ProductCatalogImageSettings> request) throws MalformedResponseException {
-        return ProductCatalogImageSettings.parseResponse(response, context, request);
+      public APINodeList<ProductCatalogImageSettings> parseResponse(String response, APIContext context, APIRequest<ProductCatalogImageSettings> request, String header) throws MalformedResponseException {
+        return ProductCatalogImageSettings.parseResponse(response, context, request, header);
       }
     };
   }

@@ -77,7 +77,7 @@ public class ReachFrequencyCurveLowerConfidenceRange extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ReachFrequencyCurveLowerConfidenceRange loadJSON(String json, APIContext context) {
+  public static ReachFrequencyCurveLowerConfidenceRange loadJSON(String json, APIContext context, String header) {
     ReachFrequencyCurveLowerConfidenceRange reachFrequencyCurveLowerConfidenceRange = getGson().fromJson(json, ReachFrequencyCurveLowerConfidenceRange.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -94,11 +94,12 @@ public class ReachFrequencyCurveLowerConfidenceRange extends APINode {
     }
     reachFrequencyCurveLowerConfidenceRange.context = context;
     reachFrequencyCurveLowerConfidenceRange.rawValue = json;
+    reachFrequencyCurveLowerConfidenceRange.header = header;
     return reachFrequencyCurveLowerConfidenceRange;
   }
 
-  public static APINodeList<ReachFrequencyCurveLowerConfidenceRange> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ReachFrequencyCurveLowerConfidenceRange> reachFrequencyCurveLowerConfidenceRanges = new APINodeList<ReachFrequencyCurveLowerConfidenceRange>(request, json);
+  public static APINodeList<ReachFrequencyCurveLowerConfidenceRange> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ReachFrequencyCurveLowerConfidenceRange> reachFrequencyCurveLowerConfidenceRanges = new APINodeList<ReachFrequencyCurveLowerConfidenceRange>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -109,7 +110,7 @@ public class ReachFrequencyCurveLowerConfidenceRange extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return reachFrequencyCurveLowerConfidenceRanges;
       } else if (result.isJsonObject()) {
@@ -134,7 +135,7 @@ public class ReachFrequencyCurveLowerConfidenceRange extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -145,13 +146,13 @@ public class ReachFrequencyCurveLowerConfidenceRange extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(entry.getValue().toString(), context));
+                  reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(obj.toString(), context));
+              reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(obj.toString(), context, header));
             }
           }
           return reachFrequencyCurveLowerConfidenceRanges;
@@ -159,7 +160,7 @@ public class ReachFrequencyCurveLowerConfidenceRange extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(entry.getValue().toString(), context));
+              reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return reachFrequencyCurveLowerConfidenceRanges;
         } else {
@@ -178,7 +179,7 @@ public class ReachFrequencyCurveLowerConfidenceRange extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(value.toString(), context));
+              reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -190,7 +191,7 @@ public class ReachFrequencyCurveLowerConfidenceRange extends APINode {
 
           // Sixth, check if it's pure JsonObject
           reachFrequencyCurveLowerConfidenceRanges.clear();
-          reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(json, context));
+          reachFrequencyCurveLowerConfidenceRanges.add(loadJSON(json, context, header));
           return reachFrequencyCurveLowerConfidenceRanges;
         }
       }
@@ -313,8 +314,8 @@ public class ReachFrequencyCurveLowerConfidenceRange extends APINode {
 
   public static APIRequest.ResponseParser<ReachFrequencyCurveLowerConfidenceRange> getParser() {
     return new APIRequest.ResponseParser<ReachFrequencyCurveLowerConfidenceRange>() {
-      public APINodeList<ReachFrequencyCurveLowerConfidenceRange> parseResponse(String response, APIContext context, APIRequest<ReachFrequencyCurveLowerConfidenceRange> request) throws MalformedResponseException {
-        return ReachFrequencyCurveLowerConfidenceRange.parseResponse(response, context, request);
+      public APINodeList<ReachFrequencyCurveLowerConfidenceRange> parseResponse(String response, APIContext context, APIRequest<ReachFrequencyCurveLowerConfidenceRange> request, String header) throws MalformedResponseException {
+        return ReachFrequencyCurveLowerConfidenceRange.parseResponse(response, context, request, header);
       }
     };
   }

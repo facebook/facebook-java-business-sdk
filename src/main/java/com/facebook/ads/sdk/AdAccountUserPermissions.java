@@ -57,8 +57,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdAccountUserPermissions extends APINode {
   @SerializedName("business")
   private Business mBusiness = null;
-  @SerializedName("business_persona")
-  private Object mBusinessPersona = null;
   @SerializedName("created_by")
   private User mCreatedBy = null;
   @SerializedName("created_time")
@@ -85,7 +83,7 @@ public class AdAccountUserPermissions extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdAccountUserPermissions loadJSON(String json, APIContext context) {
+  public static AdAccountUserPermissions loadJSON(String json, APIContext context, String header) {
     AdAccountUserPermissions adAccountUserPermissions = getGson().fromJson(json, AdAccountUserPermissions.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -102,11 +100,12 @@ public class AdAccountUserPermissions extends APINode {
     }
     adAccountUserPermissions.context = context;
     adAccountUserPermissions.rawValue = json;
+    adAccountUserPermissions.header = header;
     return adAccountUserPermissions;
   }
 
-  public static APINodeList<AdAccountUserPermissions> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAccountUserPermissions> adAccountUserPermissionss = new APINodeList<AdAccountUserPermissions>(request, json);
+  public static APINodeList<AdAccountUserPermissions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountUserPermissions> adAccountUserPermissionss = new APINodeList<AdAccountUserPermissions>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -117,7 +116,7 @@ public class AdAccountUserPermissions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAccountUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adAccountUserPermissionss;
       } else if (result.isJsonObject()) {
@@ -142,7 +141,7 @@ public class AdAccountUserPermissions extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAccountUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -153,13 +152,13 @@ public class AdAccountUserPermissions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountUserPermissionss.add(loadJSON(entry.getValue().toString(), context));
+                  adAccountUserPermissionss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountUserPermissionss.add(loadJSON(obj.toString(), context));
+              adAccountUserPermissionss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adAccountUserPermissionss;
@@ -167,7 +166,7 @@ public class AdAccountUserPermissions extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountUserPermissionss.add(loadJSON(entry.getValue().toString(), context));
+              adAccountUserPermissionss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adAccountUserPermissionss;
         } else {
@@ -186,7 +185,7 @@ public class AdAccountUserPermissions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountUserPermissionss.add(loadJSON(value.toString(), context));
+              adAccountUserPermissionss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -198,7 +197,7 @@ public class AdAccountUserPermissions extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adAccountUserPermissionss.clear();
-          adAccountUserPermissionss.add(loadJSON(json, context));
+          adAccountUserPermissionss.add(loadJSON(json, context, header));
           return adAccountUserPermissionss;
         }
       }
@@ -244,15 +243,6 @@ public class AdAccountUserPermissions extends APINode {
     this.mBusiness = Business.getGson().fromJson(value, type);
     return this;
   }
-  public Object getFieldBusinessPersona() {
-    return mBusinessPersona;
-  }
-
-  public AdAccountUserPermissions setFieldBusinessPersona(Object value) {
-    this.mBusinessPersona = value;
-    return this;
-  }
-
   public User getFieldCreatedBy() {
     if (mCreatedBy != null) {
       mCreatedBy.context = getContext();
@@ -376,7 +366,6 @@ public class AdAccountUserPermissions extends APINode {
 
   public AdAccountUserPermissions copyFrom(AdAccountUserPermissions instance) {
     this.mBusiness = instance.mBusiness;
-    this.mBusinessPersona = instance.mBusinessPersona;
     this.mCreatedBy = instance.mCreatedBy;
     this.mCreatedTime = instance.mCreatedTime;
     this.mEmail = instance.mEmail;
@@ -393,8 +382,8 @@ public class AdAccountUserPermissions extends APINode {
 
   public static APIRequest.ResponseParser<AdAccountUserPermissions> getParser() {
     return new APIRequest.ResponseParser<AdAccountUserPermissions>() {
-      public APINodeList<AdAccountUserPermissions> parseResponse(String response, APIContext context, APIRequest<AdAccountUserPermissions> request) throws MalformedResponseException {
-        return AdAccountUserPermissions.parseResponse(response, context, request);
+      public APINodeList<AdAccountUserPermissions> parseResponse(String response, APIContext context, APIRequest<AdAccountUserPermissions> request, String header) throws MalformedResponseException {
+        return AdAccountUserPermissions.parseResponse(response, context, request, header);
       }
     };
   }

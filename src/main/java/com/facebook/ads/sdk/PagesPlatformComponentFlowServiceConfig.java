@@ -130,7 +130,7 @@ public class PagesPlatformComponentFlowServiceConfig extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PagesPlatformComponentFlowServiceConfig loadJSON(String json, APIContext context) {
+  public static PagesPlatformComponentFlowServiceConfig loadJSON(String json, APIContext context, String header) {
     PagesPlatformComponentFlowServiceConfig pagesPlatformComponentFlowServiceConfig = getGson().fromJson(json, PagesPlatformComponentFlowServiceConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -147,11 +147,12 @@ public class PagesPlatformComponentFlowServiceConfig extends APINode {
     }
     pagesPlatformComponentFlowServiceConfig.context = context;
     pagesPlatformComponentFlowServiceConfig.rawValue = json;
+    pagesPlatformComponentFlowServiceConfig.header = header;
     return pagesPlatformComponentFlowServiceConfig;
   }
 
-  public static APINodeList<PagesPlatformComponentFlowServiceConfig> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PagesPlatformComponentFlowServiceConfig> pagesPlatformComponentFlowServiceConfigs = new APINodeList<PagesPlatformComponentFlowServiceConfig>(request, json);
+  public static APINodeList<PagesPlatformComponentFlowServiceConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PagesPlatformComponentFlowServiceConfig> pagesPlatformComponentFlowServiceConfigs = new APINodeList<PagesPlatformComponentFlowServiceConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -162,7 +163,7 @@ public class PagesPlatformComponentFlowServiceConfig extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pagesPlatformComponentFlowServiceConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pagesPlatformComponentFlowServiceConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pagesPlatformComponentFlowServiceConfigs;
       } else if (result.isJsonObject()) {
@@ -187,7 +188,7 @@ public class PagesPlatformComponentFlowServiceConfig extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pagesPlatformComponentFlowServiceConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pagesPlatformComponentFlowServiceConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -198,13 +199,13 @@ public class PagesPlatformComponentFlowServiceConfig extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pagesPlatformComponentFlowServiceConfigs.add(loadJSON(entry.getValue().toString(), context));
+                  pagesPlatformComponentFlowServiceConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pagesPlatformComponentFlowServiceConfigs.add(loadJSON(obj.toString(), context));
+              pagesPlatformComponentFlowServiceConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pagesPlatformComponentFlowServiceConfigs;
@@ -212,7 +213,7 @@ public class PagesPlatformComponentFlowServiceConfig extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pagesPlatformComponentFlowServiceConfigs.add(loadJSON(entry.getValue().toString(), context));
+              pagesPlatformComponentFlowServiceConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pagesPlatformComponentFlowServiceConfigs;
         } else {
@@ -231,7 +232,7 @@ public class PagesPlatformComponentFlowServiceConfig extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pagesPlatformComponentFlowServiceConfigs.add(loadJSON(value.toString(), context));
+              pagesPlatformComponentFlowServiceConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -243,7 +244,7 @@ public class PagesPlatformComponentFlowServiceConfig extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pagesPlatformComponentFlowServiceConfigs.clear();
-          pagesPlatformComponentFlowServiceConfigs.add(loadJSON(json, context));
+          pagesPlatformComponentFlowServiceConfigs.add(loadJSON(json, context, header));
           return pagesPlatformComponentFlowServiceConfigs;
         }
       }
@@ -312,8 +313,8 @@ public class PagesPlatformComponentFlowServiceConfig extends APINode {
     };
 
     @Override
-    public PagesPlatformComponentFlowServiceConfig parseResponse(String response) throws APIException {
-      return PagesPlatformComponentFlowServiceConfig.parseResponse(response, getContext(), this).head();
+    public PagesPlatformComponentFlowServiceConfig parseResponse(String response, String header) throws APIException {
+      return PagesPlatformComponentFlowServiceConfig.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -323,7 +324,8 @@ public class PagesPlatformComponentFlowServiceConfig extends APINode {
 
     @Override
     public PagesPlatformComponentFlowServiceConfig execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -337,7 +339,7 @@ public class PagesPlatformComponentFlowServiceConfig extends APINode {
         new Function<String, PagesPlatformComponentFlowServiceConfig>() {
            public PagesPlatformComponentFlowServiceConfig apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -455,8 +457,8 @@ public class PagesPlatformComponentFlowServiceConfig extends APINode {
 
   public static APIRequest.ResponseParser<PagesPlatformComponentFlowServiceConfig> getParser() {
     return new APIRequest.ResponseParser<PagesPlatformComponentFlowServiceConfig>() {
-      public APINodeList<PagesPlatformComponentFlowServiceConfig> parseResponse(String response, APIContext context, APIRequest<PagesPlatformComponentFlowServiceConfig> request) throws MalformedResponseException {
-        return PagesPlatformComponentFlowServiceConfig.parseResponse(response, context, request);
+      public APINodeList<PagesPlatformComponentFlowServiceConfig> parseResponse(String response, APIContext context, APIRequest<PagesPlatformComponentFlowServiceConfig> request, String header) throws MalformedResponseException {
+        return PagesPlatformComponentFlowServiceConfig.parseResponse(response, context, request, header);
       }
     };
   }

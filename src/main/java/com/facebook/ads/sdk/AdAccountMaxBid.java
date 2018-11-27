@@ -67,7 +67,7 @@ public class AdAccountMaxBid extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdAccountMaxBid loadJSON(String json, APIContext context) {
+  public static AdAccountMaxBid loadJSON(String json, APIContext context, String header) {
     AdAccountMaxBid adAccountMaxBid = getGson().fromJson(json, AdAccountMaxBid.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class AdAccountMaxBid extends APINode {
     }
     adAccountMaxBid.context = context;
     adAccountMaxBid.rawValue = json;
+    adAccountMaxBid.header = header;
     return adAccountMaxBid;
   }
 
-  public static APINodeList<AdAccountMaxBid> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAccountMaxBid> adAccountMaxBids = new APINodeList<AdAccountMaxBid>(request, json);
+  public static APINodeList<AdAccountMaxBid> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountMaxBid> adAccountMaxBids = new APINodeList<AdAccountMaxBid>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class AdAccountMaxBid extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountMaxBids.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAccountMaxBids.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adAccountMaxBids;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class AdAccountMaxBid extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountMaxBids.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAccountMaxBids.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class AdAccountMaxBid extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountMaxBids.add(loadJSON(entry.getValue().toString(), context));
+                  adAccountMaxBids.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountMaxBids.add(loadJSON(obj.toString(), context));
+              adAccountMaxBids.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adAccountMaxBids;
@@ -149,7 +150,7 @@ public class AdAccountMaxBid extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountMaxBids.add(loadJSON(entry.getValue().toString(), context));
+              adAccountMaxBids.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adAccountMaxBids;
         } else {
@@ -168,7 +169,7 @@ public class AdAccountMaxBid extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountMaxBids.add(loadJSON(value.toString(), context));
+              adAccountMaxBids.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class AdAccountMaxBid extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adAccountMaxBids.clear();
-          adAccountMaxBids.add(loadJSON(json, context));
+          adAccountMaxBids.add(loadJSON(json, context, header));
           return adAccountMaxBids;
         }
       }
@@ -253,8 +254,8 @@ public class AdAccountMaxBid extends APINode {
 
   public static APIRequest.ResponseParser<AdAccountMaxBid> getParser() {
     return new APIRequest.ResponseParser<AdAccountMaxBid>() {
-      public APINodeList<AdAccountMaxBid> parseResponse(String response, APIContext context, APIRequest<AdAccountMaxBid> request) throws MalformedResponseException {
-        return AdAccountMaxBid.parseResponse(response, context, request);
+      public APINodeList<AdAccountMaxBid> parseResponse(String response, APIContext context, APIRequest<AdAccountMaxBid> request, String header) throws MalformedResponseException {
+        return AdAccountMaxBid.parseResponse(response, context, request, header);
       }
     };
   }

@@ -77,7 +77,7 @@ public class AdKpiShift extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdKpiShift loadJSON(String json, APIContext context) {
+  public static AdKpiShift loadJSON(String json, APIContext context, String header) {
     AdKpiShift adKpiShift = getGson().fromJson(json, AdKpiShift.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -94,11 +94,12 @@ public class AdKpiShift extends APINode {
     }
     adKpiShift.context = context;
     adKpiShift.rawValue = json;
+    adKpiShift.header = header;
     return adKpiShift;
   }
 
-  public static APINodeList<AdKpiShift> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdKpiShift> adKpiShifts = new APINodeList<AdKpiShift>(request, json);
+  public static APINodeList<AdKpiShift> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdKpiShift> adKpiShifts = new APINodeList<AdKpiShift>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -109,7 +110,7 @@ public class AdKpiShift extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adKpiShifts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adKpiShifts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adKpiShifts;
       } else if (result.isJsonObject()) {
@@ -134,7 +135,7 @@ public class AdKpiShift extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adKpiShifts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adKpiShifts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -145,13 +146,13 @@ public class AdKpiShift extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adKpiShifts.add(loadJSON(entry.getValue().toString(), context));
+                  adKpiShifts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adKpiShifts.add(loadJSON(obj.toString(), context));
+              adKpiShifts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adKpiShifts;
@@ -159,7 +160,7 @@ public class AdKpiShift extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adKpiShifts.add(loadJSON(entry.getValue().toString(), context));
+              adKpiShifts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adKpiShifts;
         } else {
@@ -178,7 +179,7 @@ public class AdKpiShift extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adKpiShifts.add(loadJSON(value.toString(), context));
+              adKpiShifts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -190,7 +191,7 @@ public class AdKpiShift extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adKpiShifts.clear();
-          adKpiShifts.add(loadJSON(json, context));
+          adKpiShifts.add(loadJSON(json, context, header));
           return adKpiShifts;
         }
       }
@@ -321,8 +322,8 @@ public class AdKpiShift extends APINode {
 
   public static APIRequest.ResponseParser<AdKpiShift> getParser() {
     return new APIRequest.ResponseParser<AdKpiShift>() {
-      public APINodeList<AdKpiShift> parseResponse(String response, APIContext context, APIRequest<AdKpiShift> request) throws MalformedResponseException {
-        return AdKpiShift.parseResponse(response, context, request);
+      public APINodeList<AdKpiShift> parseResponse(String response, APIContext context, APIRequest<AdKpiShift> request, String header) throws MalformedResponseException {
+        return AdKpiShift.parseResponse(response, context, request, header);
       }
     };
   }

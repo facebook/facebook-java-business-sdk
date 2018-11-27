@@ -85,7 +85,7 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdStudyAdsAssetUserPermissions loadJSON(String json, APIContext context) {
+  public static AdStudyAdsAssetUserPermissions loadJSON(String json, APIContext context, String header) {
     AdStudyAdsAssetUserPermissions adStudyAdsAssetUserPermissions = getGson().fromJson(json, AdStudyAdsAssetUserPermissions.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -102,11 +102,12 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
     }
     adStudyAdsAssetUserPermissions.context = context;
     adStudyAdsAssetUserPermissions.rawValue = json;
+    adStudyAdsAssetUserPermissions.header = header;
     return adStudyAdsAssetUserPermissions;
   }
 
-  public static APINodeList<AdStudyAdsAssetUserPermissions> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdStudyAdsAssetUserPermissions> adStudyAdsAssetUserPermissionss = new APINodeList<AdStudyAdsAssetUserPermissions>(request, json);
+  public static APINodeList<AdStudyAdsAssetUserPermissions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdStudyAdsAssetUserPermissions> adStudyAdsAssetUserPermissionss = new APINodeList<AdStudyAdsAssetUserPermissions>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -117,7 +118,7 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adStudyAdsAssetUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adStudyAdsAssetUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adStudyAdsAssetUserPermissionss;
       } else if (result.isJsonObject()) {
@@ -142,7 +143,7 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adStudyAdsAssetUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adStudyAdsAssetUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -153,13 +154,13 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adStudyAdsAssetUserPermissionss.add(loadJSON(entry.getValue().toString(), context));
+                  adStudyAdsAssetUserPermissionss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adStudyAdsAssetUserPermissionss.add(loadJSON(obj.toString(), context));
+              adStudyAdsAssetUserPermissionss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adStudyAdsAssetUserPermissionss;
@@ -167,7 +168,7 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adStudyAdsAssetUserPermissionss.add(loadJSON(entry.getValue().toString(), context));
+              adStudyAdsAssetUserPermissionss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adStudyAdsAssetUserPermissionss;
         } else {
@@ -186,7 +187,7 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adStudyAdsAssetUserPermissionss.add(loadJSON(value.toString(), context));
+              adStudyAdsAssetUserPermissionss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -198,7 +199,7 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adStudyAdsAssetUserPermissionss.clear();
-          adStudyAdsAssetUserPermissionss.add(loadJSON(json, context));
+          adStudyAdsAssetUserPermissionss.add(loadJSON(json, context, header));
           return adStudyAdsAssetUserPermissionss;
         }
       }
@@ -393,8 +394,8 @@ public class AdStudyAdsAssetUserPermissions extends APINode {
 
   public static APIRequest.ResponseParser<AdStudyAdsAssetUserPermissions> getParser() {
     return new APIRequest.ResponseParser<AdStudyAdsAssetUserPermissions>() {
-      public APINodeList<AdStudyAdsAssetUserPermissions> parseResponse(String response, APIContext context, APIRequest<AdStudyAdsAssetUserPermissions> request) throws MalformedResponseException {
-        return AdStudyAdsAssetUserPermissions.parseResponse(response, context, request);
+      public APINodeList<AdStudyAdsAssetUserPermissions> parseResponse(String response, APIContext context, APIRequest<AdStudyAdsAssetUserPermissions> request, String header) throws MalformedResponseException {
+        return AdStudyAdsAssetUserPermissions.parseResponse(response, context, request, header);
       }
     };
   }

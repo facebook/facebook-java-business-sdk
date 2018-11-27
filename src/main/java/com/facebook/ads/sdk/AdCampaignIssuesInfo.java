@@ -71,7 +71,7 @@ public class AdCampaignIssuesInfo extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCampaignIssuesInfo loadJSON(String json, APIContext context) {
+  public static AdCampaignIssuesInfo loadJSON(String json, APIContext context, String header) {
     AdCampaignIssuesInfo adCampaignIssuesInfo = getGson().fromJson(json, AdCampaignIssuesInfo.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class AdCampaignIssuesInfo extends APINode {
     }
     adCampaignIssuesInfo.context = context;
     adCampaignIssuesInfo.rawValue = json;
+    adCampaignIssuesInfo.header = header;
     return adCampaignIssuesInfo;
   }
 
-  public static APINodeList<AdCampaignIssuesInfo> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCampaignIssuesInfo> adCampaignIssuesInfos = new APINodeList<AdCampaignIssuesInfo>(request, json);
+  public static APINodeList<AdCampaignIssuesInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignIssuesInfo> adCampaignIssuesInfos = new APINodeList<AdCampaignIssuesInfo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class AdCampaignIssuesInfo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCampaignIssuesInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCampaignIssuesInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCampaignIssuesInfos;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class AdCampaignIssuesInfo extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCampaignIssuesInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCampaignIssuesInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class AdCampaignIssuesInfo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCampaignIssuesInfos.add(loadJSON(entry.getValue().toString(), context));
+                  adCampaignIssuesInfos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCampaignIssuesInfos.add(loadJSON(obj.toString(), context));
+              adCampaignIssuesInfos.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCampaignIssuesInfos;
@@ -153,7 +154,7 @@ public class AdCampaignIssuesInfo extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCampaignIssuesInfos.add(loadJSON(entry.getValue().toString(), context));
+              adCampaignIssuesInfos.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCampaignIssuesInfos;
         } else {
@@ -172,7 +173,7 @@ public class AdCampaignIssuesInfo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCampaignIssuesInfos.add(loadJSON(value.toString(), context));
+              adCampaignIssuesInfos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class AdCampaignIssuesInfo extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCampaignIssuesInfos.clear();
-          adCampaignIssuesInfos.add(loadJSON(json, context));
+          adCampaignIssuesInfos.add(loadJSON(json, context, header));
           return adCampaignIssuesInfos;
         }
       }
@@ -277,8 +278,8 @@ public class AdCampaignIssuesInfo extends APINode {
 
   public static APIRequest.ResponseParser<AdCampaignIssuesInfo> getParser() {
     return new APIRequest.ResponseParser<AdCampaignIssuesInfo>() {
-      public APINodeList<AdCampaignIssuesInfo> parseResponse(String response, APIContext context, APIRequest<AdCampaignIssuesInfo> request) throws MalformedResponseException {
-        return AdCampaignIssuesInfo.parseResponse(response, context, request);
+      public APINodeList<AdCampaignIssuesInfo> parseResponse(String response, APIContext context, APIRequest<AdCampaignIssuesInfo> request, String header) throws MalformedResponseException {
+        return AdCampaignIssuesInfo.parseResponse(response, context, request, header);
       }
     };
   }

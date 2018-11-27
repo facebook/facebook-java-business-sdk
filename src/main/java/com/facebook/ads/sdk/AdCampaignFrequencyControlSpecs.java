@@ -71,7 +71,7 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCampaignFrequencyControlSpecs loadJSON(String json, APIContext context) {
+  public static AdCampaignFrequencyControlSpecs loadJSON(String json, APIContext context, String header) {
     AdCampaignFrequencyControlSpecs adCampaignFrequencyControlSpecs = getGson().fromJson(json, AdCampaignFrequencyControlSpecs.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
     }
     adCampaignFrequencyControlSpecs.context = context;
     adCampaignFrequencyControlSpecs.rawValue = json;
+    adCampaignFrequencyControlSpecs.header = header;
     return adCampaignFrequencyControlSpecs;
   }
 
-  public static APINodeList<AdCampaignFrequencyControlSpecs> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCampaignFrequencyControlSpecs> adCampaignFrequencyControlSpecss = new APINodeList<AdCampaignFrequencyControlSpecs>(request, json);
+  public static APINodeList<AdCampaignFrequencyControlSpecs> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignFrequencyControlSpecs> adCampaignFrequencyControlSpecss = new APINodeList<AdCampaignFrequencyControlSpecs>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCampaignFrequencyControlSpecss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCampaignFrequencyControlSpecss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCampaignFrequencyControlSpecss;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCampaignFrequencyControlSpecss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCampaignFrequencyControlSpecss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCampaignFrequencyControlSpecss.add(loadJSON(entry.getValue().toString(), context));
+                  adCampaignFrequencyControlSpecss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCampaignFrequencyControlSpecss.add(loadJSON(obj.toString(), context));
+              adCampaignFrequencyControlSpecss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCampaignFrequencyControlSpecss;
@@ -153,7 +154,7 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCampaignFrequencyControlSpecss.add(loadJSON(entry.getValue().toString(), context));
+              adCampaignFrequencyControlSpecss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCampaignFrequencyControlSpecss;
         } else {
@@ -172,7 +173,7 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCampaignFrequencyControlSpecss.add(loadJSON(value.toString(), context));
+              adCampaignFrequencyControlSpecss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCampaignFrequencyControlSpecss.clear();
-          adCampaignFrequencyControlSpecss.add(loadJSON(json, context));
+          adCampaignFrequencyControlSpecss.add(loadJSON(json, context, header));
           return adCampaignFrequencyControlSpecss;
         }
       }
@@ -277,8 +278,8 @@ public class AdCampaignFrequencyControlSpecs extends APINode {
 
   public static APIRequest.ResponseParser<AdCampaignFrequencyControlSpecs> getParser() {
     return new APIRequest.ResponseParser<AdCampaignFrequencyControlSpecs>() {
-      public APINodeList<AdCampaignFrequencyControlSpecs> parseResponse(String response, APIContext context, APIRequest<AdCampaignFrequencyControlSpecs> request) throws MalformedResponseException {
-        return AdCampaignFrequencyControlSpecs.parseResponse(response, context, request);
+      public APINodeList<AdCampaignFrequencyControlSpecs> parseResponse(String response, APIContext context, APIRequest<AdCampaignFrequencyControlSpecs> request, String header) throws MalformedResponseException {
+        return AdCampaignFrequencyControlSpecs.parseResponse(response, context, request, header);
       }
     };
   }

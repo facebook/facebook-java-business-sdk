@@ -144,7 +144,7 @@ public class Referral extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Referral loadJSON(String json, APIContext context) {
+  public static Referral loadJSON(String json, APIContext context, String header) {
     Referral referral = getGson().fromJson(json, Referral.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -161,11 +161,12 @@ public class Referral extends APINode {
     }
     referral.context = context;
     referral.rawValue = json;
+    referral.header = header;
     return referral;
   }
 
-  public static APINodeList<Referral> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Referral> referrals = new APINodeList<Referral>(request, json);
+  public static APINodeList<Referral> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Referral> referrals = new APINodeList<Referral>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -176,7 +177,7 @@ public class Referral extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          referrals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          referrals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return referrals;
       } else if (result.isJsonObject()) {
@@ -201,7 +202,7 @@ public class Referral extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              referrals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              referrals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -212,13 +213,13 @@ public class Referral extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  referrals.add(loadJSON(entry.getValue().toString(), context));
+                  referrals.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              referrals.add(loadJSON(obj.toString(), context));
+              referrals.add(loadJSON(obj.toString(), context, header));
             }
           }
           return referrals;
@@ -226,7 +227,7 @@ public class Referral extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              referrals.add(loadJSON(entry.getValue().toString(), context));
+              referrals.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return referrals;
         } else {
@@ -245,7 +246,7 @@ public class Referral extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              referrals.add(loadJSON(value.toString(), context));
+              referrals.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -257,7 +258,7 @@ public class Referral extends APINode {
 
           // Sixth, check if it's pure JsonObject
           referrals.clear();
-          referrals.add(loadJSON(json, context));
+          referrals.add(loadJSON(json, context, header));
           return referrals;
         }
       }
@@ -358,8 +359,8 @@ public class Referral extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -369,7 +370,8 @@ public class Referral extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -383,7 +385,7 @@ public class Referral extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -472,8 +474,8 @@ public class Referral extends APINode {
     };
 
     @Override
-    public Referral parseResponse(String response) throws APIException {
-      return Referral.parseResponse(response, getContext(), this).head();
+    public Referral parseResponse(String response, String header) throws APIException {
+      return Referral.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -483,7 +485,8 @@ public class Referral extends APINode {
 
     @Override
     public Referral execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -497,7 +500,7 @@ public class Referral extends APINode {
         new Function<String, Referral>() {
            public Referral apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -662,8 +665,8 @@ public class Referral extends APINode {
     };
 
     @Override
-    public Referral parseResponse(String response) throws APIException {
-      return Referral.parseResponse(response, getContext(), this).head();
+    public Referral parseResponse(String response, String header) throws APIException {
+      return Referral.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -673,7 +676,8 @@ public class Referral extends APINode {
 
     @Override
     public Referral execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -687,7 +691,7 @@ public class Referral extends APINode {
         new Function<String, Referral>() {
            public Referral apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -850,8 +854,8 @@ public class Referral extends APINode {
 
   public static APIRequest.ResponseParser<Referral> getParser() {
     return new APIRequest.ResponseParser<Referral>() {
-      public APINodeList<Referral> parseResponse(String response, APIContext context, APIRequest<Referral> request) throws MalformedResponseException {
-        return Referral.parseResponse(response, context, request);
+      public APINodeList<Referral> parseResponse(String response, APIContext context, APIRequest<Referral> request, String header) throws MalformedResponseException {
+        return Referral.parseResponse(response, context, request, header);
       }
     };
   }

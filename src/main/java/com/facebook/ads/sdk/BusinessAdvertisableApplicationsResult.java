@@ -71,7 +71,7 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BusinessAdvertisableApplicationsResult loadJSON(String json, APIContext context) {
+  public static BusinessAdvertisableApplicationsResult loadJSON(String json, APIContext context, String header) {
     BusinessAdvertisableApplicationsResult businessAdvertisableApplicationsResult = getGson().fromJson(json, BusinessAdvertisableApplicationsResult.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
     }
     businessAdvertisableApplicationsResult.context = context;
     businessAdvertisableApplicationsResult.rawValue = json;
+    businessAdvertisableApplicationsResult.header = header;
     return businessAdvertisableApplicationsResult;
   }
 
-  public static APINodeList<BusinessAdvertisableApplicationsResult> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<BusinessAdvertisableApplicationsResult> businessAdvertisableApplicationsResults = new APINodeList<BusinessAdvertisableApplicationsResult>(request, json);
+  public static APINodeList<BusinessAdvertisableApplicationsResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessAdvertisableApplicationsResult> businessAdvertisableApplicationsResults = new APINodeList<BusinessAdvertisableApplicationsResult>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          businessAdvertisableApplicationsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          businessAdvertisableApplicationsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return businessAdvertisableApplicationsResults;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              businessAdvertisableApplicationsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              businessAdvertisableApplicationsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  businessAdvertisableApplicationsResults.add(loadJSON(entry.getValue().toString(), context));
+                  businessAdvertisableApplicationsResults.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              businessAdvertisableApplicationsResults.add(loadJSON(obj.toString(), context));
+              businessAdvertisableApplicationsResults.add(loadJSON(obj.toString(), context, header));
             }
           }
           return businessAdvertisableApplicationsResults;
@@ -153,7 +154,7 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              businessAdvertisableApplicationsResults.add(loadJSON(entry.getValue().toString(), context));
+              businessAdvertisableApplicationsResults.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return businessAdvertisableApplicationsResults;
         } else {
@@ -172,7 +173,7 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              businessAdvertisableApplicationsResults.add(loadJSON(value.toString(), context));
+              businessAdvertisableApplicationsResults.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
 
           // Sixth, check if it's pure JsonObject
           businessAdvertisableApplicationsResults.clear();
-          businessAdvertisableApplicationsResults.add(loadJSON(json, context));
+          businessAdvertisableApplicationsResults.add(loadJSON(json, context, header));
           return businessAdvertisableApplicationsResults;
         }
       }
@@ -277,8 +278,8 @@ public class BusinessAdvertisableApplicationsResult extends APINode {
 
   public static APIRequest.ResponseParser<BusinessAdvertisableApplicationsResult> getParser() {
     return new APIRequest.ResponseParser<BusinessAdvertisableApplicationsResult>() {
-      public APINodeList<BusinessAdvertisableApplicationsResult> parseResponse(String response, APIContext context, APIRequest<BusinessAdvertisableApplicationsResult> request) throws MalformedResponseException {
-        return BusinessAdvertisableApplicationsResult.parseResponse(response, context, request);
+      public APINodeList<BusinessAdvertisableApplicationsResult> parseResponse(String response, APIContext context, APIRequest<BusinessAdvertisableApplicationsResult> request, String header) throws MalformedResponseException {
+        return BusinessAdvertisableApplicationsResult.parseResponse(response, context, request, header);
       }
     };
   }

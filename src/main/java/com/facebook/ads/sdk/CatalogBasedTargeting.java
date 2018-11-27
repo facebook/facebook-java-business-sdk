@@ -54,27 +54,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdgroupMetadata extends APINode {
-  @SerializedName("carousel_style")
-  private String mCarouselStyle = null;
-  @SerializedName("carousel_with_static_card_style")
-  private String mCarouselWithStaticCardStyle = null;
+public class CatalogBasedTargeting extends APINode {
+  @SerializedName("geo_targeting_type")
+  private String mGeoTargetingType = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
 
-  public AdgroupMetadata() {
+  public CatalogBasedTargeting() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdgroupMetadata loadJSON(String json, APIContext context) {
-    AdgroupMetadata adgroupMetadata = getGson().fromJson(json, AdgroupMetadata.class);
+  public static CatalogBasedTargeting loadJSON(String json, APIContext context, String header) {
+    CatalogBasedTargeting catalogBasedTargeting = getGson().fromJson(json, CatalogBasedTargeting.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adgroupMetadata.toString());
+      JsonElement o2 = parser.parse(catalogBasedTargeting.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,13 +82,14 @@ public class AdgroupMetadata extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adgroupMetadata.context = context;
-    adgroupMetadata.rawValue = json;
-    return adgroupMetadata;
+    catalogBasedTargeting.context = context;
+    catalogBasedTargeting.rawValue = json;
+    catalogBasedTargeting.header = header;
+    return catalogBasedTargeting;
   }
 
-  public static APINodeList<AdgroupMetadata> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdgroupMetadata> adgroupMetadatas = new APINodeList<AdgroupMetadata>(request, json);
+  public static APINodeList<CatalogBasedTargeting> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CatalogBasedTargeting> catalogBasedTargetings = new APINodeList<CatalogBasedTargeting>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,9 +100,9 @@ public class AdgroupMetadata extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adgroupMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          catalogBasedTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adgroupMetadatas;
+        return catalogBasedTargetings;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -113,20 +112,20 @@ public class AdgroupMetadata extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adgroupMetadatas.setCursors(before, after);
+                catalogBasedTargetings.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adgroupMetadatas.setPaging(previous, next);
+            catalogBasedTargetings.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adgroupMetadatas.setAppSecret(context.getAppSecretProof());
+              catalogBasedTargetings.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adgroupMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              catalogBasedTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,23 +136,23 @@ public class AdgroupMetadata extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adgroupMetadatas.add(loadJSON(entry.getValue().toString(), context));
+                  catalogBasedTargetings.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adgroupMetadatas.add(loadJSON(obj.toString(), context));
+              catalogBasedTargetings.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adgroupMetadatas;
+          return catalogBasedTargetings;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adgroupMetadatas.add(loadJSON(entry.getValue().toString(), context));
+              catalogBasedTargetings.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adgroupMetadatas;
+          return catalogBasedTargetings;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -170,20 +169,20 @@ public class AdgroupMetadata extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adgroupMetadatas.add(loadJSON(value.toString(), context));
+              catalogBasedTargetings.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adgroupMetadatas;
+            return catalogBasedTargetings;
           }
 
           // Sixth, check if it's pure JsonObject
-          adgroupMetadatas.clear();
-          adgroupMetadatas.add(loadJSON(json, context));
-          return adgroupMetadatas;
+          catalogBasedTargetings.clear();
+          catalogBasedTargetings.add(loadJSON(json, context, header));
+          return catalogBasedTargetings;
         }
       }
     } catch (Exception e) {
@@ -211,21 +210,12 @@ public class AdgroupMetadata extends APINode {
   }
 
 
-  public String getFieldCarouselStyle() {
-    return mCarouselStyle;
+  public String getFieldGeoTargetingType() {
+    return mGeoTargetingType;
   }
 
-  public AdgroupMetadata setFieldCarouselStyle(String value) {
-    this.mCarouselStyle = value;
-    return this;
-  }
-
-  public String getFieldCarouselWithStaticCardStyle() {
-    return mCarouselWithStaticCardStyle;
-  }
-
-  public AdgroupMetadata setFieldCarouselWithStaticCardStyle(String value) {
-    this.mCarouselWithStaticCardStyle = value;
+  public CatalogBasedTargeting setFieldGeoTargetingType(String value) {
+    this.mGeoTargetingType = value;
     return this;
   }
 
@@ -233,7 +223,7 @@ public class AdgroupMetadata extends APINode {
     return mId;
   }
 
-  public AdgroupMetadata setFieldId(String value) {
+  public CatalogBasedTargeting setFieldId(String value) {
     this.mId = value;
     return this;
   }
@@ -254,19 +244,18 @@ public class AdgroupMetadata extends APINode {
     return gson;
   }
 
-  public AdgroupMetadata copyFrom(AdgroupMetadata instance) {
-    this.mCarouselStyle = instance.mCarouselStyle;
-    this.mCarouselWithStaticCardStyle = instance.mCarouselWithStaticCardStyle;
+  public CatalogBasedTargeting copyFrom(CatalogBasedTargeting instance) {
+    this.mGeoTargetingType = instance.mGeoTargetingType;
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdgroupMetadata> getParser() {
-    return new APIRequest.ResponseParser<AdgroupMetadata>() {
-      public APINodeList<AdgroupMetadata> parseResponse(String response, APIContext context, APIRequest<AdgroupMetadata> request) throws MalformedResponseException {
-        return AdgroupMetadata.parseResponse(response, context, request);
+  public static APIRequest.ResponseParser<CatalogBasedTargeting> getParser() {
+    return new APIRequest.ResponseParser<CatalogBasedTargeting>() {
+      public APINodeList<CatalogBasedTargeting> parseResponse(String response, APIContext context, APIRequest<CatalogBasedTargeting> request, String header) throws MalformedResponseException {
+        return CatalogBasedTargeting.parseResponse(response, context, request, header);
       }
     };
   }

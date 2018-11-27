@@ -79,7 +79,7 @@ public class AdCreativeTemplateURLSpec extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCreativeTemplateURLSpec loadJSON(String json, APIContext context) {
+  public static AdCreativeTemplateURLSpec loadJSON(String json, APIContext context, String header) {
     AdCreativeTemplateURLSpec adCreativeTemplateURLSpec = getGson().fromJson(json, AdCreativeTemplateURLSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -96,11 +96,12 @@ public class AdCreativeTemplateURLSpec extends APINode {
     }
     adCreativeTemplateURLSpec.context = context;
     adCreativeTemplateURLSpec.rawValue = json;
+    adCreativeTemplateURLSpec.header = header;
     return adCreativeTemplateURLSpec;
   }
 
-  public static APINodeList<AdCreativeTemplateURLSpec> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCreativeTemplateURLSpec> adCreativeTemplateURLSpecs = new APINodeList<AdCreativeTemplateURLSpec>(request, json);
+  public static APINodeList<AdCreativeTemplateURLSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeTemplateURLSpec> adCreativeTemplateURLSpecs = new APINodeList<AdCreativeTemplateURLSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -111,7 +112,7 @@ public class AdCreativeTemplateURLSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeTemplateURLSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCreativeTemplateURLSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCreativeTemplateURLSpecs;
       } else if (result.isJsonObject()) {
@@ -136,7 +137,7 @@ public class AdCreativeTemplateURLSpec extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeTemplateURLSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCreativeTemplateURLSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -147,13 +148,13 @@ public class AdCreativeTemplateURLSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeTemplateURLSpecs.add(loadJSON(entry.getValue().toString(), context));
+                  adCreativeTemplateURLSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeTemplateURLSpecs.add(loadJSON(obj.toString(), context));
+              adCreativeTemplateURLSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCreativeTemplateURLSpecs;
@@ -161,7 +162,7 @@ public class AdCreativeTemplateURLSpec extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeTemplateURLSpecs.add(loadJSON(entry.getValue().toString(), context));
+              adCreativeTemplateURLSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCreativeTemplateURLSpecs;
         } else {
@@ -180,7 +181,7 @@ public class AdCreativeTemplateURLSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeTemplateURLSpecs.add(loadJSON(value.toString(), context));
+              adCreativeTemplateURLSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -192,7 +193,7 @@ public class AdCreativeTemplateURLSpec extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCreativeTemplateURLSpecs.clear();
-          adCreativeTemplateURLSpecs.add(loadJSON(json, context));
+          adCreativeTemplateURLSpecs.add(loadJSON(json, context, header));
           return adCreativeTemplateURLSpecs;
         }
       }
@@ -325,8 +326,8 @@ public class AdCreativeTemplateURLSpec extends APINode {
 
   public static APIRequest.ResponseParser<AdCreativeTemplateURLSpec> getParser() {
     return new APIRequest.ResponseParser<AdCreativeTemplateURLSpec>() {
-      public APINodeList<AdCreativeTemplateURLSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeTemplateURLSpec> request) throws MalformedResponseException {
-        return AdCreativeTemplateURLSpec.parseResponse(response, context, request);
+      public APINodeList<AdCreativeTemplateURLSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeTemplateURLSpec> request, String header) throws MalformedResponseException {
+        return AdCreativeTemplateURLSpec.parseResponse(response, context, request, header);
       }
     };
   }

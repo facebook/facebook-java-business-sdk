@@ -75,7 +75,7 @@ public class AdEntityTargetSpend extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdEntityTargetSpend loadJSON(String json, APIContext context) {
+  public static AdEntityTargetSpend loadJSON(String json, APIContext context, String header) {
     AdEntityTargetSpend adEntityTargetSpend = getGson().fromJson(json, AdEntityTargetSpend.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -92,11 +92,12 @@ public class AdEntityTargetSpend extends APINode {
     }
     adEntityTargetSpend.context = context;
     adEntityTargetSpend.rawValue = json;
+    adEntityTargetSpend.header = header;
     return adEntityTargetSpend;
   }
 
-  public static APINodeList<AdEntityTargetSpend> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdEntityTargetSpend> adEntityTargetSpends = new APINodeList<AdEntityTargetSpend>(request, json);
+  public static APINodeList<AdEntityTargetSpend> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdEntityTargetSpend> adEntityTargetSpends = new APINodeList<AdEntityTargetSpend>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -107,7 +108,7 @@ public class AdEntityTargetSpend extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adEntityTargetSpends.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adEntityTargetSpends.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adEntityTargetSpends;
       } else if (result.isJsonObject()) {
@@ -132,7 +133,7 @@ public class AdEntityTargetSpend extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adEntityTargetSpends.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adEntityTargetSpends.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -143,13 +144,13 @@ public class AdEntityTargetSpend extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adEntityTargetSpends.add(loadJSON(entry.getValue().toString(), context));
+                  adEntityTargetSpends.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adEntityTargetSpends.add(loadJSON(obj.toString(), context));
+              adEntityTargetSpends.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adEntityTargetSpends;
@@ -157,7 +158,7 @@ public class AdEntityTargetSpend extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adEntityTargetSpends.add(loadJSON(entry.getValue().toString(), context));
+              adEntityTargetSpends.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adEntityTargetSpends;
         } else {
@@ -176,7 +177,7 @@ public class AdEntityTargetSpend extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adEntityTargetSpends.add(loadJSON(value.toString(), context));
+              adEntityTargetSpends.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -188,7 +189,7 @@ public class AdEntityTargetSpend extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adEntityTargetSpends.clear();
-          adEntityTargetSpends.add(loadJSON(json, context));
+          adEntityTargetSpends.add(loadJSON(json, context, header));
           return adEntityTargetSpends;
         }
       }
@@ -301,8 +302,8 @@ public class AdEntityTargetSpend extends APINode {
 
   public static APIRequest.ResponseParser<AdEntityTargetSpend> getParser() {
     return new APIRequest.ResponseParser<AdEntityTargetSpend>() {
-      public APINodeList<AdEntityTargetSpend> parseResponse(String response, APIContext context, APIRequest<AdEntityTargetSpend> request) throws MalformedResponseException {
-        return AdEntityTargetSpend.parseResponse(response, context, request);
+      public APINodeList<AdEntityTargetSpend> parseResponse(String response, APIContext context, APIRequest<AdEntityTargetSpend> request, String header) throws MalformedResponseException {
+        return AdEntityTargetSpend.parseResponse(response, context, request, header);
       }
     };
   }

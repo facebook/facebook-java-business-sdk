@@ -123,6 +123,8 @@ public class AdCreativeLinkData extends APINode {
   private AdCreativeLinkDataSponsorshipInfoSpec mSponsorshipInfo = null;
   @SerializedName("static_fallback_spec")
   private AdCreativeStaticFallbackSpec mStaticFallbackSpec = null;
+  @SerializedName("use_flexible_image_aspect_ratio")
+  private Boolean mUseFlexibleImageAspectRatio = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
@@ -133,7 +135,7 @@ public class AdCreativeLinkData extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCreativeLinkData loadJSON(String json, APIContext context) {
+  public static AdCreativeLinkData loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkData adCreativeLinkData = getGson().fromJson(json, AdCreativeLinkData.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -150,11 +152,12 @@ public class AdCreativeLinkData extends APINode {
     }
     adCreativeLinkData.context = context;
     adCreativeLinkData.rawValue = json;
+    adCreativeLinkData.header = header;
     return adCreativeLinkData;
   }
 
-  public static APINodeList<AdCreativeLinkData> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCreativeLinkData> adCreativeLinkDatas = new APINodeList<AdCreativeLinkData>(request, json);
+  public static APINodeList<AdCreativeLinkData> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeLinkData> adCreativeLinkDatas = new APINodeList<AdCreativeLinkData>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -165,7 +168,7 @@ public class AdCreativeLinkData extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeLinkDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCreativeLinkDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCreativeLinkDatas;
       } else if (result.isJsonObject()) {
@@ -190,7 +193,7 @@ public class AdCreativeLinkData extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeLinkDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCreativeLinkDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -201,13 +204,13 @@ public class AdCreativeLinkData extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeLinkDatas.add(loadJSON(entry.getValue().toString(), context));
+                  adCreativeLinkDatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeLinkDatas.add(loadJSON(obj.toString(), context));
+              adCreativeLinkDatas.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCreativeLinkDatas;
@@ -215,7 +218,7 @@ public class AdCreativeLinkData extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeLinkDatas.add(loadJSON(entry.getValue().toString(), context));
+              adCreativeLinkDatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCreativeLinkDatas;
         } else {
@@ -234,7 +237,7 @@ public class AdCreativeLinkData extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeLinkDatas.add(loadJSON(value.toString(), context));
+              adCreativeLinkDatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -246,7 +249,7 @@ public class AdCreativeLinkData extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCreativeLinkDatas.clear();
-          adCreativeLinkDatas.add(loadJSON(json, context));
+          adCreativeLinkDatas.add(loadJSON(json, context, header));
           return adCreativeLinkDatas;
         }
       }
@@ -641,6 +644,15 @@ public class AdCreativeLinkData extends APINode {
     this.mStaticFallbackSpec = AdCreativeStaticFallbackSpec.getGson().fromJson(value, type);
     return this;
   }
+  public Boolean getFieldUseFlexibleImageAspectRatio() {
+    return mUseFlexibleImageAspectRatio;
+  }
+
+  public AdCreativeLinkData setFieldUseFlexibleImageAspectRatio(Boolean value) {
+    this.mUseFlexibleImageAspectRatio = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -743,6 +755,7 @@ public class AdCreativeLinkData extends APINode {
     this.mShowMultipleImages = instance.mShowMultipleImages;
     this.mSponsorshipInfo = instance.mSponsorshipInfo;
     this.mStaticFallbackSpec = instance.mStaticFallbackSpec;
+    this.mUseFlexibleImageAspectRatio = instance.mUseFlexibleImageAspectRatio;
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
@@ -751,8 +764,8 @@ public class AdCreativeLinkData extends APINode {
 
   public static APIRequest.ResponseParser<AdCreativeLinkData> getParser() {
     return new APIRequest.ResponseParser<AdCreativeLinkData>() {
-      public APINodeList<AdCreativeLinkData> parseResponse(String response, APIContext context, APIRequest<AdCreativeLinkData> request) throws MalformedResponseException {
-        return AdCreativeLinkData.parseResponse(response, context, request);
+      public APINodeList<AdCreativeLinkData> parseResponse(String response, APIContext context, APIRequest<AdCreativeLinkData> request, String header) throws MalformedResponseException {
+        return AdCreativeLinkData.parseResponse(response, context, request, header);
       }
     };
   }

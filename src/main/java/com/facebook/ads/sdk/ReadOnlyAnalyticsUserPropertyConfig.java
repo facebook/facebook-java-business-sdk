@@ -126,7 +126,7 @@ public class ReadOnlyAnalyticsUserPropertyConfig extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ReadOnlyAnalyticsUserPropertyConfig loadJSON(String json, APIContext context) {
+  public static ReadOnlyAnalyticsUserPropertyConfig loadJSON(String json, APIContext context, String header) {
     ReadOnlyAnalyticsUserPropertyConfig readOnlyAnalyticsUserPropertyConfig = getGson().fromJson(json, ReadOnlyAnalyticsUserPropertyConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -143,11 +143,12 @@ public class ReadOnlyAnalyticsUserPropertyConfig extends APINode {
     }
     readOnlyAnalyticsUserPropertyConfig.context = context;
     readOnlyAnalyticsUserPropertyConfig.rawValue = json;
+    readOnlyAnalyticsUserPropertyConfig.header = header;
     return readOnlyAnalyticsUserPropertyConfig;
   }
 
-  public static APINodeList<ReadOnlyAnalyticsUserPropertyConfig> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ReadOnlyAnalyticsUserPropertyConfig> readOnlyAnalyticsUserPropertyConfigs = new APINodeList<ReadOnlyAnalyticsUserPropertyConfig>(request, json);
+  public static APINodeList<ReadOnlyAnalyticsUserPropertyConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ReadOnlyAnalyticsUserPropertyConfig> readOnlyAnalyticsUserPropertyConfigs = new APINodeList<ReadOnlyAnalyticsUserPropertyConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -158,7 +159,7 @@ public class ReadOnlyAnalyticsUserPropertyConfig extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return readOnlyAnalyticsUserPropertyConfigs;
       } else if (result.isJsonObject()) {
@@ -183,7 +184,7 @@ public class ReadOnlyAnalyticsUserPropertyConfig extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -194,13 +195,13 @@ public class ReadOnlyAnalyticsUserPropertyConfig extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(entry.getValue().toString(), context));
+                  readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(obj.toString(), context));
+              readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return readOnlyAnalyticsUserPropertyConfigs;
@@ -208,7 +209,7 @@ public class ReadOnlyAnalyticsUserPropertyConfig extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(entry.getValue().toString(), context));
+              readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return readOnlyAnalyticsUserPropertyConfigs;
         } else {
@@ -227,7 +228,7 @@ public class ReadOnlyAnalyticsUserPropertyConfig extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(value.toString(), context));
+              readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -239,7 +240,7 @@ public class ReadOnlyAnalyticsUserPropertyConfig extends APINode {
 
           // Sixth, check if it's pure JsonObject
           readOnlyAnalyticsUserPropertyConfigs.clear();
-          readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(json, context));
+          readOnlyAnalyticsUserPropertyConfigs.add(loadJSON(json, context, header));
           return readOnlyAnalyticsUserPropertyConfigs;
         }
       }
@@ -298,8 +299,8 @@ public class ReadOnlyAnalyticsUserPropertyConfig extends APINode {
     };
 
     @Override
-    public ReadOnlyAnalyticsUserPropertyConfig parseResponse(String response) throws APIException {
-      return ReadOnlyAnalyticsUserPropertyConfig.parseResponse(response, getContext(), this).head();
+    public ReadOnlyAnalyticsUserPropertyConfig parseResponse(String response, String header) throws APIException {
+      return ReadOnlyAnalyticsUserPropertyConfig.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -309,7 +310,8 @@ public class ReadOnlyAnalyticsUserPropertyConfig extends APINode {
 
     @Override
     public ReadOnlyAnalyticsUserPropertyConfig execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -323,7 +325,7 @@ public class ReadOnlyAnalyticsUserPropertyConfig extends APINode {
         new Function<String, ReadOnlyAnalyticsUserPropertyConfig>() {
            public ReadOnlyAnalyticsUserPropertyConfig apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -425,8 +427,8 @@ public class ReadOnlyAnalyticsUserPropertyConfig extends APINode {
 
   public static APIRequest.ResponseParser<ReadOnlyAnalyticsUserPropertyConfig> getParser() {
     return new APIRequest.ResponseParser<ReadOnlyAnalyticsUserPropertyConfig>() {
-      public APINodeList<ReadOnlyAnalyticsUserPropertyConfig> parseResponse(String response, APIContext context, APIRequest<ReadOnlyAnalyticsUserPropertyConfig> request) throws MalformedResponseException {
-        return ReadOnlyAnalyticsUserPropertyConfig.parseResponse(response, context, request);
+      public APINodeList<ReadOnlyAnalyticsUserPropertyConfig> parseResponse(String response, APIContext context, APIRequest<ReadOnlyAnalyticsUserPropertyConfig> request, String header) throws MalformedResponseException {
+        return ReadOnlyAnalyticsUserPropertyConfig.parseResponse(response, context, request, header);
       }
     };
   }

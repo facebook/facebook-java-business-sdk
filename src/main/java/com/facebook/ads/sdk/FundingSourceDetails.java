@@ -71,7 +71,7 @@ public class FundingSourceDetails extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static FundingSourceDetails loadJSON(String json, APIContext context) {
+  public static FundingSourceDetails loadJSON(String json, APIContext context, String header) {
     FundingSourceDetails fundingSourceDetails = getGson().fromJson(json, FundingSourceDetails.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class FundingSourceDetails extends APINode {
     }
     fundingSourceDetails.context = context;
     fundingSourceDetails.rawValue = json;
+    fundingSourceDetails.header = header;
     return fundingSourceDetails;
   }
 
-  public static APINodeList<FundingSourceDetails> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<FundingSourceDetails> fundingSourceDetailss = new APINodeList<FundingSourceDetails>(request, json);
+  public static APINodeList<FundingSourceDetails> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<FundingSourceDetails> fundingSourceDetailss = new APINodeList<FundingSourceDetails>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class FundingSourceDetails extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          fundingSourceDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          fundingSourceDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return fundingSourceDetailss;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class FundingSourceDetails extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              fundingSourceDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              fundingSourceDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class FundingSourceDetails extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  fundingSourceDetailss.add(loadJSON(entry.getValue().toString(), context));
+                  fundingSourceDetailss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              fundingSourceDetailss.add(loadJSON(obj.toString(), context));
+              fundingSourceDetailss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return fundingSourceDetailss;
@@ -153,7 +154,7 @@ public class FundingSourceDetails extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              fundingSourceDetailss.add(loadJSON(entry.getValue().toString(), context));
+              fundingSourceDetailss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return fundingSourceDetailss;
         } else {
@@ -172,7 +173,7 @@ public class FundingSourceDetails extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              fundingSourceDetailss.add(loadJSON(value.toString(), context));
+              fundingSourceDetailss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class FundingSourceDetails extends APINode {
 
           // Sixth, check if it's pure JsonObject
           fundingSourceDetailss.clear();
-          fundingSourceDetailss.add(loadJSON(json, context));
+          fundingSourceDetailss.add(loadJSON(json, context, header));
           return fundingSourceDetailss;
         }
       }
@@ -282,8 +283,8 @@ public class FundingSourceDetails extends APINode {
 
   public static APIRequest.ResponseParser<FundingSourceDetails> getParser() {
     return new APIRequest.ResponseParser<FundingSourceDetails>() {
-      public APINodeList<FundingSourceDetails> parseResponse(String response, APIContext context, APIRequest<FundingSourceDetails> request) throws MalformedResponseException {
-        return FundingSourceDetails.parseResponse(response, context, request);
+      public APINodeList<FundingSourceDetails> parseResponse(String response, APIContext context, APIRequest<FundingSourceDetails> request, String header) throws MalformedResponseException {
+        return FundingSourceDetails.parseResponse(response, context, request, header);
       }
     };
   }

@@ -69,8 +69,6 @@ public class AdCreativeVideoData extends APINode {
   private List<AdCreativeCollectionThumbnailInfo> mCollectionThumbnails = null;
   @SerializedName("custom_overlay_spec")
   private List<AdCreativeVideoDataCustomOverlaySpec> mCustomOverlaySpec = null;
-  @SerializedName("description")
-  private String mDescription = null;
   @SerializedName("image_hash")
   private String mImageHash = null;
   @SerializedName("image_url")
@@ -103,7 +101,7 @@ public class AdCreativeVideoData extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCreativeVideoData loadJSON(String json, APIContext context) {
+  public static AdCreativeVideoData loadJSON(String json, APIContext context, String header) {
     AdCreativeVideoData adCreativeVideoData = getGson().fromJson(json, AdCreativeVideoData.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -120,11 +118,12 @@ public class AdCreativeVideoData extends APINode {
     }
     adCreativeVideoData.context = context;
     adCreativeVideoData.rawValue = json;
+    adCreativeVideoData.header = header;
     return adCreativeVideoData;
   }
 
-  public static APINodeList<AdCreativeVideoData> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCreativeVideoData> adCreativeVideoDatas = new APINodeList<AdCreativeVideoData>(request, json);
+  public static APINodeList<AdCreativeVideoData> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeVideoData> adCreativeVideoDatas = new APINodeList<AdCreativeVideoData>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -135,7 +134,7 @@ public class AdCreativeVideoData extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeVideoDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCreativeVideoDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCreativeVideoDatas;
       } else if (result.isJsonObject()) {
@@ -160,7 +159,7 @@ public class AdCreativeVideoData extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeVideoDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCreativeVideoDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -171,13 +170,13 @@ public class AdCreativeVideoData extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeVideoDatas.add(loadJSON(entry.getValue().toString(), context));
+                  adCreativeVideoDatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeVideoDatas.add(loadJSON(obj.toString(), context));
+              adCreativeVideoDatas.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCreativeVideoDatas;
@@ -185,7 +184,7 @@ public class AdCreativeVideoData extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeVideoDatas.add(loadJSON(entry.getValue().toString(), context));
+              adCreativeVideoDatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCreativeVideoDatas;
         } else {
@@ -204,7 +203,7 @@ public class AdCreativeVideoData extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeVideoDatas.add(loadJSON(value.toString(), context));
+              adCreativeVideoDatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -216,7 +215,7 @@ public class AdCreativeVideoData extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCreativeVideoDatas.clear();
-          adCreativeVideoDatas.add(loadJSON(json, context));
+          adCreativeVideoDatas.add(loadJSON(json, context, header));
           return adCreativeVideoDatas;
         }
       }
@@ -323,15 +322,6 @@ public class AdCreativeVideoData extends APINode {
     this.mCustomOverlaySpec = AdCreativeVideoDataCustomOverlaySpec.getGson().fromJson(value, type);
     return this;
   }
-  public String getFieldDescription() {
-    return mDescription;
-  }
-
-  public AdCreativeVideoData setFieldDescription(String value) {
-    this.mDescription = value;
-    return this;
-  }
-
   public String getFieldImageHash() {
     return mImageHash;
   }
@@ -474,7 +464,6 @@ public class AdCreativeVideoData extends APINode {
     this.mCallToAction = instance.mCallToAction;
     this.mCollectionThumbnails = instance.mCollectionThumbnails;
     this.mCustomOverlaySpec = instance.mCustomOverlaySpec;
-    this.mDescription = instance.mDescription;
     this.mImageHash = instance.mImageHash;
     this.mImageUrl = instance.mImageUrl;
     this.mLinkDescription = instance.mLinkDescription;
@@ -494,8 +483,8 @@ public class AdCreativeVideoData extends APINode {
 
   public static APIRequest.ResponseParser<AdCreativeVideoData> getParser() {
     return new APIRequest.ResponseParser<AdCreativeVideoData>() {
-      public APINodeList<AdCreativeVideoData> parseResponse(String response, APIContext context, APIRequest<AdCreativeVideoData> request) throws MalformedResponseException {
-        return AdCreativeVideoData.parseResponse(response, context, request);
+      public APINodeList<AdCreativeVideoData> parseResponse(String response, APIContext context, APIRequest<AdCreativeVideoData> request, String header) throws MalformedResponseException {
+        return AdCreativeVideoData.parseResponse(response, context, request, header);
       }
     };
   }

@@ -73,7 +73,7 @@ public class TrackingAndConversionWithDefaults extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static TrackingAndConversionWithDefaults loadJSON(String json, APIContext context) {
+  public static TrackingAndConversionWithDefaults loadJSON(String json, APIContext context, String header) {
     TrackingAndConversionWithDefaults trackingAndConversionWithDefaults = getGson().fromJson(json, TrackingAndConversionWithDefaults.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class TrackingAndConversionWithDefaults extends APINode {
     }
     trackingAndConversionWithDefaults.context = context;
     trackingAndConversionWithDefaults.rawValue = json;
+    trackingAndConversionWithDefaults.header = header;
     return trackingAndConversionWithDefaults;
   }
 
-  public static APINodeList<TrackingAndConversionWithDefaults> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<TrackingAndConversionWithDefaults> trackingAndConversionWithDefaultss = new APINodeList<TrackingAndConversionWithDefaults>(request, json);
+  public static APINodeList<TrackingAndConversionWithDefaults> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<TrackingAndConversionWithDefaults> trackingAndConversionWithDefaultss = new APINodeList<TrackingAndConversionWithDefaults>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class TrackingAndConversionWithDefaults extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          trackingAndConversionWithDefaultss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          trackingAndConversionWithDefaultss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return trackingAndConversionWithDefaultss;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class TrackingAndConversionWithDefaults extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              trackingAndConversionWithDefaultss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              trackingAndConversionWithDefaultss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class TrackingAndConversionWithDefaults extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  trackingAndConversionWithDefaultss.add(loadJSON(entry.getValue().toString(), context));
+                  trackingAndConversionWithDefaultss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              trackingAndConversionWithDefaultss.add(loadJSON(obj.toString(), context));
+              trackingAndConversionWithDefaultss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return trackingAndConversionWithDefaultss;
@@ -155,7 +156,7 @@ public class TrackingAndConversionWithDefaults extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              trackingAndConversionWithDefaultss.add(loadJSON(entry.getValue().toString(), context));
+              trackingAndConversionWithDefaultss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return trackingAndConversionWithDefaultss;
         } else {
@@ -174,7 +175,7 @@ public class TrackingAndConversionWithDefaults extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              trackingAndConversionWithDefaultss.add(loadJSON(value.toString(), context));
+              trackingAndConversionWithDefaultss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class TrackingAndConversionWithDefaults extends APINode {
 
           // Sixth, check if it's pure JsonObject
           trackingAndConversionWithDefaultss.clear();
-          trackingAndConversionWithDefaultss.add(loadJSON(json, context));
+          trackingAndConversionWithDefaultss.add(loadJSON(json, context, header));
           return trackingAndConversionWithDefaultss;
         }
       }
@@ -289,8 +290,8 @@ public class TrackingAndConversionWithDefaults extends APINode {
 
   public static APIRequest.ResponseParser<TrackingAndConversionWithDefaults> getParser() {
     return new APIRequest.ResponseParser<TrackingAndConversionWithDefaults>() {
-      public APINodeList<TrackingAndConversionWithDefaults> parseResponse(String response, APIContext context, APIRequest<TrackingAndConversionWithDefaults> request) throws MalformedResponseException {
-        return TrackingAndConversionWithDefaults.parseResponse(response, context, request);
+      public APINodeList<TrackingAndConversionWithDefaults> parseResponse(String response, APIContext context, APIRequest<TrackingAndConversionWithDefaults> request, String header) throws MalformedResponseException {
+        return TrackingAndConversionWithDefaults.parseResponse(response, context, request, header);
       }
     };
   }

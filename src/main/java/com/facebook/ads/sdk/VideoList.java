@@ -140,7 +140,7 @@ public class VideoList extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static VideoList loadJSON(String json, APIContext context) {
+  public static VideoList loadJSON(String json, APIContext context, String header) {
     VideoList videoList = getGson().fromJson(json, VideoList.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -157,11 +157,12 @@ public class VideoList extends APINode {
     }
     videoList.context = context;
     videoList.rawValue = json;
+    videoList.header = header;
     return videoList;
   }
 
-  public static APINodeList<VideoList> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<VideoList> videoLists = new APINodeList<VideoList>(request, json);
+  public static APINodeList<VideoList> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<VideoList> videoLists = new APINodeList<VideoList>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -172,7 +173,7 @@ public class VideoList extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          videoLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          videoLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return videoLists;
       } else if (result.isJsonObject()) {
@@ -197,7 +198,7 @@ public class VideoList extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              videoLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              videoLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -208,13 +209,13 @@ public class VideoList extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  videoLists.add(loadJSON(entry.getValue().toString(), context));
+                  videoLists.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              videoLists.add(loadJSON(obj.toString(), context));
+              videoLists.add(loadJSON(obj.toString(), context, header));
             }
           }
           return videoLists;
@@ -222,7 +223,7 @@ public class VideoList extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              videoLists.add(loadJSON(entry.getValue().toString(), context));
+              videoLists.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return videoLists;
         } else {
@@ -241,7 +242,7 @@ public class VideoList extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              videoLists.add(loadJSON(value.toString(), context));
+              videoLists.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -253,7 +254,7 @@ public class VideoList extends APINode {
 
           // Sixth, check if it's pure JsonObject
           videoLists.clear();
-          videoLists.add(loadJSON(json, context));
+          videoLists.add(loadJSON(json, context, header));
           return videoLists;
         }
       }
@@ -367,8 +368,8 @@ public class VideoList extends APINode {
     };
 
     @Override
-    public Comment parseResponse(String response) throws APIException {
-      return Comment.parseResponse(response, getContext(), this).head();
+    public Comment parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -378,7 +379,8 @@ public class VideoList extends APINode {
 
     @Override
     public Comment execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -392,7 +394,7 @@ public class VideoList extends APINode {
         new Function<String, Comment>() {
            public Comment apply(String result) {
              try {
-               return APIRequestCreateComment.this.parseResponse(result);
+               return APIRequestCreateComment.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -552,8 +554,8 @@ public class VideoList extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -563,7 +565,8 @@ public class VideoList extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -577,7 +580,7 @@ public class VideoList extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteVideos.this.parseResponse(result);
+               return APIRequestDeleteVideos.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -684,10 +687,10 @@ public class VideoList extends APINode {
       "length",
       "live_audience_count",
       "live_status",
-      "name",
       "permalink_url",
       "picture",
       "place",
+      "premiere_living_room_status",
       "privacy",
       "published",
       "scheduled_publish_time",
@@ -701,8 +704,8 @@ public class VideoList extends APINode {
     };
 
     @Override
-    public APINodeList<AdVideo> parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this);
+    public APINodeList<AdVideo> parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -712,7 +715,8 @@ public class VideoList extends APINode {
 
     @Override
     public APINodeList<AdVideo> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -726,7 +730,7 @@ public class VideoList extends APINode {
         new Function<String, APINodeList<AdVideo>>() {
            public APINodeList<AdVideo> apply(String result) {
              try {
-               return APIRequestGetVideos.this.parseResponse(result);
+               return APIRequestGetVideos.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -949,13 +953,6 @@ public class VideoList extends APINode {
       this.requestField("live_status", value);
       return this;
     }
-    public APIRequestGetVideos requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetVideos requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
     public APIRequestGetVideos requestPermalinkUrlField () {
       return this.requestPermalinkUrlField(true);
     }
@@ -975,6 +972,13 @@ public class VideoList extends APINode {
     }
     public APIRequestGetVideos requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetVideos requestPremiereLivingRoomStatusField () {
+      return this.requestPremiereLivingRoomStatusField(true);
+    }
+    public APIRequestGetVideos requestPremiereLivingRoomStatusField (boolean value) {
+      this.requestField("premiere_living_room_status", value);
       return this;
     }
     public APIRequestGetVideos requestPrivacyField () {
@@ -1064,8 +1068,8 @@ public class VideoList extends APINode {
     };
 
     @Override
-    public VideoList parseResponse(String response) throws APIException {
-      return VideoList.parseResponse(response, getContext(), this).head();
+    public VideoList parseResponse(String response, String header) throws APIException {
+      return VideoList.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1075,7 +1079,8 @@ public class VideoList extends APINode {
 
     @Override
     public VideoList execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1089,7 +1094,7 @@ public class VideoList extends APINode {
         new Function<String, VideoList>() {
            public VideoList apply(String result) {
              try {
-               return APIRequestCreateVideo.this.parseResponse(result);
+               return APIRequestCreateVideo.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1185,8 +1190,8 @@ public class VideoList extends APINode {
     };
 
     @Override
-    public VideoList parseResponse(String response) throws APIException {
-      return VideoList.parseResponse(response, getContext(), this).head();
+    public VideoList parseResponse(String response, String header) throws APIException {
+      return VideoList.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1196,7 +1201,8 @@ public class VideoList extends APINode {
 
     @Override
     public VideoList execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1210,7 +1216,7 @@ public class VideoList extends APINode {
         new Function<String, VideoList>() {
            public VideoList apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1368,8 +1374,8 @@ public class VideoList extends APINode {
 
   public static APIRequest.ResponseParser<VideoList> getParser() {
     return new APIRequest.ResponseParser<VideoList>() {
-      public APINodeList<VideoList> parseResponse(String response, APIContext context, APIRequest<VideoList> request) throws MalformedResponseException {
-        return VideoList.parseResponse(response, context, request);
+      public APINodeList<VideoList> parseResponse(String response, APIContext context, APIRequest<VideoList> request, String header) throws MalformedResponseException {
+        return VideoList.parseResponse(response, context, request, header);
       }
     };
   }

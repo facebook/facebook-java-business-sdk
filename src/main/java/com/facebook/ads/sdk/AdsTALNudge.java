@@ -73,7 +73,7 @@ public class AdsTALNudge extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdsTALNudge loadJSON(String json, APIContext context) {
+  public static AdsTALNudge loadJSON(String json, APIContext context, String header) {
     AdsTALNudge adsTALNudge = getGson().fromJson(json, AdsTALNudge.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class AdsTALNudge extends APINode {
     }
     adsTALNudge.context = context;
     adsTALNudge.rawValue = json;
+    adsTALNudge.header = header;
     return adsTALNudge;
   }
 
-  public static APINodeList<AdsTALNudge> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdsTALNudge> adsTALNudges = new APINodeList<AdsTALNudge>(request, json);
+  public static APINodeList<AdsTALNudge> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdsTALNudge> adsTALNudges = new APINodeList<AdsTALNudge>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class AdsTALNudge extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsTALNudges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adsTALNudges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adsTALNudges;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class AdsTALNudge extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsTALNudges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adsTALNudges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class AdsTALNudge extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsTALNudges.add(loadJSON(entry.getValue().toString(), context));
+                  adsTALNudges.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsTALNudges.add(loadJSON(obj.toString(), context));
+              adsTALNudges.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adsTALNudges;
@@ -155,7 +156,7 @@ public class AdsTALNudge extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsTALNudges.add(loadJSON(entry.getValue().toString(), context));
+              adsTALNudges.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adsTALNudges;
         } else {
@@ -174,7 +175,7 @@ public class AdsTALNudge extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsTALNudges.add(loadJSON(value.toString(), context));
+              adsTALNudges.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class AdsTALNudge extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adsTALNudges.clear();
-          adsTALNudges.add(loadJSON(json, context));
+          adsTALNudges.add(loadJSON(json, context, header));
           return adsTALNudges;
         }
       }
@@ -289,8 +290,8 @@ public class AdsTALNudge extends APINode {
 
   public static APIRequest.ResponseParser<AdsTALNudge> getParser() {
     return new APIRequest.ResponseParser<AdsTALNudge>() {
-      public APINodeList<AdsTALNudge> parseResponse(String response, APIContext context, APIRequest<AdsTALNudge> request) throws MalformedResponseException {
-        return AdsTALNudge.parseResponse(response, context, request);
+      public APINodeList<AdsTALNudge> parseResponse(String response, APIContext context, APIRequest<AdsTALNudge> request, String header) throws MalformedResponseException {
+        return AdsTALNudge.parseResponse(response, context, request, header);
       }
     };
   }

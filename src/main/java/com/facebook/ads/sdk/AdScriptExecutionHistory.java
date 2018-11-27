@@ -83,7 +83,7 @@ public class AdScriptExecutionHistory extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdScriptExecutionHistory loadJSON(String json, APIContext context) {
+  public static AdScriptExecutionHistory loadJSON(String json, APIContext context, String header) {
     AdScriptExecutionHistory adScriptExecutionHistory = getGson().fromJson(json, AdScriptExecutionHistory.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -100,11 +100,12 @@ public class AdScriptExecutionHistory extends APINode {
     }
     adScriptExecutionHistory.context = context;
     adScriptExecutionHistory.rawValue = json;
+    adScriptExecutionHistory.header = header;
     return adScriptExecutionHistory;
   }
 
-  public static APINodeList<AdScriptExecutionHistory> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdScriptExecutionHistory> adScriptExecutionHistorys = new APINodeList<AdScriptExecutionHistory>(request, json);
+  public static APINodeList<AdScriptExecutionHistory> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdScriptExecutionHistory> adScriptExecutionHistorys = new APINodeList<AdScriptExecutionHistory>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -115,7 +116,7 @@ public class AdScriptExecutionHistory extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adScriptExecutionHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adScriptExecutionHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adScriptExecutionHistorys;
       } else if (result.isJsonObject()) {
@@ -140,7 +141,7 @@ public class AdScriptExecutionHistory extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adScriptExecutionHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adScriptExecutionHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -151,13 +152,13 @@ public class AdScriptExecutionHistory extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adScriptExecutionHistorys.add(loadJSON(entry.getValue().toString(), context));
+                  adScriptExecutionHistorys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adScriptExecutionHistorys.add(loadJSON(obj.toString(), context));
+              adScriptExecutionHistorys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adScriptExecutionHistorys;
@@ -165,7 +166,7 @@ public class AdScriptExecutionHistory extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adScriptExecutionHistorys.add(loadJSON(entry.getValue().toString(), context));
+              adScriptExecutionHistorys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adScriptExecutionHistorys;
         } else {
@@ -184,7 +185,7 @@ public class AdScriptExecutionHistory extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adScriptExecutionHistorys.add(loadJSON(value.toString(), context));
+              adScriptExecutionHistorys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -196,7 +197,7 @@ public class AdScriptExecutionHistory extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adScriptExecutionHistorys.clear();
-          adScriptExecutionHistorys.add(loadJSON(json, context));
+          adScriptExecutionHistorys.add(loadJSON(json, context, header));
           return adScriptExecutionHistorys;
         }
       }
@@ -349,8 +350,8 @@ public class AdScriptExecutionHistory extends APINode {
 
   public static APIRequest.ResponseParser<AdScriptExecutionHistory> getParser() {
     return new APIRequest.ResponseParser<AdScriptExecutionHistory>() {
-      public APINodeList<AdScriptExecutionHistory> parseResponse(String response, APIContext context, APIRequest<AdScriptExecutionHistory> request) throws MalformedResponseException {
-        return AdScriptExecutionHistory.parseResponse(response, context, request);
+      public APINodeList<AdScriptExecutionHistory> parseResponse(String response, APIContext context, APIRequest<AdScriptExecutionHistory> request, String header) throws MalformedResponseException {
+        return AdScriptExecutionHistory.parseResponse(response, context, request, header);
       }
     };
   }

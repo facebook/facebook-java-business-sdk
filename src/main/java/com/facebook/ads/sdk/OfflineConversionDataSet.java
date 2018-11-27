@@ -55,8 +55,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class OfflineConversionDataSet extends APINode {
-  @SerializedName("attribute_stats")
-  private String mAttributeStats = null;
   @SerializedName("business")
   private Business mBusiness = null;
   @SerializedName("config")
@@ -91,8 +89,6 @@ public class OfflineConversionDataSet extends APINode {
   private Long mMatchRateApprox = null;
   @SerializedName("matched_entries")
   private Long mMatchedEntries = null;
-  @SerializedName("matched_unique_users")
-  private Long mMatchedUniqueUsers = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("usage")
@@ -166,7 +162,7 @@ public class OfflineConversionDataSet extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static OfflineConversionDataSet loadJSON(String json, APIContext context) {
+  public static OfflineConversionDataSet loadJSON(String json, APIContext context, String header) {
     OfflineConversionDataSet offlineConversionDataSet = getGson().fromJson(json, OfflineConversionDataSet.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -183,11 +179,12 @@ public class OfflineConversionDataSet extends APINode {
     }
     offlineConversionDataSet.context = context;
     offlineConversionDataSet.rawValue = json;
+    offlineConversionDataSet.header = header;
     return offlineConversionDataSet;
   }
 
-  public static APINodeList<OfflineConversionDataSet> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<OfflineConversionDataSet> offlineConversionDataSets = new APINodeList<OfflineConversionDataSet>(request, json);
+  public static APINodeList<OfflineConversionDataSet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OfflineConversionDataSet> offlineConversionDataSets = new APINodeList<OfflineConversionDataSet>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -198,7 +195,7 @@ public class OfflineConversionDataSet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          offlineConversionDataSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          offlineConversionDataSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return offlineConversionDataSets;
       } else if (result.isJsonObject()) {
@@ -223,7 +220,7 @@ public class OfflineConversionDataSet extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              offlineConversionDataSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              offlineConversionDataSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -234,13 +231,13 @@ public class OfflineConversionDataSet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  offlineConversionDataSets.add(loadJSON(entry.getValue().toString(), context));
+                  offlineConversionDataSets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              offlineConversionDataSets.add(loadJSON(obj.toString(), context));
+              offlineConversionDataSets.add(loadJSON(obj.toString(), context, header));
             }
           }
           return offlineConversionDataSets;
@@ -248,7 +245,7 @@ public class OfflineConversionDataSet extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              offlineConversionDataSets.add(loadJSON(entry.getValue().toString(), context));
+              offlineConversionDataSets.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return offlineConversionDataSets;
         } else {
@@ -267,7 +264,7 @@ public class OfflineConversionDataSet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              offlineConversionDataSets.add(loadJSON(value.toString(), context));
+              offlineConversionDataSets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -279,7 +276,7 @@ public class OfflineConversionDataSet extends APINode {
 
           // Sixth, check if it's pure JsonObject
           offlineConversionDataSets.clear();
-          offlineConversionDataSets.add(loadJSON(json, context));
+          offlineConversionDataSets.add(loadJSON(json, context, header));
           return offlineConversionDataSets;
         }
       }
@@ -375,6 +372,14 @@ public class OfflineConversionDataSet extends APINode {
     return new APIRequestCreateUserPermission(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteUsers deleteUsers() {
+    return new APIRequestDeleteUsers(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateUser createUser() {
+    return new APIRequestCreateUser(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateValidate createValidate() {
     return new APIRequestCreateValidate(this.getPrefixedId().toString(), context);
   }
@@ -391,10 +396,6 @@ public class OfflineConversionDataSet extends APINode {
     return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
-
-  public String getFieldAttributeStats() {
-    return mAttributeStats;
-  }
 
   public Business getFieldBusiness() {
     if (mBusiness != null) {
@@ -467,10 +468,6 @@ public class OfflineConversionDataSet extends APINode {
     return mMatchedEntries;
   }
 
-  public Long getFieldMatchedUniqueUsers() {
-    return mMatchedUniqueUsers;
-  }
-
   public String getFieldName() {
     return mName;
   }
@@ -503,8 +500,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -514,7 +511,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -528,7 +526,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetActivities.this.parseResponse(result);
+               return APIRequestGetActivities.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -632,8 +630,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -643,7 +641,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -657,7 +656,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAdAccounts.this.parseResponse(result);
+               return APIRequestDeleteAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -763,7 +762,6 @@ public class OfflineConversionDataSet extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "daily_spend_limit",
       "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
@@ -792,7 +790,6 @@ public class OfflineConversionDataSet extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
-      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -808,8 +805,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccount> parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -819,7 +816,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -833,7 +831,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINodeList<AdAccount>>() {
            public APINodeList<AdAccount> apply(String result) {
              try {
-               return APIRequestGetAdAccounts.this.parseResponse(result);
+               return APIRequestGetAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1040,13 +1038,6 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("currency", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestDailySpendLimitField () {
-      return this.requestDailySpendLimitField(true);
-    }
-    public APIRequestGetAdAccounts requestDailySpendLimitField (boolean value) {
-      this.requestField("daily_spend_limit", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField () {
       return this.requestDirectDealsTosAcceptedField(true);
     }
@@ -1243,13 +1234,6 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("partner", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestRateLimitResetTimeField () {
-      return this.requestRateLimitResetTimeField(true);
-    }
-    public APIRequestGetAdAccounts requestRateLimitResetTimeField (boolean value) {
-      this.requestField("rate_limit_reset_time", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
@@ -1353,8 +1337,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public OfflineConversionDataSet parseResponse(String response) throws APIException {
-      return OfflineConversionDataSet.parseResponse(response, getContext(), this).head();
+    public OfflineConversionDataSet parseResponse(String response, String header) throws APIException {
+      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1364,7 +1348,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public OfflineConversionDataSet execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1378,7 +1363,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, OfflineConversionDataSet>() {
            public OfflineConversionDataSet apply(String result) {
              try {
-               return APIRequestCreateAdAccount.this.parseResponse(result);
+               return APIRequestCreateAdAccount.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1476,8 +1461,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1487,7 +1472,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1501,7 +1487,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAgencies.this.parseResponse(result);
+               return APIRequestDeleteAgencies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1602,8 +1588,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINodeList<Business> parseResponse(String response) throws APIException {
-      return Business.parseResponse(response, getContext(), this);
+    public APINodeList<Business> parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1613,7 +1599,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINodeList<Business> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1627,7 +1614,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINodeList<Business>>() {
            public APINodeList<Business> apply(String result) {
              try {
-               return APIRequestGetAgencies.this.parseResponse(result);
+               return APIRequestGetAgencies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1835,8 +1822,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public OfflineConversionDataSet parseResponse(String response) throws APIException {
-      return OfflineConversionDataSet.parseResponse(response, getContext(), this).head();
+    public OfflineConversionDataSet parseResponse(String response, String header) throws APIException {
+      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1846,7 +1833,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public OfflineConversionDataSet execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1860,7 +1848,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, OfflineConversionDataSet>() {
            public OfflineConversionDataSet apply(String result) {
              try {
-               return APIRequestCreateAgency.this.parseResponse(result);
+               return APIRequestCreateAgency.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2004,8 +1992,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINodeList<CustomAudience> parseResponse(String response) throws APIException {
-      return CustomAudience.parseResponse(response, getContext(), this);
+    public APINodeList<CustomAudience> parseResponse(String response, String header) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2015,7 +2003,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINodeList<CustomAudience> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2029,7 +2018,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINodeList<CustomAudience>>() {
            public APINodeList<CustomAudience> apply(String result) {
              try {
-               return APIRequestGetAudiences.this.parseResponse(result);
+               return APIRequestGetAudiences.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2390,8 +2379,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINodeList<CustomConversion> parseResponse(String response) throws APIException {
-      return CustomConversion.parseResponse(response, getContext(), this);
+    public APINodeList<CustomConversion> parseResponse(String response, String header) throws APIException {
+      return CustomConversion.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2401,7 +2390,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINodeList<CustomConversion> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2415,7 +2405,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINodeList<CustomConversion>>() {
            public APINodeList<CustomConversion> apply(String result) {
              try {
-               return APIRequestGetCustomConversions.this.parseResponse(result);
+               return APIRequestGetCustomConversions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2632,8 +2622,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINodeList<DACheck> parseResponse(String response) throws APIException {
-      return DACheck.parseResponse(response, getContext(), this);
+    public APINodeList<DACheck> parseResponse(String response, String header) throws APIException {
+      return DACheck.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2643,7 +2633,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINodeList<DACheck> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2657,7 +2648,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINodeList<DACheck>>() {
            public APINodeList<DACheck> apply(String result) {
              try {
-               return APIRequestGetDaChecks.this.parseResponse(result);
+               return APIRequestGetDaChecks.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2799,8 +2790,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2810,7 +2801,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2824,7 +2816,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateEvent.this.parseResponse(result);
+               return APIRequestCreateEvent.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2946,8 +2938,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2957,7 +2949,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2971,7 +2964,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetStats.this.parseResponse(result);
+               return APIRequestGetStats.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3108,8 +3101,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3119,7 +3112,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3133,7 +3127,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetUploads.this.parseResponse(result);
+               return APIRequestGetUploads.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3253,8 +3247,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3264,7 +3258,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3278,7 +3273,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateUpload.this.parseResponse(result);
+               return APIRequestCreateUpload.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3364,8 +3359,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3375,7 +3370,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3389,7 +3385,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteUserPermissions.this.parseResponse(result);
+               return APIRequestDeleteUserPermissions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3491,8 +3487,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3502,7 +3498,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3516,7 +3513,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetUserPermissions.this.parseResponse(result);
+               return APIRequestGetUserPermissions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3606,8 +3603,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public OfflineConversionDataSet parseResponse(String response) throws APIException {
-      return OfflineConversionDataSet.parseResponse(response, getContext(), this).head();
+    public OfflineConversionDataSet parseResponse(String response, String header) throws APIException {
+      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3617,7 +3614,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public OfflineConversionDataSet execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3631,7 +3629,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, OfflineConversionDataSet>() {
            public OfflineConversionDataSet apply(String result) {
              try {
-               return APIRequestCreateUserPermission.this.parseResponse(result);
+               return APIRequestCreateUserPermission.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3722,6 +3720,234 @@ public class OfflineConversionDataSet extends APINode {
 
   }
 
+  public static class APIRequestDeleteUsers extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "data",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(String result) {
+             try {
+               return APIRequestDeleteUsers.this.parseResponse(result, null);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteUsers(String nodeId, APIContext context) {
+      super(context, nodeId, "/users", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteUsers setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteUsers setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteUsers setData (List<Object> data) {
+      this.setParam("data", data);
+      return this;
+    }
+    public APIRequestDeleteUsers setData (String data) {
+      this.setParam("data", data);
+      return this;
+    }
+
+    public APIRequestDeleteUsers requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteUsers requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteUsers requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteUsers requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteUsers requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteUsers requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestCreateUser extends APIRequest<OfflineConversionDataSet> {
+
+    OfflineConversionDataSet lastResponse = null;
+    @Override
+    public OfflineConversionDataSet getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "data",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public OfflineConversionDataSet parseResponse(String response, String header) throws APIException {
+      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public OfflineConversionDataSet execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public OfflineConversionDataSet execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<OfflineConversionDataSet> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, OfflineConversionDataSet>() {
+           public OfflineConversionDataSet apply(String result) {
+             try {
+               return APIRequestCreateUser.this.parseResponse(result, null);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateUser(String nodeId, APIContext context) {
+      super(context, nodeId, "/users", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateUser setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUser setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateUser setData (List<Object> data) {
+      this.setParam("data", data);
+      return this;
+    }
+    public APIRequestCreateUser setData (String data) {
+      this.setParam("data", data);
+      return this;
+    }
+
+    public APIRequestCreateUser requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateUser requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUser requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateUser requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUser requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateUser requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateValidate extends APIRequest<OfflineConversionDataSet> {
 
     OfflineConversionDataSet lastResponse = null;
@@ -3738,8 +3964,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public OfflineConversionDataSet parseResponse(String response) throws APIException {
-      return OfflineConversionDataSet.parseResponse(response, getContext(), this).head();
+    public OfflineConversionDataSet parseResponse(String response, String header) throws APIException {
+      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3749,7 +3975,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public OfflineConversionDataSet execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3763,7 +3990,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, OfflineConversionDataSet>() {
            public OfflineConversionDataSet apply(String result) {
              try {
-               return APIRequestCreateValidate.this.parseResponse(result);
+               return APIRequestCreateValidate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3855,8 +4082,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3866,7 +4093,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3880,7 +4108,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3955,7 +4183,6 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "attribute_stats",
       "business",
       "config",
       "creation_time",
@@ -3973,15 +4200,14 @@ public class OfflineConversionDataSet extends APINode {
       "last_upload_app_changed_time",
       "match_rate_approx",
       "matched_entries",
-      "matched_unique_users",
       "name",
       "usage",
       "valid_entries",
     };
 
     @Override
-    public OfflineConversionDataSet parseResponse(String response) throws APIException {
-      return OfflineConversionDataSet.parseResponse(response, getContext(), this).head();
+    public OfflineConversionDataSet parseResponse(String response, String header) throws APIException {
+      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3991,7 +4217,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public OfflineConversionDataSet execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4005,7 +4232,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, OfflineConversionDataSet>() {
            public OfflineConversionDataSet apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4067,13 +4294,6 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestGet requestAttributeStatsField () {
-      return this.requestAttributeStatsField(true);
-    }
-    public APIRequestGet requestAttributeStatsField (boolean value) {
-      this.requestField("attribute_stats", value);
-      return this;
-    }
     public APIRequestGet requestBusinessField () {
       return this.requestBusinessField(true);
     }
@@ -4193,13 +4413,6 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("matched_entries", value);
       return this;
     }
-    public APIRequestGet requestMatchedUniqueUsersField () {
-      return this.requestMatchedUniqueUsersField(true);
-    }
-    public APIRequestGet requestMatchedUniqueUsersField (boolean value) {
-      this.requestField("matched_unique_users", value);
-      return this;
-    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -4242,8 +4455,8 @@ public class OfflineConversionDataSet extends APINode {
     };
 
     @Override
-    public OfflineConversionDataSet parseResponse(String response) throws APIException {
-      return OfflineConversionDataSet.parseResponse(response, getContext(), this).head();
+    public OfflineConversionDataSet parseResponse(String response, String header) throws APIException {
+      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4253,7 +4466,8 @@ public class OfflineConversionDataSet extends APINode {
 
     @Override
     public OfflineConversionDataSet execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4267,7 +4481,7 @@ public class OfflineConversionDataSet extends APINode {
         new Function<String, OfflineConversionDataSet>() {
            public OfflineConversionDataSet apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4600,7 +4814,6 @@ public class OfflineConversionDataSet extends APINode {
   }
 
   public OfflineConversionDataSet copyFrom(OfflineConversionDataSet instance) {
-    this.mAttributeStats = instance.mAttributeStats;
     this.mBusiness = instance.mBusiness;
     this.mConfig = instance.mConfig;
     this.mCreationTime = instance.mCreationTime;
@@ -4618,7 +4831,6 @@ public class OfflineConversionDataSet extends APINode {
     this.mLastUploadAppChangedTime = instance.mLastUploadAppChangedTime;
     this.mMatchRateApprox = instance.mMatchRateApprox;
     this.mMatchedEntries = instance.mMatchedEntries;
-    this.mMatchedUniqueUsers = instance.mMatchedUniqueUsers;
     this.mName = instance.mName;
     this.mUsage = instance.mUsage;
     this.mValidEntries = instance.mValidEntries;
@@ -4629,8 +4841,8 @@ public class OfflineConversionDataSet extends APINode {
 
   public static APIRequest.ResponseParser<OfflineConversionDataSet> getParser() {
     return new APIRequest.ResponseParser<OfflineConversionDataSet>() {
-      public APINodeList<OfflineConversionDataSet> parseResponse(String response, APIContext context, APIRequest<OfflineConversionDataSet> request) throws MalformedResponseException {
-        return OfflineConversionDataSet.parseResponse(response, context, request);
+      public APINodeList<OfflineConversionDataSet> parseResponse(String response, APIContext context, APIRequest<OfflineConversionDataSet> request, String header) throws MalformedResponseException {
+        return OfflineConversionDataSet.parseResponse(response, context, request, header);
       }
     };
   }

@@ -24,6 +24,8 @@ package com.facebook.ads.sdk;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.util.Map;
+import java.util.List;
 
 public class APIException extends Exception implements APIResponse {
 
@@ -62,6 +64,11 @@ public class APIException extends Exception implements APIResponse {
   public JsonObject getRawResponseAsJsonObject() {
     JsonParser parser = new JsonParser();
     return parser.parse(this.getMessage()).getAsJsonObject();
+  }
+
+  @Override
+  public String getHeader() {
+    return null;
   }
 
   public static class MalformedResponseException extends APIException {

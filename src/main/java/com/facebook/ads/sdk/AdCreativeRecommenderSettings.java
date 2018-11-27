@@ -69,7 +69,7 @@ public class AdCreativeRecommenderSettings extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCreativeRecommenderSettings loadJSON(String json, APIContext context) {
+  public static AdCreativeRecommenderSettings loadJSON(String json, APIContext context, String header) {
     AdCreativeRecommenderSettings adCreativeRecommenderSettings = getGson().fromJson(json, AdCreativeRecommenderSettings.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class AdCreativeRecommenderSettings extends APINode {
     }
     adCreativeRecommenderSettings.context = context;
     adCreativeRecommenderSettings.rawValue = json;
+    adCreativeRecommenderSettings.header = header;
     return adCreativeRecommenderSettings;
   }
 
-  public static APINodeList<AdCreativeRecommenderSettings> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCreativeRecommenderSettings> adCreativeRecommenderSettingss = new APINodeList<AdCreativeRecommenderSettings>(request, json);
+  public static APINodeList<AdCreativeRecommenderSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeRecommenderSettings> adCreativeRecommenderSettingss = new APINodeList<AdCreativeRecommenderSettings>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class AdCreativeRecommenderSettings extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeRecommenderSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCreativeRecommenderSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCreativeRecommenderSettingss;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class AdCreativeRecommenderSettings extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeRecommenderSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCreativeRecommenderSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class AdCreativeRecommenderSettings extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeRecommenderSettingss.add(loadJSON(entry.getValue().toString(), context));
+                  adCreativeRecommenderSettingss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeRecommenderSettingss.add(loadJSON(obj.toString(), context));
+              adCreativeRecommenderSettingss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCreativeRecommenderSettingss;
@@ -151,7 +152,7 @@ public class AdCreativeRecommenderSettings extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeRecommenderSettingss.add(loadJSON(entry.getValue().toString(), context));
+              adCreativeRecommenderSettingss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCreativeRecommenderSettingss;
         } else {
@@ -170,7 +171,7 @@ public class AdCreativeRecommenderSettings extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeRecommenderSettingss.add(loadJSON(value.toString(), context));
+              adCreativeRecommenderSettingss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class AdCreativeRecommenderSettings extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCreativeRecommenderSettingss.clear();
-          adCreativeRecommenderSettingss.add(loadJSON(json, context));
+          adCreativeRecommenderSettingss.add(loadJSON(json, context, header));
           return adCreativeRecommenderSettingss;
         }
       }
@@ -265,8 +266,8 @@ public class AdCreativeRecommenderSettings extends APINode {
 
   public static APIRequest.ResponseParser<AdCreativeRecommenderSettings> getParser() {
     return new APIRequest.ResponseParser<AdCreativeRecommenderSettings>() {
-      public APINodeList<AdCreativeRecommenderSettings> parseResponse(String response, APIContext context, APIRequest<AdCreativeRecommenderSettings> request) throws MalformedResponseException {
-        return AdCreativeRecommenderSettings.parseResponse(response, context, request);
+      public APINodeList<AdCreativeRecommenderSettings> parseResponse(String response, APIContext context, APIRequest<AdCreativeRecommenderSettings> request, String header) throws MalformedResponseException {
+        return AdCreativeRecommenderSettings.parseResponse(response, context, request, header);
       }
     };
   }

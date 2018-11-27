@@ -71,7 +71,7 @@ public class ScimCompanyUserPhoneNumber extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ScimCompanyUserPhoneNumber loadJSON(String json, APIContext context) {
+  public static ScimCompanyUserPhoneNumber loadJSON(String json, APIContext context, String header) {
     ScimCompanyUserPhoneNumber scimCompanyUserPhoneNumber = getGson().fromJson(json, ScimCompanyUserPhoneNumber.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class ScimCompanyUserPhoneNumber extends APINode {
     }
     scimCompanyUserPhoneNumber.context = context;
     scimCompanyUserPhoneNumber.rawValue = json;
+    scimCompanyUserPhoneNumber.header = header;
     return scimCompanyUserPhoneNumber;
   }
 
-  public static APINodeList<ScimCompanyUserPhoneNumber> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ScimCompanyUserPhoneNumber> scimCompanyUserPhoneNumbers = new APINodeList<ScimCompanyUserPhoneNumber>(request, json);
+  public static APINodeList<ScimCompanyUserPhoneNumber> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ScimCompanyUserPhoneNumber> scimCompanyUserPhoneNumbers = new APINodeList<ScimCompanyUserPhoneNumber>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class ScimCompanyUserPhoneNumber extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          scimCompanyUserPhoneNumbers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          scimCompanyUserPhoneNumbers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return scimCompanyUserPhoneNumbers;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class ScimCompanyUserPhoneNumber extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              scimCompanyUserPhoneNumbers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              scimCompanyUserPhoneNumbers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class ScimCompanyUserPhoneNumber extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  scimCompanyUserPhoneNumbers.add(loadJSON(entry.getValue().toString(), context));
+                  scimCompanyUserPhoneNumbers.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              scimCompanyUserPhoneNumbers.add(loadJSON(obj.toString(), context));
+              scimCompanyUserPhoneNumbers.add(loadJSON(obj.toString(), context, header));
             }
           }
           return scimCompanyUserPhoneNumbers;
@@ -153,7 +154,7 @@ public class ScimCompanyUserPhoneNumber extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              scimCompanyUserPhoneNumbers.add(loadJSON(entry.getValue().toString(), context));
+              scimCompanyUserPhoneNumbers.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return scimCompanyUserPhoneNumbers;
         } else {
@@ -172,7 +173,7 @@ public class ScimCompanyUserPhoneNumber extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              scimCompanyUserPhoneNumbers.add(loadJSON(value.toString(), context));
+              scimCompanyUserPhoneNumbers.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class ScimCompanyUserPhoneNumber extends APINode {
 
           // Sixth, check if it's pure JsonObject
           scimCompanyUserPhoneNumbers.clear();
-          scimCompanyUserPhoneNumbers.add(loadJSON(json, context));
+          scimCompanyUserPhoneNumbers.add(loadJSON(json, context, header));
           return scimCompanyUserPhoneNumbers;
         }
       }
@@ -277,8 +278,8 @@ public class ScimCompanyUserPhoneNumber extends APINode {
 
   public static APIRequest.ResponseParser<ScimCompanyUserPhoneNumber> getParser() {
     return new APIRequest.ResponseParser<ScimCompanyUserPhoneNumber>() {
-      public APINodeList<ScimCompanyUserPhoneNumber> parseResponse(String response, APIContext context, APIRequest<ScimCompanyUserPhoneNumber> request) throws MalformedResponseException {
-        return ScimCompanyUserPhoneNumber.parseResponse(response, context, request);
+      public APINodeList<ScimCompanyUserPhoneNumber> parseResponse(String response, APIContext context, APIRequest<ScimCompanyUserPhoneNumber> request, String header) throws MalformedResponseException {
+        return ScimCompanyUserPhoneNumber.parseResponse(response, context, request, header);
       }
     };
   }

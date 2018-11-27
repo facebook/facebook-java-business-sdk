@@ -67,7 +67,7 @@ public class AdDynamicCreative extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdDynamicCreative loadJSON(String json, APIContext context) {
+  public static AdDynamicCreative loadJSON(String json, APIContext context, String header) {
     AdDynamicCreative adDynamicCreative = getGson().fromJson(json, AdDynamicCreative.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class AdDynamicCreative extends APINode {
     }
     adDynamicCreative.context = context;
     adDynamicCreative.rawValue = json;
+    adDynamicCreative.header = header;
     return adDynamicCreative;
   }
 
-  public static APINodeList<AdDynamicCreative> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdDynamicCreative> adDynamicCreatives = new APINodeList<AdDynamicCreative>(request, json);
+  public static APINodeList<AdDynamicCreative> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdDynamicCreative> adDynamicCreatives = new APINodeList<AdDynamicCreative>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class AdDynamicCreative extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adDynamicCreatives.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adDynamicCreatives.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adDynamicCreatives;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class AdDynamicCreative extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adDynamicCreatives.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adDynamicCreatives.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class AdDynamicCreative extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adDynamicCreatives.add(loadJSON(entry.getValue().toString(), context));
+                  adDynamicCreatives.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adDynamicCreatives.add(loadJSON(obj.toString(), context));
+              adDynamicCreatives.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adDynamicCreatives;
@@ -149,7 +150,7 @@ public class AdDynamicCreative extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adDynamicCreatives.add(loadJSON(entry.getValue().toString(), context));
+              adDynamicCreatives.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adDynamicCreatives;
         } else {
@@ -168,7 +169,7 @@ public class AdDynamicCreative extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adDynamicCreatives.add(loadJSON(value.toString(), context));
+              adDynamicCreatives.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class AdDynamicCreative extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adDynamicCreatives.clear();
-          adDynamicCreatives.add(loadJSON(json, context));
+          adDynamicCreatives.add(loadJSON(json, context, header));
           return adDynamicCreatives;
         }
       }
@@ -253,8 +254,8 @@ public class AdDynamicCreative extends APINode {
 
   public static APIRequest.ResponseParser<AdDynamicCreative> getParser() {
     return new APIRequest.ResponseParser<AdDynamicCreative>() {
-      public APINodeList<AdDynamicCreative> parseResponse(String response, APIContext context, APIRequest<AdDynamicCreative> request) throws MalformedResponseException {
-        return AdDynamicCreative.parseResponse(response, context, request);
+      public APINodeList<AdDynamicCreative> parseResponse(String response, APIContext context, APIRequest<AdDynamicCreative> request, String header) throws MalformedResponseException {
+        return AdDynamicCreative.parseResponse(response, context, request, header);
       }
     };
   }

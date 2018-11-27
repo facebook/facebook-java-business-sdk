@@ -75,7 +75,7 @@ public class MinimumBudget extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static MinimumBudget loadJSON(String json, APIContext context) {
+  public static MinimumBudget loadJSON(String json, APIContext context, String header) {
     MinimumBudget minimumBudget = getGson().fromJson(json, MinimumBudget.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -92,11 +92,12 @@ public class MinimumBudget extends APINode {
     }
     minimumBudget.context = context;
     minimumBudget.rawValue = json;
+    minimumBudget.header = header;
     return minimumBudget;
   }
 
-  public static APINodeList<MinimumBudget> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<MinimumBudget> minimumBudgets = new APINodeList<MinimumBudget>(request, json);
+  public static APINodeList<MinimumBudget> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<MinimumBudget> minimumBudgets = new APINodeList<MinimumBudget>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -107,7 +108,7 @@ public class MinimumBudget extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          minimumBudgets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          minimumBudgets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return minimumBudgets;
       } else if (result.isJsonObject()) {
@@ -132,7 +133,7 @@ public class MinimumBudget extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              minimumBudgets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              minimumBudgets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -143,13 +144,13 @@ public class MinimumBudget extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  minimumBudgets.add(loadJSON(entry.getValue().toString(), context));
+                  minimumBudgets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              minimumBudgets.add(loadJSON(obj.toString(), context));
+              minimumBudgets.add(loadJSON(obj.toString(), context, header));
             }
           }
           return minimumBudgets;
@@ -157,7 +158,7 @@ public class MinimumBudget extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              minimumBudgets.add(loadJSON(entry.getValue().toString(), context));
+              minimumBudgets.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return minimumBudgets;
         } else {
@@ -176,7 +177,7 @@ public class MinimumBudget extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              minimumBudgets.add(loadJSON(value.toString(), context));
+              minimumBudgets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -188,7 +189,7 @@ public class MinimumBudget extends APINode {
 
           // Sixth, check if it's pure JsonObject
           minimumBudgets.clear();
-          minimumBudgets.add(loadJSON(json, context));
+          minimumBudgets.add(loadJSON(json, context, header));
           return minimumBudgets;
         }
       }
@@ -301,8 +302,8 @@ public class MinimumBudget extends APINode {
 
   public static APIRequest.ResponseParser<MinimumBudget> getParser() {
     return new APIRequest.ResponseParser<MinimumBudget>() {
-      public APINodeList<MinimumBudget> parseResponse(String response, APIContext context, APIRequest<MinimumBudget> request) throws MalformedResponseException {
-        return MinimumBudget.parseResponse(response, context, request);
+      public APINodeList<MinimumBudget> parseResponse(String response, APIContext context, APIRequest<MinimumBudget> request, String header) throws MalformedResponseException {
+        return MinimumBudget.parseResponse(response, context, request, header);
       }
     };
   }

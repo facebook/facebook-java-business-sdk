@@ -69,7 +69,7 @@ public class ReachFrequencyEstimatesDemoBreakdown extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ReachFrequencyEstimatesDemoBreakdown loadJSON(String json, APIContext context) {
+  public static ReachFrequencyEstimatesDemoBreakdown loadJSON(String json, APIContext context, String header) {
     ReachFrequencyEstimatesDemoBreakdown reachFrequencyEstimatesDemoBreakdown = getGson().fromJson(json, ReachFrequencyEstimatesDemoBreakdown.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class ReachFrequencyEstimatesDemoBreakdown extends APINode {
     }
     reachFrequencyEstimatesDemoBreakdown.context = context;
     reachFrequencyEstimatesDemoBreakdown.rawValue = json;
+    reachFrequencyEstimatesDemoBreakdown.header = header;
     return reachFrequencyEstimatesDemoBreakdown;
   }
 
-  public static APINodeList<ReachFrequencyEstimatesDemoBreakdown> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ReachFrequencyEstimatesDemoBreakdown> reachFrequencyEstimatesDemoBreakdowns = new APINodeList<ReachFrequencyEstimatesDemoBreakdown>(request, json);
+  public static APINodeList<ReachFrequencyEstimatesDemoBreakdown> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ReachFrequencyEstimatesDemoBreakdown> reachFrequencyEstimatesDemoBreakdowns = new APINodeList<ReachFrequencyEstimatesDemoBreakdown>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class ReachFrequencyEstimatesDemoBreakdown extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return reachFrequencyEstimatesDemoBreakdowns;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class ReachFrequencyEstimatesDemoBreakdown extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class ReachFrequencyEstimatesDemoBreakdown extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(entry.getValue().toString(), context));
+                  reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(obj.toString(), context));
+              reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(obj.toString(), context, header));
             }
           }
           return reachFrequencyEstimatesDemoBreakdowns;
@@ -151,7 +152,7 @@ public class ReachFrequencyEstimatesDemoBreakdown extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(entry.getValue().toString(), context));
+              reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return reachFrequencyEstimatesDemoBreakdowns;
         } else {
@@ -170,7 +171,7 @@ public class ReachFrequencyEstimatesDemoBreakdown extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(value.toString(), context));
+              reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class ReachFrequencyEstimatesDemoBreakdown extends APINode {
 
           // Sixth, check if it's pure JsonObject
           reachFrequencyEstimatesDemoBreakdowns.clear();
-          reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(json, context));
+          reachFrequencyEstimatesDemoBreakdowns.add(loadJSON(json, context, header));
           return reachFrequencyEstimatesDemoBreakdowns;
         }
       }
@@ -265,8 +266,8 @@ public class ReachFrequencyEstimatesDemoBreakdown extends APINode {
 
   public static APIRequest.ResponseParser<ReachFrequencyEstimatesDemoBreakdown> getParser() {
     return new APIRequest.ResponseParser<ReachFrequencyEstimatesDemoBreakdown>() {
-      public APINodeList<ReachFrequencyEstimatesDemoBreakdown> parseResponse(String response, APIContext context, APIRequest<ReachFrequencyEstimatesDemoBreakdown> request) throws MalformedResponseException {
-        return ReachFrequencyEstimatesDemoBreakdown.parseResponse(response, context, request);
+      public APINodeList<ReachFrequencyEstimatesDemoBreakdown> parseResponse(String response, APIContext context, APIRequest<ReachFrequencyEstimatesDemoBreakdown> request, String header) throws MalformedResponseException {
+        return ReachFrequencyEstimatesDemoBreakdown.parseResponse(response, context, request, header);
       }
     };
   }

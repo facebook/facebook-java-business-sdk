@@ -71,7 +71,7 @@ public class LeadGenAppointmentBookingInfo extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LeadGenAppointmentBookingInfo loadJSON(String json, APIContext context) {
+  public static LeadGenAppointmentBookingInfo loadJSON(String json, APIContext context, String header) {
     LeadGenAppointmentBookingInfo leadGenAppointmentBookingInfo = getGson().fromJson(json, LeadGenAppointmentBookingInfo.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class LeadGenAppointmentBookingInfo extends APINode {
     }
     leadGenAppointmentBookingInfo.context = context;
     leadGenAppointmentBookingInfo.rawValue = json;
+    leadGenAppointmentBookingInfo.header = header;
     return leadGenAppointmentBookingInfo;
   }
 
-  public static APINodeList<LeadGenAppointmentBookingInfo> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LeadGenAppointmentBookingInfo> leadGenAppointmentBookingInfos = new APINodeList<LeadGenAppointmentBookingInfo>(request, json);
+  public static APINodeList<LeadGenAppointmentBookingInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LeadGenAppointmentBookingInfo> leadGenAppointmentBookingInfos = new APINodeList<LeadGenAppointmentBookingInfo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class LeadGenAppointmentBookingInfo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          leadGenAppointmentBookingInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          leadGenAppointmentBookingInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return leadGenAppointmentBookingInfos;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class LeadGenAppointmentBookingInfo extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              leadGenAppointmentBookingInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              leadGenAppointmentBookingInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class LeadGenAppointmentBookingInfo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  leadGenAppointmentBookingInfos.add(loadJSON(entry.getValue().toString(), context));
+                  leadGenAppointmentBookingInfos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              leadGenAppointmentBookingInfos.add(loadJSON(obj.toString(), context));
+              leadGenAppointmentBookingInfos.add(loadJSON(obj.toString(), context, header));
             }
           }
           return leadGenAppointmentBookingInfos;
@@ -153,7 +154,7 @@ public class LeadGenAppointmentBookingInfo extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              leadGenAppointmentBookingInfos.add(loadJSON(entry.getValue().toString(), context));
+              leadGenAppointmentBookingInfos.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return leadGenAppointmentBookingInfos;
         } else {
@@ -172,7 +173,7 @@ public class LeadGenAppointmentBookingInfo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              leadGenAppointmentBookingInfos.add(loadJSON(value.toString(), context));
+              leadGenAppointmentBookingInfos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class LeadGenAppointmentBookingInfo extends APINode {
 
           // Sixth, check if it's pure JsonObject
           leadGenAppointmentBookingInfos.clear();
-          leadGenAppointmentBookingInfos.add(loadJSON(json, context));
+          leadGenAppointmentBookingInfos.add(loadJSON(json, context, header));
           return leadGenAppointmentBookingInfos;
         }
       }
@@ -277,8 +278,8 @@ public class LeadGenAppointmentBookingInfo extends APINode {
 
   public static APIRequest.ResponseParser<LeadGenAppointmentBookingInfo> getParser() {
     return new APIRequest.ResponseParser<LeadGenAppointmentBookingInfo>() {
-      public APINodeList<LeadGenAppointmentBookingInfo> parseResponse(String response, APIContext context, APIRequest<LeadGenAppointmentBookingInfo> request) throws MalformedResponseException {
-        return LeadGenAppointmentBookingInfo.parseResponse(response, context, request);
+      public APINodeList<LeadGenAppointmentBookingInfo> parseResponse(String response, APIContext context, APIRequest<LeadGenAppointmentBookingInfo> request, String header) throws MalformedResponseException {
+        return LeadGenAppointmentBookingInfo.parseResponse(response, context, request, header);
       }
     };
   }

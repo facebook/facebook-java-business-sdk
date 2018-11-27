@@ -242,7 +242,7 @@ public class PagePost extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PagePost loadJSON(String json, APIContext context) {
+  public static PagePost loadJSON(String json, APIContext context, String header) {
     PagePost pagePost = getGson().fromJson(json, PagePost.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -259,11 +259,12 @@ public class PagePost extends APINode {
     }
     pagePost.context = context;
     pagePost.rawValue = json;
+    pagePost.header = header;
     return pagePost;
   }
 
-  public static APINodeList<PagePost> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PagePost> pagePosts = new APINodeList<PagePost>(request, json);
+  public static APINodeList<PagePost> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PagePost> pagePosts = new APINodeList<PagePost>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -274,7 +275,7 @@ public class PagePost extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pagePosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pagePosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pagePosts;
       } else if (result.isJsonObject()) {
@@ -299,7 +300,7 @@ public class PagePost extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pagePosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pagePosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -310,13 +311,13 @@ public class PagePost extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pagePosts.add(loadJSON(entry.getValue().toString(), context));
+                  pagePosts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pagePosts.add(loadJSON(obj.toString(), context));
+              pagePosts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pagePosts;
@@ -324,7 +325,7 @@ public class PagePost extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pagePosts.add(loadJSON(entry.getValue().toString(), context));
+              pagePosts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pagePosts;
         } else {
@@ -343,7 +344,7 @@ public class PagePost extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pagePosts.add(loadJSON(value.toString(), context));
+              pagePosts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -355,7 +356,7 @@ public class PagePost extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pagePosts.clear();
-          pagePosts.add(loadJSON(json, context));
+          pagePosts.add(loadJSON(json, context, header));
           return pagePosts;
         }
       }
@@ -728,8 +729,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -739,7 +740,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -753,7 +755,7 @@ public class PagePost extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetAttachments.this.parseResponse(result);
+               return APIRequestGetAttachments.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -856,8 +858,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINodeList<Comment> parseResponse(String response) throws APIException {
-      return Comment.parseResponse(response, getContext(), this);
+    public APINodeList<Comment> parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -867,7 +869,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINodeList<Comment> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -881,7 +884,7 @@ public class PagePost extends APINode {
         new Function<String, APINodeList<Comment>>() {
            public APINodeList<Comment> apply(String result) {
              try {
-               return APIRequestGetComments.this.parseResponse(result);
+               return APIRequestGetComments.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1149,8 +1152,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public Comment parseResponse(String response) throws APIException {
-      return Comment.parseResponse(response, getContext(), this).head();
+    public Comment parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1160,7 +1163,8 @@ public class PagePost extends APINode {
 
     @Override
     public Comment execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1174,7 +1178,7 @@ public class PagePost extends APINode {
         new Function<String, Comment>() {
            public Comment apply(String result) {
              try {
-               return APIRequestCreateComment.this.parseResponse(result);
+               return APIRequestCreateComment.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1326,8 +1330,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINodeList<RTBDynamicPost> parseResponse(String response) throws APIException {
-      return RTBDynamicPost.parseResponse(response, getContext(), this);
+    public APINodeList<RTBDynamicPost> parseResponse(String response, String header) throws APIException {
+      return RTBDynamicPost.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1337,7 +1341,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINodeList<RTBDynamicPost> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1351,7 +1356,7 @@ public class PagePost extends APINode {
         new Function<String, APINodeList<RTBDynamicPost>>() {
            public APINodeList<RTBDynamicPost> apply(String result) {
              try {
-               return APIRequestGetDynamicPosts.this.parseResponse(result);
+               return APIRequestGetDynamicPosts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1506,8 +1511,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1517,7 +1522,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1531,7 +1537,7 @@ public class PagePost extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetEditActions.this.parseResponse(result);
+               return APIRequestGetEditActions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1622,8 +1628,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINodeList<InsightsResult> parseResponse(String response) throws APIException {
-      return InsightsResult.parseResponse(response, getContext(), this);
+    public APINodeList<InsightsResult> parseResponse(String response, String header) throws APIException {
+      return InsightsResult.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1633,7 +1639,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINodeList<InsightsResult> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1647,7 +1654,7 @@ public class PagePost extends APINode {
         new Function<String, APINodeList<InsightsResult>>() {
            public APINodeList<InsightsResult> apply(String result) {
              try {
-               return APIRequestGetInsights.this.parseResponse(result);
+               return APIRequestGetInsights.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1822,8 +1829,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1833,7 +1840,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1847,7 +1855,7 @@ public class PagePost extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteLikes.this.parseResponse(result);
+               return APIRequestDeleteLikes.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1946,8 +1954,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1957,7 +1965,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1971,7 +1980,7 @@ public class PagePost extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetLikes.this.parseResponse(result);
+               return APIRequestGetLikes.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2129,8 +2138,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public PagePost parseResponse(String response) throws APIException {
-      return PagePost.parseResponse(response, getContext(), this).head();
+    public PagePost parseResponse(String response, String header) throws APIException {
+      return PagePost.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2140,7 +2149,8 @@ public class PagePost extends APINode {
 
     @Override
     public PagePost execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2154,7 +2164,7 @@ public class PagePost extends APINode {
         new Function<String, PagePost>() {
            public PagePost apply(String result) {
              try {
-               return APIRequestCreateLike.this.parseResponse(result);
+               return APIRequestCreateLike.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2260,8 +2270,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2271,7 +2281,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2285,7 +2296,7 @@ public class PagePost extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreatePromotion.this.parseResponse(result);
+               return APIRequestCreatePromotion.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2472,8 +2483,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2483,7 +2494,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2497,7 +2509,7 @@ public class PagePost extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetReactions.this.parseResponse(result);
+               return APIRequestGetReactions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2662,7 +2674,6 @@ public class PagePost extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -2683,12 +2694,10 @@ public class PagePost extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -2716,7 +2725,6 @@ public class PagePost extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -2725,8 +2733,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2736,7 +2744,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2750,7 +2759,7 @@ public class PagePost extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetSeen.this.parseResponse(result);
+               return APIRequestGetSeen.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2838,13 +2847,6 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSeen requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetSeen requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetSeen requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetSeen requestBirthdayField () {
@@ -2987,13 +2989,6 @@ public class PagePost extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetSeen requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetSeen requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetSeen requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -3020,13 +3015,6 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSeen requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetSeen requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetSeen requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetSeen requestLastNameField () {
@@ -3218,13 +3206,6 @@ public class PagePost extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetSeen requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetSeen requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetSeen requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -3335,8 +3316,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINodeList<Post> parseResponse(String response) throws APIException {
-      return Post.parseResponse(response, getContext(), this);
+    public APINodeList<Post> parseResponse(String response, String header) throws APIException {
+      return Post.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3346,7 +3327,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINodeList<Post> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3360,7 +3342,7 @@ public class PagePost extends APINode {
         new Function<String, APINodeList<Post>>() {
            public APINodeList<Post> apply(String result) {
              try {
-               return APIRequestGetShareDPosts.this.parseResponse(result);
+               return APIRequestGetShareDPosts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3896,7 +3878,6 @@ public class PagePost extends APINode {
       "general_manager",
       "genre",
       "global_brand_page_name",
-      "global_brand_parent_page",
       "global_brand_root_id",
       "has_added_app",
       "has_whatsapp_business_number",
@@ -3963,7 +3944,6 @@ public class PagePost extends APINode {
       "promotion_eligible",
       "promotion_ineligible_reason",
       "public_transit",
-      "publisher_space",
       "rating_count",
       "recipient",
       "record_label",
@@ -3995,8 +3975,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINodeList<Page> parseResponse(String response) throws APIException {
-      return Page.parseResponse(response, getContext(), this);
+    public APINodeList<Page> parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4006,7 +3986,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINodeList<Page> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4020,7 +4001,7 @@ public class PagePost extends APINode {
         new Function<String, APINodeList<Page>>() {
            public APINodeList<Page> apply(String result) {
              try {
-               return APIRequestGetSponsorTags.this.parseResponse(result);
+               return APIRequestGetSponsorTags.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4416,13 +4397,6 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSponsorTags requestGlobalBrandPageNameField (boolean value) {
       this.requestField("global_brand_page_name", value);
-      return this;
-    }
-    public APIRequestGetSponsorTags requestGlobalBrandParentPageField () {
-      return this.requestGlobalBrandParentPageField(true);
-    }
-    public APIRequestGetSponsorTags requestGlobalBrandParentPageField (boolean value) {
-      this.requestField("global_brand_parent_page", value);
       return this;
     }
     public APIRequestGetSponsorTags requestGlobalBrandRootIdField () {
@@ -4887,13 +4861,6 @@ public class PagePost extends APINode {
       this.requestField("public_transit", value);
       return this;
     }
-    public APIRequestGetSponsorTags requestPublisherSpaceField () {
-      return this.requestPublisherSpaceField(true);
-    }
-    public APIRequestGetSponsorTags requestPublisherSpaceField (boolean value) {
-      this.requestField("publisher_space", value);
-      return this;
-    }
     public APIRequestGetSponsorTags requestRatingCountField () {
       return this.requestRatingCountField(true);
     }
@@ -5117,8 +5084,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -5128,7 +5095,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -5142,7 +5110,7 @@ public class PagePost extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetTo.this.parseResponse(result);
+               return APIRequestGetTo.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5308,8 +5276,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -5319,7 +5287,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -5333,7 +5302,7 @@ public class PagePost extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetWithTags.this.parseResponse(result);
+               return APIRequestGetWithTags.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5488,8 +5457,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -5499,7 +5468,8 @@ public class PagePost extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -5513,7 +5483,7 @@ public class PagePost extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5651,8 +5621,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public PagePost parseResponse(String response) throws APIException {
-      return PagePost.parseResponse(response, getContext(), this).head();
+    public PagePost parseResponse(String response, String header) throws APIException {
+      return PagePost.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -5662,7 +5632,8 @@ public class PagePost extends APINode {
 
     @Override
     public PagePost execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -5676,7 +5647,7 @@ public class PagePost extends APINode {
         new Function<String, PagePost>() {
            public PagePost apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6204,8 +6175,8 @@ public class PagePost extends APINode {
     };
 
     @Override
-    public PagePost parseResponse(String response) throws APIException {
-      return PagePost.parseResponse(response, getContext(), this).head();
+    public PagePost parseResponse(String response, String header) throws APIException {
+      return PagePost.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -6215,7 +6186,8 @@ public class PagePost extends APINode {
 
     @Override
     public PagePost execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -6229,7 +6201,7 @@ public class PagePost extends APINode {
         new Function<String, PagePost>() {
            public PagePost apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6779,6 +6751,8 @@ public class PagePost extends APINode {
       VALUE_MULT_CUSTOM_AUDIENCES("MULT_CUSTOM_AUDIENCES"),
       @SerializedName("EVENT_CUSTOM_AUDIENCES")
       VALUE_EVENT_CUSTOM_AUDIENCES("EVENT_CUSTOM_AUDIENCES"),
+      @SerializedName("AUTO_PAGE_LOOKALIKE")
+      VALUE_AUTO_PAGE_LOOKALIKE("AUTO_PAGE_LOOKALIKE"),
       NULL(null);
 
       private String value;
@@ -6890,6 +6864,8 @@ public class PagePost extends APINode {
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
+      @SerializedName("SEE_MORE")
+      VALUE_SEE_MORE("SEE_MORE"),
       NULL(null);
 
       private String value;
@@ -6986,8 +6962,8 @@ public class PagePost extends APINode {
 
   public static APIRequest.ResponseParser<PagePost> getParser() {
     return new APIRequest.ResponseParser<PagePost>() {
-      public APINodeList<PagePost> parseResponse(String response, APIContext context, APIRequest<PagePost> request) throws MalformedResponseException {
-        return PagePost.parseResponse(response, context, request);
+      public APINodeList<PagePost> parseResponse(String response, APIContext context, APIRequest<PagePost> request, String header) throws MalformedResponseException {
+        return PagePost.parseResponse(response, context, request, header);
       }
     };
   }

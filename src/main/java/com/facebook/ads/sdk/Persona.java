@@ -128,7 +128,7 @@ public class Persona extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Persona loadJSON(String json, APIContext context) {
+  public static Persona loadJSON(String json, APIContext context, String header) {
     Persona persona = getGson().fromJson(json, Persona.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -145,11 +145,12 @@ public class Persona extends APINode {
     }
     persona.context = context;
     persona.rawValue = json;
+    persona.header = header;
     return persona;
   }
 
-  public static APINodeList<Persona> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Persona> personas = new APINodeList<Persona>(request, json);
+  public static APINodeList<Persona> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Persona> personas = new APINodeList<Persona>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -160,7 +161,7 @@ public class Persona extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          personas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          personas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return personas;
       } else if (result.isJsonObject()) {
@@ -185,7 +186,7 @@ public class Persona extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              personas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              personas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -196,13 +197,13 @@ public class Persona extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  personas.add(loadJSON(entry.getValue().toString(), context));
+                  personas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              personas.add(loadJSON(obj.toString(), context));
+              personas.add(loadJSON(obj.toString(), context, header));
             }
           }
           return personas;
@@ -210,7 +211,7 @@ public class Persona extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              personas.add(loadJSON(entry.getValue().toString(), context));
+              personas.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return personas;
         } else {
@@ -229,7 +230,7 @@ public class Persona extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              personas.add(loadJSON(value.toString(), context));
+              personas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -241,7 +242,7 @@ public class Persona extends APINode {
 
           // Sixth, check if it's pure JsonObject
           personas.clear();
-          personas.add(loadJSON(json, context));
+          personas.add(loadJSON(json, context, header));
           return personas;
         }
       }
@@ -306,8 +307,8 @@ public class Persona extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -317,7 +318,8 @@ public class Persona extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -331,7 +333,7 @@ public class Persona extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -412,8 +414,8 @@ public class Persona extends APINode {
     };
 
     @Override
-    public Persona parseResponse(String response) throws APIException {
-      return Persona.parseResponse(response, getContext(), this).head();
+    public Persona parseResponse(String response, String header) throws APIException {
+      return Persona.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -423,7 +425,8 @@ public class Persona extends APINode {
 
     @Override
     public Persona execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -437,7 +440,7 @@ public class Persona extends APINode {
         new Function<String, Persona>() {
            public Persona apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -547,8 +550,8 @@ public class Persona extends APINode {
 
   public static APIRequest.ResponseParser<Persona> getParser() {
     return new APIRequest.ResponseParser<Persona>() {
-      public APINodeList<Persona> parseResponse(String response, APIContext context, APIRequest<Persona> request) throws MalformedResponseException {
-        return Persona.parseResponse(response, context, request);
+      public APINodeList<Persona> parseResponse(String response, APIContext context, APIRequest<Persona> request, String header) throws MalformedResponseException {
+        return Persona.parseResponse(response, context, request, header);
       }
     };
   }

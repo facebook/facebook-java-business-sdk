@@ -65,7 +65,7 @@ public class PlatformSessionKey extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PlatformSessionKey loadJSON(String json, APIContext context) {
+  public static PlatformSessionKey loadJSON(String json, APIContext context, String header) {
     PlatformSessionKey platformSessionKey = getGson().fromJson(json, PlatformSessionKey.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -82,11 +82,12 @@ public class PlatformSessionKey extends APINode {
     }
     platformSessionKey.context = context;
     platformSessionKey.rawValue = json;
+    platformSessionKey.header = header;
     return platformSessionKey;
   }
 
-  public static APINodeList<PlatformSessionKey> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PlatformSessionKey> platformSessionKeys = new APINodeList<PlatformSessionKey>(request, json);
+  public static APINodeList<PlatformSessionKey> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PlatformSessionKey> platformSessionKeys = new APINodeList<PlatformSessionKey>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -97,7 +98,7 @@ public class PlatformSessionKey extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          platformSessionKeys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          platformSessionKeys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return platformSessionKeys;
       } else if (result.isJsonObject()) {
@@ -122,7 +123,7 @@ public class PlatformSessionKey extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              platformSessionKeys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              platformSessionKeys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -133,13 +134,13 @@ public class PlatformSessionKey extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  platformSessionKeys.add(loadJSON(entry.getValue().toString(), context));
+                  platformSessionKeys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              platformSessionKeys.add(loadJSON(obj.toString(), context));
+              platformSessionKeys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return platformSessionKeys;
@@ -147,7 +148,7 @@ public class PlatformSessionKey extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              platformSessionKeys.add(loadJSON(entry.getValue().toString(), context));
+              platformSessionKeys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return platformSessionKeys;
         } else {
@@ -166,7 +167,7 @@ public class PlatformSessionKey extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              platformSessionKeys.add(loadJSON(value.toString(), context));
+              platformSessionKeys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -178,7 +179,7 @@ public class PlatformSessionKey extends APINode {
 
           // Sixth, check if it's pure JsonObject
           platformSessionKeys.clear();
-          platformSessionKeys.add(loadJSON(json, context));
+          platformSessionKeys.add(loadJSON(json, context, header));
           return platformSessionKeys;
         }
       }
@@ -241,8 +242,8 @@ public class PlatformSessionKey extends APINode {
 
   public static APIRequest.ResponseParser<PlatformSessionKey> getParser() {
     return new APIRequest.ResponseParser<PlatformSessionKey>() {
-      public APINodeList<PlatformSessionKey> parseResponse(String response, APIContext context, APIRequest<PlatformSessionKey> request) throws MalformedResponseException {
-        return PlatformSessionKey.parseResponse(response, context, request);
+      public APINodeList<PlatformSessionKey> parseResponse(String response, APIContext context, APIRequest<PlatformSessionKey> request, String header) throws MalformedResponseException {
+        return PlatformSessionKey.parseResponse(response, context, request, header);
       }
     };
   }

@@ -71,7 +71,7 @@ public class ProductFeedRuleSuggestion extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductFeedRuleSuggestion loadJSON(String json, APIContext context) {
+  public static ProductFeedRuleSuggestion loadJSON(String json, APIContext context, String header) {
     ProductFeedRuleSuggestion productFeedRuleSuggestion = getGson().fromJson(json, ProductFeedRuleSuggestion.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class ProductFeedRuleSuggestion extends APINode {
     }
     productFeedRuleSuggestion.context = context;
     productFeedRuleSuggestion.rawValue = json;
+    productFeedRuleSuggestion.header = header;
     return productFeedRuleSuggestion;
   }
 
-  public static APINodeList<ProductFeedRuleSuggestion> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ProductFeedRuleSuggestion> productFeedRuleSuggestions = new APINodeList<ProductFeedRuleSuggestion>(request, json);
+  public static APINodeList<ProductFeedRuleSuggestion> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductFeedRuleSuggestion> productFeedRuleSuggestions = new APINodeList<ProductFeedRuleSuggestion>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class ProductFeedRuleSuggestion extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productFeedRuleSuggestions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          productFeedRuleSuggestions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return productFeedRuleSuggestions;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class ProductFeedRuleSuggestion extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productFeedRuleSuggestions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              productFeedRuleSuggestions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class ProductFeedRuleSuggestion extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productFeedRuleSuggestions.add(loadJSON(entry.getValue().toString(), context));
+                  productFeedRuleSuggestions.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productFeedRuleSuggestions.add(loadJSON(obj.toString(), context));
+              productFeedRuleSuggestions.add(loadJSON(obj.toString(), context, header));
             }
           }
           return productFeedRuleSuggestions;
@@ -153,7 +154,7 @@ public class ProductFeedRuleSuggestion extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productFeedRuleSuggestions.add(loadJSON(entry.getValue().toString(), context));
+              productFeedRuleSuggestions.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return productFeedRuleSuggestions;
         } else {
@@ -172,7 +173,7 @@ public class ProductFeedRuleSuggestion extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productFeedRuleSuggestions.add(loadJSON(value.toString(), context));
+              productFeedRuleSuggestions.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class ProductFeedRuleSuggestion extends APINode {
 
           // Sixth, check if it's pure JsonObject
           productFeedRuleSuggestions.clear();
-          productFeedRuleSuggestions.add(loadJSON(json, context));
+          productFeedRuleSuggestions.add(loadJSON(json, context, header));
           return productFeedRuleSuggestions;
         }
       }
@@ -277,8 +278,8 @@ public class ProductFeedRuleSuggestion extends APINode {
 
   public static APIRequest.ResponseParser<ProductFeedRuleSuggestion> getParser() {
     return new APIRequest.ResponseParser<ProductFeedRuleSuggestion>() {
-      public APINodeList<ProductFeedRuleSuggestion> parseResponse(String response, APIContext context, APIRequest<ProductFeedRuleSuggestion> request) throws MalformedResponseException {
-        return ProductFeedRuleSuggestion.parseResponse(response, context, request);
+      public APINodeList<ProductFeedRuleSuggestion> parseResponse(String response, APIContext context, APIRequest<ProductFeedRuleSuggestion> request, String header) throws MalformedResponseException {
+        return ProductFeedRuleSuggestion.parseResponse(response, context, request, header);
       }
     };
   }

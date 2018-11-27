@@ -71,7 +71,7 @@ public class CampaignGroupBrandConfiguration extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CampaignGroupBrandConfiguration loadJSON(String json, APIContext context) {
+  public static CampaignGroupBrandConfiguration loadJSON(String json, APIContext context, String header) {
     CampaignGroupBrandConfiguration campaignGroupBrandConfiguration = getGson().fromJson(json, CampaignGroupBrandConfiguration.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class CampaignGroupBrandConfiguration extends APINode {
     }
     campaignGroupBrandConfiguration.context = context;
     campaignGroupBrandConfiguration.rawValue = json;
+    campaignGroupBrandConfiguration.header = header;
     return campaignGroupBrandConfiguration;
   }
 
-  public static APINodeList<CampaignGroupBrandConfiguration> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CampaignGroupBrandConfiguration> campaignGroupBrandConfigurations = new APINodeList<CampaignGroupBrandConfiguration>(request, json);
+  public static APINodeList<CampaignGroupBrandConfiguration> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CampaignGroupBrandConfiguration> campaignGroupBrandConfigurations = new APINodeList<CampaignGroupBrandConfiguration>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class CampaignGroupBrandConfiguration extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          campaignGroupBrandConfigurations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          campaignGroupBrandConfigurations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return campaignGroupBrandConfigurations;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class CampaignGroupBrandConfiguration extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              campaignGroupBrandConfigurations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              campaignGroupBrandConfigurations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class CampaignGroupBrandConfiguration extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  campaignGroupBrandConfigurations.add(loadJSON(entry.getValue().toString(), context));
+                  campaignGroupBrandConfigurations.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              campaignGroupBrandConfigurations.add(loadJSON(obj.toString(), context));
+              campaignGroupBrandConfigurations.add(loadJSON(obj.toString(), context, header));
             }
           }
           return campaignGroupBrandConfigurations;
@@ -153,7 +154,7 @@ public class CampaignGroupBrandConfiguration extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              campaignGroupBrandConfigurations.add(loadJSON(entry.getValue().toString(), context));
+              campaignGroupBrandConfigurations.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return campaignGroupBrandConfigurations;
         } else {
@@ -172,7 +173,7 @@ public class CampaignGroupBrandConfiguration extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              campaignGroupBrandConfigurations.add(loadJSON(value.toString(), context));
+              campaignGroupBrandConfigurations.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class CampaignGroupBrandConfiguration extends APINode {
 
           // Sixth, check if it's pure JsonObject
           campaignGroupBrandConfigurations.clear();
-          campaignGroupBrandConfigurations.add(loadJSON(json, context));
+          campaignGroupBrandConfigurations.add(loadJSON(json, context, header));
           return campaignGroupBrandConfigurations;
         }
       }
@@ -277,8 +278,8 @@ public class CampaignGroupBrandConfiguration extends APINode {
 
   public static APIRequest.ResponseParser<CampaignGroupBrandConfiguration> getParser() {
     return new APIRequest.ResponseParser<CampaignGroupBrandConfiguration>() {
-      public APINodeList<CampaignGroupBrandConfiguration> parseResponse(String response, APIContext context, APIRequest<CampaignGroupBrandConfiguration> request) throws MalformedResponseException {
-        return CampaignGroupBrandConfiguration.parseResponse(response, context, request);
+      public APINodeList<CampaignGroupBrandConfiguration> parseResponse(String response, APIContext context, APIRequest<CampaignGroupBrandConfiguration> request, String header) throws MalformedResponseException {
+        return CampaignGroupBrandConfiguration.parseResponse(response, context, request, header);
       }
     };
   }

@@ -63,8 +63,6 @@ public class AdCreative extends APINode {
   private List<AdLabel> mAdlabels = null;
   @SerializedName("applink_treatment")
   private EnumApplinkTreatment mApplinkTreatment = null;
-  @SerializedName("asset_feed_id")
-  private String mAssetFeedId = null;
   @SerializedName("asset_feed_spec")
   private AdAssetFeedSpec mAssetFeedSpec = null;
   @SerializedName("authorization_category")
@@ -139,6 +137,8 @@ public class AdCreative extends APINode {
   private AdCreativePlatformCustomization mPlatformCustomizations = null;
   @SerializedName("playable_asset_id")
   private String mPlayableAssetId = null;
+  @SerializedName("portrait_customizations")
+  private AdCreativePortraitCustomizations mPortraitCustomizations = null;
   @SerializedName("product_set_id")
   private String mProductSetId = null;
   @SerializedName("recommender_settings")
@@ -230,7 +230,7 @@ public class AdCreative extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCreative loadJSON(String json, APIContext context) {
+  public static AdCreative loadJSON(String json, APIContext context, String header) {
     AdCreative adCreative = getGson().fromJson(json, AdCreative.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -247,12 +247,13 @@ public class AdCreative extends APINode {
     }
     adCreative.context = context;
     adCreative.rawValue = json;
+    adCreative.header = header;
     adCreative.mCreativeId = adCreative.mId;
     return adCreative;
   }
 
-  public static APINodeList<AdCreative> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCreative> adCreatives = new APINodeList<AdCreative>(request, json);
+  public static APINodeList<AdCreative> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreative> adCreatives = new APINodeList<AdCreative>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -263,7 +264,7 @@ public class AdCreative extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreatives.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCreatives.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCreatives;
       } else if (result.isJsonObject()) {
@@ -288,7 +289,7 @@ public class AdCreative extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreatives.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCreatives.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -299,13 +300,13 @@ public class AdCreative extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreatives.add(loadJSON(entry.getValue().toString(), context));
+                  adCreatives.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreatives.add(loadJSON(obj.toString(), context));
+              adCreatives.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCreatives;
@@ -313,7 +314,7 @@ public class AdCreative extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreatives.add(loadJSON(entry.getValue().toString(), context));
+              adCreatives.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCreatives;
         } else {
@@ -332,7 +333,7 @@ public class AdCreative extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreatives.add(loadJSON(value.toString(), context));
+              adCreatives.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -344,7 +345,7 @@ public class AdCreative extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCreatives.clear();
-          adCreatives.add(loadJSON(json, context));
+          adCreatives.add(loadJSON(json, context, header));
           return adCreatives;
         }
       }
@@ -435,15 +436,6 @@ public class AdCreative extends APINode {
 
   public AdCreative setFieldApplinkTreatment(EnumApplinkTreatment value) {
     this.mApplinkTreatment = value;
-    return this;
-  }
-
-  public String getFieldAssetFeedId() {
-    return mAssetFeedId;
-  }
-
-  public AdCreative setFieldAssetFeedId(String value) {
-    this.mAssetFeedId = value;
     return this;
   }
 
@@ -801,6 +793,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativePortraitCustomizations getFieldPortraitCustomizations() {
+    return mPortraitCustomizations;
+  }
+
+  public AdCreative setFieldPortraitCustomizations(AdCreativePortraitCustomizations value) {
+    this.mPortraitCustomizations = value;
+    return this;
+  }
+
+  public AdCreative setFieldPortraitCustomizations(String value) {
+    Type type = new TypeToken<AdCreativePortraitCustomizations>(){}.getType();
+    this.mPortraitCustomizations = AdCreativePortraitCustomizations.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldProductSetId() {
     return mProductSetId;
   }
@@ -918,8 +924,8 @@ public class AdCreative extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -929,7 +935,8 @@ public class AdCreative extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -943,7 +950,7 @@ public class AdCreative extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAdLabels.this.parseResponse(result);
+               return APIRequestDeleteAdLabels.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1031,8 +1038,8 @@ public class AdCreative extends APINode {
     };
 
     @Override
-    public AdCreative parseResponse(String response) throws APIException {
-      return AdCreative.parseResponse(response, getContext(), this).head();
+    public AdCreative parseResponse(String response, String header) throws APIException {
+      return AdCreative.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1042,7 +1049,8 @@ public class AdCreative extends APINode {
 
     @Override
     public AdCreative execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1056,7 +1064,7 @@ public class AdCreative extends APINode {
         new Function<String, AdCreative>() {
            public AdCreative apply(String result) {
              try {
-               return APIRequestCreateAdLabel.this.parseResponse(result);
+               return APIRequestCreateAdLabel.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1139,6 +1147,7 @@ public class AdCreative extends APINode {
     public static final String[] PARAMS = {
       "ad_format",
       "dynamic_creative_spec",
+      "dynamic_asset_label",
       "interactive",
       "post",
       "height",
@@ -1157,8 +1166,8 @@ public class AdCreative extends APINode {
     };
 
     @Override
-    public APINodeList<AdPreview> parseResponse(String response) throws APIException {
-      return AdPreview.parseResponse(response, getContext(), this);
+    public APINodeList<AdPreview> parseResponse(String response, String header) throws APIException {
+      return AdPreview.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1168,7 +1177,8 @@ public class AdCreative extends APINode {
 
     @Override
     public APINodeList<AdPreview> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1182,7 +1192,7 @@ public class AdCreative extends APINode {
         new Function<String, APINodeList<AdPreview>>() {
            public APINodeList<AdPreview> apply(String result) {
              try {
-               return APIRequestGetPreviews.this.parseResponse(result);
+               return APIRequestGetPreviews.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1223,6 +1233,11 @@ public class AdCreative extends APINode {
     }
     public APIRequestGetPreviews setDynamicCreativeSpec (String dynamicCreativeSpec) {
       this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
+      return this;
+    }
+
+    public APIRequestGetPreviews setDynamicAssetLabel (String dynamicAssetLabel) {
+      this.setParam("dynamic_asset_label", dynamicAssetLabel);
       return this;
     }
 
@@ -1374,8 +1389,8 @@ public class AdCreative extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1385,7 +1400,8 @@ public class AdCreative extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1399,7 +1415,7 @@ public class AdCreative extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1508,7 +1524,6 @@ public class AdCreative extends APINode {
       "actor_id",
       "adlabels",
       "applink_treatment",
-      "asset_feed_id",
       "asset_feed_spec",
       "authorization_category",
       "auto_update",
@@ -1546,6 +1561,7 @@ public class AdCreative extends APINode {
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
+      "portrait_customizations",
       "product_set_id",
       "recommender_settings",
       "status",
@@ -1559,8 +1575,8 @@ public class AdCreative extends APINode {
     };
 
     @Override
-    public AdCreative parseResponse(String response) throws APIException {
-      return AdCreative.parseResponse(response, getContext(), this).head();
+    public AdCreative parseResponse(String response, String header) throws APIException {
+      return AdCreative.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1570,7 +1586,8 @@ public class AdCreative extends APINode {
 
     @Override
     public AdCreative execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1584,7 +1601,7 @@ public class AdCreative extends APINode {
         new Function<String, AdCreative>() {
            public AdCreative apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1690,13 +1707,6 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestApplinkTreatmentField (boolean value) {
       this.requestField("applink_treatment", value);
-      return this;
-    }
-    public APIRequestGet requestAssetFeedIdField () {
-      return this.requestAssetFeedIdField(true);
-    }
-    public APIRequestGet requestAssetFeedIdField (boolean value) {
-      this.requestField("asset_feed_id", value);
       return this;
     }
     public APIRequestGet requestAssetFeedSpecField () {
@@ -1958,6 +1968,13 @@ public class AdCreative extends APINode {
       this.requestField("playable_asset_id", value);
       return this;
     }
+    public APIRequestGet requestPortraitCustomizationsField () {
+      return this.requestPortraitCustomizationsField(true);
+    }
+    public APIRequestGet requestPortraitCustomizationsField (boolean value) {
+      this.requestField("portrait_customizations", value);
+      return this;
+    }
     public APIRequestGet requestProductSetIdField () {
       return this.requestProductSetIdField(true);
     }
@@ -2048,8 +2065,8 @@ public class AdCreative extends APINode {
     };
 
     @Override
-    public AdCreative parseResponse(String response) throws APIException {
-      return AdCreative.parseResponse(response, getContext(), this).head();
+    public AdCreative parseResponse(String response, String header) throws APIException {
+      return AdCreative.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2059,7 +2076,8 @@ public class AdCreative extends APINode {
 
     @Override
     public AdCreative execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2073,7 +2091,7 @@ public class AdCreative extends APINode {
         new Function<String, AdCreative>() {
            public AdCreative apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2283,6 +2301,8 @@ public class AdCreative extends APINode {
       VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
       @SerializedName("FOLLOW_NEWS_STORYLINE")
       VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
+      @SerializedName("SEE_MORE")
+      VALUE_SEE_MORE("SEE_MORE"),
       NULL(null);
 
       private String value;
@@ -2473,7 +2493,6 @@ public class AdCreative extends APINode {
     this.mActorId = instance.mActorId;
     this.mAdlabels = instance.mAdlabels;
     this.mApplinkTreatment = instance.mApplinkTreatment;
-    this.mAssetFeedId = instance.mAssetFeedId;
     this.mAssetFeedSpec = instance.mAssetFeedSpec;
     this.mAuthorizationCategory = instance.mAuthorizationCategory;
     this.mAutoUpdate = instance.mAutoUpdate;
@@ -2511,6 +2530,7 @@ public class AdCreative extends APINode {
     this.mPlacePageSetId = instance.mPlacePageSetId;
     this.mPlatformCustomizations = instance.mPlatformCustomizations;
     this.mPlayableAssetId = instance.mPlayableAssetId;
+    this.mPortraitCustomizations = instance.mPortraitCustomizations;
     this.mProductSetId = instance.mProductSetId;
     this.mRecommenderSettings = instance.mRecommenderSettings;
     this.mStatus = instance.mStatus;
@@ -2529,8 +2549,8 @@ public class AdCreative extends APINode {
 
   public static APIRequest.ResponseParser<AdCreative> getParser() {
     return new APIRequest.ResponseParser<AdCreative>() {
-      public APINodeList<AdCreative> parseResponse(String response, APIContext context, APIRequest<AdCreative> request) throws MalformedResponseException {
-        return AdCreative.parseResponse(response, context, request);
+      public APINodeList<AdCreative> parseResponse(String response, APIContext context, APIRequest<AdCreative> request, String header) throws MalformedResponseException {
+        return AdCreative.parseResponse(response, context, request, header);
       }
     };
   }

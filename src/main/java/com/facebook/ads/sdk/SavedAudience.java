@@ -146,7 +146,7 @@ public class SavedAudience extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static SavedAudience loadJSON(String json, APIContext context) {
+  public static SavedAudience loadJSON(String json, APIContext context, String header) {
     SavedAudience savedAudience = getGson().fromJson(json, SavedAudience.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -163,11 +163,12 @@ public class SavedAudience extends APINode {
     }
     savedAudience.context = context;
     savedAudience.rawValue = json;
+    savedAudience.header = header;
     return savedAudience;
   }
 
-  public static APINodeList<SavedAudience> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<SavedAudience> savedAudiences = new APINodeList<SavedAudience>(request, json);
+  public static APINodeList<SavedAudience> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<SavedAudience> savedAudiences = new APINodeList<SavedAudience>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -178,7 +179,7 @@ public class SavedAudience extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          savedAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          savedAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return savedAudiences;
       } else if (result.isJsonObject()) {
@@ -203,7 +204,7 @@ public class SavedAudience extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              savedAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              savedAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -214,13 +215,13 @@ public class SavedAudience extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  savedAudiences.add(loadJSON(entry.getValue().toString(), context));
+                  savedAudiences.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              savedAudiences.add(loadJSON(obj.toString(), context));
+              savedAudiences.add(loadJSON(obj.toString(), context, header));
             }
           }
           return savedAudiences;
@@ -228,7 +229,7 @@ public class SavedAudience extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              savedAudiences.add(loadJSON(entry.getValue().toString(), context));
+              savedAudiences.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return savedAudiences;
         } else {
@@ -247,7 +248,7 @@ public class SavedAudience extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              savedAudiences.add(loadJSON(value.toString(), context));
+              savedAudiences.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -259,7 +260,7 @@ public class SavedAudience extends APINode {
 
           // Sixth, check if it's pure JsonObject
           savedAudiences.clear();
-          savedAudiences.add(loadJSON(json, context));
+          savedAudiences.add(loadJSON(json, context, header));
           return savedAudiences;
         }
       }
@@ -366,7 +367,6 @@ public class SavedAudience extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "ad_keywords",
-      "adasset_feed",
       "adlabels",
       "adset_schedule",
       "asset_feed_id",
@@ -390,19 +390,13 @@ public class SavedAudience extends APINode {
       "destination_type",
       "effective_status",
       "end_time",
-      "frequency_cap",
-      "frequency_cap_reset_period",
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
-      "is_autobid",
-      "is_average_price_pacing",
       "is_dynamic_creative",
-      "is_dynamic_creative_optimization",
       "issues_info",
       "lifetime_budget",
-      "lifetime_frequency_cap",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
@@ -414,7 +408,6 @@ public class SavedAudience extends APINode {
       "recurring_budget_semantics",
       "review_feedback",
       "rf_prediction_id",
-      "rtb_flag",
       "source_adset",
       "source_adset_id",
       "start_time",
@@ -422,14 +415,13 @@ public class SavedAudience extends APINode {
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
-      "tracking_specs",
       "updated_time",
       "use_new_app_click",
     };
 
     @Override
-    public APINodeList<AdSet> parseResponse(String response) throws APIException {
-      return AdSet.parseResponse(response, getContext(), this);
+    public APINodeList<AdSet> parseResponse(String response, String header) throws APIException {
+      return AdSet.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -439,7 +431,8 @@ public class SavedAudience extends APINode {
 
     @Override
     public APINodeList<AdSet> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -453,7 +446,7 @@ public class SavedAudience extends APINode {
         new Function<String, APINodeList<AdSet>>() {
            public APINodeList<AdSet> apply(String result) {
              try {
-               return APIRequestGetAdSets.this.parseResponse(result);
+               return APIRequestGetAdSets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -527,13 +520,6 @@ public class SavedAudience extends APINode {
     }
     public APIRequestGetAdSets requestAdKeywordsField (boolean value) {
       this.requestField("ad_keywords", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestAdassetFeedField () {
-      return this.requestAdassetFeedField(true);
-    }
-    public APIRequestGetAdSets requestAdassetFeedField (boolean value) {
-      this.requestField("adasset_feed", value);
       return this;
     }
     public APIRequestGetAdSets requestAdlabelsField () {
@@ -697,20 +683,6 @@ public class SavedAudience extends APINode {
       this.requestField("end_time", value);
       return this;
     }
-    public APIRequestGetAdSets requestFrequencyCapField () {
-      return this.requestFrequencyCapField(true);
-    }
-    public APIRequestGetAdSets requestFrequencyCapField (boolean value) {
-      this.requestField("frequency_cap", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestFrequencyCapResetPeriodField () {
-      return this.requestFrequencyCapResetPeriodField(true);
-    }
-    public APIRequestGetAdSets requestFrequencyCapResetPeriodField (boolean value) {
-      this.requestField("frequency_cap_reset_period", value);
-      return this;
-    }
     public APIRequestGetAdSets requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
@@ -739,32 +711,11 @@ public class SavedAudience extends APINode {
       this.requestField("instagram_actor_id", value);
       return this;
     }
-    public APIRequestGetAdSets requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetAdSets requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGetAdSets requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
-      return this;
-    }
     public APIRequestGetAdSets requestIsDynamicCreativeField () {
       return this.requestIsDynamicCreativeField(true);
     }
     public APIRequestGetAdSets requestIsDynamicCreativeField (boolean value) {
       this.requestField("is_dynamic_creative", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField () {
-      return this.requestIsDynamicCreativeOptimizationField(true);
-    }
-    public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField (boolean value) {
-      this.requestField("is_dynamic_creative_optimization", value);
       return this;
     }
     public APIRequestGetAdSets requestIssuesInfoField () {
@@ -779,13 +730,6 @@ public class SavedAudience extends APINode {
     }
     public APIRequestGetAdSets requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestLifetimeFrequencyCapField () {
-      return this.requestLifetimeFrequencyCapField(true);
-    }
-    public APIRequestGetAdSets requestLifetimeFrequencyCapField (boolean value) {
-      this.requestField("lifetime_frequency_cap", value);
       return this;
     }
     public APIRequestGetAdSets requestLifetimeImpsField () {
@@ -865,13 +809,6 @@ public class SavedAudience extends APINode {
       this.requestField("rf_prediction_id", value);
       return this;
     }
-    public APIRequestGetAdSets requestRtbFlagField () {
-      return this.requestRtbFlagField(true);
-    }
-    public APIRequestGetAdSets requestRtbFlagField (boolean value) {
-      this.requestField("rtb_flag", value);
-      return this;
-    }
     public APIRequestGetAdSets requestSourceAdsetField () {
       return this.requestSourceAdsetField(true);
     }
@@ -921,13 +858,6 @@ public class SavedAudience extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
-    public APIRequestGetAdSets requestTrackingSpecsField () {
-      return this.requestTrackingSpecsField(true);
-    }
-    public APIRequestGetAdSets requestTrackingSpecsField (boolean value) {
-      this.requestField("tracking_specs", value);
-      return this;
-    }
     public APIRequestGetAdSets requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -958,8 +888,8 @@ public class SavedAudience extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -969,7 +899,8 @@ public class SavedAudience extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -983,7 +914,7 @@ public class SavedAudience extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1073,8 +1004,8 @@ public class SavedAudience extends APINode {
     };
 
     @Override
-    public SavedAudience parseResponse(String response) throws APIException {
-      return SavedAudience.parseResponse(response, getContext(), this).head();
+    public SavedAudience parseResponse(String response, String header) throws APIException {
+      return SavedAudience.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1084,7 +1015,8 @@ public class SavedAudience extends APINode {
 
     @Override
     public SavedAudience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1098,7 +1030,7 @@ public class SavedAudience extends APINode {
         new Function<String, SavedAudience>() {
            public SavedAudience apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1280,8 +1212,8 @@ public class SavedAudience extends APINode {
 
   public static APIRequest.ResponseParser<SavedAudience> getParser() {
     return new APIRequest.ResponseParser<SavedAudience>() {
-      public APINodeList<SavedAudience> parseResponse(String response, APIContext context, APIRequest<SavedAudience> request) throws MalformedResponseException {
-        return SavedAudience.parseResponse(response, context, request);
+      public APINodeList<SavedAudience> parseResponse(String response, APIContext context, APIRequest<SavedAudience> request, String header) throws MalformedResponseException {
+        return SavedAudience.parseResponse(response, context, request, header);
       }
     };
   }

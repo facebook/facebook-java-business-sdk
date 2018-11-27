@@ -67,6 +67,8 @@ public class CopyrightReferenceContainer extends APINode {
   private String mFingerprintValidity = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("iswc")
+  private String mIswc = null;
   @SerializedName("metadata")
   private Object mMetadata = null;
   @SerializedName("published_time")
@@ -77,6 +79,8 @@ public class CopyrightReferenceContainer extends APINode {
   private String mTitle = null;
   @SerializedName("universal_content_id")
   private String mUniversalContentId = null;
+  @SerializedName("writer_names")
+  private List<String> mWriterNames = null;
   protected static Gson gson = null;
 
   public CopyrightReferenceContainer() {
@@ -85,7 +89,7 @@ public class CopyrightReferenceContainer extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CopyrightReferenceContainer loadJSON(String json, APIContext context) {
+  public static CopyrightReferenceContainer loadJSON(String json, APIContext context, String header) {
     CopyrightReferenceContainer copyrightReferenceContainer = getGson().fromJson(json, CopyrightReferenceContainer.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -102,11 +106,12 @@ public class CopyrightReferenceContainer extends APINode {
     }
     copyrightReferenceContainer.context = context;
     copyrightReferenceContainer.rawValue = json;
+    copyrightReferenceContainer.header = header;
     return copyrightReferenceContainer;
   }
 
-  public static APINodeList<CopyrightReferenceContainer> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CopyrightReferenceContainer> copyrightReferenceContainers = new APINodeList<CopyrightReferenceContainer>(request, json);
+  public static APINodeList<CopyrightReferenceContainer> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CopyrightReferenceContainer> copyrightReferenceContainers = new APINodeList<CopyrightReferenceContainer>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -117,7 +122,7 @@ public class CopyrightReferenceContainer extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          copyrightReferenceContainers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          copyrightReferenceContainers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return copyrightReferenceContainers;
       } else if (result.isJsonObject()) {
@@ -142,7 +147,7 @@ public class CopyrightReferenceContainer extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              copyrightReferenceContainers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              copyrightReferenceContainers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -153,13 +158,13 @@ public class CopyrightReferenceContainer extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  copyrightReferenceContainers.add(loadJSON(entry.getValue().toString(), context));
+                  copyrightReferenceContainers.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              copyrightReferenceContainers.add(loadJSON(obj.toString(), context));
+              copyrightReferenceContainers.add(loadJSON(obj.toString(), context, header));
             }
           }
           return copyrightReferenceContainers;
@@ -167,7 +172,7 @@ public class CopyrightReferenceContainer extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              copyrightReferenceContainers.add(loadJSON(entry.getValue().toString(), context));
+              copyrightReferenceContainers.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return copyrightReferenceContainers;
         } else {
@@ -186,7 +191,7 @@ public class CopyrightReferenceContainer extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              copyrightReferenceContainers.add(loadJSON(value.toString(), context));
+              copyrightReferenceContainers.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -198,7 +203,7 @@ public class CopyrightReferenceContainer extends APINode {
 
           // Sixth, check if it's pure JsonObject
           copyrightReferenceContainers.clear();
-          copyrightReferenceContainers.add(loadJSON(json, context));
+          copyrightReferenceContainers.add(loadJSON(json, context, header));
           return copyrightReferenceContainers;
         }
       }
@@ -281,6 +286,15 @@ public class CopyrightReferenceContainer extends APINode {
     return this;
   }
 
+  public String getFieldIswc() {
+    return mIswc;
+  }
+
+  public CopyrightReferenceContainer setFieldIswc(String value) {
+    this.mIswc = value;
+    return this;
+  }
+
   public Object getFieldMetadata() {
     return mMetadata;
   }
@@ -326,6 +340,15 @@ public class CopyrightReferenceContainer extends APINode {
     return this;
   }
 
+  public List<String> getFieldWriterNames() {
+    return mWriterNames;
+  }
+
+  public CopyrightReferenceContainer setFieldWriterNames(List<String> value) {
+    this.mWriterNames = value;
+    return this;
+  }
+
 
 
 
@@ -349,11 +372,13 @@ public class CopyrightReferenceContainer extends APINode {
     this.mDurationInSec = instance.mDurationInSec;
     this.mFingerprintValidity = instance.mFingerprintValidity;
     this.mId = instance.mId;
+    this.mIswc = instance.mIswc;
     this.mMetadata = instance.mMetadata;
     this.mPublishedTime = instance.mPublishedTime;
     this.mThumbnailUrl = instance.mThumbnailUrl;
     this.mTitle = instance.mTitle;
     this.mUniversalContentId = instance.mUniversalContentId;
+    this.mWriterNames = instance.mWriterNames;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
@@ -361,8 +386,8 @@ public class CopyrightReferenceContainer extends APINode {
 
   public static APIRequest.ResponseParser<CopyrightReferenceContainer> getParser() {
     return new APIRequest.ResponseParser<CopyrightReferenceContainer>() {
-      public APINodeList<CopyrightReferenceContainer> parseResponse(String response, APIContext context, APIRequest<CopyrightReferenceContainer> request) throws MalformedResponseException {
-        return CopyrightReferenceContainer.parseResponse(response, context, request);
+      public APINodeList<CopyrightReferenceContainer> parseResponse(String response, APIContext context, APIRequest<CopyrightReferenceContainer> request, String header) throws MalformedResponseException {
+        return CopyrightReferenceContainer.parseResponse(response, context, request, header);
       }
     };
   }

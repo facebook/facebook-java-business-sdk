@@ -132,7 +132,7 @@ public class VideoGameShow extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static VideoGameShow loadJSON(String json, APIContext context) {
+  public static VideoGameShow loadJSON(String json, APIContext context, String header) {
     VideoGameShow videoGameShow = getGson().fromJson(json, VideoGameShow.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -149,11 +149,12 @@ public class VideoGameShow extends APINode {
     }
     videoGameShow.context = context;
     videoGameShow.rawValue = json;
+    videoGameShow.header = header;
     return videoGameShow;
   }
 
-  public static APINodeList<VideoGameShow> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<VideoGameShow> videoGameShows = new APINodeList<VideoGameShow>(request, json);
+  public static APINodeList<VideoGameShow> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<VideoGameShow> videoGameShows = new APINodeList<VideoGameShow>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -164,7 +165,7 @@ public class VideoGameShow extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          videoGameShows.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          videoGameShows.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return videoGameShows;
       } else if (result.isJsonObject()) {
@@ -189,7 +190,7 @@ public class VideoGameShow extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              videoGameShows.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              videoGameShows.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -200,13 +201,13 @@ public class VideoGameShow extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  videoGameShows.add(loadJSON(entry.getValue().toString(), context));
+                  videoGameShows.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              videoGameShows.add(loadJSON(obj.toString(), context));
+              videoGameShows.add(loadJSON(obj.toString(), context, header));
             }
           }
           return videoGameShows;
@@ -214,7 +215,7 @@ public class VideoGameShow extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              videoGameShows.add(loadJSON(entry.getValue().toString(), context));
+              videoGameShows.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return videoGameShows;
         } else {
@@ -233,7 +234,7 @@ public class VideoGameShow extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              videoGameShows.add(loadJSON(value.toString(), context));
+              videoGameShows.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -245,7 +246,7 @@ public class VideoGameShow extends APINode {
 
           // Sixth, check if it's pure JsonObject
           videoGameShows.clear();
-          videoGameShows.add(loadJSON(json, context));
+          videoGameShows.add(loadJSON(json, context, header));
           return videoGameShows;
         }
       }
@@ -326,8 +327,8 @@ public class VideoGameShow extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -337,7 +338,8 @@ public class VideoGameShow extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -351,7 +353,7 @@ public class VideoGameShow extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetQuestions.this.parseResponse(result);
+               return APIRequestGetQuestions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -432,8 +434,8 @@ public class VideoGameShow extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -443,7 +445,8 @@ public class VideoGameShow extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -457,7 +460,7 @@ public class VideoGameShow extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateQuestion.this.parseResponse(result);
+               return APIRequestCreateQuestion.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -563,8 +566,8 @@ public class VideoGameShow extends APINode {
     };
 
     @Override
-    public VideoGameShow parseResponse(String response) throws APIException {
-      return VideoGameShow.parseResponse(response, getContext(), this).head();
+    public VideoGameShow parseResponse(String response, String header) throws APIException {
+      return VideoGameShow.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -574,7 +577,8 @@ public class VideoGameShow extends APINode {
 
     @Override
     public VideoGameShow execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -588,7 +592,7 @@ public class VideoGameShow extends APINode {
         new Function<String, VideoGameShow>() {
            public VideoGameShow apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -702,8 +706,8 @@ public class VideoGameShow extends APINode {
     };
 
     @Override
-    public VideoGameShow parseResponse(String response) throws APIException {
-      return VideoGameShow.parseResponse(response, getContext(), this).head();
+    public VideoGameShow parseResponse(String response, String header) throws APIException {
+      return VideoGameShow.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -713,7 +717,8 @@ public class VideoGameShow extends APINode {
 
     @Override
     public VideoGameShow execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -727,7 +732,7 @@ public class VideoGameShow extends APINode {
         new Function<String, VideoGameShow>() {
            public VideoGameShow apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -846,8 +851,8 @@ public class VideoGameShow extends APINode {
 
   public static APIRequest.ResponseParser<VideoGameShow> getParser() {
     return new APIRequest.ResponseParser<VideoGameShow>() {
-      public APINodeList<VideoGameShow> parseResponse(String response, APIContext context, APIRequest<VideoGameShow> request) throws MalformedResponseException {
-        return VideoGameShow.parseResponse(response, context, request);
+      public APINodeList<VideoGameShow> parseResponse(String response, APIContext context, APIRequest<VideoGameShow> request, String header) throws MalformedResponseException {
+        return VideoGameShow.parseResponse(response, context, request, header);
       }
     };
   }

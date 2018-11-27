@@ -158,7 +158,7 @@ public class AdReportSpec extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdReportSpec loadJSON(String json, APIContext context) {
+  public static AdReportSpec loadJSON(String json, APIContext context, String header) {
     AdReportSpec adReportSpec = getGson().fromJson(json, AdReportSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -175,11 +175,12 @@ public class AdReportSpec extends APINode {
     }
     adReportSpec.context = context;
     adReportSpec.rawValue = json;
+    adReportSpec.header = header;
     return adReportSpec;
   }
 
-  public static APINodeList<AdReportSpec> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdReportSpec> adReportSpecs = new APINodeList<AdReportSpec>(request, json);
+  public static APINodeList<AdReportSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdReportSpec> adReportSpecs = new APINodeList<AdReportSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -190,7 +191,7 @@ public class AdReportSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adReportSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adReportSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adReportSpecs;
       } else if (result.isJsonObject()) {
@@ -215,7 +216,7 @@ public class AdReportSpec extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adReportSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adReportSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -226,13 +227,13 @@ public class AdReportSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adReportSpecs.add(loadJSON(entry.getValue().toString(), context));
+                  adReportSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adReportSpecs.add(loadJSON(obj.toString(), context));
+              adReportSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adReportSpecs;
@@ -240,7 +241,7 @@ public class AdReportSpec extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adReportSpecs.add(loadJSON(entry.getValue().toString(), context));
+              adReportSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adReportSpecs;
         } else {
@@ -259,7 +260,7 @@ public class AdReportSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adReportSpecs.add(loadJSON(value.toString(), context));
+              adReportSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -271,7 +272,7 @@ public class AdReportSpec extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adReportSpecs.clear();
-          adReportSpecs.add(loadJSON(json, context));
+          adReportSpecs.add(loadJSON(json, context, header));
           return adReportSpecs;
         }
       }
@@ -400,8 +401,8 @@ public class AdReportSpec extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -411,7 +412,8 @@ public class AdReportSpec extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -425,7 +427,7 @@ public class AdReportSpec extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -521,8 +523,8 @@ public class AdReportSpec extends APINode {
     };
 
     @Override
-    public AdReportSpec parseResponse(String response) throws APIException {
-      return AdReportSpec.parseResponse(response, getContext(), this).head();
+    public AdReportSpec parseResponse(String response, String header) throws APIException {
+      return AdReportSpec.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -532,7 +534,8 @@ public class AdReportSpec extends APINode {
 
     @Override
     public AdReportSpec execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -546,7 +549,7 @@ public class AdReportSpec extends APINode {
         new Function<String, AdReportSpec>() {
            public AdReportSpec apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -771,8 +774,8 @@ public class AdReportSpec extends APINode {
     };
 
     @Override
-    public AdReportSpec parseResponse(String response) throws APIException {
-      return AdReportSpec.parseResponse(response, getContext(), this).head();
+    public AdReportSpec parseResponse(String response, String header) throws APIException {
+      return AdReportSpec.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -782,7 +785,8 @@ public class AdReportSpec extends APINode {
 
     @Override
     public AdReportSpec execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -796,7 +800,7 @@ public class AdReportSpec extends APINode {
         new Function<String, AdReportSpec>() {
            public AdReportSpec apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1197,8 +1201,8 @@ public class AdReportSpec extends APINode {
 
   public static APIRequest.ResponseParser<AdReportSpec> getParser() {
     return new APIRequest.ResponseParser<AdReportSpec>() {
-      public APINodeList<AdReportSpec> parseResponse(String response, APIContext context, APIRequest<AdReportSpec> request) throws MalformedResponseException {
-        return AdReportSpec.parseResponse(response, context, request);
+      public APINodeList<AdReportSpec> parseResponse(String response, APIContext context, APIRequest<AdReportSpec> request, String header) throws MalformedResponseException {
+        return AdReportSpec.parseResponse(response, context, request, header);
       }
     };
   }

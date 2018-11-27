@@ -126,7 +126,7 @@ public class OwnedDomain extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static OwnedDomain loadJSON(String json, APIContext context) {
+  public static OwnedDomain loadJSON(String json, APIContext context, String header) {
     OwnedDomain ownedDomain = getGson().fromJson(json, OwnedDomain.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -143,11 +143,12 @@ public class OwnedDomain extends APINode {
     }
     ownedDomain.context = context;
     ownedDomain.rawValue = json;
+    ownedDomain.header = header;
     return ownedDomain;
   }
 
-  public static APINodeList<OwnedDomain> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<OwnedDomain> ownedDomains = new APINodeList<OwnedDomain>(request, json);
+  public static APINodeList<OwnedDomain> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OwnedDomain> ownedDomains = new APINodeList<OwnedDomain>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -158,7 +159,7 @@ public class OwnedDomain extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          ownedDomains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          ownedDomains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return ownedDomains;
       } else if (result.isJsonObject()) {
@@ -183,7 +184,7 @@ public class OwnedDomain extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              ownedDomains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              ownedDomains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -194,13 +195,13 @@ public class OwnedDomain extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  ownedDomains.add(loadJSON(entry.getValue().toString(), context));
+                  ownedDomains.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              ownedDomains.add(loadJSON(obj.toString(), context));
+              ownedDomains.add(loadJSON(obj.toString(), context, header));
             }
           }
           return ownedDomains;
@@ -208,7 +209,7 @@ public class OwnedDomain extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              ownedDomains.add(loadJSON(entry.getValue().toString(), context));
+              ownedDomains.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return ownedDomains;
         } else {
@@ -227,7 +228,7 @@ public class OwnedDomain extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              ownedDomains.add(loadJSON(value.toString(), context));
+              ownedDomains.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -239,7 +240,7 @@ public class OwnedDomain extends APINode {
 
           // Sixth, check if it's pure JsonObject
           ownedDomains.clear();
-          ownedDomains.add(loadJSON(json, context));
+          ownedDomains.add(loadJSON(json, context, header));
           return ownedDomains;
         }
       }
@@ -302,8 +303,8 @@ public class OwnedDomain extends APINode {
     };
 
     @Override
-    public OwnedDomain parseResponse(String response) throws APIException {
-      return OwnedDomain.parseResponse(response, getContext(), this).head();
+    public OwnedDomain parseResponse(String response, String header) throws APIException {
+      return OwnedDomain.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -313,7 +314,8 @@ public class OwnedDomain extends APINode {
 
     @Override
     public OwnedDomain execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -327,7 +329,7 @@ public class OwnedDomain extends APINode {
         new Function<String, OwnedDomain>() {
            public OwnedDomain apply(String result) {
              try {
-               return APIRequestCreateAgency.this.parseResponse(result);
+               return APIRequestCreateAgency.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -421,8 +423,8 @@ public class OwnedDomain extends APINode {
     };
 
     @Override
-    public OwnedDomain parseResponse(String response) throws APIException {
-      return OwnedDomain.parseResponse(response, getContext(), this).head();
+    public OwnedDomain parseResponse(String response, String header) throws APIException {
+      return OwnedDomain.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -432,7 +434,8 @@ public class OwnedDomain extends APINode {
 
     @Override
     public OwnedDomain execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -446,7 +449,7 @@ public class OwnedDomain extends APINode {
         new Function<String, OwnedDomain>() {
            public OwnedDomain apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -567,8 +570,8 @@ public class OwnedDomain extends APINode {
 
   public static APIRequest.ResponseParser<OwnedDomain> getParser() {
     return new APIRequest.ResponseParser<OwnedDomain>() {
-      public APINodeList<OwnedDomain> parseResponse(String response, APIContext context, APIRequest<OwnedDomain> request) throws MalformedResponseException {
-        return OwnedDomain.parseResponse(response, context, request);
+      public APINodeList<OwnedDomain> parseResponse(String response, APIContext context, APIRequest<OwnedDomain> request, String header) throws MalformedResponseException {
+        return OwnedDomain.parseResponse(response, context, request, header);
       }
     };
   }

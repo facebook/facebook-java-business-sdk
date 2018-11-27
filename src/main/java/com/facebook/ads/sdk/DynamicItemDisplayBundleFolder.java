@@ -134,7 +134,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static DynamicItemDisplayBundleFolder loadJSON(String json, APIContext context) {
+  public static DynamicItemDisplayBundleFolder loadJSON(String json, APIContext context, String header) {
     DynamicItemDisplayBundleFolder dynamicItemDisplayBundleFolder = getGson().fromJson(json, DynamicItemDisplayBundleFolder.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -151,11 +151,12 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     }
     dynamicItemDisplayBundleFolder.context = context;
     dynamicItemDisplayBundleFolder.rawValue = json;
+    dynamicItemDisplayBundleFolder.header = header;
     return dynamicItemDisplayBundleFolder;
   }
 
-  public static APINodeList<DynamicItemDisplayBundleFolder> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<DynamicItemDisplayBundleFolder> dynamicItemDisplayBundleFolders = new APINodeList<DynamicItemDisplayBundleFolder>(request, json);
+  public static APINodeList<DynamicItemDisplayBundleFolder> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<DynamicItemDisplayBundleFolder> dynamicItemDisplayBundleFolders = new APINodeList<DynamicItemDisplayBundleFolder>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -166,7 +167,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          dynamicItemDisplayBundleFolders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          dynamicItemDisplayBundleFolders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return dynamicItemDisplayBundleFolders;
       } else if (result.isJsonObject()) {
@@ -191,7 +192,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              dynamicItemDisplayBundleFolders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              dynamicItemDisplayBundleFolders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -202,13 +203,13 @@ public class DynamicItemDisplayBundleFolder extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  dynamicItemDisplayBundleFolders.add(loadJSON(entry.getValue().toString(), context));
+                  dynamicItemDisplayBundleFolders.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              dynamicItemDisplayBundleFolders.add(loadJSON(obj.toString(), context));
+              dynamicItemDisplayBundleFolders.add(loadJSON(obj.toString(), context, header));
             }
           }
           return dynamicItemDisplayBundleFolders;
@@ -216,7 +217,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              dynamicItemDisplayBundleFolders.add(loadJSON(entry.getValue().toString(), context));
+              dynamicItemDisplayBundleFolders.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return dynamicItemDisplayBundleFolders;
         } else {
@@ -235,7 +236,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              dynamicItemDisplayBundleFolders.add(loadJSON(value.toString(), context));
+              dynamicItemDisplayBundleFolders.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -247,7 +248,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
 
           // Sixth, check if it's pure JsonObject
           dynamicItemDisplayBundleFolders.clear();
-          dynamicItemDisplayBundleFolders.add(loadJSON(json, context));
+          dynamicItemDisplayBundleFolders.add(loadJSON(json, context, header));
           return dynamicItemDisplayBundleFolders;
         }
       }
@@ -347,8 +348,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -358,7 +359,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -372,7 +374,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteBundles.this.parseResponse(result);
+               return APIRequestDeleteBundles.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -462,8 +464,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     };
 
     @Override
-    public APINodeList<DynamicItemDisplayBundle> parseResponse(String response) throws APIException {
-      return DynamicItemDisplayBundle.parseResponse(response, getContext(), this);
+    public APINodeList<DynamicItemDisplayBundle> parseResponse(String response, String header) throws APIException {
+      return DynamicItemDisplayBundle.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -473,7 +475,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
 
     @Override
     public APINodeList<DynamicItemDisplayBundle> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -487,7 +490,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
         new Function<String, APINodeList<DynamicItemDisplayBundle>>() {
            public APINodeList<DynamicItemDisplayBundle> apply(String result) {
              try {
-               return APIRequestGetBundles.this.parseResponse(result);
+               return APIRequestGetBundles.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -615,8 +618,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     };
 
     @Override
-    public DynamicItemDisplayBundleFolder parseResponse(String response) throws APIException {
-      return DynamicItemDisplayBundleFolder.parseResponse(response, getContext(), this).head();
+    public DynamicItemDisplayBundleFolder parseResponse(String response, String header) throws APIException {
+      return DynamicItemDisplayBundleFolder.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -626,7 +629,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
 
     @Override
     public DynamicItemDisplayBundleFolder execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -640,7 +644,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
         new Function<String, DynamicItemDisplayBundleFolder>() {
            public DynamicItemDisplayBundleFolder apply(String result) {
              try {
-               return APIRequestCreateBundle.this.parseResponse(result);
+               return APIRequestCreateBundle.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -723,8 +727,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -734,7 +738,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -748,7 +753,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -832,8 +837,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     };
 
     @Override
-    public DynamicItemDisplayBundleFolder parseResponse(String response) throws APIException {
-      return DynamicItemDisplayBundleFolder.parseResponse(response, getContext(), this).head();
+    public DynamicItemDisplayBundleFolder parseResponse(String response, String header) throws APIException {
+      return DynamicItemDisplayBundleFolder.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -843,7 +848,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
 
     @Override
     public DynamicItemDisplayBundleFolder execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -857,7 +863,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
         new Function<String, DynamicItemDisplayBundleFolder>() {
            public DynamicItemDisplayBundleFolder apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -979,8 +985,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     };
 
     @Override
-    public DynamicItemDisplayBundleFolder parseResponse(String response) throws APIException {
-      return DynamicItemDisplayBundleFolder.parseResponse(response, getContext(), this).head();
+    public DynamicItemDisplayBundleFolder parseResponse(String response, String header) throws APIException {
+      return DynamicItemDisplayBundleFolder.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -990,7 +996,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
 
     @Override
     public DynamicItemDisplayBundleFolder execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1004,7 +1011,7 @@ public class DynamicItemDisplayBundleFolder extends APINode {
         new Function<String, DynamicItemDisplayBundleFolder>() {
            public DynamicItemDisplayBundleFolder apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1110,8 +1117,8 @@ public class DynamicItemDisplayBundleFolder extends APINode {
 
   public static APIRequest.ResponseParser<DynamicItemDisplayBundleFolder> getParser() {
     return new APIRequest.ResponseParser<DynamicItemDisplayBundleFolder>() {
-      public APINodeList<DynamicItemDisplayBundleFolder> parseResponse(String response, APIContext context, APIRequest<DynamicItemDisplayBundleFolder> request) throws MalformedResponseException {
-        return DynamicItemDisplayBundleFolder.parseResponse(response, context, request);
+      public APINodeList<DynamicItemDisplayBundleFolder> parseResponse(String response, APIContext context, APIRequest<DynamicItemDisplayBundleFolder> request, String header) throws MalformedResponseException {
+        return DynamicItemDisplayBundleFolder.parseResponse(response, context, request, header);
       }
     };
   }

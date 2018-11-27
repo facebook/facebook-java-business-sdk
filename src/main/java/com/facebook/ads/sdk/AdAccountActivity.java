@@ -188,7 +188,7 @@ public class AdAccountActivity extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdAccountActivity loadJSON(String json, APIContext context) {
+  public static AdAccountActivity loadJSON(String json, APIContext context, String header) {
     AdAccountActivity adAccountActivity = getGson().fromJson(json, AdAccountActivity.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -205,11 +205,12 @@ public class AdAccountActivity extends APINode {
     }
     adAccountActivity.context = context;
     adAccountActivity.rawValue = json;
+    adAccountActivity.header = header;
     return adAccountActivity;
   }
 
-  public static APINodeList<AdAccountActivity> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAccountActivity> adAccountActivitys = new APINodeList<AdAccountActivity>(request, json);
+  public static APINodeList<AdAccountActivity> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountActivity> adAccountActivitys = new APINodeList<AdAccountActivity>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -220,7 +221,7 @@ public class AdAccountActivity extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountActivitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAccountActivitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adAccountActivitys;
       } else if (result.isJsonObject()) {
@@ -245,7 +246,7 @@ public class AdAccountActivity extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountActivitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAccountActivitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -256,13 +257,13 @@ public class AdAccountActivity extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountActivitys.add(loadJSON(entry.getValue().toString(), context));
+                  adAccountActivitys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountActivitys.add(loadJSON(obj.toString(), context));
+              adAccountActivitys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adAccountActivitys;
@@ -270,7 +271,7 @@ public class AdAccountActivity extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountActivitys.add(loadJSON(entry.getValue().toString(), context));
+              adAccountActivitys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adAccountActivitys;
         } else {
@@ -289,7 +290,7 @@ public class AdAccountActivity extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountActivitys.add(loadJSON(value.toString(), context));
+              adAccountActivitys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -301,7 +302,7 @@ public class AdAccountActivity extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adAccountActivitys.clear();
-          adAccountActivitys.add(loadJSON(json, context));
+          adAccountActivitys.add(loadJSON(json, context, header));
           return adAccountActivitys;
         }
       }
@@ -515,8 +516,8 @@ public class AdAccountActivity extends APINode {
     };
 
     @Override
-    public AdAccountActivity parseResponse(String response) throws APIException {
-      return AdAccountActivity.parseResponse(response, getContext(), this).head();
+    public AdAccountActivity parseResponse(String response, String header) throws APIException {
+      return AdAccountActivity.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -526,7 +527,8 @@ public class AdAccountActivity extends APINode {
 
     @Override
     public AdAccountActivity execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -540,7 +542,7 @@ public class AdAccountActivity extends APINode {
         new Function<String, AdAccountActivity>() {
            public AdAccountActivity apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -890,8 +892,8 @@ public class AdAccountActivity extends APINode {
 
   public static APIRequest.ResponseParser<AdAccountActivity> getParser() {
     return new APIRequest.ResponseParser<AdAccountActivity>() {
-      public APINodeList<AdAccountActivity> parseResponse(String response, APIContext context, APIRequest<AdAccountActivity> request) throws MalformedResponseException {
-        return AdAccountActivity.parseResponse(response, context, request);
+      public APINodeList<AdAccountActivity> parseResponse(String response, APIContext context, APIRequest<AdAccountActivity> request, String header) throws MalformedResponseException {
+        return AdAccountActivity.parseResponse(response, context, request, header);
       }
     };
   }

@@ -160,7 +160,7 @@ public class Group extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Group loadJSON(String json, APIContext context) {
+  public static Group loadJSON(String json, APIContext context, String header) {
     Group group = getGson().fromJson(json, Group.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -177,11 +177,12 @@ public class Group extends APINode {
     }
     group.context = context;
     group.rawValue = json;
+    group.header = header;
     return group;
   }
 
-  public static APINodeList<Group> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Group> groups = new APINodeList<Group>(request, json);
+  public static APINodeList<Group> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Group> groups = new APINodeList<Group>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -192,7 +193,7 @@ public class Group extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          groups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          groups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return groups;
       } else if (result.isJsonObject()) {
@@ -217,7 +218,7 @@ public class Group extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              groups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              groups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -228,13 +229,13 @@ public class Group extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  groups.add(loadJSON(entry.getValue().toString(), context));
+                  groups.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              groups.add(loadJSON(obj.toString(), context));
+              groups.add(loadJSON(obj.toString(), context, header));
             }
           }
           return groups;
@@ -242,7 +243,7 @@ public class Group extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              groups.add(loadJSON(entry.getValue().toString(), context));
+              groups.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return groups;
         } else {
@@ -261,7 +262,7 @@ public class Group extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              groups.add(loadJSON(value.toString(), context));
+              groups.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -273,7 +274,7 @@ public class Group extends APINode {
 
           // Sixth, check if it's pure JsonObject
           groups.clear();
-          groups.add(loadJSON(json, context));
+          groups.add(loadJSON(json, context, header));
           return groups;
         }
       }
@@ -491,8 +492,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -502,7 +503,8 @@ public class Group extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -516,7 +518,7 @@ public class Group extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAdmins.this.parseResponse(result);
+               return APIRequestDeleteAdmins.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -604,8 +606,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public Group parseResponse(String response) throws APIException {
-      return Group.parseResponse(response, getContext(), this).head();
+    public Group parseResponse(String response, String header) throws APIException {
+      return Group.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -615,7 +617,8 @@ public class Group extends APINode {
 
     @Override
     public Group execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -629,7 +632,7 @@ public class Group extends APINode {
         new Function<String, Group>() {
            public Group apply(String result) {
              try {
-               return APIRequestCreateAdmin.this.parseResponse(result);
+               return APIRequestCreateAdmin.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -739,8 +742,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public APINodeList<Album> parseResponse(String response) throws APIException {
-      return Album.parseResponse(response, getContext(), this);
+    public APINodeList<Album> parseResponse(String response, String header) throws APIException {
+      return Album.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -750,7 +753,8 @@ public class Group extends APINode {
 
     @Override
     public APINodeList<Album> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -764,7 +768,7 @@ public class Group extends APINode {
         new Function<String, APINodeList<Album>>() {
            public APINodeList<Album> apply(String result) {
              try {
-               return APIRequestGetAlbums.this.parseResponse(result);
+               return APIRequestGetAlbums.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1014,8 +1018,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public Album parseResponse(String response) throws APIException {
-      return Album.parseResponse(response, getContext(), this).head();
+    public Album parseResponse(String response, String header) throws APIException {
+      return Album.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1025,7 +1029,8 @@ public class Group extends APINode {
 
     @Override
     public Album execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1039,7 +1044,7 @@ public class Group extends APINode {
         new Function<String, Album>() {
            public Album apply(String result) {
              try {
-               return APIRequestCreateAlbum.this.parseResponse(result);
+               return APIRequestCreateAlbum.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1196,8 +1201,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1207,7 +1212,8 @@ public class Group extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1221,7 +1227,7 @@ public class Group extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetDocs.this.parseResponse(result);
+               return APIRequestGetDocs.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1301,8 +1307,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1312,7 +1318,8 @@ public class Group extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1326,7 +1333,7 @@ public class Group extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateDoc.this.parseResponse(result);
+               return APIRequestCreateDoc.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1413,7 +1420,6 @@ public class Group extends APINode {
     public static final String[] FIELDS = {
       "attending_count",
       "can_guests_invite",
-      "can_viewer_post",
       "category",
       "cover",
       "declined_count",
@@ -1424,19 +1430,15 @@ public class Group extends APINode {
       "guest_list_enabled",
       "id",
       "interested_count",
-      "invited_count",
       "is_canceled",
-      "is_date_only",
       "is_draft",
       "is_page_owned",
-      "location",
       "maybe_count",
       "name",
       "noreply_count",
       "owner",
       "parent_group",
       "place",
-      "privacy",
       "scheduled_publish_time",
       "start_time",
       "ticket_uri",
@@ -1446,12 +1448,11 @@ public class Group extends APINode {
       "timezone",
       "type",
       "updated_time",
-      "venue",
     };
 
     @Override
-    public APINodeList<Event> parseResponse(String response) throws APIException {
-      return Event.parseResponse(response, getContext(), this);
+    public APINodeList<Event> parseResponse(String response, String header) throws APIException {
+      return Event.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1461,7 +1462,8 @@ public class Group extends APINode {
 
     @Override
     public APINodeList<Event> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1475,7 +1477,7 @@ public class Group extends APINode {
         new Function<String, APINodeList<Event>>() {
            public APINodeList<Event> apply(String result) {
              try {
-               return APIRequestGetEvents.this.parseResponse(result);
+               return APIRequestGetEvents.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1551,13 +1553,6 @@ public class Group extends APINode {
       this.requestField("can_guests_invite", value);
       return this;
     }
-    public APIRequestGetEvents requestCanViewerPostField () {
-      return this.requestCanViewerPostField(true);
-    }
-    public APIRequestGetEvents requestCanViewerPostField (boolean value) {
-      this.requestField("can_viewer_post", value);
-      return this;
-    }
     public APIRequestGetEvents requestCategoryField () {
       return this.requestCategoryField(true);
     }
@@ -1628,25 +1623,11 @@ public class Group extends APINode {
       this.requestField("interested_count", value);
       return this;
     }
-    public APIRequestGetEvents requestInvitedCountField () {
-      return this.requestInvitedCountField(true);
-    }
-    public APIRequestGetEvents requestInvitedCountField (boolean value) {
-      this.requestField("invited_count", value);
-      return this;
-    }
     public APIRequestGetEvents requestIsCanceledField () {
       return this.requestIsCanceledField(true);
     }
     public APIRequestGetEvents requestIsCanceledField (boolean value) {
       this.requestField("is_canceled", value);
-      return this;
-    }
-    public APIRequestGetEvents requestIsDateOnlyField () {
-      return this.requestIsDateOnlyField(true);
-    }
-    public APIRequestGetEvents requestIsDateOnlyField (boolean value) {
-      this.requestField("is_date_only", value);
       return this;
     }
     public APIRequestGetEvents requestIsDraftField () {
@@ -1661,13 +1642,6 @@ public class Group extends APINode {
     }
     public APIRequestGetEvents requestIsPageOwnedField (boolean value) {
       this.requestField("is_page_owned", value);
-      return this;
-    }
-    public APIRequestGetEvents requestLocationField () {
-      return this.requestLocationField(true);
-    }
-    public APIRequestGetEvents requestLocationField (boolean value) {
-      this.requestField("location", value);
       return this;
     }
     public APIRequestGetEvents requestMaybeCountField () {
@@ -1710,13 +1684,6 @@ public class Group extends APINode {
     }
     public APIRequestGetEvents requestPlaceField (boolean value) {
       this.requestField("place", value);
-      return this;
-    }
-    public APIRequestGetEvents requestPrivacyField () {
-      return this.requestPrivacyField(true);
-    }
-    public APIRequestGetEvents requestPrivacyField (boolean value) {
-      this.requestField("privacy", value);
       return this;
     }
     public APIRequestGetEvents requestScheduledPublishTimeField () {
@@ -1780,13 +1747,6 @@ public class Group extends APINode {
     }
     public APIRequestGetEvents requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetEvents requestVenueField () {
-      return this.requestVenueField(true);
-    }
-    public APIRequestGetEvents requestVenueField (boolean value) {
-      this.requestField("venue", value);
       return this;
     }
   }
@@ -1917,8 +1877,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1928,7 +1888,8 @@ public class Group extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1942,7 +1903,7 @@ public class Group extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateFeed.this.parseResponse(result);
+               return APIRequestCreateFeed.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2818,8 +2779,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2829,7 +2790,8 @@ public class Group extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2843,7 +2805,7 @@ public class Group extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateGroupThread.this.parseResponse(result);
+               return APIRequestCreateGroupThread.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2958,8 +2920,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public APINodeList<Group> parseResponse(String response) throws APIException {
-      return Group.parseResponse(response, getContext(), this);
+    public APINodeList<Group> parseResponse(String response, String header) throws APIException {
+      return Group.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2969,7 +2931,8 @@ public class Group extends APINode {
 
     @Override
     public APINodeList<Group> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2983,7 +2946,7 @@ public class Group extends APINode {
         new Function<String, APINodeList<Group>>() {
            public APINodeList<Group> apply(String result) {
              try {
-               return APIRequestGetGroups.this.parseResponse(result);
+               return APIRequestGetGroups.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3207,8 +3170,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public Group parseResponse(String response) throws APIException {
-      return Group.parseResponse(response, getContext(), this).head();
+    public Group parseResponse(String response, String header) throws APIException {
+      return Group.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3218,7 +3181,8 @@ public class Group extends APINode {
 
     @Override
     public Group execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3232,7 +3196,7 @@ public class Group extends APINode {
         new Function<String, Group>() {
            public Group apply(String result) {
              try {
-               return APIRequestCreateGroup.this.parseResponse(result);
+               return APIRequestCreateGroup.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3425,7 +3389,6 @@ public class Group extends APINode {
       "live_views",
       "permalink_url",
       "planned_start_time",
-      "preview_url",
       "seconds_left",
       "secure_stream_url",
       "status",
@@ -3437,8 +3400,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public APINodeList<LiveVideo> parseResponse(String response) throws APIException {
-      return LiveVideo.parseResponse(response, getContext(), this);
+    public APINodeList<LiveVideo> parseResponse(String response, String header) throws APIException {
+      return LiveVideo.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3448,7 +3411,8 @@ public class Group extends APINode {
 
     @Override
     public APINodeList<LiveVideo> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3462,7 +3426,7 @@ public class Group extends APINode {
         new Function<String, APINodeList<LiveVideo>>() {
            public APINodeList<LiveVideo> apply(String result) {
              try {
-               return APIRequestGetLiveVideos.this.parseResponse(result);
+               return APIRequestGetLiveVideos.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3677,13 +3641,6 @@ public class Group extends APINode {
       this.requestField("planned_start_time", value);
       return this;
     }
-    public APIRequestGetLiveVideos requestPreviewUrlField () {
-      return this.requestPreviewUrlField(true);
-    }
-    public APIRequestGetLiveVideos requestPreviewUrlField (boolean value) {
-      this.requestField("preview_url", value);
-      return this;
-    }
     public APIRequestGetLiveVideos requestSecondsLeftField () {
       return this.requestSecondsLeftField(true);
     }
@@ -3778,8 +3735,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public LiveVideo parseResponse(String response) throws APIException {
-      return LiveVideo.parseResponse(response, getContext(), this).head();
+    public LiveVideo parseResponse(String response, String header) throws APIException {
+      return LiveVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3789,7 +3746,8 @@ public class Group extends APINode {
 
     @Override
     public LiveVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3803,7 +3761,7 @@ public class Group extends APINode {
         new Function<String, LiveVideo>() {
            public LiveVideo apply(String result) {
              try {
-               return APIRequestCreateLiveVideo.this.parseResponse(result);
+               return APIRequestCreateLiveVideo.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4065,8 +4023,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4076,7 +4034,8 @@ public class Group extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4090,7 +4049,7 @@ public class Group extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteMembers.this.parseResponse(result);
+               return APIRequestDeleteMembers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4187,8 +4146,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public Group parseResponse(String response) throws APIException {
-      return Group.parseResponse(response, getContext(), this).head();
+    public Group parseResponse(String response, String header) throws APIException {
+      return Group.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4198,7 +4157,8 @@ public class Group extends APINode {
 
     @Override
     public Group execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4212,7 +4172,7 @@ public class Group extends APINode {
         new Function<String, Group>() {
            public Group apply(String result) {
              try {
-               return APIRequestCreateMember.this.parseResponse(result);
+               return APIRequestCreateMember.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4328,8 +4288,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4339,7 +4299,8 @@ public class Group extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4353,7 +4314,7 @@ public class Group extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteModerators.this.parseResponse(result);
+               return APIRequestDeleteModerators.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4441,8 +4402,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public Group parseResponse(String response) throws APIException {
-      return Group.parseResponse(response, getContext(), this).head();
+    public Group parseResponse(String response, String header) throws APIException {
+      return Group.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4452,7 +4413,8 @@ public class Group extends APINode {
 
     @Override
     public Group execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4466,7 +4428,7 @@ public class Group extends APINode {
         new Function<String, Group>() {
            public Group apply(String result) {
              try {
-               return APIRequestCreateModerator.this.parseResponse(result);
+               return APIRequestCreateModerator.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4584,8 +4546,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4595,7 +4557,8 @@ public class Group extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4609,7 +4572,7 @@ public class Group extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateOpenGraphActionFeed.this.parseResponse(result);
+               return APIRequestCreateOpenGraphActionFeed.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4899,7 +4862,6 @@ public class Group extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -4920,12 +4882,10 @@ public class Group extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -4953,7 +4913,6 @@ public class Group extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -4962,8 +4921,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4973,7 +4932,8 @@ public class Group extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4987,7 +4947,7 @@ public class Group extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetOptedInMembers.this.parseResponse(result);
+               return APIRequestGetOptedInMembers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5075,13 +5035,6 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetOptedInMembers requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetOptedInMembers requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestBirthdayField () {
@@ -5224,13 +5177,6 @@ public class Group extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetOptedInMembers requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetOptedInMembers requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetOptedInMembers requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -5257,13 +5203,6 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetOptedInMembers requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetOptedInMembers requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestLastNameField () {
@@ -5455,13 +5394,6 @@ public class Group extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetOptedInMembers requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetOptedInMembers requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetOptedInMembers requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -5564,8 +5496,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public Photo parseResponse(String response) throws APIException {
-      return Photo.parseResponse(response, getContext(), this).head();
+    public Photo parseResponse(String response, String header) throws APIException {
+      return Photo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -5575,7 +5507,8 @@ public class Group extends APINode {
 
     @Override
     public Photo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -5589,7 +5522,7 @@ public class Group extends APINode {
         new Function<String, Photo>() {
            public Photo apply(String result) {
              try {
-               return APIRequestCreatePhoto.this.parseResponse(result);
+               return APIRequestCreatePhoto.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6058,15 +5991,14 @@ public class Group extends APINode {
       "left",
       "right",
       "top",
-      "uri",
       "url",
       "width",
       "id",
     };
 
     @Override
-    public APINodeList<ProfilePictureSource> parseResponse(String response) throws APIException {
-      return ProfilePictureSource.parseResponse(response, getContext(), this);
+    public APINodeList<ProfilePictureSource> parseResponse(String response, String header) throws APIException {
+      return ProfilePictureSource.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -6076,7 +6008,8 @@ public class Group extends APINode {
 
     @Override
     public APINodeList<ProfilePictureSource> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -6090,7 +6023,7 @@ public class Group extends APINode {
         new Function<String, APINodeList<ProfilePictureSource>>() {
            public APINodeList<ProfilePictureSource> apply(String result) {
              try {
-               return APIRequestGetPicture.this.parseResponse(result);
+               return APIRequestGetPicture.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6237,13 +6170,6 @@ public class Group extends APINode {
       this.requestField("top", value);
       return this;
     }
-    public APIRequestGetPicture requestUriField () {
-      return this.requestUriField(true);
-    }
-    public APIRequestGetPicture requestUriField (boolean value) {
-      this.requestField("uri", value);
-      return this;
-    }
     public APIRequestGetPicture requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -6302,10 +6228,10 @@ public class Group extends APINode {
       "length",
       "live_audience_count",
       "live_status",
-      "name",
       "permalink_url",
       "picture",
       "place",
+      "premiere_living_room_status",
       "privacy",
       "published",
       "scheduled_publish_time",
@@ -6319,8 +6245,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public APINodeList<AdVideo> parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this);
+    public APINodeList<AdVideo> parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -6330,7 +6256,8 @@ public class Group extends APINode {
 
     @Override
     public APINodeList<AdVideo> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -6344,7 +6271,7 @@ public class Group extends APINode {
         new Function<String, APINodeList<AdVideo>>() {
            public APINodeList<AdVideo> apply(String result) {
              try {
-               return APIRequestGetVideos.this.parseResponse(result);
+               return APIRequestGetVideos.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6576,13 +6503,6 @@ public class Group extends APINode {
       this.requestField("live_status", value);
       return this;
     }
-    public APIRequestGetVideos requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetVideos requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
     public APIRequestGetVideos requestPermalinkUrlField () {
       return this.requestPermalinkUrlField(true);
     }
@@ -6602,6 +6522,13 @@ public class Group extends APINode {
     }
     public APIRequestGetVideos requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetVideos requestPremiereLivingRoomStatusField () {
+      return this.requestPremiereLivingRoomStatusField(true);
+    }
+    public APIRequestGetVideos requestPremiereLivingRoomStatusField (boolean value) {
+      this.requestField("premiere_living_room_status", value);
       return this;
     }
     public APIRequestGetVideos requestPrivacyField () {
@@ -6762,8 +6689,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public AdVideo parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this).head();
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -6773,7 +6700,8 @@ public class Group extends APINode {
 
     @Override
     public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -6787,7 +6715,7 @@ public class Group extends APINode {
         new Function<String, AdVideo>() {
            public AdVideo apply(String result) {
              try {
-               return APIRequestCreateVideo.this.parseResponse(result);
+               return APIRequestCreateVideo.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7393,8 +7321,8 @@ public class Group extends APINode {
     };
 
     @Override
-    public Group parseResponse(String response) throws APIException {
-      return Group.parseResponse(response, getContext(), this).head();
+    public Group parseResponse(String response, String header) throws APIException {
+      return Group.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -7404,7 +7332,8 @@ public class Group extends APINode {
 
     @Override
     public Group execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -7418,7 +7347,7 @@ public class Group extends APINode {
         new Function<String, Group>() {
            public Group apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8060,8 +7989,8 @@ public class Group extends APINode {
 
   public static APIRequest.ResponseParser<Group> getParser() {
     return new APIRequest.ResponseParser<Group>() {
-      public APINodeList<Group> parseResponse(String response, APIContext context, APIRequest<Group> request) throws MalformedResponseException {
-        return Group.parseResponse(response, context, request);
+      public APINodeList<Group> parseResponse(String response, APIContext context, APIRequest<Group> request, String header) throws MalformedResponseException {
+        return Group.parseResponse(response, context, request, header);
       }
     };
   }

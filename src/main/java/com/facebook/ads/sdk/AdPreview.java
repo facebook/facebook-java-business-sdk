@@ -67,7 +67,7 @@ public class AdPreview extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdPreview loadJSON(String json, APIContext context) {
+  public static AdPreview loadJSON(String json, APIContext context, String header) {
     AdPreview adPreview = getGson().fromJson(json, AdPreview.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class AdPreview extends APINode {
     }
     adPreview.context = context;
     adPreview.rawValue = json;
+    adPreview.header = header;
     return adPreview;
   }
 
-  public static APINodeList<AdPreview> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdPreview> adPreviews = new APINodeList<AdPreview>(request, json);
+  public static APINodeList<AdPreview> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdPreview> adPreviews = new APINodeList<AdPreview>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class AdPreview extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adPreviews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adPreviews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adPreviews;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class AdPreview extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adPreviews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adPreviews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class AdPreview extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adPreviews.add(loadJSON(entry.getValue().toString(), context));
+                  adPreviews.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adPreviews.add(loadJSON(obj.toString(), context));
+              adPreviews.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adPreviews;
@@ -149,7 +150,7 @@ public class AdPreview extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adPreviews.add(loadJSON(entry.getValue().toString(), context));
+              adPreviews.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adPreviews;
         } else {
@@ -168,7 +169,7 @@ public class AdPreview extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adPreviews.add(loadJSON(value.toString(), context));
+              adPreviews.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class AdPreview extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adPreviews.clear();
-          adPreviews.add(loadJSON(json, context));
+          adPreviews.add(loadJSON(json, context, header));
           return adPreviews;
         }
       }
@@ -333,8 +334,8 @@ public class AdPreview extends APINode {
 
   public static APIRequest.ResponseParser<AdPreview> getParser() {
     return new APIRequest.ResponseParser<AdPreview>() {
-      public APINodeList<AdPreview> parseResponse(String response, APIContext context, APIRequest<AdPreview> request) throws MalformedResponseException {
-        return AdPreview.parseResponse(response, context, request);
+      public APINodeList<AdPreview> parseResponse(String response, APIContext context, APIRequest<AdPreview> request, String header) throws MalformedResponseException {
+        return AdPreview.parseResponse(response, context, request, header);
       }
     };
   }

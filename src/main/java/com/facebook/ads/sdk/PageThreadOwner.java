@@ -67,7 +67,7 @@ public class PageThreadOwner extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageThreadOwner loadJSON(String json, APIContext context) {
+  public static PageThreadOwner loadJSON(String json, APIContext context, String header) {
     PageThreadOwner pageThreadOwner = getGson().fromJson(json, PageThreadOwner.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class PageThreadOwner extends APINode {
     }
     pageThreadOwner.context = context;
     pageThreadOwner.rawValue = json;
+    pageThreadOwner.header = header;
     return pageThreadOwner;
   }
 
-  public static APINodeList<PageThreadOwner> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageThreadOwner> pageThreadOwners = new APINodeList<PageThreadOwner>(request, json);
+  public static APINodeList<PageThreadOwner> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageThreadOwner> pageThreadOwners = new APINodeList<PageThreadOwner>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class PageThreadOwner extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageThreadOwners.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageThreadOwners.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageThreadOwners;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class PageThreadOwner extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageThreadOwners.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageThreadOwners.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class PageThreadOwner extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageThreadOwners.add(loadJSON(entry.getValue().toString(), context));
+                  pageThreadOwners.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageThreadOwners.add(loadJSON(obj.toString(), context));
+              pageThreadOwners.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageThreadOwners;
@@ -149,7 +150,7 @@ public class PageThreadOwner extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageThreadOwners.add(loadJSON(entry.getValue().toString(), context));
+              pageThreadOwners.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageThreadOwners;
         } else {
@@ -168,7 +169,7 @@ public class PageThreadOwner extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageThreadOwners.add(loadJSON(value.toString(), context));
+              pageThreadOwners.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class PageThreadOwner extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageThreadOwners.clear();
-          pageThreadOwners.add(loadJSON(json, context));
+          pageThreadOwners.add(loadJSON(json, context, header));
           return pageThreadOwners;
         }
       }
@@ -253,8 +254,8 @@ public class PageThreadOwner extends APINode {
 
   public static APIRequest.ResponseParser<PageThreadOwner> getParser() {
     return new APIRequest.ResponseParser<PageThreadOwner>() {
-      public APINodeList<PageThreadOwner> parseResponse(String response, APIContext context, APIRequest<PageThreadOwner> request) throws MalformedResponseException {
-        return PageThreadOwner.parseResponse(response, context, request);
+      public APINodeList<PageThreadOwner> parseResponse(String response, APIContext context, APIRequest<PageThreadOwner> request, String header) throws MalformedResponseException {
+        return PageThreadOwner.parseResponse(response, context, request, header);
       }
     };
   }

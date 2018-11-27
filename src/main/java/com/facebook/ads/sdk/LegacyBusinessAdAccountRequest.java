@@ -69,7 +69,7 @@ public class LegacyBusinessAdAccountRequest extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LegacyBusinessAdAccountRequest loadJSON(String json, APIContext context) {
+  public static LegacyBusinessAdAccountRequest loadJSON(String json, APIContext context, String header) {
     LegacyBusinessAdAccountRequest legacyBusinessAdAccountRequest = getGson().fromJson(json, LegacyBusinessAdAccountRequest.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class LegacyBusinessAdAccountRequest extends APINode {
     }
     legacyBusinessAdAccountRequest.context = context;
     legacyBusinessAdAccountRequest.rawValue = json;
+    legacyBusinessAdAccountRequest.header = header;
     return legacyBusinessAdAccountRequest;
   }
 
-  public static APINodeList<LegacyBusinessAdAccountRequest> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LegacyBusinessAdAccountRequest> legacyBusinessAdAccountRequests = new APINodeList<LegacyBusinessAdAccountRequest>(request, json);
+  public static APINodeList<LegacyBusinessAdAccountRequest> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LegacyBusinessAdAccountRequest> legacyBusinessAdAccountRequests = new APINodeList<LegacyBusinessAdAccountRequest>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class LegacyBusinessAdAccountRequest extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          legacyBusinessAdAccountRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          legacyBusinessAdAccountRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return legacyBusinessAdAccountRequests;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class LegacyBusinessAdAccountRequest extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              legacyBusinessAdAccountRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              legacyBusinessAdAccountRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class LegacyBusinessAdAccountRequest extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  legacyBusinessAdAccountRequests.add(loadJSON(entry.getValue().toString(), context));
+                  legacyBusinessAdAccountRequests.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              legacyBusinessAdAccountRequests.add(loadJSON(obj.toString(), context));
+              legacyBusinessAdAccountRequests.add(loadJSON(obj.toString(), context, header));
             }
           }
           return legacyBusinessAdAccountRequests;
@@ -151,7 +152,7 @@ public class LegacyBusinessAdAccountRequest extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              legacyBusinessAdAccountRequests.add(loadJSON(entry.getValue().toString(), context));
+              legacyBusinessAdAccountRequests.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return legacyBusinessAdAccountRequests;
         } else {
@@ -170,7 +171,7 @@ public class LegacyBusinessAdAccountRequest extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              legacyBusinessAdAccountRequests.add(loadJSON(value.toString(), context));
+              legacyBusinessAdAccountRequests.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class LegacyBusinessAdAccountRequest extends APINode {
 
           // Sixth, check if it's pure JsonObject
           legacyBusinessAdAccountRequests.clear();
-          legacyBusinessAdAccountRequests.add(loadJSON(json, context));
+          legacyBusinessAdAccountRequests.add(loadJSON(json, context, header));
           return legacyBusinessAdAccountRequests;
         }
       }
@@ -273,8 +274,8 @@ public class LegacyBusinessAdAccountRequest extends APINode {
 
   public static APIRequest.ResponseParser<LegacyBusinessAdAccountRequest> getParser() {
     return new APIRequest.ResponseParser<LegacyBusinessAdAccountRequest>() {
-      public APINodeList<LegacyBusinessAdAccountRequest> parseResponse(String response, APIContext context, APIRequest<LegacyBusinessAdAccountRequest> request) throws MalformedResponseException {
-        return LegacyBusinessAdAccountRequest.parseResponse(response, context, request);
+      public APINodeList<LegacyBusinessAdAccountRequest> parseResponse(String response, APIContext context, APIRequest<LegacyBusinessAdAccountRequest> request, String header) throws MalformedResponseException {
+        return LegacyBusinessAdAccountRequest.parseResponse(response, context, request, header);
       }
     };
   }

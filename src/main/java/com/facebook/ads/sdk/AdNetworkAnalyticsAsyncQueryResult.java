@@ -75,7 +75,7 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdNetworkAnalyticsAsyncQueryResult loadJSON(String json, APIContext context) {
+  public static AdNetworkAnalyticsAsyncQueryResult loadJSON(String json, APIContext context, String header) {
     AdNetworkAnalyticsAsyncQueryResult adNetworkAnalyticsAsyncQueryResult = getGson().fromJson(json, AdNetworkAnalyticsAsyncQueryResult.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -92,11 +92,12 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
     }
     adNetworkAnalyticsAsyncQueryResult.context = context;
     adNetworkAnalyticsAsyncQueryResult.rawValue = json;
+    adNetworkAnalyticsAsyncQueryResult.header = header;
     return adNetworkAnalyticsAsyncQueryResult;
   }
 
-  public static APINodeList<AdNetworkAnalyticsAsyncQueryResult> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdNetworkAnalyticsAsyncQueryResult> adNetworkAnalyticsAsyncQueryResults = new APINodeList<AdNetworkAnalyticsAsyncQueryResult>(request, json);
+  public static APINodeList<AdNetworkAnalyticsAsyncQueryResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdNetworkAnalyticsAsyncQueryResult> adNetworkAnalyticsAsyncQueryResults = new APINodeList<AdNetworkAnalyticsAsyncQueryResult>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -107,7 +108,7 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adNetworkAnalyticsAsyncQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adNetworkAnalyticsAsyncQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adNetworkAnalyticsAsyncQueryResults;
       } else if (result.isJsonObject()) {
@@ -132,7 +133,7 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adNetworkAnalyticsAsyncQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adNetworkAnalyticsAsyncQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -143,13 +144,13 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adNetworkAnalyticsAsyncQueryResults.add(loadJSON(entry.getValue().toString(), context));
+                  adNetworkAnalyticsAsyncQueryResults.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adNetworkAnalyticsAsyncQueryResults.add(loadJSON(obj.toString(), context));
+              adNetworkAnalyticsAsyncQueryResults.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adNetworkAnalyticsAsyncQueryResults;
@@ -157,7 +158,7 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adNetworkAnalyticsAsyncQueryResults.add(loadJSON(entry.getValue().toString(), context));
+              adNetworkAnalyticsAsyncQueryResults.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adNetworkAnalyticsAsyncQueryResults;
         } else {
@@ -176,7 +177,7 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adNetworkAnalyticsAsyncQueryResults.add(loadJSON(value.toString(), context));
+              adNetworkAnalyticsAsyncQueryResults.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -188,7 +189,7 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adNetworkAnalyticsAsyncQueryResults.clear();
-          adNetworkAnalyticsAsyncQueryResults.add(loadJSON(json, context));
+          adNetworkAnalyticsAsyncQueryResults.add(loadJSON(json, context, header));
           return adNetworkAnalyticsAsyncQueryResults;
         }
       }
@@ -301,8 +302,8 @@ public class AdNetworkAnalyticsAsyncQueryResult extends APINode {
 
   public static APIRequest.ResponseParser<AdNetworkAnalyticsAsyncQueryResult> getParser() {
     return new APIRequest.ResponseParser<AdNetworkAnalyticsAsyncQueryResult>() {
-      public APINodeList<AdNetworkAnalyticsAsyncQueryResult> parseResponse(String response, APIContext context, APIRequest<AdNetworkAnalyticsAsyncQueryResult> request) throws MalformedResponseException {
-        return AdNetworkAnalyticsAsyncQueryResult.parseResponse(response, context, request);
+      public APINodeList<AdNetworkAnalyticsAsyncQueryResult> parseResponse(String response, APIContext context, APIRequest<AdNetworkAnalyticsAsyncQueryResult> request, String header) throws MalformedResponseException {
+        return AdNetworkAnalyticsAsyncQueryResult.parseResponse(response, context, request, header);
       }
     };
   }

@@ -132,7 +132,7 @@ public class VaultDeletedImage extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static VaultDeletedImage loadJSON(String json, APIContext context) {
+  public static VaultDeletedImage loadJSON(String json, APIContext context, String header) {
     VaultDeletedImage vaultDeletedImage = getGson().fromJson(json, VaultDeletedImage.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -149,11 +149,12 @@ public class VaultDeletedImage extends APINode {
     }
     vaultDeletedImage.context = context;
     vaultDeletedImage.rawValue = json;
+    vaultDeletedImage.header = header;
     return vaultDeletedImage;
   }
 
-  public static APINodeList<VaultDeletedImage> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<VaultDeletedImage> vaultDeletedImages = new APINodeList<VaultDeletedImage>(request, json);
+  public static APINodeList<VaultDeletedImage> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<VaultDeletedImage> vaultDeletedImages = new APINodeList<VaultDeletedImage>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -164,7 +165,7 @@ public class VaultDeletedImage extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          vaultDeletedImages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          vaultDeletedImages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return vaultDeletedImages;
       } else if (result.isJsonObject()) {
@@ -189,7 +190,7 @@ public class VaultDeletedImage extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              vaultDeletedImages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              vaultDeletedImages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -200,13 +201,13 @@ public class VaultDeletedImage extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  vaultDeletedImages.add(loadJSON(entry.getValue().toString(), context));
+                  vaultDeletedImages.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              vaultDeletedImages.add(loadJSON(obj.toString(), context));
+              vaultDeletedImages.add(loadJSON(obj.toString(), context, header));
             }
           }
           return vaultDeletedImages;
@@ -214,7 +215,7 @@ public class VaultDeletedImage extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              vaultDeletedImages.add(loadJSON(entry.getValue().toString(), context));
+              vaultDeletedImages.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return vaultDeletedImages;
         } else {
@@ -233,7 +234,7 @@ public class VaultDeletedImage extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              vaultDeletedImages.add(loadJSON(value.toString(), context));
+              vaultDeletedImages.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -245,7 +246,7 @@ public class VaultDeletedImage extends APINode {
 
           // Sixth, check if it's pure JsonObject
           vaultDeletedImages.clear();
-          vaultDeletedImages.add(loadJSON(json, context));
+          vaultDeletedImages.add(loadJSON(json, context, header));
           return vaultDeletedImages;
         }
       }
@@ -322,8 +323,8 @@ public class VaultDeletedImage extends APINode {
     };
 
     @Override
-    public VaultDeletedImage parseResponse(String response) throws APIException {
-      return VaultDeletedImage.parseResponse(response, getContext(), this).head();
+    public VaultDeletedImage parseResponse(String response, String header) throws APIException {
+      return VaultDeletedImage.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -333,7 +334,8 @@ public class VaultDeletedImage extends APINode {
 
     @Override
     public VaultDeletedImage execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -347,7 +349,7 @@ public class VaultDeletedImage extends APINode {
         new Function<String, VaultDeletedImage>() {
            public VaultDeletedImage apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -473,8 +475,8 @@ public class VaultDeletedImage extends APINode {
 
   public static APIRequest.ResponseParser<VaultDeletedImage> getParser() {
     return new APIRequest.ResponseParser<VaultDeletedImage>() {
-      public APINodeList<VaultDeletedImage> parseResponse(String response, APIContext context, APIRequest<VaultDeletedImage> request) throws MalformedResponseException {
-        return VaultDeletedImage.parseResponse(response, context, request);
+      public APINodeList<VaultDeletedImage> parseResponse(String response, APIContext context, APIRequest<VaultDeletedImage> request, String header) throws MalformedResponseException {
+        return VaultDeletedImage.parseResponse(response, context, request, header);
       }
     };
   }

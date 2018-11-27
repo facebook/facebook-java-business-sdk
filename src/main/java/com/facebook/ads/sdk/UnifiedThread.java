@@ -79,10 +79,6 @@ public class UnifiedThread extends APINode {
   private String mSnippet = null;
   @SerializedName("subject")
   private String mSubject = null;
-  @SerializedName("tags")
-  private Object mTags = null;
-  @SerializedName("thread_key")
-  private String mThreadKey = null;
   @SerializedName("unread_count")
   private Long mUnreadCount = null;
   @SerializedName("updated_time")
@@ -156,7 +152,7 @@ public class UnifiedThread extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UnifiedThread loadJSON(String json, APIContext context) {
+  public static UnifiedThread loadJSON(String json, APIContext context, String header) {
     UnifiedThread unifiedThread = getGson().fromJson(json, UnifiedThread.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -173,11 +169,12 @@ public class UnifiedThread extends APINode {
     }
     unifiedThread.context = context;
     unifiedThread.rawValue = json;
+    unifiedThread.header = header;
     return unifiedThread;
   }
 
-  public static APINodeList<UnifiedThread> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UnifiedThread> unifiedThreads = new APINodeList<UnifiedThread>(request, json);
+  public static APINodeList<UnifiedThread> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UnifiedThread> unifiedThreads = new APINodeList<UnifiedThread>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -188,7 +185,7 @@ public class UnifiedThread extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          unifiedThreads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          unifiedThreads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return unifiedThreads;
       } else if (result.isJsonObject()) {
@@ -213,7 +210,7 @@ public class UnifiedThread extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              unifiedThreads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              unifiedThreads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -224,13 +221,13 @@ public class UnifiedThread extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  unifiedThreads.add(loadJSON(entry.getValue().toString(), context));
+                  unifiedThreads.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              unifiedThreads.add(loadJSON(obj.toString(), context));
+              unifiedThreads.add(loadJSON(obj.toString(), context, header));
             }
           }
           return unifiedThreads;
@@ -238,7 +235,7 @@ public class UnifiedThread extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              unifiedThreads.add(loadJSON(entry.getValue().toString(), context));
+              unifiedThreads.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return unifiedThreads;
         } else {
@@ -257,7 +254,7 @@ public class UnifiedThread extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              unifiedThreads.add(loadJSON(value.toString(), context));
+              unifiedThreads.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -269,7 +266,7 @@ public class UnifiedThread extends APINode {
 
           // Sixth, check if it's pure JsonObject
           unifiedThreads.clear();
-          unifiedThreads.add(loadJSON(json, context));
+          unifiedThreads.add(loadJSON(json, context, header));
           return unifiedThreads;
         }
       }
@@ -358,14 +355,6 @@ public class UnifiedThread extends APINode {
     return mSubject;
   }
 
-  public Object getFieldTags() {
-    return mTags;
-  }
-
-  public String getFieldThreadKey() {
-    return mThreadKey;
-  }
-
   public Long getFieldUnreadCount() {
     return mUnreadCount;
   }
@@ -395,8 +384,8 @@ public class UnifiedThread extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -406,7 +395,8 @@ public class UnifiedThread extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -420,7 +410,7 @@ public class UnifiedThread extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetMessages.this.parseResponse(result);
+               return APIRequestGetMessages.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -564,8 +554,8 @@ public class UnifiedThread extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -575,7 +565,8 @@ public class UnifiedThread extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -589,7 +580,7 @@ public class UnifiedThread extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateMessage.this.parseResponse(result);
+               return APIRequestCreateMessage.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1109,16 +1100,14 @@ public class UnifiedThread extends APINode {
       "senders",
       "snippet",
       "subject",
-      "tags",
-      "thread_key",
       "unread_count",
       "updated_time",
       "wallpaper",
     };
 
     @Override
-    public UnifiedThread parseResponse(String response) throws APIException {
-      return UnifiedThread.parseResponse(response, getContext(), this).head();
+    public UnifiedThread parseResponse(String response, String header) throws APIException {
+      return UnifiedThread.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1128,7 +1117,8 @@ public class UnifiedThread extends APINode {
 
     @Override
     public UnifiedThread execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1142,7 +1132,7 @@ public class UnifiedThread extends APINode {
         new Function<String, UnifiedThread>() {
            public UnifiedThread apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1286,20 +1276,6 @@ public class UnifiedThread extends APINode {
     }
     public APIRequestGet requestSubjectField (boolean value) {
       this.requestField("subject", value);
-      return this;
-    }
-    public APIRequestGet requestTagsField () {
-      return this.requestTagsField(true);
-    }
-    public APIRequestGet requestTagsField (boolean value) {
-      this.requestField("tags", value);
-      return this;
-    }
-    public APIRequestGet requestThreadKeyField () {
-      return this.requestThreadKeyField(true);
-    }
-    public APIRequestGet requestThreadKeyField (boolean value) {
-      this.requestField("thread_key", value);
       return this;
     }
     public APIRequestGet requestUnreadCountField () {
@@ -1455,8 +1431,6 @@ public class UnifiedThread extends APINode {
     this.mSenders = instance.mSenders;
     this.mSnippet = instance.mSnippet;
     this.mSubject = instance.mSubject;
-    this.mTags = instance.mTags;
-    this.mThreadKey = instance.mThreadKey;
     this.mUnreadCount = instance.mUnreadCount;
     this.mUpdatedTime = instance.mUpdatedTime;
     this.mWallpaper = instance.mWallpaper;
@@ -1467,8 +1441,8 @@ public class UnifiedThread extends APINode {
 
   public static APIRequest.ResponseParser<UnifiedThread> getParser() {
     return new APIRequest.ResponseParser<UnifiedThread>() {
-      public APINodeList<UnifiedThread> parseResponse(String response, APIContext context, APIRequest<UnifiedThread> request) throws MalformedResponseException {
-        return UnifiedThread.parseResponse(response, context, request);
+      public APINodeList<UnifiedThread> parseResponse(String response, APIContext context, APIRequest<UnifiedThread> request, String header) throws MalformedResponseException {
+        return UnifiedThread.parseResponse(response, context, request, header);
       }
     };
   }

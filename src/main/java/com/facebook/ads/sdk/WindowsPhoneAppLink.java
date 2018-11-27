@@ -71,7 +71,7 @@ public class WindowsPhoneAppLink extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static WindowsPhoneAppLink loadJSON(String json, APIContext context) {
+  public static WindowsPhoneAppLink loadJSON(String json, APIContext context, String header) {
     WindowsPhoneAppLink windowsPhoneAppLink = getGson().fromJson(json, WindowsPhoneAppLink.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class WindowsPhoneAppLink extends APINode {
     }
     windowsPhoneAppLink.context = context;
     windowsPhoneAppLink.rawValue = json;
+    windowsPhoneAppLink.header = header;
     return windowsPhoneAppLink;
   }
 
-  public static APINodeList<WindowsPhoneAppLink> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<WindowsPhoneAppLink> windowsPhoneAppLinks = new APINodeList<WindowsPhoneAppLink>(request, json);
+  public static APINodeList<WindowsPhoneAppLink> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<WindowsPhoneAppLink> windowsPhoneAppLinks = new APINodeList<WindowsPhoneAppLink>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class WindowsPhoneAppLink extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          windowsPhoneAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          windowsPhoneAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return windowsPhoneAppLinks;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class WindowsPhoneAppLink extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              windowsPhoneAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              windowsPhoneAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class WindowsPhoneAppLink extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  windowsPhoneAppLinks.add(loadJSON(entry.getValue().toString(), context));
+                  windowsPhoneAppLinks.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              windowsPhoneAppLinks.add(loadJSON(obj.toString(), context));
+              windowsPhoneAppLinks.add(loadJSON(obj.toString(), context, header));
             }
           }
           return windowsPhoneAppLinks;
@@ -153,7 +154,7 @@ public class WindowsPhoneAppLink extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              windowsPhoneAppLinks.add(loadJSON(entry.getValue().toString(), context));
+              windowsPhoneAppLinks.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return windowsPhoneAppLinks;
         } else {
@@ -172,7 +173,7 @@ public class WindowsPhoneAppLink extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              windowsPhoneAppLinks.add(loadJSON(value.toString(), context));
+              windowsPhoneAppLinks.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class WindowsPhoneAppLink extends APINode {
 
           // Sixth, check if it's pure JsonObject
           windowsPhoneAppLinks.clear();
-          windowsPhoneAppLinks.add(loadJSON(json, context));
+          windowsPhoneAppLinks.add(loadJSON(json, context, header));
           return windowsPhoneAppLinks;
         }
       }
@@ -277,8 +278,8 @@ public class WindowsPhoneAppLink extends APINode {
 
   public static APIRequest.ResponseParser<WindowsPhoneAppLink> getParser() {
     return new APIRequest.ResponseParser<WindowsPhoneAppLink>() {
-      public APINodeList<WindowsPhoneAppLink> parseResponse(String response, APIContext context, APIRequest<WindowsPhoneAppLink> request) throws MalformedResponseException {
-        return WindowsPhoneAppLink.parseResponse(response, context, request);
+      public APINodeList<WindowsPhoneAppLink> parseResponse(String response, APIContext context, APIRequest<WindowsPhoneAppLink> request, String header) throws MalformedResponseException {
+        return WindowsPhoneAppLink.parseResponse(response, context, request, header);
       }
     };
   }

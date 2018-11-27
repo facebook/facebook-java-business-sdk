@@ -71,7 +71,7 @@ public class AdAssetFeedSpecCaption extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdAssetFeedSpecCaption loadJSON(String json, APIContext context) {
+  public static AdAssetFeedSpecCaption loadJSON(String json, APIContext context, String header) {
     AdAssetFeedSpecCaption adAssetFeedSpecCaption = getGson().fromJson(json, AdAssetFeedSpecCaption.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class AdAssetFeedSpecCaption extends APINode {
     }
     adAssetFeedSpecCaption.context = context;
     adAssetFeedSpecCaption.rawValue = json;
+    adAssetFeedSpecCaption.header = header;
     return adAssetFeedSpecCaption;
   }
 
-  public static APINodeList<AdAssetFeedSpecCaption> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAssetFeedSpecCaption> adAssetFeedSpecCaptions = new APINodeList<AdAssetFeedSpecCaption>(request, json);
+  public static APINodeList<AdAssetFeedSpecCaption> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAssetFeedSpecCaption> adAssetFeedSpecCaptions = new APINodeList<AdAssetFeedSpecCaption>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class AdAssetFeedSpecCaption extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAssetFeedSpecCaptions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAssetFeedSpecCaptions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adAssetFeedSpecCaptions;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class AdAssetFeedSpecCaption extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAssetFeedSpecCaptions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAssetFeedSpecCaptions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class AdAssetFeedSpecCaption extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAssetFeedSpecCaptions.add(loadJSON(entry.getValue().toString(), context));
+                  adAssetFeedSpecCaptions.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAssetFeedSpecCaptions.add(loadJSON(obj.toString(), context));
+              adAssetFeedSpecCaptions.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adAssetFeedSpecCaptions;
@@ -153,7 +154,7 @@ public class AdAssetFeedSpecCaption extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAssetFeedSpecCaptions.add(loadJSON(entry.getValue().toString(), context));
+              adAssetFeedSpecCaptions.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adAssetFeedSpecCaptions;
         } else {
@@ -172,7 +173,7 @@ public class AdAssetFeedSpecCaption extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAssetFeedSpecCaptions.add(loadJSON(value.toString(), context));
+              adAssetFeedSpecCaptions.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class AdAssetFeedSpecCaption extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adAssetFeedSpecCaptions.clear();
-          adAssetFeedSpecCaptions.add(loadJSON(json, context));
+          adAssetFeedSpecCaptions.add(loadJSON(json, context, header));
           return adAssetFeedSpecCaptions;
         }
       }
@@ -282,8 +283,8 @@ public class AdAssetFeedSpecCaption extends APINode {
 
   public static APIRequest.ResponseParser<AdAssetFeedSpecCaption> getParser() {
     return new APIRequest.ResponseParser<AdAssetFeedSpecCaption>() {
-      public APINodeList<AdAssetFeedSpecCaption> parseResponse(String response, APIContext context, APIRequest<AdAssetFeedSpecCaption> request) throws MalformedResponseException {
-        return AdAssetFeedSpecCaption.parseResponse(response, context, request);
+      public APINodeList<AdAssetFeedSpecCaption> parseResponse(String response, APIContext context, APIRequest<AdAssetFeedSpecCaption> request, String header) throws MalformedResponseException {
+        return AdAssetFeedSpecCaption.parseResponse(response, context, request, header);
       }
     };
   }

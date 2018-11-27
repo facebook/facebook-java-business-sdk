@@ -75,7 +75,7 @@ public class PagePaymentOptions extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PagePaymentOptions loadJSON(String json, APIContext context) {
+  public static PagePaymentOptions loadJSON(String json, APIContext context, String header) {
     PagePaymentOptions pagePaymentOptions = getGson().fromJson(json, PagePaymentOptions.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -92,11 +92,12 @@ public class PagePaymentOptions extends APINode {
     }
     pagePaymentOptions.context = context;
     pagePaymentOptions.rawValue = json;
+    pagePaymentOptions.header = header;
     return pagePaymentOptions;
   }
 
-  public static APINodeList<PagePaymentOptions> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PagePaymentOptions> pagePaymentOptionss = new APINodeList<PagePaymentOptions>(request, json);
+  public static APINodeList<PagePaymentOptions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PagePaymentOptions> pagePaymentOptionss = new APINodeList<PagePaymentOptions>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -107,7 +108,7 @@ public class PagePaymentOptions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pagePaymentOptionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pagePaymentOptionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pagePaymentOptionss;
       } else if (result.isJsonObject()) {
@@ -132,7 +133,7 @@ public class PagePaymentOptions extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pagePaymentOptionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pagePaymentOptionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -143,13 +144,13 @@ public class PagePaymentOptions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pagePaymentOptionss.add(loadJSON(entry.getValue().toString(), context));
+                  pagePaymentOptionss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pagePaymentOptionss.add(loadJSON(obj.toString(), context));
+              pagePaymentOptionss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pagePaymentOptionss;
@@ -157,7 +158,7 @@ public class PagePaymentOptions extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pagePaymentOptionss.add(loadJSON(entry.getValue().toString(), context));
+              pagePaymentOptionss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pagePaymentOptionss;
         } else {
@@ -176,7 +177,7 @@ public class PagePaymentOptions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pagePaymentOptionss.add(loadJSON(value.toString(), context));
+              pagePaymentOptionss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -188,7 +189,7 @@ public class PagePaymentOptions extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pagePaymentOptionss.clear();
-          pagePaymentOptionss.add(loadJSON(json, context));
+          pagePaymentOptionss.add(loadJSON(json, context, header));
           return pagePaymentOptionss;
         }
       }
@@ -301,8 +302,8 @@ public class PagePaymentOptions extends APINode {
 
   public static APIRequest.ResponseParser<PagePaymentOptions> getParser() {
     return new APIRequest.ResponseParser<PagePaymentOptions>() {
-      public APINodeList<PagePaymentOptions> parseResponse(String response, APIContext context, APIRequest<PagePaymentOptions> request) throws MalformedResponseException {
-        return PagePaymentOptions.parseResponse(response, context, request);
+      public APINodeList<PagePaymentOptions> parseResponse(String response, APIContext context, APIRequest<PagePaymentOptions> request, String header) throws MalformedResponseException {
+        return PagePaymentOptions.parseResponse(response, context, request, header);
       }
     };
   }

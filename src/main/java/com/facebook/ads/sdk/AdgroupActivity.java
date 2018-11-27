@@ -226,7 +226,7 @@ public class AdgroupActivity extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdgroupActivity loadJSON(String json, APIContext context) {
+  public static AdgroupActivity loadJSON(String json, APIContext context, String header) {
     AdgroupActivity adgroupActivity = getGson().fromJson(json, AdgroupActivity.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -243,11 +243,12 @@ public class AdgroupActivity extends APINode {
     }
     adgroupActivity.context = context;
     adgroupActivity.rawValue = json;
+    adgroupActivity.header = header;
     return adgroupActivity;
   }
 
-  public static APINodeList<AdgroupActivity> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdgroupActivity> adgroupActivitys = new APINodeList<AdgroupActivity>(request, json);
+  public static APINodeList<AdgroupActivity> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdgroupActivity> adgroupActivitys = new APINodeList<AdgroupActivity>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -258,7 +259,7 @@ public class AdgroupActivity extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adgroupActivitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adgroupActivitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adgroupActivitys;
       } else if (result.isJsonObject()) {
@@ -283,7 +284,7 @@ public class AdgroupActivity extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adgroupActivitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adgroupActivitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -294,13 +295,13 @@ public class AdgroupActivity extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adgroupActivitys.add(loadJSON(entry.getValue().toString(), context));
+                  adgroupActivitys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adgroupActivitys.add(loadJSON(obj.toString(), context));
+              adgroupActivitys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adgroupActivitys;
@@ -308,7 +309,7 @@ public class AdgroupActivity extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adgroupActivitys.add(loadJSON(entry.getValue().toString(), context));
+              adgroupActivitys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adgroupActivitys;
         } else {
@@ -327,7 +328,7 @@ public class AdgroupActivity extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adgroupActivitys.add(loadJSON(value.toString(), context));
+              adgroupActivitys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -339,7 +340,7 @@ public class AdgroupActivity extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adgroupActivitys.clear();
-          adgroupActivitys.add(loadJSON(json, context));
+          adgroupActivitys.add(loadJSON(json, context, header));
           return adgroupActivitys;
         }
       }
@@ -648,8 +649,8 @@ public class AdgroupActivity extends APINode {
     };
 
     @Override
-    public AdgroupActivity parseResponse(String response) throws APIException {
-      return AdgroupActivity.parseResponse(response, getContext(), this).head();
+    public AdgroupActivity parseResponse(String response, String header) throws APIException {
+      return AdgroupActivity.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -659,7 +660,8 @@ public class AdgroupActivity extends APINode {
 
     @Override
     public AdgroupActivity execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -673,7 +675,7 @@ public class AdgroupActivity extends APINode {
         new Function<String, AdgroupActivity>() {
            public AdgroupActivity apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1277,8 +1279,8 @@ public class AdgroupActivity extends APINode {
 
   public static APIRequest.ResponseParser<AdgroupActivity> getParser() {
     return new APIRequest.ResponseParser<AdgroupActivity>() {
-      public APINodeList<AdgroupActivity> parseResponse(String response, APIContext context, APIRequest<AdgroupActivity> request) throws MalformedResponseException {
-        return AdgroupActivity.parseResponse(response, context, request);
+      public APINodeList<AdgroupActivity> parseResponse(String response, APIContext context, APIRequest<AdgroupActivity> request, String header) throws MalformedResponseException {
+        return AdgroupActivity.parseResponse(response, context, request, header);
       }
     };
   }

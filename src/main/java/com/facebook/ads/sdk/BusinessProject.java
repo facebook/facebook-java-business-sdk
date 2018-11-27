@@ -132,7 +132,7 @@ public class BusinessProject extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BusinessProject loadJSON(String json, APIContext context) {
+  public static BusinessProject loadJSON(String json, APIContext context, String header) {
     BusinessProject businessProject = getGson().fromJson(json, BusinessProject.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -149,11 +149,12 @@ public class BusinessProject extends APINode {
     }
     businessProject.context = context;
     businessProject.rawValue = json;
+    businessProject.header = header;
     return businessProject;
   }
 
-  public static APINodeList<BusinessProject> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<BusinessProject> businessProjects = new APINodeList<BusinessProject>(request, json);
+  public static APINodeList<BusinessProject> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessProject> businessProjects = new APINodeList<BusinessProject>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -164,7 +165,7 @@ public class BusinessProject extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          businessProjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          businessProjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return businessProjects;
       } else if (result.isJsonObject()) {
@@ -189,7 +190,7 @@ public class BusinessProject extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              businessProjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              businessProjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -200,13 +201,13 @@ public class BusinessProject extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  businessProjects.add(loadJSON(entry.getValue().toString(), context));
+                  businessProjects.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              businessProjects.add(loadJSON(obj.toString(), context));
+              businessProjects.add(loadJSON(obj.toString(), context, header));
             }
           }
           return businessProjects;
@@ -214,7 +215,7 @@ public class BusinessProject extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              businessProjects.add(loadJSON(entry.getValue().toString(), context));
+              businessProjects.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return businessProjects;
         } else {
@@ -233,7 +234,7 @@ public class BusinessProject extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              businessProjects.add(loadJSON(value.toString(), context));
+              businessProjects.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -245,7 +246,7 @@ public class BusinessProject extends APINode {
 
           // Sixth, check if it's pure JsonObject
           businessProjects.clear();
-          businessProjects.add(loadJSON(json, context));
+          businessProjects.add(loadJSON(json, context, header));
           return businessProjects;
         }
       }
@@ -382,8 +383,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -393,7 +394,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -407,7 +409,7 @@ public class BusinessProject extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAdAccounts.this.parseResponse(result);
+               return APIRequestDeleteAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -507,7 +509,6 @@ public class BusinessProject extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "daily_spend_limit",
       "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
@@ -536,7 +537,6 @@ public class BusinessProject extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
-      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -552,8 +552,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccount> parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -563,7 +563,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -577,7 +578,7 @@ public class BusinessProject extends APINode {
         new Function<String, APINodeList<AdAccount>>() {
            public APINodeList<AdAccount> apply(String result) {
              try {
-               return APIRequestGetAdAccounts.this.parseResponse(result);
+               return APIRequestGetAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -779,13 +780,6 @@ public class BusinessProject extends APINode {
       this.requestField("currency", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestDailySpendLimitField () {
-      return this.requestDailySpendLimitField(true);
-    }
-    public APIRequestGetAdAccounts requestDailySpendLimitField (boolean value) {
-      this.requestField("daily_spend_limit", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField () {
       return this.requestDirectDealsTosAcceptedField(true);
     }
@@ -982,13 +976,6 @@ public class BusinessProject extends APINode {
       this.requestField("partner", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestRateLimitResetTimeField () {
-      return this.requestRateLimitResetTimeField(true);
-    }
-    public APIRequestGetAdAccounts requestRateLimitResetTimeField (boolean value) {
-      this.requestField("rate_limit_reset_time", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
@@ -1090,8 +1077,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public BusinessProject parseResponse(String response) throws APIException {
-      return BusinessProject.parseResponse(response, getContext(), this).head();
+    public BusinessProject parseResponse(String response, String header) throws APIException {
+      return BusinessProject.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1101,7 +1088,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public BusinessProject execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1115,7 +1103,7 @@ public class BusinessProject extends APINode {
         new Function<String, BusinessProject>() {
            public BusinessProject apply(String result) {
              try {
-               return APIRequestCreateAdAccount.this.parseResponse(result);
+               return APIRequestCreateAdAccount.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1199,8 +1187,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1210,7 +1198,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1224,7 +1213,7 @@ public class BusinessProject extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteApps.this.parseResponse(result);
+               return APIRequestDeleteApps.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1406,8 +1395,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public APINodeList<Application> parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this);
+    public APINodeList<Application> parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1417,7 +1406,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public APINodeList<Application> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1431,7 +1421,7 @@ public class BusinessProject extends APINode {
         new Function<String, APINodeList<Application>>() {
            public APINodeList<Application> apply(String result) {
              try {
-               return APIRequestGetApps.this.parseResponse(result);
+               return APIRequestGetApps.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2203,8 +2193,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public BusinessProject parseResponse(String response) throws APIException {
-      return BusinessProject.parseResponse(response, getContext(), this).head();
+    public BusinessProject parseResponse(String response, String header) throws APIException {
+      return BusinessProject.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2214,7 +2204,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public BusinessProject execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2228,7 +2219,7 @@ public class BusinessProject extends APINode {
         new Function<String, BusinessProject>() {
            public BusinessProject apply(String result) {
              try {
-               return APIRequestCreateApp.this.parseResponse(result);
+               return APIRequestCreateApp.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2312,8 +2303,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2323,7 +2314,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2337,7 +2329,7 @@ public class BusinessProject extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAssets.this.parseResponse(result);
+               return APIRequestDeleteAssets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2421,8 +2413,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public BusinessProject parseResponse(String response) throws APIException {
-      return BusinessProject.parseResponse(response, getContext(), this).head();
+    public BusinessProject parseResponse(String response, String header) throws APIException {
+      return BusinessProject.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2432,7 +2424,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public BusinessProject execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2446,7 +2439,7 @@ public class BusinessProject extends APINode {
         new Function<String, BusinessProject>() {
            public BusinessProject apply(String result) {
              try {
-               return APIRequestCreateAsset.this.parseResponse(result);
+               return APIRequestCreateAsset.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2530,8 +2523,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2541,7 +2534,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2555,7 +2549,7 @@ public class BusinessProject extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeletePages.this.parseResponse(result);
+               return APIRequestDeletePages.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2687,7 +2681,6 @@ public class BusinessProject extends APINode {
       "general_manager",
       "genre",
       "global_brand_page_name",
-      "global_brand_parent_page",
       "global_brand_root_id",
       "has_added_app",
       "has_whatsapp_business_number",
@@ -2754,7 +2747,6 @@ public class BusinessProject extends APINode {
       "promotion_eligible",
       "promotion_ineligible_reason",
       "public_transit",
-      "publisher_space",
       "rating_count",
       "recipient",
       "record_label",
@@ -2786,8 +2778,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public APINodeList<Page> parseResponse(String response) throws APIException {
-      return Page.parseResponse(response, getContext(), this);
+    public APINodeList<Page> parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2797,7 +2789,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public APINodeList<Page> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2811,7 +2804,7 @@ public class BusinessProject extends APINode {
         new Function<String, APINodeList<Page>>() {
            public APINodeList<Page> apply(String result) {
              try {
-               return APIRequestGetPages.this.parseResponse(result);
+               return APIRequestGetPages.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3207,13 +3200,6 @@ public class BusinessProject extends APINode {
     }
     public APIRequestGetPages requestGlobalBrandPageNameField (boolean value) {
       this.requestField("global_brand_page_name", value);
-      return this;
-    }
-    public APIRequestGetPages requestGlobalBrandParentPageField () {
-      return this.requestGlobalBrandParentPageField(true);
-    }
-    public APIRequestGetPages requestGlobalBrandParentPageField (boolean value) {
-      this.requestField("global_brand_parent_page", value);
       return this;
     }
     public APIRequestGetPages requestGlobalBrandRootIdField () {
@@ -3678,13 +3664,6 @@ public class BusinessProject extends APINode {
       this.requestField("public_transit", value);
       return this;
     }
-    public APIRequestGetPages requestPublisherSpaceField () {
-      return this.requestPublisherSpaceField(true);
-    }
-    public APIRequestGetPages requestPublisherSpaceField (boolean value) {
-      this.requestField("publisher_space", value);
-      return this;
-    }
     public APIRequestGetPages requestRatingCountField () {
       return this.requestRatingCountField(true);
     }
@@ -3898,8 +3877,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public BusinessProject parseResponse(String response) throws APIException {
-      return BusinessProject.parseResponse(response, getContext(), this).head();
+    public BusinessProject parseResponse(String response, String header) throws APIException {
+      return BusinessProject.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3909,7 +3888,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public BusinessProject execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3923,7 +3903,7 @@ public class BusinessProject extends APINode {
         new Function<String, BusinessProject>() {
            public BusinessProject apply(String result) {
              try {
-               return APIRequestCreatePage.this.parseResponse(result);
+               return APIRequestCreatePage.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4011,8 +3991,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4022,7 +4002,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4036,7 +4017,7 @@ public class BusinessProject extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteProductCatalogs.this.parseResponse(result);
+               return APIRequestDeleteProductCatalogs.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4123,8 +4104,6 @@ public class BusinessProject extends APINode {
       "feed_count",
       "flight_catalog_settings",
       "id",
-      "image_padding_landscape",
-      "image_padding_square",
       "name",
       "product_count",
       "qualified_product_count",
@@ -4132,8 +4111,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public APINodeList<ProductCatalog> parseResponse(String response) throws APIException {
-      return ProductCatalog.parseResponse(response, getContext(), this);
+    public APINodeList<ProductCatalog> parseResponse(String response, String header) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4143,7 +4122,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public APINodeList<ProductCatalog> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4157,7 +4137,7 @@ public class BusinessProject extends APINode {
         new Function<String, APINodeList<ProductCatalog>>() {
            public APINodeList<ProductCatalog> apply(String result) {
              try {
-               return APIRequestGetProductCatalogs.this.parseResponse(result);
+               return APIRequestGetProductCatalogs.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4268,20 +4248,6 @@ public class BusinessProject extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetProductCatalogs requestImagePaddingLandscapeField () {
-      return this.requestImagePaddingLandscapeField(true);
-    }
-    public APIRequestGetProductCatalogs requestImagePaddingLandscapeField (boolean value) {
-      this.requestField("image_padding_landscape", value);
-      return this;
-    }
-    public APIRequestGetProductCatalogs requestImagePaddingSquareField () {
-      return this.requestImagePaddingSquareField(true);
-    }
-    public APIRequestGetProductCatalogs requestImagePaddingSquareField (boolean value) {
-      this.requestField("image_padding_square", value);
-      return this;
-    }
     public APIRequestGetProductCatalogs requestNameField () {
       return this.requestNameField(true);
     }
@@ -4327,8 +4293,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public BusinessProject parseResponse(String response) throws APIException {
-      return BusinessProject.parseResponse(response, getContext(), this).head();
+    public BusinessProject parseResponse(String response, String header) throws APIException {
+      return BusinessProject.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4338,7 +4304,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public BusinessProject execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4352,7 +4319,7 @@ public class BusinessProject extends APINode {
         new Function<String, BusinessProject>() {
            public BusinessProject apply(String result) {
              try {
-               return APIRequestCreateProductCatalog.this.parseResponse(result);
+               return APIRequestCreateProductCatalog.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4435,8 +4402,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4446,7 +4413,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4460,7 +4428,7 @@ public class BusinessProject extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4543,8 +4511,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public BusinessProject parseResponse(String response) throws APIException {
-      return BusinessProject.parseResponse(response, getContext(), this).head();
+    public BusinessProject parseResponse(String response, String header) throws APIException {
+      return BusinessProject.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4554,7 +4522,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public BusinessProject execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4568,7 +4537,7 @@ public class BusinessProject extends APINode {
         new Function<String, BusinessProject>() {
            public BusinessProject apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4682,8 +4651,8 @@ public class BusinessProject extends APINode {
     };
 
     @Override
-    public BusinessProject parseResponse(String response) throws APIException {
-      return BusinessProject.parseResponse(response, getContext(), this).head();
+    public BusinessProject parseResponse(String response, String header) throws APIException {
+      return BusinessProject.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4693,7 +4662,8 @@ public class BusinessProject extends APINode {
 
     @Override
     public BusinessProject execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4707,7 +4677,7 @@ public class BusinessProject extends APINode {
         new Function<String, BusinessProject>() {
            public BusinessProject apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4803,8 +4773,8 @@ public class BusinessProject extends APINode {
 
   public static APIRequest.ResponseParser<BusinessProject> getParser() {
     return new APIRequest.ResponseParser<BusinessProject>() {
-      public APINodeList<BusinessProject> parseResponse(String response, APIContext context, APIRequest<BusinessProject> request) throws MalformedResponseException {
-        return BusinessProject.parseResponse(response, context, request);
+      public APINodeList<BusinessProject> parseResponse(String response, APIContext context, APIRequest<BusinessProject> request, String header) throws MalformedResponseException {
+        return BusinessProject.parseResponse(response, context, request, header);
       }
     };
   }

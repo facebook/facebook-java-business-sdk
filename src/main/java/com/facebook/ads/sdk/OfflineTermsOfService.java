@@ -128,7 +128,7 @@ public class OfflineTermsOfService extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static OfflineTermsOfService loadJSON(String json, APIContext context) {
+  public static OfflineTermsOfService loadJSON(String json, APIContext context, String header) {
     OfflineTermsOfService offlineTermsOfService = getGson().fromJson(json, OfflineTermsOfService.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -145,11 +145,12 @@ public class OfflineTermsOfService extends APINode {
     }
     offlineTermsOfService.context = context;
     offlineTermsOfService.rawValue = json;
+    offlineTermsOfService.header = header;
     return offlineTermsOfService;
   }
 
-  public static APINodeList<OfflineTermsOfService> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<OfflineTermsOfService> offlineTermsOfServices = new APINodeList<OfflineTermsOfService>(request, json);
+  public static APINodeList<OfflineTermsOfService> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OfflineTermsOfService> offlineTermsOfServices = new APINodeList<OfflineTermsOfService>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -160,7 +161,7 @@ public class OfflineTermsOfService extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          offlineTermsOfServices.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          offlineTermsOfServices.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return offlineTermsOfServices;
       } else if (result.isJsonObject()) {
@@ -185,7 +186,7 @@ public class OfflineTermsOfService extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              offlineTermsOfServices.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              offlineTermsOfServices.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -196,13 +197,13 @@ public class OfflineTermsOfService extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  offlineTermsOfServices.add(loadJSON(entry.getValue().toString(), context));
+                  offlineTermsOfServices.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              offlineTermsOfServices.add(loadJSON(obj.toString(), context));
+              offlineTermsOfServices.add(loadJSON(obj.toString(), context, header));
             }
           }
           return offlineTermsOfServices;
@@ -210,7 +211,7 @@ public class OfflineTermsOfService extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              offlineTermsOfServices.add(loadJSON(entry.getValue().toString(), context));
+              offlineTermsOfServices.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return offlineTermsOfServices;
         } else {
@@ -229,7 +230,7 @@ public class OfflineTermsOfService extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              offlineTermsOfServices.add(loadJSON(value.toString(), context));
+              offlineTermsOfServices.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -241,7 +242,7 @@ public class OfflineTermsOfService extends APINode {
 
           // Sixth, check if it's pure JsonObject
           offlineTermsOfServices.clear();
-          offlineTermsOfServices.add(loadJSON(json, context));
+          offlineTermsOfServices.add(loadJSON(json, context, header));
           return offlineTermsOfServices;
         }
       }
@@ -308,8 +309,8 @@ public class OfflineTermsOfService extends APINode {
     };
 
     @Override
-    public OfflineTermsOfService parseResponse(String response) throws APIException {
-      return OfflineTermsOfService.parseResponse(response, getContext(), this).head();
+    public OfflineTermsOfService parseResponse(String response, String header) throws APIException {
+      return OfflineTermsOfService.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -319,7 +320,8 @@ public class OfflineTermsOfService extends APINode {
 
     @Override
     public OfflineTermsOfService execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -333,7 +335,7 @@ public class OfflineTermsOfService extends APINode {
         new Function<String, OfflineTermsOfService>() {
            public OfflineTermsOfService apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -443,8 +445,8 @@ public class OfflineTermsOfService extends APINode {
 
   public static APIRequest.ResponseParser<OfflineTermsOfService> getParser() {
     return new APIRequest.ResponseParser<OfflineTermsOfService>() {
-      public APINodeList<OfflineTermsOfService> parseResponse(String response, APIContext context, APIRequest<OfflineTermsOfService> request) throws MalformedResponseException {
-        return OfflineTermsOfService.parseResponse(response, context, request);
+      public APINodeList<OfflineTermsOfService> parseResponse(String response, APIContext context, APIRequest<OfflineTermsOfService> request, String header) throws MalformedResponseException {
+        return OfflineTermsOfService.parseResponse(response, context, request, header);
       }
     };
   }

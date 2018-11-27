@@ -67,7 +67,7 @@ public class AdRecommendationData extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdRecommendationData loadJSON(String json, APIContext context) {
+  public static AdRecommendationData loadJSON(String json, APIContext context, String header) {
     AdRecommendationData adRecommendationData = getGson().fromJson(json, AdRecommendationData.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class AdRecommendationData extends APINode {
     }
     adRecommendationData.context = context;
     adRecommendationData.rawValue = json;
+    adRecommendationData.header = header;
     return adRecommendationData;
   }
 
-  public static APINodeList<AdRecommendationData> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdRecommendationData> adRecommendationDatas = new APINodeList<AdRecommendationData>(request, json);
+  public static APINodeList<AdRecommendationData> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdRecommendationData> adRecommendationDatas = new APINodeList<AdRecommendationData>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class AdRecommendationData extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adRecommendationDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adRecommendationDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adRecommendationDatas;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class AdRecommendationData extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adRecommendationDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adRecommendationDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class AdRecommendationData extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adRecommendationDatas.add(loadJSON(entry.getValue().toString(), context));
+                  adRecommendationDatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adRecommendationDatas.add(loadJSON(obj.toString(), context));
+              adRecommendationDatas.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adRecommendationDatas;
@@ -149,7 +150,7 @@ public class AdRecommendationData extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adRecommendationDatas.add(loadJSON(entry.getValue().toString(), context));
+              adRecommendationDatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adRecommendationDatas;
         } else {
@@ -168,7 +169,7 @@ public class AdRecommendationData extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adRecommendationDatas.add(loadJSON(value.toString(), context));
+              adRecommendationDatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class AdRecommendationData extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adRecommendationDatas.clear();
-          adRecommendationDatas.add(loadJSON(json, context));
+          adRecommendationDatas.add(loadJSON(json, context, header));
           return adRecommendationDatas;
         }
       }
@@ -253,8 +254,8 @@ public class AdRecommendationData extends APINode {
 
   public static APIRequest.ResponseParser<AdRecommendationData> getParser() {
     return new APIRequest.ResponseParser<AdRecommendationData>() {
-      public APINodeList<AdRecommendationData> parseResponse(String response, APIContext context, APIRequest<AdRecommendationData> request) throws MalformedResponseException {
-        return AdRecommendationData.parseResponse(response, context, request);
+      public APINodeList<AdRecommendationData> parseResponse(String response, APIContext context, APIRequest<AdRecommendationData> request, String header) throws MalformedResponseException {
+        return AdRecommendationData.parseResponse(response, context, request, header);
       }
     };
   }

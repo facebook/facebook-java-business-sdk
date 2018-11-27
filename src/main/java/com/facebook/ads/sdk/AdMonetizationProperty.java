@@ -124,7 +124,7 @@ public class AdMonetizationProperty extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdMonetizationProperty loadJSON(String json, APIContext context) {
+  public static AdMonetizationProperty loadJSON(String json, APIContext context, String header) {
     AdMonetizationProperty adMonetizationProperty = getGson().fromJson(json, AdMonetizationProperty.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -141,11 +141,12 @@ public class AdMonetizationProperty extends APINode {
     }
     adMonetizationProperty.context = context;
     adMonetizationProperty.rawValue = json;
+    adMonetizationProperty.header = header;
     return adMonetizationProperty;
   }
 
-  public static APINodeList<AdMonetizationProperty> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdMonetizationProperty> adMonetizationPropertys = new APINodeList<AdMonetizationProperty>(request, json);
+  public static APINodeList<AdMonetizationProperty> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdMonetizationProperty> adMonetizationPropertys = new APINodeList<AdMonetizationProperty>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -156,7 +157,7 @@ public class AdMonetizationProperty extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adMonetizationPropertys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adMonetizationPropertys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adMonetizationPropertys;
       } else if (result.isJsonObject()) {
@@ -181,7 +182,7 @@ public class AdMonetizationProperty extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adMonetizationPropertys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adMonetizationPropertys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -192,13 +193,13 @@ public class AdMonetizationProperty extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adMonetizationPropertys.add(loadJSON(entry.getValue().toString(), context));
+                  adMonetizationPropertys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adMonetizationPropertys.add(loadJSON(obj.toString(), context));
+              adMonetizationPropertys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adMonetizationPropertys;
@@ -206,7 +207,7 @@ public class AdMonetizationProperty extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adMonetizationPropertys.add(loadJSON(entry.getValue().toString(), context));
+              adMonetizationPropertys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adMonetizationPropertys;
         } else {
@@ -225,7 +226,7 @@ public class AdMonetizationProperty extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adMonetizationPropertys.add(loadJSON(value.toString(), context));
+              adMonetizationPropertys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -237,7 +238,7 @@ public class AdMonetizationProperty extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adMonetizationPropertys.clear();
-          adMonetizationPropertys.add(loadJSON(json, context));
+          adMonetizationPropertys.add(loadJSON(json, context, header));
           return adMonetizationPropertys;
         }
       }
@@ -314,8 +315,8 @@ public class AdMonetizationProperty extends APINode {
     };
 
     @Override
-    public APINodeList<AdNetworkAnalyticsSyncQueryResult> parseResponse(String response) throws APIException {
-      return AdNetworkAnalyticsSyncQueryResult.parseResponse(response, getContext(), this);
+    public APINodeList<AdNetworkAnalyticsSyncQueryResult> parseResponse(String response, String header) throws APIException {
+      return AdNetworkAnalyticsSyncQueryResult.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -325,7 +326,8 @@ public class AdMonetizationProperty extends APINode {
 
     @Override
     public APINodeList<AdNetworkAnalyticsSyncQueryResult> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -339,7 +341,7 @@ public class AdMonetizationProperty extends APINode {
         new Function<String, APINodeList<AdNetworkAnalyticsSyncQueryResult>>() {
            public APINodeList<AdNetworkAnalyticsSyncQueryResult> apply(String result) {
              try {
-               return APIRequestGetAdNetworkAnalytics.this.parseResponse(result);
+               return APIRequestGetAdNetworkAnalytics.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -528,8 +530,8 @@ public class AdMonetizationProperty extends APINode {
     };
 
     @Override
-    public AdMonetizationProperty parseResponse(String response) throws APIException {
-      return AdMonetizationProperty.parseResponse(response, getContext(), this).head();
+    public AdMonetizationProperty parseResponse(String response, String header) throws APIException {
+      return AdMonetizationProperty.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -539,7 +541,8 @@ public class AdMonetizationProperty extends APINode {
 
     @Override
     public AdMonetizationProperty execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -553,7 +556,7 @@ public class AdMonetizationProperty extends APINode {
         new Function<String, AdMonetizationProperty>() {
            public AdMonetizationProperty apply(String result) {
              try {
-               return APIRequestCreateAdNetworkAnalytic.this.parseResponse(result);
+               return APIRequestCreateAdNetworkAnalytic.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -719,8 +722,8 @@ public class AdMonetizationProperty extends APINode {
     };
 
     @Override
-    public APINodeList<AdNetworkAnalyticsAsyncQueryResult> parseResponse(String response) throws APIException {
-      return AdNetworkAnalyticsAsyncQueryResult.parseResponse(response, getContext(), this);
+    public APINodeList<AdNetworkAnalyticsAsyncQueryResult> parseResponse(String response, String header) throws APIException {
+      return AdNetworkAnalyticsAsyncQueryResult.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -730,7 +733,8 @@ public class AdMonetizationProperty extends APINode {
 
     @Override
     public APINodeList<AdNetworkAnalyticsAsyncQueryResult> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -744,7 +748,7 @@ public class AdMonetizationProperty extends APINode {
         new Function<String, APINodeList<AdNetworkAnalyticsAsyncQueryResult>>() {
            public APINodeList<AdNetworkAnalyticsAsyncQueryResult> apply(String result) {
              try {
-               return APIRequestGetAdNetworkAnalyticsResults.this.parseResponse(result);
+               return APIRequestGetAdNetworkAnalyticsResults.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -874,8 +878,8 @@ public class AdMonetizationProperty extends APINode {
     };
 
     @Override
-    public AdMonetizationProperty parseResponse(String response) throws APIException {
-      return AdMonetizationProperty.parseResponse(response, getContext(), this).head();
+    public AdMonetizationProperty parseResponse(String response, String header) throws APIException {
+      return AdMonetizationProperty.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -885,7 +889,8 @@ public class AdMonetizationProperty extends APINode {
 
     @Override
     public AdMonetizationProperty execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -899,7 +904,7 @@ public class AdMonetizationProperty extends APINode {
         new Function<String, AdMonetizationProperty>() {
            public AdMonetizationProperty apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1178,8 +1183,8 @@ public class AdMonetizationProperty extends APINode {
 
   public static APIRequest.ResponseParser<AdMonetizationProperty> getParser() {
     return new APIRequest.ResponseParser<AdMonetizationProperty>() {
-      public APINodeList<AdMonetizationProperty> parseResponse(String response, APIContext context, APIRequest<AdMonetizationProperty> request) throws MalformedResponseException {
-        return AdMonetizationProperty.parseResponse(response, context, request);
+      public APINodeList<AdMonetizationProperty> parseResponse(String response, APIContext context, APIRequest<AdMonetizationProperty> request, String header) throws MalformedResponseException {
+        return AdMonetizationProperty.parseResponse(response, context, request, header);
       }
     };
   }

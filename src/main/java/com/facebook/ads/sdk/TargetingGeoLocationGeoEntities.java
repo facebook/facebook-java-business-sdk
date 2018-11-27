@@ -75,7 +75,7 @@ public class TargetingGeoLocationGeoEntities extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static TargetingGeoLocationGeoEntities loadJSON(String json, APIContext context) {
+  public static TargetingGeoLocationGeoEntities loadJSON(String json, APIContext context, String header) {
     TargetingGeoLocationGeoEntities targetingGeoLocationGeoEntities = getGson().fromJson(json, TargetingGeoLocationGeoEntities.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -92,11 +92,12 @@ public class TargetingGeoLocationGeoEntities extends APINode {
     }
     targetingGeoLocationGeoEntities.context = context;
     targetingGeoLocationGeoEntities.rawValue = json;
+    targetingGeoLocationGeoEntities.header = header;
     return targetingGeoLocationGeoEntities;
   }
 
-  public static APINodeList<TargetingGeoLocationGeoEntities> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<TargetingGeoLocationGeoEntities> targetingGeoLocationGeoEntitiess = new APINodeList<TargetingGeoLocationGeoEntities>(request, json);
+  public static APINodeList<TargetingGeoLocationGeoEntities> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<TargetingGeoLocationGeoEntities> targetingGeoLocationGeoEntitiess = new APINodeList<TargetingGeoLocationGeoEntities>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -107,7 +108,7 @@ public class TargetingGeoLocationGeoEntities extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          targetingGeoLocationGeoEntitiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          targetingGeoLocationGeoEntitiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return targetingGeoLocationGeoEntitiess;
       } else if (result.isJsonObject()) {
@@ -132,7 +133,7 @@ public class TargetingGeoLocationGeoEntities extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              targetingGeoLocationGeoEntitiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              targetingGeoLocationGeoEntitiess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -143,13 +144,13 @@ public class TargetingGeoLocationGeoEntities extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  targetingGeoLocationGeoEntitiess.add(loadJSON(entry.getValue().toString(), context));
+                  targetingGeoLocationGeoEntitiess.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              targetingGeoLocationGeoEntitiess.add(loadJSON(obj.toString(), context));
+              targetingGeoLocationGeoEntitiess.add(loadJSON(obj.toString(), context, header));
             }
           }
           return targetingGeoLocationGeoEntitiess;
@@ -157,7 +158,7 @@ public class TargetingGeoLocationGeoEntities extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              targetingGeoLocationGeoEntitiess.add(loadJSON(entry.getValue().toString(), context));
+              targetingGeoLocationGeoEntitiess.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return targetingGeoLocationGeoEntitiess;
         } else {
@@ -176,7 +177,7 @@ public class TargetingGeoLocationGeoEntities extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              targetingGeoLocationGeoEntitiess.add(loadJSON(value.toString(), context));
+              targetingGeoLocationGeoEntitiess.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -188,7 +189,7 @@ public class TargetingGeoLocationGeoEntities extends APINode {
 
           // Sixth, check if it's pure JsonObject
           targetingGeoLocationGeoEntitiess.clear();
-          targetingGeoLocationGeoEntitiess.add(loadJSON(json, context));
+          targetingGeoLocationGeoEntitiess.add(loadJSON(json, context, header));
           return targetingGeoLocationGeoEntitiess;
         }
       }
@@ -301,8 +302,8 @@ public class TargetingGeoLocationGeoEntities extends APINode {
 
   public static APIRequest.ResponseParser<TargetingGeoLocationGeoEntities> getParser() {
     return new APIRequest.ResponseParser<TargetingGeoLocationGeoEntities>() {
-      public APINodeList<TargetingGeoLocationGeoEntities> parseResponse(String response, APIContext context, APIRequest<TargetingGeoLocationGeoEntities> request) throws MalformedResponseException {
-        return TargetingGeoLocationGeoEntities.parseResponse(response, context, request);
+      public APINodeList<TargetingGeoLocationGeoEntities> parseResponse(String response, APIContext context, APIRequest<TargetingGeoLocationGeoEntities> request, String header) throws MalformedResponseException {
+        return TargetingGeoLocationGeoEntities.parseResponse(response, context, request, header);
       }
     };
   }

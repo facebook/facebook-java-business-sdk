@@ -71,7 +71,7 @@ public class PlatformImageSource extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PlatformImageSource loadJSON(String json, APIContext context) {
+  public static PlatformImageSource loadJSON(String json, APIContext context, String header) {
     PlatformImageSource platformImageSource = getGson().fromJson(json, PlatformImageSource.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class PlatformImageSource extends APINode {
     }
     platformImageSource.context = context;
     platformImageSource.rawValue = json;
+    platformImageSource.header = header;
     return platformImageSource;
   }
 
-  public static APINodeList<PlatformImageSource> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PlatformImageSource> platformImageSources = new APINodeList<PlatformImageSource>(request, json);
+  public static APINodeList<PlatformImageSource> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PlatformImageSource> platformImageSources = new APINodeList<PlatformImageSource>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class PlatformImageSource extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          platformImageSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          platformImageSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return platformImageSources;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class PlatformImageSource extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              platformImageSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              platformImageSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class PlatformImageSource extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  platformImageSources.add(loadJSON(entry.getValue().toString(), context));
+                  platformImageSources.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              platformImageSources.add(loadJSON(obj.toString(), context));
+              platformImageSources.add(loadJSON(obj.toString(), context, header));
             }
           }
           return platformImageSources;
@@ -153,7 +154,7 @@ public class PlatformImageSource extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              platformImageSources.add(loadJSON(entry.getValue().toString(), context));
+              platformImageSources.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return platformImageSources;
         } else {
@@ -172,7 +173,7 @@ public class PlatformImageSource extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              platformImageSources.add(loadJSON(value.toString(), context));
+              platformImageSources.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class PlatformImageSource extends APINode {
 
           // Sixth, check if it's pure JsonObject
           platformImageSources.clear();
-          platformImageSources.add(loadJSON(json, context));
+          platformImageSources.add(loadJSON(json, context, header));
           return platformImageSources;
         }
       }
@@ -277,8 +278,8 @@ public class PlatformImageSource extends APINode {
 
   public static APIRequest.ResponseParser<PlatformImageSource> getParser() {
     return new APIRequest.ResponseParser<PlatformImageSource>() {
-      public APINodeList<PlatformImageSource> parseResponse(String response, APIContext context, APIRequest<PlatformImageSource> request) throws MalformedResponseException {
-        return PlatformImageSource.parseResponse(response, context, request);
+      public APINodeList<PlatformImageSource> parseResponse(String response, APIContext context, APIRequest<PlatformImageSource> request, String header) throws MalformedResponseException {
+        return PlatformImageSource.parseResponse(response, context, request, header);
       }
     };
   }

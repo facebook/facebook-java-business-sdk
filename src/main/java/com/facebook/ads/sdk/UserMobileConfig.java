@@ -69,7 +69,7 @@ public class UserMobileConfig extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserMobileConfig loadJSON(String json, APIContext context) {
+  public static UserMobileConfig loadJSON(String json, APIContext context, String header) {
     UserMobileConfig userMobileConfig = getGson().fromJson(json, UserMobileConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class UserMobileConfig extends APINode {
     }
     userMobileConfig.context = context;
     userMobileConfig.rawValue = json;
+    userMobileConfig.header = header;
     return userMobileConfig;
   }
 
-  public static APINodeList<UserMobileConfig> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UserMobileConfig> userMobileConfigs = new APINodeList<UserMobileConfig>(request, json);
+  public static APINodeList<UserMobileConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UserMobileConfig> userMobileConfigs = new APINodeList<UserMobileConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class UserMobileConfig extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userMobileConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userMobileConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return userMobileConfigs;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class UserMobileConfig extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userMobileConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userMobileConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class UserMobileConfig extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userMobileConfigs.add(loadJSON(entry.getValue().toString(), context));
+                  userMobileConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userMobileConfigs.add(loadJSON(obj.toString(), context));
+              userMobileConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return userMobileConfigs;
@@ -151,7 +152,7 @@ public class UserMobileConfig extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userMobileConfigs.add(loadJSON(entry.getValue().toString(), context));
+              userMobileConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return userMobileConfigs;
         } else {
@@ -170,7 +171,7 @@ public class UserMobileConfig extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userMobileConfigs.add(loadJSON(value.toString(), context));
+              userMobileConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class UserMobileConfig extends APINode {
 
           // Sixth, check if it's pure JsonObject
           userMobileConfigs.clear();
-          userMobileConfigs.add(loadJSON(json, context));
+          userMobileConfigs.add(loadJSON(json, context, header));
           return userMobileConfigs;
         }
       }
@@ -265,8 +266,8 @@ public class UserMobileConfig extends APINode {
 
   public static APIRequest.ResponseParser<UserMobileConfig> getParser() {
     return new APIRequest.ResponseParser<UserMobileConfig>() {
-      public APINodeList<UserMobileConfig> parseResponse(String response, APIContext context, APIRequest<UserMobileConfig> request) throws MalformedResponseException {
-        return UserMobileConfig.parseResponse(response, context, request);
+      public APINodeList<UserMobileConfig> parseResponse(String response, APIContext context, APIRequest<UserMobileConfig> request, String header) throws MalformedResponseException {
+        return UserMobileConfig.parseResponse(response, context, request, header);
       }
     };
   }

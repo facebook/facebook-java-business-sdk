@@ -132,7 +132,7 @@ public class PageLabel extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageLabel loadJSON(String json, APIContext context) {
+  public static PageLabel loadJSON(String json, APIContext context, String header) {
     PageLabel pageLabel = getGson().fromJson(json, PageLabel.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -149,11 +149,12 @@ public class PageLabel extends APINode {
     }
     pageLabel.context = context;
     pageLabel.rawValue = json;
+    pageLabel.header = header;
     return pageLabel;
   }
 
-  public static APINodeList<PageLabel> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageLabel> pageLabels = new APINodeList<PageLabel>(request, json);
+  public static APINodeList<PageLabel> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageLabel> pageLabels = new APINodeList<PageLabel>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -164,7 +165,7 @@ public class PageLabel extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageLabels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageLabels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageLabels;
       } else if (result.isJsonObject()) {
@@ -189,7 +190,7 @@ public class PageLabel extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageLabels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageLabels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -200,13 +201,13 @@ public class PageLabel extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageLabels.add(loadJSON(entry.getValue().toString(), context));
+                  pageLabels.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageLabels.add(loadJSON(obj.toString(), context));
+              pageLabels.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageLabels;
@@ -214,7 +215,7 @@ public class PageLabel extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageLabels.add(loadJSON(entry.getValue().toString(), context));
+              pageLabels.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageLabels;
         } else {
@@ -233,7 +234,7 @@ public class PageLabel extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageLabels.add(loadJSON(value.toString(), context));
+              pageLabels.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -245,7 +246,7 @@ public class PageLabel extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageLabels.clear();
-          pageLabels.add(loadJSON(json, context));
+          pageLabels.add(loadJSON(json, context, header));
           return pageLabels;
         }
       }
@@ -337,8 +338,8 @@ public class PageLabel extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -348,7 +349,8 @@ public class PageLabel extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -362,7 +364,7 @@ public class PageLabel extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteUsers.this.parseResponse(result);
+               return APIRequestDeleteUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -450,7 +452,6 @@ public class PageLabel extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -471,12 +472,10 @@ public class PageLabel extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -504,7 +503,6 @@ public class PageLabel extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -513,8 +511,8 @@ public class PageLabel extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -524,7 +522,8 @@ public class PageLabel extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -538,7 +537,7 @@ public class PageLabel extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetUsers.this.parseResponse(result);
+               return APIRequestGetUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -626,13 +625,6 @@ public class PageLabel extends APINode {
     }
     public APIRequestGetUsers requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetUsers requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetUsers requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetUsers requestBirthdayField () {
@@ -775,13 +767,6 @@ public class PageLabel extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetUsers requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetUsers requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetUsers requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -808,13 +793,6 @@ public class PageLabel extends APINode {
     }
     public APIRequestGetUsers requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetUsers requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetUsers requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetUsers requestLastNameField () {
@@ -1006,13 +984,6 @@ public class PageLabel extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetUsers requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetUsers requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetUsers requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -1065,8 +1036,8 @@ public class PageLabel extends APINode {
     };
 
     @Override
-    public PageLabel parseResponse(String response) throws APIException {
-      return PageLabel.parseResponse(response, getContext(), this).head();
+    public PageLabel parseResponse(String response, String header) throws APIException {
+      return PageLabel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1076,7 +1047,8 @@ public class PageLabel extends APINode {
 
     @Override
     public PageLabel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1090,7 +1062,7 @@ public class PageLabel extends APINode {
         new Function<String, PageLabel>() {
            public PageLabel apply(String result) {
              try {
-               return APIRequestCreateUser.this.parseResponse(result);
+               return APIRequestCreateUser.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1177,8 +1149,8 @@ public class PageLabel extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1188,7 +1160,8 @@ public class PageLabel extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1202,7 +1175,7 @@ public class PageLabel extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1285,8 +1258,8 @@ public class PageLabel extends APINode {
     };
 
     @Override
-    public PageLabel parseResponse(String response) throws APIException {
-      return PageLabel.parseResponse(response, getContext(), this).head();
+    public PageLabel parseResponse(String response, String header) throws APIException {
+      return PageLabel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1296,7 +1269,8 @@ public class PageLabel extends APINode {
 
     @Override
     public PageLabel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1310,7 +1284,7 @@ public class PageLabel extends APINode {
         new Function<String, PageLabel>() {
            public PageLabel apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1436,8 +1410,8 @@ public class PageLabel extends APINode {
 
   public static APIRequest.ResponseParser<PageLabel> getParser() {
     return new APIRequest.ResponseParser<PageLabel>() {
-      public APINodeList<PageLabel> parseResponse(String response, APIContext context, APIRequest<PageLabel> request) throws MalformedResponseException {
-        return PageLabel.parseResponse(response, context, request);
+      public APINodeList<PageLabel> parseResponse(String response, APIContext context, APIRequest<PageLabel> request, String header) throws MalformedResponseException {
+        return PageLabel.parseResponse(response, context, request, header);
       }
     };
   }

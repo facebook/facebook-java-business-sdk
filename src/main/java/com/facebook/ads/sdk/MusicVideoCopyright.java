@@ -148,7 +148,7 @@ public class MusicVideoCopyright extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static MusicVideoCopyright loadJSON(String json, APIContext context) {
+  public static MusicVideoCopyright loadJSON(String json, APIContext context, String header) {
     MusicVideoCopyright musicVideoCopyright = getGson().fromJson(json, MusicVideoCopyright.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -165,11 +165,12 @@ public class MusicVideoCopyright extends APINode {
     }
     musicVideoCopyright.context = context;
     musicVideoCopyright.rawValue = json;
+    musicVideoCopyright.header = header;
     return musicVideoCopyright;
   }
 
-  public static APINodeList<MusicVideoCopyright> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<MusicVideoCopyright> musicVideoCopyrights = new APINodeList<MusicVideoCopyright>(request, json);
+  public static APINodeList<MusicVideoCopyright> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<MusicVideoCopyright> musicVideoCopyrights = new APINodeList<MusicVideoCopyright>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -180,7 +181,7 @@ public class MusicVideoCopyright extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          musicVideoCopyrights.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          musicVideoCopyrights.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return musicVideoCopyrights;
       } else if (result.isJsonObject()) {
@@ -205,7 +206,7 @@ public class MusicVideoCopyright extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              musicVideoCopyrights.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              musicVideoCopyrights.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -216,13 +217,13 @@ public class MusicVideoCopyright extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  musicVideoCopyrights.add(loadJSON(entry.getValue().toString(), context));
+                  musicVideoCopyrights.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              musicVideoCopyrights.add(loadJSON(obj.toString(), context));
+              musicVideoCopyrights.add(loadJSON(obj.toString(), context, header));
             }
           }
           return musicVideoCopyrights;
@@ -230,7 +231,7 @@ public class MusicVideoCopyright extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              musicVideoCopyrights.add(loadJSON(entry.getValue().toString(), context));
+              musicVideoCopyrights.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return musicVideoCopyrights;
         } else {
@@ -249,7 +250,7 @@ public class MusicVideoCopyright extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              musicVideoCopyrights.add(loadJSON(value.toString(), context));
+              musicVideoCopyrights.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -261,7 +262,7 @@ public class MusicVideoCopyright extends APINode {
 
           // Sixth, check if it's pure JsonObject
           musicVideoCopyrights.clear();
-          musicVideoCopyrights.add(loadJSON(json, context));
+          musicVideoCopyrights.add(loadJSON(json, context, header));
           return musicVideoCopyrights;
         }
       }
@@ -378,8 +379,8 @@ public class MusicVideoCopyright extends APINode {
     };
 
     @Override
-    public MusicVideoCopyright parseResponse(String response) throws APIException {
-      return MusicVideoCopyright.parseResponse(response, getContext(), this).head();
+    public MusicVideoCopyright parseResponse(String response, String header) throws APIException {
+      return MusicVideoCopyright.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -389,7 +390,8 @@ public class MusicVideoCopyright extends APINode {
 
     @Override
     public MusicVideoCopyright execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -403,7 +405,7 @@ public class MusicVideoCopyright extends APINode {
         new Function<String, MusicVideoCopyright>() {
            public MusicVideoCopyright apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -593,8 +595,8 @@ public class MusicVideoCopyright extends APINode {
 
   public static APIRequest.ResponseParser<MusicVideoCopyright> getParser() {
     return new APIRequest.ResponseParser<MusicVideoCopyright>() {
-      public APINodeList<MusicVideoCopyright> parseResponse(String response, APIContext context, APIRequest<MusicVideoCopyright> request) throws MalformedResponseException {
-        return MusicVideoCopyright.parseResponse(response, context, request);
+      public APINodeList<MusicVideoCopyright> parseResponse(String response, APIContext context, APIRequest<MusicVideoCopyright> request, String header) throws MalformedResponseException {
+        return MusicVideoCopyright.parseResponse(response, context, request, header);
       }
     };
   }

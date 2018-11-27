@@ -73,6 +73,10 @@ public class AutomotiveModel extends APINode {
   private String mDrivetrain = null;
   @SerializedName("exterior_color")
   private String mExteriorColor = null;
+  @SerializedName("finance_description")
+  private String mFinanceDescription = null;
+  @SerializedName("finance_type")
+  private String mFinanceType = null;
   @SerializedName("fuel_type")
   private String mFuelType = null;
   @SerializedName("generation")
@@ -170,7 +174,7 @@ public class AutomotiveModel extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AutomotiveModel loadJSON(String json, APIContext context) {
+  public static AutomotiveModel loadJSON(String json, APIContext context, String header) {
     AutomotiveModel automotiveModel = getGson().fromJson(json, AutomotiveModel.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -187,11 +191,12 @@ public class AutomotiveModel extends APINode {
     }
     automotiveModel.context = context;
     automotiveModel.rawValue = json;
+    automotiveModel.header = header;
     return automotiveModel;
   }
 
-  public static APINodeList<AutomotiveModel> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AutomotiveModel> automotiveModels = new APINodeList<AutomotiveModel>(request, json);
+  public static APINodeList<AutomotiveModel> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AutomotiveModel> automotiveModels = new APINodeList<AutomotiveModel>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -202,7 +207,7 @@ public class AutomotiveModel extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          automotiveModels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          automotiveModels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return automotiveModels;
       } else if (result.isJsonObject()) {
@@ -227,7 +232,7 @@ public class AutomotiveModel extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              automotiveModels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              automotiveModels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -238,13 +243,13 @@ public class AutomotiveModel extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  automotiveModels.add(loadJSON(entry.getValue().toString(), context));
+                  automotiveModels.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              automotiveModels.add(loadJSON(obj.toString(), context));
+              automotiveModels.add(loadJSON(obj.toString(), context, header));
             }
           }
           return automotiveModels;
@@ -252,7 +257,7 @@ public class AutomotiveModel extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              automotiveModels.add(loadJSON(entry.getValue().toString(), context));
+              automotiveModels.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return automotiveModels;
         } else {
@@ -271,7 +276,7 @@ public class AutomotiveModel extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              automotiveModels.add(loadJSON(value.toString(), context));
+              automotiveModels.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -283,7 +288,7 @@ public class AutomotiveModel extends APINode {
 
           // Sixth, check if it's pure JsonObject
           automotiveModels.clear();
-          automotiveModels.add(loadJSON(json, context));
+          automotiveModels.add(loadJSON(json, context, header));
           return automotiveModels;
         }
       }
@@ -353,6 +358,14 @@ public class AutomotiveModel extends APINode {
 
   public String getFieldExteriorColor() {
     return mExteriorColor;
+  }
+
+  public String getFieldFinanceDescription() {
+    return mFinanceDescription;
+  }
+
+  public String getFieldFinanceType() {
+    return mFinanceType;
   }
 
   public String getFieldFuelType() {
@@ -437,6 +450,8 @@ public class AutomotiveModel extends APINode {
       "description",
       "drivetrain",
       "exterior_color",
+      "finance_description",
+      "finance_type",
       "fuel_type",
       "generation",
       "id",
@@ -455,8 +470,8 @@ public class AutomotiveModel extends APINode {
     };
 
     @Override
-    public AutomotiveModel parseResponse(String response) throws APIException {
-      return AutomotiveModel.parseResponse(response, getContext(), this).head();
+    public AutomotiveModel parseResponse(String response, String header) throws APIException {
+      return AutomotiveModel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -466,7 +481,8 @@ public class AutomotiveModel extends APINode {
 
     @Override
     public AutomotiveModel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -480,7 +496,7 @@ public class AutomotiveModel extends APINode {
         new Function<String, AutomotiveModel>() {
            public AutomotiveModel apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -603,6 +619,20 @@ public class AutomotiveModel extends APINode {
     }
     public APIRequestGet requestExteriorColorField (boolean value) {
       this.requestField("exterior_color", value);
+      return this;
+    }
+    public APIRequestGet requestFinanceDescriptionField () {
+      return this.requestFinanceDescriptionField(true);
+    }
+    public APIRequestGet requestFinanceDescriptionField (boolean value) {
+      this.requestField("finance_description", value);
+      return this;
+    }
+    public APIRequestGet requestFinanceTypeField () {
+      return this.requestFinanceTypeField(true);
+    }
+    public APIRequestGet requestFinanceTypeField (boolean value) {
+      this.requestField("finance_type", value);
       return this;
     }
     public APIRequestGet requestFuelTypeField () {
@@ -736,6 +766,8 @@ public class AutomotiveModel extends APINode {
     this.mDescription = instance.mDescription;
     this.mDrivetrain = instance.mDrivetrain;
     this.mExteriorColor = instance.mExteriorColor;
+    this.mFinanceDescription = instance.mFinanceDescription;
+    this.mFinanceType = instance.mFinanceType;
     this.mFuelType = instance.mFuelType;
     this.mGeneration = instance.mGeneration;
     this.mId = instance.mId;
@@ -758,8 +790,8 @@ public class AutomotiveModel extends APINode {
 
   public static APIRequest.ResponseParser<AutomotiveModel> getParser() {
     return new APIRequest.ResponseParser<AutomotiveModel>() {
-      public APINodeList<AutomotiveModel> parseResponse(String response, APIContext context, APIRequest<AutomotiveModel> request) throws MalformedResponseException {
-        return AutomotiveModel.parseResponse(response, context, request);
+      public APINodeList<AutomotiveModel> parseResponse(String response, APIContext context, APIRequest<AutomotiveModel> request, String header) throws MalformedResponseException {
+        return AutomotiveModel.parseResponse(response, context, request, header);
       }
     };
   }

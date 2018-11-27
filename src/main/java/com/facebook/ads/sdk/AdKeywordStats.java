@@ -103,7 +103,7 @@ public class AdKeywordStats extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdKeywordStats loadJSON(String json, APIContext context) {
+  public static AdKeywordStats loadJSON(String json, APIContext context, String header) {
     AdKeywordStats adKeywordStats = getGson().fromJson(json, AdKeywordStats.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -120,11 +120,12 @@ public class AdKeywordStats extends APINode {
     }
     adKeywordStats.context = context;
     adKeywordStats.rawValue = json;
+    adKeywordStats.header = header;
     return adKeywordStats;
   }
 
-  public static APINodeList<AdKeywordStats> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdKeywordStats> adKeywordStatss = new APINodeList<AdKeywordStats>(request, json);
+  public static APINodeList<AdKeywordStats> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdKeywordStats> adKeywordStatss = new APINodeList<AdKeywordStats>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -135,7 +136,7 @@ public class AdKeywordStats extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adKeywordStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adKeywordStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adKeywordStatss;
       } else if (result.isJsonObject()) {
@@ -160,7 +161,7 @@ public class AdKeywordStats extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adKeywordStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adKeywordStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -171,13 +172,13 @@ public class AdKeywordStats extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adKeywordStatss.add(loadJSON(entry.getValue().toString(), context));
+                  adKeywordStatss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adKeywordStatss.add(loadJSON(obj.toString(), context));
+              adKeywordStatss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adKeywordStatss;
@@ -185,7 +186,7 @@ public class AdKeywordStats extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adKeywordStatss.add(loadJSON(entry.getValue().toString(), context));
+              adKeywordStatss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adKeywordStatss;
         } else {
@@ -204,7 +205,7 @@ public class AdKeywordStats extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adKeywordStatss.add(loadJSON(value.toString(), context));
+              adKeywordStatss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -216,7 +217,7 @@ public class AdKeywordStats extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adKeywordStatss.clear();
-          adKeywordStatss.add(loadJSON(json, context));
+          adKeywordStatss.add(loadJSON(json, context, header));
           return adKeywordStatss;
         }
       }
@@ -479,8 +480,8 @@ public class AdKeywordStats extends APINode {
 
   public static APIRequest.ResponseParser<AdKeywordStats> getParser() {
     return new APIRequest.ResponseParser<AdKeywordStats>() {
-      public APINodeList<AdKeywordStats> parseResponse(String response, APIContext context, APIRequest<AdKeywordStats> request) throws MalformedResponseException {
-        return AdKeywordStats.parseResponse(response, context, request);
+      public APINodeList<AdKeywordStats> parseResponse(String response, APIContext context, APIRequest<AdKeywordStats> request, String header) throws MalformedResponseException {
+        return AdKeywordStats.parseResponse(response, context, request, header);
       }
     };
   }

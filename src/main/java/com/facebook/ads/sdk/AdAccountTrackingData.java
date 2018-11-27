@@ -67,7 +67,7 @@ public class AdAccountTrackingData extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdAccountTrackingData loadJSON(String json, APIContext context) {
+  public static AdAccountTrackingData loadJSON(String json, APIContext context, String header) {
     AdAccountTrackingData adAccountTrackingData = getGson().fromJson(json, AdAccountTrackingData.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class AdAccountTrackingData extends APINode {
     }
     adAccountTrackingData.context = context;
     adAccountTrackingData.rawValue = json;
+    adAccountTrackingData.header = header;
     return adAccountTrackingData;
   }
 
-  public static APINodeList<AdAccountTrackingData> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAccountTrackingData> adAccountTrackingDatas = new APINodeList<AdAccountTrackingData>(request, json);
+  public static APINodeList<AdAccountTrackingData> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountTrackingData> adAccountTrackingDatas = new APINodeList<AdAccountTrackingData>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class AdAccountTrackingData extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountTrackingDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAccountTrackingDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adAccountTrackingDatas;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class AdAccountTrackingData extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountTrackingDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAccountTrackingDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class AdAccountTrackingData extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountTrackingDatas.add(loadJSON(entry.getValue().toString(), context));
+                  adAccountTrackingDatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountTrackingDatas.add(loadJSON(obj.toString(), context));
+              adAccountTrackingDatas.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adAccountTrackingDatas;
@@ -149,7 +150,7 @@ public class AdAccountTrackingData extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountTrackingDatas.add(loadJSON(entry.getValue().toString(), context));
+              adAccountTrackingDatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adAccountTrackingDatas;
         } else {
@@ -168,7 +169,7 @@ public class AdAccountTrackingData extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountTrackingDatas.add(loadJSON(value.toString(), context));
+              adAccountTrackingDatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class AdAccountTrackingData extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adAccountTrackingDatas.clear();
-          adAccountTrackingDatas.add(loadJSON(json, context));
+          adAccountTrackingDatas.add(loadJSON(json, context, header));
           return adAccountTrackingDatas;
         }
       }
@@ -258,8 +259,8 @@ public class AdAccountTrackingData extends APINode {
 
   public static APIRequest.ResponseParser<AdAccountTrackingData> getParser() {
     return new APIRequest.ResponseParser<AdAccountTrackingData>() {
-      public APINodeList<AdAccountTrackingData> parseResponse(String response, APIContext context, APIRequest<AdAccountTrackingData> request) throws MalformedResponseException {
-        return AdAccountTrackingData.parseResponse(response, context, request);
+      public APINodeList<AdAccountTrackingData> parseResponse(String response, APIContext context, APIRequest<AdAccountTrackingData> request, String header) throws MalformedResponseException {
+        return AdAccountTrackingData.parseResponse(response, context, request, header);
       }
     };
   }

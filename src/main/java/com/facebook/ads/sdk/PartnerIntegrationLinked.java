@@ -146,7 +146,7 @@ public class PartnerIntegrationLinked extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PartnerIntegrationLinked loadJSON(String json, APIContext context) {
+  public static PartnerIntegrationLinked loadJSON(String json, APIContext context, String header) {
     PartnerIntegrationLinked partnerIntegrationLinked = getGson().fromJson(json, PartnerIntegrationLinked.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -163,11 +163,12 @@ public class PartnerIntegrationLinked extends APINode {
     }
     partnerIntegrationLinked.context = context;
     partnerIntegrationLinked.rawValue = json;
+    partnerIntegrationLinked.header = header;
     return partnerIntegrationLinked;
   }
 
-  public static APINodeList<PartnerIntegrationLinked> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PartnerIntegrationLinked> partnerIntegrationLinkeds = new APINodeList<PartnerIntegrationLinked>(request, json);
+  public static APINodeList<PartnerIntegrationLinked> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PartnerIntegrationLinked> partnerIntegrationLinkeds = new APINodeList<PartnerIntegrationLinked>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -178,7 +179,7 @@ public class PartnerIntegrationLinked extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          partnerIntegrationLinkeds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          partnerIntegrationLinkeds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return partnerIntegrationLinkeds;
       } else if (result.isJsonObject()) {
@@ -203,7 +204,7 @@ public class PartnerIntegrationLinked extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              partnerIntegrationLinkeds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              partnerIntegrationLinkeds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -214,13 +215,13 @@ public class PartnerIntegrationLinked extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  partnerIntegrationLinkeds.add(loadJSON(entry.getValue().toString(), context));
+                  partnerIntegrationLinkeds.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              partnerIntegrationLinkeds.add(loadJSON(obj.toString(), context));
+              partnerIntegrationLinkeds.add(loadJSON(obj.toString(), context, header));
             }
           }
           return partnerIntegrationLinkeds;
@@ -228,7 +229,7 @@ public class PartnerIntegrationLinked extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              partnerIntegrationLinkeds.add(loadJSON(entry.getValue().toString(), context));
+              partnerIntegrationLinkeds.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return partnerIntegrationLinkeds;
         } else {
@@ -247,7 +248,7 @@ public class PartnerIntegrationLinked extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              partnerIntegrationLinkeds.add(loadJSON(value.toString(), context));
+              partnerIntegrationLinkeds.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -259,7 +260,7 @@ public class PartnerIntegrationLinked extends APINode {
 
           // Sixth, check if it's pure JsonObject
           partnerIntegrationLinkeds.clear();
-          partnerIntegrationLinkeds.add(loadJSON(json, context));
+          partnerIntegrationLinkeds.add(loadJSON(json, context, header));
           return partnerIntegrationLinkeds;
         }
       }
@@ -377,8 +378,8 @@ public class PartnerIntegrationLinked extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -388,7 +389,8 @@ public class PartnerIntegrationLinked extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -402,7 +404,7 @@ public class PartnerIntegrationLinked extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -501,8 +503,8 @@ public class PartnerIntegrationLinked extends APINode {
     };
 
     @Override
-    public PartnerIntegrationLinked parseResponse(String response) throws APIException {
-      return PartnerIntegrationLinked.parseResponse(response, getContext(), this).head();
+    public PartnerIntegrationLinked parseResponse(String response, String header) throws APIException {
+      return PartnerIntegrationLinked.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -512,7 +514,8 @@ public class PartnerIntegrationLinked extends APINode {
 
     @Override
     public PartnerIntegrationLinked execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -526,7 +529,7 @@ public class PartnerIntegrationLinked extends APINode {
         new Function<String, PartnerIntegrationLinked>() {
            public PartnerIntegrationLinked apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -696,8 +699,8 @@ public class PartnerIntegrationLinked extends APINode {
     };
 
     @Override
-    public PartnerIntegrationLinked parseResponse(String response) throws APIException {
-      return PartnerIntegrationLinked.parseResponse(response, getContext(), this).head();
+    public PartnerIntegrationLinked parseResponse(String response, String header) throws APIException {
+      return PartnerIntegrationLinked.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -707,7 +710,8 @@ public class PartnerIntegrationLinked extends APINode {
 
     @Override
     public PartnerIntegrationLinked execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -721,7 +725,7 @@ public class PartnerIntegrationLinked extends APINode {
         new Function<String, PartnerIntegrationLinked>() {
            public PartnerIntegrationLinked apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1067,8 +1071,8 @@ public class PartnerIntegrationLinked extends APINode {
 
   public static APIRequest.ResponseParser<PartnerIntegrationLinked> getParser() {
     return new APIRequest.ResponseParser<PartnerIntegrationLinked>() {
-      public APINodeList<PartnerIntegrationLinked> parseResponse(String response, APIContext context, APIRequest<PartnerIntegrationLinked> request) throws MalformedResponseException {
-        return PartnerIntegrationLinked.parseResponse(response, context, request);
+      public APINodeList<PartnerIntegrationLinked> parseResponse(String response, APIContext context, APIRequest<PartnerIntegrationLinked> request, String header) throws MalformedResponseException {
+        return PartnerIntegrationLinked.parseResponse(response, context, request, header);
       }
     };
   }

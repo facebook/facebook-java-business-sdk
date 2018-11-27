@@ -107,10 +107,12 @@ public class AdsInsights extends APINode {
   private String mCanvasAvgViewPercent = null;
   @SerializedName("canvas_avg_view_time")
   private String mCanvasAvgViewTime = null;
-  @SerializedName("canvas_component_avg_pct_view")
-  private List<AdsActionStats> mCanvasComponentAvgPctView = null;
   @SerializedName("clicks")
   private String mClicks = null;
+  @SerializedName("conversion_values")
+  private List<AdsActionStats> mConversionValues = null;
+  @SerializedName("conversions")
+  private List<AdsActionStats> mConversions = null;
   @SerializedName("cost_per_10_sec_video_view")
   private List<AdsActionStats> mCostPer10SecVideoView = null;
   @SerializedName("cost_per_15_sec_video_view")
@@ -121,16 +123,10 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mCostPerActionType = null;
   @SerializedName("cost_per_ad_click")
   private List<AdsActionStats> mCostPerAdClick = null;
+  @SerializedName("cost_per_conversion")
+  private List<AdsActionStats> mCostPerConversion = null;
   @SerializedName("cost_per_dda_countby_convs")
   private String mCostPerDdaCountbyConvs = null;
-  @SerializedName("cost_per_dwell")
-  private String mCostPerDwell = null;
-  @SerializedName("cost_per_dwell_3_sec")
-  private String mCostPerDwell3Sec = null;
-  @SerializedName("cost_per_dwell_5_sec")
-  private String mCostPerDwell5Sec = null;
-  @SerializedName("cost_per_dwell_7_sec")
-  private String mCostPerDwell7Sec = null;
   @SerializedName("cost_per_estimated_ad_recallers")
   private String mCostPerEstimatedAdRecallers = null;
   @SerializedName("cost_per_inline_link_click")
@@ -147,6 +143,8 @@ public class AdsInsights extends APINode {
   private List<AdsActionStats> mCostPerUniqueActionType = null;
   @SerializedName("cost_per_unique_click")
   private String mCostPerUniqueClick = null;
+  @SerializedName("cost_per_unique_conversion")
+  private List<AdsActionStats> mCostPerUniqueConversion = null;
   @SerializedName("cost_per_unique_inline_link_click")
   private String mCostPerUniqueInlineLinkClick = null;
   @SerializedName("cost_per_unique_outbound_click")
@@ -177,14 +175,6 @@ public class AdsInsights extends APINode {
   private String mDevicePlatform = null;
   @SerializedName("dma")
   private String mDma = null;
-  @SerializedName("dwell_3_sec")
-  private String mDwell3Sec = null;
-  @SerializedName("dwell_5_sec")
-  private String mDwell5Sec = null;
-  @SerializedName("dwell_7_sec")
-  private String mDwell7Sec = null;
-  @SerializedName("dwell_rate")
-  private String mDwellRate = null;
   @SerializedName("estimated_ad_recall_rate")
   private String mEstimatedAdRecallRate = null;
   @SerializedName("estimated_ad_recall_rate_lower_bound")
@@ -253,6 +243,8 @@ public class AdsInsights extends APINode {
   private String mProductId = null;
   @SerializedName("publisher_platform")
   private String mPublisherPlatform = null;
+  @SerializedName("purchase_roas")
+  private List<AdsActionStats> mPurchaseRoas = null;
   @SerializedName("purchasing_interface")
   private String mPurchasingInterface = null;
   @SerializedName("reach")
@@ -267,14 +259,14 @@ public class AdsInsights extends APINode {
   private String mSocialSpend = null;
   @SerializedName("spend")
   private String mSpend = null;
-  @SerializedName("thumb_stops")
-  private String mThumbStops = null;
   @SerializedName("title_asset")
   private Object mTitleAsset = null;
   @SerializedName("unique_actions")
   private List<AdsActionStats> mUniqueActions = null;
   @SerializedName("unique_clicks")
   private String mUniqueClicks = null;
+  @SerializedName("unique_conversions")
+  private List<AdsActionStats> mUniqueConversions = null;
   @SerializedName("unique_ctr")
   private String mUniqueCtr = null;
   @SerializedName("unique_inline_link_click_ctr")
@@ -347,7 +339,7 @@ public class AdsInsights extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdsInsights loadJSON(String json, APIContext context) {
+  public static AdsInsights loadJSON(String json, APIContext context, String header) {
     AdsInsights adsInsights = getGson().fromJson(json, AdsInsights.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -364,11 +356,12 @@ public class AdsInsights extends APINode {
     }
     adsInsights.context = context;
     adsInsights.rawValue = json;
+    adsInsights.header = header;
     return adsInsights;
   }
 
-  public static APINodeList<AdsInsights> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdsInsights> adsInsightss = new APINodeList<AdsInsights>(request, json);
+  public static APINodeList<AdsInsights> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdsInsights> adsInsightss = new APINodeList<AdsInsights>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -379,7 +372,7 @@ public class AdsInsights extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adsInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adsInsightss;
       } else if (result.isJsonObject()) {
@@ -404,7 +397,7 @@ public class AdsInsights extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adsInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -415,13 +408,13 @@ public class AdsInsights extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsInsightss.add(loadJSON(entry.getValue().toString(), context));
+                  adsInsightss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsInsightss.add(loadJSON(obj.toString(), context));
+              adsInsightss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adsInsightss;
@@ -429,7 +422,7 @@ public class AdsInsights extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsInsightss.add(loadJSON(entry.getValue().toString(), context));
+              adsInsightss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adsInsightss;
         } else {
@@ -448,7 +441,7 @@ public class AdsInsights extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsInsightss.add(loadJSON(value.toString(), context));
+              adsInsightss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -460,7 +453,7 @@ public class AdsInsights extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adsInsightss.clear();
-          adsInsightss.add(loadJSON(json, context));
+          adsInsightss.add(loadJSON(json, context, header));
           return adsInsightss;
         }
       }
@@ -743,20 +736,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public List<AdsActionStats> getFieldCanvasComponentAvgPctView() {
-    return mCanvasComponentAvgPctView;
-  }
-
-  public AdsInsights setFieldCanvasComponentAvgPctView(List<AdsActionStats> value) {
-    this.mCanvasComponentAvgPctView = value;
-    return this;
-  }
-
-  public AdsInsights setFieldCanvasComponentAvgPctView(String value) {
-    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
-    this.mCanvasComponentAvgPctView = AdsActionStats.getGson().fromJson(value, type);
-    return this;
-  }
   public String getFieldClicks() {
     return mClicks;
   }
@@ -766,6 +745,34 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<AdsActionStats> getFieldConversionValues() {
+    return mConversionValues;
+  }
+
+  public AdsInsights setFieldConversionValues(List<AdsActionStats> value) {
+    this.mConversionValues = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConversionValues(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConversionValues = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
+  public List<AdsActionStats> getFieldConversions() {
+    return mConversions;
+  }
+
+  public AdsInsights setFieldConversions(List<AdsActionStats> value) {
+    this.mConversions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldConversions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mConversions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdsActionStats> getFieldCostPer10SecVideoView() {
     return mCostPer10SecVideoView;
   }
@@ -836,48 +843,26 @@ public class AdsInsights extends APINode {
     this.mCostPerAdClick = AdsActionStats.getGson().fromJson(value, type);
     return this;
   }
+  public List<AdsActionStats> getFieldCostPerConversion() {
+    return mCostPerConversion;
+  }
+
+  public AdsInsights setFieldCostPerConversion(List<AdsActionStats> value) {
+    this.mCostPerConversion = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCostPerConversion(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCostPerConversion = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldCostPerDdaCountbyConvs() {
     return mCostPerDdaCountbyConvs;
   }
 
   public AdsInsights setFieldCostPerDdaCountbyConvs(String value) {
     this.mCostPerDdaCountbyConvs = value;
-    return this;
-  }
-
-  public String getFieldCostPerDwell() {
-    return mCostPerDwell;
-  }
-
-  public AdsInsights setFieldCostPerDwell(String value) {
-    this.mCostPerDwell = value;
-    return this;
-  }
-
-  public String getFieldCostPerDwell3Sec() {
-    return mCostPerDwell3Sec;
-  }
-
-  public AdsInsights setFieldCostPerDwell3Sec(String value) {
-    this.mCostPerDwell3Sec = value;
-    return this;
-  }
-
-  public String getFieldCostPerDwell5Sec() {
-    return mCostPerDwell5Sec;
-  }
-
-  public AdsInsights setFieldCostPerDwell5Sec(String value) {
-    this.mCostPerDwell5Sec = value;
-    return this;
-  }
-
-  public String getFieldCostPerDwell7Sec() {
-    return mCostPerDwell7Sec;
-  }
-
-  public AdsInsights setFieldCostPerDwell7Sec(String value) {
-    this.mCostPerDwell7Sec = value;
     return this;
   }
 
@@ -973,6 +958,20 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<AdsActionStats> getFieldCostPerUniqueConversion() {
+    return mCostPerUniqueConversion;
+  }
+
+  public AdsInsights setFieldCostPerUniqueConversion(List<AdsActionStats> value) {
+    this.mCostPerUniqueConversion = value;
+    return this;
+  }
+
+  public AdsInsights setFieldCostPerUniqueConversion(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mCostPerUniqueConversion = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldCostPerUniqueInlineLinkClick() {
     return mCostPerUniqueInlineLinkClick;
   }
@@ -1110,42 +1109,6 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldDma(String value) {
     this.mDma = value;
-    return this;
-  }
-
-  public String getFieldDwell3Sec() {
-    return mDwell3Sec;
-  }
-
-  public AdsInsights setFieldDwell3Sec(String value) {
-    this.mDwell3Sec = value;
-    return this;
-  }
-
-  public String getFieldDwell5Sec() {
-    return mDwell5Sec;
-  }
-
-  public AdsInsights setFieldDwell5Sec(String value) {
-    this.mDwell5Sec = value;
-    return this;
-  }
-
-  public String getFieldDwell7Sec() {
-    return mDwell7Sec;
-  }
-
-  public AdsInsights setFieldDwell7Sec(String value) {
-    this.mDwell7Sec = value;
-    return this;
-  }
-
-  public String getFieldDwellRate() {
-    return mDwellRate;
-  }
-
-  public AdsInsights setFieldDwellRate(String value) {
-    this.mDwellRate = value;
     return this;
   }
 
@@ -1470,6 +1433,20 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<AdsActionStats> getFieldPurchaseRoas() {
+    return mPurchaseRoas;
+  }
+
+  public AdsInsights setFieldPurchaseRoas(List<AdsActionStats> value) {
+    this.mPurchaseRoas = value;
+    return this;
+  }
+
+  public AdsInsights setFieldPurchaseRoas(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mPurchaseRoas = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldPurchasingInterface() {
     return mPurchasingInterface;
   }
@@ -1538,15 +1515,6 @@ public class AdsInsights extends APINode {
     return this;
   }
 
-  public String getFieldThumbStops() {
-    return mThumbStops;
-  }
-
-  public AdsInsights setFieldThumbStops(String value) {
-    this.mThumbStops = value;
-    return this;
-  }
-
   public Object getFieldTitleAsset() {
     return mTitleAsset;
   }
@@ -1579,6 +1547,20 @@ public class AdsInsights extends APINode {
     return this;
   }
 
+  public List<AdsActionStats> getFieldUniqueConversions() {
+    return mUniqueConversions;
+  }
+
+  public AdsInsights setFieldUniqueConversions(List<AdsActionStats> value) {
+    this.mUniqueConversions = value;
+    return this;
+  }
+
+  public AdsInsights setFieldUniqueConversions(String value) {
+    Type type = new TypeToken<List<AdsActionStats>>(){}.getType();
+    this.mUniqueConversions = AdsActionStats.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldUniqueCtr() {
     return mUniqueCtr;
   }
@@ -2272,18 +2254,16 @@ public class AdsInsights extends APINode {
     this.mCampaignName = instance.mCampaignName;
     this.mCanvasAvgViewPercent = instance.mCanvasAvgViewPercent;
     this.mCanvasAvgViewTime = instance.mCanvasAvgViewTime;
-    this.mCanvasComponentAvgPctView = instance.mCanvasComponentAvgPctView;
     this.mClicks = instance.mClicks;
+    this.mConversionValues = instance.mConversionValues;
+    this.mConversions = instance.mConversions;
     this.mCostPer10SecVideoView = instance.mCostPer10SecVideoView;
     this.mCostPer15SecVideoView = instance.mCostPer15SecVideoView;
     this.mCostPer2SecContinuousVideoView = instance.mCostPer2SecContinuousVideoView;
     this.mCostPerActionType = instance.mCostPerActionType;
     this.mCostPerAdClick = instance.mCostPerAdClick;
+    this.mCostPerConversion = instance.mCostPerConversion;
     this.mCostPerDdaCountbyConvs = instance.mCostPerDdaCountbyConvs;
-    this.mCostPerDwell = instance.mCostPerDwell;
-    this.mCostPerDwell3Sec = instance.mCostPerDwell3Sec;
-    this.mCostPerDwell5Sec = instance.mCostPerDwell5Sec;
-    this.mCostPerDwell7Sec = instance.mCostPerDwell7Sec;
     this.mCostPerEstimatedAdRecallers = instance.mCostPerEstimatedAdRecallers;
     this.mCostPerInlineLinkClick = instance.mCostPerInlineLinkClick;
     this.mCostPerInlinePostEngagement = instance.mCostPerInlinePostEngagement;
@@ -2292,6 +2272,7 @@ public class AdsInsights extends APINode {
     this.mCostPerThruplay = instance.mCostPerThruplay;
     this.mCostPerUniqueActionType = instance.mCostPerUniqueActionType;
     this.mCostPerUniqueClick = instance.mCostPerUniqueClick;
+    this.mCostPerUniqueConversion = instance.mCostPerUniqueConversion;
     this.mCostPerUniqueInlineLinkClick = instance.mCostPerUniqueInlineLinkClick;
     this.mCostPerUniqueOutboundClick = instance.mCostPerUniqueOutboundClick;
     this.mCountry = instance.mCountry;
@@ -2307,10 +2288,6 @@ public class AdsInsights extends APINode {
     this.mDescriptionAsset = instance.mDescriptionAsset;
     this.mDevicePlatform = instance.mDevicePlatform;
     this.mDma = instance.mDma;
-    this.mDwell3Sec = instance.mDwell3Sec;
-    this.mDwell5Sec = instance.mDwell5Sec;
-    this.mDwell7Sec = instance.mDwell7Sec;
-    this.mDwellRate = instance.mDwellRate;
     this.mEstimatedAdRecallRate = instance.mEstimatedAdRecallRate;
     this.mEstimatedAdRecallRateLowerBound = instance.mEstimatedAdRecallRateLowerBound;
     this.mEstimatedAdRecallRateUpperBound = instance.mEstimatedAdRecallRateUpperBound;
@@ -2345,6 +2322,7 @@ public class AdsInsights extends APINode {
     this.mProductFormat = instance.mProductFormat;
     this.mProductId = instance.mProductId;
     this.mPublisherPlatform = instance.mPublisherPlatform;
+    this.mPurchaseRoas = instance.mPurchaseRoas;
     this.mPurchasingInterface = instance.mPurchasingInterface;
     this.mReach = instance.mReach;
     this.mRegion = instance.mRegion;
@@ -2352,10 +2330,10 @@ public class AdsInsights extends APINode {
     this.mRuleAsset = instance.mRuleAsset;
     this.mSocialSpend = instance.mSocialSpend;
     this.mSpend = instance.mSpend;
-    this.mThumbStops = instance.mThumbStops;
     this.mTitleAsset = instance.mTitleAsset;
     this.mUniqueActions = instance.mUniqueActions;
     this.mUniqueClicks = instance.mUniqueClicks;
+    this.mUniqueConversions = instance.mUniqueConversions;
     this.mUniqueCtr = instance.mUniqueCtr;
     this.mUniqueInlineLinkClickCtr = instance.mUniqueInlineLinkClickCtr;
     this.mUniqueInlineLinkClicks = instance.mUniqueInlineLinkClicks;
@@ -2395,8 +2373,8 @@ public class AdsInsights extends APINode {
 
   public static APIRequest.ResponseParser<AdsInsights> getParser() {
     return new APIRequest.ResponseParser<AdsInsights>() {
-      public APINodeList<AdsInsights> parseResponse(String response, APIContext context, APIRequest<AdsInsights> request) throws MalformedResponseException {
-        return AdsInsights.parseResponse(response, context, request);
+      public APINodeList<AdsInsights> parseResponse(String response, APIContext context, APIRequest<AdsInsights> request, String header) throws MalformedResponseException {
+        return AdsInsights.parseResponse(response, context, request, header);
       }
     };
   }

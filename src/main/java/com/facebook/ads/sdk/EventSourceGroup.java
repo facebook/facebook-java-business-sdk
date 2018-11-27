@@ -130,7 +130,7 @@ public class EventSourceGroup extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static EventSourceGroup loadJSON(String json, APIContext context) {
+  public static EventSourceGroup loadJSON(String json, APIContext context, String header) {
     EventSourceGroup eventSourceGroup = getGson().fromJson(json, EventSourceGroup.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -147,11 +147,12 @@ public class EventSourceGroup extends APINode {
     }
     eventSourceGroup.context = context;
     eventSourceGroup.rawValue = json;
+    eventSourceGroup.header = header;
     return eventSourceGroup;
   }
 
-  public static APINodeList<EventSourceGroup> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<EventSourceGroup> eventSourceGroups = new APINodeList<EventSourceGroup>(request, json);
+  public static APINodeList<EventSourceGroup> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<EventSourceGroup> eventSourceGroups = new APINodeList<EventSourceGroup>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -162,7 +163,7 @@ public class EventSourceGroup extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          eventSourceGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          eventSourceGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return eventSourceGroups;
       } else if (result.isJsonObject()) {
@@ -187,7 +188,7 @@ public class EventSourceGroup extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              eventSourceGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              eventSourceGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -198,13 +199,13 @@ public class EventSourceGroup extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  eventSourceGroups.add(loadJSON(entry.getValue().toString(), context));
+                  eventSourceGroups.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              eventSourceGroups.add(loadJSON(obj.toString(), context));
+              eventSourceGroups.add(loadJSON(obj.toString(), context, header));
             }
           }
           return eventSourceGroups;
@@ -212,7 +213,7 @@ public class EventSourceGroup extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              eventSourceGroups.add(loadJSON(entry.getValue().toString(), context));
+              eventSourceGroups.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return eventSourceGroups;
         } else {
@@ -231,7 +232,7 @@ public class EventSourceGroup extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              eventSourceGroups.add(loadJSON(value.toString(), context));
+              eventSourceGroups.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -243,7 +244,7 @@ public class EventSourceGroup extends APINode {
 
           // Sixth, check if it's pure JsonObject
           eventSourceGroups.clear();
-          eventSourceGroups.add(loadJSON(json, context));
+          eventSourceGroups.add(loadJSON(json, context, header));
           return eventSourceGroups;
         }
       }
@@ -352,7 +353,6 @@ public class EventSourceGroup extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "daily_spend_limit",
       "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
@@ -381,7 +381,6 @@ public class EventSourceGroup extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
-      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -397,8 +396,8 @@ public class EventSourceGroup extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccount> parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -408,7 +407,8 @@ public class EventSourceGroup extends APINode {
 
     @Override
     public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -422,7 +422,7 @@ public class EventSourceGroup extends APINode {
         new Function<String, APINodeList<AdAccount>>() {
            public APINodeList<AdAccount> apply(String result) {
              try {
-               return APIRequestGetShareDAccounts.this.parseResponse(result);
+               return APIRequestGetShareDAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -624,13 +624,6 @@ public class EventSourceGroup extends APINode {
       this.requestField("currency", value);
       return this;
     }
-    public APIRequestGetShareDAccounts requestDailySpendLimitField () {
-      return this.requestDailySpendLimitField(true);
-    }
-    public APIRequestGetShareDAccounts requestDailySpendLimitField (boolean value) {
-      this.requestField("daily_spend_limit", value);
-      return this;
-    }
     public APIRequestGetShareDAccounts requestDirectDealsTosAcceptedField () {
       return this.requestDirectDealsTosAcceptedField(true);
     }
@@ -827,13 +820,6 @@ public class EventSourceGroup extends APINode {
       this.requestField("partner", value);
       return this;
     }
-    public APIRequestGetShareDAccounts requestRateLimitResetTimeField () {
-      return this.requestRateLimitResetTimeField(true);
-    }
-    public APIRequestGetShareDAccounts requestRateLimitResetTimeField (boolean value) {
-      this.requestField("rate_limit_reset_time", value);
-      return this;
-    }
     public APIRequestGetShareDAccounts requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
@@ -935,8 +921,8 @@ public class EventSourceGroup extends APINode {
     };
 
     @Override
-    public EventSourceGroup parseResponse(String response) throws APIException {
-      return EventSourceGroup.parseResponse(response, getContext(), this).head();
+    public EventSourceGroup parseResponse(String response, String header) throws APIException {
+      return EventSourceGroup.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -946,7 +932,8 @@ public class EventSourceGroup extends APINode {
 
     @Override
     public EventSourceGroup execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -960,7 +947,7 @@ public class EventSourceGroup extends APINode {
         new Function<String, EventSourceGroup>() {
            public EventSourceGroup apply(String result) {
              try {
-               return APIRequestCreateShareDAccount.this.parseResponse(result);
+               return APIRequestCreateShareDAccount.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1048,8 +1035,8 @@ public class EventSourceGroup extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1059,7 +1046,8 @@ public class EventSourceGroup extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1073,7 +1061,7 @@ public class EventSourceGroup extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteUserPermissions.this.parseResponse(result);
+               return APIRequestDeleteUserPermissions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1161,8 +1149,8 @@ public class EventSourceGroup extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1172,7 +1160,8 @@ public class EventSourceGroup extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1186,7 +1175,7 @@ public class EventSourceGroup extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetUserPermissions.this.parseResponse(result);
+               return APIRequestGetUserPermissions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1275,8 +1264,8 @@ public class EventSourceGroup extends APINode {
     };
 
     @Override
-    public EventSourceGroup parseResponse(String response) throws APIException {
-      return EventSourceGroup.parseResponse(response, getContext(), this).head();
+    public EventSourceGroup parseResponse(String response, String header) throws APIException {
+      return EventSourceGroup.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1286,7 +1275,8 @@ public class EventSourceGroup extends APINode {
 
     @Override
     public EventSourceGroup execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1300,7 +1290,7 @@ public class EventSourceGroup extends APINode {
         new Function<String, EventSourceGroup>() {
            public EventSourceGroup apply(String result) {
              try {
-               return APIRequestCreateUserPermission.this.parseResponse(result);
+               return APIRequestCreateUserPermission.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1400,8 +1390,8 @@ public class EventSourceGroup extends APINode {
     };
 
     @Override
-    public EventSourceGroup parseResponse(String response) throws APIException {
-      return EventSourceGroup.parseResponse(response, getContext(), this).head();
+    public EventSourceGroup parseResponse(String response, String header) throws APIException {
+      return EventSourceGroup.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1411,7 +1401,8 @@ public class EventSourceGroup extends APINode {
 
     @Override
     public EventSourceGroup execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1425,7 +1416,7 @@ public class EventSourceGroup extends APINode {
         new Function<String, EventSourceGroup>() {
            public EventSourceGroup apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1533,8 +1524,8 @@ public class EventSourceGroup extends APINode {
     };
 
     @Override
-    public EventSourceGroup parseResponse(String response) throws APIException {
-      return EventSourceGroup.parseResponse(response, getContext(), this).head();
+    public EventSourceGroup parseResponse(String response, String header) throws APIException {
+      return EventSourceGroup.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1544,7 +1535,8 @@ public class EventSourceGroup extends APINode {
 
     @Override
     public EventSourceGroup execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1558,7 +1550,7 @@ public class EventSourceGroup extends APINode {
         new Function<String, EventSourceGroup>() {
            public EventSourceGroup apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1681,8 +1673,8 @@ public class EventSourceGroup extends APINode {
 
   public static APIRequest.ResponseParser<EventSourceGroup> getParser() {
     return new APIRequest.ResponseParser<EventSourceGroup>() {
-      public APINodeList<EventSourceGroup> parseResponse(String response, APIContext context, APIRequest<EventSourceGroup> request) throws MalformedResponseException {
-        return EventSourceGroup.parseResponse(response, context, request);
+      public APINodeList<EventSourceGroup> parseResponse(String response, APIContext context, APIRequest<EventSourceGroup> request, String header) throws MalformedResponseException {
+        return EventSourceGroup.parseResponse(response, context, request, header);
       }
     };
   }

@@ -152,7 +152,7 @@ public class AdToplineDetail extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdToplineDetail loadJSON(String json, APIContext context) {
+  public static AdToplineDetail loadJSON(String json, APIContext context, String header) {
     AdToplineDetail adToplineDetail = getGson().fromJson(json, AdToplineDetail.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -169,11 +169,12 @@ public class AdToplineDetail extends APINode {
     }
     adToplineDetail.context = context;
     adToplineDetail.rawValue = json;
+    adToplineDetail.header = header;
     return adToplineDetail;
   }
 
-  public static APINodeList<AdToplineDetail> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdToplineDetail> adToplineDetails = new APINodeList<AdToplineDetail>(request, json);
+  public static APINodeList<AdToplineDetail> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdToplineDetail> adToplineDetails = new APINodeList<AdToplineDetail>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -184,7 +185,7 @@ public class AdToplineDetail extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adToplineDetails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adToplineDetails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adToplineDetails;
       } else if (result.isJsonObject()) {
@@ -209,7 +210,7 @@ public class AdToplineDetail extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adToplineDetails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adToplineDetails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -220,13 +221,13 @@ public class AdToplineDetail extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adToplineDetails.add(loadJSON(entry.getValue().toString(), context));
+                  adToplineDetails.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adToplineDetails.add(loadJSON(obj.toString(), context));
+              adToplineDetails.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adToplineDetails;
@@ -234,7 +235,7 @@ public class AdToplineDetail extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adToplineDetails.add(loadJSON(entry.getValue().toString(), context));
+              adToplineDetails.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adToplineDetails;
         } else {
@@ -253,7 +254,7 @@ public class AdToplineDetail extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adToplineDetails.add(loadJSON(value.toString(), context));
+              adToplineDetails.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -265,7 +266,7 @@ public class AdToplineDetail extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adToplineDetails.clear();
-          adToplineDetails.add(loadJSON(json, context));
+          adToplineDetails.add(loadJSON(json, context, header));
           return adToplineDetails;
         }
       }
@@ -392,8 +393,8 @@ public class AdToplineDetail extends APINode {
     };
 
     @Override
-    public AdToplineDetail parseResponse(String response) throws APIException {
-      return AdToplineDetail.parseResponse(response, getContext(), this).head();
+    public AdToplineDetail parseResponse(String response, String header) throws APIException {
+      return AdToplineDetail.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -403,7 +404,8 @@ public class AdToplineDetail extends APINode {
 
     @Override
     public AdToplineDetail execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -417,7 +419,7 @@ public class AdToplineDetail extends APINode {
         new Function<String, AdToplineDetail>() {
            public AdToplineDetail apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -623,8 +625,8 @@ public class AdToplineDetail extends APINode {
 
   public static APIRequest.ResponseParser<AdToplineDetail> getParser() {
     return new APIRequest.ResponseParser<AdToplineDetail>() {
-      public APINodeList<AdToplineDetail> parseResponse(String response, APIContext context, APIRequest<AdToplineDetail> request) throws MalformedResponseException {
-        return AdToplineDetail.parseResponse(response, context, request);
+      public APINodeList<AdToplineDetail> parseResponse(String response, APIContext context, APIRequest<AdToplineDetail> request, String header) throws MalformedResponseException {
+        return AdToplineDetail.parseResponse(response, context, request, header);
       }
     };
   }

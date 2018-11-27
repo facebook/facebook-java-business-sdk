@@ -71,7 +71,7 @@ public class DeliveryCheckExtraInfo extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static DeliveryCheckExtraInfo loadJSON(String json, APIContext context) {
+  public static DeliveryCheckExtraInfo loadJSON(String json, APIContext context, String header) {
     DeliveryCheckExtraInfo deliveryCheckExtraInfo = getGson().fromJson(json, DeliveryCheckExtraInfo.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class DeliveryCheckExtraInfo extends APINode {
     }
     deliveryCheckExtraInfo.context = context;
     deliveryCheckExtraInfo.rawValue = json;
+    deliveryCheckExtraInfo.header = header;
     return deliveryCheckExtraInfo;
   }
 
-  public static APINodeList<DeliveryCheckExtraInfo> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<DeliveryCheckExtraInfo> deliveryCheckExtraInfos = new APINodeList<DeliveryCheckExtraInfo>(request, json);
+  public static APINodeList<DeliveryCheckExtraInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<DeliveryCheckExtraInfo> deliveryCheckExtraInfos = new APINodeList<DeliveryCheckExtraInfo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class DeliveryCheckExtraInfo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          deliveryCheckExtraInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          deliveryCheckExtraInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return deliveryCheckExtraInfos;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class DeliveryCheckExtraInfo extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              deliveryCheckExtraInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              deliveryCheckExtraInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class DeliveryCheckExtraInfo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  deliveryCheckExtraInfos.add(loadJSON(entry.getValue().toString(), context));
+                  deliveryCheckExtraInfos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              deliveryCheckExtraInfos.add(loadJSON(obj.toString(), context));
+              deliveryCheckExtraInfos.add(loadJSON(obj.toString(), context, header));
             }
           }
           return deliveryCheckExtraInfos;
@@ -153,7 +154,7 @@ public class DeliveryCheckExtraInfo extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              deliveryCheckExtraInfos.add(loadJSON(entry.getValue().toString(), context));
+              deliveryCheckExtraInfos.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return deliveryCheckExtraInfos;
         } else {
@@ -172,7 +173,7 @@ public class DeliveryCheckExtraInfo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              deliveryCheckExtraInfos.add(loadJSON(value.toString(), context));
+              deliveryCheckExtraInfos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class DeliveryCheckExtraInfo extends APINode {
 
           // Sixth, check if it's pure JsonObject
           deliveryCheckExtraInfos.clear();
-          deliveryCheckExtraInfos.add(loadJSON(json, context));
+          deliveryCheckExtraInfos.add(loadJSON(json, context, header));
           return deliveryCheckExtraInfos;
         }
       }
@@ -277,8 +278,8 @@ public class DeliveryCheckExtraInfo extends APINode {
 
   public static APIRequest.ResponseParser<DeliveryCheckExtraInfo> getParser() {
     return new APIRequest.ResponseParser<DeliveryCheckExtraInfo>() {
-      public APINodeList<DeliveryCheckExtraInfo> parseResponse(String response, APIContext context, APIRequest<DeliveryCheckExtraInfo> request) throws MalformedResponseException {
-        return DeliveryCheckExtraInfo.parseResponse(response, context, request);
+      public APINodeList<DeliveryCheckExtraInfo> parseResponse(String response, APIContext context, APIRequest<DeliveryCheckExtraInfo> request, String header) throws MalformedResponseException {
+        return DeliveryCheckExtraInfo.parseResponse(response, context, request, header);
       }
     };
   }

@@ -77,7 +77,7 @@ public class DynamicPostChildAttachment extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static DynamicPostChildAttachment loadJSON(String json, APIContext context) {
+  public static DynamicPostChildAttachment loadJSON(String json, APIContext context, String header) {
     DynamicPostChildAttachment dynamicPostChildAttachment = getGson().fromJson(json, DynamicPostChildAttachment.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -94,11 +94,12 @@ public class DynamicPostChildAttachment extends APINode {
     }
     dynamicPostChildAttachment.context = context;
     dynamicPostChildAttachment.rawValue = json;
+    dynamicPostChildAttachment.header = header;
     return dynamicPostChildAttachment;
   }
 
-  public static APINodeList<DynamicPostChildAttachment> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<DynamicPostChildAttachment> dynamicPostChildAttachments = new APINodeList<DynamicPostChildAttachment>(request, json);
+  public static APINodeList<DynamicPostChildAttachment> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<DynamicPostChildAttachment> dynamicPostChildAttachments = new APINodeList<DynamicPostChildAttachment>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -109,7 +110,7 @@ public class DynamicPostChildAttachment extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          dynamicPostChildAttachments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          dynamicPostChildAttachments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return dynamicPostChildAttachments;
       } else if (result.isJsonObject()) {
@@ -134,7 +135,7 @@ public class DynamicPostChildAttachment extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              dynamicPostChildAttachments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              dynamicPostChildAttachments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -145,13 +146,13 @@ public class DynamicPostChildAttachment extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  dynamicPostChildAttachments.add(loadJSON(entry.getValue().toString(), context));
+                  dynamicPostChildAttachments.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              dynamicPostChildAttachments.add(loadJSON(obj.toString(), context));
+              dynamicPostChildAttachments.add(loadJSON(obj.toString(), context, header));
             }
           }
           return dynamicPostChildAttachments;
@@ -159,7 +160,7 @@ public class DynamicPostChildAttachment extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              dynamicPostChildAttachments.add(loadJSON(entry.getValue().toString(), context));
+              dynamicPostChildAttachments.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return dynamicPostChildAttachments;
         } else {
@@ -178,7 +179,7 @@ public class DynamicPostChildAttachment extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              dynamicPostChildAttachments.add(loadJSON(value.toString(), context));
+              dynamicPostChildAttachments.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -190,7 +191,7 @@ public class DynamicPostChildAttachment extends APINode {
 
           // Sixth, check if it's pure JsonObject
           dynamicPostChildAttachments.clear();
-          dynamicPostChildAttachments.add(loadJSON(json, context));
+          dynamicPostChildAttachments.add(loadJSON(json, context, header));
           return dynamicPostChildAttachments;
         }
       }
@@ -313,8 +314,8 @@ public class DynamicPostChildAttachment extends APINode {
 
   public static APIRequest.ResponseParser<DynamicPostChildAttachment> getParser() {
     return new APIRequest.ResponseParser<DynamicPostChildAttachment>() {
-      public APINodeList<DynamicPostChildAttachment> parseResponse(String response, APIContext context, APIRequest<DynamicPostChildAttachment> request) throws MalformedResponseException {
-        return DynamicPostChildAttachment.parseResponse(response, context, request);
+      public APINodeList<DynamicPostChildAttachment> parseResponse(String response, APIContext context, APIRequest<DynamicPostChildAttachment> request, String header) throws MalformedResponseException {
+        return DynamicPostChildAttachment.parseResponse(response, context, request, header);
       }
     };
   }

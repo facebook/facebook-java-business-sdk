@@ -69,7 +69,7 @@ public class StreamingReaction extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static StreamingReaction loadJSON(String json, APIContext context) {
+  public static StreamingReaction loadJSON(String json, APIContext context, String header) {
     StreamingReaction streamingReaction = getGson().fromJson(json, StreamingReaction.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class StreamingReaction extends APINode {
     }
     streamingReaction.context = context;
     streamingReaction.rawValue = json;
+    streamingReaction.header = header;
     return streamingReaction;
   }
 
-  public static APINodeList<StreamingReaction> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<StreamingReaction> streamingReactions = new APINodeList<StreamingReaction>(request, json);
+  public static APINodeList<StreamingReaction> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<StreamingReaction> streamingReactions = new APINodeList<StreamingReaction>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class StreamingReaction extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          streamingReactions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          streamingReactions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return streamingReactions;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class StreamingReaction extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              streamingReactions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              streamingReactions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class StreamingReaction extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  streamingReactions.add(loadJSON(entry.getValue().toString(), context));
+                  streamingReactions.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              streamingReactions.add(loadJSON(obj.toString(), context));
+              streamingReactions.add(loadJSON(obj.toString(), context, header));
             }
           }
           return streamingReactions;
@@ -151,7 +152,7 @@ public class StreamingReaction extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              streamingReactions.add(loadJSON(entry.getValue().toString(), context));
+              streamingReactions.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return streamingReactions;
         } else {
@@ -170,7 +171,7 @@ public class StreamingReaction extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              streamingReactions.add(loadJSON(value.toString(), context));
+              streamingReactions.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class StreamingReaction extends APINode {
 
           // Sixth, check if it's pure JsonObject
           streamingReactions.clear();
-          streamingReactions.add(loadJSON(json, context));
+          streamingReactions.add(loadJSON(json, context, header));
           return streamingReactions;
         }
       }
@@ -298,8 +299,8 @@ public class StreamingReaction extends APINode {
 
   public static APIRequest.ResponseParser<StreamingReaction> getParser() {
     return new APIRequest.ResponseParser<StreamingReaction>() {
-      public APINodeList<StreamingReaction> parseResponse(String response, APIContext context, APIRequest<StreamingReaction> request) throws MalformedResponseException {
-        return StreamingReaction.parseResponse(response, context, request);
+      public APINodeList<StreamingReaction> parseResponse(String response, APIContext context, APIRequest<StreamingReaction> request, String header) throws MalformedResponseException {
+        return StreamingReaction.parseResponse(response, context, request, header);
       }
     };
   }

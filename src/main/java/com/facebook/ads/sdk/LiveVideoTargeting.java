@@ -73,7 +73,7 @@ public class LiveVideoTargeting extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LiveVideoTargeting loadJSON(String json, APIContext context) {
+  public static LiveVideoTargeting loadJSON(String json, APIContext context, String header) {
     LiveVideoTargeting liveVideoTargeting = getGson().fromJson(json, LiveVideoTargeting.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class LiveVideoTargeting extends APINode {
     }
     liveVideoTargeting.context = context;
     liveVideoTargeting.rawValue = json;
+    liveVideoTargeting.header = header;
     return liveVideoTargeting;
   }
 
-  public static APINodeList<LiveVideoTargeting> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LiveVideoTargeting> liveVideoTargetings = new APINodeList<LiveVideoTargeting>(request, json);
+  public static APINodeList<LiveVideoTargeting> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LiveVideoTargeting> liveVideoTargetings = new APINodeList<LiveVideoTargeting>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class LiveVideoTargeting extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          liveVideoTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          liveVideoTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return liveVideoTargetings;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class LiveVideoTargeting extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              liveVideoTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              liveVideoTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class LiveVideoTargeting extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  liveVideoTargetings.add(loadJSON(entry.getValue().toString(), context));
+                  liveVideoTargetings.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              liveVideoTargetings.add(loadJSON(obj.toString(), context));
+              liveVideoTargetings.add(loadJSON(obj.toString(), context, header));
             }
           }
           return liveVideoTargetings;
@@ -155,7 +156,7 @@ public class LiveVideoTargeting extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              liveVideoTargetings.add(loadJSON(entry.getValue().toString(), context));
+              liveVideoTargetings.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return liveVideoTargetings;
         } else {
@@ -174,7 +175,7 @@ public class LiveVideoTargeting extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              liveVideoTargetings.add(loadJSON(value.toString(), context));
+              liveVideoTargetings.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class LiveVideoTargeting extends APINode {
 
           // Sixth, check if it's pure JsonObject
           liveVideoTargetings.clear();
-          liveVideoTargetings.add(loadJSON(json, context));
+          liveVideoTargetings.add(loadJSON(json, context, header));
           return liveVideoTargetings;
         }
       }
@@ -294,8 +295,8 @@ public class LiveVideoTargeting extends APINode {
 
   public static APIRequest.ResponseParser<LiveVideoTargeting> getParser() {
     return new APIRequest.ResponseParser<LiveVideoTargeting>() {
-      public APINodeList<LiveVideoTargeting> parseResponse(String response, APIContext context, APIRequest<LiveVideoTargeting> request) throws MalformedResponseException {
-        return LiveVideoTargeting.parseResponse(response, context, request);
+      public APINodeList<LiveVideoTargeting> parseResponse(String response, APIContext context, APIRequest<LiveVideoTargeting> request, String header) throws MalformedResponseException {
+        return LiveVideoTargeting.parseResponse(response, context, request, header);
       }
     };
   }

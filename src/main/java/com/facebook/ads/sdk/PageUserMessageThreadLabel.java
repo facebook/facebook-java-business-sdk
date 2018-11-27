@@ -126,7 +126,7 @@ public class PageUserMessageThreadLabel extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageUserMessageThreadLabel loadJSON(String json, APIContext context) {
+  public static PageUserMessageThreadLabel loadJSON(String json, APIContext context, String header) {
     PageUserMessageThreadLabel pageUserMessageThreadLabel = getGson().fromJson(json, PageUserMessageThreadLabel.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -143,11 +143,12 @@ public class PageUserMessageThreadLabel extends APINode {
     }
     pageUserMessageThreadLabel.context = context;
     pageUserMessageThreadLabel.rawValue = json;
+    pageUserMessageThreadLabel.header = header;
     return pageUserMessageThreadLabel;
   }
 
-  public static APINodeList<PageUserMessageThreadLabel> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageUserMessageThreadLabel> pageUserMessageThreadLabels = new APINodeList<PageUserMessageThreadLabel>(request, json);
+  public static APINodeList<PageUserMessageThreadLabel> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageUserMessageThreadLabel> pageUserMessageThreadLabels = new APINodeList<PageUserMessageThreadLabel>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -158,7 +159,7 @@ public class PageUserMessageThreadLabel extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageUserMessageThreadLabels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageUserMessageThreadLabels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageUserMessageThreadLabels;
       } else if (result.isJsonObject()) {
@@ -183,7 +184,7 @@ public class PageUserMessageThreadLabel extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageUserMessageThreadLabels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageUserMessageThreadLabels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -194,13 +195,13 @@ public class PageUserMessageThreadLabel extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageUserMessageThreadLabels.add(loadJSON(entry.getValue().toString(), context));
+                  pageUserMessageThreadLabels.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageUserMessageThreadLabels.add(loadJSON(obj.toString(), context));
+              pageUserMessageThreadLabels.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageUserMessageThreadLabels;
@@ -208,7 +209,7 @@ public class PageUserMessageThreadLabel extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageUserMessageThreadLabels.add(loadJSON(entry.getValue().toString(), context));
+              pageUserMessageThreadLabels.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageUserMessageThreadLabels;
         } else {
@@ -227,7 +228,7 @@ public class PageUserMessageThreadLabel extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageUserMessageThreadLabels.add(loadJSON(value.toString(), context));
+              pageUserMessageThreadLabels.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -239,7 +240,7 @@ public class PageUserMessageThreadLabel extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageUserMessageThreadLabels.clear();
-          pageUserMessageThreadLabels.add(loadJSON(json, context));
+          pageUserMessageThreadLabels.add(loadJSON(json, context, header));
           return pageUserMessageThreadLabels;
         }
       }
@@ -309,8 +310,8 @@ public class PageUserMessageThreadLabel extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -320,7 +321,8 @@ public class PageUserMessageThreadLabel extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -334,7 +336,7 @@ public class PageUserMessageThreadLabel extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteLabel.this.parseResponse(result);
+               return APIRequestDeleteLabel.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -422,8 +424,8 @@ public class PageUserMessageThreadLabel extends APINode {
     };
 
     @Override
-    public PageUserMessageThreadLabel parseResponse(String response) throws APIException {
-      return PageUserMessageThreadLabel.parseResponse(response, getContext(), this).head();
+    public PageUserMessageThreadLabel parseResponse(String response, String header) throws APIException {
+      return PageUserMessageThreadLabel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -433,7 +435,8 @@ public class PageUserMessageThreadLabel extends APINode {
 
     @Override
     public PageUserMessageThreadLabel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -447,7 +450,7 @@ public class PageUserMessageThreadLabel extends APINode {
         new Function<String, PageUserMessageThreadLabel>() {
            public PageUserMessageThreadLabel apply(String result) {
              try {
-               return APIRequestCreateLabel.this.parseResponse(result);
+               return APIRequestCreateLabel.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -534,8 +537,8 @@ public class PageUserMessageThreadLabel extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -545,7 +548,8 @@ public class PageUserMessageThreadLabel extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -559,7 +563,7 @@ public class PageUserMessageThreadLabel extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -639,8 +643,8 @@ public class PageUserMessageThreadLabel extends APINode {
     };
 
     @Override
-    public PageUserMessageThreadLabel parseResponse(String response) throws APIException {
-      return PageUserMessageThreadLabel.parseResponse(response, getContext(), this).head();
+    public PageUserMessageThreadLabel parseResponse(String response, String header) throws APIException {
+      return PageUserMessageThreadLabel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -650,7 +654,8 @@ public class PageUserMessageThreadLabel extends APINode {
 
     @Override
     public PageUserMessageThreadLabel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -664,7 +669,7 @@ public class PageUserMessageThreadLabel extends APINode {
         new Function<String, PageUserMessageThreadLabel>() {
            public PageUserMessageThreadLabel apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -766,8 +771,8 @@ public class PageUserMessageThreadLabel extends APINode {
 
   public static APIRequest.ResponseParser<PageUserMessageThreadLabel> getParser() {
     return new APIRequest.ResponseParser<PageUserMessageThreadLabel>() {
-      public APINodeList<PageUserMessageThreadLabel> parseResponse(String response, APIContext context, APIRequest<PageUserMessageThreadLabel> request) throws MalformedResponseException {
-        return PageUserMessageThreadLabel.parseResponse(response, context, request);
+      public APINodeList<PageUserMessageThreadLabel> parseResponse(String response, APIContext context, APIRequest<PageUserMessageThreadLabel> request, String header) throws MalformedResponseException {
+        return PageUserMessageThreadLabel.parseResponse(response, context, request, header);
       }
     };
   }

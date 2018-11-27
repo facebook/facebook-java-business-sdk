@@ -142,7 +142,7 @@ public class PublisherBlockList extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PublisherBlockList loadJSON(String json, APIContext context) {
+  public static PublisherBlockList loadJSON(String json, APIContext context, String header) {
     PublisherBlockList publisherBlockList = getGson().fromJson(json, PublisherBlockList.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -159,11 +159,12 @@ public class PublisherBlockList extends APINode {
     }
     publisherBlockList.context = context;
     publisherBlockList.rawValue = json;
+    publisherBlockList.header = header;
     return publisherBlockList;
   }
 
-  public static APINodeList<PublisherBlockList> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PublisherBlockList> publisherBlockLists = new APINodeList<PublisherBlockList>(request, json);
+  public static APINodeList<PublisherBlockList> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PublisherBlockList> publisherBlockLists = new APINodeList<PublisherBlockList>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -174,7 +175,7 @@ public class PublisherBlockList extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          publisherBlockLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          publisherBlockLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return publisherBlockLists;
       } else if (result.isJsonObject()) {
@@ -199,7 +200,7 @@ public class PublisherBlockList extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              publisherBlockLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              publisherBlockLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -210,13 +211,13 @@ public class PublisherBlockList extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  publisherBlockLists.add(loadJSON(entry.getValue().toString(), context));
+                  publisherBlockLists.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              publisherBlockLists.add(loadJSON(obj.toString(), context));
+              publisherBlockLists.add(loadJSON(obj.toString(), context, header));
             }
           }
           return publisherBlockLists;
@@ -224,7 +225,7 @@ public class PublisherBlockList extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              publisherBlockLists.add(loadJSON(entry.getValue().toString(), context));
+              publisherBlockLists.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return publisherBlockLists;
         } else {
@@ -243,7 +244,7 @@ public class PublisherBlockList extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              publisherBlockLists.add(loadJSON(value.toString(), context));
+              publisherBlockLists.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -255,7 +256,7 @@ public class PublisherBlockList extends APINode {
 
           // Sixth, check if it's pure JsonObject
           publisherBlockLists.clear();
-          publisherBlockLists.add(loadJSON(json, context));
+          publisherBlockLists.add(loadJSON(json, context, header));
           return publisherBlockLists;
         }
       }
@@ -368,8 +369,8 @@ public class PublisherBlockList extends APINode {
     };
 
     @Override
-    public APINodeList<AppPublisher> parseResponse(String response) throws APIException {
-      return AppPublisher.parseResponse(response, getContext(), this);
+    public APINodeList<AppPublisher> parseResponse(String response, String header) throws APIException {
+      return AppPublisher.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -379,7 +380,8 @@ public class PublisherBlockList extends APINode {
 
     @Override
     public APINodeList<AppPublisher> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -393,7 +395,7 @@ public class PublisherBlockList extends APINode {
         new Function<String, APINodeList<AppPublisher>>() {
            public APINodeList<AppPublisher> apply(String result) {
              try {
-               return APIRequestGetPageDAppPublishers.this.parseResponse(result);
+               return APIRequestGetPageDAppPublishers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -529,8 +531,8 @@ public class PublisherBlockList extends APINode {
     };
 
     @Override
-    public APINodeList<WebPublisher> parseResponse(String response) throws APIException {
-      return WebPublisher.parseResponse(response, getContext(), this);
+    public APINodeList<WebPublisher> parseResponse(String response, String header) throws APIException {
+      return WebPublisher.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -540,7 +542,8 @@ public class PublisherBlockList extends APINode {
 
     @Override
     public APINodeList<WebPublisher> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -554,7 +557,7 @@ public class PublisherBlockList extends APINode {
         new Function<String, APINodeList<WebPublisher>>() {
            public APINodeList<WebPublisher> apply(String result) {
              try {
-               return APIRequestGetPageDWebPublishers.this.parseResponse(result);
+               return APIRequestGetPageDWebPublishers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -658,8 +661,8 @@ public class PublisherBlockList extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -669,7 +672,8 @@ public class PublisherBlockList extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -683,7 +687,7 @@ public class PublisherBlockList extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -774,8 +778,8 @@ public class PublisherBlockList extends APINode {
     };
 
     @Override
-    public PublisherBlockList parseResponse(String response) throws APIException {
-      return PublisherBlockList.parseResponse(response, getContext(), this).head();
+    public PublisherBlockList parseResponse(String response, String header) throws APIException {
+      return PublisherBlockList.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -785,7 +789,8 @@ public class PublisherBlockList extends APINode {
 
     @Override
     public PublisherBlockList execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -799,7 +804,7 @@ public class PublisherBlockList extends APINode {
         new Function<String, PublisherBlockList>() {
            public PublisherBlockList apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -967,8 +972,8 @@ public class PublisherBlockList extends APINode {
     };
 
     @Override
-    public PublisherBlockList parseResponse(String response) throws APIException {
-      return PublisherBlockList.parseResponse(response, getContext(), this).head();
+    public PublisherBlockList parseResponse(String response, String header) throws APIException {
+      return PublisherBlockList.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -978,7 +983,8 @@ public class PublisherBlockList extends APINode {
 
     @Override
     public PublisherBlockList execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -992,7 +998,7 @@ public class PublisherBlockList extends APINode {
         new Function<String, PublisherBlockList>() {
            public PublisherBlockList apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1097,8 +1103,8 @@ public class PublisherBlockList extends APINode {
 
   public static APIRequest.ResponseParser<PublisherBlockList> getParser() {
     return new APIRequest.ResponseParser<PublisherBlockList>() {
-      public APINodeList<PublisherBlockList> parseResponse(String response, APIContext context, APIRequest<PublisherBlockList> request) throws MalformedResponseException {
-        return PublisherBlockList.parseResponse(response, context, request);
+      public APINodeList<PublisherBlockList> parseResponse(String response, APIContext context, APIRequest<PublisherBlockList> request, String header) throws MalformedResponseException {
+        return PublisherBlockList.parseResponse(response, context, request, header);
       }
     };
   }

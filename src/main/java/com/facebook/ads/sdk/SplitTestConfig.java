@@ -138,7 +138,7 @@ public class SplitTestConfig extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static SplitTestConfig loadJSON(String json, APIContext context) {
+  public static SplitTestConfig loadJSON(String json, APIContext context, String header) {
     SplitTestConfig splitTestConfig = getGson().fromJson(json, SplitTestConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -155,11 +155,12 @@ public class SplitTestConfig extends APINode {
     }
     splitTestConfig.context = context;
     splitTestConfig.rawValue = json;
+    splitTestConfig.header = header;
     return splitTestConfig;
   }
 
-  public static APINodeList<SplitTestConfig> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<SplitTestConfig> splitTestConfigs = new APINodeList<SplitTestConfig>(request, json);
+  public static APINodeList<SplitTestConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<SplitTestConfig> splitTestConfigs = new APINodeList<SplitTestConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -170,7 +171,7 @@ public class SplitTestConfig extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          splitTestConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          splitTestConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return splitTestConfigs;
       } else if (result.isJsonObject()) {
@@ -195,7 +196,7 @@ public class SplitTestConfig extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              splitTestConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              splitTestConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -206,13 +207,13 @@ public class SplitTestConfig extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  splitTestConfigs.add(loadJSON(entry.getValue().toString(), context));
+                  splitTestConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              splitTestConfigs.add(loadJSON(obj.toString(), context));
+              splitTestConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return splitTestConfigs;
@@ -220,7 +221,7 @@ public class SplitTestConfig extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              splitTestConfigs.add(loadJSON(entry.getValue().toString(), context));
+              splitTestConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return splitTestConfigs;
         } else {
@@ -239,7 +240,7 @@ public class SplitTestConfig extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              splitTestConfigs.add(loadJSON(value.toString(), context));
+              splitTestConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -251,7 +252,7 @@ public class SplitTestConfig extends APINode {
 
           // Sixth, check if it's pure JsonObject
           splitTestConfigs.clear();
-          splitTestConfigs.add(loadJSON(json, context));
+          splitTestConfigs.add(loadJSON(json, context, header));
           return splitTestConfigs;
         }
       }
@@ -340,8 +341,8 @@ public class SplitTestConfig extends APINode {
     };
 
     @Override
-    public SplitTestConfig parseResponse(String response) throws APIException {
-      return SplitTestConfig.parseResponse(response, getContext(), this).head();
+    public SplitTestConfig parseResponse(String response, String header) throws APIException {
+      return SplitTestConfig.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -351,7 +352,8 @@ public class SplitTestConfig extends APINode {
 
     @Override
     public SplitTestConfig execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -365,7 +367,7 @@ public class SplitTestConfig extends APINode {
         new Function<String, SplitTestConfig>() {
            public SplitTestConfig apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -515,8 +517,8 @@ public class SplitTestConfig extends APINode {
 
   public static APIRequest.ResponseParser<SplitTestConfig> getParser() {
     return new APIRequest.ResponseParser<SplitTestConfig>() {
-      public APINodeList<SplitTestConfig> parseResponse(String response, APIContext context, APIRequest<SplitTestConfig> request) throws MalformedResponseException {
-        return SplitTestConfig.parseResponse(response, context, request);
+      public APINodeList<SplitTestConfig> parseResponse(String response, APIContext context, APIRequest<SplitTestConfig> request, String header) throws MalformedResponseException {
+        return SplitTestConfig.parseResponse(response, context, request, header);
       }
     };
   }

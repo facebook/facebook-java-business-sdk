@@ -69,7 +69,7 @@ public class PageSettings extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageSettings loadJSON(String json, APIContext context) {
+  public static PageSettings loadJSON(String json, APIContext context, String header) {
     PageSettings pageSettings = getGson().fromJson(json, PageSettings.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class PageSettings extends APINode {
     }
     pageSettings.context = context;
     pageSettings.rawValue = json;
+    pageSettings.header = header;
     return pageSettings;
   }
 
-  public static APINodeList<PageSettings> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageSettings> pageSettingss = new APINodeList<PageSettings>(request, json);
+  public static APINodeList<PageSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageSettings> pageSettingss = new APINodeList<PageSettings>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class PageSettings extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageSettingss;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class PageSettings extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class PageSettings extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageSettingss.add(loadJSON(entry.getValue().toString(), context));
+                  pageSettingss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageSettingss.add(loadJSON(obj.toString(), context));
+              pageSettingss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageSettingss;
@@ -151,7 +152,7 @@ public class PageSettings extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageSettingss.add(loadJSON(entry.getValue().toString(), context));
+              pageSettingss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageSettingss;
         } else {
@@ -170,7 +171,7 @@ public class PageSettings extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageSettingss.add(loadJSON(value.toString(), context));
+              pageSettingss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class PageSettings extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageSettingss.clear();
-          pageSettingss.add(loadJSON(json, context));
+          pageSettingss.add(loadJSON(json, context, header));
           return pageSettingss;
         }
       }
@@ -265,8 +266,8 @@ public class PageSettings extends APINode {
 
   public static APIRequest.ResponseParser<PageSettings> getParser() {
     return new APIRequest.ResponseParser<PageSettings>() {
-      public APINodeList<PageSettings> parseResponse(String response, APIContext context, APIRequest<PageSettings> request) throws MalformedResponseException {
-        return PageSettings.parseResponse(response, context, request);
+      public APINodeList<PageSettings> parseResponse(String response, APIContext context, APIRequest<PageSettings> request, String header) throws MalformedResponseException {
+        return PageSettings.parseResponse(response, context, request, header);
       }
     };
   }

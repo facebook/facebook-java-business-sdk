@@ -130,7 +130,7 @@ public class PageAdminNote extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageAdminNote loadJSON(String json, APIContext context) {
+  public static PageAdminNote loadJSON(String json, APIContext context, String header) {
     PageAdminNote pageAdminNote = getGson().fromJson(json, PageAdminNote.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -147,11 +147,12 @@ public class PageAdminNote extends APINode {
     }
     pageAdminNote.context = context;
     pageAdminNote.rawValue = json;
+    pageAdminNote.header = header;
     return pageAdminNote;
   }
 
-  public static APINodeList<PageAdminNote> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageAdminNote> pageAdminNotes = new APINodeList<PageAdminNote>(request, json);
+  public static APINodeList<PageAdminNote> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageAdminNote> pageAdminNotes = new APINodeList<PageAdminNote>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -162,7 +163,7 @@ public class PageAdminNote extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageAdminNotes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageAdminNotes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageAdminNotes;
       } else if (result.isJsonObject()) {
@@ -187,7 +188,7 @@ public class PageAdminNote extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageAdminNotes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageAdminNotes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -198,13 +199,13 @@ public class PageAdminNote extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageAdminNotes.add(loadJSON(entry.getValue().toString(), context));
+                  pageAdminNotes.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageAdminNotes.add(loadJSON(obj.toString(), context));
+              pageAdminNotes.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageAdminNotes;
@@ -212,7 +213,7 @@ public class PageAdminNote extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageAdminNotes.add(loadJSON(entry.getValue().toString(), context));
+              pageAdminNotes.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageAdminNotes;
         } else {
@@ -231,7 +232,7 @@ public class PageAdminNote extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageAdminNotes.add(loadJSON(value.toString(), context));
+              pageAdminNotes.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -243,7 +244,7 @@ public class PageAdminNote extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageAdminNotes.clear();
-          pageAdminNotes.add(loadJSON(json, context));
+          pageAdminNotes.add(loadJSON(json, context, header));
           return pageAdminNotes;
         }
       }
@@ -318,8 +319,8 @@ public class PageAdminNote extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -329,7 +330,8 @@ public class PageAdminNote extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -343,7 +345,7 @@ public class PageAdminNote extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -425,8 +427,8 @@ public class PageAdminNote extends APINode {
     };
 
     @Override
-    public PageAdminNote parseResponse(String response) throws APIException {
-      return PageAdminNote.parseResponse(response, getContext(), this).head();
+    public PageAdminNote parseResponse(String response, String header) throws APIException {
+      return PageAdminNote.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -436,7 +438,8 @@ public class PageAdminNote extends APINode {
 
     @Override
     public PageAdminNote execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -450,7 +453,7 @@ public class PageAdminNote extends APINode {
         new Function<String, PageAdminNote>() {
            public PageAdminNote apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -568,8 +571,8 @@ public class PageAdminNote extends APINode {
 
   public static APIRequest.ResponseParser<PageAdminNote> getParser() {
     return new APIRequest.ResponseParser<PageAdminNote>() {
-      public APINodeList<PageAdminNote> parseResponse(String response, APIContext context, APIRequest<PageAdminNote> request) throws MalformedResponseException {
-        return PageAdminNote.parseResponse(response, context, request);
+      public APINodeList<PageAdminNote> parseResponse(String response, APIContext context, APIRequest<PageAdminNote> request, String header) throws MalformedResponseException {
+        return PageAdminNote.parseResponse(response, context, request, header);
       }
     };
   }

@@ -152,7 +152,7 @@ public class AdStudy extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdStudy loadJSON(String json, APIContext context) {
+  public static AdStudy loadJSON(String json, APIContext context, String header) {
     AdStudy adStudy = getGson().fromJson(json, AdStudy.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -169,11 +169,12 @@ public class AdStudy extends APINode {
     }
     adStudy.context = context;
     adStudy.rawValue = json;
+    adStudy.header = header;
     return adStudy;
   }
 
-  public static APINodeList<AdStudy> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdStudy> adStudys = new APINodeList<AdStudy>(request, json);
+  public static APINodeList<AdStudy> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdStudy> adStudys = new APINodeList<AdStudy>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -184,7 +185,7 @@ public class AdStudy extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adStudys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adStudys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adStudys;
       } else if (result.isJsonObject()) {
@@ -209,7 +210,7 @@ public class AdStudy extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adStudys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adStudys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -220,13 +221,13 @@ public class AdStudy extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adStudys.add(loadJSON(entry.getValue().toString(), context));
+                  adStudys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adStudys.add(loadJSON(obj.toString(), context));
+              adStudys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adStudys;
@@ -234,7 +235,7 @@ public class AdStudy extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adStudys.add(loadJSON(entry.getValue().toString(), context));
+              adStudys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adStudys;
         } else {
@@ -253,7 +254,7 @@ public class AdStudy extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adStudys.add(loadJSON(value.toString(), context));
+              adStudys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -265,7 +266,7 @@ public class AdStudy extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adStudys.clear();
-          adStudys.add(loadJSON(json, context));
+          adStudys.add(loadJSON(json, context, header));
           return adStudys;
         }
       }
@@ -432,8 +433,8 @@ public class AdStudy extends APINode {
     };
 
     @Override
-    public APINodeList<AdStudyCell> parseResponse(String response) throws APIException {
-      return AdStudyCell.parseResponse(response, getContext(), this);
+    public APINodeList<AdStudyCell> parseResponse(String response, String header) throws APIException {
+      return AdStudyCell.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -443,7 +444,8 @@ public class AdStudy extends APINode {
 
     @Override
     public APINodeList<AdStudyCell> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -457,7 +459,7 @@ public class AdStudy extends APINode {
         new Function<String, APINodeList<AdStudyCell>>() {
            public APINodeList<AdStudyCell> apply(String result) {
              try {
-               return APIRequestGetCells.this.parseResponse(result);
+               return APIRequestGetCells.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -575,8 +577,8 @@ public class AdStudy extends APINode {
     };
 
     @Override
-    public AdStudy parseResponse(String response) throws APIException {
-      return AdStudy.parseResponse(response, getContext(), this).head();
+    public AdStudy parseResponse(String response, String header) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -586,7 +588,8 @@ public class AdStudy extends APINode {
 
     @Override
     public AdStudy execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -600,7 +603,7 @@ public class AdStudy extends APINode {
         new Function<String, AdStudy>() {
            public AdStudy apply(String result) {
              try {
-               return APIRequestCreateCustomAudience.this.parseResponse(result);
+               return APIRequestCreateCustomAudience.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -710,8 +713,8 @@ public class AdStudy extends APINode {
     };
 
     @Override
-    public APINodeList<AdsTALHealthCheckError> parseResponse(String response) throws APIException {
-      return AdsTALHealthCheckError.parseResponse(response, getContext(), this);
+    public APINodeList<AdsTALHealthCheckError> parseResponse(String response, String header) throws APIException {
+      return AdsTALHealthCheckError.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -721,7 +724,8 @@ public class AdStudy extends APINode {
 
     @Override
     public APINodeList<AdsTALHealthCheckError> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -735,7 +739,7 @@ public class AdStudy extends APINode {
         new Function<String, APINodeList<AdsTALHealthCheckError>>() {
            public APINodeList<AdsTALHealthCheckError> apply(String result) {
              try {
-               return APIRequestGetHealthCheckErrors.this.parseResponse(result);
+               return APIRequestGetHealthCheckErrors.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -841,8 +845,8 @@ public class AdStudy extends APINode {
     };
 
     @Override
-    public APINodeList<AdStudyObjective> parseResponse(String response) throws APIException {
-      return AdStudyObjective.parseResponse(response, getContext(), this);
+    public APINodeList<AdStudyObjective> parseResponse(String response, String header) throws APIException {
+      return AdStudyObjective.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -852,7 +856,8 @@ public class AdStudy extends APINode {
 
     @Override
     public APINodeList<AdStudyObjective> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -866,7 +871,7 @@ public class AdStudy extends APINode {
         new Function<String, APINodeList<AdStudyObjective>>() {
            public APINodeList<AdStudyObjective> apply(String result) {
              try {
-               return APIRequestGetObjectives.this.parseResponse(result);
+               return APIRequestGetObjectives.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1001,8 +1006,8 @@ public class AdStudy extends APINode {
     };
 
     @Override
-    public AdStudyObjective parseResponse(String response) throws APIException {
-      return AdStudyObjective.parseResponse(response, getContext(), this).head();
+    public AdStudyObjective parseResponse(String response, String header) throws APIException {
+      return AdStudyObjective.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1012,7 +1017,8 @@ public class AdStudy extends APINode {
 
     @Override
     public AdStudyObjective execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1026,7 +1032,7 @@ public class AdStudy extends APINode {
         new Function<String, AdStudyObjective>() {
            public AdStudyObjective apply(String result) {
              try {
-               return APIRequestCreateObjective.this.parseResponse(result);
+               return APIRequestCreateObjective.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1175,8 +1181,8 @@ public class AdStudy extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1186,7 +1192,8 @@ public class AdStudy extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1200,7 +1207,7 @@ public class AdStudy extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteUserPermissions.this.parseResponse(result);
+               return APIRequestDeleteUserPermissions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1308,8 +1315,8 @@ public class AdStudy extends APINode {
     };
 
     @Override
-    public APINodeList<AdStudyAdsAssetUserPermissions> parseResponse(String response) throws APIException {
-      return AdStudyAdsAssetUserPermissions.parseResponse(response, getContext(), this);
+    public APINodeList<AdStudyAdsAssetUserPermissions> parseResponse(String response, String header) throws APIException {
+      return AdStudyAdsAssetUserPermissions.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1319,7 +1326,8 @@ public class AdStudy extends APINode {
 
     @Override
     public APINodeList<AdStudyAdsAssetUserPermissions> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1333,7 +1341,7 @@ public class AdStudy extends APINode {
         new Function<String, APINodeList<AdStudyAdsAssetUserPermissions>>() {
            public APINodeList<AdStudyAdsAssetUserPermissions> apply(String result) {
              try {
-               return APIRequestGetUserPermissions.this.parseResponse(result);
+               return APIRequestGetUserPermissions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1492,8 +1500,8 @@ public class AdStudy extends APINode {
     };
 
     @Override
-    public AdStudy parseResponse(String response) throws APIException {
-      return AdStudy.parseResponse(response, getContext(), this).head();
+    public AdStudy parseResponse(String response, String header) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1503,7 +1511,8 @@ public class AdStudy extends APINode {
 
     @Override
     public AdStudy execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1517,7 +1526,7 @@ public class AdStudy extends APINode {
         new Function<String, AdStudy>() {
            public AdStudy apply(String result) {
              try {
-               return APIRequestCreateUserPermission.this.parseResponse(result);
+               return APIRequestCreateUserPermission.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1624,7 +1633,6 @@ public class AdStudy extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -1645,12 +1653,10 @@ public class AdStudy extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -1678,7 +1684,6 @@ public class AdStudy extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -1687,8 +1692,8 @@ public class AdStudy extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1698,7 +1703,8 @@ public class AdStudy extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1712,7 +1718,7 @@ public class AdStudy extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetViewers.this.parseResponse(result);
+               return APIRequestGetViewers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1800,13 +1806,6 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetViewers requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetViewers requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetViewers requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetViewers requestBirthdayField () {
@@ -1949,13 +1948,6 @@ public class AdStudy extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetViewers requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetViewers requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetViewers requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -1982,13 +1974,6 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetViewers requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetViewers requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetViewers requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetViewers requestLastNameField () {
@@ -2180,13 +2165,6 @@ public class AdStudy extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetViewers requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetViewers requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetViewers requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -2238,8 +2216,8 @@ public class AdStudy extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2249,7 +2227,8 @@ public class AdStudy extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2263,7 +2242,7 @@ public class AdStudy extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2356,8 +2335,8 @@ public class AdStudy extends APINode {
     };
 
     @Override
-    public AdStudy parseResponse(String response) throws APIException {
-      return AdStudy.parseResponse(response, getContext(), this).head();
+    public AdStudy parseResponse(String response, String header) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2367,7 +2346,8 @@ public class AdStudy extends APINode {
 
     @Override
     public AdStudy execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2381,7 +2361,7 @@ public class AdStudy extends APINode {
         new Function<String, AdStudy>() {
            public AdStudy apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2575,8 +2555,8 @@ public class AdStudy extends APINode {
     };
 
     @Override
-    public AdStudy parseResponse(String response) throws APIException {
-      return AdStudy.parseResponse(response, getContext(), this).head();
+    public AdStudy parseResponse(String response, String header) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2586,7 +2566,8 @@ public class AdStudy extends APINode {
 
     @Override
     public AdStudy execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2600,7 +2581,7 @@ public class AdStudy extends APINode {
         new Function<String, AdStudy>() {
            public AdStudy apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2845,8 +2826,8 @@ public class AdStudy extends APINode {
 
   public static APIRequest.ResponseParser<AdStudy> getParser() {
     return new APIRequest.ResponseParser<AdStudy>() {
-      public APINodeList<AdStudy> parseResponse(String response, APIContext context, APIRequest<AdStudy> request) throws MalformedResponseException {
-        return AdStudy.parseResponse(response, context, request);
+      public APINodeList<AdStudy> parseResponse(String response, APIContext context, APIRequest<AdStudy> request, String header) throws MalformedResponseException {
+        return AdStudy.parseResponse(response, context, request, header);
       }
     };
   }

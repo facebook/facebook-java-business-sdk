@@ -206,7 +206,7 @@ public class HomeListing extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static HomeListing loadJSON(String json, APIContext context) {
+  public static HomeListing loadJSON(String json, APIContext context, String header) {
     HomeListing homeListing = getGson().fromJson(json, HomeListing.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -223,11 +223,12 @@ public class HomeListing extends APINode {
     }
     homeListing.context = context;
     homeListing.rawValue = json;
+    homeListing.header = header;
     return homeListing;
   }
 
-  public static APINodeList<HomeListing> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<HomeListing> homeListings = new APINodeList<HomeListing>(request, json);
+  public static APINodeList<HomeListing> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<HomeListing> homeListings = new APINodeList<HomeListing>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -238,7 +239,7 @@ public class HomeListing extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          homeListings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          homeListings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return homeListings;
       } else if (result.isJsonObject()) {
@@ -263,7 +264,7 @@ public class HomeListing extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              homeListings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              homeListings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -274,13 +275,13 @@ public class HomeListing extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  homeListings.add(loadJSON(entry.getValue().toString(), context));
+                  homeListings.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              homeListings.add(loadJSON(obj.toString(), context));
+              homeListings.add(loadJSON(obj.toString(), context, header));
             }
           }
           return homeListings;
@@ -288,7 +289,7 @@ public class HomeListing extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              homeListings.add(loadJSON(entry.getValue().toString(), context));
+              homeListings.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return homeListings;
         } else {
@@ -307,7 +308,7 @@ public class HomeListing extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              homeListings.add(loadJSON(value.toString(), context));
+              homeListings.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -319,7 +320,7 @@ public class HomeListing extends APINode {
 
           // Sixth, check if it's pure JsonObject
           homeListings.clear();
-          homeListings.add(loadJSON(json, context));
+          homeListings.add(loadJSON(json, context, header));
           return homeListings;
         }
       }
@@ -550,8 +551,8 @@ public class HomeListing extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -561,7 +562,8 @@ public class HomeListing extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -575,7 +577,7 @@ public class HomeListing extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -695,8 +697,8 @@ public class HomeListing extends APINode {
     };
 
     @Override
-    public HomeListing parseResponse(String response) throws APIException {
-      return HomeListing.parseResponse(response, getContext(), this).head();
+    public HomeListing parseResponse(String response, String header) throws APIException {
+      return HomeListing.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -706,7 +708,8 @@ public class HomeListing extends APINode {
 
     @Override
     public HomeListing execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -720,7 +723,7 @@ public class HomeListing extends APINode {
         new Function<String, HomeListing>() {
            public HomeListing apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1106,8 +1109,8 @@ public class HomeListing extends APINode {
     };
 
     @Override
-    public HomeListing parseResponse(String response) throws APIException {
-      return HomeListing.parseResponse(response, getContext(), this).head();
+    public HomeListing parseResponse(String response, String header) throws APIException {
+      return HomeListing.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1117,7 +1120,8 @@ public class HomeListing extends APINode {
 
     @Override
     public HomeListing execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1131,7 +1135,7 @@ public class HomeListing extends APINode {
         new Function<String, HomeListing>() {
            public HomeListing apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1357,8 +1361,8 @@ public class HomeListing extends APINode {
 
   public static APIRequest.ResponseParser<HomeListing> getParser() {
     return new APIRequest.ResponseParser<HomeListing>() {
-      public APINodeList<HomeListing> parseResponse(String response, APIContext context, APIRequest<HomeListing> request) throws MalformedResponseException {
-        return HomeListing.parseResponse(response, context, request);
+      public APINodeList<HomeListing> parseResponse(String response, APIContext context, APIRequest<HomeListing> request, String header) throws MalformedResponseException {
+        return HomeListing.parseResponse(response, context, request, header);
       }
     };
   }

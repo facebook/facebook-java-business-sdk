@@ -67,7 +67,7 @@ public class SecuritySettings extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static SecuritySettings loadJSON(String json, APIContext context) {
+  public static SecuritySettings loadJSON(String json, APIContext context, String header) {
     SecuritySettings securitySettings = getGson().fromJson(json, SecuritySettings.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class SecuritySettings extends APINode {
     }
     securitySettings.context = context;
     securitySettings.rawValue = json;
+    securitySettings.header = header;
     return securitySettings;
   }
 
-  public static APINodeList<SecuritySettings> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<SecuritySettings> securitySettingss = new APINodeList<SecuritySettings>(request, json);
+  public static APINodeList<SecuritySettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<SecuritySettings> securitySettingss = new APINodeList<SecuritySettings>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class SecuritySettings extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          securitySettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          securitySettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return securitySettingss;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class SecuritySettings extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              securitySettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              securitySettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class SecuritySettings extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  securitySettingss.add(loadJSON(entry.getValue().toString(), context));
+                  securitySettingss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              securitySettingss.add(loadJSON(obj.toString(), context));
+              securitySettingss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return securitySettingss;
@@ -149,7 +150,7 @@ public class SecuritySettings extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              securitySettingss.add(loadJSON(entry.getValue().toString(), context));
+              securitySettingss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return securitySettingss;
         } else {
@@ -168,7 +169,7 @@ public class SecuritySettings extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              securitySettingss.add(loadJSON(value.toString(), context));
+              securitySettingss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class SecuritySettings extends APINode {
 
           // Sixth, check if it's pure JsonObject
           securitySettingss.clear();
-          securitySettingss.add(loadJSON(json, context));
+          securitySettingss.add(loadJSON(json, context, header));
           return securitySettingss;
         }
       }
@@ -253,8 +254,8 @@ public class SecuritySettings extends APINode {
 
   public static APIRequest.ResponseParser<SecuritySettings> getParser() {
     return new APIRequest.ResponseParser<SecuritySettings>() {
-      public APINodeList<SecuritySettings> parseResponse(String response, APIContext context, APIRequest<SecuritySettings> request) throws MalformedResponseException {
-        return SecuritySettings.parseResponse(response, context, request);
+      public APINodeList<SecuritySettings> parseResponse(String response, APIContext context, APIRequest<SecuritySettings> request, String header) throws MalformedResponseException {
+        return SecuritySettings.parseResponse(response, context, request, header);
       }
     };
   }

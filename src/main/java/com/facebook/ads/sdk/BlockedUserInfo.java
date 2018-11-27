@@ -73,7 +73,7 @@ public class BlockedUserInfo extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BlockedUserInfo loadJSON(String json, APIContext context) {
+  public static BlockedUserInfo loadJSON(String json, APIContext context, String header) {
     BlockedUserInfo blockedUserInfo = getGson().fromJson(json, BlockedUserInfo.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class BlockedUserInfo extends APINode {
     }
     blockedUserInfo.context = context;
     blockedUserInfo.rawValue = json;
+    blockedUserInfo.header = header;
     return blockedUserInfo;
   }
 
-  public static APINodeList<BlockedUserInfo> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<BlockedUserInfo> blockedUserInfos = new APINodeList<BlockedUserInfo>(request, json);
+  public static APINodeList<BlockedUserInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BlockedUserInfo> blockedUserInfos = new APINodeList<BlockedUserInfo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class BlockedUserInfo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          blockedUserInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          blockedUserInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return blockedUserInfos;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class BlockedUserInfo extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              blockedUserInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              blockedUserInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class BlockedUserInfo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  blockedUserInfos.add(loadJSON(entry.getValue().toString(), context));
+                  blockedUserInfos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              blockedUserInfos.add(loadJSON(obj.toString(), context));
+              blockedUserInfos.add(loadJSON(obj.toString(), context, header));
             }
           }
           return blockedUserInfos;
@@ -155,7 +156,7 @@ public class BlockedUserInfo extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              blockedUserInfos.add(loadJSON(entry.getValue().toString(), context));
+              blockedUserInfos.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return blockedUserInfos;
         } else {
@@ -174,7 +175,7 @@ public class BlockedUserInfo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              blockedUserInfos.add(loadJSON(value.toString(), context));
+              blockedUserInfos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class BlockedUserInfo extends APINode {
 
           // Sixth, check if it's pure JsonObject
           blockedUserInfos.clear();
-          blockedUserInfos.add(loadJSON(json, context));
+          blockedUserInfos.add(loadJSON(json, context, header));
           return blockedUserInfos;
         }
       }
@@ -289,8 +290,8 @@ public class BlockedUserInfo extends APINode {
 
   public static APIRequest.ResponseParser<BlockedUserInfo> getParser() {
     return new APIRequest.ResponseParser<BlockedUserInfo>() {
-      public APINodeList<BlockedUserInfo> parseResponse(String response, APIContext context, APIRequest<BlockedUserInfo> request) throws MalformedResponseException {
-        return BlockedUserInfo.parseResponse(response, context, request);
+      public APINodeList<BlockedUserInfo> parseResponse(String response, APIContext context, APIRequest<BlockedUserInfo> request, String header) throws MalformedResponseException {
+        return BlockedUserInfo.parseResponse(response, context, request, header);
       }
     };
   }

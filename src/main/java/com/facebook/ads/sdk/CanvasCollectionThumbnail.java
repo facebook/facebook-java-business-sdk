@@ -71,7 +71,7 @@ public class CanvasCollectionThumbnail extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CanvasCollectionThumbnail loadJSON(String json, APIContext context) {
+  public static CanvasCollectionThumbnail loadJSON(String json, APIContext context, String header) {
     CanvasCollectionThumbnail canvasCollectionThumbnail = getGson().fromJson(json, CanvasCollectionThumbnail.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class CanvasCollectionThumbnail extends APINode {
     }
     canvasCollectionThumbnail.context = context;
     canvasCollectionThumbnail.rawValue = json;
+    canvasCollectionThumbnail.header = header;
     return canvasCollectionThumbnail;
   }
 
-  public static APINodeList<CanvasCollectionThumbnail> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CanvasCollectionThumbnail> canvasCollectionThumbnails = new APINodeList<CanvasCollectionThumbnail>(request, json);
+  public static APINodeList<CanvasCollectionThumbnail> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CanvasCollectionThumbnail> canvasCollectionThumbnails = new APINodeList<CanvasCollectionThumbnail>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class CanvasCollectionThumbnail extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          canvasCollectionThumbnails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          canvasCollectionThumbnails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return canvasCollectionThumbnails;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class CanvasCollectionThumbnail extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              canvasCollectionThumbnails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              canvasCollectionThumbnails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class CanvasCollectionThumbnail extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  canvasCollectionThumbnails.add(loadJSON(entry.getValue().toString(), context));
+                  canvasCollectionThumbnails.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              canvasCollectionThumbnails.add(loadJSON(obj.toString(), context));
+              canvasCollectionThumbnails.add(loadJSON(obj.toString(), context, header));
             }
           }
           return canvasCollectionThumbnails;
@@ -153,7 +154,7 @@ public class CanvasCollectionThumbnail extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              canvasCollectionThumbnails.add(loadJSON(entry.getValue().toString(), context));
+              canvasCollectionThumbnails.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return canvasCollectionThumbnails;
         } else {
@@ -172,7 +173,7 @@ public class CanvasCollectionThumbnail extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              canvasCollectionThumbnails.add(loadJSON(value.toString(), context));
+              canvasCollectionThumbnails.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class CanvasCollectionThumbnail extends APINode {
 
           // Sixth, check if it's pure JsonObject
           canvasCollectionThumbnails.clear();
-          canvasCollectionThumbnails.add(loadJSON(json, context));
+          canvasCollectionThumbnails.add(loadJSON(json, context, header));
           return canvasCollectionThumbnails;
         }
       }
@@ -285,8 +286,8 @@ public class CanvasCollectionThumbnail extends APINode {
 
   public static APIRequest.ResponseParser<CanvasCollectionThumbnail> getParser() {
     return new APIRequest.ResponseParser<CanvasCollectionThumbnail>() {
-      public APINodeList<CanvasCollectionThumbnail> parseResponse(String response, APIContext context, APIRequest<CanvasCollectionThumbnail> request) throws MalformedResponseException {
-        return CanvasCollectionThumbnail.parseResponse(response, context, request);
+      public APINodeList<CanvasCollectionThumbnail> parseResponse(String response, APIContext context, APIRequest<CanvasCollectionThumbnail> request, String header) throws MalformedResponseException {
+        return CanvasCollectionThumbnail.parseResponse(response, context, request, header);
       }
     };
   }

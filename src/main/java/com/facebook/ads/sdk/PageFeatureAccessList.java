@@ -67,7 +67,7 @@ public class PageFeatureAccessList extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageFeatureAccessList loadJSON(String json, APIContext context) {
+  public static PageFeatureAccessList loadJSON(String json, APIContext context, String header) {
     PageFeatureAccessList pageFeatureAccessList = getGson().fromJson(json, PageFeatureAccessList.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class PageFeatureAccessList extends APINode {
     }
     pageFeatureAccessList.context = context;
     pageFeatureAccessList.rawValue = json;
+    pageFeatureAccessList.header = header;
     return pageFeatureAccessList;
   }
 
-  public static APINodeList<PageFeatureAccessList> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageFeatureAccessList> pageFeatureAccessLists = new APINodeList<PageFeatureAccessList>(request, json);
+  public static APINodeList<PageFeatureAccessList> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageFeatureAccessList> pageFeatureAccessLists = new APINodeList<PageFeatureAccessList>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class PageFeatureAccessList extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageFeatureAccessLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageFeatureAccessLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageFeatureAccessLists;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class PageFeatureAccessList extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageFeatureAccessLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageFeatureAccessLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class PageFeatureAccessList extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageFeatureAccessLists.add(loadJSON(entry.getValue().toString(), context));
+                  pageFeatureAccessLists.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageFeatureAccessLists.add(loadJSON(obj.toString(), context));
+              pageFeatureAccessLists.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageFeatureAccessLists;
@@ -149,7 +150,7 @@ public class PageFeatureAccessList extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageFeatureAccessLists.add(loadJSON(entry.getValue().toString(), context));
+              pageFeatureAccessLists.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageFeatureAccessLists;
         } else {
@@ -168,7 +169,7 @@ public class PageFeatureAccessList extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageFeatureAccessLists.add(loadJSON(value.toString(), context));
+              pageFeatureAccessLists.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class PageFeatureAccessList extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageFeatureAccessLists.clear();
-          pageFeatureAccessLists.add(loadJSON(json, context));
+          pageFeatureAccessLists.add(loadJSON(json, context, header));
           return pageFeatureAccessLists;
         }
       }
@@ -253,8 +254,8 @@ public class PageFeatureAccessList extends APINode {
 
   public static APIRequest.ResponseParser<PageFeatureAccessList> getParser() {
     return new APIRequest.ResponseParser<PageFeatureAccessList>() {
-      public APINodeList<PageFeatureAccessList> parseResponse(String response, APIContext context, APIRequest<PageFeatureAccessList> request) throws MalformedResponseException {
-        return PageFeatureAccessList.parseResponse(response, context, request);
+      public APINodeList<PageFeatureAccessList> parseResponse(String response, APIContext context, APIRequest<PageFeatureAccessList> request, String header) throws MalformedResponseException {
+        return PageFeatureAccessList.parseResponse(response, context, request, header);
       }
     };
   }

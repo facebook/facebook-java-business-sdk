@@ -73,7 +73,7 @@ public class PagePublisher extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PagePublisher loadJSON(String json, APIContext context) {
+  public static PagePublisher loadJSON(String json, APIContext context, String header) {
     PagePublisher pagePublisher = getGson().fromJson(json, PagePublisher.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class PagePublisher extends APINode {
     }
     pagePublisher.context = context;
     pagePublisher.rawValue = json;
+    pagePublisher.header = header;
     return pagePublisher;
   }
 
-  public static APINodeList<PagePublisher> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PagePublisher> pagePublishers = new APINodeList<PagePublisher>(request, json);
+  public static APINodeList<PagePublisher> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PagePublisher> pagePublishers = new APINodeList<PagePublisher>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class PagePublisher extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pagePublishers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pagePublishers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pagePublishers;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class PagePublisher extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pagePublishers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pagePublishers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class PagePublisher extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pagePublishers.add(loadJSON(entry.getValue().toString(), context));
+                  pagePublishers.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pagePublishers.add(loadJSON(obj.toString(), context));
+              pagePublishers.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pagePublishers;
@@ -155,7 +156,7 @@ public class PagePublisher extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pagePublishers.add(loadJSON(entry.getValue().toString(), context));
+              pagePublishers.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pagePublishers;
         } else {
@@ -174,7 +175,7 @@ public class PagePublisher extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pagePublishers.add(loadJSON(value.toString(), context));
+              pagePublishers.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class PagePublisher extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pagePublishers.clear();
-          pagePublishers.add(loadJSON(json, context));
+          pagePublishers.add(loadJSON(json, context, header));
           return pagePublishers;
         }
       }
@@ -289,8 +290,8 @@ public class PagePublisher extends APINode {
 
   public static APIRequest.ResponseParser<PagePublisher> getParser() {
     return new APIRequest.ResponseParser<PagePublisher>() {
-      public APINodeList<PagePublisher> parseResponse(String response, APIContext context, APIRequest<PagePublisher> request) throws MalformedResponseException {
-        return PagePublisher.parseResponse(response, context, request);
+      public APINodeList<PagePublisher> parseResponse(String response, APIContext context, APIRequest<PagePublisher> request, String header) throws MalformedResponseException {
+        return PagePublisher.parseResponse(response, context, request, header);
       }
     };
   }

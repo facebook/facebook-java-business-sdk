@@ -69,7 +69,7 @@ public class BusinessProductCatalogTOS extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BusinessProductCatalogTOS loadJSON(String json, APIContext context) {
+  public static BusinessProductCatalogTOS loadJSON(String json, APIContext context, String header) {
     BusinessProductCatalogTOS businessProductCatalogTOS = getGson().fromJson(json, BusinessProductCatalogTOS.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class BusinessProductCatalogTOS extends APINode {
     }
     businessProductCatalogTOS.context = context;
     businessProductCatalogTOS.rawValue = json;
+    businessProductCatalogTOS.header = header;
     return businessProductCatalogTOS;
   }
 
-  public static APINodeList<BusinessProductCatalogTOS> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<BusinessProductCatalogTOS> businessProductCatalogTOSs = new APINodeList<BusinessProductCatalogTOS>(request, json);
+  public static APINodeList<BusinessProductCatalogTOS> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessProductCatalogTOS> businessProductCatalogTOSs = new APINodeList<BusinessProductCatalogTOS>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class BusinessProductCatalogTOS extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          businessProductCatalogTOSs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          businessProductCatalogTOSs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return businessProductCatalogTOSs;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class BusinessProductCatalogTOS extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              businessProductCatalogTOSs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              businessProductCatalogTOSs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class BusinessProductCatalogTOS extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  businessProductCatalogTOSs.add(loadJSON(entry.getValue().toString(), context));
+                  businessProductCatalogTOSs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              businessProductCatalogTOSs.add(loadJSON(obj.toString(), context));
+              businessProductCatalogTOSs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return businessProductCatalogTOSs;
@@ -151,7 +152,7 @@ public class BusinessProductCatalogTOS extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              businessProductCatalogTOSs.add(loadJSON(entry.getValue().toString(), context));
+              businessProductCatalogTOSs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return businessProductCatalogTOSs;
         } else {
@@ -170,7 +171,7 @@ public class BusinessProductCatalogTOS extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              businessProductCatalogTOSs.add(loadJSON(value.toString(), context));
+              businessProductCatalogTOSs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class BusinessProductCatalogTOS extends APINode {
 
           // Sixth, check if it's pure JsonObject
           businessProductCatalogTOSs.clear();
-          businessProductCatalogTOSs.add(loadJSON(json, context));
+          businessProductCatalogTOSs.add(loadJSON(json, context, header));
           return businessProductCatalogTOSs;
         }
       }
@@ -265,8 +266,8 @@ public class BusinessProductCatalogTOS extends APINode {
 
   public static APIRequest.ResponseParser<BusinessProductCatalogTOS> getParser() {
     return new APIRequest.ResponseParser<BusinessProductCatalogTOS>() {
-      public APINodeList<BusinessProductCatalogTOS> parseResponse(String response, APIContext context, APIRequest<BusinessProductCatalogTOS> request) throws MalformedResponseException {
-        return BusinessProductCatalogTOS.parseResponse(response, context, request);
+      public APINodeList<BusinessProductCatalogTOS> parseResponse(String response, APIContext context, APIRequest<BusinessProductCatalogTOS> request, String header) throws MalformedResponseException {
+        return BusinessProductCatalogTOS.parseResponse(response, context, request, header);
       }
     };
   }

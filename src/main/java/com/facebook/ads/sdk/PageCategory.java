@@ -71,7 +71,7 @@ public class PageCategory extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageCategory loadJSON(String json, APIContext context) {
+  public static PageCategory loadJSON(String json, APIContext context, String header) {
     PageCategory pageCategory = getGson().fromJson(json, PageCategory.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class PageCategory extends APINode {
     }
     pageCategory.context = context;
     pageCategory.rawValue = json;
+    pageCategory.header = header;
     return pageCategory;
   }
 
-  public static APINodeList<PageCategory> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageCategory> pageCategorys = new APINodeList<PageCategory>(request, json);
+  public static APINodeList<PageCategory> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageCategory> pageCategorys = new APINodeList<PageCategory>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class PageCategory extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageCategorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageCategorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageCategorys;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class PageCategory extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageCategorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageCategorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class PageCategory extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageCategorys.add(loadJSON(entry.getValue().toString(), context));
+                  pageCategorys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageCategorys.add(loadJSON(obj.toString(), context));
+              pageCategorys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageCategorys;
@@ -153,7 +154,7 @@ public class PageCategory extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageCategorys.add(loadJSON(entry.getValue().toString(), context));
+              pageCategorys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageCategorys;
         } else {
@@ -172,7 +173,7 @@ public class PageCategory extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageCategorys.add(loadJSON(value.toString(), context));
+              pageCategorys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class PageCategory extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageCategorys.clear();
-          pageCategorys.add(loadJSON(json, context));
+          pageCategorys.add(loadJSON(json, context, header));
           return pageCategorys;
         }
       }
@@ -282,8 +283,8 @@ public class PageCategory extends APINode {
 
   public static APIRequest.ResponseParser<PageCategory> getParser() {
     return new APIRequest.ResponseParser<PageCategory>() {
-      public APINodeList<PageCategory> parseResponse(String response, APIContext context, APIRequest<PageCategory> request) throws MalformedResponseException {
-        return PageCategory.parseResponse(response, context, request);
+      public APINodeList<PageCategory> parseResponse(String response, APIContext context, APIRequest<PageCategory> request, String header) throws MalformedResponseException {
+        return PageCategory.parseResponse(response, context, request, header);
       }
     };
   }

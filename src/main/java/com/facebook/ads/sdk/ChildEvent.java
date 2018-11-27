@@ -71,7 +71,7 @@ public class ChildEvent extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ChildEvent loadJSON(String json, APIContext context) {
+  public static ChildEvent loadJSON(String json, APIContext context, String header) {
     ChildEvent childEvent = getGson().fromJson(json, ChildEvent.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class ChildEvent extends APINode {
     }
     childEvent.context = context;
     childEvent.rawValue = json;
+    childEvent.header = header;
     return childEvent;
   }
 
-  public static APINodeList<ChildEvent> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ChildEvent> childEvents = new APINodeList<ChildEvent>(request, json);
+  public static APINodeList<ChildEvent> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ChildEvent> childEvents = new APINodeList<ChildEvent>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class ChildEvent extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          childEvents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          childEvents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return childEvents;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class ChildEvent extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              childEvents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              childEvents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class ChildEvent extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  childEvents.add(loadJSON(entry.getValue().toString(), context));
+                  childEvents.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              childEvents.add(loadJSON(obj.toString(), context));
+              childEvents.add(loadJSON(obj.toString(), context, header));
             }
           }
           return childEvents;
@@ -153,7 +154,7 @@ public class ChildEvent extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              childEvents.add(loadJSON(entry.getValue().toString(), context));
+              childEvents.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return childEvents;
         } else {
@@ -172,7 +173,7 @@ public class ChildEvent extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              childEvents.add(loadJSON(value.toString(), context));
+              childEvents.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class ChildEvent extends APINode {
 
           // Sixth, check if it's pure JsonObject
           childEvents.clear();
-          childEvents.add(loadJSON(json, context));
+          childEvents.add(loadJSON(json, context, header));
           return childEvents;
         }
       }
@@ -277,8 +278,8 @@ public class ChildEvent extends APINode {
 
   public static APIRequest.ResponseParser<ChildEvent> getParser() {
     return new APIRequest.ResponseParser<ChildEvent>() {
-      public APINodeList<ChildEvent> parseResponse(String response, APIContext context, APIRequest<ChildEvent> request) throws MalformedResponseException {
-        return ChildEvent.parseResponse(response, context, request);
+      public APINodeList<ChildEvent> parseResponse(String response, APIContext context, APIRequest<ChildEvent> request, String header) throws MalformedResponseException {
+        return ChildEvent.parseResponse(response, context, request, header);
       }
     };
   }

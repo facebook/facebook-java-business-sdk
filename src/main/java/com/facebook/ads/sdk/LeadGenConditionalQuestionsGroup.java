@@ -128,7 +128,7 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LeadGenConditionalQuestionsGroup loadJSON(String json, APIContext context) {
+  public static LeadGenConditionalQuestionsGroup loadJSON(String json, APIContext context, String header) {
     LeadGenConditionalQuestionsGroup leadGenConditionalQuestionsGroup = getGson().fromJson(json, LeadGenConditionalQuestionsGroup.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -145,11 +145,12 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
     }
     leadGenConditionalQuestionsGroup.context = context;
     leadGenConditionalQuestionsGroup.rawValue = json;
+    leadGenConditionalQuestionsGroup.header = header;
     return leadGenConditionalQuestionsGroup;
   }
 
-  public static APINodeList<LeadGenConditionalQuestionsGroup> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LeadGenConditionalQuestionsGroup> leadGenConditionalQuestionsGroups = new APINodeList<LeadGenConditionalQuestionsGroup>(request, json);
+  public static APINodeList<LeadGenConditionalQuestionsGroup> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LeadGenConditionalQuestionsGroup> leadGenConditionalQuestionsGroups = new APINodeList<LeadGenConditionalQuestionsGroup>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -160,7 +161,7 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          leadGenConditionalQuestionsGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          leadGenConditionalQuestionsGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return leadGenConditionalQuestionsGroups;
       } else if (result.isJsonObject()) {
@@ -185,7 +186,7 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              leadGenConditionalQuestionsGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              leadGenConditionalQuestionsGroups.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -196,13 +197,13 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  leadGenConditionalQuestionsGroups.add(loadJSON(entry.getValue().toString(), context));
+                  leadGenConditionalQuestionsGroups.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              leadGenConditionalQuestionsGroups.add(loadJSON(obj.toString(), context));
+              leadGenConditionalQuestionsGroups.add(loadJSON(obj.toString(), context, header));
             }
           }
           return leadGenConditionalQuestionsGroups;
@@ -210,7 +211,7 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              leadGenConditionalQuestionsGroups.add(loadJSON(entry.getValue().toString(), context));
+              leadGenConditionalQuestionsGroups.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return leadGenConditionalQuestionsGroups;
         } else {
@@ -229,7 +230,7 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              leadGenConditionalQuestionsGroups.add(loadJSON(value.toString(), context));
+              leadGenConditionalQuestionsGroups.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -241,7 +242,7 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
 
           // Sixth, check if it's pure JsonObject
           leadGenConditionalQuestionsGroups.clear();
-          leadGenConditionalQuestionsGroups.add(loadJSON(json, context));
+          leadGenConditionalQuestionsGroups.add(loadJSON(json, context, header));
           return leadGenConditionalQuestionsGroups;
         }
       }
@@ -305,8 +306,8 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
     };
 
     @Override
-    public LeadGenConditionalQuestionsGroup parseResponse(String response) throws APIException {
-      return LeadGenConditionalQuestionsGroup.parseResponse(response, getContext(), this).head();
+    public LeadGenConditionalQuestionsGroup parseResponse(String response, String header) throws APIException {
+      return LeadGenConditionalQuestionsGroup.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -316,7 +317,8 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
 
     @Override
     public LeadGenConditionalQuestionsGroup execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -330,7 +332,7 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
         new Function<String, LeadGenConditionalQuestionsGroup>() {
            public LeadGenConditionalQuestionsGroup apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -440,8 +442,8 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
 
   public static APIRequest.ResponseParser<LeadGenConditionalQuestionsGroup> getParser() {
     return new APIRequest.ResponseParser<LeadGenConditionalQuestionsGroup>() {
-      public APINodeList<LeadGenConditionalQuestionsGroup> parseResponse(String response, APIContext context, APIRequest<LeadGenConditionalQuestionsGroup> request) throws MalformedResponseException {
-        return LeadGenConditionalQuestionsGroup.parseResponse(response, context, request);
+      public APINodeList<LeadGenConditionalQuestionsGroup> parseResponse(String response, APIContext context, APIRequest<LeadGenConditionalQuestionsGroup> request, String header) throws MalformedResponseException {
+        return LeadGenConditionalQuestionsGroup.parseResponse(response, context, request, header);
       }
     };
   }

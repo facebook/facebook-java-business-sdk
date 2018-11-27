@@ -226,7 +226,7 @@ public class ProductItem extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductItem loadJSON(String json, APIContext context) {
+  public static ProductItem loadJSON(String json, APIContext context, String header) {
     ProductItem productItem = getGson().fromJson(json, ProductItem.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -243,11 +243,12 @@ public class ProductItem extends APINode {
     }
     productItem.context = context;
     productItem.rawValue = json;
+    productItem.header = header;
     return productItem;
   }
 
-  public static APINodeList<ProductItem> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ProductItem> productItems = new APINodeList<ProductItem>(request, json);
+  public static APINodeList<ProductItem> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductItem> productItems = new APINodeList<ProductItem>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -258,7 +259,7 @@ public class ProductItem extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productItems.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          productItems.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return productItems;
       } else if (result.isJsonObject()) {
@@ -283,7 +284,7 @@ public class ProductItem extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productItems.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              productItems.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -294,13 +295,13 @@ public class ProductItem extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productItems.add(loadJSON(entry.getValue().toString(), context));
+                  productItems.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productItems.add(loadJSON(obj.toString(), context));
+              productItems.add(loadJSON(obj.toString(), context, header));
             }
           }
           return productItems;
@@ -308,7 +309,7 @@ public class ProductItem extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productItems.add(loadJSON(entry.getValue().toString(), context));
+              productItems.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return productItems;
         } else {
@@ -327,7 +328,7 @@ public class ProductItem extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productItems.add(loadJSON(value.toString(), context));
+              productItems.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -339,7 +340,7 @@ public class ProductItem extends APINode {
 
           // Sixth, check if it's pure JsonObject
           productItems.clear();
-          productItems.add(loadJSON(json, context));
+          productItems.add(loadJSON(json, context, header));
           return productItems;
         }
       }
@@ -637,8 +638,8 @@ public class ProductItem extends APINode {
     };
 
     @Override
-    public Comment parseResponse(String response) throws APIException {
-      return Comment.parseResponse(response, getContext(), this).head();
+    public Comment parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -648,7 +649,8 @@ public class ProductItem extends APINode {
 
     @Override
     public Comment execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -662,7 +664,7 @@ public class ProductItem extends APINode {
         new Function<String, Comment>() {
            public Comment apply(String result) {
              try {
-               return APIRequestCreateComment.this.parseResponse(result);
+               return APIRequestCreateComment.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -827,8 +829,8 @@ public class ProductItem extends APINode {
     };
 
     @Override
-    public APINodeList<ProductSet> parseResponse(String response) throws APIException {
-      return ProductSet.parseResponse(response, getContext(), this);
+    public APINodeList<ProductSet> parseResponse(String response, String header) throws APIException {
+      return ProductSet.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -838,7 +840,8 @@ public class ProductItem extends APINode {
 
     @Override
     public APINodeList<ProductSet> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -852,7 +855,7 @@ public class ProductItem extends APINode {
         new Function<String, APINodeList<ProductSet>>() {
            public APINodeList<ProductSet> apply(String result) {
              try {
-               return APIRequestGetProductSets.this.parseResponse(result);
+               return APIRequestGetProductSets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -972,8 +975,8 @@ public class ProductItem extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -983,7 +986,8 @@ public class ProductItem extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -997,7 +1001,7 @@ public class ProductItem extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1129,8 +1133,8 @@ public class ProductItem extends APINode {
     };
 
     @Override
-    public ProductItem parseResponse(String response) throws APIException {
-      return ProductItem.parseResponse(response, getContext(), this).head();
+    public ProductItem parseResponse(String response, String header) throws APIException {
+      return ProductItem.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1140,7 +1144,8 @@ public class ProductItem extends APINode {
 
     @Override
     public ProductItem execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1154,7 +1159,7 @@ public class ProductItem extends APINode {
         new Function<String, ProductItem>() {
            public ProductItem apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1671,8 +1676,8 @@ public class ProductItem extends APINode {
     };
 
     @Override
-    public ProductItem parseResponse(String response) throws APIException {
-      return ProductItem.parseResponse(response, getContext(), this).head();
+    public ProductItem parseResponse(String response, String header) throws APIException {
+      return ProductItem.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1682,7 +1687,8 @@ public class ProductItem extends APINode {
 
     @Override
     public ProductItem execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1696,7 +1702,7 @@ public class ProductItem extends APINode {
         new Function<String, ProductItem>() {
            public ProductItem apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2366,8 +2372,8 @@ public class ProductItem extends APINode {
 
   public static APIRequest.ResponseParser<ProductItem> getParser() {
     return new APIRequest.ResponseParser<ProductItem>() {
-      public APINodeList<ProductItem> parseResponse(String response, APIContext context, APIRequest<ProductItem> request) throws MalformedResponseException {
-        return ProductItem.parseResponse(response, context, request);
+      public APINodeList<ProductItem> parseResponse(String response, APIContext context, APIRequest<ProductItem> request, String header) throws MalformedResponseException {
+        return ProductItem.parseResponse(response, context, request, header);
       }
     };
   }

@@ -77,7 +77,7 @@ public class VideoThumbnail extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static VideoThumbnail loadJSON(String json, APIContext context) {
+  public static VideoThumbnail loadJSON(String json, APIContext context, String header) {
     VideoThumbnail videoThumbnail = getGson().fromJson(json, VideoThumbnail.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -94,11 +94,12 @@ public class VideoThumbnail extends APINode {
     }
     videoThumbnail.context = context;
     videoThumbnail.rawValue = json;
+    videoThumbnail.header = header;
     return videoThumbnail;
   }
 
-  public static APINodeList<VideoThumbnail> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<VideoThumbnail> videoThumbnails = new APINodeList<VideoThumbnail>(request, json);
+  public static APINodeList<VideoThumbnail> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<VideoThumbnail> videoThumbnails = new APINodeList<VideoThumbnail>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -109,7 +110,7 @@ public class VideoThumbnail extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          videoThumbnails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          videoThumbnails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return videoThumbnails;
       } else if (result.isJsonObject()) {
@@ -134,7 +135,7 @@ public class VideoThumbnail extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              videoThumbnails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              videoThumbnails.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -145,13 +146,13 @@ public class VideoThumbnail extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  videoThumbnails.add(loadJSON(entry.getValue().toString(), context));
+                  videoThumbnails.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              videoThumbnails.add(loadJSON(obj.toString(), context));
+              videoThumbnails.add(loadJSON(obj.toString(), context, header));
             }
           }
           return videoThumbnails;
@@ -159,7 +160,7 @@ public class VideoThumbnail extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              videoThumbnails.add(loadJSON(entry.getValue().toString(), context));
+              videoThumbnails.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return videoThumbnails;
         } else {
@@ -178,7 +179,7 @@ public class VideoThumbnail extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              videoThumbnails.add(loadJSON(value.toString(), context));
+              videoThumbnails.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -190,7 +191,7 @@ public class VideoThumbnail extends APINode {
 
           // Sixth, check if it's pure JsonObject
           videoThumbnails.clear();
-          videoThumbnails.add(loadJSON(json, context));
+          videoThumbnails.add(loadJSON(json, context, header));
           return videoThumbnails;
         }
       }
@@ -313,8 +314,8 @@ public class VideoThumbnail extends APINode {
 
   public static APIRequest.ResponseParser<VideoThumbnail> getParser() {
     return new APIRequest.ResponseParser<VideoThumbnail>() {
-      public APINodeList<VideoThumbnail> parseResponse(String response, APIContext context, APIRequest<VideoThumbnail> request) throws MalformedResponseException {
-        return VideoThumbnail.parseResponse(response, context, request);
+      public APINodeList<VideoThumbnail> parseResponse(String response, APIContext context, APIRequest<VideoThumbnail> request, String header) throws MalformedResponseException {
+        return VideoThumbnail.parseResponse(response, context, request, header);
       }
     };
   }

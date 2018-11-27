@@ -81,7 +81,7 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdsPixelRealTimeEventLogResult loadJSON(String json, APIContext context) {
+  public static AdsPixelRealTimeEventLogResult loadJSON(String json, APIContext context, String header) {
     AdsPixelRealTimeEventLogResult adsPixelRealTimeEventLogResult = getGson().fromJson(json, AdsPixelRealTimeEventLogResult.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -98,11 +98,12 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
     }
     adsPixelRealTimeEventLogResult.context = context;
     adsPixelRealTimeEventLogResult.rawValue = json;
+    adsPixelRealTimeEventLogResult.header = header;
     return adsPixelRealTimeEventLogResult;
   }
 
-  public static APINodeList<AdsPixelRealTimeEventLogResult> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdsPixelRealTimeEventLogResult> adsPixelRealTimeEventLogResults = new APINodeList<AdsPixelRealTimeEventLogResult>(request, json);
+  public static APINodeList<AdsPixelRealTimeEventLogResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdsPixelRealTimeEventLogResult> adsPixelRealTimeEventLogResults = new APINodeList<AdsPixelRealTimeEventLogResult>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -113,7 +114,7 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsPixelRealTimeEventLogResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adsPixelRealTimeEventLogResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adsPixelRealTimeEventLogResults;
       } else if (result.isJsonObject()) {
@@ -138,7 +139,7 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsPixelRealTimeEventLogResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adsPixelRealTimeEventLogResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -149,13 +150,13 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsPixelRealTimeEventLogResults.add(loadJSON(entry.getValue().toString(), context));
+                  adsPixelRealTimeEventLogResults.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsPixelRealTimeEventLogResults.add(loadJSON(obj.toString(), context));
+              adsPixelRealTimeEventLogResults.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adsPixelRealTimeEventLogResults;
@@ -163,7 +164,7 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsPixelRealTimeEventLogResults.add(loadJSON(entry.getValue().toString(), context));
+              adsPixelRealTimeEventLogResults.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adsPixelRealTimeEventLogResults;
         } else {
@@ -182,7 +183,7 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsPixelRealTimeEventLogResults.add(loadJSON(value.toString(), context));
+              adsPixelRealTimeEventLogResults.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -194,7 +195,7 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adsPixelRealTimeEventLogResults.clear();
-          adsPixelRealTimeEventLogResults.add(loadJSON(json, context));
+          adsPixelRealTimeEventLogResults.add(loadJSON(json, context, header));
           return adsPixelRealTimeEventLogResults;
         }
       }
@@ -337,8 +338,8 @@ public class AdsPixelRealTimeEventLogResult extends APINode {
 
   public static APIRequest.ResponseParser<AdsPixelRealTimeEventLogResult> getParser() {
     return new APIRequest.ResponseParser<AdsPixelRealTimeEventLogResult>() {
-      public APINodeList<AdsPixelRealTimeEventLogResult> parseResponse(String response, APIContext context, APIRequest<AdsPixelRealTimeEventLogResult> request) throws MalformedResponseException {
-        return AdsPixelRealTimeEventLogResult.parseResponse(response, context, request);
+      public APINodeList<AdsPixelRealTimeEventLogResult> parseResponse(String response, APIContext context, APIRequest<AdsPixelRealTimeEventLogResult> request, String header) throws MalformedResponseException {
+        return AdsPixelRealTimeEventLogResult.parseResponse(response, context, request, header);
       }
     };
   }

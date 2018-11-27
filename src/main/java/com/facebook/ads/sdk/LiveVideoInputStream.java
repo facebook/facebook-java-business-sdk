@@ -67,6 +67,8 @@ public class LiveVideoInputStream extends APINode {
   private LiveEncoder mLiveEncoder = null;
   @SerializedName("secure_stream_url")
   private String mSecureStreamUrl = null;
+  @SerializedName("stream_health")
+  private Object mStreamHealth = null;
   @SerializedName("stream_id")
   private String mStreamId = null;
   @SerializedName("stream_url")
@@ -138,7 +140,7 @@ public class LiveVideoInputStream extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LiveVideoInputStream loadJSON(String json, APIContext context) {
+  public static LiveVideoInputStream loadJSON(String json, APIContext context, String header) {
     LiveVideoInputStream liveVideoInputStream = getGson().fromJson(json, LiveVideoInputStream.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -155,11 +157,12 @@ public class LiveVideoInputStream extends APINode {
     }
     liveVideoInputStream.context = context;
     liveVideoInputStream.rawValue = json;
+    liveVideoInputStream.header = header;
     return liveVideoInputStream;
   }
 
-  public static APINodeList<LiveVideoInputStream> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LiveVideoInputStream> liveVideoInputStreams = new APINodeList<LiveVideoInputStream>(request, json);
+  public static APINodeList<LiveVideoInputStream> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LiveVideoInputStream> liveVideoInputStreams = new APINodeList<LiveVideoInputStream>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -170,7 +173,7 @@ public class LiveVideoInputStream extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          liveVideoInputStreams.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          liveVideoInputStreams.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return liveVideoInputStreams;
       } else if (result.isJsonObject()) {
@@ -195,7 +198,7 @@ public class LiveVideoInputStream extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              liveVideoInputStreams.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              liveVideoInputStreams.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -206,13 +209,13 @@ public class LiveVideoInputStream extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  liveVideoInputStreams.add(loadJSON(entry.getValue().toString(), context));
+                  liveVideoInputStreams.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              liveVideoInputStreams.add(loadJSON(obj.toString(), context));
+              liveVideoInputStreams.add(loadJSON(obj.toString(), context, header));
             }
           }
           return liveVideoInputStreams;
@@ -220,7 +223,7 @@ public class LiveVideoInputStream extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              liveVideoInputStreams.add(loadJSON(entry.getValue().toString(), context));
+              liveVideoInputStreams.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return liveVideoInputStreams;
         } else {
@@ -239,7 +242,7 @@ public class LiveVideoInputStream extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              liveVideoInputStreams.add(loadJSON(value.toString(), context));
+              liveVideoInputStreams.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -251,7 +254,7 @@ public class LiveVideoInputStream extends APINode {
 
           // Sixth, check if it's pure JsonObject
           liveVideoInputStreams.clear();
-          liveVideoInputStreams.add(loadJSON(json, context));
+          liveVideoInputStreams.add(loadJSON(json, context, header));
           return liveVideoInputStreams;
         }
       }
@@ -311,6 +314,10 @@ public class LiveVideoInputStream extends APINode {
     return mSecureStreamUrl;
   }
 
+  public Object getFieldStreamHealth() {
+    return mStreamHealth;
+  }
+
   public String getFieldStreamId() {
     return mStreamId;
   }
@@ -338,13 +345,14 @@ public class LiveVideoInputStream extends APINode {
       "is_master",
       "live_encoder",
       "secure_stream_url",
+      "stream_health",
       "stream_id",
       "stream_url",
     };
 
     @Override
-    public LiveVideoInputStream parseResponse(String response) throws APIException {
-      return LiveVideoInputStream.parseResponse(response, getContext(), this).head();
+    public LiveVideoInputStream parseResponse(String response, String header) throws APIException {
+      return LiveVideoInputStream.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -354,7 +362,8 @@ public class LiveVideoInputStream extends APINode {
 
     @Override
     public LiveVideoInputStream execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -368,7 +377,7 @@ public class LiveVideoInputStream extends APINode {
         new Function<String, LiveVideoInputStream>() {
            public LiveVideoInputStream apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -472,6 +481,13 @@ public class LiveVideoInputStream extends APINode {
       this.requestField("secure_stream_url", value);
       return this;
     }
+    public APIRequestGet requestStreamHealthField () {
+      return this.requestStreamHealthField(true);
+    }
+    public APIRequestGet requestStreamHealthField (boolean value) {
+      this.requestField("stream_health", value);
+      return this;
+    }
     public APIRequestGet requestStreamIdField () {
       return this.requestStreamIdField(true);
     }
@@ -509,6 +525,7 @@ public class LiveVideoInputStream extends APINode {
     this.mIsMaster = instance.mIsMaster;
     this.mLiveEncoder = instance.mLiveEncoder;
     this.mSecureStreamUrl = instance.mSecureStreamUrl;
+    this.mStreamHealth = instance.mStreamHealth;
     this.mStreamId = instance.mStreamId;
     this.mStreamUrl = instance.mStreamUrl;
     this.context = instance.context;
@@ -518,8 +535,8 @@ public class LiveVideoInputStream extends APINode {
 
   public static APIRequest.ResponseParser<LiveVideoInputStream> getParser() {
     return new APIRequest.ResponseParser<LiveVideoInputStream>() {
-      public APINodeList<LiveVideoInputStream> parseResponse(String response, APIContext context, APIRequest<LiveVideoInputStream> request) throws MalformedResponseException {
-        return LiveVideoInputStream.parseResponse(response, context, request);
+      public APINodeList<LiveVideoInputStream> parseResponse(String response, APIContext context, APIRequest<LiveVideoInputStream> request, String header) throws MalformedResponseException {
+        return LiveVideoInputStream.parseResponse(response, context, request, header);
       }
     };
   }

@@ -156,7 +156,7 @@ public class Hotel extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Hotel loadJSON(String json, APIContext context) {
+  public static Hotel loadJSON(String json, APIContext context, String header) {
     Hotel hotel = getGson().fromJson(json, Hotel.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -173,11 +173,12 @@ public class Hotel extends APINode {
     }
     hotel.context = context;
     hotel.rawValue = json;
+    hotel.header = header;
     return hotel;
   }
 
-  public static APINodeList<Hotel> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Hotel> hotels = new APINodeList<Hotel>(request, json);
+  public static APINodeList<Hotel> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Hotel> hotels = new APINodeList<Hotel>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -188,7 +189,7 @@ public class Hotel extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          hotels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          hotels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return hotels;
       } else if (result.isJsonObject()) {
@@ -213,7 +214,7 @@ public class Hotel extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              hotels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              hotels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -224,13 +225,13 @@ public class Hotel extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  hotels.add(loadJSON(entry.getValue().toString(), context));
+                  hotels.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              hotels.add(loadJSON(obj.toString(), context));
+              hotels.add(loadJSON(obj.toString(), context, header));
             }
           }
           return hotels;
@@ -238,7 +239,7 @@ public class Hotel extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              hotels.add(loadJSON(entry.getValue().toString(), context));
+              hotels.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return hotels;
         } else {
@@ -257,7 +258,7 @@ public class Hotel extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              hotels.add(loadJSON(value.toString(), context));
+              hotels.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -269,7 +270,7 @@ public class Hotel extends APINode {
 
           // Sixth, check if it's pure JsonObject
           hotels.clear();
-          hotels.add(loadJSON(json, context));
+          hotels.add(loadJSON(json, context, header));
           return hotels;
         }
       }
@@ -416,8 +417,8 @@ public class Hotel extends APINode {
     };
 
     @Override
-    public APINodeList<HotelRoom> parseResponse(String response) throws APIException {
-      return HotelRoom.parseResponse(response, getContext(), this);
+    public APINodeList<HotelRoom> parseResponse(String response, String header) throws APIException {
+      return HotelRoom.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -427,7 +428,8 @@ public class Hotel extends APINode {
 
     @Override
     public APINodeList<HotelRoom> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -441,7 +443,7 @@ public class Hotel extends APINode {
         new Function<String, APINodeList<HotelRoom>>() {
            public APINodeList<HotelRoom> apply(String result) {
              try {
-               return APIRequestGetHotelRooms.this.parseResponse(result);
+               return APIRequestGetHotelRooms.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -607,8 +609,8 @@ public class Hotel extends APINode {
     };
 
     @Override
-    public HotelRoom parseResponse(String response) throws APIException {
-      return HotelRoom.parseResponse(response, getContext(), this).head();
+    public HotelRoom parseResponse(String response, String header) throws APIException {
+      return HotelRoom.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -618,7 +620,8 @@ public class Hotel extends APINode {
 
     @Override
     public HotelRoom execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -632,7 +635,7 @@ public class Hotel extends APINode {
         new Function<String, HotelRoom>() {
            public HotelRoom apply(String result) {
              try {
-               return APIRequestCreateHotelRoom.this.parseResponse(result);
+               return APIRequestCreateHotelRoom.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -789,8 +792,8 @@ public class Hotel extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -800,7 +803,8 @@ public class Hotel extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -814,7 +818,7 @@ public class Hotel extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -909,8 +913,8 @@ public class Hotel extends APINode {
     };
 
     @Override
-    public Hotel parseResponse(String response) throws APIException {
-      return Hotel.parseResponse(response, getContext(), this).head();
+    public Hotel parseResponse(String response, String header) throws APIException {
+      return Hotel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -920,7 +924,8 @@ public class Hotel extends APINode {
 
     @Override
     public Hotel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -934,7 +939,7 @@ public class Hotel extends APINode {
         new Function<String, Hotel>() {
            public Hotel apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1143,8 +1148,8 @@ public class Hotel extends APINode {
     };
 
     @Override
-    public Hotel parseResponse(String response) throws APIException {
-      return Hotel.parseResponse(response, getContext(), this).head();
+    public Hotel parseResponse(String response, String header) throws APIException {
+      return Hotel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1154,7 +1159,8 @@ public class Hotel extends APINode {
 
     @Override
     public Hotel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1168,7 +1174,7 @@ public class Hotel extends APINode {
         new Function<String, Hotel>() {
            public Hotel apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1355,8 +1361,8 @@ public class Hotel extends APINode {
 
   public static APIRequest.ResponseParser<Hotel> getParser() {
     return new APIRequest.ResponseParser<Hotel>() {
-      public APINodeList<Hotel> parseResponse(String response, APIContext context, APIRequest<Hotel> request) throws MalformedResponseException {
-        return Hotel.parseResponse(response, context, request);
+      public APINodeList<Hotel> parseResponse(String response, APIContext context, APIRequest<Hotel> request, String header) throws MalformedResponseException {
+        return Hotel.parseResponse(response, context, request, header);
       }
     };
   }

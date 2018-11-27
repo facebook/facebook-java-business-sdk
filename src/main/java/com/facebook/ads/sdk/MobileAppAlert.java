@@ -73,7 +73,7 @@ public class MobileAppAlert extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static MobileAppAlert loadJSON(String json, APIContext context) {
+  public static MobileAppAlert loadJSON(String json, APIContext context, String header) {
     MobileAppAlert mobileAppAlert = getGson().fromJson(json, MobileAppAlert.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class MobileAppAlert extends APINode {
     }
     mobileAppAlert.context = context;
     mobileAppAlert.rawValue = json;
+    mobileAppAlert.header = header;
     return mobileAppAlert;
   }
 
-  public static APINodeList<MobileAppAlert> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<MobileAppAlert> mobileAppAlerts = new APINodeList<MobileAppAlert>(request, json);
+  public static APINodeList<MobileAppAlert> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<MobileAppAlert> mobileAppAlerts = new APINodeList<MobileAppAlert>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class MobileAppAlert extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          mobileAppAlerts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          mobileAppAlerts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return mobileAppAlerts;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class MobileAppAlert extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              mobileAppAlerts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              mobileAppAlerts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class MobileAppAlert extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  mobileAppAlerts.add(loadJSON(entry.getValue().toString(), context));
+                  mobileAppAlerts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              mobileAppAlerts.add(loadJSON(obj.toString(), context));
+              mobileAppAlerts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return mobileAppAlerts;
@@ -155,7 +156,7 @@ public class MobileAppAlert extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              mobileAppAlerts.add(loadJSON(entry.getValue().toString(), context));
+              mobileAppAlerts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return mobileAppAlerts;
         } else {
@@ -174,7 +175,7 @@ public class MobileAppAlert extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              mobileAppAlerts.add(loadJSON(value.toString(), context));
+              mobileAppAlerts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class MobileAppAlert extends APINode {
 
           // Sixth, check if it's pure JsonObject
           mobileAppAlerts.clear();
-          mobileAppAlerts.add(loadJSON(json, context));
+          mobileAppAlerts.add(loadJSON(json, context, header));
           return mobileAppAlerts;
         }
       }
@@ -289,8 +290,8 @@ public class MobileAppAlert extends APINode {
 
   public static APIRequest.ResponseParser<MobileAppAlert> getParser() {
     return new APIRequest.ResponseParser<MobileAppAlert>() {
-      public APINodeList<MobileAppAlert> parseResponse(String response, APIContext context, APIRequest<MobileAppAlert> request) throws MalformedResponseException {
-        return MobileAppAlert.parseResponse(response, context, request);
+      public APINodeList<MobileAppAlert> parseResponse(String response, APIContext context, APIRequest<MobileAppAlert> request, String header) throws MalformedResponseException {
+        return MobileAppAlert.parseResponse(response, context, request, header);
       }
     };
   }

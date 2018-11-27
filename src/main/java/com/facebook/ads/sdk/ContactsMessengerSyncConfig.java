@@ -67,7 +67,7 @@ public class ContactsMessengerSyncConfig extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ContactsMessengerSyncConfig loadJSON(String json, APIContext context) {
+  public static ContactsMessengerSyncConfig loadJSON(String json, APIContext context, String header) {
     ContactsMessengerSyncConfig contactsMessengerSyncConfig = getGson().fromJson(json, ContactsMessengerSyncConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class ContactsMessengerSyncConfig extends APINode {
     }
     contactsMessengerSyncConfig.context = context;
     contactsMessengerSyncConfig.rawValue = json;
+    contactsMessengerSyncConfig.header = header;
     return contactsMessengerSyncConfig;
   }
 
-  public static APINodeList<ContactsMessengerSyncConfig> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ContactsMessengerSyncConfig> contactsMessengerSyncConfigs = new APINodeList<ContactsMessengerSyncConfig>(request, json);
+  public static APINodeList<ContactsMessengerSyncConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ContactsMessengerSyncConfig> contactsMessengerSyncConfigs = new APINodeList<ContactsMessengerSyncConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class ContactsMessengerSyncConfig extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          contactsMessengerSyncConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          contactsMessengerSyncConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return contactsMessengerSyncConfigs;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class ContactsMessengerSyncConfig extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              contactsMessengerSyncConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              contactsMessengerSyncConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class ContactsMessengerSyncConfig extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  contactsMessengerSyncConfigs.add(loadJSON(entry.getValue().toString(), context));
+                  contactsMessengerSyncConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              contactsMessengerSyncConfigs.add(loadJSON(obj.toString(), context));
+              contactsMessengerSyncConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return contactsMessengerSyncConfigs;
@@ -149,7 +150,7 @@ public class ContactsMessengerSyncConfig extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              contactsMessengerSyncConfigs.add(loadJSON(entry.getValue().toString(), context));
+              contactsMessengerSyncConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return contactsMessengerSyncConfigs;
         } else {
@@ -168,7 +169,7 @@ public class ContactsMessengerSyncConfig extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              contactsMessengerSyncConfigs.add(loadJSON(value.toString(), context));
+              contactsMessengerSyncConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class ContactsMessengerSyncConfig extends APINode {
 
           // Sixth, check if it's pure JsonObject
           contactsMessengerSyncConfigs.clear();
-          contactsMessengerSyncConfigs.add(loadJSON(json, context));
+          contactsMessengerSyncConfigs.add(loadJSON(json, context, header));
           return contactsMessengerSyncConfigs;
         }
       }
@@ -253,8 +254,8 @@ public class ContactsMessengerSyncConfig extends APINode {
 
   public static APIRequest.ResponseParser<ContactsMessengerSyncConfig> getParser() {
     return new APIRequest.ResponseParser<ContactsMessengerSyncConfig>() {
-      public APINodeList<ContactsMessengerSyncConfig> parseResponse(String response, APIContext context, APIRequest<ContactsMessengerSyncConfig> request) throws MalformedResponseException {
-        return ContactsMessengerSyncConfig.parseResponse(response, context, request);
+      public APINodeList<ContactsMessengerSyncConfig> parseResponse(String response, APIContext context, APIRequest<ContactsMessengerSyncConfig> request, String header) throws MalformedResponseException {
+        return ContactsMessengerSyncConfig.parseResponse(response, context, request, header);
       }
     };
   }

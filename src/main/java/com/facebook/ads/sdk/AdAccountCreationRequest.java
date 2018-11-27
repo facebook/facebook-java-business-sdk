@@ -188,7 +188,7 @@ public class AdAccountCreationRequest extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdAccountCreationRequest loadJSON(String json, APIContext context) {
+  public static AdAccountCreationRequest loadJSON(String json, APIContext context, String header) {
     AdAccountCreationRequest adAccountCreationRequest = getGson().fromJson(json, AdAccountCreationRequest.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -205,11 +205,12 @@ public class AdAccountCreationRequest extends APINode {
     }
     adAccountCreationRequest.context = context;
     adAccountCreationRequest.rawValue = json;
+    adAccountCreationRequest.header = header;
     return adAccountCreationRequest;
   }
 
-  public static APINodeList<AdAccountCreationRequest> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAccountCreationRequest> adAccountCreationRequests = new APINodeList<AdAccountCreationRequest>(request, json);
+  public static APINodeList<AdAccountCreationRequest> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountCreationRequest> adAccountCreationRequests = new APINodeList<AdAccountCreationRequest>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -220,7 +221,7 @@ public class AdAccountCreationRequest extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountCreationRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAccountCreationRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adAccountCreationRequests;
       } else if (result.isJsonObject()) {
@@ -245,7 +246,7 @@ public class AdAccountCreationRequest extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountCreationRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAccountCreationRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -256,13 +257,13 @@ public class AdAccountCreationRequest extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountCreationRequests.add(loadJSON(entry.getValue().toString(), context));
+                  adAccountCreationRequests.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountCreationRequests.add(loadJSON(obj.toString(), context));
+              adAccountCreationRequests.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adAccountCreationRequests;
@@ -270,7 +271,7 @@ public class AdAccountCreationRequest extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountCreationRequests.add(loadJSON(entry.getValue().toString(), context));
+              adAccountCreationRequests.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adAccountCreationRequests;
         } else {
@@ -289,7 +290,7 @@ public class AdAccountCreationRequest extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountCreationRequests.add(loadJSON(value.toString(), context));
+              adAccountCreationRequests.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -301,7 +302,7 @@ public class AdAccountCreationRequest extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adAccountCreationRequests.clear();
-          adAccountCreationRequests.add(loadJSON(json, context));
+          adAccountCreationRequests.add(loadJSON(json, context, header));
           return adAccountCreationRequests;
         }
       }
@@ -527,7 +528,6 @@ public class AdAccountCreationRequest extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "daily_spend_limit",
       "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
@@ -556,7 +556,6 @@ public class AdAccountCreationRequest extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
-      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -572,8 +571,8 @@ public class AdAccountCreationRequest extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccount> parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -583,7 +582,8 @@ public class AdAccountCreationRequest extends APINode {
 
     @Override
     public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -597,7 +597,7 @@ public class AdAccountCreationRequest extends APINode {
         new Function<String, APINodeList<AdAccount>>() {
            public APINodeList<AdAccount> apply(String result) {
              try {
-               return APIRequestGetAdAccounts.this.parseResponse(result);
+               return APIRequestGetAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -799,13 +799,6 @@ public class AdAccountCreationRequest extends APINode {
       this.requestField("currency", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestDailySpendLimitField () {
-      return this.requestDailySpendLimitField(true);
-    }
-    public APIRequestGetAdAccounts requestDailySpendLimitField (boolean value) {
-      this.requestField("daily_spend_limit", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField () {
       return this.requestDirectDealsTosAcceptedField(true);
     }
@@ -1002,13 +995,6 @@ public class AdAccountCreationRequest extends APINode {
       this.requestField("partner", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestRateLimitResetTimeField () {
-      return this.requestRateLimitResetTimeField(true);
-    }
-    public APIRequestGetAdAccounts requestRateLimitResetTimeField (boolean value) {
-      this.requestField("rate_limit_reset_time", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
@@ -1127,8 +1113,8 @@ public class AdAccountCreationRequest extends APINode {
     };
 
     @Override
-    public AdAccountCreationRequest parseResponse(String response) throws APIException {
-      return AdAccountCreationRequest.parseResponse(response, getContext(), this).head();
+    public AdAccountCreationRequest parseResponse(String response, String header) throws APIException {
+      return AdAccountCreationRequest.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1138,7 +1124,8 @@ public class AdAccountCreationRequest extends APINode {
 
     @Override
     public AdAccountCreationRequest execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1152,7 +1139,7 @@ public class AdAccountCreationRequest extends APINode {
         new Function<String, AdAccountCreationRequest>() {
            public AdAccountCreationRequest apply(String result) {
              try {
-               return APIRequestCreateVietnam.this.parseResponse(result);
+               return APIRequestCreateVietnam.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1372,8 +1359,8 @@ public class AdAccountCreationRequest extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1383,7 +1370,8 @@ public class AdAccountCreationRequest extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1397,7 +1385,7 @@ public class AdAccountCreationRequest extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1508,8 +1496,8 @@ public class AdAccountCreationRequest extends APINode {
     };
 
     @Override
-    public AdAccountCreationRequest parseResponse(String response) throws APIException {
-      return AdAccountCreationRequest.parseResponse(response, getContext(), this).head();
+    public AdAccountCreationRequest parseResponse(String response, String header) throws APIException {
+      return AdAccountCreationRequest.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1519,7 +1507,8 @@ public class AdAccountCreationRequest extends APINode {
 
     @Override
     public AdAccountCreationRequest execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1533,7 +1522,7 @@ public class AdAccountCreationRequest extends APINode {
         new Function<String, AdAccountCreationRequest>() {
            public AdAccountCreationRequest apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1865,8 +1854,8 @@ public class AdAccountCreationRequest extends APINode {
     };
 
     @Override
-    public AdAccountCreationRequest parseResponse(String response) throws APIException {
-      return AdAccountCreationRequest.parseResponse(response, getContext(), this).head();
+    public AdAccountCreationRequest parseResponse(String response, String header) throws APIException {
+      return AdAccountCreationRequest.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1876,7 +1865,8 @@ public class AdAccountCreationRequest extends APINode {
 
     @Override
     public AdAccountCreationRequest execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1890,7 +1880,7 @@ public class AdAccountCreationRequest extends APINode {
         new Function<String, AdAccountCreationRequest>() {
            public AdAccountCreationRequest apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2521,8 +2511,8 @@ public class AdAccountCreationRequest extends APINode {
 
   public static APIRequest.ResponseParser<AdAccountCreationRequest> getParser() {
     return new APIRequest.ResponseParser<AdAccountCreationRequest>() {
-      public APINodeList<AdAccountCreationRequest> parseResponse(String response, APIContext context, APIRequest<AdAccountCreationRequest> request) throws MalformedResponseException {
-        return AdAccountCreationRequest.parseResponse(response, context, request);
+      public APINodeList<AdAccountCreationRequest> parseResponse(String response, APIContext context, APIRequest<AdAccountCreationRequest> request, String header) throws MalformedResponseException {
+        return AdAccountCreationRequest.parseResponse(response, context, request, header);
       }
     };
   }

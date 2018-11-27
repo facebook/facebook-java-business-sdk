@@ -81,7 +81,7 @@ public class CustomAudienceSharedAccountCampaignInfo extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CustomAudienceSharedAccountCampaignInfo loadJSON(String json, APIContext context) {
+  public static CustomAudienceSharedAccountCampaignInfo loadJSON(String json, APIContext context, String header) {
     CustomAudienceSharedAccountCampaignInfo customAudienceSharedAccountCampaignInfo = getGson().fromJson(json, CustomAudienceSharedAccountCampaignInfo.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -98,11 +98,12 @@ public class CustomAudienceSharedAccountCampaignInfo extends APINode {
     }
     customAudienceSharedAccountCampaignInfo.context = context;
     customAudienceSharedAccountCampaignInfo.rawValue = json;
+    customAudienceSharedAccountCampaignInfo.header = header;
     return customAudienceSharedAccountCampaignInfo;
   }
 
-  public static APINodeList<CustomAudienceSharedAccountCampaignInfo> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CustomAudienceSharedAccountCampaignInfo> customAudienceSharedAccountCampaignInfos = new APINodeList<CustomAudienceSharedAccountCampaignInfo>(request, json);
+  public static APINodeList<CustomAudienceSharedAccountCampaignInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CustomAudienceSharedAccountCampaignInfo> customAudienceSharedAccountCampaignInfos = new APINodeList<CustomAudienceSharedAccountCampaignInfo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -113,7 +114,7 @@ public class CustomAudienceSharedAccountCampaignInfo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          customAudienceSharedAccountCampaignInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          customAudienceSharedAccountCampaignInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return customAudienceSharedAccountCampaignInfos;
       } else if (result.isJsonObject()) {
@@ -138,7 +139,7 @@ public class CustomAudienceSharedAccountCampaignInfo extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              customAudienceSharedAccountCampaignInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              customAudienceSharedAccountCampaignInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -149,13 +150,13 @@ public class CustomAudienceSharedAccountCampaignInfo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  customAudienceSharedAccountCampaignInfos.add(loadJSON(entry.getValue().toString(), context));
+                  customAudienceSharedAccountCampaignInfos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              customAudienceSharedAccountCampaignInfos.add(loadJSON(obj.toString(), context));
+              customAudienceSharedAccountCampaignInfos.add(loadJSON(obj.toString(), context, header));
             }
           }
           return customAudienceSharedAccountCampaignInfos;
@@ -163,7 +164,7 @@ public class CustomAudienceSharedAccountCampaignInfo extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              customAudienceSharedAccountCampaignInfos.add(loadJSON(entry.getValue().toString(), context));
+              customAudienceSharedAccountCampaignInfos.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return customAudienceSharedAccountCampaignInfos;
         } else {
@@ -182,7 +183,7 @@ public class CustomAudienceSharedAccountCampaignInfo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              customAudienceSharedAccountCampaignInfos.add(loadJSON(value.toString(), context));
+              customAudienceSharedAccountCampaignInfos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -194,7 +195,7 @@ public class CustomAudienceSharedAccountCampaignInfo extends APINode {
 
           // Sixth, check if it's pure JsonObject
           customAudienceSharedAccountCampaignInfos.clear();
-          customAudienceSharedAccountCampaignInfos.add(loadJSON(json, context));
+          customAudienceSharedAccountCampaignInfos.add(loadJSON(json, context, header));
           return customAudienceSharedAccountCampaignInfos;
         }
       }
@@ -337,8 +338,8 @@ public class CustomAudienceSharedAccountCampaignInfo extends APINode {
 
   public static APIRequest.ResponseParser<CustomAudienceSharedAccountCampaignInfo> getParser() {
     return new APIRequest.ResponseParser<CustomAudienceSharedAccountCampaignInfo>() {
-      public APINodeList<CustomAudienceSharedAccountCampaignInfo> parseResponse(String response, APIContext context, APIRequest<CustomAudienceSharedAccountCampaignInfo> request) throws MalformedResponseException {
-        return CustomAudienceSharedAccountCampaignInfo.parseResponse(response, context, request);
+      public APINodeList<CustomAudienceSharedAccountCampaignInfo> parseResponse(String response, APIContext context, APIRequest<CustomAudienceSharedAccountCampaignInfo> request, String header) throws MalformedResponseException {
+        return CustomAudienceSharedAccountCampaignInfo.parseResponse(response, context, request, header);
       }
     };
   }

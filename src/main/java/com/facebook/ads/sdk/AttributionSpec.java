@@ -69,7 +69,7 @@ public class AttributionSpec extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AttributionSpec loadJSON(String json, APIContext context) {
+  public static AttributionSpec loadJSON(String json, APIContext context, String header) {
     AttributionSpec attributionSpec = getGson().fromJson(json, AttributionSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class AttributionSpec extends APINode {
     }
     attributionSpec.context = context;
     attributionSpec.rawValue = json;
+    attributionSpec.header = header;
     return attributionSpec;
   }
 
-  public static APINodeList<AttributionSpec> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AttributionSpec> attributionSpecs = new APINodeList<AttributionSpec>(request, json);
+  public static APINodeList<AttributionSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AttributionSpec> attributionSpecs = new APINodeList<AttributionSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class AttributionSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          attributionSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          attributionSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return attributionSpecs;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class AttributionSpec extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              attributionSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              attributionSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class AttributionSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  attributionSpecs.add(loadJSON(entry.getValue().toString(), context));
+                  attributionSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              attributionSpecs.add(loadJSON(obj.toString(), context));
+              attributionSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return attributionSpecs;
@@ -151,7 +152,7 @@ public class AttributionSpec extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              attributionSpecs.add(loadJSON(entry.getValue().toString(), context));
+              attributionSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return attributionSpecs;
         } else {
@@ -170,7 +171,7 @@ public class AttributionSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              attributionSpecs.add(loadJSON(value.toString(), context));
+              attributionSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class AttributionSpec extends APINode {
 
           // Sixth, check if it's pure JsonObject
           attributionSpecs.clear();
-          attributionSpecs.add(loadJSON(json, context));
+          attributionSpecs.add(loadJSON(json, context, header));
           return attributionSpecs;
         }
       }
@@ -265,8 +266,8 @@ public class AttributionSpec extends APINode {
 
   public static APIRequest.ResponseParser<AttributionSpec> getParser() {
     return new APIRequest.ResponseParser<AttributionSpec>() {
-      public APINodeList<AttributionSpec> parseResponse(String response, APIContext context, APIRequest<AttributionSpec> request) throws MalformedResponseException {
-        return AttributionSpec.parseResponse(response, context, request);
+      public APINodeList<AttributionSpec> parseResponse(String response, APIContext context, APIRequest<AttributionSpec> request, String header) throws MalformedResponseException {
+        return AttributionSpec.parseResponse(response, context, request, header);
       }
     };
   }

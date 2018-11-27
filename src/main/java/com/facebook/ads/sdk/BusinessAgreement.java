@@ -126,7 +126,7 @@ public class BusinessAgreement extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BusinessAgreement loadJSON(String json, APIContext context) {
+  public static BusinessAgreement loadJSON(String json, APIContext context, String header) {
     BusinessAgreement businessAgreement = getGson().fromJson(json, BusinessAgreement.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -143,11 +143,12 @@ public class BusinessAgreement extends APINode {
     }
     businessAgreement.context = context;
     businessAgreement.rawValue = json;
+    businessAgreement.header = header;
     return businessAgreement;
   }
 
-  public static APINodeList<BusinessAgreement> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<BusinessAgreement> businessAgreements = new APINodeList<BusinessAgreement>(request, json);
+  public static APINodeList<BusinessAgreement> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessAgreement> businessAgreements = new APINodeList<BusinessAgreement>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -158,7 +159,7 @@ public class BusinessAgreement extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          businessAgreements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          businessAgreements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return businessAgreements;
       } else if (result.isJsonObject()) {
@@ -183,7 +184,7 @@ public class BusinessAgreement extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              businessAgreements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              businessAgreements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -194,13 +195,13 @@ public class BusinessAgreement extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  businessAgreements.add(loadJSON(entry.getValue().toString(), context));
+                  businessAgreements.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              businessAgreements.add(loadJSON(obj.toString(), context));
+              businessAgreements.add(loadJSON(obj.toString(), context, header));
             }
           }
           return businessAgreements;
@@ -208,7 +209,7 @@ public class BusinessAgreement extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              businessAgreements.add(loadJSON(entry.getValue().toString(), context));
+              businessAgreements.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return businessAgreements;
         } else {
@@ -227,7 +228,7 @@ public class BusinessAgreement extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              businessAgreements.add(loadJSON(value.toString(), context));
+              businessAgreements.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -239,7 +240,7 @@ public class BusinessAgreement extends APINode {
 
           // Sixth, check if it's pure JsonObject
           businessAgreements.clear();
-          businessAgreements.add(loadJSON(json, context));
+          businessAgreements.add(loadJSON(json, context, header));
           return businessAgreements;
         }
       }
@@ -302,8 +303,8 @@ public class BusinessAgreement extends APINode {
     };
 
     @Override
-    public BusinessAgreement parseResponse(String response) throws APIException {
-      return BusinessAgreement.parseResponse(response, getContext(), this).head();
+    public BusinessAgreement parseResponse(String response, String header) throws APIException {
+      return BusinessAgreement.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -313,7 +314,8 @@ public class BusinessAgreement extends APINode {
 
     @Override
     public BusinessAgreement execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -327,7 +329,7 @@ public class BusinessAgreement extends APINode {
         new Function<String, BusinessAgreement>() {
            public BusinessAgreement apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -421,8 +423,8 @@ public class BusinessAgreement extends APINode {
     };
 
     @Override
-    public BusinessAgreement parseResponse(String response) throws APIException {
-      return BusinessAgreement.parseResponse(response, getContext(), this).head();
+    public BusinessAgreement parseResponse(String response, String header) throws APIException {
+      return BusinessAgreement.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -432,7 +434,8 @@ public class BusinessAgreement extends APINode {
 
     @Override
     public BusinessAgreement execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -446,7 +449,7 @@ public class BusinessAgreement extends APINode {
         new Function<String, BusinessAgreement>() {
            public BusinessAgreement apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -575,8 +578,8 @@ public class BusinessAgreement extends APINode {
 
   public static APIRequest.ResponseParser<BusinessAgreement> getParser() {
     return new APIRequest.ResponseParser<BusinessAgreement>() {
-      public APINodeList<BusinessAgreement> parseResponse(String response, APIContext context, APIRequest<BusinessAgreement> request) throws MalformedResponseException {
-        return BusinessAgreement.parseResponse(response, context, request);
+      public APINodeList<BusinessAgreement> parseResponse(String response, APIContext context, APIRequest<BusinessAgreement> request, String header) throws MalformedResponseException {
+        return BusinessAgreement.parseResponse(response, context, request, header);
       }
     };
   }

@@ -140,7 +140,7 @@ public class LifeEvent extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LifeEvent loadJSON(String json, APIContext context) {
+  public static LifeEvent loadJSON(String json, APIContext context, String header) {
     LifeEvent lifeEvent = getGson().fromJson(json, LifeEvent.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -157,11 +157,12 @@ public class LifeEvent extends APINode {
     }
     lifeEvent.context = context;
     lifeEvent.rawValue = json;
+    lifeEvent.header = header;
     return lifeEvent;
   }
 
-  public static APINodeList<LifeEvent> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LifeEvent> lifeEvents = new APINodeList<LifeEvent>(request, json);
+  public static APINodeList<LifeEvent> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LifeEvent> lifeEvents = new APINodeList<LifeEvent>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -172,7 +173,7 @@ public class LifeEvent extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          lifeEvents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          lifeEvents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return lifeEvents;
       } else if (result.isJsonObject()) {
@@ -197,7 +198,7 @@ public class LifeEvent extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              lifeEvents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              lifeEvents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -208,13 +209,13 @@ public class LifeEvent extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  lifeEvents.add(loadJSON(entry.getValue().toString(), context));
+                  lifeEvents.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              lifeEvents.add(loadJSON(obj.toString(), context));
+              lifeEvents.add(loadJSON(obj.toString(), context, header));
             }
           }
           return lifeEvents;
@@ -222,7 +223,7 @@ public class LifeEvent extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              lifeEvents.add(loadJSON(entry.getValue().toString(), context));
+              lifeEvents.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return lifeEvents;
         } else {
@@ -241,7 +242,7 @@ public class LifeEvent extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              lifeEvents.add(loadJSON(value.toString(), context));
+              lifeEvents.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -253,7 +254,7 @@ public class LifeEvent extends APINode {
 
           // Sixth, check if it's pure JsonObject
           lifeEvents.clear();
-          lifeEvents.add(loadJSON(json, context));
+          lifeEvents.add(loadJSON(json, context, header));
           return lifeEvents;
         }
       }
@@ -394,8 +395,8 @@ public class LifeEvent extends APINode {
     };
 
     @Override
-    public APINodeList<Comment> parseResponse(String response) throws APIException {
-      return Comment.parseResponse(response, getContext(), this);
+    public APINodeList<Comment> parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -405,7 +406,8 @@ public class LifeEvent extends APINode {
 
     @Override
     public APINodeList<Comment> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -419,7 +421,7 @@ public class LifeEvent extends APINode {
         new Function<String, APINodeList<Comment>>() {
            public APINodeList<Comment> apply(String result) {
              try {
-               return APIRequestGetComments.this.parseResponse(result);
+               return APIRequestGetComments.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -689,8 +691,8 @@ public class LifeEvent extends APINode {
     };
 
     @Override
-    public Comment parseResponse(String response) throws APIException {
-      return Comment.parseResponse(response, getContext(), this).head();
+    public Comment parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -700,7 +702,8 @@ public class LifeEvent extends APINode {
 
     @Override
     public Comment execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -714,7 +717,7 @@ public class LifeEvent extends APINode {
         new Function<String, Comment>() {
            public Comment apply(String result) {
              try {
-               return APIRequestCreateComment.this.parseResponse(result);
+               return APIRequestCreateComment.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -884,8 +887,8 @@ public class LifeEvent extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -895,7 +898,8 @@ public class LifeEvent extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -909,7 +913,7 @@ public class LifeEvent extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetLikes.this.parseResponse(result);
+               return APIRequestGetLikes.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1089,8 +1093,8 @@ public class LifeEvent extends APINode {
     };
 
     @Override
-    public APINodeList<Photo> parseResponse(String response) throws APIException {
-      return Photo.parseResponse(response, getContext(), this);
+    public APINodeList<Photo> parseResponse(String response, String header) throws APIException {
+      return Photo.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1100,7 +1104,8 @@ public class LifeEvent extends APINode {
 
     @Override
     public APINodeList<Photo> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1114,7 +1119,7 @@ public class LifeEvent extends APINode {
         new Function<String, APINodeList<Photo>>() {
            public APINodeList<Photo> apply(String result) {
              try {
-               return APIRequestGetPhotos.this.parseResponse(result);
+               return APIRequestGetPhotos.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1426,8 +1431,8 @@ public class LifeEvent extends APINode {
     };
 
     @Override
-    public APINodeList<Post> parseResponse(String response) throws APIException {
-      return Post.parseResponse(response, getContext(), this);
+    public APINodeList<Post> parseResponse(String response, String header) throws APIException {
+      return Post.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1437,7 +1442,8 @@ public class LifeEvent extends APINode {
 
     @Override
     public APINodeList<Post> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1451,7 +1457,7 @@ public class LifeEvent extends APINode {
         new Function<String, APINodeList<Post>>() {
            public APINodeList<Post> apply(String result) {
              try {
-               return APIRequestGetShareDPosts.this.parseResponse(result);
+               return APIRequestGetShareDPosts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1943,8 +1949,8 @@ public class LifeEvent extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1954,7 +1960,8 @@ public class LifeEvent extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1968,7 +1975,7 @@ public class LifeEvent extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2060,8 +2067,8 @@ public class LifeEvent extends APINode {
     };
 
     @Override
-    public LifeEvent parseResponse(String response) throws APIException {
-      return LifeEvent.parseResponse(response, getContext(), this).head();
+    public LifeEvent parseResponse(String response, String header) throws APIException {
+      return LifeEvent.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2071,7 +2078,8 @@ public class LifeEvent extends APINode {
 
     @Override
     public LifeEvent execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2085,7 +2093,7 @@ public class LifeEvent extends APINode {
         new Function<String, LifeEvent>() {
            public LifeEvent apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2229,8 +2237,8 @@ public class LifeEvent extends APINode {
     };
 
     @Override
-    public LifeEvent parseResponse(String response) throws APIException {
-      return LifeEvent.parseResponse(response, getContext(), this).head();
+    public LifeEvent parseResponse(String response, String header) throws APIException {
+      return LifeEvent.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2240,7 +2248,8 @@ public class LifeEvent extends APINode {
 
     @Override
     public LifeEvent execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2254,7 +2263,7 @@ public class LifeEvent extends APINode {
         new Function<String, LifeEvent>() {
            public LifeEvent apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2364,8 +2373,8 @@ public class LifeEvent extends APINode {
 
   public static APIRequest.ResponseParser<LifeEvent> getParser() {
     return new APIRequest.ResponseParser<LifeEvent>() {
-      public APINodeList<LifeEvent> parseResponse(String response, APIContext context, APIRequest<LifeEvent> request) throws MalformedResponseException {
-        return LifeEvent.parseResponse(response, context, request);
+      public APINodeList<LifeEvent> parseResponse(String response, APIContext context, APIRequest<LifeEvent> request, String header) throws MalformedResponseException {
+        return LifeEvent.parseResponse(response, context, request, header);
       }
     };
   }

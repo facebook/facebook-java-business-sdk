@@ -67,7 +67,7 @@ public class AdCampaignPacedBidInfo extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCampaignPacedBidInfo loadJSON(String json, APIContext context) {
+  public static AdCampaignPacedBidInfo loadJSON(String json, APIContext context, String header) {
     AdCampaignPacedBidInfo adCampaignPacedBidInfo = getGson().fromJson(json, AdCampaignPacedBidInfo.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class AdCampaignPacedBidInfo extends APINode {
     }
     adCampaignPacedBidInfo.context = context;
     adCampaignPacedBidInfo.rawValue = json;
+    adCampaignPacedBidInfo.header = header;
     return adCampaignPacedBidInfo;
   }
 
-  public static APINodeList<AdCampaignPacedBidInfo> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCampaignPacedBidInfo> adCampaignPacedBidInfos = new APINodeList<AdCampaignPacedBidInfo>(request, json);
+  public static APINodeList<AdCampaignPacedBidInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignPacedBidInfo> adCampaignPacedBidInfos = new APINodeList<AdCampaignPacedBidInfo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class AdCampaignPacedBidInfo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCampaignPacedBidInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCampaignPacedBidInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCampaignPacedBidInfos;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class AdCampaignPacedBidInfo extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCampaignPacedBidInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCampaignPacedBidInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class AdCampaignPacedBidInfo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCampaignPacedBidInfos.add(loadJSON(entry.getValue().toString(), context));
+                  adCampaignPacedBidInfos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCampaignPacedBidInfos.add(loadJSON(obj.toString(), context));
+              adCampaignPacedBidInfos.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCampaignPacedBidInfos;
@@ -149,7 +150,7 @@ public class AdCampaignPacedBidInfo extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCampaignPacedBidInfos.add(loadJSON(entry.getValue().toString(), context));
+              adCampaignPacedBidInfos.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCampaignPacedBidInfos;
         } else {
@@ -168,7 +169,7 @@ public class AdCampaignPacedBidInfo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCampaignPacedBidInfos.add(loadJSON(value.toString(), context));
+              adCampaignPacedBidInfos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class AdCampaignPacedBidInfo extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCampaignPacedBidInfos.clear();
-          adCampaignPacedBidInfos.add(loadJSON(json, context));
+          adCampaignPacedBidInfos.add(loadJSON(json, context, header));
           return adCampaignPacedBidInfos;
         }
       }
@@ -253,8 +254,8 @@ public class AdCampaignPacedBidInfo extends APINode {
 
   public static APIRequest.ResponseParser<AdCampaignPacedBidInfo> getParser() {
     return new APIRequest.ResponseParser<AdCampaignPacedBidInfo>() {
-      public APINodeList<AdCampaignPacedBidInfo> parseResponse(String response, APIContext context, APIRequest<AdCampaignPacedBidInfo> request) throws MalformedResponseException {
-        return AdCampaignPacedBidInfo.parseResponse(response, context, request);
+      public APINodeList<AdCampaignPacedBidInfo> parseResponse(String response, APIContext context, APIRequest<AdCampaignPacedBidInfo> request, String header) throws MalformedResponseException {
+        return AdCampaignPacedBidInfo.parseResponse(response, context, request, header);
       }
     };
   }

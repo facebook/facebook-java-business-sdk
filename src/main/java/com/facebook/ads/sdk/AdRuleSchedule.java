@@ -71,7 +71,7 @@ public class AdRuleSchedule extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdRuleSchedule loadJSON(String json, APIContext context) {
+  public static AdRuleSchedule loadJSON(String json, APIContext context, String header) {
     AdRuleSchedule adRuleSchedule = getGson().fromJson(json, AdRuleSchedule.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class AdRuleSchedule extends APINode {
     }
     adRuleSchedule.context = context;
     adRuleSchedule.rawValue = json;
+    adRuleSchedule.header = header;
     return adRuleSchedule;
   }
 
-  public static APINodeList<AdRuleSchedule> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdRuleSchedule> adRuleSchedules = new APINodeList<AdRuleSchedule>(request, json);
+  public static APINodeList<AdRuleSchedule> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdRuleSchedule> adRuleSchedules = new APINodeList<AdRuleSchedule>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class AdRuleSchedule extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adRuleSchedules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adRuleSchedules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adRuleSchedules;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class AdRuleSchedule extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adRuleSchedules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adRuleSchedules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class AdRuleSchedule extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adRuleSchedules.add(loadJSON(entry.getValue().toString(), context));
+                  adRuleSchedules.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adRuleSchedules.add(loadJSON(obj.toString(), context));
+              adRuleSchedules.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adRuleSchedules;
@@ -153,7 +154,7 @@ public class AdRuleSchedule extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adRuleSchedules.add(loadJSON(entry.getValue().toString(), context));
+              adRuleSchedules.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adRuleSchedules;
         } else {
@@ -172,7 +173,7 @@ public class AdRuleSchedule extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adRuleSchedules.add(loadJSON(value.toString(), context));
+              adRuleSchedules.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class AdRuleSchedule extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adRuleSchedules.clear();
-          adRuleSchedules.add(loadJSON(json, context));
+          adRuleSchedules.add(loadJSON(json, context, header));
           return adRuleSchedules;
         }
       }
@@ -277,8 +278,8 @@ public class AdRuleSchedule extends APINode {
 
   public static APIRequest.ResponseParser<AdRuleSchedule> getParser() {
     return new APIRequest.ResponseParser<AdRuleSchedule>() {
-      public APINodeList<AdRuleSchedule> parseResponse(String response, APIContext context, APIRequest<AdRuleSchedule> request) throws MalformedResponseException {
-        return AdRuleSchedule.parseResponse(response, context, request);
+      public APINodeList<AdRuleSchedule> parseResponse(String response, APIContext context, APIRequest<AdRuleSchedule> request, String header) throws MalformedResponseException {
+        return AdRuleSchedule.parseResponse(response, context, request, header);
       }
     };
   }

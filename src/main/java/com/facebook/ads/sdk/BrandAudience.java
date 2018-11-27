@@ -142,7 +142,7 @@ public class BrandAudience extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BrandAudience loadJSON(String json, APIContext context) {
+  public static BrandAudience loadJSON(String json, APIContext context, String header) {
     BrandAudience brandAudience = getGson().fromJson(json, BrandAudience.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -159,11 +159,12 @@ public class BrandAudience extends APINode {
     }
     brandAudience.context = context;
     brandAudience.rawValue = json;
+    brandAudience.header = header;
     return brandAudience;
   }
 
-  public static APINodeList<BrandAudience> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<BrandAudience> brandAudiences = new APINodeList<BrandAudience>(request, json);
+  public static APINodeList<BrandAudience> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BrandAudience> brandAudiences = new APINodeList<BrandAudience>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -174,7 +175,7 @@ public class BrandAudience extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          brandAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          brandAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return brandAudiences;
       } else if (result.isJsonObject()) {
@@ -199,7 +200,7 @@ public class BrandAudience extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              brandAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              brandAudiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -210,13 +211,13 @@ public class BrandAudience extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  brandAudiences.add(loadJSON(entry.getValue().toString(), context));
+                  brandAudiences.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              brandAudiences.add(loadJSON(obj.toString(), context));
+              brandAudiences.add(loadJSON(obj.toString(), context, header));
             }
           }
           return brandAudiences;
@@ -224,7 +225,7 @@ public class BrandAudience extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              brandAudiences.add(loadJSON(entry.getValue().toString(), context));
+              brandAudiences.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return brandAudiences;
         } else {
@@ -243,7 +244,7 @@ public class BrandAudience extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              brandAudiences.add(loadJSON(value.toString(), context));
+              brandAudiences.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -255,7 +256,7 @@ public class BrandAudience extends APINode {
 
           // Sixth, check if it's pure JsonObject
           brandAudiences.clear();
-          brandAudiences.add(loadJSON(json, context));
+          brandAudiences.add(loadJSON(json, context, header));
           return brandAudiences;
         }
       }
@@ -357,8 +358,8 @@ public class BrandAudience extends APINode {
     };
 
     @Override
-    public BrandAudience parseResponse(String response) throws APIException {
-      return BrandAudience.parseResponse(response, getContext(), this).head();
+    public BrandAudience parseResponse(String response, String header) throws APIException {
+      return BrandAudience.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -368,7 +369,8 @@ public class BrandAudience extends APINode {
 
     @Override
     public BrandAudience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -382,7 +384,7 @@ public class BrandAudience extends APINode {
         new Function<String, BrandAudience>() {
            public BrandAudience apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -548,8 +550,8 @@ public class BrandAudience extends APINode {
 
   public static APIRequest.ResponseParser<BrandAudience> getParser() {
     return new APIRequest.ResponseParser<BrandAudience>() {
-      public APINodeList<BrandAudience> parseResponse(String response, APIContext context, APIRequest<BrandAudience> request) throws MalformedResponseException {
-        return BrandAudience.parseResponse(response, context, request);
+      public APINodeList<BrandAudience> parseResponse(String response, APIContext context, APIRequest<BrandAudience> request, String header) throws MalformedResponseException {
+        return BrandAudience.parseResponse(response, context, request, header);
       }
     };
   }

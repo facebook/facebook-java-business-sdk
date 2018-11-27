@@ -132,7 +132,7 @@ public class MessengerPlatformReferral extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static MessengerPlatformReferral loadJSON(String json, APIContext context) {
+  public static MessengerPlatformReferral loadJSON(String json, APIContext context, String header) {
     MessengerPlatformReferral messengerPlatformReferral = getGson().fromJson(json, MessengerPlatformReferral.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -149,11 +149,12 @@ public class MessengerPlatformReferral extends APINode {
     }
     messengerPlatformReferral.context = context;
     messengerPlatformReferral.rawValue = json;
+    messengerPlatformReferral.header = header;
     return messengerPlatformReferral;
   }
 
-  public static APINodeList<MessengerPlatformReferral> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<MessengerPlatformReferral> messengerPlatformReferrals = new APINodeList<MessengerPlatformReferral>(request, json);
+  public static APINodeList<MessengerPlatformReferral> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<MessengerPlatformReferral> messengerPlatformReferrals = new APINodeList<MessengerPlatformReferral>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -164,7 +165,7 @@ public class MessengerPlatformReferral extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          messengerPlatformReferrals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          messengerPlatformReferrals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return messengerPlatformReferrals;
       } else if (result.isJsonObject()) {
@@ -189,7 +190,7 @@ public class MessengerPlatformReferral extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              messengerPlatformReferrals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              messengerPlatformReferrals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -200,13 +201,13 @@ public class MessengerPlatformReferral extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  messengerPlatformReferrals.add(loadJSON(entry.getValue().toString(), context));
+                  messengerPlatformReferrals.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              messengerPlatformReferrals.add(loadJSON(obj.toString(), context));
+              messengerPlatformReferrals.add(loadJSON(obj.toString(), context, header));
             }
           }
           return messengerPlatformReferrals;
@@ -214,7 +215,7 @@ public class MessengerPlatformReferral extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              messengerPlatformReferrals.add(loadJSON(entry.getValue().toString(), context));
+              messengerPlatformReferrals.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return messengerPlatformReferrals;
         } else {
@@ -233,7 +234,7 @@ public class MessengerPlatformReferral extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              messengerPlatformReferrals.add(loadJSON(value.toString(), context));
+              messengerPlatformReferrals.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -245,7 +246,7 @@ public class MessengerPlatformReferral extends APINode {
 
           // Sixth, check if it's pure JsonObject
           messengerPlatformReferrals.clear();
-          messengerPlatformReferrals.add(loadJSON(json, context));
+          messengerPlatformReferrals.add(loadJSON(json, context, header));
           return messengerPlatformReferrals;
         }
       }
@@ -319,8 +320,8 @@ public class MessengerPlatformReferral extends APINode {
     };
 
     @Override
-    public MessengerPlatformReferral parseResponse(String response) throws APIException {
-      return MessengerPlatformReferral.parseResponse(response, getContext(), this).head();
+    public MessengerPlatformReferral parseResponse(String response, String header) throws APIException {
+      return MessengerPlatformReferral.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -330,7 +331,8 @@ public class MessengerPlatformReferral extends APINode {
 
     @Override
     public MessengerPlatformReferral execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -344,7 +346,7 @@ public class MessengerPlatformReferral extends APINode {
         new Function<String, MessengerPlatformReferral>() {
            public MessengerPlatformReferral apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -470,8 +472,8 @@ public class MessengerPlatformReferral extends APINode {
 
   public static APIRequest.ResponseParser<MessengerPlatformReferral> getParser() {
     return new APIRequest.ResponseParser<MessengerPlatformReferral>() {
-      public APINodeList<MessengerPlatformReferral> parseResponse(String response, APIContext context, APIRequest<MessengerPlatformReferral> request) throws MalformedResponseException {
-        return MessengerPlatformReferral.parseResponse(response, context, request);
+      public APINodeList<MessengerPlatformReferral> parseResponse(String response, APIContext context, APIRequest<MessengerPlatformReferral> request, String header) throws MalformedResponseException {
+        return MessengerPlatformReferral.parseResponse(response, context, request, header);
       }
     };
   }

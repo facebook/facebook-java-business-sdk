@@ -85,7 +85,7 @@ public class ReportStatsMetadata extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ReportStatsMetadata loadJSON(String json, APIContext context) {
+  public static ReportStatsMetadata loadJSON(String json, APIContext context, String header) {
     ReportStatsMetadata reportStatsMetadata = getGson().fromJson(json, ReportStatsMetadata.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -102,11 +102,12 @@ public class ReportStatsMetadata extends APINode {
     }
     reportStatsMetadata.context = context;
     reportStatsMetadata.rawValue = json;
+    reportStatsMetadata.header = header;
     return reportStatsMetadata;
   }
 
-  public static APINodeList<ReportStatsMetadata> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ReportStatsMetadata> reportStatsMetadatas = new APINodeList<ReportStatsMetadata>(request, json);
+  public static APINodeList<ReportStatsMetadata> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ReportStatsMetadata> reportStatsMetadatas = new APINodeList<ReportStatsMetadata>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -117,7 +118,7 @@ public class ReportStatsMetadata extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          reportStatsMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          reportStatsMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return reportStatsMetadatas;
       } else if (result.isJsonObject()) {
@@ -142,7 +143,7 @@ public class ReportStatsMetadata extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              reportStatsMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              reportStatsMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -153,13 +154,13 @@ public class ReportStatsMetadata extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  reportStatsMetadatas.add(loadJSON(entry.getValue().toString(), context));
+                  reportStatsMetadatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              reportStatsMetadatas.add(loadJSON(obj.toString(), context));
+              reportStatsMetadatas.add(loadJSON(obj.toString(), context, header));
             }
           }
           return reportStatsMetadatas;
@@ -167,7 +168,7 @@ public class ReportStatsMetadata extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              reportStatsMetadatas.add(loadJSON(entry.getValue().toString(), context));
+              reportStatsMetadatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return reportStatsMetadatas;
         } else {
@@ -186,7 +187,7 @@ public class ReportStatsMetadata extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              reportStatsMetadatas.add(loadJSON(value.toString(), context));
+              reportStatsMetadatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -198,7 +199,7 @@ public class ReportStatsMetadata extends APINode {
 
           // Sixth, check if it's pure JsonObject
           reportStatsMetadatas.clear();
-          reportStatsMetadatas.add(loadJSON(json, context));
+          reportStatsMetadatas.add(loadJSON(json, context, header));
           return reportStatsMetadatas;
         }
       }
@@ -361,8 +362,8 @@ public class ReportStatsMetadata extends APINode {
 
   public static APIRequest.ResponseParser<ReportStatsMetadata> getParser() {
     return new APIRequest.ResponseParser<ReportStatsMetadata>() {
-      public APINodeList<ReportStatsMetadata> parseResponse(String response, APIContext context, APIRequest<ReportStatsMetadata> request) throws MalformedResponseException {
-        return ReportStatsMetadata.parseResponse(response, context, request);
+      public APINodeList<ReportStatsMetadata> parseResponse(String response, APIContext context, APIRequest<ReportStatsMetadata> request, String header) throws MalformedResponseException {
+        return ReportStatsMetadata.parseResponse(response, context, request, header);
       }
     };
   }

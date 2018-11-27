@@ -71,7 +71,7 @@ public class DirectDealAvailableAdvertisers extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static DirectDealAvailableAdvertisers loadJSON(String json, APIContext context) {
+  public static DirectDealAvailableAdvertisers loadJSON(String json, APIContext context, String header) {
     DirectDealAvailableAdvertisers directDealAvailableAdvertisers = getGson().fromJson(json, DirectDealAvailableAdvertisers.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class DirectDealAvailableAdvertisers extends APINode {
     }
     directDealAvailableAdvertisers.context = context;
     directDealAvailableAdvertisers.rawValue = json;
+    directDealAvailableAdvertisers.header = header;
     return directDealAvailableAdvertisers;
   }
 
-  public static APINodeList<DirectDealAvailableAdvertisers> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<DirectDealAvailableAdvertisers> directDealAvailableAdvertiserss = new APINodeList<DirectDealAvailableAdvertisers>(request, json);
+  public static APINodeList<DirectDealAvailableAdvertisers> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<DirectDealAvailableAdvertisers> directDealAvailableAdvertiserss = new APINodeList<DirectDealAvailableAdvertisers>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class DirectDealAvailableAdvertisers extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          directDealAvailableAdvertiserss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          directDealAvailableAdvertiserss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return directDealAvailableAdvertiserss;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class DirectDealAvailableAdvertisers extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              directDealAvailableAdvertiserss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              directDealAvailableAdvertiserss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class DirectDealAvailableAdvertisers extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  directDealAvailableAdvertiserss.add(loadJSON(entry.getValue().toString(), context));
+                  directDealAvailableAdvertiserss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              directDealAvailableAdvertiserss.add(loadJSON(obj.toString(), context));
+              directDealAvailableAdvertiserss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return directDealAvailableAdvertiserss;
@@ -153,7 +154,7 @@ public class DirectDealAvailableAdvertisers extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              directDealAvailableAdvertiserss.add(loadJSON(entry.getValue().toString(), context));
+              directDealAvailableAdvertiserss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return directDealAvailableAdvertiserss;
         } else {
@@ -172,7 +173,7 @@ public class DirectDealAvailableAdvertisers extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              directDealAvailableAdvertiserss.add(loadJSON(value.toString(), context));
+              directDealAvailableAdvertiserss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class DirectDealAvailableAdvertisers extends APINode {
 
           // Sixth, check if it's pure JsonObject
           directDealAvailableAdvertiserss.clear();
-          directDealAvailableAdvertiserss.add(loadJSON(json, context));
+          directDealAvailableAdvertiserss.add(loadJSON(json, context, header));
           return directDealAvailableAdvertiserss;
         }
       }
@@ -277,8 +278,8 @@ public class DirectDealAvailableAdvertisers extends APINode {
 
   public static APIRequest.ResponseParser<DirectDealAvailableAdvertisers> getParser() {
     return new APIRequest.ResponseParser<DirectDealAvailableAdvertisers>() {
-      public APINodeList<DirectDealAvailableAdvertisers> parseResponse(String response, APIContext context, APIRequest<DirectDealAvailableAdvertisers> request) throws MalformedResponseException {
-        return DirectDealAvailableAdvertisers.parseResponse(response, context, request);
+      public APINodeList<DirectDealAvailableAdvertisers> parseResponse(String response, APIContext context, APIRequest<DirectDealAvailableAdvertisers> request, String header) throws MalformedResponseException {
+        return DirectDealAvailableAdvertisers.parseResponse(response, context, request, header);
       }
     };
   }

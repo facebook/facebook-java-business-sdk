@@ -156,7 +156,7 @@ public class OracleTransaction extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static OracleTransaction loadJSON(String json, APIContext context) {
+  public static OracleTransaction loadJSON(String json, APIContext context, String header) {
     OracleTransaction oracleTransaction = getGson().fromJson(json, OracleTransaction.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -173,11 +173,12 @@ public class OracleTransaction extends APINode {
     }
     oracleTransaction.context = context;
     oracleTransaction.rawValue = json;
+    oracleTransaction.header = header;
     return oracleTransaction;
   }
 
-  public static APINodeList<OracleTransaction> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<OracleTransaction> oracleTransactions = new APINodeList<OracleTransaction>(request, json);
+  public static APINodeList<OracleTransaction> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OracleTransaction> oracleTransactions = new APINodeList<OracleTransaction>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -188,7 +189,7 @@ public class OracleTransaction extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          oracleTransactions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          oracleTransactions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return oracleTransactions;
       } else if (result.isJsonObject()) {
@@ -213,7 +214,7 @@ public class OracleTransaction extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              oracleTransactions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              oracleTransactions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -224,13 +225,13 @@ public class OracleTransaction extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  oracleTransactions.add(loadJSON(entry.getValue().toString(), context));
+                  oracleTransactions.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              oracleTransactions.add(loadJSON(obj.toString(), context));
+              oracleTransactions.add(loadJSON(obj.toString(), context, header));
             }
           }
           return oracleTransactions;
@@ -238,7 +239,7 @@ public class OracleTransaction extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              oracleTransactions.add(loadJSON(entry.getValue().toString(), context));
+              oracleTransactions.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return oracleTransactions;
         } else {
@@ -257,7 +258,7 @@ public class OracleTransaction extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              oracleTransactions.add(loadJSON(value.toString(), context));
+              oracleTransactions.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -269,7 +270,7 @@ public class OracleTransaction extends APINode {
 
           // Sixth, check if it's pure JsonObject
           oracleTransactions.clear();
-          oracleTransactions.add(loadJSON(json, context));
+          oracleTransactions.add(loadJSON(json, context, header));
           return oracleTransactions;
         }
       }
@@ -403,8 +404,8 @@ public class OracleTransaction extends APINode {
     };
 
     @Override
-    public APINodeList<InvoiceCampaign> parseResponse(String response) throws APIException {
-      return InvoiceCampaign.parseResponse(response, getContext(), this);
+    public APINodeList<InvoiceCampaign> parseResponse(String response, String header) throws APIException {
+      return InvoiceCampaign.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -414,7 +415,8 @@ public class OracleTransaction extends APINode {
 
     @Override
     public APINodeList<InvoiceCampaign> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -428,7 +430,7 @@ public class OracleTransaction extends APINode {
         new Function<String, APINodeList<InvoiceCampaign>>() {
            public APINodeList<InvoiceCampaign> apply(String result) {
              try {
-               return APIRequestGetCampaigns.this.parseResponse(result);
+               return APIRequestGetCampaigns.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -572,8 +574,8 @@ public class OracleTransaction extends APINode {
     };
 
     @Override
-    public APINodeList<AtlasURL> parseResponse(String response) throws APIException {
-      return AtlasURL.parseResponse(response, getContext(), this);
+    public APINodeList<AtlasURL> parseResponse(String response, String header) throws APIException {
+      return AtlasURL.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -583,7 +585,8 @@ public class OracleTransaction extends APINode {
 
     @Override
     public APINodeList<AtlasURL> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -597,7 +600,7 @@ public class OracleTransaction extends APINode {
         new Function<String, APINodeList<AtlasURL>>() {
            public APINodeList<AtlasURL> apply(String result) {
              try {
-               return APIRequestGetData.this.parseResponse(result);
+               return APIRequestGetData.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -715,8 +718,8 @@ public class OracleTransaction extends APINode {
     };
 
     @Override
-    public OracleTransaction parseResponse(String response) throws APIException {
-      return OracleTransaction.parseResponse(response, getContext(), this).head();
+    public OracleTransaction parseResponse(String response, String header) throws APIException {
+      return OracleTransaction.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -726,7 +729,8 @@ public class OracleTransaction extends APINode {
 
     @Override
     public OracleTransaction execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -740,7 +744,7 @@ public class OracleTransaction extends APINode {
         new Function<String, OracleTransaction>() {
            public OracleTransaction apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -962,8 +966,8 @@ public class OracleTransaction extends APINode {
 
   public static APIRequest.ResponseParser<OracleTransaction> getParser() {
     return new APIRequest.ResponseParser<OracleTransaction>() {
-      public APINodeList<OracleTransaction> parseResponse(String response, APIContext context, APIRequest<OracleTransaction> request) throws MalformedResponseException {
-        return OracleTransaction.parseResponse(response, context, request);
+      public APINodeList<OracleTransaction> parseResponse(String response, APIContext context, APIRequest<OracleTransaction> request, String header) throws MalformedResponseException {
+        return OracleTransaction.parseResponse(response, context, request, header);
       }
     };
   }

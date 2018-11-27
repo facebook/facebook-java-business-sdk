@@ -85,7 +85,7 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCreativeVideoDataCustomOverlaySpec loadJSON(String json, APIContext context) {
+  public static AdCreativeVideoDataCustomOverlaySpec loadJSON(String json, APIContext context, String header) {
     AdCreativeVideoDataCustomOverlaySpec adCreativeVideoDataCustomOverlaySpec = getGson().fromJson(json, AdCreativeVideoDataCustomOverlaySpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -102,11 +102,12 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
     }
     adCreativeVideoDataCustomOverlaySpec.context = context;
     adCreativeVideoDataCustomOverlaySpec.rawValue = json;
+    adCreativeVideoDataCustomOverlaySpec.header = header;
     return adCreativeVideoDataCustomOverlaySpec;
   }
 
-  public static APINodeList<AdCreativeVideoDataCustomOverlaySpec> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCreativeVideoDataCustomOverlaySpec> adCreativeVideoDataCustomOverlaySpecs = new APINodeList<AdCreativeVideoDataCustomOverlaySpec>(request, json);
+  public static APINodeList<AdCreativeVideoDataCustomOverlaySpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeVideoDataCustomOverlaySpec> adCreativeVideoDataCustomOverlaySpecs = new APINodeList<AdCreativeVideoDataCustomOverlaySpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -117,7 +118,7 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCreativeVideoDataCustomOverlaySpecs;
       } else if (result.isJsonObject()) {
@@ -142,7 +143,7 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -153,13 +154,13 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(entry.getValue().toString(), context));
+                  adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(obj.toString(), context));
+              adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCreativeVideoDataCustomOverlaySpecs;
@@ -167,7 +168,7 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(entry.getValue().toString(), context));
+              adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCreativeVideoDataCustomOverlaySpecs;
         } else {
@@ -186,7 +187,7 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(value.toString(), context));
+              adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -198,7 +199,7 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCreativeVideoDataCustomOverlaySpecs.clear();
-          adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(json, context));
+          adCreativeVideoDataCustomOverlaySpecs.add(loadJSON(json, context, header));
           return adCreativeVideoDataCustomOverlaySpecs;
         }
       }
@@ -459,8 +460,8 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
 
   public static APIRequest.ResponseParser<AdCreativeVideoDataCustomOverlaySpec> getParser() {
     return new APIRequest.ResponseParser<AdCreativeVideoDataCustomOverlaySpec>() {
-      public APINodeList<AdCreativeVideoDataCustomOverlaySpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeVideoDataCustomOverlaySpec> request) throws MalformedResponseException {
-        return AdCreativeVideoDataCustomOverlaySpec.parseResponse(response, context, request);
+      public APINodeList<AdCreativeVideoDataCustomOverlaySpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeVideoDataCustomOverlaySpec> request, String header) throws MalformedResponseException {
+        return AdCreativeVideoDataCustomOverlaySpec.parseResponse(response, context, request, header);
       }
     };
   }

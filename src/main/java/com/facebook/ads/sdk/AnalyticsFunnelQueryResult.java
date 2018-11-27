@@ -73,7 +73,7 @@ public class AnalyticsFunnelQueryResult extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AnalyticsFunnelQueryResult loadJSON(String json, APIContext context) {
+  public static AnalyticsFunnelQueryResult loadJSON(String json, APIContext context, String header) {
     AnalyticsFunnelQueryResult analyticsFunnelQueryResult = getGson().fromJson(json, AnalyticsFunnelQueryResult.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class AnalyticsFunnelQueryResult extends APINode {
     }
     analyticsFunnelQueryResult.context = context;
     analyticsFunnelQueryResult.rawValue = json;
+    analyticsFunnelQueryResult.header = header;
     return analyticsFunnelQueryResult;
   }
 
-  public static APINodeList<AnalyticsFunnelQueryResult> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AnalyticsFunnelQueryResult> analyticsFunnelQueryResults = new APINodeList<AnalyticsFunnelQueryResult>(request, json);
+  public static APINodeList<AnalyticsFunnelQueryResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AnalyticsFunnelQueryResult> analyticsFunnelQueryResults = new APINodeList<AnalyticsFunnelQueryResult>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class AnalyticsFunnelQueryResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          analyticsFunnelQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          analyticsFunnelQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return analyticsFunnelQueryResults;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class AnalyticsFunnelQueryResult extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              analyticsFunnelQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              analyticsFunnelQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class AnalyticsFunnelQueryResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  analyticsFunnelQueryResults.add(loadJSON(entry.getValue().toString(), context));
+                  analyticsFunnelQueryResults.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              analyticsFunnelQueryResults.add(loadJSON(obj.toString(), context));
+              analyticsFunnelQueryResults.add(loadJSON(obj.toString(), context, header));
             }
           }
           return analyticsFunnelQueryResults;
@@ -155,7 +156,7 @@ public class AnalyticsFunnelQueryResult extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              analyticsFunnelQueryResults.add(loadJSON(entry.getValue().toString(), context));
+              analyticsFunnelQueryResults.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return analyticsFunnelQueryResults;
         } else {
@@ -174,7 +175,7 @@ public class AnalyticsFunnelQueryResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              analyticsFunnelQueryResults.add(loadJSON(value.toString(), context));
+              analyticsFunnelQueryResults.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class AnalyticsFunnelQueryResult extends APINode {
 
           // Sixth, check if it's pure JsonObject
           analyticsFunnelQueryResults.clear();
-          analyticsFunnelQueryResults.add(loadJSON(json, context));
+          analyticsFunnelQueryResults.add(loadJSON(json, context, header));
           return analyticsFunnelQueryResults;
         }
       }
@@ -289,8 +290,8 @@ public class AnalyticsFunnelQueryResult extends APINode {
 
   public static APIRequest.ResponseParser<AnalyticsFunnelQueryResult> getParser() {
     return new APIRequest.ResponseParser<AnalyticsFunnelQueryResult>() {
-      public APINodeList<AnalyticsFunnelQueryResult> parseResponse(String response, APIContext context, APIRequest<AnalyticsFunnelQueryResult> request) throws MalformedResponseException {
-        return AnalyticsFunnelQueryResult.parseResponse(response, context, request);
+      public APINodeList<AnalyticsFunnelQueryResult> parseResponse(String response, APIContext context, APIRequest<AnalyticsFunnelQueryResult> request, String header) throws MalformedResponseException {
+        return AnalyticsFunnelQueryResult.parseResponse(response, context, request, header);
       }
     };
   }

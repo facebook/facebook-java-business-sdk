@@ -69,7 +69,7 @@ public class PageVideosYouCanUse extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageVideosYouCanUse loadJSON(String json, APIContext context) {
+  public static PageVideosYouCanUse loadJSON(String json, APIContext context, String header) {
     PageVideosYouCanUse pageVideosYouCanUse = getGson().fromJson(json, PageVideosYouCanUse.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class PageVideosYouCanUse extends APINode {
     }
     pageVideosYouCanUse.context = context;
     pageVideosYouCanUse.rawValue = json;
+    pageVideosYouCanUse.header = header;
     return pageVideosYouCanUse;
   }
 
-  public static APINodeList<PageVideosYouCanUse> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageVideosYouCanUse> pageVideosYouCanUses = new APINodeList<PageVideosYouCanUse>(request, json);
+  public static APINodeList<PageVideosYouCanUse> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageVideosYouCanUse> pageVideosYouCanUses = new APINodeList<PageVideosYouCanUse>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class PageVideosYouCanUse extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageVideosYouCanUses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageVideosYouCanUses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageVideosYouCanUses;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class PageVideosYouCanUse extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageVideosYouCanUses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageVideosYouCanUses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class PageVideosYouCanUse extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageVideosYouCanUses.add(loadJSON(entry.getValue().toString(), context));
+                  pageVideosYouCanUses.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageVideosYouCanUses.add(loadJSON(obj.toString(), context));
+              pageVideosYouCanUses.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageVideosYouCanUses;
@@ -151,7 +152,7 @@ public class PageVideosYouCanUse extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageVideosYouCanUses.add(loadJSON(entry.getValue().toString(), context));
+              pageVideosYouCanUses.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageVideosYouCanUses;
         } else {
@@ -170,7 +171,7 @@ public class PageVideosYouCanUse extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageVideosYouCanUses.add(loadJSON(value.toString(), context));
+              pageVideosYouCanUses.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class PageVideosYouCanUse extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageVideosYouCanUses.clear();
-          pageVideosYouCanUses.add(loadJSON(json, context));
+          pageVideosYouCanUses.add(loadJSON(json, context, header));
           return pageVideosYouCanUses;
         }
       }
@@ -265,8 +266,8 @@ public class PageVideosYouCanUse extends APINode {
 
   public static APIRequest.ResponseParser<PageVideosYouCanUse> getParser() {
     return new APIRequest.ResponseParser<PageVideosYouCanUse>() {
-      public APINodeList<PageVideosYouCanUse> parseResponse(String response, APIContext context, APIRequest<PageVideosYouCanUse> request) throws MalformedResponseException {
-        return PageVideosYouCanUse.parseResponse(response, context, request);
+      public APINodeList<PageVideosYouCanUse> parseResponse(String response, APIContext context, APIRequest<PageVideosYouCanUse> request, String header) throws MalformedResponseException {
+        return PageVideosYouCanUse.parseResponse(response, context, request, header);
       }
     };
   }

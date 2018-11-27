@@ -69,7 +69,7 @@ public class AdgroupReviewFeedback extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdgroupReviewFeedback loadJSON(String json, APIContext context) {
+  public static AdgroupReviewFeedback loadJSON(String json, APIContext context, String header) {
     AdgroupReviewFeedback adgroupReviewFeedback = getGson().fromJson(json, AdgroupReviewFeedback.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class AdgroupReviewFeedback extends APINode {
     }
     adgroupReviewFeedback.context = context;
     adgroupReviewFeedback.rawValue = json;
+    adgroupReviewFeedback.header = header;
     return adgroupReviewFeedback;
   }
 
-  public static APINodeList<AdgroupReviewFeedback> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdgroupReviewFeedback> adgroupReviewFeedbacks = new APINodeList<AdgroupReviewFeedback>(request, json);
+  public static APINodeList<AdgroupReviewFeedback> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdgroupReviewFeedback> adgroupReviewFeedbacks = new APINodeList<AdgroupReviewFeedback>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class AdgroupReviewFeedback extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adgroupReviewFeedbacks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adgroupReviewFeedbacks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adgroupReviewFeedbacks;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class AdgroupReviewFeedback extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adgroupReviewFeedbacks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adgroupReviewFeedbacks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class AdgroupReviewFeedback extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adgroupReviewFeedbacks.add(loadJSON(entry.getValue().toString(), context));
+                  adgroupReviewFeedbacks.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adgroupReviewFeedbacks.add(loadJSON(obj.toString(), context));
+              adgroupReviewFeedbacks.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adgroupReviewFeedbacks;
@@ -151,7 +152,7 @@ public class AdgroupReviewFeedback extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adgroupReviewFeedbacks.add(loadJSON(entry.getValue().toString(), context));
+              adgroupReviewFeedbacks.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adgroupReviewFeedbacks;
         } else {
@@ -170,7 +171,7 @@ public class AdgroupReviewFeedback extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adgroupReviewFeedbacks.add(loadJSON(value.toString(), context));
+              adgroupReviewFeedbacks.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class AdgroupReviewFeedback extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adgroupReviewFeedbacks.clear();
-          adgroupReviewFeedbacks.add(loadJSON(json, context));
+          adgroupReviewFeedbacks.add(loadJSON(json, context, header));
           return adgroupReviewFeedbacks;
         }
       }
@@ -270,8 +271,8 @@ public class AdgroupReviewFeedback extends APINode {
 
   public static APIRequest.ResponseParser<AdgroupReviewFeedback> getParser() {
     return new APIRequest.ResponseParser<AdgroupReviewFeedback>() {
-      public APINodeList<AdgroupReviewFeedback> parseResponse(String response, APIContext context, APIRequest<AdgroupReviewFeedback> request) throws MalformedResponseException {
-        return AdgroupReviewFeedback.parseResponse(response, context, request);
+      public APINodeList<AdgroupReviewFeedback> parseResponse(String response, APIContext context, APIRequest<AdgroupReviewFeedback> request, String header) throws MalformedResponseException {
+        return AdgroupReviewFeedback.parseResponse(response, context, request, header);
       }
     };
   }

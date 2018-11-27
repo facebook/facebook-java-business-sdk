@@ -121,7 +121,7 @@ public class FlexibleTargeting extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static FlexibleTargeting loadJSON(String json, APIContext context) {
+  public static FlexibleTargeting loadJSON(String json, APIContext context, String header) {
     FlexibleTargeting flexibleTargeting = getGson().fromJson(json, FlexibleTargeting.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -138,11 +138,12 @@ public class FlexibleTargeting extends APINode {
     }
     flexibleTargeting.context = context;
     flexibleTargeting.rawValue = json;
+    flexibleTargeting.header = header;
     return flexibleTargeting;
   }
 
-  public static APINodeList<FlexibleTargeting> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<FlexibleTargeting> flexibleTargetings = new APINodeList<FlexibleTargeting>(request, json);
+  public static APINodeList<FlexibleTargeting> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<FlexibleTargeting> flexibleTargetings = new APINodeList<FlexibleTargeting>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -153,7 +154,7 @@ public class FlexibleTargeting extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          flexibleTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          flexibleTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return flexibleTargetings;
       } else if (result.isJsonObject()) {
@@ -178,7 +179,7 @@ public class FlexibleTargeting extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              flexibleTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              flexibleTargetings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -189,13 +190,13 @@ public class FlexibleTargeting extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  flexibleTargetings.add(loadJSON(entry.getValue().toString(), context));
+                  flexibleTargetings.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              flexibleTargetings.add(loadJSON(obj.toString(), context));
+              flexibleTargetings.add(loadJSON(obj.toString(), context, header));
             }
           }
           return flexibleTargetings;
@@ -203,7 +204,7 @@ public class FlexibleTargeting extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              flexibleTargetings.add(loadJSON(entry.getValue().toString(), context));
+              flexibleTargetings.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return flexibleTargetings;
         } else {
@@ -222,7 +223,7 @@ public class FlexibleTargeting extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              flexibleTargetings.add(loadJSON(value.toString(), context));
+              flexibleTargetings.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -234,7 +235,7 @@ public class FlexibleTargeting extends APINode {
 
           // Sixth, check if it's pure JsonObject
           flexibleTargetings.clear();
-          flexibleTargetings.add(loadJSON(json, context));
+          flexibleTargetings.add(loadJSON(json, context, header));
           return flexibleTargetings;
         }
       }
@@ -697,8 +698,8 @@ public class FlexibleTargeting extends APINode {
 
   public static APIRequest.ResponseParser<FlexibleTargeting> getParser() {
     return new APIRequest.ResponseParser<FlexibleTargeting>() {
-      public APINodeList<FlexibleTargeting> parseResponse(String response, APIContext context, APIRequest<FlexibleTargeting> request) throws MalformedResponseException {
-        return FlexibleTargeting.parseResponse(response, context, request);
+      public APINodeList<FlexibleTargeting> parseResponse(String response, APIContext context, APIRequest<FlexibleTargeting> request, String header) throws MalformedResponseException {
+        return FlexibleTargeting.parseResponse(response, context, request, header);
       }
     };
   }

@@ -69,7 +69,7 @@ public class CustomAudiencesTOS extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CustomAudiencesTOS loadJSON(String json, APIContext context) {
+  public static CustomAudiencesTOS loadJSON(String json, APIContext context, String header) {
     CustomAudiencesTOS customAudiencesTOS = getGson().fromJson(json, CustomAudiencesTOS.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class CustomAudiencesTOS extends APINode {
     }
     customAudiencesTOS.context = context;
     customAudiencesTOS.rawValue = json;
+    customAudiencesTOS.header = header;
     return customAudiencesTOS;
   }
 
-  public static APINodeList<CustomAudiencesTOS> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CustomAudiencesTOS> customAudiencesTOSs = new APINodeList<CustomAudiencesTOS>(request, json);
+  public static APINodeList<CustomAudiencesTOS> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CustomAudiencesTOS> customAudiencesTOSs = new APINodeList<CustomAudiencesTOS>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class CustomAudiencesTOS extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          customAudiencesTOSs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          customAudiencesTOSs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return customAudiencesTOSs;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class CustomAudiencesTOS extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              customAudiencesTOSs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              customAudiencesTOSs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class CustomAudiencesTOS extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  customAudiencesTOSs.add(loadJSON(entry.getValue().toString(), context));
+                  customAudiencesTOSs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              customAudiencesTOSs.add(loadJSON(obj.toString(), context));
+              customAudiencesTOSs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return customAudiencesTOSs;
@@ -151,7 +152,7 @@ public class CustomAudiencesTOS extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              customAudiencesTOSs.add(loadJSON(entry.getValue().toString(), context));
+              customAudiencesTOSs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return customAudiencesTOSs;
         } else {
@@ -170,7 +171,7 @@ public class CustomAudiencesTOS extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              customAudiencesTOSs.add(loadJSON(value.toString(), context));
+              customAudiencesTOSs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class CustomAudiencesTOS extends APINode {
 
           // Sixth, check if it's pure JsonObject
           customAudiencesTOSs.clear();
-          customAudiencesTOSs.add(loadJSON(json, context));
+          customAudiencesTOSs.add(loadJSON(json, context, header));
           return customAudiencesTOSs;
         }
       }
@@ -265,8 +266,8 @@ public class CustomAudiencesTOS extends APINode {
 
   public static APIRequest.ResponseParser<CustomAudiencesTOS> getParser() {
     return new APIRequest.ResponseParser<CustomAudiencesTOS>() {
-      public APINodeList<CustomAudiencesTOS> parseResponse(String response, APIContext context, APIRequest<CustomAudiencesTOS> request) throws MalformedResponseException {
-        return CustomAudiencesTOS.parseResponse(response, context, request);
+      public APINodeList<CustomAudiencesTOS> parseResponse(String response, APIContext context, APIRequest<CustomAudiencesTOS> request, String header) throws MalformedResponseException {
+        return CustomAudiencesTOS.parseResponse(response, context, request, header);
       }
     };
   }

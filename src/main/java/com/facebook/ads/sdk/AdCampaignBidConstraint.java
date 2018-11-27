@@ -67,7 +67,7 @@ public class AdCampaignBidConstraint extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCampaignBidConstraint loadJSON(String json, APIContext context) {
+  public static AdCampaignBidConstraint loadJSON(String json, APIContext context, String header) {
     AdCampaignBidConstraint adCampaignBidConstraint = getGson().fromJson(json, AdCampaignBidConstraint.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class AdCampaignBidConstraint extends APINode {
     }
     adCampaignBidConstraint.context = context;
     adCampaignBidConstraint.rawValue = json;
+    adCampaignBidConstraint.header = header;
     return adCampaignBidConstraint;
   }
 
-  public static APINodeList<AdCampaignBidConstraint> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCampaignBidConstraint> adCampaignBidConstraints = new APINodeList<AdCampaignBidConstraint>(request, json);
+  public static APINodeList<AdCampaignBidConstraint> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignBidConstraint> adCampaignBidConstraints = new APINodeList<AdCampaignBidConstraint>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class AdCampaignBidConstraint extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCampaignBidConstraints.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCampaignBidConstraints.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCampaignBidConstraints;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class AdCampaignBidConstraint extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCampaignBidConstraints.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCampaignBidConstraints.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class AdCampaignBidConstraint extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCampaignBidConstraints.add(loadJSON(entry.getValue().toString(), context));
+                  adCampaignBidConstraints.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCampaignBidConstraints.add(loadJSON(obj.toString(), context));
+              adCampaignBidConstraints.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCampaignBidConstraints;
@@ -149,7 +150,7 @@ public class AdCampaignBidConstraint extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCampaignBidConstraints.add(loadJSON(entry.getValue().toString(), context));
+              adCampaignBidConstraints.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCampaignBidConstraints;
         } else {
@@ -168,7 +169,7 @@ public class AdCampaignBidConstraint extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCampaignBidConstraints.add(loadJSON(value.toString(), context));
+              adCampaignBidConstraints.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class AdCampaignBidConstraint extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCampaignBidConstraints.clear();
-          adCampaignBidConstraints.add(loadJSON(json, context));
+          adCampaignBidConstraints.add(loadJSON(json, context, header));
           return adCampaignBidConstraints;
         }
       }
@@ -253,8 +254,8 @@ public class AdCampaignBidConstraint extends APINode {
 
   public static APIRequest.ResponseParser<AdCampaignBidConstraint> getParser() {
     return new APIRequest.ResponseParser<AdCampaignBidConstraint>() {
-      public APINodeList<AdCampaignBidConstraint> parseResponse(String response, APIContext context, APIRequest<AdCampaignBidConstraint> request) throws MalformedResponseException {
-        return AdCampaignBidConstraint.parseResponse(response, context, request);
+      public APINodeList<AdCampaignBidConstraint> parseResponse(String response, APIContext context, APIRequest<AdCampaignBidConstraint> request, String header) throws MalformedResponseException {
+        return AdCampaignBidConstraint.parseResponse(response, context, request, header);
       }
     };
   }

@@ -73,7 +73,7 @@ public class WindowsAppLink extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static WindowsAppLink loadJSON(String json, APIContext context) {
+  public static WindowsAppLink loadJSON(String json, APIContext context, String header) {
     WindowsAppLink windowsAppLink = getGson().fromJson(json, WindowsAppLink.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class WindowsAppLink extends APINode {
     }
     windowsAppLink.context = context;
     windowsAppLink.rawValue = json;
+    windowsAppLink.header = header;
     return windowsAppLink;
   }
 
-  public static APINodeList<WindowsAppLink> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<WindowsAppLink> windowsAppLinks = new APINodeList<WindowsAppLink>(request, json);
+  public static APINodeList<WindowsAppLink> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<WindowsAppLink> windowsAppLinks = new APINodeList<WindowsAppLink>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class WindowsAppLink extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          windowsAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          windowsAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return windowsAppLinks;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class WindowsAppLink extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              windowsAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              windowsAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class WindowsAppLink extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  windowsAppLinks.add(loadJSON(entry.getValue().toString(), context));
+                  windowsAppLinks.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              windowsAppLinks.add(loadJSON(obj.toString(), context));
+              windowsAppLinks.add(loadJSON(obj.toString(), context, header));
             }
           }
           return windowsAppLinks;
@@ -155,7 +156,7 @@ public class WindowsAppLink extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              windowsAppLinks.add(loadJSON(entry.getValue().toString(), context));
+              windowsAppLinks.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return windowsAppLinks;
         } else {
@@ -174,7 +175,7 @@ public class WindowsAppLink extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              windowsAppLinks.add(loadJSON(value.toString(), context));
+              windowsAppLinks.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class WindowsAppLink extends APINode {
 
           // Sixth, check if it's pure JsonObject
           windowsAppLinks.clear();
-          windowsAppLinks.add(loadJSON(json, context));
+          windowsAppLinks.add(loadJSON(json, context, header));
           return windowsAppLinks;
         }
       }
@@ -289,8 +290,8 @@ public class WindowsAppLink extends APINode {
 
   public static APIRequest.ResponseParser<WindowsAppLink> getParser() {
     return new APIRequest.ResponseParser<WindowsAppLink>() {
-      public APINodeList<WindowsAppLink> parseResponse(String response, APIContext context, APIRequest<WindowsAppLink> request) throws MalformedResponseException {
-        return WindowsAppLink.parseResponse(response, context, request);
+      public APINodeList<WindowsAppLink> parseResponse(String response, APIContext context, APIRequest<WindowsAppLink> request, String header) throws MalformedResponseException {
+        return WindowsAppLink.parseResponse(response, context, request, header);
       }
     };
   }

@@ -71,7 +71,7 @@ public class CustomConversionStatsResult extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CustomConversionStatsResult loadJSON(String json, APIContext context) {
+  public static CustomConversionStatsResult loadJSON(String json, APIContext context, String header) {
     CustomConversionStatsResult customConversionStatsResult = getGson().fromJson(json, CustomConversionStatsResult.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class CustomConversionStatsResult extends APINode {
     }
     customConversionStatsResult.context = context;
     customConversionStatsResult.rawValue = json;
+    customConversionStatsResult.header = header;
     return customConversionStatsResult;
   }
 
-  public static APINodeList<CustomConversionStatsResult> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CustomConversionStatsResult> customConversionStatsResults = new APINodeList<CustomConversionStatsResult>(request, json);
+  public static APINodeList<CustomConversionStatsResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CustomConversionStatsResult> customConversionStatsResults = new APINodeList<CustomConversionStatsResult>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class CustomConversionStatsResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          customConversionStatsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          customConversionStatsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return customConversionStatsResults;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class CustomConversionStatsResult extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              customConversionStatsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              customConversionStatsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class CustomConversionStatsResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  customConversionStatsResults.add(loadJSON(entry.getValue().toString(), context));
+                  customConversionStatsResults.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              customConversionStatsResults.add(loadJSON(obj.toString(), context));
+              customConversionStatsResults.add(loadJSON(obj.toString(), context, header));
             }
           }
           return customConversionStatsResults;
@@ -153,7 +154,7 @@ public class CustomConversionStatsResult extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              customConversionStatsResults.add(loadJSON(entry.getValue().toString(), context));
+              customConversionStatsResults.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return customConversionStatsResults;
         } else {
@@ -172,7 +173,7 @@ public class CustomConversionStatsResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              customConversionStatsResults.add(loadJSON(value.toString(), context));
+              customConversionStatsResults.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class CustomConversionStatsResult extends APINode {
 
           // Sixth, check if it's pure JsonObject
           customConversionStatsResults.clear();
-          customConversionStatsResults.add(loadJSON(json, context));
+          customConversionStatsResults.add(loadJSON(json, context, header));
           return customConversionStatsResults;
         }
       }
@@ -308,8 +309,8 @@ public class CustomConversionStatsResult extends APINode {
 
   public static APIRequest.ResponseParser<CustomConversionStatsResult> getParser() {
     return new APIRequest.ResponseParser<CustomConversionStatsResult>() {
-      public APINodeList<CustomConversionStatsResult> parseResponse(String response, APIContext context, APIRequest<CustomConversionStatsResult> request) throws MalformedResponseException {
-        return CustomConversionStatsResult.parseResponse(response, context, request);
+      public APINodeList<CustomConversionStatsResult> parseResponse(String response, APIContext context, APIRequest<CustomConversionStatsResult> request, String header) throws MalformedResponseException {
+        return CustomConversionStatsResult.parseResponse(response, context, request, header);
       }
     };
   }

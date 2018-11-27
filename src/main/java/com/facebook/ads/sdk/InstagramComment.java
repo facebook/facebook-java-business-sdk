@@ -136,7 +136,7 @@ public class InstagramComment extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static InstagramComment loadJSON(String json, APIContext context) {
+  public static InstagramComment loadJSON(String json, APIContext context, String header) {
     InstagramComment instagramComment = getGson().fromJson(json, InstagramComment.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -153,11 +153,12 @@ public class InstagramComment extends APINode {
     }
     instagramComment.context = context;
     instagramComment.rawValue = json;
+    instagramComment.header = header;
     return instagramComment;
   }
 
-  public static APINodeList<InstagramComment> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<InstagramComment> instagramComments = new APINodeList<InstagramComment>(request, json);
+  public static APINodeList<InstagramComment> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<InstagramComment> instagramComments = new APINodeList<InstagramComment>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -168,7 +169,7 @@ public class InstagramComment extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instagramComments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          instagramComments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return instagramComments;
       } else if (result.isJsonObject()) {
@@ -193,7 +194,7 @@ public class InstagramComment extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instagramComments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              instagramComments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -204,13 +205,13 @@ public class InstagramComment extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instagramComments.add(loadJSON(entry.getValue().toString(), context));
+                  instagramComments.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instagramComments.add(loadJSON(obj.toString(), context));
+              instagramComments.add(loadJSON(obj.toString(), context, header));
             }
           }
           return instagramComments;
@@ -218,7 +219,7 @@ public class InstagramComment extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instagramComments.add(loadJSON(entry.getValue().toString(), context));
+              instagramComments.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return instagramComments;
         } else {
@@ -237,7 +238,7 @@ public class InstagramComment extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instagramComments.add(loadJSON(value.toString(), context));
+              instagramComments.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -249,7 +250,7 @@ public class InstagramComment extends APINode {
 
           // Sixth, check if it's pure JsonObject
           instagramComments.clear();
-          instagramComments.add(loadJSON(json, context));
+          instagramComments.add(loadJSON(json, context, header));
           return instagramComments;
         }
       }
@@ -338,8 +339,8 @@ public class InstagramComment extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -349,7 +350,8 @@ public class InstagramComment extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -363,7 +365,7 @@ public class InstagramComment extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -457,8 +459,8 @@ public class InstagramComment extends APINode {
     };
 
     @Override
-    public InstagramComment parseResponse(String response) throws APIException {
-      return InstagramComment.parseResponse(response, getContext(), this).head();
+    public InstagramComment parseResponse(String response, String header) throws APIException {
+      return InstagramComment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -468,7 +470,8 @@ public class InstagramComment extends APINode {
 
     @Override
     public InstagramComment execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -482,7 +485,7 @@ public class InstagramComment extends APINode {
         new Function<String, InstagramComment>() {
            public InstagramComment apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -611,8 +614,8 @@ public class InstagramComment extends APINode {
     };
 
     @Override
-    public InstagramComment parseResponse(String response) throws APIException {
-      return InstagramComment.parseResponse(response, getContext(), this).head();
+    public InstagramComment parseResponse(String response, String header) throws APIException {
+      return InstagramComment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -622,7 +625,8 @@ public class InstagramComment extends APINode {
 
     @Override
     public InstagramComment execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -636,7 +640,7 @@ public class InstagramComment extends APINode {
         new Function<String, InstagramComment>() {
            public InstagramComment apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -747,8 +751,8 @@ public class InstagramComment extends APINode {
 
   public static APIRequest.ResponseParser<InstagramComment> getParser() {
     return new APIRequest.ResponseParser<InstagramComment>() {
-      public APINodeList<InstagramComment> parseResponse(String response, APIContext context, APIRequest<InstagramComment> request) throws MalformedResponseException {
-        return InstagramComment.parseResponse(response, context, request);
+      public APINodeList<InstagramComment> parseResponse(String response, APIContext context, APIRequest<InstagramComment> request, String header) throws MalformedResponseException {
+        return InstagramComment.parseResponse(response, context, request, header);
       }
     };
   }

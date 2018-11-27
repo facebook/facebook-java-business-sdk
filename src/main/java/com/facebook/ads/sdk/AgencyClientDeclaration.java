@@ -89,7 +89,7 @@ public class AgencyClientDeclaration extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AgencyClientDeclaration loadJSON(String json, APIContext context) {
+  public static AgencyClientDeclaration loadJSON(String json, APIContext context, String header) {
     AgencyClientDeclaration agencyClientDeclaration = getGson().fromJson(json, AgencyClientDeclaration.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -106,11 +106,12 @@ public class AgencyClientDeclaration extends APINode {
     }
     agencyClientDeclaration.context = context;
     agencyClientDeclaration.rawValue = json;
+    agencyClientDeclaration.header = header;
     return agencyClientDeclaration;
   }
 
-  public static APINodeList<AgencyClientDeclaration> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AgencyClientDeclaration> agencyClientDeclarations = new APINodeList<AgencyClientDeclaration>(request, json);
+  public static APINodeList<AgencyClientDeclaration> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AgencyClientDeclaration> agencyClientDeclarations = new APINodeList<AgencyClientDeclaration>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -121,7 +122,7 @@ public class AgencyClientDeclaration extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          agencyClientDeclarations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          agencyClientDeclarations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return agencyClientDeclarations;
       } else if (result.isJsonObject()) {
@@ -146,7 +147,7 @@ public class AgencyClientDeclaration extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              agencyClientDeclarations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              agencyClientDeclarations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -157,13 +158,13 @@ public class AgencyClientDeclaration extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  agencyClientDeclarations.add(loadJSON(entry.getValue().toString(), context));
+                  agencyClientDeclarations.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              agencyClientDeclarations.add(loadJSON(obj.toString(), context));
+              agencyClientDeclarations.add(loadJSON(obj.toString(), context, header));
             }
           }
           return agencyClientDeclarations;
@@ -171,7 +172,7 @@ public class AgencyClientDeclaration extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              agencyClientDeclarations.add(loadJSON(entry.getValue().toString(), context));
+              agencyClientDeclarations.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return agencyClientDeclarations;
         } else {
@@ -190,7 +191,7 @@ public class AgencyClientDeclaration extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              agencyClientDeclarations.add(loadJSON(value.toString(), context));
+              agencyClientDeclarations.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -202,7 +203,7 @@ public class AgencyClientDeclaration extends APINode {
 
           // Sixth, check if it's pure JsonObject
           agencyClientDeclarations.clear();
-          agencyClientDeclarations.add(loadJSON(json, context));
+          agencyClientDeclarations.add(loadJSON(json, context, header));
           return agencyClientDeclarations;
         }
       }
@@ -385,8 +386,8 @@ public class AgencyClientDeclaration extends APINode {
 
   public static APIRequest.ResponseParser<AgencyClientDeclaration> getParser() {
     return new APIRequest.ResponseParser<AgencyClientDeclaration>() {
-      public APINodeList<AgencyClientDeclaration> parseResponse(String response, APIContext context, APIRequest<AgencyClientDeclaration> request) throws MalformedResponseException {
-        return AgencyClientDeclaration.parseResponse(response, context, request);
+      public APINodeList<AgencyClientDeclaration> parseResponse(String response, APIContext context, APIRequest<AgencyClientDeclaration> request, String header) throws MalformedResponseException {
+        return AgencyClientDeclaration.parseResponse(response, context, request, header);
       }
     };
   }

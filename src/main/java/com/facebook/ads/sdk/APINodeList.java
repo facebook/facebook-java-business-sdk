@@ -44,12 +44,14 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
     private String next;
     private APIRequest<T> request;
     private String rawValue;
+    private String header;
     private boolean autoPagination;
     private String appSecret;
 
-    public APINodeList(APIRequest<T> request, String rawValue) {
+    public APINodeList(APIRequest<T> request, String rawValue, String header) {
       this.request = request;
       this.rawValue = rawValue;
+      this.header = header;
     }
 
     public APINodeList<T> withAutoPaginationIterator(boolean autoPagination) {
@@ -133,6 +135,11 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
     @Override
     public T head() {
       return this.size() > 0 ? this.get(0) : null;
+    }
+
+    @Override
+    public String getHeader() {
+      return this.header;
     }
 
     @Override

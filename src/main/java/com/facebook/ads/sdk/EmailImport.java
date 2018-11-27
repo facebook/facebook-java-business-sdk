@@ -69,7 +69,7 @@ public class EmailImport extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static EmailImport loadJSON(String json, APIContext context) {
+  public static EmailImport loadJSON(String json, APIContext context, String header) {
     EmailImport emailImport = getGson().fromJson(json, EmailImport.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class EmailImport extends APINode {
     }
     emailImport.context = context;
     emailImport.rawValue = json;
+    emailImport.header = header;
     return emailImport;
   }
 
-  public static APINodeList<EmailImport> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<EmailImport> emailImports = new APINodeList<EmailImport>(request, json);
+  public static APINodeList<EmailImport> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<EmailImport> emailImports = new APINodeList<EmailImport>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class EmailImport extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          emailImports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          emailImports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return emailImports;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class EmailImport extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              emailImports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              emailImports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class EmailImport extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  emailImports.add(loadJSON(entry.getValue().toString(), context));
+                  emailImports.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              emailImports.add(loadJSON(obj.toString(), context));
+              emailImports.add(loadJSON(obj.toString(), context, header));
             }
           }
           return emailImports;
@@ -151,7 +152,7 @@ public class EmailImport extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              emailImports.add(loadJSON(entry.getValue().toString(), context));
+              emailImports.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return emailImports;
         } else {
@@ -170,7 +171,7 @@ public class EmailImport extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              emailImports.add(loadJSON(value.toString(), context));
+              emailImports.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class EmailImport extends APINode {
 
           // Sixth, check if it's pure JsonObject
           emailImports.clear();
-          emailImports.add(loadJSON(json, context));
+          emailImports.add(loadJSON(json, context, header));
           return emailImports;
         }
       }
@@ -265,8 +266,8 @@ public class EmailImport extends APINode {
 
   public static APIRequest.ResponseParser<EmailImport> getParser() {
     return new APIRequest.ResponseParser<EmailImport>() {
-      public APINodeList<EmailImport> parseResponse(String response, APIContext context, APIRequest<EmailImport> request) throws MalformedResponseException {
-        return EmailImport.parseResponse(response, context, request);
+      public APINodeList<EmailImport> parseResponse(String response, APIContext context, APIRequest<EmailImport> request, String header) throws MalformedResponseException {
+        return EmailImport.parseResponse(response, context, request, header);
       }
     };
   }

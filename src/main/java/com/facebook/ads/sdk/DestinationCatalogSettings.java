@@ -126,7 +126,7 @@ public class DestinationCatalogSettings extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static DestinationCatalogSettings loadJSON(String json, APIContext context) {
+  public static DestinationCatalogSettings loadJSON(String json, APIContext context, String header) {
     DestinationCatalogSettings destinationCatalogSettings = getGson().fromJson(json, DestinationCatalogSettings.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -143,11 +143,12 @@ public class DestinationCatalogSettings extends APINode {
     }
     destinationCatalogSettings.context = context;
     destinationCatalogSettings.rawValue = json;
+    destinationCatalogSettings.header = header;
     return destinationCatalogSettings;
   }
 
-  public static APINodeList<DestinationCatalogSettings> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<DestinationCatalogSettings> destinationCatalogSettingss = new APINodeList<DestinationCatalogSettings>(request, json);
+  public static APINodeList<DestinationCatalogSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<DestinationCatalogSettings> destinationCatalogSettingss = new APINodeList<DestinationCatalogSettings>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -158,7 +159,7 @@ public class DestinationCatalogSettings extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          destinationCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          destinationCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return destinationCatalogSettingss;
       } else if (result.isJsonObject()) {
@@ -183,7 +184,7 @@ public class DestinationCatalogSettings extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              destinationCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              destinationCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -194,13 +195,13 @@ public class DestinationCatalogSettings extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  destinationCatalogSettingss.add(loadJSON(entry.getValue().toString(), context));
+                  destinationCatalogSettingss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              destinationCatalogSettingss.add(loadJSON(obj.toString(), context));
+              destinationCatalogSettingss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return destinationCatalogSettingss;
@@ -208,7 +209,7 @@ public class DestinationCatalogSettings extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              destinationCatalogSettingss.add(loadJSON(entry.getValue().toString(), context));
+              destinationCatalogSettingss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return destinationCatalogSettingss;
         } else {
@@ -227,7 +228,7 @@ public class DestinationCatalogSettings extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              destinationCatalogSettingss.add(loadJSON(value.toString(), context));
+              destinationCatalogSettingss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -239,7 +240,7 @@ public class DestinationCatalogSettings extends APINode {
 
           // Sixth, check if it's pure JsonObject
           destinationCatalogSettingss.clear();
-          destinationCatalogSettingss.add(loadJSON(json, context));
+          destinationCatalogSettingss.add(loadJSON(json, context, header));
           return destinationCatalogSettingss;
         }
       }
@@ -298,8 +299,8 @@ public class DestinationCatalogSettings extends APINode {
     };
 
     @Override
-    public DestinationCatalogSettings parseResponse(String response) throws APIException {
-      return DestinationCatalogSettings.parseResponse(response, getContext(), this).head();
+    public DestinationCatalogSettings parseResponse(String response, String header) throws APIException {
+      return DestinationCatalogSettings.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -309,7 +310,8 @@ public class DestinationCatalogSettings extends APINode {
 
     @Override
     public DestinationCatalogSettings execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -323,7 +325,7 @@ public class DestinationCatalogSettings extends APINode {
         new Function<String, DestinationCatalogSettings>() {
            public DestinationCatalogSettings apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -425,8 +427,8 @@ public class DestinationCatalogSettings extends APINode {
 
   public static APIRequest.ResponseParser<DestinationCatalogSettings> getParser() {
     return new APIRequest.ResponseParser<DestinationCatalogSettings>() {
-      public APINodeList<DestinationCatalogSettings> parseResponse(String response, APIContext context, APIRequest<DestinationCatalogSettings> request) throws MalformedResponseException {
-        return DestinationCatalogSettings.parseResponse(response, context, request);
+      public APINodeList<DestinationCatalogSettings> parseResponse(String response, APIContext context, APIRequest<DestinationCatalogSettings> request, String header) throws MalformedResponseException {
+        return DestinationCatalogSettings.parseResponse(response, context, request, header);
       }
     };
   }

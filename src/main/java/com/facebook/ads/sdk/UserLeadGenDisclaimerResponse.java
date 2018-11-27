@@ -69,7 +69,7 @@ public class UserLeadGenDisclaimerResponse extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserLeadGenDisclaimerResponse loadJSON(String json, APIContext context) {
+  public static UserLeadGenDisclaimerResponse loadJSON(String json, APIContext context, String header) {
     UserLeadGenDisclaimerResponse userLeadGenDisclaimerResponse = getGson().fromJson(json, UserLeadGenDisclaimerResponse.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class UserLeadGenDisclaimerResponse extends APINode {
     }
     userLeadGenDisclaimerResponse.context = context;
     userLeadGenDisclaimerResponse.rawValue = json;
+    userLeadGenDisclaimerResponse.header = header;
     return userLeadGenDisclaimerResponse;
   }
 
-  public static APINodeList<UserLeadGenDisclaimerResponse> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UserLeadGenDisclaimerResponse> userLeadGenDisclaimerResponses = new APINodeList<UserLeadGenDisclaimerResponse>(request, json);
+  public static APINodeList<UserLeadGenDisclaimerResponse> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UserLeadGenDisclaimerResponse> userLeadGenDisclaimerResponses = new APINodeList<UserLeadGenDisclaimerResponse>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class UserLeadGenDisclaimerResponse extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userLeadGenDisclaimerResponses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userLeadGenDisclaimerResponses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return userLeadGenDisclaimerResponses;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class UserLeadGenDisclaimerResponse extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userLeadGenDisclaimerResponses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userLeadGenDisclaimerResponses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class UserLeadGenDisclaimerResponse extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userLeadGenDisclaimerResponses.add(loadJSON(entry.getValue().toString(), context));
+                  userLeadGenDisclaimerResponses.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userLeadGenDisclaimerResponses.add(loadJSON(obj.toString(), context));
+              userLeadGenDisclaimerResponses.add(loadJSON(obj.toString(), context, header));
             }
           }
           return userLeadGenDisclaimerResponses;
@@ -151,7 +152,7 @@ public class UserLeadGenDisclaimerResponse extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userLeadGenDisclaimerResponses.add(loadJSON(entry.getValue().toString(), context));
+              userLeadGenDisclaimerResponses.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return userLeadGenDisclaimerResponses;
         } else {
@@ -170,7 +171,7 @@ public class UserLeadGenDisclaimerResponse extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userLeadGenDisclaimerResponses.add(loadJSON(value.toString(), context));
+              userLeadGenDisclaimerResponses.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class UserLeadGenDisclaimerResponse extends APINode {
 
           // Sixth, check if it's pure JsonObject
           userLeadGenDisclaimerResponses.clear();
-          userLeadGenDisclaimerResponses.add(loadJSON(json, context));
+          userLeadGenDisclaimerResponses.add(loadJSON(json, context, header));
           return userLeadGenDisclaimerResponses;
         }
       }
@@ -265,8 +266,8 @@ public class UserLeadGenDisclaimerResponse extends APINode {
 
   public static APIRequest.ResponseParser<UserLeadGenDisclaimerResponse> getParser() {
     return new APIRequest.ResponseParser<UserLeadGenDisclaimerResponse>() {
-      public APINodeList<UserLeadGenDisclaimerResponse> parseResponse(String response, APIContext context, APIRequest<UserLeadGenDisclaimerResponse> request) throws MalformedResponseException {
-        return UserLeadGenDisclaimerResponse.parseResponse(response, context, request);
+      public APINodeList<UserLeadGenDisclaimerResponse> parseResponse(String response, APIContext context, APIRequest<UserLeadGenDisclaimerResponse> request, String header) throws MalformedResponseException {
+        return UserLeadGenDisclaimerResponse.parseResponse(response, context, request, header);
       }
     };
   }

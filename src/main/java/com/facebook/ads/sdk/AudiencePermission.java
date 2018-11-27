@@ -71,7 +71,7 @@ public class AudiencePermission extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AudiencePermission loadJSON(String json, APIContext context) {
+  public static AudiencePermission loadJSON(String json, APIContext context, String header) {
     AudiencePermission audiencePermission = getGson().fromJson(json, AudiencePermission.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class AudiencePermission extends APINode {
     }
     audiencePermission.context = context;
     audiencePermission.rawValue = json;
+    audiencePermission.header = header;
     return audiencePermission;
   }
 
-  public static APINodeList<AudiencePermission> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AudiencePermission> audiencePermissions = new APINodeList<AudiencePermission>(request, json);
+  public static APINodeList<AudiencePermission> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AudiencePermission> audiencePermissions = new APINodeList<AudiencePermission>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class AudiencePermission extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          audiencePermissions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          audiencePermissions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return audiencePermissions;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class AudiencePermission extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              audiencePermissions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              audiencePermissions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class AudiencePermission extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  audiencePermissions.add(loadJSON(entry.getValue().toString(), context));
+                  audiencePermissions.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              audiencePermissions.add(loadJSON(obj.toString(), context));
+              audiencePermissions.add(loadJSON(obj.toString(), context, header));
             }
           }
           return audiencePermissions;
@@ -153,7 +154,7 @@ public class AudiencePermission extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              audiencePermissions.add(loadJSON(entry.getValue().toString(), context));
+              audiencePermissions.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return audiencePermissions;
         } else {
@@ -172,7 +173,7 @@ public class AudiencePermission extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              audiencePermissions.add(loadJSON(value.toString(), context));
+              audiencePermissions.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class AudiencePermission extends APINode {
 
           // Sixth, check if it's pure JsonObject
           audiencePermissions.clear();
-          audiencePermissions.add(loadJSON(json, context));
+          audiencePermissions.add(loadJSON(json, context, header));
           return audiencePermissions;
         }
       }
@@ -285,8 +286,8 @@ public class AudiencePermission extends APINode {
 
   public static APIRequest.ResponseParser<AudiencePermission> getParser() {
     return new APIRequest.ResponseParser<AudiencePermission>() {
-      public APINodeList<AudiencePermission> parseResponse(String response, APIContext context, APIRequest<AudiencePermission> request) throws MalformedResponseException {
-        return AudiencePermission.parseResponse(response, context, request);
+      public APINodeList<AudiencePermission> parseResponse(String response, APIContext context, APIRequest<AudiencePermission> request, String header) throws MalformedResponseException {
+        return AudiencePermission.parseResponse(response, context, request, header);
       }
     };
   }

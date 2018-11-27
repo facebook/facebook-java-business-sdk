@@ -73,7 +73,7 @@ public class CurrencyAmount extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CurrencyAmount loadJSON(String json, APIContext context) {
+  public static CurrencyAmount loadJSON(String json, APIContext context, String header) {
     CurrencyAmount currencyAmount = getGson().fromJson(json, CurrencyAmount.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class CurrencyAmount extends APINode {
     }
     currencyAmount.context = context;
     currencyAmount.rawValue = json;
+    currencyAmount.header = header;
     return currencyAmount;
   }
 
-  public static APINodeList<CurrencyAmount> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CurrencyAmount> currencyAmounts = new APINodeList<CurrencyAmount>(request, json);
+  public static APINodeList<CurrencyAmount> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CurrencyAmount> currencyAmounts = new APINodeList<CurrencyAmount>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class CurrencyAmount extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          currencyAmounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          currencyAmounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return currencyAmounts;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class CurrencyAmount extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              currencyAmounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              currencyAmounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class CurrencyAmount extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  currencyAmounts.add(loadJSON(entry.getValue().toString(), context));
+                  currencyAmounts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              currencyAmounts.add(loadJSON(obj.toString(), context));
+              currencyAmounts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return currencyAmounts;
@@ -155,7 +156,7 @@ public class CurrencyAmount extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              currencyAmounts.add(loadJSON(entry.getValue().toString(), context));
+              currencyAmounts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return currencyAmounts;
         } else {
@@ -174,7 +175,7 @@ public class CurrencyAmount extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              currencyAmounts.add(loadJSON(value.toString(), context));
+              currencyAmounts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class CurrencyAmount extends APINode {
 
           // Sixth, check if it's pure JsonObject
           currencyAmounts.clear();
-          currencyAmounts.add(loadJSON(json, context));
+          currencyAmounts.add(loadJSON(json, context, header));
           return currencyAmounts;
         }
       }
@@ -289,8 +290,8 @@ public class CurrencyAmount extends APINode {
 
   public static APIRequest.ResponseParser<CurrencyAmount> getParser() {
     return new APIRequest.ResponseParser<CurrencyAmount>() {
-      public APINodeList<CurrencyAmount> parseResponse(String response, APIContext context, APIRequest<CurrencyAmount> request) throws MalformedResponseException {
-        return CurrencyAmount.parseResponse(response, context, request);
+      public APINodeList<CurrencyAmount> parseResponse(String response, APIContext context, APIRequest<CurrencyAmount> request, String header) throws MalformedResponseException {
+        return CurrencyAmount.parseResponse(response, context, request, header);
       }
     };
   }

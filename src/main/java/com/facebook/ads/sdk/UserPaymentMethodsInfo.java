@@ -79,7 +79,7 @@ public class UserPaymentMethodsInfo extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserPaymentMethodsInfo loadJSON(String json, APIContext context) {
+  public static UserPaymentMethodsInfo loadJSON(String json, APIContext context, String header) {
     UserPaymentMethodsInfo userPaymentMethodsInfo = getGson().fromJson(json, UserPaymentMethodsInfo.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -96,11 +96,12 @@ public class UserPaymentMethodsInfo extends APINode {
     }
     userPaymentMethodsInfo.context = context;
     userPaymentMethodsInfo.rawValue = json;
+    userPaymentMethodsInfo.header = header;
     return userPaymentMethodsInfo;
   }
 
-  public static APINodeList<UserPaymentMethodsInfo> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UserPaymentMethodsInfo> userPaymentMethodsInfos = new APINodeList<UserPaymentMethodsInfo>(request, json);
+  public static APINodeList<UserPaymentMethodsInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UserPaymentMethodsInfo> userPaymentMethodsInfos = new APINodeList<UserPaymentMethodsInfo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -111,7 +112,7 @@ public class UserPaymentMethodsInfo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userPaymentMethodsInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userPaymentMethodsInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return userPaymentMethodsInfos;
       } else if (result.isJsonObject()) {
@@ -136,7 +137,7 @@ public class UserPaymentMethodsInfo extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userPaymentMethodsInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userPaymentMethodsInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -147,13 +148,13 @@ public class UserPaymentMethodsInfo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userPaymentMethodsInfos.add(loadJSON(entry.getValue().toString(), context));
+                  userPaymentMethodsInfos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userPaymentMethodsInfos.add(loadJSON(obj.toString(), context));
+              userPaymentMethodsInfos.add(loadJSON(obj.toString(), context, header));
             }
           }
           return userPaymentMethodsInfos;
@@ -161,7 +162,7 @@ public class UserPaymentMethodsInfo extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userPaymentMethodsInfos.add(loadJSON(entry.getValue().toString(), context));
+              userPaymentMethodsInfos.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return userPaymentMethodsInfos;
         } else {
@@ -180,7 +181,7 @@ public class UserPaymentMethodsInfo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userPaymentMethodsInfos.add(loadJSON(value.toString(), context));
+              userPaymentMethodsInfos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -192,7 +193,7 @@ public class UserPaymentMethodsInfo extends APINode {
 
           // Sixth, check if it's pure JsonObject
           userPaymentMethodsInfos.clear();
-          userPaymentMethodsInfos.add(loadJSON(json, context));
+          userPaymentMethodsInfos.add(loadJSON(json, context, header));
           return userPaymentMethodsInfos;
         }
       }
@@ -325,8 +326,8 @@ public class UserPaymentMethodsInfo extends APINode {
 
   public static APIRequest.ResponseParser<UserPaymentMethodsInfo> getParser() {
     return new APIRequest.ResponseParser<UserPaymentMethodsInfo>() {
-      public APINodeList<UserPaymentMethodsInfo> parseResponse(String response, APIContext context, APIRequest<UserPaymentMethodsInfo> request) throws MalformedResponseException {
-        return UserPaymentMethodsInfo.parseResponse(response, context, request);
+      public APINodeList<UserPaymentMethodsInfo> parseResponse(String response, APIContext context, APIRequest<UserPaymentMethodsInfo> request, String header) throws MalformedResponseException {
+        return UserPaymentMethodsInfo.parseResponse(response, context, request, header);
       }
     };
   }

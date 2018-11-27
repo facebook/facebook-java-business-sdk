@@ -152,7 +152,7 @@ public class AsyncSession extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AsyncSession loadJSON(String json, APIContext context) {
+  public static AsyncSession loadJSON(String json, APIContext context, String header) {
     AsyncSession asyncSession = getGson().fromJson(json, AsyncSession.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -169,11 +169,12 @@ public class AsyncSession extends APINode {
     }
     asyncSession.context = context;
     asyncSession.rawValue = json;
+    asyncSession.header = header;
     return asyncSession;
   }
 
-  public static APINodeList<AsyncSession> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AsyncSession> asyncSessions = new APINodeList<AsyncSession>(request, json);
+  public static APINodeList<AsyncSession> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AsyncSession> asyncSessions = new APINodeList<AsyncSession>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -184,7 +185,7 @@ public class AsyncSession extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          asyncSessions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          asyncSessions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return asyncSessions;
       } else if (result.isJsonObject()) {
@@ -209,7 +210,7 @@ public class AsyncSession extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              asyncSessions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              asyncSessions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -220,13 +221,13 @@ public class AsyncSession extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  asyncSessions.add(loadJSON(entry.getValue().toString(), context));
+                  asyncSessions.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              asyncSessions.add(loadJSON(obj.toString(), context));
+              asyncSessions.add(loadJSON(obj.toString(), context, header));
             }
           }
           return asyncSessions;
@@ -234,7 +235,7 @@ public class AsyncSession extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              asyncSessions.add(loadJSON(entry.getValue().toString(), context));
+              asyncSessions.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return asyncSessions;
         } else {
@@ -253,7 +254,7 @@ public class AsyncSession extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              asyncSessions.add(loadJSON(value.toString(), context));
+              asyncSessions.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -265,7 +266,7 @@ public class AsyncSession extends APINode {
 
           // Sixth, check if it's pure JsonObject
           asyncSessions.clear();
-          asyncSessions.add(loadJSON(json, context));
+          asyncSessions.add(loadJSON(json, context, header));
           return asyncSessions;
         }
       }
@@ -398,8 +399,8 @@ public class AsyncSession extends APINode {
     };
 
     @Override
-    public AsyncSession parseResponse(String response) throws APIException {
-      return AsyncSession.parseResponse(response, getContext(), this).head();
+    public AsyncSession parseResponse(String response, String header) throws APIException {
+      return AsyncSession.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -409,7 +410,8 @@ public class AsyncSession extends APINode {
 
     @Override
     public AsyncSession execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -423,7 +425,7 @@ public class AsyncSession extends APINode {
         new Function<String, AsyncSession>() {
            public AsyncSession apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -629,8 +631,8 @@ public class AsyncSession extends APINode {
 
   public static APIRequest.ResponseParser<AsyncSession> getParser() {
     return new APIRequest.ResponseParser<AsyncSession>() {
-      public APINodeList<AsyncSession> parseResponse(String response, APIContext context, APIRequest<AsyncSession> request) throws MalformedResponseException {
-        return AsyncSession.parseResponse(response, context, request);
+      public APINodeList<AsyncSession> parseResponse(String response, APIContext context, APIRequest<AsyncSession> request, String header) throws MalformedResponseException {
+        return AsyncSession.parseResponse(response, context, request, header);
       }
     };
   }

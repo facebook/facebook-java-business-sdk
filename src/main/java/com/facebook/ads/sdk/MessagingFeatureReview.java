@@ -69,7 +69,7 @@ public class MessagingFeatureReview extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static MessagingFeatureReview loadJSON(String json, APIContext context) {
+  public static MessagingFeatureReview loadJSON(String json, APIContext context, String header) {
     MessagingFeatureReview messagingFeatureReview = getGson().fromJson(json, MessagingFeatureReview.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class MessagingFeatureReview extends APINode {
     }
     messagingFeatureReview.context = context;
     messagingFeatureReview.rawValue = json;
+    messagingFeatureReview.header = header;
     return messagingFeatureReview;
   }
 
-  public static APINodeList<MessagingFeatureReview> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<MessagingFeatureReview> messagingFeatureReviews = new APINodeList<MessagingFeatureReview>(request, json);
+  public static APINodeList<MessagingFeatureReview> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<MessagingFeatureReview> messagingFeatureReviews = new APINodeList<MessagingFeatureReview>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class MessagingFeatureReview extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          messagingFeatureReviews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          messagingFeatureReviews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return messagingFeatureReviews;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class MessagingFeatureReview extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              messagingFeatureReviews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              messagingFeatureReviews.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class MessagingFeatureReview extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  messagingFeatureReviews.add(loadJSON(entry.getValue().toString(), context));
+                  messagingFeatureReviews.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              messagingFeatureReviews.add(loadJSON(obj.toString(), context));
+              messagingFeatureReviews.add(loadJSON(obj.toString(), context, header));
             }
           }
           return messagingFeatureReviews;
@@ -151,7 +152,7 @@ public class MessagingFeatureReview extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              messagingFeatureReviews.add(loadJSON(entry.getValue().toString(), context));
+              messagingFeatureReviews.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return messagingFeatureReviews;
         } else {
@@ -170,7 +171,7 @@ public class MessagingFeatureReview extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              messagingFeatureReviews.add(loadJSON(value.toString(), context));
+              messagingFeatureReviews.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class MessagingFeatureReview extends APINode {
 
           // Sixth, check if it's pure JsonObject
           messagingFeatureReviews.clear();
-          messagingFeatureReviews.add(loadJSON(json, context));
+          messagingFeatureReviews.add(loadJSON(json, context, header));
           return messagingFeatureReviews;
         }
       }
@@ -265,8 +266,8 @@ public class MessagingFeatureReview extends APINode {
 
   public static APIRequest.ResponseParser<MessagingFeatureReview> getParser() {
     return new APIRequest.ResponseParser<MessagingFeatureReview>() {
-      public APINodeList<MessagingFeatureReview> parseResponse(String response, APIContext context, APIRequest<MessagingFeatureReview> request) throws MalformedResponseException {
-        return MessagingFeatureReview.parseResponse(response, context, request);
+      public APINodeList<MessagingFeatureReview> parseResponse(String response, APIContext context, APIRequest<MessagingFeatureReview> request, String header) throws MalformedResponseException {
+        return MessagingFeatureReview.parseResponse(response, context, request, header);
       }
     };
   }

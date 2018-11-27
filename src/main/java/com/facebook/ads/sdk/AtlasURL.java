@@ -67,7 +67,7 @@ public class AtlasURL extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AtlasURL loadJSON(String json, APIContext context) {
+  public static AtlasURL loadJSON(String json, APIContext context, String header) {
     AtlasURL atlasURL = getGson().fromJson(json, AtlasURL.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class AtlasURL extends APINode {
     }
     atlasURL.context = context;
     atlasURL.rawValue = json;
+    atlasURL.header = header;
     return atlasURL;
   }
 
-  public static APINodeList<AtlasURL> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AtlasURL> atlasURLs = new APINodeList<AtlasURL>(request, json);
+  public static APINodeList<AtlasURL> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AtlasURL> atlasURLs = new APINodeList<AtlasURL>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class AtlasURL extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          atlasURLs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          atlasURLs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return atlasURLs;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class AtlasURL extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              atlasURLs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              atlasURLs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class AtlasURL extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  atlasURLs.add(loadJSON(entry.getValue().toString(), context));
+                  atlasURLs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              atlasURLs.add(loadJSON(obj.toString(), context));
+              atlasURLs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return atlasURLs;
@@ -149,7 +150,7 @@ public class AtlasURL extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              atlasURLs.add(loadJSON(entry.getValue().toString(), context));
+              atlasURLs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return atlasURLs;
         } else {
@@ -168,7 +169,7 @@ public class AtlasURL extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              atlasURLs.add(loadJSON(value.toString(), context));
+              atlasURLs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class AtlasURL extends APINode {
 
           // Sixth, check if it's pure JsonObject
           atlasURLs.clear();
-          atlasURLs.add(loadJSON(json, context));
+          atlasURLs.add(loadJSON(json, context, header));
           return atlasURLs;
         }
       }
@@ -253,8 +254,8 @@ public class AtlasURL extends APINode {
 
   public static APIRequest.ResponseParser<AtlasURL> getParser() {
     return new APIRequest.ResponseParser<AtlasURL>() {
-      public APINodeList<AtlasURL> parseResponse(String response, APIContext context, APIRequest<AtlasURL> request) throws MalformedResponseException {
-        return AtlasURL.parseResponse(response, context, request);
+      public APINodeList<AtlasURL> parseResponse(String response, APIContext context, APIRequest<AtlasURL> request, String header) throws MalformedResponseException {
+        return AtlasURL.parseResponse(response, context, request, header);
       }
     };
   }

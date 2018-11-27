@@ -75,7 +75,7 @@ public class AudiencePermissionForActions extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AudiencePermissionForActions loadJSON(String json, APIContext context) {
+  public static AudiencePermissionForActions loadJSON(String json, APIContext context, String header) {
     AudiencePermissionForActions audiencePermissionForActions = getGson().fromJson(json, AudiencePermissionForActions.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -92,11 +92,12 @@ public class AudiencePermissionForActions extends APINode {
     }
     audiencePermissionForActions.context = context;
     audiencePermissionForActions.rawValue = json;
+    audiencePermissionForActions.header = header;
     return audiencePermissionForActions;
   }
 
-  public static APINodeList<AudiencePermissionForActions> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AudiencePermissionForActions> audiencePermissionForActionss = new APINodeList<AudiencePermissionForActions>(request, json);
+  public static APINodeList<AudiencePermissionForActions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AudiencePermissionForActions> audiencePermissionForActionss = new APINodeList<AudiencePermissionForActions>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -107,7 +108,7 @@ public class AudiencePermissionForActions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          audiencePermissionForActionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          audiencePermissionForActionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return audiencePermissionForActionss;
       } else if (result.isJsonObject()) {
@@ -132,7 +133,7 @@ public class AudiencePermissionForActions extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              audiencePermissionForActionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              audiencePermissionForActionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -143,13 +144,13 @@ public class AudiencePermissionForActions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  audiencePermissionForActionss.add(loadJSON(entry.getValue().toString(), context));
+                  audiencePermissionForActionss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              audiencePermissionForActionss.add(loadJSON(obj.toString(), context));
+              audiencePermissionForActionss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return audiencePermissionForActionss;
@@ -157,7 +158,7 @@ public class AudiencePermissionForActions extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              audiencePermissionForActionss.add(loadJSON(entry.getValue().toString(), context));
+              audiencePermissionForActionss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return audiencePermissionForActionss;
         } else {
@@ -176,7 +177,7 @@ public class AudiencePermissionForActions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              audiencePermissionForActionss.add(loadJSON(value.toString(), context));
+              audiencePermissionForActionss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -188,7 +189,7 @@ public class AudiencePermissionForActions extends APINode {
 
           // Sixth, check if it's pure JsonObject
           audiencePermissionForActionss.clear();
-          audiencePermissionForActionss.add(loadJSON(json, context));
+          audiencePermissionForActionss.add(loadJSON(json, context, header));
           return audiencePermissionForActionss;
         }
       }
@@ -301,8 +302,8 @@ public class AudiencePermissionForActions extends APINode {
 
   public static APIRequest.ResponseParser<AudiencePermissionForActions> getParser() {
     return new APIRequest.ResponseParser<AudiencePermissionForActions>() {
-      public APINodeList<AudiencePermissionForActions> parseResponse(String response, APIContext context, APIRequest<AudiencePermissionForActions> request) throws MalformedResponseException {
-        return AudiencePermissionForActions.parseResponse(response, context, request);
+      public APINodeList<AudiencePermissionForActions> parseResponse(String response, APIContext context, APIRequest<AudiencePermissionForActions> request, String header) throws MalformedResponseException {
+        return AudiencePermissionForActions.parseResponse(response, context, request, header);
       }
     };
   }

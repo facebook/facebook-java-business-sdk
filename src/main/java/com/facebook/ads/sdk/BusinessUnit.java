@@ -130,7 +130,7 @@ public class BusinessUnit extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BusinessUnit loadJSON(String json, APIContext context) {
+  public static BusinessUnit loadJSON(String json, APIContext context, String header) {
     BusinessUnit businessUnit = getGson().fromJson(json, BusinessUnit.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -147,11 +147,12 @@ public class BusinessUnit extends APINode {
     }
     businessUnit.context = context;
     businessUnit.rawValue = json;
+    businessUnit.header = header;
     return businessUnit;
   }
 
-  public static APINodeList<BusinessUnit> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<BusinessUnit> businessUnits = new APINodeList<BusinessUnit>(request, json);
+  public static APINodeList<BusinessUnit> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessUnit> businessUnits = new APINodeList<BusinessUnit>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -162,7 +163,7 @@ public class BusinessUnit extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          businessUnits.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          businessUnits.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return businessUnits;
       } else if (result.isJsonObject()) {
@@ -187,7 +188,7 @@ public class BusinessUnit extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              businessUnits.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              businessUnits.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -198,13 +199,13 @@ public class BusinessUnit extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  businessUnits.add(loadJSON(entry.getValue().toString(), context));
+                  businessUnits.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              businessUnits.add(loadJSON(obj.toString(), context));
+              businessUnits.add(loadJSON(obj.toString(), context, header));
             }
           }
           return businessUnits;
@@ -212,7 +213,7 @@ public class BusinessUnit extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              businessUnits.add(loadJSON(entry.getValue().toString(), context));
+              businessUnits.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return businessUnits;
         } else {
@@ -231,7 +232,7 @@ public class BusinessUnit extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              businessUnits.add(loadJSON(value.toString(), context));
+              businessUnits.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -243,7 +244,7 @@ public class BusinessUnit extends APINode {
 
           // Sixth, check if it's pure JsonObject
           businessUnits.clear();
-          businessUnits.add(loadJSON(json, context));
+          businessUnits.add(loadJSON(json, context, header));
           return businessUnits;
         }
       }
@@ -315,8 +316,8 @@ public class BusinessUnit extends APINode {
     };
 
     @Override
-    public BusinessUnit parseResponse(String response) throws APIException {
-      return BusinessUnit.parseResponse(response, getContext(), this).head();
+    public BusinessUnit parseResponse(String response, String header) throws APIException {
+      return BusinessUnit.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -326,7 +327,8 @@ public class BusinessUnit extends APINode {
 
     @Override
     public BusinessUnit execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -340,7 +342,7 @@ public class BusinessUnit extends APINode {
         new Function<String, BusinessUnit>() {
            public BusinessUnit apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -458,8 +460,8 @@ public class BusinessUnit extends APINode {
 
   public static APIRequest.ResponseParser<BusinessUnit> getParser() {
     return new APIRequest.ResponseParser<BusinessUnit>() {
-      public APINodeList<BusinessUnit> parseResponse(String response, APIContext context, APIRequest<BusinessUnit> request) throws MalformedResponseException {
-        return BusinessUnit.parseResponse(response, context, request);
+      public APINodeList<BusinessUnit> parseResponse(String response, APIContext context, APIRequest<BusinessUnit> request, String header) throws MalformedResponseException {
+        return BusinessUnit.parseResponse(response, context, request, header);
       }
     };
   }

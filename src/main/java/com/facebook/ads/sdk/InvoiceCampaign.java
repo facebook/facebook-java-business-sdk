@@ -81,7 +81,7 @@ public class InvoiceCampaign extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static InvoiceCampaign loadJSON(String json, APIContext context) {
+  public static InvoiceCampaign loadJSON(String json, APIContext context, String header) {
     InvoiceCampaign invoiceCampaign = getGson().fromJson(json, InvoiceCampaign.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -98,11 +98,12 @@ public class InvoiceCampaign extends APINode {
     }
     invoiceCampaign.context = context;
     invoiceCampaign.rawValue = json;
+    invoiceCampaign.header = header;
     return invoiceCampaign;
   }
 
-  public static APINodeList<InvoiceCampaign> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<InvoiceCampaign> invoiceCampaigns = new APINodeList<InvoiceCampaign>(request, json);
+  public static APINodeList<InvoiceCampaign> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<InvoiceCampaign> invoiceCampaigns = new APINodeList<InvoiceCampaign>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -113,7 +114,7 @@ public class InvoiceCampaign extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          invoiceCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          invoiceCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return invoiceCampaigns;
       } else if (result.isJsonObject()) {
@@ -138,7 +139,7 @@ public class InvoiceCampaign extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              invoiceCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              invoiceCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -149,13 +150,13 @@ public class InvoiceCampaign extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  invoiceCampaigns.add(loadJSON(entry.getValue().toString(), context));
+                  invoiceCampaigns.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              invoiceCampaigns.add(loadJSON(obj.toString(), context));
+              invoiceCampaigns.add(loadJSON(obj.toString(), context, header));
             }
           }
           return invoiceCampaigns;
@@ -163,7 +164,7 @@ public class InvoiceCampaign extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              invoiceCampaigns.add(loadJSON(entry.getValue().toString(), context));
+              invoiceCampaigns.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return invoiceCampaigns;
         } else {
@@ -182,7 +183,7 @@ public class InvoiceCampaign extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              invoiceCampaigns.add(loadJSON(value.toString(), context));
+              invoiceCampaigns.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -194,7 +195,7 @@ public class InvoiceCampaign extends APINode {
 
           // Sixth, check if it's pure JsonObject
           invoiceCampaigns.clear();
-          invoiceCampaigns.add(loadJSON(json, context));
+          invoiceCampaigns.add(loadJSON(json, context, header));
           return invoiceCampaigns;
         }
       }
@@ -342,8 +343,8 @@ public class InvoiceCampaign extends APINode {
 
   public static APIRequest.ResponseParser<InvoiceCampaign> getParser() {
     return new APIRequest.ResponseParser<InvoiceCampaign>() {
-      public APINodeList<InvoiceCampaign> parseResponse(String response, APIContext context, APIRequest<InvoiceCampaign> request) throws MalformedResponseException {
-        return InvoiceCampaign.parseResponse(response, context, request);
+      public APINodeList<InvoiceCampaign> parseResponse(String response, APIContext context, APIRequest<InvoiceCampaign> request, String header) throws MalformedResponseException {
+        return InvoiceCampaign.parseResponse(response, context, request, header);
       }
     };
   }

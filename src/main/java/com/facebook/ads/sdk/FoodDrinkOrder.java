@@ -140,7 +140,7 @@ public class FoodDrinkOrder extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static FoodDrinkOrder loadJSON(String json, APIContext context) {
+  public static FoodDrinkOrder loadJSON(String json, APIContext context, String header) {
     FoodDrinkOrder foodDrinkOrder = getGson().fromJson(json, FoodDrinkOrder.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -157,11 +157,12 @@ public class FoodDrinkOrder extends APINode {
     }
     foodDrinkOrder.context = context;
     foodDrinkOrder.rawValue = json;
+    foodDrinkOrder.header = header;
     return foodDrinkOrder;
   }
 
-  public static APINodeList<FoodDrinkOrder> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<FoodDrinkOrder> foodDrinkOrders = new APINodeList<FoodDrinkOrder>(request, json);
+  public static APINodeList<FoodDrinkOrder> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<FoodDrinkOrder> foodDrinkOrders = new APINodeList<FoodDrinkOrder>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -172,7 +173,7 @@ public class FoodDrinkOrder extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          foodDrinkOrders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          foodDrinkOrders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return foodDrinkOrders;
       } else if (result.isJsonObject()) {
@@ -197,7 +198,7 @@ public class FoodDrinkOrder extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              foodDrinkOrders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              foodDrinkOrders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -208,13 +209,13 @@ public class FoodDrinkOrder extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  foodDrinkOrders.add(loadJSON(entry.getValue().toString(), context));
+                  foodDrinkOrders.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              foodDrinkOrders.add(loadJSON(obj.toString(), context));
+              foodDrinkOrders.add(loadJSON(obj.toString(), context, header));
             }
           }
           return foodDrinkOrders;
@@ -222,7 +223,7 @@ public class FoodDrinkOrder extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              foodDrinkOrders.add(loadJSON(entry.getValue().toString(), context));
+              foodDrinkOrders.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return foodDrinkOrders;
         } else {
@@ -241,7 +242,7 @@ public class FoodDrinkOrder extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              foodDrinkOrders.add(loadJSON(value.toString(), context));
+              foodDrinkOrders.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -253,7 +254,7 @@ public class FoodDrinkOrder extends APINode {
 
           // Sixth, check if it's pure JsonObject
           foodDrinkOrders.clear();
-          foodDrinkOrders.add(loadJSON(json, context));
+          foodDrinkOrders.add(loadJSON(json, context, header));
           return foodDrinkOrders;
         }
       }
@@ -351,8 +352,8 @@ public class FoodDrinkOrder extends APINode {
     };
 
     @Override
-    public FoodDrinkOrder parseResponse(String response) throws APIException {
-      return FoodDrinkOrder.parseResponse(response, getContext(), this).head();
+    public FoodDrinkOrder parseResponse(String response, String header) throws APIException {
+      return FoodDrinkOrder.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -362,7 +363,8 @@ public class FoodDrinkOrder extends APINode {
 
     @Override
     public FoodDrinkOrder execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -376,7 +378,7 @@ public class FoodDrinkOrder extends APINode {
         new Function<String, FoodDrinkOrder>() {
            public FoodDrinkOrder apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -518,8 +520,8 @@ public class FoodDrinkOrder extends APINode {
     };
 
     @Override
-    public FoodDrinkOrder parseResponse(String response) throws APIException {
-      return FoodDrinkOrder.parseResponse(response, getContext(), this).head();
+    public FoodDrinkOrder parseResponse(String response, String header) throws APIException {
+      return FoodDrinkOrder.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -529,7 +531,8 @@ public class FoodDrinkOrder extends APINode {
 
     @Override
     public FoodDrinkOrder execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -543,7 +546,7 @@ public class FoodDrinkOrder extends APINode {
         new Function<String, FoodDrinkOrder>() {
            public FoodDrinkOrder apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -678,8 +681,8 @@ public class FoodDrinkOrder extends APINode {
 
   public static APIRequest.ResponseParser<FoodDrinkOrder> getParser() {
     return new APIRequest.ResponseParser<FoodDrinkOrder>() {
-      public APINodeList<FoodDrinkOrder> parseResponse(String response, APIContext context, APIRequest<FoodDrinkOrder> request) throws MalformedResponseException {
-        return FoodDrinkOrder.parseResponse(response, context, request);
+      public APINodeList<FoodDrinkOrder> parseResponse(String response, APIContext context, APIRequest<FoodDrinkOrder> request, String header) throws MalformedResponseException {
+        return FoodDrinkOrder.parseResponse(response, context, request, header);
       }
     };
   }

@@ -71,7 +71,7 @@ public class VideoCopyrightSegment extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static VideoCopyrightSegment loadJSON(String json, APIContext context) {
+  public static VideoCopyrightSegment loadJSON(String json, APIContext context, String header) {
     VideoCopyrightSegment videoCopyrightSegment = getGson().fromJson(json, VideoCopyrightSegment.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class VideoCopyrightSegment extends APINode {
     }
     videoCopyrightSegment.context = context;
     videoCopyrightSegment.rawValue = json;
+    videoCopyrightSegment.header = header;
     return videoCopyrightSegment;
   }
 
-  public static APINodeList<VideoCopyrightSegment> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<VideoCopyrightSegment> videoCopyrightSegments = new APINodeList<VideoCopyrightSegment>(request, json);
+  public static APINodeList<VideoCopyrightSegment> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<VideoCopyrightSegment> videoCopyrightSegments = new APINodeList<VideoCopyrightSegment>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class VideoCopyrightSegment extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          videoCopyrightSegments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          videoCopyrightSegments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return videoCopyrightSegments;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class VideoCopyrightSegment extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              videoCopyrightSegments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              videoCopyrightSegments.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class VideoCopyrightSegment extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  videoCopyrightSegments.add(loadJSON(entry.getValue().toString(), context));
+                  videoCopyrightSegments.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              videoCopyrightSegments.add(loadJSON(obj.toString(), context));
+              videoCopyrightSegments.add(loadJSON(obj.toString(), context, header));
             }
           }
           return videoCopyrightSegments;
@@ -153,7 +154,7 @@ public class VideoCopyrightSegment extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              videoCopyrightSegments.add(loadJSON(entry.getValue().toString(), context));
+              videoCopyrightSegments.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return videoCopyrightSegments;
         } else {
@@ -172,7 +173,7 @@ public class VideoCopyrightSegment extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              videoCopyrightSegments.add(loadJSON(value.toString(), context));
+              videoCopyrightSegments.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class VideoCopyrightSegment extends APINode {
 
           // Sixth, check if it's pure JsonObject
           videoCopyrightSegments.clear();
-          videoCopyrightSegments.add(loadJSON(json, context));
+          videoCopyrightSegments.add(loadJSON(json, context, header));
           return videoCopyrightSegments;
         }
       }
@@ -277,8 +278,8 @@ public class VideoCopyrightSegment extends APINode {
 
   public static APIRequest.ResponseParser<VideoCopyrightSegment> getParser() {
     return new APIRequest.ResponseParser<VideoCopyrightSegment>() {
-      public APINodeList<VideoCopyrightSegment> parseResponse(String response, APIContext context, APIRequest<VideoCopyrightSegment> request) throws MalformedResponseException {
-        return VideoCopyrightSegment.parseResponse(response, context, request);
+      public APINodeList<VideoCopyrightSegment> parseResponse(String response, APIContext context, APIRequest<VideoCopyrightSegment> request, String header) throws MalformedResponseException {
+        return VideoCopyrightSegment.parseResponse(response, context, request, header);
       }
     };
   }

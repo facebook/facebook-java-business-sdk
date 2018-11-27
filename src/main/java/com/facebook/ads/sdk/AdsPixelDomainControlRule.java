@@ -69,7 +69,7 @@ public class AdsPixelDomainControlRule extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdsPixelDomainControlRule loadJSON(String json, APIContext context) {
+  public static AdsPixelDomainControlRule loadJSON(String json, APIContext context, String header) {
     AdsPixelDomainControlRule adsPixelDomainControlRule = getGson().fromJson(json, AdsPixelDomainControlRule.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class AdsPixelDomainControlRule extends APINode {
     }
     adsPixelDomainControlRule.context = context;
     adsPixelDomainControlRule.rawValue = json;
+    adsPixelDomainControlRule.header = header;
     return adsPixelDomainControlRule;
   }
 
-  public static APINodeList<AdsPixelDomainControlRule> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdsPixelDomainControlRule> adsPixelDomainControlRules = new APINodeList<AdsPixelDomainControlRule>(request, json);
+  public static APINodeList<AdsPixelDomainControlRule> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdsPixelDomainControlRule> adsPixelDomainControlRules = new APINodeList<AdsPixelDomainControlRule>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class AdsPixelDomainControlRule extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsPixelDomainControlRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adsPixelDomainControlRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adsPixelDomainControlRules;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class AdsPixelDomainControlRule extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsPixelDomainControlRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adsPixelDomainControlRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class AdsPixelDomainControlRule extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsPixelDomainControlRules.add(loadJSON(entry.getValue().toString(), context));
+                  adsPixelDomainControlRules.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsPixelDomainControlRules.add(loadJSON(obj.toString(), context));
+              adsPixelDomainControlRules.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adsPixelDomainControlRules;
@@ -151,7 +152,7 @@ public class AdsPixelDomainControlRule extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsPixelDomainControlRules.add(loadJSON(entry.getValue().toString(), context));
+              adsPixelDomainControlRules.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adsPixelDomainControlRules;
         } else {
@@ -170,7 +171,7 @@ public class AdsPixelDomainControlRule extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsPixelDomainControlRules.add(loadJSON(value.toString(), context));
+              adsPixelDomainControlRules.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class AdsPixelDomainControlRule extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adsPixelDomainControlRules.clear();
-          adsPixelDomainControlRules.add(loadJSON(json, context));
+          adsPixelDomainControlRules.add(loadJSON(json, context, header));
           return adsPixelDomainControlRules;
         }
       }
@@ -265,8 +266,8 @@ public class AdsPixelDomainControlRule extends APINode {
 
   public static APIRequest.ResponseParser<AdsPixelDomainControlRule> getParser() {
     return new APIRequest.ResponseParser<AdsPixelDomainControlRule>() {
-      public APINodeList<AdsPixelDomainControlRule> parseResponse(String response, APIContext context, APIRequest<AdsPixelDomainControlRule> request) throws MalformedResponseException {
-        return AdsPixelDomainControlRule.parseResponse(response, context, request);
+      public APINodeList<AdsPixelDomainControlRule> parseResponse(String response, APIContext context, APIRequest<AdsPixelDomainControlRule> request, String header) throws MalformedResponseException {
+        return AdsPixelDomainControlRule.parseResponse(response, context, request, header);
       }
     };
   }

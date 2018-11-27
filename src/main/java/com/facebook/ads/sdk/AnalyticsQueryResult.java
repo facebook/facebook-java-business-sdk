@@ -75,7 +75,7 @@ public class AnalyticsQueryResult extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AnalyticsQueryResult loadJSON(String json, APIContext context) {
+  public static AnalyticsQueryResult loadJSON(String json, APIContext context, String header) {
     AnalyticsQueryResult analyticsQueryResult = getGson().fromJson(json, AnalyticsQueryResult.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -92,11 +92,12 @@ public class AnalyticsQueryResult extends APINode {
     }
     analyticsQueryResult.context = context;
     analyticsQueryResult.rawValue = json;
+    analyticsQueryResult.header = header;
     return analyticsQueryResult;
   }
 
-  public static APINodeList<AnalyticsQueryResult> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AnalyticsQueryResult> analyticsQueryResults = new APINodeList<AnalyticsQueryResult>(request, json);
+  public static APINodeList<AnalyticsQueryResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AnalyticsQueryResult> analyticsQueryResults = new APINodeList<AnalyticsQueryResult>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -107,7 +108,7 @@ public class AnalyticsQueryResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          analyticsQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          analyticsQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return analyticsQueryResults;
       } else if (result.isJsonObject()) {
@@ -132,7 +133,7 @@ public class AnalyticsQueryResult extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              analyticsQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              analyticsQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -143,13 +144,13 @@ public class AnalyticsQueryResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  analyticsQueryResults.add(loadJSON(entry.getValue().toString(), context));
+                  analyticsQueryResults.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              analyticsQueryResults.add(loadJSON(obj.toString(), context));
+              analyticsQueryResults.add(loadJSON(obj.toString(), context, header));
             }
           }
           return analyticsQueryResults;
@@ -157,7 +158,7 @@ public class AnalyticsQueryResult extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              analyticsQueryResults.add(loadJSON(entry.getValue().toString(), context));
+              analyticsQueryResults.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return analyticsQueryResults;
         } else {
@@ -176,7 +177,7 @@ public class AnalyticsQueryResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              analyticsQueryResults.add(loadJSON(value.toString(), context));
+              analyticsQueryResults.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -188,7 +189,7 @@ public class AnalyticsQueryResult extends APINode {
 
           // Sixth, check if it's pure JsonObject
           analyticsQueryResults.clear();
-          analyticsQueryResults.add(loadJSON(json, context));
+          analyticsQueryResults.add(loadJSON(json, context, header));
           return analyticsQueryResults;
         }
       }
@@ -301,8 +302,8 @@ public class AnalyticsQueryResult extends APINode {
 
   public static APIRequest.ResponseParser<AnalyticsQueryResult> getParser() {
     return new APIRequest.ResponseParser<AnalyticsQueryResult>() {
-      public APINodeList<AnalyticsQueryResult> parseResponse(String response, APIContext context, APIRequest<AnalyticsQueryResult> request) throws MalformedResponseException {
-        return AnalyticsQueryResult.parseResponse(response, context, request);
+      public APINodeList<AnalyticsQueryResult> parseResponse(String response, APIContext context, APIRequest<AnalyticsQueryResult> request, String header) throws MalformedResponseException {
+        return AnalyticsQueryResult.parseResponse(response, context, request, header);
       }
     };
   }

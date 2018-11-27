@@ -150,7 +150,7 @@ public class AdsPixel extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdsPixel loadJSON(String json, APIContext context) {
+  public static AdsPixel loadJSON(String json, APIContext context, String header) {
     AdsPixel adsPixel = getGson().fromJson(json, AdsPixel.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -167,11 +167,12 @@ public class AdsPixel extends APINode {
     }
     adsPixel.context = context;
     adsPixel.rawValue = json;
+    adsPixel.header = header;
     return adsPixel;
   }
 
-  public static APINodeList<AdsPixel> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdsPixel> adsPixels = new APINodeList<AdsPixel>(request, json);
+  public static APINodeList<AdsPixel> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdsPixel> adsPixels = new APINodeList<AdsPixel>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -182,7 +183,7 @@ public class AdsPixel extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsPixels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adsPixels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adsPixels;
       } else if (result.isJsonObject()) {
@@ -207,7 +208,7 @@ public class AdsPixel extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsPixels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adsPixels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -218,13 +219,13 @@ public class AdsPixel extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsPixels.add(loadJSON(entry.getValue().toString(), context));
+                  adsPixels.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsPixels.add(loadJSON(obj.toString(), context));
+              adsPixels.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adsPixels;
@@ -232,7 +233,7 @@ public class AdsPixel extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsPixels.add(loadJSON(entry.getValue().toString(), context));
+              adsPixels.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adsPixels;
         } else {
@@ -251,7 +252,7 @@ public class AdsPixel extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsPixels.add(loadJSON(value.toString(), context));
+              adsPixels.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -263,7 +264,7 @@ public class AdsPixel extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adsPixels.clear();
-          adsPixels.add(loadJSON(json, context));
+          adsPixels.add(loadJSON(json, context, header));
           return adsPixels;
         }
       }
@@ -451,8 +452,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -462,7 +463,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -476,7 +478,7 @@ public class AdsPixel extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAssignedUsers.this.parseResponse(result);
+               return APIRequestDeleteAssignedUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -573,8 +575,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<AssignedUser> parseResponse(String response) throws APIException {
-      return AssignedUser.parseResponse(response, getContext(), this);
+    public APINodeList<AssignedUser> parseResponse(String response, String header) throws APIException {
+      return AssignedUser.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -584,7 +586,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public APINodeList<AssignedUser> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -598,7 +601,7 @@ public class AdsPixel extends APINode {
         new Function<String, APINodeList<AssignedUser>>() {
            public APINodeList<AssignedUser> apply(String result) {
              try {
-               return APIRequestGetAssignedUsers.this.parseResponse(result);
+               return APIRequestGetAssignedUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -712,8 +715,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public AdsPixel parseResponse(String response) throws APIException {
-      return AdsPixel.parseResponse(response, getContext(), this).head();
+    public AdsPixel parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -723,7 +726,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -737,7 +741,7 @@ public class AdsPixel extends APINode {
         new Function<String, AdsPixel>() {
            public AdsPixel apply(String result) {
              try {
-               return APIRequestCreateAssignedUser.this.parseResponse(result);
+               return APIRequestCreateAssignedUser.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -876,8 +880,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<CustomAudience> parseResponse(String response) throws APIException {
-      return CustomAudience.parseResponse(response, getContext(), this);
+    public APINodeList<CustomAudience> parseResponse(String response, String header) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -887,7 +891,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public APINodeList<CustomAudience> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -901,7 +906,7 @@ public class AdsPixel extends APINode {
         new Function<String, APINodeList<CustomAudience>>() {
            public APINodeList<CustomAudience> apply(String result) {
              try {
-               return APIRequestGetAudiences.this.parseResponse(result);
+               return APIRequestGetAudiences.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1243,8 +1248,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public AdsPixel parseResponse(String response) throws APIException {
-      return AdsPixel.parseResponse(response, getContext(), this).head();
+    public AdsPixel parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1254,7 +1259,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1268,7 +1274,7 @@ public class AdsPixel extends APINode {
         new Function<String, AdsPixel>() {
            public AdsPixel apply(String result) {
              try {
-               return APIRequestCreateCreateServerToServerKey.this.parseResponse(result);
+               return APIRequestCreateCreateServerToServerKey.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1354,8 +1360,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<DACheck> parseResponse(String response) throws APIException {
-      return DACheck.parseResponse(response, getContext(), this);
+    public APINodeList<DACheck> parseResponse(String response, String header) throws APIException {
+      return DACheck.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1365,7 +1371,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public APINodeList<DACheck> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1379,7 +1386,7 @@ public class AdsPixel extends APINode {
         new Function<String, APINodeList<DACheck>>() {
            public APINodeList<DACheck> apply(String result) {
              try {
-               return APIRequestGetDaChecks.this.parseResponse(result);
+               return APIRequestGetDaChecks.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1521,8 +1528,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<SignalsIWLExtractor> parseResponse(String response) throws APIException {
-      return SignalsIWLExtractor.parseResponse(response, getContext(), this);
+    public APINodeList<SignalsIWLExtractor> parseResponse(String response, String header) throws APIException {
+      return SignalsIWLExtractor.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1532,7 +1539,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public APINodeList<SignalsIWLExtractor> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1546,7 +1554,7 @@ public class AdsPixel extends APINode {
         new Function<String, APINodeList<SignalsIWLExtractor>>() {
            public APINodeList<SignalsIWLExtractor> apply(String result) {
              try {
-               return APIRequestGetExtractors.this.parseResponse(result);
+               return APIRequestGetExtractors.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1672,8 +1680,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public SignalsIWLExtractor parseResponse(String response) throws APIException {
-      return SignalsIWLExtractor.parseResponse(response, getContext(), this).head();
+    public SignalsIWLExtractor parseResponse(String response, String header) throws APIException {
+      return SignalsIWLExtractor.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1683,7 +1691,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public SignalsIWLExtractor execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1697,7 +1706,7 @@ public class AdsPixel extends APINode {
         new Function<String, SignalsIWLExtractor>() {
            public SignalsIWLExtractor apply(String result) {
              try {
-               return APIRequestCreateExtractor.this.parseResponse(result);
+               return APIRequestCreateExtractor.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1829,8 +1838,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<Business> parseResponse(String response) throws APIException {
-      return Business.parseResponse(response, getContext(), this);
+    public APINodeList<Business> parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1840,7 +1849,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public APINodeList<Business> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1854,7 +1864,7 @@ public class AdsPixel extends APINode {
         new Function<String, APINodeList<Business>>() {
            public APINodeList<Business> apply(String result) {
              try {
-               return APIRequestGetPendingShareDAgencies.this.parseResponse(result);
+               return APIRequestGetPendingShareDAgencies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2059,8 +2069,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public AdsPixel parseResponse(String response) throws APIException {
-      return AdsPixel.parseResponse(response, getContext(), this).head();
+    public AdsPixel parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2070,7 +2080,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2084,7 +2095,7 @@ public class AdsPixel extends APINode {
         new Function<String, AdsPixel>() {
            public AdsPixel apply(String result) {
              try {
-               return APIRequestCreateResetServerToServerKey.this.parseResponse(result);
+               return APIRequestCreateResetServerToServerKey.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2173,8 +2184,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2184,7 +2195,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2198,7 +2210,7 @@ public class AdsPixel extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteShareDAccounts.this.parseResponse(result);
+               return APIRequestDeleteShareDAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2304,7 +2316,6 @@ public class AdsPixel extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "daily_spend_limit",
       "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
@@ -2333,7 +2344,6 @@ public class AdsPixel extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
-      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -2349,8 +2359,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccount> parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2360,7 +2370,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2374,7 +2385,7 @@ public class AdsPixel extends APINode {
         new Function<String, APINodeList<AdAccount>>() {
            public APINodeList<AdAccount> apply(String result) {
              try {
-               return APIRequestGetShareDAccounts.this.parseResponse(result);
+               return APIRequestGetShareDAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2581,13 +2592,6 @@ public class AdsPixel extends APINode {
       this.requestField("currency", value);
       return this;
     }
-    public APIRequestGetShareDAccounts requestDailySpendLimitField () {
-      return this.requestDailySpendLimitField(true);
-    }
-    public APIRequestGetShareDAccounts requestDailySpendLimitField (boolean value) {
-      this.requestField("daily_spend_limit", value);
-      return this;
-    }
     public APIRequestGetShareDAccounts requestDirectDealsTosAcceptedField () {
       return this.requestDirectDealsTosAcceptedField(true);
     }
@@ -2784,13 +2788,6 @@ public class AdsPixel extends APINode {
       this.requestField("partner", value);
       return this;
     }
-    public APIRequestGetShareDAccounts requestRateLimitResetTimeField () {
-      return this.requestRateLimitResetTimeField(true);
-    }
-    public APIRequestGetShareDAccounts requestRateLimitResetTimeField (boolean value) {
-      this.requestField("rate_limit_reset_time", value);
-      return this;
-    }
     public APIRequestGetShareDAccounts requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
@@ -2893,8 +2890,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public AdsPixel parseResponse(String response) throws APIException {
-      return AdsPixel.parseResponse(response, getContext(), this).head();
+    public AdsPixel parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2904,7 +2901,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2918,7 +2916,7 @@ public class AdsPixel extends APINode {
         new Function<String, AdsPixel>() {
            public AdsPixel apply(String result) {
              try {
-               return APIRequestCreateShareDAccount.this.parseResponse(result);
+               return APIRequestCreateShareDAccount.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3008,8 +3006,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3019,7 +3017,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3033,7 +3032,7 @@ public class AdsPixel extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteShareDAgencies.this.parseResponse(result);
+               return APIRequestDeleteShareDAgencies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3139,8 +3138,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<Business> parseResponse(String response) throws APIException {
-      return Business.parseResponse(response, getContext(), this);
+    public APINodeList<Business> parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3150,7 +3149,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public APINodeList<Business> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3164,7 +3164,7 @@ public class AdsPixel extends APINode {
         new Function<String, APINodeList<Business>>() {
            public APINodeList<Business> apply(String result) {
              try {
-               return APIRequestGetShareDAgencies.this.parseResponse(result);
+               return APIRequestGetShareDAgencies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3372,8 +3372,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public AdsPixel parseResponse(String response) throws APIException {
-      return AdsPixel.parseResponse(response, getContext(), this).head();
+    public AdsPixel parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3383,7 +3383,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3397,7 +3398,7 @@ public class AdsPixel extends APINode {
         new Function<String, AdsPixel>() {
            public AdsPixel apply(String result) {
              try {
-               return APIRequestCreateShareDAgency.this.parseResponse(result);
+               return APIRequestCreateShareDAgency.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3507,8 +3508,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public APINodeList<AdsPixelStatsResult> parseResponse(String response) throws APIException {
-      return AdsPixelStatsResult.parseResponse(response, getContext(), this);
+    public APINodeList<AdsPixelStatsResult> parseResponse(String response, String header) throws APIException {
+      return AdsPixelStatsResult.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3518,7 +3519,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public APINodeList<AdsPixelStatsResult> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3532,7 +3534,7 @@ public class AdsPixel extends APINode {
         new Function<String, APINodeList<AdsPixelStatsResult>>() {
            public APINodeList<AdsPixelStatsResult> apply(String result) {
              try {
-               return APIRequestGetStats.this.parseResponse(result);
+               return APIRequestGetStats.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3684,8 +3686,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public AdsPixel parseResponse(String response) throws APIException {
-      return AdsPixel.parseResponse(response, getContext(), this).head();
+    public AdsPixel parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3695,7 +3697,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3709,7 +3712,7 @@ public class AdsPixel extends APINode {
         new Function<String, AdsPixel>() {
            public AdsPixel apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3890,8 +3893,8 @@ public class AdsPixel extends APINode {
     };
 
     @Override
-    public AdsPixel parseResponse(String response) throws APIException {
-      return AdsPixel.parseResponse(response, getContext(), this).head();
+    public AdsPixel parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3901,7 +3904,8 @@ public class AdsPixel extends APINode {
 
     @Override
     public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3915,7 +3919,7 @@ public class AdsPixel extends APINode {
         new Function<String, AdsPixel>() {
            public AdsPixel apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4209,8 +4213,8 @@ public class AdsPixel extends APINode {
 
   public static APIRequest.ResponseParser<AdsPixel> getParser() {
     return new APIRequest.ResponseParser<AdsPixel>() {
-      public APINodeList<AdsPixel> parseResponse(String response, APIContext context, APIRequest<AdsPixel> request) throws MalformedResponseException {
-        return AdsPixel.parseResponse(response, context, request);
+      public APINodeList<AdsPixel> parseResponse(String response, APIContext context, APIRequest<AdsPixel> request, String header) throws MalformedResponseException {
+        return AdsPixel.parseResponse(response, context, request, header);
       }
     };
   }

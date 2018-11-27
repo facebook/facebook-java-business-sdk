@@ -71,7 +71,7 @@ public class AsyncRequest extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AsyncRequest loadJSON(String json, APIContext context) {
+  public static AsyncRequest loadJSON(String json, APIContext context, String header) {
     AsyncRequest asyncRequest = getGson().fromJson(json, AsyncRequest.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class AsyncRequest extends APINode {
     }
     asyncRequest.context = context;
     asyncRequest.rawValue = json;
+    asyncRequest.header = header;
     return asyncRequest;
   }
 
-  public static APINodeList<AsyncRequest> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AsyncRequest> asyncRequests = new APINodeList<AsyncRequest>(request, json);
+  public static APINodeList<AsyncRequest> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AsyncRequest> asyncRequests = new APINodeList<AsyncRequest>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class AsyncRequest extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          asyncRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          asyncRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return asyncRequests;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class AsyncRequest extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              asyncRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              asyncRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class AsyncRequest extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  asyncRequests.add(loadJSON(entry.getValue().toString(), context));
+                  asyncRequests.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              asyncRequests.add(loadJSON(obj.toString(), context));
+              asyncRequests.add(loadJSON(obj.toString(), context, header));
             }
           }
           return asyncRequests;
@@ -153,7 +154,7 @@ public class AsyncRequest extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              asyncRequests.add(loadJSON(entry.getValue().toString(), context));
+              asyncRequests.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return asyncRequests;
         } else {
@@ -172,7 +173,7 @@ public class AsyncRequest extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              asyncRequests.add(loadJSON(value.toString(), context));
+              asyncRequests.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class AsyncRequest extends APINode {
 
           // Sixth, check if it's pure JsonObject
           asyncRequests.clear();
-          asyncRequests.add(loadJSON(json, context));
+          asyncRequests.add(loadJSON(json, context, header));
           return asyncRequests;
         }
       }
@@ -321,8 +322,8 @@ public class AsyncRequest extends APINode {
 
   public static APIRequest.ResponseParser<AsyncRequest> getParser() {
     return new APIRequest.ResponseParser<AsyncRequest>() {
-      public APINodeList<AsyncRequest> parseResponse(String response, APIContext context, APIRequest<AsyncRequest> request) throws MalformedResponseException {
-        return AsyncRequest.parseResponse(response, context, request);
+      public APINodeList<AsyncRequest> parseResponse(String response, APIContext context, APIRequest<AsyncRequest> request, String header) throws MalformedResponseException {
+        return AsyncRequest.parseResponse(response, context, request, header);
       }
     };
   }

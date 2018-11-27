@@ -69,7 +69,7 @@ public class SmartPixelInsights extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static SmartPixelInsights loadJSON(String json, APIContext context) {
+  public static SmartPixelInsights loadJSON(String json, APIContext context, String header) {
     SmartPixelInsights smartPixelInsights = getGson().fromJson(json, SmartPixelInsights.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class SmartPixelInsights extends APINode {
     }
     smartPixelInsights.context = context;
     smartPixelInsights.rawValue = json;
+    smartPixelInsights.header = header;
     return smartPixelInsights;
   }
 
-  public static APINodeList<SmartPixelInsights> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<SmartPixelInsights> smartPixelInsightss = new APINodeList<SmartPixelInsights>(request, json);
+  public static APINodeList<SmartPixelInsights> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<SmartPixelInsights> smartPixelInsightss = new APINodeList<SmartPixelInsights>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class SmartPixelInsights extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          smartPixelInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          smartPixelInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return smartPixelInsightss;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class SmartPixelInsights extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              smartPixelInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              smartPixelInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class SmartPixelInsights extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  smartPixelInsightss.add(loadJSON(entry.getValue().toString(), context));
+                  smartPixelInsightss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              smartPixelInsightss.add(loadJSON(obj.toString(), context));
+              smartPixelInsightss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return smartPixelInsightss;
@@ -151,7 +152,7 @@ public class SmartPixelInsights extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              smartPixelInsightss.add(loadJSON(entry.getValue().toString(), context));
+              smartPixelInsightss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return smartPixelInsightss;
         } else {
@@ -170,7 +171,7 @@ public class SmartPixelInsights extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              smartPixelInsightss.add(loadJSON(value.toString(), context));
+              smartPixelInsightss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class SmartPixelInsights extends APINode {
 
           // Sixth, check if it's pure JsonObject
           smartPixelInsightss.clear();
-          smartPixelInsightss.add(loadJSON(json, context));
+          smartPixelInsightss.add(loadJSON(json, context, header));
           return smartPixelInsightss;
         }
       }
@@ -265,8 +266,8 @@ public class SmartPixelInsights extends APINode {
 
   public static APIRequest.ResponseParser<SmartPixelInsights> getParser() {
     return new APIRequest.ResponseParser<SmartPixelInsights>() {
-      public APINodeList<SmartPixelInsights> parseResponse(String response, APIContext context, APIRequest<SmartPixelInsights> request) throws MalformedResponseException {
-        return SmartPixelInsights.parseResponse(response, context, request);
+      public APINodeList<SmartPixelInsights> parseResponse(String response, APIContext context, APIRequest<SmartPixelInsights> request, String header) throws MalformedResponseException {
+        return SmartPixelInsights.parseResponse(response, context, request, header);
       }
     };
   }

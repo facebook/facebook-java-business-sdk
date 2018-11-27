@@ -320,7 +320,7 @@ public class Application extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Application loadJSON(String json, APIContext context) {
+  public static Application loadJSON(String json, APIContext context, String header) {
     Application application = getGson().fromJson(json, Application.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -337,11 +337,12 @@ public class Application extends APINode {
     }
     application.context = context;
     application.rawValue = json;
+    application.header = header;
     return application;
   }
 
-  public static APINodeList<Application> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Application> applications = new APINodeList<Application>(request, json);
+  public static APINodeList<Application> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Application> applications = new APINodeList<Application>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -352,7 +353,7 @@ public class Application extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          applications.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          applications.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return applications;
       } else if (result.isJsonObject()) {
@@ -377,7 +378,7 @@ public class Application extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              applications.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              applications.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -388,13 +389,13 @@ public class Application extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  applications.add(loadJSON(entry.getValue().toString(), context));
+                  applications.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              applications.add(loadJSON(obj.toString(), context));
+              applications.add(loadJSON(obj.toString(), context, header));
             }
           }
           return applications;
@@ -402,7 +403,7 @@ public class Application extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              applications.add(loadJSON(entry.getValue().toString(), context));
+              applications.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return applications;
         } else {
@@ -421,7 +422,7 @@ public class Application extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              applications.add(loadJSON(value.toString(), context));
+              applications.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -433,7 +434,7 @@ public class Application extends APINode {
 
           // Sixth, check if it's pure JsonObject
           applications.clear();
-          applications.add(loadJSON(json, context));
+          applications.add(loadJSON(json, context, header));
           return applications;
         }
       }
@@ -1226,8 +1227,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1237,7 +1238,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1251,7 +1253,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateLocalServiceBookingTest.this.parseResponse(result);
+               return APIRequestCreateLocalServiceBookingTest.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1340,8 +1342,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1351,7 +1353,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1365,7 +1368,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAccounts.this.parseResponse(result);
+               return APIRequestDeleteAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1462,8 +1465,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1473,7 +1476,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1487,7 +1491,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetAccounts.this.parseResponse(result);
+               return APIRequestGetAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1581,8 +1585,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1592,7 +1596,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1606,7 +1611,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateAccount.this.parseResponse(result);
+               return APIRequestCreateAccount.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1758,13 +1763,12 @@ public class Application extends APINode {
       "title",
       "type",
       "updated_time",
-      "url",
       "video",
     };
 
     @Override
-    public APINodeList<OpenGraphObject> parseResponse(String response) throws APIException {
-      return OpenGraphObject.parseResponse(response, getContext(), this);
+    public APINodeList<OpenGraphObject> parseResponse(String response, String header) throws APIException {
+      return OpenGraphObject.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1774,7 +1778,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<OpenGraphObject> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1788,7 +1793,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<OpenGraphObject>>() {
            public APINodeList<OpenGraphObject> apply(String result) {
              try {
-               return APIRequestGetAchievements.this.parseResponse(result);
+               return APIRequestGetAchievements.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2006,13 +2011,6 @@ public class Application extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetAchievements requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGetAchievements requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
     public APIRequestGetAchievements requestVideoField () {
       return this.requestVideoField(true);
     }
@@ -2064,8 +2062,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2075,7 +2073,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2089,7 +2088,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateActivity.this.parseResponse(result);
+               return APIRequestCreateActivity.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2379,8 +2378,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<AdNetworkAnalyticsSyncQueryResult> parseResponse(String response) throws APIException {
-      return AdNetworkAnalyticsSyncQueryResult.parseResponse(response, getContext(), this);
+    public APINodeList<AdNetworkAnalyticsSyncQueryResult> parseResponse(String response, String header) throws APIException {
+      return AdNetworkAnalyticsSyncQueryResult.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2390,7 +2389,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<AdNetworkAnalyticsSyncQueryResult> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2404,7 +2404,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<AdNetworkAnalyticsSyncQueryResult>>() {
            public APINodeList<AdNetworkAnalyticsSyncQueryResult> apply(String result) {
              try {
-               return APIRequestGetAdNetworkAnalytics.this.parseResponse(result);
+               return APIRequestGetAdNetworkAnalytics.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2593,8 +2593,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2604,7 +2604,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2618,7 +2619,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateAdNetworkAnalytic.this.parseResponse(result);
+               return APIRequestCreateAdNetworkAnalytic.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2784,8 +2785,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<AdNetworkAnalyticsAsyncQueryResult> parseResponse(String response) throws APIException {
-      return AdNetworkAnalyticsAsyncQueryResult.parseResponse(response, getContext(), this);
+    public APINodeList<AdNetworkAnalyticsAsyncQueryResult> parseResponse(String response, String header) throws APIException {
+      return AdNetworkAnalyticsAsyncQueryResult.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2795,7 +2796,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<AdNetworkAnalyticsAsyncQueryResult> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2809,7 +2811,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<AdNetworkAnalyticsAsyncQueryResult>>() {
            public APINodeList<AdNetworkAnalyticsAsyncQueryResult> apply(String result) {
              try {
-               return APIRequestGetAdNetworkAnalyticsResults.this.parseResponse(result);
+               return APIRequestGetAdNetworkAnalyticsResults.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2946,8 +2948,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2957,7 +2959,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2971,7 +2974,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetAdsAppInsights.this.parseResponse(result);
+               return APIRequestGetAdsAppInsights.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3118,8 +3121,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3129,7 +3132,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3143,7 +3147,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetAdsAppInsightsDimensions.this.parseResponse(result);
+               return APIRequestGetAdsAppInsightsDimensions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3276,8 +3280,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<Business> parseResponse(String response) throws APIException {
-      return Business.parseResponse(response, getContext(), this);
+    public APINodeList<Business> parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3287,7 +3291,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<Business> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3301,7 +3306,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<Business>>() {
            public APINodeList<Business> apply(String result) {
              try {
-               return APIRequestGetAgencies.this.parseResponse(result);
+               return APIRequestGetAgencies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3505,8 +3510,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3516,7 +3521,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3530,7 +3536,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetAndroidDialogConfigs.this.parseResponse(result);
+               return APIRequestGetAndroidDialogConfigs.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3608,8 +3614,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3619,7 +3625,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3633,7 +3640,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetAppEventTypes.this.parseResponse(result);
+               return APIRequestGetAppEventTypes.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3717,8 +3724,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3728,7 +3735,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3742,7 +3750,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateAppIndexing.this.parseResponse(result);
+               return APIRequestCreateAppIndexing.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3864,8 +3872,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3875,7 +3883,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3889,7 +3898,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateAppIndexingSession.this.parseResponse(result);
+               return APIRequestCreateAppIndexingSession.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3986,8 +3995,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3997,7 +4006,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4011,7 +4021,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetAppInsights.this.parseResponse(result);
+               return APIRequestGetAppInsights.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4174,8 +4184,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<Group> parseResponse(String response) throws APIException {
-      return Group.parseResponse(response, getContext(), this);
+    public APINodeList<Group> parseResponse(String response, String header) throws APIException {
+      return Group.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4185,7 +4195,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<Group> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4199,7 +4210,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<Group>>() {
            public APINodeList<Group> apply(String result) {
              try {
-               return APIRequestGetAppInstalledGroups.this.parseResponse(result);
+               return APIRequestGetAppInstalledGroups.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4428,8 +4439,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4439,7 +4450,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4453,7 +4465,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateAppLinkHost.this.parseResponse(result);
+               return APIRequestCreateAppLinkHost.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4611,8 +4623,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4622,7 +4634,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4636,7 +4649,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateAppPushDeviceToken.this.parseResponse(result);
+               return APIRequestCreateAppPushDeviceToken.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4733,8 +4746,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4744,7 +4757,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4758,7 +4772,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetAppAssets.this.parseResponse(result);
+               return APIRequestGetAppAssets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4839,8 +4853,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4850,7 +4864,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4864,7 +4879,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateAsset.this.parseResponse(result);
+               return APIRequestCreateAsset.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4999,8 +5014,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<CustomAudience> parseResponse(String response) throws APIException {
-      return CustomAudience.parseResponse(response, getContext(), this);
+    public APINodeList<CustomAudience> parseResponse(String response, String header) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -5010,7 +5025,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<CustomAudience> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -5024,7 +5040,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<CustomAudience>>() {
            public APINodeList<CustomAudience> apply(String result) {
              try {
-               return APIRequestGetAudiences.this.parseResponse(result);
+               return APIRequestGetAudiences.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5368,8 +5384,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -5379,7 +5395,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -5393,7 +5410,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAuthorizedAdAccounts.this.parseResponse(result);
+               return APIRequestDeleteAuthorizedAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5499,7 +5516,6 @@ public class Application extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "daily_spend_limit",
       "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
@@ -5528,7 +5544,6 @@ public class Application extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
-      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -5544,8 +5559,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccount> parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -5555,7 +5570,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -5569,7 +5585,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<AdAccount>>() {
            public APINodeList<AdAccount> apply(String result) {
              try {
-               return APIRequestGetAuthorizedAdAccounts.this.parseResponse(result);
+               return APIRequestGetAuthorizedAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5776,13 +5792,6 @@ public class Application extends APINode {
       this.requestField("currency", value);
       return this;
     }
-    public APIRequestGetAuthorizedAdAccounts requestDailySpendLimitField () {
-      return this.requestDailySpendLimitField(true);
-    }
-    public APIRequestGetAuthorizedAdAccounts requestDailySpendLimitField (boolean value) {
-      this.requestField("daily_spend_limit", value);
-      return this;
-    }
     public APIRequestGetAuthorizedAdAccounts requestDirectDealsTosAcceptedField () {
       return this.requestDirectDealsTosAcceptedField(true);
     }
@@ -5979,13 +5988,6 @@ public class Application extends APINode {
       this.requestField("partner", value);
       return this;
     }
-    public APIRequestGetAuthorizedAdAccounts requestRateLimitResetTimeField () {
-      return this.requestRateLimitResetTimeField(true);
-    }
-    public APIRequestGetAuthorizedAdAccounts requestRateLimitResetTimeField (boolean value) {
-      this.requestField("rate_limit_reset_time", value);
-      return this;
-    }
     public APIRequestGetAuthorizedAdAccounts requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
@@ -6088,8 +6090,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -6099,7 +6101,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -6113,7 +6116,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateAuthorizedAdAccount.this.parseResponse(result);
+               return APIRequestCreateAuthorizedAdAccount.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6202,8 +6205,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -6213,7 +6216,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -6227,7 +6231,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteBanned.this.parseResponse(result);
+               return APIRequestDeleteBanned.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6316,7 +6320,6 @@ public class Application extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -6337,12 +6340,10 @@ public class Application extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -6370,7 +6371,6 @@ public class Application extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -6379,8 +6379,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -6390,7 +6390,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -6404,7 +6405,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetBanned.this.parseResponse(result);
+               return APIRequestGetBanned.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6501,13 +6502,6 @@ public class Application extends APINode {
     }
     public APIRequestGetBanned requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetBanned requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetBanned requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetBanned requestBirthdayField () {
@@ -6650,13 +6644,6 @@ public class Application extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetBanned requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetBanned requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetBanned requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -6683,13 +6670,6 @@ public class Application extends APINode {
     }
     public APIRequestGetBanned requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetBanned requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetBanned requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetBanned requestLastNameField () {
@@ -6881,13 +6861,6 @@ public class Application extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetBanned requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetBanned requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetBanned requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -6940,8 +6913,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public User parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this).head();
+    public User parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -6951,7 +6924,8 @@ public class Application extends APINode {
 
     @Override
     public User execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -6965,7 +6939,7 @@ public class Application extends APINode {
         new Function<String, User>() {
            public User apply(String result) {
              try {
-               return APIRequestCreateBanned.this.parseResponse(result);
+               return APIRequestCreateBanned.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7053,8 +7027,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -7064,7 +7038,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -7078,7 +7053,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetButtonAutoDetectionDeviceSelection.this.parseResponse(result);
+               return APIRequestGetButtonAutoDetectionDeviceSelection.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7165,8 +7140,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -7176,7 +7151,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -7190,7 +7166,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateButtonIndexing.this.parseResponse(result);
+               return APIRequestCreateButtonIndexing.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7295,8 +7271,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -7306,7 +7282,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -7320,7 +7297,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateCodelessEventBinding.this.parseResponse(result);
+               return APIRequestCreateCodelessEventBinding.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7428,8 +7405,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -7439,7 +7416,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -7453,7 +7431,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateCodelessEventMapping.this.parseResponse(result);
+               return APIRequestCreateCodelessEventMapping.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7558,8 +7536,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -7569,7 +7547,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -7583,7 +7562,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetConnections.this.parseResponse(result);
+               return APIRequestGetConnections.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7663,8 +7642,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -7674,7 +7653,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -7688,7 +7668,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetCustomAudienceThirdPartyId.this.parseResponse(result);
+               return APIRequestGetCustomAudienceThirdPartyId.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7788,8 +7768,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<DACheck> parseResponse(String response) throws APIException {
-      return DACheck.parseResponse(response, getContext(), this);
+    public APINodeList<DACheck> parseResponse(String response, String header) throws APIException {
+      return DACheck.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -7799,7 +7779,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<DACheck> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -7813,7 +7794,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<DACheck>>() {
            public APINodeList<DACheck> apply(String result) {
              try {
-               return APIRequestGetDaChecks.this.parseResponse(result);
+               return APIRequestGetDaChecks.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7973,8 +7954,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<DirectDeal> parseResponse(String response) throws APIException {
-      return DirectDeal.parseResponse(response, getContext(), this);
+    public APINodeList<DirectDeal> parseResponse(String response, String header) throws APIException {
+      return DirectDeal.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -7984,7 +7965,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<DirectDeal> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -7998,7 +7980,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<DirectDeal>>() {
            public APINodeList<DirectDeal> apply(String result) {
              try {
-               return APIRequestGetDirectDeals.this.parseResponse(result);
+               return APIRequestGetDirectDeals.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8245,7 +8227,6 @@ public class Application extends APINode {
     public static final String[] FIELDS = {
       "attending_count",
       "can_guests_invite",
-      "can_viewer_post",
       "category",
       "cover",
       "declined_count",
@@ -8256,19 +8237,15 @@ public class Application extends APINode {
       "guest_list_enabled",
       "id",
       "interested_count",
-      "invited_count",
       "is_canceled",
-      "is_date_only",
       "is_draft",
       "is_page_owned",
-      "location",
       "maybe_count",
       "name",
       "noreply_count",
       "owner",
       "parent_group",
       "place",
-      "privacy",
       "scheduled_publish_time",
       "start_time",
       "ticket_uri",
@@ -8278,12 +8255,11 @@ public class Application extends APINode {
       "timezone",
       "type",
       "updated_time",
-      "venue",
     };
 
     @Override
-    public APINodeList<Event> parseResponse(String response) throws APIException {
-      return Event.parseResponse(response, getContext(), this);
+    public APINodeList<Event> parseResponse(String response, String header) throws APIException {
+      return Event.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -8293,7 +8269,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<Event> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -8307,7 +8284,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<Event>>() {
            public APINodeList<Event> apply(String result) {
              try {
-               return APIRequestGetEvents.this.parseResponse(result);
+               return APIRequestGetEvents.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8401,13 +8378,6 @@ public class Application extends APINode {
       this.requestField("can_guests_invite", value);
       return this;
     }
-    public APIRequestGetEvents requestCanViewerPostField () {
-      return this.requestCanViewerPostField(true);
-    }
-    public APIRequestGetEvents requestCanViewerPostField (boolean value) {
-      this.requestField("can_viewer_post", value);
-      return this;
-    }
     public APIRequestGetEvents requestCategoryField () {
       return this.requestCategoryField(true);
     }
@@ -8478,25 +8448,11 @@ public class Application extends APINode {
       this.requestField("interested_count", value);
       return this;
     }
-    public APIRequestGetEvents requestInvitedCountField () {
-      return this.requestInvitedCountField(true);
-    }
-    public APIRequestGetEvents requestInvitedCountField (boolean value) {
-      this.requestField("invited_count", value);
-      return this;
-    }
     public APIRequestGetEvents requestIsCanceledField () {
       return this.requestIsCanceledField(true);
     }
     public APIRequestGetEvents requestIsCanceledField (boolean value) {
       this.requestField("is_canceled", value);
-      return this;
-    }
-    public APIRequestGetEvents requestIsDateOnlyField () {
-      return this.requestIsDateOnlyField(true);
-    }
-    public APIRequestGetEvents requestIsDateOnlyField (boolean value) {
-      this.requestField("is_date_only", value);
       return this;
     }
     public APIRequestGetEvents requestIsDraftField () {
@@ -8511,13 +8467,6 @@ public class Application extends APINode {
     }
     public APIRequestGetEvents requestIsPageOwnedField (boolean value) {
       this.requestField("is_page_owned", value);
-      return this;
-    }
-    public APIRequestGetEvents requestLocationField () {
-      return this.requestLocationField(true);
-    }
-    public APIRequestGetEvents requestLocationField (boolean value) {
-      this.requestField("location", value);
       return this;
     }
     public APIRequestGetEvents requestMaybeCountField () {
@@ -8560,13 +8509,6 @@ public class Application extends APINode {
     }
     public APIRequestGetEvents requestPlaceField (boolean value) {
       this.requestField("place", value);
-      return this;
-    }
-    public APIRequestGetEvents requestPrivacyField () {
-      return this.requestPrivacyField(true);
-    }
-    public APIRequestGetEvents requestPrivacyField (boolean value) {
-      this.requestField("privacy", value);
       return this;
     }
     public APIRequestGetEvents requestScheduledPublishTimeField () {
@@ -8632,13 +8574,6 @@ public class Application extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetEvents requestVenueField () {
-      return this.requestVenueField(true);
-    }
-    public APIRequestGetEvents requestVenueField (boolean value) {
-      this.requestField("venue", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetFoodDrinkOrders extends APIRequest<APINode> {
@@ -8656,8 +8591,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -8667,7 +8602,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -8681,7 +8617,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetFoodDrinkOrders.this.parseResponse(result);
+               return APIRequestGetFoodDrinkOrders.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8766,8 +8702,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -8777,7 +8713,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -8791,7 +8728,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateFoodDrinkOrder.this.parseResponse(result);
+               return APIRequestCreateFoodDrinkOrder.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8884,8 +8821,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -8895,7 +8832,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -8909,7 +8847,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetFullAppIndexingInfos.this.parseResponse(result);
+               return APIRequestGetFullAppIndexingInfos.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8994,8 +8932,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -9005,7 +8943,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -9019,7 +8958,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateFullAppIndexingInfo.this.parseResponse(result);
+               return APIRequestCreateFullAppIndexingInfo.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9116,8 +9055,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -9127,7 +9066,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -9141,7 +9081,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetInsightsEventLabels.this.parseResponse(result);
+               return APIRequestGetInsightsEventLabels.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9256,8 +9196,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -9267,7 +9207,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -9281,7 +9222,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetIosDialogConfigs.this.parseResponse(result);
+               return APIRequestGetIosDialogConfigs.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9365,8 +9306,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -9376,7 +9317,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -9390,7 +9332,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateLeaderboardsCreate.this.parseResponse(result);
+               return APIRequestCreateLeaderboardsCreate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9512,8 +9454,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -9523,7 +9465,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -9537,7 +9480,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateLeaderboardsDeleteEntry.this.parseResponse(result);
+               return APIRequestCreateLeaderboardsDeleteEntry.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9631,8 +9574,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -9642,7 +9585,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -9656,7 +9600,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateLeaderboardsReset.this.parseResponse(result);
+               return APIRequestCreateLeaderboardsReset.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9752,8 +9696,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -9763,7 +9707,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -9777,7 +9722,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateLeaderboardsSetScore.this.parseResponse(result);
+               return APIRequestCreateLeaderboardsSetScore.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9883,8 +9828,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -9894,7 +9839,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -9908,7 +9854,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetLocalServiceBookingConfig.this.parseResponse(result);
+               return APIRequestGetLocalServiceBookingConfig.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9987,8 +9933,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -9998,7 +9944,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -10012,7 +9959,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateLocalServiceBookingConfig.this.parseResponse(result);
+               return APIRequestCreateLocalServiceBookingConfig.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10099,8 +10046,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -10110,7 +10057,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -10124,7 +10072,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateMachine.this.parseResponse(result);
+               return APIRequestCreateMachine.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10215,8 +10163,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -10226,7 +10174,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -10240,7 +10189,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateMmpAuditing.this.parseResponse(result);
+               return APIRequestCreateMmpAuditing.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10414,8 +10363,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -10425,7 +10374,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -10439,7 +10389,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetMobileSdkGk.this.parseResponse(result);
+               return APIRequestGetMobileSdkGk.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10536,8 +10486,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -10547,7 +10497,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -10561,7 +10512,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetMoodsForApplication.this.parseResponse(result);
+               return APIRequestGetMoodsForApplication.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10639,8 +10590,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -10650,7 +10601,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -10664,7 +10616,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetObjectTypes.this.parseResponse(result);
+               return APIRequestGetObjectTypes.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10761,13 +10713,12 @@ public class Application extends APINode {
       "title",
       "type",
       "updated_time",
-      "url",
       "video",
     };
 
     @Override
-    public APINodeList<OpenGraphObject> parseResponse(String response) throws APIException {
-      return OpenGraphObject.parseResponse(response, getContext(), this);
+    public APINodeList<OpenGraphObject> parseResponse(String response, String header) throws APIException {
+      return OpenGraphObject.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -10777,7 +10728,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<OpenGraphObject> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -10791,7 +10743,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<OpenGraphObject>>() {
            public APINodeList<OpenGraphObject> apply(String result) {
              try {
-               return APIRequestGetObjects.this.parseResponse(result);
+               return APIRequestGetObjects.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11009,13 +10961,6 @@ public class Application extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetObjects requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGetObjects requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
     public APIRequestGetObjects requestVideoField () {
       return this.requestVideoField(true);
     }
@@ -11041,8 +10986,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public OpenGraphObject parseResponse(String response) throws APIException {
-      return OpenGraphObject.parseResponse(response, getContext(), this).head();
+    public OpenGraphObject parseResponse(String response, String header) throws APIException {
+      return OpenGraphObject.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -11052,7 +10997,8 @@ public class Application extends APINode {
 
     @Override
     public OpenGraphObject execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -11066,7 +11012,7 @@ public class Application extends APINode {
         new Function<String, OpenGraphObject>() {
            public OpenGraphObject apply(String result) {
              try {
-               return APIRequestCreateObject.this.parseResponse(result);
+               return APIRequestCreateObject.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11160,8 +11106,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -11171,7 +11117,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -11185,7 +11132,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateOccludesPopup.this.parseResponse(result);
+               return APIRequestCreateOccludesPopup.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11281,8 +11228,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -11292,7 +11239,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -11306,7 +11254,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetOzoneRelease.this.parseResponse(result);
+               return APIRequestGetOzoneRelease.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11389,8 +11337,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -11400,7 +11348,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -11414,7 +11363,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateOzoneRelease.this.parseResponse(result);
+               return APIRequestCreateOzoneRelease.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11530,8 +11479,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -11541,7 +11490,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -11555,7 +11505,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeletePaymentCurrencies.this.parseResponse(result);
+               return APIRequestDeletePaymentCurrencies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11639,8 +11589,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -11650,7 +11600,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -11664,7 +11615,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreatePaymentCurrency.this.parseResponse(result);
+               return APIRequestCreatePaymentCurrency.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11748,8 +11699,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -11759,7 +11710,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -11773,7 +11725,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeletePaymentsTestUsers.this.parseResponse(result);
+               return APIRequestDeletePaymentsTestUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11861,7 +11813,6 @@ public class Application extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -11882,12 +11833,10 @@ public class Application extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -11915,7 +11864,6 @@ public class Application extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -11924,8 +11872,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -11935,7 +11883,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -11949,7 +11898,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetPaymentsTestUsers.this.parseResponse(result);
+               return APIRequestGetPaymentsTestUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -12037,13 +11986,6 @@ public class Application extends APINode {
     }
     public APIRequestGetPaymentsTestUsers requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetPaymentsTestUsers requestBirthdayField () {
@@ -12186,13 +12128,6 @@ public class Application extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetPaymentsTestUsers requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetPaymentsTestUsers requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -12219,13 +12154,6 @@ public class Application extends APINode {
     }
     public APIRequestGetPaymentsTestUsers requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetPaymentsTestUsers requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetPaymentsTestUsers requestLastNameField () {
@@ -12417,13 +12345,6 @@ public class Application extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetPaymentsTestUsers requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetPaymentsTestUsers requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetPaymentsTestUsers requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -12476,8 +12397,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -12487,7 +12408,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -12501,7 +12423,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreatePaymentsTestUser.this.parseResponse(result);
+               return APIRequestCreatePaymentsTestUser.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -12593,8 +12515,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -12604,7 +12526,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -12618,7 +12541,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetPermissions.this.parseResponse(result);
+               return APIRequestGetPermissions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -12784,8 +12707,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Photo parseResponse(String response) throws APIException {
-      return Photo.parseResponse(response, getContext(), this).head();
+    public Photo parseResponse(String response, String header) throws APIException {
+      return Photo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -12795,7 +12718,8 @@ public class Application extends APINode {
 
     @Override
     public Photo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -12809,7 +12733,7 @@ public class Application extends APINode {
         new Function<String, Photo>() {
            public Photo apply(String result) {
              try {
-               return APIRequestCreatePhoto.this.parseResponse(result);
+               return APIRequestCreatePhoto.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13276,15 +13200,14 @@ public class Application extends APINode {
       "left",
       "right",
       "top",
-      "uri",
       "url",
       "width",
       "id",
     };
 
     @Override
-    public APINodeList<ProfilePictureSource> parseResponse(String response) throws APIException {
-      return ProfilePictureSource.parseResponse(response, getContext(), this);
+    public APINodeList<ProfilePictureSource> parseResponse(String response, String header) throws APIException {
+      return ProfilePictureSource.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -13294,7 +13217,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<ProfilePictureSource> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -13308,7 +13232,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<ProfilePictureSource>>() {
            public APINodeList<ProfilePictureSource> apply(String result) {
              try {
-               return APIRequestGetPicture.this.parseResponse(result);
+               return APIRequestGetPicture.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13437,13 +13361,6 @@ public class Application extends APINode {
       this.requestField("top", value);
       return this;
     }
-    public APIRequestGetPicture requestUriField () {
-      return this.requestUriField(true);
-    }
-    public APIRequestGetPicture requestUriField (boolean value) {
-      this.requestField("uri", value);
-      return this;
-    }
     public APIRequestGetPicture requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -13485,8 +13402,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<ExternalEventSourcePixelHelperDebuggingInfo> parseResponse(String response) throws APIException {
-      return ExternalEventSourcePixelHelperDebuggingInfo.parseResponse(response, getContext(), this);
+    public APINodeList<ExternalEventSourcePixelHelperDebuggingInfo> parseResponse(String response, String header) throws APIException {
+      return ExternalEventSourcePixelHelperDebuggingInfo.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -13496,7 +13413,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<ExternalEventSourcePixelHelperDebuggingInfo> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -13510,7 +13428,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<ExternalEventSourcePixelHelperDebuggingInfo>>() {
            public APINodeList<ExternalEventSourcePixelHelperDebuggingInfo> apply(String result) {
              try {
-               return APIRequestGetPixelHelperDebuggingInfo.this.parseResponse(result);
+               return APIRequestGetPixelHelperDebuggingInfo.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13617,8 +13535,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -13628,7 +13546,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -13642,7 +13561,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetProducts.this.parseResponse(result);
+               return APIRequestGetProducts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13730,8 +13649,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -13741,7 +13660,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -13755,7 +13675,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetPurchases.this.parseResponse(result);
+               return APIRequestGetPurchases.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13853,8 +13773,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<ExternalEventSourceDebugging> parseResponse(String response) throws APIException {
-      return ExternalEventSourceDebugging.parseResponse(response, getContext(), this);
+    public APINodeList<ExternalEventSourceDebugging> parseResponse(String response, String header) throws APIException {
+      return ExternalEventSourceDebugging.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -13864,7 +13784,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<ExternalEventSourceDebugging> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -13878,7 +13799,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<ExternalEventSourceDebugging>>() {
            public APINodeList<ExternalEventSourceDebugging> apply(String result) {
              try {
-               return APIRequestGetRecentDebuggings.this.parseResponse(result);
+               return APIRequestGetRecentDebuggings.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14030,8 +13951,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -14041,7 +13962,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -14055,7 +13977,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteRoles.this.parseResponse(result);
+               return APIRequestDeleteRoles.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14142,8 +14064,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -14153,7 +14075,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -14167,7 +14090,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetRoles.this.parseResponse(result);
+               return APIRequestGetRoles.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14247,8 +14170,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -14258,7 +14181,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -14272,7 +14196,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateRole.this.parseResponse(result);
+               return APIRequestCreateRole.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14369,8 +14293,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -14380,7 +14304,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -14394,7 +14319,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateStagingResource.this.parseResponse(result);
+               return APIRequestCreateStagingResource.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14481,8 +14406,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -14492,7 +14417,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -14506,7 +14432,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetSubscribedDomains.this.parseResponse(result);
+               return APIRequestGetSubscribedDomains.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14586,8 +14512,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -14597,7 +14523,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -14611,7 +14538,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateSubscribedDomain.this.parseResponse(result);
+               return APIRequestCreateSubscribedDomain.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14707,8 +14634,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -14718,7 +14645,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -14732,7 +14660,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetSubscribedDomainsPhishing.this.parseResponse(result);
+               return APIRequestGetSubscribedDomainsPhishing.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14812,8 +14740,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -14823,7 +14751,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -14837,7 +14766,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateSubscribedDomainsPhishing.this.parseResponse(result);
+               return APIRequestCreateSubscribedDomainsPhishing.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14935,8 +14864,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -14946,7 +14875,8 @@ public class Application extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -14960,7 +14890,7 @@ public class Application extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteSubscriptions.this.parseResponse(result);
+               return APIRequestDeleteSubscriptions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15057,8 +14987,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -15068,7 +14998,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -15082,7 +15013,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateSubscription.this.parseResponse(result);
+               return APIRequestCreateSubscription.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15202,8 +15133,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -15213,7 +15144,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -15227,7 +15159,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestCreateSubscriptionsSample.this.parseResponse(result);
+               return APIRequestCreateSubscriptionsSample.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15338,8 +15270,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -15349,7 +15281,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -15363,7 +15296,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateUpload.this.parseResponse(result);
+               return APIRequestCreateUpload.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15470,8 +15403,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -15481,7 +15414,8 @@ public class Application extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -15495,7 +15429,7 @@ public class Application extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateUserProperty.this.parseResponse(result);
+               return APIRequestCreateUserProperty.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15682,8 +15616,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -15693,7 +15627,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -15707,7 +15642,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16531,8 +16466,8 @@ public class Application extends APINode {
     };
 
     @Override
-    public Application parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this).head();
+    public Application parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -16542,7 +16477,8 @@ public class Application extends APINode {
 
     @Override
     public Application execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -16556,7 +16492,7 @@ public class Application extends APINode {
         new Function<String, Application>() {
            public Application apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -17736,8 +17672,8 @@ public class Application extends APINode {
 
   public static APIRequest.ResponseParser<Application> getParser() {
     return new APIRequest.ResponseParser<Application>() {
-      public APINodeList<Application> parseResponse(String response, APIContext context, APIRequest<Application> request) throws MalformedResponseException {
-        return Application.parseResponse(response, context, request);
+      public APINodeList<Application> parseResponse(String response, APIContext context, APIRequest<Application> request, String header) throws MalformedResponseException {
+        return Application.parseResponse(response, context, request, header);
       }
     };
   }

@@ -124,7 +124,7 @@ public class UserContext extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserContext loadJSON(String json, APIContext context) {
+  public static UserContext loadJSON(String json, APIContext context, String header) {
     UserContext userContext = getGson().fromJson(json, UserContext.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -141,11 +141,12 @@ public class UserContext extends APINode {
     }
     userContext.context = context;
     userContext.rawValue = json;
+    userContext.header = header;
     return userContext;
   }
 
-  public static APINodeList<UserContext> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UserContext> userContexts = new APINodeList<UserContext>(request, json);
+  public static APINodeList<UserContext> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UserContext> userContexts = new APINodeList<UserContext>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -156,7 +157,7 @@ public class UserContext extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userContexts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userContexts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return userContexts;
       } else if (result.isJsonObject()) {
@@ -181,7 +182,7 @@ public class UserContext extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userContexts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userContexts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -192,13 +193,13 @@ public class UserContext extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userContexts.add(loadJSON(entry.getValue().toString(), context));
+                  userContexts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userContexts.add(loadJSON(obj.toString(), context));
+              userContexts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return userContexts;
@@ -206,7 +207,7 @@ public class UserContext extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userContexts.add(loadJSON(entry.getValue().toString(), context));
+              userContexts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return userContexts;
         } else {
@@ -225,7 +226,7 @@ public class UserContext extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userContexts.add(loadJSON(value.toString(), context));
+              userContexts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -237,7 +238,7 @@ public class UserContext extends APINode {
 
           // Sixth, check if it's pure JsonObject
           userContexts.clear();
-          userContexts.add(loadJSON(json, context));
+          userContexts.add(loadJSON(json, context, header));
           return userContexts;
         }
       }
@@ -265,20 +266,8 @@ public class UserContext extends APINode {
     return getGson().toJson(this);
   }
 
-  public APIRequestGetAllMutualFriends getAllMutualFriends() {
-    return new APIRequestGetAllMutualFriends(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetMutualFriends getMutualFriends() {
-    return new APIRequestGetMutualFriends(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetMutualLikes getMutualLikes() {
     return new APIRequestGetMutualLikes(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetThreeDegreeMutualFriends getThreeDegreeMutualFriends() {
-    return new APIRequestGetThreeDegreeMutualFriends(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -291,724 +280,6 @@ public class UserContext extends APINode {
   }
 
 
-
-  public static class APIRequestGetAllMutualFriends extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
-             try {
-               return APIRequestGetAllMutualFriends.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAllMutualFriends(String nodeId, APIContext context) {
-      super(context, nodeId, "/all_mutual_friends", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAllMutualFriends setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAllMutualFriends setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAllMutualFriends requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAllMutualFriends requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAllMutualFriends requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAllMutualFriends requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAllMutualFriends requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAllMutualFriends requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetMutualFriends extends APIRequest<User> {
-
-    APINodeList<User> lastResponse = null;
-    @Override
-    public APINodeList<User> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "about",
-      "address",
-      "admin_notes",
-      "age_range",
-      "bio",
-      "birthday",
-      "can_review_measurement_request",
-      "context",
-      "cover",
-      "currency",
-      "devices",
-      "education",
-      "email",
-      "employee_number",
-      "favorite_athletes",
-      "favorite_teams",
-      "first_name",
-      "gender",
-      "hometown",
-      "id",
-      "inspirational_people",
-      "install_type",
-      "installed",
-      "interested_in",
-      "is_famedeeplinkinguser",
-      "is_payment_enabled",
-      "is_shared_login",
-      "is_verified",
-      "labels",
-      "languages",
-      "last_ad_referral",
-      "last_name",
-      "link",
-      "local_news_megaphone_dismiss_status",
-      "local_news_subscription_status",
-      "locale",
-      "location",
-      "meeting_for",
-      "middle_name",
-      "name",
-      "name_format",
-      "payment_pricepoints",
-      "political",
-      "profile_pic",
-      "public_key",
-      "quotes",
-      "relationship_status",
-      "religion",
-      "security_settings",
-      "shared_login_upgrade_required_by",
-      "short_name",
-      "significant_other",
-      "sports",
-      "test_group",
-      "third_party_id",
-      "timezone",
-      "token_for_business",
-      "updated_time",
-      "username",
-      "verified",
-      "video_upload_limits",
-      "viewer_can_send_gift",
-      "website",
-      "work",
-    };
-
-    @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<User> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<User>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<User>>() {
-           public APINodeList<User> apply(String result) {
-             try {
-               return APIRequestGetMutualFriends.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetMutualFriends(String nodeId, APIContext context) {
-      super(context, nodeId, "/mutual_friends", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetMutualFriends setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMutualFriends setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetMutualFriends requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetMutualFriends requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMutualFriends requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetMutualFriends requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMutualFriends requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMutualFriends requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetMutualFriends requestAboutField () {
-      return this.requestAboutField(true);
-    }
-    public APIRequestGetMutualFriends requestAboutField (boolean value) {
-      this.requestField("about", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestAddressField () {
-      return this.requestAddressField(true);
-    }
-    public APIRequestGetMutualFriends requestAddressField (boolean value) {
-      this.requestField("address", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestAdminNotesField () {
-      return this.requestAdminNotesField(true);
-    }
-    public APIRequestGetMutualFriends requestAdminNotesField (boolean value) {
-      this.requestField("admin_notes", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestAgeRangeField () {
-      return this.requestAgeRangeField(true);
-    }
-    public APIRequestGetMutualFriends requestAgeRangeField (boolean value) {
-      this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetMutualFriends requestBioField (boolean value) {
-      this.requestField("bio", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestBirthdayField () {
-      return this.requestBirthdayField(true);
-    }
-    public APIRequestGetMutualFriends requestBirthdayField (boolean value) {
-      this.requestField("birthday", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestCanReviewMeasurementRequestField () {
-      return this.requestCanReviewMeasurementRequestField(true);
-    }
-    public APIRequestGetMutualFriends requestCanReviewMeasurementRequestField (boolean value) {
-      this.requestField("can_review_measurement_request", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestContextField () {
-      return this.requestContextField(true);
-    }
-    public APIRequestGetMutualFriends requestContextField (boolean value) {
-      this.requestField("context", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestCoverField () {
-      return this.requestCoverField(true);
-    }
-    public APIRequestGetMutualFriends requestCoverField (boolean value) {
-      this.requestField("cover", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestCurrencyField () {
-      return this.requestCurrencyField(true);
-    }
-    public APIRequestGetMutualFriends requestCurrencyField (boolean value) {
-      this.requestField("currency", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestDevicesField () {
-      return this.requestDevicesField(true);
-    }
-    public APIRequestGetMutualFriends requestDevicesField (boolean value) {
-      this.requestField("devices", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestEducationField () {
-      return this.requestEducationField(true);
-    }
-    public APIRequestGetMutualFriends requestEducationField (boolean value) {
-      this.requestField("education", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestEmailField () {
-      return this.requestEmailField(true);
-    }
-    public APIRequestGetMutualFriends requestEmailField (boolean value) {
-      this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestEmployeeNumberField () {
-      return this.requestEmployeeNumberField(true);
-    }
-    public APIRequestGetMutualFriends requestEmployeeNumberField (boolean value) {
-      this.requestField("employee_number", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestFavoriteAthletesField () {
-      return this.requestFavoriteAthletesField(true);
-    }
-    public APIRequestGetMutualFriends requestFavoriteAthletesField (boolean value) {
-      this.requestField("favorite_athletes", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestFavoriteTeamsField () {
-      return this.requestFavoriteTeamsField(true);
-    }
-    public APIRequestGetMutualFriends requestFavoriteTeamsField (boolean value) {
-      this.requestField("favorite_teams", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestFirstNameField () {
-      return this.requestFirstNameField(true);
-    }
-    public APIRequestGetMutualFriends requestFirstNameField (boolean value) {
-      this.requestField("first_name", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestGenderField () {
-      return this.requestGenderField(true);
-    }
-    public APIRequestGetMutualFriends requestGenderField (boolean value) {
-      this.requestField("gender", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestHometownField () {
-      return this.requestHometownField(true);
-    }
-    public APIRequestGetMutualFriends requestHometownField (boolean value) {
-      this.requestField("hometown", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetMutualFriends requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestInspirationalPeopleField () {
-      return this.requestInspirationalPeopleField(true);
-    }
-    public APIRequestGetMutualFriends requestInspirationalPeopleField (boolean value) {
-      this.requestField("inspirational_people", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestInstallTypeField () {
-      return this.requestInstallTypeField(true);
-    }
-    public APIRequestGetMutualFriends requestInstallTypeField (boolean value) {
-      this.requestField("install_type", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestInstalledField () {
-      return this.requestInstalledField(true);
-    }
-    public APIRequestGetMutualFriends requestInstalledField (boolean value) {
-      this.requestField("installed", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestInterestedInField () {
-      return this.requestInterestedInField(true);
-    }
-    public APIRequestGetMutualFriends requestInterestedInField (boolean value) {
-      this.requestField("interested_in", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestIsFamedeeplinkinguserField () {
-      return this.requestIsFamedeeplinkinguserField(true);
-    }
-    public APIRequestGetMutualFriends requestIsFamedeeplinkinguserField (boolean value) {
-      this.requestField("is_famedeeplinkinguser", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetMutualFriends requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestIsSharedLoginField () {
-      return this.requestIsSharedLoginField(true);
-    }
-    public APIRequestGetMutualFriends requestIsSharedLoginField (boolean value) {
-      this.requestField("is_shared_login", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestIsVerifiedField () {
-      return this.requestIsVerifiedField(true);
-    }
-    public APIRequestGetMutualFriends requestIsVerifiedField (boolean value) {
-      this.requestField("is_verified", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestLabelsField () {
-      return this.requestLabelsField(true);
-    }
-    public APIRequestGetMutualFriends requestLabelsField (boolean value) {
-      this.requestField("labels", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestLanguagesField () {
-      return this.requestLanguagesField(true);
-    }
-    public APIRequestGetMutualFriends requestLanguagesField (boolean value) {
-      this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetMutualFriends requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestLastNameField () {
-      return this.requestLastNameField(true);
-    }
-    public APIRequestGetMutualFriends requestLastNameField (boolean value) {
-      this.requestField("last_name", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestLinkField () {
-      return this.requestLinkField(true);
-    }
-    public APIRequestGetMutualFriends requestLinkField (boolean value) {
-      this.requestField("link", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestLocalNewsMegaphoneDismissStatusField () {
-      return this.requestLocalNewsMegaphoneDismissStatusField(true);
-    }
-    public APIRequestGetMutualFriends requestLocalNewsMegaphoneDismissStatusField (boolean value) {
-      this.requestField("local_news_megaphone_dismiss_status", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestLocalNewsSubscriptionStatusField () {
-      return this.requestLocalNewsSubscriptionStatusField(true);
-    }
-    public APIRequestGetMutualFriends requestLocalNewsSubscriptionStatusField (boolean value) {
-      this.requestField("local_news_subscription_status", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestLocaleField () {
-      return this.requestLocaleField(true);
-    }
-    public APIRequestGetMutualFriends requestLocaleField (boolean value) {
-      this.requestField("locale", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestLocationField () {
-      return this.requestLocationField(true);
-    }
-    public APIRequestGetMutualFriends requestLocationField (boolean value) {
-      this.requestField("location", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestMeetingForField () {
-      return this.requestMeetingForField(true);
-    }
-    public APIRequestGetMutualFriends requestMeetingForField (boolean value) {
-      this.requestField("meeting_for", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestMiddleNameField () {
-      return this.requestMiddleNameField(true);
-    }
-    public APIRequestGetMutualFriends requestMiddleNameField (boolean value) {
-      this.requestField("middle_name", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetMutualFriends requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestNameFormatField () {
-      return this.requestNameFormatField(true);
-    }
-    public APIRequestGetMutualFriends requestNameFormatField (boolean value) {
-      this.requestField("name_format", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestPaymentPricepointsField () {
-      return this.requestPaymentPricepointsField(true);
-    }
-    public APIRequestGetMutualFriends requestPaymentPricepointsField (boolean value) {
-      this.requestField("payment_pricepoints", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestPoliticalField () {
-      return this.requestPoliticalField(true);
-    }
-    public APIRequestGetMutualFriends requestPoliticalField (boolean value) {
-      this.requestField("political", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestProfilePicField () {
-      return this.requestProfilePicField(true);
-    }
-    public APIRequestGetMutualFriends requestProfilePicField (boolean value) {
-      this.requestField("profile_pic", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestPublicKeyField () {
-      return this.requestPublicKeyField(true);
-    }
-    public APIRequestGetMutualFriends requestPublicKeyField (boolean value) {
-      this.requestField("public_key", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestQuotesField () {
-      return this.requestQuotesField(true);
-    }
-    public APIRequestGetMutualFriends requestQuotesField (boolean value) {
-      this.requestField("quotes", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestRelationshipStatusField () {
-      return this.requestRelationshipStatusField(true);
-    }
-    public APIRequestGetMutualFriends requestRelationshipStatusField (boolean value) {
-      this.requestField("relationship_status", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestReligionField () {
-      return this.requestReligionField(true);
-    }
-    public APIRequestGetMutualFriends requestReligionField (boolean value) {
-      this.requestField("religion", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestSecuritySettingsField () {
-      return this.requestSecuritySettingsField(true);
-    }
-    public APIRequestGetMutualFriends requestSecuritySettingsField (boolean value) {
-      this.requestField("security_settings", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestSharedLoginUpgradeRequiredByField () {
-      return this.requestSharedLoginUpgradeRequiredByField(true);
-    }
-    public APIRequestGetMutualFriends requestSharedLoginUpgradeRequiredByField (boolean value) {
-      this.requestField("shared_login_upgrade_required_by", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestShortNameField () {
-      return this.requestShortNameField(true);
-    }
-    public APIRequestGetMutualFriends requestShortNameField (boolean value) {
-      this.requestField("short_name", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestSignificantOtherField () {
-      return this.requestSignificantOtherField(true);
-    }
-    public APIRequestGetMutualFriends requestSignificantOtherField (boolean value) {
-      this.requestField("significant_other", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestSportsField () {
-      return this.requestSportsField(true);
-    }
-    public APIRequestGetMutualFriends requestSportsField (boolean value) {
-      this.requestField("sports", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestTestGroupField () {
-      return this.requestTestGroupField(true);
-    }
-    public APIRequestGetMutualFriends requestTestGroupField (boolean value) {
-      this.requestField("test_group", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestThirdPartyIdField () {
-      return this.requestThirdPartyIdField(true);
-    }
-    public APIRequestGetMutualFriends requestThirdPartyIdField (boolean value) {
-      this.requestField("third_party_id", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestTimezoneField () {
-      return this.requestTimezoneField(true);
-    }
-    public APIRequestGetMutualFriends requestTimezoneField (boolean value) {
-      this.requestField("timezone", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestTokenForBusinessField () {
-      return this.requestTokenForBusinessField(true);
-    }
-    public APIRequestGetMutualFriends requestTokenForBusinessField (boolean value) {
-      this.requestField("token_for_business", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGetMutualFriends requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetMutualFriends requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestVerifiedField () {
-      return this.requestVerifiedField(true);
-    }
-    public APIRequestGetMutualFriends requestVerifiedField (boolean value) {
-      this.requestField("verified", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestVideoUploadLimitsField () {
-      return this.requestVideoUploadLimitsField(true);
-    }
-    public APIRequestGetMutualFriends requestVideoUploadLimitsField (boolean value) {
-      this.requestField("video_upload_limits", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestViewerCanSendGiftField () {
-      return this.requestViewerCanSendGiftField(true);
-    }
-    public APIRequestGetMutualFriends requestViewerCanSendGiftField (boolean value) {
-      this.requestField("viewer_can_send_gift", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestWebsiteField () {
-      return this.requestWebsiteField(true);
-    }
-    public APIRequestGetMutualFriends requestWebsiteField (boolean value) {
-      this.requestField("website", value);
-      return this;
-    }
-    public APIRequestGetMutualFriends requestWorkField () {
-      return this.requestWorkField(true);
-    }
-    public APIRequestGetMutualFriends requestWorkField (boolean value) {
-      this.requestField("work", value);
-      return this;
-    }
-  }
 
   public static class APIRequestGetMutualLikes extends APIRequest<Page> {
 
@@ -1069,7 +340,6 @@ public class UserContext extends APINode {
       "general_manager",
       "genre",
       "global_brand_page_name",
-      "global_brand_parent_page",
       "global_brand_root_id",
       "has_added_app",
       "has_whatsapp_business_number",
@@ -1136,7 +406,6 @@ public class UserContext extends APINode {
       "promotion_eligible",
       "promotion_ineligible_reason",
       "public_transit",
-      "publisher_space",
       "rating_count",
       "recipient",
       "record_label",
@@ -1168,8 +437,8 @@ public class UserContext extends APINode {
     };
 
     @Override
-    public APINodeList<Page> parseResponse(String response) throws APIException {
-      return Page.parseResponse(response, getContext(), this);
+    public APINodeList<Page> parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1179,7 +448,8 @@ public class UserContext extends APINode {
 
     @Override
     public APINodeList<Page> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1193,7 +463,7 @@ public class UserContext extends APINode {
         new Function<String, APINodeList<Page>>() {
            public APINodeList<Page> apply(String result) {
              try {
-               return APIRequestGetMutualLikes.this.parseResponse(result);
+               return APIRequestGetMutualLikes.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1589,13 +859,6 @@ public class UserContext extends APINode {
     }
     public APIRequestGetMutualLikes requestGlobalBrandPageNameField (boolean value) {
       this.requestField("global_brand_page_name", value);
-      return this;
-    }
-    public APIRequestGetMutualLikes requestGlobalBrandParentPageField () {
-      return this.requestGlobalBrandParentPageField(true);
-    }
-    public APIRequestGetMutualLikes requestGlobalBrandParentPageField (boolean value) {
-      this.requestField("global_brand_parent_page", value);
       return this;
     }
     public APIRequestGetMutualLikes requestGlobalBrandRootIdField () {
@@ -2060,13 +1323,6 @@ public class UserContext extends APINode {
       this.requestField("public_transit", value);
       return this;
     }
-    public APIRequestGetMutualLikes requestPublisherSpaceField () {
-      return this.requestPublisherSpaceField(true);
-    }
-    public APIRequestGetMutualLikes requestPublisherSpaceField (boolean value) {
-      this.requestField("publisher_space", value);
-      return this;
-    }
     public APIRequestGetMutualLikes requestRatingCountField () {
       return this.requestRatingCountField(true);
     }
@@ -2265,109 +1521,6 @@ public class UserContext extends APINode {
     }
   }
 
-  public static class APIRequestGetThreeDegreeMutualFriends extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
-             try {
-               return APIRequestGetThreeDegreeMutualFriends.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetThreeDegreeMutualFriends(String nodeId, APIContext context) {
-      super(context, nodeId, "/three_degree_mutual_friends", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetThreeDegreeMutualFriends setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetThreeDegreeMutualFriends setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetThreeDegreeMutualFriends requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetThreeDegreeMutualFriends requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetThreeDegreeMutualFriends requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetThreeDegreeMutualFriends requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetThreeDegreeMutualFriends requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetThreeDegreeMutualFriends requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGet extends APIRequest<UserContext> {
 
     UserContext lastResponse = null;
@@ -2383,8 +1536,8 @@ public class UserContext extends APINode {
     };
 
     @Override
-    public UserContext parseResponse(String response) throws APIException {
-      return UserContext.parseResponse(response, getContext(), this).head();
+    public UserContext parseResponse(String response, String header) throws APIException {
+      return UserContext.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2394,7 +1547,8 @@ public class UserContext extends APINode {
 
     @Override
     public UserContext execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2408,7 +1562,7 @@ public class UserContext extends APINode {
         new Function<String, UserContext>() {
            public UserContext apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2502,8 +1656,8 @@ public class UserContext extends APINode {
 
   public static APIRequest.ResponseParser<UserContext> getParser() {
     return new APIRequest.ResponseParser<UserContext>() {
-      public APINodeList<UserContext> parseResponse(String response, APIContext context, APIRequest<UserContext> request) throws MalformedResponseException {
-        return UserContext.parseResponse(response, context, request);
+      public APINodeList<UserContext> parseResponse(String response, APIContext context, APIRequest<UserContext> request, String header) throws MalformedResponseException {
+        return UserContext.parseResponse(response, context, request, header);
       }
     };
   }

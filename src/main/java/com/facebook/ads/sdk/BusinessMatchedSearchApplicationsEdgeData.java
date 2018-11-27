@@ -79,7 +79,7 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BusinessMatchedSearchApplicationsEdgeData loadJSON(String json, APIContext context) {
+  public static BusinessMatchedSearchApplicationsEdgeData loadJSON(String json, APIContext context, String header) {
     BusinessMatchedSearchApplicationsEdgeData businessMatchedSearchApplicationsEdgeData = getGson().fromJson(json, BusinessMatchedSearchApplicationsEdgeData.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -96,11 +96,12 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
     }
     businessMatchedSearchApplicationsEdgeData.context = context;
     businessMatchedSearchApplicationsEdgeData.rawValue = json;
+    businessMatchedSearchApplicationsEdgeData.header = header;
     return businessMatchedSearchApplicationsEdgeData;
   }
 
-  public static APINodeList<BusinessMatchedSearchApplicationsEdgeData> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<BusinessMatchedSearchApplicationsEdgeData> businessMatchedSearchApplicationsEdgeDatas = new APINodeList<BusinessMatchedSearchApplicationsEdgeData>(request, json);
+  public static APINodeList<BusinessMatchedSearchApplicationsEdgeData> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessMatchedSearchApplicationsEdgeData> businessMatchedSearchApplicationsEdgeDatas = new APINodeList<BusinessMatchedSearchApplicationsEdgeData>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -111,7 +112,7 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return businessMatchedSearchApplicationsEdgeDatas;
       } else if (result.isJsonObject()) {
@@ -136,7 +137,7 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -147,13 +148,13 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(entry.getValue().toString(), context));
+                  businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(obj.toString(), context));
+              businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(obj.toString(), context, header));
             }
           }
           return businessMatchedSearchApplicationsEdgeDatas;
@@ -161,7 +162,7 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(entry.getValue().toString(), context));
+              businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return businessMatchedSearchApplicationsEdgeDatas;
         } else {
@@ -180,7 +181,7 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(value.toString(), context));
+              businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -192,7 +193,7 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
 
           // Sixth, check if it's pure JsonObject
           businessMatchedSearchApplicationsEdgeDatas.clear();
-          businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(json, context));
+          businessMatchedSearchApplicationsEdgeDatas.add(loadJSON(json, context, header));
           return businessMatchedSearchApplicationsEdgeDatas;
         }
       }
@@ -364,8 +365,8 @@ public class BusinessMatchedSearchApplicationsEdgeData extends APINode {
 
   public static APIRequest.ResponseParser<BusinessMatchedSearchApplicationsEdgeData> getParser() {
     return new APIRequest.ResponseParser<BusinessMatchedSearchApplicationsEdgeData>() {
-      public APINodeList<BusinessMatchedSearchApplicationsEdgeData> parseResponse(String response, APIContext context, APIRequest<BusinessMatchedSearchApplicationsEdgeData> request) throws MalformedResponseException {
-        return BusinessMatchedSearchApplicationsEdgeData.parseResponse(response, context, request);
+      public APINodeList<BusinessMatchedSearchApplicationsEdgeData> parseResponse(String response, APIContext context, APIRequest<BusinessMatchedSearchApplicationsEdgeData> request, String header) throws MalformedResponseException {
+        return BusinessMatchedSearchApplicationsEdgeData.parseResponse(response, context, request, header);
       }
     };
   }

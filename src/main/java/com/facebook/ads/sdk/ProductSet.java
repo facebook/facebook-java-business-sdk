@@ -134,7 +134,7 @@ public class ProductSet extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductSet loadJSON(String json, APIContext context) {
+  public static ProductSet loadJSON(String json, APIContext context, String header) {
     ProductSet productSet = getGson().fromJson(json, ProductSet.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -151,11 +151,12 @@ public class ProductSet extends APINode {
     }
     productSet.context = context;
     productSet.rawValue = json;
+    productSet.header = header;
     return productSet;
   }
 
-  public static APINodeList<ProductSet> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ProductSet> productSets = new APINodeList<ProductSet>(request, json);
+  public static APINodeList<ProductSet> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductSet> productSets = new APINodeList<ProductSet>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -166,7 +167,7 @@ public class ProductSet extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          productSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return productSets;
       } else if (result.isJsonObject()) {
@@ -191,7 +192,7 @@ public class ProductSet extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              productSets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -202,13 +203,13 @@ public class ProductSet extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productSets.add(loadJSON(entry.getValue().toString(), context));
+                  productSets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productSets.add(loadJSON(obj.toString(), context));
+              productSets.add(loadJSON(obj.toString(), context, header));
             }
           }
           return productSets;
@@ -216,7 +217,7 @@ public class ProductSet extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productSets.add(loadJSON(entry.getValue().toString(), context));
+              productSets.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return productSets;
         } else {
@@ -235,7 +236,7 @@ public class ProductSet extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productSets.add(loadJSON(value.toString(), context));
+              productSets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -247,7 +248,7 @@ public class ProductSet extends APINode {
 
           // Sixth, check if it's pure JsonObject
           productSets.clear();
-          productSets.add(loadJSON(json, context));
+          productSets.add(loadJSON(json, context, header));
           return productSets;
         }
       }
@@ -371,6 +372,8 @@ public class ProductSet extends APINode {
       "description",
       "drivetrain",
       "exterior_color",
+      "finance_description",
+      "finance_type",
       "fuel_type",
       "generation",
       "id",
@@ -389,8 +392,8 @@ public class ProductSet extends APINode {
     };
 
     @Override
-    public APINodeList<AutomotiveModel> parseResponse(String response) throws APIException {
-      return AutomotiveModel.parseResponse(response, getContext(), this);
+    public APINodeList<AutomotiveModel> parseResponse(String response, String header) throws APIException {
+      return AutomotiveModel.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -400,7 +403,8 @@ public class ProductSet extends APINode {
 
     @Override
     public APINodeList<AutomotiveModel> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -414,7 +418,7 @@ public class ProductSet extends APINode {
         new Function<String, APINodeList<AutomotiveModel>>() {
            public APINodeList<AutomotiveModel> apply(String result) {
              try {
-               return APIRequestGetAutomotiveModels.this.parseResponse(result);
+               return APIRequestGetAutomotiveModels.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -557,6 +561,20 @@ public class ProductSet extends APINode {
       this.requestField("exterior_color", value);
       return this;
     }
+    public APIRequestGetAutomotiveModels requestFinanceDescriptionField () {
+      return this.requestFinanceDescriptionField(true);
+    }
+    public APIRequestGetAutomotiveModels requestFinanceDescriptionField (boolean value) {
+      this.requestField("finance_description", value);
+      return this;
+    }
+    public APIRequestGetAutomotiveModels requestFinanceTypeField () {
+      return this.requestFinanceTypeField(true);
+    }
+    public APIRequestGetAutomotiveModels requestFinanceTypeField (boolean value) {
+      this.requestField("finance_type", value);
+      return this;
+    }
     public APIRequestGetAutomotiveModels requestFuelTypeField () {
       return this.requestFuelTypeField(true);
     }
@@ -686,8 +704,8 @@ public class ProductSet extends APINode {
     };
 
     @Override
-    public APINodeList<DACheck> parseResponse(String response) throws APIException {
-      return DACheck.parseResponse(response, getContext(), this);
+    public APINodeList<DACheck> parseResponse(String response, String header) throws APIException {
+      return DACheck.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -697,7 +715,8 @@ public class ProductSet extends APINode {
 
     @Override
     public APINodeList<DACheck> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -711,7 +730,7 @@ public class ProductSet extends APINode {
         new Function<String, APINodeList<DACheck>>() {
            public APINodeList<DACheck> apply(String result) {
              try {
-               return APIRequestGetDaChecks.this.parseResponse(result);
+               return APIRequestGetDaChecks.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -862,8 +881,8 @@ public class ProductSet extends APINode {
     };
 
     @Override
-    public APINodeList<Destination> parseResponse(String response) throws APIException {
-      return Destination.parseResponse(response, getContext(), this);
+    public APINodeList<Destination> parseResponse(String response, String header) throws APIException {
+      return Destination.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -873,7 +892,8 @@ public class ProductSet extends APINode {
 
     @Override
     public APINodeList<Destination> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -887,7 +907,7 @@ public class ProductSet extends APINode {
         new Function<String, APINodeList<Destination>>() {
            public APINodeList<Destination> apply(String result) {
              try {
-               return APIRequestGetDestinations.this.parseResponse(result);
+               return APIRequestGetDestinations.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1091,8 +1111,8 @@ public class ProductSet extends APINode {
     };
 
     @Override
-    public APINodeList<Flight> parseResponse(String response) throws APIException {
-      return Flight.parseResponse(response, getContext(), this);
+    public APINodeList<Flight> parseResponse(String response, String header) throws APIException {
+      return Flight.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1102,7 +1122,8 @@ public class ProductSet extends APINode {
 
     @Override
     public APINodeList<Flight> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1116,7 +1137,7 @@ public class ProductSet extends APINode {
         new Function<String, APINodeList<Flight>>() {
            public APINodeList<Flight> apply(String result) {
              try {
-               return APIRequestGetFlights.this.parseResponse(result);
+               return APIRequestGetFlights.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1361,8 +1382,8 @@ public class ProductSet extends APINode {
     };
 
     @Override
-    public APINodeList<HomeListing> parseResponse(String response) throws APIException {
-      return HomeListing.parseResponse(response, getContext(), this);
+    public APINodeList<HomeListing> parseResponse(String response, String header) throws APIException {
+      return HomeListing.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1372,7 +1393,8 @@ public class ProductSet extends APINode {
 
     @Override
     public APINodeList<HomeListing> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1386,7 +1408,7 @@ public class ProductSet extends APINode {
         new Function<String, APINodeList<HomeListing>>() {
            public APINodeList<HomeListing> apply(String result) {
              try {
-               return APIRequestGetHomeListings.this.parseResponse(result);
+               return APIRequestGetHomeListings.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1795,8 +1817,8 @@ public class ProductSet extends APINode {
     };
 
     @Override
-    public APINodeList<Hotel> parseResponse(String response) throws APIException {
-      return Hotel.parseResponse(response, getContext(), this);
+    public APINodeList<Hotel> parseResponse(String response, String header) throws APIException {
+      return Hotel.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1806,7 +1828,8 @@ public class ProductSet extends APINode {
 
     @Override
     public APINodeList<Hotel> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1820,7 +1843,7 @@ public class ProductSet extends APINode {
         new Function<String, APINodeList<Hotel>>() {
            public APINodeList<Hotel> apply(String result) {
              try {
-               return APIRequestGetHotels.this.parseResponse(result);
+               return APIRequestGetHotels.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2089,8 +2112,8 @@ public class ProductSet extends APINode {
     };
 
     @Override
-    public APINodeList<ProductItem> parseResponse(String response) throws APIException {
-      return ProductItem.parseResponse(response, getContext(), this);
+    public APINodeList<ProductItem> parseResponse(String response, String header) throws APIException {
+      return ProductItem.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2100,7 +2123,8 @@ public class ProductSet extends APINode {
 
     @Override
     public APINodeList<ProductItem> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2114,7 +2138,7 @@ public class ProductSet extends APINode {
         new Function<String, APINodeList<ProductItem>>() {
            public APINodeList<ProductItem> apply(String result) {
              try {
-               return APIRequestGetProducts.this.parseResponse(result);
+               return APIRequestGetProducts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2620,8 +2644,8 @@ public class ProductSet extends APINode {
     };
 
     @Override
-    public APINodeList<Vehicle> parseResponse(String response) throws APIException {
-      return Vehicle.parseResponse(response, getContext(), this);
+    public APINodeList<Vehicle> parseResponse(String response, String header) throws APIException {
+      return Vehicle.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2631,7 +2655,8 @@ public class ProductSet extends APINode {
 
     @Override
     public APINodeList<Vehicle> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2645,7 +2670,7 @@ public class ProductSet extends APINode {
         new Function<String, APINodeList<Vehicle>>() {
            public APINodeList<Vehicle> apply(String result) {
              try {
-               return APIRequestGetVehicles.this.parseResponse(result);
+               return APIRequestGetVehicles.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3049,8 +3074,8 @@ public class ProductSet extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3060,7 +3085,8 @@ public class ProductSet extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3074,7 +3100,7 @@ public class ProductSet extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3158,8 +3184,8 @@ public class ProductSet extends APINode {
     };
 
     @Override
-    public ProductSet parseResponse(String response) throws APIException {
-      return ProductSet.parseResponse(response, getContext(), this).head();
+    public ProductSet parseResponse(String response, String header) throws APIException {
+      return ProductSet.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3169,7 +3195,8 @@ public class ProductSet extends APINode {
 
     @Override
     public ProductSet execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3183,7 +3210,7 @@ public class ProductSet extends APINode {
         new Function<String, ProductSet>() {
            public ProductSet apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3305,8 +3332,8 @@ public class ProductSet extends APINode {
     };
 
     @Override
-    public ProductSet parseResponse(String response) throws APIException {
-      return ProductSet.parseResponse(response, getContext(), this).head();
+    public ProductSet parseResponse(String response, String header) throws APIException {
+      return ProductSet.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3316,7 +3343,8 @@ public class ProductSet extends APINode {
 
     @Override
     public ProductSet execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3330,7 +3358,7 @@ public class ProductSet extends APINode {
         new Function<String, ProductSet>() {
            public ProductSet apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3436,8 +3464,8 @@ public class ProductSet extends APINode {
 
   public static APIRequest.ResponseParser<ProductSet> getParser() {
     return new APIRequest.ResponseParser<ProductSet>() {
-      public APINodeList<ProductSet> parseResponse(String response, APIContext context, APIRequest<ProductSet> request) throws MalformedResponseException {
-        return ProductSet.parseResponse(response, context, request);
+      public APINodeList<ProductSet> parseResponse(String response, APIContext context, APIRequest<ProductSet> request, String header) throws MalformedResponseException {
+        return ProductSet.parseResponse(response, context, request, header);
       }
     };
   }

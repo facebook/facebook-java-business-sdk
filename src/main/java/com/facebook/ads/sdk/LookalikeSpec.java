@@ -81,7 +81,7 @@ public class LookalikeSpec extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LookalikeSpec loadJSON(String json, APIContext context) {
+  public static LookalikeSpec loadJSON(String json, APIContext context, String header) {
     LookalikeSpec lookalikeSpec = getGson().fromJson(json, LookalikeSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -98,11 +98,12 @@ public class LookalikeSpec extends APINode {
     }
     lookalikeSpec.context = context;
     lookalikeSpec.rawValue = json;
+    lookalikeSpec.header = header;
     return lookalikeSpec;
   }
 
-  public static APINodeList<LookalikeSpec> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LookalikeSpec> lookalikeSpecs = new APINodeList<LookalikeSpec>(request, json);
+  public static APINodeList<LookalikeSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LookalikeSpec> lookalikeSpecs = new APINodeList<LookalikeSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -113,7 +114,7 @@ public class LookalikeSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          lookalikeSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          lookalikeSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return lookalikeSpecs;
       } else if (result.isJsonObject()) {
@@ -138,7 +139,7 @@ public class LookalikeSpec extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              lookalikeSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              lookalikeSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -149,13 +150,13 @@ public class LookalikeSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  lookalikeSpecs.add(loadJSON(entry.getValue().toString(), context));
+                  lookalikeSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              lookalikeSpecs.add(loadJSON(obj.toString(), context));
+              lookalikeSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return lookalikeSpecs;
@@ -163,7 +164,7 @@ public class LookalikeSpec extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              lookalikeSpecs.add(loadJSON(entry.getValue().toString(), context));
+              lookalikeSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return lookalikeSpecs;
         } else {
@@ -182,7 +183,7 @@ public class LookalikeSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              lookalikeSpecs.add(loadJSON(value.toString(), context));
+              lookalikeSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -194,7 +195,7 @@ public class LookalikeSpec extends APINode {
 
           // Sixth, check if it's pure JsonObject
           lookalikeSpecs.clear();
-          lookalikeSpecs.add(loadJSON(json, context));
+          lookalikeSpecs.add(loadJSON(json, context, header));
           return lookalikeSpecs;
         }
       }
@@ -337,8 +338,8 @@ public class LookalikeSpec extends APINode {
 
   public static APIRequest.ResponseParser<LookalikeSpec> getParser() {
     return new APIRequest.ResponseParser<LookalikeSpec>() {
-      public APINodeList<LookalikeSpec> parseResponse(String response, APIContext context, APIRequest<LookalikeSpec> request) throws MalformedResponseException {
-        return LookalikeSpec.parseResponse(response, context, request);
+      public APINodeList<LookalikeSpec> parseResponse(String response, APIContext context, APIRequest<LookalikeSpec> request, String header) throws MalformedResponseException {
+        return LookalikeSpec.parseResponse(response, context, request, header);
       }
     };
   }

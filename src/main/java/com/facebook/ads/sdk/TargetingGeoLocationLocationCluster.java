@@ -67,7 +67,7 @@ public class TargetingGeoLocationLocationCluster extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static TargetingGeoLocationLocationCluster loadJSON(String json, APIContext context) {
+  public static TargetingGeoLocationLocationCluster loadJSON(String json, APIContext context, String header) {
     TargetingGeoLocationLocationCluster targetingGeoLocationLocationCluster = getGson().fromJson(json, TargetingGeoLocationLocationCluster.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class TargetingGeoLocationLocationCluster extends APINode {
     }
     targetingGeoLocationLocationCluster.context = context;
     targetingGeoLocationLocationCluster.rawValue = json;
+    targetingGeoLocationLocationCluster.header = header;
     return targetingGeoLocationLocationCluster;
   }
 
-  public static APINodeList<TargetingGeoLocationLocationCluster> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<TargetingGeoLocationLocationCluster> targetingGeoLocationLocationClusters = new APINodeList<TargetingGeoLocationLocationCluster>(request, json);
+  public static APINodeList<TargetingGeoLocationLocationCluster> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<TargetingGeoLocationLocationCluster> targetingGeoLocationLocationClusters = new APINodeList<TargetingGeoLocationLocationCluster>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class TargetingGeoLocationLocationCluster extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          targetingGeoLocationLocationClusters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          targetingGeoLocationLocationClusters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return targetingGeoLocationLocationClusters;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class TargetingGeoLocationLocationCluster extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              targetingGeoLocationLocationClusters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              targetingGeoLocationLocationClusters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class TargetingGeoLocationLocationCluster extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  targetingGeoLocationLocationClusters.add(loadJSON(entry.getValue().toString(), context));
+                  targetingGeoLocationLocationClusters.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              targetingGeoLocationLocationClusters.add(loadJSON(obj.toString(), context));
+              targetingGeoLocationLocationClusters.add(loadJSON(obj.toString(), context, header));
             }
           }
           return targetingGeoLocationLocationClusters;
@@ -149,7 +150,7 @@ public class TargetingGeoLocationLocationCluster extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              targetingGeoLocationLocationClusters.add(loadJSON(entry.getValue().toString(), context));
+              targetingGeoLocationLocationClusters.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return targetingGeoLocationLocationClusters;
         } else {
@@ -168,7 +169,7 @@ public class TargetingGeoLocationLocationCluster extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              targetingGeoLocationLocationClusters.add(loadJSON(value.toString(), context));
+              targetingGeoLocationLocationClusters.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class TargetingGeoLocationLocationCluster extends APINode {
 
           // Sixth, check if it's pure JsonObject
           targetingGeoLocationLocationClusters.clear();
-          targetingGeoLocationLocationClusters.add(loadJSON(json, context));
+          targetingGeoLocationLocationClusters.add(loadJSON(json, context, header));
           return targetingGeoLocationLocationClusters;
         }
       }
@@ -253,8 +254,8 @@ public class TargetingGeoLocationLocationCluster extends APINode {
 
   public static APIRequest.ResponseParser<TargetingGeoLocationLocationCluster> getParser() {
     return new APIRequest.ResponseParser<TargetingGeoLocationLocationCluster>() {
-      public APINodeList<TargetingGeoLocationLocationCluster> parseResponse(String response, APIContext context, APIRequest<TargetingGeoLocationLocationCluster> request) throws MalformedResponseException {
-        return TargetingGeoLocationLocationCluster.parseResponse(response, context, request);
+      public APINodeList<TargetingGeoLocationLocationCluster> parseResponse(String response, APIContext context, APIRequest<TargetingGeoLocationLocationCluster> request, String header) throws MalformedResponseException {
+        return TargetingGeoLocationLocationCluster.parseResponse(response, context, request, header);
       }
     };
   }

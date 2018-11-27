@@ -296,7 +296,7 @@ public class ReachFrequencyPrediction extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ReachFrequencyPrediction loadJSON(String json, APIContext context) {
+  public static ReachFrequencyPrediction loadJSON(String json, APIContext context, String header) {
     ReachFrequencyPrediction reachFrequencyPrediction = getGson().fromJson(json, ReachFrequencyPrediction.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -313,11 +313,12 @@ public class ReachFrequencyPrediction extends APINode {
     }
     reachFrequencyPrediction.context = context;
     reachFrequencyPrediction.rawValue = json;
+    reachFrequencyPrediction.header = header;
     return reachFrequencyPrediction;
   }
 
-  public static APINodeList<ReachFrequencyPrediction> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ReachFrequencyPrediction> reachFrequencyPredictions = new APINodeList<ReachFrequencyPrediction>(request, json);
+  public static APINodeList<ReachFrequencyPrediction> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ReachFrequencyPrediction> reachFrequencyPredictions = new APINodeList<ReachFrequencyPrediction>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -328,7 +329,7 @@ public class ReachFrequencyPrediction extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          reachFrequencyPredictions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          reachFrequencyPredictions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return reachFrequencyPredictions;
       } else if (result.isJsonObject()) {
@@ -353,7 +354,7 @@ public class ReachFrequencyPrediction extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              reachFrequencyPredictions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              reachFrequencyPredictions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -364,13 +365,13 @@ public class ReachFrequencyPrediction extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  reachFrequencyPredictions.add(loadJSON(entry.getValue().toString(), context));
+                  reachFrequencyPredictions.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              reachFrequencyPredictions.add(loadJSON(obj.toString(), context));
+              reachFrequencyPredictions.add(loadJSON(obj.toString(), context, header));
             }
           }
           return reachFrequencyPredictions;
@@ -378,7 +379,7 @@ public class ReachFrequencyPrediction extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              reachFrequencyPredictions.add(loadJSON(entry.getValue().toString(), context));
+              reachFrequencyPredictions.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return reachFrequencyPredictions;
         } else {
@@ -397,7 +398,7 @@ public class ReachFrequencyPrediction extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              reachFrequencyPredictions.add(loadJSON(value.toString(), context));
+              reachFrequencyPredictions.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -409,7 +410,7 @@ public class ReachFrequencyPrediction extends APINode {
 
           // Sixth, check if it's pure JsonObject
           reachFrequencyPredictions.clear();
-          reachFrequencyPredictions.add(loadJSON(json, context));
+          reachFrequencyPredictions.add(loadJSON(json, context, header));
           return reachFrequencyPredictions;
         }
       }
@@ -893,8 +894,8 @@ public class ReachFrequencyPrediction extends APINode {
     };
 
     @Override
-    public ReachFrequencyPrediction parseResponse(String response) throws APIException {
-      return ReachFrequencyPrediction.parseResponse(response, getContext(), this).head();
+    public ReachFrequencyPrediction parseResponse(String response, String header) throws APIException {
+      return ReachFrequencyPrediction.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -904,7 +905,8 @@ public class ReachFrequencyPrediction extends APINode {
 
     @Override
     public ReachFrequencyPrediction execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -918,7 +920,7 @@ public class ReachFrequencyPrediction extends APINode {
         new Function<String, ReachFrequencyPrediction>() {
            public ReachFrequencyPrediction apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1814,8 +1816,8 @@ public class ReachFrequencyPrediction extends APINode {
 
   public static APIRequest.ResponseParser<ReachFrequencyPrediction> getParser() {
     return new APIRequest.ResponseParser<ReachFrequencyPrediction>() {
-      public APINodeList<ReachFrequencyPrediction> parseResponse(String response, APIContext context, APIRequest<ReachFrequencyPrediction> request) throws MalformedResponseException {
-        return ReachFrequencyPrediction.parseResponse(response, context, request);
+      public APINodeList<ReachFrequencyPrediction> parseResponse(String response, APIContext context, APIRequest<ReachFrequencyPrediction> request, String header) throws MalformedResponseException {
+        return ReachFrequencyPrediction.parseResponse(response, context, request, header);
       }
     };
   }

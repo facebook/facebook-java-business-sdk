@@ -128,7 +128,7 @@ public class PlaceTag extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PlaceTag loadJSON(String json, APIContext context) {
+  public static PlaceTag loadJSON(String json, APIContext context, String header) {
     PlaceTag placeTag = getGson().fromJson(json, PlaceTag.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -145,11 +145,12 @@ public class PlaceTag extends APINode {
     }
     placeTag.context = context;
     placeTag.rawValue = json;
+    placeTag.header = header;
     return placeTag;
   }
 
-  public static APINodeList<PlaceTag> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PlaceTag> placeTags = new APINodeList<PlaceTag>(request, json);
+  public static APINodeList<PlaceTag> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PlaceTag> placeTags = new APINodeList<PlaceTag>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -160,7 +161,7 @@ public class PlaceTag extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          placeTags.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          placeTags.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return placeTags;
       } else if (result.isJsonObject()) {
@@ -185,7 +186,7 @@ public class PlaceTag extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              placeTags.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              placeTags.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -196,13 +197,13 @@ public class PlaceTag extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  placeTags.add(loadJSON(entry.getValue().toString(), context));
+                  placeTags.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              placeTags.add(loadJSON(obj.toString(), context));
+              placeTags.add(loadJSON(obj.toString(), context, header));
             }
           }
           return placeTags;
@@ -210,7 +211,7 @@ public class PlaceTag extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              placeTags.add(loadJSON(entry.getValue().toString(), context));
+              placeTags.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return placeTags;
         } else {
@@ -229,7 +230,7 @@ public class PlaceTag extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              placeTags.add(loadJSON(value.toString(), context));
+              placeTags.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -241,7 +242,7 @@ public class PlaceTag extends APINode {
 
           // Sixth, check if it's pure JsonObject
           placeTags.clear();
-          placeTags.add(loadJSON(json, context));
+          placeTags.add(loadJSON(json, context, header));
           return placeTags;
         }
       }
@@ -308,8 +309,8 @@ public class PlaceTag extends APINode {
     };
 
     @Override
-    public PlaceTag parseResponse(String response) throws APIException {
-      return PlaceTag.parseResponse(response, getContext(), this).head();
+    public PlaceTag parseResponse(String response, String header) throws APIException {
+      return PlaceTag.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -319,7 +320,8 @@ public class PlaceTag extends APINode {
 
     @Override
     public PlaceTag execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -333,7 +335,7 @@ public class PlaceTag extends APINode {
         new Function<String, PlaceTag>() {
            public PlaceTag apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -443,8 +445,8 @@ public class PlaceTag extends APINode {
 
   public static APIRequest.ResponseParser<PlaceTag> getParser() {
     return new APIRequest.ResponseParser<PlaceTag>() {
-      public APINodeList<PlaceTag> parseResponse(String response, APIContext context, APIRequest<PlaceTag> request) throws MalformedResponseException {
-        return PlaceTag.parseResponse(response, context, request);
+      public APINodeList<PlaceTag> parseResponse(String response, APIContext context, APIRequest<PlaceTag> request, String header) throws MalformedResponseException {
+        return PlaceTag.parseResponse(response, context, request, header);
       }
     };
   }

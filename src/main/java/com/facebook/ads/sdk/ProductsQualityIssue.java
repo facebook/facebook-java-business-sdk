@@ -77,7 +77,7 @@ public class ProductsQualityIssue extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductsQualityIssue loadJSON(String json, APIContext context) {
+  public static ProductsQualityIssue loadJSON(String json, APIContext context, String header) {
     ProductsQualityIssue productsQualityIssue = getGson().fromJson(json, ProductsQualityIssue.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -94,11 +94,12 @@ public class ProductsQualityIssue extends APINode {
     }
     productsQualityIssue.context = context;
     productsQualityIssue.rawValue = json;
+    productsQualityIssue.header = header;
     return productsQualityIssue;
   }
 
-  public static APINodeList<ProductsQualityIssue> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ProductsQualityIssue> productsQualityIssues = new APINodeList<ProductsQualityIssue>(request, json);
+  public static APINodeList<ProductsQualityIssue> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductsQualityIssue> productsQualityIssues = new APINodeList<ProductsQualityIssue>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -109,7 +110,7 @@ public class ProductsQualityIssue extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productsQualityIssues.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          productsQualityIssues.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return productsQualityIssues;
       } else if (result.isJsonObject()) {
@@ -134,7 +135,7 @@ public class ProductsQualityIssue extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productsQualityIssues.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              productsQualityIssues.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -145,13 +146,13 @@ public class ProductsQualityIssue extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productsQualityIssues.add(loadJSON(entry.getValue().toString(), context));
+                  productsQualityIssues.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productsQualityIssues.add(loadJSON(obj.toString(), context));
+              productsQualityIssues.add(loadJSON(obj.toString(), context, header));
             }
           }
           return productsQualityIssues;
@@ -159,7 +160,7 @@ public class ProductsQualityIssue extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productsQualityIssues.add(loadJSON(entry.getValue().toString(), context));
+              productsQualityIssues.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return productsQualityIssues;
         } else {
@@ -178,7 +179,7 @@ public class ProductsQualityIssue extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productsQualityIssues.add(loadJSON(value.toString(), context));
+              productsQualityIssues.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -190,7 +191,7 @@ public class ProductsQualityIssue extends APINode {
 
           // Sixth, check if it's pure JsonObject
           productsQualityIssues.clear();
-          productsQualityIssues.add(loadJSON(json, context));
+          productsQualityIssues.add(loadJSON(json, context, header));
           return productsQualityIssues;
         }
       }
@@ -318,8 +319,8 @@ public class ProductsQualityIssue extends APINode {
 
   public static APIRequest.ResponseParser<ProductsQualityIssue> getParser() {
     return new APIRequest.ResponseParser<ProductsQualityIssue>() {
-      public APINodeList<ProductsQualityIssue> parseResponse(String response, APIContext context, APIRequest<ProductsQualityIssue> request) throws MalformedResponseException {
-        return ProductsQualityIssue.parseResponse(response, context, request);
+      public APINodeList<ProductsQualityIssue> parseResponse(String response, APIContext context, APIRequest<ProductsQualityIssue> request, String header) throws MalformedResponseException {
+        return ProductsQualityIssue.parseResponse(response, context, request, header);
       }
     };
   }

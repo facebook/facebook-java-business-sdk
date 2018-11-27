@@ -71,7 +71,7 @@ public class ProductVariant extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductVariant loadJSON(String json, APIContext context) {
+  public static ProductVariant loadJSON(String json, APIContext context, String header) {
     ProductVariant productVariant = getGson().fromJson(json, ProductVariant.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class ProductVariant extends APINode {
     }
     productVariant.context = context;
     productVariant.rawValue = json;
+    productVariant.header = header;
     return productVariant;
   }
 
-  public static APINodeList<ProductVariant> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ProductVariant> productVariants = new APINodeList<ProductVariant>(request, json);
+  public static APINodeList<ProductVariant> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductVariant> productVariants = new APINodeList<ProductVariant>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class ProductVariant extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productVariants.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          productVariants.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return productVariants;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class ProductVariant extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productVariants.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              productVariants.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class ProductVariant extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productVariants.add(loadJSON(entry.getValue().toString(), context));
+                  productVariants.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productVariants.add(loadJSON(obj.toString(), context));
+              productVariants.add(loadJSON(obj.toString(), context, header));
             }
           }
           return productVariants;
@@ -153,7 +154,7 @@ public class ProductVariant extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productVariants.add(loadJSON(entry.getValue().toString(), context));
+              productVariants.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return productVariants;
         } else {
@@ -172,7 +173,7 @@ public class ProductVariant extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productVariants.add(loadJSON(value.toString(), context));
+              productVariants.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class ProductVariant extends APINode {
 
           // Sixth, check if it's pure JsonObject
           productVariants.clear();
-          productVariants.add(loadJSON(json, context));
+          productVariants.add(loadJSON(json, context, header));
           return productVariants;
         }
       }
@@ -277,8 +278,8 @@ public class ProductVariant extends APINode {
 
   public static APIRequest.ResponseParser<ProductVariant> getParser() {
     return new APIRequest.ResponseParser<ProductVariant>() {
-      public APINodeList<ProductVariant> parseResponse(String response, APIContext context, APIRequest<ProductVariant> request) throws MalformedResponseException {
-        return ProductVariant.parseResponse(response, context, request);
+      public APINodeList<ProductVariant> parseResponse(String response, APIContext context, APIRequest<ProductVariant> request, String header) throws MalformedResponseException {
+        return ProductVariant.parseResponse(response, context, request, header);
       }
     };
   }

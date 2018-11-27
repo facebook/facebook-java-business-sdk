@@ -75,7 +75,7 @@ public class BusinessSettingLogsData extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BusinessSettingLogsData loadJSON(String json, APIContext context) {
+  public static BusinessSettingLogsData loadJSON(String json, APIContext context, String header) {
     BusinessSettingLogsData businessSettingLogsData = getGson().fromJson(json, BusinessSettingLogsData.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -92,11 +92,12 @@ public class BusinessSettingLogsData extends APINode {
     }
     businessSettingLogsData.context = context;
     businessSettingLogsData.rawValue = json;
+    businessSettingLogsData.header = header;
     return businessSettingLogsData;
   }
 
-  public static APINodeList<BusinessSettingLogsData> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<BusinessSettingLogsData> businessSettingLogsDatas = new APINodeList<BusinessSettingLogsData>(request, json);
+  public static APINodeList<BusinessSettingLogsData> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BusinessSettingLogsData> businessSettingLogsDatas = new APINodeList<BusinessSettingLogsData>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -107,7 +108,7 @@ public class BusinessSettingLogsData extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          businessSettingLogsDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          businessSettingLogsDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return businessSettingLogsDatas;
       } else if (result.isJsonObject()) {
@@ -132,7 +133,7 @@ public class BusinessSettingLogsData extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              businessSettingLogsDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              businessSettingLogsDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -143,13 +144,13 @@ public class BusinessSettingLogsData extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  businessSettingLogsDatas.add(loadJSON(entry.getValue().toString(), context));
+                  businessSettingLogsDatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              businessSettingLogsDatas.add(loadJSON(obj.toString(), context));
+              businessSettingLogsDatas.add(loadJSON(obj.toString(), context, header));
             }
           }
           return businessSettingLogsDatas;
@@ -157,7 +158,7 @@ public class BusinessSettingLogsData extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              businessSettingLogsDatas.add(loadJSON(entry.getValue().toString(), context));
+              businessSettingLogsDatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return businessSettingLogsDatas;
         } else {
@@ -176,7 +177,7 @@ public class BusinessSettingLogsData extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              businessSettingLogsDatas.add(loadJSON(value.toString(), context));
+              businessSettingLogsDatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -188,7 +189,7 @@ public class BusinessSettingLogsData extends APINode {
 
           // Sixth, check if it's pure JsonObject
           businessSettingLogsDatas.clear();
-          businessSettingLogsDatas.add(loadJSON(json, context));
+          businessSettingLogsDatas.add(loadJSON(json, context, header));
           return businessSettingLogsDatas;
         }
       }
@@ -301,8 +302,8 @@ public class BusinessSettingLogsData extends APINode {
 
   public static APIRequest.ResponseParser<BusinessSettingLogsData> getParser() {
     return new APIRequest.ResponseParser<BusinessSettingLogsData>() {
-      public APINodeList<BusinessSettingLogsData> parseResponse(String response, APIContext context, APIRequest<BusinessSettingLogsData> request) throws MalformedResponseException {
-        return BusinessSettingLogsData.parseResponse(response, context, request);
+      public APINodeList<BusinessSettingLogsData> parseResponse(String response, APIContext context, APIRequest<BusinessSettingLogsData> request, String header) throws MalformedResponseException {
+        return BusinessSettingLogsData.parseResponse(response, context, request, header);
       }
     };
   }

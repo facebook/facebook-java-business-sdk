@@ -170,7 +170,7 @@ public class DirectDeal extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static DirectDeal loadJSON(String json, APIContext context) {
+  public static DirectDeal loadJSON(String json, APIContext context, String header) {
     DirectDeal directDeal = getGson().fromJson(json, DirectDeal.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -187,11 +187,12 @@ public class DirectDeal extends APINode {
     }
     directDeal.context = context;
     directDeal.rawValue = json;
+    directDeal.header = header;
     return directDeal;
   }
 
-  public static APINodeList<DirectDeal> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<DirectDeal> directDeals = new APINodeList<DirectDeal>(request, json);
+  public static APINodeList<DirectDeal> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<DirectDeal> directDeals = new APINodeList<DirectDeal>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -202,7 +203,7 @@ public class DirectDeal extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          directDeals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          directDeals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return directDeals;
       } else if (result.isJsonObject()) {
@@ -227,7 +228,7 @@ public class DirectDeal extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              directDeals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              directDeals.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -238,13 +239,13 @@ public class DirectDeal extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  directDeals.add(loadJSON(entry.getValue().toString(), context));
+                  directDeals.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              directDeals.add(loadJSON(obj.toString(), context));
+              directDeals.add(loadJSON(obj.toString(), context, header));
             }
           }
           return directDeals;
@@ -252,7 +253,7 @@ public class DirectDeal extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              directDeals.add(loadJSON(entry.getValue().toString(), context));
+              directDeals.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return directDeals;
         } else {
@@ -271,7 +272,7 @@ public class DirectDeal extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              directDeals.add(loadJSON(value.toString(), context));
+              directDeals.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -283,7 +284,7 @@ public class DirectDeal extends APINode {
 
           // Sixth, check if it's pure JsonObject
           directDeals.clear();
-          directDeals.add(loadJSON(json, context));
+          directDeals.add(loadJSON(json, context, header));
           return directDeals;
         }
       }
@@ -534,8 +535,8 @@ public class DirectDeal extends APINode {
     };
 
     @Override
-    public APINodeList<Application> parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this);
+    public APINodeList<Application> parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -545,7 +546,8 @@ public class DirectDeal extends APINode {
 
     @Override
     public APINodeList<Application> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -559,7 +561,7 @@ public class DirectDeal extends APINode {
         new Function<String, APINodeList<Application>>() {
            public APINodeList<Application> apply(String result) {
              try {
-               return APIRequestGetApplications.this.parseResponse(result);
+               return APIRequestGetApplications.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1354,8 +1356,8 @@ public class DirectDeal extends APINode {
     };
 
     @Override
-    public DirectDeal parseResponse(String response) throws APIException {
-      return DirectDeal.parseResponse(response, getContext(), this).head();
+    public DirectDeal parseResponse(String response, String header) throws APIException {
+      return DirectDeal.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1365,7 +1367,8 @@ public class DirectDeal extends APINode {
 
     @Override
     public DirectDeal execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1379,7 +1382,7 @@ public class DirectDeal extends APINode {
         new Function<String, DirectDeal>() {
            public DirectDeal apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1686,8 +1689,8 @@ public class DirectDeal extends APINode {
 
   public static APIRequest.ResponseParser<DirectDeal> getParser() {
     return new APIRequest.ResponseParser<DirectDeal>() {
-      public APINodeList<DirectDeal> parseResponse(String response, APIContext context, APIRequest<DirectDeal> request) throws MalformedResponseException {
-        return DirectDeal.parseResponse(response, context, request);
+      public APINodeList<DirectDeal> parseResponse(String response, APIContext context, APIRequest<DirectDeal> request, String header) throws MalformedResponseException {
+        return DirectDeal.parseResponse(response, context, request, header);
       }
     };
   }

@@ -71,7 +71,7 @@ public class StreamFilter extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static StreamFilter loadJSON(String json, APIContext context) {
+  public static StreamFilter loadJSON(String json, APIContext context, String header) {
     StreamFilter streamFilter = getGson().fromJson(json, StreamFilter.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class StreamFilter extends APINode {
     }
     streamFilter.context = context;
     streamFilter.rawValue = json;
+    streamFilter.header = header;
     return streamFilter;
   }
 
-  public static APINodeList<StreamFilter> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<StreamFilter> streamFilters = new APINodeList<StreamFilter>(request, json);
+  public static APINodeList<StreamFilter> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<StreamFilter> streamFilters = new APINodeList<StreamFilter>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class StreamFilter extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          streamFilters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          streamFilters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return streamFilters;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class StreamFilter extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              streamFilters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              streamFilters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class StreamFilter extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  streamFilters.add(loadJSON(entry.getValue().toString(), context));
+                  streamFilters.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              streamFilters.add(loadJSON(obj.toString(), context));
+              streamFilters.add(loadJSON(obj.toString(), context, header));
             }
           }
           return streamFilters;
@@ -153,7 +154,7 @@ public class StreamFilter extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              streamFilters.add(loadJSON(entry.getValue().toString(), context));
+              streamFilters.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return streamFilters;
         } else {
@@ -172,7 +173,7 @@ public class StreamFilter extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              streamFilters.add(loadJSON(value.toString(), context));
+              streamFilters.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class StreamFilter extends APINode {
 
           // Sixth, check if it's pure JsonObject
           streamFilters.clear();
-          streamFilters.add(loadJSON(json, context));
+          streamFilters.add(loadJSON(json, context, header));
           return streamFilters;
         }
       }
@@ -277,8 +278,8 @@ public class StreamFilter extends APINode {
 
   public static APIRequest.ResponseParser<StreamFilter> getParser() {
     return new APIRequest.ResponseParser<StreamFilter>() {
-      public APINodeList<StreamFilter> parseResponse(String response, APIContext context, APIRequest<StreamFilter> request) throws MalformedResponseException {
-        return StreamFilter.parseResponse(response, context, request);
+      public APINodeList<StreamFilter> parseResponse(String response, APIContext context, APIRequest<StreamFilter> request, String header) throws MalformedResponseException {
+        return StreamFilter.parseResponse(response, context, request, header);
       }
     };
   }

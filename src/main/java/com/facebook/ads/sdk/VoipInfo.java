@@ -79,7 +79,7 @@ public class VoipInfo extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static VoipInfo loadJSON(String json, APIContext context) {
+  public static VoipInfo loadJSON(String json, APIContext context, String header) {
     VoipInfo voipInfo = getGson().fromJson(json, VoipInfo.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -96,11 +96,12 @@ public class VoipInfo extends APINode {
     }
     voipInfo.context = context;
     voipInfo.rawValue = json;
+    voipInfo.header = header;
     return voipInfo;
   }
 
-  public static APINodeList<VoipInfo> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<VoipInfo> voipInfos = new APINodeList<VoipInfo>(request, json);
+  public static APINodeList<VoipInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<VoipInfo> voipInfos = new APINodeList<VoipInfo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -111,7 +112,7 @@ public class VoipInfo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          voipInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          voipInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return voipInfos;
       } else if (result.isJsonObject()) {
@@ -136,7 +137,7 @@ public class VoipInfo extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              voipInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              voipInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -147,13 +148,13 @@ public class VoipInfo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  voipInfos.add(loadJSON(entry.getValue().toString(), context));
+                  voipInfos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              voipInfos.add(loadJSON(obj.toString(), context));
+              voipInfos.add(loadJSON(obj.toString(), context, header));
             }
           }
           return voipInfos;
@@ -161,7 +162,7 @@ public class VoipInfo extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              voipInfos.add(loadJSON(entry.getValue().toString(), context));
+              voipInfos.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return voipInfos;
         } else {
@@ -180,7 +181,7 @@ public class VoipInfo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              voipInfos.add(loadJSON(value.toString(), context));
+              voipInfos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -192,7 +193,7 @@ public class VoipInfo extends APINode {
 
           // Sixth, check if it's pure JsonObject
           voipInfos.clear();
-          voipInfos.add(loadJSON(json, context));
+          voipInfos.add(loadJSON(json, context, header));
           return voipInfos;
         }
       }
@@ -325,8 +326,8 @@ public class VoipInfo extends APINode {
 
   public static APIRequest.ResponseParser<VoipInfo> getParser() {
     return new APIRequest.ResponseParser<VoipInfo>() {
-      public APINodeList<VoipInfo> parseResponse(String response, APIContext context, APIRequest<VoipInfo> request) throws MalformedResponseException {
-        return VoipInfo.parseResponse(response, context, request);
+      public APINodeList<VoipInfo> parseResponse(String response, APIContext context, APIRequest<VoipInfo> request, String header) throws MalformedResponseException {
+        return VoipInfo.parseResponse(response, context, request, header);
       }
     };
   }

@@ -97,8 +97,6 @@ public class OpenGraphObject extends APINode {
   private String mType = null;
   @SerializedName("updated_time")
   private String mUpdatedTime = null;
-  @SerializedName("url")
-  private String mUrl = null;
   @SerializedName("video")
   private List<Object> mVideo = null;
   protected static Gson gson = null;
@@ -168,7 +166,7 @@ public class OpenGraphObject extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static OpenGraphObject loadJSON(String json, APIContext context) {
+  public static OpenGraphObject loadJSON(String json, APIContext context, String header) {
     OpenGraphObject openGraphObject = getGson().fromJson(json, OpenGraphObject.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -185,11 +183,12 @@ public class OpenGraphObject extends APINode {
     }
     openGraphObject.context = context;
     openGraphObject.rawValue = json;
+    openGraphObject.header = header;
     return openGraphObject;
   }
 
-  public static APINodeList<OpenGraphObject> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<OpenGraphObject> openGraphObjects = new APINodeList<OpenGraphObject>(request, json);
+  public static APINodeList<OpenGraphObject> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OpenGraphObject> openGraphObjects = new APINodeList<OpenGraphObject>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -200,7 +199,7 @@ public class OpenGraphObject extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          openGraphObjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          openGraphObjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return openGraphObjects;
       } else if (result.isJsonObject()) {
@@ -225,7 +224,7 @@ public class OpenGraphObject extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              openGraphObjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              openGraphObjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -236,13 +235,13 @@ public class OpenGraphObject extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  openGraphObjects.add(loadJSON(entry.getValue().toString(), context));
+                  openGraphObjects.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              openGraphObjects.add(loadJSON(obj.toString(), context));
+              openGraphObjects.add(loadJSON(obj.toString(), context, header));
             }
           }
           return openGraphObjects;
@@ -250,7 +249,7 @@ public class OpenGraphObject extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              openGraphObjects.add(loadJSON(entry.getValue().toString(), context));
+              openGraphObjects.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return openGraphObjects;
         } else {
@@ -269,7 +268,7 @@ public class OpenGraphObject extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              openGraphObjects.add(loadJSON(value.toString(), context));
+              openGraphObjects.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -281,7 +280,7 @@ public class OpenGraphObject extends APINode {
 
           // Sixth, check if it's pure JsonObject
           openGraphObjects.clear();
-          openGraphObjects.add(loadJSON(json, context));
+          openGraphObjects.add(loadJSON(json, context, header));
           return openGraphObjects;
         }
       }
@@ -433,10 +432,6 @@ public class OpenGraphObject extends APINode {
     return mUpdatedTime;
   }
 
-  public String getFieldUrl() {
-    return mUrl;
-  }
-
   public List<Object> getFieldVideo() {
     return mVideo;
   }
@@ -482,8 +477,8 @@ public class OpenGraphObject extends APINode {
     };
 
     @Override
-    public APINodeList<Comment> parseResponse(String response) throws APIException {
-      return Comment.parseResponse(response, getContext(), this);
+    public APINodeList<Comment> parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -493,7 +488,8 @@ public class OpenGraphObject extends APINode {
 
     @Override
     public APINodeList<Comment> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -507,7 +503,7 @@ public class OpenGraphObject extends APINode {
         new Function<String, APINodeList<Comment>>() {
            public APINodeList<Comment> apply(String result) {
              try {
-               return APIRequestGetComments.this.parseResponse(result);
+               return APIRequestGetComments.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -777,8 +773,8 @@ public class OpenGraphObject extends APINode {
     };
 
     @Override
-    public Comment parseResponse(String response) throws APIException {
-      return Comment.parseResponse(response, getContext(), this).head();
+    public Comment parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -788,7 +784,8 @@ public class OpenGraphObject extends APINode {
 
     @Override
     public Comment execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -802,7 +799,7 @@ public class OpenGraphObject extends APINode {
         new Function<String, Comment>() {
            public Comment apply(String result) {
              try {
-               return APIRequestCreateComment.this.parseResponse(result);
+               return APIRequestCreateComment.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -972,8 +969,8 @@ public class OpenGraphObject extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -983,7 +980,8 @@ public class OpenGraphObject extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -997,7 +995,7 @@ public class OpenGraphObject extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetLikes.this.parseResponse(result);
+               return APIRequestGetLikes.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1156,8 +1154,8 @@ public class OpenGraphObject extends APINode {
     };
 
     @Override
-    public OpenGraphObject parseResponse(String response) throws APIException {
-      return OpenGraphObject.parseResponse(response, getContext(), this).head();
+    public OpenGraphObject parseResponse(String response, String header) throws APIException {
+      return OpenGraphObject.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1167,7 +1165,8 @@ public class OpenGraphObject extends APINode {
 
     @Override
     public OpenGraphObject execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1181,7 +1180,7 @@ public class OpenGraphObject extends APINode {
         new Function<String, OpenGraphObject>() {
            public OpenGraphObject apply(String result) {
              try {
-               return APIRequestCreateLike.this.parseResponse(result);
+               return APIRequestCreateLike.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1330,8 +1329,8 @@ public class OpenGraphObject extends APINode {
     };
 
     @Override
-    public Photo parseResponse(String response) throws APIException {
-      return Photo.parseResponse(response, getContext(), this).head();
+    public Photo parseResponse(String response, String header) throws APIException {
+      return Photo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1341,7 +1340,8 @@ public class OpenGraphObject extends APINode {
 
     @Override
     public Photo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1355,7 +1355,7 @@ public class OpenGraphObject extends APINode {
         new Function<String, Photo>() {
            public Photo apply(String result) {
              try {
-               return APIRequestCreatePhoto.this.parseResponse(result);
+               return APIRequestCreatePhoto.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1822,15 +1822,14 @@ public class OpenGraphObject extends APINode {
       "left",
       "right",
       "top",
-      "uri",
       "url",
       "width",
       "id",
     };
 
     @Override
-    public APINodeList<ProfilePictureSource> parseResponse(String response) throws APIException {
-      return ProfilePictureSource.parseResponse(response, getContext(), this);
+    public APINodeList<ProfilePictureSource> parseResponse(String response, String header) throws APIException {
+      return ProfilePictureSource.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1840,7 +1839,8 @@ public class OpenGraphObject extends APINode {
 
     @Override
     public APINodeList<ProfilePictureSource> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1854,7 +1854,7 @@ public class OpenGraphObject extends APINode {
         new Function<String, APINodeList<ProfilePictureSource>>() {
            public APINodeList<ProfilePictureSource> apply(String result) {
              try {
-               return APIRequestGetPicture.this.parseResponse(result);
+               return APIRequestGetPicture.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1983,13 +1983,6 @@ public class OpenGraphObject extends APINode {
       this.requestField("top", value);
       return this;
     }
-    public APIRequestGetPicture requestUriField () {
-      return this.requestUriField(true);
-    }
-    public APIRequestGetPicture requestUriField (boolean value) {
-      this.requestField("uri", value);
-      return this;
-    }
     public APIRequestGetPicture requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -2039,8 +2032,8 @@ public class OpenGraphObject extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2050,7 +2043,8 @@ public class OpenGraphObject extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2064,7 +2058,7 @@ public class OpenGraphObject extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetReactions.this.parseResponse(result);
+               return APIRequestGetReactions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2246,13 +2240,12 @@ public class OpenGraphObject extends APINode {
       "title",
       "type",
       "updated_time",
-      "url",
       "video",
     };
 
     @Override
-    public OpenGraphObject parseResponse(String response) throws APIException {
-      return OpenGraphObject.parseResponse(response, getContext(), this).head();
+    public OpenGraphObject parseResponse(String response, String header) throws APIException {
+      return OpenGraphObject.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2262,7 +2255,8 @@ public class OpenGraphObject extends APINode {
 
     @Override
     public OpenGraphObject execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2276,7 +2270,7 @@ public class OpenGraphObject extends APINode {
         new Function<String, OpenGraphObject>() {
            public OpenGraphObject apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2485,13 +2479,6 @@ public class OpenGraphObject extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGet requestUrlField () {
-      return this.requestUrlField(true);
-    }
-    public APIRequestGet requestUrlField (boolean value) {
-      this.requestField("url", value);
-      return this;
-    }
     public APIRequestGet requestVideoField () {
       return this.requestVideoField(true);
     }
@@ -2518,8 +2505,8 @@ public class OpenGraphObject extends APINode {
     };
 
     @Override
-    public OpenGraphObject parseResponse(String response) throws APIException {
-      return OpenGraphObject.parseResponse(response, getContext(), this).head();
+    public OpenGraphObject parseResponse(String response, String header) throws APIException {
+      return OpenGraphObject.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2529,7 +2516,8 @@ public class OpenGraphObject extends APINode {
 
     @Override
     public OpenGraphObject execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2543,7 +2531,7 @@ public class OpenGraphObject extends APINode {
         new Function<String, OpenGraphObject>() {
            public OpenGraphObject apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2670,7 +2658,6 @@ public class OpenGraphObject extends APINode {
     this.mTitle = instance.mTitle;
     this.mType = instance.mType;
     this.mUpdatedTime = instance.mUpdatedTime;
-    this.mUrl = instance.mUrl;
     this.mVideo = instance.mVideo;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
@@ -2679,8 +2666,8 @@ public class OpenGraphObject extends APINode {
 
   public static APIRequest.ResponseParser<OpenGraphObject> getParser() {
     return new APIRequest.ResponseParser<OpenGraphObject>() {
-      public APINodeList<OpenGraphObject> parseResponse(String response, APIContext context, APIRequest<OpenGraphObject> request) throws MalformedResponseException {
-        return OpenGraphObject.parseResponse(response, context, request);
+      public APINodeList<OpenGraphObject> parseResponse(String response, APIContext context, APIRequest<OpenGraphObject> request, String header) throws MalformedResponseException {
+        return OpenGraphObject.parseResponse(response, context, request, header);
       }
     };
   }

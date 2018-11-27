@@ -140,7 +140,7 @@ public class LeadGenContextCard extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LeadGenContextCard loadJSON(String json, APIContext context) {
+  public static LeadGenContextCard loadJSON(String json, APIContext context, String header) {
     LeadGenContextCard leadGenContextCard = getGson().fromJson(json, LeadGenContextCard.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -157,11 +157,12 @@ public class LeadGenContextCard extends APINode {
     }
     leadGenContextCard.context = context;
     leadGenContextCard.rawValue = json;
+    leadGenContextCard.header = header;
     return leadGenContextCard;
   }
 
-  public static APINodeList<LeadGenContextCard> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LeadGenContextCard> leadGenContextCards = new APINodeList<LeadGenContextCard>(request, json);
+  public static APINodeList<LeadGenContextCard> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LeadGenContextCard> leadGenContextCards = new APINodeList<LeadGenContextCard>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -172,7 +173,7 @@ public class LeadGenContextCard extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          leadGenContextCards.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          leadGenContextCards.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return leadGenContextCards;
       } else if (result.isJsonObject()) {
@@ -197,7 +198,7 @@ public class LeadGenContextCard extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              leadGenContextCards.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              leadGenContextCards.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -208,13 +209,13 @@ public class LeadGenContextCard extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  leadGenContextCards.add(loadJSON(entry.getValue().toString(), context));
+                  leadGenContextCards.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              leadGenContextCards.add(loadJSON(obj.toString(), context));
+              leadGenContextCards.add(loadJSON(obj.toString(), context, header));
             }
           }
           return leadGenContextCards;
@@ -222,7 +223,7 @@ public class LeadGenContextCard extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              leadGenContextCards.add(loadJSON(entry.getValue().toString(), context));
+              leadGenContextCards.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return leadGenContextCards;
         } else {
@@ -241,7 +242,7 @@ public class LeadGenContextCard extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              leadGenContextCards.add(loadJSON(value.toString(), context));
+              leadGenContextCards.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -253,7 +254,7 @@ public class LeadGenContextCard extends APINode {
 
           // Sixth, check if it's pure JsonObject
           leadGenContextCards.clear();
-          leadGenContextCards.add(loadJSON(json, context));
+          leadGenContextCards.add(loadJSON(json, context, header));
           return leadGenContextCards;
         }
       }
@@ -353,8 +354,8 @@ public class LeadGenContextCard extends APINode {
     };
 
     @Override
-    public LeadGenContextCard parseResponse(String response) throws APIException {
-      return LeadGenContextCard.parseResponse(response, getContext(), this).head();
+    public LeadGenContextCard parseResponse(String response, String header) throws APIException {
+      return LeadGenContextCard.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -364,7 +365,8 @@ public class LeadGenContextCard extends APINode {
 
     @Override
     public LeadGenContextCard execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -378,7 +380,7 @@ public class LeadGenContextCard extends APINode {
         new Function<String, LeadGenContextCard>() {
            public LeadGenContextCard apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -536,8 +538,8 @@ public class LeadGenContextCard extends APINode {
 
   public static APIRequest.ResponseParser<LeadGenContextCard> getParser() {
     return new APIRequest.ResponseParser<LeadGenContextCard>() {
-      public APINodeList<LeadGenContextCard> parseResponse(String response, APIContext context, APIRequest<LeadGenContextCard> request) throws MalformedResponseException {
-        return LeadGenContextCard.parseResponse(response, context, request);
+      public APINodeList<LeadGenContextCard> parseResponse(String response, APIContext context, APIRequest<LeadGenContextCard> request, String header) throws MalformedResponseException {
+        return LeadGenContextCard.parseResponse(response, context, request, header);
       }
     };
   }

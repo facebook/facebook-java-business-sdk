@@ -83,7 +83,7 @@ public class AdAccountAdRulesHistory extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdAccountAdRulesHistory loadJSON(String json, APIContext context) {
+  public static AdAccountAdRulesHistory loadJSON(String json, APIContext context, String header) {
     AdAccountAdRulesHistory adAccountAdRulesHistory = getGson().fromJson(json, AdAccountAdRulesHistory.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -100,11 +100,12 @@ public class AdAccountAdRulesHistory extends APINode {
     }
     adAccountAdRulesHistory.context = context;
     adAccountAdRulesHistory.rawValue = json;
+    adAccountAdRulesHistory.header = header;
     return adAccountAdRulesHistory;
   }
 
-  public static APINodeList<AdAccountAdRulesHistory> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAccountAdRulesHistory> adAccountAdRulesHistorys = new APINodeList<AdAccountAdRulesHistory>(request, json);
+  public static APINodeList<AdAccountAdRulesHistory> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountAdRulesHistory> adAccountAdRulesHistorys = new APINodeList<AdAccountAdRulesHistory>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -115,7 +116,7 @@ public class AdAccountAdRulesHistory extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountAdRulesHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAccountAdRulesHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adAccountAdRulesHistorys;
       } else if (result.isJsonObject()) {
@@ -140,7 +141,7 @@ public class AdAccountAdRulesHistory extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountAdRulesHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAccountAdRulesHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -151,13 +152,13 @@ public class AdAccountAdRulesHistory extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountAdRulesHistorys.add(loadJSON(entry.getValue().toString(), context));
+                  adAccountAdRulesHistorys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountAdRulesHistorys.add(loadJSON(obj.toString(), context));
+              adAccountAdRulesHistorys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adAccountAdRulesHistorys;
@@ -165,7 +166,7 @@ public class AdAccountAdRulesHistory extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountAdRulesHistorys.add(loadJSON(entry.getValue().toString(), context));
+              adAccountAdRulesHistorys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adAccountAdRulesHistorys;
         } else {
@@ -184,7 +185,7 @@ public class AdAccountAdRulesHistory extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountAdRulesHistorys.add(loadJSON(value.toString(), context));
+              adAccountAdRulesHistorys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -196,7 +197,7 @@ public class AdAccountAdRulesHistory extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adAccountAdRulesHistorys.clear();
-          adAccountAdRulesHistorys.add(loadJSON(json, context));
+          adAccountAdRulesHistorys.add(loadJSON(json, context, header));
           return adAccountAdRulesHistorys;
         }
       }
@@ -406,8 +407,8 @@ public class AdAccountAdRulesHistory extends APINode {
 
   public static APIRequest.ResponseParser<AdAccountAdRulesHistory> getParser() {
     return new APIRequest.ResponseParser<AdAccountAdRulesHistory>() {
-      public APINodeList<AdAccountAdRulesHistory> parseResponse(String response, APIContext context, APIRequest<AdAccountAdRulesHistory> request) throws MalformedResponseException {
-        return AdAccountAdRulesHistory.parseResponse(response, context, request);
+      public APINodeList<AdAccountAdRulesHistory> parseResponse(String response, APIContext context, APIRequest<AdAccountAdRulesHistory> request, String header) throws MalformedResponseException {
+        return AdAccountAdRulesHistory.parseResponse(response, context, request, header);
       }
     };
   }

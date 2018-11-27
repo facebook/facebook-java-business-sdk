@@ -65,8 +65,6 @@ public class OffsitePixel extends APINode {
   private String mLastFiringTime = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("status")
-  private String mStatus = null;
   @SerializedName("tag")
   private String mTag = null;
   protected static Gson gson = null;
@@ -136,7 +134,7 @@ public class OffsitePixel extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static OffsitePixel loadJSON(String json, APIContext context) {
+  public static OffsitePixel loadJSON(String json, APIContext context, String header) {
     OffsitePixel offsitePixel = getGson().fromJson(json, OffsitePixel.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -153,11 +151,12 @@ public class OffsitePixel extends APINode {
     }
     offsitePixel.context = context;
     offsitePixel.rawValue = json;
+    offsitePixel.header = header;
     return offsitePixel;
   }
 
-  public static APINodeList<OffsitePixel> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<OffsitePixel> offsitePixels = new APINodeList<OffsitePixel>(request, json);
+  public static APINodeList<OffsitePixel> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OffsitePixel> offsitePixels = new APINodeList<OffsitePixel>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -168,7 +167,7 @@ public class OffsitePixel extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          offsitePixels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          offsitePixels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return offsitePixels;
       } else if (result.isJsonObject()) {
@@ -193,7 +192,7 @@ public class OffsitePixel extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              offsitePixels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              offsitePixels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -204,13 +203,13 @@ public class OffsitePixel extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  offsitePixels.add(loadJSON(entry.getValue().toString(), context));
+                  offsitePixels.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              offsitePixels.add(loadJSON(obj.toString(), context));
+              offsitePixels.add(loadJSON(obj.toString(), context, header));
             }
           }
           return offsitePixels;
@@ -218,7 +217,7 @@ public class OffsitePixel extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              offsitePixels.add(loadJSON(entry.getValue().toString(), context));
+              offsitePixels.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return offsitePixels;
         } else {
@@ -237,7 +236,7 @@ public class OffsitePixel extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              offsitePixels.add(loadJSON(value.toString(), context));
+              offsitePixels.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -249,7 +248,7 @@ public class OffsitePixel extends APINode {
 
           // Sixth, check if it's pure JsonObject
           offsitePixels.clear();
-          offsitePixels.add(loadJSON(json, context));
+          offsitePixels.add(loadJSON(json, context, header));
           return offsitePixels;
         }
       }
@@ -302,10 +301,6 @@ public class OffsitePixel extends APINode {
     return mName;
   }
 
-  public String getFieldStatus() {
-    return mStatus;
-  }
-
   public String getFieldTag() {
     return mTag;
   }
@@ -329,13 +324,12 @@ public class OffsitePixel extends APINode {
       "js_pixel",
       "last_firing_time",
       "name",
-      "status",
       "tag",
     };
 
     @Override
-    public OffsitePixel parseResponse(String response) throws APIException {
-      return OffsitePixel.parseResponse(response, getContext(), this).head();
+    public OffsitePixel parseResponse(String response, String header) throws APIException {
+      return OffsitePixel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -345,7 +339,8 @@ public class OffsitePixel extends APINode {
 
     @Override
     public OffsitePixel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -359,7 +354,7 @@ public class OffsitePixel extends APINode {
         new Function<String, OffsitePixel>() {
            public OffsitePixel apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -465,13 +460,6 @@ public class OffsitePixel extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
     public APIRequestGet requestTagField () {
       return this.requestTagField(true);
     }
@@ -501,7 +489,6 @@ public class OffsitePixel extends APINode {
     this.mJsPixel = instance.mJsPixel;
     this.mLastFiringTime = instance.mLastFiringTime;
     this.mName = instance.mName;
-    this.mStatus = instance.mStatus;
     this.mTag = instance.mTag;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
@@ -510,8 +497,8 @@ public class OffsitePixel extends APINode {
 
   public static APIRequest.ResponseParser<OffsitePixel> getParser() {
     return new APIRequest.ResponseParser<OffsitePixel>() {
-      public APINodeList<OffsitePixel> parseResponse(String response, APIContext context, APIRequest<OffsitePixel> request) throws MalformedResponseException {
-        return OffsitePixel.parseResponse(response, context, request);
+      public APINodeList<OffsitePixel> parseResponse(String response, APIContext context, APIRequest<OffsitePixel> request, String header) throws MalformedResponseException {
+        return OffsitePixel.parseResponse(response, context, request, header);
       }
     };
   }

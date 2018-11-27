@@ -69,7 +69,7 @@ public class AgeRange extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AgeRange loadJSON(String json, APIContext context) {
+  public static AgeRange loadJSON(String json, APIContext context, String header) {
     AgeRange ageRange = getGson().fromJson(json, AgeRange.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class AgeRange extends APINode {
     }
     ageRange.context = context;
     ageRange.rawValue = json;
+    ageRange.header = header;
     return ageRange;
   }
 
-  public static APINodeList<AgeRange> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AgeRange> ageRanges = new APINodeList<AgeRange>(request, json);
+  public static APINodeList<AgeRange> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AgeRange> ageRanges = new APINodeList<AgeRange>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class AgeRange extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          ageRanges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          ageRanges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return ageRanges;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class AgeRange extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              ageRanges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              ageRanges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class AgeRange extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  ageRanges.add(loadJSON(entry.getValue().toString(), context));
+                  ageRanges.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              ageRanges.add(loadJSON(obj.toString(), context));
+              ageRanges.add(loadJSON(obj.toString(), context, header));
             }
           }
           return ageRanges;
@@ -151,7 +152,7 @@ public class AgeRange extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              ageRanges.add(loadJSON(entry.getValue().toString(), context));
+              ageRanges.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return ageRanges;
         } else {
@@ -170,7 +171,7 @@ public class AgeRange extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              ageRanges.add(loadJSON(value.toString(), context));
+              ageRanges.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class AgeRange extends APINode {
 
           // Sixth, check if it's pure JsonObject
           ageRanges.clear();
-          ageRanges.add(loadJSON(json, context));
+          ageRanges.add(loadJSON(json, context, header));
           return ageRanges;
         }
       }
@@ -265,8 +266,8 @@ public class AgeRange extends APINode {
 
   public static APIRequest.ResponseParser<AgeRange> getParser() {
     return new APIRequest.ResponseParser<AgeRange>() {
-      public APINodeList<AgeRange> parseResponse(String response, APIContext context, APIRequest<AgeRange> request) throws MalformedResponseException {
-        return AgeRange.parseResponse(response, context, request);
+      public APINodeList<AgeRange> parseResponse(String response, APIContext context, APIRequest<AgeRange> request, String header) throws MalformedResponseException {
+        return AgeRange.parseResponse(response, context, request, header);
       }
     };
   }

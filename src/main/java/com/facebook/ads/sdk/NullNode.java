@@ -65,7 +65,7 @@ public class NullNode extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static NullNode loadJSON(String json, APIContext context) {
+  public static NullNode loadJSON(String json, APIContext context, String header) {
     NullNode nullNode = getGson().fromJson(json, NullNode.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -82,11 +82,12 @@ public class NullNode extends APINode {
     }
     nullNode.context = context;
     nullNode.rawValue = json;
+    nullNode.header = header;
     return nullNode;
   }
 
-  public static APINodeList<NullNode> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<NullNode> nullNodes = new APINodeList<NullNode>(request, json);
+  public static APINodeList<NullNode> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<NullNode> nullNodes = new APINodeList<NullNode>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -97,7 +98,7 @@ public class NullNode extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          nullNodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          nullNodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return nullNodes;
       } else if (result.isJsonObject()) {
@@ -122,7 +123,7 @@ public class NullNode extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              nullNodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              nullNodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -133,13 +134,13 @@ public class NullNode extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  nullNodes.add(loadJSON(entry.getValue().toString(), context));
+                  nullNodes.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              nullNodes.add(loadJSON(obj.toString(), context));
+              nullNodes.add(loadJSON(obj.toString(), context, header));
             }
           }
           return nullNodes;
@@ -147,7 +148,7 @@ public class NullNode extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              nullNodes.add(loadJSON(entry.getValue().toString(), context));
+              nullNodes.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return nullNodes;
         } else {
@@ -166,7 +167,7 @@ public class NullNode extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              nullNodes.add(loadJSON(value.toString(), context));
+              nullNodes.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -178,7 +179,7 @@ public class NullNode extends APINode {
 
           // Sixth, check if it's pure JsonObject
           nullNodes.clear();
-          nullNodes.add(loadJSON(json, context));
+          nullNodes.add(loadJSON(json, context, header));
           return nullNodes;
         }
       }
@@ -241,8 +242,8 @@ public class NullNode extends APINode {
 
   public static APIRequest.ResponseParser<NullNode> getParser() {
     return new APIRequest.ResponseParser<NullNode>() {
-      public APINodeList<NullNode> parseResponse(String response, APIContext context, APIRequest<NullNode> request) throws MalformedResponseException {
-        return NullNode.parseResponse(response, context, request);
+      public APINodeList<NullNode> parseResponse(String response, APIContext context, APIRequest<NullNode> request, String header) throws MalformedResponseException {
+        return NullNode.parseResponse(response, context, request, header);
       }
     };
   }

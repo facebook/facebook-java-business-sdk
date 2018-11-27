@@ -71,7 +71,7 @@ public class PageParking extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageParking loadJSON(String json, APIContext context) {
+  public static PageParking loadJSON(String json, APIContext context, String header) {
     PageParking pageParking = getGson().fromJson(json, PageParking.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class PageParking extends APINode {
     }
     pageParking.context = context;
     pageParking.rawValue = json;
+    pageParking.header = header;
     return pageParking;
   }
 
-  public static APINodeList<PageParking> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageParking> pageParkings = new APINodeList<PageParking>(request, json);
+  public static APINodeList<PageParking> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageParking> pageParkings = new APINodeList<PageParking>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class PageParking extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageParkings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageParkings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageParkings;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class PageParking extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageParkings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageParkings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class PageParking extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageParkings.add(loadJSON(entry.getValue().toString(), context));
+                  pageParkings.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageParkings.add(loadJSON(obj.toString(), context));
+              pageParkings.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageParkings;
@@ -153,7 +154,7 @@ public class PageParking extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageParkings.add(loadJSON(entry.getValue().toString(), context));
+              pageParkings.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageParkings;
         } else {
@@ -172,7 +173,7 @@ public class PageParking extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageParkings.add(loadJSON(value.toString(), context));
+              pageParkings.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class PageParking extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageParkings.clear();
-          pageParkings.add(loadJSON(json, context));
+          pageParkings.add(loadJSON(json, context, header));
           return pageParkings;
         }
       }
@@ -277,8 +278,8 @@ public class PageParking extends APINode {
 
   public static APIRequest.ResponseParser<PageParking> getParser() {
     return new APIRequest.ResponseParser<PageParking>() {
-      public APINodeList<PageParking> parseResponse(String response, APIContext context, APIRequest<PageParking> request) throws MalformedResponseException {
-        return PageParking.parseResponse(response, context, request);
+      public APINodeList<PageParking> parseResponse(String response, APIContext context, APIRequest<PageParking> request, String header) throws MalformedResponseException {
+        return PageParking.parseResponse(response, context, request, header);
       }
     };
   }

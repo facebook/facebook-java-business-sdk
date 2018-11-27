@@ -89,7 +89,7 @@ public class ReachFrequencyActivity extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ReachFrequencyActivity loadJSON(String json, APIContext context) {
+  public static ReachFrequencyActivity loadJSON(String json, APIContext context, String header) {
     ReachFrequencyActivity reachFrequencyActivity = getGson().fromJson(json, ReachFrequencyActivity.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -106,11 +106,12 @@ public class ReachFrequencyActivity extends APINode {
     }
     reachFrequencyActivity.context = context;
     reachFrequencyActivity.rawValue = json;
+    reachFrequencyActivity.header = header;
     return reachFrequencyActivity;
   }
 
-  public static APINodeList<ReachFrequencyActivity> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ReachFrequencyActivity> reachFrequencyActivitys = new APINodeList<ReachFrequencyActivity>(request, json);
+  public static APINodeList<ReachFrequencyActivity> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ReachFrequencyActivity> reachFrequencyActivitys = new APINodeList<ReachFrequencyActivity>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -121,7 +122,7 @@ public class ReachFrequencyActivity extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          reachFrequencyActivitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          reachFrequencyActivitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return reachFrequencyActivitys;
       } else if (result.isJsonObject()) {
@@ -146,7 +147,7 @@ public class ReachFrequencyActivity extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              reachFrequencyActivitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              reachFrequencyActivitys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -157,13 +158,13 @@ public class ReachFrequencyActivity extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  reachFrequencyActivitys.add(loadJSON(entry.getValue().toString(), context));
+                  reachFrequencyActivitys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              reachFrequencyActivitys.add(loadJSON(obj.toString(), context));
+              reachFrequencyActivitys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return reachFrequencyActivitys;
@@ -171,7 +172,7 @@ public class ReachFrequencyActivity extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              reachFrequencyActivitys.add(loadJSON(entry.getValue().toString(), context));
+              reachFrequencyActivitys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return reachFrequencyActivitys;
         } else {
@@ -190,7 +191,7 @@ public class ReachFrequencyActivity extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              reachFrequencyActivitys.add(loadJSON(value.toString(), context));
+              reachFrequencyActivitys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -202,7 +203,7 @@ public class ReachFrequencyActivity extends APINode {
 
           // Sixth, check if it's pure JsonObject
           reachFrequencyActivitys.clear();
-          reachFrequencyActivitys.add(loadJSON(json, context));
+          reachFrequencyActivitys.add(loadJSON(json, context, header));
           return reachFrequencyActivitys;
         }
       }
@@ -385,8 +386,8 @@ public class ReachFrequencyActivity extends APINode {
 
   public static APIRequest.ResponseParser<ReachFrequencyActivity> getParser() {
     return new APIRequest.ResponseParser<ReachFrequencyActivity>() {
-      public APINodeList<ReachFrequencyActivity> parseResponse(String response, APIContext context, APIRequest<ReachFrequencyActivity> request) throws MalformedResponseException {
-        return ReachFrequencyActivity.parseResponse(response, context, request);
+      public APINodeList<ReachFrequencyActivity> parseResponse(String response, APIContext context, APIRequest<ReachFrequencyActivity> request, String header) throws MalformedResponseException {
+        return ReachFrequencyActivity.parseResponse(response, context, request, header);
       }
     };
   }

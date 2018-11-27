@@ -73,7 +73,7 @@ public class TargetingGeoLocationPoliticalDistrict extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static TargetingGeoLocationPoliticalDistrict loadJSON(String json, APIContext context) {
+  public static TargetingGeoLocationPoliticalDistrict loadJSON(String json, APIContext context, String header) {
     TargetingGeoLocationPoliticalDistrict targetingGeoLocationPoliticalDistrict = getGson().fromJson(json, TargetingGeoLocationPoliticalDistrict.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class TargetingGeoLocationPoliticalDistrict extends APINode {
     }
     targetingGeoLocationPoliticalDistrict.context = context;
     targetingGeoLocationPoliticalDistrict.rawValue = json;
+    targetingGeoLocationPoliticalDistrict.header = header;
     return targetingGeoLocationPoliticalDistrict;
   }
 
-  public static APINodeList<TargetingGeoLocationPoliticalDistrict> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<TargetingGeoLocationPoliticalDistrict> targetingGeoLocationPoliticalDistricts = new APINodeList<TargetingGeoLocationPoliticalDistrict>(request, json);
+  public static APINodeList<TargetingGeoLocationPoliticalDistrict> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<TargetingGeoLocationPoliticalDistrict> targetingGeoLocationPoliticalDistricts = new APINodeList<TargetingGeoLocationPoliticalDistrict>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class TargetingGeoLocationPoliticalDistrict extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          targetingGeoLocationPoliticalDistricts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          targetingGeoLocationPoliticalDistricts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return targetingGeoLocationPoliticalDistricts;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class TargetingGeoLocationPoliticalDistrict extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              targetingGeoLocationPoliticalDistricts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              targetingGeoLocationPoliticalDistricts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class TargetingGeoLocationPoliticalDistrict extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  targetingGeoLocationPoliticalDistricts.add(loadJSON(entry.getValue().toString(), context));
+                  targetingGeoLocationPoliticalDistricts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              targetingGeoLocationPoliticalDistricts.add(loadJSON(obj.toString(), context));
+              targetingGeoLocationPoliticalDistricts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return targetingGeoLocationPoliticalDistricts;
@@ -155,7 +156,7 @@ public class TargetingGeoLocationPoliticalDistrict extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              targetingGeoLocationPoliticalDistricts.add(loadJSON(entry.getValue().toString(), context));
+              targetingGeoLocationPoliticalDistricts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return targetingGeoLocationPoliticalDistricts;
         } else {
@@ -174,7 +175,7 @@ public class TargetingGeoLocationPoliticalDistrict extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              targetingGeoLocationPoliticalDistricts.add(loadJSON(value.toString(), context));
+              targetingGeoLocationPoliticalDistricts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class TargetingGeoLocationPoliticalDistrict extends APINode {
 
           // Sixth, check if it's pure JsonObject
           targetingGeoLocationPoliticalDistricts.clear();
-          targetingGeoLocationPoliticalDistricts.add(loadJSON(json, context));
+          targetingGeoLocationPoliticalDistricts.add(loadJSON(json, context, header));
           return targetingGeoLocationPoliticalDistricts;
         }
       }
@@ -289,8 +290,8 @@ public class TargetingGeoLocationPoliticalDistrict extends APINode {
 
   public static APIRequest.ResponseParser<TargetingGeoLocationPoliticalDistrict> getParser() {
     return new APIRequest.ResponseParser<TargetingGeoLocationPoliticalDistrict>() {
-      public APINodeList<TargetingGeoLocationPoliticalDistrict> parseResponse(String response, APIContext context, APIRequest<TargetingGeoLocationPoliticalDistrict> request) throws MalformedResponseException {
-        return TargetingGeoLocationPoliticalDistrict.parseResponse(response, context, request);
+      public APINodeList<TargetingGeoLocationPoliticalDistrict> parseResponse(String response, APIContext context, APIRequest<TargetingGeoLocationPoliticalDistrict> request, String header) throws MalformedResponseException {
+        return TargetingGeoLocationPoliticalDistrict.parseResponse(response, context, request, header);
       }
     };
   }

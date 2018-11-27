@@ -91,7 +91,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCreativeLinkDataImageLayerSpec loadJSON(String json, APIContext context) {
+  public static AdCreativeLinkDataImageLayerSpec loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkDataImageLayerSpec adCreativeLinkDataImageLayerSpec = getGson().fromJson(json, AdCreativeLinkDataImageLayerSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -108,11 +108,12 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
     }
     adCreativeLinkDataImageLayerSpec.context = context;
     adCreativeLinkDataImageLayerSpec.rawValue = json;
+    adCreativeLinkDataImageLayerSpec.header = header;
     return adCreativeLinkDataImageLayerSpec;
   }
 
-  public static APINodeList<AdCreativeLinkDataImageLayerSpec> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCreativeLinkDataImageLayerSpec> adCreativeLinkDataImageLayerSpecs = new APINodeList<AdCreativeLinkDataImageLayerSpec>(request, json);
+  public static APINodeList<AdCreativeLinkDataImageLayerSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeLinkDataImageLayerSpec> adCreativeLinkDataImageLayerSpecs = new APINodeList<AdCreativeLinkDataImageLayerSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -123,7 +124,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeLinkDataImageLayerSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCreativeLinkDataImageLayerSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCreativeLinkDataImageLayerSpecs;
       } else if (result.isJsonObject()) {
@@ -148,7 +149,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeLinkDataImageLayerSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCreativeLinkDataImageLayerSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -159,13 +160,13 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeLinkDataImageLayerSpecs.add(loadJSON(entry.getValue().toString(), context));
+                  adCreativeLinkDataImageLayerSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeLinkDataImageLayerSpecs.add(loadJSON(obj.toString(), context));
+              adCreativeLinkDataImageLayerSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCreativeLinkDataImageLayerSpecs;
@@ -173,7 +174,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeLinkDataImageLayerSpecs.add(loadJSON(entry.getValue().toString(), context));
+              adCreativeLinkDataImageLayerSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCreativeLinkDataImageLayerSpecs;
         } else {
@@ -192,7 +193,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeLinkDataImageLayerSpecs.add(loadJSON(value.toString(), context));
+              adCreativeLinkDataImageLayerSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -204,7 +205,7 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCreativeLinkDataImageLayerSpecs.clear();
-          adCreativeLinkDataImageLayerSpecs.add(loadJSON(json, context));
+          adCreativeLinkDataImageLayerSpecs.add(loadJSON(json, context, header));
           return adCreativeLinkDataImageLayerSpecs;
         }
       }
@@ -564,8 +565,8 @@ public class AdCreativeLinkDataImageLayerSpec extends APINode {
 
   public static APIRequest.ResponseParser<AdCreativeLinkDataImageLayerSpec> getParser() {
     return new APIRequest.ResponseParser<AdCreativeLinkDataImageLayerSpec>() {
-      public APINodeList<AdCreativeLinkDataImageLayerSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeLinkDataImageLayerSpec> request) throws MalformedResponseException {
-        return AdCreativeLinkDataImageLayerSpec.parseResponse(response, context, request);
+      public APINodeList<AdCreativeLinkDataImageLayerSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeLinkDataImageLayerSpec> request, String header) throws MalformedResponseException {
+        return AdCreativeLinkDataImageLayerSpec.parseResponse(response, context, request, header);
       }
     };
   }

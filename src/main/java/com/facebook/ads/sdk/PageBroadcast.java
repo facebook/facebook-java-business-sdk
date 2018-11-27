@@ -128,7 +128,7 @@ public class PageBroadcast extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageBroadcast loadJSON(String json, APIContext context) {
+  public static PageBroadcast loadJSON(String json, APIContext context, String header) {
     PageBroadcast pageBroadcast = getGson().fromJson(json, PageBroadcast.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -145,11 +145,12 @@ public class PageBroadcast extends APINode {
     }
     pageBroadcast.context = context;
     pageBroadcast.rawValue = json;
+    pageBroadcast.header = header;
     return pageBroadcast;
   }
 
-  public static APINodeList<PageBroadcast> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageBroadcast> pageBroadcasts = new APINodeList<PageBroadcast>(request, json);
+  public static APINodeList<PageBroadcast> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageBroadcast> pageBroadcasts = new APINodeList<PageBroadcast>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -160,7 +161,7 @@ public class PageBroadcast extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageBroadcasts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageBroadcasts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageBroadcasts;
       } else if (result.isJsonObject()) {
@@ -185,7 +186,7 @@ public class PageBroadcast extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageBroadcasts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageBroadcasts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -196,13 +197,13 @@ public class PageBroadcast extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageBroadcasts.add(loadJSON(entry.getValue().toString(), context));
+                  pageBroadcasts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageBroadcasts.add(loadJSON(obj.toString(), context));
+              pageBroadcasts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageBroadcasts;
@@ -210,7 +211,7 @@ public class PageBroadcast extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageBroadcasts.add(loadJSON(entry.getValue().toString(), context));
+              pageBroadcasts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageBroadcasts;
         } else {
@@ -229,7 +230,7 @@ public class PageBroadcast extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageBroadcasts.add(loadJSON(value.toString(), context));
+              pageBroadcasts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -241,7 +242,7 @@ public class PageBroadcast extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageBroadcasts.clear();
-          pageBroadcasts.add(loadJSON(json, context));
+          pageBroadcasts.add(loadJSON(json, context, header));
           return pageBroadcasts;
         }
       }
@@ -314,8 +315,8 @@ public class PageBroadcast extends APINode {
     };
 
     @Override
-    public APINodeList<InsightsResult> parseResponse(String response) throws APIException {
-      return InsightsResult.parseResponse(response, getContext(), this);
+    public APINodeList<InsightsResult> parseResponse(String response, String header) throws APIException {
+      return InsightsResult.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -325,7 +326,8 @@ public class PageBroadcast extends APINode {
 
     @Override
     public APINodeList<InsightsResult> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -339,7 +341,7 @@ public class PageBroadcast extends APINode {
         new Function<String, APINodeList<InsightsResult>>() {
            public APINodeList<InsightsResult> apply(String result) {
              try {
-               return APIRequestGetInsights.this.parseResponse(result);
+               return APIRequestGetInsights.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -478,8 +480,8 @@ public class PageBroadcast extends APINode {
     };
 
     @Override
-    public PageBroadcast parseResponse(String response) throws APIException {
-      return PageBroadcast.parseResponse(response, getContext(), this).head();
+    public PageBroadcast parseResponse(String response, String header) throws APIException {
+      return PageBroadcast.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -489,7 +491,8 @@ public class PageBroadcast extends APINode {
 
     @Override
     public PageBroadcast execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -503,7 +506,7 @@ public class PageBroadcast extends APINode {
         new Function<String, PageBroadcast>() {
            public PageBroadcast apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -613,8 +616,8 @@ public class PageBroadcast extends APINode {
 
   public static APIRequest.ResponseParser<PageBroadcast> getParser() {
     return new APIRequest.ResponseParser<PageBroadcast>() {
-      public APINodeList<PageBroadcast> parseResponse(String response, APIContext context, APIRequest<PageBroadcast> request) throws MalformedResponseException {
-        return PageBroadcast.parseResponse(response, context, request);
+      public APINodeList<PageBroadcast> parseResponse(String response, APIContext context, APIRequest<PageBroadcast> request, String header) throws MalformedResponseException {
+        return PageBroadcast.parseResponse(response, context, request, header);
       }
     };
   }

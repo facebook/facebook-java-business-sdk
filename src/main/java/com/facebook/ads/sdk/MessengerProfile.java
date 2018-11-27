@@ -81,7 +81,7 @@ public class MessengerProfile extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static MessengerProfile loadJSON(String json, APIContext context) {
+  public static MessengerProfile loadJSON(String json, APIContext context, String header) {
     MessengerProfile messengerProfile = getGson().fromJson(json, MessengerProfile.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -98,11 +98,12 @@ public class MessengerProfile extends APINode {
     }
     messengerProfile.context = context;
     messengerProfile.rawValue = json;
+    messengerProfile.header = header;
     return messengerProfile;
   }
 
-  public static APINodeList<MessengerProfile> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<MessengerProfile> messengerProfiles = new APINodeList<MessengerProfile>(request, json);
+  public static APINodeList<MessengerProfile> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<MessengerProfile> messengerProfiles = new APINodeList<MessengerProfile>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -113,7 +114,7 @@ public class MessengerProfile extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          messengerProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          messengerProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return messengerProfiles;
       } else if (result.isJsonObject()) {
@@ -138,7 +139,7 @@ public class MessengerProfile extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              messengerProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              messengerProfiles.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -149,13 +150,13 @@ public class MessengerProfile extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  messengerProfiles.add(loadJSON(entry.getValue().toString(), context));
+                  messengerProfiles.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              messengerProfiles.add(loadJSON(obj.toString(), context));
+              messengerProfiles.add(loadJSON(obj.toString(), context, header));
             }
           }
           return messengerProfiles;
@@ -163,7 +164,7 @@ public class MessengerProfile extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              messengerProfiles.add(loadJSON(entry.getValue().toString(), context));
+              messengerProfiles.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return messengerProfiles;
         } else {
@@ -182,7 +183,7 @@ public class MessengerProfile extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              messengerProfiles.add(loadJSON(value.toString(), context));
+              messengerProfiles.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -194,7 +195,7 @@ public class MessengerProfile extends APINode {
 
           // Sixth, check if it's pure JsonObject
           messengerProfiles.clear();
-          messengerProfiles.add(loadJSON(json, context));
+          messengerProfiles.add(loadJSON(json, context, header));
           return messengerProfiles;
         }
       }
@@ -337,8 +338,8 @@ public class MessengerProfile extends APINode {
 
   public static APIRequest.ResponseParser<MessengerProfile> getParser() {
     return new APIRequest.ResponseParser<MessengerProfile>() {
-      public APINodeList<MessengerProfile> parseResponse(String response, APIContext context, APIRequest<MessengerProfile> request) throws MalformedResponseException {
-        return MessengerProfile.parseResponse(response, context, request);
+      public APINodeList<MessengerProfile> parseResponse(String response, APIContext context, APIRequest<MessengerProfile> request, String header) throws MalformedResponseException {
+        return MessengerProfile.parseResponse(response, context, request, header);
       }
     };
   }

@@ -132,7 +132,7 @@ public class PageAboutStory extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageAboutStory loadJSON(String json, APIContext context) {
+  public static PageAboutStory loadJSON(String json, APIContext context, String header) {
     PageAboutStory pageAboutStory = getGson().fromJson(json, PageAboutStory.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -149,11 +149,12 @@ public class PageAboutStory extends APINode {
     }
     pageAboutStory.context = context;
     pageAboutStory.rawValue = json;
+    pageAboutStory.header = header;
     return pageAboutStory;
   }
 
-  public static APINodeList<PageAboutStory> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageAboutStory> pageAboutStorys = new APINodeList<PageAboutStory>(request, json);
+  public static APINodeList<PageAboutStory> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageAboutStory> pageAboutStorys = new APINodeList<PageAboutStory>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -164,7 +165,7 @@ public class PageAboutStory extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageAboutStorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageAboutStorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageAboutStorys;
       } else if (result.isJsonObject()) {
@@ -189,7 +190,7 @@ public class PageAboutStory extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageAboutStorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageAboutStorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -200,13 +201,13 @@ public class PageAboutStory extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageAboutStorys.add(loadJSON(entry.getValue().toString(), context));
+                  pageAboutStorys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageAboutStorys.add(loadJSON(obj.toString(), context));
+              pageAboutStorys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageAboutStorys;
@@ -214,7 +215,7 @@ public class PageAboutStory extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageAboutStorys.add(loadJSON(entry.getValue().toString(), context));
+              pageAboutStorys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageAboutStorys;
         } else {
@@ -233,7 +234,7 @@ public class PageAboutStory extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageAboutStorys.add(loadJSON(value.toString(), context));
+              pageAboutStorys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -245,7 +246,7 @@ public class PageAboutStory extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageAboutStorys.clear();
-          pageAboutStorys.add(loadJSON(json, context));
+          pageAboutStorys.add(loadJSON(json, context, header));
           return pageAboutStorys;
         }
       }
@@ -322,8 +323,8 @@ public class PageAboutStory extends APINode {
     };
 
     @Override
-    public PageAboutStory parseResponse(String response) throws APIException {
-      return PageAboutStory.parseResponse(response, getContext(), this).head();
+    public PageAboutStory parseResponse(String response, String header) throws APIException {
+      return PageAboutStory.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -333,7 +334,8 @@ public class PageAboutStory extends APINode {
 
     @Override
     public PageAboutStory execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -347,7 +349,7 @@ public class PageAboutStory extends APINode {
         new Function<String, PageAboutStory>() {
            public PageAboutStory apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -473,8 +475,8 @@ public class PageAboutStory extends APINode {
 
   public static APIRequest.ResponseParser<PageAboutStory> getParser() {
     return new APIRequest.ResponseParser<PageAboutStory>() {
-      public APINodeList<PageAboutStory> parseResponse(String response, APIContext context, APIRequest<PageAboutStory> request) throws MalformedResponseException {
-        return PageAboutStory.parseResponse(response, context, request);
+      public APINodeList<PageAboutStory> parseResponse(String response, APIContext context, APIRequest<PageAboutStory> request, String header) throws MalformedResponseException {
+        return PageAboutStory.parseResponse(response, context, request, header);
       }
     };
   }

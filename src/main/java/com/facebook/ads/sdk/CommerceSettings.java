@@ -69,7 +69,7 @@ public class CommerceSettings extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CommerceSettings loadJSON(String json, APIContext context) {
+  public static CommerceSettings loadJSON(String json, APIContext context, String header) {
     CommerceSettings commerceSettings = getGson().fromJson(json, CommerceSettings.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class CommerceSettings extends APINode {
     }
     commerceSettings.context = context;
     commerceSettings.rawValue = json;
+    commerceSettings.header = header;
     return commerceSettings;
   }
 
-  public static APINodeList<CommerceSettings> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CommerceSettings> commerceSettingss = new APINodeList<CommerceSettings>(request, json);
+  public static APINodeList<CommerceSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CommerceSettings> commerceSettingss = new APINodeList<CommerceSettings>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class CommerceSettings extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          commerceSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          commerceSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return commerceSettingss;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class CommerceSettings extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              commerceSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              commerceSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class CommerceSettings extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  commerceSettingss.add(loadJSON(entry.getValue().toString(), context));
+                  commerceSettingss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              commerceSettingss.add(loadJSON(obj.toString(), context));
+              commerceSettingss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return commerceSettingss;
@@ -151,7 +152,7 @@ public class CommerceSettings extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              commerceSettingss.add(loadJSON(entry.getValue().toString(), context));
+              commerceSettingss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return commerceSettingss;
         } else {
@@ -170,7 +171,7 @@ public class CommerceSettings extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              commerceSettingss.add(loadJSON(value.toString(), context));
+              commerceSettingss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class CommerceSettings extends APINode {
 
           // Sixth, check if it's pure JsonObject
           commerceSettingss.clear();
-          commerceSettingss.add(loadJSON(json, context));
+          commerceSettingss.add(loadJSON(json, context, header));
           return commerceSettingss;
         }
       }
@@ -265,8 +266,8 @@ public class CommerceSettings extends APINode {
 
   public static APIRequest.ResponseParser<CommerceSettings> getParser() {
     return new APIRequest.ResponseParser<CommerceSettings>() {
-      public APINodeList<CommerceSettings> parseResponse(String response, APIContext context, APIRequest<CommerceSettings> request) throws MalformedResponseException {
-        return CommerceSettings.parseResponse(response, context, request);
+      public APINodeList<CommerceSettings> parseResponse(String response, APIContext context, APIRequest<CommerceSettings> request, String header) throws MalformedResponseException {
+        return CommerceSettings.parseResponse(response, context, request, header);
       }
     };
   }

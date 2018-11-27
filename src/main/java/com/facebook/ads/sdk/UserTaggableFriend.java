@@ -73,7 +73,7 @@ public class UserTaggableFriend extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserTaggableFriend loadJSON(String json, APIContext context) {
+  public static UserTaggableFriend loadJSON(String json, APIContext context, String header) {
     UserTaggableFriend userTaggableFriend = getGson().fromJson(json, UserTaggableFriend.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class UserTaggableFriend extends APINode {
     }
     userTaggableFriend.context = context;
     userTaggableFriend.rawValue = json;
+    userTaggableFriend.header = header;
     return userTaggableFriend;
   }
 
-  public static APINodeList<UserTaggableFriend> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UserTaggableFriend> userTaggableFriends = new APINodeList<UserTaggableFriend>(request, json);
+  public static APINodeList<UserTaggableFriend> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UserTaggableFriend> userTaggableFriends = new APINodeList<UserTaggableFriend>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class UserTaggableFriend extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userTaggableFriends.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userTaggableFriends.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return userTaggableFriends;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class UserTaggableFriend extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userTaggableFriends.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userTaggableFriends.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class UserTaggableFriend extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userTaggableFriends.add(loadJSON(entry.getValue().toString(), context));
+                  userTaggableFriends.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userTaggableFriends.add(loadJSON(obj.toString(), context));
+              userTaggableFriends.add(loadJSON(obj.toString(), context, header));
             }
           }
           return userTaggableFriends;
@@ -155,7 +156,7 @@ public class UserTaggableFriend extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userTaggableFriends.add(loadJSON(entry.getValue().toString(), context));
+              userTaggableFriends.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return userTaggableFriends;
         } else {
@@ -174,7 +175,7 @@ public class UserTaggableFriend extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userTaggableFriends.add(loadJSON(value.toString(), context));
+              userTaggableFriends.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class UserTaggableFriend extends APINode {
 
           // Sixth, check if it's pure JsonObject
           userTaggableFriends.clear();
-          userTaggableFriends.add(loadJSON(json, context));
+          userTaggableFriends.add(loadJSON(json, context, header));
           return userTaggableFriends;
         }
       }
@@ -288,15 +289,14 @@ public class UserTaggableFriend extends APINode {
       "left",
       "right",
       "top",
-      "uri",
       "url",
       "width",
       "id",
     };
 
     @Override
-    public APINodeList<ProfilePictureSource> parseResponse(String response) throws APIException {
-      return ProfilePictureSource.parseResponse(response, getContext(), this);
+    public APINodeList<ProfilePictureSource> parseResponse(String response, String header) throws APIException {
+      return ProfilePictureSource.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -306,7 +306,8 @@ public class UserTaggableFriend extends APINode {
 
     @Override
     public APINodeList<ProfilePictureSource> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -320,7 +321,7 @@ public class UserTaggableFriend extends APINode {
         new Function<String, APINodeList<ProfilePictureSource>>() {
            public APINodeList<ProfilePictureSource> apply(String result) {
              try {
-               return APIRequestGetPicture.this.parseResponse(result);
+               return APIRequestGetPicture.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -467,13 +468,6 @@ public class UserTaggableFriend extends APINode {
       this.requestField("top", value);
       return this;
     }
-    public APIRequestGetPicture requestUriField () {
-      return this.requestUriField(true);
-    }
-    public APIRequestGetPicture requestUriField (boolean value) {
-      this.requestField("uri", value);
-      return this;
-    }
     public APIRequestGetPicture requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -524,8 +518,8 @@ public class UserTaggableFriend extends APINode {
 
   public static APIRequest.ResponseParser<UserTaggableFriend> getParser() {
     return new APIRequest.ResponseParser<UserTaggableFriend>() {
-      public APINodeList<UserTaggableFriend> parseResponse(String response, APIContext context, APIRequest<UserTaggableFriend> request) throws MalformedResponseException {
-        return UserTaggableFriend.parseResponse(response, context, request);
+      public APINodeList<UserTaggableFriend> parseResponse(String response, APIContext context, APIRequest<UserTaggableFriend> request, String header) throws MalformedResponseException {
+        return UserTaggableFriend.parseResponse(response, context, request, header);
       }
     };
   }

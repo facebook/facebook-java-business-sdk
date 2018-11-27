@@ -73,7 +73,7 @@ public class LeadGenQualifier extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LeadGenQualifier loadJSON(String json, APIContext context) {
+  public static LeadGenQualifier loadJSON(String json, APIContext context, String header) {
     LeadGenQualifier leadGenQualifier = getGson().fromJson(json, LeadGenQualifier.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class LeadGenQualifier extends APINode {
     }
     leadGenQualifier.context = context;
     leadGenQualifier.rawValue = json;
+    leadGenQualifier.header = header;
     return leadGenQualifier;
   }
 
-  public static APINodeList<LeadGenQualifier> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LeadGenQualifier> leadGenQualifiers = new APINodeList<LeadGenQualifier>(request, json);
+  public static APINodeList<LeadGenQualifier> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LeadGenQualifier> leadGenQualifiers = new APINodeList<LeadGenQualifier>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class LeadGenQualifier extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          leadGenQualifiers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          leadGenQualifiers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return leadGenQualifiers;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class LeadGenQualifier extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              leadGenQualifiers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              leadGenQualifiers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class LeadGenQualifier extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  leadGenQualifiers.add(loadJSON(entry.getValue().toString(), context));
+                  leadGenQualifiers.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              leadGenQualifiers.add(loadJSON(obj.toString(), context));
+              leadGenQualifiers.add(loadJSON(obj.toString(), context, header));
             }
           }
           return leadGenQualifiers;
@@ -155,7 +156,7 @@ public class LeadGenQualifier extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              leadGenQualifiers.add(loadJSON(entry.getValue().toString(), context));
+              leadGenQualifiers.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return leadGenQualifiers;
         } else {
@@ -174,7 +175,7 @@ public class LeadGenQualifier extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              leadGenQualifiers.add(loadJSON(value.toString(), context));
+              leadGenQualifiers.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class LeadGenQualifier extends APINode {
 
           // Sixth, check if it's pure JsonObject
           leadGenQualifiers.clear();
-          leadGenQualifiers.add(loadJSON(json, context));
+          leadGenQualifiers.add(loadJSON(json, context, header));
           return leadGenQualifiers;
         }
       }
@@ -289,8 +290,8 @@ public class LeadGenQualifier extends APINode {
 
   public static APIRequest.ResponseParser<LeadGenQualifier> getParser() {
     return new APIRequest.ResponseParser<LeadGenQualifier>() {
-      public APINodeList<LeadGenQualifier> parseResponse(String response, APIContext context, APIRequest<LeadGenQualifier> request) throws MalformedResponseException {
-        return LeadGenQualifier.parseResponse(response, context, request);
+      public APINodeList<LeadGenQualifier> parseResponse(String response, APIContext context, APIRequest<LeadGenQualifier> request, String header) throws MalformedResponseException {
+        return LeadGenQualifier.parseResponse(response, context, request, header);
       }
     };
   }

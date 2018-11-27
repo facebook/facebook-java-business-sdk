@@ -73,7 +73,7 @@ public class FundingSourceDetailsCoupon extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static FundingSourceDetailsCoupon loadJSON(String json, APIContext context) {
+  public static FundingSourceDetailsCoupon loadJSON(String json, APIContext context, String header) {
     FundingSourceDetailsCoupon fundingSourceDetailsCoupon = getGson().fromJson(json, FundingSourceDetailsCoupon.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class FundingSourceDetailsCoupon extends APINode {
     }
     fundingSourceDetailsCoupon.context = context;
     fundingSourceDetailsCoupon.rawValue = json;
+    fundingSourceDetailsCoupon.header = header;
     return fundingSourceDetailsCoupon;
   }
 
-  public static APINodeList<FundingSourceDetailsCoupon> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<FundingSourceDetailsCoupon> fundingSourceDetailsCoupons = new APINodeList<FundingSourceDetailsCoupon>(request, json);
+  public static APINodeList<FundingSourceDetailsCoupon> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<FundingSourceDetailsCoupon> fundingSourceDetailsCoupons = new APINodeList<FundingSourceDetailsCoupon>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class FundingSourceDetailsCoupon extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          fundingSourceDetailsCoupons.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          fundingSourceDetailsCoupons.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return fundingSourceDetailsCoupons;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class FundingSourceDetailsCoupon extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              fundingSourceDetailsCoupons.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              fundingSourceDetailsCoupons.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class FundingSourceDetailsCoupon extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  fundingSourceDetailsCoupons.add(loadJSON(entry.getValue().toString(), context));
+                  fundingSourceDetailsCoupons.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              fundingSourceDetailsCoupons.add(loadJSON(obj.toString(), context));
+              fundingSourceDetailsCoupons.add(loadJSON(obj.toString(), context, header));
             }
           }
           return fundingSourceDetailsCoupons;
@@ -155,7 +156,7 @@ public class FundingSourceDetailsCoupon extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              fundingSourceDetailsCoupons.add(loadJSON(entry.getValue().toString(), context));
+              fundingSourceDetailsCoupons.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return fundingSourceDetailsCoupons;
         } else {
@@ -174,7 +175,7 @@ public class FundingSourceDetailsCoupon extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              fundingSourceDetailsCoupons.add(loadJSON(value.toString(), context));
+              fundingSourceDetailsCoupons.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class FundingSourceDetailsCoupon extends APINode {
 
           // Sixth, check if it's pure JsonObject
           fundingSourceDetailsCoupons.clear();
-          fundingSourceDetailsCoupons.add(loadJSON(json, context));
+          fundingSourceDetailsCoupons.add(loadJSON(json, context, header));
           return fundingSourceDetailsCoupons;
         }
       }
@@ -289,8 +290,8 @@ public class FundingSourceDetailsCoupon extends APINode {
 
   public static APIRequest.ResponseParser<FundingSourceDetailsCoupon> getParser() {
     return new APIRequest.ResponseParser<FundingSourceDetailsCoupon>() {
-      public APINodeList<FundingSourceDetailsCoupon> parseResponse(String response, APIContext context, APIRequest<FundingSourceDetailsCoupon> request) throws MalformedResponseException {
-        return FundingSourceDetailsCoupon.parseResponse(response, context, request);
+      public APINodeList<FundingSourceDetailsCoupon> parseResponse(String response, APIContext context, APIRequest<FundingSourceDetailsCoupon> request, String header) throws MalformedResponseException {
+        return FundingSourceDetailsCoupon.parseResponse(response, context, request, header);
       }
     };
   }

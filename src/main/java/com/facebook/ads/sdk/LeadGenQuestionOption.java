@@ -69,7 +69,7 @@ public class LeadGenQuestionOption extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LeadGenQuestionOption loadJSON(String json, APIContext context) {
+  public static LeadGenQuestionOption loadJSON(String json, APIContext context, String header) {
     LeadGenQuestionOption leadGenQuestionOption = getGson().fromJson(json, LeadGenQuestionOption.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class LeadGenQuestionOption extends APINode {
     }
     leadGenQuestionOption.context = context;
     leadGenQuestionOption.rawValue = json;
+    leadGenQuestionOption.header = header;
     return leadGenQuestionOption;
   }
 
-  public static APINodeList<LeadGenQuestionOption> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LeadGenQuestionOption> leadGenQuestionOptions = new APINodeList<LeadGenQuestionOption>(request, json);
+  public static APINodeList<LeadGenQuestionOption> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LeadGenQuestionOption> leadGenQuestionOptions = new APINodeList<LeadGenQuestionOption>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class LeadGenQuestionOption extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          leadGenQuestionOptions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          leadGenQuestionOptions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return leadGenQuestionOptions;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class LeadGenQuestionOption extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              leadGenQuestionOptions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              leadGenQuestionOptions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class LeadGenQuestionOption extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  leadGenQuestionOptions.add(loadJSON(entry.getValue().toString(), context));
+                  leadGenQuestionOptions.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              leadGenQuestionOptions.add(loadJSON(obj.toString(), context));
+              leadGenQuestionOptions.add(loadJSON(obj.toString(), context, header));
             }
           }
           return leadGenQuestionOptions;
@@ -151,7 +152,7 @@ public class LeadGenQuestionOption extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              leadGenQuestionOptions.add(loadJSON(entry.getValue().toString(), context));
+              leadGenQuestionOptions.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return leadGenQuestionOptions;
         } else {
@@ -170,7 +171,7 @@ public class LeadGenQuestionOption extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              leadGenQuestionOptions.add(loadJSON(value.toString(), context));
+              leadGenQuestionOptions.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class LeadGenQuestionOption extends APINode {
 
           // Sixth, check if it's pure JsonObject
           leadGenQuestionOptions.clear();
-          leadGenQuestionOptions.add(loadJSON(json, context));
+          leadGenQuestionOptions.add(loadJSON(json, context, header));
           return leadGenQuestionOptions;
         }
       }
@@ -265,8 +266,8 @@ public class LeadGenQuestionOption extends APINode {
 
   public static APIRequest.ResponseParser<LeadGenQuestionOption> getParser() {
     return new APIRequest.ResponseParser<LeadGenQuestionOption>() {
-      public APINodeList<LeadGenQuestionOption> parseResponse(String response, APIContext context, APIRequest<LeadGenQuestionOption> request) throws MalformedResponseException {
-        return LeadGenQuestionOption.parseResponse(response, context, request);
+      public APINodeList<LeadGenQuestionOption> parseResponse(String response, APIContext context, APIRequest<LeadGenQuestionOption> request, String header) throws MalformedResponseException {
+        return LeadGenQuestionOption.parseResponse(response, context, request, header);
       }
     };
   }

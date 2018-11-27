@@ -73,7 +73,7 @@ public class PageStoreVisitsDemographicInsights extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageStoreVisitsDemographicInsights loadJSON(String json, APIContext context) {
+  public static PageStoreVisitsDemographicInsights loadJSON(String json, APIContext context, String header) {
     PageStoreVisitsDemographicInsights pageStoreVisitsDemographicInsights = getGson().fromJson(json, PageStoreVisitsDemographicInsights.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class PageStoreVisitsDemographicInsights extends APINode {
     }
     pageStoreVisitsDemographicInsights.context = context;
     pageStoreVisitsDemographicInsights.rawValue = json;
+    pageStoreVisitsDemographicInsights.header = header;
     return pageStoreVisitsDemographicInsights;
   }
 
-  public static APINodeList<PageStoreVisitsDemographicInsights> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageStoreVisitsDemographicInsights> pageStoreVisitsDemographicInsightss = new APINodeList<PageStoreVisitsDemographicInsights>(request, json);
+  public static APINodeList<PageStoreVisitsDemographicInsights> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageStoreVisitsDemographicInsights> pageStoreVisitsDemographicInsightss = new APINodeList<PageStoreVisitsDemographicInsights>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class PageStoreVisitsDemographicInsights extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageStoreVisitsDemographicInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageStoreVisitsDemographicInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageStoreVisitsDemographicInsightss;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class PageStoreVisitsDemographicInsights extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageStoreVisitsDemographicInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageStoreVisitsDemographicInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class PageStoreVisitsDemographicInsights extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageStoreVisitsDemographicInsightss.add(loadJSON(entry.getValue().toString(), context));
+                  pageStoreVisitsDemographicInsightss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageStoreVisitsDemographicInsightss.add(loadJSON(obj.toString(), context));
+              pageStoreVisitsDemographicInsightss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageStoreVisitsDemographicInsightss;
@@ -155,7 +156,7 @@ public class PageStoreVisitsDemographicInsights extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageStoreVisitsDemographicInsightss.add(loadJSON(entry.getValue().toString(), context));
+              pageStoreVisitsDemographicInsightss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageStoreVisitsDemographicInsightss;
         } else {
@@ -174,7 +175,7 @@ public class PageStoreVisitsDemographicInsights extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageStoreVisitsDemographicInsightss.add(loadJSON(value.toString(), context));
+              pageStoreVisitsDemographicInsightss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class PageStoreVisitsDemographicInsights extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageStoreVisitsDemographicInsightss.clear();
-          pageStoreVisitsDemographicInsightss.add(loadJSON(json, context));
+          pageStoreVisitsDemographicInsightss.add(loadJSON(json, context, header));
           return pageStoreVisitsDemographicInsightss;
         }
       }
@@ -289,8 +290,8 @@ public class PageStoreVisitsDemographicInsights extends APINode {
 
   public static APIRequest.ResponseParser<PageStoreVisitsDemographicInsights> getParser() {
     return new APIRequest.ResponseParser<PageStoreVisitsDemographicInsights>() {
-      public APINodeList<PageStoreVisitsDemographicInsights> parseResponse(String response, APIContext context, APIRequest<PageStoreVisitsDemographicInsights> request) throws MalformedResponseException {
-        return PageStoreVisitsDemographicInsights.parseResponse(response, context, request);
+      public APINodeList<PageStoreVisitsDemographicInsights> parseResponse(String response, APIContext context, APIRequest<PageStoreVisitsDemographicInsights> request, String header) throws MalformedResponseException {
+        return PageStoreVisitsDemographicInsights.parseResponse(response, context, request, header);
       }
     };
   }

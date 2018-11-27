@@ -67,7 +67,7 @@ public class UserIDForPage extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserIDForPage loadJSON(String json, APIContext context) {
+  public static UserIDForPage loadJSON(String json, APIContext context, String header) {
     UserIDForPage userIDForPage = getGson().fromJson(json, UserIDForPage.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class UserIDForPage extends APINode {
     }
     userIDForPage.context = context;
     userIDForPage.rawValue = json;
+    userIDForPage.header = header;
     return userIDForPage;
   }
 
-  public static APINodeList<UserIDForPage> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UserIDForPage> userIDForPages = new APINodeList<UserIDForPage>(request, json);
+  public static APINodeList<UserIDForPage> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UserIDForPage> userIDForPages = new APINodeList<UserIDForPage>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class UserIDForPage extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userIDForPages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userIDForPages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return userIDForPages;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class UserIDForPage extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userIDForPages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userIDForPages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class UserIDForPage extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userIDForPages.add(loadJSON(entry.getValue().toString(), context));
+                  userIDForPages.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userIDForPages.add(loadJSON(obj.toString(), context));
+              userIDForPages.add(loadJSON(obj.toString(), context, header));
             }
           }
           return userIDForPages;
@@ -149,7 +150,7 @@ public class UserIDForPage extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userIDForPages.add(loadJSON(entry.getValue().toString(), context));
+              userIDForPages.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return userIDForPages;
         } else {
@@ -168,7 +169,7 @@ public class UserIDForPage extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userIDForPages.add(loadJSON(value.toString(), context));
+              userIDForPages.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class UserIDForPage extends APINode {
 
           // Sixth, check if it's pure JsonObject
           userIDForPages.clear();
-          userIDForPages.add(loadJSON(json, context));
+          userIDForPages.add(loadJSON(json, context, header));
           return userIDForPages;
         }
       }
@@ -261,8 +262,8 @@ public class UserIDForPage extends APINode {
 
   public static APIRequest.ResponseParser<UserIDForPage> getParser() {
     return new APIRequest.ResponseParser<UserIDForPage>() {
-      public APINodeList<UserIDForPage> parseResponse(String response, APIContext context, APIRequest<UserIDForPage> request) throws MalformedResponseException {
-        return UserIDForPage.parseResponse(response, context, request);
+      public APINodeList<UserIDForPage> parseResponse(String response, APIContext context, APIRequest<UserIDForPage> request, String header) throws MalformedResponseException {
+        return UserIDForPage.parseResponse(response, context, request, header);
       }
     };
   }

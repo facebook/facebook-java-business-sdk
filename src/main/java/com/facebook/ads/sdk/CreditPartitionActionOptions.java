@@ -71,7 +71,7 @@ public class CreditPartitionActionOptions extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CreditPartitionActionOptions loadJSON(String json, APIContext context) {
+  public static CreditPartitionActionOptions loadJSON(String json, APIContext context, String header) {
     CreditPartitionActionOptions creditPartitionActionOptions = getGson().fromJson(json, CreditPartitionActionOptions.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class CreditPartitionActionOptions extends APINode {
     }
     creditPartitionActionOptions.context = context;
     creditPartitionActionOptions.rawValue = json;
+    creditPartitionActionOptions.header = header;
     return creditPartitionActionOptions;
   }
 
-  public static APINodeList<CreditPartitionActionOptions> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CreditPartitionActionOptions> creditPartitionActionOptionss = new APINodeList<CreditPartitionActionOptions>(request, json);
+  public static APINodeList<CreditPartitionActionOptions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CreditPartitionActionOptions> creditPartitionActionOptionss = new APINodeList<CreditPartitionActionOptions>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class CreditPartitionActionOptions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          creditPartitionActionOptionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          creditPartitionActionOptionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return creditPartitionActionOptionss;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class CreditPartitionActionOptions extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              creditPartitionActionOptionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              creditPartitionActionOptionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class CreditPartitionActionOptions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  creditPartitionActionOptionss.add(loadJSON(entry.getValue().toString(), context));
+                  creditPartitionActionOptionss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              creditPartitionActionOptionss.add(loadJSON(obj.toString(), context));
+              creditPartitionActionOptionss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return creditPartitionActionOptionss;
@@ -153,7 +154,7 @@ public class CreditPartitionActionOptions extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              creditPartitionActionOptionss.add(loadJSON(entry.getValue().toString(), context));
+              creditPartitionActionOptionss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return creditPartitionActionOptionss;
         } else {
@@ -172,7 +173,7 @@ public class CreditPartitionActionOptions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              creditPartitionActionOptionss.add(loadJSON(value.toString(), context));
+              creditPartitionActionOptionss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class CreditPartitionActionOptions extends APINode {
 
           // Sixth, check if it's pure JsonObject
           creditPartitionActionOptionss.clear();
-          creditPartitionActionOptionss.add(loadJSON(json, context));
+          creditPartitionActionOptionss.add(loadJSON(json, context, header));
           return creditPartitionActionOptionss;
         }
       }
@@ -277,8 +278,8 @@ public class CreditPartitionActionOptions extends APINode {
 
   public static APIRequest.ResponseParser<CreditPartitionActionOptions> getParser() {
     return new APIRequest.ResponseParser<CreditPartitionActionOptions>() {
-      public APINodeList<CreditPartitionActionOptions> parseResponse(String response, APIContext context, APIRequest<CreditPartitionActionOptions> request) throws MalformedResponseException {
-        return CreditPartitionActionOptions.parseResponse(response, context, request);
+      public APINodeList<CreditPartitionActionOptions> parseResponse(String response, APIContext context, APIRequest<CreditPartitionActionOptions> request, String header) throws MalformedResponseException {
+        return CreditPartitionActionOptions.parseResponse(response, context, request, header);
       }
     };
   }

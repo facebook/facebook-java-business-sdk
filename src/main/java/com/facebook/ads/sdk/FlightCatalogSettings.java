@@ -126,7 +126,7 @@ public class FlightCatalogSettings extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static FlightCatalogSettings loadJSON(String json, APIContext context) {
+  public static FlightCatalogSettings loadJSON(String json, APIContext context, String header) {
     FlightCatalogSettings flightCatalogSettings = getGson().fromJson(json, FlightCatalogSettings.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -143,11 +143,12 @@ public class FlightCatalogSettings extends APINode {
     }
     flightCatalogSettings.context = context;
     flightCatalogSettings.rawValue = json;
+    flightCatalogSettings.header = header;
     return flightCatalogSettings;
   }
 
-  public static APINodeList<FlightCatalogSettings> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<FlightCatalogSettings> flightCatalogSettingss = new APINodeList<FlightCatalogSettings>(request, json);
+  public static APINodeList<FlightCatalogSettings> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<FlightCatalogSettings> flightCatalogSettingss = new APINodeList<FlightCatalogSettings>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -158,7 +159,7 @@ public class FlightCatalogSettings extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          flightCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          flightCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return flightCatalogSettingss;
       } else if (result.isJsonObject()) {
@@ -183,7 +184,7 @@ public class FlightCatalogSettings extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              flightCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              flightCatalogSettingss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -194,13 +195,13 @@ public class FlightCatalogSettings extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  flightCatalogSettingss.add(loadJSON(entry.getValue().toString(), context));
+                  flightCatalogSettingss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              flightCatalogSettingss.add(loadJSON(obj.toString(), context));
+              flightCatalogSettingss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return flightCatalogSettingss;
@@ -208,7 +209,7 @@ public class FlightCatalogSettings extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              flightCatalogSettingss.add(loadJSON(entry.getValue().toString(), context));
+              flightCatalogSettingss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return flightCatalogSettingss;
         } else {
@@ -227,7 +228,7 @@ public class FlightCatalogSettings extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              flightCatalogSettingss.add(loadJSON(value.toString(), context));
+              flightCatalogSettingss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -239,7 +240,7 @@ public class FlightCatalogSettings extends APINode {
 
           // Sixth, check if it's pure JsonObject
           flightCatalogSettingss.clear();
-          flightCatalogSettingss.add(loadJSON(json, context));
+          flightCatalogSettingss.add(loadJSON(json, context, header));
           return flightCatalogSettingss;
         }
       }
@@ -298,8 +299,8 @@ public class FlightCatalogSettings extends APINode {
     };
 
     @Override
-    public FlightCatalogSettings parseResponse(String response) throws APIException {
-      return FlightCatalogSettings.parseResponse(response, getContext(), this).head();
+    public FlightCatalogSettings parseResponse(String response, String header) throws APIException {
+      return FlightCatalogSettings.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -309,7 +310,8 @@ public class FlightCatalogSettings extends APINode {
 
     @Override
     public FlightCatalogSettings execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -323,7 +325,7 @@ public class FlightCatalogSettings extends APINode {
         new Function<String, FlightCatalogSettings>() {
            public FlightCatalogSettings apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -425,8 +427,8 @@ public class FlightCatalogSettings extends APINode {
 
   public static APIRequest.ResponseParser<FlightCatalogSettings> getParser() {
     return new APIRequest.ResponseParser<FlightCatalogSettings>() {
-      public APINodeList<FlightCatalogSettings> parseResponse(String response, APIContext context, APIRequest<FlightCatalogSettings> request) throws MalformedResponseException {
-        return FlightCatalogSettings.parseResponse(response, context, request);
+      public APINodeList<FlightCatalogSettings> parseResponse(String response, APIContext context, APIRequest<FlightCatalogSettings> request, String header) throws MalformedResponseException {
+        return FlightCatalogSettings.parseResponse(response, context, request, header);
       }
     };
   }

@@ -38,12 +38,14 @@ public class APINode implements APIResponse {
 
   protected APIContext context = null;
   protected String rawValue = null;
+  protected String header = null;
 
-  public static APINode loadJSON(String json, APIContext context) {
+  public static APINode loadJSON(String json, APIContext context, String header) {
     APINode result = null;
     result = new APINode();
     result.context = context;
     result.rawValue = json;
+    result.header = header;
     return result;
   }
 
@@ -92,8 +94,13 @@ public class APINode implements APIResponse {
     return this;
   }
 
-  public static APINodeList<APINode> parseResponse(String json, APIContext context, APIRequest<APINode> request) throws MalformedResponseException{
-    APINodeList<APINode> nodes = new APINodeList<APINode>(request, json);
+  @Override
+  public String getHeader() {
+    return this.header;
+  }
+
+  public static APINodeList<APINode> parseResponse(String json, APIContext context, APIRequest<APINode> request, String header) throws MalformedResponseException{
+    APINodeList<APINode> nodes = new APINodeList<APINode>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -104,7 +111,7 @@ public class APINode implements APIResponse {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          nodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          nodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return nodes;
       } else if (result.isJsonObject()) {
@@ -130,19 +137,19 @@ public class APINode implements APIResponse {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              nodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              nodes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
             obj = obj.get("data").getAsJsonObject();
-            nodes.add(loadJSON(obj.toString(), context));
+            nodes.add(loadJSON(obj.toString(), context, header));
           }
           return nodes;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              nodes.add(loadJSON(entry.getValue().toString(), context));
+              nodes.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return nodes;
         } else {
@@ -161,7 +168,7 @@ public class APINode implements APIResponse {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              nodes.add(loadJSON(value.toString(), context));
+              nodes.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -173,7 +180,7 @@ public class APINode implements APIResponse {
 
           // Sixth, check if it's pure JsonObject
           nodes.clear();
-          nodes.add(loadJSON(json, context));
+          nodes.add(loadJSON(json, context, header));
           return nodes;
         }
       }

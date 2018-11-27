@@ -71,7 +71,7 @@ public class RichMediaElement extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static RichMediaElement loadJSON(String json, APIContext context) {
+  public static RichMediaElement loadJSON(String json, APIContext context, String header) {
     RichMediaElement richMediaElement = getGson().fromJson(json, RichMediaElement.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class RichMediaElement extends APINode {
     }
     richMediaElement.context = context;
     richMediaElement.rawValue = json;
+    richMediaElement.header = header;
     return richMediaElement;
   }
 
-  public static APINodeList<RichMediaElement> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<RichMediaElement> richMediaElements = new APINodeList<RichMediaElement>(request, json);
+  public static APINodeList<RichMediaElement> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<RichMediaElement> richMediaElements = new APINodeList<RichMediaElement>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class RichMediaElement extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          richMediaElements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          richMediaElements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return richMediaElements;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class RichMediaElement extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              richMediaElements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              richMediaElements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class RichMediaElement extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  richMediaElements.add(loadJSON(entry.getValue().toString(), context));
+                  richMediaElements.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              richMediaElements.add(loadJSON(obj.toString(), context));
+              richMediaElements.add(loadJSON(obj.toString(), context, header));
             }
           }
           return richMediaElements;
@@ -153,7 +154,7 @@ public class RichMediaElement extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              richMediaElements.add(loadJSON(entry.getValue().toString(), context));
+              richMediaElements.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return richMediaElements;
         } else {
@@ -172,7 +173,7 @@ public class RichMediaElement extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              richMediaElements.add(loadJSON(value.toString(), context));
+              richMediaElements.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class RichMediaElement extends APINode {
 
           // Sixth, check if it's pure JsonObject
           richMediaElements.clear();
-          richMediaElements.add(loadJSON(json, context));
+          richMediaElements.add(loadJSON(json, context, header));
           return richMediaElements;
         }
       }
@@ -277,8 +278,8 @@ public class RichMediaElement extends APINode {
 
   public static APIRequest.ResponseParser<RichMediaElement> getParser() {
     return new APIRequest.ResponseParser<RichMediaElement>() {
-      public APINodeList<RichMediaElement> parseResponse(String response, APIContext context, APIRequest<RichMediaElement> request) throws MalformedResponseException {
-        return RichMediaElement.parseResponse(response, context, request);
+      public APINodeList<RichMediaElement> parseResponse(String response, APIContext context, APIRequest<RichMediaElement> request, String header) throws MalformedResponseException {
+        return RichMediaElement.parseResponse(response, context, request, header);
       }
     };
   }

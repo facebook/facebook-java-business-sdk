@@ -75,7 +75,7 @@ public class InstagramInsightsResult extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static InstagramInsightsResult loadJSON(String json, APIContext context) {
+  public static InstagramInsightsResult loadJSON(String json, APIContext context, String header) {
     InstagramInsightsResult instagramInsightsResult = getGson().fromJson(json, InstagramInsightsResult.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -92,11 +92,12 @@ public class InstagramInsightsResult extends APINode {
     }
     instagramInsightsResult.context = context;
     instagramInsightsResult.rawValue = json;
+    instagramInsightsResult.header = header;
     return instagramInsightsResult;
   }
 
-  public static APINodeList<InstagramInsightsResult> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<InstagramInsightsResult> instagramInsightsResults = new APINodeList<InstagramInsightsResult>(request, json);
+  public static APINodeList<InstagramInsightsResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<InstagramInsightsResult> instagramInsightsResults = new APINodeList<InstagramInsightsResult>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -107,7 +108,7 @@ public class InstagramInsightsResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instagramInsightsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          instagramInsightsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return instagramInsightsResults;
       } else if (result.isJsonObject()) {
@@ -132,7 +133,7 @@ public class InstagramInsightsResult extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instagramInsightsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              instagramInsightsResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -143,13 +144,13 @@ public class InstagramInsightsResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instagramInsightsResults.add(loadJSON(entry.getValue().toString(), context));
+                  instagramInsightsResults.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instagramInsightsResults.add(loadJSON(obj.toString(), context));
+              instagramInsightsResults.add(loadJSON(obj.toString(), context, header));
             }
           }
           return instagramInsightsResults;
@@ -157,7 +158,7 @@ public class InstagramInsightsResult extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instagramInsightsResults.add(loadJSON(entry.getValue().toString(), context));
+              instagramInsightsResults.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return instagramInsightsResults;
         } else {
@@ -176,7 +177,7 @@ public class InstagramInsightsResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instagramInsightsResults.add(loadJSON(value.toString(), context));
+              instagramInsightsResults.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -188,7 +189,7 @@ public class InstagramInsightsResult extends APINode {
 
           // Sixth, check if it's pure JsonObject
           instagramInsightsResults.clear();
-          instagramInsightsResults.add(loadJSON(json, context));
+          instagramInsightsResults.add(loadJSON(json, context, header));
           return instagramInsightsResults;
         }
       }
@@ -374,8 +375,8 @@ public class InstagramInsightsResult extends APINode {
 
   public static APIRequest.ResponseParser<InstagramInsightsResult> getParser() {
     return new APIRequest.ResponseParser<InstagramInsightsResult>() {
-      public APINodeList<InstagramInsightsResult> parseResponse(String response, APIContext context, APIRequest<InstagramInsightsResult> request) throws MalformedResponseException {
-        return InstagramInsightsResult.parseResponse(response, context, request);
+      public APINodeList<InstagramInsightsResult> parseResponse(String response, APIContext context, APIRequest<InstagramInsightsResult> request, String header) throws MalformedResponseException {
+        return InstagramInsightsResult.parseResponse(response, context, request, header);
       }
     };
   }

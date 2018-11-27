@@ -69,7 +69,7 @@ public class FinanceObject extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static FinanceObject loadJSON(String json, APIContext context) {
+  public static FinanceObject loadJSON(String json, APIContext context, String header) {
     FinanceObject financeObject = getGson().fromJson(json, FinanceObject.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class FinanceObject extends APINode {
     }
     financeObject.context = context;
     financeObject.rawValue = json;
+    financeObject.header = header;
     return financeObject;
   }
 
-  public static APINodeList<FinanceObject> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<FinanceObject> financeObjects = new APINodeList<FinanceObject>(request, json);
+  public static APINodeList<FinanceObject> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<FinanceObject> financeObjects = new APINodeList<FinanceObject>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class FinanceObject extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          financeObjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          financeObjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return financeObjects;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class FinanceObject extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              financeObjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              financeObjects.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class FinanceObject extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  financeObjects.add(loadJSON(entry.getValue().toString(), context));
+                  financeObjects.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              financeObjects.add(loadJSON(obj.toString(), context));
+              financeObjects.add(loadJSON(obj.toString(), context, header));
             }
           }
           return financeObjects;
@@ -151,7 +152,7 @@ public class FinanceObject extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              financeObjects.add(loadJSON(entry.getValue().toString(), context));
+              financeObjects.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return financeObjects;
         } else {
@@ -170,7 +171,7 @@ public class FinanceObject extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              financeObjects.add(loadJSON(value.toString(), context));
+              financeObjects.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class FinanceObject extends APINode {
 
           // Sixth, check if it's pure JsonObject
           financeObjects.clear();
-          financeObjects.add(loadJSON(json, context));
+          financeObjects.add(loadJSON(json, context, header));
           return financeObjects;
         }
       }
@@ -265,8 +266,8 @@ public class FinanceObject extends APINode {
 
   public static APIRequest.ResponseParser<FinanceObject> getParser() {
     return new APIRequest.ResponseParser<FinanceObject>() {
-      public APINodeList<FinanceObject> parseResponse(String response, APIContext context, APIRequest<FinanceObject> request) throws MalformedResponseException {
-        return FinanceObject.parseResponse(response, context, request);
+      public APINodeList<FinanceObject> parseResponse(String response, APIContext context, APIRequest<FinanceObject> request, String header) throws MalformedResponseException {
+        return FinanceObject.parseResponse(response, context, request, header);
       }
     };
   }

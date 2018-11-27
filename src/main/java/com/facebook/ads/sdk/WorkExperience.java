@@ -142,7 +142,7 @@ public class WorkExperience extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static WorkExperience loadJSON(String json, APIContext context) {
+  public static WorkExperience loadJSON(String json, APIContext context, String header) {
     WorkExperience workExperience = getGson().fromJson(json, WorkExperience.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -159,11 +159,12 @@ public class WorkExperience extends APINode {
     }
     workExperience.context = context;
     workExperience.rawValue = json;
+    workExperience.header = header;
     return workExperience;
   }
 
-  public static APINodeList<WorkExperience> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<WorkExperience> workExperiences = new APINodeList<WorkExperience>(request, json);
+  public static APINodeList<WorkExperience> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<WorkExperience> workExperiences = new APINodeList<WorkExperience>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -174,7 +175,7 @@ public class WorkExperience extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          workExperiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          workExperiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return workExperiences;
       } else if (result.isJsonObject()) {
@@ -199,7 +200,7 @@ public class WorkExperience extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              workExperiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              workExperiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -210,13 +211,13 @@ public class WorkExperience extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  workExperiences.add(loadJSON(entry.getValue().toString(), context));
+                  workExperiences.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              workExperiences.add(loadJSON(obj.toString(), context));
+              workExperiences.add(loadJSON(obj.toString(), context, header));
             }
           }
           return workExperiences;
@@ -224,7 +225,7 @@ public class WorkExperience extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              workExperiences.add(loadJSON(entry.getValue().toString(), context));
+              workExperiences.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return workExperiences;
         } else {
@@ -243,7 +244,7 @@ public class WorkExperience extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              workExperiences.add(loadJSON(value.toString(), context));
+              workExperiences.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -255,7 +256,7 @@ public class WorkExperience extends APINode {
 
           // Sixth, check if it's pure JsonObject
           workExperiences.clear();
-          workExperiences.add(loadJSON(json, context));
+          workExperiences.add(loadJSON(json, context, header));
           return workExperiences;
         }
       }
@@ -366,8 +367,8 @@ public class WorkExperience extends APINode {
     };
 
     @Override
-    public WorkExperience parseResponse(String response) throws APIException {
-      return WorkExperience.parseResponse(response, getContext(), this).head();
+    public WorkExperience parseResponse(String response, String header) throws APIException {
+      return WorkExperience.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -377,7 +378,8 @@ public class WorkExperience extends APINode {
 
     @Override
     public WorkExperience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -391,7 +393,7 @@ public class WorkExperience extends APINode {
         new Function<String, WorkExperience>() {
            public WorkExperience apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -557,8 +559,8 @@ public class WorkExperience extends APINode {
 
   public static APIRequest.ResponseParser<WorkExperience> getParser() {
     return new APIRequest.ResponseParser<WorkExperience>() {
-      public APINodeList<WorkExperience> parseResponse(String response, APIContext context, APIRequest<WorkExperience> request) throws MalformedResponseException {
-        return WorkExperience.parseResponse(response, context, request);
+      public APINodeList<WorkExperience> parseResponse(String response, APIContext context, APIRequest<WorkExperience> request, String header) throws MalformedResponseException {
+        return WorkExperience.parseResponse(response, context, request, header);
       }
     };
   }

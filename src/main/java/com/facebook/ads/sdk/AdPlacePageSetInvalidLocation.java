@@ -69,7 +69,7 @@ public class AdPlacePageSetInvalidLocation extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdPlacePageSetInvalidLocation loadJSON(String json, APIContext context) {
+  public static AdPlacePageSetInvalidLocation loadJSON(String json, APIContext context, String header) {
     AdPlacePageSetInvalidLocation adPlacePageSetInvalidLocation = getGson().fromJson(json, AdPlacePageSetInvalidLocation.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class AdPlacePageSetInvalidLocation extends APINode {
     }
     adPlacePageSetInvalidLocation.context = context;
     adPlacePageSetInvalidLocation.rawValue = json;
+    adPlacePageSetInvalidLocation.header = header;
     return adPlacePageSetInvalidLocation;
   }
 
-  public static APINodeList<AdPlacePageSetInvalidLocation> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdPlacePageSetInvalidLocation> adPlacePageSetInvalidLocations = new APINodeList<AdPlacePageSetInvalidLocation>(request, json);
+  public static APINodeList<AdPlacePageSetInvalidLocation> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdPlacePageSetInvalidLocation> adPlacePageSetInvalidLocations = new APINodeList<AdPlacePageSetInvalidLocation>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class AdPlacePageSetInvalidLocation extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adPlacePageSetInvalidLocations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adPlacePageSetInvalidLocations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adPlacePageSetInvalidLocations;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class AdPlacePageSetInvalidLocation extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adPlacePageSetInvalidLocations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adPlacePageSetInvalidLocations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class AdPlacePageSetInvalidLocation extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adPlacePageSetInvalidLocations.add(loadJSON(entry.getValue().toString(), context));
+                  adPlacePageSetInvalidLocations.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adPlacePageSetInvalidLocations.add(loadJSON(obj.toString(), context));
+              adPlacePageSetInvalidLocations.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adPlacePageSetInvalidLocations;
@@ -151,7 +152,7 @@ public class AdPlacePageSetInvalidLocation extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adPlacePageSetInvalidLocations.add(loadJSON(entry.getValue().toString(), context));
+              adPlacePageSetInvalidLocations.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adPlacePageSetInvalidLocations;
         } else {
@@ -170,7 +171,7 @@ public class AdPlacePageSetInvalidLocation extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adPlacePageSetInvalidLocations.add(loadJSON(value.toString(), context));
+              adPlacePageSetInvalidLocations.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class AdPlacePageSetInvalidLocation extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adPlacePageSetInvalidLocations.clear();
-          adPlacePageSetInvalidLocations.add(loadJSON(json, context));
+          adPlacePageSetInvalidLocations.add(loadJSON(json, context, header));
           return adPlacePageSetInvalidLocations;
         }
       }
@@ -273,8 +274,8 @@ public class AdPlacePageSetInvalidLocation extends APINode {
 
   public static APIRequest.ResponseParser<AdPlacePageSetInvalidLocation> getParser() {
     return new APIRequest.ResponseParser<AdPlacePageSetInvalidLocation>() {
-      public APINodeList<AdPlacePageSetInvalidLocation> parseResponse(String response, APIContext context, APIRequest<AdPlacePageSetInvalidLocation> request) throws MalformedResponseException {
-        return AdPlacePageSetInvalidLocation.parseResponse(response, context, request);
+      public APINodeList<AdPlacePageSetInvalidLocation> parseResponse(String response, APIContext context, APIRequest<AdPlacePageSetInvalidLocation> request, String header) throws MalformedResponseException {
+        return AdPlacePageSetInvalidLocation.parseResponse(response, context, request, header);
       }
     };
   }

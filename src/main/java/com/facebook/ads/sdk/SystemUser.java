@@ -134,7 +134,7 @@ public class SystemUser extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static SystemUser loadJSON(String json, APIContext context) {
+  public static SystemUser loadJSON(String json, APIContext context, String header) {
     SystemUser systemUser = getGson().fromJson(json, SystemUser.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -151,11 +151,12 @@ public class SystemUser extends APINode {
     }
     systemUser.context = context;
     systemUser.rawValue = json;
+    systemUser.header = header;
     return systemUser;
   }
 
-  public static APINodeList<SystemUser> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<SystemUser> systemUsers = new APINodeList<SystemUser>(request, json);
+  public static APINodeList<SystemUser> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<SystemUser> systemUsers = new APINodeList<SystemUser>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -166,7 +167,7 @@ public class SystemUser extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          systemUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          systemUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return systemUsers;
       } else if (result.isJsonObject()) {
@@ -191,7 +192,7 @@ public class SystemUser extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              systemUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              systemUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -202,13 +203,13 @@ public class SystemUser extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  systemUsers.add(loadJSON(entry.getValue().toString(), context));
+                  systemUsers.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              systemUsers.add(loadJSON(obj.toString(), context));
+              systemUsers.add(loadJSON(obj.toString(), context, header));
             }
           }
           return systemUsers;
@@ -216,7 +217,7 @@ public class SystemUser extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              systemUsers.add(loadJSON(entry.getValue().toString(), context));
+              systemUsers.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return systemUsers;
         } else {
@@ -235,7 +236,7 @@ public class SystemUser extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              systemUsers.add(loadJSON(value.toString(), context));
+              systemUsers.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -247,7 +248,7 @@ public class SystemUser extends APINode {
 
           // Sixth, check if it's pure JsonObject
           systemUsers.clear();
-          systemUsers.add(loadJSON(json, context));
+          systemUsers.add(loadJSON(json, context, header));
           return systemUsers;
         }
       }
@@ -360,7 +361,6 @@ public class SystemUser extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "daily_spend_limit",
       "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
@@ -389,7 +389,6 @@ public class SystemUser extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
-      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -405,8 +404,8 @@ public class SystemUser extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccount> parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -416,7 +415,8 @@ public class SystemUser extends APINode {
 
     @Override
     public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -430,7 +430,7 @@ public class SystemUser extends APINode {
         new Function<String, APINodeList<AdAccount>>() {
            public APINodeList<AdAccount> apply(String result) {
              try {
-               return APIRequestGetAssignedAdAccounts.this.parseResponse(result);
+               return APIRequestGetAssignedAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -632,13 +632,6 @@ public class SystemUser extends APINode {
       this.requestField("currency", value);
       return this;
     }
-    public APIRequestGetAssignedAdAccounts requestDailySpendLimitField () {
-      return this.requestDailySpendLimitField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestDailySpendLimitField (boolean value) {
-      this.requestField("daily_spend_limit", value);
-      return this;
-    }
     public APIRequestGetAssignedAdAccounts requestDirectDealsTosAcceptedField () {
       return this.requestDirectDealsTosAcceptedField(true);
     }
@@ -835,13 +828,6 @@ public class SystemUser extends APINode {
       this.requestField("partner", value);
       return this;
     }
-    public APIRequestGetAssignedAdAccounts requestRateLimitResetTimeField () {
-      return this.requestRateLimitResetTimeField(true);
-    }
-    public APIRequestGetAssignedAdAccounts requestRateLimitResetTimeField (boolean value) {
-      this.requestField("rate_limit_reset_time", value);
-      return this;
-    }
     public APIRequestGetAssignedAdAccounts requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
@@ -943,8 +929,8 @@ public class SystemUser extends APINode {
     };
 
     @Override
-    public APINodeList<AdMonetizationProperty> parseResponse(String response) throws APIException {
-      return AdMonetizationProperty.parseResponse(response, getContext(), this);
+    public APINodeList<AdMonetizationProperty> parseResponse(String response, String header) throws APIException {
+      return AdMonetizationProperty.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -954,7 +940,8 @@ public class SystemUser extends APINode {
 
     @Override
     public APINodeList<AdMonetizationProperty> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -968,7 +955,7 @@ public class SystemUser extends APINode {
         new Function<String, APINodeList<AdMonetizationProperty>>() {
            public APINodeList<AdMonetizationProperty> apply(String result) {
              try {
-               return APIRequestGetAssignedMonetizationProperties.this.parseResponse(result);
+               return APIRequestGetAssignedMonetizationProperties.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1098,7 +1085,6 @@ public class SystemUser extends APINode {
       "general_manager",
       "genre",
       "global_brand_page_name",
-      "global_brand_parent_page",
       "global_brand_root_id",
       "has_added_app",
       "has_whatsapp_business_number",
@@ -1165,7 +1151,6 @@ public class SystemUser extends APINode {
       "promotion_eligible",
       "promotion_ineligible_reason",
       "public_transit",
-      "publisher_space",
       "rating_count",
       "recipient",
       "record_label",
@@ -1197,8 +1182,8 @@ public class SystemUser extends APINode {
     };
 
     @Override
-    public APINodeList<Page> parseResponse(String response) throws APIException {
-      return Page.parseResponse(response, getContext(), this);
+    public APINodeList<Page> parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1208,7 +1193,8 @@ public class SystemUser extends APINode {
 
     @Override
     public APINodeList<Page> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1222,7 +1208,7 @@ public class SystemUser extends APINode {
         new Function<String, APINodeList<Page>>() {
            public APINodeList<Page> apply(String result) {
              try {
-               return APIRequestGetAssignedPages.this.parseResponse(result);
+               return APIRequestGetAssignedPages.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1618,13 +1604,6 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetAssignedPages requestGlobalBrandPageNameField (boolean value) {
       this.requestField("global_brand_page_name", value);
-      return this;
-    }
-    public APIRequestGetAssignedPages requestGlobalBrandParentPageField () {
-      return this.requestGlobalBrandParentPageField(true);
-    }
-    public APIRequestGetAssignedPages requestGlobalBrandParentPageField (boolean value) {
-      this.requestField("global_brand_parent_page", value);
       return this;
     }
     public APIRequestGetAssignedPages requestGlobalBrandRootIdField () {
@@ -2089,13 +2068,6 @@ public class SystemUser extends APINode {
       this.requestField("public_transit", value);
       return this;
     }
-    public APIRequestGetAssignedPages requestPublisherSpaceField () {
-      return this.requestPublisherSpaceField(true);
-    }
-    public APIRequestGetAssignedPages requestPublisherSpaceField (boolean value) {
-      this.requestField("publisher_space", value);
-      return this;
-    }
     public APIRequestGetAssignedPages requestRatingCountField () {
       return this.requestRatingCountField(true);
     }
@@ -2312,8 +2284,6 @@ public class SystemUser extends APINode {
       "feed_count",
       "flight_catalog_settings",
       "id",
-      "image_padding_landscape",
-      "image_padding_square",
       "name",
       "product_count",
       "qualified_product_count",
@@ -2321,8 +2291,8 @@ public class SystemUser extends APINode {
     };
 
     @Override
-    public APINodeList<ProductCatalog> parseResponse(String response) throws APIException {
-      return ProductCatalog.parseResponse(response, getContext(), this);
+    public APINodeList<ProductCatalog> parseResponse(String response, String header) throws APIException {
+      return ProductCatalog.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2332,7 +2302,8 @@ public class SystemUser extends APINode {
 
     @Override
     public APINodeList<ProductCatalog> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2346,7 +2317,7 @@ public class SystemUser extends APINode {
         new Function<String, APINodeList<ProductCatalog>>() {
            public APINodeList<ProductCatalog> apply(String result) {
              try {
-               return APIRequestGetAssignedProductCatalogs.this.parseResponse(result);
+               return APIRequestGetAssignedProductCatalogs.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2457,20 +2428,6 @@ public class SystemUser extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetAssignedProductCatalogs requestImagePaddingLandscapeField () {
-      return this.requestImagePaddingLandscapeField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestImagePaddingLandscapeField (boolean value) {
-      this.requestField("image_padding_landscape", value);
-      return this;
-    }
-    public APIRequestGetAssignedProductCatalogs requestImagePaddingSquareField () {
-      return this.requestImagePaddingSquareField(true);
-    }
-    public APIRequestGetAssignedProductCatalogs requestImagePaddingSquareField (boolean value) {
-      this.requestField("image_padding_square", value);
-      return this;
-    }
     public APIRequestGetAssignedProductCatalogs requestNameField () {
       return this.requestNameField(true);
     }
@@ -2516,7 +2473,6 @@ public class SystemUser extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -2537,12 +2493,10 @@ public class SystemUser extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -2570,7 +2524,6 @@ public class SystemUser extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -2579,8 +2532,8 @@ public class SystemUser extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2590,7 +2543,8 @@ public class SystemUser extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2604,7 +2558,7 @@ public class SystemUser extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetUpdatedBy.this.parseResponse(result);
+               return APIRequestGetUpdatedBy.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2692,13 +2646,6 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetUpdatedBy requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetUpdatedBy requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetUpdatedBy requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetUpdatedBy requestBirthdayField () {
@@ -2841,13 +2788,6 @@ public class SystemUser extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetUpdatedBy requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetUpdatedBy requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetUpdatedBy requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -2874,13 +2814,6 @@ public class SystemUser extends APINode {
     }
     public APIRequestGetUpdatedBy requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetUpdatedBy requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetUpdatedBy requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetUpdatedBy requestLastNameField () {
@@ -3072,13 +3005,6 @@ public class SystemUser extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetUpdatedBy requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetUpdatedBy requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetUpdatedBy requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -3136,8 +3062,8 @@ public class SystemUser extends APINode {
     };
 
     @Override
-    public SystemUser parseResponse(String response) throws APIException {
-      return SystemUser.parseResponse(response, getContext(), this).head();
+    public SystemUser parseResponse(String response, String header) throws APIException {
+      return SystemUser.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3147,7 +3073,8 @@ public class SystemUser extends APINode {
 
     @Override
     public SystemUser execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3161,7 +3088,7 @@ public class SystemUser extends APINode {
         new Function<String, SystemUser>() {
            public SystemUser apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3322,8 +3249,8 @@ public class SystemUser extends APINode {
 
   public static APIRequest.ResponseParser<SystemUser> getParser() {
     return new APIRequest.ResponseParser<SystemUser>() {
-      public APINodeList<SystemUser> parseResponse(String response, APIContext context, APIRequest<SystemUser> request) throws MalformedResponseException {
-        return SystemUser.parseResponse(response, context, request);
+      public APINodeList<SystemUser> parseResponse(String response, APIContext context, APIRequest<SystemUser> request, String header) throws MalformedResponseException {
+        return SystemUser.parseResponse(response, context, request, header);
       }
     };
   }

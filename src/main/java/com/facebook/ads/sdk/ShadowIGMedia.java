@@ -150,7 +150,7 @@ public class ShadowIGMedia extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ShadowIGMedia loadJSON(String json, APIContext context) {
+  public static ShadowIGMedia loadJSON(String json, APIContext context, String header) {
     ShadowIGMedia shadowIGMedia = getGson().fromJson(json, ShadowIGMedia.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -167,11 +167,12 @@ public class ShadowIGMedia extends APINode {
     }
     shadowIGMedia.context = context;
     shadowIGMedia.rawValue = json;
+    shadowIGMedia.header = header;
     return shadowIGMedia;
   }
 
-  public static APINodeList<ShadowIGMedia> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ShadowIGMedia> shadowIGMedias = new APINodeList<ShadowIGMedia>(request, json);
+  public static APINodeList<ShadowIGMedia> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ShadowIGMedia> shadowIGMedias = new APINodeList<ShadowIGMedia>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -182,7 +183,7 @@ public class ShadowIGMedia extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          shadowIGMedias.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          shadowIGMedias.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return shadowIGMedias;
       } else if (result.isJsonObject()) {
@@ -207,7 +208,7 @@ public class ShadowIGMedia extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              shadowIGMedias.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              shadowIGMedias.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -218,13 +219,13 @@ public class ShadowIGMedia extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  shadowIGMedias.add(loadJSON(entry.getValue().toString(), context));
+                  shadowIGMedias.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              shadowIGMedias.add(loadJSON(obj.toString(), context));
+              shadowIGMedias.add(loadJSON(obj.toString(), context, header));
             }
           }
           return shadowIGMedias;
@@ -232,7 +233,7 @@ public class ShadowIGMedia extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              shadowIGMedias.add(loadJSON(entry.getValue().toString(), context));
+              shadowIGMedias.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return shadowIGMedias;
         } else {
@@ -251,7 +252,7 @@ public class ShadowIGMedia extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              shadowIGMedias.add(loadJSON(value.toString(), context));
+              shadowIGMedias.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -263,7 +264,7 @@ public class ShadowIGMedia extends APINode {
 
           // Sixth, check if it's pure JsonObject
           shadowIGMedias.clear();
-          shadowIGMedias.add(loadJSON(json, context));
+          shadowIGMedias.add(loadJSON(json, context, header));
           return shadowIGMedias;
         }
       }
@@ -405,8 +406,8 @@ public class ShadowIGMedia extends APINode {
     };
 
     @Override
-    public APINodeList<ShadowIGMedia> parseResponse(String response) throws APIException {
-      return ShadowIGMedia.parseResponse(response, getContext(), this);
+    public APINodeList<ShadowIGMedia> parseResponse(String response, String header) throws APIException {
+      return ShadowIGMedia.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -416,7 +417,8 @@ public class ShadowIGMedia extends APINode {
 
     @Override
     public APINodeList<ShadowIGMedia> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -430,7 +432,7 @@ public class ShadowIGMedia extends APINode {
         new Function<String, APINodeList<ShadowIGMedia>>() {
            public APINodeList<ShadowIGMedia> apply(String result) {
              try {
-               return APIRequestGetChildren.this.parseResponse(result);
+               return APIRequestGetChildren.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -614,8 +616,8 @@ public class ShadowIGMedia extends APINode {
     };
 
     @Override
-    public APINodeList<ShadowIGComment> parseResponse(String response) throws APIException {
-      return ShadowIGComment.parseResponse(response, getContext(), this);
+    public APINodeList<ShadowIGComment> parseResponse(String response, String header) throws APIException {
+      return ShadowIGComment.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -625,7 +627,8 @@ public class ShadowIGMedia extends APINode {
 
     @Override
     public APINodeList<ShadowIGComment> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -639,7 +642,7 @@ public class ShadowIGMedia extends APINode {
         new Function<String, APINodeList<ShadowIGComment>>() {
            public APINodeList<ShadowIGComment> apply(String result) {
              try {
-               return APIRequestGetComments.this.parseResponse(result);
+               return APIRequestGetComments.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -774,8 +777,8 @@ public class ShadowIGMedia extends APINode {
     };
 
     @Override
-    public ShadowIGComment parseResponse(String response) throws APIException {
-      return ShadowIGComment.parseResponse(response, getContext(), this).head();
+    public ShadowIGComment parseResponse(String response, String header) throws APIException {
+      return ShadowIGComment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -785,7 +788,8 @@ public class ShadowIGMedia extends APINode {
 
     @Override
     public ShadowIGComment execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -799,7 +803,7 @@ public class ShadowIGMedia extends APINode {
         new Function<String, ShadowIGComment>() {
            public ShadowIGComment apply(String result) {
              try {
-               return APIRequestCreateComment.this.parseResponse(result);
+               return APIRequestCreateComment.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -890,8 +894,8 @@ public class ShadowIGMedia extends APINode {
     };
 
     @Override
-    public APINodeList<InstagramInsightsResult> parseResponse(String response) throws APIException {
-      return InstagramInsightsResult.parseResponse(response, getContext(), this);
+    public APINodeList<InstagramInsightsResult> parseResponse(String response, String header) throws APIException {
+      return InstagramInsightsResult.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -901,7 +905,8 @@ public class ShadowIGMedia extends APINode {
 
     @Override
     public APINodeList<InstagramInsightsResult> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -915,7 +920,7 @@ public class ShadowIGMedia extends APINode {
         new Function<String, APINodeList<InstagramInsightsResult>>() {
            public APINodeList<InstagramInsightsResult> apply(String result) {
              try {
-               return APIRequestGetInsights.this.parseResponse(result);
+               return APIRequestGetInsights.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1067,8 +1072,8 @@ public class ShadowIGMedia extends APINode {
     };
 
     @Override
-    public ShadowIGMedia parseResponse(String response) throws APIException {
-      return ShadowIGMedia.parseResponse(response, getContext(), this).head();
+    public ShadowIGMedia parseResponse(String response, String header) throws APIException {
+      return ShadowIGMedia.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1078,7 +1083,8 @@ public class ShadowIGMedia extends APINode {
 
     @Override
     public ShadowIGMedia execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1092,7 +1098,7 @@ public class ShadowIGMedia extends APINode {
         new Function<String, ShadowIGMedia>() {
            public ShadowIGMedia apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1269,8 +1275,8 @@ public class ShadowIGMedia extends APINode {
     };
 
     @Override
-    public ShadowIGMedia parseResponse(String response) throws APIException {
-      return ShadowIGMedia.parseResponse(response, getContext(), this).head();
+    public ShadowIGMedia parseResponse(String response, String header) throws APIException {
+      return ShadowIGMedia.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1280,7 +1286,8 @@ public class ShadowIGMedia extends APINode {
 
     @Override
     public ShadowIGMedia execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1294,7 +1301,7 @@ public class ShadowIGMedia extends APINode {
         new Function<String, ShadowIGMedia>() {
            public ShadowIGMedia apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1403,8 +1410,8 @@ public class ShadowIGMedia extends APINode {
 
   public static APIRequest.ResponseParser<ShadowIGMedia> getParser() {
     return new APIRequest.ResponseParser<ShadowIGMedia>() {
-      public APINodeList<ShadowIGMedia> parseResponse(String response, APIContext context, APIRequest<ShadowIGMedia> request) throws MalformedResponseException {
-        return ShadowIGMedia.parseResponse(response, context, request);
+      public APINodeList<ShadowIGMedia> parseResponse(String response, APIContext context, APIRequest<ShadowIGMedia> request, String header) throws MalformedResponseException {
+        return ShadowIGMedia.parseResponse(response, context, request, header);
       }
     };
   }

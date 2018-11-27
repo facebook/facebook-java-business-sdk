@@ -67,7 +67,7 @@ public class AppRequestFormerRecipient extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AppRequestFormerRecipient loadJSON(String json, APIContext context) {
+  public static AppRequestFormerRecipient loadJSON(String json, APIContext context, String header) {
     AppRequestFormerRecipient appRequestFormerRecipient = getGson().fromJson(json, AppRequestFormerRecipient.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class AppRequestFormerRecipient extends APINode {
     }
     appRequestFormerRecipient.context = context;
     appRequestFormerRecipient.rawValue = json;
+    appRequestFormerRecipient.header = header;
     return appRequestFormerRecipient;
   }
 
-  public static APINodeList<AppRequestFormerRecipient> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AppRequestFormerRecipient> appRequestFormerRecipients = new APINodeList<AppRequestFormerRecipient>(request, json);
+  public static APINodeList<AppRequestFormerRecipient> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AppRequestFormerRecipient> appRequestFormerRecipients = new APINodeList<AppRequestFormerRecipient>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class AppRequestFormerRecipient extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          appRequestFormerRecipients.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          appRequestFormerRecipients.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return appRequestFormerRecipients;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class AppRequestFormerRecipient extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              appRequestFormerRecipients.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              appRequestFormerRecipients.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class AppRequestFormerRecipient extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  appRequestFormerRecipients.add(loadJSON(entry.getValue().toString(), context));
+                  appRequestFormerRecipients.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              appRequestFormerRecipients.add(loadJSON(obj.toString(), context));
+              appRequestFormerRecipients.add(loadJSON(obj.toString(), context, header));
             }
           }
           return appRequestFormerRecipients;
@@ -149,7 +150,7 @@ public class AppRequestFormerRecipient extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              appRequestFormerRecipients.add(loadJSON(entry.getValue().toString(), context));
+              appRequestFormerRecipients.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return appRequestFormerRecipients;
         } else {
@@ -168,7 +169,7 @@ public class AppRequestFormerRecipient extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              appRequestFormerRecipients.add(loadJSON(value.toString(), context));
+              appRequestFormerRecipients.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class AppRequestFormerRecipient extends APINode {
 
           // Sixth, check if it's pure JsonObject
           appRequestFormerRecipients.clear();
-          appRequestFormerRecipients.add(loadJSON(json, context));
+          appRequestFormerRecipients.add(loadJSON(json, context, header));
           return appRequestFormerRecipients;
         }
       }
@@ -253,8 +254,8 @@ public class AppRequestFormerRecipient extends APINode {
 
   public static APIRequest.ResponseParser<AppRequestFormerRecipient> getParser() {
     return new APIRequest.ResponseParser<AppRequestFormerRecipient>() {
-      public APINodeList<AppRequestFormerRecipient> parseResponse(String response, APIContext context, APIRequest<AppRequestFormerRecipient> request) throws MalformedResponseException {
-        return AppRequestFormerRecipient.parseResponse(response, context, request);
+      public APINodeList<AppRequestFormerRecipient> parseResponse(String response, APIContext context, APIRequest<AppRequestFormerRecipient> request, String header) throws MalformedResponseException {
+        return AppRequestFormerRecipient.parseResponse(response, context, request, header);
       }
     };
   }

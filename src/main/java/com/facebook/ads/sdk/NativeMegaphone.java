@@ -73,7 +73,7 @@ public class NativeMegaphone extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static NativeMegaphone loadJSON(String json, APIContext context) {
+  public static NativeMegaphone loadJSON(String json, APIContext context, String header) {
     NativeMegaphone nativeMegaphone = getGson().fromJson(json, NativeMegaphone.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class NativeMegaphone extends APINode {
     }
     nativeMegaphone.context = context;
     nativeMegaphone.rawValue = json;
+    nativeMegaphone.header = header;
     return nativeMegaphone;
   }
 
-  public static APINodeList<NativeMegaphone> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<NativeMegaphone> nativeMegaphones = new APINodeList<NativeMegaphone>(request, json);
+  public static APINodeList<NativeMegaphone> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<NativeMegaphone> nativeMegaphones = new APINodeList<NativeMegaphone>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class NativeMegaphone extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          nativeMegaphones.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          nativeMegaphones.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return nativeMegaphones;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class NativeMegaphone extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              nativeMegaphones.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              nativeMegaphones.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class NativeMegaphone extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  nativeMegaphones.add(loadJSON(entry.getValue().toString(), context));
+                  nativeMegaphones.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              nativeMegaphones.add(loadJSON(obj.toString(), context));
+              nativeMegaphones.add(loadJSON(obj.toString(), context, header));
             }
           }
           return nativeMegaphones;
@@ -155,7 +156,7 @@ public class NativeMegaphone extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              nativeMegaphones.add(loadJSON(entry.getValue().toString(), context));
+              nativeMegaphones.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return nativeMegaphones;
         } else {
@@ -174,7 +175,7 @@ public class NativeMegaphone extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              nativeMegaphones.add(loadJSON(value.toString(), context));
+              nativeMegaphones.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class NativeMegaphone extends APINode {
 
           // Sixth, check if it's pure JsonObject
           nativeMegaphones.clear();
-          nativeMegaphones.add(loadJSON(json, context));
+          nativeMegaphones.add(loadJSON(json, context, header));
           return nativeMegaphones;
         }
       }
@@ -294,8 +295,8 @@ public class NativeMegaphone extends APINode {
 
   public static APIRequest.ResponseParser<NativeMegaphone> getParser() {
     return new APIRequest.ResponseParser<NativeMegaphone>() {
-      public APINodeList<NativeMegaphone> parseResponse(String response, APIContext context, APIRequest<NativeMegaphone> request) throws MalformedResponseException {
-        return NativeMegaphone.parseResponse(response, context, request);
+      public APINodeList<NativeMegaphone> parseResponse(String response, APIContext context, APIRequest<NativeMegaphone> request, String header) throws MalformedResponseException {
+        return NativeMegaphone.parseResponse(response, context, request, header);
       }
     };
   }

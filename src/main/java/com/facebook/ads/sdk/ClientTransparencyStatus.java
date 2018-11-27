@@ -73,7 +73,7 @@ public class ClientTransparencyStatus extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ClientTransparencyStatus loadJSON(String json, APIContext context) {
+  public static ClientTransparencyStatus loadJSON(String json, APIContext context, String header) {
     ClientTransparencyStatus clientTransparencyStatus = getGson().fromJson(json, ClientTransparencyStatus.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class ClientTransparencyStatus extends APINode {
     }
     clientTransparencyStatus.context = context;
     clientTransparencyStatus.rawValue = json;
+    clientTransparencyStatus.header = header;
     return clientTransparencyStatus;
   }
 
-  public static APINodeList<ClientTransparencyStatus> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ClientTransparencyStatus> clientTransparencyStatuss = new APINodeList<ClientTransparencyStatus>(request, json);
+  public static APINodeList<ClientTransparencyStatus> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ClientTransparencyStatus> clientTransparencyStatuss = new APINodeList<ClientTransparencyStatus>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class ClientTransparencyStatus extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          clientTransparencyStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          clientTransparencyStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return clientTransparencyStatuss;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class ClientTransparencyStatus extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              clientTransparencyStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              clientTransparencyStatuss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class ClientTransparencyStatus extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  clientTransparencyStatuss.add(loadJSON(entry.getValue().toString(), context));
+                  clientTransparencyStatuss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              clientTransparencyStatuss.add(loadJSON(obj.toString(), context));
+              clientTransparencyStatuss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return clientTransparencyStatuss;
@@ -155,7 +156,7 @@ public class ClientTransparencyStatus extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              clientTransparencyStatuss.add(loadJSON(entry.getValue().toString(), context));
+              clientTransparencyStatuss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return clientTransparencyStatuss;
         } else {
@@ -174,7 +175,7 @@ public class ClientTransparencyStatus extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              clientTransparencyStatuss.add(loadJSON(value.toString(), context));
+              clientTransparencyStatuss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class ClientTransparencyStatus extends APINode {
 
           // Sixth, check if it's pure JsonObject
           clientTransparencyStatuss.clear();
-          clientTransparencyStatuss.add(loadJSON(json, context));
+          clientTransparencyStatuss.add(loadJSON(json, context, header));
           return clientTransparencyStatuss;
         }
       }
@@ -289,8 +290,8 @@ public class ClientTransparencyStatus extends APINode {
 
   public static APIRequest.ResponseParser<ClientTransparencyStatus> getParser() {
     return new APIRequest.ResponseParser<ClientTransparencyStatus>() {
-      public APINodeList<ClientTransparencyStatus> parseResponse(String response, APIContext context, APIRequest<ClientTransparencyStatus> request) throws MalformedResponseException {
-        return ClientTransparencyStatus.parseResponse(response, context, request);
+      public APINodeList<ClientTransparencyStatus> parseResponse(String response, APIContext context, APIRequest<ClientTransparencyStatus> request, String header) throws MalformedResponseException {
+        return ClientTransparencyStatus.parseResponse(response, context, request, header);
       }
     };
   }

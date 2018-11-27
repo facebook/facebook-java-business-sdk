@@ -83,7 +83,7 @@ public class ReachFrequencyEstimatesCurve extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ReachFrequencyEstimatesCurve loadJSON(String json, APIContext context) {
+  public static ReachFrequencyEstimatesCurve loadJSON(String json, APIContext context, String header) {
     ReachFrequencyEstimatesCurve reachFrequencyEstimatesCurve = getGson().fromJson(json, ReachFrequencyEstimatesCurve.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -100,11 +100,12 @@ public class ReachFrequencyEstimatesCurve extends APINode {
     }
     reachFrequencyEstimatesCurve.context = context;
     reachFrequencyEstimatesCurve.rawValue = json;
+    reachFrequencyEstimatesCurve.header = header;
     return reachFrequencyEstimatesCurve;
   }
 
-  public static APINodeList<ReachFrequencyEstimatesCurve> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ReachFrequencyEstimatesCurve> reachFrequencyEstimatesCurves = new APINodeList<ReachFrequencyEstimatesCurve>(request, json);
+  public static APINodeList<ReachFrequencyEstimatesCurve> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ReachFrequencyEstimatesCurve> reachFrequencyEstimatesCurves = new APINodeList<ReachFrequencyEstimatesCurve>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -115,7 +116,7 @@ public class ReachFrequencyEstimatesCurve extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          reachFrequencyEstimatesCurves.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          reachFrequencyEstimatesCurves.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return reachFrequencyEstimatesCurves;
       } else if (result.isJsonObject()) {
@@ -140,7 +141,7 @@ public class ReachFrequencyEstimatesCurve extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              reachFrequencyEstimatesCurves.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              reachFrequencyEstimatesCurves.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -151,13 +152,13 @@ public class ReachFrequencyEstimatesCurve extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  reachFrequencyEstimatesCurves.add(loadJSON(entry.getValue().toString(), context));
+                  reachFrequencyEstimatesCurves.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              reachFrequencyEstimatesCurves.add(loadJSON(obj.toString(), context));
+              reachFrequencyEstimatesCurves.add(loadJSON(obj.toString(), context, header));
             }
           }
           return reachFrequencyEstimatesCurves;
@@ -165,7 +166,7 @@ public class ReachFrequencyEstimatesCurve extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              reachFrequencyEstimatesCurves.add(loadJSON(entry.getValue().toString(), context));
+              reachFrequencyEstimatesCurves.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return reachFrequencyEstimatesCurves;
         } else {
@@ -184,7 +185,7 @@ public class ReachFrequencyEstimatesCurve extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              reachFrequencyEstimatesCurves.add(loadJSON(value.toString(), context));
+              reachFrequencyEstimatesCurves.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -196,7 +197,7 @@ public class ReachFrequencyEstimatesCurve extends APINode {
 
           // Sixth, check if it's pure JsonObject
           reachFrequencyEstimatesCurves.clear();
-          reachFrequencyEstimatesCurves.add(loadJSON(json, context));
+          reachFrequencyEstimatesCurves.add(loadJSON(json, context, header));
           return reachFrequencyEstimatesCurves;
         }
       }
@@ -349,8 +350,8 @@ public class ReachFrequencyEstimatesCurve extends APINode {
 
   public static APIRequest.ResponseParser<ReachFrequencyEstimatesCurve> getParser() {
     return new APIRequest.ResponseParser<ReachFrequencyEstimatesCurve>() {
-      public APINodeList<ReachFrequencyEstimatesCurve> parseResponse(String response, APIContext context, APIRequest<ReachFrequencyEstimatesCurve> request) throws MalformedResponseException {
-        return ReachFrequencyEstimatesCurve.parseResponse(response, context, request);
+      public APINodeList<ReachFrequencyEstimatesCurve> parseResponse(String response, APIContext context, APIRequest<ReachFrequencyEstimatesCurve> request, String header) throws MalformedResponseException {
+        return ReachFrequencyEstimatesCurve.parseResponse(response, context, request, header);
       }
     };
   }

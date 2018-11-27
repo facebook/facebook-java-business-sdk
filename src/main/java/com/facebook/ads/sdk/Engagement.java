@@ -79,7 +79,7 @@ public class Engagement extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Engagement loadJSON(String json, APIContext context) {
+  public static Engagement loadJSON(String json, APIContext context, String header) {
     Engagement engagement = getGson().fromJson(json, Engagement.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -96,11 +96,12 @@ public class Engagement extends APINode {
     }
     engagement.context = context;
     engagement.rawValue = json;
+    engagement.header = header;
     return engagement;
   }
 
-  public static APINodeList<Engagement> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Engagement> engagements = new APINodeList<Engagement>(request, json);
+  public static APINodeList<Engagement> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Engagement> engagements = new APINodeList<Engagement>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -111,7 +112,7 @@ public class Engagement extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          engagements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          engagements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return engagements;
       } else if (result.isJsonObject()) {
@@ -136,7 +137,7 @@ public class Engagement extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              engagements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              engagements.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -147,13 +148,13 @@ public class Engagement extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  engagements.add(loadJSON(entry.getValue().toString(), context));
+                  engagements.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              engagements.add(loadJSON(obj.toString(), context));
+              engagements.add(loadJSON(obj.toString(), context, header));
             }
           }
           return engagements;
@@ -161,7 +162,7 @@ public class Engagement extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              engagements.add(loadJSON(entry.getValue().toString(), context));
+              engagements.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return engagements;
         } else {
@@ -180,7 +181,7 @@ public class Engagement extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              engagements.add(loadJSON(value.toString(), context));
+              engagements.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -192,7 +193,7 @@ public class Engagement extends APINode {
 
           // Sixth, check if it's pure JsonObject
           engagements.clear();
-          engagements.add(loadJSON(json, context));
+          engagements.add(loadJSON(json, context, header));
           return engagements;
         }
       }
@@ -325,8 +326,8 @@ public class Engagement extends APINode {
 
   public static APIRequest.ResponseParser<Engagement> getParser() {
     return new APIRequest.ResponseParser<Engagement>() {
-      public APINodeList<Engagement> parseResponse(String response, APIContext context, APIRequest<Engagement> request) throws MalformedResponseException {
-        return Engagement.parseResponse(response, context, request);
+      public APINodeList<Engagement> parseResponse(String response, APIContext context, APIRequest<Engagement> request, String header) throws MalformedResponseException {
+        return Engagement.parseResponse(response, context, request, header);
       }
     };
   }

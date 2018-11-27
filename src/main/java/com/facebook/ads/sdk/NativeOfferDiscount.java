@@ -77,7 +77,7 @@ public class NativeOfferDiscount extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static NativeOfferDiscount loadJSON(String json, APIContext context) {
+  public static NativeOfferDiscount loadJSON(String json, APIContext context, String header) {
     NativeOfferDiscount nativeOfferDiscount = getGson().fromJson(json, NativeOfferDiscount.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -94,11 +94,12 @@ public class NativeOfferDiscount extends APINode {
     }
     nativeOfferDiscount.context = context;
     nativeOfferDiscount.rawValue = json;
+    nativeOfferDiscount.header = header;
     return nativeOfferDiscount;
   }
 
-  public static APINodeList<NativeOfferDiscount> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<NativeOfferDiscount> nativeOfferDiscounts = new APINodeList<NativeOfferDiscount>(request, json);
+  public static APINodeList<NativeOfferDiscount> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<NativeOfferDiscount> nativeOfferDiscounts = new APINodeList<NativeOfferDiscount>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -109,7 +110,7 @@ public class NativeOfferDiscount extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          nativeOfferDiscounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          nativeOfferDiscounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return nativeOfferDiscounts;
       } else if (result.isJsonObject()) {
@@ -134,7 +135,7 @@ public class NativeOfferDiscount extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              nativeOfferDiscounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              nativeOfferDiscounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -145,13 +146,13 @@ public class NativeOfferDiscount extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  nativeOfferDiscounts.add(loadJSON(entry.getValue().toString(), context));
+                  nativeOfferDiscounts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              nativeOfferDiscounts.add(loadJSON(obj.toString(), context));
+              nativeOfferDiscounts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return nativeOfferDiscounts;
@@ -159,7 +160,7 @@ public class NativeOfferDiscount extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              nativeOfferDiscounts.add(loadJSON(entry.getValue().toString(), context));
+              nativeOfferDiscounts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return nativeOfferDiscounts;
         } else {
@@ -178,7 +179,7 @@ public class NativeOfferDiscount extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              nativeOfferDiscounts.add(loadJSON(value.toString(), context));
+              nativeOfferDiscounts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -190,7 +191,7 @@ public class NativeOfferDiscount extends APINode {
 
           // Sixth, check if it's pure JsonObject
           nativeOfferDiscounts.clear();
-          nativeOfferDiscounts.add(loadJSON(json, context));
+          nativeOfferDiscounts.add(loadJSON(json, context, header));
           return nativeOfferDiscounts;
         }
       }
@@ -313,8 +314,8 @@ public class NativeOfferDiscount extends APINode {
 
   public static APIRequest.ResponseParser<NativeOfferDiscount> getParser() {
     return new APIRequest.ResponseParser<NativeOfferDiscount>() {
-      public APINodeList<NativeOfferDiscount> parseResponse(String response, APIContext context, APIRequest<NativeOfferDiscount> request) throws MalformedResponseException {
-        return NativeOfferDiscount.parseResponse(response, context, request);
+      public APINodeList<NativeOfferDiscount> parseResponse(String response, APIContext context, APIRequest<NativeOfferDiscount> request, String header) throws MalformedResponseException {
+        return NativeOfferDiscount.parseResponse(response, context, request, header);
       }
     };
   }

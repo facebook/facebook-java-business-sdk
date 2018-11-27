@@ -77,7 +77,7 @@ public class Privacy extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Privacy loadJSON(String json, APIContext context) {
+  public static Privacy loadJSON(String json, APIContext context, String header) {
     Privacy privacy = getGson().fromJson(json, Privacy.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -94,11 +94,12 @@ public class Privacy extends APINode {
     }
     privacy.context = context;
     privacy.rawValue = json;
+    privacy.header = header;
     return privacy;
   }
 
-  public static APINodeList<Privacy> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Privacy> privacys = new APINodeList<Privacy>(request, json);
+  public static APINodeList<Privacy> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Privacy> privacys = new APINodeList<Privacy>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -109,7 +110,7 @@ public class Privacy extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          privacys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          privacys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return privacys;
       } else if (result.isJsonObject()) {
@@ -134,7 +135,7 @@ public class Privacy extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              privacys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              privacys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -145,13 +146,13 @@ public class Privacy extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  privacys.add(loadJSON(entry.getValue().toString(), context));
+                  privacys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              privacys.add(loadJSON(obj.toString(), context));
+              privacys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return privacys;
@@ -159,7 +160,7 @@ public class Privacy extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              privacys.add(loadJSON(entry.getValue().toString(), context));
+              privacys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return privacys;
         } else {
@@ -178,7 +179,7 @@ public class Privacy extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              privacys.add(loadJSON(value.toString(), context));
+              privacys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -190,7 +191,7 @@ public class Privacy extends APINode {
 
           // Sixth, check if it's pure JsonObject
           privacys.clear();
-          privacys.add(loadJSON(json, context));
+          privacys.add(loadJSON(json, context, header));
           return privacys;
         }
       }
@@ -313,8 +314,8 @@ public class Privacy extends APINode {
 
   public static APIRequest.ResponseParser<Privacy> getParser() {
     return new APIRequest.ResponseParser<Privacy>() {
-      public APINodeList<Privacy> parseResponse(String response, APIContext context, APIRequest<Privacy> request) throws MalformedResponseException {
-        return Privacy.parseResponse(response, context, request);
+      public APINodeList<Privacy> parseResponse(String response, APIContext context, APIRequest<Privacy> request, String header) throws MalformedResponseException {
+        return Privacy.parseResponse(response, context, request, header);
       }
     };
   }

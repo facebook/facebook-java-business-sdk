@@ -142,7 +142,7 @@ public class AudienceInsightsRule extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AudienceInsightsRule loadJSON(String json, APIContext context) {
+  public static AudienceInsightsRule loadJSON(String json, APIContext context, String header) {
     AudienceInsightsRule audienceInsightsRule = getGson().fromJson(json, AudienceInsightsRule.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -159,11 +159,12 @@ public class AudienceInsightsRule extends APINode {
     }
     audienceInsightsRule.context = context;
     audienceInsightsRule.rawValue = json;
+    audienceInsightsRule.header = header;
     return audienceInsightsRule;
   }
 
-  public static APINodeList<AudienceInsightsRule> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AudienceInsightsRule> audienceInsightsRules = new APINodeList<AudienceInsightsRule>(request, json);
+  public static APINodeList<AudienceInsightsRule> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AudienceInsightsRule> audienceInsightsRules = new APINodeList<AudienceInsightsRule>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -174,7 +175,7 @@ public class AudienceInsightsRule extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          audienceInsightsRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          audienceInsightsRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return audienceInsightsRules;
       } else if (result.isJsonObject()) {
@@ -199,7 +200,7 @@ public class AudienceInsightsRule extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              audienceInsightsRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              audienceInsightsRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -210,13 +211,13 @@ public class AudienceInsightsRule extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  audienceInsightsRules.add(loadJSON(entry.getValue().toString(), context));
+                  audienceInsightsRules.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              audienceInsightsRules.add(loadJSON(obj.toString(), context));
+              audienceInsightsRules.add(loadJSON(obj.toString(), context, header));
             }
           }
           return audienceInsightsRules;
@@ -224,7 +225,7 @@ public class AudienceInsightsRule extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              audienceInsightsRules.add(loadJSON(entry.getValue().toString(), context));
+              audienceInsightsRules.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return audienceInsightsRules;
         } else {
@@ -243,7 +244,7 @@ public class AudienceInsightsRule extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              audienceInsightsRules.add(loadJSON(value.toString(), context));
+              audienceInsightsRules.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -255,7 +256,7 @@ public class AudienceInsightsRule extends APINode {
 
           // Sixth, check if it's pure JsonObject
           audienceInsightsRules.clear();
-          audienceInsightsRules.add(loadJSON(json, context));
+          audienceInsightsRules.add(loadJSON(json, context, header));
           return audienceInsightsRules;
         }
       }
@@ -357,8 +358,8 @@ public class AudienceInsightsRule extends APINode {
     };
 
     @Override
-    public AudienceInsightsRule parseResponse(String response) throws APIException {
-      return AudienceInsightsRule.parseResponse(response, getContext(), this).head();
+    public AudienceInsightsRule parseResponse(String response, String header) throws APIException {
+      return AudienceInsightsRule.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -368,7 +369,8 @@ public class AudienceInsightsRule extends APINode {
 
     @Override
     public AudienceInsightsRule execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -382,7 +384,7 @@ public class AudienceInsightsRule extends APINode {
         new Function<String, AudienceInsightsRule>() {
            public AudienceInsightsRule apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -548,8 +550,8 @@ public class AudienceInsightsRule extends APINode {
 
   public static APIRequest.ResponseParser<AudienceInsightsRule> getParser() {
     return new APIRequest.ResponseParser<AudienceInsightsRule>() {
-      public APINodeList<AudienceInsightsRule> parseResponse(String response, APIContext context, APIRequest<AudienceInsightsRule> request) throws MalformedResponseException {
-        return AudienceInsightsRule.parseResponse(response, context, request);
+      public APINodeList<AudienceInsightsRule> parseResponse(String response, APIContext context, APIRequest<AudienceInsightsRule> request, String header) throws MalformedResponseException {
+        return AudienceInsightsRule.parseResponse(response, context, request, header);
       }
     };
   }

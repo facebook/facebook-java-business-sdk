@@ -81,7 +81,7 @@ public class ExternalEventSourceDebugging extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ExternalEventSourceDebugging loadJSON(String json, APIContext context) {
+  public static ExternalEventSourceDebugging loadJSON(String json, APIContext context, String header) {
     ExternalEventSourceDebugging externalEventSourceDebugging = getGson().fromJson(json, ExternalEventSourceDebugging.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -98,11 +98,12 @@ public class ExternalEventSourceDebugging extends APINode {
     }
     externalEventSourceDebugging.context = context;
     externalEventSourceDebugging.rawValue = json;
+    externalEventSourceDebugging.header = header;
     return externalEventSourceDebugging;
   }
 
-  public static APINodeList<ExternalEventSourceDebugging> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ExternalEventSourceDebugging> externalEventSourceDebuggings = new APINodeList<ExternalEventSourceDebugging>(request, json);
+  public static APINodeList<ExternalEventSourceDebugging> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ExternalEventSourceDebugging> externalEventSourceDebuggings = new APINodeList<ExternalEventSourceDebugging>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -113,7 +114,7 @@ public class ExternalEventSourceDebugging extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          externalEventSourceDebuggings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          externalEventSourceDebuggings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return externalEventSourceDebuggings;
       } else if (result.isJsonObject()) {
@@ -138,7 +139,7 @@ public class ExternalEventSourceDebugging extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              externalEventSourceDebuggings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              externalEventSourceDebuggings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -149,13 +150,13 @@ public class ExternalEventSourceDebugging extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  externalEventSourceDebuggings.add(loadJSON(entry.getValue().toString(), context));
+                  externalEventSourceDebuggings.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              externalEventSourceDebuggings.add(loadJSON(obj.toString(), context));
+              externalEventSourceDebuggings.add(loadJSON(obj.toString(), context, header));
             }
           }
           return externalEventSourceDebuggings;
@@ -163,7 +164,7 @@ public class ExternalEventSourceDebugging extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              externalEventSourceDebuggings.add(loadJSON(entry.getValue().toString(), context));
+              externalEventSourceDebuggings.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return externalEventSourceDebuggings;
         } else {
@@ -182,7 +183,7 @@ public class ExternalEventSourceDebugging extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              externalEventSourceDebuggings.add(loadJSON(value.toString(), context));
+              externalEventSourceDebuggings.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -194,7 +195,7 @@ public class ExternalEventSourceDebugging extends APINode {
 
           // Sixth, check if it's pure JsonObject
           externalEventSourceDebuggings.clear();
-          externalEventSourceDebuggings.add(loadJSON(json, context));
+          externalEventSourceDebuggings.add(loadJSON(json, context, header));
           return externalEventSourceDebuggings;
         }
       }
@@ -337,8 +338,8 @@ public class ExternalEventSourceDebugging extends APINode {
 
   public static APIRequest.ResponseParser<ExternalEventSourceDebugging> getParser() {
     return new APIRequest.ResponseParser<ExternalEventSourceDebugging>() {
-      public APINodeList<ExternalEventSourceDebugging> parseResponse(String response, APIContext context, APIRequest<ExternalEventSourceDebugging> request) throws MalformedResponseException {
-        return ExternalEventSourceDebugging.parseResponse(response, context, request);
+      public APINodeList<ExternalEventSourceDebugging> parseResponse(String response, APIContext context, APIRequest<ExternalEventSourceDebugging> request, String header) throws MalformedResponseException {
+        return ExternalEventSourceDebugging.parseResponse(response, context, request, header);
       }
     };
   }

@@ -144,7 +144,7 @@ public class RTBDynamicPost extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static RTBDynamicPost loadJSON(String json, APIContext context) {
+  public static RTBDynamicPost loadJSON(String json, APIContext context, String header) {
     RTBDynamicPost rtbDynamicPost = getGson().fromJson(json, RTBDynamicPost.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -161,11 +161,12 @@ public class RTBDynamicPost extends APINode {
     }
     rtbDynamicPost.context = context;
     rtbDynamicPost.rawValue = json;
+    rtbDynamicPost.header = header;
     return rtbDynamicPost;
   }
 
-  public static APINodeList<RTBDynamicPost> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<RTBDynamicPost> rtbDynamicPosts = new APINodeList<RTBDynamicPost>(request, json);
+  public static APINodeList<RTBDynamicPost> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<RTBDynamicPost> rtbDynamicPosts = new APINodeList<RTBDynamicPost>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -176,7 +177,7 @@ public class RTBDynamicPost extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          rtbDynamicPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          rtbDynamicPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return rtbDynamicPosts;
       } else if (result.isJsonObject()) {
@@ -201,7 +202,7 @@ public class RTBDynamicPost extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              rtbDynamicPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              rtbDynamicPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -212,13 +213,13 @@ public class RTBDynamicPost extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  rtbDynamicPosts.add(loadJSON(entry.getValue().toString(), context));
+                  rtbDynamicPosts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              rtbDynamicPosts.add(loadJSON(obj.toString(), context));
+              rtbDynamicPosts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return rtbDynamicPosts;
@@ -226,7 +227,7 @@ public class RTBDynamicPost extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              rtbDynamicPosts.add(loadJSON(entry.getValue().toString(), context));
+              rtbDynamicPosts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return rtbDynamicPosts;
         } else {
@@ -245,7 +246,7 @@ public class RTBDynamicPost extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              rtbDynamicPosts.add(loadJSON(value.toString(), context));
+              rtbDynamicPosts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -257,7 +258,7 @@ public class RTBDynamicPost extends APINode {
 
           // Sixth, check if it's pure JsonObject
           rtbDynamicPosts.clear();
-          rtbDynamicPosts.add(loadJSON(json, context));
+          rtbDynamicPosts.add(loadJSON(json, context, header));
           return rtbDynamicPosts;
         }
       }
@@ -391,8 +392,8 @@ public class RTBDynamicPost extends APINode {
     };
 
     @Override
-    public APINodeList<Comment> parseResponse(String response) throws APIException {
-      return Comment.parseResponse(response, getContext(), this);
+    public APINodeList<Comment> parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -402,7 +403,8 @@ public class RTBDynamicPost extends APINode {
 
     @Override
     public APINodeList<Comment> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -416,7 +418,7 @@ public class RTBDynamicPost extends APINode {
         new Function<String, APINodeList<Comment>>() {
            public APINodeList<Comment> apply(String result) {
              try {
-               return APIRequestGetComments.this.parseResponse(result);
+               return APIRequestGetComments.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -680,8 +682,8 @@ public class RTBDynamicPost extends APINode {
     };
 
     @Override
-    public APINodeList<InstagramComment> parseResponse(String response) throws APIException {
-      return InstagramComment.parseResponse(response, getContext(), this);
+    public APINodeList<InstagramComment> parseResponse(String response, String header) throws APIException {
+      return InstagramComment.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -691,7 +693,8 @@ public class RTBDynamicPost extends APINode {
 
     @Override
     public APINodeList<InstagramComment> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -705,7 +708,7 @@ public class RTBDynamicPost extends APINode {
         new Function<String, APINodeList<InstagramComment>>() {
            public APINodeList<InstagramComment> apply(String result) {
              try {
-               return APIRequestGetInstagramComments.this.parseResponse(result);
+               return APIRequestGetInstagramComments.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -843,8 +846,8 @@ public class RTBDynamicPost extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -854,7 +857,8 @@ public class RTBDynamicPost extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -868,7 +872,7 @@ public class RTBDynamicPost extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetLikes.this.parseResponse(result);
+               return APIRequestGetLikes.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1023,8 +1027,8 @@ public class RTBDynamicPost extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1034,7 +1038,8 @@ public class RTBDynamicPost extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1048,7 +1053,7 @@ public class RTBDynamicPost extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1137,8 +1142,8 @@ public class RTBDynamicPost extends APINode {
     };
 
     @Override
-    public RTBDynamicPost parseResponse(String response) throws APIException {
-      return RTBDynamicPost.parseResponse(response, getContext(), this).head();
+    public RTBDynamicPost parseResponse(String response, String header) throws APIException {
+      return RTBDynamicPost.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1148,7 +1153,8 @@ public class RTBDynamicPost extends APINode {
 
     @Override
     public RTBDynamicPost execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1162,7 +1168,7 @@ public class RTBDynamicPost extends APINode {
         new Function<String, RTBDynamicPost>() {
            public RTBDynamicPost apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1336,8 +1342,8 @@ public class RTBDynamicPost extends APINode {
 
   public static APIRequest.ResponseParser<RTBDynamicPost> getParser() {
     return new APIRequest.ResponseParser<RTBDynamicPost>() {
-      public APINodeList<RTBDynamicPost> parseResponse(String response, APIContext context, APIRequest<RTBDynamicPost> request) throws MalformedResponseException {
-        return RTBDynamicPost.parseResponse(response, context, request);
+      public APINodeList<RTBDynamicPost> parseResponse(String response, APIContext context, APIRequest<RTBDynamicPost> request, String header) throws MalformedResponseException {
+        return RTBDynamicPost.parseResponse(response, context, request, header);
       }
     };
   }

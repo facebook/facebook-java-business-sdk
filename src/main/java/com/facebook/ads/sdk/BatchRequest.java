@@ -92,7 +92,7 @@ public class BatchRequest {
         if (response.get("code").getAsInt() == HttpURLConnection.HTTP_OK) {
           String body = response.get("body").getAsString();
           APIRequest request = requests.get(i).request;
-          responses.add(request.parseResponse(body));
+          responses.add(request.parseResponse(body, null));
         } else {
           responses.add(new APIException.FailedRequestException(response.toString()));
         }
@@ -139,7 +139,7 @@ public class BatchRequest {
     }
     params.put("batch", batch.toString());
     params.putAll(files);
-    return APIRequest.getExecutor().sendPost(context.getEndpointBase() + "/", params, context);
+    return APIRequest.getExecutor().sendPost(context.getEndpointBase() + "/", params, context).getBody();
   }
 
   public static class BatchModeRequestInfo {

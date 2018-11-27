@@ -71,7 +71,7 @@ public class CustomAudiencePrefillState extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CustomAudiencePrefillState loadJSON(String json, APIContext context) {
+  public static CustomAudiencePrefillState loadJSON(String json, APIContext context, String header) {
     CustomAudiencePrefillState customAudiencePrefillState = getGson().fromJson(json, CustomAudiencePrefillState.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class CustomAudiencePrefillState extends APINode {
     }
     customAudiencePrefillState.context = context;
     customAudiencePrefillState.rawValue = json;
+    customAudiencePrefillState.header = header;
     return customAudiencePrefillState;
   }
 
-  public static APINodeList<CustomAudiencePrefillState> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CustomAudiencePrefillState> customAudiencePrefillStates = new APINodeList<CustomAudiencePrefillState>(request, json);
+  public static APINodeList<CustomAudiencePrefillState> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CustomAudiencePrefillState> customAudiencePrefillStates = new APINodeList<CustomAudiencePrefillState>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class CustomAudiencePrefillState extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          customAudiencePrefillStates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          customAudiencePrefillStates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return customAudiencePrefillStates;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class CustomAudiencePrefillState extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              customAudiencePrefillStates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              customAudiencePrefillStates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class CustomAudiencePrefillState extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  customAudiencePrefillStates.add(loadJSON(entry.getValue().toString(), context));
+                  customAudiencePrefillStates.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              customAudiencePrefillStates.add(loadJSON(obj.toString(), context));
+              customAudiencePrefillStates.add(loadJSON(obj.toString(), context, header));
             }
           }
           return customAudiencePrefillStates;
@@ -153,7 +154,7 @@ public class CustomAudiencePrefillState extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              customAudiencePrefillStates.add(loadJSON(entry.getValue().toString(), context));
+              customAudiencePrefillStates.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return customAudiencePrefillStates;
         } else {
@@ -172,7 +173,7 @@ public class CustomAudiencePrefillState extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              customAudiencePrefillStates.add(loadJSON(value.toString(), context));
+              customAudiencePrefillStates.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class CustomAudiencePrefillState extends APINode {
 
           // Sixth, check if it's pure JsonObject
           customAudiencePrefillStates.clear();
-          customAudiencePrefillStates.add(loadJSON(json, context));
+          customAudiencePrefillStates.add(loadJSON(json, context, header));
           return customAudiencePrefillStates;
         }
       }
@@ -277,8 +278,8 @@ public class CustomAudiencePrefillState extends APINode {
 
   public static APIRequest.ResponseParser<CustomAudiencePrefillState> getParser() {
     return new APIRequest.ResponseParser<CustomAudiencePrefillState>() {
-      public APINodeList<CustomAudiencePrefillState> parseResponse(String response, APIContext context, APIRequest<CustomAudiencePrefillState> request) throws MalformedResponseException {
-        return CustomAudiencePrefillState.parseResponse(response, context, request);
+      public APINodeList<CustomAudiencePrefillState> parseResponse(String response, APIContext context, APIRequest<CustomAudiencePrefillState> request, String header) throws MalformedResponseException {
+        return CustomAudiencePrefillState.parseResponse(response, context, request, header);
       }
     };
   }

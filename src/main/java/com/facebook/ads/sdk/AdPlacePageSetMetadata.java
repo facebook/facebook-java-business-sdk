@@ -71,7 +71,7 @@ public class AdPlacePageSetMetadata extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdPlacePageSetMetadata loadJSON(String json, APIContext context) {
+  public static AdPlacePageSetMetadata loadJSON(String json, APIContext context, String header) {
     AdPlacePageSetMetadata adPlacePageSetMetadata = getGson().fromJson(json, AdPlacePageSetMetadata.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class AdPlacePageSetMetadata extends APINode {
     }
     adPlacePageSetMetadata.context = context;
     adPlacePageSetMetadata.rawValue = json;
+    adPlacePageSetMetadata.header = header;
     return adPlacePageSetMetadata;
   }
 
-  public static APINodeList<AdPlacePageSetMetadata> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdPlacePageSetMetadata> adPlacePageSetMetadatas = new APINodeList<AdPlacePageSetMetadata>(request, json);
+  public static APINodeList<AdPlacePageSetMetadata> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdPlacePageSetMetadata> adPlacePageSetMetadatas = new APINodeList<AdPlacePageSetMetadata>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class AdPlacePageSetMetadata extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adPlacePageSetMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adPlacePageSetMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adPlacePageSetMetadatas;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class AdPlacePageSetMetadata extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adPlacePageSetMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adPlacePageSetMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class AdPlacePageSetMetadata extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adPlacePageSetMetadatas.add(loadJSON(entry.getValue().toString(), context));
+                  adPlacePageSetMetadatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adPlacePageSetMetadatas.add(loadJSON(obj.toString(), context));
+              adPlacePageSetMetadatas.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adPlacePageSetMetadatas;
@@ -153,7 +154,7 @@ public class AdPlacePageSetMetadata extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adPlacePageSetMetadatas.add(loadJSON(entry.getValue().toString(), context));
+              adPlacePageSetMetadatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adPlacePageSetMetadatas;
         } else {
@@ -172,7 +173,7 @@ public class AdPlacePageSetMetadata extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adPlacePageSetMetadatas.add(loadJSON(value.toString(), context));
+              adPlacePageSetMetadatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class AdPlacePageSetMetadata extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adPlacePageSetMetadatas.clear();
-          adPlacePageSetMetadatas.add(loadJSON(json, context));
+          adPlacePageSetMetadatas.add(loadJSON(json, context, header));
           return adPlacePageSetMetadatas;
         }
       }
@@ -277,8 +278,8 @@ public class AdPlacePageSetMetadata extends APINode {
 
   public static APIRequest.ResponseParser<AdPlacePageSetMetadata> getParser() {
     return new APIRequest.ResponseParser<AdPlacePageSetMetadata>() {
-      public APINodeList<AdPlacePageSetMetadata> parseResponse(String response, APIContext context, APIRequest<AdPlacePageSetMetadata> request) throws MalformedResponseException {
-        return AdPlacePageSetMetadata.parseResponse(response, context, request);
+      public APINodeList<AdPlacePageSetMetadata> parseResponse(String response, APIContext context, APIRequest<AdPlacePageSetMetadata> request, String header) throws MalformedResponseException {
+        return AdPlacePageSetMetadata.parseResponse(response, context, request, header);
       }
     };
   }

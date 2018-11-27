@@ -158,7 +158,7 @@ public class CustomConversion extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CustomConversion loadJSON(String json, APIContext context) {
+  public static CustomConversion loadJSON(String json, APIContext context, String header) {
     CustomConversion customConversion = getGson().fromJson(json, CustomConversion.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -175,11 +175,12 @@ public class CustomConversion extends APINode {
     }
     customConversion.context = context;
     customConversion.rawValue = json;
+    customConversion.header = header;
     return customConversion;
   }
 
-  public static APINodeList<CustomConversion> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CustomConversion> customConversions = new APINodeList<CustomConversion>(request, json);
+  public static APINodeList<CustomConversion> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CustomConversion> customConversions = new APINodeList<CustomConversion>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -190,7 +191,7 @@ public class CustomConversion extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          customConversions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          customConversions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return customConversions;
       } else if (result.isJsonObject()) {
@@ -215,7 +216,7 @@ public class CustomConversion extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              customConversions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              customConversions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -226,13 +227,13 @@ public class CustomConversion extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  customConversions.add(loadJSON(entry.getValue().toString(), context));
+                  customConversions.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              customConversions.add(loadJSON(obj.toString(), context));
+              customConversions.add(loadJSON(obj.toString(), context, header));
             }
           }
           return customConversions;
@@ -240,7 +241,7 @@ public class CustomConversion extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              customConversions.add(loadJSON(entry.getValue().toString(), context));
+              customConversions.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return customConversions;
         } else {
@@ -259,7 +260,7 @@ public class CustomConversion extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              customConversions.add(loadJSON(value.toString(), context));
+              customConversions.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -271,7 +272,7 @@ public class CustomConversion extends APINode {
 
           // Sixth, check if it's pure JsonObject
           customConversions.clear();
-          customConversions.add(loadJSON(json, context));
+          customConversions.add(loadJSON(json, context, header));
           return customConversions;
         }
       }
@@ -437,8 +438,8 @@ public class CustomConversion extends APINode {
     };
 
     @Override
-    public APINodeList<CustomConversionActivities> parseResponse(String response) throws APIException {
-      return CustomConversionActivities.parseResponse(response, getContext(), this);
+    public APINodeList<CustomConversionActivities> parseResponse(String response, String header) throws APIException {
+      return CustomConversionActivities.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -448,7 +449,8 @@ public class CustomConversion extends APINode {
 
     @Override
     public APINodeList<CustomConversionActivities> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -462,7 +464,7 @@ public class CustomConversion extends APINode {
         new Function<String, APINodeList<CustomConversionActivities>>() {
            public APINodeList<CustomConversionActivities> apply(String result) {
              try {
-               return APIRequestGetActivities.this.parseResponse(result);
+               return APIRequestGetActivities.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -604,8 +606,8 @@ public class CustomConversion extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -615,7 +617,8 @@ public class CustomConversion extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -629,7 +632,7 @@ public class CustomConversion extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAdAccounts.this.parseResponse(result);
+               return APIRequestDeleteAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -735,7 +738,6 @@ public class CustomConversion extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "daily_spend_limit",
       "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
@@ -764,7 +766,6 @@ public class CustomConversion extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
-      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -780,8 +781,8 @@ public class CustomConversion extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccount> parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -791,7 +792,8 @@ public class CustomConversion extends APINode {
 
     @Override
     public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -805,7 +807,7 @@ public class CustomConversion extends APINode {
         new Function<String, APINodeList<AdAccount>>() {
            public APINodeList<AdAccount> apply(String result) {
              try {
-               return APIRequestGetAdAccounts.this.parseResponse(result);
+               return APIRequestGetAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1012,13 +1014,6 @@ public class CustomConversion extends APINode {
       this.requestField("currency", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestDailySpendLimitField () {
-      return this.requestDailySpendLimitField(true);
-    }
-    public APIRequestGetAdAccounts requestDailySpendLimitField (boolean value) {
-      this.requestField("daily_spend_limit", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestDirectDealsTosAcceptedField () {
       return this.requestDirectDealsTosAcceptedField(true);
     }
@@ -1215,13 +1210,6 @@ public class CustomConversion extends APINode {
       this.requestField("partner", value);
       return this;
     }
-    public APIRequestGetAdAccounts requestRateLimitResetTimeField () {
-      return this.requestRateLimitResetTimeField(true);
-    }
-    public APIRequestGetAdAccounts requestRateLimitResetTimeField (boolean value) {
-      this.requestField("rate_limit_reset_time", value);
-      return this;
-    }
     public APIRequestGetAdAccounts requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
@@ -1324,8 +1312,8 @@ public class CustomConversion extends APINode {
     };
 
     @Override
-    public CustomConversion parseResponse(String response) throws APIException {
-      return CustomConversion.parseResponse(response, getContext(), this).head();
+    public CustomConversion parseResponse(String response, String header) throws APIException {
+      return CustomConversion.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1335,7 +1323,8 @@ public class CustomConversion extends APINode {
 
     @Override
     public CustomConversion execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1349,7 +1338,7 @@ public class CustomConversion extends APINode {
         new Function<String, CustomConversion>() {
            public CustomConversion apply(String result) {
              try {
-               return APIRequestCreateAdAccount.this.parseResponse(result);
+               return APIRequestCreateAdAccount.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1444,8 +1433,8 @@ public class CustomConversion extends APINode {
     };
 
     @Override
-    public APINodeList<CustomConversionStatsResult> parseResponse(String response) throws APIException {
-      return CustomConversionStatsResult.parseResponse(response, getContext(), this);
+    public APINodeList<CustomConversionStatsResult> parseResponse(String response, String header) throws APIException {
+      return CustomConversionStatsResult.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1455,7 +1444,8 @@ public class CustomConversion extends APINode {
 
     @Override
     public APINodeList<CustomConversionStatsResult> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1469,7 +1459,7 @@ public class CustomConversion extends APINode {
         new Function<String, APINodeList<CustomConversionStatsResult>>() {
            public APINodeList<CustomConversionStatsResult> apply(String result) {
              try {
-               return APIRequestGetStats.this.parseResponse(result);
+               return APIRequestGetStats.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1594,8 +1584,8 @@ public class CustomConversion extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1605,7 +1595,8 @@ public class CustomConversion extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1619,7 +1610,7 @@ public class CustomConversion extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1715,8 +1706,8 @@ public class CustomConversion extends APINode {
     };
 
     @Override
-    public CustomConversion parseResponse(String response) throws APIException {
-      return CustomConversion.parseResponse(response, getContext(), this).head();
+    public CustomConversion parseResponse(String response, String header) throws APIException {
+      return CustomConversion.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1726,7 +1717,8 @@ public class CustomConversion extends APINode {
 
     @Override
     public CustomConversion execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1740,7 +1732,7 @@ public class CustomConversion extends APINode {
         new Function<String, CustomConversion>() {
            public CustomConversion apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1947,8 +1939,8 @@ public class CustomConversion extends APINode {
     };
 
     @Override
-    public CustomConversion parseResponse(String response) throws APIException {
-      return CustomConversion.parseResponse(response, getContext(), this).head();
+    public CustomConversion parseResponse(String response, String header) throws APIException {
+      return CustomConversion.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1958,7 +1950,8 @@ public class CustomConversion extends APINode {
 
     @Override
     public CustomConversion execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1972,7 +1965,7 @@ public class CustomConversion extends APINode {
         new Function<String, CustomConversion>() {
            public CustomConversion apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2146,8 +2139,8 @@ public class CustomConversion extends APINode {
 
   public static APIRequest.ResponseParser<CustomConversion> getParser() {
     return new APIRequest.ResponseParser<CustomConversion>() {
-      public APINodeList<CustomConversion> parseResponse(String response, APIContext context, APIRequest<CustomConversion> request) throws MalformedResponseException {
-        return CustomConversion.parseResponse(response, context, request);
+      public APINodeList<CustomConversion> parseResponse(String response, APIContext context, APIRequest<CustomConversion> request, String header) throws MalformedResponseException {
+        return CustomConversion.parseResponse(response, context, request, header);
       }
     };
   }

@@ -69,7 +69,7 @@ public class UserDevice extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserDevice loadJSON(String json, APIContext context) {
+  public static UserDevice loadJSON(String json, APIContext context, String header) {
     UserDevice userDevice = getGson().fromJson(json, UserDevice.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class UserDevice extends APINode {
     }
     userDevice.context = context;
     userDevice.rawValue = json;
+    userDevice.header = header;
     return userDevice;
   }
 
-  public static APINodeList<UserDevice> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UserDevice> userDevices = new APINodeList<UserDevice>(request, json);
+  public static APINodeList<UserDevice> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UserDevice> userDevices = new APINodeList<UserDevice>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class UserDevice extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userDevices.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userDevices.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return userDevices;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class UserDevice extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userDevices.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userDevices.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class UserDevice extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userDevices.add(loadJSON(entry.getValue().toString(), context));
+                  userDevices.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userDevices.add(loadJSON(obj.toString(), context));
+              userDevices.add(loadJSON(obj.toString(), context, header));
             }
           }
           return userDevices;
@@ -151,7 +152,7 @@ public class UserDevice extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userDevices.add(loadJSON(entry.getValue().toString(), context));
+              userDevices.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return userDevices;
         } else {
@@ -170,7 +171,7 @@ public class UserDevice extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userDevices.add(loadJSON(value.toString(), context));
+              userDevices.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class UserDevice extends APINode {
 
           // Sixth, check if it's pure JsonObject
           userDevices.clear();
-          userDevices.add(loadJSON(json, context));
+          userDevices.add(loadJSON(json, context, header));
           return userDevices;
         }
       }
@@ -265,8 +266,8 @@ public class UserDevice extends APINode {
 
   public static APIRequest.ResponseParser<UserDevice> getParser() {
     return new APIRequest.ResponseParser<UserDevice>() {
-      public APINodeList<UserDevice> parseResponse(String response, APIContext context, APIRequest<UserDevice> request) throws MalformedResponseException {
-        return UserDevice.parseResponse(response, context, request);
+      public APINodeList<UserDevice> parseResponse(String response, APIContext context, APIRequest<UserDevice> request, String header) throws MalformedResponseException {
+        return UserDevice.parseResponse(response, context, request, header);
       }
     };
   }

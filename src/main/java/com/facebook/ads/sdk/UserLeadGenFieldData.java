@@ -69,7 +69,7 @@ public class UserLeadGenFieldData extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserLeadGenFieldData loadJSON(String json, APIContext context) {
+  public static UserLeadGenFieldData loadJSON(String json, APIContext context, String header) {
     UserLeadGenFieldData userLeadGenFieldData = getGson().fromJson(json, UserLeadGenFieldData.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class UserLeadGenFieldData extends APINode {
     }
     userLeadGenFieldData.context = context;
     userLeadGenFieldData.rawValue = json;
+    userLeadGenFieldData.header = header;
     return userLeadGenFieldData;
   }
 
-  public static APINodeList<UserLeadGenFieldData> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UserLeadGenFieldData> userLeadGenFieldDatas = new APINodeList<UserLeadGenFieldData>(request, json);
+  public static APINodeList<UserLeadGenFieldData> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UserLeadGenFieldData> userLeadGenFieldDatas = new APINodeList<UserLeadGenFieldData>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class UserLeadGenFieldData extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userLeadGenFieldDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userLeadGenFieldDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return userLeadGenFieldDatas;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class UserLeadGenFieldData extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userLeadGenFieldDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userLeadGenFieldDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class UserLeadGenFieldData extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userLeadGenFieldDatas.add(loadJSON(entry.getValue().toString(), context));
+                  userLeadGenFieldDatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userLeadGenFieldDatas.add(loadJSON(obj.toString(), context));
+              userLeadGenFieldDatas.add(loadJSON(obj.toString(), context, header));
             }
           }
           return userLeadGenFieldDatas;
@@ -151,7 +152,7 @@ public class UserLeadGenFieldData extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userLeadGenFieldDatas.add(loadJSON(entry.getValue().toString(), context));
+              userLeadGenFieldDatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return userLeadGenFieldDatas;
         } else {
@@ -170,7 +171,7 @@ public class UserLeadGenFieldData extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userLeadGenFieldDatas.add(loadJSON(value.toString(), context));
+              userLeadGenFieldDatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class UserLeadGenFieldData extends APINode {
 
           // Sixth, check if it's pure JsonObject
           userLeadGenFieldDatas.clear();
-          userLeadGenFieldDatas.add(loadJSON(json, context));
+          userLeadGenFieldDatas.add(loadJSON(json, context, header));
           return userLeadGenFieldDatas;
         }
       }
@@ -265,8 +266,8 @@ public class UserLeadGenFieldData extends APINode {
 
   public static APIRequest.ResponseParser<UserLeadGenFieldData> getParser() {
     return new APIRequest.ResponseParser<UserLeadGenFieldData>() {
-      public APINodeList<UserLeadGenFieldData> parseResponse(String response, APIContext context, APIRequest<UserLeadGenFieldData> request) throws MalformedResponseException {
-        return UserLeadGenFieldData.parseResponse(response, context, request);
+      public APINodeList<UserLeadGenFieldData> parseResponse(String response, APIContext context, APIRequest<UserLeadGenFieldData> request, String header) throws MalformedResponseException {
+        return UserLeadGenFieldData.parseResponse(response, context, request, header);
       }
     };
   }

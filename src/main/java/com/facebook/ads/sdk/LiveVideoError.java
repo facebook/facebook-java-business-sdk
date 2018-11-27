@@ -132,7 +132,7 @@ public class LiveVideoError extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LiveVideoError loadJSON(String json, APIContext context) {
+  public static LiveVideoError loadJSON(String json, APIContext context, String header) {
     LiveVideoError liveVideoError = getGson().fromJson(json, LiveVideoError.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -149,11 +149,12 @@ public class LiveVideoError extends APINode {
     }
     liveVideoError.context = context;
     liveVideoError.rawValue = json;
+    liveVideoError.header = header;
     return liveVideoError;
   }
 
-  public static APINodeList<LiveVideoError> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LiveVideoError> liveVideoErrors = new APINodeList<LiveVideoError>(request, json);
+  public static APINodeList<LiveVideoError> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LiveVideoError> liveVideoErrors = new APINodeList<LiveVideoError>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -164,7 +165,7 @@ public class LiveVideoError extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          liveVideoErrors.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          liveVideoErrors.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return liveVideoErrors;
       } else if (result.isJsonObject()) {
@@ -189,7 +190,7 @@ public class LiveVideoError extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              liveVideoErrors.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              liveVideoErrors.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -200,13 +201,13 @@ public class LiveVideoError extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  liveVideoErrors.add(loadJSON(entry.getValue().toString(), context));
+                  liveVideoErrors.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              liveVideoErrors.add(loadJSON(obj.toString(), context));
+              liveVideoErrors.add(loadJSON(obj.toString(), context, header));
             }
           }
           return liveVideoErrors;
@@ -214,7 +215,7 @@ public class LiveVideoError extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              liveVideoErrors.add(loadJSON(entry.getValue().toString(), context));
+              liveVideoErrors.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return liveVideoErrors;
         } else {
@@ -233,7 +234,7 @@ public class LiveVideoError extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              liveVideoErrors.add(loadJSON(value.toString(), context));
+              liveVideoErrors.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -245,7 +246,7 @@ public class LiveVideoError extends APINode {
 
           // Sixth, check if it's pure JsonObject
           liveVideoErrors.clear();
-          liveVideoErrors.add(loadJSON(json, context));
+          liveVideoErrors.add(loadJSON(json, context, header));
           return liveVideoErrors;
         }
       }
@@ -319,8 +320,8 @@ public class LiveVideoError extends APINode {
     };
 
     @Override
-    public LiveVideoError parseResponse(String response) throws APIException {
-      return LiveVideoError.parseResponse(response, getContext(), this).head();
+    public LiveVideoError parseResponse(String response, String header) throws APIException {
+      return LiveVideoError.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -330,7 +331,8 @@ public class LiveVideoError extends APINode {
 
     @Override
     public LiveVideoError execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -344,7 +346,7 @@ public class LiveVideoError extends APINode {
         new Function<String, LiveVideoError>() {
            public LiveVideoError apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -470,8 +472,8 @@ public class LiveVideoError extends APINode {
 
   public static APIRequest.ResponseParser<LiveVideoError> getParser() {
     return new APIRequest.ResponseParser<LiveVideoError>() {
-      public APINodeList<LiveVideoError> parseResponse(String response, APIContext context, APIRequest<LiveVideoError> request) throws MalformedResponseException {
-        return LiveVideoError.parseResponse(response, context, request);
+      public APINodeList<LiveVideoError> parseResponse(String response, APIContext context, APIRequest<LiveVideoError> request, String header) throws MalformedResponseException {
+        return LiveVideoError.parseResponse(response, context, request, header);
       }
     };
   }

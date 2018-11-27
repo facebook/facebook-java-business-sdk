@@ -73,7 +73,7 @@ public class ColumnSuggestions extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ColumnSuggestions loadJSON(String json, APIContext context) {
+  public static ColumnSuggestions loadJSON(String json, APIContext context, String header) {
     ColumnSuggestions columnSuggestions = getGson().fromJson(json, ColumnSuggestions.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class ColumnSuggestions extends APINode {
     }
     columnSuggestions.context = context;
     columnSuggestions.rawValue = json;
+    columnSuggestions.header = header;
     return columnSuggestions;
   }
 
-  public static APINodeList<ColumnSuggestions> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ColumnSuggestions> columnSuggestionss = new APINodeList<ColumnSuggestions>(request, json);
+  public static APINodeList<ColumnSuggestions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ColumnSuggestions> columnSuggestionss = new APINodeList<ColumnSuggestions>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class ColumnSuggestions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          columnSuggestionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          columnSuggestionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return columnSuggestionss;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class ColumnSuggestions extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              columnSuggestionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              columnSuggestionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class ColumnSuggestions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  columnSuggestionss.add(loadJSON(entry.getValue().toString(), context));
+                  columnSuggestionss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              columnSuggestionss.add(loadJSON(obj.toString(), context));
+              columnSuggestionss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return columnSuggestionss;
@@ -155,7 +156,7 @@ public class ColumnSuggestions extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              columnSuggestionss.add(loadJSON(entry.getValue().toString(), context));
+              columnSuggestionss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return columnSuggestionss;
         } else {
@@ -174,7 +175,7 @@ public class ColumnSuggestions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              columnSuggestionss.add(loadJSON(value.toString(), context));
+              columnSuggestionss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class ColumnSuggestions extends APINode {
 
           // Sixth, check if it's pure JsonObject
           columnSuggestionss.clear();
-          columnSuggestionss.add(loadJSON(json, context));
+          columnSuggestionss.add(loadJSON(json, context, header));
           return columnSuggestionss;
         }
       }
@@ -289,8 +290,8 @@ public class ColumnSuggestions extends APINode {
 
   public static APIRequest.ResponseParser<ColumnSuggestions> getParser() {
     return new APIRequest.ResponseParser<ColumnSuggestions>() {
-      public APINodeList<ColumnSuggestions> parseResponse(String response, APIContext context, APIRequest<ColumnSuggestions> request) throws MalformedResponseException {
-        return ColumnSuggestions.parseResponse(response, context, request);
+      public APINodeList<ColumnSuggestions> parseResponse(String response, APIContext context, APIRequest<ColumnSuggestions> request, String header) throws MalformedResponseException {
+        return ColumnSuggestions.parseResponse(response, context, request, header);
       }
     };
   }

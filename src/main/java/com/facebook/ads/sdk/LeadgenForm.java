@@ -182,7 +182,7 @@ public class LeadgenForm extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LeadgenForm loadJSON(String json, APIContext context) {
+  public static LeadgenForm loadJSON(String json, APIContext context, String header) {
     LeadgenForm leadgenForm = getGson().fromJson(json, LeadgenForm.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -199,11 +199,12 @@ public class LeadgenForm extends APINode {
     }
     leadgenForm.context = context;
     leadgenForm.rawValue = json;
+    leadgenForm.header = header;
     return leadgenForm;
   }
 
-  public static APINodeList<LeadgenForm> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LeadgenForm> leadgenForms = new APINodeList<LeadgenForm>(request, json);
+  public static APINodeList<LeadgenForm> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LeadgenForm> leadgenForms = new APINodeList<LeadgenForm>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -214,7 +215,7 @@ public class LeadgenForm extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          leadgenForms.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          leadgenForms.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return leadgenForms;
       } else if (result.isJsonObject()) {
@@ -239,7 +240,7 @@ public class LeadgenForm extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              leadgenForms.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              leadgenForms.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -250,13 +251,13 @@ public class LeadgenForm extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  leadgenForms.add(loadJSON(entry.getValue().toString(), context));
+                  leadgenForms.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              leadgenForms.add(loadJSON(obj.toString(), context));
+              leadgenForms.add(loadJSON(obj.toString(), context, header));
             }
           }
           return leadgenForms;
@@ -264,7 +265,7 @@ public class LeadgenForm extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              leadgenForms.add(loadJSON(entry.getValue().toString(), context));
+              leadgenForms.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return leadgenForms;
         } else {
@@ -283,7 +284,7 @@ public class LeadgenForm extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              leadgenForms.add(loadJSON(value.toString(), context));
+              leadgenForms.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -295,7 +296,7 @@ public class LeadgenForm extends APINode {
 
           // Sixth, check if it's pure JsonObject
           leadgenForms.clear();
-          leadgenForms.add(loadJSON(json, context));
+          leadgenForms.add(loadJSON(json, context, header));
           return leadgenForms;
         }
       }
@@ -516,8 +517,8 @@ public class LeadgenForm extends APINode {
     };
 
     @Override
-    public APINodeList<Lead> parseResponse(String response) throws APIException {
-      return Lead.parseResponse(response, getContext(), this);
+    public APINodeList<Lead> parseResponse(String response, String header) throws APIException {
+      return Lead.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -527,7 +528,8 @@ public class LeadgenForm extends APINode {
 
     @Override
     public APINodeList<Lead> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -541,7 +543,7 @@ public class LeadgenForm extends APINode {
         new Function<String, APINodeList<Lead>>() {
            public APINodeList<Lead> apply(String result) {
              try {
-               return APIRequestGetLeads.this.parseResponse(result);
+               return APIRequestGetLeads.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -734,8 +736,8 @@ public class LeadgenForm extends APINode {
     };
 
     @Override
-    public Lead parseResponse(String response) throws APIException {
-      return Lead.parseResponse(response, getContext(), this).head();
+    public Lead parseResponse(String response, String header) throws APIException {
+      return Lead.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -745,7 +747,8 @@ public class LeadgenForm extends APINode {
 
     @Override
     public Lead execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -759,7 +762,7 @@ public class LeadgenForm extends APINode {
         new Function<String, Lead>() {
            public Lead apply(String result) {
              try {
-               return APIRequestCreateLead.this.parseResponse(result);
+               return APIRequestCreateLead.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -868,8 +871,8 @@ public class LeadgenForm extends APINode {
     };
 
     @Override
-    public APINodeList<Lead> parseResponse(String response) throws APIException {
-      return Lead.parseResponse(response, getContext(), this);
+    public APINodeList<Lead> parseResponse(String response, String header) throws APIException {
+      return Lead.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -879,7 +882,8 @@ public class LeadgenForm extends APINode {
 
     @Override
     public APINodeList<Lead> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -893,7 +897,7 @@ public class LeadgenForm extends APINode {
         new Function<String, APINodeList<Lead>>() {
            public APINodeList<Lead> apply(String result) {
              try {
-               return APIRequestGetTestLeads.this.parseResponse(result);
+               return APIRequestGetTestLeads.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1085,8 +1089,8 @@ public class LeadgenForm extends APINode {
     };
 
     @Override
-    public Lead parseResponse(String response) throws APIException {
-      return Lead.parseResponse(response, getContext(), this).head();
+    public Lead parseResponse(String response, String header) throws APIException {
+      return Lead.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1096,7 +1100,8 @@ public class LeadgenForm extends APINode {
 
     @Override
     public Lead execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1110,7 +1115,7 @@ public class LeadgenForm extends APINode {
         new Function<String, Lead>() {
            public Lead apply(String result) {
              try {
-               return APIRequestCreateTestLead.this.parseResponse(result);
+               return APIRequestCreateTestLead.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1206,8 +1211,8 @@ public class LeadgenForm extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1217,7 +1222,8 @@ public class LeadgenForm extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1231,7 +1237,7 @@ public class LeadgenForm extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1339,8 +1345,8 @@ public class LeadgenForm extends APINode {
     };
 
     @Override
-    public LeadgenForm parseResponse(String response) throws APIException {
-      return LeadgenForm.parseResponse(response, getContext(), this).head();
+    public LeadgenForm parseResponse(String response, String header) throws APIException {
+      return LeadgenForm.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1350,7 +1356,8 @@ public class LeadgenForm extends APINode {
 
     @Override
     public LeadgenForm execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1364,7 +1371,7 @@ public class LeadgenForm extends APINode {
         new Function<String, LeadgenForm>() {
            public LeadgenForm apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1646,21 +1653,15 @@ public class LeadgenForm extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "context_card_id",
-      "legal_content_id",
-      "locale",
-      "name",
-      "questions",
       "status",
-      "thank_you_page_id",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public LeadgenForm parseResponse(String response) throws APIException {
-      return LeadgenForm.parseResponse(response, getContext(), this).head();
+    public LeadgenForm parseResponse(String response, String header) throws APIException {
+      return LeadgenForm.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1670,7 +1671,8 @@ public class LeadgenForm extends APINode {
 
     @Override
     public LeadgenForm execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1684,7 +1686,7 @@ public class LeadgenForm extends APINode {
         new Function<String, LeadgenForm>() {
            public LeadgenForm apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1710,50 +1712,12 @@ public class LeadgenForm extends APINode {
     }
 
 
-    public APIRequestUpdate setContextCardId (String contextCardId) {
-      this.setParam("context_card_id", contextCardId);
-      return this;
-    }
-
-    public APIRequestUpdate setLegalContentId (String legalContentId) {
-      this.setParam("legal_content_id", legalContentId);
-      return this;
-    }
-
-    public APIRequestUpdate setLocale (LeadgenForm.EnumLocale locale) {
-      this.setParam("locale", locale);
-      return this;
-    }
-    public APIRequestUpdate setLocale (String locale) {
-      this.setParam("locale", locale);
-      return this;
-    }
-
-    public APIRequestUpdate setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestUpdate setQuestions (List<Object> questions) {
-      this.setParam("questions", questions);
-      return this;
-    }
-    public APIRequestUpdate setQuestions (String questions) {
-      this.setParam("questions", questions);
-      return this;
-    }
-
     public APIRequestUpdate setStatus (LeadgenForm.EnumStatus status) {
       this.setParam("status", status);
       return this;
     }
     public APIRequestUpdate setStatus (String status) {
       this.setParam("status", status);
-      return this;
-    }
-
-    public APIRequestUpdate setThankYouPageId (String thankYouPageId) {
-      this.setParam("thank_you_page_id", thankYouPageId);
       return this;
     }
 
@@ -1793,6 +1757,29 @@ public class LeadgenForm extends APINode {
       return this;
     }
 
+  }
+
+  public static enum EnumStatus {
+      @SerializedName("ACTIVE")
+      VALUE_ACTIVE("ACTIVE"),
+      @SerializedName("ARCHIVED")
+      VALUE_ARCHIVED("ARCHIVED"),
+      @SerializedName("DELETED")
+      VALUE_DELETED("DELETED"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
+      NULL(null);
+
+      private String value;
+
+      private EnumStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
   public static enum EnumLocale {
@@ -1872,29 +1859,6 @@ public class LeadgenForm extends APINode {
       }
   }
 
-  public static enum EnumStatus {
-      @SerializedName("ACTIVE")
-      VALUE_ACTIVE("ACTIVE"),
-      @SerializedName("ARCHIVED")
-      VALUE_ARCHIVED("ARCHIVED"),
-      @SerializedName("DELETED")
-      VALUE_DELETED("DELETED"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      NULL(null);
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -1947,8 +1911,8 @@ public class LeadgenForm extends APINode {
 
   public static APIRequest.ResponseParser<LeadgenForm> getParser() {
     return new APIRequest.ResponseParser<LeadgenForm>() {
-      public APINodeList<LeadgenForm> parseResponse(String response, APIContext context, APIRequest<LeadgenForm> request) throws MalformedResponseException {
-        return LeadgenForm.parseResponse(response, context, request);
+      public APINodeList<LeadgenForm> parseResponse(String response, APIContext context, APIRequest<LeadgenForm> request, String header) throws MalformedResponseException {
+        return LeadgenForm.parseResponse(response, context, request, header);
       }
     };
   }

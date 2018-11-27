@@ -69,7 +69,7 @@ public class WebAppLink extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static WebAppLink loadJSON(String json, APIContext context) {
+  public static WebAppLink loadJSON(String json, APIContext context, String header) {
     WebAppLink webAppLink = getGson().fromJson(json, WebAppLink.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class WebAppLink extends APINode {
     }
     webAppLink.context = context;
     webAppLink.rawValue = json;
+    webAppLink.header = header;
     return webAppLink;
   }
 
-  public static APINodeList<WebAppLink> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<WebAppLink> webAppLinks = new APINodeList<WebAppLink>(request, json);
+  public static APINodeList<WebAppLink> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<WebAppLink> webAppLinks = new APINodeList<WebAppLink>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class WebAppLink extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          webAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          webAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return webAppLinks;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class WebAppLink extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              webAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              webAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class WebAppLink extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  webAppLinks.add(loadJSON(entry.getValue().toString(), context));
+                  webAppLinks.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              webAppLinks.add(loadJSON(obj.toString(), context));
+              webAppLinks.add(loadJSON(obj.toString(), context, header));
             }
           }
           return webAppLinks;
@@ -151,7 +152,7 @@ public class WebAppLink extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              webAppLinks.add(loadJSON(entry.getValue().toString(), context));
+              webAppLinks.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return webAppLinks;
         } else {
@@ -170,7 +171,7 @@ public class WebAppLink extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              webAppLinks.add(loadJSON(value.toString(), context));
+              webAppLinks.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class WebAppLink extends APINode {
 
           // Sixth, check if it's pure JsonObject
           webAppLinks.clear();
-          webAppLinks.add(loadJSON(json, context));
+          webAppLinks.add(loadJSON(json, context, header));
           return webAppLinks;
         }
       }
@@ -265,8 +266,8 @@ public class WebAppLink extends APINode {
 
   public static APIRequest.ResponseParser<WebAppLink> getParser() {
     return new APIRequest.ResponseParser<WebAppLink>() {
-      public APINodeList<WebAppLink> parseResponse(String response, APIContext context, APIRequest<WebAppLink> request) throws MalformedResponseException {
-        return WebAppLink.parseResponse(response, context, request);
+      public APINodeList<WebAppLink> parseResponse(String response, APIContext context, APIRequest<WebAppLink> request, String header) throws MalformedResponseException {
+        return WebAppLink.parseResponse(response, context, request, header);
       }
     };
   }

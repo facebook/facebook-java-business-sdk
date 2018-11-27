@@ -71,7 +71,7 @@ public class AssignedUser extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AssignedUser loadJSON(String json, APIContext context) {
+  public static AssignedUser loadJSON(String json, APIContext context, String header) {
     AssignedUser assignedUser = getGson().fromJson(json, AssignedUser.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class AssignedUser extends APINode {
     }
     assignedUser.context = context;
     assignedUser.rawValue = json;
+    assignedUser.header = header;
     return assignedUser;
   }
 
-  public static APINodeList<AssignedUser> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AssignedUser> assignedUsers = new APINodeList<AssignedUser>(request, json);
+  public static APINodeList<AssignedUser> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AssignedUser> assignedUsers = new APINodeList<AssignedUser>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class AssignedUser extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          assignedUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          assignedUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return assignedUsers;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class AssignedUser extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              assignedUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              assignedUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class AssignedUser extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  assignedUsers.add(loadJSON(entry.getValue().toString(), context));
+                  assignedUsers.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              assignedUsers.add(loadJSON(obj.toString(), context));
+              assignedUsers.add(loadJSON(obj.toString(), context, header));
             }
           }
           return assignedUsers;
@@ -153,7 +154,7 @@ public class AssignedUser extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              assignedUsers.add(loadJSON(entry.getValue().toString(), context));
+              assignedUsers.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return assignedUsers;
         } else {
@@ -172,7 +173,7 @@ public class AssignedUser extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              assignedUsers.add(loadJSON(value.toString(), context));
+              assignedUsers.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class AssignedUser extends APINode {
 
           // Sixth, check if it's pure JsonObject
           assignedUsers.clear();
-          assignedUsers.add(loadJSON(json, context));
+          assignedUsers.add(loadJSON(json, context, header));
           return assignedUsers;
         }
       }
@@ -285,8 +286,8 @@ public class AssignedUser extends APINode {
 
   public static APIRequest.ResponseParser<AssignedUser> getParser() {
     return new APIRequest.ResponseParser<AssignedUser>() {
-      public APINodeList<AssignedUser> parseResponse(String response, APIContext context, APIRequest<AssignedUser> request) throws MalformedResponseException {
-        return AssignedUser.parseResponse(response, context, request);
+      public APINodeList<AssignedUser> parseResponse(String response, APIContext context, APIRequest<AssignedUser> request, String header) throws MalformedResponseException {
+        return AssignedUser.parseResponse(response, context, request, header);
       }
     };
   }

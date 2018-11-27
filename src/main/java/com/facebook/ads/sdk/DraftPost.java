@@ -95,7 +95,7 @@ public class DraftPost extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static DraftPost loadJSON(String json, APIContext context) {
+  public static DraftPost loadJSON(String json, APIContext context, String header) {
     DraftPost draftPost = getGson().fromJson(json, DraftPost.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -112,11 +112,12 @@ public class DraftPost extends APINode {
     }
     draftPost.context = context;
     draftPost.rawValue = json;
+    draftPost.header = header;
     return draftPost;
   }
 
-  public static APINodeList<DraftPost> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<DraftPost> draftPosts = new APINodeList<DraftPost>(request, json);
+  public static APINodeList<DraftPost> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<DraftPost> draftPosts = new APINodeList<DraftPost>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -127,7 +128,7 @@ public class DraftPost extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          draftPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          draftPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return draftPosts;
       } else if (result.isJsonObject()) {
@@ -152,7 +153,7 @@ public class DraftPost extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              draftPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              draftPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -163,13 +164,13 @@ public class DraftPost extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  draftPosts.add(loadJSON(entry.getValue().toString(), context));
+                  draftPosts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              draftPosts.add(loadJSON(obj.toString(), context));
+              draftPosts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return draftPosts;
@@ -177,7 +178,7 @@ public class DraftPost extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              draftPosts.add(loadJSON(entry.getValue().toString(), context));
+              draftPosts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return draftPosts;
         } else {
@@ -196,7 +197,7 @@ public class DraftPost extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              draftPosts.add(loadJSON(value.toString(), context));
+              draftPosts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -208,7 +209,7 @@ public class DraftPost extends APINode {
 
           // Sixth, check if it's pure JsonObject
           draftPosts.clear();
-          draftPosts.add(loadJSON(json, context));
+          draftPosts.add(loadJSON(json, context, header));
           return draftPosts;
         }
       }
@@ -442,8 +443,8 @@ public class DraftPost extends APINode {
 
   public static APIRequest.ResponseParser<DraftPost> getParser() {
     return new APIRequest.ResponseParser<DraftPost>() {
-      public APINodeList<DraftPost> parseResponse(String response, APIContext context, APIRequest<DraftPost> request) throws MalformedResponseException {
-        return DraftPost.parseResponse(response, context, request);
+      public APINodeList<DraftPost> parseResponse(String response, APIContext context, APIRequest<DraftPost> request, String header) throws MalformedResponseException {
+        return DraftPost.parseResponse(response, context, request, header);
       }
     };
   }

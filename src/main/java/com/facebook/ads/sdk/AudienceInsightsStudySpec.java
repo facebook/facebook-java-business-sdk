@@ -81,7 +81,7 @@ public class AudienceInsightsStudySpec extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AudienceInsightsStudySpec loadJSON(String json, APIContext context) {
+  public static AudienceInsightsStudySpec loadJSON(String json, APIContext context, String header) {
     AudienceInsightsStudySpec audienceInsightsStudySpec = getGson().fromJson(json, AudienceInsightsStudySpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -98,11 +98,12 @@ public class AudienceInsightsStudySpec extends APINode {
     }
     audienceInsightsStudySpec.context = context;
     audienceInsightsStudySpec.rawValue = json;
+    audienceInsightsStudySpec.header = header;
     return audienceInsightsStudySpec;
   }
 
-  public static APINodeList<AudienceInsightsStudySpec> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AudienceInsightsStudySpec> audienceInsightsStudySpecs = new APINodeList<AudienceInsightsStudySpec>(request, json);
+  public static APINodeList<AudienceInsightsStudySpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AudienceInsightsStudySpec> audienceInsightsStudySpecs = new APINodeList<AudienceInsightsStudySpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -113,7 +114,7 @@ public class AudienceInsightsStudySpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          audienceInsightsStudySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          audienceInsightsStudySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return audienceInsightsStudySpecs;
       } else if (result.isJsonObject()) {
@@ -138,7 +139,7 @@ public class AudienceInsightsStudySpec extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              audienceInsightsStudySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              audienceInsightsStudySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -149,13 +150,13 @@ public class AudienceInsightsStudySpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  audienceInsightsStudySpecs.add(loadJSON(entry.getValue().toString(), context));
+                  audienceInsightsStudySpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              audienceInsightsStudySpecs.add(loadJSON(obj.toString(), context));
+              audienceInsightsStudySpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return audienceInsightsStudySpecs;
@@ -163,7 +164,7 @@ public class AudienceInsightsStudySpec extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              audienceInsightsStudySpecs.add(loadJSON(entry.getValue().toString(), context));
+              audienceInsightsStudySpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return audienceInsightsStudySpecs;
         } else {
@@ -182,7 +183,7 @@ public class AudienceInsightsStudySpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              audienceInsightsStudySpecs.add(loadJSON(value.toString(), context));
+              audienceInsightsStudySpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -194,7 +195,7 @@ public class AudienceInsightsStudySpec extends APINode {
 
           // Sixth, check if it's pure JsonObject
           audienceInsightsStudySpecs.clear();
-          audienceInsightsStudySpecs.add(loadJSON(json, context));
+          audienceInsightsStudySpecs.add(loadJSON(json, context, header));
           return audienceInsightsStudySpecs;
         }
       }
@@ -337,8 +338,8 @@ public class AudienceInsightsStudySpec extends APINode {
 
   public static APIRequest.ResponseParser<AudienceInsightsStudySpec> getParser() {
     return new APIRequest.ResponseParser<AudienceInsightsStudySpec>() {
-      public APINodeList<AudienceInsightsStudySpec> parseResponse(String response, APIContext context, APIRequest<AudienceInsightsStudySpec> request) throws MalformedResponseException {
-        return AudienceInsightsStudySpec.parseResponse(response, context, request);
+      public APINodeList<AudienceInsightsStudySpec> parseResponse(String response, APIContext context, APIRequest<AudienceInsightsStudySpec> request, String header) throws MalformedResponseException {
+        return AudienceInsightsStudySpec.parseResponse(response, context, request, header);
       }
     };
   }

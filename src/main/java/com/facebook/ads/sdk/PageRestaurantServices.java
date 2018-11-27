@@ -85,7 +85,7 @@ public class PageRestaurantServices extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageRestaurantServices loadJSON(String json, APIContext context) {
+  public static PageRestaurantServices loadJSON(String json, APIContext context, String header) {
     PageRestaurantServices pageRestaurantServices = getGson().fromJson(json, PageRestaurantServices.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -102,11 +102,12 @@ public class PageRestaurantServices extends APINode {
     }
     pageRestaurantServices.context = context;
     pageRestaurantServices.rawValue = json;
+    pageRestaurantServices.header = header;
     return pageRestaurantServices;
   }
 
-  public static APINodeList<PageRestaurantServices> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageRestaurantServices> pageRestaurantServicess = new APINodeList<PageRestaurantServices>(request, json);
+  public static APINodeList<PageRestaurantServices> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageRestaurantServices> pageRestaurantServicess = new APINodeList<PageRestaurantServices>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -117,7 +118,7 @@ public class PageRestaurantServices extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageRestaurantServicess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageRestaurantServicess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageRestaurantServicess;
       } else if (result.isJsonObject()) {
@@ -142,7 +143,7 @@ public class PageRestaurantServices extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageRestaurantServicess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageRestaurantServicess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -153,13 +154,13 @@ public class PageRestaurantServices extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageRestaurantServicess.add(loadJSON(entry.getValue().toString(), context));
+                  pageRestaurantServicess.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageRestaurantServicess.add(loadJSON(obj.toString(), context));
+              pageRestaurantServicess.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageRestaurantServicess;
@@ -167,7 +168,7 @@ public class PageRestaurantServices extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageRestaurantServicess.add(loadJSON(entry.getValue().toString(), context));
+              pageRestaurantServicess.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageRestaurantServicess;
         } else {
@@ -186,7 +187,7 @@ public class PageRestaurantServices extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageRestaurantServicess.add(loadJSON(value.toString(), context));
+              pageRestaurantServicess.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -198,7 +199,7 @@ public class PageRestaurantServices extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageRestaurantServicess.clear();
-          pageRestaurantServicess.add(loadJSON(json, context));
+          pageRestaurantServicess.add(loadJSON(json, context, header));
           return pageRestaurantServicess;
         }
       }
@@ -361,8 +362,8 @@ public class PageRestaurantServices extends APINode {
 
   public static APIRequest.ResponseParser<PageRestaurantServices> getParser() {
     return new APIRequest.ResponseParser<PageRestaurantServices>() {
-      public APINodeList<PageRestaurantServices> parseResponse(String response, APIContext context, APIRequest<PageRestaurantServices> request) throws MalformedResponseException {
-        return PageRestaurantServices.parseResponse(response, context, request);
+      public APINodeList<PageRestaurantServices> parseResponse(String response, APIContext context, APIRequest<PageRestaurantServices> request, String header) throws MalformedResponseException {
+        return PageRestaurantServices.parseResponse(response, context, request, header);
       }
     };
   }

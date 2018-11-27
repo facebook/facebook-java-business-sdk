@@ -69,7 +69,7 @@ public class KeyValue extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static KeyValue loadJSON(String json, APIContext context) {
+  public static KeyValue loadJSON(String json, APIContext context, String header) {
     KeyValue keyValue = getGson().fromJson(json, KeyValue.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class KeyValue extends APINode {
     }
     keyValue.context = context;
     keyValue.rawValue = json;
+    keyValue.header = header;
     return keyValue;
   }
 
-  public static APINodeList<KeyValue> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<KeyValue> keyValues = new APINodeList<KeyValue>(request, json);
+  public static APINodeList<KeyValue> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<KeyValue> keyValues = new APINodeList<KeyValue>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class KeyValue extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          keyValues.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          keyValues.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return keyValues;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class KeyValue extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              keyValues.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              keyValues.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class KeyValue extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  keyValues.add(loadJSON(entry.getValue().toString(), context));
+                  keyValues.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              keyValues.add(loadJSON(obj.toString(), context));
+              keyValues.add(loadJSON(obj.toString(), context, header));
             }
           }
           return keyValues;
@@ -151,7 +152,7 @@ public class KeyValue extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              keyValues.add(loadJSON(entry.getValue().toString(), context));
+              keyValues.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return keyValues;
         } else {
@@ -170,7 +171,7 @@ public class KeyValue extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              keyValues.add(loadJSON(value.toString(), context));
+              keyValues.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class KeyValue extends APINode {
 
           // Sixth, check if it's pure JsonObject
           keyValues.clear();
-          keyValues.add(loadJSON(json, context));
+          keyValues.add(loadJSON(json, context, header));
           return keyValues;
         }
       }
@@ -265,8 +266,8 @@ public class KeyValue extends APINode {
 
   public static APIRequest.ResponseParser<KeyValue> getParser() {
     return new APIRequest.ResponseParser<KeyValue>() {
-      public APINodeList<KeyValue> parseResponse(String response, APIContext context, APIRequest<KeyValue> request) throws MalformedResponseException {
-        return KeyValue.parseResponse(response, context, request);
+      public APINodeList<KeyValue> parseResponse(String response, APIContext context, APIRequest<KeyValue> request, String header) throws MalformedResponseException {
+        return KeyValue.parseResponse(response, context, request, header);
       }
     };
   }

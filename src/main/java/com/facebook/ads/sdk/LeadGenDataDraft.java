@@ -154,7 +154,7 @@ public class LeadGenDataDraft extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LeadGenDataDraft loadJSON(String json, APIContext context) {
+  public static LeadGenDataDraft loadJSON(String json, APIContext context, String header) {
     LeadGenDataDraft leadGenDataDraft = getGson().fromJson(json, LeadGenDataDraft.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -171,11 +171,12 @@ public class LeadGenDataDraft extends APINode {
     }
     leadGenDataDraft.context = context;
     leadGenDataDraft.rawValue = json;
+    leadGenDataDraft.header = header;
     return leadGenDataDraft;
   }
 
-  public static APINodeList<LeadGenDataDraft> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LeadGenDataDraft> leadGenDataDrafts = new APINodeList<LeadGenDataDraft>(request, json);
+  public static APINodeList<LeadGenDataDraft> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LeadGenDataDraft> leadGenDataDrafts = new APINodeList<LeadGenDataDraft>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -186,7 +187,7 @@ public class LeadGenDataDraft extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          leadGenDataDrafts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          leadGenDataDrafts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return leadGenDataDrafts;
       } else if (result.isJsonObject()) {
@@ -211,7 +212,7 @@ public class LeadGenDataDraft extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              leadGenDataDrafts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              leadGenDataDrafts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -222,13 +223,13 @@ public class LeadGenDataDraft extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  leadGenDataDrafts.add(loadJSON(entry.getValue().toString(), context));
+                  leadGenDataDrafts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              leadGenDataDrafts.add(loadJSON(obj.toString(), context));
+              leadGenDataDrafts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return leadGenDataDrafts;
@@ -236,7 +237,7 @@ public class LeadGenDataDraft extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              leadGenDataDrafts.add(loadJSON(entry.getValue().toString(), context));
+              leadGenDataDrafts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return leadGenDataDrafts;
         } else {
@@ -255,7 +256,7 @@ public class LeadGenDataDraft extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              leadGenDataDrafts.add(loadJSON(value.toString(), context));
+              leadGenDataDrafts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -267,7 +268,7 @@ public class LeadGenDataDraft extends APINode {
 
           // Sixth, check if it's pure JsonObject
           leadGenDataDrafts.clear();
-          leadGenDataDrafts.add(loadJSON(json, context));
+          leadGenDataDrafts.add(loadJSON(json, context, header));
           return leadGenDataDrafts;
         }
       }
@@ -403,8 +404,8 @@ public class LeadGenDataDraft extends APINode {
     };
 
     @Override
-    public LeadGenDataDraft parseResponse(String response) throws APIException {
-      return LeadGenDataDraft.parseResponse(response, getContext(), this).head();
+    public LeadGenDataDraft parseResponse(String response, String header) throws APIException {
+      return LeadGenDataDraft.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -414,7 +415,8 @@ public class LeadGenDataDraft extends APINode {
 
     @Override
     public LeadGenDataDraft execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -428,7 +430,7 @@ public class LeadGenDataDraft extends APINode {
         new Function<String, LeadGenDataDraft>() {
            public LeadGenDataDraft apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -634,8 +636,8 @@ public class LeadGenDataDraft extends APINode {
     };
 
     @Override
-    public LeadGenDataDraft parseResponse(String response) throws APIException {
-      return LeadGenDataDraft.parseResponse(response, getContext(), this).head();
+    public LeadGenDataDraft parseResponse(String response, String header) throws APIException {
+      return LeadGenDataDraft.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -645,7 +647,8 @@ public class LeadGenDataDraft extends APINode {
 
     @Override
     public LeadGenDataDraft execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -659,7 +662,7 @@ public class LeadGenDataDraft extends APINode {
         new Function<String, LeadGenDataDraft>() {
            public LeadGenDataDraft apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -985,8 +988,8 @@ public class LeadGenDataDraft extends APINode {
 
   public static APIRequest.ResponseParser<LeadGenDataDraft> getParser() {
     return new APIRequest.ResponseParser<LeadGenDataDraft>() {
-      public APINodeList<LeadGenDataDraft> parseResponse(String response, APIContext context, APIRequest<LeadGenDataDraft> request) throws MalformedResponseException {
-        return LeadGenDataDraft.parseResponse(response, context, request);
+      public APINodeList<LeadGenDataDraft> parseResponse(String response, APIContext context, APIRequest<LeadGenDataDraft> request, String header) throws MalformedResponseException {
+        return LeadGenDataDraft.parseResponse(response, context, request, header);
       }
     };
   }

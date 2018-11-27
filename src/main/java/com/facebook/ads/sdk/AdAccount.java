@@ -97,8 +97,6 @@ public class AdAccount extends APINode {
   private String mCreatedTime = null;
   @SerializedName("currency")
   private String mCurrency = null;
-  @SerializedName("daily_spend_limit")
-  private String mDailySpendLimit = null;
   @SerializedName("direct_deals_tos_accepted")
   private Boolean mDirectDealsTosAccepted = null;
   @SerializedName("disable_reason")
@@ -155,8 +153,6 @@ public class AdAccount extends APINode {
   private String mOwner = null;
   @SerializedName("partner")
   private String mPartner = null;
-  @SerializedName("rate_limit_reset_time")
-  private String mRateLimitResetTime = null;
   @SerializedName("rf_spec")
   private ReachFrequencySpec mRfSpec = null;
   @SerializedName("show_checkout_experience")
@@ -249,7 +245,7 @@ public class AdAccount extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdAccount loadJSON(String json, APIContext context) {
+  public static AdAccount loadJSON(String json, APIContext context, String header) {
     AdAccount adAccount = getGson().fromJson(json, AdAccount.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -266,6 +262,7 @@ public class AdAccount extends APINode {
     }
     adAccount.context = context;
     adAccount.rawValue = json;
+    adAccount.header = header;
     JsonParser parser = new JsonParser();
     JsonObject o = parser.parse(json).getAsJsonObject();
     if (o.has("account_id")) {
@@ -280,8 +277,8 @@ public class AdAccount extends APINode {
     return adAccount;
   }
 
-  public static APINodeList<AdAccount> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAccount> adAccounts = new APINodeList<AdAccount>(request, json);
+  public static APINodeList<AdAccount> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccount> adAccounts = new APINodeList<AdAccount>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -292,7 +289,7 @@ public class AdAccount extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAccounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adAccounts;
       } else if (result.isJsonObject()) {
@@ -317,7 +314,7 @@ public class AdAccount extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAccounts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -328,13 +325,13 @@ public class AdAccount extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccounts.add(loadJSON(entry.getValue().toString(), context));
+                  adAccounts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccounts.add(loadJSON(obj.toString(), context));
+              adAccounts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adAccounts;
@@ -342,7 +339,7 @@ public class AdAccount extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccounts.add(loadJSON(entry.getValue().toString(), context));
+              adAccounts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adAccounts;
         } else {
@@ -361,7 +358,7 @@ public class AdAccount extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccounts.add(loadJSON(value.toString(), context));
+              adAccounts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -373,7 +370,7 @@ public class AdAccount extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adAccounts.clear();
-          adAccounts.add(loadJSON(json, context));
+          adAccounts.add(loadJSON(json, context, header));
           return adAccounts;
         }
       }
@@ -407,10 +404,6 @@ public class AdAccount extends APINode {
 
   public APIRequestGetAdStudies getAdStudies() {
     return new APIRequestGetAdStudies(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetAdAssetFeeds getAdAssetFeeds() {
-    return new APIRequestGetAdAssetFeeds(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateAdAssetFeed createAdAssetFeed() {
@@ -455,10 +448,6 @@ public class AdAccount extends APINode {
 
   public APIRequestCreateAdLabel createAdLabel() {
     return new APIRequestCreateAdLabel(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetAdLanguageAssets getAdLanguageAssets() {
-    return new APIRequestGetAdLanguageAssets(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateAdLanguageAsset createAdLanguageAsset() {
@@ -649,6 +638,10 @@ public class AdAccount extends APINode {
     return new APIRequestGetBusinessProjects(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetBusinessSettingLogs getBusinessSettingLogs() {
+    return new APIRequestGetBusinessSettingLogs(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteCampaigns deleteCampaigns() {
     return new APIRequestDeleteCampaigns(this.getPrefixedId().toString(), context);
   }
@@ -671,10 +664,6 @@ public class AdAccount extends APINode {
 
   public APIRequestCreateCoupon createCoupon() {
     return new APIRequestCreateCoupon(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetCustomAudienceLimits getCustomAudienceLimits() {
-    return new APIRequestGetCustomAudienceLimits(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetCustomAudiences getCustomAudiences() {
@@ -897,10 +886,6 @@ public class AdAccount extends APINode {
     return new APIRequestDeleteUserPermissions(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetUserPermissions getUserPermissions() {
-    return new APIRequestGetUserPermissions(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateUserPermission createUserPermission() {
     return new APIRequestCreateUserPermission(this.getPrefixedId().toString(), context);
   }
@@ -1020,10 +1005,6 @@ public class AdAccount extends APINode {
     return mCurrency;
   }
 
-  public String getFieldDailySpendLimit() {
-    return mDailySpendLimit;
-  }
-
   public Boolean getFieldDirectDealsTosAccepted() {
     return mDirectDealsTosAccepted;
   }
@@ -1139,10 +1120,6 @@ public class AdAccount extends APINode {
     return mPartner;
   }
 
-  public String getFieldRateLimitResetTime() {
-    return mRateLimitResetTime;
-  }
-
   public ReachFrequencySpec getFieldRfSpec() {
     return mRfSpec;
   }
@@ -1230,8 +1207,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdActivity> parseResponse(String response) throws APIException {
-      return AdActivity.parseResponse(response, getContext(), this);
+    public APINodeList<AdActivity> parseResponse(String response, String header) throws APIException {
+      return AdActivity.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1241,7 +1218,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdActivity> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1255,7 +1233,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdActivity>>() {
            public APINodeList<AdActivity> apply(String result) {
              try {
-               return APIRequestGetActivities.this.parseResponse(result);
+               return APIRequestGetActivities.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1509,8 +1487,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdStudy> parseResponse(String response) throws APIException {
-      return AdStudy.parseResponse(response, getContext(), this);
+    public APINodeList<AdStudy> parseResponse(String response, String header) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1520,7 +1498,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdStudy> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1534,7 +1513,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdStudy>>() {
            public APINodeList<AdStudy> apply(String result) {
              try {
-               return APIRequestGetAdStudies.this.parseResponse(result);
+               return APIRequestGetAdStudies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1703,162 +1682,11 @@ public class AdAccount extends APINode {
     }
   }
 
-  public static class APIRequestGetAdAssetFeeds extends APIRequest<AdAssetFeed> {
+  public static class APIRequestCreateAdAssetFeed extends APIRequest<APINode> {
 
-    APINodeList<AdAssetFeed> lastResponse = null;
+    APINode lastResponse = null;
     @Override
-    public APINodeList<AdAssetFeed> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "account",
-      "ad_formats",
-      "additional_data",
-      "autotranslate",
-      "id",
-      "optimization_type",
-    };
-
-    @Override
-    public APINodeList<AdAssetFeed> parseResponse(String response) throws APIException {
-      return AdAssetFeed.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<AdAssetFeed> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdAssetFeed> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdAssetFeed>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdAssetFeed>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAssetFeed>>() {
-           public APINodeList<AdAssetFeed> apply(String result) {
-             try {
-               return APIRequestGetAdAssetFeeds.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAdAssetFeeds(String nodeId, APIContext context) {
-      super(context, nodeId, "/adasset_feeds", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAdAssetFeeds setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdAssetFeeds setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAdAssetFeeds requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAdAssetFeeds requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdAssetFeeds requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAdAssetFeeds requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdAssetFeeds requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdAssetFeeds requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAdAssetFeeds requestAccountField () {
-      return this.requestAccountField(true);
-    }
-    public APIRequestGetAdAssetFeeds requestAccountField (boolean value) {
-      this.requestField("account", value);
-      return this;
-    }
-    public APIRequestGetAdAssetFeeds requestAdFormatsField () {
-      return this.requestAdFormatsField(true);
-    }
-    public APIRequestGetAdAssetFeeds requestAdFormatsField (boolean value) {
-      this.requestField("ad_formats", value);
-      return this;
-    }
-    public APIRequestGetAdAssetFeeds requestAdditionalDataField () {
-      return this.requestAdditionalDataField(true);
-    }
-    public APIRequestGetAdAssetFeeds requestAdditionalDataField (boolean value) {
-      this.requestField("additional_data", value);
-      return this;
-    }
-    public APIRequestGetAdAssetFeeds requestAutotranslateField () {
-      return this.requestAutotranslateField(true);
-    }
-    public APIRequestGetAdAssetFeeds requestAutotranslateField (boolean value) {
-      this.requestField("autotranslate", value);
-      return this;
-    }
-    public APIRequestGetAdAssetFeeds requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAdAssetFeeds requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAdAssetFeeds requestOptimizationTypeField () {
-      return this.requestOptimizationTypeField(true);
-    }
-    public APIRequestGetAdAssetFeeds requestOptimizationTypeField (boolean value) {
-      this.requestField("optimization_type", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreateAdAssetFeed extends APIRequest<AdAssetFeed> {
-
-    AdAssetFeed lastResponse = null;
-    @Override
-    public AdAssetFeed getLastResponse() {
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -1884,32 +1712,33 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAssetFeed parseResponse(String response) throws APIException {
-      return AdAssetFeed.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public AdAssetFeed execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdAssetFeed execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<AdAssetFeed> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<AdAssetFeed> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAssetFeed>() {
-           public AdAssetFeed apply(String result) {
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
              try {
-               return APIRequestCreateAdAssetFeed.this.parseResponse(result);
+               return APIRequestCreateAdAssetFeed.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1962,7 +1791,7 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdAssetFeed setCallToActionTypes (List<AdAssetFeed.EnumCallToActionTypes> callToActionTypes) {
+    public APIRequestCreateAdAssetFeed setCallToActionTypes (List<EnumCallToActionTypes> callToActionTypes) {
       this.setParam("call_to_action_types", callToActionTypes);
       return this;
     }
@@ -2007,7 +1836,7 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdAssetFeed setAdFormats (List<AdAssetFeed.EnumAdFormats> adFormats) {
+    public APIRequestCreateAdAssetFeed setAdFormats (List<EnumAdFormats> adFormats) {
       this.setParam("ad_formats", adFormats);
       return this;
     }
@@ -2043,7 +1872,7 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdAssetFeed setOptimizationType (AdAssetFeed.EnumOptimizationType optimizationType) {
+    public APIRequestCreateAdAssetFeed setOptimizationType (EnumOptimizationType optimizationType) {
       this.setParam("optimization_type", optimizationType);
       return this;
     }
@@ -2174,8 +2003,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdContract> parseResponse(String response) throws APIException {
-      return AdContract.parseResponse(response, getContext(), this);
+    public APINodeList<AdContract> parseResponse(String response, String header) throws APIException {
+      return AdContract.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2185,7 +2014,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdContract> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2199,7 +2029,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdContract>>() {
            public APINodeList<AdContract> apply(String result) {
              try {
-               return APIRequestGetAdContracts.this.parseResponse(result);
+               return APIRequestGetAdContracts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2579,7 +2409,6 @@ public class AdAccount extends APINode {
       "actor_id",
       "adlabels",
       "applink_treatment",
-      "asset_feed_id",
       "asset_feed_spec",
       "authorization_category",
       "auto_update",
@@ -2617,6 +2446,7 @@ public class AdAccount extends APINode {
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
+      "portrait_customizations",
       "product_set_id",
       "recommender_settings",
       "status",
@@ -2630,8 +2460,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdCreative> parseResponse(String response) throws APIException {
-      return AdCreative.parseResponse(response, getContext(), this);
+    public APINodeList<AdCreative> parseResponse(String response, String header) throws APIException {
+      return AdCreative.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2641,7 +2471,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdCreative> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2655,7 +2486,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdCreative>>() {
            public APINodeList<AdCreative> apply(String result) {
              try {
-               return APIRequestGetAdCreatives.this.parseResponse(result);
+               return APIRequestGetAdCreatives.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2743,13 +2574,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreatives requestApplinkTreatmentField (boolean value) {
       this.requestField("applink_treatment", value);
-      return this;
-    }
-    public APIRequestGetAdCreatives requestAssetFeedIdField () {
-      return this.requestAssetFeedIdField(true);
-    }
-    public APIRequestGetAdCreatives requestAssetFeedIdField (boolean value) {
-      this.requestField("asset_feed_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestAssetFeedSpecField () {
@@ -3011,6 +2835,13 @@ public class AdAccount extends APINode {
       this.requestField("playable_asset_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestPortraitCustomizationsField () {
+      return this.requestPortraitCustomizationsField(true);
+    }
+    public APIRequestGetAdCreatives requestPortraitCustomizationsField (boolean value) {
+      this.requestField("portrait_customizations", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestProductSetIdField () {
       return this.requestProductSetIdField(true);
     }
@@ -3140,8 +2971,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdCreative parseResponse(String response) throws APIException {
-      return AdCreative.parseResponse(response, getContext(), this).head();
+    public AdCreative parseResponse(String response, String header) throws APIException {
+      return AdCreative.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3151,7 +2982,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdCreative execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3165,7 +2997,7 @@ public class AdAccount extends APINode {
         new Function<String, AdCreative>() {
            public AdCreative apply(String result) {
              try {
-               return APIRequestCreateAdCreative.this.parseResponse(result);
+               return APIRequestCreateAdCreative.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3544,8 +3376,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdCreative parseResponse(String response) throws APIException {
-      return AdCreative.parseResponse(response, getContext(), this).head();
+    public AdCreative parseResponse(String response, String header) throws APIException {
+      return AdCreative.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3555,7 +3387,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdCreative execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3569,7 +3402,7 @@ public class AdAccount extends APINode {
         new Function<String, AdCreative>() {
            public AdCreative apply(String result) {
              try {
-               return APIRequestCreateAdCreativesFromMockup.this.parseResponse(result);
+               return APIRequestCreateAdCreativesFromMockup.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3660,7 +3493,6 @@ public class AdAccount extends APINode {
       "actor_id",
       "adlabels",
       "applink_treatment",
-      "asset_feed_id",
       "asset_feed_spec",
       "authorization_category",
       "auto_update",
@@ -3698,6 +3530,7 @@ public class AdAccount extends APINode {
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
+      "portrait_customizations",
       "product_set_id",
       "recommender_settings",
       "status",
@@ -3711,8 +3544,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdCreative> parseResponse(String response) throws APIException {
-      return AdCreative.parseResponse(response, getContext(), this);
+    public APINodeList<AdCreative> parseResponse(String response, String header) throws APIException {
+      return AdCreative.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3722,7 +3555,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdCreative> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3736,7 +3570,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdCreative>>() {
            public APINodeList<AdCreative> apply(String result) {
              try {
-               return APIRequestGetAdCreativesByLabels.this.parseResponse(result);
+               return APIRequestGetAdCreativesByLabels.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3842,13 +3676,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdCreativesByLabels requestApplinkTreatmentField (boolean value) {
       this.requestField("applink_treatment", value);
-      return this;
-    }
-    public APIRequestGetAdCreativesByLabels requestAssetFeedIdField () {
-      return this.requestAssetFeedIdField(true);
-    }
-    public APIRequestGetAdCreativesByLabels requestAssetFeedIdField (boolean value) {
-      this.requestField("asset_feed_id", value);
       return this;
     }
     public APIRequestGetAdCreativesByLabels requestAssetFeedSpecField () {
@@ -4110,6 +3937,13 @@ public class AdAccount extends APINode {
       this.requestField("playable_asset_id", value);
       return this;
     }
+    public APIRequestGetAdCreativesByLabels requestPortraitCustomizationsField () {
+      return this.requestPortraitCustomizationsField(true);
+    }
+    public APIRequestGetAdCreativesByLabels requestPortraitCustomizationsField (boolean value) {
+      this.requestField("portrait_customizations", value);
+      return this;
+    }
     public APIRequestGetAdCreativesByLabels requestProductSetIdField () {
       return this.requestProductSetIdField(true);
     }
@@ -4197,8 +4031,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4208,7 +4042,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4222,7 +4057,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAdImages.this.parseResponse(result);
+               return APIRequestDeleteAdImages.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4327,8 +4162,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdImage> parseResponse(String response) throws APIException {
-      return AdImage.parseResponse(response, getContext(), this);
+    public APINodeList<AdImage> parseResponse(String response, String header) throws APIException {
+      return AdImage.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4338,7 +4173,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdImage> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4352,7 +4188,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdImage>>() {
            public APINodeList<AdImage> apply(String result) {
              try {
-               return APIRequestGetAdImages.this.parseResponse(result);
+               return APIRequestGetAdImages.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4590,8 +4426,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdImage parseResponse(String response) throws APIException {
-      return AdImage.parseResponse(response, getContext(), this).head();
+    public AdImage parseResponse(String response, String header) throws APIException {
+      return AdImage.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4601,7 +4437,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdImage execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4615,7 +4452,7 @@ public class AdAccount extends APINode {
         new Function<String, AdImage>() {
            public AdImage apply(String result) {
              try {
-               return APIRequestCreateAdImage.this.parseResponse(result);
+               return APIRequestCreateAdImage.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4716,8 +4553,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdLabel> parseResponse(String response) throws APIException {
-      return AdLabel.parseResponse(response, getContext(), this);
+    public APINodeList<AdLabel> parseResponse(String response, String header) throws APIException {
+      return AdLabel.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4727,7 +4564,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdLabel> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4741,7 +4579,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdLabel>>() {
            public APINodeList<AdLabel> apply(String result) {
              try {
-               return APIRequestGetAdLabels.this.parseResponse(result);
+               return APIRequestGetAdLabels.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4855,8 +4693,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdLabel parseResponse(String response) throws APIException {
-      return AdLabel.parseResponse(response, getContext(), this).head();
+    public AdLabel parseResponse(String response, String header) throws APIException {
+      return AdLabel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4866,7 +4704,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdLabel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4880,7 +4719,7 @@ public class AdAccount extends APINode {
         new Function<String, AdLabel>() {
            public AdLabel apply(String result) {
              try {
-               return APIRequestCreateAdLabel.this.parseResponse(result);
+               return APIRequestCreateAdLabel.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4949,162 +4788,11 @@ public class AdAccount extends APINode {
 
   }
 
-  public static class APIRequestGetAdLanguageAssets extends APIRequest<AdAssetFeed> {
+  public static class APIRequestCreateAdLanguageAsset extends APIRequest<APINode> {
 
-    APINodeList<AdAssetFeed> lastResponse = null;
+    APINode lastResponse = null;
     @Override
-    public APINodeList<AdAssetFeed> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "account",
-      "ad_formats",
-      "additional_data",
-      "autotranslate",
-      "id",
-      "optimization_type",
-    };
-
-    @Override
-    public APINodeList<AdAssetFeed> parseResponse(String response) throws APIException {
-      return AdAssetFeed.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<AdAssetFeed> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdAssetFeed> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdAssetFeed>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdAssetFeed>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAssetFeed>>() {
-           public APINodeList<AdAssetFeed> apply(String result) {
-             try {
-               return APIRequestGetAdLanguageAssets.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAdLanguageAssets(String nodeId, APIContext context) {
-      super(context, nodeId, "/adlanguage_assets", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAdLanguageAssets setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdLanguageAssets setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAdLanguageAssets requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAdLanguageAssets requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdLanguageAssets requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAdLanguageAssets requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdLanguageAssets requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdLanguageAssets requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetAdLanguageAssets requestAccountField () {
-      return this.requestAccountField(true);
-    }
-    public APIRequestGetAdLanguageAssets requestAccountField (boolean value) {
-      this.requestField("account", value);
-      return this;
-    }
-    public APIRequestGetAdLanguageAssets requestAdFormatsField () {
-      return this.requestAdFormatsField(true);
-    }
-    public APIRequestGetAdLanguageAssets requestAdFormatsField (boolean value) {
-      this.requestField("ad_formats", value);
-      return this;
-    }
-    public APIRequestGetAdLanguageAssets requestAdditionalDataField () {
-      return this.requestAdditionalDataField(true);
-    }
-    public APIRequestGetAdLanguageAssets requestAdditionalDataField (boolean value) {
-      this.requestField("additional_data", value);
-      return this;
-    }
-    public APIRequestGetAdLanguageAssets requestAutotranslateField () {
-      return this.requestAutotranslateField(true);
-    }
-    public APIRequestGetAdLanguageAssets requestAutotranslateField (boolean value) {
-      this.requestField("autotranslate", value);
-      return this;
-    }
-    public APIRequestGetAdLanguageAssets requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetAdLanguageAssets requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetAdLanguageAssets requestOptimizationTypeField () {
-      return this.requestOptimizationTypeField(true);
-    }
-    public APIRequestGetAdLanguageAssets requestOptimizationTypeField (boolean value) {
-      this.requestField("optimization_type", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestCreateAdLanguageAsset extends APIRequest<AdAssetFeed> {
-
-    AdAssetFeed lastResponse = null;
-    @Override
-    public AdAssetFeed getLastResponse() {
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -5122,32 +4810,33 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAssetFeed parseResponse(String response) throws APIException {
-      return AdAssetFeed.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public AdAssetFeed execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public AdAssetFeed execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<AdAssetFeed> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<AdAssetFeed> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAssetFeed>() {
-           public AdAssetFeed apply(String result) {
+        new Function<String, APINode>() {
+           public APINode apply(String result) {
              try {
-               return APIRequestCreateAdLanguageAsset.this.parseResponse(result);
+               return APIRequestCreateAdLanguageAsset.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5191,7 +4880,7 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdLanguageAsset setCallToActionType (AdAssetFeed.EnumCallToActionType callToActionType) {
+    public APIRequestCreateAdLanguageAsset setCallToActionType (EnumCallToActionType callToActionType) {
       this.setParam("call_to_action_type", callToActionType);
       return this;
     }
@@ -5296,8 +4985,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<PlayableContent> parseResponse(String response) throws APIException {
-      return PlayableContent.parseResponse(response, getContext(), this);
+    public APINodeList<PlayableContent> parseResponse(String response, String header) throws APIException {
+      return PlayableContent.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -5307,7 +4996,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<PlayableContent> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -5321,7 +5011,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<PlayableContent>>() {
            public APINodeList<PlayableContent> apply(String result) {
              try {
-               return APIRequestGetAdPlayables.this.parseResponse(result);
+               return APIRequestGetAdPlayables.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5423,8 +5113,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public PlayableContent parseResponse(String response) throws APIException {
-      return PlayableContent.parseResponse(response, getContext(), this).head();
+    public PlayableContent parseResponse(String response, String header) throws APIException {
+      return PlayableContent.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -5434,7 +5124,8 @@ public class AdAccount extends APINode {
 
     @Override
     public PlayableContent execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -5448,7 +5139,7 @@ public class AdAccount extends APINode {
         new Function<String, PlayableContent>() {
            public PlayableContent apply(String result) {
              try {
-               return APIRequestCreateAdPlayable.this.parseResponse(result);
+               return APIRequestCreateAdPlayable.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5545,8 +5236,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -5556,7 +5247,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -5570,7 +5262,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAdReportRuns.this.parseResponse(result);
+               return APIRequestDeleteAdReportRuns.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5661,8 +5353,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdReportRun> parseResponse(String response) throws APIException {
-      return AdReportRun.parseResponse(response, getContext(), this);
+    public APINodeList<AdReportRun> parseResponse(String response, String header) throws APIException {
+      return AdReportRun.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -5672,7 +5364,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdReportRun> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -5686,7 +5379,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdReportRun>>() {
            public APINodeList<AdReportRun> apply(String result) {
              try {
-               return APIRequestGetAdReportRuns.this.parseResponse(result);
+               return APIRequestGetAdReportRuns.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5855,8 +5548,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -5866,7 +5559,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -5880,7 +5574,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetAdReportSchedules.this.parseResponse(result);
+               return APIRequestGetAdReportSchedules.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5985,8 +5679,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -5996,7 +5690,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -6010,7 +5705,7 @@ public class AdAccount extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateAdReportSchedule.this.parseResponse(result);
+               return APIRequestCreateAdReportSchedule.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6332,8 +6027,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdReportSpec parseResponse(String response) throws APIException {
-      return AdReportSpec.parseResponse(response, getContext(), this).head();
+    public AdReportSpec parseResponse(String response, String header) throws APIException {
+      return AdReportSpec.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -6343,7 +6038,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdReportSpec execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -6357,7 +6053,7 @@ public class AdAccount extends APINode {
         new Function<String, AdReportSpec>() {
            public AdReportSpec apply(String result) {
              try {
-               return APIRequestCreateAdReportSpec.this.parseResponse(result);
+               return APIRequestCreateAdReportSpec.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6609,8 +6305,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccountAdRulesHistory> parseResponse(String response) throws APIException {
-      return AdAccountAdRulesHistory.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccountAdRulesHistory> parseResponse(String response, String header) throws APIException {
+      return AdAccountAdRulesHistory.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -6620,7 +6316,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdAccountAdRulesHistory> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -6634,7 +6331,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdAccountAdRulesHistory>>() {
            public APINodeList<AdAccountAdRulesHistory> apply(String result) {
              try {
-               return APIRequestGetAdRulesHistory.this.parseResponse(result);
+               return APIRequestGetAdRulesHistory.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6815,8 +6512,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdRule> parseResponse(String response) throws APIException {
-      return AdRule.parseResponse(response, getContext(), this);
+    public APINodeList<AdRule> parseResponse(String response, String header) throws APIException {
+      return AdRule.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -6826,7 +6523,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdRule> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -6840,7 +6538,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdRule>>() {
            public APINodeList<AdRule> apply(String result) {
              try {
-               return APIRequestGetAdRulesLibrary.this.parseResponse(result);
+               return APIRequestGetAdRulesLibrary.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6994,8 +6692,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdRule parseResponse(String response) throws APIException {
-      return AdRule.parseResponse(response, getContext(), this).head();
+    public AdRule parseResponse(String response, String header) throws APIException {
+      return AdRule.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -7005,7 +6703,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdRule execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -7019,7 +6718,7 @@ public class AdAccount extends APINode {
         new Function<String, AdRule>() {
            public AdRule apply(String result) {
              try {
-               return APIRequestCreateAdRulesLibrary.this.parseResponse(result);
+               return APIRequestCreateAdRulesLibrary.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7147,8 +6846,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -7158,7 +6857,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -7172,7 +6872,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAds.this.parseResponse(result);
+               return APIRequestDeleteAds.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7308,7 +7008,6 @@ public class AdAccount extends APINode {
       "issues_info",
       "last_updated_by_app_id",
       "name",
-      "objective_source",
       "priority",
       "recommendations",
       "source_ad",
@@ -7321,8 +7020,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<Ad> parseResponse(String response) throws APIException {
-      return Ad.parseResponse(response, getContext(), this);
+    public APINodeList<Ad> parseResponse(String response, String header) throws APIException {
+      return Ad.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -7332,7 +7031,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<Ad> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -7346,7 +7046,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<Ad>>() {
            public APINodeList<Ad> apply(String result) {
              try {
-               return APIRequestGetAds.this.parseResponse(result);
+               return APIRequestGetAds.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7619,13 +7319,6 @@ public class AdAccount extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetAds requestObjectiveSourceField () {
-      return this.requestObjectiveSourceField(true);
-    }
-    public APIRequestGetAds requestObjectiveSourceField (boolean value) {
-      this.requestField("objective_source", value);
-      return this;
-    }
     public APIRequestGetAds requestPriorityField () {
       return this.requestPriorityField(true);
     }
@@ -7723,8 +7416,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public Ad parseResponse(String response) throws APIException {
-      return Ad.parseResponse(response, getContext(), this).head();
+    public Ad parseResponse(String response, String header) throws APIException {
+      return Ad.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -7734,7 +7427,8 @@ public class AdAccount extends APINode {
 
     @Override
     public Ad execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -7748,7 +7442,7 @@ public class AdAccount extends APINode {
         new Function<String, Ad>() {
            public Ad apply(String result) {
              try {
-               return APIRequestCreateAd.this.parseResponse(result);
+               return APIRequestCreateAd.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7990,7 +7684,6 @@ public class AdAccount extends APINode {
       "issues_info",
       "last_updated_by_app_id",
       "name",
-      "objective_source",
       "priority",
       "recommendations",
       "source_ad",
@@ -8003,8 +7696,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<Ad> parseResponse(String response) throws APIException {
-      return Ad.parseResponse(response, getContext(), this);
+    public APINodeList<Ad> parseResponse(String response, String header) throws APIException {
+      return Ad.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -8014,7 +7707,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<Ad> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -8028,7 +7722,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<Ad>>() {
            public APINodeList<Ad> apply(String result) {
              try {
-               return APIRequestGetAdsByLabels.this.parseResponse(result);
+               return APIRequestGetAdsByLabels.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8269,13 +7963,6 @@ public class AdAccount extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetAdsByLabels requestObjectiveSourceField () {
-      return this.requestObjectiveSourceField(true);
-    }
-    public APIRequestGetAdsByLabels requestObjectiveSourceField (boolean value) {
-      this.requestField("objective_source", value);
-      return this;
-    }
     public APIRequestGetAdsByLabels requestPriorityField () {
       return this.requestPriorityField(true);
     }
@@ -8359,8 +8046,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -8370,7 +8057,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -8384,7 +8072,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAdSets.this.parseResponse(result);
+               return APIRequestDeleteAdSets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8499,7 +8187,6 @@ public class AdAccount extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "ad_keywords",
-      "adasset_feed",
       "adlabels",
       "adset_schedule",
       "asset_feed_id",
@@ -8523,19 +8210,13 @@ public class AdAccount extends APINode {
       "destination_type",
       "effective_status",
       "end_time",
-      "frequency_cap",
-      "frequency_cap_reset_period",
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
-      "is_autobid",
-      "is_average_price_pacing",
       "is_dynamic_creative",
-      "is_dynamic_creative_optimization",
       "issues_info",
       "lifetime_budget",
-      "lifetime_frequency_cap",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
@@ -8547,7 +8228,6 @@ public class AdAccount extends APINode {
       "recurring_budget_semantics",
       "review_feedback",
       "rf_prediction_id",
-      "rtb_flag",
       "source_adset",
       "source_adset_id",
       "start_time",
@@ -8555,14 +8235,13 @@ public class AdAccount extends APINode {
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
-      "tracking_specs",
       "updated_time",
       "use_new_app_click",
     };
 
     @Override
-    public APINodeList<AdSet> parseResponse(String response) throws APIException {
-      return AdSet.parseResponse(response, getContext(), this);
+    public APINodeList<AdSet> parseResponse(String response, String header) throws APIException {
+      return AdSet.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -8572,7 +8251,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdSet> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -8586,7 +8266,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdSet>>() {
            public APINodeList<AdSet> apply(String result) {
              try {
-               return APIRequestGetAdSets.this.parseResponse(result);
+               return APIRequestGetAdSets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8710,13 +8390,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestAdKeywordsField (boolean value) {
       this.requestField("ad_keywords", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestAdassetFeedField () {
-      return this.requestAdassetFeedField(true);
-    }
-    public APIRequestGetAdSets requestAdassetFeedField (boolean value) {
-      this.requestField("adasset_feed", value);
       return this;
     }
     public APIRequestGetAdSets requestAdlabelsField () {
@@ -8880,20 +8553,6 @@ public class AdAccount extends APINode {
       this.requestField("end_time", value);
       return this;
     }
-    public APIRequestGetAdSets requestFrequencyCapField () {
-      return this.requestFrequencyCapField(true);
-    }
-    public APIRequestGetAdSets requestFrequencyCapField (boolean value) {
-      this.requestField("frequency_cap", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestFrequencyCapResetPeriodField () {
-      return this.requestFrequencyCapResetPeriodField(true);
-    }
-    public APIRequestGetAdSets requestFrequencyCapResetPeriodField (boolean value) {
-      this.requestField("frequency_cap_reset_period", value);
-      return this;
-    }
     public APIRequestGetAdSets requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
@@ -8922,32 +8581,11 @@ public class AdAccount extends APINode {
       this.requestField("instagram_actor_id", value);
       return this;
     }
-    public APIRequestGetAdSets requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetAdSets requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGetAdSets requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
-      return this;
-    }
     public APIRequestGetAdSets requestIsDynamicCreativeField () {
       return this.requestIsDynamicCreativeField(true);
     }
     public APIRequestGetAdSets requestIsDynamicCreativeField (boolean value) {
       this.requestField("is_dynamic_creative", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField () {
-      return this.requestIsDynamicCreativeOptimizationField(true);
-    }
-    public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField (boolean value) {
-      this.requestField("is_dynamic_creative_optimization", value);
       return this;
     }
     public APIRequestGetAdSets requestIssuesInfoField () {
@@ -8962,13 +8600,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSets requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestLifetimeFrequencyCapField () {
-      return this.requestLifetimeFrequencyCapField(true);
-    }
-    public APIRequestGetAdSets requestLifetimeFrequencyCapField (boolean value) {
-      this.requestField("lifetime_frequency_cap", value);
       return this;
     }
     public APIRequestGetAdSets requestLifetimeImpsField () {
@@ -9048,13 +8679,6 @@ public class AdAccount extends APINode {
       this.requestField("rf_prediction_id", value);
       return this;
     }
-    public APIRequestGetAdSets requestRtbFlagField () {
-      return this.requestRtbFlagField(true);
-    }
-    public APIRequestGetAdSets requestRtbFlagField (boolean value) {
-      this.requestField("rtb_flag", value);
-      return this;
-    }
     public APIRequestGetAdSets requestSourceAdsetField () {
       return this.requestSourceAdsetField(true);
     }
@@ -9104,13 +8728,6 @@ public class AdAccount extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
-    public APIRequestGetAdSets requestTrackingSpecsField () {
-      return this.requestTrackingSpecsField(true);
-    }
-    public APIRequestGetAdSets requestTrackingSpecsField (boolean value) {
-      this.requestField("tracking_specs", value);
-      return this;
-    }
     public APIRequestGetAdSets requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -9139,6 +8756,7 @@ public class AdAccount extends APINode {
       "adlabels",
       "bid_amount",
       "bid_adjustments",
+      "bid_constraints",
       "bid_strategy",
       "billing_event",
       "campaign_id",
@@ -9160,7 +8778,6 @@ public class AdAccount extends APINode {
       "is_autobid",
       "is_average_price_pacing",
       "is_dynamic_creative",
-      "is_dynamic_creative_optimization",
       "lifetime_budget",
       "lifetime_frequency_cap",
       "lifetime_imps",
@@ -9190,8 +8807,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdSet parseResponse(String response) throws APIException {
-      return AdSet.parseResponse(response, getContext(), this).head();
+    public AdSet parseResponse(String response, String header) throws APIException {
+      return AdSet.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -9201,7 +8818,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdSet execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -9215,7 +8833,7 @@ public class AdAccount extends APINode {
         new Function<String, AdSet>() {
            public AdSet apply(String result) {
              try {
-               return APIRequestCreateAdSet.this.parseResponse(result);
+               return APIRequestCreateAdSet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9274,6 +8892,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdSet setBidAdjustments (String bidAdjustments) {
       this.setParam("bid_adjustments", bidAdjustments);
+      return this;
+    }
+
+    public APIRequestCreateAdSet setBidConstraints (Object bidConstraints) {
+      this.setParam("bid_constraints", bidConstraints);
+      return this;
+    }
+    public APIRequestCreateAdSet setBidConstraints (String bidConstraints) {
+      this.setParam("bid_constraints", bidConstraints);
       return this;
     }
 
@@ -9451,15 +9078,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdSet setIsDynamicCreative (String isDynamicCreative) {
       this.setParam("is_dynamic_creative", isDynamicCreative);
-      return this;
-    }
-
-    public APIRequestCreateAdSet setIsDynamicCreativeOptimization (Boolean isDynamicCreativeOptimization) {
-      this.setParam("is_dynamic_creative_optimization", isDynamicCreativeOptimization);
-      return this;
-    }
-    public APIRequestCreateAdSet setIsDynamicCreativeOptimization (String isDynamicCreativeOptimization) {
-      this.setParam("is_dynamic_creative_optimization", isDynamicCreativeOptimization);
       return this;
     }
 
@@ -9691,7 +9309,6 @@ public class AdAccount extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "ad_keywords",
-      "adasset_feed",
       "adlabels",
       "adset_schedule",
       "asset_feed_id",
@@ -9715,19 +9332,13 @@ public class AdAccount extends APINode {
       "destination_type",
       "effective_status",
       "end_time",
-      "frequency_cap",
-      "frequency_cap_reset_period",
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
-      "is_autobid",
-      "is_average_price_pacing",
       "is_dynamic_creative",
-      "is_dynamic_creative_optimization",
       "issues_info",
       "lifetime_budget",
-      "lifetime_frequency_cap",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
@@ -9739,7 +9350,6 @@ public class AdAccount extends APINode {
       "recurring_budget_semantics",
       "review_feedback",
       "rf_prediction_id",
-      "rtb_flag",
       "source_adset",
       "source_adset_id",
       "start_time",
@@ -9747,14 +9357,13 @@ public class AdAccount extends APINode {
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
-      "tracking_specs",
       "updated_time",
       "use_new_app_click",
     };
 
     @Override
-    public APINodeList<AdSet> parseResponse(String response) throws APIException {
-      return AdSet.parseResponse(response, getContext(), this);
+    public APINodeList<AdSet> parseResponse(String response, String header) throws APIException {
+      return AdSet.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -9764,7 +9373,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdSet> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -9778,7 +9388,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdSet>>() {
            public APINodeList<AdSet> apply(String result) {
              try {
-               return APIRequestGetAdSetsByLabels.this.parseResponse(result);
+               return APIRequestGetAdSetsByLabels.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9870,13 +9480,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestAdKeywordsField (boolean value) {
       this.requestField("ad_keywords", value);
-      return this;
-    }
-    public APIRequestGetAdSetsByLabels requestAdassetFeedField () {
-      return this.requestAdassetFeedField(true);
-    }
-    public APIRequestGetAdSetsByLabels requestAdassetFeedField (boolean value) {
-      this.requestField("adasset_feed", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestAdlabelsField () {
@@ -10040,20 +9643,6 @@ public class AdAccount extends APINode {
       this.requestField("end_time", value);
       return this;
     }
-    public APIRequestGetAdSetsByLabels requestFrequencyCapField () {
-      return this.requestFrequencyCapField(true);
-    }
-    public APIRequestGetAdSetsByLabels requestFrequencyCapField (boolean value) {
-      this.requestField("frequency_cap", value);
-      return this;
-    }
-    public APIRequestGetAdSetsByLabels requestFrequencyCapResetPeriodField () {
-      return this.requestFrequencyCapResetPeriodField(true);
-    }
-    public APIRequestGetAdSetsByLabels requestFrequencyCapResetPeriodField (boolean value) {
-      this.requestField("frequency_cap_reset_period", value);
-      return this;
-    }
     public APIRequestGetAdSetsByLabels requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
@@ -10082,32 +9671,11 @@ public class AdAccount extends APINode {
       this.requestField("instagram_actor_id", value);
       return this;
     }
-    public APIRequestGetAdSetsByLabels requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetAdSetsByLabels requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGetAdSetsByLabels requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGetAdSetsByLabels requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
-      return this;
-    }
     public APIRequestGetAdSetsByLabels requestIsDynamicCreativeField () {
       return this.requestIsDynamicCreativeField(true);
     }
     public APIRequestGetAdSetsByLabels requestIsDynamicCreativeField (boolean value) {
       this.requestField("is_dynamic_creative", value);
-      return this;
-    }
-    public APIRequestGetAdSetsByLabels requestIsDynamicCreativeOptimizationField () {
-      return this.requestIsDynamicCreativeOptimizationField(true);
-    }
-    public APIRequestGetAdSetsByLabels requestIsDynamicCreativeOptimizationField (boolean value) {
-      this.requestField("is_dynamic_creative_optimization", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestIssuesInfoField () {
@@ -10122,13 +9690,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdSetsByLabels requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGetAdSetsByLabels requestLifetimeFrequencyCapField () {
-      return this.requestLifetimeFrequencyCapField(true);
-    }
-    public APIRequestGetAdSetsByLabels requestLifetimeFrequencyCapField (boolean value) {
-      this.requestField("lifetime_frequency_cap", value);
       return this;
     }
     public APIRequestGetAdSetsByLabels requestLifetimeImpsField () {
@@ -10208,13 +9769,6 @@ public class AdAccount extends APINode {
       this.requestField("rf_prediction_id", value);
       return this;
     }
-    public APIRequestGetAdSetsByLabels requestRtbFlagField () {
-      return this.requestRtbFlagField(true);
-    }
-    public APIRequestGetAdSetsByLabels requestRtbFlagField (boolean value) {
-      this.requestField("rtb_flag", value);
-      return this;
-    }
     public APIRequestGetAdSetsByLabels requestSourceAdsetField () {
       return this.requestSourceAdsetField(true);
     }
@@ -10264,13 +9818,6 @@ public class AdAccount extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
-    public APIRequestGetAdSetsByLabels requestTrackingSpecsField () {
-      return this.requestTrackingSpecsField(true);
-    }
-    public APIRequestGetAdSetsByLabels requestTrackingSpecsField (boolean value) {
-      this.requestField("tracking_specs", value);
-      return this;
-    }
     public APIRequestGetAdSetsByLabels requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -10316,8 +9863,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdsPixel> parseResponse(String response) throws APIException {
-      return AdsPixel.parseResponse(response, getContext(), this);
+    public APINodeList<AdsPixel> parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -10327,7 +9874,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdsPixel> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -10341,7 +9889,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdsPixel>>() {
            public APINodeList<AdsPixel> apply(String result) {
              try {
-               return APIRequestGetAdsPixels.this.parseResponse(result);
+               return APIRequestGetAdsPixels.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10527,8 +10075,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdsPixel parseResponse(String response) throws APIException {
-      return AdsPixel.parseResponse(response, getContext(), this).head();
+    public AdsPixel parseResponse(String response, String header) throws APIException {
+      return AdsPixel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -10538,7 +10086,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -10552,7 +10101,7 @@ public class AdAccount extends APINode {
         new Function<String, AdsPixel>() {
            public AdsPixel apply(String result) {
              try {
-               return APIRequestCreateAdsPixel.this.parseResponse(result);
+               return APIRequestCreateAdsPixel.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10650,8 +10199,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdToplineDetail> parseResponse(String response) throws APIException {
-      return AdToplineDetail.parseResponse(response, getContext(), this);
+    public APINodeList<AdToplineDetail> parseResponse(String response, String header) throws APIException {
+      return AdToplineDetail.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -10661,7 +10210,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdToplineDetail> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -10675,7 +10225,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdToplineDetail>>() {
            public APINodeList<AdToplineDetail> apply(String result) {
              try {
-               return APIRequestGetAdToplineDetails.this.parseResponse(result);
+               return APIRequestGetAdToplineDetails.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10893,8 +10443,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdTopline> parseResponse(String response) throws APIException {
-      return AdTopline.parseResponse(response, getContext(), this);
+    public APINodeList<AdTopline> parseResponse(String response, String header) throws APIException {
+      return AdTopline.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -10904,7 +10454,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdTopline> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -10918,7 +10469,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdTopline>>() {
            public APINodeList<AdTopline> apply(String result) {
              try {
-               return APIRequestGetAdTopLines.this.parseResponse(result);
+               return APIRequestGetAdTopLines.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11342,8 +10893,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<Application> parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this);
+    public APINodeList<Application> parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -11353,7 +10904,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<Application> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -11367,7 +10919,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<Application>>() {
            public APINodeList<Application> apply(String result) {
              try {
-               return APIRequestGetAdvertisableApplications.this.parseResponse(result);
+               return APIRequestGetAdvertisableApplications.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -12177,10 +11729,10 @@ public class AdAccount extends APINode {
       "length",
       "live_audience_count",
       "live_status",
-      "name",
       "permalink_url",
       "picture",
       "place",
+      "premiere_living_room_status",
       "privacy",
       "published",
       "scheduled_publish_time",
@@ -12194,8 +11746,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdVideo> parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this);
+    public APINodeList<AdVideo> parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -12205,7 +11757,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdVideo> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -12219,7 +11772,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdVideo>>() {
            public APINodeList<AdVideo> apply(String result) {
              try {
-               return APIRequestGetAdVideos.this.parseResponse(result);
+               return APIRequestGetAdVideos.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -12519,13 +12072,6 @@ public class AdAccount extends APINode {
       this.requestField("live_status", value);
       return this;
     }
-    public APIRequestGetAdVideos requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGetAdVideos requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
     public APIRequestGetAdVideos requestPermalinkUrlField () {
       return this.requestPermalinkUrlField(true);
     }
@@ -12545,6 +12091,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdVideos requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGetAdVideos requestPremiereLivingRoomStatusField () {
+      return this.requestPremiereLivingRoomStatusField(true);
+    }
+    public APIRequestGetAdVideos requestPremiereLivingRoomStatusField (boolean value) {
+      this.requestField("premiere_living_room_status", value);
       return this;
     }
     public APIRequestGetAdVideos requestPrivacyField () {
@@ -12706,8 +12259,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdVideo parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this).head();
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -12717,7 +12270,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -12731,7 +12285,7 @@ public class AdAccount extends APINode {
         new Function<String, AdVideo>() {
            public AdVideo apply(String result) {
              try {
-               return APIRequestCreateAdVideo.this.parseResponse(result);
+               return APIRequestCreateAdVideo.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13331,7 +12885,6 @@ public class AdAccount extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "ad_keywords",
-      "adasset_feed",
       "adlabels",
       "adset_schedule",
       "asset_feed_id",
@@ -13355,19 +12908,13 @@ public class AdAccount extends APINode {
       "destination_type",
       "effective_status",
       "end_time",
-      "frequency_cap",
-      "frequency_cap_reset_period",
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
-      "is_autobid",
-      "is_average_price_pacing",
       "is_dynamic_creative",
-      "is_dynamic_creative_optimization",
       "issues_info",
       "lifetime_budget",
-      "lifetime_frequency_cap",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
@@ -13379,7 +12926,6 @@ public class AdAccount extends APINode {
       "recurring_budget_semantics",
       "review_feedback",
       "rf_prediction_id",
-      "rtb_flag",
       "source_adset",
       "source_adset_id",
       "start_time",
@@ -13387,14 +12933,13 @@ public class AdAccount extends APINode {
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
-      "tracking_specs",
       "updated_time",
       "use_new_app_click",
     };
 
     @Override
-    public APINodeList<AdSet> parseResponse(String response) throws APIException {
-      return AdSet.parseResponse(response, getContext(), this);
+    public APINodeList<AdSet> parseResponse(String response, String header) throws APIException {
+      return AdSet.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -13404,7 +12949,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdSet> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -13418,7 +12964,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdSet>>() {
            public APINodeList<AdSet> apply(String result) {
              try {
-               return APIRequestGetAffectedAdSets.this.parseResponse(result);
+               return APIRequestGetAffectedAdSets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13492,13 +13038,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestAdKeywordsField (boolean value) {
       this.requestField("ad_keywords", value);
-      return this;
-    }
-    public APIRequestGetAffectedAdSets requestAdassetFeedField () {
-      return this.requestAdassetFeedField(true);
-    }
-    public APIRequestGetAffectedAdSets requestAdassetFeedField (boolean value) {
-      this.requestField("adasset_feed", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestAdlabelsField () {
@@ -13662,20 +13201,6 @@ public class AdAccount extends APINode {
       this.requestField("end_time", value);
       return this;
     }
-    public APIRequestGetAffectedAdSets requestFrequencyCapField () {
-      return this.requestFrequencyCapField(true);
-    }
-    public APIRequestGetAffectedAdSets requestFrequencyCapField (boolean value) {
-      this.requestField("frequency_cap", value);
-      return this;
-    }
-    public APIRequestGetAffectedAdSets requestFrequencyCapResetPeriodField () {
-      return this.requestFrequencyCapResetPeriodField(true);
-    }
-    public APIRequestGetAffectedAdSets requestFrequencyCapResetPeriodField (boolean value) {
-      this.requestField("frequency_cap_reset_period", value);
-      return this;
-    }
     public APIRequestGetAffectedAdSets requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
@@ -13704,32 +13229,11 @@ public class AdAccount extends APINode {
       this.requestField("instagram_actor_id", value);
       return this;
     }
-    public APIRequestGetAffectedAdSets requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetAffectedAdSets requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGetAffectedAdSets requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGetAffectedAdSets requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
-      return this;
-    }
     public APIRequestGetAffectedAdSets requestIsDynamicCreativeField () {
       return this.requestIsDynamicCreativeField(true);
     }
     public APIRequestGetAffectedAdSets requestIsDynamicCreativeField (boolean value) {
       this.requestField("is_dynamic_creative", value);
-      return this;
-    }
-    public APIRequestGetAffectedAdSets requestIsDynamicCreativeOptimizationField () {
-      return this.requestIsDynamicCreativeOptimizationField(true);
-    }
-    public APIRequestGetAffectedAdSets requestIsDynamicCreativeOptimizationField (boolean value) {
-      this.requestField("is_dynamic_creative_optimization", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestIssuesInfoField () {
@@ -13744,13 +13248,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAffectedAdSets requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGetAffectedAdSets requestLifetimeFrequencyCapField () {
-      return this.requestLifetimeFrequencyCapField(true);
-    }
-    public APIRequestGetAffectedAdSets requestLifetimeFrequencyCapField (boolean value) {
-      this.requestField("lifetime_frequency_cap", value);
       return this;
     }
     public APIRequestGetAffectedAdSets requestLifetimeImpsField () {
@@ -13830,13 +13327,6 @@ public class AdAccount extends APINode {
       this.requestField("rf_prediction_id", value);
       return this;
     }
-    public APIRequestGetAffectedAdSets requestRtbFlagField () {
-      return this.requestRtbFlagField(true);
-    }
-    public APIRequestGetAffectedAdSets requestRtbFlagField (boolean value) {
-      this.requestField("rtb_flag", value);
-      return this;
-    }
     public APIRequestGetAffectedAdSets requestSourceAdsetField () {
       return this.requestSourceAdsetField(true);
     }
@@ -13886,13 +13376,6 @@ public class AdAccount extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
-    public APIRequestGetAffectedAdSets requestTrackingSpecsField () {
-      return this.requestTrackingSpecsField(true);
-    }
-    public APIRequestGetAffectedAdSets requestTrackingSpecsField (boolean value) {
-      this.requestField("tracking_specs", value);
-      return this;
-    }
     public APIRequestGetAffectedAdSets requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -13924,8 +13407,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -13935,7 +13418,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -13949,7 +13433,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAgencies.this.parseResponse(result);
+               return APIRequestDeleteAgencies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14050,8 +13534,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<Business> parseResponse(String response) throws APIException {
-      return Business.parseResponse(response, getContext(), this);
+    public APINodeList<Business> parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -14061,7 +13545,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<Business> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -14075,7 +13560,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<Business>>() {
            public APINodeList<Business> apply(String result) {
              try {
-               return APIRequestGetAgencies.this.parseResponse(result);
+               return APIRequestGetAgencies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14281,8 +13766,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -14292,7 +13777,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -14306,7 +13792,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAccount>() {
            public AdAccount apply(String result) {
              try {
-               return APIRequestCreateAgency.this.parseResponse(result);
+               return APIRequestCreateAgency.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14497,8 +13983,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<Application> parseResponse(String response) throws APIException {
-      return Application.parseResponse(response, getContext(), this);
+    public APINodeList<Application> parseResponse(String response, String header) throws APIException {
+      return Application.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -14508,7 +13994,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<Application> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -14522,7 +14009,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<Application>>() {
            public APINodeList<Application> apply(String result) {
              try {
-               return APIRequestGetApplications.this.parseResponse(result);
+               return APIRequestGetApplications.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15294,8 +14781,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -15305,7 +14792,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -15319,7 +14807,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAssignedUsers.this.parseResponse(result);
+               return APIRequestDeleteAssignedUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15411,8 +14899,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AssignedUser> parseResponse(String response) throws APIException {
-      return AssignedUser.parseResponse(response, getContext(), this);
+    public APINodeList<AssignedUser> parseResponse(String response, String header) throws APIException {
+      return AssignedUser.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -15422,7 +14910,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AssignedUser> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -15436,7 +14925,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AssignedUser>>() {
            public APINodeList<AssignedUser> apply(String result) {
              try {
-               return APIRequestGetAssignedUsers.this.parseResponse(result);
+               return APIRequestGetAssignedUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15549,8 +15038,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -15560,7 +15049,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -15574,7 +15064,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAccount>() {
            public AdAccount apply(String result) {
              try {
-               return APIRequestCreateAssignedUser.this.parseResponse(result);
+               return APIRequestCreateAssignedUser.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15672,8 +15162,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public Campaign parseResponse(String response) throws APIException {
-      return Campaign.parseResponse(response, getContext(), this).head();
+    public Campaign parseResponse(String response, String header) throws APIException {
+      return Campaign.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -15683,7 +15173,8 @@ public class AdAccount extends APINode {
 
     @Override
     public Campaign execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -15697,7 +15188,7 @@ public class AdAccount extends APINode {
         new Function<String, Campaign>() {
            public Campaign apply(String result) {
              try {
-               return APIRequestCreateAsyncBatchRequest.this.parseResponse(result);
+               return APIRequestCreateAsyncBatchRequest.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15795,8 +15286,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AsyncRequest> parseResponse(String response) throws APIException {
-      return AsyncRequest.parseResponse(response, getContext(), this);
+    public APINodeList<AsyncRequest> parseResponse(String response, String header) throws APIException {
+      return AsyncRequest.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -15806,7 +15297,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AsyncRequest> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -15820,7 +15312,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AsyncRequest>>() {
            public APINodeList<AsyncRequest> apply(String result) {
              try {
-               return APIRequestGetAsyncRequests.this.parseResponse(result);
+               return APIRequestGetAsyncRequests.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15961,8 +15453,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdAsyncRequestSet> parseResponse(String response) throws APIException {
-      return AdAsyncRequestSet.parseResponse(response, getContext(), this);
+    public APINodeList<AdAsyncRequestSet> parseResponse(String response, String header) throws APIException {
+      return AdAsyncRequestSet.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -15972,7 +15464,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdAsyncRequestSet> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -15986,7 +15479,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdAsyncRequestSet>>() {
            public APINodeList<AdAsyncRequestSet> apply(String result) {
              try {
-               return APIRequestGetAsyncAdRequestSets.this.parseResponse(result);
+               return APIRequestGetAsyncAdRequestSets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16189,8 +15682,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAsyncRequestSet parseResponse(String response) throws APIException {
-      return AdAsyncRequestSet.parseResponse(response, getContext(), this).head();
+    public AdAsyncRequestSet parseResponse(String response, String header) throws APIException {
+      return AdAsyncRequestSet.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -16200,7 +15693,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAsyncRequestSet execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -16214,7 +15708,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAsyncRequestSet>() {
            public AdAsyncRequestSet apply(String result) {
              try {
-               return APIRequestCreateAsyncAdRequestSet.this.parseResponse(result);
+               return APIRequestCreateAsyncAdRequestSet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16322,8 +15816,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -16333,7 +15827,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -16347,7 +15842,7 @@ public class AdAccount extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateAudienceReplace.this.parseResponse(result);
+               return APIRequestCreateAudienceReplace.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16444,8 +15939,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -16455,7 +15950,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -16469,7 +15965,7 @@ public class AdAccount extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateBatchReplace.this.parseResponse(result);
+               return APIRequestCreateBatchReplace.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16557,8 +16053,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -16568,7 +16064,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -16582,7 +16079,7 @@ public class AdAccount extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateBatchUpload.this.parseResponse(result);
+               return APIRequestCreateBatchUpload.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16670,8 +16167,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -16681,7 +16178,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -16695,7 +16193,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAccount>() {
            public AdAccount apply(String result) {
              try {
-               return APIRequestCreateBlockListDraft.this.parseResponse(result);
+               return APIRequestCreateBlockListDraft.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16792,8 +16290,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<BrandAudience> parseResponse(String response) throws APIException {
-      return BrandAudience.parseResponse(response, getContext(), this);
+    public APINodeList<BrandAudience> parseResponse(String response, String header) throws APIException {
+      return BrandAudience.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -16803,7 +16301,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<BrandAudience> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -16817,7 +16316,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<BrandAudience>>() {
            public APINodeList<BrandAudience> apply(String result) {
              try {
-               return APIRequestGetBrandAudiences.this.parseResponse(result);
+               return APIRequestGetBrandAudiences.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16969,8 +16468,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public BrandAudience parseResponse(String response) throws APIException {
-      return BrandAudience.parseResponse(response, getContext(), this).head();
+    public BrandAudience parseResponse(String response, String header) throws APIException {
+      return BrandAudience.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -16980,7 +16479,8 @@ public class AdAccount extends APINode {
 
     @Override
     public BrandAudience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -16994,7 +16494,7 @@ public class AdAccount extends APINode {
         new Function<String, BrandAudience>() {
            public BrandAudience apply(String result) {
              try {
-               return APIRequestCreateBrandAudience.this.parseResponse(result);
+               return APIRequestCreateBrandAudience.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -17112,8 +16612,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<BroadTargetingCategories> parseResponse(String response) throws APIException {
-      return BroadTargetingCategories.parseResponse(response, getContext(), this);
+    public APINodeList<BroadTargetingCategories> parseResponse(String response, String header) throws APIException {
+      return BroadTargetingCategories.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -17123,7 +16623,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<BroadTargetingCategories> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -17137,7 +16638,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<BroadTargetingCategories>>() {
            public APINodeList<BroadTargetingCategories> apply(String result) {
              try {
-               return APIRequestGetBroadTargetingCategories.this.parseResponse(result);
+               return APIRequestGetBroadTargetingCategories.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -17322,8 +16823,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<BusinessActivityLogEvent> parseResponse(String response) throws APIException {
-      return BusinessActivityLogEvent.parseResponse(response, getContext(), this);
+    public APINodeList<BusinessActivityLogEvent> parseResponse(String response, String header) throws APIException {
+      return BusinessActivityLogEvent.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -17333,7 +16834,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<BusinessActivityLogEvent> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -17347,7 +16849,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<BusinessActivityLogEvent>>() {
            public APINodeList<BusinessActivityLogEvent> apply(String result) {
              try {
-               return APIRequestGetBusinessActivities.this.parseResponse(result);
+               return APIRequestGetBusinessActivities.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -17576,8 +17078,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<BusinessProject> parseResponse(String response) throws APIException {
-      return BusinessProject.parseResponse(response, getContext(), this);
+    public APINodeList<BusinessProject> parseResponse(String response, String header) throws APIException {
+      return BusinessProject.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -17587,7 +17089,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<BusinessProject> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -17601,7 +17104,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<BusinessProject>>() {
            public APINodeList<BusinessProject> apply(String result) {
              try {
-               return APIRequestGetBusinessProjects.this.parseResponse(result);
+               return APIRequestGetBusinessProjects.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -17709,6 +17212,158 @@ public class AdAccount extends APINode {
     }
   }
 
+  public static class APIRequestGetBusinessSettingLogs extends APIRequest<BusinessSettingLogsData> {
+
+    APINodeList<BusinessSettingLogsData> lastResponse = null;
+    @Override
+    public APINodeList<BusinessSettingLogsData> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "actor",
+      "event_object",
+      "event_time",
+      "event_type",
+      "extra_data",
+      "id",
+    };
+
+    @Override
+    public APINodeList<BusinessSettingLogsData> parseResponse(String response, String header) throws APIException {
+      return BusinessSettingLogsData.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BusinessSettingLogsData> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BusinessSettingLogsData> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BusinessSettingLogsData>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BusinessSettingLogsData>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<BusinessSettingLogsData>>() {
+           public APINodeList<BusinessSettingLogsData> apply(String result) {
+             try {
+               return APIRequestGetBusinessSettingLogs.this.parseResponse(result, null);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetBusinessSettingLogs(String nodeId, APIContext context) {
+      super(context, nodeId, "/businesssettinglogs", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBusinessSettingLogs setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessSettingLogs setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBusinessSettingLogs requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBusinessSettingLogs requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessSettingLogs requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBusinessSettingLogs requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessSettingLogs requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessSettingLogs requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetBusinessSettingLogs requestActorField () {
+      return this.requestActorField(true);
+    }
+    public APIRequestGetBusinessSettingLogs requestActorField (boolean value) {
+      this.requestField("actor", value);
+      return this;
+    }
+    public APIRequestGetBusinessSettingLogs requestEventObjectField () {
+      return this.requestEventObjectField(true);
+    }
+    public APIRequestGetBusinessSettingLogs requestEventObjectField (boolean value) {
+      this.requestField("event_object", value);
+      return this;
+    }
+    public APIRequestGetBusinessSettingLogs requestEventTimeField () {
+      return this.requestEventTimeField(true);
+    }
+    public APIRequestGetBusinessSettingLogs requestEventTimeField (boolean value) {
+      this.requestField("event_time", value);
+      return this;
+    }
+    public APIRequestGetBusinessSettingLogs requestEventTypeField () {
+      return this.requestEventTypeField(true);
+    }
+    public APIRequestGetBusinessSettingLogs requestEventTypeField (boolean value) {
+      this.requestField("event_type", value);
+      return this;
+    }
+    public APIRequestGetBusinessSettingLogs requestExtraDataField () {
+      return this.requestExtraDataField(true);
+    }
+    public APIRequestGetBusinessSettingLogs requestExtraDataField (boolean value) {
+      this.requestField("extra_data", value);
+      return this;
+    }
+    public APIRequestGetBusinessSettingLogs requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetBusinessSettingLogs requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+  }
+
   public static class APIRequestDeleteCampaigns extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -17727,8 +17382,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -17738,7 +17393,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -17752,7 +17408,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteCampaigns.this.parseResponse(result);
+               return APIRequestDeleteCampaigns.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -17877,10 +17533,6 @@ public class AdAccount extends APINode {
       "daily_budget",
       "effective_status",
       "id",
-      "is_autobid",
-      "is_average_price_pacing",
-      "kpi_custom_conversion_id",
-      "kpi_type",
       "last_budget_toggling_time",
       "lifetime_budget",
       "metrics_metadata",
@@ -17900,8 +17552,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<Campaign> parseResponse(String response) throws APIException {
-      return Campaign.parseResponse(response, getContext(), this);
+    public APINodeList<Campaign> parseResponse(String response, String header) throws APIException {
+      return Campaign.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -17911,7 +17563,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<Campaign> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -17925,7 +17578,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<Campaign>>() {
            public APINodeList<Campaign> apply(String result) {
              try {
-               return APIRequestGetCampaigns.this.parseResponse(result);
+               return APIRequestGetCampaigns.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -18119,34 +17772,6 @@ public class AdAccount extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetCampaigns requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetCampaigns requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGetCampaigns requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestKpiCustomConversionIdField () {
-      return this.requestKpiCustomConversionIdField(true);
-    }
-    public APIRequestGetCampaigns requestKpiCustomConversionIdField (boolean value) {
-      this.requestField("kpi_custom_conversion_id", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestKpiTypeField () {
-      return this.requestKpiTypeField(true);
-    }
-    public APIRequestGetCampaigns requestKpiTypeField (boolean value) {
-      this.requestField("kpi_type", value);
-      return this;
-    }
     public APIRequestGetCampaigns requestLastBudgetTogglingTimeField () {
       return this.requestLastBudgetTogglingTimeField(true);
     }
@@ -18296,8 +17921,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public Campaign parseResponse(String response) throws APIException {
-      return Campaign.parseResponse(response, getContext(), this).head();
+    public Campaign parseResponse(String response, String header) throws APIException {
+      return Campaign.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -18307,7 +17932,8 @@ public class AdAccount extends APINode {
 
     @Override
     public Campaign execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -18321,7 +17947,7 @@ public class AdAccount extends APINode {
         new Function<String, Campaign>() {
            public Campaign apply(String result) {
              try {
-               return APIRequestCreateCampaign.this.parseResponse(result);
+               return APIRequestCreateCampaign.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -18582,10 +18208,6 @@ public class AdAccount extends APINode {
       "daily_budget",
       "effective_status",
       "id",
-      "is_autobid",
-      "is_average_price_pacing",
-      "kpi_custom_conversion_id",
-      "kpi_type",
       "last_budget_toggling_time",
       "lifetime_budget",
       "metrics_metadata",
@@ -18605,8 +18227,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<Campaign> parseResponse(String response) throws APIException {
-      return Campaign.parseResponse(response, getContext(), this);
+    public APINodeList<Campaign> parseResponse(String response, String header) throws APIException {
+      return Campaign.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -18616,7 +18238,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<Campaign> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -18630,7 +18253,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<Campaign>>() {
            public APINodeList<Campaign> apply(String result) {
              try {
-               return APIRequestGetCampaignsByLabels.this.parseResponse(result);
+               return APIRequestGetCampaignsByLabels.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -18815,34 +18438,6 @@ public class AdAccount extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetCampaignsByLabels requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetCampaignsByLabels requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGetCampaignsByLabels requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGetCampaignsByLabels requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
-      return this;
-    }
-    public APIRequestGetCampaignsByLabels requestKpiCustomConversionIdField () {
-      return this.requestKpiCustomConversionIdField(true);
-    }
-    public APIRequestGetCampaignsByLabels requestKpiCustomConversionIdField (boolean value) {
-      this.requestField("kpi_custom_conversion_id", value);
-      return this;
-    }
-    public APIRequestGetCampaignsByLabels requestKpiTypeField () {
-      return this.requestKpiTypeField(true);
-    }
-    public APIRequestGetCampaignsByLabels requestKpiTypeField (boolean value) {
-      this.requestField("kpi_type", value);
-      return this;
-    }
     public APIRequestGetCampaignsByLabels requestLastBudgetTogglingTimeField () {
       return this.requestLastBudgetTogglingTimeField(true);
     }
@@ -18979,8 +18574,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccountContextualTargeting> parseResponse(String response) throws APIException {
-      return AdAccountContextualTargeting.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccountContextualTargeting> parseResponse(String response, String header) throws APIException {
+      return AdAccountContextualTargeting.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -18990,7 +18585,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdAccountContextualTargeting> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -19004,7 +18600,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdAccountContextualTargeting>>() {
            public APINodeList<AdAccountContextualTargeting> apply(String result) {
              try {
-               return APIRequestGetContextualTargetingBrowse.this.parseResponse(result);
+               return APIRequestGetContextualTargetingBrowse.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -19139,8 +18735,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -19150,7 +18746,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -19164,7 +18761,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAccount>() {
            public AdAccount apply(String result) {
              try {
-               return APIRequestCreateCoupon.this.parseResponse(result);
+               return APIRequestCreateCoupon.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -19233,157 +18830,6 @@ public class AdAccount extends APINode {
 
   }
 
-  public static class APIRequestGetCustomAudienceLimits extends APIRequest<AdAccountCustomAudienceLimits> {
-
-    APINodeList<AdAccountCustomAudienceLimits> lastResponse = null;
-    @Override
-    public APINodeList<AdAccountCustomAudienceLimits> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "audience_update_quota_in_total",
-      "audience_update_quota_left",
-      "has_hit_audience_update_limit",
-      "next_audience_update_available_time",
-      "rate_limit_reset_time",
-      "id",
-    };
-
-    @Override
-    public APINodeList<AdAccountCustomAudienceLimits> parseResponse(String response) throws APIException {
-      return AdAccountCustomAudienceLimits.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<AdAccountCustomAudienceLimits> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdAccountCustomAudienceLimits> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdAccountCustomAudienceLimits>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdAccountCustomAudienceLimits>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountCustomAudienceLimits>>() {
-           public APINodeList<AdAccountCustomAudienceLimits> apply(String result) {
-             try {
-               return APIRequestGetCustomAudienceLimits.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetCustomAudienceLimits(String nodeId, APIContext context) {
-      super(context, nodeId, "/custom_audience_limits", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetCustomAudienceLimits setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCustomAudienceLimits setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetCustomAudienceLimits requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetCustomAudienceLimits requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCustomAudienceLimits requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetCustomAudienceLimits requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCustomAudienceLimits requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetCustomAudienceLimits requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetCustomAudienceLimits requestAudienceUpdateQuotaInTotalField () {
-      return this.requestAudienceUpdateQuotaInTotalField(true);
-    }
-    public APIRequestGetCustomAudienceLimits requestAudienceUpdateQuotaInTotalField (boolean value) {
-      this.requestField("audience_update_quota_in_total", value);
-      return this;
-    }
-    public APIRequestGetCustomAudienceLimits requestAudienceUpdateQuotaLeftField () {
-      return this.requestAudienceUpdateQuotaLeftField(true);
-    }
-    public APIRequestGetCustomAudienceLimits requestAudienceUpdateQuotaLeftField (boolean value) {
-      this.requestField("audience_update_quota_left", value);
-      return this;
-    }
-    public APIRequestGetCustomAudienceLimits requestHasHitAudienceUpdateLimitField () {
-      return this.requestHasHitAudienceUpdateLimitField(true);
-    }
-    public APIRequestGetCustomAudienceLimits requestHasHitAudienceUpdateLimitField (boolean value) {
-      this.requestField("has_hit_audience_update_limit", value);
-      return this;
-    }
-    public APIRequestGetCustomAudienceLimits requestNextAudienceUpdateAvailableTimeField () {
-      return this.requestNextAudienceUpdateAvailableTimeField(true);
-    }
-    public APIRequestGetCustomAudienceLimits requestNextAudienceUpdateAvailableTimeField (boolean value) {
-      this.requestField("next_audience_update_available_time", value);
-      return this;
-    }
-    public APIRequestGetCustomAudienceLimits requestRateLimitResetTimeField () {
-      return this.requestRateLimitResetTimeField(true);
-    }
-    public APIRequestGetCustomAudienceLimits requestRateLimitResetTimeField (boolean value) {
-      this.requestField("rate_limit_reset_time", value);
-      return this;
-    }
-    public APIRequestGetCustomAudienceLimits requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetCustomAudienceLimits requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetCustomAudiences extends APIRequest<CustomAudience> {
 
     APINodeList<CustomAudience> lastResponse = null;
@@ -19402,8 +18848,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<CustomAudience> parseResponse(String response) throws APIException {
-      return CustomAudience.parseResponse(response, getContext(), this);
+    public APINodeList<CustomAudience> parseResponse(String response, String header) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -19413,7 +18859,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<CustomAudience> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -19427,7 +18874,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<CustomAudience>>() {
            public APINodeList<CustomAudience> apply(String result) {
              try {
-               return APIRequestGetCustomAudiences.this.parseResponse(result);
+               return APIRequestGetCustomAudiences.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -19579,8 +19026,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public CustomAudience parseResponse(String response) throws APIException {
-      return CustomAudience.parseResponse(response, getContext(), this).head();
+    public CustomAudience parseResponse(String response, String header) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -19590,7 +19037,8 @@ public class AdAccount extends APINode {
 
     @Override
     public CustomAudience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -19604,7 +19052,7 @@ public class AdAccount extends APINode {
         new Function<String, CustomAudience>() {
            public CustomAudience apply(String result) {
              try {
-               return APIRequestCreateCustomAudience.this.parseResponse(result);
+               return APIRequestCreateCustomAudience.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -20023,8 +19471,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<CustomAudiencesTOS> parseResponse(String response) throws APIException {
-      return CustomAudiencesTOS.parseResponse(response, getContext(), this);
+    public APINodeList<CustomAudiencesTOS> parseResponse(String response, String header) throws APIException {
+      return CustomAudiencesTOS.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -20034,7 +19482,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<CustomAudiencesTOS> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -20048,7 +19497,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<CustomAudiencesTOS>>() {
            public APINodeList<CustomAudiencesTOS> apply(String result) {
              try {
-               return APIRequestGetCustomAudiencesTos.this.parseResponse(result);
+               return APIRequestGetCustomAudiencesTos.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -20165,8 +19614,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<CustomConversion> parseResponse(String response) throws APIException {
-      return CustomConversion.parseResponse(response, getContext(), this);
+    public APINodeList<CustomConversion> parseResponse(String response, String header) throws APIException {
+      return CustomConversion.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -20176,7 +19625,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<CustomConversion> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -20190,7 +19640,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<CustomConversion>>() {
            public APINodeList<CustomConversion> apply(String result) {
              try {
-               return APIRequestGetCustomConversions.this.parseResponse(result);
+               return APIRequestGetCustomConversions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -20401,8 +19851,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public CustomConversion parseResponse(String response) throws APIException {
-      return CustomConversion.parseResponse(response, getContext(), this).head();
+    public CustomConversion parseResponse(String response, String header) throws APIException {
+      return CustomConversion.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -20412,7 +19862,8 @@ public class AdAccount extends APINode {
 
     @Override
     public CustomConversion execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -20426,7 +19877,7 @@ public class AdAccount extends APINode {
         new Function<String, CustomConversion>() {
            public CustomConversion apply(String result) {
              try {
-               return APIRequestCreateCustomConversion.this.parseResponse(result);
+               return APIRequestCreateCustomConversion.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -20547,8 +19998,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -20558,7 +20009,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -20572,7 +20024,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAccount>() {
            public AdAccount apply(String result) {
              try {
-               return APIRequestCreateDeactivate.this.parseResponse(result);
+               return APIRequestCreateDeactivate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -20650,7 +20102,6 @@ public class AdAccount extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "bid_estimate",
       "daily_outcomes_curve",
       "estimate_dau",
       "estimate_mau",
@@ -20659,8 +20110,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccountDeliveryEstimate> parseResponse(String response) throws APIException {
-      return AdAccountDeliveryEstimate.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccountDeliveryEstimate> parseResponse(String response, String header) throws APIException {
+      return AdAccountDeliveryEstimate.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -20670,7 +20121,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdAccountDeliveryEstimate> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -20684,7 +20136,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdAccountDeliveryEstimate>>() {
            public APINodeList<AdAccountDeliveryEstimate> apply(String result) {
              try {
-               return APIRequestGetDeliveryEstimate.this.parseResponse(result);
+               return APIRequestGetDeliveryEstimate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -20773,13 +20225,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetDeliveryEstimate requestBidEstimateField () {
-      return this.requestBidEstimateField(true);
-    }
-    public APIRequestGetDeliveryEstimate requestBidEstimateField (boolean value) {
-      this.requestField("bid_estimate", value);
-      return this;
-    }
     public APIRequestGetDeliveryEstimate requestDailyOutcomesCurveField () {
       return this.requestDailyOutcomesCurveField(true);
     }
@@ -20831,7 +20276,6 @@ public class AdAccount extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "ad_keywords",
-      "adasset_feed",
       "adlabels",
       "adset_schedule",
       "asset_feed_id",
@@ -20855,19 +20299,13 @@ public class AdAccount extends APINode {
       "destination_type",
       "effective_status",
       "end_time",
-      "frequency_cap",
-      "frequency_cap_reset_period",
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
-      "is_autobid",
-      "is_average_price_pacing",
       "is_dynamic_creative",
-      "is_dynamic_creative_optimization",
       "issues_info",
       "lifetime_budget",
-      "lifetime_frequency_cap",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
@@ -20879,7 +20317,6 @@ public class AdAccount extends APINode {
       "recurring_budget_semantics",
       "review_feedback",
       "rf_prediction_id",
-      "rtb_flag",
       "source_adset",
       "source_adset_id",
       "start_time",
@@ -20887,14 +20324,13 @@ public class AdAccount extends APINode {
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
-      "tracking_specs",
       "updated_time",
       "use_new_app_click",
     };
 
     @Override
-    public APINodeList<AdSet> parseResponse(String response) throws APIException {
-      return AdSet.parseResponse(response, getContext(), this);
+    public APINodeList<AdSet> parseResponse(String response, String header) throws APIException {
+      return AdSet.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -20904,7 +20340,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdSet> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -20918,7 +20355,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdSet>>() {
            public APINodeList<AdSet> apply(String result) {
              try {
-               return APIRequestGetDeprecatedTargetingAdSets.this.parseResponse(result);
+               return APIRequestGetDeprecatedTargetingAdSets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -20997,13 +20434,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestAdKeywordsField (boolean value) {
       this.requestField("ad_keywords", value);
-      return this;
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestAdassetFeedField () {
-      return this.requestAdassetFeedField(true);
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestAdassetFeedField (boolean value) {
-      this.requestField("adasset_feed", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestAdlabelsField () {
@@ -21167,20 +20597,6 @@ public class AdAccount extends APINode {
       this.requestField("end_time", value);
       return this;
     }
-    public APIRequestGetDeprecatedTargetingAdSets requestFrequencyCapField () {
-      return this.requestFrequencyCapField(true);
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestFrequencyCapField (boolean value) {
-      this.requestField("frequency_cap", value);
-      return this;
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestFrequencyCapResetPeriodField () {
-      return this.requestFrequencyCapResetPeriodField(true);
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestFrequencyCapResetPeriodField (boolean value) {
-      this.requestField("frequency_cap_reset_period", value);
-      return this;
-    }
     public APIRequestGetDeprecatedTargetingAdSets requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
@@ -21209,32 +20625,11 @@ public class AdAccount extends APINode {
       this.requestField("instagram_actor_id", value);
       return this;
     }
-    public APIRequestGetDeprecatedTargetingAdSets requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
-      return this;
-    }
     public APIRequestGetDeprecatedTargetingAdSets requestIsDynamicCreativeField () {
       return this.requestIsDynamicCreativeField(true);
     }
     public APIRequestGetDeprecatedTargetingAdSets requestIsDynamicCreativeField (boolean value) {
       this.requestField("is_dynamic_creative", value);
-      return this;
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestIsDynamicCreativeOptimizationField () {
-      return this.requestIsDynamicCreativeOptimizationField(true);
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestIsDynamicCreativeOptimizationField (boolean value) {
-      this.requestField("is_dynamic_creative_optimization", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestIssuesInfoField () {
@@ -21249,13 +20644,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestLifetimeFrequencyCapField () {
-      return this.requestLifetimeFrequencyCapField(true);
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestLifetimeFrequencyCapField (boolean value) {
-      this.requestField("lifetime_frequency_cap", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestLifetimeImpsField () {
@@ -21335,13 +20723,6 @@ public class AdAccount extends APINode {
       this.requestField("rf_prediction_id", value);
       return this;
     }
-    public APIRequestGetDeprecatedTargetingAdSets requestRtbFlagField () {
-      return this.requestRtbFlagField(true);
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestRtbFlagField (boolean value) {
-      this.requestField("rtb_flag", value);
-      return this;
-    }
     public APIRequestGetDeprecatedTargetingAdSets requestSourceAdsetField () {
       return this.requestSourceAdsetField(true);
     }
@@ -21389,13 +20770,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetDeprecatedTargetingAdSets requestTimeBasedAdRotationIntervalsField (boolean value) {
       this.requestField("time_based_ad_rotation_intervals", value);
-      return this;
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestTrackingSpecsField () {
-      return this.requestTrackingSpecsField(true);
-    }
-    public APIRequestGetDeprecatedTargetingAdSets requestTrackingSpecsField (boolean value) {
-      this.requestField("tracking_specs", value);
       return this;
     }
     public APIRequestGetDeprecatedTargetingAdSets requestUpdatedTimeField () {
@@ -21453,8 +20827,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<DirectDeal> parseResponse(String response) throws APIException {
-      return DirectDeal.parseResponse(response, getContext(), this);
+    public APINodeList<DirectDeal> parseResponse(String response, String header) throws APIException {
+      return DirectDeal.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -21464,7 +20838,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<DirectDeal> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -21478,7 +20853,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<DirectDeal>>() {
            public APINodeList<DirectDeal> apply(String result) {
              try {
-               return APIRequestGetDirectDeals.this.parseResponse(result);
+               return APIRequestGetDirectDeals.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -21733,8 +21108,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -21744,7 +21119,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -21758,7 +21134,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAccount>() {
            public AdAccount apply(String result) {
              try {
-               return APIRequestCreateDirectDealsTo.this.parseResponse(result);
+               return APIRequestCreateDirectDealsTo.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -21838,8 +21214,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public EmailImport parseResponse(String response) throws APIException {
-      return EmailImport.parseResponse(response, getContext(), this).head();
+    public EmailImport parseResponse(String response, String header) throws APIException {
+      return EmailImport.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -21849,7 +21225,8 @@ public class AdAccount extends APINode {
 
     @Override
     public EmailImport execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -21863,7 +21240,7 @@ public class AdAccount extends APINode {
         new Function<String, EmailImport>() {
            public EmailImport apply(String result) {
              try {
-               return APIRequestCreateEmailImport.this.parseResponse(result);
+               return APIRequestCreateEmailImport.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -21947,6 +21324,7 @@ public class AdAccount extends APINode {
     public static final String[] PARAMS = {
       "ad_format",
       "dynamic_creative_spec",
+      "dynamic_asset_label",
       "interactive",
       "post",
       "height",
@@ -21966,8 +21344,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdPreview> parseResponse(String response) throws APIException {
-      return AdPreview.parseResponse(response, getContext(), this);
+    public APINodeList<AdPreview> parseResponse(String response, String header) throws APIException {
+      return AdPreview.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -21977,7 +21355,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdPreview> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -21991,7 +21370,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdPreview>>() {
            public APINodeList<AdPreview> apply(String result) {
              try {
-               return APIRequestGetGeneratePreviews.this.parseResponse(result);
+               return APIRequestGetGeneratePreviews.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -22032,6 +21411,11 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetGeneratePreviews setDynamicCreativeSpec (String dynamicCreativeSpec) {
       this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
+      return this;
+    }
+
+    public APIRequestGetGeneratePreviews setDynamicAssetLabel (String dynamicAssetLabel) {
+      this.setParam("dynamic_asset_label", dynamicAssetLabel);
       return this;
     }
 
@@ -22203,8 +21587,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdStudy> parseResponse(String response) throws APIException {
-      return AdStudy.parseResponse(response, getContext(), this);
+    public APINodeList<AdStudy> parseResponse(String response, String header) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -22214,7 +21598,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdStudy> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -22228,7 +21613,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdStudy>>() {
            public APINodeList<AdStudy> apply(String result) {
              try {
-               return APIRequestGetImpactingAdStudies.this.parseResponse(result);
+               return APIRequestGetImpactingAdStudies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -22431,8 +21816,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdsInsights> parseResponse(String response) throws APIException {
-      return AdsInsights.parseResponse(response, getContext(), this);
+    public APINodeList<AdsInsights> parseResponse(String response, String header) throws APIException {
+      return AdsInsights.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -22442,7 +21827,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdsInsights> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -22456,7 +21842,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdsInsights>>() {
            public APINodeList<AdsInsights> apply(String result) {
              try {
-               return APIRequestGetInsights.this.parseResponse(result);
+               return APIRequestGetInsights.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -22722,8 +22108,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdReportRun parseResponse(String response) throws APIException {
-      return AdReportRun.parseResponse(response, getContext(), this).head();
+    public AdReportRun parseResponse(String response, String header) throws APIException {
+      return AdReportRun.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -22733,7 +22119,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdReportRun execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -22747,7 +22134,7 @@ public class AdAccount extends APINode {
         new Function<String, AdReportRun>() {
            public AdReportRun apply(String result) {
              try {
-               return APIRequestGetInsightsAsync.this.parseResponse(result);
+               return APIRequestGetInsightsAsync.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -23002,8 +22389,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<InstagramUser> parseResponse(String response) throws APIException {
-      return InstagramUser.parseResponse(response, getContext(), this);
+    public APINodeList<InstagramUser> parseResponse(String response, String header) throws APIException {
+      return InstagramUser.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -23013,7 +22400,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<InstagramUser> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -23027,7 +22415,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<InstagramUser>>() {
            public APINodeList<InstagramUser> apply(String result) {
              try {
-               return APIRequestGetInstagramAccounts.this.parseResponse(result);
+               return APIRequestGetInstagramAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -23199,8 +22587,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<LeadgenForm> parseResponse(String response) throws APIException {
-      return LeadgenForm.parseResponse(response, getContext(), this);
+    public APINodeList<LeadgenForm> parseResponse(String response, String header) throws APIException {
+      return LeadgenForm.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -23210,7 +22598,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<LeadgenForm> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -23224,7 +22613,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<LeadgenForm>>() {
            public APINodeList<LeadgenForm> apply(String result) {
              try {
-               return APIRequestGetLeadGenForms.this.parseResponse(result);
+               return APIRequestGetLeadGenForms.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -23518,8 +22907,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -23529,7 +22918,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -23543,7 +22933,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAccount>() {
            public AdAccount apply(String result) {
              try {
-               return APIRequestCreateLocationCluster.this.parseResponse(result);
+               return APIRequestCreateLocationCluster.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -23643,8 +23033,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccountMatchedSearchApplicationsEdgeData> parseResponse(String response) throws APIException {
-      return AdAccountMatchedSearchApplicationsEdgeData.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccountMatchedSearchApplicationsEdgeData> parseResponse(String response, String header) throws APIException {
+      return AdAccountMatchedSearchApplicationsEdgeData.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -23654,7 +23044,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdAccountMatchedSearchApplicationsEdgeData> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -23668,7 +23059,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdAccountMatchedSearchApplicationsEdgeData>>() {
            public APINodeList<AdAccountMatchedSearchApplicationsEdgeData> apply(String result) {
              try {
-               return APIRequestGetMatchedSearchApplications.this.parseResponse(result);
+               return APIRequestGetMatchedSearchApplications.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -23841,8 +23232,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccountMaxBid> parseResponse(String response) throws APIException {
-      return AdAccountMaxBid.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccountMaxBid> parseResponse(String response, String header) throws APIException {
+      return AdAccountMaxBid.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -23852,7 +23243,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdAccountMaxBid> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -23866,7 +23258,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdAccountMaxBid>>() {
            public APINodeList<AdAccountMaxBid> apply(String result) {
              try {
-               return APIRequestGetMaxBid.this.parseResponse(result);
+               return APIRequestGetMaxBid.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -23965,8 +23357,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<MinimumBudget> parseResponse(String response) throws APIException {
-      return MinimumBudget.parseResponse(response, getContext(), this);
+    public APINodeList<MinimumBudget> parseResponse(String response, String header) throws APIException {
+      return MinimumBudget.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -23976,7 +23368,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<MinimumBudget> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -23990,7 +23383,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<MinimumBudget>>() {
            public APINodeList<MinimumBudget> apply(String result) {
              try {
-               return APIRequestGetMinimumBudgets.this.parseResponse(result);
+               return APIRequestGetMinimumBudgets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -24122,8 +23515,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -24133,7 +23526,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -24147,7 +23541,7 @@ public class AdAccount extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateMockup.this.parseResponse(result);
+               return APIRequestCreateMockup.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -24237,7 +23631,6 @@ public class AdAccount extends APINode {
     };
 
     public static final String[] FIELDS = {
-      "attribute_stats",
       "business",
       "config",
       "creation_time",
@@ -24255,15 +23648,14 @@ public class AdAccount extends APINode {
       "last_upload_app_changed_time",
       "match_rate_approx",
       "matched_entries",
-      "matched_unique_users",
       "name",
       "usage",
       "valid_entries",
     };
 
     @Override
-    public APINodeList<OfflineConversionDataSet> parseResponse(String response) throws APIException {
-      return OfflineConversionDataSet.parseResponse(response, getContext(), this);
+    public APINodeList<OfflineConversionDataSet> parseResponse(String response, String header) throws APIException {
+      return OfflineConversionDataSet.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -24273,7 +23665,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<OfflineConversionDataSet> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -24287,7 +23680,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<OfflineConversionDataSet>>() {
            public APINodeList<OfflineConversionDataSet> apply(String result) {
              try {
-               return APIRequestGetOfflineConversionDataSets.this.parseResponse(result);
+               return APIRequestGetOfflineConversionDataSets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -24349,13 +23742,6 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestGetOfflineConversionDataSets requestAttributeStatsField () {
-      return this.requestAttributeStatsField(true);
-    }
-    public APIRequestGetOfflineConversionDataSets requestAttributeStatsField (boolean value) {
-      this.requestField("attribute_stats", value);
-      return this;
-    }
     public APIRequestGetOfflineConversionDataSets requestBusinessField () {
       return this.requestBusinessField(true);
     }
@@ -24475,13 +23861,6 @@ public class AdAccount extends APINode {
       this.requestField("matched_entries", value);
       return this;
     }
-    public APIRequestGetOfflineConversionDataSets requestMatchedUniqueUsersField () {
-      return this.requestMatchedUniqueUsersField(true);
-    }
-    public APIRequestGetOfflineConversionDataSets requestMatchedUniqueUsersField (boolean value) {
-      this.requestField("matched_unique_users", value);
-      return this;
-    }
     public APIRequestGetOfflineConversionDataSets requestNameField () {
       return this.requestNameField(true);
     }
@@ -24521,13 +23900,12 @@ public class AdAccount extends APINode {
       "js_pixel",
       "last_firing_time",
       "name",
-      "status",
       "tag",
     };
 
     @Override
-    public APINodeList<OffsitePixel> parseResponse(String response) throws APIException {
-      return OffsitePixel.parseResponse(response, getContext(), this);
+    public APINodeList<OffsitePixel> parseResponse(String response, String header) throws APIException {
+      return OffsitePixel.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -24537,7 +23915,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<OffsitePixel> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -24551,7 +23930,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<OffsitePixel>>() {
            public APINodeList<OffsitePixel> apply(String result) {
              try {
-               return APIRequestGetOffsitePixels.this.parseResponse(result);
+               return APIRequestGetOffsitePixels.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -24648,13 +24027,6 @@ public class AdAccount extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetOffsitePixels requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGetOffsitePixels requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
     public APIRequestGetOffsitePixels requestTagField () {
       return this.requestTagField(true);
     }
@@ -24690,8 +24062,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<PartnerIntegrationLinked> parseResponse(String response) throws APIException {
-      return PartnerIntegrationLinked.parseResponse(response, getContext(), this);
+    public APINodeList<PartnerIntegrationLinked> parseResponse(String response, String header) throws APIException {
+      return PartnerIntegrationLinked.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -24701,7 +24073,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<PartnerIntegrationLinked> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -24715,7 +24088,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<PartnerIntegrationLinked>>() {
            public APINodeList<PartnerIntegrationLinked> apply(String result) {
              try {
-               return APIRequestGetPartnerIntegrations.this.parseResponse(result);
+               return APIRequestGetPartnerIntegrations.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -24882,8 +24255,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public PartnerIntegrationLinked parseResponse(String response) throws APIException {
-      return PartnerIntegrationLinked.parseResponse(response, getContext(), this).head();
+    public PartnerIntegrationLinked parseResponse(String response, String header) throws APIException {
+      return PartnerIntegrationLinked.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -24893,7 +24266,8 @@ public class AdAccount extends APINode {
 
     @Override
     public PartnerIntegrationLinked execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -24907,7 +24281,7 @@ public class AdAccount extends APINode {
         new Function<String, PartnerIntegrationLinked>() {
            public PartnerIntegrationLinked apply(String result) {
              try {
-               return APIRequestCreatePartnerIntegration.this.parseResponse(result);
+               return APIRequestCreatePartnerIntegration.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -25030,8 +24404,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<PartnerCategory> parseResponse(String response) throws APIException {
-      return PartnerCategory.parseResponse(response, getContext(), this);
+    public APINodeList<PartnerCategory> parseResponse(String response, String header) throws APIException {
+      return PartnerCategory.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -25041,7 +24415,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<PartnerCategory> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -25055,7 +24430,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<PartnerCategory>>() {
            public APINodeList<PartnerCategory> apply(String result) {
              try {
-               return APIRequestGetPartnerCategories.this.parseResponse(result);
+               return APIRequestGetPartnerCategories.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -25261,8 +24636,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -25272,7 +24647,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -25286,7 +24662,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAccount>() {
            public AdAccount apply(String result) {
              try {
-               return APIRequestCreatePartnerDatum.this.parseResponse(result);
+               return APIRequestCreatePartnerDatum.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -25445,8 +24821,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -25456,7 +24832,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -25470,7 +24847,7 @@ public class AdAccount extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreatePartnerRequest.this.parseResponse(result);
+               return APIRequestCreatePartnerRequest.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -25578,8 +24955,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdsDataPartner> parseResponse(String response) throws APIException {
-      return AdsDataPartner.parseResponse(response, getContext(), this);
+    public APINodeList<AdsDataPartner> parseResponse(String response, String header) throws APIException {
+      return AdsDataPartner.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -25589,7 +24966,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdsDataPartner> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -25603,7 +24981,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdsDataPartner>>() {
            public APINodeList<AdsDataPartner> apply(String result) {
              try {
-               return APIRequestGetPartners.this.parseResponse(result);
+               return APIRequestGetPartners.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -25724,8 +25102,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public CustomAudience parseResponse(String response) throws APIException {
-      return CustomAudience.parseResponse(response, getContext(), this).head();
+    public CustomAudience parseResponse(String response, String header) throws APIException {
+      return CustomAudience.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -25735,7 +25113,8 @@ public class AdAccount extends APINode {
 
     @Override
     public CustomAudience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -25749,7 +25128,7 @@ public class AdAccount extends APINode {
         new Function<String, CustomAudience>() {
            public CustomAudience apply(String result) {
              try {
-               return APIRequestCreateProductAudience.this.parseResponse(result);
+               return APIRequestCreateProductAudience.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -26050,7 +25429,6 @@ public class AdAccount extends APINode {
       "general_manager",
       "genre",
       "global_brand_page_name",
-      "global_brand_parent_page",
       "global_brand_root_id",
       "has_added_app",
       "has_whatsapp_business_number",
@@ -26117,7 +25495,6 @@ public class AdAccount extends APINode {
       "promotion_eligible",
       "promotion_ineligible_reason",
       "public_transit",
-      "publisher_space",
       "rating_count",
       "recipient",
       "record_label",
@@ -26149,8 +25526,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<Page> parseResponse(String response) throws APIException {
-      return Page.parseResponse(response, getContext(), this);
+    public APINodeList<Page> parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -26160,7 +25537,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<Page> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -26174,7 +25552,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<Page>>() {
            public APINodeList<Page> apply(String result) {
              try {
-               return APIRequestGetPromotePages.this.parseResponse(result);
+               return APIRequestGetPromotePages.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -26570,13 +25948,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestGlobalBrandPageNameField (boolean value) {
       this.requestField("global_brand_page_name", value);
-      return this;
-    }
-    public APIRequestGetPromotePages requestGlobalBrandParentPageField () {
-      return this.requestGlobalBrandParentPageField(true);
-    }
-    public APIRequestGetPromotePages requestGlobalBrandParentPageField (boolean value) {
-      this.requestField("global_brand_parent_page", value);
       return this;
     }
     public APIRequestGetPromotePages requestGlobalBrandRootIdField () {
@@ -27041,13 +26412,6 @@ public class AdAccount extends APINode {
       this.requestField("public_transit", value);
       return this;
     }
-    public APIRequestGetPromotePages requestPublisherSpaceField () {
-      return this.requestPublisherSpaceField(true);
-    }
-    public APIRequestGetPromotePages requestPublisherSpaceField (boolean value) {
-      this.requestField("publisher_space", value);
-      return this;
-    }
     public APIRequestGetPromotePages requestRatingCountField () {
       return this.requestRatingCountField(true);
     }
@@ -27270,8 +26634,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<PublisherBlockList> parseResponse(String response) throws APIException {
-      return PublisherBlockList.parseResponse(response, getContext(), this);
+    public APINodeList<PublisherBlockList> parseResponse(String response, String header) throws APIException {
+      return PublisherBlockList.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -27281,7 +26645,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<PublisherBlockList> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -27295,7 +26660,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<PublisherBlockList>>() {
            public APINodeList<PublisherBlockList> apply(String result) {
              try {
-               return APIRequestGetPublisherBlockLists.this.parseResponse(result);
+               return APIRequestGetPublisherBlockLists.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -27444,8 +26809,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public PublisherBlockList parseResponse(String response) throws APIException {
-      return PublisherBlockList.parseResponse(response, getContext(), this).head();
+    public PublisherBlockList parseResponse(String response, String header) throws APIException {
+      return PublisherBlockList.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -27455,7 +26820,8 @@ public class AdAccount extends APINode {
 
     @Override
     public PublisherBlockList execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -27469,7 +26835,7 @@ public class AdAccount extends APINode {
         new Function<String, PublisherBlockList>() {
            public PublisherBlockList apply(String result) {
              try {
-               return APIRequestCreatePublisherBlockList.this.parseResponse(result);
+               return APIRequestCreatePublisherBlockList.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -27566,8 +26932,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<ReachEstimate> parseResponse(String response) throws APIException {
-      return ReachEstimate.parseResponse(response, getContext(), this);
+    public APINodeList<ReachEstimate> parseResponse(String response, String header) throws APIException {
+      return ReachEstimate.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -27577,7 +26943,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<ReachEstimate> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -27591,7 +26958,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<ReachEstimate>>() {
            public APINodeList<ReachEstimate> apply(String result) {
              try {
-               return APIRequestGetReachEstimate.this.parseResponse(result);
+               return APIRequestGetReachEstimate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -27854,8 +27221,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<ReachFrequencyPrediction> parseResponse(String response) throws APIException {
-      return ReachFrequencyPrediction.parseResponse(response, getContext(), this);
+    public APINodeList<ReachFrequencyPrediction> parseResponse(String response, String header) throws APIException {
+      return ReachFrequencyPrediction.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -27865,7 +27232,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<ReachFrequencyPrediction> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -27879,7 +27247,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<ReachFrequencyPrediction>>() {
            public APINodeList<ReachFrequencyPrediction> apply(String result) {
              try {
-               return APIRequestGetReachFrequencyPredictions.this.parseResponse(result);
+               return APIRequestGetReachFrequencyPredictions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -28602,8 +27970,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public ReachFrequencyPrediction parseResponse(String response) throws APIException {
-      return ReachFrequencyPrediction.parseResponse(response, getContext(), this).head();
+    public ReachFrequencyPrediction parseResponse(String response, String header) throws APIException {
+      return ReachFrequencyPrediction.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -28613,7 +27981,8 @@ public class AdAccount extends APINode {
 
     @Override
     public ReachFrequencyPrediction execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -28627,7 +27996,7 @@ public class AdAccount extends APINode {
         new Function<String, ReachFrequencyPrediction>() {
            public ReachFrequencyPrediction apply(String result) {
              try {
-               return APIRequestCreateReachFrequencyPrediction.this.parseResponse(result);
+               return APIRequestCreateReachFrequencyPrediction.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -29016,8 +28385,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<Referral> parseResponse(String response) throws APIException {
-      return Referral.parseResponse(response, getContext(), this);
+    public APINodeList<Referral> parseResponse(String response, String header) throws APIException {
+      return Referral.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -29027,7 +28396,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<Referral> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -29041,7 +28411,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<Referral>>() {
            public APINodeList<Referral> apply(String result) {
              try {
-               return APIRequestGetReferral.this.parseResponse(result);
+               return APIRequestGetReferral.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -29206,8 +28576,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public Referral parseResponse(String response) throws APIException {
-      return Referral.parseResponse(response, getContext(), this).head();
+    public Referral parseResponse(String response, String header) throws APIException {
+      return Referral.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -29217,7 +28587,8 @@ public class AdAccount extends APINode {
 
     @Override
     public Referral execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -29231,7 +28602,7 @@ public class AdAccount extends APINode {
         new Function<String, Referral>() {
            public Referral apply(String result) {
              try {
-               return APIRequestCreateReferral.this.parseResponse(result);
+               return APIRequestCreateReferral.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -29393,8 +28764,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -29404,7 +28775,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -29418,7 +28790,7 @@ public class AdAccount extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateReportStat.this.parseResponse(result);
+               return APIRequestCreateReportStat.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -29638,8 +29010,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccountRoas> parseResponse(String response) throws APIException {
-      return AdAccountRoas.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccountRoas> parseResponse(String response, String header) throws APIException {
+      return AdAccountRoas.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -29649,7 +29021,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdAccountRoas> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -29663,7 +29036,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdAccountRoas>>() {
            public APINodeList<AdAccountRoas> apply(String result) {
              try {
-               return APIRequestGetRoas.this.parseResponse(result);
+               return APIRequestGetRoas.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -29776,8 +29149,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<SavedAudience> parseResponse(String response) throws APIException {
-      return SavedAudience.parseResponse(response, getContext(), this);
+    public APINodeList<SavedAudience> parseResponse(String response, String header) throws APIException {
+      return SavedAudience.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -29787,7 +29160,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<SavedAudience> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -29801,7 +29175,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<SavedAudience>>() {
            public APINodeList<SavedAudience> apply(String result) {
              try {
-               return APIRequestGetSavedAudiences.this.parseResponse(result);
+               return APIRequestGetSavedAudiences.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -29906,8 +29280,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -29917,7 +29291,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -29931,7 +29306,7 @@ public class AdAccount extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateSponsoredMessageAd.this.parseResponse(result);
+               return APIRequestCreateSponsoredMessageAd.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -30068,8 +29443,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccountTargetingUnified> parseResponse(String response) throws APIException {
-      return AdAccountTargetingUnified.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccountTargetingUnified> parseResponse(String response, String header) throws APIException {
+      return AdAccountTargetingUnified.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -30079,7 +29454,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdAccountTargetingUnified> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -30093,7 +29469,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdAccountTargetingUnified>>() {
            public APINodeList<AdAccountTargetingUnified> apply(String result) {
              try {
-               return APIRequestGetTargetingBrowse.this.parseResponse(result);
+               return APIRequestGetTargetingBrowse.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -30395,8 +29771,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccountTargetingUnified> parseResponse(String response) throws APIException {
-      return AdAccountTargetingUnified.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccountTargetingUnified> parseResponse(String response, String header) throws APIException {
+      return AdAccountTargetingUnified.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -30406,7 +29782,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdAccountTargetingUnified> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -30420,7 +29797,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdAccountTargetingUnified>>() {
            public APINodeList<AdAccountTargetingUnified> apply(String result) {
              try {
-               return APIRequestGetTargetingSearch.this.parseResponse(result);
+               return APIRequestGetTargetingSearch.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -30718,8 +30095,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<TargetingSentenceLine> parseResponse(String response) throws APIException {
-      return TargetingSentenceLine.parseResponse(response, getContext(), this);
+    public APINodeList<TargetingSentenceLine> parseResponse(String response, String header) throws APIException {
+      return TargetingSentenceLine.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -30729,7 +30106,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<TargetingSentenceLine> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -30743,7 +30121,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<TargetingSentenceLine>>() {
            public APINodeList<TargetingSentenceLine> apply(String result) {
              try {
-               return APIRequestGetTargetingSentenceLines.this.parseResponse(result);
+               return APIRequestGetTargetingSentenceLines.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -30908,8 +30286,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccountTargetingUnified> parseResponse(String response) throws APIException {
-      return AdAccountTargetingUnified.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccountTargetingUnified> parseResponse(String response, String header) throws APIException {
+      return AdAccountTargetingUnified.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -30919,7 +30297,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdAccountTargetingUnified> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -30933,7 +30312,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdAccountTargetingUnified>>() {
            public APINodeList<AdAccountTargetingUnified> apply(String result) {
              try {
-               return APIRequestGetTargetingSuggestions.this.parseResponse(result);
+               return APIRequestGetTargetingSuggestions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -31263,8 +30642,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccountTargetingUnified> parseResponse(String response) throws APIException {
-      return AdAccountTargetingUnified.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccountTargetingUnified> parseResponse(String response, String header) throws APIException {
+      return AdAccountTargetingUnified.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -31274,7 +30653,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdAccountTargetingUnified> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -31288,7 +30668,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdAccountTargetingUnified>>() {
            public APINodeList<AdAccountTargetingUnified> apply(String result) {
              try {
-               return APIRequestGetTargetingValidation.this.parseResponse(result);
+               return APIRequestGetTargetingValidation.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -31563,8 +30943,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<TimezoneOffset> parseResponse(String response) throws APIException {
-      return TimezoneOffset.parseResponse(response, getContext(), this);
+    public APINodeList<TimezoneOffset> parseResponse(String response, String header) throws APIException {
+      return TimezoneOffset.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -31574,7 +30954,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<TimezoneOffset> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -31588,7 +30969,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<TimezoneOffset>>() {
            public APINodeList<TimezoneOffset> apply(String result) {
              try {
-               return APIRequestGetTimezoneOffsets.this.parseResponse(result);
+               return APIRequestGetTimezoneOffsets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -31718,8 +31099,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -31729,7 +31110,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -31743,7 +31125,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteTracking.this.parseResponse(result);
+               return APIRequestDeleteTracking.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -31832,8 +31214,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccountTrackingData> parseResponse(String response) throws APIException {
-      return AdAccountTrackingData.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccountTrackingData> parseResponse(String response, String header) throws APIException {
+      return AdAccountTrackingData.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -31843,7 +31225,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdAccountTrackingData> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -31857,7 +31240,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdAccountTrackingData>>() {
            public APINodeList<AdAccountTrackingData> apply(String result) {
              try {
-               return APIRequestGetTracking.this.parseResponse(result);
+               return APIRequestGetTracking.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -31950,8 +31333,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -31961,7 +31344,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -31975,7 +31359,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAccount>() {
            public AdAccount apply(String result) {
              try {
-               return APIRequestCreateTracking.this.parseResponse(result);
+               return APIRequestCreateTracking.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -32065,8 +31449,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -32076,7 +31460,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -32090,7 +31475,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteUserMatch.this.parseResponse(result);
+               return APIRequestDeleteUserMatch.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -32100,7 +31485,7 @@ public class AdAccount extends APINode {
     };
 
     public APIRequestDeleteUserMatch(String nodeId, APIContext context) {
-      super(context, nodeId, "/user_match", "DELETE", Arrays.asList(PARAMS));
+      super(context, nodeId, "/usermatch", "DELETE", Arrays.asList(PARAMS));
     }
 
     @Override
@@ -32196,8 +31581,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -32207,7 +31592,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -32221,7 +31607,7 @@ public class AdAccount extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateUserMatch.this.parseResponse(result);
+               return APIRequestCreateUserMatch.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -32231,7 +31617,7 @@ public class AdAccount extends APINode {
     };
 
     public APIRequestCreateUserMatch(String nodeId, APIContext context) {
-      super(context, nodeId, "/user_match", "POST", Arrays.asList(PARAMS));
+      super(context, nodeId, "/usermatch", "POST", Arrays.asList(PARAMS));
     }
 
     @Override
@@ -32335,8 +31721,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -32346,7 +31732,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -32360,7 +31747,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteUserPermissions.this.parseResponse(result);
+               return APIRequestDeleteUserPermissions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -32443,217 +31830,6 @@ public class AdAccount extends APINode {
 
   }
 
-  public static class APIRequestGetUserPermissions extends APIRequest<AdAccountUserPermissions> {
-
-    APINodeList<AdAccountUserPermissions> lastResponse = null;
-    @Override
-    public APINodeList<AdAccountUserPermissions> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "business",
-      "user",
-    };
-
-    public static final String[] FIELDS = {
-      "business",
-      "business_persona",
-      "created_by",
-      "created_time",
-      "email",
-      "status",
-      "tasks",
-      "updated_by",
-      "updated_time",
-      "user",
-      "id",
-    };
-
-    @Override
-    public APINodeList<AdAccountUserPermissions> parseResponse(String response) throws APIException {
-      return AdAccountUserPermissions.parseResponse(response, getContext(), this);
-    }
-
-    @Override
-    public APINodeList<AdAccountUserPermissions> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<AdAccountUserPermissions> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<AdAccountUserPermissions>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<AdAccountUserPermissions>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountUserPermissions>>() {
-           public APINodeList<AdAccountUserPermissions> apply(String result) {
-             try {
-               return APIRequestGetUserPermissions.this.parseResponse(result);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetUserPermissions(String nodeId, APIContext context) {
-      super(context, nodeId, "/userpermissions", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetUserPermissions setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetUserPermissions setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetUserPermissions setBusiness (Object business) {
-      this.setParam("business", business);
-      return this;
-    }
-    public APIRequestGetUserPermissions setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
-
-    public APIRequestGetUserPermissions setUser (Object user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestGetUserPermissions setUser (String user) {
-      this.setParam("user", user);
-      return this;
-    }
-
-    public APIRequestGetUserPermissions requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetUserPermissions requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetUserPermissions requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetUserPermissions requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetUserPermissions requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetUserPermissions requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetUserPermissions requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGetUserPermissions requestBusinessField (boolean value) {
-      this.requestField("business", value);
-      return this;
-    }
-    public APIRequestGetUserPermissions requestBusinessPersonaField () {
-      return this.requestBusinessPersonaField(true);
-    }
-    public APIRequestGetUserPermissions requestBusinessPersonaField (boolean value) {
-      this.requestField("business_persona", value);
-      return this;
-    }
-    public APIRequestGetUserPermissions requestCreatedByField () {
-      return this.requestCreatedByField(true);
-    }
-    public APIRequestGetUserPermissions requestCreatedByField (boolean value) {
-      this.requestField("created_by", value);
-      return this;
-    }
-    public APIRequestGetUserPermissions requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetUserPermissions requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetUserPermissions requestEmailField () {
-      return this.requestEmailField(true);
-    }
-    public APIRequestGetUserPermissions requestEmailField (boolean value) {
-      this.requestField("email", value);
-      return this;
-    }
-    public APIRequestGetUserPermissions requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGetUserPermissions requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-    public APIRequestGetUserPermissions requestTasksField () {
-      return this.requestTasksField(true);
-    }
-    public APIRequestGetUserPermissions requestTasksField (boolean value) {
-      this.requestField("tasks", value);
-      return this;
-    }
-    public APIRequestGetUserPermissions requestUpdatedByField () {
-      return this.requestUpdatedByField(true);
-    }
-    public APIRequestGetUserPermissions requestUpdatedByField (boolean value) {
-      this.requestField("updated_by", value);
-      return this;
-    }
-    public APIRequestGetUserPermissions requestUpdatedTimeField () {
-      return this.requestUpdatedTimeField(true);
-    }
-    public APIRequestGetUserPermissions requestUpdatedTimeField (boolean value) {
-      this.requestField("updated_time", value);
-      return this;
-    }
-    public APIRequestGetUserPermissions requestUserField () {
-      return this.requestUserField(true);
-    }
-    public APIRequestGetUserPermissions requestUserField (boolean value) {
-      this.requestField("user", value);
-      return this;
-    }
-    public APIRequestGetUserPermissions requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetUserPermissions requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-  }
-
   public static class APIRequestCreateUserPermission extends APIRequest<AdAccount> {
 
     AdAccount lastResponse = null;
@@ -32672,8 +31848,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -32683,7 +31859,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -32697,7 +31874,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAccount>() {
            public AdAccount apply(String result) {
              try {
-               return APIRequestCreateUserPermission.this.parseResponse(result);
+               return APIRequestCreateUserPermission.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -32805,8 +31982,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -32816,7 +31993,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -32830,7 +32008,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteUsers.this.parseResponse(result);
+               return APIRequestDeleteUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -32929,8 +32107,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccountUser> parseResponse(String response) throws APIException {
-      return AdAccountUser.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccountUser> parseResponse(String response, String header) throws APIException {
+      return AdAccountUser.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -32940,7 +32118,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<AdAccountUser> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -32954,7 +32133,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<AdAccountUser>>() {
            public APINodeList<AdAccountUser> apply(String result) {
              try {
-               return APIRequestGetUsers.this.parseResponse(result);
+               return APIRequestGetUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -33055,8 +32234,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -33066,7 +32245,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -33080,7 +32260,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAccount>() {
            public AdAccount apply(String result) {
              try {
-               return APIRequestCreateUser.this.parseResponse(result);
+               return APIRequestCreateUser.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -33179,8 +32359,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -33190,7 +32370,8 @@ public class AdAccount extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -33204,7 +32385,7 @@ public class AdAccount extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteUsersOfAnyAudience.this.parseResponse(result);
+               return APIRequestDeleteUsersOfAnyAudience.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -33322,7 +32503,6 @@ public class AdAccount extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "daily_spend_limit",
       "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
@@ -33351,7 +32531,6 @@ public class AdAccount extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
-      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -33367,8 +32546,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -33378,7 +32557,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -33392,7 +32572,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAccount>() {
            public AdAccount apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -33594,13 +32774,6 @@ public class AdAccount extends APINode {
       this.requestField("currency", value);
       return this;
     }
-    public APIRequestGet requestDailySpendLimitField () {
-      return this.requestDailySpendLimitField(true);
-    }
-    public APIRequestGet requestDailySpendLimitField (boolean value) {
-      this.requestField("daily_spend_limit", value);
-      return this;
-    }
     public APIRequestGet requestDirectDealsTosAcceptedField () {
       return this.requestDirectDealsTosAcceptedField(true);
     }
@@ -33797,13 +32970,6 @@ public class AdAccount extends APINode {
       this.requestField("partner", value);
       return this;
     }
-    public APIRequestGet requestRateLimitResetTimeField () {
-      return this.requestRateLimitResetTimeField(true);
-    }
-    public APIRequestGet requestRateLimitResetTimeField (boolean value) {
-      this.requestField("rate_limit_reset_time", value);
-      return this;
-    }
     public APIRequestGet requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
@@ -33917,8 +33083,8 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public AdAccount parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this).head();
+    public AdAccount parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -33928,7 +33094,8 @@ public class AdAccount extends APINode {
 
     @Override
     public AdAccount execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -33942,7 +33109,7 @@ public class AdAccount extends APINode {
         new Function<String, AdAccount>() {
            public AdAccount apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -34373,6 +33540,288 @@ public class AdAccount extends APINode {
       }
   }
 
+  public static enum EnumCallToActionTypes {
+      @SerializedName("OPEN_LINK")
+      VALUE_OPEN_LINK("OPEN_LINK"),
+      @SerializedName("LIKE_PAGE")
+      VALUE_LIKE_PAGE("LIKE_PAGE"),
+      @SerializedName("SHOP_NOW")
+      VALUE_SHOP_NOW("SHOP_NOW"),
+      @SerializedName("PLAY_GAME")
+      VALUE_PLAY_GAME("PLAY_GAME"),
+      @SerializedName("INSTALL_APP")
+      VALUE_INSTALL_APP("INSTALL_APP"),
+      @SerializedName("USE_APP")
+      VALUE_USE_APP("USE_APP"),
+      @SerializedName("CALL")
+      VALUE_CALL("CALL"),
+      @SerializedName("CALL_ME")
+      VALUE_CALL_ME("CALL_ME"),
+      @SerializedName("INSTALL_MOBILE_APP")
+      VALUE_INSTALL_MOBILE_APP("INSTALL_MOBILE_APP"),
+      @SerializedName("USE_MOBILE_APP")
+      VALUE_USE_MOBILE_APP("USE_MOBILE_APP"),
+      @SerializedName("MOBILE_DOWNLOAD")
+      VALUE_MOBILE_DOWNLOAD("MOBILE_DOWNLOAD"),
+      @SerializedName("BOOK_TRAVEL")
+      VALUE_BOOK_TRAVEL("BOOK_TRAVEL"),
+      @SerializedName("LISTEN_MUSIC")
+      VALUE_LISTEN_MUSIC("LISTEN_MUSIC"),
+      @SerializedName("WATCH_VIDEO")
+      VALUE_WATCH_VIDEO("WATCH_VIDEO"),
+      @SerializedName("LEARN_MORE")
+      VALUE_LEARN_MORE("LEARN_MORE"),
+      @SerializedName("SIGN_UP")
+      VALUE_SIGN_UP("SIGN_UP"),
+      @SerializedName("DOWNLOAD")
+      VALUE_DOWNLOAD("DOWNLOAD"),
+      @SerializedName("WATCH_MORE")
+      VALUE_WATCH_MORE("WATCH_MORE"),
+      @SerializedName("NO_BUTTON")
+      VALUE_NO_BUTTON("NO_BUTTON"),
+      @SerializedName("VISIT_PAGES_FEED")
+      VALUE_VISIT_PAGES_FEED("VISIT_PAGES_FEED"),
+      @SerializedName("APPLY_NOW")
+      VALUE_APPLY_NOW("APPLY_NOW"),
+      @SerializedName("BUY_NOW")
+      VALUE_BUY_NOW("BUY_NOW"),
+      @SerializedName("GET_OFFER")
+      VALUE_GET_OFFER("GET_OFFER"),
+      @SerializedName("GET_OFFER_VIEW")
+      VALUE_GET_OFFER_VIEW("GET_OFFER_VIEW"),
+      @SerializedName("BUY_TICKETS")
+      VALUE_BUY_TICKETS("BUY_TICKETS"),
+      @SerializedName("UPDATE_APP")
+      VALUE_UPDATE_APP("UPDATE_APP"),
+      @SerializedName("GET_DIRECTIONS")
+      VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
+      @SerializedName("BUY")
+      VALUE_BUY("BUY"),
+      @SerializedName("MESSAGE_PAGE")
+      VALUE_MESSAGE_PAGE("MESSAGE_PAGE"),
+      @SerializedName("DONATE")
+      VALUE_DONATE("DONATE"),
+      @SerializedName("SUBSCRIBE")
+      VALUE_SUBSCRIBE("SUBSCRIBE"),
+      @SerializedName("SAY_THANKS")
+      VALUE_SAY_THANKS("SAY_THANKS"),
+      @SerializedName("SELL_NOW")
+      VALUE_SELL_NOW("SELL_NOW"),
+      @SerializedName("SHARE")
+      VALUE_SHARE("SHARE"),
+      @SerializedName("DONATE_NOW")
+      VALUE_DONATE_NOW("DONATE_NOW"),
+      @SerializedName("GET_QUOTE")
+      VALUE_GET_QUOTE("GET_QUOTE"),
+      @SerializedName("CONTACT_US")
+      VALUE_CONTACT_US("CONTACT_US"),
+      @SerializedName("ORDER_NOW")
+      VALUE_ORDER_NOW("ORDER_NOW"),
+      @SerializedName("ADD_TO_CART")
+      VALUE_ADD_TO_CART("ADD_TO_CART"),
+      @SerializedName("VIDEO_ANNOTATION")
+      VALUE_VIDEO_ANNOTATION("VIDEO_ANNOTATION"),
+      @SerializedName("MOMENTS")
+      VALUE_MOMENTS("MOMENTS"),
+      @SerializedName("RECORD_NOW")
+      VALUE_RECORD_NOW("RECORD_NOW"),
+      @SerializedName("GET_SHOWTIMES")
+      VALUE_GET_SHOWTIMES("GET_SHOWTIMES"),
+      @SerializedName("LISTEN_NOW")
+      VALUE_LISTEN_NOW("LISTEN_NOW"),
+      @SerializedName("WOODHENGE_SUPPORT")
+      VALUE_WOODHENGE_SUPPORT("WOODHENGE_SUPPORT"),
+      @SerializedName("EVENT_RSVP")
+      VALUE_EVENT_RSVP("EVENT_RSVP"),
+      @SerializedName("WHATSAPP_MESSAGE")
+      VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
+      @SerializedName("FOLLOW_NEWS_STORYLINE")
+      VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
+      @SerializedName("SEE_MORE")
+      VALUE_SEE_MORE("SEE_MORE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumCallToActionTypes(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumAdFormats {
+      @SerializedName("AUTOMATIC_FORMAT")
+      VALUE_AUTOMATIC_FORMAT("AUTOMATIC_FORMAT"),
+      @SerializedName("CAROUSEL_IMAGE")
+      VALUE_CAROUSEL_IMAGE("CAROUSEL_IMAGE"),
+      @SerializedName("CAROUSEL_VIDEO")
+      VALUE_CAROUSEL_VIDEO("CAROUSEL_VIDEO"),
+      @SerializedName("SINGLE_IMAGE")
+      VALUE_SINGLE_IMAGE("SINGLE_IMAGE"),
+      @SerializedName("SINGLE_VIDEO")
+      VALUE_SINGLE_VIDEO("SINGLE_VIDEO"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAdFormats(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumOptimizationType {
+      @SerializedName("REGULAR")
+      VALUE_REGULAR("REGULAR"),
+      @SerializedName("LANGUAGE")
+      VALUE_LANGUAGE("LANGUAGE"),
+      @SerializedName("PLACEMENT")
+      VALUE_PLACEMENT("PLACEMENT"),
+      @SerializedName("VIDEO_BANDWIDTH")
+      VALUE_VIDEO_BANDWIDTH("VIDEO_BANDWIDTH"),
+      @SerializedName("BRAND")
+      VALUE_BRAND("BRAND"),
+      @SerializedName("ASSET_CUSTOMIZATION")
+      VALUE_ASSET_CUSTOMIZATION("ASSET_CUSTOMIZATION"),
+      @SerializedName("DCO_PARITY")
+      VALUE_DCO_PARITY("DCO_PARITY"),
+      @SerializedName("PREVIEW_DYNAMIC_RENDERING")
+      VALUE_PREVIEW_DYNAMIC_RENDERING("PREVIEW_DYNAMIC_RENDERING"),
+      NULL(null);
+
+      private String value;
+
+      private EnumOptimizationType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCallToActionType {
+      @SerializedName("OPEN_LINK")
+      VALUE_OPEN_LINK("OPEN_LINK"),
+      @SerializedName("LIKE_PAGE")
+      VALUE_LIKE_PAGE("LIKE_PAGE"),
+      @SerializedName("SHOP_NOW")
+      VALUE_SHOP_NOW("SHOP_NOW"),
+      @SerializedName("PLAY_GAME")
+      VALUE_PLAY_GAME("PLAY_GAME"),
+      @SerializedName("INSTALL_APP")
+      VALUE_INSTALL_APP("INSTALL_APP"),
+      @SerializedName("USE_APP")
+      VALUE_USE_APP("USE_APP"),
+      @SerializedName("CALL")
+      VALUE_CALL("CALL"),
+      @SerializedName("CALL_ME")
+      VALUE_CALL_ME("CALL_ME"),
+      @SerializedName("INSTALL_MOBILE_APP")
+      VALUE_INSTALL_MOBILE_APP("INSTALL_MOBILE_APP"),
+      @SerializedName("USE_MOBILE_APP")
+      VALUE_USE_MOBILE_APP("USE_MOBILE_APP"),
+      @SerializedName("MOBILE_DOWNLOAD")
+      VALUE_MOBILE_DOWNLOAD("MOBILE_DOWNLOAD"),
+      @SerializedName("BOOK_TRAVEL")
+      VALUE_BOOK_TRAVEL("BOOK_TRAVEL"),
+      @SerializedName("LISTEN_MUSIC")
+      VALUE_LISTEN_MUSIC("LISTEN_MUSIC"),
+      @SerializedName("WATCH_VIDEO")
+      VALUE_WATCH_VIDEO("WATCH_VIDEO"),
+      @SerializedName("LEARN_MORE")
+      VALUE_LEARN_MORE("LEARN_MORE"),
+      @SerializedName("SIGN_UP")
+      VALUE_SIGN_UP("SIGN_UP"),
+      @SerializedName("DOWNLOAD")
+      VALUE_DOWNLOAD("DOWNLOAD"),
+      @SerializedName("WATCH_MORE")
+      VALUE_WATCH_MORE("WATCH_MORE"),
+      @SerializedName("NO_BUTTON")
+      VALUE_NO_BUTTON("NO_BUTTON"),
+      @SerializedName("VISIT_PAGES_FEED")
+      VALUE_VISIT_PAGES_FEED("VISIT_PAGES_FEED"),
+      @SerializedName("APPLY_NOW")
+      VALUE_APPLY_NOW("APPLY_NOW"),
+      @SerializedName("BUY_NOW")
+      VALUE_BUY_NOW("BUY_NOW"),
+      @SerializedName("GET_OFFER")
+      VALUE_GET_OFFER("GET_OFFER"),
+      @SerializedName("GET_OFFER_VIEW")
+      VALUE_GET_OFFER_VIEW("GET_OFFER_VIEW"),
+      @SerializedName("BUY_TICKETS")
+      VALUE_BUY_TICKETS("BUY_TICKETS"),
+      @SerializedName("UPDATE_APP")
+      VALUE_UPDATE_APP("UPDATE_APP"),
+      @SerializedName("GET_DIRECTIONS")
+      VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
+      @SerializedName("BUY")
+      VALUE_BUY("BUY"),
+      @SerializedName("MESSAGE_PAGE")
+      VALUE_MESSAGE_PAGE("MESSAGE_PAGE"),
+      @SerializedName("DONATE")
+      VALUE_DONATE("DONATE"),
+      @SerializedName("SUBSCRIBE")
+      VALUE_SUBSCRIBE("SUBSCRIBE"),
+      @SerializedName("SAY_THANKS")
+      VALUE_SAY_THANKS("SAY_THANKS"),
+      @SerializedName("SELL_NOW")
+      VALUE_SELL_NOW("SELL_NOW"),
+      @SerializedName("SHARE")
+      VALUE_SHARE("SHARE"),
+      @SerializedName("DONATE_NOW")
+      VALUE_DONATE_NOW("DONATE_NOW"),
+      @SerializedName("GET_QUOTE")
+      VALUE_GET_QUOTE("GET_QUOTE"),
+      @SerializedName("CONTACT_US")
+      VALUE_CONTACT_US("CONTACT_US"),
+      @SerializedName("ORDER_NOW")
+      VALUE_ORDER_NOW("ORDER_NOW"),
+      @SerializedName("ADD_TO_CART")
+      VALUE_ADD_TO_CART("ADD_TO_CART"),
+      @SerializedName("VIDEO_ANNOTATION")
+      VALUE_VIDEO_ANNOTATION("VIDEO_ANNOTATION"),
+      @SerializedName("MOMENTS")
+      VALUE_MOMENTS("MOMENTS"),
+      @SerializedName("RECORD_NOW")
+      VALUE_RECORD_NOW("RECORD_NOW"),
+      @SerializedName("GET_SHOWTIMES")
+      VALUE_GET_SHOWTIMES("GET_SHOWTIMES"),
+      @SerializedName("LISTEN_NOW")
+      VALUE_LISTEN_NOW("LISTEN_NOW"),
+      @SerializedName("WOODHENGE_SUPPORT")
+      VALUE_WOODHENGE_SUPPORT("WOODHENGE_SUPPORT"),
+      @SerializedName("EVENT_RSVP")
+      VALUE_EVENT_RSVP("EVENT_RSVP"),
+      @SerializedName("WHATSAPP_MESSAGE")
+      VALUE_WHATSAPP_MESSAGE("WHATSAPP_MESSAGE"),
+      @SerializedName("FOLLOW_NEWS_STORYLINE")
+      VALUE_FOLLOW_NEWS_STORYLINE("FOLLOW_NEWS_STORYLINE"),
+      @SerializedName("SEE_MORE")
+      VALUE_SEE_MORE("SEE_MORE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumCallToActionType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumBuiltinColumnSet {
       @SerializedName("APP_ENGAGEMENT")
       VALUE_APP_ENGAGEMENT("APP_ENGAGEMENT"),
@@ -34699,7 +34148,6 @@ public class AdAccount extends APINode {
     this.mCapabilities = instance.mCapabilities;
     this.mCreatedTime = instance.mCreatedTime;
     this.mCurrency = instance.mCurrency;
-    this.mDailySpendLimit = instance.mDailySpendLimit;
     this.mDirectDealsTosAccepted = instance.mDirectDealsTosAccepted;
     this.mDisableReason = instance.mDisableReason;
     this.mEndAdvertiser = instance.mEndAdvertiser;
@@ -34728,7 +34176,6 @@ public class AdAccount extends APINode {
     this.mOffsitePixelsTosAccepted = instance.mOffsitePixelsTosAccepted;
     this.mOwner = instance.mOwner;
     this.mPartner = instance.mPartner;
-    this.mRateLimitResetTime = instance.mRateLimitResetTime;
     this.mRfSpec = instance.mRfSpec;
     this.mShowCheckoutExperience = instance.mShowCheckoutExperience;
     this.mSpendCap = instance.mSpendCap;
@@ -34748,8 +34195,8 @@ public class AdAccount extends APINode {
 
   public static APIRequest.ResponseParser<AdAccount> getParser() {
     return new APIRequest.ResponseParser<AdAccount>() {
-      public APINodeList<AdAccount> parseResponse(String response, APIContext context, APIRequest<AdAccount> request) throws MalformedResponseException {
-        return AdAccount.parseResponse(response, context, request);
+      public APINodeList<AdAccount> parseResponse(String response, APIContext context, APIRequest<AdAccount> request, String header) throws MalformedResponseException {
+        return AdAccount.parseResponse(response, context, request, header);
       }
     };
   }

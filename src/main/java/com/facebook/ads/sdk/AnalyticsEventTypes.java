@@ -73,7 +73,7 @@ public class AnalyticsEventTypes extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AnalyticsEventTypes loadJSON(String json, APIContext context) {
+  public static AnalyticsEventTypes loadJSON(String json, APIContext context, String header) {
     AnalyticsEventTypes analyticsEventTypes = getGson().fromJson(json, AnalyticsEventTypes.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class AnalyticsEventTypes extends APINode {
     }
     analyticsEventTypes.context = context;
     analyticsEventTypes.rawValue = json;
+    analyticsEventTypes.header = header;
     return analyticsEventTypes;
   }
 
-  public static APINodeList<AnalyticsEventTypes> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AnalyticsEventTypes> analyticsEventTypess = new APINodeList<AnalyticsEventTypes>(request, json);
+  public static APINodeList<AnalyticsEventTypes> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AnalyticsEventTypes> analyticsEventTypess = new APINodeList<AnalyticsEventTypes>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class AnalyticsEventTypes extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          analyticsEventTypess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          analyticsEventTypess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return analyticsEventTypess;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class AnalyticsEventTypes extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              analyticsEventTypess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              analyticsEventTypess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class AnalyticsEventTypes extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  analyticsEventTypess.add(loadJSON(entry.getValue().toString(), context));
+                  analyticsEventTypess.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              analyticsEventTypess.add(loadJSON(obj.toString(), context));
+              analyticsEventTypess.add(loadJSON(obj.toString(), context, header));
             }
           }
           return analyticsEventTypess;
@@ -155,7 +156,7 @@ public class AnalyticsEventTypes extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              analyticsEventTypess.add(loadJSON(entry.getValue().toString(), context));
+              analyticsEventTypess.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return analyticsEventTypess;
         } else {
@@ -174,7 +175,7 @@ public class AnalyticsEventTypes extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              analyticsEventTypess.add(loadJSON(value.toString(), context));
+              analyticsEventTypess.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class AnalyticsEventTypes extends APINode {
 
           // Sixth, check if it's pure JsonObject
           analyticsEventTypess.clear();
-          analyticsEventTypess.add(loadJSON(json, context));
+          analyticsEventTypess.add(loadJSON(json, context, header));
           return analyticsEventTypess;
         }
       }
@@ -289,8 +290,8 @@ public class AnalyticsEventTypes extends APINode {
 
   public static APIRequest.ResponseParser<AnalyticsEventTypes> getParser() {
     return new APIRequest.ResponseParser<AnalyticsEventTypes>() {
-      public APINodeList<AnalyticsEventTypes> parseResponse(String response, APIContext context, APIRequest<AnalyticsEventTypes> request) throws MalformedResponseException {
-        return AnalyticsEventTypes.parseResponse(response, context, request);
+      public APINodeList<AnalyticsEventTypes> parseResponse(String response, APIContext context, APIRequest<AnalyticsEventTypes> request, String header) throws MalformedResponseException {
+        return AnalyticsEventTypes.parseResponse(response, context, request, header);
       }
     };
   }

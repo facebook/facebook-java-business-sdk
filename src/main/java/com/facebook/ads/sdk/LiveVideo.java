@@ -91,8 +91,6 @@ public class LiveVideo extends APINode {
   private String mPermalinkUrl = null;
   @SerializedName("planned_start_time")
   private String mPlannedStartTime = null;
-  @SerializedName("preview_url")
-  private String mPreviewUrl = null;
   @SerializedName("seconds_left")
   private Long mSecondsLeft = null;
   @SerializedName("secure_stream_url")
@@ -176,7 +174,7 @@ public class LiveVideo extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LiveVideo loadJSON(String json, APIContext context) {
+  public static LiveVideo loadJSON(String json, APIContext context, String header) {
     LiveVideo liveVideo = getGson().fromJson(json, LiveVideo.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -193,11 +191,12 @@ public class LiveVideo extends APINode {
     }
     liveVideo.context = context;
     liveVideo.rawValue = json;
+    liveVideo.header = header;
     return liveVideo;
   }
 
-  public static APINodeList<LiveVideo> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LiveVideo> liveVideos = new APINodeList<LiveVideo>(request, json);
+  public static APINodeList<LiveVideo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LiveVideo> liveVideos = new APINodeList<LiveVideo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -208,7 +207,7 @@ public class LiveVideo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          liveVideos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          liveVideos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return liveVideos;
       } else if (result.isJsonObject()) {
@@ -233,7 +232,7 @@ public class LiveVideo extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              liveVideos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              liveVideos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -244,13 +243,13 @@ public class LiveVideo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  liveVideos.add(loadJSON(entry.getValue().toString(), context));
+                  liveVideos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              liveVideos.add(loadJSON(obj.toString(), context));
+              liveVideos.add(loadJSON(obj.toString(), context, header));
             }
           }
           return liveVideos;
@@ -258,7 +257,7 @@ public class LiveVideo extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              liveVideos.add(loadJSON(entry.getValue().toString(), context));
+              liveVideos.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return liveVideos;
         } else {
@@ -277,7 +276,7 @@ public class LiveVideo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              liveVideos.add(loadJSON(value.toString(), context));
+              liveVideos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -289,7 +288,7 @@ public class LiveVideo extends APINode {
 
           // Sixth, check if it's pure JsonObject
           liveVideos.clear();
-          liveVideos.add(loadJSON(json, context));
+          liveVideos.add(loadJSON(json, context, header));
           return liveVideos;
         }
       }
@@ -339,6 +338,14 @@ public class LiveVideo extends APINode {
 
   public APIRequestGetGameShows getGameShows() {
     return new APIRequestGetGameShows(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetGuestSessions getGuestSessions() {
+    return new APIRequestGetGuestSessions(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateGuestSession createGuestSession() {
+    return new APIRequestCreateGuestSession(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateInputStream createInputStream() {
@@ -449,10 +456,6 @@ public class LiveVideo extends APINode {
     return mPlannedStartTime;
   }
 
-  public String getFieldPreviewUrl() {
-    return mPreviewUrl;
-  }
-
   public Long getFieldSecondsLeft() {
     return mSecondsLeft;
   }
@@ -506,7 +509,6 @@ public class LiveVideo extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -527,12 +529,10 @@ public class LiveVideo extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -560,7 +560,6 @@ public class LiveVideo extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -569,8 +568,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -580,7 +579,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -594,7 +594,7 @@ public class LiveVideo extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetBlockedUsers.this.parseResponse(result);
+               return APIRequestGetBlockedUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -691,13 +691,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetBlockedUsers requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestBirthdayField () {
@@ -840,13 +833,6 @@ public class LiveVideo extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetBlockedUsers requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetBlockedUsers requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetBlockedUsers requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -873,13 +859,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetBlockedUsers requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetBlockedUsers requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestLastNameField () {
@@ -1071,13 +1050,6 @@ public class LiveVideo extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetBlockedUsers requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetBlockedUsers requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetBlockedUsers requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -1154,8 +1126,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public APINodeList<Comment> parseResponse(String response) throws APIException {
-      return Comment.parseResponse(response, getContext(), this);
+    public APINodeList<Comment> parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1165,7 +1137,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public APINodeList<Comment> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1179,7 +1152,7 @@ public class LiveVideo extends APINode {
         new Function<String, APINodeList<Comment>>() {
            public APINodeList<Comment> apply(String result) {
              try {
-               return APIRequestGetComments.this.parseResponse(result);
+               return APIRequestGetComments.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1481,7 +1454,6 @@ public class LiveVideo extends APINode {
       "general_manager",
       "genre",
       "global_brand_page_name",
-      "global_brand_parent_page",
       "global_brand_root_id",
       "has_added_app",
       "has_whatsapp_business_number",
@@ -1548,7 +1520,6 @@ public class LiveVideo extends APINode {
       "promotion_eligible",
       "promotion_ineligible_reason",
       "public_transit",
-      "publisher_space",
       "rating_count",
       "recipient",
       "record_label",
@@ -1580,8 +1551,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public APINodeList<Page> parseResponse(String response) throws APIException {
-      return Page.parseResponse(response, getContext(), this);
+    public APINodeList<Page> parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1591,7 +1562,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public APINodeList<Page> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1605,7 +1577,7 @@ public class LiveVideo extends APINode {
         new Function<String, APINodeList<Page>>() {
            public APINodeList<Page> apply(String result) {
              try {
-               return APIRequestGetCrosspostShareDPages.this.parseResponse(result);
+               return APIRequestGetCrosspostShareDPages.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2001,13 +1973,6 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostShareDPages requestGlobalBrandPageNameField (boolean value) {
       this.requestField("global_brand_page_name", value);
-      return this;
-    }
-    public APIRequestGetCrosspostShareDPages requestGlobalBrandParentPageField () {
-      return this.requestGlobalBrandParentPageField(true);
-    }
-    public APIRequestGetCrosspostShareDPages requestGlobalBrandParentPageField (boolean value) {
-      this.requestField("global_brand_parent_page", value);
       return this;
     }
     public APIRequestGetCrosspostShareDPages requestGlobalBrandRootIdField () {
@@ -2472,13 +2437,6 @@ public class LiveVideo extends APINode {
       this.requestField("public_transit", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPublisherSpaceField () {
-      return this.requestPublisherSpaceField(true);
-    }
-    public APIRequestGetCrosspostShareDPages requestPublisherSpaceField (boolean value) {
-      this.requestField("publisher_space", value);
-      return this;
-    }
     public APIRequestGetCrosspostShareDPages requestRatingCountField () {
       return this.requestRatingCountField(true);
     }
@@ -2706,7 +2664,6 @@ public class LiveVideo extends APINode {
       "live_views",
       "permalink_url",
       "planned_start_time",
-      "preview_url",
       "seconds_left",
       "secure_stream_url",
       "status",
@@ -2718,8 +2675,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public APINodeList<LiveVideo> parseResponse(String response) throws APIException {
-      return LiveVideo.parseResponse(response, getContext(), this);
+    public APINodeList<LiveVideo> parseResponse(String response, String header) throws APIException {
+      return LiveVideo.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2729,7 +2686,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public APINodeList<LiveVideo> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2743,7 +2701,7 @@ public class LiveVideo extends APINode {
         new Function<String, APINodeList<LiveVideo>>() {
            public APINodeList<LiveVideo> apply(String result) {
              try {
-               return APIRequestGetCrosspostedBroadcasts.this.parseResponse(result);
+               return APIRequestGetCrosspostedBroadcasts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2931,13 +2889,6 @@ public class LiveVideo extends APINode {
       this.requestField("planned_start_time", value);
       return this;
     }
-    public APIRequestGetCrosspostedBroadcasts requestPreviewUrlField () {
-      return this.requestPreviewUrlField(true);
-    }
-    public APIRequestGetCrosspostedBroadcasts requestPreviewUrlField (boolean value) {
-      this.requestField("preview_url", value);
-      return this;
-    }
     public APIRequestGetCrosspostedBroadcasts requestSecondsLeftField () {
       return this.requestSecondsLeftField(true);
     }
@@ -3015,8 +2966,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public APINodeList<LiveVideoError> parseResponse(String response) throws APIException {
-      return LiveVideoError.parseResponse(response, getContext(), this);
+    public APINodeList<LiveVideoError> parseResponse(String response, String header) throws APIException {
+      return LiveVideoError.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3026,7 +2977,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public APINodeList<LiveVideoError> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3040,7 +2992,7 @@ public class LiveVideo extends APINode {
         new Function<String, APINodeList<LiveVideoError>>() {
            public APINodeList<LiveVideoError> apply(String result) {
              try {
-               return APIRequestGetErrors.this.parseResponse(result);
+               return APIRequestGetErrors.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3158,8 +3110,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public APINodeList<VideoGameShow> parseResponse(String response) throws APIException {
-      return VideoGameShow.parseResponse(response, getContext(), this);
+    public APINodeList<VideoGameShow> parseResponse(String response, String header) throws APIException {
+      return VideoGameShow.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3169,7 +3121,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public APINodeList<VideoGameShow> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3183,7 +3136,7 @@ public class LiveVideo extends APINode {
         new Function<String, APINodeList<VideoGameShow>>() {
            public APINodeList<VideoGameShow> apply(String result) {
              try {
-               return APIRequestGetGameShows.this.parseResponse(result);
+               return APIRequestGetGameShows.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3282,6 +3235,246 @@ public class LiveVideo extends APINode {
     }
   }
 
+  public static class APIRequestGetGuestSessions extends APIRequest<LiveWithGuestSession> {
+
+    APINodeList<LiveWithGuestSession> lastResponse = null;
+    @Override
+    public APINodeList<LiveWithGuestSession> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "conference_name",
+      "id",
+      "participant_call_states",
+      "server_sdp",
+    };
+
+    @Override
+    public APINodeList<LiveWithGuestSession> parseResponse(String response, String header) throws APIException {
+      return LiveWithGuestSession.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<LiveWithGuestSession> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<LiveWithGuestSession> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<LiveWithGuestSession>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<LiveWithGuestSession>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, APINodeList<LiveWithGuestSession>>() {
+           public APINodeList<LiveWithGuestSession> apply(String result) {
+             try {
+               return APIRequestGetGuestSessions.this.parseResponse(result, null);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetGuestSessions(String nodeId, APIContext context) {
+      super(context, nodeId, "/guest_sessions", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetGuestSessions setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetGuestSessions setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetGuestSessions requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetGuestSessions requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetGuestSessions requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetGuestSessions requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetGuestSessions requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetGuestSessions requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetGuestSessions requestConferenceNameField () {
+      return this.requestConferenceNameField(true);
+    }
+    public APIRequestGetGuestSessions requestConferenceNameField (boolean value) {
+      this.requestField("conference_name", value);
+      return this;
+    }
+    public APIRequestGetGuestSessions requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetGuestSessions requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetGuestSessions requestParticipantCallStatesField () {
+      return this.requestParticipantCallStatesField(true);
+    }
+    public APIRequestGetGuestSessions requestParticipantCallStatesField (boolean value) {
+      this.requestField("participant_call_states", value);
+      return this;
+    }
+    public APIRequestGetGuestSessions requestServerSdpField () {
+      return this.requestServerSdpField(true);
+    }
+    public APIRequestGetGuestSessions requestServerSdpField (boolean value) {
+      this.requestField("server_sdp", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateGuestSession extends APIRequest<LiveWithGuestSession> {
+
+    LiveWithGuestSession lastResponse = null;
+    @Override
+    public LiveWithGuestSession getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public LiveWithGuestSession parseResponse(String response, String header) throws APIException {
+      return LiveWithGuestSession.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public LiveWithGuestSession execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public LiveWithGuestSession execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<LiveWithGuestSession> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<LiveWithGuestSession> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, LiveWithGuestSession>() {
+           public LiveWithGuestSession apply(String result) {
+             try {
+               return APIRequestCreateGuestSession.this.parseResponse(result, null);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateGuestSession(String nodeId, APIContext context) {
+      super(context, nodeId, "/guest_sessions", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateGuestSession setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateGuestSession setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateGuestSession requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateGuestSession requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateGuestSession requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateGuestSession requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateGuestSession requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateGuestSession requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateInputStream extends APIRequest<LiveVideo> {
 
     LiveVideo lastResponse = null;
@@ -3296,8 +3489,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public LiveVideo parseResponse(String response) throws APIException {
-      return LiveVideo.parseResponse(response, getContext(), this).head();
+    public LiveVideo parseResponse(String response, String header) throws APIException {
+      return LiveVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3307,7 +3500,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public LiveVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3321,7 +3515,7 @@ public class LiveVideo extends APINode {
         new Function<String, LiveVideo>() {
            public LiveVideo apply(String result) {
              try {
-               return APIRequestCreateInputStream.this.parseResponse(result);
+               return APIRequestCreateInputStream.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3410,8 +3604,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3421,7 +3615,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3435,7 +3630,7 @@ public class LiveVideo extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetLikes.this.parseResponse(result);
+               return APIRequestGetLikes.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3597,8 +3792,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public APINodeList<VideoPoll> parseResponse(String response) throws APIException {
-      return VideoPoll.parseResponse(response, getContext(), this);
+    public APINodeList<VideoPoll> parseResponse(String response, String header) throws APIException {
+      return VideoPoll.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3608,7 +3803,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public APINodeList<VideoPoll> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3622,7 +3818,7 @@ public class LiveVideo extends APINode {
         new Function<String, APINodeList<VideoPoll>>() {
            public APINodeList<VideoPoll> apply(String result) {
              try {
-               return APIRequestGetPolls.this.parseResponse(result);
+               return APIRequestGetPolls.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3756,8 +3952,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public VideoPoll parseResponse(String response) throws APIException {
-      return VideoPoll.parseResponse(response, getContext(), this).head();
+    public VideoPoll parseResponse(String response, String header) throws APIException {
+      return VideoPoll.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3767,7 +3963,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public VideoPoll execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3781,7 +3978,7 @@ public class LiveVideo extends APINode {
         new Function<String, VideoPoll>() {
            public VideoPoll apply(String result) {
              try {
-               return APIRequestCreatePoll.this.parseResponse(result);
+               return APIRequestCreatePoll.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3930,8 +4127,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3941,7 +4138,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3955,7 +4153,7 @@ public class LiveVideo extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetReactions.this.parseResponse(result);
+               return APIRequestGetReactions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4119,8 +4317,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4130,7 +4328,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4144,7 +4343,7 @@ public class LiveVideo extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4216,6 +4415,7 @@ public class LiveVideo extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "target_token",
     };
 
     public static final String[] FIELDS = {
@@ -4237,7 +4437,6 @@ public class LiveVideo extends APINode {
       "live_views",
       "permalink_url",
       "planned_start_time",
-      "preview_url",
       "seconds_left",
       "secure_stream_url",
       "status",
@@ -4249,8 +4448,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public LiveVideo parseResponse(String response) throws APIException {
-      return LiveVideo.parseResponse(response, getContext(), this).head();
+    public LiveVideo parseResponse(String response, String header) throws APIException {
+      return LiveVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4260,7 +4459,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public LiveVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4274,7 +4474,7 @@ public class LiveVideo extends APINode {
         new Function<String, LiveVideo>() {
            public LiveVideo apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4299,6 +4499,11 @@ public class LiveVideo extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setTargetToken (String targetToken) {
+      this.setParam("target_token", targetToken);
+      return this;
+    }
 
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);
@@ -4462,13 +4667,6 @@ public class LiveVideo extends APINode {
       this.requestField("planned_start_time", value);
       return this;
     }
-    public APIRequestGet requestPreviewUrlField () {
-      return this.requestPreviewUrlField(true);
-    }
-    public APIRequestGet requestPreviewUrlField (boolean value) {
-      this.requestField("preview_url", value);
-      return this;
-    }
     public APIRequestGet requestSecondsLeftField () {
       return this.requestSecondsLeftField(true);
     }
@@ -4579,8 +4777,8 @@ public class LiveVideo extends APINode {
     };
 
     @Override
-    public LiveVideo parseResponse(String response) throws APIException {
-      return LiveVideo.parseResponse(response, getContext(), this).head();
+    public LiveVideo parseResponse(String response, String header) throws APIException {
+      return LiveVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4590,7 +4788,8 @@ public class LiveVideo extends APINode {
 
     @Override
     public LiveVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4604,7 +4803,7 @@ public class LiveVideo extends APINode {
         new Function<String, LiveVideo>() {
            public LiveVideo apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5212,7 +5411,6 @@ public class LiveVideo extends APINode {
     this.mLiveViews = instance.mLiveViews;
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mPlannedStartTime = instance.mPlannedStartTime;
-    this.mPreviewUrl = instance.mPreviewUrl;
     this.mSecondsLeft = instance.mSecondsLeft;
     this.mSecureStreamUrl = instance.mSecureStreamUrl;
     this.mStatus = instance.mStatus;
@@ -5228,8 +5426,8 @@ public class LiveVideo extends APINode {
 
   public static APIRequest.ResponseParser<LiveVideo> getParser() {
     return new APIRequest.ResponseParser<LiveVideo>() {
-      public APINodeList<LiveVideo> parseResponse(String response, APIContext context, APIRequest<LiveVideo> request) throws MalformedResponseException {
-        return LiveVideo.parseResponse(response, context, request);
+      public APINodeList<LiveVideo> parseResponse(String response, APIContext context, APIRequest<LiveVideo> request, String header) throws MalformedResponseException {
+        return LiveVideo.parseResponse(response, context, request, header);
       }
     };
   }

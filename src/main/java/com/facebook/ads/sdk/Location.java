@@ -91,7 +91,7 @@ public class Location extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Location loadJSON(String json, APIContext context) {
+  public static Location loadJSON(String json, APIContext context, String header) {
     Location location = getGson().fromJson(json, Location.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -108,11 +108,12 @@ public class Location extends APINode {
     }
     location.context = context;
     location.rawValue = json;
+    location.header = header;
     return location;
   }
 
-  public static APINodeList<Location> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Location> locations = new APINodeList<Location>(request, json);
+  public static APINodeList<Location> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Location> locations = new APINodeList<Location>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -123,7 +124,7 @@ public class Location extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          locations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          locations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return locations;
       } else if (result.isJsonObject()) {
@@ -148,7 +149,7 @@ public class Location extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              locations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              locations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -159,13 +160,13 @@ public class Location extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  locations.add(loadJSON(entry.getValue().toString(), context));
+                  locations.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              locations.add(loadJSON(obj.toString(), context));
+              locations.add(loadJSON(obj.toString(), context, header));
             }
           }
           return locations;
@@ -173,7 +174,7 @@ public class Location extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              locations.add(loadJSON(entry.getValue().toString(), context));
+              locations.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return locations;
         } else {
@@ -192,7 +193,7 @@ public class Location extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              locations.add(loadJSON(value.toString(), context));
+              locations.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -204,7 +205,7 @@ public class Location extends APINode {
 
           // Sixth, check if it's pure JsonObject
           locations.clear();
-          locations.add(loadJSON(json, context));
+          locations.add(loadJSON(json, context, header));
           return locations;
         }
       }
@@ -397,8 +398,8 @@ public class Location extends APINode {
 
   public static APIRequest.ResponseParser<Location> getParser() {
     return new APIRequest.ResponseParser<Location>() {
-      public APINodeList<Location> parseResponse(String response, APIContext context, APIRequest<Location> request) throws MalformedResponseException {
-        return Location.parseResponse(response, context, request);
+      public APINodeList<Location> parseResponse(String response, APIContext context, APIRequest<Location> request, String header) throws MalformedResponseException {
+        return Location.parseResponse(response, context, request, header);
       }
     };
   }

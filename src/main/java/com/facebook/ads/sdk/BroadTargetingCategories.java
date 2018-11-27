@@ -85,7 +85,7 @@ public class BroadTargetingCategories extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BroadTargetingCategories loadJSON(String json, APIContext context) {
+  public static BroadTargetingCategories loadJSON(String json, APIContext context, String header) {
     BroadTargetingCategories broadTargetingCategories = getGson().fromJson(json, BroadTargetingCategories.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -102,11 +102,12 @@ public class BroadTargetingCategories extends APINode {
     }
     broadTargetingCategories.context = context;
     broadTargetingCategories.rawValue = json;
+    broadTargetingCategories.header = header;
     return broadTargetingCategories;
   }
 
-  public static APINodeList<BroadTargetingCategories> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<BroadTargetingCategories> broadTargetingCategoriess = new APINodeList<BroadTargetingCategories>(request, json);
+  public static APINodeList<BroadTargetingCategories> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<BroadTargetingCategories> broadTargetingCategoriess = new APINodeList<BroadTargetingCategories>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -117,7 +118,7 @@ public class BroadTargetingCategories extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          broadTargetingCategoriess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          broadTargetingCategoriess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return broadTargetingCategoriess;
       } else if (result.isJsonObject()) {
@@ -142,7 +143,7 @@ public class BroadTargetingCategories extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              broadTargetingCategoriess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              broadTargetingCategoriess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -153,13 +154,13 @@ public class BroadTargetingCategories extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  broadTargetingCategoriess.add(loadJSON(entry.getValue().toString(), context));
+                  broadTargetingCategoriess.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              broadTargetingCategoriess.add(loadJSON(obj.toString(), context));
+              broadTargetingCategoriess.add(loadJSON(obj.toString(), context, header));
             }
           }
           return broadTargetingCategoriess;
@@ -167,7 +168,7 @@ public class BroadTargetingCategories extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              broadTargetingCategoriess.add(loadJSON(entry.getValue().toString(), context));
+              broadTargetingCategoriess.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return broadTargetingCategoriess;
         } else {
@@ -186,7 +187,7 @@ public class BroadTargetingCategories extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              broadTargetingCategoriess.add(loadJSON(value.toString(), context));
+              broadTargetingCategoriess.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -198,7 +199,7 @@ public class BroadTargetingCategories extends APINode {
 
           // Sixth, check if it's pure JsonObject
           broadTargetingCategoriess.clear();
-          broadTargetingCategoriess.add(loadJSON(json, context));
+          broadTargetingCategoriess.add(loadJSON(json, context, header));
           return broadTargetingCategoriess;
         }
       }
@@ -361,8 +362,8 @@ public class BroadTargetingCategories extends APINode {
 
   public static APIRequest.ResponseParser<BroadTargetingCategories> getParser() {
     return new APIRequest.ResponseParser<BroadTargetingCategories>() {
-      public APINodeList<BroadTargetingCategories> parseResponse(String response, APIContext context, APIRequest<BroadTargetingCategories> request) throws MalformedResponseException {
-        return BroadTargetingCategories.parseResponse(response, context, request);
+      public APINodeList<BroadTargetingCategories> parseResponse(String response, APIContext context, APIRequest<BroadTargetingCategories> request, String header) throws MalformedResponseException {
+        return BroadTargetingCategories.parseResponse(response, context, request, header);
       }
     };
   }

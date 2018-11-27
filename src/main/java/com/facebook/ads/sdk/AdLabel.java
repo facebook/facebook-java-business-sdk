@@ -132,7 +132,7 @@ public class AdLabel extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdLabel loadJSON(String json, APIContext context) {
+  public static AdLabel loadJSON(String json, APIContext context, String header) {
     AdLabel adLabel = getGson().fromJson(json, AdLabel.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -149,11 +149,12 @@ public class AdLabel extends APINode {
     }
     adLabel.context = context;
     adLabel.rawValue = json;
+    adLabel.header = header;
     return adLabel;
   }
 
-  public static APINodeList<AdLabel> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdLabel> adLabels = new APINodeList<AdLabel>(request, json);
+  public static APINodeList<AdLabel> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdLabel> adLabels = new APINodeList<AdLabel>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -164,7 +165,7 @@ public class AdLabel extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adLabels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adLabels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adLabels;
       } else if (result.isJsonObject()) {
@@ -189,7 +190,7 @@ public class AdLabel extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adLabels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adLabels.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -200,13 +201,13 @@ public class AdLabel extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adLabels.add(loadJSON(entry.getValue().toString(), context));
+                  adLabels.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adLabels.add(loadJSON(obj.toString(), context));
+              adLabels.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adLabels;
@@ -214,7 +215,7 @@ public class AdLabel extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adLabels.add(loadJSON(entry.getValue().toString(), context));
+              adLabels.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adLabels;
         } else {
@@ -233,7 +234,7 @@ public class AdLabel extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adLabels.add(loadJSON(value.toString(), context));
+              adLabels.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -245,7 +246,7 @@ public class AdLabel extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adLabels.clear();
-          adLabels.add(loadJSON(json, context));
+          adLabels.add(loadJSON(json, context, header));
           return adLabels;
         }
       }
@@ -342,7 +343,6 @@ public class AdLabel extends APINode {
       "actor_id",
       "adlabels",
       "applink_treatment",
-      "asset_feed_id",
       "asset_feed_spec",
       "authorization_category",
       "auto_update",
@@ -380,6 +380,7 @@ public class AdLabel extends APINode {
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
+      "portrait_customizations",
       "product_set_id",
       "recommender_settings",
       "status",
@@ -393,8 +394,8 @@ public class AdLabel extends APINode {
     };
 
     @Override
-    public APINodeList<AdCreative> parseResponse(String response) throws APIException {
-      return AdCreative.parseResponse(response, getContext(), this);
+    public APINodeList<AdCreative> parseResponse(String response, String header) throws APIException {
+      return AdCreative.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -404,7 +405,8 @@ public class AdLabel extends APINode {
 
     @Override
     public APINodeList<AdCreative> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -418,7 +420,7 @@ public class AdLabel extends APINode {
         new Function<String, APINodeList<AdCreative>>() {
            public APINodeList<AdCreative> apply(String result) {
              try {
-               return APIRequestGetAdCreatives.this.parseResponse(result);
+               return APIRequestGetAdCreatives.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -506,13 +508,6 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestApplinkTreatmentField (boolean value) {
       this.requestField("applink_treatment", value);
-      return this;
-    }
-    public APIRequestGetAdCreatives requestAssetFeedIdField () {
-      return this.requestAssetFeedIdField(true);
-    }
-    public APIRequestGetAdCreatives requestAssetFeedIdField (boolean value) {
-      this.requestField("asset_feed_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestAssetFeedSpecField () {
@@ -774,6 +769,13 @@ public class AdLabel extends APINode {
       this.requestField("playable_asset_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestPortraitCustomizationsField () {
+      return this.requestPortraitCustomizationsField(true);
+    }
+    public APIRequestGetAdCreatives requestPortraitCustomizationsField (boolean value) {
+      this.requestField("portrait_customizations", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestProductSetIdField () {
       return this.requestProductSetIdField(true);
     }
@@ -880,7 +882,6 @@ public class AdLabel extends APINode {
       "issues_info",
       "last_updated_by_app_id",
       "name",
-      "objective_source",
       "priority",
       "recommendations",
       "source_ad",
@@ -893,8 +894,8 @@ public class AdLabel extends APINode {
     };
 
     @Override
-    public APINodeList<Ad> parseResponse(String response) throws APIException {
-      return Ad.parseResponse(response, getContext(), this);
+    public APINodeList<Ad> parseResponse(String response, String header) throws APIException {
+      return Ad.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -904,7 +905,8 @@ public class AdLabel extends APINode {
 
     @Override
     public APINodeList<Ad> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -918,7 +920,7 @@ public class AdLabel extends APINode {
         new Function<String, APINodeList<Ad>>() {
            public APINodeList<Ad> apply(String result) {
              try {
-               return APIRequestGetAds.this.parseResponse(result);
+               return APIRequestGetAds.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1141,13 +1143,6 @@ public class AdLabel extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetAds requestObjectiveSourceField () {
-      return this.requestObjectiveSourceField(true);
-    }
-    public APIRequestGetAds requestObjectiveSourceField (boolean value) {
-      this.requestField("objective_source", value);
-      return this;
-    }
     public APIRequestGetAds requestPriorityField () {
       return this.requestPriorityField(true);
     }
@@ -1226,7 +1221,6 @@ public class AdLabel extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "ad_keywords",
-      "adasset_feed",
       "adlabels",
       "adset_schedule",
       "asset_feed_id",
@@ -1250,19 +1244,13 @@ public class AdLabel extends APINode {
       "destination_type",
       "effective_status",
       "end_time",
-      "frequency_cap",
-      "frequency_cap_reset_period",
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
-      "is_autobid",
-      "is_average_price_pacing",
       "is_dynamic_creative",
-      "is_dynamic_creative_optimization",
       "issues_info",
       "lifetime_budget",
-      "lifetime_frequency_cap",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
@@ -1274,7 +1262,6 @@ public class AdLabel extends APINode {
       "recurring_budget_semantics",
       "review_feedback",
       "rf_prediction_id",
-      "rtb_flag",
       "source_adset",
       "source_adset_id",
       "start_time",
@@ -1282,14 +1269,13 @@ public class AdLabel extends APINode {
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
-      "tracking_specs",
       "updated_time",
       "use_new_app_click",
     };
 
     @Override
-    public APINodeList<AdSet> parseResponse(String response) throws APIException {
-      return AdSet.parseResponse(response, getContext(), this);
+    public APINodeList<AdSet> parseResponse(String response, String header) throws APIException {
+      return AdSet.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1299,7 +1285,8 @@ public class AdLabel extends APINode {
 
     @Override
     public APINodeList<AdSet> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1313,7 +1300,7 @@ public class AdLabel extends APINode {
         new Function<String, APINodeList<AdSet>>() {
            public APINodeList<AdSet> apply(String result) {
              try {
-               return APIRequestGetAdSets.this.parseResponse(result);
+               return APIRequestGetAdSets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1387,13 +1374,6 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestAdKeywordsField (boolean value) {
       this.requestField("ad_keywords", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestAdassetFeedField () {
-      return this.requestAdassetFeedField(true);
-    }
-    public APIRequestGetAdSets requestAdassetFeedField (boolean value) {
-      this.requestField("adasset_feed", value);
       return this;
     }
     public APIRequestGetAdSets requestAdlabelsField () {
@@ -1557,20 +1537,6 @@ public class AdLabel extends APINode {
       this.requestField("end_time", value);
       return this;
     }
-    public APIRequestGetAdSets requestFrequencyCapField () {
-      return this.requestFrequencyCapField(true);
-    }
-    public APIRequestGetAdSets requestFrequencyCapField (boolean value) {
-      this.requestField("frequency_cap", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestFrequencyCapResetPeriodField () {
-      return this.requestFrequencyCapResetPeriodField(true);
-    }
-    public APIRequestGetAdSets requestFrequencyCapResetPeriodField (boolean value) {
-      this.requestField("frequency_cap_reset_period", value);
-      return this;
-    }
     public APIRequestGetAdSets requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
@@ -1599,32 +1565,11 @@ public class AdLabel extends APINode {
       this.requestField("instagram_actor_id", value);
       return this;
     }
-    public APIRequestGetAdSets requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetAdSets requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGetAdSets requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
-      return this;
-    }
     public APIRequestGetAdSets requestIsDynamicCreativeField () {
       return this.requestIsDynamicCreativeField(true);
     }
     public APIRequestGetAdSets requestIsDynamicCreativeField (boolean value) {
       this.requestField("is_dynamic_creative", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField () {
-      return this.requestIsDynamicCreativeOptimizationField(true);
-    }
-    public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField (boolean value) {
-      this.requestField("is_dynamic_creative_optimization", value);
       return this;
     }
     public APIRequestGetAdSets requestIssuesInfoField () {
@@ -1639,13 +1584,6 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestLifetimeFrequencyCapField () {
-      return this.requestLifetimeFrequencyCapField(true);
-    }
-    public APIRequestGetAdSets requestLifetimeFrequencyCapField (boolean value) {
-      this.requestField("lifetime_frequency_cap", value);
       return this;
     }
     public APIRequestGetAdSets requestLifetimeImpsField () {
@@ -1725,13 +1663,6 @@ public class AdLabel extends APINode {
       this.requestField("rf_prediction_id", value);
       return this;
     }
-    public APIRequestGetAdSets requestRtbFlagField () {
-      return this.requestRtbFlagField(true);
-    }
-    public APIRequestGetAdSets requestRtbFlagField (boolean value) {
-      this.requestField("rtb_flag", value);
-      return this;
-    }
     public APIRequestGetAdSets requestSourceAdsetField () {
       return this.requestSourceAdsetField(true);
     }
@@ -1781,13 +1712,6 @@ public class AdLabel extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
-    public APIRequestGetAdSets requestTrackingSpecsField () {
-      return this.requestTrackingSpecsField(true);
-    }
-    public APIRequestGetAdSets requestTrackingSpecsField (boolean value) {
-      this.requestField("tracking_specs", value);
-      return this;
-    }
     public APIRequestGetAdSets requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -1830,10 +1754,6 @@ public class AdLabel extends APINode {
       "daily_budget",
       "effective_status",
       "id",
-      "is_autobid",
-      "is_average_price_pacing",
-      "kpi_custom_conversion_id",
-      "kpi_type",
       "last_budget_toggling_time",
       "lifetime_budget",
       "metrics_metadata",
@@ -1853,8 +1773,8 @@ public class AdLabel extends APINode {
     };
 
     @Override
-    public APINodeList<Campaign> parseResponse(String response) throws APIException {
-      return Campaign.parseResponse(response, getContext(), this);
+    public APINodeList<Campaign> parseResponse(String response, String header) throws APIException {
+      return Campaign.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1864,7 +1784,8 @@ public class AdLabel extends APINode {
 
     @Override
     public APINodeList<Campaign> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1878,7 +1799,7 @@ public class AdLabel extends APINode {
         new Function<String, APINodeList<Campaign>>() {
            public APINodeList<Campaign> apply(String result) {
              try {
-               return APIRequestGetCampaigns.this.parseResponse(result);
+               return APIRequestGetCampaigns.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2045,34 +1966,6 @@ public class AdLabel extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetCampaigns requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetCampaigns requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGetCampaigns requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestKpiCustomConversionIdField () {
-      return this.requestKpiCustomConversionIdField(true);
-    }
-    public APIRequestGetCampaigns requestKpiCustomConversionIdField (boolean value) {
-      this.requestField("kpi_custom_conversion_id", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestKpiTypeField () {
-      return this.requestKpiTypeField(true);
-    }
-    public APIRequestGetCampaigns requestKpiTypeField (boolean value) {
-      this.requestField("kpi_type", value);
-      return this;
-    }
     public APIRequestGetCampaigns requestLastBudgetTogglingTimeField () {
       return this.requestLastBudgetTogglingTimeField(true);
     }
@@ -2201,8 +2094,8 @@ public class AdLabel extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2212,7 +2105,8 @@ public class AdLabel extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2226,7 +2120,7 @@ public class AdLabel extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2309,8 +2203,8 @@ public class AdLabel extends APINode {
     };
 
     @Override
-    public AdLabel parseResponse(String response) throws APIException {
-      return AdLabel.parseResponse(response, getContext(), this).head();
+    public AdLabel parseResponse(String response, String header) throws APIException {
+      return AdLabel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2320,7 +2214,8 @@ public class AdLabel extends APINode {
 
     @Override
     public AdLabel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2334,7 +2229,7 @@ public class AdLabel extends APINode {
         new Function<String, AdLabel>() {
            public AdLabel apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2448,8 +2343,8 @@ public class AdLabel extends APINode {
     };
 
     @Override
-    public AdLabel parseResponse(String response) throws APIException {
-      return AdLabel.parseResponse(response, getContext(), this).head();
+    public AdLabel parseResponse(String response, String header) throws APIException {
+      return AdLabel.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2459,7 +2354,8 @@ public class AdLabel extends APINode {
 
     @Override
     public AdLabel execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2473,7 +2369,7 @@ public class AdLabel extends APINode {
         new Function<String, AdLabel>() {
            public AdLabel apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2569,8 +2465,8 @@ public class AdLabel extends APINode {
 
   public static APIRequest.ResponseParser<AdLabel> getParser() {
     return new APIRequest.ResponseParser<AdLabel>() {
-      public APINodeList<AdLabel> parseResponse(String response, APIContext context, APIRequest<AdLabel> request) throws MalformedResponseException {
-        return AdLabel.parseResponse(response, context, request);
+      public APINodeList<AdLabel> parseResponse(String response, APIContext context, APIRequest<AdLabel> request, String header) throws MalformedResponseException {
+        return AdLabel.parseResponse(response, context, request, header);
       }
     };
   }

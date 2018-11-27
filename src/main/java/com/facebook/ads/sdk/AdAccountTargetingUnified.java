@@ -107,7 +107,7 @@ public class AdAccountTargetingUnified extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdAccountTargetingUnified loadJSON(String json, APIContext context) {
+  public static AdAccountTargetingUnified loadJSON(String json, APIContext context, String header) {
     AdAccountTargetingUnified adAccountTargetingUnified = getGson().fromJson(json, AdAccountTargetingUnified.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -124,11 +124,12 @@ public class AdAccountTargetingUnified extends APINode {
     }
     adAccountTargetingUnified.context = context;
     adAccountTargetingUnified.rawValue = json;
+    adAccountTargetingUnified.header = header;
     return adAccountTargetingUnified;
   }
 
-  public static APINodeList<AdAccountTargetingUnified> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAccountTargetingUnified> adAccountTargetingUnifieds = new APINodeList<AdAccountTargetingUnified>(request, json);
+  public static APINodeList<AdAccountTargetingUnified> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountTargetingUnified> adAccountTargetingUnifieds = new APINodeList<AdAccountTargetingUnified>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -139,7 +140,7 @@ public class AdAccountTargetingUnified extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountTargetingUnifieds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAccountTargetingUnifieds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adAccountTargetingUnifieds;
       } else if (result.isJsonObject()) {
@@ -164,7 +165,7 @@ public class AdAccountTargetingUnified extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountTargetingUnifieds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAccountTargetingUnifieds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -175,13 +176,13 @@ public class AdAccountTargetingUnified extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountTargetingUnifieds.add(loadJSON(entry.getValue().toString(), context));
+                  adAccountTargetingUnifieds.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountTargetingUnifieds.add(loadJSON(obj.toString(), context));
+              adAccountTargetingUnifieds.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adAccountTargetingUnifieds;
@@ -189,7 +190,7 @@ public class AdAccountTargetingUnified extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountTargetingUnifieds.add(loadJSON(entry.getValue().toString(), context));
+              adAccountTargetingUnifieds.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adAccountTargetingUnifieds;
         } else {
@@ -208,7 +209,7 @@ public class AdAccountTargetingUnified extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountTargetingUnifieds.add(loadJSON(value.toString(), context));
+              adAccountTargetingUnifieds.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -220,7 +221,7 @@ public class AdAccountTargetingUnified extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adAccountTargetingUnifieds.clear();
-          adAccountTargetingUnifieds.add(loadJSON(json, context));
+          adAccountTargetingUnifieds.add(loadJSON(json, context, header));
           return adAccountTargetingUnifieds;
         }
       }
@@ -668,6 +669,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_PROSPECTING_AUDIENCE("prospecting_audience"),
       @SerializedName("brand_safety_content_severity_levels")
       VALUE_BRAND_SAFETY_CONTENT_SEVERITY_LEVELS("brand_safety_content_severity_levels"),
+      @SerializedName("catalog_based_targeting")
+      VALUE_CATALOG_BASED_TARGETING("catalog_based_targeting"),
       NULL(null);
 
       private String value;
@@ -901,6 +904,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_PROSPECTING_AUDIENCE("prospecting_audience"),
       @SerializedName("brand_safety_content_severity_levels")
       VALUE_BRAND_SAFETY_CONTENT_SEVERITY_LEVELS("brand_safety_content_severity_levels"),
+      @SerializedName("catalog_based_targeting")
+      VALUE_CATALOG_BASED_TARGETING("catalog_based_targeting"),
       NULL(null);
 
       private String value;
@@ -1025,8 +1030,8 @@ public class AdAccountTargetingUnified extends APINode {
 
   public static APIRequest.ResponseParser<AdAccountTargetingUnified> getParser() {
     return new APIRequest.ResponseParser<AdAccountTargetingUnified>() {
-      public APINodeList<AdAccountTargetingUnified> parseResponse(String response, APIContext context, APIRequest<AdAccountTargetingUnified> request) throws MalformedResponseException {
-        return AdAccountTargetingUnified.parseResponse(response, context, request);
+      public APINodeList<AdAccountTargetingUnified> parseResponse(String response, APIContext context, APIRequest<AdAccountTargetingUnified> request, String header) throws MalformedResponseException {
+        return AdAccountTargetingUnified.parseResponse(response, context, request, header);
       }
     };
   }

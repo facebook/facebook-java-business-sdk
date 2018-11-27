@@ -75,7 +75,7 @@ public class ProductItemInsights extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductItemInsights loadJSON(String json, APIContext context) {
+  public static ProductItemInsights loadJSON(String json, APIContext context, String header) {
     ProductItemInsights productItemInsights = getGson().fromJson(json, ProductItemInsights.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -92,11 +92,12 @@ public class ProductItemInsights extends APINode {
     }
     productItemInsights.context = context;
     productItemInsights.rawValue = json;
+    productItemInsights.header = header;
     return productItemInsights;
   }
 
-  public static APINodeList<ProductItemInsights> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ProductItemInsights> productItemInsightss = new APINodeList<ProductItemInsights>(request, json);
+  public static APINodeList<ProductItemInsights> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductItemInsights> productItemInsightss = new APINodeList<ProductItemInsights>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -107,7 +108,7 @@ public class ProductItemInsights extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productItemInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          productItemInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return productItemInsightss;
       } else if (result.isJsonObject()) {
@@ -132,7 +133,7 @@ public class ProductItemInsights extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productItemInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              productItemInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -143,13 +144,13 @@ public class ProductItemInsights extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productItemInsightss.add(loadJSON(entry.getValue().toString(), context));
+                  productItemInsightss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productItemInsightss.add(loadJSON(obj.toString(), context));
+              productItemInsightss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return productItemInsightss;
@@ -157,7 +158,7 @@ public class ProductItemInsights extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productItemInsightss.add(loadJSON(entry.getValue().toString(), context));
+              productItemInsightss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return productItemInsightss;
         } else {
@@ -176,7 +177,7 @@ public class ProductItemInsights extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productItemInsightss.add(loadJSON(value.toString(), context));
+              productItemInsightss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -188,7 +189,7 @@ public class ProductItemInsights extends APINode {
 
           // Sixth, check if it's pure JsonObject
           productItemInsightss.clear();
-          productItemInsightss.add(loadJSON(json, context));
+          productItemInsightss.add(loadJSON(json, context, header));
           return productItemInsightss;
         }
       }
@@ -301,8 +302,8 @@ public class ProductItemInsights extends APINode {
 
   public static APIRequest.ResponseParser<ProductItemInsights> getParser() {
     return new APIRequest.ResponseParser<ProductItemInsights>() {
-      public APINodeList<ProductItemInsights> parseResponse(String response, APIContext context, APIRequest<ProductItemInsights> request) throws MalformedResponseException {
-        return ProductItemInsights.parseResponse(response, context, request);
+      public APINodeList<ProductItemInsights> parseResponse(String response, APIContext context, APIRequest<ProductItemInsights> request, String header) throws MalformedResponseException {
+        return ProductItemInsights.parseResponse(response, context, request, header);
       }
     };
   }

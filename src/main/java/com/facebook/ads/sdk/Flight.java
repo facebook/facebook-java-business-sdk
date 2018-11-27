@@ -152,7 +152,7 @@ public class Flight extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Flight loadJSON(String json, APIContext context) {
+  public static Flight loadJSON(String json, APIContext context, String header) {
     Flight flight = getGson().fromJson(json, Flight.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -169,11 +169,12 @@ public class Flight extends APINode {
     }
     flight.context = context;
     flight.rawValue = json;
+    flight.header = header;
     return flight;
   }
 
-  public static APINodeList<Flight> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Flight> flights = new APINodeList<Flight>(request, json);
+  public static APINodeList<Flight> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Flight> flights = new APINodeList<Flight>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -184,7 +185,7 @@ public class Flight extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          flights.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          flights.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return flights;
       } else if (result.isJsonObject()) {
@@ -209,7 +210,7 @@ public class Flight extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              flights.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              flights.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -220,13 +221,13 @@ public class Flight extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  flights.add(loadJSON(entry.getValue().toString(), context));
+                  flights.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              flights.add(loadJSON(obj.toString(), context));
+              flights.add(loadJSON(obj.toString(), context, header));
             }
           }
           return flights;
@@ -234,7 +235,7 @@ public class Flight extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              flights.add(loadJSON(entry.getValue().toString(), context));
+              flights.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return flights;
         } else {
@@ -253,7 +254,7 @@ public class Flight extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              flights.add(loadJSON(value.toString(), context));
+              flights.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -265,7 +266,7 @@ public class Flight extends APINode {
 
           // Sixth, check if it's pure JsonObject
           flights.clear();
-          flights.add(loadJSON(json, context));
+          flights.add(loadJSON(json, context, header));
           return flights;
         }
       }
@@ -396,8 +397,8 @@ public class Flight extends APINode {
     };
 
     @Override
-    public Flight parseResponse(String response) throws APIException {
-      return Flight.parseResponse(response, getContext(), this).head();
+    public Flight parseResponse(String response, String header) throws APIException {
+      return Flight.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -407,7 +408,8 @@ public class Flight extends APINode {
 
     @Override
     public Flight execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -421,7 +423,7 @@ public class Flight extends APINode {
         new Function<String, Flight>() {
            public Flight apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -611,8 +613,8 @@ public class Flight extends APINode {
     };
 
     @Override
-    public Flight parseResponse(String response) throws APIException {
-      return Flight.parseResponse(response, getContext(), this).head();
+    public Flight parseResponse(String response, String header) throws APIException {
+      return Flight.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -622,7 +624,8 @@ public class Flight extends APINode {
 
     @Override
     public Flight execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -636,7 +639,7 @@ public class Flight extends APINode {
         new Function<String, Flight>() {
            public Flight apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -784,8 +787,8 @@ public class Flight extends APINode {
 
   public static APIRequest.ResponseParser<Flight> getParser() {
     return new APIRequest.ResponseParser<Flight>() {
-      public APINodeList<Flight> parseResponse(String response, APIContext context, APIRequest<Flight> request) throws MalformedResponseException {
-        return Flight.parseResponse(response, context, request);
+      public APINodeList<Flight> parseResponse(String response, APIContext context, APIRequest<Flight> request, String header) throws MalformedResponseException {
+        return Flight.parseResponse(response, context, request, header);
       }
     };
   }

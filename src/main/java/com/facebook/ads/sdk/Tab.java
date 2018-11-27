@@ -83,7 +83,7 @@ public class Tab extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Tab loadJSON(String json, APIContext context) {
+  public static Tab loadJSON(String json, APIContext context, String header) {
     Tab tab = getGson().fromJson(json, Tab.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -100,11 +100,12 @@ public class Tab extends APINode {
     }
     tab.context = context;
     tab.rawValue = json;
+    tab.header = header;
     return tab;
   }
 
-  public static APINodeList<Tab> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Tab> tabs = new APINodeList<Tab>(request, json);
+  public static APINodeList<Tab> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Tab> tabs = new APINodeList<Tab>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -115,7 +116,7 @@ public class Tab extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          tabs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          tabs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return tabs;
       } else if (result.isJsonObject()) {
@@ -140,7 +141,7 @@ public class Tab extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              tabs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              tabs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -151,13 +152,13 @@ public class Tab extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  tabs.add(loadJSON(entry.getValue().toString(), context));
+                  tabs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              tabs.add(loadJSON(obj.toString(), context));
+              tabs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return tabs;
@@ -165,7 +166,7 @@ public class Tab extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              tabs.add(loadJSON(entry.getValue().toString(), context));
+              tabs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return tabs;
         } else {
@@ -184,7 +185,7 @@ public class Tab extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              tabs.add(loadJSON(value.toString(), context));
+              tabs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -196,7 +197,7 @@ public class Tab extends APINode {
 
           // Sixth, check if it's pure JsonObject
           tabs.clear();
-          tabs.add(loadJSON(json, context));
+          tabs.add(loadJSON(json, context, header));
           return tabs;
         }
       }
@@ -357,8 +358,8 @@ public class Tab extends APINode {
 
   public static APIRequest.ResponseParser<Tab> getParser() {
     return new APIRequest.ResponseParser<Tab>() {
-      public APINodeList<Tab> parseResponse(String response, APIContext context, APIRequest<Tab> request) throws MalformedResponseException {
-        return Tab.parseResponse(response, context, request);
+      public APINodeList<Tab> parseResponse(String response, APIContext context, APIRequest<Tab> request, String header) throws MalformedResponseException {
+        return Tab.parseResponse(response, context, request, header);
       }
     };
   }

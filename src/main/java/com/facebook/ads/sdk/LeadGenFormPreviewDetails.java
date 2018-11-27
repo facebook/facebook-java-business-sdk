@@ -87,7 +87,7 @@ public class LeadGenFormPreviewDetails extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LeadGenFormPreviewDetails loadJSON(String json, APIContext context) {
+  public static LeadGenFormPreviewDetails loadJSON(String json, APIContext context, String header) {
     LeadGenFormPreviewDetails leadGenFormPreviewDetails = getGson().fromJson(json, LeadGenFormPreviewDetails.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -104,11 +104,12 @@ public class LeadGenFormPreviewDetails extends APINode {
     }
     leadGenFormPreviewDetails.context = context;
     leadGenFormPreviewDetails.rawValue = json;
+    leadGenFormPreviewDetails.header = header;
     return leadGenFormPreviewDetails;
   }
 
-  public static APINodeList<LeadGenFormPreviewDetails> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LeadGenFormPreviewDetails> leadGenFormPreviewDetailss = new APINodeList<LeadGenFormPreviewDetails>(request, json);
+  public static APINodeList<LeadGenFormPreviewDetails> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LeadGenFormPreviewDetails> leadGenFormPreviewDetailss = new APINodeList<LeadGenFormPreviewDetails>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -119,7 +120,7 @@ public class LeadGenFormPreviewDetails extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          leadGenFormPreviewDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          leadGenFormPreviewDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return leadGenFormPreviewDetailss;
       } else if (result.isJsonObject()) {
@@ -144,7 +145,7 @@ public class LeadGenFormPreviewDetails extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              leadGenFormPreviewDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              leadGenFormPreviewDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -155,13 +156,13 @@ public class LeadGenFormPreviewDetails extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  leadGenFormPreviewDetailss.add(loadJSON(entry.getValue().toString(), context));
+                  leadGenFormPreviewDetailss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              leadGenFormPreviewDetailss.add(loadJSON(obj.toString(), context));
+              leadGenFormPreviewDetailss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return leadGenFormPreviewDetailss;
@@ -169,7 +170,7 @@ public class LeadGenFormPreviewDetails extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              leadGenFormPreviewDetailss.add(loadJSON(entry.getValue().toString(), context));
+              leadGenFormPreviewDetailss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return leadGenFormPreviewDetailss;
         } else {
@@ -188,7 +189,7 @@ public class LeadGenFormPreviewDetails extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              leadGenFormPreviewDetailss.add(loadJSON(value.toString(), context));
+              leadGenFormPreviewDetailss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -200,7 +201,7 @@ public class LeadGenFormPreviewDetails extends APINode {
 
           // Sixth, check if it's pure JsonObject
           leadGenFormPreviewDetailss.clear();
-          leadGenFormPreviewDetailss.add(loadJSON(json, context));
+          leadGenFormPreviewDetailss.add(loadJSON(json, context, header));
           return leadGenFormPreviewDetailss;
         }
       }
@@ -373,8 +374,8 @@ public class LeadGenFormPreviewDetails extends APINode {
 
   public static APIRequest.ResponseParser<LeadGenFormPreviewDetails> getParser() {
     return new APIRequest.ResponseParser<LeadGenFormPreviewDetails>() {
-      public APINodeList<LeadGenFormPreviewDetails> parseResponse(String response, APIContext context, APIRequest<LeadGenFormPreviewDetails> request) throws MalformedResponseException {
-        return LeadGenFormPreviewDetails.parseResponse(response, context, request);
+      public APINodeList<LeadGenFormPreviewDetails> parseResponse(String response, APIContext context, APIRequest<LeadGenFormPreviewDetails> request, String header) throws MalformedResponseException {
+        return LeadGenFormPreviewDetails.parseResponse(response, context, request, header);
       }
     };
   }

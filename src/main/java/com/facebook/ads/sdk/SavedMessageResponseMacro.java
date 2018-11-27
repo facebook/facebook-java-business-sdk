@@ -71,7 +71,7 @@ public class SavedMessageResponseMacro extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static SavedMessageResponseMacro loadJSON(String json, APIContext context) {
+  public static SavedMessageResponseMacro loadJSON(String json, APIContext context, String header) {
     SavedMessageResponseMacro savedMessageResponseMacro = getGson().fromJson(json, SavedMessageResponseMacro.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class SavedMessageResponseMacro extends APINode {
     }
     savedMessageResponseMacro.context = context;
     savedMessageResponseMacro.rawValue = json;
+    savedMessageResponseMacro.header = header;
     return savedMessageResponseMacro;
   }
 
-  public static APINodeList<SavedMessageResponseMacro> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<SavedMessageResponseMacro> savedMessageResponseMacros = new APINodeList<SavedMessageResponseMacro>(request, json);
+  public static APINodeList<SavedMessageResponseMacro> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<SavedMessageResponseMacro> savedMessageResponseMacros = new APINodeList<SavedMessageResponseMacro>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class SavedMessageResponseMacro extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          savedMessageResponseMacros.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          savedMessageResponseMacros.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return savedMessageResponseMacros;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class SavedMessageResponseMacro extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              savedMessageResponseMacros.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              savedMessageResponseMacros.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class SavedMessageResponseMacro extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  savedMessageResponseMacros.add(loadJSON(entry.getValue().toString(), context));
+                  savedMessageResponseMacros.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              savedMessageResponseMacros.add(loadJSON(obj.toString(), context));
+              savedMessageResponseMacros.add(loadJSON(obj.toString(), context, header));
             }
           }
           return savedMessageResponseMacros;
@@ -153,7 +154,7 @@ public class SavedMessageResponseMacro extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              savedMessageResponseMacros.add(loadJSON(entry.getValue().toString(), context));
+              savedMessageResponseMacros.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return savedMessageResponseMacros;
         } else {
@@ -172,7 +173,7 @@ public class SavedMessageResponseMacro extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              savedMessageResponseMacros.add(loadJSON(value.toString(), context));
+              savedMessageResponseMacros.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class SavedMessageResponseMacro extends APINode {
 
           // Sixth, check if it's pure JsonObject
           savedMessageResponseMacros.clear();
-          savedMessageResponseMacros.add(loadJSON(json, context));
+          savedMessageResponseMacros.add(loadJSON(json, context, header));
           return savedMessageResponseMacros;
         }
       }
@@ -277,8 +278,8 @@ public class SavedMessageResponseMacro extends APINode {
 
   public static APIRequest.ResponseParser<SavedMessageResponseMacro> getParser() {
     return new APIRequest.ResponseParser<SavedMessageResponseMacro>() {
-      public APINodeList<SavedMessageResponseMacro> parseResponse(String response, APIContext context, APIRequest<SavedMessageResponseMacro> request) throws MalformedResponseException {
-        return SavedMessageResponseMacro.parseResponse(response, context, request);
+      public APINodeList<SavedMessageResponseMacro> parseResponse(String response, APIContext context, APIRequest<SavedMessageResponseMacro> request, String header) throws MalformedResponseException {
+        return SavedMessageResponseMacro.parseResponse(response, context, request, header);
       }
     };
   }

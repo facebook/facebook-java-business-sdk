@@ -124,7 +124,7 @@ public class OpenGraphContext extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static OpenGraphContext loadJSON(String json, APIContext context) {
+  public static OpenGraphContext loadJSON(String json, APIContext context, String header) {
     OpenGraphContext openGraphContext = getGson().fromJson(json, OpenGraphContext.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -141,11 +141,12 @@ public class OpenGraphContext extends APINode {
     }
     openGraphContext.context = context;
     openGraphContext.rawValue = json;
+    openGraphContext.header = header;
     return openGraphContext;
   }
 
-  public static APINodeList<OpenGraphContext> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<OpenGraphContext> openGraphContexts = new APINodeList<OpenGraphContext>(request, json);
+  public static APINodeList<OpenGraphContext> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OpenGraphContext> openGraphContexts = new APINodeList<OpenGraphContext>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -156,7 +157,7 @@ public class OpenGraphContext extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          openGraphContexts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          openGraphContexts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return openGraphContexts;
       } else if (result.isJsonObject()) {
@@ -181,7 +182,7 @@ public class OpenGraphContext extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              openGraphContexts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              openGraphContexts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -192,13 +193,13 @@ public class OpenGraphContext extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  openGraphContexts.add(loadJSON(entry.getValue().toString(), context));
+                  openGraphContexts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              openGraphContexts.add(loadJSON(obj.toString(), context));
+              openGraphContexts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return openGraphContexts;
@@ -206,7 +207,7 @@ public class OpenGraphContext extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              openGraphContexts.add(loadJSON(entry.getValue().toString(), context));
+              openGraphContexts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return openGraphContexts;
         } else {
@@ -225,7 +226,7 @@ public class OpenGraphContext extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              openGraphContexts.add(loadJSON(value.toString(), context));
+              openGraphContexts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -237,7 +238,7 @@ public class OpenGraphContext extends APINode {
 
           // Sixth, check if it's pure JsonObject
           openGraphContexts.clear();
-          openGraphContexts.add(loadJSON(json, context));
+          openGraphContexts.add(loadJSON(json, context, header));
           return openGraphContexts;
         }
       }
@@ -307,7 +308,6 @@ public class OpenGraphContext extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -328,12 +328,10 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -361,7 +359,6 @@ public class OpenGraphContext extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -370,8 +367,8 @@ public class OpenGraphContext extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -381,7 +378,8 @@ public class OpenGraphContext extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -395,7 +393,7 @@ public class OpenGraphContext extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetFriendsTaggedAt.this.parseResponse(result);
+               return APIRequestGetFriendsTaggedAt.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -483,13 +481,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetFriendsTaggedAt requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetFriendsTaggedAt requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetFriendsTaggedAt requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetFriendsTaggedAt requestBirthdayField () {
@@ -632,13 +623,6 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetFriendsTaggedAt requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetFriendsTaggedAt requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetFriendsTaggedAt requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -665,13 +649,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetFriendsTaggedAt requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetFriendsTaggedAt requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetFriendsTaggedAt requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetFriendsTaggedAt requestLastNameField () {
@@ -863,13 +840,6 @@ public class OpenGraphContext extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetFriendsTaggedAt requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetFriendsTaggedAt requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetFriendsTaggedAt requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -922,7 +892,6 @@ public class OpenGraphContext extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -943,12 +912,10 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -976,7 +943,6 @@ public class OpenGraphContext extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -985,8 +951,8 @@ public class OpenGraphContext extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -996,7 +962,8 @@ public class OpenGraphContext extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1010,7 +977,7 @@ public class OpenGraphContext extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetFriendsWhoLike.this.parseResponse(result);
+               return APIRequestGetFriendsWhoLike.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1098,13 +1065,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetFriendsWhoLike requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetFriendsWhoLike requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetFriendsWhoLike requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetFriendsWhoLike requestBirthdayField () {
@@ -1247,13 +1207,6 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetFriendsWhoLike requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetFriendsWhoLike requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetFriendsWhoLike requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -1280,13 +1233,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetFriendsWhoLike requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetFriendsWhoLike requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetFriendsWhoLike requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetFriendsWhoLike requestLastNameField () {
@@ -1478,13 +1424,6 @@ public class OpenGraphContext extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetFriendsWhoLike requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetFriendsWhoLike requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetFriendsWhoLike requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -1537,7 +1476,6 @@ public class OpenGraphContext extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -1558,12 +1496,10 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -1591,7 +1527,6 @@ public class OpenGraphContext extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -1600,8 +1535,8 @@ public class OpenGraphContext extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1611,7 +1546,8 @@ public class OpenGraphContext extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1625,7 +1561,7 @@ public class OpenGraphContext extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetMusicListenFriends.this.parseResponse(result);
+               return APIRequestGetMusicListenFriends.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1713,13 +1649,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetMusicListenFriends requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetMusicListenFriends requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetMusicListenFriends requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetMusicListenFriends requestBirthdayField () {
@@ -1862,13 +1791,6 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetMusicListenFriends requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetMusicListenFriends requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetMusicListenFriends requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -1895,13 +1817,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetMusicListenFriends requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetMusicListenFriends requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetMusicListenFriends requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetMusicListenFriends requestLastNameField () {
@@ -2093,13 +2008,6 @@ public class OpenGraphContext extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetMusicListenFriends requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetMusicListenFriends requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetMusicListenFriends requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -2152,7 +2060,6 @@ public class OpenGraphContext extends APINode {
       "address",
       "admin_notes",
       "age_range",
-      "bio",
       "birthday",
       "can_review_measurement_request",
       "context",
@@ -2173,12 +2080,10 @@ public class OpenGraphContext extends APINode {
       "installed",
       "interested_in",
       "is_famedeeplinkinguser",
-      "is_payment_enabled",
       "is_shared_login",
       "is_verified",
       "labels",
       "languages",
-      "last_ad_referral",
       "last_name",
       "link",
       "local_news_megaphone_dismiss_status",
@@ -2206,7 +2111,6 @@ public class OpenGraphContext extends APINode {
       "timezone",
       "token_for_business",
       "updated_time",
-      "username",
       "verified",
       "video_upload_limits",
       "viewer_can_send_gift",
@@ -2215,8 +2119,8 @@ public class OpenGraphContext extends APINode {
     };
 
     @Override
-    public APINodeList<User> parseResponse(String response) throws APIException {
-      return User.parseResponse(response, getContext(), this);
+    public APINodeList<User> parseResponse(String response, String header) throws APIException {
+      return User.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2226,7 +2130,8 @@ public class OpenGraphContext extends APINode {
 
     @Override
     public APINodeList<User> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2240,7 +2145,7 @@ public class OpenGraphContext extends APINode {
         new Function<String, APINodeList<User>>() {
            public APINodeList<User> apply(String result) {
              try {
-               return APIRequestGetVideoWatchFriends.this.parseResponse(result);
+               return APIRequestGetVideoWatchFriends.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2328,13 +2233,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetVideoWatchFriends requestAgeRangeField (boolean value) {
       this.requestField("age_range", value);
-      return this;
-    }
-    public APIRequestGetVideoWatchFriends requestBioField () {
-      return this.requestBioField(true);
-    }
-    public APIRequestGetVideoWatchFriends requestBioField (boolean value) {
-      this.requestField("bio", value);
       return this;
     }
     public APIRequestGetVideoWatchFriends requestBirthdayField () {
@@ -2477,13 +2375,6 @@ public class OpenGraphContext extends APINode {
       this.requestField("is_famedeeplinkinguser", value);
       return this;
     }
-    public APIRequestGetVideoWatchFriends requestIsPaymentEnabledField () {
-      return this.requestIsPaymentEnabledField(true);
-    }
-    public APIRequestGetVideoWatchFriends requestIsPaymentEnabledField (boolean value) {
-      this.requestField("is_payment_enabled", value);
-      return this;
-    }
     public APIRequestGetVideoWatchFriends requestIsSharedLoginField () {
       return this.requestIsSharedLoginField(true);
     }
@@ -2510,13 +2401,6 @@ public class OpenGraphContext extends APINode {
     }
     public APIRequestGetVideoWatchFriends requestLanguagesField (boolean value) {
       this.requestField("languages", value);
-      return this;
-    }
-    public APIRequestGetVideoWatchFriends requestLastAdReferralField () {
-      return this.requestLastAdReferralField(true);
-    }
-    public APIRequestGetVideoWatchFriends requestLastAdReferralField (boolean value) {
-      this.requestField("last_ad_referral", value);
       return this;
     }
     public APIRequestGetVideoWatchFriends requestLastNameField () {
@@ -2708,13 +2592,6 @@ public class OpenGraphContext extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetVideoWatchFriends requestUsernameField () {
-      return this.requestUsernameField(true);
-    }
-    public APIRequestGetVideoWatchFriends requestUsernameField (boolean value) {
-      this.requestField("username", value);
-      return this;
-    }
     public APIRequestGetVideoWatchFriends requestVerifiedField () {
       return this.requestVerifiedField(true);
     }
@@ -2767,8 +2644,8 @@ public class OpenGraphContext extends APINode {
     };
 
     @Override
-    public OpenGraphContext parseResponse(String response) throws APIException {
-      return OpenGraphContext.parseResponse(response, getContext(), this).head();
+    public OpenGraphContext parseResponse(String response, String header) throws APIException {
+      return OpenGraphContext.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2778,7 +2655,8 @@ public class OpenGraphContext extends APINode {
 
     @Override
     public OpenGraphContext execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2792,7 +2670,7 @@ public class OpenGraphContext extends APINode {
         new Function<String, OpenGraphContext>() {
            public OpenGraphContext apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2886,8 +2764,8 @@ public class OpenGraphContext extends APINode {
 
   public static APIRequest.ResponseParser<OpenGraphContext> getParser() {
     return new APIRequest.ResponseParser<OpenGraphContext>() {
-      public APINodeList<OpenGraphContext> parseResponse(String response, APIContext context, APIRequest<OpenGraphContext> request) throws MalformedResponseException {
-        return OpenGraphContext.parseResponse(response, context, request);
+      public APINodeList<OpenGraphContext> parseResponse(String response, APIContext context, APIRequest<OpenGraphContext> request, String header) throws MalformedResponseException {
+        return OpenGraphContext.parseResponse(response, context, request, header);
       }
     };
   }

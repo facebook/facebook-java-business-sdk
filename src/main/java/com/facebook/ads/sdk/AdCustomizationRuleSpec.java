@@ -81,7 +81,7 @@ public class AdCustomizationRuleSpec extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCustomizationRuleSpec loadJSON(String json, APIContext context) {
+  public static AdCustomizationRuleSpec loadJSON(String json, APIContext context, String header) {
     AdCustomizationRuleSpec adCustomizationRuleSpec = getGson().fromJson(json, AdCustomizationRuleSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -98,11 +98,12 @@ public class AdCustomizationRuleSpec extends APINode {
     }
     adCustomizationRuleSpec.context = context;
     adCustomizationRuleSpec.rawValue = json;
+    adCustomizationRuleSpec.header = header;
     return adCustomizationRuleSpec;
   }
 
-  public static APINodeList<AdCustomizationRuleSpec> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCustomizationRuleSpec> adCustomizationRuleSpecs = new APINodeList<AdCustomizationRuleSpec>(request, json);
+  public static APINodeList<AdCustomizationRuleSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCustomizationRuleSpec> adCustomizationRuleSpecs = new APINodeList<AdCustomizationRuleSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -113,7 +114,7 @@ public class AdCustomizationRuleSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCustomizationRuleSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCustomizationRuleSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCustomizationRuleSpecs;
       } else if (result.isJsonObject()) {
@@ -138,7 +139,7 @@ public class AdCustomizationRuleSpec extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCustomizationRuleSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCustomizationRuleSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -149,13 +150,13 @@ public class AdCustomizationRuleSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCustomizationRuleSpecs.add(loadJSON(entry.getValue().toString(), context));
+                  adCustomizationRuleSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCustomizationRuleSpecs.add(loadJSON(obj.toString(), context));
+              adCustomizationRuleSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCustomizationRuleSpecs;
@@ -163,7 +164,7 @@ public class AdCustomizationRuleSpec extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCustomizationRuleSpecs.add(loadJSON(entry.getValue().toString(), context));
+              adCustomizationRuleSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCustomizationRuleSpecs;
         } else {
@@ -182,7 +183,7 @@ public class AdCustomizationRuleSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCustomizationRuleSpecs.add(loadJSON(value.toString(), context));
+              adCustomizationRuleSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -194,7 +195,7 @@ public class AdCustomizationRuleSpec extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCustomizationRuleSpecs.clear();
-          adCustomizationRuleSpecs.add(loadJSON(json, context));
+          adCustomizationRuleSpecs.add(loadJSON(json, context, header));
           return adCustomizationRuleSpecs;
         }
       }
@@ -342,8 +343,8 @@ public class AdCustomizationRuleSpec extends APINode {
 
   public static APIRequest.ResponseParser<AdCustomizationRuleSpec> getParser() {
     return new APIRequest.ResponseParser<AdCustomizationRuleSpec>() {
-      public APINodeList<AdCustomizationRuleSpec> parseResponse(String response, APIContext context, APIRequest<AdCustomizationRuleSpec> request) throws MalformedResponseException {
-        return AdCustomizationRuleSpec.parseResponse(response, context, request);
+      public APINodeList<AdCustomizationRuleSpec> parseResponse(String response, APIContext context, APIRequest<AdCustomizationRuleSpec> request, String header) throws MalformedResponseException {
+        return AdCustomizationRuleSpec.parseResponse(response, context, request, header);
       }
     };
   }

@@ -128,7 +128,7 @@ public class Domain extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Domain loadJSON(String json, APIContext context) {
+  public static Domain loadJSON(String json, APIContext context, String header) {
     Domain domain = getGson().fromJson(json, Domain.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -145,11 +145,12 @@ public class Domain extends APINode {
     }
     domain.context = context;
     domain.rawValue = json;
+    domain.header = header;
     return domain;
   }
 
-  public static APINodeList<Domain> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Domain> domains = new APINodeList<Domain>(request, json);
+  public static APINodeList<Domain> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Domain> domains = new APINodeList<Domain>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -160,7 +161,7 @@ public class Domain extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          domains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          domains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return domains;
       } else if (result.isJsonObject()) {
@@ -185,7 +186,7 @@ public class Domain extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              domains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              domains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -196,13 +197,13 @@ public class Domain extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  domains.add(loadJSON(entry.getValue().toString(), context));
+                  domains.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              domains.add(loadJSON(obj.toString(), context));
+              domains.add(loadJSON(obj.toString(), context, header));
             }
           }
           return domains;
@@ -210,7 +211,7 @@ public class Domain extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              domains.add(loadJSON(entry.getValue().toString(), context));
+              domains.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return domains;
         } else {
@@ -229,7 +230,7 @@ public class Domain extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              domains.add(loadJSON(value.toString(), context));
+              domains.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -241,7 +242,7 @@ public class Domain extends APINode {
 
           // Sixth, check if it's pure JsonObject
           domains.clear();
-          domains.add(loadJSON(json, context));
+          domains.add(loadJSON(json, context, header));
           return domains;
         }
       }
@@ -305,8 +306,8 @@ public class Domain extends APINode {
     };
 
     @Override
-    public Domain parseResponse(String response) throws APIException {
-      return Domain.parseResponse(response, getContext(), this).head();
+    public Domain parseResponse(String response, String header) throws APIException {
+      return Domain.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -316,7 +317,8 @@ public class Domain extends APINode {
 
     @Override
     public Domain execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -330,7 +332,7 @@ public class Domain extends APINode {
         new Function<String, Domain>() {
            public Domain apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -440,8 +442,8 @@ public class Domain extends APINode {
 
   public static APIRequest.ResponseParser<Domain> getParser() {
     return new APIRequest.ResponseParser<Domain>() {
-      public APINodeList<Domain> parseResponse(String response, APIContext context, APIRequest<Domain> request) throws MalformedResponseException {
-        return Domain.parseResponse(response, context, request);
+      public APINodeList<Domain> parseResponse(String response, APIContext context, APIRequest<Domain> request, String header) throws MalformedResponseException {
+        return Domain.parseResponse(response, context, request, header);
       }
     };
   }

@@ -134,7 +134,7 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static MessengerDestinationPageWelcomeMessage loadJSON(String json, APIContext context) {
+  public static MessengerDestinationPageWelcomeMessage loadJSON(String json, APIContext context, String header) {
     MessengerDestinationPageWelcomeMessage messengerDestinationPageWelcomeMessage = getGson().fromJson(json, MessengerDestinationPageWelcomeMessage.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -151,11 +151,12 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
     }
     messengerDestinationPageWelcomeMessage.context = context;
     messengerDestinationPageWelcomeMessage.rawValue = json;
+    messengerDestinationPageWelcomeMessage.header = header;
     return messengerDestinationPageWelcomeMessage;
   }
 
-  public static APINodeList<MessengerDestinationPageWelcomeMessage> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<MessengerDestinationPageWelcomeMessage> messengerDestinationPageWelcomeMessages = new APINodeList<MessengerDestinationPageWelcomeMessage>(request, json);
+  public static APINodeList<MessengerDestinationPageWelcomeMessage> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<MessengerDestinationPageWelcomeMessage> messengerDestinationPageWelcomeMessages = new APINodeList<MessengerDestinationPageWelcomeMessage>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -166,7 +167,7 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          messengerDestinationPageWelcomeMessages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          messengerDestinationPageWelcomeMessages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return messengerDestinationPageWelcomeMessages;
       } else if (result.isJsonObject()) {
@@ -191,7 +192,7 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              messengerDestinationPageWelcomeMessages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              messengerDestinationPageWelcomeMessages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -202,13 +203,13 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  messengerDestinationPageWelcomeMessages.add(loadJSON(entry.getValue().toString(), context));
+                  messengerDestinationPageWelcomeMessages.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              messengerDestinationPageWelcomeMessages.add(loadJSON(obj.toString(), context));
+              messengerDestinationPageWelcomeMessages.add(loadJSON(obj.toString(), context, header));
             }
           }
           return messengerDestinationPageWelcomeMessages;
@@ -216,7 +217,7 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              messengerDestinationPageWelcomeMessages.add(loadJSON(entry.getValue().toString(), context));
+              messengerDestinationPageWelcomeMessages.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return messengerDestinationPageWelcomeMessages;
         } else {
@@ -235,7 +236,7 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              messengerDestinationPageWelcomeMessages.add(loadJSON(value.toString(), context));
+              messengerDestinationPageWelcomeMessages.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -247,7 +248,7 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
 
           // Sixth, check if it's pure JsonObject
           messengerDestinationPageWelcomeMessages.clear();
-          messengerDestinationPageWelcomeMessages.add(loadJSON(json, context));
+          messengerDestinationPageWelcomeMessages.add(loadJSON(json, context, header));
           return messengerDestinationPageWelcomeMessages;
         }
       }
@@ -326,8 +327,8 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
     };
 
     @Override
-    public MessengerDestinationPageWelcomeMessage parseResponse(String response) throws APIException {
-      return MessengerDestinationPageWelcomeMessage.parseResponse(response, getContext(), this).head();
+    public MessengerDestinationPageWelcomeMessage parseResponse(String response, String header) throws APIException {
+      return MessengerDestinationPageWelcomeMessage.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -337,7 +338,8 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
 
     @Override
     public MessengerDestinationPageWelcomeMessage execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -351,7 +353,7 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
         new Function<String, MessengerDestinationPageWelcomeMessage>() {
            public MessengerDestinationPageWelcomeMessage apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -485,8 +487,8 @@ public class MessengerDestinationPageWelcomeMessage extends APINode {
 
   public static APIRequest.ResponseParser<MessengerDestinationPageWelcomeMessage> getParser() {
     return new APIRequest.ResponseParser<MessengerDestinationPageWelcomeMessage>() {
-      public APINodeList<MessengerDestinationPageWelcomeMessage> parseResponse(String response, APIContext context, APIRequest<MessengerDestinationPageWelcomeMessage> request) throws MalformedResponseException {
-        return MessengerDestinationPageWelcomeMessage.parseResponse(response, context, request);
+      public APINodeList<MessengerDestinationPageWelcomeMessage> parseResponse(String response, APIContext context, APIRequest<MessengerDestinationPageWelcomeMessage> request, String header) throws MalformedResponseException {
+        return MessengerDestinationPageWelcomeMessage.parseResponse(response, context, request, header);
       }
     };
   }

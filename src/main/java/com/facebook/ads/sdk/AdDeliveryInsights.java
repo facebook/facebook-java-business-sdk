@@ -79,7 +79,7 @@ public class AdDeliveryInsights extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdDeliveryInsights loadJSON(String json, APIContext context) {
+  public static AdDeliveryInsights loadJSON(String json, APIContext context, String header) {
     AdDeliveryInsights adDeliveryInsights = getGson().fromJson(json, AdDeliveryInsights.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -96,11 +96,12 @@ public class AdDeliveryInsights extends APINode {
     }
     adDeliveryInsights.context = context;
     adDeliveryInsights.rawValue = json;
+    adDeliveryInsights.header = header;
     return adDeliveryInsights;
   }
 
-  public static APINodeList<AdDeliveryInsights> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdDeliveryInsights> adDeliveryInsightss = new APINodeList<AdDeliveryInsights>(request, json);
+  public static APINodeList<AdDeliveryInsights> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdDeliveryInsights> adDeliveryInsightss = new APINodeList<AdDeliveryInsights>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -111,7 +112,7 @@ public class AdDeliveryInsights extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adDeliveryInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adDeliveryInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adDeliveryInsightss;
       } else if (result.isJsonObject()) {
@@ -136,7 +137,7 @@ public class AdDeliveryInsights extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adDeliveryInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adDeliveryInsightss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -147,13 +148,13 @@ public class AdDeliveryInsights extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adDeliveryInsightss.add(loadJSON(entry.getValue().toString(), context));
+                  adDeliveryInsightss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adDeliveryInsightss.add(loadJSON(obj.toString(), context));
+              adDeliveryInsightss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adDeliveryInsightss;
@@ -161,7 +162,7 @@ public class AdDeliveryInsights extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adDeliveryInsightss.add(loadJSON(entry.getValue().toString(), context));
+              adDeliveryInsightss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adDeliveryInsightss;
         } else {
@@ -180,7 +181,7 @@ public class AdDeliveryInsights extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adDeliveryInsightss.add(loadJSON(value.toString(), context));
+              adDeliveryInsightss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -192,7 +193,7 @@ public class AdDeliveryInsights extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adDeliveryInsightss.clear();
-          adDeliveryInsightss.add(loadJSON(json, context));
+          adDeliveryInsightss.add(loadJSON(json, context, header));
           return adDeliveryInsightss;
         }
       }
@@ -325,8 +326,8 @@ public class AdDeliveryInsights extends APINode {
 
   public static APIRequest.ResponseParser<AdDeliveryInsights> getParser() {
     return new APIRequest.ResponseParser<AdDeliveryInsights>() {
-      public APINodeList<AdDeliveryInsights> parseResponse(String response, APIContext context, APIRequest<AdDeliveryInsights> request) throws MalformedResponseException {
-        return AdDeliveryInsights.parseResponse(response, context, request);
+      public APINodeList<AdDeliveryInsights> parseResponse(String response, APIContext context, APIRequest<AdDeliveryInsights> request, String header) throws MalformedResponseException {
+        return AdDeliveryInsights.parseResponse(response, context, request, header);
       }
     };
   }

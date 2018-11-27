@@ -57,8 +57,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ProductCatalogUserPermissions extends APINode {
   @SerializedName("business")
   private Business mBusiness = null;
-  @SerializedName("business_persona")
-  private Object mBusinessPersona = null;
   @SerializedName("created_by")
   private User mCreatedBy = null;
   @SerializedName("created_time")
@@ -85,7 +83,7 @@ public class ProductCatalogUserPermissions extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductCatalogUserPermissions loadJSON(String json, APIContext context) {
+  public static ProductCatalogUserPermissions loadJSON(String json, APIContext context, String header) {
     ProductCatalogUserPermissions productCatalogUserPermissions = getGson().fromJson(json, ProductCatalogUserPermissions.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -102,11 +100,12 @@ public class ProductCatalogUserPermissions extends APINode {
     }
     productCatalogUserPermissions.context = context;
     productCatalogUserPermissions.rawValue = json;
+    productCatalogUserPermissions.header = header;
     return productCatalogUserPermissions;
   }
 
-  public static APINodeList<ProductCatalogUserPermissions> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ProductCatalogUserPermissions> productCatalogUserPermissionss = new APINodeList<ProductCatalogUserPermissions>(request, json);
+  public static APINodeList<ProductCatalogUserPermissions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductCatalogUserPermissions> productCatalogUserPermissionss = new APINodeList<ProductCatalogUserPermissions>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -117,7 +116,7 @@ public class ProductCatalogUserPermissions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          productCatalogUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return productCatalogUserPermissionss;
       } else if (result.isJsonObject()) {
@@ -142,7 +141,7 @@ public class ProductCatalogUserPermissions extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              productCatalogUserPermissionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -153,13 +152,13 @@ public class ProductCatalogUserPermissions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogUserPermissionss.add(loadJSON(entry.getValue().toString(), context));
+                  productCatalogUserPermissionss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogUserPermissionss.add(loadJSON(obj.toString(), context));
+              productCatalogUserPermissionss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return productCatalogUserPermissionss;
@@ -167,7 +166,7 @@ public class ProductCatalogUserPermissions extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogUserPermissionss.add(loadJSON(entry.getValue().toString(), context));
+              productCatalogUserPermissionss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return productCatalogUserPermissionss;
         } else {
@@ -186,7 +185,7 @@ public class ProductCatalogUserPermissions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogUserPermissionss.add(loadJSON(value.toString(), context));
+              productCatalogUserPermissionss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -198,7 +197,7 @@ public class ProductCatalogUserPermissions extends APINode {
 
           // Sixth, check if it's pure JsonObject
           productCatalogUserPermissionss.clear();
-          productCatalogUserPermissionss.add(loadJSON(json, context));
+          productCatalogUserPermissionss.add(loadJSON(json, context, header));
           return productCatalogUserPermissionss;
         }
       }
@@ -244,15 +243,6 @@ public class ProductCatalogUserPermissions extends APINode {
     this.mBusiness = Business.getGson().fromJson(value, type);
     return this;
   }
-  public Object getFieldBusinessPersona() {
-    return mBusinessPersona;
-  }
-
-  public ProductCatalogUserPermissions setFieldBusinessPersona(Object value) {
-    this.mBusinessPersona = value;
-    return this;
-  }
-
   public User getFieldCreatedBy() {
     if (mCreatedBy != null) {
       mCreatedBy.context = getContext();
@@ -376,7 +366,6 @@ public class ProductCatalogUserPermissions extends APINode {
 
   public ProductCatalogUserPermissions copyFrom(ProductCatalogUserPermissions instance) {
     this.mBusiness = instance.mBusiness;
-    this.mBusinessPersona = instance.mBusinessPersona;
     this.mCreatedBy = instance.mCreatedBy;
     this.mCreatedTime = instance.mCreatedTime;
     this.mEmail = instance.mEmail;
@@ -393,8 +382,8 @@ public class ProductCatalogUserPermissions extends APINode {
 
   public static APIRequest.ResponseParser<ProductCatalogUserPermissions> getParser() {
     return new APIRequest.ResponseParser<ProductCatalogUserPermissions>() {
-      public APINodeList<ProductCatalogUserPermissions> parseResponse(String response, APIContext context, APIRequest<ProductCatalogUserPermissions> request) throws MalformedResponseException {
-        return ProductCatalogUserPermissions.parseResponse(response, context, request);
+      public APINodeList<ProductCatalogUserPermissions> parseResponse(String response, APIContext context, APIRequest<ProductCatalogUserPermissions> request, String header) throws MalformedResponseException {
+        return ProductCatalogUserPermissions.parseResponse(response, context, request, header);
       }
     };
   }

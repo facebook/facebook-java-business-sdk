@@ -149,7 +149,7 @@ public class AdContract extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdContract loadJSON(String json, APIContext context) {
+  public static AdContract loadJSON(String json, APIContext context, String header) {
     AdContract adContract = getGson().fromJson(json, AdContract.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -166,11 +166,12 @@ public class AdContract extends APINode {
     }
     adContract.context = context;
     adContract.rawValue = json;
+    adContract.header = header;
     return adContract;
   }
 
-  public static APINodeList<AdContract> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdContract> adContracts = new APINodeList<AdContract>(request, json);
+  public static APINodeList<AdContract> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdContract> adContracts = new APINodeList<AdContract>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -181,7 +182,7 @@ public class AdContract extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adContracts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adContracts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adContracts;
       } else if (result.isJsonObject()) {
@@ -206,7 +207,7 @@ public class AdContract extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adContracts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adContracts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -217,13 +218,13 @@ public class AdContract extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adContracts.add(loadJSON(entry.getValue().toString(), context));
+                  adContracts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adContracts.add(loadJSON(obj.toString(), context));
+              adContracts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adContracts;
@@ -231,7 +232,7 @@ public class AdContract extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adContracts.add(loadJSON(entry.getValue().toString(), context));
+              adContracts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adContracts;
         } else {
@@ -250,7 +251,7 @@ public class AdContract extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adContracts.add(loadJSON(value.toString(), context));
+              adContracts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -262,7 +263,7 @@ public class AdContract extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adContracts.clear();
-          adContracts.add(loadJSON(json, context));
+          adContracts.add(loadJSON(json, context, header));
           return adContracts;
         }
       }
@@ -745,8 +746,8 @@ public class AdContract extends APINode {
 
   public static APIRequest.ResponseParser<AdContract> getParser() {
     return new APIRequest.ResponseParser<AdContract>() {
-      public APINodeList<AdContract> parseResponse(String response, APIContext context, APIRequest<AdContract> request) throws MalformedResponseException {
-        return AdContract.parseResponse(response, context, request);
+      public APINodeList<AdContract> parseResponse(String response, APIContext context, APIRequest<AdContract> request, String header) throws MalformedResponseException {
+        return AdContract.parseResponse(response, context, request, header);
       }
     };
   }

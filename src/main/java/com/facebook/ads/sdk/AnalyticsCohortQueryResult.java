@@ -73,7 +73,7 @@ public class AnalyticsCohortQueryResult extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AnalyticsCohortQueryResult loadJSON(String json, APIContext context) {
+  public static AnalyticsCohortQueryResult loadJSON(String json, APIContext context, String header) {
     AnalyticsCohortQueryResult analyticsCohortQueryResult = getGson().fromJson(json, AnalyticsCohortQueryResult.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class AnalyticsCohortQueryResult extends APINode {
     }
     analyticsCohortQueryResult.context = context;
     analyticsCohortQueryResult.rawValue = json;
+    analyticsCohortQueryResult.header = header;
     return analyticsCohortQueryResult;
   }
 
-  public static APINodeList<AnalyticsCohortQueryResult> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AnalyticsCohortQueryResult> analyticsCohortQueryResults = new APINodeList<AnalyticsCohortQueryResult>(request, json);
+  public static APINodeList<AnalyticsCohortQueryResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AnalyticsCohortQueryResult> analyticsCohortQueryResults = new APINodeList<AnalyticsCohortQueryResult>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class AnalyticsCohortQueryResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          analyticsCohortQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          analyticsCohortQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return analyticsCohortQueryResults;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class AnalyticsCohortQueryResult extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              analyticsCohortQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              analyticsCohortQueryResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class AnalyticsCohortQueryResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  analyticsCohortQueryResults.add(loadJSON(entry.getValue().toString(), context));
+                  analyticsCohortQueryResults.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              analyticsCohortQueryResults.add(loadJSON(obj.toString(), context));
+              analyticsCohortQueryResults.add(loadJSON(obj.toString(), context, header));
             }
           }
           return analyticsCohortQueryResults;
@@ -155,7 +156,7 @@ public class AnalyticsCohortQueryResult extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              analyticsCohortQueryResults.add(loadJSON(entry.getValue().toString(), context));
+              analyticsCohortQueryResults.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return analyticsCohortQueryResults;
         } else {
@@ -174,7 +175,7 @@ public class AnalyticsCohortQueryResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              analyticsCohortQueryResults.add(loadJSON(value.toString(), context));
+              analyticsCohortQueryResults.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class AnalyticsCohortQueryResult extends APINode {
 
           // Sixth, check if it's pure JsonObject
           analyticsCohortQueryResults.clear();
-          analyticsCohortQueryResults.add(loadJSON(json, context));
+          analyticsCohortQueryResults.add(loadJSON(json, context, header));
           return analyticsCohortQueryResults;
         }
       }
@@ -289,8 +290,8 @@ public class AnalyticsCohortQueryResult extends APINode {
 
   public static APIRequest.ResponseParser<AnalyticsCohortQueryResult> getParser() {
     return new APIRequest.ResponseParser<AnalyticsCohortQueryResult>() {
-      public APINodeList<AnalyticsCohortQueryResult> parseResponse(String response, APIContext context, APIRequest<AnalyticsCohortQueryResult> request) throws MalformedResponseException {
-        return AnalyticsCohortQueryResult.parseResponse(response, context, request);
+      public APINodeList<AnalyticsCohortQueryResult> parseResponse(String response, APIContext context, APIRequest<AnalyticsCohortQueryResult> request, String header) throws MalformedResponseException {
+        return AnalyticsCohortQueryResult.parseResponse(response, context, request, header);
       }
     };
   }

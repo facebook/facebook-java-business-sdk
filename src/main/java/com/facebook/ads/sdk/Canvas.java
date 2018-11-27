@@ -142,7 +142,7 @@ public class Canvas extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Canvas loadJSON(String json, APIContext context) {
+  public static Canvas loadJSON(String json, APIContext context, String header) {
     Canvas canvas = getGson().fromJson(json, Canvas.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -159,11 +159,12 @@ public class Canvas extends APINode {
     }
     canvas.context = context;
     canvas.rawValue = json;
+    canvas.header = header;
     return canvas;
   }
 
-  public static APINodeList<Canvas> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Canvas> canvass = new APINodeList<Canvas>(request, json);
+  public static APINodeList<Canvas> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Canvas> canvass = new APINodeList<Canvas>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -174,7 +175,7 @@ public class Canvas extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          canvass.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          canvass.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return canvass;
       } else if (result.isJsonObject()) {
@@ -199,7 +200,7 @@ public class Canvas extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              canvass.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              canvass.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -210,13 +211,13 @@ public class Canvas extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  canvass.add(loadJSON(entry.getValue().toString(), context));
+                  canvass.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              canvass.add(loadJSON(obj.toString(), context));
+              canvass.add(loadJSON(obj.toString(), context, header));
             }
           }
           return canvass;
@@ -224,7 +225,7 @@ public class Canvas extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              canvass.add(loadJSON(entry.getValue().toString(), context));
+              canvass.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return canvass;
         } else {
@@ -243,7 +244,7 @@ public class Canvas extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              canvass.add(loadJSON(value.toString(), context));
+              canvass.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -255,7 +256,7 @@ public class Canvas extends APINode {
 
           // Sixth, check if it's pure JsonObject
           canvass.clear();
-          canvass.add(loadJSON(json, context));
+          canvass.add(loadJSON(json, context, header));
           return canvass;
         }
       }
@@ -366,8 +367,8 @@ public class Canvas extends APINode {
     };
 
     @Override
-    public Canvas parseResponse(String response) throws APIException {
-      return Canvas.parseResponse(response, getContext(), this).head();
+    public Canvas parseResponse(String response, String header) throws APIException {
+      return Canvas.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -377,7 +378,8 @@ public class Canvas extends APINode {
 
     @Override
     public Canvas execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -391,7 +393,7 @@ public class Canvas extends APINode {
         new Function<String, Canvas>() {
            public Canvas apply(String result) {
              try {
-               return APIRequestCreateDuplicateCanva.this.parseResponse(result);
+               return APIRequestCreateDuplicateCanva.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -470,8 +472,8 @@ public class Canvas extends APINode {
     };
 
     @Override
-    public Canvas parseResponse(String response) throws APIException {
-      return Canvas.parseResponse(response, getContext(), this).head();
+    public Canvas parseResponse(String response, String header) throws APIException {
+      return Canvas.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -481,7 +483,8 @@ public class Canvas extends APINode {
 
     @Override
     public Canvas execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -495,7 +498,7 @@ public class Canvas extends APINode {
         new Function<String, Canvas>() {
            public Canvas apply(String result) {
              try {
-               return APIRequestCreatePreviewNotification.this.parseResponse(result);
+               return APIRequestCreatePreviewNotification.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -582,8 +585,8 @@ public class Canvas extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -593,7 +596,8 @@ public class Canvas extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -607,7 +611,7 @@ public class Canvas extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -695,8 +699,8 @@ public class Canvas extends APINode {
     };
 
     @Override
-    public Canvas parseResponse(String response) throws APIException {
-      return Canvas.parseResponse(response, getContext(), this).head();
+    public Canvas parseResponse(String response, String header) throws APIException {
+      return Canvas.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -706,7 +710,8 @@ public class Canvas extends APINode {
 
     @Override
     public Canvas execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -720,7 +725,7 @@ public class Canvas extends APINode {
         new Function<String, Canvas>() {
            public Canvas apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -874,8 +879,8 @@ public class Canvas extends APINode {
     };
 
     @Override
-    public Canvas parseResponse(String response) throws APIException {
-      return Canvas.parseResponse(response, getContext(), this).head();
+    public Canvas parseResponse(String response, String header) throws APIException {
+      return Canvas.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -885,7 +890,8 @@ public class Canvas extends APINode {
 
     @Override
     public Canvas execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -899,7 +905,7 @@ public class Canvas extends APINode {
         new Function<String, Canvas>() {
            public Canvas apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1041,8 +1047,8 @@ public class Canvas extends APINode {
 
   public static APIRequest.ResponseParser<Canvas> getParser() {
     return new APIRequest.ResponseParser<Canvas>() {
-      public APINodeList<Canvas> parseResponse(String response, APIContext context, APIRequest<Canvas> request) throws MalformedResponseException {
-        return Canvas.parseResponse(response, context, request);
+      public APINodeList<Canvas> parseResponse(String response, APIContext context, APIRequest<Canvas> request, String header) throws MalformedResponseException {
+        return Canvas.parseResponse(response, context, request, header);
       }
     };
   }

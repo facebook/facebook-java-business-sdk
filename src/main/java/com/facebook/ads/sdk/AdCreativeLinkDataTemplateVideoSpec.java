@@ -71,7 +71,7 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCreativeLinkDataTemplateVideoSpec loadJSON(String json, APIContext context) {
+  public static AdCreativeLinkDataTemplateVideoSpec loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkDataTemplateVideoSpec adCreativeLinkDataTemplateVideoSpec = getGson().fromJson(json, AdCreativeLinkDataTemplateVideoSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
     }
     adCreativeLinkDataTemplateVideoSpec.context = context;
     adCreativeLinkDataTemplateVideoSpec.rawValue = json;
+    adCreativeLinkDataTemplateVideoSpec.header = header;
     return adCreativeLinkDataTemplateVideoSpec;
   }
 
-  public static APINodeList<AdCreativeLinkDataTemplateVideoSpec> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCreativeLinkDataTemplateVideoSpec> adCreativeLinkDataTemplateVideoSpecs = new APINodeList<AdCreativeLinkDataTemplateVideoSpec>(request, json);
+  public static APINodeList<AdCreativeLinkDataTemplateVideoSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeLinkDataTemplateVideoSpec> adCreativeLinkDataTemplateVideoSpecs = new APINodeList<AdCreativeLinkDataTemplateVideoSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCreativeLinkDataTemplateVideoSpecs;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(entry.getValue().toString(), context));
+                  adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(obj.toString(), context));
+              adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCreativeLinkDataTemplateVideoSpecs;
@@ -153,7 +154,7 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(entry.getValue().toString(), context));
+              adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCreativeLinkDataTemplateVideoSpecs;
         } else {
@@ -172,7 +173,7 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(value.toString(), context));
+              adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCreativeLinkDataTemplateVideoSpecs.clear();
-          adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(json, context));
+          adCreativeLinkDataTemplateVideoSpecs.add(loadJSON(json, context, header));
           return adCreativeLinkDataTemplateVideoSpecs;
         }
       }
@@ -277,8 +278,8 @@ public class AdCreativeLinkDataTemplateVideoSpec extends APINode {
 
   public static APIRequest.ResponseParser<AdCreativeLinkDataTemplateVideoSpec> getParser() {
     return new APIRequest.ResponseParser<AdCreativeLinkDataTemplateVideoSpec>() {
-      public APINodeList<AdCreativeLinkDataTemplateVideoSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeLinkDataTemplateVideoSpec> request) throws MalformedResponseException {
-        return AdCreativeLinkDataTemplateVideoSpec.parseResponse(response, context, request);
+      public APINodeList<AdCreativeLinkDataTemplateVideoSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeLinkDataTemplateVideoSpec> request, String header) throws MalformedResponseException {
+        return AdCreativeLinkDataTemplateVideoSpec.parseResponse(response, context, request, header);
       }
     };
   }

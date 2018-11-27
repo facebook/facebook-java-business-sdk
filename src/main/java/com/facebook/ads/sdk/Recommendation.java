@@ -81,7 +81,7 @@ public class Recommendation extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Recommendation loadJSON(String json, APIContext context) {
+  public static Recommendation loadJSON(String json, APIContext context, String header) {
     Recommendation recommendation = getGson().fromJson(json, Recommendation.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -98,11 +98,12 @@ public class Recommendation extends APINode {
     }
     recommendation.context = context;
     recommendation.rawValue = json;
+    recommendation.header = header;
     return recommendation;
   }
 
-  public static APINodeList<Recommendation> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Recommendation> recommendations = new APINodeList<Recommendation>(request, json);
+  public static APINodeList<Recommendation> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Recommendation> recommendations = new APINodeList<Recommendation>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -113,7 +114,7 @@ public class Recommendation extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          recommendations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          recommendations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return recommendations;
       } else if (result.isJsonObject()) {
@@ -138,7 +139,7 @@ public class Recommendation extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              recommendations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              recommendations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -149,13 +150,13 @@ public class Recommendation extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  recommendations.add(loadJSON(entry.getValue().toString(), context));
+                  recommendations.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              recommendations.add(loadJSON(obj.toString(), context));
+              recommendations.add(loadJSON(obj.toString(), context, header));
             }
           }
           return recommendations;
@@ -163,7 +164,7 @@ public class Recommendation extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              recommendations.add(loadJSON(entry.getValue().toString(), context));
+              recommendations.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return recommendations;
         } else {
@@ -182,7 +183,7 @@ public class Recommendation extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              recommendations.add(loadJSON(value.toString(), context));
+              recommendations.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -194,7 +195,7 @@ public class Recommendation extends APINode {
 
           // Sixth, check if it's pure JsonObject
           recommendations.clear();
-          recommendations.add(loadJSON(json, context));
+          recommendations.add(loadJSON(json, context, header));
           return recommendations;
         }
       }
@@ -345,8 +346,8 @@ public class Recommendation extends APINode {
 
   public static APIRequest.ResponseParser<Recommendation> getParser() {
     return new APIRequest.ResponseParser<Recommendation>() {
-      public APINodeList<Recommendation> parseResponse(String response, APIContext context, APIRequest<Recommendation> request) throws MalformedResponseException {
-        return Recommendation.parseResponse(response, context, request);
+      public APINodeList<Recommendation> parseResponse(String response, APIContext context, APIRequest<Recommendation> request, String header) throws MalformedResponseException {
+        return Recommendation.parseResponse(response, context, request, header);
       }
     };
   }

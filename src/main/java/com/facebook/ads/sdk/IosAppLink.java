@@ -71,7 +71,7 @@ public class IosAppLink extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static IosAppLink loadJSON(String json, APIContext context) {
+  public static IosAppLink loadJSON(String json, APIContext context, String header) {
     IosAppLink iosAppLink = getGson().fromJson(json, IosAppLink.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class IosAppLink extends APINode {
     }
     iosAppLink.context = context;
     iosAppLink.rawValue = json;
+    iosAppLink.header = header;
     return iosAppLink;
   }
 
-  public static APINodeList<IosAppLink> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<IosAppLink> iosAppLinks = new APINodeList<IosAppLink>(request, json);
+  public static APINodeList<IosAppLink> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<IosAppLink> iosAppLinks = new APINodeList<IosAppLink>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class IosAppLink extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          iosAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          iosAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return iosAppLinks;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class IosAppLink extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              iosAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              iosAppLinks.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class IosAppLink extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  iosAppLinks.add(loadJSON(entry.getValue().toString(), context));
+                  iosAppLinks.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              iosAppLinks.add(loadJSON(obj.toString(), context));
+              iosAppLinks.add(loadJSON(obj.toString(), context, header));
             }
           }
           return iosAppLinks;
@@ -153,7 +154,7 @@ public class IosAppLink extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              iosAppLinks.add(loadJSON(entry.getValue().toString(), context));
+              iosAppLinks.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return iosAppLinks;
         } else {
@@ -172,7 +173,7 @@ public class IosAppLink extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              iosAppLinks.add(loadJSON(value.toString(), context));
+              iosAppLinks.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class IosAppLink extends APINode {
 
           // Sixth, check if it's pure JsonObject
           iosAppLinks.clear();
-          iosAppLinks.add(loadJSON(json, context));
+          iosAppLinks.add(loadJSON(json, context, header));
           return iosAppLinks;
         }
       }
@@ -277,8 +278,8 @@ public class IosAppLink extends APINode {
 
   public static APIRequest.ResponseParser<IosAppLink> getParser() {
     return new APIRequest.ResponseParser<IosAppLink>() {
-      public APINodeList<IosAppLink> parseResponse(String response, APIContext context, APIRequest<IosAppLink> request) throws MalformedResponseException {
-        return IosAppLink.parseResponse(response, context, request);
+      public APINodeList<IosAppLink> parseResponse(String response, APIContext context, APIRequest<IosAppLink> request, String header) throws MalformedResponseException {
+        return IosAppLink.parseResponse(response, context, request, header);
       }
     };
   }

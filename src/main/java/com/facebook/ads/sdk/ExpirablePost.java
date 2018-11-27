@@ -101,7 +101,7 @@ public class ExpirablePost extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ExpirablePost loadJSON(String json, APIContext context) {
+  public static ExpirablePost loadJSON(String json, APIContext context, String header) {
     ExpirablePost expirablePost = getGson().fromJson(json, ExpirablePost.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -118,11 +118,12 @@ public class ExpirablePost extends APINode {
     }
     expirablePost.context = context;
     expirablePost.rawValue = json;
+    expirablePost.header = header;
     return expirablePost;
   }
 
-  public static APINodeList<ExpirablePost> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ExpirablePost> expirablePosts = new APINodeList<ExpirablePost>(request, json);
+  public static APINodeList<ExpirablePost> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ExpirablePost> expirablePosts = new APINodeList<ExpirablePost>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -133,7 +134,7 @@ public class ExpirablePost extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          expirablePosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          expirablePosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return expirablePosts;
       } else if (result.isJsonObject()) {
@@ -158,7 +159,7 @@ public class ExpirablePost extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              expirablePosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              expirablePosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -169,13 +170,13 @@ public class ExpirablePost extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  expirablePosts.add(loadJSON(entry.getValue().toString(), context));
+                  expirablePosts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              expirablePosts.add(loadJSON(obj.toString(), context));
+              expirablePosts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return expirablePosts;
@@ -183,7 +184,7 @@ public class ExpirablePost extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              expirablePosts.add(loadJSON(entry.getValue().toString(), context));
+              expirablePosts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return expirablePosts;
         } else {
@@ -202,7 +203,7 @@ public class ExpirablePost extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              expirablePosts.add(loadJSON(value.toString(), context));
+              expirablePosts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -214,7 +215,7 @@ public class ExpirablePost extends APINode {
 
           // Sixth, check if it's pure JsonObject
           expirablePosts.clear();
-          expirablePosts.add(loadJSON(json, context));
+          expirablePosts.add(loadJSON(json, context, header));
           return expirablePosts;
         }
       }
@@ -478,8 +479,8 @@ public class ExpirablePost extends APINode {
 
   public static APIRequest.ResponseParser<ExpirablePost> getParser() {
     return new APIRequest.ResponseParser<ExpirablePost>() {
-      public APINodeList<ExpirablePost> parseResponse(String response, APIContext context, APIRequest<ExpirablePost> request) throws MalformedResponseException {
-        return ExpirablePost.parseResponse(response, context, request);
+      public APINodeList<ExpirablePost> parseResponse(String response, APIContext context, APIRequest<ExpirablePost> request, String header) throws MalformedResponseException {
+        return ExpirablePost.parseResponse(response, context, request, header);
       }
     };
   }

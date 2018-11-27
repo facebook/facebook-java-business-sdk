@@ -67,7 +67,7 @@ public class FBLiteToNTTransitions extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static FBLiteToNTTransitions loadJSON(String json, APIContext context) {
+  public static FBLiteToNTTransitions loadJSON(String json, APIContext context, String header) {
     FBLiteToNTTransitions fbLiteToNTTransitions = getGson().fromJson(json, FBLiteToNTTransitions.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class FBLiteToNTTransitions extends APINode {
     }
     fbLiteToNTTransitions.context = context;
     fbLiteToNTTransitions.rawValue = json;
+    fbLiteToNTTransitions.header = header;
     return fbLiteToNTTransitions;
   }
 
-  public static APINodeList<FBLiteToNTTransitions> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<FBLiteToNTTransitions> fbLiteToNTTransitionss = new APINodeList<FBLiteToNTTransitions>(request, json);
+  public static APINodeList<FBLiteToNTTransitions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<FBLiteToNTTransitions> fbLiteToNTTransitionss = new APINodeList<FBLiteToNTTransitions>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class FBLiteToNTTransitions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          fbLiteToNTTransitionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          fbLiteToNTTransitionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return fbLiteToNTTransitionss;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class FBLiteToNTTransitions extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              fbLiteToNTTransitionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              fbLiteToNTTransitionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class FBLiteToNTTransitions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  fbLiteToNTTransitionss.add(loadJSON(entry.getValue().toString(), context));
+                  fbLiteToNTTransitionss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              fbLiteToNTTransitionss.add(loadJSON(obj.toString(), context));
+              fbLiteToNTTransitionss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return fbLiteToNTTransitionss;
@@ -149,7 +150,7 @@ public class FBLiteToNTTransitions extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              fbLiteToNTTransitionss.add(loadJSON(entry.getValue().toString(), context));
+              fbLiteToNTTransitionss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return fbLiteToNTTransitionss;
         } else {
@@ -168,7 +169,7 @@ public class FBLiteToNTTransitions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              fbLiteToNTTransitionss.add(loadJSON(value.toString(), context));
+              fbLiteToNTTransitionss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class FBLiteToNTTransitions extends APINode {
 
           // Sixth, check if it's pure JsonObject
           fbLiteToNTTransitionss.clear();
-          fbLiteToNTTransitionss.add(loadJSON(json, context));
+          fbLiteToNTTransitionss.add(loadJSON(json, context, header));
           return fbLiteToNTTransitionss;
         }
       }
@@ -253,8 +254,8 @@ public class FBLiteToNTTransitions extends APINode {
 
   public static APIRequest.ResponseParser<FBLiteToNTTransitions> getParser() {
     return new APIRequest.ResponseParser<FBLiteToNTTransitions>() {
-      public APINodeList<FBLiteToNTTransitions> parseResponse(String response, APIContext context, APIRequest<FBLiteToNTTransitions> request) throws MalformedResponseException {
-        return FBLiteToNTTransitions.parseResponse(response, context, request);
+      public APINodeList<FBLiteToNTTransitions> parseResponse(String response, APIContext context, APIRequest<FBLiteToNTTransitions> request, String header) throws MalformedResponseException {
+        return FBLiteToNTTransitions.parseResponse(response, context, request, header);
       }
     };
   }

@@ -69,7 +69,7 @@ public class AdRuleExecutionSpec extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdRuleExecutionSpec loadJSON(String json, APIContext context) {
+  public static AdRuleExecutionSpec loadJSON(String json, APIContext context, String header) {
     AdRuleExecutionSpec adRuleExecutionSpec = getGson().fromJson(json, AdRuleExecutionSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class AdRuleExecutionSpec extends APINode {
     }
     adRuleExecutionSpec.context = context;
     adRuleExecutionSpec.rawValue = json;
+    adRuleExecutionSpec.header = header;
     return adRuleExecutionSpec;
   }
 
-  public static APINodeList<AdRuleExecutionSpec> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdRuleExecutionSpec> adRuleExecutionSpecs = new APINodeList<AdRuleExecutionSpec>(request, json);
+  public static APINodeList<AdRuleExecutionSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdRuleExecutionSpec> adRuleExecutionSpecs = new APINodeList<AdRuleExecutionSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class AdRuleExecutionSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adRuleExecutionSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adRuleExecutionSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adRuleExecutionSpecs;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class AdRuleExecutionSpec extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adRuleExecutionSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adRuleExecutionSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class AdRuleExecutionSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adRuleExecutionSpecs.add(loadJSON(entry.getValue().toString(), context));
+                  adRuleExecutionSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adRuleExecutionSpecs.add(loadJSON(obj.toString(), context));
+              adRuleExecutionSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adRuleExecutionSpecs;
@@ -151,7 +152,7 @@ public class AdRuleExecutionSpec extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adRuleExecutionSpecs.add(loadJSON(entry.getValue().toString(), context));
+              adRuleExecutionSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adRuleExecutionSpecs;
         } else {
@@ -170,7 +171,7 @@ public class AdRuleExecutionSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adRuleExecutionSpecs.add(loadJSON(value.toString(), context));
+              adRuleExecutionSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class AdRuleExecutionSpec extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adRuleExecutionSpecs.clear();
-          adRuleExecutionSpecs.add(loadJSON(json, context));
+          adRuleExecutionSpecs.add(loadJSON(json, context, header));
           return adRuleExecutionSpecs;
         }
       }
@@ -301,8 +302,8 @@ public class AdRuleExecutionSpec extends APINode {
 
   public static APIRequest.ResponseParser<AdRuleExecutionSpec> getParser() {
     return new APIRequest.ResponseParser<AdRuleExecutionSpec>() {
-      public APINodeList<AdRuleExecutionSpec> parseResponse(String response, APIContext context, APIRequest<AdRuleExecutionSpec> request) throws MalformedResponseException {
-        return AdRuleExecutionSpec.parseResponse(response, context, request);
+      public APINodeList<AdRuleExecutionSpec> parseResponse(String response, APIContext context, APIRequest<AdRuleExecutionSpec> request, String header) throws MalformedResponseException {
+        return AdRuleExecutionSpec.parseResponse(response, context, request, header);
       }
     };
   }

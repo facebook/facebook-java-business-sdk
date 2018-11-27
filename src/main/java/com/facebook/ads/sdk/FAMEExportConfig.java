@@ -73,7 +73,7 @@ public class FAMEExportConfig extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static FAMEExportConfig loadJSON(String json, APIContext context) {
+  public static FAMEExportConfig loadJSON(String json, APIContext context, String header) {
     FAMEExportConfig fameExportConfig = getGson().fromJson(json, FAMEExportConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class FAMEExportConfig extends APINode {
     }
     fameExportConfig.context = context;
     fameExportConfig.rawValue = json;
+    fameExportConfig.header = header;
     return fameExportConfig;
   }
 
-  public static APINodeList<FAMEExportConfig> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<FAMEExportConfig> fameExportConfigs = new APINodeList<FAMEExportConfig>(request, json);
+  public static APINodeList<FAMEExportConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<FAMEExportConfig> fameExportConfigs = new APINodeList<FAMEExportConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class FAMEExportConfig extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          fameExportConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          fameExportConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return fameExportConfigs;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class FAMEExportConfig extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              fameExportConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              fameExportConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class FAMEExportConfig extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  fameExportConfigs.add(loadJSON(entry.getValue().toString(), context));
+                  fameExportConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              fameExportConfigs.add(loadJSON(obj.toString(), context));
+              fameExportConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return fameExportConfigs;
@@ -155,7 +156,7 @@ public class FAMEExportConfig extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              fameExportConfigs.add(loadJSON(entry.getValue().toString(), context));
+              fameExportConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return fameExportConfigs;
         } else {
@@ -174,7 +175,7 @@ public class FAMEExportConfig extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              fameExportConfigs.add(loadJSON(value.toString(), context));
+              fameExportConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class FAMEExportConfig extends APINode {
 
           // Sixth, check if it's pure JsonObject
           fameExportConfigs.clear();
-          fameExportConfigs.add(loadJSON(json, context));
+          fameExportConfigs.add(loadJSON(json, context, header));
           return fameExportConfigs;
         }
       }
@@ -289,8 +290,8 @@ public class FAMEExportConfig extends APINode {
 
   public static APIRequest.ResponseParser<FAMEExportConfig> getParser() {
     return new APIRequest.ResponseParser<FAMEExportConfig>() {
-      public APINodeList<FAMEExportConfig> parseResponse(String response, APIContext context, APIRequest<FAMEExportConfig> request) throws MalformedResponseException {
-        return FAMEExportConfig.parseResponse(response, context, request);
+      public APINodeList<FAMEExportConfig> parseResponse(String response, APIContext context, APIRequest<FAMEExportConfig> request, String header) throws MalformedResponseException {
+        return FAMEExportConfig.parseResponse(response, context, request, header);
       }
     };
   }

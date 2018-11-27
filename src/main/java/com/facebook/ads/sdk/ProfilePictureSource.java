@@ -69,8 +69,6 @@ public class ProfilePictureSource extends APINode {
   private Long mRight = null;
   @SerializedName("top")
   private Long mTop = null;
-  @SerializedName("uri")
-  private String mUri = null;
   @SerializedName("url")
   private String mUrl = null;
   @SerializedName("width")
@@ -85,7 +83,7 @@ public class ProfilePictureSource extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProfilePictureSource loadJSON(String json, APIContext context) {
+  public static ProfilePictureSource loadJSON(String json, APIContext context, String header) {
     ProfilePictureSource profilePictureSource = getGson().fromJson(json, ProfilePictureSource.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -102,11 +100,12 @@ public class ProfilePictureSource extends APINode {
     }
     profilePictureSource.context = context;
     profilePictureSource.rawValue = json;
+    profilePictureSource.header = header;
     return profilePictureSource;
   }
 
-  public static APINodeList<ProfilePictureSource> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ProfilePictureSource> profilePictureSources = new APINodeList<ProfilePictureSource>(request, json);
+  public static APINodeList<ProfilePictureSource> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProfilePictureSource> profilePictureSources = new APINodeList<ProfilePictureSource>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -117,7 +116,7 @@ public class ProfilePictureSource extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          profilePictureSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          profilePictureSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return profilePictureSources;
       } else if (result.isJsonObject()) {
@@ -142,7 +141,7 @@ public class ProfilePictureSource extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              profilePictureSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              profilePictureSources.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -153,13 +152,13 @@ public class ProfilePictureSource extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  profilePictureSources.add(loadJSON(entry.getValue().toString(), context));
+                  profilePictureSources.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              profilePictureSources.add(loadJSON(obj.toString(), context));
+              profilePictureSources.add(loadJSON(obj.toString(), context, header));
             }
           }
           return profilePictureSources;
@@ -167,7 +166,7 @@ public class ProfilePictureSource extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              profilePictureSources.add(loadJSON(entry.getValue().toString(), context));
+              profilePictureSources.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return profilePictureSources;
         } else {
@@ -186,7 +185,7 @@ public class ProfilePictureSource extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              profilePictureSources.add(loadJSON(value.toString(), context));
+              profilePictureSources.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -198,7 +197,7 @@ public class ProfilePictureSource extends APINode {
 
           // Sixth, check if it's pure JsonObject
           profilePictureSources.clear();
-          profilePictureSources.add(loadJSON(json, context));
+          profilePictureSources.add(loadJSON(json, context, header));
           return profilePictureSources;
         }
       }
@@ -290,15 +289,6 @@ public class ProfilePictureSource extends APINode {
     return this;
   }
 
-  public String getFieldUri() {
-    return mUri;
-  }
-
-  public ProfilePictureSource setFieldUri(String value) {
-    this.mUri = value;
-    return this;
-  }
-
   public String getFieldUrl() {
     return mUrl;
   }
@@ -371,7 +361,6 @@ public class ProfilePictureSource extends APINode {
     this.mLeft = instance.mLeft;
     this.mRight = instance.mRight;
     this.mTop = instance.mTop;
-    this.mUri = instance.mUri;
     this.mUrl = instance.mUrl;
     this.mWidth = instance.mWidth;
     this.mId = instance.mId;
@@ -382,8 +371,8 @@ public class ProfilePictureSource extends APINode {
 
   public static APIRequest.ResponseParser<ProfilePictureSource> getParser() {
     return new APIRequest.ResponseParser<ProfilePictureSource>() {
-      public APINodeList<ProfilePictureSource> parseResponse(String response, APIContext context, APIRequest<ProfilePictureSource> request) throws MalformedResponseException {
-        return ProfilePictureSource.parseResponse(response, context, request);
+      public APINodeList<ProfilePictureSource> parseResponse(String response, APIContext context, APIRequest<ProfilePictureSource> request, String header) throws MalformedResponseException {
+        return ProfilePictureSource.parseResponse(response, context, request, header);
       }
     };
   }

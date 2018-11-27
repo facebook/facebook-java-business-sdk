@@ -69,7 +69,7 @@ public class AdsPixelDomainLastFiredTime extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdsPixelDomainLastFiredTime loadJSON(String json, APIContext context) {
+  public static AdsPixelDomainLastFiredTime loadJSON(String json, APIContext context, String header) {
     AdsPixelDomainLastFiredTime adsPixelDomainLastFiredTime = getGson().fromJson(json, AdsPixelDomainLastFiredTime.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class AdsPixelDomainLastFiredTime extends APINode {
     }
     adsPixelDomainLastFiredTime.context = context;
     adsPixelDomainLastFiredTime.rawValue = json;
+    adsPixelDomainLastFiredTime.header = header;
     return adsPixelDomainLastFiredTime;
   }
 
-  public static APINodeList<AdsPixelDomainLastFiredTime> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdsPixelDomainLastFiredTime> adsPixelDomainLastFiredTimes = new APINodeList<AdsPixelDomainLastFiredTime>(request, json);
+  public static APINodeList<AdsPixelDomainLastFiredTime> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdsPixelDomainLastFiredTime> adsPixelDomainLastFiredTimes = new APINodeList<AdsPixelDomainLastFiredTime>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class AdsPixelDomainLastFiredTime extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsPixelDomainLastFiredTimes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adsPixelDomainLastFiredTimes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adsPixelDomainLastFiredTimes;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class AdsPixelDomainLastFiredTime extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsPixelDomainLastFiredTimes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adsPixelDomainLastFiredTimes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class AdsPixelDomainLastFiredTime extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsPixelDomainLastFiredTimes.add(loadJSON(entry.getValue().toString(), context));
+                  adsPixelDomainLastFiredTimes.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsPixelDomainLastFiredTimes.add(loadJSON(obj.toString(), context));
+              adsPixelDomainLastFiredTimes.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adsPixelDomainLastFiredTimes;
@@ -151,7 +152,7 @@ public class AdsPixelDomainLastFiredTime extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsPixelDomainLastFiredTimes.add(loadJSON(entry.getValue().toString(), context));
+              adsPixelDomainLastFiredTimes.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adsPixelDomainLastFiredTimes;
         } else {
@@ -170,7 +171,7 @@ public class AdsPixelDomainLastFiredTime extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsPixelDomainLastFiredTimes.add(loadJSON(value.toString(), context));
+              adsPixelDomainLastFiredTimes.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class AdsPixelDomainLastFiredTime extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adsPixelDomainLastFiredTimes.clear();
-          adsPixelDomainLastFiredTimes.add(loadJSON(json, context));
+          adsPixelDomainLastFiredTimes.add(loadJSON(json, context, header));
           return adsPixelDomainLastFiredTimes;
         }
       }
@@ -265,8 +266,8 @@ public class AdsPixelDomainLastFiredTime extends APINode {
 
   public static APIRequest.ResponseParser<AdsPixelDomainLastFiredTime> getParser() {
     return new APIRequest.ResponseParser<AdsPixelDomainLastFiredTime>() {
-      public APINodeList<AdsPixelDomainLastFiredTime> parseResponse(String response, APIContext context, APIRequest<AdsPixelDomainLastFiredTime> request) throws MalformedResponseException {
-        return AdsPixelDomainLastFiredTime.parseResponse(response, context, request);
+      public APINodeList<AdsPixelDomainLastFiredTime> parseResponse(String response, APIContext context, APIRequest<AdsPixelDomainLastFiredTime> request, String header) throws MalformedResponseException {
+        return AdsPixelDomainLastFiredTime.parseResponse(response, context, request, header);
       }
     };
   }

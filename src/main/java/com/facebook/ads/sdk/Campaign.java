@@ -85,14 +85,6 @@ public class Campaign extends APINode {
   private EnumEffectiveStatus mEffectiveStatus = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("is_autobid")
-  private Boolean mIsAutobid = null;
-  @SerializedName("is_average_price_pacing")
-  private Boolean mIsAveragePricePacing = null;
-  @SerializedName("kpi_custom_conversion_id")
-  private String mKpiCustomConversionId = null;
-  @SerializedName("kpi_type")
-  private String mKpiType = null;
   @SerializedName("last_budget_toggling_time")
   private String mLastBudgetTogglingTime = null;
   @SerializedName("lifetime_budget")
@@ -192,7 +184,7 @@ public class Campaign extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Campaign loadJSON(String json, APIContext context) {
+  public static Campaign loadJSON(String json, APIContext context, String header) {
     Campaign campaign = getGson().fromJson(json, Campaign.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -209,11 +201,12 @@ public class Campaign extends APINode {
     }
     campaign.context = context;
     campaign.rawValue = json;
+    campaign.header = header;
     return campaign;
   }
 
-  public static APINodeList<Campaign> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Campaign> campaigns = new APINodeList<Campaign>(request, json);
+  public static APINodeList<Campaign> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Campaign> campaigns = new APINodeList<Campaign>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -224,7 +217,7 @@ public class Campaign extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          campaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          campaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return campaigns;
       } else if (result.isJsonObject()) {
@@ -249,7 +242,7 @@ public class Campaign extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              campaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              campaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -260,13 +253,13 @@ public class Campaign extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  campaigns.add(loadJSON(entry.getValue().toString(), context));
+                  campaigns.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              campaigns.add(loadJSON(obj.toString(), context));
+              campaigns.add(loadJSON(obj.toString(), context, header));
             }
           }
           return campaigns;
@@ -274,7 +267,7 @@ public class Campaign extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              campaigns.add(loadJSON(entry.getValue().toString(), context));
+              campaigns.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return campaigns;
         } else {
@@ -293,7 +286,7 @@ public class Campaign extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              campaigns.add(loadJSON(value.toString(), context));
+              campaigns.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -305,7 +298,7 @@ public class Campaign extends APINode {
 
           // Sixth, check if it's pure JsonObject
           campaigns.clear();
-          campaigns.add(loadJSON(json, context));
+          campaigns.add(loadJSON(json, context, header));
           return campaigns;
         }
       }
@@ -446,22 +439,6 @@ public class Campaign extends APINode {
     return mId;
   }
 
-  public Boolean getFieldIsAutobid() {
-    return mIsAutobid;
-  }
-
-  public Boolean getFieldIsAveragePricePacing() {
-    return mIsAveragePricePacing;
-  }
-
-  public String getFieldKpiCustomConversionId() {
-    return mKpiCustomConversionId;
-  }
-
-  public String getFieldKpiType() {
-    return mKpiType;
-  }
-
   public String getFieldLastBudgetTogglingTime() {
     return mLastBudgetTogglingTime;
   }
@@ -560,8 +537,8 @@ public class Campaign extends APINode {
     };
 
     @Override
-    public APINodeList<AdStudy> parseResponse(String response) throws APIException {
-      return AdStudy.parseResponse(response, getContext(), this);
+    public APINodeList<AdStudy> parseResponse(String response, String header) throws APIException {
+      return AdStudy.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -571,7 +548,8 @@ public class Campaign extends APINode {
 
     @Override
     public APINodeList<AdStudy> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -585,7 +563,7 @@ public class Campaign extends APINode {
         new Function<String, APINodeList<AdStudy>>() {
            public APINodeList<AdStudy> apply(String result) {
              try {
-               return APIRequestGetAdStudies.this.parseResponse(result);
+               return APIRequestGetAdStudies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -770,8 +748,8 @@ public class Campaign extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -781,7 +759,8 @@ public class Campaign extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -795,7 +774,7 @@ public class Campaign extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAdLabels.this.parseResponse(result);
+               return APIRequestDeleteAdLabels.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -830,7 +809,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestDeleteAdLabels setExecutionOptions (List<Campaign.EnumExecutionOptions> executionOptions) {
+    public APIRequestDeleteAdLabels setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -893,8 +872,8 @@ public class Campaign extends APINode {
     };
 
     @Override
-    public Campaign parseResponse(String response) throws APIException {
-      return Campaign.parseResponse(response, getContext(), this).head();
+    public Campaign parseResponse(String response, String header) throws APIException {
+      return Campaign.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -904,7 +883,8 @@ public class Campaign extends APINode {
 
     @Override
     public Campaign execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -918,7 +898,7 @@ public class Campaign extends APINode {
         new Function<String, Campaign>() {
            public Campaign apply(String result) {
              try {
-               return APIRequestCreateAdLabel.this.parseResponse(result);
+               return APIRequestCreateAdLabel.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -953,7 +933,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdLabel setExecutionOptions (List<Campaign.EnumExecutionOptions> executionOptions) {
+    public APIRequestCreateAdLabel setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -1025,8 +1005,8 @@ public class Campaign extends APINode {
     };
 
     @Override
-    public APINodeList<AdRule> parseResponse(String response) throws APIException {
-      return AdRule.parseResponse(response, getContext(), this);
+    public APINodeList<AdRule> parseResponse(String response, String header) throws APIException {
+      return AdRule.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1036,7 +1016,8 @@ public class Campaign extends APINode {
 
     @Override
     public APINodeList<AdRule> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1050,7 +1031,7 @@ public class Campaign extends APINode {
         new Function<String, APINodeList<AdRule>>() {
            public APINodeList<AdRule> apply(String result) {
              try {
-               return APIRequestGetAdRulesGoverned.this.parseResponse(result);
+               return APIRequestGetAdRulesGoverned.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1233,7 +1214,6 @@ public class Campaign extends APINode {
       "issues_info",
       "last_updated_by_app_id",
       "name",
-      "objective_source",
       "priority",
       "recommendations",
       "source_ad",
@@ -1246,8 +1226,8 @@ public class Campaign extends APINode {
     };
 
     @Override
-    public APINodeList<Ad> parseResponse(String response) throws APIException {
-      return Ad.parseResponse(response, getContext(), this);
+    public APINodeList<Ad> parseResponse(String response, String header) throws APIException {
+      return Ad.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1257,7 +1237,8 @@ public class Campaign extends APINode {
 
     @Override
     public APINodeList<Ad> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1271,7 +1252,7 @@ public class Campaign extends APINode {
         new Function<String, APINodeList<Ad>>() {
            public APINodeList<Ad> apply(String result) {
              try {
-               return APIRequestGetAds.this.parseResponse(result);
+               return APIRequestGetAds.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1544,13 +1525,6 @@ public class Campaign extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetAds requestObjectiveSourceField () {
-      return this.requestObjectiveSourceField(true);
-    }
-    public APIRequestGetAds requestObjectiveSourceField (boolean value) {
-      this.requestField("objective_source", value);
-      return this;
-    }
     public APIRequestGetAds requestPriorityField () {
       return this.requestPriorityField(true);
     }
@@ -1634,7 +1608,6 @@ public class Campaign extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "ad_keywords",
-      "adasset_feed",
       "adlabels",
       "adset_schedule",
       "asset_feed_id",
@@ -1658,19 +1631,13 @@ public class Campaign extends APINode {
       "destination_type",
       "effective_status",
       "end_time",
-      "frequency_cap",
-      "frequency_cap_reset_period",
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
-      "is_autobid",
-      "is_average_price_pacing",
       "is_dynamic_creative",
-      "is_dynamic_creative_optimization",
       "issues_info",
       "lifetime_budget",
-      "lifetime_frequency_cap",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
@@ -1682,7 +1649,6 @@ public class Campaign extends APINode {
       "recurring_budget_semantics",
       "review_feedback",
       "rf_prediction_id",
-      "rtb_flag",
       "source_adset",
       "source_adset_id",
       "start_time",
@@ -1690,14 +1656,13 @@ public class Campaign extends APINode {
       "targeting",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
-      "tracking_specs",
       "updated_time",
       "use_new_app_click",
     };
 
     @Override
-    public APINodeList<AdSet> parseResponse(String response) throws APIException {
-      return AdSet.parseResponse(response, getContext(), this);
+    public APINodeList<AdSet> parseResponse(String response, String header) throws APIException {
+      return AdSet.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1707,7 +1672,8 @@ public class Campaign extends APINode {
 
     @Override
     public APINodeList<AdSet> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1721,7 +1687,7 @@ public class Campaign extends APINode {
         new Function<String, APINodeList<AdSet>>() {
            public APINodeList<AdSet> apply(String result) {
              try {
-               return APIRequestGetAdSets.this.parseResponse(result);
+               return APIRequestGetAdSets.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1836,13 +1802,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestAdKeywordsField (boolean value) {
       this.requestField("ad_keywords", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestAdassetFeedField () {
-      return this.requestAdassetFeedField(true);
-    }
-    public APIRequestGetAdSets requestAdassetFeedField (boolean value) {
-      this.requestField("adasset_feed", value);
       return this;
     }
     public APIRequestGetAdSets requestAdlabelsField () {
@@ -2006,20 +1965,6 @@ public class Campaign extends APINode {
       this.requestField("end_time", value);
       return this;
     }
-    public APIRequestGetAdSets requestFrequencyCapField () {
-      return this.requestFrequencyCapField(true);
-    }
-    public APIRequestGetAdSets requestFrequencyCapField (boolean value) {
-      this.requestField("frequency_cap", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestFrequencyCapResetPeriodField () {
-      return this.requestFrequencyCapResetPeriodField(true);
-    }
-    public APIRequestGetAdSets requestFrequencyCapResetPeriodField (boolean value) {
-      this.requestField("frequency_cap_reset_period", value);
-      return this;
-    }
     public APIRequestGetAdSets requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
@@ -2048,32 +1993,11 @@ public class Campaign extends APINode {
       this.requestField("instagram_actor_id", value);
       return this;
     }
-    public APIRequestGetAdSets requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetAdSets requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGetAdSets requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
-      return this;
-    }
     public APIRequestGetAdSets requestIsDynamicCreativeField () {
       return this.requestIsDynamicCreativeField(true);
     }
     public APIRequestGetAdSets requestIsDynamicCreativeField (boolean value) {
       this.requestField("is_dynamic_creative", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField () {
-      return this.requestIsDynamicCreativeOptimizationField(true);
-    }
-    public APIRequestGetAdSets requestIsDynamicCreativeOptimizationField (boolean value) {
-      this.requestField("is_dynamic_creative_optimization", value);
       return this;
     }
     public APIRequestGetAdSets requestIssuesInfoField () {
@@ -2088,13 +2012,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGetAdSets requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGetAdSets requestLifetimeFrequencyCapField () {
-      return this.requestLifetimeFrequencyCapField(true);
-    }
-    public APIRequestGetAdSets requestLifetimeFrequencyCapField (boolean value) {
-      this.requestField("lifetime_frequency_cap", value);
       return this;
     }
     public APIRequestGetAdSets requestLifetimeImpsField () {
@@ -2174,13 +2091,6 @@ public class Campaign extends APINode {
       this.requestField("rf_prediction_id", value);
       return this;
     }
-    public APIRequestGetAdSets requestRtbFlagField () {
-      return this.requestRtbFlagField(true);
-    }
-    public APIRequestGetAdSets requestRtbFlagField (boolean value) {
-      this.requestField("rtb_flag", value);
-      return this;
-    }
     public APIRequestGetAdSets requestSourceAdsetField () {
       return this.requestSourceAdsetField(true);
     }
@@ -2230,13 +2140,6 @@ public class Campaign extends APINode {
       this.requestField("time_based_ad_rotation_intervals", value);
       return this;
     }
-    public APIRequestGetAdSets requestTrackingSpecsField () {
-      return this.requestTrackingSpecsField(true);
-    }
-    public APIRequestGetAdSets requestTrackingSpecsField (boolean value) {
-      this.requestField("tracking_specs", value);
-      return this;
-    }
     public APIRequestGetAdSets requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
@@ -2283,10 +2186,6 @@ public class Campaign extends APINode {
       "daily_budget",
       "effective_status",
       "id",
-      "is_autobid",
-      "is_average_price_pacing",
-      "kpi_custom_conversion_id",
-      "kpi_type",
       "last_budget_toggling_time",
       "lifetime_budget",
       "metrics_metadata",
@@ -2306,8 +2205,8 @@ public class Campaign extends APINode {
     };
 
     @Override
-    public APINodeList<Campaign> parseResponse(String response) throws APIException {
-      return Campaign.parseResponse(response, getContext(), this);
+    public APINodeList<Campaign> parseResponse(String response, String header) throws APIException {
+      return Campaign.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2317,7 +2216,8 @@ public class Campaign extends APINode {
 
     @Override
     public APINodeList<Campaign> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2331,7 +2231,7 @@ public class Campaign extends APINode {
         new Function<String, APINodeList<Campaign>>() {
            public APINodeList<Campaign> apply(String result) {
              try {
-               return APIRequestGetCopies.this.parseResponse(result);
+               return APIRequestGetCopies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2534,34 +2434,6 @@ public class Campaign extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetCopies requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGetCopies requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGetCopies requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGetCopies requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
-      return this;
-    }
-    public APIRequestGetCopies requestKpiCustomConversionIdField () {
-      return this.requestKpiCustomConversionIdField(true);
-    }
-    public APIRequestGetCopies requestKpiCustomConversionIdField (boolean value) {
-      this.requestField("kpi_custom_conversion_id", value);
-      return this;
-    }
-    public APIRequestGetCopies requestKpiTypeField () {
-      return this.requestKpiTypeField(true);
-    }
-    public APIRequestGetCopies requestKpiTypeField (boolean value) {
-      this.requestField("kpi_type", value);
-      return this;
-    }
     public APIRequestGetCopies requestLastBudgetTogglingTimeField () {
       return this.requestLastBudgetTogglingTimeField(true);
     }
@@ -2695,8 +2567,8 @@ public class Campaign extends APINode {
     };
 
     @Override
-    public Campaign parseResponse(String response) throws APIException {
-      return Campaign.parseResponse(response, getContext(), this).head();
+    public Campaign parseResponse(String response, String header) throws APIException {
+      return Campaign.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2706,7 +2578,8 @@ public class Campaign extends APINode {
 
     @Override
     public Campaign execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2720,7 +2593,7 @@ public class Campaign extends APINode {
         new Function<String, Campaign>() {
            public Campaign apply(String result) {
              try {
-               return APIRequestCreateCopy.this.parseResponse(result);
+               return APIRequestCreateCopy.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2855,8 +2728,8 @@ public class Campaign extends APINode {
     };
 
     @Override
-    public APINodeList<AdsInsights> parseResponse(String response) throws APIException {
-      return AdsInsights.parseResponse(response, getContext(), this);
+    public APINodeList<AdsInsights> parseResponse(String response, String header) throws APIException {
+      return AdsInsights.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2866,7 +2739,8 @@ public class Campaign extends APINode {
 
     @Override
     public APINodeList<AdsInsights> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2880,7 +2754,7 @@ public class Campaign extends APINode {
         new Function<String, APINodeList<AdsInsights>>() {
            public APINodeList<AdsInsights> apply(String result) {
              try {
-               return APIRequestGetInsights.this.parseResponse(result);
+               return APIRequestGetInsights.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3146,8 +3020,8 @@ public class Campaign extends APINode {
     };
 
     @Override
-    public AdReportRun parseResponse(String response) throws APIException {
-      return AdReportRun.parseResponse(response, getContext(), this).head();
+    public AdReportRun parseResponse(String response, String header) throws APIException {
+      return AdReportRun.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3157,7 +3031,8 @@ public class Campaign extends APINode {
 
     @Override
     public AdReportRun execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3171,7 +3046,7 @@ public class Campaign extends APINode {
         new Function<String, AdReportRun>() {
            public AdReportRun apply(String result) {
              try {
-               return APIRequestGetInsightsAsync.this.parseResponse(result);
+               return APIRequestGetInsightsAsync.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3417,8 +3292,8 @@ public class Campaign extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3428,7 +3303,8 @@ public class Campaign extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3442,7 +3318,7 @@ public class Campaign extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3514,6 +3390,7 @@ public class Campaign extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "am_call_tags",
       "date_preset",
       "from_adtable",
       "time_range",
@@ -3535,10 +3412,6 @@ public class Campaign extends APINode {
       "daily_budget",
       "effective_status",
       "id",
-      "is_autobid",
-      "is_average_price_pacing",
-      "kpi_custom_conversion_id",
-      "kpi_type",
       "last_budget_toggling_time",
       "lifetime_budget",
       "metrics_metadata",
@@ -3558,8 +3431,8 @@ public class Campaign extends APINode {
     };
 
     @Override
-    public Campaign parseResponse(String response) throws APIException {
-      return Campaign.parseResponse(response, getContext(), this).head();
+    public Campaign parseResponse(String response, String header) throws APIException {
+      return Campaign.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3569,7 +3442,8 @@ public class Campaign extends APINode {
 
     @Override
     public Campaign execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3583,7 +3457,7 @@ public class Campaign extends APINode {
         new Function<String, Campaign>() {
            public Campaign apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3608,6 +3482,15 @@ public class Campaign extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setAmCallTags (Object amCallTags) {
+      this.setParam("am_call_tags", amCallTags);
+      return this;
+    }
+    public APIRequestGet setAmCallTags (String amCallTags) {
+      this.setParam("am_call_tags", amCallTags);
+      return this;
+    }
 
     public APIRequestGet setDatePreset (EnumDatePreset datePreset) {
       this.setParam("date_preset", datePreset);
@@ -3777,34 +3660,6 @@ public class Campaign extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestIsAutobidField () {
-      return this.requestIsAutobidField(true);
-    }
-    public APIRequestGet requestIsAutobidField (boolean value) {
-      this.requestField("is_autobid", value);
-      return this;
-    }
-    public APIRequestGet requestIsAveragePricePacingField () {
-      return this.requestIsAveragePricePacingField(true);
-    }
-    public APIRequestGet requestIsAveragePricePacingField (boolean value) {
-      this.requestField("is_average_price_pacing", value);
-      return this;
-    }
-    public APIRequestGet requestKpiCustomConversionIdField () {
-      return this.requestKpiCustomConversionIdField(true);
-    }
-    public APIRequestGet requestKpiCustomConversionIdField (boolean value) {
-      this.requestField("kpi_custom_conversion_id", value);
-      return this;
-    }
-    public APIRequestGet requestKpiTypeField () {
-      return this.requestKpiTypeField(true);
-    }
-    public APIRequestGet requestKpiTypeField (boolean value) {
-      this.requestField("kpi_type", value);
-      return this;
-    }
     public APIRequestGet requestLastBudgetTogglingTimeField () {
       return this.requestLastBudgetTogglingTimeField(true);
     }
@@ -3945,14 +3800,15 @@ public class Campaign extends APINode {
       "kpi_type",
       "is_autobid",
       "is_average_price_pacing",
+      "adset_bid_amounts",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public Campaign parseResponse(String response) throws APIException {
-      return Campaign.parseResponse(response, getContext(), this).head();
+    public Campaign parseResponse(String response, String header) throws APIException {
+      return Campaign.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3962,7 +3818,8 @@ public class Campaign extends APINode {
 
     @Override
     public Campaign execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3976,7 +3833,7 @@ public class Campaign extends APINode {
         new Function<String, Campaign>() {
            public Campaign apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4153,6 +4010,15 @@ public class Campaign extends APINode {
     }
     public APIRequestUpdate setIsAveragePricePacing (String isAveragePricePacing) {
       this.setParam("is_average_price_pacing", isAveragePricePacing);
+      return this;
+    }
+
+    public APIRequestUpdate setAdsetBidAmounts (Object adsetBidAmounts) {
+      this.setParam("adset_bid_amounts", adsetBidAmounts);
+      return this;
+    }
+    public APIRequestUpdate setAdsetBidAmounts (String adsetBidAmounts) {
+      this.setParam("adset_bid_amounts", adsetBidAmounts);
       return this;
     }
 
@@ -4481,10 +4347,6 @@ public class Campaign extends APINode {
     this.mDailyBudget = instance.mDailyBudget;
     this.mEffectiveStatus = instance.mEffectiveStatus;
     this.mId = instance.mId;
-    this.mIsAutobid = instance.mIsAutobid;
-    this.mIsAveragePricePacing = instance.mIsAveragePricePacing;
-    this.mKpiCustomConversionId = instance.mKpiCustomConversionId;
-    this.mKpiType = instance.mKpiType;
     this.mLastBudgetTogglingTime = instance.mLastBudgetTogglingTime;
     this.mLifetimeBudget = instance.mLifetimeBudget;
     this.mMetricsMetadata = instance.mMetricsMetadata;
@@ -4508,8 +4370,8 @@ public class Campaign extends APINode {
 
   public static APIRequest.ResponseParser<Campaign> getParser() {
     return new APIRequest.ResponseParser<Campaign>() {
-      public APINodeList<Campaign> parseResponse(String response, APIContext context, APIRequest<Campaign> request) throws MalformedResponseException {
-        return Campaign.parseResponse(response, context, request);
+      public APINodeList<Campaign> parseResponse(String response, APIContext context, APIRequest<Campaign> request, String header) throws MalformedResponseException {
+        return Campaign.parseResponse(response, context, request, header);
       }
     };
   }

@@ -142,7 +142,7 @@ public class IterativeSplitTestConfig extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static IterativeSplitTestConfig loadJSON(String json, APIContext context) {
+  public static IterativeSplitTestConfig loadJSON(String json, APIContext context, String header) {
     IterativeSplitTestConfig iterativeSplitTestConfig = getGson().fromJson(json, IterativeSplitTestConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -159,11 +159,12 @@ public class IterativeSplitTestConfig extends APINode {
     }
     iterativeSplitTestConfig.context = context;
     iterativeSplitTestConfig.rawValue = json;
+    iterativeSplitTestConfig.header = header;
     return iterativeSplitTestConfig;
   }
 
-  public static APINodeList<IterativeSplitTestConfig> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<IterativeSplitTestConfig> iterativeSplitTestConfigs = new APINodeList<IterativeSplitTestConfig>(request, json);
+  public static APINodeList<IterativeSplitTestConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<IterativeSplitTestConfig> iterativeSplitTestConfigs = new APINodeList<IterativeSplitTestConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -174,7 +175,7 @@ public class IterativeSplitTestConfig extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          iterativeSplitTestConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          iterativeSplitTestConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return iterativeSplitTestConfigs;
       } else if (result.isJsonObject()) {
@@ -199,7 +200,7 @@ public class IterativeSplitTestConfig extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              iterativeSplitTestConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              iterativeSplitTestConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -210,13 +211,13 @@ public class IterativeSplitTestConfig extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  iterativeSplitTestConfigs.add(loadJSON(entry.getValue().toString(), context));
+                  iterativeSplitTestConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              iterativeSplitTestConfigs.add(loadJSON(obj.toString(), context));
+              iterativeSplitTestConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return iterativeSplitTestConfigs;
@@ -224,7 +225,7 @@ public class IterativeSplitTestConfig extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              iterativeSplitTestConfigs.add(loadJSON(entry.getValue().toString(), context));
+              iterativeSplitTestConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return iterativeSplitTestConfigs;
         } else {
@@ -243,7 +244,7 @@ public class IterativeSplitTestConfig extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              iterativeSplitTestConfigs.add(loadJSON(value.toString(), context));
+              iterativeSplitTestConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -255,7 +256,7 @@ public class IterativeSplitTestConfig extends APINode {
 
           // Sixth, check if it's pure JsonObject
           iterativeSplitTestConfigs.clear();
-          iterativeSplitTestConfigs.add(loadJSON(json, context));
+          iterativeSplitTestConfigs.add(loadJSON(json, context, header));
           return iterativeSplitTestConfigs;
         }
       }
@@ -354,8 +355,8 @@ public class IterativeSplitTestConfig extends APINode {
     };
 
     @Override
-    public IterativeSplitTestConfig parseResponse(String response) throws APIException {
-      return IterativeSplitTestConfig.parseResponse(response, getContext(), this).head();
+    public IterativeSplitTestConfig parseResponse(String response, String header) throws APIException {
+      return IterativeSplitTestConfig.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -365,7 +366,8 @@ public class IterativeSplitTestConfig extends APINode {
 
     @Override
     public IterativeSplitTestConfig execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -379,7 +381,7 @@ public class IterativeSplitTestConfig extends APINode {
         new Function<String, IterativeSplitTestConfig>() {
            public IterativeSplitTestConfig apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -545,8 +547,8 @@ public class IterativeSplitTestConfig extends APINode {
 
   public static APIRequest.ResponseParser<IterativeSplitTestConfig> getParser() {
     return new APIRequest.ResponseParser<IterativeSplitTestConfig>() {
-      public APINodeList<IterativeSplitTestConfig> parseResponse(String response, APIContext context, APIRequest<IterativeSplitTestConfig> request) throws MalformedResponseException {
-        return IterativeSplitTestConfig.parseResponse(response, context, request);
+      public APINodeList<IterativeSplitTestConfig> parseResponse(String response, APIContext context, APIRequest<IterativeSplitTestConfig> request, String header) throws MalformedResponseException {
+        return IterativeSplitTestConfig.parseResponse(response, context, request, header);
       }
     };
   }

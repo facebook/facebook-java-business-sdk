@@ -138,7 +138,7 @@ public class PlaceTopic extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PlaceTopic loadJSON(String json, APIContext context) {
+  public static PlaceTopic loadJSON(String json, APIContext context, String header) {
     PlaceTopic placeTopic = getGson().fromJson(json, PlaceTopic.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -155,11 +155,12 @@ public class PlaceTopic extends APINode {
     }
     placeTopic.context = context;
     placeTopic.rawValue = json;
+    placeTopic.header = header;
     return placeTopic;
   }
 
-  public static APINodeList<PlaceTopic> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PlaceTopic> placeTopics = new APINodeList<PlaceTopic>(request, json);
+  public static APINodeList<PlaceTopic> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PlaceTopic> placeTopics = new APINodeList<PlaceTopic>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -170,7 +171,7 @@ public class PlaceTopic extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          placeTopics.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          placeTopics.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return placeTopics;
       } else if (result.isJsonObject()) {
@@ -195,7 +196,7 @@ public class PlaceTopic extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              placeTopics.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              placeTopics.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -206,13 +207,13 @@ public class PlaceTopic extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  placeTopics.add(loadJSON(entry.getValue().toString(), context));
+                  placeTopics.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              placeTopics.add(loadJSON(obj.toString(), context));
+              placeTopics.add(loadJSON(obj.toString(), context, header));
             }
           }
           return placeTopics;
@@ -220,7 +221,7 @@ public class PlaceTopic extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              placeTopics.add(loadJSON(entry.getValue().toString(), context));
+              placeTopics.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return placeTopics;
         } else {
@@ -239,7 +240,7 @@ public class PlaceTopic extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              placeTopics.add(loadJSON(value.toString(), context));
+              placeTopics.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -251,7 +252,7 @@ public class PlaceTopic extends APINode {
 
           // Sixth, check if it's pure JsonObject
           placeTopics.clear();
-          placeTopics.add(loadJSON(json, context));
+          placeTopics.add(loadJSON(json, context, header));
           return placeTopics;
         }
       }
@@ -341,8 +342,8 @@ public class PlaceTopic extends APINode {
     };
 
     @Override
-    public PlaceTopic parseResponse(String response) throws APIException {
-      return PlaceTopic.parseResponse(response, getContext(), this).head();
+    public PlaceTopic parseResponse(String response, String header) throws APIException {
+      return PlaceTopic.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -352,7 +353,8 @@ public class PlaceTopic extends APINode {
 
     @Override
     public PlaceTopic execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -366,7 +368,7 @@ public class PlaceTopic extends APINode {
         new Function<String, PlaceTopic>() {
            public PlaceTopic apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -548,8 +550,8 @@ public class PlaceTopic extends APINode {
 
   public static APIRequest.ResponseParser<PlaceTopic> getParser() {
     return new APIRequest.ResponseParser<PlaceTopic>() {
-      public APINodeList<PlaceTopic> parseResponse(String response, APIContext context, APIRequest<PlaceTopic> request) throws MalformedResponseException {
-        return PlaceTopic.parseResponse(response, context, request);
+      public APINodeList<PlaceTopic> parseResponse(String response, APIContext context, APIRequest<PlaceTopic> request, String header) throws MalformedResponseException {
+        return PlaceTopic.parseResponse(response, context, request, header);
       }
     };
   }

@@ -67,7 +67,7 @@ public class AdCreativePortraitCustomizations extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCreativePortraitCustomizations loadJSON(String json, APIContext context) {
+  public static AdCreativePortraitCustomizations loadJSON(String json, APIContext context, String header) {
     AdCreativePortraitCustomizations adCreativePortraitCustomizations = getGson().fromJson(json, AdCreativePortraitCustomizations.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class AdCreativePortraitCustomizations extends APINode {
     }
     adCreativePortraitCustomizations.context = context;
     adCreativePortraitCustomizations.rawValue = json;
+    adCreativePortraitCustomizations.header = header;
     return adCreativePortraitCustomizations;
   }
 
-  public static APINodeList<AdCreativePortraitCustomizations> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCreativePortraitCustomizations> adCreativePortraitCustomizationss = new APINodeList<AdCreativePortraitCustomizations>(request, json);
+  public static APINodeList<AdCreativePortraitCustomizations> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativePortraitCustomizations> adCreativePortraitCustomizationss = new APINodeList<AdCreativePortraitCustomizations>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class AdCreativePortraitCustomizations extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativePortraitCustomizationss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCreativePortraitCustomizationss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCreativePortraitCustomizationss;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class AdCreativePortraitCustomizations extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativePortraitCustomizationss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCreativePortraitCustomizationss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class AdCreativePortraitCustomizations extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativePortraitCustomizationss.add(loadJSON(entry.getValue().toString(), context));
+                  adCreativePortraitCustomizationss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativePortraitCustomizationss.add(loadJSON(obj.toString(), context));
+              adCreativePortraitCustomizationss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCreativePortraitCustomizationss;
@@ -149,7 +150,7 @@ public class AdCreativePortraitCustomizations extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativePortraitCustomizationss.add(loadJSON(entry.getValue().toString(), context));
+              adCreativePortraitCustomizationss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCreativePortraitCustomizationss;
         } else {
@@ -168,7 +169,7 @@ public class AdCreativePortraitCustomizations extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativePortraitCustomizationss.add(loadJSON(value.toString(), context));
+              adCreativePortraitCustomizationss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class AdCreativePortraitCustomizations extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCreativePortraitCustomizationss.clear();
-          adCreativePortraitCustomizationss.add(loadJSON(json, context));
+          adCreativePortraitCustomizationss.add(loadJSON(json, context, header));
           return adCreativePortraitCustomizationss;
         }
       }
@@ -253,8 +254,8 @@ public class AdCreativePortraitCustomizations extends APINode {
 
   public static APIRequest.ResponseParser<AdCreativePortraitCustomizations> getParser() {
     return new APIRequest.ResponseParser<AdCreativePortraitCustomizations>() {
-      public APINodeList<AdCreativePortraitCustomizations> parseResponse(String response, APIContext context, APIRequest<AdCreativePortraitCustomizations> request) throws MalformedResponseException {
-        return AdCreativePortraitCustomizations.parseResponse(response, context, request);
+      public APINodeList<AdCreativePortraitCustomizations> parseResponse(String response, APIContext context, APIRequest<AdCreativePortraitCustomizations> request, String header) throws MalformedResponseException {
+        return AdCreativePortraitCustomizations.parseResponse(response, context, request, header);
       }
     };
   }

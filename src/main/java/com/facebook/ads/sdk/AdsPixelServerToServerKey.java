@@ -69,7 +69,7 @@ public class AdsPixelServerToServerKey extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdsPixelServerToServerKey loadJSON(String json, APIContext context) {
+  public static AdsPixelServerToServerKey loadJSON(String json, APIContext context, String header) {
     AdsPixelServerToServerKey adsPixelServerToServerKey = getGson().fromJson(json, AdsPixelServerToServerKey.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class AdsPixelServerToServerKey extends APINode {
     }
     adsPixelServerToServerKey.context = context;
     adsPixelServerToServerKey.rawValue = json;
+    adsPixelServerToServerKey.header = header;
     return adsPixelServerToServerKey;
   }
 
-  public static APINodeList<AdsPixelServerToServerKey> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdsPixelServerToServerKey> adsPixelServerToServerKeys = new APINodeList<AdsPixelServerToServerKey>(request, json);
+  public static APINodeList<AdsPixelServerToServerKey> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdsPixelServerToServerKey> adsPixelServerToServerKeys = new APINodeList<AdsPixelServerToServerKey>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class AdsPixelServerToServerKey extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsPixelServerToServerKeys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adsPixelServerToServerKeys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adsPixelServerToServerKeys;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class AdsPixelServerToServerKey extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsPixelServerToServerKeys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adsPixelServerToServerKeys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class AdsPixelServerToServerKey extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsPixelServerToServerKeys.add(loadJSON(entry.getValue().toString(), context));
+                  adsPixelServerToServerKeys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsPixelServerToServerKeys.add(loadJSON(obj.toString(), context));
+              adsPixelServerToServerKeys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adsPixelServerToServerKeys;
@@ -151,7 +152,7 @@ public class AdsPixelServerToServerKey extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsPixelServerToServerKeys.add(loadJSON(entry.getValue().toString(), context));
+              adsPixelServerToServerKeys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adsPixelServerToServerKeys;
         } else {
@@ -170,7 +171,7 @@ public class AdsPixelServerToServerKey extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsPixelServerToServerKeys.add(loadJSON(value.toString(), context));
+              adsPixelServerToServerKeys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class AdsPixelServerToServerKey extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adsPixelServerToServerKeys.clear();
-          adsPixelServerToServerKeys.add(loadJSON(json, context));
+          adsPixelServerToServerKeys.add(loadJSON(json, context, header));
           return adsPixelServerToServerKeys;
         }
       }
@@ -265,8 +266,8 @@ public class AdsPixelServerToServerKey extends APINode {
 
   public static APIRequest.ResponseParser<AdsPixelServerToServerKey> getParser() {
     return new APIRequest.ResponseParser<AdsPixelServerToServerKey>() {
-      public APINodeList<AdsPixelServerToServerKey> parseResponse(String response, APIContext context, APIRequest<AdsPixelServerToServerKey> request) throws MalformedResponseException {
-        return AdsPixelServerToServerKey.parseResponse(response, context, request);
+      public APINodeList<AdsPixelServerToServerKey> parseResponse(String response, APIContext context, APIRequest<AdsPixelServerToServerKey> request, String header) throws MalformedResponseException {
+        return AdsPixelServerToServerKey.parseResponse(response, context, request, header);
       }
     };
   }

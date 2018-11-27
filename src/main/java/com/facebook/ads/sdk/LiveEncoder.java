@@ -144,7 +144,7 @@ public class LiveEncoder extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LiveEncoder loadJSON(String json, APIContext context) {
+  public static LiveEncoder loadJSON(String json, APIContext context, String header) {
     LiveEncoder liveEncoder = getGson().fromJson(json, LiveEncoder.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -161,11 +161,12 @@ public class LiveEncoder extends APINode {
     }
     liveEncoder.context = context;
     liveEncoder.rawValue = json;
+    liveEncoder.header = header;
     return liveEncoder;
   }
 
-  public static APINodeList<LiveEncoder> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LiveEncoder> liveEncoders = new APINodeList<LiveEncoder>(request, json);
+  public static APINodeList<LiveEncoder> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LiveEncoder> liveEncoders = new APINodeList<LiveEncoder>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -176,7 +177,7 @@ public class LiveEncoder extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          liveEncoders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          liveEncoders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return liveEncoders;
       } else if (result.isJsonObject()) {
@@ -201,7 +202,7 @@ public class LiveEncoder extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              liveEncoders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              liveEncoders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -212,13 +213,13 @@ public class LiveEncoder extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  liveEncoders.add(loadJSON(entry.getValue().toString(), context));
+                  liveEncoders.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              liveEncoders.add(loadJSON(obj.toString(), context));
+              liveEncoders.add(loadJSON(obj.toString(), context, header));
             }
           }
           return liveEncoders;
@@ -226,7 +227,7 @@ public class LiveEncoder extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              liveEncoders.add(loadJSON(entry.getValue().toString(), context));
+              liveEncoders.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return liveEncoders;
         } else {
@@ -245,7 +246,7 @@ public class LiveEncoder extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              liveEncoders.add(loadJSON(value.toString(), context));
+              liveEncoders.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -257,7 +258,7 @@ public class LiveEncoder extends APINode {
 
           // Sixth, check if it's pure JsonObject
           liveEncoders.clear();
-          liveEncoders.add(loadJSON(json, context));
+          liveEncoders.add(loadJSON(json, context, header));
           return liveEncoders;
         }
       }
@@ -367,8 +368,8 @@ public class LiveEncoder extends APINode {
     };
 
     @Override
-    public LiveEncoder parseResponse(String response) throws APIException {
-      return LiveEncoder.parseResponse(response, getContext(), this).head();
+    public LiveEncoder parseResponse(String response, String header) throws APIException {
+      return LiveEncoder.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -378,7 +379,8 @@ public class LiveEncoder extends APINode {
 
     @Override
     public LiveEncoder execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -392,7 +394,7 @@ public class LiveEncoder extends APINode {
         new Function<String, LiveEncoder>() {
            public LiveEncoder apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -566,8 +568,8 @@ public class LiveEncoder extends APINode {
 
   public static APIRequest.ResponseParser<LiveEncoder> getParser() {
     return new APIRequest.ResponseParser<LiveEncoder>() {
-      public APINodeList<LiveEncoder> parseResponse(String response, APIContext context, APIRequest<LiveEncoder> request) throws MalformedResponseException {
-        return LiveEncoder.parseResponse(response, context, request);
+      public APINodeList<LiveEncoder> parseResponse(String response, APIContext context, APIRequest<LiveEncoder> request, String header) throws MalformedResponseException {
+        return LiveEncoder.parseResponse(response, context, request, header);
       }
     };
   }

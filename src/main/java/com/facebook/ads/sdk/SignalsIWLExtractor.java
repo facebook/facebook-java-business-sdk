@@ -132,7 +132,7 @@ public class SignalsIWLExtractor extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static SignalsIWLExtractor loadJSON(String json, APIContext context) {
+  public static SignalsIWLExtractor loadJSON(String json, APIContext context, String header) {
     SignalsIWLExtractor signalsIWLExtractor = getGson().fromJson(json, SignalsIWLExtractor.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -149,11 +149,12 @@ public class SignalsIWLExtractor extends APINode {
     }
     signalsIWLExtractor.context = context;
     signalsIWLExtractor.rawValue = json;
+    signalsIWLExtractor.header = header;
     return signalsIWLExtractor;
   }
 
-  public static APINodeList<SignalsIWLExtractor> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<SignalsIWLExtractor> signalsIWLExtractors = new APINodeList<SignalsIWLExtractor>(request, json);
+  public static APINodeList<SignalsIWLExtractor> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<SignalsIWLExtractor> signalsIWLExtractors = new APINodeList<SignalsIWLExtractor>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -164,7 +165,7 @@ public class SignalsIWLExtractor extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          signalsIWLExtractors.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          signalsIWLExtractors.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return signalsIWLExtractors;
       } else if (result.isJsonObject()) {
@@ -189,7 +190,7 @@ public class SignalsIWLExtractor extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              signalsIWLExtractors.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              signalsIWLExtractors.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -200,13 +201,13 @@ public class SignalsIWLExtractor extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  signalsIWLExtractors.add(loadJSON(entry.getValue().toString(), context));
+                  signalsIWLExtractors.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              signalsIWLExtractors.add(loadJSON(obj.toString(), context));
+              signalsIWLExtractors.add(loadJSON(obj.toString(), context, header));
             }
           }
           return signalsIWLExtractors;
@@ -214,7 +215,7 @@ public class SignalsIWLExtractor extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              signalsIWLExtractors.add(loadJSON(entry.getValue().toString(), context));
+              signalsIWLExtractors.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return signalsIWLExtractors;
         } else {
@@ -233,7 +234,7 @@ public class SignalsIWLExtractor extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              signalsIWLExtractors.add(loadJSON(value.toString(), context));
+              signalsIWLExtractors.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -245,7 +246,7 @@ public class SignalsIWLExtractor extends APINode {
 
           // Sixth, check if it's pure JsonObject
           signalsIWLExtractors.clear();
-          signalsIWLExtractors.add(loadJSON(json, context));
+          signalsIWLExtractors.add(loadJSON(json, context, header));
           return signalsIWLExtractors;
         }
       }
@@ -322,8 +323,8 @@ public class SignalsIWLExtractor extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -333,7 +334,8 @@ public class SignalsIWLExtractor extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -347,7 +349,7 @@ public class SignalsIWLExtractor extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -430,8 +432,8 @@ public class SignalsIWLExtractor extends APINode {
     };
 
     @Override
-    public SignalsIWLExtractor parseResponse(String response) throws APIException {
-      return SignalsIWLExtractor.parseResponse(response, getContext(), this).head();
+    public SignalsIWLExtractor parseResponse(String response, String header) throws APIException {
+      return SignalsIWLExtractor.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -441,7 +443,8 @@ public class SignalsIWLExtractor extends APINode {
 
     @Override
     public SignalsIWLExtractor execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -455,7 +458,7 @@ public class SignalsIWLExtractor extends APINode {
         new Function<String, SignalsIWLExtractor>() {
            public SignalsIWLExtractor apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -572,8 +575,8 @@ public class SignalsIWLExtractor extends APINode {
     };
 
     @Override
-    public SignalsIWLExtractor parseResponse(String response) throws APIException {
-      return SignalsIWLExtractor.parseResponse(response, getContext(), this).head();
+    public SignalsIWLExtractor parseResponse(String response, String header) throws APIException {
+      return SignalsIWLExtractor.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -583,7 +586,8 @@ public class SignalsIWLExtractor extends APINode {
 
     @Override
     public SignalsIWLExtractor execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -597,7 +601,7 @@ public class SignalsIWLExtractor extends APINode {
         new Function<String, SignalsIWLExtractor>() {
            public SignalsIWLExtractor apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -810,8 +814,8 @@ public class SignalsIWLExtractor extends APINode {
 
   public static APIRequest.ResponseParser<SignalsIWLExtractor> getParser() {
     return new APIRequest.ResponseParser<SignalsIWLExtractor>() {
-      public APINodeList<SignalsIWLExtractor> parseResponse(String response, APIContext context, APIRequest<SignalsIWLExtractor> request) throws MalformedResponseException {
-        return SignalsIWLExtractor.parseResponse(response, context, request);
+      public APINodeList<SignalsIWLExtractor> parseResponse(String response, APIContext context, APIRequest<SignalsIWLExtractor> request, String header) throws MalformedResponseException {
+        return SignalsIWLExtractor.parseResponse(response, context, request, header);
       }
     };
   }

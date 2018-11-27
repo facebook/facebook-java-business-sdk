@@ -138,7 +138,7 @@ public class EducationExperience extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static EducationExperience loadJSON(String json, APIContext context) {
+  public static EducationExperience loadJSON(String json, APIContext context, String header) {
     EducationExperience educationExperience = getGson().fromJson(json, EducationExperience.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -155,11 +155,12 @@ public class EducationExperience extends APINode {
     }
     educationExperience.context = context;
     educationExperience.rawValue = json;
+    educationExperience.header = header;
     return educationExperience;
   }
 
-  public static APINodeList<EducationExperience> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<EducationExperience> educationExperiences = new APINodeList<EducationExperience>(request, json);
+  public static APINodeList<EducationExperience> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<EducationExperience> educationExperiences = new APINodeList<EducationExperience>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -170,7 +171,7 @@ public class EducationExperience extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          educationExperiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          educationExperiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return educationExperiences;
       } else if (result.isJsonObject()) {
@@ -195,7 +196,7 @@ public class EducationExperience extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              educationExperiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              educationExperiences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -206,13 +207,13 @@ public class EducationExperience extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  educationExperiences.add(loadJSON(entry.getValue().toString(), context));
+                  educationExperiences.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              educationExperiences.add(loadJSON(obj.toString(), context));
+              educationExperiences.add(loadJSON(obj.toString(), context, header));
             }
           }
           return educationExperiences;
@@ -220,7 +221,7 @@ public class EducationExperience extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              educationExperiences.add(loadJSON(entry.getValue().toString(), context));
+              educationExperiences.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return educationExperiences;
         } else {
@@ -239,7 +240,7 @@ public class EducationExperience extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              educationExperiences.add(loadJSON(value.toString(), context));
+              educationExperiences.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -251,7 +252,7 @@ public class EducationExperience extends APINode {
 
           // Sixth, check if it's pure JsonObject
           educationExperiences.clear();
-          educationExperiences.add(loadJSON(json, context));
+          educationExperiences.add(loadJSON(json, context, header));
           return educationExperiences;
         }
       }
@@ -349,8 +350,8 @@ public class EducationExperience extends APINode {
     };
 
     @Override
-    public EducationExperience parseResponse(String response) throws APIException {
-      return EducationExperience.parseResponse(response, getContext(), this).head();
+    public EducationExperience parseResponse(String response, String header) throws APIException {
+      return EducationExperience.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -360,7 +361,8 @@ public class EducationExperience extends APINode {
 
     @Override
     public EducationExperience execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -374,7 +376,7 @@ public class EducationExperience extends APINode {
         new Function<String, EducationExperience>() {
            public EducationExperience apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -524,8 +526,8 @@ public class EducationExperience extends APINode {
 
   public static APIRequest.ResponseParser<EducationExperience> getParser() {
     return new APIRequest.ResponseParser<EducationExperience>() {
-      public APINodeList<EducationExperience> parseResponse(String response, APIContext context, APIRequest<EducationExperience> request) throws MalformedResponseException {
-        return EducationExperience.parseResponse(response, context, request);
+      public APINodeList<EducationExperience> parseResponse(String response, APIContext context, APIRequest<EducationExperience> request, String header) throws MalformedResponseException {
+        return EducationExperience.parseResponse(response, context, request, header);
       }
     };
   }

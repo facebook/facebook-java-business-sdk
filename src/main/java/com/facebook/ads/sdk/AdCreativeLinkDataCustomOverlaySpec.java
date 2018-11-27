@@ -81,7 +81,7 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCreativeLinkDataCustomOverlaySpec loadJSON(String json, APIContext context) {
+  public static AdCreativeLinkDataCustomOverlaySpec loadJSON(String json, APIContext context, String header) {
     AdCreativeLinkDataCustomOverlaySpec adCreativeLinkDataCustomOverlaySpec = getGson().fromJson(json, AdCreativeLinkDataCustomOverlaySpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -98,11 +98,12 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
     }
     adCreativeLinkDataCustomOverlaySpec.context = context;
     adCreativeLinkDataCustomOverlaySpec.rawValue = json;
+    adCreativeLinkDataCustomOverlaySpec.header = header;
     return adCreativeLinkDataCustomOverlaySpec;
   }
 
-  public static APINodeList<AdCreativeLinkDataCustomOverlaySpec> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCreativeLinkDataCustomOverlaySpec> adCreativeLinkDataCustomOverlaySpecs = new APINodeList<AdCreativeLinkDataCustomOverlaySpec>(request, json);
+  public static APINodeList<AdCreativeLinkDataCustomOverlaySpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeLinkDataCustomOverlaySpec> adCreativeLinkDataCustomOverlaySpecs = new APINodeList<AdCreativeLinkDataCustomOverlaySpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -113,7 +114,7 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCreativeLinkDataCustomOverlaySpecs;
       } else if (result.isJsonObject()) {
@@ -138,7 +139,7 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -149,13 +150,13 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(entry.getValue().toString(), context));
+                  adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(obj.toString(), context));
+              adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCreativeLinkDataCustomOverlaySpecs;
@@ -163,7 +164,7 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(entry.getValue().toString(), context));
+              adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCreativeLinkDataCustomOverlaySpecs;
         } else {
@@ -182,7 +183,7 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(value.toString(), context));
+              adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -194,7 +195,7 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCreativeLinkDataCustomOverlaySpecs.clear();
-          adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(json, context));
+          adCreativeLinkDataCustomOverlaySpecs.add(loadJSON(json, context, header));
           return adCreativeLinkDataCustomOverlaySpecs;
         }
       }
@@ -509,8 +510,8 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
 
   public static APIRequest.ResponseParser<AdCreativeLinkDataCustomOverlaySpec> getParser() {
     return new APIRequest.ResponseParser<AdCreativeLinkDataCustomOverlaySpec>() {
-      public APINodeList<AdCreativeLinkDataCustomOverlaySpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeLinkDataCustomOverlaySpec> request) throws MalformedResponseException {
-        return AdCreativeLinkDataCustomOverlaySpec.parseResponse(response, context, request);
+      public APINodeList<AdCreativeLinkDataCustomOverlaySpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeLinkDataCustomOverlaySpec> request, String header) throws MalformedResponseException {
+        return AdCreativeLinkDataCustomOverlaySpec.parseResponse(response, context, request, header);
       }
     };
   }

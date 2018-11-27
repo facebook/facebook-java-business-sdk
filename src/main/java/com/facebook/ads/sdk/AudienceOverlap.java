@@ -71,7 +71,7 @@ public class AudienceOverlap extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AudienceOverlap loadJSON(String json, APIContext context) {
+  public static AudienceOverlap loadJSON(String json, APIContext context, String header) {
     AudienceOverlap audienceOverlap = getGson().fromJson(json, AudienceOverlap.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class AudienceOverlap extends APINode {
     }
     audienceOverlap.context = context;
     audienceOverlap.rawValue = json;
+    audienceOverlap.header = header;
     return audienceOverlap;
   }
 
-  public static APINodeList<AudienceOverlap> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AudienceOverlap> audienceOverlaps = new APINodeList<AudienceOverlap>(request, json);
+  public static APINodeList<AudienceOverlap> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AudienceOverlap> audienceOverlaps = new APINodeList<AudienceOverlap>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class AudienceOverlap extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          audienceOverlaps.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          audienceOverlaps.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return audienceOverlaps;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class AudienceOverlap extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              audienceOverlaps.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              audienceOverlaps.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class AudienceOverlap extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  audienceOverlaps.add(loadJSON(entry.getValue().toString(), context));
+                  audienceOverlaps.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              audienceOverlaps.add(loadJSON(obj.toString(), context));
+              audienceOverlaps.add(loadJSON(obj.toString(), context, header));
             }
           }
           return audienceOverlaps;
@@ -153,7 +154,7 @@ public class AudienceOverlap extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              audienceOverlaps.add(loadJSON(entry.getValue().toString(), context));
+              audienceOverlaps.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return audienceOverlaps;
         } else {
@@ -172,7 +173,7 @@ public class AudienceOverlap extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              audienceOverlaps.add(loadJSON(value.toString(), context));
+              audienceOverlaps.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class AudienceOverlap extends APINode {
 
           // Sixth, check if it's pure JsonObject
           audienceOverlaps.clear();
-          audienceOverlaps.add(loadJSON(json, context));
+          audienceOverlaps.add(loadJSON(json, context, header));
           return audienceOverlaps;
         }
       }
@@ -277,8 +278,8 @@ public class AudienceOverlap extends APINode {
 
   public static APIRequest.ResponseParser<AudienceOverlap> getParser() {
     return new APIRequest.ResponseParser<AudienceOverlap>() {
-      public APINodeList<AudienceOverlap> parseResponse(String response, APIContext context, APIRequest<AudienceOverlap> request) throws MalformedResponseException {
-        return AudienceOverlap.parseResponse(response, context, request);
+      public APINodeList<AudienceOverlap> parseResponse(String response, APIContext context, APIRequest<AudienceOverlap> request, String header) throws MalformedResponseException {
+        return AudienceOverlap.parseResponse(response, context, request, header);
       }
     };
   }

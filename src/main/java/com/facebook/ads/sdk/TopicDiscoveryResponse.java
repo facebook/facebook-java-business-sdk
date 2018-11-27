@@ -69,7 +69,7 @@ public class TopicDiscoveryResponse extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static TopicDiscoveryResponse loadJSON(String json, APIContext context) {
+  public static TopicDiscoveryResponse loadJSON(String json, APIContext context, String header) {
     TopicDiscoveryResponse topicDiscoveryResponse = getGson().fromJson(json, TopicDiscoveryResponse.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class TopicDiscoveryResponse extends APINode {
     }
     topicDiscoveryResponse.context = context;
     topicDiscoveryResponse.rawValue = json;
+    topicDiscoveryResponse.header = header;
     return topicDiscoveryResponse;
   }
 
-  public static APINodeList<TopicDiscoveryResponse> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<TopicDiscoveryResponse> topicDiscoveryResponses = new APINodeList<TopicDiscoveryResponse>(request, json);
+  public static APINodeList<TopicDiscoveryResponse> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<TopicDiscoveryResponse> topicDiscoveryResponses = new APINodeList<TopicDiscoveryResponse>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class TopicDiscoveryResponse extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          topicDiscoveryResponses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          topicDiscoveryResponses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return topicDiscoveryResponses;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class TopicDiscoveryResponse extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              topicDiscoveryResponses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              topicDiscoveryResponses.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class TopicDiscoveryResponse extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  topicDiscoveryResponses.add(loadJSON(entry.getValue().toString(), context));
+                  topicDiscoveryResponses.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              topicDiscoveryResponses.add(loadJSON(obj.toString(), context));
+              topicDiscoveryResponses.add(loadJSON(obj.toString(), context, header));
             }
           }
           return topicDiscoveryResponses;
@@ -151,7 +152,7 @@ public class TopicDiscoveryResponse extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              topicDiscoveryResponses.add(loadJSON(entry.getValue().toString(), context));
+              topicDiscoveryResponses.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return topicDiscoveryResponses;
         } else {
@@ -170,7 +171,7 @@ public class TopicDiscoveryResponse extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              topicDiscoveryResponses.add(loadJSON(value.toString(), context));
+              topicDiscoveryResponses.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class TopicDiscoveryResponse extends APINode {
 
           // Sixth, check if it's pure JsonObject
           topicDiscoveryResponses.clear();
-          topicDiscoveryResponses.add(loadJSON(json, context));
+          topicDiscoveryResponses.add(loadJSON(json, context, header));
           return topicDiscoveryResponses;
         }
       }
@@ -265,8 +266,8 @@ public class TopicDiscoveryResponse extends APINode {
 
   public static APIRequest.ResponseParser<TopicDiscoveryResponse> getParser() {
     return new APIRequest.ResponseParser<TopicDiscoveryResponse>() {
-      public APINodeList<TopicDiscoveryResponse> parseResponse(String response, APIContext context, APIRequest<TopicDiscoveryResponse> request) throws MalformedResponseException {
-        return TopicDiscoveryResponse.parseResponse(response, context, request);
+      public APINodeList<TopicDiscoveryResponse> parseResponse(String response, APIContext context, APIRequest<TopicDiscoveryResponse> request, String header) throws MalformedResponseException {
+        return TopicDiscoveryResponse.parseResponse(response, context, request, header);
       }
     };
   }

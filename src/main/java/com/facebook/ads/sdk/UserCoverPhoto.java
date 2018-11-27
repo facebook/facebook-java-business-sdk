@@ -71,7 +71,7 @@ public class UserCoverPhoto extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserCoverPhoto loadJSON(String json, APIContext context) {
+  public static UserCoverPhoto loadJSON(String json, APIContext context, String header) {
     UserCoverPhoto userCoverPhoto = getGson().fromJson(json, UserCoverPhoto.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class UserCoverPhoto extends APINode {
     }
     userCoverPhoto.context = context;
     userCoverPhoto.rawValue = json;
+    userCoverPhoto.header = header;
     return userCoverPhoto;
   }
 
-  public static APINodeList<UserCoverPhoto> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UserCoverPhoto> userCoverPhotos = new APINodeList<UserCoverPhoto>(request, json);
+  public static APINodeList<UserCoverPhoto> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UserCoverPhoto> userCoverPhotos = new APINodeList<UserCoverPhoto>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class UserCoverPhoto extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userCoverPhotos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userCoverPhotos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return userCoverPhotos;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class UserCoverPhoto extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userCoverPhotos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userCoverPhotos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class UserCoverPhoto extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userCoverPhotos.add(loadJSON(entry.getValue().toString(), context));
+                  userCoverPhotos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userCoverPhotos.add(loadJSON(obj.toString(), context));
+              userCoverPhotos.add(loadJSON(obj.toString(), context, header));
             }
           }
           return userCoverPhotos;
@@ -153,7 +154,7 @@ public class UserCoverPhoto extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userCoverPhotos.add(loadJSON(entry.getValue().toString(), context));
+              userCoverPhotos.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return userCoverPhotos;
         } else {
@@ -172,7 +173,7 @@ public class UserCoverPhoto extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userCoverPhotos.add(loadJSON(value.toString(), context));
+              userCoverPhotos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class UserCoverPhoto extends APINode {
 
           // Sixth, check if it's pure JsonObject
           userCoverPhotos.clear();
-          userCoverPhotos.add(loadJSON(json, context));
+          userCoverPhotos.add(loadJSON(json, context, header));
           return userCoverPhotos;
         }
       }
@@ -277,8 +278,8 @@ public class UserCoverPhoto extends APINode {
 
   public static APIRequest.ResponseParser<UserCoverPhoto> getParser() {
     return new APIRequest.ResponseParser<UserCoverPhoto>() {
-      public APINodeList<UserCoverPhoto> parseResponse(String response, APIContext context, APIRequest<UserCoverPhoto> request) throws MalformedResponseException {
-        return UserCoverPhoto.parseResponse(response, context, request);
+      public APINodeList<UserCoverPhoto> parseResponse(String response, APIContext context, APIRequest<UserCoverPhoto> request, String header) throws MalformedResponseException {
+        return UserCoverPhoto.parseResponse(response, context, request, header);
       }
     };
   }

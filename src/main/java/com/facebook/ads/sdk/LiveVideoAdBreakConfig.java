@@ -85,7 +85,7 @@ public class LiveVideoAdBreakConfig extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LiveVideoAdBreakConfig loadJSON(String json, APIContext context) {
+  public static LiveVideoAdBreakConfig loadJSON(String json, APIContext context, String header) {
     LiveVideoAdBreakConfig liveVideoAdBreakConfig = getGson().fromJson(json, LiveVideoAdBreakConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -102,11 +102,12 @@ public class LiveVideoAdBreakConfig extends APINode {
     }
     liveVideoAdBreakConfig.context = context;
     liveVideoAdBreakConfig.rawValue = json;
+    liveVideoAdBreakConfig.header = header;
     return liveVideoAdBreakConfig;
   }
 
-  public static APINodeList<LiveVideoAdBreakConfig> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LiveVideoAdBreakConfig> liveVideoAdBreakConfigs = new APINodeList<LiveVideoAdBreakConfig>(request, json);
+  public static APINodeList<LiveVideoAdBreakConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LiveVideoAdBreakConfig> liveVideoAdBreakConfigs = new APINodeList<LiveVideoAdBreakConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -117,7 +118,7 @@ public class LiveVideoAdBreakConfig extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          liveVideoAdBreakConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          liveVideoAdBreakConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return liveVideoAdBreakConfigs;
       } else if (result.isJsonObject()) {
@@ -142,7 +143,7 @@ public class LiveVideoAdBreakConfig extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              liveVideoAdBreakConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              liveVideoAdBreakConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -153,13 +154,13 @@ public class LiveVideoAdBreakConfig extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  liveVideoAdBreakConfigs.add(loadJSON(entry.getValue().toString(), context));
+                  liveVideoAdBreakConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              liveVideoAdBreakConfigs.add(loadJSON(obj.toString(), context));
+              liveVideoAdBreakConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return liveVideoAdBreakConfigs;
@@ -167,7 +168,7 @@ public class LiveVideoAdBreakConfig extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              liveVideoAdBreakConfigs.add(loadJSON(entry.getValue().toString(), context));
+              liveVideoAdBreakConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return liveVideoAdBreakConfigs;
         } else {
@@ -186,7 +187,7 @@ public class LiveVideoAdBreakConfig extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              liveVideoAdBreakConfigs.add(loadJSON(value.toString(), context));
+              liveVideoAdBreakConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -198,7 +199,7 @@ public class LiveVideoAdBreakConfig extends APINode {
 
           // Sixth, check if it's pure JsonObject
           liveVideoAdBreakConfigs.clear();
-          liveVideoAdBreakConfigs.add(loadJSON(json, context));
+          liveVideoAdBreakConfigs.add(loadJSON(json, context, header));
           return liveVideoAdBreakConfigs;
         }
       }
@@ -361,8 +362,8 @@ public class LiveVideoAdBreakConfig extends APINode {
 
   public static APIRequest.ResponseParser<LiveVideoAdBreakConfig> getParser() {
     return new APIRequest.ResponseParser<LiveVideoAdBreakConfig>() {
-      public APINodeList<LiveVideoAdBreakConfig> parseResponse(String response, APIContext context, APIRequest<LiveVideoAdBreakConfig> request) throws MalformedResponseException {
-        return LiveVideoAdBreakConfig.parseResponse(response, context, request);
+      public APINodeList<LiveVideoAdBreakConfig> parseResponse(String response, APIContext context, APIRequest<LiveVideoAdBreakConfig> request, String header) throws MalformedResponseException {
+        return LiveVideoAdBreakConfig.parseResponse(response, context, request, header);
       }
     };
   }

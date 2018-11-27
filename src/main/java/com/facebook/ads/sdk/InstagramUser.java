@@ -140,7 +140,7 @@ public class InstagramUser extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static InstagramUser loadJSON(String json, APIContext context) {
+  public static InstagramUser loadJSON(String json, APIContext context, String header) {
     InstagramUser instagramUser = getGson().fromJson(json, InstagramUser.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -157,11 +157,12 @@ public class InstagramUser extends APINode {
     }
     instagramUser.context = context;
     instagramUser.rawValue = json;
+    instagramUser.header = header;
     return instagramUser;
   }
 
-  public static APINodeList<InstagramUser> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<InstagramUser> instagramUsers = new APINodeList<InstagramUser>(request, json);
+  public static APINodeList<InstagramUser> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<InstagramUser> instagramUsers = new APINodeList<InstagramUser>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -172,7 +173,7 @@ public class InstagramUser extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instagramUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          instagramUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return instagramUsers;
       } else if (result.isJsonObject()) {
@@ -197,7 +198,7 @@ public class InstagramUser extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instagramUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              instagramUsers.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -208,13 +209,13 @@ public class InstagramUser extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instagramUsers.add(loadJSON(entry.getValue().toString(), context));
+                  instagramUsers.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instagramUsers.add(loadJSON(obj.toString(), context));
+              instagramUsers.add(loadJSON(obj.toString(), context, header));
             }
           }
           return instagramUsers;
@@ -222,7 +223,7 @@ public class InstagramUser extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instagramUsers.add(loadJSON(entry.getValue().toString(), context));
+              instagramUsers.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return instagramUsers;
         } else {
@@ -241,7 +242,7 @@ public class InstagramUser extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instagramUsers.add(loadJSON(value.toString(), context));
+              instagramUsers.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -253,7 +254,7 @@ public class InstagramUser extends APINode {
 
           // Sixth, check if it's pure JsonObject
           instagramUsers.clear();
-          instagramUsers.add(loadJSON(json, context));
+          instagramUsers.add(loadJSON(json, context, header));
           return instagramUsers;
         }
       }
@@ -379,8 +380,8 @@ public class InstagramUser extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -390,7 +391,8 @@ public class InstagramUser extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -404,7 +406,7 @@ public class InstagramUser extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAgencies.this.parseResponse(result);
+               return APIRequestDeleteAgencies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -505,8 +507,8 @@ public class InstagramUser extends APINode {
     };
 
     @Override
-    public APINodeList<Business> parseResponse(String response) throws APIException {
-      return Business.parseResponse(response, getContext(), this);
+    public APINodeList<Business> parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -516,7 +518,8 @@ public class InstagramUser extends APINode {
 
     @Override
     public APINodeList<Business> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -530,7 +533,7 @@ public class InstagramUser extends APINode {
         new Function<String, APINodeList<Business>>() {
            public APINodeList<Business> apply(String result) {
              try {
-               return APIRequestGetAgencies.this.parseResponse(result);
+               return APIRequestGetAgencies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -735,8 +738,8 @@ public class InstagramUser extends APINode {
     };
 
     @Override
-    public InstagramUser parseResponse(String response) throws APIException {
-      return InstagramUser.parseResponse(response, getContext(), this).head();
+    public InstagramUser parseResponse(String response, String header) throws APIException {
+      return InstagramUser.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -746,7 +749,8 @@ public class InstagramUser extends APINode {
 
     @Override
     public InstagramUser execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -760,7 +764,7 @@ public class InstagramUser extends APINode {
         new Function<String, InstagramUser>() {
            public InstagramUser apply(String result) {
              try {
-               return APIRequestCreateAgency.this.parseResponse(result);
+               return APIRequestCreateAgency.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -845,8 +849,8 @@ public class InstagramUser extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -856,7 +860,8 @@ public class InstagramUser extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -870,7 +875,7 @@ public class InstagramUser extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAssignedUsers.this.parseResponse(result);
+               return APIRequestDeleteAssignedUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -971,8 +976,8 @@ public class InstagramUser extends APINode {
     };
 
     @Override
-    public APINodeList<AssignedUser> parseResponse(String response) throws APIException {
-      return AssignedUser.parseResponse(response, getContext(), this);
+    public APINodeList<AssignedUser> parseResponse(String response, String header) throws APIException {
+      return AssignedUser.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -982,7 +987,8 @@ public class InstagramUser extends APINode {
 
     @Override
     public APINodeList<AssignedUser> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -996,7 +1002,7 @@ public class InstagramUser extends APINode {
         new Function<String, APINodeList<AssignedUser>>() {
            public APINodeList<AssignedUser> apply(String result) {
              try {
-               return APIRequestGetAssignedUsers.this.parseResponse(result);
+               return APIRequestGetAssignedUsers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1114,8 +1120,8 @@ public class InstagramUser extends APINode {
     };
 
     @Override
-    public InstagramUser parseResponse(String response) throws APIException {
-      return InstagramUser.parseResponse(response, getContext(), this).head();
+    public InstagramUser parseResponse(String response, String header) throws APIException {
+      return InstagramUser.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1125,7 +1131,8 @@ public class InstagramUser extends APINode {
 
     @Override
     public InstagramUser execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1139,7 +1146,7 @@ public class InstagramUser extends APINode {
         new Function<String, InstagramUser>() {
            public InstagramUser apply(String result) {
              try {
-               return APIRequestCreateAssignedUser.this.parseResponse(result);
+               return APIRequestCreateAssignedUser.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1246,8 +1253,8 @@ public class InstagramUser extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1257,7 +1264,8 @@ public class InstagramUser extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1271,7 +1279,7 @@ public class InstagramUser extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAuthorizedAdAccounts.this.parseResponse(result);
+               return APIRequestDeleteAuthorizedAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1377,7 +1385,6 @@ public class InstagramUser extends APINode {
       "capabilities",
       "created_time",
       "currency",
-      "daily_spend_limit",
       "direct_deals_tos_accepted",
       "disable_reason",
       "end_advertiser",
@@ -1406,7 +1413,6 @@ public class InstagramUser extends APINode {
       "offsite_pixels_tos_accepted",
       "owner",
       "partner",
-      "rate_limit_reset_time",
       "rf_spec",
       "show_checkout_experience",
       "spend_cap",
@@ -1422,8 +1428,8 @@ public class InstagramUser extends APINode {
     };
 
     @Override
-    public APINodeList<AdAccount> parseResponse(String response) throws APIException {
-      return AdAccount.parseResponse(response, getContext(), this);
+    public APINodeList<AdAccount> parseResponse(String response, String header) throws APIException {
+      return AdAccount.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1433,7 +1439,8 @@ public class InstagramUser extends APINode {
 
     @Override
     public APINodeList<AdAccount> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1447,7 +1454,7 @@ public class InstagramUser extends APINode {
         new Function<String, APINodeList<AdAccount>>() {
            public APINodeList<AdAccount> apply(String result) {
              try {
-               return APIRequestGetAuthorizedAdAccounts.this.parseResponse(result);
+               return APIRequestGetAuthorizedAdAccounts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1654,13 +1661,6 @@ public class InstagramUser extends APINode {
       this.requestField("currency", value);
       return this;
     }
-    public APIRequestGetAuthorizedAdAccounts requestDailySpendLimitField () {
-      return this.requestDailySpendLimitField(true);
-    }
-    public APIRequestGetAuthorizedAdAccounts requestDailySpendLimitField (boolean value) {
-      this.requestField("daily_spend_limit", value);
-      return this;
-    }
     public APIRequestGetAuthorizedAdAccounts requestDirectDealsTosAcceptedField () {
       return this.requestDirectDealsTosAcceptedField(true);
     }
@@ -1857,13 +1857,6 @@ public class InstagramUser extends APINode {
       this.requestField("partner", value);
       return this;
     }
-    public APIRequestGetAuthorizedAdAccounts requestRateLimitResetTimeField () {
-      return this.requestRateLimitResetTimeField(true);
-    }
-    public APIRequestGetAuthorizedAdAccounts requestRateLimitResetTimeField (boolean value) {
-      this.requestField("rate_limit_reset_time", value);
-      return this;
-    }
     public APIRequestGetAuthorizedAdAccounts requestRfSpecField () {
       return this.requestRfSpecField(true);
     }
@@ -1966,8 +1959,8 @@ public class InstagramUser extends APINode {
     };
 
     @Override
-    public InstagramUser parseResponse(String response) throws APIException {
-      return InstagramUser.parseResponse(response, getContext(), this).head();
+    public InstagramUser parseResponse(String response, String header) throws APIException {
+      return InstagramUser.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1977,7 +1970,8 @@ public class InstagramUser extends APINode {
 
     @Override
     public InstagramUser execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1991,7 +1985,7 @@ public class InstagramUser extends APINode {
         new Function<String, InstagramUser>() {
            public InstagramUser apply(String result) {
              try {
-               return APIRequestCreateAuthorizedAdAccount.this.parseResponse(result);
+               return APIRequestCreateAuthorizedAdAccount.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2082,8 +2076,8 @@ public class InstagramUser extends APINode {
     };
 
     @Override
-    public InstagramUser parseResponse(String response) throws APIException {
-      return InstagramUser.parseResponse(response, getContext(), this).head();
+    public InstagramUser parseResponse(String response, String header) throws APIException {
+      return InstagramUser.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2093,7 +2087,8 @@ public class InstagramUser extends APINode {
 
     @Override
     public InstagramUser execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2107,7 +2102,7 @@ public class InstagramUser extends APINode {
         new Function<String, InstagramUser>() {
            public InstagramUser apply(String result) {
              try {
-               return APIRequestCreateUserPermission.this.parseResponse(result);
+               return APIRequestCreateUserPermission.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2221,8 +2216,8 @@ public class InstagramUser extends APINode {
     };
 
     @Override
-    public InstagramUser parseResponse(String response) throws APIException {
-      return InstagramUser.parseResponse(response, getContext(), this).head();
+    public InstagramUser parseResponse(String response, String header) throws APIException {
+      return InstagramUser.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2232,7 +2227,8 @@ public class InstagramUser extends APINode {
 
     @Override
     public InstagramUser execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2246,7 +2242,7 @@ public class InstagramUser extends APINode {
         new Function<String, InstagramUser>() {
            public InstagramUser apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2423,8 +2419,8 @@ public class InstagramUser extends APINode {
 
   public static APIRequest.ResponseParser<InstagramUser> getParser() {
     return new APIRequest.ResponseParser<InstagramUser>() {
-      public APINodeList<InstagramUser> parseResponse(String response, APIContext context, APIRequest<InstagramUser> request) throws MalformedResponseException {
-        return InstagramUser.parseResponse(response, context, request);
+      public APINodeList<InstagramUser> parseResponse(String response, APIContext context, APIRequest<InstagramUser> request, String header) throws MalformedResponseException {
+        return InstagramUser.parseResponse(response, context, request, header);
       }
     };
   }

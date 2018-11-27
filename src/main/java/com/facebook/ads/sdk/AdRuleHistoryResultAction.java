@@ -73,7 +73,7 @@ public class AdRuleHistoryResultAction extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdRuleHistoryResultAction loadJSON(String json, APIContext context) {
+  public static AdRuleHistoryResultAction loadJSON(String json, APIContext context, String header) {
     AdRuleHistoryResultAction adRuleHistoryResultAction = getGson().fromJson(json, AdRuleHistoryResultAction.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class AdRuleHistoryResultAction extends APINode {
     }
     adRuleHistoryResultAction.context = context;
     adRuleHistoryResultAction.rawValue = json;
+    adRuleHistoryResultAction.header = header;
     return adRuleHistoryResultAction;
   }
 
-  public static APINodeList<AdRuleHistoryResultAction> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdRuleHistoryResultAction> adRuleHistoryResultActions = new APINodeList<AdRuleHistoryResultAction>(request, json);
+  public static APINodeList<AdRuleHistoryResultAction> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdRuleHistoryResultAction> adRuleHistoryResultActions = new APINodeList<AdRuleHistoryResultAction>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class AdRuleHistoryResultAction extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adRuleHistoryResultActions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adRuleHistoryResultActions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adRuleHistoryResultActions;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class AdRuleHistoryResultAction extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adRuleHistoryResultActions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adRuleHistoryResultActions.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class AdRuleHistoryResultAction extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adRuleHistoryResultActions.add(loadJSON(entry.getValue().toString(), context));
+                  adRuleHistoryResultActions.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adRuleHistoryResultActions.add(loadJSON(obj.toString(), context));
+              adRuleHistoryResultActions.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adRuleHistoryResultActions;
@@ -155,7 +156,7 @@ public class AdRuleHistoryResultAction extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adRuleHistoryResultActions.add(loadJSON(entry.getValue().toString(), context));
+              adRuleHistoryResultActions.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adRuleHistoryResultActions;
         } else {
@@ -174,7 +175,7 @@ public class AdRuleHistoryResultAction extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adRuleHistoryResultActions.add(loadJSON(value.toString(), context));
+              adRuleHistoryResultActions.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class AdRuleHistoryResultAction extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adRuleHistoryResultActions.clear();
-          adRuleHistoryResultActions.add(loadJSON(json, context));
+          adRuleHistoryResultActions.add(loadJSON(json, context, header));
           return adRuleHistoryResultActions;
         }
       }
@@ -289,8 +290,8 @@ public class AdRuleHistoryResultAction extends APINode {
 
   public static APIRequest.ResponseParser<AdRuleHistoryResultAction> getParser() {
     return new APIRequest.ResponseParser<AdRuleHistoryResultAction>() {
-      public APINodeList<AdRuleHistoryResultAction> parseResponse(String response, APIContext context, APIRequest<AdRuleHistoryResultAction> request) throws MalformedResponseException {
-        return AdRuleHistoryResultAction.parseResponse(response, context, request);
+      public APINodeList<AdRuleHistoryResultAction> parseResponse(String response, APIContext context, APIRequest<AdRuleHistoryResultAction> request, String header) throws MalformedResponseException {
+        return AdRuleHistoryResultAction.parseResponse(response, context, request, header);
       }
     };
   }

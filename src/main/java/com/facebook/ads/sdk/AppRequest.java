@@ -140,7 +140,7 @@ public class AppRequest extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AppRequest loadJSON(String json, APIContext context) {
+  public static AppRequest loadJSON(String json, APIContext context, String header) {
     AppRequest appRequest = getGson().fromJson(json, AppRequest.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -157,11 +157,12 @@ public class AppRequest extends APINode {
     }
     appRequest.context = context;
     appRequest.rawValue = json;
+    appRequest.header = header;
     return appRequest;
   }
 
-  public static APINodeList<AppRequest> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AppRequest> appRequests = new APINodeList<AppRequest>(request, json);
+  public static APINodeList<AppRequest> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AppRequest> appRequests = new APINodeList<AppRequest>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -172,7 +173,7 @@ public class AppRequest extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          appRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          appRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return appRequests;
       } else if (result.isJsonObject()) {
@@ -197,7 +198,7 @@ public class AppRequest extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              appRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              appRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -208,13 +209,13 @@ public class AppRequest extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  appRequests.add(loadJSON(entry.getValue().toString(), context));
+                  appRequests.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              appRequests.add(loadJSON(obj.toString(), context));
+              appRequests.add(loadJSON(obj.toString(), context, header));
             }
           }
           return appRequests;
@@ -222,7 +223,7 @@ public class AppRequest extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              appRequests.add(loadJSON(entry.getValue().toString(), context));
+              appRequests.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return appRequests;
         } else {
@@ -241,7 +242,7 @@ public class AppRequest extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              appRequests.add(loadJSON(value.toString(), context));
+              appRequests.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -253,7 +254,7 @@ public class AppRequest extends APINode {
 
           // Sixth, check if it's pure JsonObject
           appRequests.clear();
-          appRequests.add(loadJSON(json, context));
+          appRequests.add(loadJSON(json, context, header));
           return appRequests;
         }
       }
@@ -352,8 +353,8 @@ public class AppRequest extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -363,7 +364,8 @@ public class AppRequest extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -377,7 +379,7 @@ public class AppRequest extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -473,8 +475,8 @@ public class AppRequest extends APINode {
     };
 
     @Override
-    public AppRequest parseResponse(String response) throws APIException {
-      return AppRequest.parseResponse(response, getContext(), this).head();
+    public AppRequest parseResponse(String response, String header) throws APIException {
+      return AppRequest.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -484,7 +486,8 @@ public class AppRequest extends APINode {
 
     @Override
     public AppRequest execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -498,7 +501,7 @@ public class AppRequest extends APINode {
         new Function<String, AppRequest>() {
            public AppRequest apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -656,8 +659,8 @@ public class AppRequest extends APINode {
 
   public static APIRequest.ResponseParser<AppRequest> getParser() {
     return new APIRequest.ResponseParser<AppRequest>() {
-      public APINodeList<AppRequest> parseResponse(String response, APIContext context, APIRequest<AppRequest> request) throws MalformedResponseException {
-        return AppRequest.parseResponse(response, context, request);
+      public APINodeList<AppRequest> parseResponse(String response, APIContext context, APIRequest<AppRequest> request, String header) throws MalformedResponseException {
+        return AppRequest.parseResponse(response, context, request, header);
       }
     };
   }

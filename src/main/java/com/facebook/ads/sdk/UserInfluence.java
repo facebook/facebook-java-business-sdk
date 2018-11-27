@@ -71,7 +71,7 @@ public class UserInfluence extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserInfluence loadJSON(String json, APIContext context) {
+  public static UserInfluence loadJSON(String json, APIContext context, String header) {
     UserInfluence userInfluence = getGson().fromJson(json, UserInfluence.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class UserInfluence extends APINode {
     }
     userInfluence.context = context;
     userInfluence.rawValue = json;
+    userInfluence.header = header;
     return userInfluence;
   }
 
-  public static APINodeList<UserInfluence> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UserInfluence> userInfluences = new APINodeList<UserInfluence>(request, json);
+  public static APINodeList<UserInfluence> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UserInfluence> userInfluences = new APINodeList<UserInfluence>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class UserInfluence extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userInfluences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userInfluences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return userInfluences;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class UserInfluence extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userInfluences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userInfluences.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class UserInfluence extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userInfluences.add(loadJSON(entry.getValue().toString(), context));
+                  userInfluences.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userInfluences.add(loadJSON(obj.toString(), context));
+              userInfluences.add(loadJSON(obj.toString(), context, header));
             }
           }
           return userInfluences;
@@ -153,7 +154,7 @@ public class UserInfluence extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userInfluences.add(loadJSON(entry.getValue().toString(), context));
+              userInfluences.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return userInfluences;
         } else {
@@ -172,7 +173,7 @@ public class UserInfluence extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userInfluences.add(loadJSON(value.toString(), context));
+              userInfluences.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class UserInfluence extends APINode {
 
           // Sixth, check if it's pure JsonObject
           userInfluences.clear();
-          userInfluences.add(loadJSON(json, context));
+          userInfluences.add(loadJSON(json, context, header));
           return userInfluences;
         }
       }
@@ -277,8 +278,8 @@ public class UserInfluence extends APINode {
 
   public static APIRequest.ResponseParser<UserInfluence> getParser() {
     return new APIRequest.ResponseParser<UserInfluence>() {
-      public APINodeList<UserInfluence> parseResponse(String response, APIContext context, APIRequest<UserInfluence> request) throws MalformedResponseException {
-        return UserInfluence.parseResponse(response, context, request);
+      public APINodeList<UserInfluence> parseResponse(String response, APIContext context, APIRequest<UserInfluence> request, String header) throws MalformedResponseException {
+        return UserInfluence.parseResponse(response, context, request, header);
       }
     };
   }

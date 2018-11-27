@@ -71,7 +71,7 @@ public class SplitTestWinner extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static SplitTestWinner loadJSON(String json, APIContext context) {
+  public static SplitTestWinner loadJSON(String json, APIContext context, String header) {
     SplitTestWinner splitTestWinner = getGson().fromJson(json, SplitTestWinner.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class SplitTestWinner extends APINode {
     }
     splitTestWinner.context = context;
     splitTestWinner.rawValue = json;
+    splitTestWinner.header = header;
     return splitTestWinner;
   }
 
-  public static APINodeList<SplitTestWinner> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<SplitTestWinner> splitTestWinners = new APINodeList<SplitTestWinner>(request, json);
+  public static APINodeList<SplitTestWinner> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<SplitTestWinner> splitTestWinners = new APINodeList<SplitTestWinner>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class SplitTestWinner extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          splitTestWinners.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          splitTestWinners.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return splitTestWinners;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class SplitTestWinner extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              splitTestWinners.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              splitTestWinners.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class SplitTestWinner extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  splitTestWinners.add(loadJSON(entry.getValue().toString(), context));
+                  splitTestWinners.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              splitTestWinners.add(loadJSON(obj.toString(), context));
+              splitTestWinners.add(loadJSON(obj.toString(), context, header));
             }
           }
           return splitTestWinners;
@@ -153,7 +154,7 @@ public class SplitTestWinner extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              splitTestWinners.add(loadJSON(entry.getValue().toString(), context));
+              splitTestWinners.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return splitTestWinners;
         } else {
@@ -172,7 +173,7 @@ public class SplitTestWinner extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              splitTestWinners.add(loadJSON(value.toString(), context));
+              splitTestWinners.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class SplitTestWinner extends APINode {
 
           // Sixth, check if it's pure JsonObject
           splitTestWinners.clear();
-          splitTestWinners.add(loadJSON(json, context));
+          splitTestWinners.add(loadJSON(json, context, header));
           return splitTestWinners;
         }
       }
@@ -277,8 +278,8 @@ public class SplitTestWinner extends APINode {
 
   public static APIRequest.ResponseParser<SplitTestWinner> getParser() {
     return new APIRequest.ResponseParser<SplitTestWinner>() {
-      public APINodeList<SplitTestWinner> parseResponse(String response, APIContext context, APIRequest<SplitTestWinner> request) throws MalformedResponseException {
-        return SplitTestWinner.parseResponse(response, context, request);
+      public APINodeList<SplitTestWinner> parseResponse(String response, APIContext context, APIRequest<SplitTestWinner> request, String header) throws MalformedResponseException {
+        return SplitTestWinner.parseResponse(response, context, request, header);
       }
     };
   }

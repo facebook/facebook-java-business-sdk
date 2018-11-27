@@ -79,7 +79,7 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdAccountMatchedSearchApplicationsEdgeData loadJSON(String json, APIContext context) {
+  public static AdAccountMatchedSearchApplicationsEdgeData loadJSON(String json, APIContext context, String header) {
     AdAccountMatchedSearchApplicationsEdgeData adAccountMatchedSearchApplicationsEdgeData = getGson().fromJson(json, AdAccountMatchedSearchApplicationsEdgeData.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -96,11 +96,12 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
     }
     adAccountMatchedSearchApplicationsEdgeData.context = context;
     adAccountMatchedSearchApplicationsEdgeData.rawValue = json;
+    adAccountMatchedSearchApplicationsEdgeData.header = header;
     return adAccountMatchedSearchApplicationsEdgeData;
   }
 
-  public static APINodeList<AdAccountMatchedSearchApplicationsEdgeData> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAccountMatchedSearchApplicationsEdgeData> adAccountMatchedSearchApplicationsEdgeDatas = new APINodeList<AdAccountMatchedSearchApplicationsEdgeData>(request, json);
+  public static APINodeList<AdAccountMatchedSearchApplicationsEdgeData> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountMatchedSearchApplicationsEdgeData> adAccountMatchedSearchApplicationsEdgeDatas = new APINodeList<AdAccountMatchedSearchApplicationsEdgeData>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -111,7 +112,7 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adAccountMatchedSearchApplicationsEdgeDatas;
       } else if (result.isJsonObject()) {
@@ -136,7 +137,7 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -147,13 +148,13 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(entry.getValue().toString(), context));
+                  adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(obj.toString(), context));
+              adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adAccountMatchedSearchApplicationsEdgeDatas;
@@ -161,7 +162,7 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(entry.getValue().toString(), context));
+              adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adAccountMatchedSearchApplicationsEdgeDatas;
         } else {
@@ -180,7 +181,7 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(value.toString(), context));
+              adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -192,7 +193,7 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adAccountMatchedSearchApplicationsEdgeDatas.clear();
-          adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(json, context));
+          adAccountMatchedSearchApplicationsEdgeDatas.add(loadJSON(json, context, header));
           return adAccountMatchedSearchApplicationsEdgeDatas;
         }
       }
@@ -364,8 +365,8 @@ public class AdAccountMatchedSearchApplicationsEdgeData extends APINode {
 
   public static APIRequest.ResponseParser<AdAccountMatchedSearchApplicationsEdgeData> getParser() {
     return new APIRequest.ResponseParser<AdAccountMatchedSearchApplicationsEdgeData>() {
-      public APINodeList<AdAccountMatchedSearchApplicationsEdgeData> parseResponse(String response, APIContext context, APIRequest<AdAccountMatchedSearchApplicationsEdgeData> request) throws MalformedResponseException {
-        return AdAccountMatchedSearchApplicationsEdgeData.parseResponse(response, context, request);
+      public APINodeList<AdAccountMatchedSearchApplicationsEdgeData> parseResponse(String response, APIContext context, APIRequest<AdAccountMatchedSearchApplicationsEdgeData> request, String header) throws MalformedResponseException {
+        return AdAccountMatchedSearchApplicationsEdgeData.parseResponse(response, context, request, header);
       }
     };
   }

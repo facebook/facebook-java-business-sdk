@@ -128,7 +128,7 @@ public class ProductFeedUploadErrorSample extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductFeedUploadErrorSample loadJSON(String json, APIContext context) {
+  public static ProductFeedUploadErrorSample loadJSON(String json, APIContext context, String header) {
     ProductFeedUploadErrorSample productFeedUploadErrorSample = getGson().fromJson(json, ProductFeedUploadErrorSample.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -145,11 +145,12 @@ public class ProductFeedUploadErrorSample extends APINode {
     }
     productFeedUploadErrorSample.context = context;
     productFeedUploadErrorSample.rawValue = json;
+    productFeedUploadErrorSample.header = header;
     return productFeedUploadErrorSample;
   }
 
-  public static APINodeList<ProductFeedUploadErrorSample> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ProductFeedUploadErrorSample> productFeedUploadErrorSamples = new APINodeList<ProductFeedUploadErrorSample>(request, json);
+  public static APINodeList<ProductFeedUploadErrorSample> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductFeedUploadErrorSample> productFeedUploadErrorSamples = new APINodeList<ProductFeedUploadErrorSample>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -160,7 +161,7 @@ public class ProductFeedUploadErrorSample extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productFeedUploadErrorSamples.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          productFeedUploadErrorSamples.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return productFeedUploadErrorSamples;
       } else if (result.isJsonObject()) {
@@ -185,7 +186,7 @@ public class ProductFeedUploadErrorSample extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productFeedUploadErrorSamples.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              productFeedUploadErrorSamples.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -196,13 +197,13 @@ public class ProductFeedUploadErrorSample extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productFeedUploadErrorSamples.add(loadJSON(entry.getValue().toString(), context));
+                  productFeedUploadErrorSamples.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productFeedUploadErrorSamples.add(loadJSON(obj.toString(), context));
+              productFeedUploadErrorSamples.add(loadJSON(obj.toString(), context, header));
             }
           }
           return productFeedUploadErrorSamples;
@@ -210,7 +211,7 @@ public class ProductFeedUploadErrorSample extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productFeedUploadErrorSamples.add(loadJSON(entry.getValue().toString(), context));
+              productFeedUploadErrorSamples.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return productFeedUploadErrorSamples;
         } else {
@@ -229,7 +230,7 @@ public class ProductFeedUploadErrorSample extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productFeedUploadErrorSamples.add(loadJSON(value.toString(), context));
+              productFeedUploadErrorSamples.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -241,7 +242,7 @@ public class ProductFeedUploadErrorSample extends APINode {
 
           // Sixth, check if it's pure JsonObject
           productFeedUploadErrorSamples.clear();
-          productFeedUploadErrorSamples.add(loadJSON(json, context));
+          productFeedUploadErrorSamples.add(loadJSON(json, context, header));
           return productFeedUploadErrorSamples;
         }
       }
@@ -305,8 +306,8 @@ public class ProductFeedUploadErrorSample extends APINode {
     };
 
     @Override
-    public ProductFeedUploadErrorSample parseResponse(String response) throws APIException {
-      return ProductFeedUploadErrorSample.parseResponse(response, getContext(), this).head();
+    public ProductFeedUploadErrorSample parseResponse(String response, String header) throws APIException {
+      return ProductFeedUploadErrorSample.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -316,7 +317,8 @@ public class ProductFeedUploadErrorSample extends APINode {
 
     @Override
     public ProductFeedUploadErrorSample execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -330,7 +332,7 @@ public class ProductFeedUploadErrorSample extends APINode {
         new Function<String, ProductFeedUploadErrorSample>() {
            public ProductFeedUploadErrorSample apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -440,8 +442,8 @@ public class ProductFeedUploadErrorSample extends APINode {
 
   public static APIRequest.ResponseParser<ProductFeedUploadErrorSample> getParser() {
     return new APIRequest.ResponseParser<ProductFeedUploadErrorSample>() {
-      public APINodeList<ProductFeedUploadErrorSample> parseResponse(String response, APIContext context, APIRequest<ProductFeedUploadErrorSample> request) throws MalformedResponseException {
-        return ProductFeedUploadErrorSample.parseResponse(response, context, request);
+      public APINodeList<ProductFeedUploadErrorSample> parseResponse(String response, APIContext context, APIRequest<ProductFeedUploadErrorSample> request, String header) throws MalformedResponseException {
+        return ProductFeedUploadErrorSample.parseResponse(response, context, request, header);
       }
     };
   }

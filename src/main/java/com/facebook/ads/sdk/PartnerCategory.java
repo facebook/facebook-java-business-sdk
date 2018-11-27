@@ -85,7 +85,7 @@ public class PartnerCategory extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PartnerCategory loadJSON(String json, APIContext context) {
+  public static PartnerCategory loadJSON(String json, APIContext context, String header) {
     PartnerCategory partnerCategory = getGson().fromJson(json, PartnerCategory.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -102,11 +102,12 @@ public class PartnerCategory extends APINode {
     }
     partnerCategory.context = context;
     partnerCategory.rawValue = json;
+    partnerCategory.header = header;
     return partnerCategory;
   }
 
-  public static APINodeList<PartnerCategory> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PartnerCategory> partnerCategorys = new APINodeList<PartnerCategory>(request, json);
+  public static APINodeList<PartnerCategory> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PartnerCategory> partnerCategorys = new APINodeList<PartnerCategory>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -117,7 +118,7 @@ public class PartnerCategory extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          partnerCategorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          partnerCategorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return partnerCategorys;
       } else if (result.isJsonObject()) {
@@ -142,7 +143,7 @@ public class PartnerCategory extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              partnerCategorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              partnerCategorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -153,13 +154,13 @@ public class PartnerCategory extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  partnerCategorys.add(loadJSON(entry.getValue().toString(), context));
+                  partnerCategorys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              partnerCategorys.add(loadJSON(obj.toString(), context));
+              partnerCategorys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return partnerCategorys;
@@ -167,7 +168,7 @@ public class PartnerCategory extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              partnerCategorys.add(loadJSON(entry.getValue().toString(), context));
+              partnerCategorys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return partnerCategorys;
         } else {
@@ -186,7 +187,7 @@ public class PartnerCategory extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              partnerCategorys.add(loadJSON(value.toString(), context));
+              partnerCategorys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -198,7 +199,7 @@ public class PartnerCategory extends APINode {
 
           // Sixth, check if it's pure JsonObject
           partnerCategorys.clear();
-          partnerCategorys.add(loadJSON(json, context));
+          partnerCategorys.add(loadJSON(json, context, header));
           return partnerCategorys;
         }
       }
@@ -380,8 +381,8 @@ public class PartnerCategory extends APINode {
 
   public static APIRequest.ResponseParser<PartnerCategory> getParser() {
     return new APIRequest.ResponseParser<PartnerCategory>() {
-      public APINodeList<PartnerCategory> parseResponse(String response, APIContext context, APIRequest<PartnerCategory> request) throws MalformedResponseException {
-        return PartnerCategory.parseResponse(response, context, request);
+      public APINodeList<PartnerCategory> parseResponse(String response, APIContext context, APIRequest<PartnerCategory> request, String header) throws MalformedResponseException {
+        return PartnerCategory.parseResponse(response, context, request, header);
       }
     };
   }

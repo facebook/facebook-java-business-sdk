@@ -69,7 +69,7 @@ public class CreativeHistory extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CreativeHistory loadJSON(String json, APIContext context) {
+  public static CreativeHistory loadJSON(String json, APIContext context, String header) {
     CreativeHistory creativeHistory = getGson().fromJson(json, CreativeHistory.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class CreativeHistory extends APINode {
     }
     creativeHistory.context = context;
     creativeHistory.rawValue = json;
+    creativeHistory.header = header;
     return creativeHistory;
   }
 
-  public static APINodeList<CreativeHistory> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CreativeHistory> creativeHistorys = new APINodeList<CreativeHistory>(request, json);
+  public static APINodeList<CreativeHistory> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CreativeHistory> creativeHistorys = new APINodeList<CreativeHistory>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class CreativeHistory extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          creativeHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          creativeHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return creativeHistorys;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class CreativeHistory extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              creativeHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              creativeHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class CreativeHistory extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  creativeHistorys.add(loadJSON(entry.getValue().toString(), context));
+                  creativeHistorys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              creativeHistorys.add(loadJSON(obj.toString(), context));
+              creativeHistorys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return creativeHistorys;
@@ -151,7 +152,7 @@ public class CreativeHistory extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              creativeHistorys.add(loadJSON(entry.getValue().toString(), context));
+              creativeHistorys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return creativeHistorys;
         } else {
@@ -170,7 +171,7 @@ public class CreativeHistory extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              creativeHistorys.add(loadJSON(value.toString(), context));
+              creativeHistorys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class CreativeHistory extends APINode {
 
           // Sixth, check if it's pure JsonObject
           creativeHistorys.clear();
-          creativeHistorys.add(loadJSON(json, context));
+          creativeHistorys.add(loadJSON(json, context, header));
           return creativeHistorys;
         }
       }
@@ -265,8 +266,8 @@ public class CreativeHistory extends APINode {
 
   public static APIRequest.ResponseParser<CreativeHistory> getParser() {
     return new APIRequest.ResponseParser<CreativeHistory>() {
-      public APINodeList<CreativeHistory> parseResponse(String response, APIContext context, APIRequest<CreativeHistory> request) throws MalformedResponseException {
-        return CreativeHistory.parseResponse(response, context, request);
+      public APINodeList<CreativeHistory> parseResponse(String response, APIContext context, APIRequest<CreativeHistory> request, String header) throws MalformedResponseException {
+        return CreativeHistory.parseResponse(response, context, request, header);
       }
     };
   }

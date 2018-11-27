@@ -71,7 +71,7 @@ public class UserNuxStatuses extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserNuxStatuses loadJSON(String json, APIContext context) {
+  public static UserNuxStatuses loadJSON(String json, APIContext context, String header) {
     UserNuxStatuses userNuxStatuses = getGson().fromJson(json, UserNuxStatuses.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class UserNuxStatuses extends APINode {
     }
     userNuxStatuses.context = context;
     userNuxStatuses.rawValue = json;
+    userNuxStatuses.header = header;
     return userNuxStatuses;
   }
 
-  public static APINodeList<UserNuxStatuses> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UserNuxStatuses> userNuxStatusess = new APINodeList<UserNuxStatuses>(request, json);
+  public static APINodeList<UserNuxStatuses> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UserNuxStatuses> userNuxStatusess = new APINodeList<UserNuxStatuses>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class UserNuxStatuses extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userNuxStatusess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userNuxStatusess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return userNuxStatusess;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class UserNuxStatuses extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userNuxStatusess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userNuxStatusess.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class UserNuxStatuses extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userNuxStatusess.add(loadJSON(entry.getValue().toString(), context));
+                  userNuxStatusess.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userNuxStatusess.add(loadJSON(obj.toString(), context));
+              userNuxStatusess.add(loadJSON(obj.toString(), context, header));
             }
           }
           return userNuxStatusess;
@@ -153,7 +154,7 @@ public class UserNuxStatuses extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userNuxStatusess.add(loadJSON(entry.getValue().toString(), context));
+              userNuxStatusess.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return userNuxStatusess;
         } else {
@@ -172,7 +173,7 @@ public class UserNuxStatuses extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userNuxStatusess.add(loadJSON(value.toString(), context));
+              userNuxStatusess.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class UserNuxStatuses extends APINode {
 
           // Sixth, check if it's pure JsonObject
           userNuxStatusess.clear();
-          userNuxStatusess.add(loadJSON(json, context));
+          userNuxStatusess.add(loadJSON(json, context, header));
           return userNuxStatusess;
         }
       }
@@ -277,8 +278,8 @@ public class UserNuxStatuses extends APINode {
 
   public static APIRequest.ResponseParser<UserNuxStatuses> getParser() {
     return new APIRequest.ResponseParser<UserNuxStatuses>() {
-      public APINodeList<UserNuxStatuses> parseResponse(String response, APIContext context, APIRequest<UserNuxStatuses> request) throws MalformedResponseException {
-        return UserNuxStatuses.parseResponse(response, context, request);
+      public APINodeList<UserNuxStatuses> parseResponse(String response, APIContext context, APIRequest<UserNuxStatuses> request, String header) throws MalformedResponseException {
+        return UserNuxStatuses.parseResponse(response, context, request, header);
       }
     };
   }

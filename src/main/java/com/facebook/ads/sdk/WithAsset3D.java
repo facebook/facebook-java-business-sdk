@@ -124,7 +124,7 @@ public class WithAsset3D extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static WithAsset3D loadJSON(String json, APIContext context) {
+  public static WithAsset3D loadJSON(String json, APIContext context, String header) {
     WithAsset3D withAsset3D = getGson().fromJson(json, WithAsset3D.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -141,11 +141,12 @@ public class WithAsset3D extends APINode {
     }
     withAsset3D.context = context;
     withAsset3D.rawValue = json;
+    withAsset3D.header = header;
     return withAsset3D;
   }
 
-  public static APINodeList<WithAsset3D> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<WithAsset3D> withAsset3Ds = new APINodeList<WithAsset3D>(request, json);
+  public static APINodeList<WithAsset3D> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<WithAsset3D> withAsset3Ds = new APINodeList<WithAsset3D>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -156,7 +157,7 @@ public class WithAsset3D extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          withAsset3Ds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          withAsset3Ds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return withAsset3Ds;
       } else if (result.isJsonObject()) {
@@ -181,7 +182,7 @@ public class WithAsset3D extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              withAsset3Ds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              withAsset3Ds.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -192,13 +193,13 @@ public class WithAsset3D extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  withAsset3Ds.add(loadJSON(entry.getValue().toString(), context));
+                  withAsset3Ds.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              withAsset3Ds.add(loadJSON(obj.toString(), context));
+              withAsset3Ds.add(loadJSON(obj.toString(), context, header));
             }
           }
           return withAsset3Ds;
@@ -206,7 +207,7 @@ public class WithAsset3D extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              withAsset3Ds.add(loadJSON(entry.getValue().toString(), context));
+              withAsset3Ds.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return withAsset3Ds;
         } else {
@@ -225,7 +226,7 @@ public class WithAsset3D extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              withAsset3Ds.add(loadJSON(value.toString(), context));
+              withAsset3Ds.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -237,7 +238,7 @@ public class WithAsset3D extends APINode {
 
           // Sixth, check if it's pure JsonObject
           withAsset3Ds.clear();
-          withAsset3Ds.add(loadJSON(json, context));
+          withAsset3Ds.add(loadJSON(json, context, header));
           return withAsset3Ds;
         }
       }
@@ -291,8 +292,8 @@ public class WithAsset3D extends APINode {
     };
 
     @Override
-    public WithAsset3D parseResponse(String response) throws APIException {
-      return WithAsset3D.parseResponse(response, getContext(), this).head();
+    public WithAsset3D parseResponse(String response, String header) throws APIException {
+      return WithAsset3D.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -302,7 +303,8 @@ public class WithAsset3D extends APINode {
 
     @Override
     public WithAsset3D execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -316,7 +318,7 @@ public class WithAsset3D extends APINode {
         new Function<String, WithAsset3D>() {
            public WithAsset3D apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -410,8 +412,8 @@ public class WithAsset3D extends APINode {
 
   public static APIRequest.ResponseParser<WithAsset3D> getParser() {
     return new APIRequest.ResponseParser<WithAsset3D>() {
-      public APINodeList<WithAsset3D> parseResponse(String response, APIContext context, APIRequest<WithAsset3D> request) throws MalformedResponseException {
-        return WithAsset3D.parseResponse(response, context, request);
+      public APINodeList<WithAsset3D> parseResponse(String response, APIContext context, APIRequest<WithAsset3D> request, String header) throws MalformedResponseException {
+        return WithAsset3D.parseResponse(response, context, request, header);
       }
     };
   }

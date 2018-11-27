@@ -55,8 +55,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class AdAccountDeliveryEstimate extends APINode {
-  @SerializedName("bid_estimate")
-  private Object mBidEstimate = null;
   @SerializedName("daily_outcomes_curve")
   private List<OutcomePredictionPoint> mDailyOutcomesCurve = null;
   @SerializedName("estimate_dau")
@@ -75,7 +73,7 @@ public class AdAccountDeliveryEstimate extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdAccountDeliveryEstimate loadJSON(String json, APIContext context) {
+  public static AdAccountDeliveryEstimate loadJSON(String json, APIContext context, String header) {
     AdAccountDeliveryEstimate adAccountDeliveryEstimate = getGson().fromJson(json, AdAccountDeliveryEstimate.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -92,11 +90,12 @@ public class AdAccountDeliveryEstimate extends APINode {
     }
     adAccountDeliveryEstimate.context = context;
     adAccountDeliveryEstimate.rawValue = json;
+    adAccountDeliveryEstimate.header = header;
     return adAccountDeliveryEstimate;
   }
 
-  public static APINodeList<AdAccountDeliveryEstimate> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAccountDeliveryEstimate> adAccountDeliveryEstimates = new APINodeList<AdAccountDeliveryEstimate>(request, json);
+  public static APINodeList<AdAccountDeliveryEstimate> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAccountDeliveryEstimate> adAccountDeliveryEstimates = new APINodeList<AdAccountDeliveryEstimate>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -107,7 +106,7 @@ public class AdAccountDeliveryEstimate extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountDeliveryEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAccountDeliveryEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adAccountDeliveryEstimates;
       } else if (result.isJsonObject()) {
@@ -132,7 +131,7 @@ public class AdAccountDeliveryEstimate extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountDeliveryEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAccountDeliveryEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -143,13 +142,13 @@ public class AdAccountDeliveryEstimate extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountDeliveryEstimates.add(loadJSON(entry.getValue().toString(), context));
+                  adAccountDeliveryEstimates.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountDeliveryEstimates.add(loadJSON(obj.toString(), context));
+              adAccountDeliveryEstimates.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adAccountDeliveryEstimates;
@@ -157,7 +156,7 @@ public class AdAccountDeliveryEstimate extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountDeliveryEstimates.add(loadJSON(entry.getValue().toString(), context));
+              adAccountDeliveryEstimates.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adAccountDeliveryEstimates;
         } else {
@@ -176,7 +175,7 @@ public class AdAccountDeliveryEstimate extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountDeliveryEstimates.add(loadJSON(value.toString(), context));
+              adAccountDeliveryEstimates.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -188,7 +187,7 @@ public class AdAccountDeliveryEstimate extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adAccountDeliveryEstimates.clear();
-          adAccountDeliveryEstimates.add(loadJSON(json, context));
+          adAccountDeliveryEstimates.add(loadJSON(json, context, header));
           return adAccountDeliveryEstimates;
         }
       }
@@ -216,15 +215,6 @@ public class AdAccountDeliveryEstimate extends APINode {
     return getGson().toJson(this);
   }
 
-
-  public Object getFieldBidEstimate() {
-    return mBidEstimate;
-  }
-
-  public AdAccountDeliveryEstimate setFieldBidEstimate(Object value) {
-    this.mBidEstimate = value;
-    return this;
-  }
 
   public List<OutcomePredictionPoint> getFieldDailyOutcomesCurve() {
     return mDailyOutcomesCurve;
@@ -321,6 +311,8 @@ public class AdAccountDeliveryEstimate extends APINode {
       VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
+      @SerializedName("THRUPLAY")
+      VALUE_THRUPLAY("THRUPLAY"),
       @SerializedName("REPLIES")
       VALUE_REPLIES("REPLIES"),
       @SerializedName("DERIVED_EVENTS")
@@ -354,7 +346,6 @@ public class AdAccountDeliveryEstimate extends APINode {
   }
 
   public AdAccountDeliveryEstimate copyFrom(AdAccountDeliveryEstimate instance) {
-    this.mBidEstimate = instance.mBidEstimate;
     this.mDailyOutcomesCurve = instance.mDailyOutcomesCurve;
     this.mEstimateDau = instance.mEstimateDau;
     this.mEstimateMau = instance.mEstimateMau;
@@ -367,8 +358,8 @@ public class AdAccountDeliveryEstimate extends APINode {
 
   public static APIRequest.ResponseParser<AdAccountDeliveryEstimate> getParser() {
     return new APIRequest.ResponseParser<AdAccountDeliveryEstimate>() {
-      public APINodeList<AdAccountDeliveryEstimate> parseResponse(String response, APIContext context, APIRequest<AdAccountDeliveryEstimate> request) throws MalformedResponseException {
-        return AdAccountDeliveryEstimate.parseResponse(response, context, request);
+      public APINodeList<AdAccountDeliveryEstimate> parseResponse(String response, APIContext context, APIRequest<AdAccountDeliveryEstimate> request, String header) throws MalformedResponseException {
+        return AdAccountDeliveryEstimate.parseResponse(response, context, request, header);
       }
     };
   }

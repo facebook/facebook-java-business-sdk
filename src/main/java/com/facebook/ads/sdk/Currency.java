@@ -55,10 +55,6 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class Currency extends APINode {
-  @SerializedName("currency_exchange")
-  private Double mCurrencyExchange = null;
-  @SerializedName("currency_exchange_inverse")
-  private Double mCurrencyExchangeInverse = null;
   @SerializedName("currency_offset")
   private Long mCurrencyOffset = null;
   @SerializedName("usd_exchange")
@@ -77,7 +73,7 @@ public class Currency extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Currency loadJSON(String json, APIContext context) {
+  public static Currency loadJSON(String json, APIContext context, String header) {
     Currency currency = getGson().fromJson(json, Currency.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -94,11 +90,12 @@ public class Currency extends APINode {
     }
     currency.context = context;
     currency.rawValue = json;
+    currency.header = header;
     return currency;
   }
 
-  public static APINodeList<Currency> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Currency> currencys = new APINodeList<Currency>(request, json);
+  public static APINodeList<Currency> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Currency> currencys = new APINodeList<Currency>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -109,7 +106,7 @@ public class Currency extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          currencys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          currencys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return currencys;
       } else if (result.isJsonObject()) {
@@ -134,7 +131,7 @@ public class Currency extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              currencys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              currencys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -145,13 +142,13 @@ public class Currency extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  currencys.add(loadJSON(entry.getValue().toString(), context));
+                  currencys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              currencys.add(loadJSON(obj.toString(), context));
+              currencys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return currencys;
@@ -159,7 +156,7 @@ public class Currency extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              currencys.add(loadJSON(entry.getValue().toString(), context));
+              currencys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return currencys;
         } else {
@@ -178,7 +175,7 @@ public class Currency extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              currencys.add(loadJSON(value.toString(), context));
+              currencys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -190,7 +187,7 @@ public class Currency extends APINode {
 
           // Sixth, check if it's pure JsonObject
           currencys.clear();
-          currencys.add(loadJSON(json, context));
+          currencys.add(loadJSON(json, context, header));
           return currencys;
         }
       }
@@ -218,24 +215,6 @@ public class Currency extends APINode {
     return getGson().toJson(this);
   }
 
-
-  public Double getFieldCurrencyExchange() {
-    return mCurrencyExchange;
-  }
-
-  public Currency setFieldCurrencyExchange(Double value) {
-    this.mCurrencyExchange = value;
-    return this;
-  }
-
-  public Double getFieldCurrencyExchangeInverse() {
-    return mCurrencyExchangeInverse;
-  }
-
-  public Currency setFieldCurrencyExchangeInverse(Double value) {
-    this.mCurrencyExchangeInverse = value;
-    return this;
-  }
 
   public Long getFieldCurrencyOffset() {
     return mCurrencyOffset;
@@ -299,8 +278,6 @@ public class Currency extends APINode {
   }
 
   public Currency copyFrom(Currency instance) {
-    this.mCurrencyExchange = instance.mCurrencyExchange;
-    this.mCurrencyExchangeInverse = instance.mCurrencyExchangeInverse;
     this.mCurrencyOffset = instance.mCurrencyOffset;
     this.mUsdExchange = instance.mUsdExchange;
     this.mUsdExchangeInverse = instance.mUsdExchangeInverse;
@@ -313,8 +290,8 @@ public class Currency extends APINode {
 
   public static APIRequest.ResponseParser<Currency> getParser() {
     return new APIRequest.ResponseParser<Currency>() {
-      public APINodeList<Currency> parseResponse(String response, APIContext context, APIRequest<Currency> request) throws MalformedResponseException {
-        return Currency.parseResponse(response, context, request);
+      public APINodeList<Currency> parseResponse(String response, APIContext context, APIRequest<Currency> request, String header) throws MalformedResponseException {
+        return Currency.parseResponse(response, context, request, header);
       }
     };
   }

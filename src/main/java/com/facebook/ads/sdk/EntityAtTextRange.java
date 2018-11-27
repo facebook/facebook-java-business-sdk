@@ -75,7 +75,7 @@ public class EntityAtTextRange extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static EntityAtTextRange loadJSON(String json, APIContext context) {
+  public static EntityAtTextRange loadJSON(String json, APIContext context, String header) {
     EntityAtTextRange entityAtTextRange = getGson().fromJson(json, EntityAtTextRange.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -92,11 +92,12 @@ public class EntityAtTextRange extends APINode {
     }
     entityAtTextRange.context = context;
     entityAtTextRange.rawValue = json;
+    entityAtTextRange.header = header;
     return entityAtTextRange;
   }
 
-  public static APINodeList<EntityAtTextRange> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<EntityAtTextRange> entityAtTextRanges = new APINodeList<EntityAtTextRange>(request, json);
+  public static APINodeList<EntityAtTextRange> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<EntityAtTextRange> entityAtTextRanges = new APINodeList<EntityAtTextRange>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -107,7 +108,7 @@ public class EntityAtTextRange extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          entityAtTextRanges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          entityAtTextRanges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return entityAtTextRanges;
       } else if (result.isJsonObject()) {
@@ -132,7 +133,7 @@ public class EntityAtTextRange extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              entityAtTextRanges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              entityAtTextRanges.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -143,13 +144,13 @@ public class EntityAtTextRange extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  entityAtTextRanges.add(loadJSON(entry.getValue().toString(), context));
+                  entityAtTextRanges.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              entityAtTextRanges.add(loadJSON(obj.toString(), context));
+              entityAtTextRanges.add(loadJSON(obj.toString(), context, header));
             }
           }
           return entityAtTextRanges;
@@ -157,7 +158,7 @@ public class EntityAtTextRange extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              entityAtTextRanges.add(loadJSON(entry.getValue().toString(), context));
+              entityAtTextRanges.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return entityAtTextRanges;
         } else {
@@ -176,7 +177,7 @@ public class EntityAtTextRange extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              entityAtTextRanges.add(loadJSON(value.toString(), context));
+              entityAtTextRanges.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -188,7 +189,7 @@ public class EntityAtTextRange extends APINode {
 
           // Sixth, check if it's pure JsonObject
           entityAtTextRanges.clear();
-          entityAtTextRanges.add(loadJSON(json, context));
+          entityAtTextRanges.add(loadJSON(json, context, header));
           return entityAtTextRanges;
         }
       }
@@ -334,8 +335,8 @@ public class EntityAtTextRange extends APINode {
 
   public static APIRequest.ResponseParser<EntityAtTextRange> getParser() {
     return new APIRequest.ResponseParser<EntityAtTextRange>() {
-      public APINodeList<EntityAtTextRange> parseResponse(String response, APIContext context, APIRequest<EntityAtTextRange> request) throws MalformedResponseException {
-        return EntityAtTextRange.parseResponse(response, context, request);
+      public APINodeList<EntityAtTextRange> parseResponse(String response, APIContext context, APIRequest<EntityAtTextRange> request, String header) throws MalformedResponseException {
+        return EntityAtTextRange.parseResponse(response, context, request, header);
       }
     };
   }

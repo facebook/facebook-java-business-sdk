@@ -136,7 +136,7 @@ public class PageSavedFilter extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageSavedFilter loadJSON(String json, APIContext context) {
+  public static PageSavedFilter loadJSON(String json, APIContext context, String header) {
     PageSavedFilter pageSavedFilter = getGson().fromJson(json, PageSavedFilter.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -153,11 +153,12 @@ public class PageSavedFilter extends APINode {
     }
     pageSavedFilter.context = context;
     pageSavedFilter.rawValue = json;
+    pageSavedFilter.header = header;
     return pageSavedFilter;
   }
 
-  public static APINodeList<PageSavedFilter> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<PageSavedFilter> pageSavedFilters = new APINodeList<PageSavedFilter>(request, json);
+  public static APINodeList<PageSavedFilter> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<PageSavedFilter> pageSavedFilters = new APINodeList<PageSavedFilter>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -168,7 +169,7 @@ public class PageSavedFilter extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageSavedFilters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          pageSavedFilters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return pageSavedFilters;
       } else if (result.isJsonObject()) {
@@ -193,7 +194,7 @@ public class PageSavedFilter extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageSavedFilters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              pageSavedFilters.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -204,13 +205,13 @@ public class PageSavedFilter extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageSavedFilters.add(loadJSON(entry.getValue().toString(), context));
+                  pageSavedFilters.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageSavedFilters.add(loadJSON(obj.toString(), context));
+              pageSavedFilters.add(loadJSON(obj.toString(), context, header));
             }
           }
           return pageSavedFilters;
@@ -218,7 +219,7 @@ public class PageSavedFilter extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageSavedFilters.add(loadJSON(entry.getValue().toString(), context));
+              pageSavedFilters.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return pageSavedFilters;
         } else {
@@ -237,7 +238,7 @@ public class PageSavedFilter extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageSavedFilters.add(loadJSON(value.toString(), context));
+              pageSavedFilters.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -249,7 +250,7 @@ public class PageSavedFilter extends APINode {
 
           // Sixth, check if it's pure JsonObject
           pageSavedFilters.clear();
-          pageSavedFilters.add(loadJSON(json, context));
+          pageSavedFilters.add(loadJSON(json, context, header));
           return pageSavedFilters;
         }
       }
@@ -330,8 +331,8 @@ public class PageSavedFilter extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -341,7 +342,8 @@ public class PageSavedFilter extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -355,7 +357,7 @@ public class PageSavedFilter extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -440,8 +442,8 @@ public class PageSavedFilter extends APINode {
     };
 
     @Override
-    public PageSavedFilter parseResponse(String response) throws APIException {
-      return PageSavedFilter.parseResponse(response, getContext(), this).head();
+    public PageSavedFilter parseResponse(String response, String header) throws APIException {
+      return PageSavedFilter.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -451,7 +453,8 @@ public class PageSavedFilter extends APINode {
 
     @Override
     public PageSavedFilter execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -465,7 +468,7 @@ public class PageSavedFilter extends APINode {
         new Function<String, PageSavedFilter>() {
            public PageSavedFilter apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -579,8 +582,6 @@ public class PageSavedFilter extends APINode {
   }
 
   public static enum EnumSection {
-      @SerializedName("AUDIENCE_ALERTS")
-      VALUE_AUDIENCE_ALERTS("AUDIENCE_ALERTS"),
       @SerializedName("CANDIDATE_VIDEOS")
       VALUE_CANDIDATE_VIDEOS("CANDIDATE_VIDEOS"),
       @SerializedName("CHEX_PENDING_ORDERS")
@@ -824,8 +825,8 @@ public class PageSavedFilter extends APINode {
 
   public static APIRequest.ResponseParser<PageSavedFilter> getParser() {
     return new APIRequest.ResponseParser<PageSavedFilter>() {
-      public APINodeList<PageSavedFilter> parseResponse(String response, APIContext context, APIRequest<PageSavedFilter> request) throws MalformedResponseException {
-        return PageSavedFilter.parseResponse(response, context, request);
+      public APINodeList<PageSavedFilter> parseResponse(String response, APIContext context, APIRequest<PageSavedFilter> request, String header) throws MalformedResponseException {
+        return PageSavedFilter.parseResponse(response, context, request, header);
       }
     };
   }

@@ -56,7 +56,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class Destination extends APINode {
   @SerializedName("address")
-  private Object mAddress = null;
+  private String mAddress = null;
   @SerializedName("applinks")
   private AppLinks mApplinks = null;
   @SerializedName("currency")
@@ -148,7 +148,7 @@ public class Destination extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Destination loadJSON(String json, APIContext context) {
+  public static Destination loadJSON(String json, APIContext context, String header) {
     Destination destination = getGson().fromJson(json, Destination.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -165,11 +165,12 @@ public class Destination extends APINode {
     }
     destination.context = context;
     destination.rawValue = json;
+    destination.header = header;
     return destination;
   }
 
-  public static APINodeList<Destination> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Destination> destinations = new APINodeList<Destination>(request, json);
+  public static APINodeList<Destination> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Destination> destinations = new APINodeList<Destination>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -180,7 +181,7 @@ public class Destination extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          destinations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          destinations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return destinations;
       } else if (result.isJsonObject()) {
@@ -205,7 +206,7 @@ public class Destination extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              destinations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              destinations.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -216,13 +217,13 @@ public class Destination extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  destinations.add(loadJSON(entry.getValue().toString(), context));
+                  destinations.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              destinations.add(loadJSON(obj.toString(), context));
+              destinations.add(loadJSON(obj.toString(), context, header));
             }
           }
           return destinations;
@@ -230,7 +231,7 @@ public class Destination extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              destinations.add(loadJSON(entry.getValue().toString(), context));
+              destinations.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return destinations;
         } else {
@@ -249,7 +250,7 @@ public class Destination extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              destinations.add(loadJSON(value.toString(), context));
+              destinations.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -261,7 +262,7 @@ public class Destination extends APINode {
 
           // Sixth, check if it's pure JsonObject
           destinations.clear();
-          destinations.add(loadJSON(json, context));
+          destinations.add(loadJSON(json, context, header));
           return destinations;
         }
       }
@@ -293,8 +294,12 @@ public class Destination extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  }
 
-  public Object getFieldAddress() {
+
+  public String getFieldAddress() {
     return mAddress;
   }
 
@@ -378,8 +383,8 @@ public class Destination extends APINode {
     };
 
     @Override
-    public Destination parseResponse(String response) throws APIException {
-      return Destination.parseResponse(response, getContext(), this).head();
+    public Destination parseResponse(String response, String header) throws APIException {
+      return Destination.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -389,7 +394,8 @@ public class Destination extends APINode {
 
     @Override
     public Destination execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -403,7 +409,7 @@ public class Destination extends APINode {
         new Function<String, Destination>() {
            public Destination apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -558,6 +564,174 @@ public class Destination extends APINode {
     }
   }
 
+  public static class APIRequestUpdate extends APIRequest<Destination> {
+
+    Destination lastResponse = null;
+    @Override
+    public Destination getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "description",
+      "url",
+      "images",
+      "currency",
+      "price",
+      "name",
+      "types",
+      "address",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Destination parseResponse(String response, String header) throws APIException {
+      return Destination.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Destination execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Destination execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Destination> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Destination> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<String, Destination>() {
+           public Destination apply(String result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result, null);
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setUrl (Object url) {
+      this.setParam("url", url);
+      return this;
+    }
+    public APIRequestUpdate setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestUpdate setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestUpdate setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestUpdate setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestUpdate setPrice (Long price) {
+      this.setParam("price", price);
+      return this;
+    }
+    public APIRequestUpdate setPrice (String price) {
+      this.setParam("price", price);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setTypes (String types) {
+      this.setParam("types", types);
+      return this;
+    }
+
+    public APIRequestUpdate setAddress (Object address) {
+      this.setParam("address", address);
+      return this;
+    }
+    public APIRequestUpdate setAddress (String address) {
+      this.setParam("address", address);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -593,8 +767,8 @@ public class Destination extends APINode {
 
   public static APIRequest.ResponseParser<Destination> getParser() {
     return new APIRequest.ResponseParser<Destination>() {
-      public APINodeList<Destination> parseResponse(String response, APIContext context, APIRequest<Destination> request) throws MalformedResponseException {
-        return Destination.parseResponse(response, context, request);
+      public APINodeList<Destination> parseResponse(String response, APIContext context, APIRequest<Destination> request, String header) throws MalformedResponseException {
+        return Destination.parseResponse(response, context, request, header);
       }
     };
   }

@@ -71,7 +71,7 @@ public class AdRuleEvaluationSpec extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdRuleEvaluationSpec loadJSON(String json, APIContext context) {
+  public static AdRuleEvaluationSpec loadJSON(String json, APIContext context, String header) {
     AdRuleEvaluationSpec adRuleEvaluationSpec = getGson().fromJson(json, AdRuleEvaluationSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class AdRuleEvaluationSpec extends APINode {
     }
     adRuleEvaluationSpec.context = context;
     adRuleEvaluationSpec.rawValue = json;
+    adRuleEvaluationSpec.header = header;
     return adRuleEvaluationSpec;
   }
 
-  public static APINodeList<AdRuleEvaluationSpec> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdRuleEvaluationSpec> adRuleEvaluationSpecs = new APINodeList<AdRuleEvaluationSpec>(request, json);
+  public static APINodeList<AdRuleEvaluationSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdRuleEvaluationSpec> adRuleEvaluationSpecs = new APINodeList<AdRuleEvaluationSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class AdRuleEvaluationSpec extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adRuleEvaluationSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adRuleEvaluationSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adRuleEvaluationSpecs;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class AdRuleEvaluationSpec extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adRuleEvaluationSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adRuleEvaluationSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class AdRuleEvaluationSpec extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adRuleEvaluationSpecs.add(loadJSON(entry.getValue().toString(), context));
+                  adRuleEvaluationSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adRuleEvaluationSpecs.add(loadJSON(obj.toString(), context));
+              adRuleEvaluationSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adRuleEvaluationSpecs;
@@ -153,7 +154,7 @@ public class AdRuleEvaluationSpec extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adRuleEvaluationSpecs.add(loadJSON(entry.getValue().toString(), context));
+              adRuleEvaluationSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adRuleEvaluationSpecs;
         } else {
@@ -172,7 +173,7 @@ public class AdRuleEvaluationSpec extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adRuleEvaluationSpecs.add(loadJSON(value.toString(), context));
+              adRuleEvaluationSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class AdRuleEvaluationSpec extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adRuleEvaluationSpecs.clear();
-          adRuleEvaluationSpecs.add(loadJSON(json, context));
+          adRuleEvaluationSpecs.add(loadJSON(json, context, header));
           return adRuleEvaluationSpecs;
         }
       }
@@ -306,8 +307,8 @@ public class AdRuleEvaluationSpec extends APINode {
 
   public static APIRequest.ResponseParser<AdRuleEvaluationSpec> getParser() {
     return new APIRequest.ResponseParser<AdRuleEvaluationSpec>() {
-      public APINodeList<AdRuleEvaluationSpec> parseResponse(String response, APIContext context, APIRequest<AdRuleEvaluationSpec> request) throws MalformedResponseException {
-        return AdRuleEvaluationSpec.parseResponse(response, context, request);
+      public APINodeList<AdRuleEvaluationSpec> parseResponse(String response, APIContext context, APIRequest<AdRuleEvaluationSpec> request, String header) throws MalformedResponseException {
+        return AdRuleEvaluationSpec.parseResponse(response, context, request, header);
       }
     };
   }

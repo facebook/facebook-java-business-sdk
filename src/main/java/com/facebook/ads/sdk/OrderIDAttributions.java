@@ -83,7 +83,7 @@ public class OrderIDAttributions extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static OrderIDAttributions loadJSON(String json, APIContext context) {
+  public static OrderIDAttributions loadJSON(String json, APIContext context, String header) {
     OrderIDAttributions orderIDAttributions = getGson().fromJson(json, OrderIDAttributions.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -100,11 +100,12 @@ public class OrderIDAttributions extends APINode {
     }
     orderIDAttributions.context = context;
     orderIDAttributions.rawValue = json;
+    orderIDAttributions.header = header;
     return orderIDAttributions;
   }
 
-  public static APINodeList<OrderIDAttributions> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<OrderIDAttributions> orderIDAttributionss = new APINodeList<OrderIDAttributions>(request, json);
+  public static APINodeList<OrderIDAttributions> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OrderIDAttributions> orderIDAttributionss = new APINodeList<OrderIDAttributions>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -115,7 +116,7 @@ public class OrderIDAttributions extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          orderIDAttributionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          orderIDAttributionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return orderIDAttributionss;
       } else if (result.isJsonObject()) {
@@ -140,7 +141,7 @@ public class OrderIDAttributions extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              orderIDAttributionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              orderIDAttributionss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -151,13 +152,13 @@ public class OrderIDAttributions extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  orderIDAttributionss.add(loadJSON(entry.getValue().toString(), context));
+                  orderIDAttributionss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              orderIDAttributionss.add(loadJSON(obj.toString(), context));
+              orderIDAttributionss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return orderIDAttributionss;
@@ -165,7 +166,7 @@ public class OrderIDAttributions extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              orderIDAttributionss.add(loadJSON(entry.getValue().toString(), context));
+              orderIDAttributionss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return orderIDAttributionss;
         } else {
@@ -184,7 +185,7 @@ public class OrderIDAttributions extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              orderIDAttributionss.add(loadJSON(value.toString(), context));
+              orderIDAttributionss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -196,7 +197,7 @@ public class OrderIDAttributions extends APINode {
 
           // Sixth, check if it's pure JsonObject
           orderIDAttributionss.clear();
-          orderIDAttributionss.add(loadJSON(json, context));
+          orderIDAttributionss.add(loadJSON(json, context, header));
           return orderIDAttributionss;
         }
       }
@@ -349,8 +350,8 @@ public class OrderIDAttributions extends APINode {
 
   public static APIRequest.ResponseParser<OrderIDAttributions> getParser() {
     return new APIRequest.ResponseParser<OrderIDAttributions>() {
-      public APINodeList<OrderIDAttributions> parseResponse(String response, APIContext context, APIRequest<OrderIDAttributions> request) throws MalformedResponseException {
-        return OrderIDAttributions.parseResponse(response, context, request);
+      public APINodeList<OrderIDAttributions> parseResponse(String response, APIContext context, APIRequest<OrderIDAttributions> request, String header) throws MalformedResponseException {
+        return OrderIDAttributions.parseResponse(response, context, request, header);
       }
     };
   }

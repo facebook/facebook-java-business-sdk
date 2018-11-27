@@ -67,7 +67,7 @@ public class UserNotificationSeenStateData extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserNotificationSeenStateData loadJSON(String json, APIContext context) {
+  public static UserNotificationSeenStateData loadJSON(String json, APIContext context, String header) {
     UserNotificationSeenStateData userNotificationSeenStateData = getGson().fromJson(json, UserNotificationSeenStateData.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -84,11 +84,12 @@ public class UserNotificationSeenStateData extends APINode {
     }
     userNotificationSeenStateData.context = context;
     userNotificationSeenStateData.rawValue = json;
+    userNotificationSeenStateData.header = header;
     return userNotificationSeenStateData;
   }
 
-  public static APINodeList<UserNotificationSeenStateData> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UserNotificationSeenStateData> userNotificationSeenStateDatas = new APINodeList<UserNotificationSeenStateData>(request, json);
+  public static APINodeList<UserNotificationSeenStateData> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UserNotificationSeenStateData> userNotificationSeenStateDatas = new APINodeList<UserNotificationSeenStateData>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -99,7 +100,7 @@ public class UserNotificationSeenStateData extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userNotificationSeenStateDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userNotificationSeenStateDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return userNotificationSeenStateDatas;
       } else if (result.isJsonObject()) {
@@ -124,7 +125,7 @@ public class UserNotificationSeenStateData extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userNotificationSeenStateDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userNotificationSeenStateDatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -135,13 +136,13 @@ public class UserNotificationSeenStateData extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userNotificationSeenStateDatas.add(loadJSON(entry.getValue().toString(), context));
+                  userNotificationSeenStateDatas.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userNotificationSeenStateDatas.add(loadJSON(obj.toString(), context));
+              userNotificationSeenStateDatas.add(loadJSON(obj.toString(), context, header));
             }
           }
           return userNotificationSeenStateDatas;
@@ -149,7 +150,7 @@ public class UserNotificationSeenStateData extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userNotificationSeenStateDatas.add(loadJSON(entry.getValue().toString(), context));
+              userNotificationSeenStateDatas.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return userNotificationSeenStateDatas;
         } else {
@@ -168,7 +169,7 @@ public class UserNotificationSeenStateData extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userNotificationSeenStateDatas.add(loadJSON(value.toString(), context));
+              userNotificationSeenStateDatas.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -180,7 +181,7 @@ public class UserNotificationSeenStateData extends APINode {
 
           // Sixth, check if it's pure JsonObject
           userNotificationSeenStateDatas.clear();
-          userNotificationSeenStateDatas.add(loadJSON(json, context));
+          userNotificationSeenStateDatas.add(loadJSON(json, context, header));
           return userNotificationSeenStateDatas;
         }
       }
@@ -253,8 +254,8 @@ public class UserNotificationSeenStateData extends APINode {
 
   public static APIRequest.ResponseParser<UserNotificationSeenStateData> getParser() {
     return new APIRequest.ResponseParser<UserNotificationSeenStateData>() {
-      public APINodeList<UserNotificationSeenStateData> parseResponse(String response, APIContext context, APIRequest<UserNotificationSeenStateData> request) throws MalformedResponseException {
-        return UserNotificationSeenStateData.parseResponse(response, context, request);
+      public APINodeList<UserNotificationSeenStateData> parseResponse(String response, APIContext context, APIRequest<UserNotificationSeenStateData> request, String header) throws MalformedResponseException {
+        return UserNotificationSeenStateData.parseResponse(response, context, request, header);
       }
     };
   }

@@ -142,7 +142,7 @@ public class CalibratorExistingRule extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CalibratorExistingRule loadJSON(String json, APIContext context) {
+  public static CalibratorExistingRule loadJSON(String json, APIContext context, String header) {
     CalibratorExistingRule calibratorExistingRule = getGson().fromJson(json, CalibratorExistingRule.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -159,11 +159,12 @@ public class CalibratorExistingRule extends APINode {
     }
     calibratorExistingRule.context = context;
     calibratorExistingRule.rawValue = json;
+    calibratorExistingRule.header = header;
     return calibratorExistingRule;
   }
 
-  public static APINodeList<CalibratorExistingRule> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<CalibratorExistingRule> calibratorExistingRules = new APINodeList<CalibratorExistingRule>(request, json);
+  public static APINodeList<CalibratorExistingRule> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CalibratorExistingRule> calibratorExistingRules = new APINodeList<CalibratorExistingRule>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -174,7 +175,7 @@ public class CalibratorExistingRule extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          calibratorExistingRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          calibratorExistingRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return calibratorExistingRules;
       } else if (result.isJsonObject()) {
@@ -199,7 +200,7 @@ public class CalibratorExistingRule extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              calibratorExistingRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              calibratorExistingRules.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -210,13 +211,13 @@ public class CalibratorExistingRule extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  calibratorExistingRules.add(loadJSON(entry.getValue().toString(), context));
+                  calibratorExistingRules.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              calibratorExistingRules.add(loadJSON(obj.toString(), context));
+              calibratorExistingRules.add(loadJSON(obj.toString(), context, header));
             }
           }
           return calibratorExistingRules;
@@ -224,7 +225,7 @@ public class CalibratorExistingRule extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              calibratorExistingRules.add(loadJSON(entry.getValue().toString(), context));
+              calibratorExistingRules.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return calibratorExistingRules;
         } else {
@@ -243,7 +244,7 @@ public class CalibratorExistingRule extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              calibratorExistingRules.add(loadJSON(value.toString(), context));
+              calibratorExistingRules.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -255,7 +256,7 @@ public class CalibratorExistingRule extends APINode {
 
           // Sixth, check if it's pure JsonObject
           calibratorExistingRules.clear();
-          calibratorExistingRules.add(loadJSON(json, context));
+          calibratorExistingRules.add(loadJSON(json, context, header));
           return calibratorExistingRules;
         }
       }
@@ -351,8 +352,8 @@ public class CalibratorExistingRule extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -362,7 +363,8 @@ public class CalibratorExistingRule extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -376,7 +378,7 @@ public class CalibratorExistingRule extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetActivities.this.parseResponse(result);
+               return APIRequestGetActivities.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -491,8 +493,8 @@ public class CalibratorExistingRule extends APINode {
     };
 
     @Override
-    public CalibratorExistingRule parseResponse(String response) throws APIException {
-      return CalibratorExistingRule.parseResponse(response, getContext(), this).head();
+    public CalibratorExistingRule parseResponse(String response, String header) throws APIException {
+      return CalibratorExistingRule.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -502,7 +504,8 @@ public class CalibratorExistingRule extends APINode {
 
     @Override
     public CalibratorExistingRule execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -516,7 +519,7 @@ public class CalibratorExistingRule extends APINode {
         new Function<String, CalibratorExistingRule>() {
            public CalibratorExistingRule apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -703,8 +706,8 @@ public class CalibratorExistingRule extends APINode {
 
   public static APIRequest.ResponseParser<CalibratorExistingRule> getParser() {
     return new APIRequest.ResponseParser<CalibratorExistingRule>() {
-      public APINodeList<CalibratorExistingRule> parseResponse(String response, APIContext context, APIRequest<CalibratorExistingRule> request) throws MalformedResponseException {
-        return CalibratorExistingRule.parseResponse(response, context, request);
+      public APINodeList<CalibratorExistingRule> parseResponse(String response, APIContext context, APIRequest<CalibratorExistingRule> request, String header) throws MalformedResponseException {
+        return CalibratorExistingRule.parseResponse(response, context, request, header);
       }
     };
   }

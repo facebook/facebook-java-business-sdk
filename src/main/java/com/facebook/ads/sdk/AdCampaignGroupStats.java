@@ -95,7 +95,7 @@ public class AdCampaignGroupStats extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCampaignGroupStats loadJSON(String json, APIContext context) {
+  public static AdCampaignGroupStats loadJSON(String json, APIContext context, String header) {
     AdCampaignGroupStats adCampaignGroupStats = getGson().fromJson(json, AdCampaignGroupStats.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -112,11 +112,12 @@ public class AdCampaignGroupStats extends APINode {
     }
     adCampaignGroupStats.context = context;
     adCampaignGroupStats.rawValue = json;
+    adCampaignGroupStats.header = header;
     return adCampaignGroupStats;
   }
 
-  public static APINodeList<AdCampaignGroupStats> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdCampaignGroupStats> adCampaignGroupStatss = new APINodeList<AdCampaignGroupStats>(request, json);
+  public static APINodeList<AdCampaignGroupStats> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCampaignGroupStats> adCampaignGroupStatss = new APINodeList<AdCampaignGroupStats>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -127,7 +128,7 @@ public class AdCampaignGroupStats extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCampaignGroupStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adCampaignGroupStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adCampaignGroupStatss;
       } else if (result.isJsonObject()) {
@@ -152,7 +153,7 @@ public class AdCampaignGroupStats extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCampaignGroupStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adCampaignGroupStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -163,13 +164,13 @@ public class AdCampaignGroupStats extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCampaignGroupStatss.add(loadJSON(entry.getValue().toString(), context));
+                  adCampaignGroupStatss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCampaignGroupStatss.add(loadJSON(obj.toString(), context));
+              adCampaignGroupStatss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adCampaignGroupStatss;
@@ -177,7 +178,7 @@ public class AdCampaignGroupStats extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCampaignGroupStatss.add(loadJSON(entry.getValue().toString(), context));
+              adCampaignGroupStatss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adCampaignGroupStatss;
         } else {
@@ -196,7 +197,7 @@ public class AdCampaignGroupStats extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCampaignGroupStatss.add(loadJSON(value.toString(), context));
+              adCampaignGroupStatss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -208,7 +209,7 @@ public class AdCampaignGroupStats extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adCampaignGroupStatss.clear();
-          adCampaignGroupStatss.add(loadJSON(json, context));
+          adCampaignGroupStatss.add(loadJSON(json, context, header));
           return adCampaignGroupStatss;
         }
       }
@@ -421,8 +422,8 @@ public class AdCampaignGroupStats extends APINode {
 
   public static APIRequest.ResponseParser<AdCampaignGroupStats> getParser() {
     return new APIRequest.ResponseParser<AdCampaignGroupStats>() {
-      public APINodeList<AdCampaignGroupStats> parseResponse(String response, APIContext context, APIRequest<AdCampaignGroupStats> request) throws MalformedResponseException {
-        return AdCampaignGroupStats.parseResponse(response, context, request);
+      public APINodeList<AdCampaignGroupStats> parseResponse(String response, APIContext context, APIRequest<AdCampaignGroupStats> request, String header) throws MalformedResponseException {
+        return AdCampaignGroupStats.parseResponse(response, context, request, header);
       }
     };
   }

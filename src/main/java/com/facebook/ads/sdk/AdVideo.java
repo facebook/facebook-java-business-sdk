@@ -101,14 +101,14 @@ public class AdVideo extends APINode {
   private Long mLiveAudienceCount = null;
   @SerializedName("live_status")
   private String mLiveStatus = null;
-  @SerializedName("name")
-  private String mName = null;
   @SerializedName("permalink_url")
   private String mPermalinkUrl = null;
   @SerializedName("picture")
   private String mPicture = null;
   @SerializedName("place")
   private Place mPlace = null;
+  @SerializedName("premiere_living_room_status")
+  private String mPremiereLivingRoomStatus = null;
   @SerializedName("privacy")
   private Privacy mPrivacy = null;
   @SerializedName("published")
@@ -196,7 +196,7 @@ public class AdVideo extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdVideo loadJSON(String json, APIContext context) {
+  public static AdVideo loadJSON(String json, APIContext context, String header) {
     AdVideo adVideo = getGson().fromJson(json, AdVideo.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -213,11 +213,12 @@ public class AdVideo extends APINode {
     }
     adVideo.context = context;
     adVideo.rawValue = json;
+    adVideo.header = header;
     return adVideo;
   }
 
-  public static APINodeList<AdVideo> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdVideo> adVideos = new APINodeList<AdVideo>(request, json);
+  public static APINodeList<AdVideo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdVideo> adVideos = new APINodeList<AdVideo>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -228,7 +229,7 @@ public class AdVideo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adVideos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adVideos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adVideos;
       } else if (result.isJsonObject()) {
@@ -253,7 +254,7 @@ public class AdVideo extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adVideos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adVideos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -264,13 +265,13 @@ public class AdVideo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adVideos.add(loadJSON(entry.getValue().toString(), context));
+                  adVideos.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adVideos.add(loadJSON(obj.toString(), context));
+              adVideos.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adVideos;
@@ -278,7 +279,7 @@ public class AdVideo extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adVideos.add(loadJSON(entry.getValue().toString(), context));
+              adVideos.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adVideos;
         } else {
@@ -297,7 +298,7 @@ public class AdVideo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adVideos.add(loadJSON(value.toString(), context));
+              adVideos.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -309,7 +310,7 @@ public class AdVideo extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adVideos.clear();
-          adVideos.add(loadJSON(json, context));
+          adVideos.add(loadJSON(json, context, header));
           return adVideos;
         }
       }
@@ -537,10 +538,6 @@ public class AdVideo extends APINode {
     return mLiveStatus;
   }
 
-  public String getFieldName() {
-    return mName;
-  }
-
   public String getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
@@ -554,6 +551,10 @@ public class AdVideo extends APINode {
       mPlace.context = getContext();
     }
     return mPlace;
+  }
+
+  public String getFieldPremiereLivingRoomStatus() {
+    return mPremiereLivingRoomStatus;
   }
 
   public Privacy getFieldPrivacy() {
@@ -612,8 +613,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -623,7 +624,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -637,7 +639,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetAutoGeneratedCaptions.this.parseResponse(result);
+               return APIRequestGetAutoGeneratedCaptions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -717,8 +719,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public AdVideo parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this).head();
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -728,7 +730,8 @@ public class AdVideo extends APINode {
 
     @Override
     public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -742,7 +745,7 @@ public class AdVideo extends APINode {
         new Function<String, AdVideo>() {
            public AdVideo apply(String result) {
              try {
-               return APIRequestCreateAutoTrim.this.parseResponse(result);
+               return APIRequestCreateAutoTrim.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -836,8 +839,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public AdVideo parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this).head();
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -847,7 +850,8 @@ public class AdVideo extends APINode {
 
     @Override
     public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -861,7 +865,7 @@ public class AdVideo extends APINode {
         new Function<String, AdVideo>() {
            public AdVideo apply(String result) {
              try {
-               return APIRequestCreateBlockedUser.this.parseResponse(result);
+               return APIRequestCreateBlockedUser.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -958,8 +962,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -969,7 +973,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -983,7 +988,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteCaptions.this.parseResponse(result);
+               return APIRequestDeleteCaptions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1066,8 +1071,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1077,7 +1082,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1091,7 +1097,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetCaptions.this.parseResponse(result);
+               return APIRequestGetCaptions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1172,8 +1178,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public AdVideo parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this).head();
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1183,7 +1189,8 @@ public class AdVideo extends APINode {
 
     @Override
     public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1197,7 +1204,7 @@ public class AdVideo extends APINode {
         new Function<String, AdVideo>() {
            public AdVideo apply(String result) {
              try {
-               return APIRequestCreateCaption.this.parseResponse(result);
+               return APIRequestCreateCaption.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1323,8 +1330,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<Comment> parseResponse(String response) throws APIException {
-      return Comment.parseResponse(response, getContext(), this);
+    public APINodeList<Comment> parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1334,7 +1341,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<Comment> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1348,7 +1356,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<Comment>>() {
            public APINodeList<Comment> apply(String result) {
              try {
-               return APIRequestGetComments.this.parseResponse(result);
+               return APIRequestGetComments.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1618,8 +1626,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public Comment parseResponse(String response) throws APIException {
-      return Comment.parseResponse(response, getContext(), this).head();
+    public Comment parseResponse(String response, String header) throws APIException {
+      return Comment.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1629,7 +1637,8 @@ public class AdVideo extends APINode {
 
     @Override
     public Comment execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1643,7 +1652,7 @@ public class AdVideo extends APINode {
         new Function<String, Comment>() {
            public Comment apply(String result) {
              try {
-               return APIRequestCreateComment.this.parseResponse(result);
+               return APIRequestCreateComment.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1847,7 +1856,6 @@ public class AdVideo extends APINode {
       "general_manager",
       "genre",
       "global_brand_page_name",
-      "global_brand_parent_page",
       "global_brand_root_id",
       "has_added_app",
       "has_whatsapp_business_number",
@@ -1914,7 +1922,6 @@ public class AdVideo extends APINode {
       "promotion_eligible",
       "promotion_ineligible_reason",
       "public_transit",
-      "publisher_space",
       "rating_count",
       "recipient",
       "record_label",
@@ -1946,8 +1953,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<Page> parseResponse(String response) throws APIException {
-      return Page.parseResponse(response, getContext(), this);
+    public APINodeList<Page> parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1957,7 +1964,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<Page> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1971,7 +1979,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<Page>>() {
            public APINodeList<Page> apply(String result) {
              try {
-               return APIRequestGetCrosspostShareDPages.this.parseResponse(result);
+               return APIRequestGetCrosspostShareDPages.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2367,13 +2375,6 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostShareDPages requestGlobalBrandPageNameField (boolean value) {
       this.requestField("global_brand_page_name", value);
-      return this;
-    }
-    public APIRequestGetCrosspostShareDPages requestGlobalBrandParentPageField () {
-      return this.requestGlobalBrandParentPageField(true);
-    }
-    public APIRequestGetCrosspostShareDPages requestGlobalBrandParentPageField (boolean value) {
-      this.requestField("global_brand_parent_page", value);
       return this;
     }
     public APIRequestGetCrosspostShareDPages requestGlobalBrandRootIdField () {
@@ -2838,13 +2839,6 @@ public class AdVideo extends APINode {
       this.requestField("public_transit", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPublisherSpaceField () {
-      return this.requestPublisherSpaceField(true);
-    }
-    public APIRequestGetCrosspostShareDPages requestPublisherSpaceField (boolean value) {
-      this.requestField("publisher_space", value);
-      return this;
-    }
     public APIRequestGetCrosspostShareDPages requestRatingCountField () {
       return this.requestRatingCountField(true);
     }
@@ -3061,8 +3055,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3072,7 +3066,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3086,7 +3081,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteLikes.this.parseResponse(result);
+               return APIRequestDeleteLikes.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3199,8 +3194,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3210,7 +3205,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3224,7 +3220,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetLikes.this.parseResponse(result);
+               return APIRequestGetLikes.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3383,8 +3379,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public AdVideo parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this).head();
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3394,7 +3390,8 @@ public class AdVideo extends APINode {
 
     @Override
     public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3408,7 +3405,7 @@ public class AdVideo extends APINode {
         new Function<String, AdVideo>() {
            public AdVideo apply(String result) {
              try {
-               return APIRequestCreateLike.this.parseResponse(result);
+               return APIRequestCreateLike.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3517,8 +3514,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<VideoPoll> parseResponse(String response) throws APIException {
-      return VideoPoll.parseResponse(response, getContext(), this);
+    public APINodeList<VideoPoll> parseResponse(String response, String header) throws APIException {
+      return VideoPoll.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3528,7 +3525,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<VideoPoll> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3542,7 +3540,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<VideoPoll>>() {
            public APINodeList<VideoPoll> apply(String result) {
              try {
-               return APIRequestGetPolls.this.parseResponse(result);
+               return APIRequestGetPolls.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3676,8 +3674,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public VideoPoll parseResponse(String response) throws APIException {
-      return VideoPoll.parseResponse(response, getContext(), this).head();
+    public VideoPoll parseResponse(String response, String header) throws APIException {
+      return VideoPoll.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3687,7 +3685,8 @@ public class AdVideo extends APINode {
 
     @Override
     public VideoPoll execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3701,7 +3700,7 @@ public class AdVideo extends APINode {
         new Function<String, VideoPoll>() {
            public VideoPoll apply(String result) {
              try {
-               return APIRequestCreatePoll.this.parseResponse(result);
+               return APIRequestCreatePoll.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3850,8 +3849,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<Profile> parseResponse(String response) throws APIException {
-      return Profile.parseResponse(response, getContext(), this);
+    public APINodeList<Profile> parseResponse(String response, String header) throws APIException {
+      return Profile.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3861,7 +3860,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<Profile> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3875,7 +3875,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<Profile>>() {
            public APINodeList<Profile> apply(String result) {
              try {
-               return APIRequestGetReactions.this.parseResponse(result);
+               return APIRequestGetReactions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4098,8 +4098,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<Post> parseResponse(String response) throws APIException {
-      return Post.parseResponse(response, getContext(), this);
+    public APINodeList<Post> parseResponse(String response, String header) throws APIException {
+      return Post.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4109,7 +4109,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<Post> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4123,7 +4124,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<Post>>() {
            public APINodeList<Post> apply(String result) {
              try {
-               return APIRequestGetShareDPosts.this.parseResponse(result);
+               return APIRequestGetShareDPosts.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4659,7 +4660,6 @@ public class AdVideo extends APINode {
       "general_manager",
       "genre",
       "global_brand_page_name",
-      "global_brand_parent_page",
       "global_brand_root_id",
       "has_added_app",
       "has_whatsapp_business_number",
@@ -4726,7 +4726,6 @@ public class AdVideo extends APINode {
       "promotion_eligible",
       "promotion_ineligible_reason",
       "public_transit",
-      "publisher_space",
       "rating_count",
       "recipient",
       "record_label",
@@ -4758,8 +4757,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<Page> parseResponse(String response) throws APIException {
-      return Page.parseResponse(response, getContext(), this);
+    public APINodeList<Page> parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -4769,7 +4768,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<Page> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -4783,7 +4783,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<Page>>() {
            public APINodeList<Page> apply(String result) {
              try {
-               return APIRequestGetSponsorTags.this.parseResponse(result);
+               return APIRequestGetSponsorTags.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5179,13 +5179,6 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestGlobalBrandPageNameField (boolean value) {
       this.requestField("global_brand_page_name", value);
-      return this;
-    }
-    public APIRequestGetSponsorTags requestGlobalBrandParentPageField () {
-      return this.requestGlobalBrandParentPageField(true);
-    }
-    public APIRequestGetSponsorTags requestGlobalBrandParentPageField (boolean value) {
-      this.requestField("global_brand_parent_page", value);
       return this;
     }
     public APIRequestGetSponsorTags requestGlobalBrandRootIdField () {
@@ -5650,13 +5643,6 @@ public class AdVideo extends APINode {
       this.requestField("public_transit", value);
       return this;
     }
-    public APIRequestGetSponsorTags requestPublisherSpaceField () {
-      return this.requestPublisherSpaceField(true);
-    }
-    public APIRequestGetSponsorTags requestPublisherSpaceField (boolean value) {
-      this.requestField("publisher_space", value);
-      return this;
-    }
     public APIRequestGetSponsorTags requestRatingCountField () {
       return this.requestRatingCountField(true);
     }
@@ -5871,8 +5857,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public AdVideo parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this).head();
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -5882,7 +5868,8 @@ public class AdVideo extends APINode {
 
     @Override
     public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -5896,7 +5883,7 @@ public class AdVideo extends APINode {
         new Function<String, AdVideo>() {
            public AdVideo apply(String result) {
              try {
-               return APIRequestCreateSummarization.this.parseResponse(result);
+               return APIRequestCreateSummarization.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5990,8 +5977,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<TaggableSubject> parseResponse(String response) throws APIException {
-      return TaggableSubject.parseResponse(response, getContext(), this);
+    public APINodeList<TaggableSubject> parseResponse(String response, String header) throws APIException {
+      return TaggableSubject.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -6001,7 +5988,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<TaggableSubject> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -6015,7 +6003,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<TaggableSubject>>() {
            public APINodeList<TaggableSubject> apply(String result) {
              try {
-               return APIRequestGetTags.this.parseResponse(result);
+               return APIRequestGetTags.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6110,8 +6098,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public AdVideo parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this).head();
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -6121,7 +6109,8 @@ public class AdVideo extends APINode {
 
     @Override
     public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -6135,7 +6124,7 @@ public class AdVideo extends APINode {
         new Function<String, AdVideo>() {
            public AdVideo apply(String result) {
              try {
-               return APIRequestCreateTag.this.parseResponse(result);
+               return APIRequestCreateTag.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6243,8 +6232,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<VideoThumbnail> parseResponse(String response) throws APIException {
-      return VideoThumbnail.parseResponse(response, getContext(), this);
+    public APINodeList<VideoThumbnail> parseResponse(String response, String header) throws APIException {
+      return VideoThumbnail.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -6254,7 +6243,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<VideoThumbnail> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -6268,7 +6258,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<VideoThumbnail>>() {
            public APINodeList<VideoThumbnail> apply(String result) {
              try {
-               return APIRequestGetThumbnails.this.parseResponse(result);
+               return APIRequestGetThumbnails.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6397,8 +6387,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public AdVideo parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this).head();
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -6408,7 +6398,8 @@ public class AdVideo extends APINode {
 
     @Override
     public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -6422,7 +6413,7 @@ public class AdVideo extends APINode {
         new Function<String, AdVideo>() {
            public AdVideo apply(String result) {
              try {
-               return APIRequestCreateThumbnail.this.parseResponse(result);
+               return APIRequestCreateThumbnail.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6529,8 +6520,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINodeList<InsightsResult> parseResponse(String response) throws APIException {
-      return InsightsResult.parseResponse(response, getContext(), this);
+    public APINodeList<InsightsResult> parseResponse(String response, String header) throws APIException {
+      return InsightsResult.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -6540,7 +6531,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINodeList<InsightsResult> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -6554,7 +6546,7 @@ public class AdVideo extends APINode {
         new Function<String, APINodeList<InsightsResult>>() {
            public APINodeList<InsightsResult> apply(String result) {
              try {
-               return APIRequestGetVideoInsights.this.parseResponse(result);
+               return APIRequestGetVideoInsights.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6717,8 +6709,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -6728,7 +6720,8 @@ public class AdVideo extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -6742,7 +6735,7 @@ public class AdVideo extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6840,10 +6833,10 @@ public class AdVideo extends APINode {
       "length",
       "live_audience_count",
       "live_status",
-      "name",
       "permalink_url",
       "picture",
       "place",
+      "premiere_living_room_status",
       "privacy",
       "published",
       "scheduled_publish_time",
@@ -6857,8 +6850,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public AdVideo parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this).head();
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -6868,7 +6861,8 @@ public class AdVideo extends APINode {
 
     @Override
     public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -6882,7 +6876,7 @@ public class AdVideo extends APINode {
         new Function<String, AdVideo>() {
            public AdVideo apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7105,13 +7099,6 @@ public class AdVideo extends APINode {
       this.requestField("live_status", value);
       return this;
     }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
-    }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
-      return this;
-    }
     public APIRequestGet requestPermalinkUrlField () {
       return this.requestPermalinkUrlField(true);
     }
@@ -7131,6 +7118,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGet requestPlaceField (boolean value) {
       this.requestField("place", value);
+      return this;
+    }
+    public APIRequestGet requestPremiereLivingRoomStatusField () {
+      return this.requestPremiereLivingRoomStatusField(true);
+    }
+    public APIRequestGet requestPremiereLivingRoomStatusField (boolean value) {
+      this.requestField("premiere_living_room_status", value);
       return this;
     }
     public APIRequestGet requestPrivacyField () {
@@ -7248,8 +7242,8 @@ public class AdVideo extends APINode {
     };
 
     @Override
-    public AdVideo parseResponse(String response) throws APIException {
-      return AdVideo.parseResponse(response, getContext(), this).head();
+    public AdVideo parseResponse(String response, String header) throws APIException {
+      return AdVideo.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -7259,7 +7253,8 @@ public class AdVideo extends APINode {
 
     @Override
     public AdVideo execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -7273,7 +7268,7 @@ public class AdVideo extends APINode {
         new Function<String, AdVideo>() {
            public AdVideo apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7743,6 +7738,8 @@ public class AdVideo extends APINode {
       VALUE_CIVIC_PROPOSAL_COVER_VIDEO("CIVIC_PROPOSAL_COVER_VIDEO"),
       @SerializedName("HEURISTIC_CLUSTER_VIDEO")
       VALUE_HEURISTIC_CLUSTER_VIDEO("HEURISTIC_CLUSTER_VIDEO"),
+      @SerializedName("DCO_AUTOGEN_VIDEO")
+      VALUE_DCO_AUTOGEN_VIDEO("DCO_AUTOGEN_VIDEO"),
       NULL(null);
 
       private String value;
@@ -7999,10 +7996,10 @@ public class AdVideo extends APINode {
     this.mLength = instance.mLength;
     this.mLiveAudienceCount = instance.mLiveAudienceCount;
     this.mLiveStatus = instance.mLiveStatus;
-    this.mName = instance.mName;
     this.mPermalinkUrl = instance.mPermalinkUrl;
     this.mPicture = instance.mPicture;
     this.mPlace = instance.mPlace;
+    this.mPremiereLivingRoomStatus = instance.mPremiereLivingRoomStatus;
     this.mPrivacy = instance.mPrivacy;
     this.mPublished = instance.mPublished;
     this.mScheduledPublishTime = instance.mScheduledPublishTime;
@@ -8020,8 +8017,8 @@ public class AdVideo extends APINode {
 
   public static APIRequest.ResponseParser<AdVideo> getParser() {
     return new APIRequest.ResponseParser<AdVideo>() {
-      public APINodeList<AdVideo> parseResponse(String response, APIContext context, APIRequest<AdVideo> request) throws MalformedResponseException {
-        return AdVideo.parseResponse(response, context, request);
+      public APINodeList<AdVideo> parseResponse(String response, APIContext context, APIRequest<AdVideo> request, String header) throws MalformedResponseException {
+        return AdVideo.parseResponse(response, context, request, header);
       }
     };
   }

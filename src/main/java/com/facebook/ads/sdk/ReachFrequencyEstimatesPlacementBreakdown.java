@@ -89,7 +89,7 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ReachFrequencyEstimatesPlacementBreakdown loadJSON(String json, APIContext context) {
+  public static ReachFrequencyEstimatesPlacementBreakdown loadJSON(String json, APIContext context, String header) {
     ReachFrequencyEstimatesPlacementBreakdown reachFrequencyEstimatesPlacementBreakdown = getGson().fromJson(json, ReachFrequencyEstimatesPlacementBreakdown.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -106,11 +106,12 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
     }
     reachFrequencyEstimatesPlacementBreakdown.context = context;
     reachFrequencyEstimatesPlacementBreakdown.rawValue = json;
+    reachFrequencyEstimatesPlacementBreakdown.header = header;
     return reachFrequencyEstimatesPlacementBreakdown;
   }
 
-  public static APINodeList<ReachFrequencyEstimatesPlacementBreakdown> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ReachFrequencyEstimatesPlacementBreakdown> reachFrequencyEstimatesPlacementBreakdowns = new APINodeList<ReachFrequencyEstimatesPlacementBreakdown>(request, json);
+  public static APINodeList<ReachFrequencyEstimatesPlacementBreakdown> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ReachFrequencyEstimatesPlacementBreakdown> reachFrequencyEstimatesPlacementBreakdowns = new APINodeList<ReachFrequencyEstimatesPlacementBreakdown>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -121,7 +122,7 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return reachFrequencyEstimatesPlacementBreakdowns;
       } else if (result.isJsonObject()) {
@@ -146,7 +147,7 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -157,13 +158,13 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(entry.getValue().toString(), context));
+                  reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(obj.toString(), context));
+              reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(obj.toString(), context, header));
             }
           }
           return reachFrequencyEstimatesPlacementBreakdowns;
@@ -171,7 +172,7 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(entry.getValue().toString(), context));
+              reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return reachFrequencyEstimatesPlacementBreakdowns;
         } else {
@@ -190,7 +191,7 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(value.toString(), context));
+              reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -202,7 +203,7 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
 
           // Sixth, check if it's pure JsonObject
           reachFrequencyEstimatesPlacementBreakdowns.clear();
-          reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(json, context));
+          reachFrequencyEstimatesPlacementBreakdowns.add(loadJSON(json, context, header));
           return reachFrequencyEstimatesPlacementBreakdowns;
         }
       }
@@ -385,8 +386,8 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
 
   public static APIRequest.ResponseParser<ReachFrequencyEstimatesPlacementBreakdown> getParser() {
     return new APIRequest.ResponseParser<ReachFrequencyEstimatesPlacementBreakdown>() {
-      public APINodeList<ReachFrequencyEstimatesPlacementBreakdown> parseResponse(String response, APIContext context, APIRequest<ReachFrequencyEstimatesPlacementBreakdown> request) throws MalformedResponseException {
-        return ReachFrequencyEstimatesPlacementBreakdown.parseResponse(response, context, request);
+      public APINodeList<ReachFrequencyEstimatesPlacementBreakdown> parseResponse(String response, APIContext context, APIRequest<ReachFrequencyEstimatesPlacementBreakdown> request, String header) throws MalformedResponseException {
+        return ReachFrequencyEstimatesPlacementBreakdown.parseResponse(response, context, request, header);
       }
     };
   }

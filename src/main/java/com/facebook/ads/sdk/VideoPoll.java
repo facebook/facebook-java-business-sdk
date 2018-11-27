@@ -136,7 +136,7 @@ public class VideoPoll extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static VideoPoll loadJSON(String json, APIContext context) {
+  public static VideoPoll loadJSON(String json, APIContext context, String header) {
     VideoPoll videoPoll = getGson().fromJson(json, VideoPoll.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -153,11 +153,12 @@ public class VideoPoll extends APINode {
     }
     videoPoll.context = context;
     videoPoll.rawValue = json;
+    videoPoll.header = header;
     return videoPoll;
   }
 
-  public static APINodeList<VideoPoll> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<VideoPoll> videoPolls = new APINodeList<VideoPoll>(request, json);
+  public static APINodeList<VideoPoll> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<VideoPoll> videoPolls = new APINodeList<VideoPoll>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -168,7 +169,7 @@ public class VideoPoll extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          videoPolls.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          videoPolls.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return videoPolls;
       } else if (result.isJsonObject()) {
@@ -193,7 +194,7 @@ public class VideoPoll extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              videoPolls.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              videoPolls.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -204,13 +205,13 @@ public class VideoPoll extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  videoPolls.add(loadJSON(entry.getValue().toString(), context));
+                  videoPolls.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              videoPolls.add(loadJSON(obj.toString(), context));
+              videoPolls.add(loadJSON(obj.toString(), context, header));
             }
           }
           return videoPolls;
@@ -218,7 +219,7 @@ public class VideoPoll extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              videoPolls.add(loadJSON(entry.getValue().toString(), context));
+              videoPolls.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return videoPolls;
         } else {
@@ -237,7 +238,7 @@ public class VideoPoll extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              videoPolls.add(loadJSON(value.toString(), context));
+              videoPolls.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -249,7 +250,7 @@ public class VideoPoll extends APINode {
 
           // Sixth, check if it's pure JsonObject
           videoPolls.clear();
-          videoPolls.add(loadJSON(json, context));
+          videoPolls.add(loadJSON(json, context, header));
           return videoPolls;
         }
       }
@@ -334,8 +335,8 @@ public class VideoPoll extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -345,7 +346,8 @@ public class VideoPoll extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -359,7 +361,7 @@ public class VideoPoll extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestGetPollOptions.this.parseResponse(result);
+               return APIRequestGetPollOptions.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -444,8 +446,8 @@ public class VideoPoll extends APINode {
     };
 
     @Override
-    public VideoPoll parseResponse(String response) throws APIException {
-      return VideoPoll.parseResponse(response, getContext(), this).head();
+    public VideoPoll parseResponse(String response, String header) throws APIException {
+      return VideoPoll.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -455,7 +457,8 @@ public class VideoPoll extends APINode {
 
     @Override
     public VideoPoll execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -469,7 +472,7 @@ public class VideoPoll extends APINode {
         new Function<String, VideoPoll>() {
            public VideoPoll apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -601,8 +604,8 @@ public class VideoPoll extends APINode {
     };
 
     @Override
-    public VideoPoll parseResponse(String response) throws APIException {
-      return VideoPoll.parseResponse(response, getContext(), this).head();
+    public VideoPoll parseResponse(String response, String header) throws APIException {
+      return VideoPoll.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -612,7 +615,8 @@ public class VideoPoll extends APINode {
 
     @Override
     public VideoPoll execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -626,7 +630,7 @@ public class VideoPoll extends APINode {
         new Function<String, VideoPoll>() {
            public VideoPoll apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -789,8 +793,8 @@ public class VideoPoll extends APINode {
 
   public static APIRequest.ResponseParser<VideoPoll> getParser() {
     return new APIRequest.ResponseParser<VideoPoll>() {
-      public APINodeList<VideoPoll> parseResponse(String response, APIContext context, APIRequest<VideoPoll> request) throws MalformedResponseException {
-        return VideoPoll.parseResponse(response, context, request);
+      public APINodeList<VideoPoll> parseResponse(String response, APIContext context, APIRequest<VideoPoll> request, String header) throws MalformedResponseException {
+        return VideoPoll.parseResponse(response, context, request, header);
       }
     };
   }

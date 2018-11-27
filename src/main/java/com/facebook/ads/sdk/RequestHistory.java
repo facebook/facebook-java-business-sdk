@@ -79,7 +79,7 @@ public class RequestHistory extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static RequestHistory loadJSON(String json, APIContext context) {
+  public static RequestHistory loadJSON(String json, APIContext context, String header) {
     RequestHistory requestHistory = getGson().fromJson(json, RequestHistory.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -96,11 +96,12 @@ public class RequestHistory extends APINode {
     }
     requestHistory.context = context;
     requestHistory.rawValue = json;
+    requestHistory.header = header;
     return requestHistory;
   }
 
-  public static APINodeList<RequestHistory> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<RequestHistory> requestHistorys = new APINodeList<RequestHistory>(request, json);
+  public static APINodeList<RequestHistory> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<RequestHistory> requestHistorys = new APINodeList<RequestHistory>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -111,7 +112,7 @@ public class RequestHistory extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          requestHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          requestHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return requestHistorys;
       } else if (result.isJsonObject()) {
@@ -136,7 +137,7 @@ public class RequestHistory extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              requestHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              requestHistorys.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -147,13 +148,13 @@ public class RequestHistory extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  requestHistorys.add(loadJSON(entry.getValue().toString(), context));
+                  requestHistorys.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              requestHistorys.add(loadJSON(obj.toString(), context));
+              requestHistorys.add(loadJSON(obj.toString(), context, header));
             }
           }
           return requestHistorys;
@@ -161,7 +162,7 @@ public class RequestHistory extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              requestHistorys.add(loadJSON(entry.getValue().toString(), context));
+              requestHistorys.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return requestHistorys;
         } else {
@@ -180,7 +181,7 @@ public class RequestHistory extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              requestHistorys.add(loadJSON(value.toString(), context));
+              requestHistorys.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -192,7 +193,7 @@ public class RequestHistory extends APINode {
 
           // Sixth, check if it's pure JsonObject
           requestHistorys.clear();
-          requestHistorys.add(loadJSON(json, context));
+          requestHistorys.add(loadJSON(json, context, header));
           return requestHistorys;
         }
       }
@@ -346,8 +347,8 @@ public class RequestHistory extends APINode {
 
   public static APIRequest.ResponseParser<RequestHistory> getParser() {
     return new APIRequest.ResponseParser<RequestHistory>() {
-      public APINodeList<RequestHistory> parseResponse(String response, APIContext context, APIRequest<RequestHistory> request) throws MalformedResponseException {
-        return RequestHistory.parseResponse(response, context, request);
+      public APINodeList<RequestHistory> parseResponse(String response, APIContext context, APIRequest<RequestHistory> request, String header) throws MalformedResponseException {
+        return RequestHistory.parseResponse(response, context, request, header);
       }
     };
   }

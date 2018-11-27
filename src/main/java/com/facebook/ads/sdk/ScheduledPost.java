@@ -95,7 +95,7 @@ public class ScheduledPost extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ScheduledPost loadJSON(String json, APIContext context) {
+  public static ScheduledPost loadJSON(String json, APIContext context, String header) {
     ScheduledPost scheduledPost = getGson().fromJson(json, ScheduledPost.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -112,11 +112,12 @@ public class ScheduledPost extends APINode {
     }
     scheduledPost.context = context;
     scheduledPost.rawValue = json;
+    scheduledPost.header = header;
     return scheduledPost;
   }
 
-  public static APINodeList<ScheduledPost> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ScheduledPost> scheduledPosts = new APINodeList<ScheduledPost>(request, json);
+  public static APINodeList<ScheduledPost> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ScheduledPost> scheduledPosts = new APINodeList<ScheduledPost>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -127,7 +128,7 @@ public class ScheduledPost extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          scheduledPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          scheduledPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return scheduledPosts;
       } else if (result.isJsonObject()) {
@@ -152,7 +153,7 @@ public class ScheduledPost extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              scheduledPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              scheduledPosts.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -163,13 +164,13 @@ public class ScheduledPost extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  scheduledPosts.add(loadJSON(entry.getValue().toString(), context));
+                  scheduledPosts.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              scheduledPosts.add(loadJSON(obj.toString(), context));
+              scheduledPosts.add(loadJSON(obj.toString(), context, header));
             }
           }
           return scheduledPosts;
@@ -177,7 +178,7 @@ public class ScheduledPost extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              scheduledPosts.add(loadJSON(entry.getValue().toString(), context));
+              scheduledPosts.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return scheduledPosts;
         } else {
@@ -196,7 +197,7 @@ public class ScheduledPost extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              scheduledPosts.add(loadJSON(value.toString(), context));
+              scheduledPosts.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -208,7 +209,7 @@ public class ScheduledPost extends APINode {
 
           // Sixth, check if it's pure JsonObject
           scheduledPosts.clear();
-          scheduledPosts.add(loadJSON(json, context));
+          scheduledPosts.add(loadJSON(json, context, header));
           return scheduledPosts;
         }
       }
@@ -442,8 +443,8 @@ public class ScheduledPost extends APINode {
 
   public static APIRequest.ResponseParser<ScheduledPost> getParser() {
     return new APIRequest.ResponseParser<ScheduledPost>() {
-      public APINodeList<ScheduledPost> parseResponse(String response, APIContext context, APIRequest<ScheduledPost> request) throws MalformedResponseException {
-        return ScheduledPost.parseResponse(response, context, request);
+      public APINodeList<ScheduledPost> parseResponse(String response, APIContext context, APIRequest<ScheduledPost> request, String header) throws MalformedResponseException {
+        return ScheduledPost.parseResponse(response, context, request, header);
       }
     };
   }

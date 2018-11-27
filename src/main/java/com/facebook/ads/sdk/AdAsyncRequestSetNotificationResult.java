@@ -69,7 +69,7 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdAsyncRequestSetNotificationResult loadJSON(String json, APIContext context) {
+  public static AdAsyncRequestSetNotificationResult loadJSON(String json, APIContext context, String header) {
     AdAsyncRequestSetNotificationResult adAsyncRequestSetNotificationResult = getGson().fromJson(json, AdAsyncRequestSetNotificationResult.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
     }
     adAsyncRequestSetNotificationResult.context = context;
     adAsyncRequestSetNotificationResult.rawValue = json;
+    adAsyncRequestSetNotificationResult.header = header;
     return adAsyncRequestSetNotificationResult;
   }
 
-  public static APINodeList<AdAsyncRequestSetNotificationResult> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdAsyncRequestSetNotificationResult> adAsyncRequestSetNotificationResults = new APINodeList<AdAsyncRequestSetNotificationResult>(request, json);
+  public static APINodeList<AdAsyncRequestSetNotificationResult> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdAsyncRequestSetNotificationResult> adAsyncRequestSetNotificationResults = new APINodeList<AdAsyncRequestSetNotificationResult>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAsyncRequestSetNotificationResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adAsyncRequestSetNotificationResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adAsyncRequestSetNotificationResults;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAsyncRequestSetNotificationResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adAsyncRequestSetNotificationResults.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAsyncRequestSetNotificationResults.add(loadJSON(entry.getValue().toString(), context));
+                  adAsyncRequestSetNotificationResults.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAsyncRequestSetNotificationResults.add(loadJSON(obj.toString(), context));
+              adAsyncRequestSetNotificationResults.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adAsyncRequestSetNotificationResults;
@@ -151,7 +152,7 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAsyncRequestSetNotificationResults.add(loadJSON(entry.getValue().toString(), context));
+              adAsyncRequestSetNotificationResults.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adAsyncRequestSetNotificationResults;
         } else {
@@ -170,7 +171,7 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAsyncRequestSetNotificationResults.add(loadJSON(value.toString(), context));
+              adAsyncRequestSetNotificationResults.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adAsyncRequestSetNotificationResults.clear();
-          adAsyncRequestSetNotificationResults.add(loadJSON(json, context));
+          adAsyncRequestSetNotificationResults.add(loadJSON(json, context, header));
           return adAsyncRequestSetNotificationResults;
         }
       }
@@ -265,8 +266,8 @@ public class AdAsyncRequestSetNotificationResult extends APINode {
 
   public static APIRequest.ResponseParser<AdAsyncRequestSetNotificationResult> getParser() {
     return new APIRequest.ResponseParser<AdAsyncRequestSetNotificationResult>() {
-      public APINodeList<AdAsyncRequestSetNotificationResult> parseResponse(String response, APIContext context, APIRequest<AdAsyncRequestSetNotificationResult> request) throws MalformedResponseException {
-        return AdAsyncRequestSetNotificationResult.parseResponse(response, context, request);
+      public APINodeList<AdAsyncRequestSetNotificationResult> parseResponse(String response, APIContext context, APIRequest<AdAsyncRequestSetNotificationResult> request, String header) throws MalformedResponseException {
+        return AdAsyncRequestSetNotificationResult.parseResponse(response, context, request, header);
       }
     };
   }

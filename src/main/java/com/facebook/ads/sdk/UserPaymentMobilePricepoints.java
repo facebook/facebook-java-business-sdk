@@ -73,7 +73,7 @@ public class UserPaymentMobilePricepoints extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static UserPaymentMobilePricepoints loadJSON(String json, APIContext context) {
+  public static UserPaymentMobilePricepoints loadJSON(String json, APIContext context, String header) {
     UserPaymentMobilePricepoints userPaymentMobilePricepoints = getGson().fromJson(json, UserPaymentMobilePricepoints.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class UserPaymentMobilePricepoints extends APINode {
     }
     userPaymentMobilePricepoints.context = context;
     userPaymentMobilePricepoints.rawValue = json;
+    userPaymentMobilePricepoints.header = header;
     return userPaymentMobilePricepoints;
   }
 
-  public static APINodeList<UserPaymentMobilePricepoints> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<UserPaymentMobilePricepoints> userPaymentMobilePricepointss = new APINodeList<UserPaymentMobilePricepoints>(request, json);
+  public static APINodeList<UserPaymentMobilePricepoints> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<UserPaymentMobilePricepoints> userPaymentMobilePricepointss = new APINodeList<UserPaymentMobilePricepoints>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class UserPaymentMobilePricepoints extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          userPaymentMobilePricepointss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          userPaymentMobilePricepointss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return userPaymentMobilePricepointss;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class UserPaymentMobilePricepoints extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              userPaymentMobilePricepointss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              userPaymentMobilePricepointss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class UserPaymentMobilePricepoints extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  userPaymentMobilePricepointss.add(loadJSON(entry.getValue().toString(), context));
+                  userPaymentMobilePricepointss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              userPaymentMobilePricepointss.add(loadJSON(obj.toString(), context));
+              userPaymentMobilePricepointss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return userPaymentMobilePricepointss;
@@ -155,7 +156,7 @@ public class UserPaymentMobilePricepoints extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              userPaymentMobilePricepointss.add(loadJSON(entry.getValue().toString(), context));
+              userPaymentMobilePricepointss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return userPaymentMobilePricepointss;
         } else {
@@ -174,7 +175,7 @@ public class UserPaymentMobilePricepoints extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              userPaymentMobilePricepointss.add(loadJSON(value.toString(), context));
+              userPaymentMobilePricepointss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class UserPaymentMobilePricepoints extends APINode {
 
           // Sixth, check if it's pure JsonObject
           userPaymentMobilePricepointss.clear();
-          userPaymentMobilePricepointss.add(loadJSON(json, context));
+          userPaymentMobilePricepointss.add(loadJSON(json, context, header));
           return userPaymentMobilePricepointss;
         }
       }
@@ -289,8 +290,8 @@ public class UserPaymentMobilePricepoints extends APINode {
 
   public static APIRequest.ResponseParser<UserPaymentMobilePricepoints> getParser() {
     return new APIRequest.ResponseParser<UserPaymentMobilePricepoints>() {
-      public APINodeList<UserPaymentMobilePricepoints> parseResponse(String response, APIContext context, APIRequest<UserPaymentMobilePricepoints> request) throws MalformedResponseException {
-        return UserPaymentMobilePricepoints.parseResponse(response, context, request);
+      public APINodeList<UserPaymentMobilePricepoints> parseResponse(String response, APIContext context, APIRequest<UserPaymentMobilePricepoints> request, String header) throws MalformedResponseException {
+        return UserPaymentMobilePricepoints.parseResponse(response, context, request, header);
       }
     };
   }

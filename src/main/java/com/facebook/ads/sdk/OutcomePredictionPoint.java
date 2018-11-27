@@ -73,7 +73,7 @@ public class OutcomePredictionPoint extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static OutcomePredictionPoint loadJSON(String json, APIContext context) {
+  public static OutcomePredictionPoint loadJSON(String json, APIContext context, String header) {
     OutcomePredictionPoint outcomePredictionPoint = getGson().fromJson(json, OutcomePredictionPoint.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class OutcomePredictionPoint extends APINode {
     }
     outcomePredictionPoint.context = context;
     outcomePredictionPoint.rawValue = json;
+    outcomePredictionPoint.header = header;
     return outcomePredictionPoint;
   }
 
-  public static APINodeList<OutcomePredictionPoint> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<OutcomePredictionPoint> outcomePredictionPoints = new APINodeList<OutcomePredictionPoint>(request, json);
+  public static APINodeList<OutcomePredictionPoint> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OutcomePredictionPoint> outcomePredictionPoints = new APINodeList<OutcomePredictionPoint>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class OutcomePredictionPoint extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          outcomePredictionPoints.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          outcomePredictionPoints.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return outcomePredictionPoints;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class OutcomePredictionPoint extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              outcomePredictionPoints.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              outcomePredictionPoints.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class OutcomePredictionPoint extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  outcomePredictionPoints.add(loadJSON(entry.getValue().toString(), context));
+                  outcomePredictionPoints.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              outcomePredictionPoints.add(loadJSON(obj.toString(), context));
+              outcomePredictionPoints.add(loadJSON(obj.toString(), context, header));
             }
           }
           return outcomePredictionPoints;
@@ -155,7 +156,7 @@ public class OutcomePredictionPoint extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              outcomePredictionPoints.add(loadJSON(entry.getValue().toString(), context));
+              outcomePredictionPoints.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return outcomePredictionPoints;
         } else {
@@ -174,7 +175,7 @@ public class OutcomePredictionPoint extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              outcomePredictionPoints.add(loadJSON(value.toString(), context));
+              outcomePredictionPoints.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class OutcomePredictionPoint extends APINode {
 
           // Sixth, check if it's pure JsonObject
           outcomePredictionPoints.clear();
-          outcomePredictionPoints.add(loadJSON(json, context));
+          outcomePredictionPoints.add(loadJSON(json, context, header));
           return outcomePredictionPoints;
         }
       }
@@ -289,8 +290,8 @@ public class OutcomePredictionPoint extends APINode {
 
   public static APIRequest.ResponseParser<OutcomePredictionPoint> getParser() {
     return new APIRequest.ResponseParser<OutcomePredictionPoint>() {
-      public APINodeList<OutcomePredictionPoint> parseResponse(String response, APIContext context, APIRequest<OutcomePredictionPoint> request) throws MalformedResponseException {
-        return OutcomePredictionPoint.parseResponse(response, context, request);
+      public APINodeList<OutcomePredictionPoint> parseResponse(String response, APIContext context, APIRequest<OutcomePredictionPoint> request, String header) throws MalformedResponseException {
+        return OutcomePredictionPoint.parseResponse(response, context, request, header);
       }
     };
   }

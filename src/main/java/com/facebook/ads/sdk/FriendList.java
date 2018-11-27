@@ -130,7 +130,7 @@ public class FriendList extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static FriendList loadJSON(String json, APIContext context) {
+  public static FriendList loadJSON(String json, APIContext context, String header) {
     FriendList friendList = getGson().fromJson(json, FriendList.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -147,11 +147,12 @@ public class FriendList extends APINode {
     }
     friendList.context = context;
     friendList.rawValue = json;
+    friendList.header = header;
     return friendList;
   }
 
-  public static APINodeList<FriendList> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<FriendList> friendLists = new APINodeList<FriendList>(request, json);
+  public static APINodeList<FriendList> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<FriendList> friendLists = new APINodeList<FriendList>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -162,7 +163,7 @@ public class FriendList extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          friendLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          friendLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return friendLists;
       } else if (result.isJsonObject()) {
@@ -187,7 +188,7 @@ public class FriendList extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              friendLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              friendLists.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -198,13 +199,13 @@ public class FriendList extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  friendLists.add(loadJSON(entry.getValue().toString(), context));
+                  friendLists.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              friendLists.add(loadJSON(obj.toString(), context));
+              friendLists.add(loadJSON(obj.toString(), context, header));
             }
           }
           return friendLists;
@@ -212,7 +213,7 @@ public class FriendList extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              friendLists.add(loadJSON(entry.getValue().toString(), context));
+              friendLists.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return friendLists;
         } else {
@@ -231,7 +232,7 @@ public class FriendList extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              friendLists.add(loadJSON(value.toString(), context));
+              friendLists.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -243,7 +244,7 @@ public class FriendList extends APINode {
 
           // Sixth, check if it's pure JsonObject
           friendLists.clear();
-          friendLists.add(loadJSON(json, context));
+          friendLists.add(loadJSON(json, context, header));
           return friendLists;
         }
       }
@@ -327,8 +328,8 @@ public class FriendList extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -338,7 +339,8 @@ public class FriendList extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -352,7 +354,7 @@ public class FriendList extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteMembers.this.parseResponse(result);
+               return APIRequestDeleteMembers.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -460,8 +462,8 @@ public class FriendList extends APINode {
     };
 
     @Override
-    public FriendList parseResponse(String response) throws APIException {
-      return FriendList.parseResponse(response, getContext(), this).head();
+    public FriendList parseResponse(String response, String header) throws APIException {
+      return FriendList.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -471,7 +473,8 @@ public class FriendList extends APINode {
 
     @Override
     public FriendList execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -485,7 +488,7 @@ public class FriendList extends APINode {
         new Function<String, FriendList>() {
            public FriendList apply(String result) {
              try {
-               return APIRequestCreateMember.this.parseResponse(result);
+               return APIRequestCreateMember.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -590,8 +593,8 @@ public class FriendList extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -601,7 +604,8 @@ public class FriendList extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -615,7 +619,7 @@ public class FriendList extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -697,8 +701,8 @@ public class FriendList extends APINode {
     };
 
     @Override
-    public FriendList parseResponse(String response) throws APIException {
-      return FriendList.parseResponse(response, getContext(), this).head();
+    public FriendList parseResponse(String response, String header) throws APIException {
+      return FriendList.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -708,7 +712,8 @@ public class FriendList extends APINode {
 
     @Override
     public FriendList execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -722,7 +727,7 @@ public class FriendList extends APINode {
         new Function<String, FriendList>() {
            public FriendList apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -829,8 +834,8 @@ public class FriendList extends APINode {
     };
 
     @Override
-    public FriendList parseResponse(String response) throws APIException {
-      return FriendList.parseResponse(response, getContext(), this).head();
+    public FriendList parseResponse(String response, String header) throws APIException {
+      return FriendList.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -840,7 +845,8 @@ public class FriendList extends APINode {
 
     @Override
     public FriendList execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -854,7 +860,7 @@ public class FriendList extends APINode {
         new Function<String, FriendList>() {
            public FriendList apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -966,8 +972,8 @@ public class FriendList extends APINode {
 
   public static APIRequest.ResponseParser<FriendList> getParser() {
     return new APIRequest.ResponseParser<FriendList>() {
-      public APINodeList<FriendList> parseResponse(String response, APIContext context, APIRequest<FriendList> request) throws MalformedResponseException {
-        return FriendList.parseResponse(response, context, request);
+      public APINodeList<FriendList> parseResponse(String response, APIContext context, APIRequest<FriendList> request, String header) throws MalformedResponseException {
+        return FriendList.parseResponse(response, context, request, header);
       }
     };
   }

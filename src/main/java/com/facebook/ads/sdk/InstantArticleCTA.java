@@ -71,7 +71,7 @@ public class InstantArticleCTA extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static InstantArticleCTA loadJSON(String json, APIContext context) {
+  public static InstantArticleCTA loadJSON(String json, APIContext context, String header) {
     InstantArticleCTA instantArticleCTA = getGson().fromJson(json, InstantArticleCTA.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -88,11 +88,12 @@ public class InstantArticleCTA extends APINode {
     }
     instantArticleCTA.context = context;
     instantArticleCTA.rawValue = json;
+    instantArticleCTA.header = header;
     return instantArticleCTA;
   }
 
-  public static APINodeList<InstantArticleCTA> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<InstantArticleCTA> instantArticleCTAs = new APINodeList<InstantArticleCTA>(request, json);
+  public static APINodeList<InstantArticleCTA> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<InstantArticleCTA> instantArticleCTAs = new APINodeList<InstantArticleCTA>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -103,7 +104,7 @@ public class InstantArticleCTA extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          instantArticleCTAs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          instantArticleCTAs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return instantArticleCTAs;
       } else if (result.isJsonObject()) {
@@ -128,7 +129,7 @@ public class InstantArticleCTA extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              instantArticleCTAs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              instantArticleCTAs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -139,13 +140,13 @@ public class InstantArticleCTA extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  instantArticleCTAs.add(loadJSON(entry.getValue().toString(), context));
+                  instantArticleCTAs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              instantArticleCTAs.add(loadJSON(obj.toString(), context));
+              instantArticleCTAs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return instantArticleCTAs;
@@ -153,7 +154,7 @@ public class InstantArticleCTA extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              instantArticleCTAs.add(loadJSON(entry.getValue().toString(), context));
+              instantArticleCTAs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return instantArticleCTAs;
         } else {
@@ -172,7 +173,7 @@ public class InstantArticleCTA extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              instantArticleCTAs.add(loadJSON(value.toString(), context));
+              instantArticleCTAs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -184,7 +185,7 @@ public class InstantArticleCTA extends APINode {
 
           // Sixth, check if it's pure JsonObject
           instantArticleCTAs.clear();
-          instantArticleCTAs.add(loadJSON(json, context));
+          instantArticleCTAs.add(loadJSON(json, context, header));
           return instantArticleCTAs;
         }
       }
@@ -277,8 +278,8 @@ public class InstantArticleCTA extends APINode {
 
   public static APIRequest.ResponseParser<InstantArticleCTA> getParser() {
     return new APIRequest.ResponseParser<InstantArticleCTA>() {
-      public APINodeList<InstantArticleCTA> parseResponse(String response, APIContext context, APIRequest<InstantArticleCTA> request) throws MalformedResponseException {
-        return InstantArticleCTA.parseResponse(response, context, request);
+      public APINodeList<InstantArticleCTA> parseResponse(String response, APIContext context, APIRequest<InstantArticleCTA> request, String header) throws MalformedResponseException {
+        return InstantArticleCTA.parseResponse(response, context, request, header);
       }
     };
   }

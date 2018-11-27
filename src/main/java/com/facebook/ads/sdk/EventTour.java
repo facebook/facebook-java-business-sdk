@@ -150,7 +150,7 @@ public class EventTour extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static EventTour loadJSON(String json, APIContext context) {
+  public static EventTour loadJSON(String json, APIContext context, String header) {
     EventTour eventTour = getGson().fromJson(json, EventTour.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -167,11 +167,12 @@ public class EventTour extends APINode {
     }
     eventTour.context = context;
     eventTour.rawValue = json;
+    eventTour.header = header;
     return eventTour;
   }
 
-  public static APINodeList<EventTour> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<EventTour> eventTours = new APINodeList<EventTour>(request, json);
+  public static APINodeList<EventTour> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<EventTour> eventTours = new APINodeList<EventTour>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -182,7 +183,7 @@ public class EventTour extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          eventTours.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          eventTours.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return eventTours;
       } else if (result.isJsonObject()) {
@@ -207,7 +208,7 @@ public class EventTour extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              eventTours.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              eventTours.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -218,13 +219,13 @@ public class EventTour extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  eventTours.add(loadJSON(entry.getValue().toString(), context));
+                  eventTours.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              eventTours.add(loadJSON(obj.toString(), context));
+              eventTours.add(loadJSON(obj.toString(), context, header));
             }
           }
           return eventTours;
@@ -232,7 +233,7 @@ public class EventTour extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              eventTours.add(loadJSON(entry.getValue().toString(), context));
+              eventTours.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return eventTours;
         } else {
@@ -251,7 +252,7 @@ public class EventTour extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              eventTours.add(loadJSON(value.toString(), context));
+              eventTours.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -263,7 +264,7 @@ public class EventTour extends APINode {
 
           // Sixth, check if it's pure JsonObject
           eventTours.clear();
-          eventTours.add(loadJSON(json, context));
+          eventTours.add(loadJSON(json, context, header));
           return eventTours;
         }
       }
@@ -381,7 +382,6 @@ public class EventTour extends APINode {
     public static final String[] FIELDS = {
       "attending_count",
       "can_guests_invite",
-      "can_viewer_post",
       "category",
       "cover",
       "declined_count",
@@ -392,19 +392,15 @@ public class EventTour extends APINode {
       "guest_list_enabled",
       "id",
       "interested_count",
-      "invited_count",
       "is_canceled",
-      "is_date_only",
       "is_draft",
       "is_page_owned",
-      "location",
       "maybe_count",
       "name",
       "noreply_count",
       "owner",
       "parent_group",
       "place",
-      "privacy",
       "scheduled_publish_time",
       "start_time",
       "ticket_uri",
@@ -414,12 +410,11 @@ public class EventTour extends APINode {
       "timezone",
       "type",
       "updated_time",
-      "venue",
     };
 
     @Override
-    public APINodeList<Event> parseResponse(String response) throws APIException {
-      return Event.parseResponse(response, getContext(), this);
+    public APINodeList<Event> parseResponse(String response, String header) throws APIException {
+      return Event.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -429,7 +424,8 @@ public class EventTour extends APINode {
 
     @Override
     public APINodeList<Event> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -443,7 +439,7 @@ public class EventTour extends APINode {
         new Function<String, APINodeList<Event>>() {
            public APINodeList<Event> apply(String result) {
              try {
-               return APIRequestGetEvents.this.parseResponse(result);
+               return APIRequestGetEvents.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -519,13 +515,6 @@ public class EventTour extends APINode {
       this.requestField("can_guests_invite", value);
       return this;
     }
-    public APIRequestGetEvents requestCanViewerPostField () {
-      return this.requestCanViewerPostField(true);
-    }
-    public APIRequestGetEvents requestCanViewerPostField (boolean value) {
-      this.requestField("can_viewer_post", value);
-      return this;
-    }
     public APIRequestGetEvents requestCategoryField () {
       return this.requestCategoryField(true);
     }
@@ -596,25 +585,11 @@ public class EventTour extends APINode {
       this.requestField("interested_count", value);
       return this;
     }
-    public APIRequestGetEvents requestInvitedCountField () {
-      return this.requestInvitedCountField(true);
-    }
-    public APIRequestGetEvents requestInvitedCountField (boolean value) {
-      this.requestField("invited_count", value);
-      return this;
-    }
     public APIRequestGetEvents requestIsCanceledField () {
       return this.requestIsCanceledField(true);
     }
     public APIRequestGetEvents requestIsCanceledField (boolean value) {
       this.requestField("is_canceled", value);
-      return this;
-    }
-    public APIRequestGetEvents requestIsDateOnlyField () {
-      return this.requestIsDateOnlyField(true);
-    }
-    public APIRequestGetEvents requestIsDateOnlyField (boolean value) {
-      this.requestField("is_date_only", value);
       return this;
     }
     public APIRequestGetEvents requestIsDraftField () {
@@ -629,13 +604,6 @@ public class EventTour extends APINode {
     }
     public APIRequestGetEvents requestIsPageOwnedField (boolean value) {
       this.requestField("is_page_owned", value);
-      return this;
-    }
-    public APIRequestGetEvents requestLocationField () {
-      return this.requestLocationField(true);
-    }
-    public APIRequestGetEvents requestLocationField (boolean value) {
-      this.requestField("location", value);
       return this;
     }
     public APIRequestGetEvents requestMaybeCountField () {
@@ -678,13 +646,6 @@ public class EventTour extends APINode {
     }
     public APIRequestGetEvents requestPlaceField (boolean value) {
       this.requestField("place", value);
-      return this;
-    }
-    public APIRequestGetEvents requestPrivacyField () {
-      return this.requestPrivacyField(true);
-    }
-    public APIRequestGetEvents requestPrivacyField (boolean value) {
-      this.requestField("privacy", value);
       return this;
     }
     public APIRequestGetEvents requestScheduledPublishTimeField () {
@@ -750,13 +711,6 @@ public class EventTour extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetEvents requestVenueField () {
-      return this.requestVenueField(true);
-    }
-    public APIRequestGetEvents requestVenueField (boolean value) {
-      this.requestField("venue", value);
-      return this;
-    }
   }
 
   public static class APIRequestGetPages extends APIRequest<Page> {
@@ -818,7 +772,6 @@ public class EventTour extends APINode {
       "general_manager",
       "genre",
       "global_brand_page_name",
-      "global_brand_parent_page",
       "global_brand_root_id",
       "has_added_app",
       "has_whatsapp_business_number",
@@ -885,7 +838,6 @@ public class EventTour extends APINode {
       "promotion_eligible",
       "promotion_ineligible_reason",
       "public_transit",
-      "publisher_space",
       "rating_count",
       "recipient",
       "record_label",
@@ -917,8 +869,8 @@ public class EventTour extends APINode {
     };
 
     @Override
-    public APINodeList<Page> parseResponse(String response) throws APIException {
-      return Page.parseResponse(response, getContext(), this);
+    public APINodeList<Page> parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -928,7 +880,8 @@ public class EventTour extends APINode {
 
     @Override
     public APINodeList<Page> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -942,7 +895,7 @@ public class EventTour extends APINode {
         new Function<String, APINodeList<Page>>() {
            public APINodeList<Page> apply(String result) {
              try {
-               return APIRequestGetPages.this.parseResponse(result);
+               return APIRequestGetPages.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1338,13 +1291,6 @@ public class EventTour extends APINode {
     }
     public APIRequestGetPages requestGlobalBrandPageNameField (boolean value) {
       this.requestField("global_brand_page_name", value);
-      return this;
-    }
-    public APIRequestGetPages requestGlobalBrandParentPageField () {
-      return this.requestGlobalBrandParentPageField(true);
-    }
-    public APIRequestGetPages requestGlobalBrandParentPageField (boolean value) {
-      this.requestField("global_brand_parent_page", value);
       return this;
     }
     public APIRequestGetPages requestGlobalBrandRootIdField () {
@@ -1809,13 +1755,6 @@ public class EventTour extends APINode {
       this.requestField("public_transit", value);
       return this;
     }
-    public APIRequestGetPages requestPublisherSpaceField () {
-      return this.requestPublisherSpaceField(true);
-    }
-    public APIRequestGetPages requestPublisherSpaceField (boolean value) {
-      this.requestField("publisher_space", value);
-      return this;
-    }
     public APIRequestGetPages requestRatingCountField () {
       return this.requestRatingCountField(true);
     }
@@ -2042,8 +1981,8 @@ public class EventTour extends APINode {
     };
 
     @Override
-    public EventTour parseResponse(String response) throws APIException {
-      return EventTour.parseResponse(response, getContext(), this).head();
+    public EventTour parseResponse(String response, String header) throws APIException {
+      return EventTour.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2053,7 +1992,8 @@ public class EventTour extends APINode {
 
     @Override
     public EventTour execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2067,7 +2007,7 @@ public class EventTour extends APINode {
         new Function<String, EventTour>() {
            public EventTour apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2265,8 +2205,8 @@ public class EventTour extends APINode {
 
   public static APIRequest.ResponseParser<EventTour> getParser() {
     return new APIRequest.ResponseParser<EventTour>() {
-      public APINodeList<EventTour> parseResponse(String response, APIContext context, APIRequest<EventTour> request) throws MalformedResponseException {
-        return EventTour.parseResponse(response, context, request);
+      public APINodeList<EventTour> parseResponse(String response, APIContext context, APIRequest<EventTour> request, String header) throws MalformedResponseException {
+        return EventTour.parseResponse(response, context, request, header);
       }
     };
   }

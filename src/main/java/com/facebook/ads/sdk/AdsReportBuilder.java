@@ -69,7 +69,7 @@ public class AdsReportBuilder extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdsReportBuilder loadJSON(String json, APIContext context) {
+  public static AdsReportBuilder loadJSON(String json, APIContext context, String header) {
     AdsReportBuilder adsReportBuilder = getGson().fromJson(json, AdsReportBuilder.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -86,11 +86,12 @@ public class AdsReportBuilder extends APINode {
     }
     adsReportBuilder.context = context;
     adsReportBuilder.rawValue = json;
+    adsReportBuilder.header = header;
     return adsReportBuilder;
   }
 
-  public static APINodeList<AdsReportBuilder> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdsReportBuilder> adsReportBuilders = new APINodeList<AdsReportBuilder>(request, json);
+  public static APINodeList<AdsReportBuilder> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdsReportBuilder> adsReportBuilders = new APINodeList<AdsReportBuilder>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -101,7 +102,7 @@ public class AdsReportBuilder extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsReportBuilders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adsReportBuilders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adsReportBuilders;
       } else if (result.isJsonObject()) {
@@ -126,7 +127,7 @@ public class AdsReportBuilder extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsReportBuilders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adsReportBuilders.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -137,13 +138,13 @@ public class AdsReportBuilder extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsReportBuilders.add(loadJSON(entry.getValue().toString(), context));
+                  adsReportBuilders.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsReportBuilders.add(loadJSON(obj.toString(), context));
+              adsReportBuilders.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adsReportBuilders;
@@ -151,7 +152,7 @@ public class AdsReportBuilder extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsReportBuilders.add(loadJSON(entry.getValue().toString(), context));
+              adsReportBuilders.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adsReportBuilders;
         } else {
@@ -170,7 +171,7 @@ public class AdsReportBuilder extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsReportBuilders.add(loadJSON(value.toString(), context));
+              adsReportBuilders.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -182,7 +183,7 @@ public class AdsReportBuilder extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adsReportBuilders.clear();
-          adsReportBuilders.add(loadJSON(json, context));
+          adsReportBuilders.add(loadJSON(json, context, header));
           return adsReportBuilders;
         }
       }
@@ -265,8 +266,8 @@ public class AdsReportBuilder extends APINode {
 
   public static APIRequest.ResponseParser<AdsReportBuilder> getParser() {
     return new APIRequest.ResponseParser<AdsReportBuilder>() {
-      public APINodeList<AdsReportBuilder> parseResponse(String response, APIContext context, APIRequest<AdsReportBuilder> request) throws MalformedResponseException {
-        return AdsReportBuilder.parseResponse(response, context, request);
+      public APINodeList<AdsReportBuilder> parseResponse(String response, APIContext context, APIRequest<AdsReportBuilder> request, String header) throws MalformedResponseException {
+        return AdsReportBuilder.parseResponse(response, context, request, header);
       }
     };
   }

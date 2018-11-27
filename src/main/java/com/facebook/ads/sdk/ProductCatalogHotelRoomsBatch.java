@@ -73,7 +73,7 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static ProductCatalogHotelRoomsBatch loadJSON(String json, APIContext context) {
+  public static ProductCatalogHotelRoomsBatch loadJSON(String json, APIContext context, String header) {
     ProductCatalogHotelRoomsBatch productCatalogHotelRoomsBatch = getGson().fromJson(json, ProductCatalogHotelRoomsBatch.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -90,11 +90,12 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
     }
     productCatalogHotelRoomsBatch.context = context;
     productCatalogHotelRoomsBatch.rawValue = json;
+    productCatalogHotelRoomsBatch.header = header;
     return productCatalogHotelRoomsBatch;
   }
 
-  public static APINodeList<ProductCatalogHotelRoomsBatch> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<ProductCatalogHotelRoomsBatch> productCatalogHotelRoomsBatchs = new APINodeList<ProductCatalogHotelRoomsBatch>(request, json);
+  public static APINodeList<ProductCatalogHotelRoomsBatch> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductCatalogHotelRoomsBatch> productCatalogHotelRoomsBatchs = new APINodeList<ProductCatalogHotelRoomsBatch>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -105,7 +106,7 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productCatalogHotelRoomsBatchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          productCatalogHotelRoomsBatchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return productCatalogHotelRoomsBatchs;
       } else if (result.isJsonObject()) {
@@ -130,7 +131,7 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productCatalogHotelRoomsBatchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              productCatalogHotelRoomsBatchs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -141,13 +142,13 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productCatalogHotelRoomsBatchs.add(loadJSON(entry.getValue().toString(), context));
+                  productCatalogHotelRoomsBatchs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productCatalogHotelRoomsBatchs.add(loadJSON(obj.toString(), context));
+              productCatalogHotelRoomsBatchs.add(loadJSON(obj.toString(), context, header));
             }
           }
           return productCatalogHotelRoomsBatchs;
@@ -155,7 +156,7 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productCatalogHotelRoomsBatchs.add(loadJSON(entry.getValue().toString(), context));
+              productCatalogHotelRoomsBatchs.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return productCatalogHotelRoomsBatchs;
         } else {
@@ -174,7 +175,7 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productCatalogHotelRoomsBatchs.add(loadJSON(value.toString(), context));
+              productCatalogHotelRoomsBatchs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -186,7 +187,7 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
 
           // Sixth, check if it's pure JsonObject
           productCatalogHotelRoomsBatchs.clear();
-          productCatalogHotelRoomsBatchs.add(loadJSON(json, context));
+          productCatalogHotelRoomsBatchs.add(loadJSON(json, context, header));
           return productCatalogHotelRoomsBatchs;
         }
       }
@@ -289,8 +290,8 @@ public class ProductCatalogHotelRoomsBatch extends APINode {
 
   public static APIRequest.ResponseParser<ProductCatalogHotelRoomsBatch> getParser() {
     return new APIRequest.ResponseParser<ProductCatalogHotelRoomsBatch>() {
-      public APINodeList<ProductCatalogHotelRoomsBatch> parseResponse(String response, APIContext context, APIRequest<ProductCatalogHotelRoomsBatch> request) throws MalformedResponseException {
-        return ProductCatalogHotelRoomsBatch.parseResponse(response, context, request);
+      public APINodeList<ProductCatalogHotelRoomsBatch> parseResponse(String response, APIContext context, APIRequest<ProductCatalogHotelRoomsBatch> request, String header) throws MalformedResponseException {
+        return ProductCatalogHotelRoomsBatch.parseResponse(response, context, request, header);
       }
     };
   }

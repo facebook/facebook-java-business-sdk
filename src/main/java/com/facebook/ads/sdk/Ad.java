@@ -101,8 +101,6 @@ public class Ad extends APINode {
   private String mLastUpdatedByAppId = null;
   @SerializedName("name")
   private String mName = null;
-  @SerializedName("objective_source")
-  private String mObjectiveSource = null;
   @SerializedName("priority")
   private Long mPriority = null;
   @SerializedName("recommendations")
@@ -188,7 +186,7 @@ public class Ad extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Ad loadJSON(String json, APIContext context) {
+  public static Ad loadJSON(String json, APIContext context, String header) {
     Ad ad = getGson().fromJson(json, Ad.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -205,11 +203,12 @@ public class Ad extends APINode {
     }
     ad.context = context;
     ad.rawValue = json;
+    ad.header = header;
     return ad;
   }
 
-  public static APINodeList<Ad> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<Ad> ads = new APINodeList<Ad>(request, json);
+  public static APINodeList<Ad> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<Ad> ads = new APINodeList<Ad>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -220,7 +219,7 @@ public class Ad extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          ads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          ads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return ads;
       } else if (result.isJsonObject()) {
@@ -245,7 +244,7 @@ public class Ad extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              ads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              ads.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -256,13 +255,13 @@ public class Ad extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  ads.add(loadJSON(entry.getValue().toString(), context));
+                  ads.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              ads.add(loadJSON(obj.toString(), context));
+              ads.add(loadJSON(obj.toString(), context, header));
             }
           }
           return ads;
@@ -270,7 +269,7 @@ public class Ad extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              ads.add(loadJSON(entry.getValue().toString(), context));
+              ads.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return ads;
         } else {
@@ -289,7 +288,7 @@ public class Ad extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              ads.add(loadJSON(value.toString(), context));
+              ads.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -301,7 +300,7 @@ public class Ad extends APINode {
 
           // Sixth, check if it's pure JsonObject
           ads.clear();
-          ads.add(loadJSON(json, context));
+          ads.add(loadJSON(json, context, header));
           return ads;
         }
       }
@@ -503,10 +502,6 @@ public class Ad extends APINode {
     return mName;
   }
 
-  public String getFieldObjectiveSource() {
-    return mObjectiveSource;
-  }
-
   public Long getFieldPriority() {
     return mPriority;
   }
@@ -563,7 +558,6 @@ public class Ad extends APINode {
       "actor_id",
       "adlabels",
       "applink_treatment",
-      "asset_feed_id",
       "asset_feed_spec",
       "authorization_category",
       "auto_update",
@@ -601,6 +595,7 @@ public class Ad extends APINode {
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
+      "portrait_customizations",
       "product_set_id",
       "recommender_settings",
       "status",
@@ -614,8 +609,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<AdCreative> parseResponse(String response) throws APIException {
-      return AdCreative.parseResponse(response, getContext(), this);
+    public APINodeList<AdCreative> parseResponse(String response, String header) throws APIException {
+      return AdCreative.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -625,7 +620,8 @@ public class Ad extends APINode {
 
     @Override
     public APINodeList<AdCreative> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -639,7 +635,7 @@ public class Ad extends APINode {
         new Function<String, APINodeList<AdCreative>>() {
            public APINodeList<AdCreative> apply(String result) {
              try {
-               return APIRequestGetAdCreatives.this.parseResponse(result);
+               return APIRequestGetAdCreatives.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -727,13 +723,6 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestApplinkTreatmentField (boolean value) {
       this.requestField("applink_treatment", value);
-      return this;
-    }
-    public APIRequestGetAdCreatives requestAssetFeedIdField () {
-      return this.requestAssetFeedIdField(true);
-    }
-    public APIRequestGetAdCreatives requestAssetFeedIdField (boolean value) {
-      this.requestField("asset_feed_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestAssetFeedSpecField () {
@@ -995,6 +984,13 @@ public class Ad extends APINode {
       this.requestField("playable_asset_id", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestPortraitCustomizationsField () {
+      return this.requestPortraitCustomizationsField(true);
+    }
+    public APIRequestGetAdCreatives requestPortraitCustomizationsField (boolean value) {
+      this.requestField("portrait_customizations", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestProductSetIdField () {
       return this.requestProductSetIdField(true);
     }
@@ -1083,8 +1079,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1094,7 +1090,8 @@ public class Ad extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1108,7 +1105,7 @@ public class Ad extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteAdLabels.this.parseResponse(result);
+               return APIRequestDeleteAdLabels.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1143,7 +1140,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestDeleteAdLabels setExecutionOptions (List<Ad.EnumExecutionOptions> executionOptions) {
+    public APIRequestDeleteAdLabels setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -1206,8 +1203,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public Ad parseResponse(String response) throws APIException {
-      return Ad.parseResponse(response, getContext(), this).head();
+    public Ad parseResponse(String response, String header) throws APIException {
+      return Ad.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1217,7 +1214,8 @@ public class Ad extends APINode {
 
     @Override
     public Ad execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1231,7 +1229,7 @@ public class Ad extends APINode {
         new Function<String, Ad>() {
            public Ad apply(String result) {
              try {
-               return APIRequestCreateAdLabel.this.parseResponse(result);
+               return APIRequestCreateAdLabel.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1266,7 +1264,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdLabel setExecutionOptions (List<Ad.EnumExecutionOptions> executionOptions) {
+    public APIRequestCreateAdLabel setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -1338,8 +1336,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<AdRule> parseResponse(String response) throws APIException {
-      return AdRule.parseResponse(response, getContext(), this);
+    public APINodeList<AdRule> parseResponse(String response, String header) throws APIException {
+      return AdRule.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1349,7 +1347,8 @@ public class Ad extends APINode {
 
     @Override
     public APINodeList<AdRule> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1363,7 +1362,7 @@ public class Ad extends APINode {
         new Function<String, APINodeList<AdRule>>() {
            public APINodeList<AdRule> apply(String result) {
              try {
-               return APIRequestGetAdRulesGoverned.this.parseResponse(result);
+               return APIRequestGetAdRulesGoverned.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1545,7 +1544,6 @@ public class Ad extends APINode {
       "issues_info",
       "last_updated_by_app_id",
       "name",
-      "objective_source",
       "priority",
       "recommendations",
       "source_ad",
@@ -1558,8 +1556,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<Ad> parseResponse(String response) throws APIException {
-      return Ad.parseResponse(response, getContext(), this);
+    public APINodeList<Ad> parseResponse(String response, String header) throws APIException {
+      return Ad.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -1569,7 +1567,8 @@ public class Ad extends APINode {
 
     @Override
     public APINodeList<Ad> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -1583,7 +1582,7 @@ public class Ad extends APINode {
         new Function<String, APINodeList<Ad>>() {
            public APINodeList<Ad> apply(String result) {
              try {
-               return APIRequestGetCopies.this.parseResponse(result);
+               return APIRequestGetCopies.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1851,13 +1850,6 @@ public class Ad extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetCopies requestObjectiveSourceField () {
-      return this.requestObjectiveSourceField(true);
-    }
-    public APIRequestGetCopies requestObjectiveSourceField (boolean value) {
-      this.requestField("objective_source", value);
-      return this;
-    }
     public APIRequestGetCopies requestPriorityField () {
       return this.requestPriorityField(true);
     }
@@ -1940,8 +1932,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public Ad parseResponse(String response) throws APIException {
-      return Ad.parseResponse(response, getContext(), this).head();
+    public Ad parseResponse(String response, String header) throws APIException {
+      return Ad.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -1951,7 +1943,8 @@ public class Ad extends APINode {
 
     @Override
     public Ad execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -1965,7 +1958,7 @@ public class Ad extends APINode {
         new Function<String, Ad>() {
            public Ad apply(String result) {
              try {
-               return APIRequestCreateCopy.this.parseResponse(result);
+               return APIRequestCreateCopy.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2086,8 +2079,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<AdsInsights> parseResponse(String response) throws APIException {
-      return AdsInsights.parseResponse(response, getContext(), this);
+    public APINodeList<AdsInsights> parseResponse(String response, String header) throws APIException {
+      return AdsInsights.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2097,7 +2090,8 @@ public class Ad extends APINode {
 
     @Override
     public APINodeList<AdsInsights> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2111,7 +2105,7 @@ public class Ad extends APINode {
         new Function<String, APINodeList<AdsInsights>>() {
            public APINodeList<AdsInsights> apply(String result) {
              try {
-               return APIRequestGetInsights.this.parseResponse(result);
+               return APIRequestGetInsights.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2377,8 +2371,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public AdReportRun parseResponse(String response) throws APIException {
-      return AdReportRun.parseResponse(response, getContext(), this).head();
+    public AdReportRun parseResponse(String response, String header) throws APIException {
+      return AdReportRun.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -2388,7 +2382,8 @@ public class Ad extends APINode {
 
     @Override
     public AdReportRun execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -2402,7 +2397,7 @@ public class Ad extends APINode {
         new Function<String, AdReportRun>() {
            public AdReportRun apply(String result) {
              try {
-               return APIRequestGetInsightsAsync.this.parseResponse(result);
+               return APIRequestGetInsightsAsync.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2669,8 +2664,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<AdKeywordStats> parseResponse(String response) throws APIException {
-      return AdKeywordStats.parseResponse(response, getContext(), this);
+    public APINodeList<AdKeywordStats> parseResponse(String response, String header) throws APIException {
+      return AdKeywordStats.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2680,7 +2675,8 @@ public class Ad extends APINode {
 
     @Override
     public APINodeList<AdKeywordStats> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2694,7 +2690,7 @@ public class Ad extends APINode {
         new Function<String, APINodeList<AdKeywordStats>>() {
            public APINodeList<AdKeywordStats> apply(String result) {
              try {
-               return APIRequestGetKeywordStats.this.parseResponse(result);
+               return APIRequestGetKeywordStats.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2933,8 +2929,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<Lead> parseResponse(String response) throws APIException {
-      return Lead.parseResponse(response, getContext(), this);
+    public APINodeList<Lead> parseResponse(String response, String header) throws APIException {
+      return Lead.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -2944,7 +2940,8 @@ public class Ad extends APINode {
 
     @Override
     public APINodeList<Lead> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -2958,7 +2955,7 @@ public class Ad extends APINode {
         new Function<String, APINodeList<Lead>>() {
            public APINodeList<Lead> apply(String result) {
              try {
-               return APIRequestGetLeads.this.parseResponse(result);
+               return APIRequestGetLeads.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3151,8 +3148,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public Lead parseResponse(String response) throws APIException {
-      return Lead.parseResponse(response, getContext(), this).head();
+    public Lead parseResponse(String response, String header) throws APIException {
+      return Lead.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3162,7 +3159,8 @@ public class Ad extends APINode {
 
     @Override
     public Lead execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3176,7 +3174,7 @@ public class Ad extends APINode {
         new Function<String, Lead>() {
            public Lead apply(String result) {
              try {
-               return APIRequestCreateLead.this.parseResponse(result);
+               return APIRequestCreateLead.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3265,6 +3263,7 @@ public class Ad extends APINode {
     public static final String[] PARAMS = {
       "ad_format",
       "dynamic_creative_spec",
+      "dynamic_asset_label",
       "interactive",
       "post",
       "height",
@@ -3283,8 +3282,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<AdPreview> parseResponse(String response) throws APIException {
-      return AdPreview.parseResponse(response, getContext(), this);
+    public APINodeList<AdPreview> parseResponse(String response, String header) throws APIException {
+      return AdPreview.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3294,7 +3293,8 @@ public class Ad extends APINode {
 
     @Override
     public APINodeList<AdPreview> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3308,7 +3308,7 @@ public class Ad extends APINode {
         new Function<String, APINodeList<AdPreview>>() {
            public APINodeList<AdPreview> apply(String result) {
              try {
-               return APIRequestGetPreviews.this.parseResponse(result);
+               return APIRequestGetPreviews.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3349,6 +3349,11 @@ public class Ad extends APINode {
     }
     public APIRequestGetPreviews setDynamicCreativeSpec (String dynamicCreativeSpec) {
       this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
+      return this;
+    }
+
+    public APIRequestGetPreviews setDynamicAssetLabel (String dynamicAssetLabel) {
+      this.setParam("dynamic_asset_label", dynamicAssetLabel);
       return this;
     }
 
@@ -3499,8 +3504,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<TargetingSentenceLine> parseResponse(String response) throws APIException {
-      return TargetingSentenceLine.parseResponse(response, getContext(), this);
+    public APINodeList<TargetingSentenceLine> parseResponse(String response, String header) throws APIException {
+      return TargetingSentenceLine.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3510,7 +3515,8 @@ public class Ad extends APINode {
 
     @Override
     public APINodeList<TargetingSentenceLine> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3524,7 +3530,7 @@ public class Ad extends APINode {
         new Function<String, APINodeList<TargetingSentenceLine>>() {
            public APINodeList<TargetingSentenceLine> apply(String result) {
              try {
-               return APIRequestGetTargetingSentenceLines.this.parseResponse(result);
+               return APIRequestGetTargetingSentenceLines.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3623,8 +3629,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINodeList<APINode> parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this);
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
     }
 
     @Override
@@ -3634,7 +3640,8 @@ public class Ad extends APINode {
 
     @Override
     public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
       return lastResponse;
     }
 
@@ -3648,7 +3655,7 @@ public class Ad extends APINode {
         new Function<String, APINodeList<APINode>>() {
            public APINodeList<APINode> apply(String result) {
              try {
-               return APIRequestDeleteTrackingTag.this.parseResponse(result);
+               return APIRequestDeleteTrackingTag.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3728,8 +3735,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3739,7 +3746,8 @@ public class Ad extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3753,7 +3761,7 @@ public class Ad extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestCreateTrackingTag.this.parseResponse(result);
+               return APIRequestCreateTrackingTag.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3845,8 +3853,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public APINode parseResponse(String response) throws APIException {
-      return APINode.parseResponse(response, getContext(), this).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3856,7 +3864,8 @@ public class Ad extends APINode {
 
     @Override
     public APINode execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -3870,7 +3879,7 @@ public class Ad extends APINode {
         new Function<String, APINode>() {
            public APINode apply(String result) {
              try {
-               return APIRequestDelete.this.parseResponse(result);
+               return APIRequestDelete.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3942,6 +3951,7 @@ public class Ad extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "am_call_tags",
       "date_preset",
       "from_adtable",
       "review_feedback_breakdown",
@@ -3972,7 +3982,6 @@ public class Ad extends APINode {
       "issues_info",
       "last_updated_by_app_id",
       "name",
-      "objective_source",
       "priority",
       "recommendations",
       "source_ad",
@@ -3985,8 +3994,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public Ad parseResponse(String response) throws APIException {
-      return Ad.parseResponse(response, getContext(), this).head();
+    public Ad parseResponse(String response, String header) throws APIException {
+      return Ad.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -3996,7 +4005,8 @@ public class Ad extends APINode {
 
     @Override
     public Ad execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4010,7 +4020,7 @@ public class Ad extends APINode {
         new Function<String, Ad>() {
            public Ad apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4035,6 +4045,15 @@ public class Ad extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setAmCallTags (Object amCallTags) {
+      this.setParam("am_call_tags", amCallTags);
+      return this;
+    }
+    public APIRequestGet setAmCallTags (String amCallTags) {
+      this.setParam("am_call_tags", amCallTags);
+      return this;
+    }
 
     public APIRequestGet setDatePreset (EnumDatePreset datePreset) {
       this.setParam("date_preset", datePreset);
@@ -4269,13 +4288,6 @@ public class Ad extends APINode {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGet requestObjectiveSourceField () {
-      return this.requestObjectiveSourceField(true);
-    }
-    public APIRequestGet requestObjectiveSourceField (boolean value) {
-      this.requestField("objective_source", value);
-      return this;
-    }
     public APIRequestGet requestPriorityField () {
       return this.requestPriorityField(true);
     }
@@ -4369,8 +4381,8 @@ public class Ad extends APINode {
     };
 
     @Override
-    public Ad parseResponse(String response) throws APIException {
-      return Ad.parseResponse(response, getContext(), this).head();
+    public Ad parseResponse(String response, String header) throws APIException {
+      return Ad.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -4380,7 +4392,8 @@ public class Ad extends APINode {
 
     @Override
     public Ad execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -4394,7 +4407,7 @@ public class Ad extends APINode {
         new Function<String, Ad>() {
            public Ad apply(String result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result);
+               return APIRequestUpdate.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4830,7 +4843,6 @@ public class Ad extends APINode {
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLastUpdatedByAppId = instance.mLastUpdatedByAppId;
     this.mName = instance.mName;
-    this.mObjectiveSource = instance.mObjectiveSource;
     this.mPriority = instance.mPriority;
     this.mRecommendations = instance.mRecommendations;
     this.mSourceAd = instance.mSourceAd;
@@ -4847,8 +4859,8 @@ public class Ad extends APINode {
 
   public static APIRequest.ResponseParser<Ad> getParser() {
     return new APIRequest.ResponseParser<Ad>() {
-      public APINodeList<Ad> parseResponse(String response, APIContext context, APIRequest<Ad> request) throws MalformedResponseException {
-        return Ad.parseResponse(response, context, request);
+      public APINodeList<Ad> parseResponse(String response, APIContext context, APIRequest<Ad> request, String header) throws MalformedResponseException {
+        return Ad.parseResponse(response, context, request, header);
       }
     };
   }

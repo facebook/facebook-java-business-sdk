@@ -81,7 +81,7 @@ public class AdsSegments extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdsSegments loadJSON(String json, APIContext context) {
+  public static AdsSegments loadJSON(String json, APIContext context, String header) {
     AdsSegments adsSegments = getGson().fromJson(json, AdsSegments.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -98,11 +98,12 @@ public class AdsSegments extends APINode {
     }
     adsSegments.context = context;
     adsSegments.rawValue = json;
+    adsSegments.header = header;
     return adsSegments;
   }
 
-  public static APINodeList<AdsSegments> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<AdsSegments> adsSegmentss = new APINodeList<AdsSegments>(request, json);
+  public static APINodeList<AdsSegments> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdsSegments> adsSegmentss = new APINodeList<AdsSegments>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -113,7 +114,7 @@ public class AdsSegments extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adsSegmentss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          adsSegmentss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return adsSegmentss;
       } else if (result.isJsonObject()) {
@@ -138,7 +139,7 @@ public class AdsSegments extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adsSegmentss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              adsSegmentss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -149,13 +150,13 @@ public class AdsSegments extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adsSegmentss.add(loadJSON(entry.getValue().toString(), context));
+                  adsSegmentss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adsSegmentss.add(loadJSON(obj.toString(), context));
+              adsSegmentss.add(loadJSON(obj.toString(), context, header));
             }
           }
           return adsSegmentss;
@@ -163,7 +164,7 @@ public class AdsSegments extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adsSegmentss.add(loadJSON(entry.getValue().toString(), context));
+              adsSegmentss.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return adsSegmentss;
         } else {
@@ -182,7 +183,7 @@ public class AdsSegments extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adsSegmentss.add(loadJSON(value.toString(), context));
+              adsSegmentss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -194,7 +195,7 @@ public class AdsSegments extends APINode {
 
           // Sixth, check if it's pure JsonObject
           adsSegmentss.clear();
-          adsSegmentss.add(loadJSON(json, context));
+          adsSegmentss.add(loadJSON(json, context, header));
           return adsSegmentss;
         }
       }
@@ -337,8 +338,8 @@ public class AdsSegments extends APINode {
 
   public static APIRequest.ResponseParser<AdsSegments> getParser() {
     return new APIRequest.ResponseParser<AdsSegments>() {
-      public APINodeList<AdsSegments> parseResponse(String response, APIContext context, APIRequest<AdsSegments> request) throws MalformedResponseException {
-        return AdsSegments.parseResponse(response, context, request);
+      public APINodeList<AdsSegments> parseResponse(String response, APIContext context, APIRequest<AdsSegments> request, String header) throws MalformedResponseException {
+        return AdsSegments.parseResponse(response, context, request, header);
       }
     };
   }

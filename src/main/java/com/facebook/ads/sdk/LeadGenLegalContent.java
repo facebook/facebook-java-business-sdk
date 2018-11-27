@@ -128,7 +128,7 @@ public class LeadGenLegalContent extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static LeadGenLegalContent loadJSON(String json, APIContext context) {
+  public static LeadGenLegalContent loadJSON(String json, APIContext context, String header) {
     LeadGenLegalContent leadGenLegalContent = getGson().fromJson(json, LeadGenLegalContent.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
@@ -145,11 +145,12 @@ public class LeadGenLegalContent extends APINode {
     }
     leadGenLegalContent.context = context;
     leadGenLegalContent.rawValue = json;
+    leadGenLegalContent.header = header;
     return leadGenLegalContent;
   }
 
-  public static APINodeList<LeadGenLegalContent> parseResponse(String json, APIContext context, APIRequest request) throws MalformedResponseException {
-    APINodeList<LeadGenLegalContent> leadGenLegalContents = new APINodeList<LeadGenLegalContent>(request, json);
+  public static APINodeList<LeadGenLegalContent> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<LeadGenLegalContent> leadGenLegalContents = new APINodeList<LeadGenLegalContent>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -160,7 +161,7 @@ public class LeadGenLegalContent extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          leadGenLegalContents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+          leadGenLegalContents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
         return leadGenLegalContents;
       } else if (result.isJsonObject()) {
@@ -185,7 +186,7 @@ public class LeadGenLegalContent extends APINode {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              leadGenLegalContents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context));
+              leadGenLegalContents.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -196,13 +197,13 @@ public class LeadGenLegalContent extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  leadGenLegalContents.add(loadJSON(entry.getValue().toString(), context));
+                  leadGenLegalContents.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              leadGenLegalContents.add(loadJSON(obj.toString(), context));
+              leadGenLegalContents.add(loadJSON(obj.toString(), context, header));
             }
           }
           return leadGenLegalContents;
@@ -210,7 +211,7 @@ public class LeadGenLegalContent extends APINode {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              leadGenLegalContents.add(loadJSON(entry.getValue().toString(), context));
+              leadGenLegalContents.add(loadJSON(entry.getValue().toString(), context, header));
           }
           return leadGenLegalContents;
         } else {
@@ -229,7 +230,7 @@ public class LeadGenLegalContent extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              leadGenLegalContents.add(loadJSON(value.toString(), context));
+              leadGenLegalContents.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
@@ -241,7 +242,7 @@ public class LeadGenLegalContent extends APINode {
 
           // Sixth, check if it's pure JsonObject
           leadGenLegalContents.clear();
-          leadGenLegalContents.add(loadJSON(json, context));
+          leadGenLegalContents.add(loadJSON(json, context, header));
           return leadGenLegalContents;
         }
       }
@@ -305,8 +306,8 @@ public class LeadGenLegalContent extends APINode {
     };
 
     @Override
-    public LeadGenLegalContent parseResponse(String response) throws APIException {
-      return LeadGenLegalContent.parseResponse(response, getContext(), this).head();
+    public LeadGenLegalContent parseResponse(String response, String header) throws APIException {
+      return LeadGenLegalContent.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
@@ -316,7 +317,8 @@ public class LeadGenLegalContent extends APINode {
 
     @Override
     public LeadGenLegalContent execute(Map<String, Object> extraParams) throws APIException {
-      lastResponse = parseResponse(executeInternal(extraParams));
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
@@ -330,7 +332,7 @@ public class LeadGenLegalContent extends APINode {
         new Function<String, LeadGenLegalContent>() {
            public LeadGenLegalContent apply(String result) {
              try {
-               return APIRequestGet.this.parseResponse(result);
+               return APIRequestGet.this.parseResponse(result, null);
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -415,29 +417,6 @@ public class LeadGenLegalContent extends APINode {
     }
   }
 
-  public static enum EnumStatus {
-      @SerializedName("ACTIVE")
-      VALUE_ACTIVE("ACTIVE"),
-      @SerializedName("ARCHIVED")
-      VALUE_ARCHIVED("ARCHIVED"),
-      @SerializedName("DELETED")
-      VALUE_DELETED("DELETED"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      NULL(null);
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {
@@ -463,8 +442,8 @@ public class LeadGenLegalContent extends APINode {
 
   public static APIRequest.ResponseParser<LeadGenLegalContent> getParser() {
     return new APIRequest.ResponseParser<LeadGenLegalContent>() {
-      public APINodeList<LeadGenLegalContent> parseResponse(String response, APIContext context, APIRequest<LeadGenLegalContent> request) throws MalformedResponseException {
-        return LeadGenLegalContent.parseResponse(response, context, request);
+      public APINodeList<LeadGenLegalContent> parseResponse(String response, APIContext context, APIRequest<LeadGenLegalContent> request, String header) throws MalformedResponseException {
+        return LeadGenLegalContent.parseResponse(response, context, request, header);
       }
     };
   }
