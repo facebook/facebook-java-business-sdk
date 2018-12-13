@@ -500,10 +500,10 @@ public class OpenGraphObject extends APINode {
     public ListenableFuture<APINodeList<Comment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Comment>>() {
-           public APINodeList<Comment> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Comment>>() {
+           public APINodeList<Comment> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetComments.this.parseResponse(result, null);
+               return APIRequestGetComments.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -796,10 +796,10 @@ public class OpenGraphObject extends APINode {
     public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Comment>() {
-           public Comment apply(String result) {
+        new Function<ResponseWrapper, Comment>() {
+           public Comment apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateComment.this.parseResponse(result, null);
+               return APIRequestCreateComment.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -992,10 +992,10 @@ public class OpenGraphObject extends APINode {
     public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Profile>>() {
-           public APINodeList<Profile> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Profile>>() {
+           public APINodeList<Profile> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetLikes.this.parseResponse(result, null);
+               return APIRequestGetLikes.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1177,10 +1177,10 @@ public class OpenGraphObject extends APINode {
     public ListenableFuture<OpenGraphObject> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OpenGraphObject>() {
-           public OpenGraphObject apply(String result) {
+        new Function<ResponseWrapper, OpenGraphObject>() {
+           public OpenGraphObject apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateLike.this.parseResponse(result, null);
+               return APIRequestCreateLike.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1352,10 +1352,10 @@ public class OpenGraphObject extends APINode {
     public ListenableFuture<Photo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Photo>() {
-           public Photo apply(String result) {
+        new Function<ResponseWrapper, Photo>() {
+           public Photo apply(ResponseWrapper result) {
              try {
-               return APIRequestCreatePhoto.this.parseResponse(result, null);
+               return APIRequestCreatePhoto.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1851,10 +1851,10 @@ public class OpenGraphObject extends APINode {
     public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ProfilePictureSource>>() {
-           public APINodeList<ProfilePictureSource> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ProfilePictureSource>>() {
+           public APINodeList<ProfilePictureSource> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPicture.this.parseResponse(result, null);
+               return APIRequestGetPicture.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2055,10 +2055,10 @@ public class OpenGraphObject extends APINode {
     public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Profile>>() {
-           public APINodeList<Profile> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Profile>>() {
+           public APINodeList<Profile> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetReactions.this.parseResponse(result, null);
+               return APIRequestGetReactions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2267,10 +2267,10 @@ public class OpenGraphObject extends APINode {
     public ListenableFuture<OpenGraphObject> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OpenGraphObject>() {
-           public OpenGraphObject apply(String result) {
+        new Function<ResponseWrapper, OpenGraphObject>() {
+           public OpenGraphObject apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2528,10 +2528,10 @@ public class OpenGraphObject extends APINode {
     public ListenableFuture<OpenGraphObject> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OpenGraphObject>() {
-           public OpenGraphObject apply(String result) {
+        new Function<ResponseWrapper, OpenGraphObject>() {
+           public OpenGraphObject apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

@@ -366,10 +366,10 @@ public class PageInsightsAsyncExportRun extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteInsightsExports.this.parseResponse(result, null);
+               return APIRequestDeleteInsightsExports.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -479,10 +479,10 @@ public class PageInsightsAsyncExportRun extends APINode {
     public ListenableFuture<PageInsightsAsyncExportRun> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, PageInsightsAsyncExportRun>() {
-           public PageInsightsAsyncExportRun apply(String result) {
+        new Function<ResponseWrapper, PageInsightsAsyncExportRun>() {
+           public PageInsightsAsyncExportRun apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

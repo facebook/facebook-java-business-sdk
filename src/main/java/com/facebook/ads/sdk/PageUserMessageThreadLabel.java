@@ -333,10 +333,10 @@ public class PageUserMessageThreadLabel extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteLabel.this.parseResponse(result, null);
+               return APIRequestDeleteLabel.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -447,10 +447,10 @@ public class PageUserMessageThreadLabel extends APINode {
     public ListenableFuture<PageUserMessageThreadLabel> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, PageUserMessageThreadLabel>() {
-           public PageUserMessageThreadLabel apply(String result) {
+        new Function<ResponseWrapper, PageUserMessageThreadLabel>() {
+           public PageUserMessageThreadLabel apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateLabel.this.parseResponse(result, null);
+               return APIRequestCreateLabel.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -560,10 +560,10 @@ public class PageUserMessageThreadLabel extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -666,10 +666,10 @@ public class PageUserMessageThreadLabel extends APINode {
     public ListenableFuture<PageUserMessageThreadLabel> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, PageUserMessageThreadLabel>() {
-           public PageUserMessageThreadLabel apply(String result) {
+        new Function<ResponseWrapper, PageUserMessageThreadLabel>() {
+           public PageUserMessageThreadLabel apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

@@ -390,10 +390,10 @@ public class OpenGraphContext extends APINode {
     public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<User>>() {
-           public APINodeList<User> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<User>>() {
+           public APINodeList<User> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetFriendsTaggedAt.this.parseResponse(result, null);
+               return APIRequestGetFriendsTaggedAt.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -974,10 +974,10 @@ public class OpenGraphContext extends APINode {
     public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<User>>() {
-           public APINodeList<User> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<User>>() {
+           public APINodeList<User> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetFriendsWhoLike.this.parseResponse(result, null);
+               return APIRequestGetFriendsWhoLike.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1558,10 +1558,10 @@ public class OpenGraphContext extends APINode {
     public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<User>>() {
-           public APINodeList<User> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<User>>() {
+           public APINodeList<User> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetMusicListenFriends.this.parseResponse(result, null);
+               return APIRequestGetMusicListenFriends.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2142,10 +2142,10 @@ public class OpenGraphContext extends APINode {
     public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<User>>() {
-           public APINodeList<User> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<User>>() {
+           public APINodeList<User> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetVideoWatchFriends.this.parseResponse(result, null);
+               return APIRequestGetVideoWatchFriends.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2667,10 +2667,10 @@ public class OpenGraphContext extends APINode {
     public ListenableFuture<OpenGraphContext> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OpenGraphContext>() {
-           public OpenGraphContext apply(String result) {
+        new Function<ResponseWrapper, OpenGraphContext>() {
+           public OpenGraphContext apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

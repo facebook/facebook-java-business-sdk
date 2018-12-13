@@ -390,10 +390,10 @@ public class Canvas extends APINode {
     public ListenableFuture<Canvas> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Canvas>() {
-           public Canvas apply(String result) {
+        new Function<ResponseWrapper, Canvas>() {
+           public Canvas apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateDuplicateCanva.this.parseResponse(result, null);
+               return APIRequestCreateDuplicateCanva.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -495,10 +495,10 @@ public class Canvas extends APINode {
     public ListenableFuture<Canvas> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Canvas>() {
-           public Canvas apply(String result) {
+        new Function<ResponseWrapper, Canvas>() {
+           public Canvas apply(ResponseWrapper result) {
              try {
-               return APIRequestCreatePreviewNotification.this.parseResponse(result, null);
+               return APIRequestCreatePreviewNotification.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -608,10 +608,10 @@ public class Canvas extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -722,10 +722,10 @@ public class Canvas extends APINode {
     public ListenableFuture<Canvas> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Canvas>() {
-           public Canvas apply(String result) {
+        new Function<ResponseWrapper, Canvas>() {
+           public Canvas apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -902,10 +902,10 @@ public class Canvas extends APINode {
     public ListenableFuture<Canvas> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Canvas>() {
-           public Canvas apply(String result) {
+        new Function<ResponseWrapper, Canvas>() {
+           public Canvas apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

@@ -290,6 +290,10 @@ public class ShadowIGUser extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestCreateMention createMention() {
+    return new APIRequestCreateMention(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetInsights getInsights() {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
   }
@@ -306,8 +310,16 @@ public class ShadowIGUser extends APINode {
     return new APIRequestCreateMediaPublish(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetRecentlySearchedHashtags getRecentlySearchedHashtags() {
+    return new APIRequestGetRecentlySearchedHashtags(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetStories getStories() {
     return new APIRequestGetStories(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetTags getTags() {
+    return new APIRequestGetTags(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -378,6 +390,136 @@ public class ShadowIGUser extends APINode {
 
 
 
+  public static class APIRequestCreateMention extends APIRequest<APINode> {
+
+    APINode lastResponse = null;
+    @Override
+    public APINode getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "media_id",
+      "comment_id",
+      "message",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public APINode execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINode> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateMention.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateMention(String nodeId, APIContext context) {
+      super(context, nodeId, "/Mentions", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateMention setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMention setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateMention setMediaId (Object mediaId) {
+      this.setParam("media_id", mediaId);
+      return this;
+    }
+    public APIRequestCreateMention setMediaId (String mediaId) {
+      this.setParam("media_id", mediaId);
+      return this;
+    }
+
+    public APIRequestCreateMention setCommentId (Object commentId) {
+      this.setParam("comment_id", commentId);
+      return this;
+    }
+    public APIRequestCreateMention setCommentId (String commentId) {
+      this.setParam("comment_id", commentId);
+      return this;
+    }
+
+    public APIRequestCreateMention setMessage (String message) {
+      this.setParam("message", message);
+      return this;
+    }
+
+    public APIRequestCreateMention requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateMention requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMention requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateMention requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMention requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateMention requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetInsights extends APIRequest<InstagramInsightsResult> {
 
     APINodeList<InstagramInsightsResult> lastResponse = null;
@@ -425,10 +567,10 @@ public class ShadowIGUser extends APINode {
     public ListenableFuture<APINodeList<InstagramInsightsResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<InstagramInsightsResult>>() {
-           public APINodeList<InstagramInsightsResult> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<InstagramInsightsResult>>() {
+           public APINodeList<InstagramInsightsResult> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetInsights.this.parseResponse(result, null);
+               return APIRequestGetInsights.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -613,10 +755,10 @@ public class ShadowIGUser extends APINode {
     public ListenableFuture<APINodeList<ShadowIGMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ShadowIGMedia>>() {
-           public APINodeList<ShadowIGMedia> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ShadowIGMedia>>() {
+           public APINodeList<ShadowIGMedia> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetMedia.this.parseResponse(result, null);
+               return APIRequestGetMedia.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -819,10 +961,10 @@ public class ShadowIGUser extends APINode {
     public ListenableFuture<ShadowIGMedia> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ShadowIGMedia>() {
-           public ShadowIGMedia apply(String result) {
+        new Function<ResponseWrapper, ShadowIGMedia>() {
+           public ShadowIGMedia apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateMedia.this.parseResponse(result, null);
+               return APIRequestCreateMedia.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -948,10 +1090,10 @@ public class ShadowIGUser extends APINode {
     public ListenableFuture<ShadowIGMedia> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ShadowIGMedia>() {
-           public ShadowIGMedia apply(String result) {
+        new Function<ResponseWrapper, ShadowIGMedia>() {
+           public ShadowIGMedia apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateMediaPublish.this.parseResponse(result, null);
+               return APIRequestCreateMediaPublish.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1024,6 +1166,110 @@ public class ShadowIGUser extends APINode {
 
   }
 
+  public static class APIRequestGetRecentlySearchedHashtags extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetRecentlySearchedHashtags.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetRecentlySearchedHashtags(String nodeId, APIContext context) {
+      super(context, nodeId, "/recently_searched_hashtags", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetRecentlySearchedHashtags setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRecentlySearchedHashtags setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetRecentlySearchedHashtags requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetRecentlySearchedHashtags requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRecentlySearchedHashtags requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetRecentlySearchedHashtags requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRecentlySearchedHashtags requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetRecentlySearchedHashtags requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetStories extends APIRequest<ShadowIGMedia> {
 
     APINodeList<ShadowIGMedia> lastResponse = null;
@@ -1075,10 +1321,10 @@ public class ShadowIGUser extends APINode {
     public ListenableFuture<APINodeList<ShadowIGMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ShadowIGMedia>>() {
-           public APINodeList<ShadowIGMedia> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ShadowIGMedia>>() {
+           public APINodeList<ShadowIGMedia> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetStories.this.parseResponse(result, null);
+               return APIRequestGetStories.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1240,6 +1486,222 @@ public class ShadowIGUser extends APINode {
     }
   }
 
+  public static class APIRequestGetTags extends APIRequest<ShadowIGMedia> {
+
+    APINodeList<ShadowIGMedia> lastResponse = null;
+    @Override
+    public APINodeList<ShadowIGMedia> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "caption",
+      "comments_count",
+      "id",
+      "ig_id",
+      "is_comment_enabled",
+      "like_count",
+      "media_type",
+      "media_url",
+      "owner",
+      "permalink",
+      "shortcode",
+      "thumbnail_url",
+      "timestamp",
+      "username",
+    };
+
+    @Override
+    public APINodeList<ShadowIGMedia> parseResponse(String response, String header) throws APIException {
+      return ShadowIGMedia.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ShadowIGMedia> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ShadowIGMedia> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ShadowIGMedia>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ShadowIGMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ShadowIGMedia>>() {
+           public APINodeList<ShadowIGMedia> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetTags.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetTags(String nodeId, APIContext context) {
+      super(context, nodeId, "/tags", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetTags setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetTags setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetTags requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetTags requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetTags requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetTags requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetTags requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetTags requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetTags requestCaptionField () {
+      return this.requestCaptionField(true);
+    }
+    public APIRequestGetTags requestCaptionField (boolean value) {
+      this.requestField("caption", value);
+      return this;
+    }
+    public APIRequestGetTags requestCommentsCountField () {
+      return this.requestCommentsCountField(true);
+    }
+    public APIRequestGetTags requestCommentsCountField (boolean value) {
+      this.requestField("comments_count", value);
+      return this;
+    }
+    public APIRequestGetTags requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetTags requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetTags requestIgIdField () {
+      return this.requestIgIdField(true);
+    }
+    public APIRequestGetTags requestIgIdField (boolean value) {
+      this.requestField("ig_id", value);
+      return this;
+    }
+    public APIRequestGetTags requestIsCommentEnabledField () {
+      return this.requestIsCommentEnabledField(true);
+    }
+    public APIRequestGetTags requestIsCommentEnabledField (boolean value) {
+      this.requestField("is_comment_enabled", value);
+      return this;
+    }
+    public APIRequestGetTags requestLikeCountField () {
+      return this.requestLikeCountField(true);
+    }
+    public APIRequestGetTags requestLikeCountField (boolean value) {
+      this.requestField("like_count", value);
+      return this;
+    }
+    public APIRequestGetTags requestMediaTypeField () {
+      return this.requestMediaTypeField(true);
+    }
+    public APIRequestGetTags requestMediaTypeField (boolean value) {
+      this.requestField("media_type", value);
+      return this;
+    }
+    public APIRequestGetTags requestMediaUrlField () {
+      return this.requestMediaUrlField(true);
+    }
+    public APIRequestGetTags requestMediaUrlField (boolean value) {
+      this.requestField("media_url", value);
+      return this;
+    }
+    public APIRequestGetTags requestOwnerField () {
+      return this.requestOwnerField(true);
+    }
+    public APIRequestGetTags requestOwnerField (boolean value) {
+      this.requestField("owner", value);
+      return this;
+    }
+    public APIRequestGetTags requestPermalinkField () {
+      return this.requestPermalinkField(true);
+    }
+    public APIRequestGetTags requestPermalinkField (boolean value) {
+      this.requestField("permalink", value);
+      return this;
+    }
+    public APIRequestGetTags requestShortcodeField () {
+      return this.requestShortcodeField(true);
+    }
+    public APIRequestGetTags requestShortcodeField (boolean value) {
+      this.requestField("shortcode", value);
+      return this;
+    }
+    public APIRequestGetTags requestThumbnailUrlField () {
+      return this.requestThumbnailUrlField(true);
+    }
+    public APIRequestGetTags requestThumbnailUrlField (boolean value) {
+      this.requestField("thumbnail_url", value);
+      return this;
+    }
+    public APIRequestGetTags requestTimestampField () {
+      return this.requestTimestampField(true);
+    }
+    public APIRequestGetTags requestTimestampField (boolean value) {
+      this.requestField("timestamp", value);
+      return this;
+    }
+    public APIRequestGetTags requestUsernameField () {
+      return this.requestUsernameField(true);
+    }
+    public APIRequestGetTags requestUsernameField (boolean value) {
+      this.requestField("username", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGet extends APIRequest<ShadowIGUser> {
 
     ShadowIGUser lastResponse = null;
@@ -1290,10 +1752,10 @@ public class ShadowIGUser extends APINode {
     public ListenableFuture<ShadowIGUser> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ShadowIGUser>() {
-           public ShadowIGUser apply(String result) {
+        new Function<ResponseWrapper, ShadowIGUser>() {
+           public ShadowIGUser apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

@@ -331,10 +331,10 @@ public class AdsDataPartner extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteUsersOfAnyAudience.this.parseResponse(result, null);
+               return APIRequestDeleteUsersOfAnyAudience.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -447,10 +447,10 @@ public class AdsDataPartner extends APINode {
     public ListenableFuture<AdsDataPartner> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdsDataPartner>() {
-           public AdsDataPartner apply(String result) {
+        new Function<ResponseWrapper, AdsDataPartner>() {
+           public AdsDataPartner apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

@@ -415,10 +415,10 @@ public class ProductSet extends APINode {
     public ListenableFuture<APINodeList<AutomotiveModel>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AutomotiveModel>>() {
-           public APINodeList<AutomotiveModel> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AutomotiveModel>>() {
+           public APINodeList<AutomotiveModel> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAutomotiveModels.this.parseResponse(result, null);
+               return APIRequestGetAutomotiveModels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -727,10 +727,10 @@ public class ProductSet extends APINode {
     public ListenableFuture<APINodeList<DACheck>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<DACheck>>() {
-           public APINodeList<DACheck> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<DACheck>>() {
+           public APINodeList<DACheck> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetDaChecks.this.parseResponse(result, null);
+               return APIRequestGetDaChecks.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -904,10 +904,10 @@ public class ProductSet extends APINode {
     public ListenableFuture<APINodeList<Destination>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Destination>>() {
-           public APINodeList<Destination> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Destination>>() {
+           public APINodeList<Destination> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetDestinations.this.parseResponse(result, null);
+               return APIRequestGetDestinations.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1134,10 +1134,10 @@ public class ProductSet extends APINode {
     public ListenableFuture<APINodeList<Flight>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Flight>>() {
-           public APINodeList<Flight> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Flight>>() {
+           public APINodeList<Flight> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetFlights.this.parseResponse(result, null);
+               return APIRequestGetFlights.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1405,10 +1405,10 @@ public class ProductSet extends APINode {
     public ListenableFuture<APINodeList<HomeListing>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<HomeListing>>() {
-           public APINodeList<HomeListing> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<HomeListing>>() {
+           public APINodeList<HomeListing> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetHomeListings.this.parseResponse(result, null);
+               return APIRequestGetHomeListings.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1840,10 +1840,10 @@ public class ProductSet extends APINode {
     public ListenableFuture<APINodeList<Hotel>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Hotel>>() {
-           public APINodeList<Hotel> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Hotel>>() {
+           public APINodeList<Hotel> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetHotels.this.parseResponse(result, null);
+               return APIRequestGetHotels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2135,10 +2135,10 @@ public class ProductSet extends APINode {
     public ListenableFuture<APINodeList<ProductItem>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ProductItem>>() {
-           public APINodeList<ProductItem> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ProductItem>>() {
+           public APINodeList<ProductItem> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetProducts.this.parseResponse(result, null);
+               return APIRequestGetProducts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2667,10 +2667,10 @@ public class ProductSet extends APINode {
     public ListenableFuture<APINodeList<Vehicle>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Vehicle>>() {
-           public APINodeList<Vehicle> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Vehicle>>() {
+           public APINodeList<Vehicle> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetVehicles.this.parseResponse(result, null);
+               return APIRequestGetVehicles.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3097,10 +3097,10 @@ public class ProductSet extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3207,10 +3207,10 @@ public class ProductSet extends APINode {
     public ListenableFuture<ProductSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ProductSet>() {
-           public ProductSet apply(String result) {
+        new Function<ResponseWrapper, ProductSet>() {
+           public ProductSet apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3355,10 +3355,10 @@ public class ProductSet extends APINode {
     public ListenableFuture<ProductSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ProductSet>() {
-           public ProductSet apply(String result) {
+        new Function<ResponseWrapper, ProductSet>() {
+           public ProductSet apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

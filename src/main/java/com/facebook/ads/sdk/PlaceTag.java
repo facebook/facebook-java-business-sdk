@@ -332,10 +332,10 @@ public class PlaceTag extends APINode {
     public ListenableFuture<PlaceTag> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, PlaceTag>() {
-           public PlaceTag apply(String result) {
+        new Function<ResponseWrapper, PlaceTag>() {
+           public PlaceTag apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

@@ -374,8 +374,8 @@ public class CustomAudience extends APINode {
     return new APIRequestGetSessions(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetShareDAccountInfo getShareDAccountInfo() {
-    return new APIRequestGetShareDAccountInfo(this.getPrefixedId().toString(), context);
+  public APIRequestGetSharedAccountInfo getSharedAccountInfo() {
+    return new APIRequestGetSharedAccountInfo(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteUpload deleteUpload() {
@@ -598,10 +598,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAdAccounts.this.parseResponse(result, null);
+               return APIRequestDeleteAdAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -772,10 +772,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccount>>() {
-           public APINodeList<AdAccount> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccount>>() {
+           public APINodeList<AdAccount> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdAccounts.this.parseResponse(result, null);
+               return APIRequestGetAdAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1305,10 +1305,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<CustomAudience> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, CustomAudience>() {
-           public CustomAudience apply(String result) {
+        new Function<ResponseWrapper, CustomAudience>() {
+           public CustomAudience apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdAccount.this.parseResponse(result, null);
+               return APIRequestCreateAdAccount.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1475,10 +1475,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<APINodeList<Ad>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Ad>>() {
-           public APINodeList<Ad> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Ad>>() {
+           public APINodeList<Ad> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAds.this.parseResponse(result, null);
+               return APIRequestGetAds.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1822,10 +1822,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteCapabilities.this.parseResponse(result, null);
+               return APIRequestDeleteCapabilities.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1937,10 +1937,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateCapability.this.parseResponse(result, null);
+               return APIRequestCreateCapability.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2062,10 +2062,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateDatum.this.parseResponse(result, null);
+               return APIRequestCreateDatum.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2233,10 +2233,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<APINodeList<CustomAudiencePrefillState>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<CustomAudiencePrefillState>>() {
-           public APINodeList<CustomAudiencePrefillState> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<CustomAudiencePrefillState>>() {
+           public APINodeList<CustomAudiencePrefillState> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPrefills.this.parseResponse(result, null);
+               return APIRequestGetPrefills.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2375,10 +2375,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<APINodeList<CustomAudienceSession>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<CustomAudienceSession>>() {
-           public APINodeList<CustomAudienceSession> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<CustomAudienceSession>>() {
+           public APINodeList<CustomAudienceSession> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetSessions.this.parseResponse(result, null);
+               return APIRequestGetSessions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2514,7 +2514,7 @@ public class CustomAudience extends APINode {
     }
   }
 
-  public static class APIRequestGetShareDAccountInfo extends APIRequest<CustomAudiencesharedAccountInfo> {
+  public static class APIRequestGetSharedAccountInfo extends APIRequest<CustomAudiencesharedAccountInfo> {
 
     APINodeList<CustomAudiencesharedAccountInfo> lastResponse = null;
     @Override
@@ -2557,10 +2557,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<APINodeList<CustomAudiencesharedAccountInfo>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<CustomAudiencesharedAccountInfo>>() {
-           public APINodeList<CustomAudiencesharedAccountInfo> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<CustomAudiencesharedAccountInfo>>() {
+           public APINodeList<CustomAudiencesharedAccountInfo> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetShareDAccountInfo.this.parseResponse(result, null);
+               return APIRequestGetSharedAccountInfo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2569,28 +2569,28 @@ public class CustomAudience extends APINode {
       );
     };
 
-    public APIRequestGetShareDAccountInfo(String nodeId, APIContext context) {
+    public APIRequestGetSharedAccountInfo(String nodeId, APIContext context) {
       super(context, nodeId, "/shared_account_info", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetShareDAccountInfo setParam(String param, Object value) {
+    public APIRequestGetSharedAccountInfo setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetShareDAccountInfo setParams(Map<String, Object> params) {
+    public APIRequestGetSharedAccountInfo setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetShareDAccountInfo requestAllFields () {
+    public APIRequestGetSharedAccountInfo requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetShareDAccountInfo requestAllFields (boolean value) {
+    public APIRequestGetSharedAccountInfo requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -2598,12 +2598,12 @@ public class CustomAudience extends APINode {
     }
 
     @Override
-    public APIRequestGetShareDAccountInfo requestFields (List<String> fields) {
+    public APIRequestGetSharedAccountInfo requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetShareDAccountInfo requestFields (List<String> fields, boolean value) {
+    public APIRequestGetSharedAccountInfo requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -2611,56 +2611,56 @@ public class CustomAudience extends APINode {
     }
 
     @Override
-    public APIRequestGetShareDAccountInfo requestField (String field) {
+    public APIRequestGetSharedAccountInfo requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetShareDAccountInfo requestField (String field, boolean value) {
+    public APIRequestGetSharedAccountInfo requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetShareDAccountInfo requestAccountIdField () {
+    public APIRequestGetSharedAccountInfo requestAccountIdField () {
       return this.requestAccountIdField(true);
     }
-    public APIRequestGetShareDAccountInfo requestAccountIdField (boolean value) {
+    public APIRequestGetSharedAccountInfo requestAccountIdField (boolean value) {
       this.requestField("account_id", value);
       return this;
     }
-    public APIRequestGetShareDAccountInfo requestAccountNameField () {
+    public APIRequestGetSharedAccountInfo requestAccountNameField () {
       return this.requestAccountNameField(true);
     }
-    public APIRequestGetShareDAccountInfo requestAccountNameField (boolean value) {
+    public APIRequestGetSharedAccountInfo requestAccountNameField (boolean value) {
       this.requestField("account_name", value);
       return this;
     }
-    public APIRequestGetShareDAccountInfo requestBusinessIdField () {
+    public APIRequestGetSharedAccountInfo requestBusinessIdField () {
       return this.requestBusinessIdField(true);
     }
-    public APIRequestGetShareDAccountInfo requestBusinessIdField (boolean value) {
+    public APIRequestGetSharedAccountInfo requestBusinessIdField (boolean value) {
       this.requestField("business_id", value);
       return this;
     }
-    public APIRequestGetShareDAccountInfo requestBusinessNameField () {
+    public APIRequestGetSharedAccountInfo requestBusinessNameField () {
       return this.requestBusinessNameField(true);
     }
-    public APIRequestGetShareDAccountInfo requestBusinessNameField (boolean value) {
+    public APIRequestGetSharedAccountInfo requestBusinessNameField (boolean value) {
       this.requestField("business_name", value);
       return this;
     }
-    public APIRequestGetShareDAccountInfo requestSharingStatusField () {
+    public APIRequestGetSharedAccountInfo requestSharingStatusField () {
       return this.requestSharingStatusField(true);
     }
-    public APIRequestGetShareDAccountInfo requestSharingStatusField (boolean value) {
+    public APIRequestGetSharedAccountInfo requestSharingStatusField (boolean value) {
       this.requestField("sharing_status", value);
       return this;
     }
-    public APIRequestGetShareDAccountInfo requestIdField () {
+    public APIRequestGetSharedAccountInfo requestIdField () {
       return this.requestIdField(true);
     }
-    public APIRequestGetShareDAccountInfo requestIdField (boolean value) {
+    public APIRequestGetSharedAccountInfo requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
@@ -2706,10 +2706,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteUpload.this.parseResponse(result, null);
+               return APIRequestDeleteUpload.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2836,10 +2836,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<CustomAudience> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, CustomAudience>() {
-           public CustomAudience apply(String result) {
+        new Function<ResponseWrapper, CustomAudience>() {
+           public CustomAudience apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateUpload.this.parseResponse(result, null);
+               return APIRequestCreateUpload.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2966,10 +2966,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteUsers.this.parseResponse(result, null);
+               return APIRequestDeleteUsers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3096,10 +3096,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<CustomAudience> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, CustomAudience>() {
-           public CustomAudience apply(String result) {
+        new Function<ResponseWrapper, CustomAudience>() {
+           public CustomAudience apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateUser.this.parseResponse(result, null);
+               return APIRequestCreateUser.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3223,10 +3223,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3365,10 +3365,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<CustomAudience> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, CustomAudience>() {
-           public CustomAudience apply(String result) {
+        new Function<ResponseWrapper, CustomAudience>() {
+           public CustomAudience apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3768,10 +3768,10 @@ public class CustomAudience extends APINode {
     public ListenableFuture<CustomAudience> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, CustomAudience>() {
-           public CustomAudience apply(String result) {
+        new Function<ResponseWrapper, CustomAudience>() {
+           public CustomAudience apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

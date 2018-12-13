@@ -360,10 +360,10 @@ public class SavedMessageResponse extends APINode {
     public ListenableFuture<APINodeList<SavedMessageResponseMacro>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<SavedMessageResponseMacro>>() {
-           public APINodeList<SavedMessageResponseMacro> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<SavedMessageResponseMacro>>() {
+           public APINodeList<SavedMessageResponseMacro> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetMacros.this.parseResponse(result, null);
+               return APIRequestGetMacros.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -492,10 +492,10 @@ public class SavedMessageResponse extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -602,10 +602,10 @@ public class SavedMessageResponse extends APINode {
     public ListenableFuture<SavedMessageResponse> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, SavedMessageResponse>() {
-           public SavedMessageResponse apply(String result) {
+        new Function<ResponseWrapper, SavedMessageResponse>() {
+           public SavedMessageResponse apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -752,10 +752,10 @@ public class SavedMessageResponse extends APINode {
     public ListenableFuture<SavedMessageResponse> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, SavedMessageResponse>() {
-           public SavedMessageResponse apply(String result) {
+        new Function<ResponseWrapper, SavedMessageResponse>() {
+           public SavedMessageResponse apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

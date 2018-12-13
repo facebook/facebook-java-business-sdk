@@ -402,6 +402,14 @@ public class AdAccount extends APINode {
     return new APIRequestGetActivities(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAdPlacePageSets getAdPlacePageSets() {
+    return new APIRequestGetAdPlacePageSets(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateAdPlacePageSet createAdPlacePageSet() {
+    return new APIRequestCreateAdPlacePageSet(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAdStudies getAdStudies() {
     return new APIRequestGetAdStudies(this.getPrefixedId().toString(), context);
   }
@@ -1230,10 +1238,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdActivity>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdActivity>>() {
-           public APINodeList<AdActivity> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdActivity>>() {
+           public APINodeList<AdActivity> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetActivities.this.parseResponse(result, null);
+               return APIRequestGetActivities.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1458,6 +1466,294 @@ public class AdAccount extends APINode {
     }
   }
 
+  public static class APIRequestGetAdPlacePageSets extends APIRequest<AdPlacePageSet> {
+
+    APINodeList<AdPlacePageSet> lastResponse = null;
+    @Override
+    public APINodeList<AdPlacePageSet> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "account_id",
+      "id",
+      "location_types",
+      "name",
+      "pages_count",
+      "parent_page",
+    };
+
+    @Override
+    public APINodeList<AdPlacePageSet> parseResponse(String response, String header) throws APIException {
+      return AdPlacePageSet.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdPlacePageSet> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdPlacePageSet> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdPlacePageSet>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdPlacePageSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdPlacePageSet>>() {
+           public APINodeList<AdPlacePageSet> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAdPlacePageSets.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAdPlacePageSets(String nodeId, APIContext context) {
+      super(context, nodeId, "/ad_place_page_sets", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdPlacePageSets setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlacePageSets setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdPlacePageSets requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdPlacePageSets requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlacePageSets requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdPlacePageSets requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlacePageSets requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlacePageSets requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAdPlacePageSets requestAccountIdField () {
+      return this.requestAccountIdField(true);
+    }
+    public APIRequestGetAdPlacePageSets requestAccountIdField (boolean value) {
+      this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetAdPlacePageSets requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAdPlacePageSets requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAdPlacePageSets requestLocationTypesField () {
+      return this.requestLocationTypesField(true);
+    }
+    public APIRequestGetAdPlacePageSets requestLocationTypesField (boolean value) {
+      this.requestField("location_types", value);
+      return this;
+    }
+    public APIRequestGetAdPlacePageSets requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAdPlacePageSets requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdPlacePageSets requestPagesCountField () {
+      return this.requestPagesCountField(true);
+    }
+    public APIRequestGetAdPlacePageSets requestPagesCountField (boolean value) {
+      this.requestField("pages_count", value);
+      return this;
+    }
+    public APIRequestGetAdPlacePageSets requestParentPageField () {
+      return this.requestParentPageField(true);
+    }
+    public APIRequestGetAdPlacePageSets requestParentPageField (boolean value) {
+      this.requestField("parent_page", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateAdPlacePageSet extends APIRequest<AdPlacePageSet> {
+
+    AdPlacePageSet lastResponse = null;
+    @Override
+    public AdPlacePageSet getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "name",
+      "location_types",
+      "parent_page",
+      "targeted_area_type",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public AdPlacePageSet parseResponse(String response, String header) throws APIException {
+      return AdPlacePageSet.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public AdPlacePageSet execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public AdPlacePageSet execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<AdPlacePageSet> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<AdPlacePageSet> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, AdPlacePageSet>() {
+           public AdPlacePageSet apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateAdPlacePageSet.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateAdPlacePageSet(String nodeId, APIContext context) {
+      super(context, nodeId, "/ad_place_page_sets", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateAdPlacePageSet setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdPlacePageSet setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateAdPlacePageSet setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateAdPlacePageSet setLocationTypes (List<AdPlacePageSet.EnumLocationTypes> locationTypes) {
+      this.setParam("location_types", locationTypes);
+      return this;
+    }
+    public APIRequestCreateAdPlacePageSet setLocationTypes (String locationTypes) {
+      this.setParam("location_types", locationTypes);
+      return this;
+    }
+
+    public APIRequestCreateAdPlacePageSet setParentPage (String parentPage) {
+      this.setParam("parent_page", parentPage);
+      return this;
+    }
+
+    public APIRequestCreateAdPlacePageSet setTargetedAreaType (AdPlacePageSet.EnumTargetedAreaType targetedAreaType) {
+      this.setParam("targeted_area_type", targetedAreaType);
+      return this;
+    }
+    public APIRequestCreateAdPlacePageSet setTargetedAreaType (String targetedAreaType) {
+      this.setParam("targeted_area_type", targetedAreaType);
+      return this;
+    }
+
+    public APIRequestCreateAdPlacePageSet requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateAdPlacePageSet requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdPlacePageSet requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateAdPlacePageSet requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdPlacePageSet requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateAdPlacePageSet requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetAdStudies extends APIRequest<AdStudy> {
 
     APINodeList<AdStudy> lastResponse = null;
@@ -1510,10 +1806,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdStudy>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdStudy>>() {
-           public APINodeList<AdStudy> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdStudy>>() {
+           public APINodeList<AdStudy> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdStudies.this.parseResponse(result, null);
+               return APIRequestGetAdStudies.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1735,10 +2031,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdAssetFeed.this.parseResponse(result, null);
+               return APIRequestCreateAdAssetFeed.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2026,10 +2322,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdContract>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdContract>>() {
-           public APINodeList<AdContract> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdContract>>() {
+           public APINodeList<AdContract> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdContracts.this.parseResponse(result, null);
+               return APIRequestGetAdContracts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2483,10 +2779,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdCreative>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdCreative>>() {
-           public APINodeList<AdCreative> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdCreative>>() {
+           public APINodeList<AdCreative> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdCreatives.this.parseResponse(result, null);
+               return APIRequestGetAdCreatives.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2945,7 +3241,7 @@ public class AdAccount extends APINode {
       "image_url",
       "instagram_actor_id",
       "instagram_permalink_url",
-      "instagram_story_id",
+      "portrait_customizations",
       "link_og_id",
       "link_url",
       "name",
@@ -2994,10 +3290,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdCreative> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdCreative>() {
-           public AdCreative apply(String result) {
+        new Function<ResponseWrapper, AdCreative>() {
+           public AdCreative apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdCreative.this.parseResponse(result, null);
+               return APIRequestCreateAdCreative.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3194,12 +3490,12 @@ public class AdAccount extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdCreative setInstagramStoryId (Long instagramStoryId) {
-      this.setParam("instagram_story_id", instagramStoryId);
+    public APIRequestCreateAdCreative setPortraitCustomizations (Map<String, String> portraitCustomizations) {
+      this.setParam("portrait_customizations", portraitCustomizations);
       return this;
     }
-    public APIRequestCreateAdCreative setInstagramStoryId (String instagramStoryId) {
-      this.setParam("instagram_story_id", instagramStoryId);
+    public APIRequestCreateAdCreative setPortraitCustomizations (String portraitCustomizations) {
+      this.setParam("portrait_customizations", portraitCustomizations);
       return this;
     }
 
@@ -3399,10 +3695,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdCreative> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdCreative>() {
-           public AdCreative apply(String result) {
+        new Function<ResponseWrapper, AdCreative>() {
+           public AdCreative apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdCreativesFromMockup.this.parseResponse(result, null);
+               return APIRequestCreateAdCreativesFromMockup.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3567,10 +3863,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdCreative>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdCreative>>() {
-           public APINodeList<AdCreative> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdCreative>>() {
+           public APINodeList<AdCreative> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdCreativesByLabels.this.parseResponse(result, null);
+               return APIRequestGetAdCreativesByLabels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4054,10 +4350,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAdImages.this.parseResponse(result, null);
+               return APIRequestDeleteAdImages.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4185,10 +4481,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdImage>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdImage>>() {
-           public APINodeList<AdImage> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdImage>>() {
+           public APINodeList<AdImage> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdImages.this.parseResponse(result, null);
+               return APIRequestGetAdImages.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4449,10 +4745,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdImage> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdImage>() {
-           public AdImage apply(String result) {
+        new Function<ResponseWrapper, AdImage>() {
+           public AdImage apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdImage.this.parseResponse(result, null);
+               return APIRequestCreateAdImage.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4576,10 +4872,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdLabel>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdLabel>>() {
-           public APINodeList<AdLabel> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdLabel>>() {
+           public APINodeList<AdLabel> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdLabels.this.parseResponse(result, null);
+               return APIRequestGetAdLabels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4716,10 +5012,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdLabel> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdLabel>() {
-           public AdLabel apply(String result) {
+        new Function<ResponseWrapper, AdLabel>() {
+           public AdLabel apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdLabel.this.parseResponse(result, null);
+               return APIRequestCreateAdLabel.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4833,10 +5129,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdLanguageAsset.this.parseResponse(result, null);
+               return APIRequestCreateAdLanguageAsset.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5008,10 +5304,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<PlayableContent>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<PlayableContent>>() {
-           public APINodeList<PlayableContent> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<PlayableContent>>() {
+           public APINodeList<PlayableContent> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdPlayables.this.parseResponse(result, null);
+               return APIRequestGetAdPlayables.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5136,10 +5432,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<PlayableContent> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, PlayableContent>() {
-           public PlayableContent apply(String result) {
+        new Function<ResponseWrapper, PlayableContent>() {
+           public PlayableContent apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdPlayable.this.parseResponse(result, null);
+               return APIRequestCreateAdPlayable.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5259,10 +5555,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAdReportRuns.this.parseResponse(result, null);
+               return APIRequestDeleteAdReportRuns.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5376,10 +5672,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdReportRun>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdReportRun>>() {
-           public APINodeList<AdReportRun> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdReportRun>>() {
+           public APINodeList<AdReportRun> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdReportRuns.this.parseResponse(result, null);
+               return APIRequestGetAdReportRuns.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5571,10 +5867,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdReportSchedules.this.parseResponse(result, null);
+               return APIRequestGetAdReportSchedules.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5702,10 +5998,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdReportSchedule.this.parseResponse(result, null);
+               return APIRequestCreateAdReportSchedule.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6050,10 +6346,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdReportSpec> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdReportSpec>() {
-           public AdReportSpec apply(String result) {
+        new Function<ResponseWrapper, AdReportSpec>() {
+           public AdReportSpec apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdReportSpec.this.parseResponse(result, null);
+               return APIRequestCreateAdReportSpec.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6289,6 +6585,7 @@ public class AdAccount extends APINode {
       "object_id",
       "action",
       "hide_no_changes",
+      "evaluation_type",
     };
 
     public static final String[] FIELDS = {
@@ -6328,10 +6625,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdAccountAdRulesHistory>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountAdRulesHistory>>() {
-           public APINodeList<AdAccountAdRulesHistory> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccountAdRulesHistory>>() {
+           public APINodeList<AdAccountAdRulesHistory> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdRulesHistory.this.parseResponse(result, null);
+               return APIRequestGetAdRulesHistory.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6377,6 +6674,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdRulesHistory setHideNoChanges (String hideNoChanges) {
       this.setParam("hide_no_changes", hideNoChanges);
+      return this;
+    }
+
+    public APIRequestGetAdRulesHistory setEvaluationType (AdAccountAdRulesHistory.EnumEvaluationType evaluationType) {
+      this.setParam("evaluation_type", evaluationType);
+      return this;
+    }
+    public APIRequestGetAdRulesHistory setEvaluationType (String evaluationType) {
+      this.setParam("evaluation_type", evaluationType);
       return this;
     }
 
@@ -6535,10 +6841,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdRule>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdRule>>() {
-           public APINodeList<AdRule> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdRule>>() {
+           public APINodeList<AdRule> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdRulesLibrary.this.parseResponse(result, null);
+               return APIRequestGetAdRulesLibrary.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6715,10 +7021,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdRule> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdRule>() {
-           public AdRule apply(String result) {
+        new Function<ResponseWrapper, AdRule>() {
+           public AdRule apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdRulesLibrary.this.parseResponse(result, null);
+               return APIRequestCreateAdRulesLibrary.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6869,10 +7175,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAds.this.parseResponse(result, null);
+               return APIRequestDeleteAds.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7043,10 +7349,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<Ad>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Ad>>() {
-           public APINodeList<Ad> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Ad>>() {
+           public APINodeList<Ad> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAds.this.parseResponse(result, null);
+               return APIRequestGetAds.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7439,10 +7745,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<Ad> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Ad>() {
-           public Ad apply(String result) {
+        new Function<ResponseWrapper, Ad>() {
+           public Ad apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAd.this.parseResponse(result, null);
+               return APIRequestCreateAd.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7719,10 +8025,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<Ad>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Ad>>() {
-           public APINodeList<Ad> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Ad>>() {
+           public APINodeList<Ad> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdsByLabels.this.parseResponse(result, null);
+               return APIRequestGetAdsByLabels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8069,10 +8375,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAdSets.this.parseResponse(result, null);
+               return APIRequestDeleteAdSets.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8263,10 +8569,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdSet>>() {
-           public APINodeList<AdSet> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdSet>>() {
+           public APINodeList<AdSet> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdSets.this.parseResponse(result, null);
+               return APIRequestGetAdSets.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8830,10 +9136,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdSet>() {
-           public AdSet apply(String result) {
+        new Function<ResponseWrapper, AdSet>() {
+           public AdSet apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdSet.this.parseResponse(result, null);
+               return APIRequestCreateAdSet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9385,10 +9691,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdSet>>() {
-           public APINodeList<AdSet> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdSet>>() {
+           public APINodeList<AdSet> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdSetsByLabels.this.parseResponse(result, null);
+               return APIRequestGetAdSetsByLabels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9886,10 +10192,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdsPixel>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdsPixel>>() {
-           public APINodeList<AdsPixel> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdsPixel>>() {
+           public APINodeList<AdsPixel> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdsPixels.this.parseResponse(result, null);
+               return APIRequestGetAdsPixels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10098,10 +10404,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdsPixel> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdsPixel>() {
-           public AdsPixel apply(String result) {
+        new Function<ResponseWrapper, AdsPixel>() {
+           public AdsPixel apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdsPixel.this.parseResponse(result, null);
+               return APIRequestCreateAdsPixel.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10222,10 +10528,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdToplineDetail>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdToplineDetail>>() {
-           public APINodeList<AdToplineDetail> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdToplineDetail>>() {
+           public APINodeList<AdToplineDetail> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdToplineDetails.this.parseResponse(result, null);
+               return APIRequestGetAdToplineDetails.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10466,10 +10772,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdTopline>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdTopline>>() {
-           public APINodeList<AdTopline> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdTopline>>() {
+           public APINodeList<AdTopline> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdTopLines.this.parseResponse(result, null);
+               return APIRequestGetAdTopLines.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10814,7 +11120,6 @@ public class AdAccount extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
-      "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
       "canvas_url",
@@ -10916,10 +11221,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<Application>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Application>>() {
-           public APINodeList<Application> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Application>>() {
+           public APINodeList<Application> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdvertisableApplications.this.parseResponse(result, null);
+               return APIRequestGetAdvertisableApplications.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11150,13 +11455,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetAdvertisableApplications requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
-      return this;
-    }
-    public APIRequestGetAdvertisableApplications requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGetAdvertisableApplications requestBusinessField (boolean value) {
-      this.requestField("business", value);
       return this;
     }
     public APIRequestGetAdvertisableApplications requestCanvasFluidHeightField () {
@@ -11769,10 +12067,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdVideo>>() {
-           public APINodeList<AdVideo> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdVideo>>() {
+           public APINodeList<AdVideo> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdVideos.this.parseResponse(result, null);
+               return APIRequestGetAdVideos.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -12282,10 +12580,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdVideo>() {
-           public AdVideo apply(String result) {
+        new Function<ResponseWrapper, AdVideo>() {
+           public AdVideo apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdVideo.this.parseResponse(result, null);
+               return APIRequestCreateAdVideo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -12961,10 +13259,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdSet>>() {
-           public APINodeList<AdSet> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdSet>>() {
+           public APINodeList<AdSet> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAffectedAdSets.this.parseResponse(result, null);
+               return APIRequestGetAffectedAdSets.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13430,10 +13728,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAgencies.this.parseResponse(result, null);
+               return APIRequestDeleteAgencies.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13557,10 +13855,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Business>>() {
-           public APINodeList<Business> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Business>>() {
+           public APINodeList<Business> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAgencies.this.parseResponse(result, null);
+               return APIRequestGetAgencies.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13789,10 +14087,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAgency.this.parseResponse(result, null);
+               return APIRequestCreateAgency.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13904,7 +14202,6 @@ public class AdAccount extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
-      "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
       "canvas_url",
@@ -14006,10 +14303,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<Application>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Application>>() {
-           public APINodeList<Application> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Application>>() {
+           public APINodeList<Application> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetApplications.this.parseResponse(result, null);
+               return APIRequestGetApplications.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14230,13 +14527,6 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetApplications requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
-      return this;
-    }
-    public APIRequestGetApplications requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGetApplications requestBusinessField (boolean value) {
-      this.requestField("business", value);
       return this;
     }
     public APIRequestGetApplications requestCanvasFluidHeightField () {
@@ -14804,10 +15094,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAssignedUsers.this.parseResponse(result, null);
+               return APIRequestDeleteAssignedUsers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14922,10 +15212,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AssignedUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AssignedUser>>() {
-           public APINodeList<AssignedUser> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AssignedUser>>() {
+           public APINodeList<AssignedUser> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAssignedUsers.this.parseResponse(result, null);
+               return APIRequestGetAssignedUsers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15061,10 +15351,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAssignedUser.this.parseResponse(result, null);
+               return APIRequestCreateAssignedUser.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15185,10 +15475,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<Campaign> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Campaign>() {
-           public Campaign apply(String result) {
+        new Function<ResponseWrapper, Campaign>() {
+           public Campaign apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAsyncBatchRequest.this.parseResponse(result, null);
+               return APIRequestCreateAsyncBatchRequest.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15309,10 +15599,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AsyncRequest>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AsyncRequest>>() {
-           public APINodeList<AsyncRequest> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AsyncRequest>>() {
+           public APINodeList<AsyncRequest> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAsyncRequests.this.parseResponse(result, null);
+               return APIRequestGetAsyncRequests.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15476,10 +15766,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdAsyncRequestSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAsyncRequestSet>>() {
-           public APINodeList<AdAsyncRequestSet> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAsyncRequestSet>>() {
+           public APINodeList<AdAsyncRequestSet> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAsyncAdRequestSets.this.parseResponse(result, null);
+               return APIRequestGetAsyncAdRequestSets.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15705,10 +15995,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAsyncRequestSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAsyncRequestSet>() {
-           public AdAsyncRequestSet apply(String result) {
+        new Function<ResponseWrapper, AdAsyncRequestSet>() {
+           public AdAsyncRequestSet apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAsyncAdRequestSet.this.parseResponse(result, null);
+               return APIRequestCreateAsyncAdRequestSet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15839,10 +16129,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAudienceReplace.this.parseResponse(result, null);
+               return APIRequestCreateAudienceReplace.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15962,10 +16252,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateBatchReplace.this.parseResponse(result, null);
+               return APIRequestCreateBatchReplace.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16076,10 +16366,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateBatchUpload.this.parseResponse(result, null);
+               return APIRequestCreateBatchUpload.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16190,10 +16480,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateBlockListDraft.this.parseResponse(result, null);
+               return APIRequestCreateBlockListDraft.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16313,10 +16603,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<BrandAudience>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<BrandAudience>>() {
-           public APINodeList<BrandAudience> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<BrandAudience>>() {
+           public APINodeList<BrandAudience> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetBrandAudiences.this.parseResponse(result, null);
+               return APIRequestGetBrandAudiences.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16491,10 +16781,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<BrandAudience> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, BrandAudience>() {
-           public BrandAudience apply(String result) {
+        new Function<ResponseWrapper, BrandAudience>() {
+           public BrandAudience apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateBrandAudience.this.parseResponse(result, null);
+               return APIRequestCreateBrandAudience.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16635,10 +16925,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<BroadTargetingCategories>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<BroadTargetingCategories>>() {
-           public APINodeList<BroadTargetingCategories> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<BroadTargetingCategories>>() {
+           public APINodeList<BroadTargetingCategories> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetBroadTargetingCategories.this.parseResponse(result, null);
+               return APIRequestGetBroadTargetingCategories.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -16846,10 +17136,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<BusinessActivityLogEvent>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<BusinessActivityLogEvent>>() {
-           public APINodeList<BusinessActivityLogEvent> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<BusinessActivityLogEvent>>() {
+           public APINodeList<BusinessActivityLogEvent> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetBusinessActivities.this.parseResponse(result, null);
+               return APIRequestGetBusinessActivities.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -17101,10 +17391,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<BusinessProject>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<BusinessProject>>() {
-           public APINodeList<BusinessProject> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<BusinessProject>>() {
+           public APINodeList<BusinessProject> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetBusinessProjects.this.parseResponse(result, null);
+               return APIRequestGetBusinessProjects.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -17255,10 +17545,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<BusinessSettingLogsData>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<BusinessSettingLogsData>>() {
-           public APINodeList<BusinessSettingLogsData> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<BusinessSettingLogsData>>() {
+           public APINodeList<BusinessSettingLogsData> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetBusinessSettingLogs.this.parseResponse(result, null);
+               return APIRequestGetBusinessSettingLogs.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -17405,10 +17695,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteCampaigns.this.parseResponse(result, null);
+               return APIRequestDeleteCampaigns.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -17515,6 +17805,7 @@ public class AdAccount extends APINode {
       "effective_status",
       "date_preset",
       "is_completed",
+      "time_range",
     };
 
     public static final String[] FIELDS = {
@@ -17575,10 +17866,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<Campaign>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Campaign>>() {
-           public APINodeList<Campaign> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Campaign>>() {
+           public APINodeList<Campaign> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetCampaigns.this.parseResponse(result, null);
+               return APIRequestGetCampaigns.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -17628,6 +17919,15 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetCampaigns setIsCompleted (String isCompleted) {
       this.setParam("is_completed", isCompleted);
+      return this;
+    }
+
+    public APIRequestGetCampaigns setTimeRange (Object timeRange) {
+      this.setParam("time_range", timeRange);
+      return this;
+    }
+    public APIRequestGetCampaigns setTimeRange (String timeRange) {
+      this.setParam("time_range", timeRange);
       return this;
     }
 
@@ -17944,10 +18244,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<Campaign> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Campaign>() {
-           public Campaign apply(String result) {
+        new Function<ResponseWrapper, Campaign>() {
+           public Campaign apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateCampaign.this.parseResponse(result, null);
+               return APIRequestCreateCampaign.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -18250,10 +18550,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<Campaign>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Campaign>>() {
-           public APINodeList<Campaign> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Campaign>>() {
+           public APINodeList<Campaign> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetCampaignsByLabels.this.parseResponse(result, null);
+               return APIRequestGetCampaignsByLabels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -18597,10 +18897,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdAccountContextualTargeting>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountContextualTargeting>>() {
-           public APINodeList<AdAccountContextualTargeting> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccountContextualTargeting>>() {
+           public APINodeList<AdAccountContextualTargeting> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetContextualTargetingBrowse.this.parseResponse(result, null);
+               return APIRequestGetContextualTargetingBrowse.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -18758,10 +19058,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateCoupon.this.parseResponse(result, null);
+               return APIRequestCreateCoupon.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -18871,10 +19171,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<CustomAudience>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<CustomAudience>>() {
-           public APINodeList<CustomAudience> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<CustomAudience>>() {
+           public APINodeList<CustomAudience> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetCustomAudiences.this.parseResponse(result, null);
+               return APIRequestGetCustomAudiences.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -19049,10 +19349,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<CustomAudience> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, CustomAudience>() {
-           public CustomAudience apply(String result) {
+        new Function<ResponseWrapper, CustomAudience>() {
+           public CustomAudience apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateCustomAudience.this.parseResponse(result, null);
+               return APIRequestCreateCustomAudience.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -19494,10 +19794,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<CustomAudiencesTOS>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<CustomAudiencesTOS>>() {
-           public APINodeList<CustomAudiencesTOS> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<CustomAudiencesTOS>>() {
+           public APINodeList<CustomAudiencesTOS> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetCustomAudiencesTos.this.parseResponse(result, null);
+               return APIRequestGetCustomAudiencesTos.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -19637,10 +19937,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<CustomConversion>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<CustomConversion>>() {
-           public APINodeList<CustomConversion> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<CustomConversion>>() {
+           public APINodeList<CustomConversion> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetCustomConversions.this.parseResponse(result, null);
+               return APIRequestGetCustomConversions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -19874,10 +20174,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<CustomConversion> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, CustomConversion>() {
-           public CustomConversion apply(String result) {
+        new Function<ResponseWrapper, CustomConversion>() {
+           public CustomConversion apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateCustomConversion.this.parseResponse(result, null);
+               return APIRequestCreateCustomConversion.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -20021,10 +20321,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateDeactivate.this.parseResponse(result, null);
+               return APIRequestCreateDeactivate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -20133,10 +20433,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdAccountDeliveryEstimate>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountDeliveryEstimate>>() {
-           public APINodeList<AdAccountDeliveryEstimate> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccountDeliveryEstimate>>() {
+           public APINodeList<AdAccountDeliveryEstimate> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetDeliveryEstimate.this.parseResponse(result, null);
+               return APIRequestGetDeliveryEstimate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -20352,10 +20652,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdSet>>() {
-           public APINodeList<AdSet> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdSet>>() {
+           public APINodeList<AdSet> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetDeprecatedTargetingAdSets.this.parseResponse(result, null);
+               return APIRequestGetDeprecatedTargetingAdSets.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -20850,10 +21150,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<DirectDeal>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<DirectDeal>>() {
-           public APINodeList<DirectDeal> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<DirectDeal>>() {
+           public APINodeList<DirectDeal> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetDirectDeals.this.parseResponse(result, null);
+               return APIRequestGetDirectDeals.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -21131,10 +21431,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateDirectDealsTo.this.parseResponse(result, null);
+               return APIRequestCreateDirectDealsTo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -21198,11 +21498,11 @@ public class AdAccount extends APINode {
 
   }
 
-  public static class APIRequestCreateEmailImport extends APIRequest<EmailImport> {
+  public static class APIRequestCreateEmailImport extends APIRequest<APINode> {
 
-    EmailImport lastResponse = null;
+    APINode lastResponse = null;
     @Override
-    public EmailImport getLastResponse() {
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
@@ -21214,33 +21514,33 @@ public class AdAccount extends APINode {
     };
 
     @Override
-    public EmailImport parseResponse(String response, String header) throws APIException {
-      return EmailImport.parseResponse(response, getContext(), this, header).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public EmailImport execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public EmailImport execute(Map<String, Object> extraParams) throws APIException {
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<EmailImport> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<EmailImport> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, EmailImport>() {
-           public EmailImport apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateEmailImport.this.parseResponse(result, null);
+               return APIRequestCreateEmailImport.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -21367,10 +21667,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdPreview>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdPreview>>() {
-           public APINodeList<AdPreview> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdPreview>>() {
+           public APINodeList<AdPreview> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetGeneratePreviews.this.parseResponse(result, null);
+               return APIRequestGetGeneratePreviews.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -21610,10 +21910,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdStudy>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdStudy>>() {
-           public APINodeList<AdStudy> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdStudy>>() {
+           public APINodeList<AdStudy> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetImpactingAdStudies.this.parseResponse(result, null);
+               return APIRequestGetImpactingAdStudies.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -21839,10 +22139,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdsInsights>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdsInsights>>() {
-           public APINodeList<AdsInsights> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdsInsights>>() {
+           public APINodeList<AdsInsights> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetInsights.this.parseResponse(result, null);
+               return APIRequestGetInsights.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -22131,10 +22431,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdReportRun> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdReportRun>() {
-           public AdReportRun apply(String result) {
+        new Function<ResponseWrapper, AdReportRun>() {
+           public AdReportRun apply(ResponseWrapper result) {
              try {
-               return APIRequestGetInsightsAsync.this.parseResponse(result, null);
+               return APIRequestGetInsightsAsync.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -22412,10 +22712,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<InstagramUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<InstagramUser>>() {
-           public APINodeList<InstagramUser> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<InstagramUser>>() {
+           public APINodeList<InstagramUser> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetInstagramAccounts.this.parseResponse(result, null);
+               return APIRequestGetInstagramAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -22610,10 +22910,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<LeadgenForm>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<LeadgenForm>>() {
-           public APINodeList<LeadgenForm> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<LeadgenForm>>() {
+           public APINodeList<LeadgenForm> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetLeadGenForms.this.parseResponse(result, null);
+               return APIRequestGetLeadGenForms.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -22930,10 +23230,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateLocationCluster.this.parseResponse(result, null);
+               return APIRequestCreateLocationCluster.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -23056,10 +23356,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdAccountMatchedSearchApplicationsEdgeData>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountMatchedSearchApplicationsEdgeData>>() {
-           public APINodeList<AdAccountMatchedSearchApplicationsEdgeData> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccountMatchedSearchApplicationsEdgeData>>() {
+           public APINodeList<AdAccountMatchedSearchApplicationsEdgeData> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetMatchedSearchApplications.this.parseResponse(result, null);
+               return APIRequestGetMatchedSearchApplications.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -23255,10 +23555,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdAccountMaxBid>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountMaxBid>>() {
-           public APINodeList<AdAccountMaxBid> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccountMaxBid>>() {
+           public APINodeList<AdAccountMaxBid> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetMaxBid.this.parseResponse(result, null);
+               return APIRequestGetMaxBid.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -23380,10 +23680,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<MinimumBudget>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<MinimumBudget>>() {
-           public APINodeList<MinimumBudget> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<MinimumBudget>>() {
+           public APINodeList<MinimumBudget> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetMinimumBudgets.this.parseResponse(result, null);
+               return APIRequestGetMinimumBudgets.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -23538,10 +23838,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateMockup.this.parseResponse(result, null);
+               return APIRequestCreateMockup.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -23677,10 +23977,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<OfflineConversionDataSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<OfflineConversionDataSet>>() {
-           public APINodeList<OfflineConversionDataSet> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<OfflineConversionDataSet>>() {
+           public APINodeList<OfflineConversionDataSet> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetOfflineConversionDataSets.this.parseResponse(result, null);
+               return APIRequestGetOfflineConversionDataSets.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -23927,10 +24227,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<OffsitePixel>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<OffsitePixel>>() {
-           public APINodeList<OffsitePixel> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<OffsitePixel>>() {
+           public APINodeList<OffsitePixel> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetOffsitePixels.this.parseResponse(result, null);
+               return APIRequestGetOffsitePixels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -24085,10 +24385,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<PartnerIntegrationLinked>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<PartnerIntegrationLinked>>() {
-           public APINodeList<PartnerIntegrationLinked> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<PartnerIntegrationLinked>>() {
+           public APINodeList<PartnerIntegrationLinked> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPartnerIntegrations.this.parseResponse(result, null);
+               return APIRequestGetPartnerIntegrations.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -24278,10 +24578,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<PartnerIntegrationLinked> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, PartnerIntegrationLinked>() {
-           public PartnerIntegrationLinked apply(String result) {
+        new Function<ResponseWrapper, PartnerIntegrationLinked>() {
+           public PartnerIntegrationLinked apply(ResponseWrapper result) {
              try {
-               return APIRequestCreatePartnerIntegration.this.parseResponse(result, null);
+               return APIRequestCreatePartnerIntegration.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -24427,10 +24727,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<PartnerCategory>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<PartnerCategory>>() {
-           public APINodeList<PartnerCategory> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<PartnerCategory>>() {
+           public APINodeList<PartnerCategory> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPartnerCategories.this.parseResponse(result, null);
+               return APIRequestGetPartnerCategories.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -24659,10 +24959,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
              try {
-               return APIRequestCreatePartnerDatum.this.parseResponse(result, null);
+               return APIRequestCreatePartnerDatum.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -24844,10 +25144,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreatePartnerRequest.this.parseResponse(result, null);
+               return APIRequestCreatePartnerRequest.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -24978,10 +25278,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdsDataPartner>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdsDataPartner>>() {
-           public APINodeList<AdsDataPartner> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdsDataPartner>>() {
+           public APINodeList<AdsDataPartner> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPartners.this.parseResponse(result, null);
+               return APIRequestGetPartners.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -25125,10 +25425,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<CustomAudience> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, CustomAudience>() {
-           public CustomAudience apply(String result) {
+        new Function<ResponseWrapper, CustomAudience>() {
+           public CustomAudience apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateProductAudience.this.parseResponse(result, null);
+               return APIRequestCreateProductAudience.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -25549,10 +25849,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Page>>() {
-           public APINodeList<Page> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Page>>() {
+           public APINodeList<Page> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPromotePages.this.parseResponse(result, null);
+               return APIRequestGetPromotePages.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -26657,10 +26957,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<PublisherBlockList>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<PublisherBlockList>>() {
-           public APINodeList<PublisherBlockList> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<PublisherBlockList>>() {
+           public APINodeList<PublisherBlockList> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPublisherBlockLists.this.parseResponse(result, null);
+               return APIRequestGetPublisherBlockLists.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -26832,10 +27132,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<PublisherBlockList> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, PublisherBlockList>() {
-           public PublisherBlockList apply(String result) {
+        new Function<ResponseWrapper, PublisherBlockList>() {
+           public PublisherBlockList apply(ResponseWrapper result) {
              try {
-               return APIRequestCreatePublisherBlockList.this.parseResponse(result, null);
+               return APIRequestCreatePublisherBlockList.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -26955,10 +27255,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<ReachEstimate>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ReachEstimate>>() {
-           public APINodeList<ReachEstimate> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ReachEstimate>>() {
+           public APINodeList<ReachEstimate> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetReachEstimate.this.parseResponse(result, null);
+               return APIRequestGetReachEstimate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -27244,10 +27544,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<ReachFrequencyPrediction>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ReachFrequencyPrediction>>() {
-           public APINodeList<ReachFrequencyPrediction> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ReachFrequencyPrediction>>() {
+           public APINodeList<ReachFrequencyPrediction> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetReachFrequencyPredictions.this.parseResponse(result, null);
+               return APIRequestGetReachFrequencyPredictions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -27993,10 +28293,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<ReachFrequencyPrediction> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ReachFrequencyPrediction>() {
-           public ReachFrequencyPrediction apply(String result) {
+        new Function<ResponseWrapper, ReachFrequencyPrediction>() {
+           public ReachFrequencyPrediction apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateReachFrequencyPrediction.this.parseResponse(result, null);
+               return APIRequestCreateReachFrequencyPrediction.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -28408,10 +28708,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<Referral>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Referral>>() {
-           public APINodeList<Referral> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Referral>>() {
+           public APINodeList<Referral> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetReferral.this.parseResponse(result, null);
+               return APIRequestGetReferral.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -28599,10 +28899,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<Referral> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Referral>() {
-           public Referral apply(String result) {
+        new Function<ResponseWrapper, Referral>() {
+           public Referral apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateReferral.this.parseResponse(result, null);
+               return APIRequestCreateReferral.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -28787,10 +29087,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateReportStat.this.parseResponse(result, null);
+               return APIRequestCreateReportStat.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -29033,10 +29333,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdAccountRoas>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountRoas>>() {
-           public APINodeList<AdAccountRoas> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccountRoas>>() {
+           public APINodeList<AdAccountRoas> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetRoas.this.parseResponse(result, null);
+               return APIRequestGetRoas.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -29172,10 +29472,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<SavedAudience>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<SavedAudience>>() {
-           public APINodeList<SavedAudience> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<SavedAudience>>() {
+           public APINodeList<SavedAudience> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetSavedAudiences.this.parseResponse(result, null);
+               return APIRequestGetSavedAudiences.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -29303,10 +29603,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateSponsoredMessageAd.this.parseResponse(result, null);
+               return APIRequestCreateSponsoredMessageAd.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -29466,10 +29766,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdAccountTargetingUnified>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountTargetingUnified>>() {
-           public APINodeList<AdAccountTargetingUnified> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccountTargetingUnified>>() {
+           public APINodeList<AdAccountTargetingUnified> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetTargetingBrowse.this.parseResponse(result, null);
+               return APIRequestGetTargetingBrowse.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -29794,10 +30094,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdAccountTargetingUnified>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountTargetingUnified>>() {
-           public APINodeList<AdAccountTargetingUnified> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccountTargetingUnified>>() {
+           public APINodeList<AdAccountTargetingUnified> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetTargetingSearch.this.parseResponse(result, null);
+               return APIRequestGetTargetingSearch.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -30118,10 +30418,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<TargetingSentenceLine>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<TargetingSentenceLine>>() {
-           public APINodeList<TargetingSentenceLine> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<TargetingSentenceLine>>() {
+           public APINodeList<TargetingSentenceLine> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetTargetingSentenceLines.this.parseResponse(result, null);
+               return APIRequestGetTargetingSentenceLines.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -30309,10 +30609,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdAccountTargetingUnified>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountTargetingUnified>>() {
-           public APINodeList<AdAccountTargetingUnified> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccountTargetingUnified>>() {
+           public APINodeList<AdAccountTargetingUnified> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetTargetingSuggestions.this.parseResponse(result, null);
+               return APIRequestGetTargetingSuggestions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -30665,10 +30965,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdAccountTargetingUnified>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountTargetingUnified>>() {
-           public APINodeList<AdAccountTargetingUnified> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccountTargetingUnified>>() {
+           public APINodeList<AdAccountTargetingUnified> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetTargetingValidation.this.parseResponse(result, null);
+               return APIRequestGetTargetingValidation.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -30966,10 +31266,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<TimezoneOffset>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<TimezoneOffset>>() {
-           public APINodeList<TimezoneOffset> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<TimezoneOffset>>() {
+           public APINodeList<TimezoneOffset> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetTimezoneOffsets.this.parseResponse(result, null);
+               return APIRequestGetTimezoneOffsets.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -31122,10 +31422,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteTracking.this.parseResponse(result, null);
+               return APIRequestDeleteTracking.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -31237,10 +31537,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdAccountTrackingData>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountTrackingData>>() {
-           public APINodeList<AdAccountTrackingData> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccountTrackingData>>() {
+           public APINodeList<AdAccountTrackingData> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetTracking.this.parseResponse(result, null);
+               return APIRequestGetTracking.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -31356,10 +31656,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateTracking.this.parseResponse(result, null);
+               return APIRequestCreateTracking.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -31472,10 +31772,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteUserMatch.this.parseResponse(result, null);
+               return APIRequestDeleteUserMatch.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -31604,10 +31904,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateUserMatch.this.parseResponse(result, null);
+               return APIRequestCreateUserMatch.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -31744,10 +32044,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteUserPermissions.this.parseResponse(result, null);
+               return APIRequestDeleteUserPermissions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -31871,10 +32171,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateUserPermission.this.parseResponse(result, null);
+               return APIRequestCreateUserPermission.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -32005,10 +32305,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteUsers.this.parseResponse(result, null);
+               return APIRequestDeleteUsers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -32130,10 +32430,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<AdAccountUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccountUser>>() {
-           public APINodeList<AdAccountUser> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccountUser>>() {
+           public APINodeList<AdAccountUser> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetUsers.this.parseResponse(result, null);
+               return APIRequestGetUsers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -32257,10 +32557,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateUser.this.parseResponse(result, null);
+               return APIRequestCreateUser.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -32382,10 +32682,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteUsersOfAnyAudience.this.parseResponse(result, null);
+               return APIRequestDeleteUsersOfAnyAudience.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -32569,10 +32869,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -33106,10 +33406,10 @@ public class AdAccount extends APINode {
     public ListenableFuture<AdAccount> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccount>() {
-           public AdAccount apply(String result) {
+        new Function<ResponseWrapper, AdAccount>() {
+           public AdAccount apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

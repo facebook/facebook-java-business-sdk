@@ -403,10 +403,10 @@ public class BusinessRoleRequest extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -521,10 +521,10 @@ public class BusinessRoleRequest extends APINode {
     public ListenableFuture<BusinessRoleRequest> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, BusinessRoleRequest>() {
-           public BusinessRoleRequest apply(String result) {
+        new Function<ResponseWrapper, BusinessRoleRequest>() {
+           public BusinessRoleRequest apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -724,10 +724,10 @@ public class BusinessRoleRequest extends APINode {
     public ListenableFuture<BusinessRoleRequest> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, BusinessRoleRequest>() {
-           public BusinessRoleRequest apply(String result) {
+        new Function<ResponseWrapper, BusinessRoleRequest>() {
+           public BusinessRoleRequest apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

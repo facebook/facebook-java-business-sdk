@@ -700,10 +700,10 @@ public class AdCampaignActivity extends APINode {
     public ListenableFuture<AdCampaignActivity> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdCampaignActivity>() {
-           public AdCampaignActivity apply(String result) {
+        new Function<ResponseWrapper, AdCampaignActivity>() {
+           public AdCampaignActivity apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

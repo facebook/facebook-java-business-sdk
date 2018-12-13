@@ -338,10 +338,10 @@ public class AdMonetizationProperty extends APINode {
     public ListenableFuture<APINodeList<AdNetworkAnalyticsSyncQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdNetworkAnalyticsSyncQueryResult>>() {
-           public APINodeList<AdNetworkAnalyticsSyncQueryResult> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdNetworkAnalyticsSyncQueryResult>>() {
+           public APINodeList<AdNetworkAnalyticsSyncQueryResult> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdNetworkAnalytics.this.parseResponse(result, null);
+               return APIRequestGetAdNetworkAnalytics.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -553,10 +553,10 @@ public class AdMonetizationProperty extends APINode {
     public ListenableFuture<AdMonetizationProperty> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdMonetizationProperty>() {
-           public AdMonetizationProperty apply(String result) {
+        new Function<ResponseWrapper, AdMonetizationProperty>() {
+           public AdMonetizationProperty apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdNetworkAnalytic.this.parseResponse(result, null);
+               return APIRequestCreateAdNetworkAnalytic.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -745,10 +745,10 @@ public class AdMonetizationProperty extends APINode {
     public ListenableFuture<APINodeList<AdNetworkAnalyticsAsyncQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdNetworkAnalyticsAsyncQueryResult>>() {
-           public APINodeList<AdNetworkAnalyticsAsyncQueryResult> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdNetworkAnalyticsAsyncQueryResult>>() {
+           public APINodeList<AdNetworkAnalyticsAsyncQueryResult> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdNetworkAnalyticsResults.this.parseResponse(result, null);
+               return APIRequestGetAdNetworkAnalyticsResults.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -901,10 +901,10 @@ public class AdMonetizationProperty extends APINode {
     public ListenableFuture<AdMonetizationProperty> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdMonetizationProperty>() {
-           public AdMonetizationProperty apply(String result) {
+        new Function<ResponseWrapper, AdMonetizationProperty>() {
+           public AdMonetizationProperty apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

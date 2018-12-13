@@ -40,7 +40,7 @@ public class AdAccountAdCreativesPostCreateAssetFeedSpec {
           new AdCreativeObjectStorySpec()
             .setFieldPageId("<pageID>")
         )
-      .setParam("asset_feed_spec", "{\"images\":[{\"hash\":\"<imageHash>\"}],\"bodies\":[{\"text\":\"Begin Your Adventure\"},{\"text\":\"Once a Trainer, always a Trainer.\"}],\"titles\":[{\"text\":\"Level Up\"},{\"text\":\"Swipe to evolve\"}],\"descriptions\":[{\"text\":\"First Dynamic Ad Creative Sample\"}],\"ad_formats\":[\"SINGLE_IMAGE\"],\"call_to_action_types\":[\"SHOP_NOW\"],\"link_urls\":[{\"website_url\":\"https://www.example.com/\"}],\"videos\":[]}")
+      .setAssetFeedSpec("{\"images\":[{\"hash\":\"<imageHash>\"}],\"bodies\":[{\"text\":\"Begin Your Adventure\"},{\"text\":\"Once a Trainer, always a Trainer.\"}],\"titles\":[{\"text\":\"Level Up\"},{\"text\":\"Swipe to evolve\"}],\"descriptions\":[{\"text\":\"First Dynamic Ad Creative Sample\"}],\"ad_formats\":[\"SINGLE_IMAGE\"],\"call_to_action_types\":[\"SHOP_NOW\"],\"link_urls\":[{\"website_url\":\"https://www.example.com/\"}],\"videos\":[]}")
       .execute();
 
   }

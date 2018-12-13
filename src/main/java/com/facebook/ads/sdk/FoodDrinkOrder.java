@@ -375,10 +375,10 @@ public class FoodDrinkOrder extends APINode {
     public ListenableFuture<FoodDrinkOrder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, FoodDrinkOrder>() {
-           public FoodDrinkOrder apply(String result) {
+        new Function<ResponseWrapper, FoodDrinkOrder>() {
+           public FoodDrinkOrder apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -543,10 +543,10 @@ public class FoodDrinkOrder extends APINode {
     public ListenableFuture<FoodDrinkOrder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, FoodDrinkOrder>() {
-           public FoodDrinkOrder apply(String result) {
+        new Function<ResponseWrapper, FoodDrinkOrder>() {
+           public FoodDrinkOrder apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

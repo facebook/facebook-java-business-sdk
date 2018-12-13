@@ -460,10 +460,10 @@ public class UserContext extends APINode {
     public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Page>>() {
-           public APINodeList<Page> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Page>>() {
+           public APINodeList<Page> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetMutualLikes.this.parseResponse(result, null);
+               return APIRequestGetMutualLikes.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1559,10 +1559,10 @@ public class UserContext extends APINode {
     public ListenableFuture<UserContext> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, UserContext>() {
-           public UserContext apply(String result) {
+        new Function<ResponseWrapper, UserContext>() {
+           public UserContext apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

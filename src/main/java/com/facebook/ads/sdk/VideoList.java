@@ -391,10 +391,10 @@ public class VideoList extends APINode {
     public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Comment>() {
-           public Comment apply(String result) {
+        new Function<ResponseWrapper, Comment>() {
+           public Comment apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateComment.this.parseResponse(result, null);
+               return APIRequestCreateComment.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -577,10 +577,10 @@ public class VideoList extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteVideos.this.parseResponse(result, null);
+               return APIRequestDeleteVideos.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -727,10 +727,10 @@ public class VideoList extends APINode {
     public ListenableFuture<APINodeList<AdVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdVideo>>() {
-           public APINodeList<AdVideo> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdVideo>>() {
+           public APINodeList<AdVideo> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetVideos.this.parseResponse(result, null);
+               return APIRequestGetVideos.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1091,10 +1091,10 @@ public class VideoList extends APINode {
     public ListenableFuture<VideoList> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, VideoList>() {
-           public VideoList apply(String result) {
+        new Function<ResponseWrapper, VideoList>() {
+           public VideoList apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateVideo.this.parseResponse(result, null);
+               return APIRequestCreateVideo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1213,10 +1213,10 @@ public class VideoList extends APINode {
     public ListenableFuture<VideoList> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, VideoList>() {
-           public VideoList apply(String result) {
+        new Function<ResponseWrapper, VideoList>() {
+           public VideoList apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

@@ -41,7 +41,21 @@ public class AdAccountAdCreativesPostCreateDynamicAdCustomization {
             .setFieldPageId("<pageID>")
             .setFieldTemplateData(
               new AdCreativeLinkData()
-                .setFieldCustomizationRulesSpec(Arrays.asList("{\"customization_spec\":{\"language\":\"en_XX\"}}", "{\"customization_spec\":{\"language\":\"fr_XX\"},\"message\":\"French Test {{product.name | titleize}}\",\"link\":\"http://www.example.com/frenchurl\",\"name\":\"French Headline {{product.price}}\",\"description\":\"French Description {{product.description}}\",\"template_url_spec\":{\"web\":{\"url\":\"http://www.example.com/frenchdeeplink\"}}}"))
+                .setFieldCustomizationRulesSpec(Arrays.asList(
+                  new AdCustomizationRuleSpec()
+                    .setFieldCustomizationSpec("{\"language\":\"en_XX\"}")
+                , 
+                  new AdCustomizationRuleSpec()
+                    .setFieldCustomizationSpec("{\"language\":\"fr_XX\"}")
+                    .setFieldDescription("French Description {{product.description}}")
+                    .setFieldLink("http://www.example.com/frenchurl")
+                    .setFieldMessage("French Test {{product.name | titleize}}")
+                    .setFieldName("French Headline {{product.price}}")
+                    .setFieldTemplateUrlSpec(
+                      new AdCreativeTemplateURLSpec()
+                        .setFieldWeb("{\"url\":\"http://www.example.com/frenchdeeplink\"}")
+                    )
+                ))
                 .setFieldDescription("English Description {{product.description}}")
                 .setFieldLink("http://www.example.com/englishurl")
                 .setFieldMessage("English Test {{product.name | titleize}}")

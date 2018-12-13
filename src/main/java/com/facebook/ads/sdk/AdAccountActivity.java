@@ -539,10 +539,10 @@ public class AdAccountActivity extends APINode {
     public ListenableFuture<AdAccountActivity> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdAccountActivity>() {
-           public AdAccountActivity apply(String result) {
+        new Function<ResponseWrapper, AdAccountActivity>() {
+           public AdAccountActivity apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

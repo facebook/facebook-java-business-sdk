@@ -336,6 +336,7 @@ public class LiveVideoInputStream extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "target_token",
     };
 
     public static final String[] FIELDS = {
@@ -374,10 +375,10 @@ public class LiveVideoInputStream extends APINode {
     public ListenableFuture<LiveVideoInputStream> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, LiveVideoInputStream>() {
-           public LiveVideoInputStream apply(String result) {
+        new Function<ResponseWrapper, LiveVideoInputStream>() {
+           public LiveVideoInputStream apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -402,6 +403,11 @@ public class LiveVideoInputStream extends APINode {
       return this;
     }
 
+
+    public APIRequestGet setTargetToken (String targetToken) {
+      this.setParam("target_token", targetToken);
+      return this;
+    }
 
     public APIRequestGet requestAllFields () {
       return this.requestAllFields(true);

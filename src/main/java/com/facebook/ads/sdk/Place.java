@@ -336,10 +336,10 @@ public class Place extends APINode {
     public ListenableFuture<Place> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Place>() {
-           public Place apply(String result) {
+        new Function<ResponseWrapper, Place>() {
+           public Place apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

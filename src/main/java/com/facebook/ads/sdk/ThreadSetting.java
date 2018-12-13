@@ -329,10 +329,10 @@ public class ThreadSetting extends APINode {
     public ListenableFuture<ThreadSetting> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ThreadSetting>() {
-           public ThreadSetting apply(String result) {
+        new Function<ResponseWrapper, ThreadSetting>() {
+           public ThreadSetting apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

@@ -406,10 +406,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAdAccounts.this.parseResponse(result, null);
+               return APIRequestDeleteAdAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -575,10 +575,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccount>>() {
-           public APINodeList<AdAccount> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccount>>() {
+           public APINodeList<AdAccount> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdAccounts.this.parseResponse(result, null);
+               return APIRequestGetAdAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1100,10 +1100,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<BusinessProject> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, BusinessProject>() {
-           public BusinessProject apply(String result) {
+        new Function<ResponseWrapper, BusinessProject>() {
+           public BusinessProject apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdAccount.this.parseResponse(result, null);
+               return APIRequestCreateAdAccount.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1210,10 +1210,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteApps.this.parseResponse(result, null);
+               return APIRequestDeleteApps.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1316,7 +1316,6 @@ public class BusinessProject extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
-      "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
       "canvas_url",
@@ -1418,10 +1417,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<APINodeList<Application>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Application>>() {
-           public APINodeList<Application> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Application>>() {
+           public APINodeList<Application> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetApps.this.parseResponse(result, null);
+               return APIRequestGetApps.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1642,13 +1641,6 @@ public class BusinessProject extends APINode {
     }
     public APIRequestGetApps requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
-      return this;
-    }
-    public APIRequestGetApps requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGetApps requestBusinessField (boolean value) {
-      this.requestField("business", value);
       return this;
     }
     public APIRequestGetApps requestCanvasFluidHeightField () {
@@ -2216,10 +2208,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<BusinessProject> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, BusinessProject>() {
-           public BusinessProject apply(String result) {
+        new Function<ResponseWrapper, BusinessProject>() {
+           public BusinessProject apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateApp.this.parseResponse(result, null);
+               return APIRequestCreateApp.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2326,10 +2318,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAssets.this.parseResponse(result, null);
+               return APIRequestDeleteAssets.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2436,10 +2428,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<BusinessProject> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, BusinessProject>() {
-           public BusinessProject apply(String result) {
+        new Function<ResponseWrapper, BusinessProject>() {
+           public BusinessProject apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAsset.this.parseResponse(result, null);
+               return APIRequestCreateAsset.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2546,10 +2538,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeletePages.this.parseResponse(result, null);
+               return APIRequestDeletePages.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2801,10 +2793,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Page>>() {
-           public APINodeList<Page> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Page>>() {
+           public APINodeList<Page> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPages.this.parseResponse(result, null);
+               return APIRequestGetPages.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3900,10 +3892,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<BusinessProject> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, BusinessProject>() {
-           public BusinessProject apply(String result) {
+        new Function<ResponseWrapper, BusinessProject>() {
+           public BusinessProject apply(ResponseWrapper result) {
              try {
-               return APIRequestCreatePage.this.parseResponse(result, null);
+               return APIRequestCreatePage.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4014,10 +4006,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteProductCatalogs.this.parseResponse(result, null);
+               return APIRequestDeleteProductCatalogs.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4134,10 +4126,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<APINodeList<ProductCatalog>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ProductCatalog>>() {
-           public APINodeList<ProductCatalog> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ProductCatalog>>() {
+           public APINodeList<ProductCatalog> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetProductCatalogs.this.parseResponse(result, null);
+               return APIRequestGetProductCatalogs.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4316,10 +4308,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<BusinessProject> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, BusinessProject>() {
-           public BusinessProject apply(String result) {
+        new Function<ResponseWrapper, BusinessProject>() {
+           public BusinessProject apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateProductCatalog.this.parseResponse(result, null);
+               return APIRequestCreateProductCatalog.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4425,10 +4417,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4534,10 +4526,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<BusinessProject> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, BusinessProject>() {
-           public BusinessProject apply(String result) {
+        new Function<ResponseWrapper, BusinessProject>() {
+           public BusinessProject apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4674,10 +4666,10 @@ public class BusinessProject extends APINode {
     public ListenableFuture<BusinessProject> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, BusinessProject>() {
-           public BusinessProject apply(String result) {
+        new Function<ResponseWrapper, BusinessProject>() {
+           public BusinessProject apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

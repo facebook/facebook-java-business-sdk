@@ -487,10 +487,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<APINodeList<AutomotiveModel>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AutomotiveModel>>() {
-           public APINodeList<AutomotiveModel> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AutomotiveModel>>() {
+           public APINodeList<AutomotiveModel> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAutomotiveModels.this.parseResponse(result, null);
+               return APIRequestGetAutomotiveModels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -806,10 +806,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<APINodeList<Destination>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Destination>>() {
-           public APINodeList<Destination> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Destination>>() {
+           public APINodeList<Destination> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetDestinations.this.parseResponse(result, null);
+               return APIRequestGetDestinations.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1036,10 +1036,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<APINodeList<Flight>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Flight>>() {
-           public APINodeList<Flight> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Flight>>() {
+           public APINodeList<Flight> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetFlights.this.parseResponse(result, null);
+               return APIRequestGetFlights.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1307,10 +1307,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<APINodeList<HomeListing>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<HomeListing>>() {
-           public APINodeList<HomeListing> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<HomeListing>>() {
+           public APINodeList<HomeListing> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetHomeListings.this.parseResponse(result, null);
+               return APIRequestGetHomeListings.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1742,10 +1742,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<APINodeList<Hotel>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Hotel>>() {
-           public APINodeList<Hotel> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Hotel>>() {
+           public APINodeList<Hotel> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetHotels.this.parseResponse(result, null);
+               return APIRequestGetHotels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2037,10 +2037,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<APINodeList<ProductItem>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ProductItem>>() {
-           public APINodeList<ProductItem> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ProductItem>>() {
+           public APINodeList<ProductItem> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetProducts.this.parseResponse(result, null);
+               return APIRequestGetProducts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2527,10 +2527,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<APINodeList<ProductFeedRule>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ProductFeedRule>>() {
-           public APINodeList<ProductFeedRule> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ProductFeedRule>>() {
+           public APINodeList<ProductFeedRule> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetRules.this.parseResponse(result, null);
+               return APIRequestGetRules.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2662,10 +2662,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<ProductFeedRule> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ProductFeedRule>() {
-           public ProductFeedRule apply(String result) {
+        new Function<ResponseWrapper, ProductFeedRule>() {
+           public ProductFeedRule apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateRule.this.parseResponse(result, null);
+               return APIRequestCreateRule.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2765,6 +2765,7 @@ public class ProductFeed extends APINode {
     public static final String[] FIELDS = {
       "end_time",
       "error_count",
+      "error_report",
       "filename",
       "id",
       "input_method",
@@ -2801,10 +2802,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<APINodeList<ProductFeedUpload>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ProductFeedUpload>>() {
-           public APINodeList<ProductFeedUpload> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ProductFeedUpload>>() {
+           public APINodeList<ProductFeedUpload> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetUploads.this.parseResponse(result, null);
+               return APIRequestGetUploads.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2878,6 +2879,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetUploads requestErrorCountField (boolean value) {
       this.requestField("error_count", value);
+      return this;
+    }
+    public APIRequestGetUploads requestErrorReportField () {
+      return this.requestErrorReportField(true);
+    }
+    public APIRequestGetUploads requestErrorReportField (boolean value) {
+      this.requestField("error_report", value);
       return this;
     }
     public APIRequestGetUploads requestFilenameField () {
@@ -2994,10 +3002,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<ProductFeedUpload> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ProductFeedUpload>() {
-           public ProductFeedUpload apply(String result) {
+        new Function<ResponseWrapper, ProductFeedUpload>() {
+           public ProductFeedUpload apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateUpload.this.parseResponse(result, null);
+               return APIRequestCreateUpload.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3177,10 +3185,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<APINodeList<Vehicle>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Vehicle>>() {
-           public APINodeList<Vehicle> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Vehicle>>() {
+           public APINodeList<Vehicle> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetVehicles.this.parseResponse(result, null);
+               return APIRequestGetVehicles.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3607,10 +3615,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3727,10 +3735,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<ProductFeed> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ProductFeed>() {
-           public ProductFeed apply(String result) {
+        new Function<ResponseWrapper, ProductFeed>() {
+           public ProductFeed apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3952,10 +3960,10 @@ public class ProductFeed extends APINode {
     public ListenableFuture<ProductFeed> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ProductFeed>() {
-           public ProductFeed apply(String result) {
+        new Function<ResponseWrapper, ProductFeed>() {
+           public ProductFeed apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

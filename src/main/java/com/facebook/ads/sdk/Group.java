@@ -398,6 +398,10 @@ public class Group extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestUpdate update() {
+    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
+  }
+
 
   public Boolean getFieldArchived() {
     return mArchived;
@@ -515,10 +519,10 @@ public class Group extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAdmins.this.parseResponse(result, null);
+               return APIRequestDeleteAdmins.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -629,10 +633,10 @@ public class Group extends APINode {
     public ListenableFuture<Group> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Group>() {
-           public Group apply(String result) {
+        new Function<ResponseWrapper, Group>() {
+           public Group apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdmin.this.parseResponse(result, null);
+               return APIRequestCreateAdmin.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -765,10 +769,10 @@ public class Group extends APINode {
     public ListenableFuture<APINodeList<Album>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Album>>() {
-           public APINodeList<Album> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Album>>() {
+           public APINodeList<Album> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAlbums.this.parseResponse(result, null);
+               return APIRequestGetAlbums.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1041,10 +1045,10 @@ public class Group extends APINode {
     public ListenableFuture<Album> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Album>() {
-           public Album apply(String result) {
+        new Function<ResponseWrapper, Album>() {
+           public Album apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAlbum.this.parseResponse(result, null);
+               return APIRequestCreateAlbum.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1224,10 +1228,10 @@ public class Group extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetDocs.this.parseResponse(result, null);
+               return APIRequestGetDocs.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1330,10 +1334,10 @@ public class Group extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateDoc.this.parseResponse(result, null);
+               return APIRequestCreateDoc.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1474,10 +1478,10 @@ public class Group extends APINode {
     public ListenableFuture<APINodeList<Event>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Event>>() {
-           public APINodeList<Event> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Event>>() {
+           public APINodeList<Event> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetEvents.this.parseResponse(result, null);
+               return APIRequestGetEvents.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1900,10 +1904,10 @@ public class Group extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateFeed.this.parseResponse(result, null);
+               return APIRequestCreateFeed.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2802,10 +2806,10 @@ public class Group extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateGroupThread.this.parseResponse(result, null);
+               return APIRequestCreateGroupThread.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2943,10 +2947,10 @@ public class Group extends APINode {
     public ListenableFuture<APINodeList<Group>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Group>>() {
-           public APINodeList<Group> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Group>>() {
+           public APINodeList<Group> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetGroups.this.parseResponse(result, null);
+               return APIRequestGetGroups.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3193,10 +3197,10 @@ public class Group extends APINode {
     public ListenableFuture<Group> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Group>() {
-           public Group apply(String result) {
+        new Function<ResponseWrapper, Group>() {
+           public Group apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateGroup.this.parseResponse(result, null);
+               return APIRequestCreateGroup.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3423,10 +3427,10 @@ public class Group extends APINode {
     public ListenableFuture<APINodeList<LiveVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<LiveVideo>>() {
-           public APINodeList<LiveVideo> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<LiveVideo>>() {
+           public APINodeList<LiveVideo> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetLiveVideos.this.parseResponse(result, null);
+               return APIRequestGetLiveVideos.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3758,10 +3762,10 @@ public class Group extends APINode {
     public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, LiveVideo>() {
-           public LiveVideo apply(String result) {
+        new Function<ResponseWrapper, LiveVideo>() {
+           public LiveVideo apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateLiveVideo.this.parseResponse(result, null);
+               return APIRequestCreateLiveVideo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4046,10 +4050,10 @@ public class Group extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteMembers.this.parseResponse(result, null);
+               return APIRequestDeleteMembers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4169,10 +4173,10 @@ public class Group extends APINode {
     public ListenableFuture<Group> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Group>() {
-           public Group apply(String result) {
+        new Function<ResponseWrapper, Group>() {
+           public Group apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateMember.this.parseResponse(result, null);
+               return APIRequestCreateMember.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4311,10 +4315,10 @@ public class Group extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteModerators.this.parseResponse(result, null);
+               return APIRequestDeleteModerators.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4425,10 +4429,10 @@ public class Group extends APINode {
     public ListenableFuture<Group> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Group>() {
-           public Group apply(String result) {
+        new Function<ResponseWrapper, Group>() {
+           public Group apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateModerator.this.parseResponse(result, null);
+               return APIRequestCreateModerator.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4569,10 +4573,10 @@ public class Group extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateOpenGraphActionFeed.this.parseResponse(result, null);
+               return APIRequestCreateOpenGraphActionFeed.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4944,10 +4948,10 @@ public class Group extends APINode {
     public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<User>>() {
-           public APINodeList<User> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<User>>() {
+           public APINodeList<User> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetOptedInMembers.this.parseResponse(result, null);
+               return APIRequestGetOptedInMembers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5519,10 +5523,10 @@ public class Group extends APINode {
     public ListenableFuture<Photo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Photo>() {
-           public Photo apply(String result) {
+        new Function<ResponseWrapper, Photo>() {
+           public Photo apply(ResponseWrapper result) {
              try {
-               return APIRequestCreatePhoto.this.parseResponse(result, null);
+               return APIRequestCreatePhoto.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6020,10 +6024,10 @@ public class Group extends APINode {
     public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ProfilePictureSource>>() {
-           public APINodeList<ProfilePictureSource> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ProfilePictureSource>>() {
+           public APINodeList<ProfilePictureSource> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPicture.this.parseResponse(result, null);
+               return APIRequestGetPicture.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6268,10 +6272,10 @@ public class Group extends APINode {
     public ListenableFuture<APINodeList<AdVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdVideo>>() {
-           public APINodeList<AdVideo> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdVideo>>() {
+           public APINodeList<AdVideo> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetVideos.this.parseResponse(result, null);
+               return APIRequestGetVideos.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6712,10 +6716,10 @@ public class Group extends APINode {
     public ListenableFuture<AdVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdVideo>() {
-           public AdVideo apply(String result) {
+        new Function<ResponseWrapper, AdVideo>() {
+           public AdVideo apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateVideo.this.parseResponse(result, null);
+               return APIRequestCreateVideo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7344,10 +7348,10 @@ public class Group extends APINode {
     public ListenableFuture<Group> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Group>() {
-           public Group apply(String result) {
+        new Function<ResponseWrapper, Group>() {
+           public Group apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7551,6 +7555,246 @@ public class Group extends APINode {
       this.requestField("venue", value);
       return this;
     }
+  }
+
+  public static class APIRequestUpdate extends APIRequest<Group> {
+
+    Group lastResponse = null;
+    @Override
+    public Group getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "update_view_time",
+      "name",
+      "description",
+      "group_icon",
+      "privacy",
+      "archive",
+      "group_type",
+      "join_setting",
+      "post_permissions",
+      "post_requires_admin_approval",
+      "cover",
+      "cover_url",
+      "offset_y",
+      "no_feed_story",
+      "focus_x",
+      "focus_y",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Group parseResponse(String response, String header) throws APIException {
+      return Group.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Group execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Group execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Group> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Group> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Group>() {
+           public Group apply(ResponseWrapper result) {
+             try {
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestUpdate(String nodeId, APIContext context) {
+      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestUpdate setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestUpdate setUpdateViewTime (Boolean updateViewTime) {
+      this.setParam("update_view_time", updateViewTime);
+      return this;
+    }
+    public APIRequestUpdate setUpdateViewTime (String updateViewTime) {
+      this.setParam("update_view_time", updateViewTime);
+      return this;
+    }
+
+    public APIRequestUpdate setName (String name) {
+      this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestUpdate setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestUpdate setGroupIcon (String groupIcon) {
+      this.setParam("group_icon", groupIcon);
+      return this;
+    }
+
+    public APIRequestUpdate setPrivacy (String privacy) {
+      this.setParam("privacy", privacy);
+      return this;
+    }
+
+    public APIRequestUpdate setArchive (Boolean archive) {
+      this.setParam("archive", archive);
+      return this;
+    }
+    public APIRequestUpdate setArchive (String archive) {
+      this.setParam("archive", archive);
+      return this;
+    }
+
+    public APIRequestUpdate setGroupType (Group.EnumGroupType groupType) {
+      this.setParam("group_type", groupType);
+      return this;
+    }
+    public APIRequestUpdate setGroupType (String groupType) {
+      this.setParam("group_type", groupType);
+      return this;
+    }
+
+    public APIRequestUpdate setJoinSetting (Group.EnumJoinSetting joinSetting) {
+      this.setParam("join_setting", joinSetting);
+      return this;
+    }
+    public APIRequestUpdate setJoinSetting (String joinSetting) {
+      this.setParam("join_setting", joinSetting);
+      return this;
+    }
+
+    public APIRequestUpdate setPostPermissions (Group.EnumPostPermissions postPermissions) {
+      this.setParam("post_permissions", postPermissions);
+      return this;
+    }
+    public APIRequestUpdate setPostPermissions (String postPermissions) {
+      this.setParam("post_permissions", postPermissions);
+      return this;
+    }
+
+    public APIRequestUpdate setPostRequiresAdminApproval (Boolean postRequiresAdminApproval) {
+      this.setParam("post_requires_admin_approval", postRequiresAdminApproval);
+      return this;
+    }
+    public APIRequestUpdate setPostRequiresAdminApproval (String postRequiresAdminApproval) {
+      this.setParam("post_requires_admin_approval", postRequiresAdminApproval);
+      return this;
+    }
+
+    public APIRequestUpdate setCover (String cover) {
+      this.setParam("cover", cover);
+      return this;
+    }
+
+    public APIRequestUpdate setCoverUrl (String coverUrl) {
+      this.setParam("cover_url", coverUrl);
+      return this;
+    }
+
+    public APIRequestUpdate setOffsetY (Long offsetY) {
+      this.setParam("offset_y", offsetY);
+      return this;
+    }
+    public APIRequestUpdate setOffsetY (String offsetY) {
+      this.setParam("offset_y", offsetY);
+      return this;
+    }
+
+    public APIRequestUpdate setNoFeedStory (Boolean noFeedStory) {
+      this.setParam("no_feed_story", noFeedStory);
+      return this;
+    }
+    public APIRequestUpdate setNoFeedStory (String noFeedStory) {
+      this.setParam("no_feed_story", noFeedStory);
+      return this;
+    }
+
+    public APIRequestUpdate setFocusX (Double focusX) {
+      this.setParam("focus_x", focusX);
+      return this;
+    }
+    public APIRequestUpdate setFocusX (String focusX) {
+      this.setParam("focus_x", focusX);
+      return this;
+    }
+
+    public APIRequestUpdate setFocusY (Double focusY) {
+      this.setParam("focus_y", focusY);
+      return this;
+    }
+    public APIRequestUpdate setFocusY (String focusY) {
+      this.setParam("focus_y", focusY);
+      return this;
+    }
+
+    public APIRequestUpdate requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestUpdate requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestUpdate requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static enum EnumGroupType {

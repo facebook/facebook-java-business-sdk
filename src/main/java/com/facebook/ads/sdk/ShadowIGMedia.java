@@ -429,10 +429,10 @@ public class ShadowIGMedia extends APINode {
     public ListenableFuture<APINodeList<ShadowIGMedia>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ShadowIGMedia>>() {
-           public APINodeList<ShadowIGMedia> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ShadowIGMedia>>() {
+           public APINodeList<ShadowIGMedia> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetChildren.this.parseResponse(result, null);
+               return APIRequestGetChildren.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -639,10 +639,10 @@ public class ShadowIGMedia extends APINode {
     public ListenableFuture<APINodeList<ShadowIGComment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ShadowIGComment>>() {
-           public APINodeList<ShadowIGComment> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ShadowIGComment>>() {
+           public APINodeList<ShadowIGComment> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetComments.this.parseResponse(result, null);
+               return APIRequestGetComments.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -800,10 +800,10 @@ public class ShadowIGMedia extends APINode {
     public ListenableFuture<ShadowIGComment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ShadowIGComment>() {
-           public ShadowIGComment apply(String result) {
+        new Function<ResponseWrapper, ShadowIGComment>() {
+           public ShadowIGComment apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateComment.this.parseResponse(result, null);
+               return APIRequestCreateComment.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -917,10 +917,10 @@ public class ShadowIGMedia extends APINode {
     public ListenableFuture<APINodeList<InstagramInsightsResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<InstagramInsightsResult>>() {
-           public APINodeList<InstagramInsightsResult> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<InstagramInsightsResult>>() {
+           public APINodeList<InstagramInsightsResult> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetInsights.this.parseResponse(result, null);
+               return APIRequestGetInsights.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1095,10 +1095,10 @@ public class ShadowIGMedia extends APINode {
     public ListenableFuture<ShadowIGMedia> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ShadowIGMedia>() {
-           public ShadowIGMedia apply(String result) {
+        new Function<ResponseWrapper, ShadowIGMedia>() {
+           public ShadowIGMedia apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1298,10 +1298,10 @@ public class ShadowIGMedia extends APINode {
     public ListenableFuture<ShadowIGMedia> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ShadowIGMedia>() {
-           public ShadowIGMedia apply(String result) {
+        new Function<ResponseWrapper, ShadowIGMedia>() {
+           public ShadowIGMedia apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

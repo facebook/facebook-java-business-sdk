@@ -917,10 +917,10 @@ public class ReachFrequencyPrediction extends APINode {
     public ListenableFuture<ReachFrequencyPrediction> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ReachFrequencyPrediction>() {
-           public ReachFrequencyPrediction apply(String result) {
+        new Function<ResponseWrapper, ReachFrequencyPrediction>() {
+           public ReachFrequencyPrediction apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

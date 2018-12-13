@@ -41,7 +41,7 @@ public class AdAccountAdSetsPostBidMultiplier {
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
       .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_OFFSITE_CONVERSIONS)
       .setBidAmount(500L)
-      .setParam("bid_adjustments", "{\"user_groups\":{\"gender\":{\"male\":0.8,\"female\":1}}}")
+      .setBidAdjustments("{\"user_groups\":{\"gender\":{\"male\":0.8,\"female\":1}}}")
       .setPromotedObject("{\"product_set_id\":\"<productSetID>\",\"custom_event_type\":\"ADD_TO_CART\"}")
       .setTargeting(
           new Targeting()

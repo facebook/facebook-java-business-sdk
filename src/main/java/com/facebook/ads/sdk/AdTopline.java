@@ -553,10 +553,10 @@ public class AdTopline extends APINode {
     public ListenableFuture<AdTopline> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdTopline>() {
-           public AdTopline apply(String result) {
+        new Function<ResponseWrapper, AdTopline>() {
+           public AdTopline apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

@@ -371,10 +371,10 @@ public class AppLinks extends APINode {
     public ListenableFuture<AppLinks> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AppLinks>() {
-           public AppLinks apply(String result) {
+        new Function<ResponseWrapper, AppLinks>() {
+           public AppLinks apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

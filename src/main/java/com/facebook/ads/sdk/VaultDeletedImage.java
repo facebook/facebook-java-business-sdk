@@ -346,10 +346,10 @@ public class VaultDeletedImage extends APINode {
     public ListenableFuture<VaultDeletedImage> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, VaultDeletedImage>() {
-           public VaultDeletedImage apply(String result) {
+        new Function<ResponseWrapper, VaultDeletedImage>() {
+           public VaultDeletedImage apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

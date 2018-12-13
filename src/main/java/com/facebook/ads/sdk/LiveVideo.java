@@ -324,8 +324,8 @@ public class LiveVideo extends APINode {
     return new APIRequestGetComments(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetCrosspostShareDPages getCrosspostShareDPages() {
-    return new APIRequestGetCrosspostShareDPages(this.getPrefixedId().toString(), context);
+  public APIRequestGetCrosspostSharedPages getCrosspostSharedPages() {
+    return new APIRequestGetCrosspostSharedPages(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetCrosspostedBroadcasts getCrosspostedBroadcasts() {
@@ -591,10 +591,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<User>>() {
-           public APINodeList<User> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<User>>() {
+           public APINodeList<User> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetBlockedUsers.this.parseResponse(result, null);
+               return APIRequestGetBlockedUsers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1149,10 +1149,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<APINodeList<Comment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Comment>>() {
-           public APINodeList<Comment> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Comment>>() {
+           public APINodeList<Comment> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetComments.this.parseResponse(result, null);
+               return APIRequestGetComments.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1395,7 +1395,7 @@ public class LiveVideo extends APINode {
     }
   }
 
-  public static class APIRequestGetCrosspostShareDPages extends APIRequest<Page> {
+  public static class APIRequestGetCrosspostSharedPages extends APIRequest<Page> {
 
     APINodeList<Page> lastResponse = null;
     @Override
@@ -1574,10 +1574,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Page>>() {
-           public APINodeList<Page> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Page>>() {
+           public APINodeList<Page> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetCrosspostShareDPages.this.parseResponse(result, null);
+               return APIRequestGetCrosspostSharedPages.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1586,28 +1586,28 @@ public class LiveVideo extends APINode {
       );
     };
 
-    public APIRequestGetCrosspostShareDPages(String nodeId, APIContext context) {
+    public APIRequestGetCrosspostSharedPages(String nodeId, APIContext context) {
       super(context, nodeId, "/crosspost_shared_pages", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetCrosspostShareDPages setParam(String param, Object value) {
+    public APIRequestGetCrosspostSharedPages setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetCrosspostShareDPages setParams(Map<String, Object> params) {
+    public APIRequestGetCrosspostSharedPages setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetCrosspostShareDPages requestAllFields () {
+    public APIRequestGetCrosspostSharedPages requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetCrosspostShareDPages requestAllFields (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -1615,12 +1615,12 @@ public class LiveVideo extends APINode {
     }
 
     @Override
-    public APIRequestGetCrosspostShareDPages requestFields (List<String> fields) {
+    public APIRequestGetCrosspostSharedPages requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetCrosspostShareDPages requestFields (List<String> fields, boolean value) {
+    public APIRequestGetCrosspostSharedPages requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -1628,1008 +1628,1008 @@ public class LiveVideo extends APINode {
     }
 
     @Override
-    public APIRequestGetCrosspostShareDPages requestField (String field) {
+    public APIRequestGetCrosspostSharedPages requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetCrosspostShareDPages requestField (String field, boolean value) {
+    public APIRequestGetCrosspostSharedPages requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetCrosspostShareDPages requestAboutField () {
+    public APIRequestGetCrosspostSharedPages requestAboutField () {
       return this.requestAboutField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestAboutField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestAboutField (boolean value) {
       this.requestField("about", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestAccessTokenField () {
+    public APIRequestGetCrosspostSharedPages requestAccessTokenField () {
       return this.requestAccessTokenField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestAccessTokenField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestAccessTokenField (boolean value) {
       this.requestField("access_token", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestAdCampaignField () {
+    public APIRequestGetCrosspostSharedPages requestAdCampaignField () {
       return this.requestAdCampaignField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestAdCampaignField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestAdCampaignField (boolean value) {
       this.requestField("ad_campaign", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestAffiliationField () {
+    public APIRequestGetCrosspostSharedPages requestAffiliationField () {
       return this.requestAffiliationField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestAffiliationField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestAffiliationField (boolean value) {
       this.requestField("affiliation", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestAppIdField () {
+    public APIRequestGetCrosspostSharedPages requestAppIdField () {
       return this.requestAppIdField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestAppIdField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestAppIdField (boolean value) {
       this.requestField("app_id", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestAppLinksField () {
+    public APIRequestGetCrosspostSharedPages requestAppLinksField () {
       return this.requestAppLinksField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestAppLinksField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestAppLinksField (boolean value) {
       this.requestField("app_links", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestArtistsWeLikeField () {
+    public APIRequestGetCrosspostSharedPages requestArtistsWeLikeField () {
       return this.requestArtistsWeLikeField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestArtistsWeLikeField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestArtistsWeLikeField (boolean value) {
       this.requestField("artists_we_like", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestAttireField () {
+    public APIRequestGetCrosspostSharedPages requestAttireField () {
       return this.requestAttireField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestAttireField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestAttireField (boolean value) {
       this.requestField("attire", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestAwardsField () {
+    public APIRequestGetCrosspostSharedPages requestAwardsField () {
       return this.requestAwardsField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestAwardsField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestAwardsField (boolean value) {
       this.requestField("awards", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestBandInterestsField () {
+    public APIRequestGetCrosspostSharedPages requestBandInterestsField () {
       return this.requestBandInterestsField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestBandInterestsField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestBandInterestsField (boolean value) {
       this.requestField("band_interests", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestBandMembersField () {
+    public APIRequestGetCrosspostSharedPages requestBandMembersField () {
       return this.requestBandMembersField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestBandMembersField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestBandMembersField (boolean value) {
       this.requestField("band_members", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestBestPageField () {
+    public APIRequestGetCrosspostSharedPages requestBestPageField () {
       return this.requestBestPageField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestBestPageField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestBestPageField (boolean value) {
       this.requestField("best_page", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestBioField () {
+    public APIRequestGetCrosspostSharedPages requestBioField () {
       return this.requestBioField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestBioField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestBioField (boolean value) {
       this.requestField("bio", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestBirthdayField () {
+    public APIRequestGetCrosspostSharedPages requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestBirthdayField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestBirthdayField (boolean value) {
       this.requestField("birthday", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestBookingAgentField () {
+    public APIRequestGetCrosspostSharedPages requestBookingAgentField () {
       return this.requestBookingAgentField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestBookingAgentField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestBookingAgentField (boolean value) {
       this.requestField("booking_agent", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestBuiltField () {
+    public APIRequestGetCrosspostSharedPages requestBuiltField () {
       return this.requestBuiltField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestBuiltField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestBuiltField (boolean value) {
       this.requestField("built", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestBusinessField () {
+    public APIRequestGetCrosspostSharedPages requestBusinessField () {
       return this.requestBusinessField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestBusinessField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestBusinessField (boolean value) {
       this.requestField("business", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestCanCheckinField () {
+    public APIRequestGetCrosspostSharedPages requestCanCheckinField () {
       return this.requestCanCheckinField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestCanCheckinField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestCanCheckinField (boolean value) {
       this.requestField("can_checkin", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestCanPostField () {
+    public APIRequestGetCrosspostSharedPages requestCanPostField () {
       return this.requestCanPostField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestCanPostField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestCanPostField (boolean value) {
       this.requestField("can_post", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestCategoryField () {
+    public APIRequestGetCrosspostSharedPages requestCategoryField () {
       return this.requestCategoryField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestCategoryField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestCategoryField (boolean value) {
       this.requestField("category", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestCategoryListField () {
+    public APIRequestGetCrosspostSharedPages requestCategoryListField () {
       return this.requestCategoryListField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestCategoryListField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestCategoryListField (boolean value) {
       this.requestField("category_list", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestCheckinsField () {
+    public APIRequestGetCrosspostSharedPages requestCheckinsField () {
       return this.requestCheckinsField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestCheckinsField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestCheckinsField (boolean value) {
       this.requestField("checkins", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestCompanyOverviewField () {
+    public APIRequestGetCrosspostSharedPages requestCompanyOverviewField () {
       return this.requestCompanyOverviewField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestCompanyOverviewField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestCompanyOverviewField (boolean value) {
       this.requestField("company_overview", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestConnectedInstagramAccountField () {
+    public APIRequestGetCrosspostSharedPages requestConnectedInstagramAccountField () {
       return this.requestConnectedInstagramAccountField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestConnectedInstagramAccountField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestConnectedInstagramAccountField (boolean value) {
       this.requestField("connected_instagram_account", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestContactAddressField () {
+    public APIRequestGetCrosspostSharedPages requestContactAddressField () {
       return this.requestContactAddressField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestContactAddressField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestContactAddressField (boolean value) {
       this.requestField("contact_address", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestContextField () {
+    public APIRequestGetCrosspostSharedPages requestContextField () {
       return this.requestContextField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestContextField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestContextField (boolean value) {
       this.requestField("context", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestCopyrightAttributionInsightsField () {
+    public APIRequestGetCrosspostSharedPages requestCopyrightAttributionInsightsField () {
       return this.requestCopyrightAttributionInsightsField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestCopyrightAttributionInsightsField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestCopyrightAttributionInsightsField (boolean value) {
       this.requestField("copyright_attribution_insights", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestCopyrightWhitelistedIgPartnersField () {
+    public APIRequestGetCrosspostSharedPages requestCopyrightWhitelistedIgPartnersField () {
       return this.requestCopyrightWhitelistedIgPartnersField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestCopyrightWhitelistedIgPartnersField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestCopyrightWhitelistedIgPartnersField (boolean value) {
       this.requestField("copyright_whitelisted_ig_partners", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestCountryPageLikesField () {
+    public APIRequestGetCrosspostSharedPages requestCountryPageLikesField () {
       return this.requestCountryPageLikesField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestCountryPageLikesField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestCountryPageLikesField (boolean value) {
       this.requestField("country_page_likes", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestCoverField () {
+    public APIRequestGetCrosspostSharedPages requestCoverField () {
       return this.requestCoverField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestCoverField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestCoverField (boolean value) {
       this.requestField("cover", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestCulinaryTeamField () {
+    public APIRequestGetCrosspostSharedPages requestCulinaryTeamField () {
       return this.requestCulinaryTeamField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestCulinaryTeamField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestCulinaryTeamField (boolean value) {
       this.requestField("culinary_team", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestCurrentLocationField () {
+    public APIRequestGetCrosspostSharedPages requestCurrentLocationField () {
       return this.requestCurrentLocationField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestCurrentLocationField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestCurrentLocationField (boolean value) {
       this.requestField("current_location", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestDescriptionField () {
+    public APIRequestGetCrosspostSharedPages requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestDescriptionField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestDescriptionField (boolean value) {
       this.requestField("description", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestDescriptionHtmlField () {
+    public APIRequestGetCrosspostSharedPages requestDescriptionHtmlField () {
       return this.requestDescriptionHtmlField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestDescriptionHtmlField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestDescriptionHtmlField (boolean value) {
       this.requestField("description_html", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestDirectedByField () {
+    public APIRequestGetCrosspostSharedPages requestDirectedByField () {
       return this.requestDirectedByField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestDirectedByField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestDirectedByField (boolean value) {
       this.requestField("directed_by", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestDisplaySubtextField () {
+    public APIRequestGetCrosspostSharedPages requestDisplaySubtextField () {
       return this.requestDisplaySubtextField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestDisplaySubtextField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestDisplaySubtextField (boolean value) {
       this.requestField("display_subtext", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestDisplayedMessageResponseTimeField () {
+    public APIRequestGetCrosspostSharedPages requestDisplayedMessageResponseTimeField () {
       return this.requestDisplayedMessageResponseTimeField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestDisplayedMessageResponseTimeField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestDisplayedMessageResponseTimeField (boolean value) {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestEmailsField () {
+    public APIRequestGetCrosspostSharedPages requestEmailsField () {
       return this.requestEmailsField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestEmailsField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestEmailsField (boolean value) {
       this.requestField("emails", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestEngagementField () {
+    public APIRequestGetCrosspostSharedPages requestEngagementField () {
       return this.requestEngagementField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestEngagementField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestEngagementField (boolean value) {
       this.requestField("engagement", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestFanCountField () {
+    public APIRequestGetCrosspostSharedPages requestFanCountField () {
       return this.requestFanCountField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestFanCountField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestFanCountField (boolean value) {
       this.requestField("fan_count", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestFeaturedVideoField () {
+    public APIRequestGetCrosspostSharedPages requestFeaturedVideoField () {
       return this.requestFeaturedVideoField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestFeaturedVideoField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestFeaturedVideoField (boolean value) {
       this.requestField("featured_video", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestFeaturesField () {
+    public APIRequestGetCrosspostSharedPages requestFeaturesField () {
       return this.requestFeaturesField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestFeaturesField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestFeaturesField (boolean value) {
       this.requestField("features", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestFoodStylesField () {
+    public APIRequestGetCrosspostSharedPages requestFoodStylesField () {
       return this.requestFoodStylesField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestFoodStylesField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestFoodStylesField (boolean value) {
       this.requestField("food_styles", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestFoundedField () {
+    public APIRequestGetCrosspostSharedPages requestFoundedField () {
       return this.requestFoundedField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestFoundedField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestFoundedField (boolean value) {
       this.requestField("founded", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestGeneralInfoField () {
+    public APIRequestGetCrosspostSharedPages requestGeneralInfoField () {
       return this.requestGeneralInfoField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestGeneralInfoField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestGeneralInfoField (boolean value) {
       this.requestField("general_info", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestGeneralManagerField () {
+    public APIRequestGetCrosspostSharedPages requestGeneralManagerField () {
       return this.requestGeneralManagerField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestGeneralManagerField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestGeneralManagerField (boolean value) {
       this.requestField("general_manager", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestGenreField () {
+    public APIRequestGetCrosspostSharedPages requestGenreField () {
       return this.requestGenreField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestGenreField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestGenreField (boolean value) {
       this.requestField("genre", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestGlobalBrandPageNameField () {
+    public APIRequestGetCrosspostSharedPages requestGlobalBrandPageNameField () {
       return this.requestGlobalBrandPageNameField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestGlobalBrandPageNameField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestGlobalBrandPageNameField (boolean value) {
       this.requestField("global_brand_page_name", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestGlobalBrandRootIdField () {
+    public APIRequestGetCrosspostSharedPages requestGlobalBrandRootIdField () {
       return this.requestGlobalBrandRootIdField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestGlobalBrandRootIdField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestGlobalBrandRootIdField (boolean value) {
       this.requestField("global_brand_root_id", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestHasAddedAppField () {
+    public APIRequestGetCrosspostSharedPages requestHasAddedAppField () {
       return this.requestHasAddedAppField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestHasAddedAppField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestHasAddedAppField (boolean value) {
       this.requestField("has_added_app", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestHasWhatsappBusinessNumberField () {
+    public APIRequestGetCrosspostSharedPages requestHasWhatsappBusinessNumberField () {
       return this.requestHasWhatsappBusinessNumberField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestHasWhatsappBusinessNumberField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestHasWhatsappBusinessNumberField (boolean value) {
       this.requestField("has_whatsapp_business_number", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestHasWhatsappNumberField () {
+    public APIRequestGetCrosspostSharedPages requestHasWhatsappNumberField () {
       return this.requestHasWhatsappNumberField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestHasWhatsappNumberField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestHasWhatsappNumberField (boolean value) {
       this.requestField("has_whatsapp_number", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestHometownField () {
+    public APIRequestGetCrosspostSharedPages requestHometownField () {
       return this.requestHometownField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestHometownField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestHometownField (boolean value) {
       this.requestField("hometown", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestHoursField () {
+    public APIRequestGetCrosspostSharedPages requestHoursField () {
       return this.requestHoursField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestHoursField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestHoursField (boolean value) {
       this.requestField("hours", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestIdField () {
+    public APIRequestGetCrosspostSharedPages requestIdField () {
       return this.requestIdField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestIdField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestImpressumField () {
+    public APIRequestGetCrosspostSharedPages requestImpressumField () {
       return this.requestImpressumField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestImpressumField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestImpressumField (boolean value) {
       this.requestField("impressum", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestInfluencesField () {
+    public APIRequestGetCrosspostSharedPages requestInfluencesField () {
       return this.requestInfluencesField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestInfluencesField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestInfluencesField (boolean value) {
       this.requestField("influences", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestInstagramBusinessAccountField () {
+    public APIRequestGetCrosspostSharedPages requestInstagramBusinessAccountField () {
       return this.requestInstagramBusinessAccountField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestInstagramBusinessAccountField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestInstagramBusinessAccountField (boolean value) {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestInstantArticlesReviewStatusField () {
+    public APIRequestGetCrosspostSharedPages requestInstantArticlesReviewStatusField () {
       return this.requestInstantArticlesReviewStatusField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestInstantArticlesReviewStatusField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestInstantArticlesReviewStatusField (boolean value) {
       this.requestField("instant_articles_review_status", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestIsAlwaysOpenField () {
+    public APIRequestGetCrosspostSharedPages requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestIsAlwaysOpenField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestIsAlwaysOpenField (boolean value) {
       this.requestField("is_always_open", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestIsChainField () {
+    public APIRequestGetCrosspostSharedPages requestIsChainField () {
       return this.requestIsChainField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestIsChainField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestIsChainField (boolean value) {
       this.requestField("is_chain", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestIsCommunityPageField () {
+    public APIRequestGetCrosspostSharedPages requestIsCommunityPageField () {
       return this.requestIsCommunityPageField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestIsCommunityPageField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestIsCommunityPageField (boolean value) {
       this.requestField("is_community_page", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestIsEligibleForBrandedContentField () {
+    public APIRequestGetCrosspostSharedPages requestIsEligibleForBrandedContentField () {
       return this.requestIsEligibleForBrandedContentField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestIsEligibleForBrandedContentField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestIsEligibleForBrandedContentField (boolean value) {
       this.requestField("is_eligible_for_branded_content", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestIsMessengerBotGetStartedEnabledField () {
+    public APIRequestGetCrosspostSharedPages requestIsMessengerBotGetStartedEnabledField () {
       return this.requestIsMessengerBotGetStartedEnabledField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestIsMessengerBotGetStartedEnabledField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestIsMessengerBotGetStartedEnabledField (boolean value) {
       this.requestField("is_messenger_bot_get_started_enabled", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestIsMessengerPlatformBotField () {
+    public APIRequestGetCrosspostSharedPages requestIsMessengerPlatformBotField () {
       return this.requestIsMessengerPlatformBotField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestIsMessengerPlatformBotField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestIsMessengerPlatformBotField (boolean value) {
       this.requestField("is_messenger_platform_bot", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestIsOwnedField () {
+    public APIRequestGetCrosspostSharedPages requestIsOwnedField () {
       return this.requestIsOwnedField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestIsOwnedField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestIsOwnedField (boolean value) {
       this.requestField("is_owned", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestIsPermanentlyClosedField () {
+    public APIRequestGetCrosspostSharedPages requestIsPermanentlyClosedField () {
       return this.requestIsPermanentlyClosedField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestIsPermanentlyClosedField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestIsPermanentlyClosedField (boolean value) {
       this.requestField("is_permanently_closed", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestIsPublishedField () {
+    public APIRequestGetCrosspostSharedPages requestIsPublishedField () {
       return this.requestIsPublishedField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestIsPublishedField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestIsPublishedField (boolean value) {
       this.requestField("is_published", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestIsUnclaimedField () {
+    public APIRequestGetCrosspostSharedPages requestIsUnclaimedField () {
       return this.requestIsUnclaimedField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestIsUnclaimedField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestIsUnclaimedField (boolean value) {
       this.requestField("is_unclaimed", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestIsVerifiedField () {
+    public APIRequestGetCrosspostSharedPages requestIsVerifiedField () {
       return this.requestIsVerifiedField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestIsVerifiedField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestIsVerifiedField (boolean value) {
       this.requestField("is_verified", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestIsWebhooksSubscribedField () {
+    public APIRequestGetCrosspostSharedPages requestIsWebhooksSubscribedField () {
       return this.requestIsWebhooksSubscribedField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestIsWebhooksSubscribedField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestIsWebhooksSubscribedField (boolean value) {
       this.requestField("is_webhooks_subscribed", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestKeywordsField () {
+    public APIRequestGetCrosspostSharedPages requestKeywordsField () {
       return this.requestKeywordsField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestKeywordsField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestKeywordsField (boolean value) {
       this.requestField("keywords", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestLeadgenFormPreviewDetailsField () {
+    public APIRequestGetCrosspostSharedPages requestLeadgenFormPreviewDetailsField () {
       return this.requestLeadgenFormPreviewDetailsField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestLeadgenFormPreviewDetailsField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestLeadgenFormPreviewDetailsField (boolean value) {
       this.requestField("leadgen_form_preview_details", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestLeadgenHasCrmIntegrationField () {
+    public APIRequestGetCrosspostSharedPages requestLeadgenHasCrmIntegrationField () {
       return this.requestLeadgenHasCrmIntegrationField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestLeadgenHasCrmIntegrationField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestLeadgenHasCrmIntegrationField (boolean value) {
       this.requestField("leadgen_has_crm_integration", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestLeadgenHasFatPingCrmIntegrationField () {
+    public APIRequestGetCrosspostSharedPages requestLeadgenHasFatPingCrmIntegrationField () {
       return this.requestLeadgenHasFatPingCrmIntegrationField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestLeadgenHasFatPingCrmIntegrationField (boolean value) {
       this.requestField("leadgen_has_fat_ping_crm_integration", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestLeadgenTosAcceptanceTimeField () {
+    public APIRequestGetCrosspostSharedPages requestLeadgenTosAcceptanceTimeField () {
       return this.requestLeadgenTosAcceptanceTimeField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestLeadgenTosAcceptanceTimeField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestLeadgenTosAcceptanceTimeField (boolean value) {
       this.requestField("leadgen_tos_acceptance_time", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestLeadgenTosAcceptedField () {
+    public APIRequestGetCrosspostSharedPages requestLeadgenTosAcceptedField () {
       return this.requestLeadgenTosAcceptedField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestLeadgenTosAcceptedField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestLeadgenTosAcceptedField (boolean value) {
       this.requestField("leadgen_tos_accepted", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestLeadgenTosAcceptingUserField () {
+    public APIRequestGetCrosspostSharedPages requestLeadgenTosAcceptingUserField () {
       return this.requestLeadgenTosAcceptingUserField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestLeadgenTosAcceptingUserField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestLeadgenTosAcceptingUserField (boolean value) {
       this.requestField("leadgen_tos_accepting_user", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestLinkField () {
+    public APIRequestGetCrosspostSharedPages requestLinkField () {
       return this.requestLinkField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestLinkField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestLinkField (boolean value) {
       this.requestField("link", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestLocationField () {
+    public APIRequestGetCrosspostSharedPages requestLocationField () {
       return this.requestLocationField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestLocationField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestLocationField (boolean value) {
       this.requestField("location", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestMembersField () {
+    public APIRequestGetCrosspostSharedPages requestMembersField () {
       return this.requestMembersField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestMembersField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestMembersField (boolean value) {
       this.requestField("members", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestMerchantIdField () {
+    public APIRequestGetCrosspostSharedPages requestMerchantIdField () {
       return this.requestMerchantIdField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestMerchantIdField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestMerchantIdField (boolean value) {
       this.requestField("merchant_id", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestMerchantReviewStatusField () {
+    public APIRequestGetCrosspostSharedPages requestMerchantReviewStatusField () {
       return this.requestMerchantReviewStatusField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestMerchantReviewStatusField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestMerchantReviewStatusField (boolean value) {
       this.requestField("merchant_review_status", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestMessengerAdsDefaultIcebreakersField () {
+    public APIRequestGetCrosspostSharedPages requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestMessengerAdsDefaultIcebreakersField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestMessengerAdsDefaultIcebreakersField (boolean value) {
       this.requestField("messenger_ads_default_icebreakers", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestMessengerAdsDefaultPageWelcomeMessageField () {
+    public APIRequestGetCrosspostSharedPages requestMessengerAdsDefaultPageWelcomeMessageField () {
       return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
       this.requestField("messenger_ads_default_page_welcome_message", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestMessengerAdsDefaultQuickRepliesField () {
+    public APIRequestGetCrosspostSharedPages requestMessengerAdsDefaultQuickRepliesField () {
       return this.requestMessengerAdsDefaultQuickRepliesField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestMessengerAdsDefaultQuickRepliesField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestMessengerAdsDefaultQuickRepliesField (boolean value) {
       this.requestField("messenger_ads_default_quick_replies", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestMessengerAdsQuickRepliesTypeField () {
+    public APIRequestGetCrosspostSharedPages requestMessengerAdsQuickRepliesTypeField () {
       return this.requestMessengerAdsQuickRepliesTypeField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestMessengerAdsQuickRepliesTypeField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestMissionField () {
+    public APIRequestGetCrosspostSharedPages requestMissionField () {
       return this.requestMissionField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestMissionField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestMissionField (boolean value) {
       this.requestField("mission", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestMpgField () {
+    public APIRequestGetCrosspostSharedPages requestMpgField () {
       return this.requestMpgField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestMpgField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestMpgField (boolean value) {
       this.requestField("mpg", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestNameField () {
+    public APIRequestGetCrosspostSharedPages requestNameField () {
       return this.requestNameField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestNameField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestNameField (boolean value) {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestNameWithLocationDescriptorField () {
+    public APIRequestGetCrosspostSharedPages requestNameWithLocationDescriptorField () {
       return this.requestNameWithLocationDescriptorField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestNameWithLocationDescriptorField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestNameWithLocationDescriptorField (boolean value) {
       this.requestField("name_with_location_descriptor", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestNetworkField () {
+    public APIRequestGetCrosspostSharedPages requestNetworkField () {
       return this.requestNetworkField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestNetworkField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestNetworkField (boolean value) {
       this.requestField("network", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestNewLikeCountField () {
+    public APIRequestGetCrosspostSharedPages requestNewLikeCountField () {
       return this.requestNewLikeCountField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestNewLikeCountField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestNewLikeCountField (boolean value) {
       this.requestField("new_like_count", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestOfferEligibleField () {
+    public APIRequestGetCrosspostSharedPages requestOfferEligibleField () {
       return this.requestOfferEligibleField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestOfferEligibleField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestOfferEligibleField (boolean value) {
       this.requestField("offer_eligible", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestOverallStarRatingField () {
+    public APIRequestGetCrosspostSharedPages requestOverallStarRatingField () {
       return this.requestOverallStarRatingField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestOverallStarRatingField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPageTokenField () {
+    public APIRequestGetCrosspostSharedPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPageTokenField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPageTokenField (boolean value) {
       this.requestField("page_token", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestParentPageField () {
+    public APIRequestGetCrosspostSharedPages requestParentPageField () {
       return this.requestParentPageField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestParentPageField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestParentPageField (boolean value) {
       this.requestField("parent_page", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestParkingField () {
+    public APIRequestGetCrosspostSharedPages requestParkingField () {
       return this.requestParkingField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestParkingField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestParkingField (boolean value) {
       this.requestField("parking", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPaymentOptionsField () {
+    public APIRequestGetCrosspostSharedPages requestPaymentOptionsField () {
       return this.requestPaymentOptionsField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPaymentOptionsField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPaymentOptionsField (boolean value) {
       this.requestField("payment_options", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPersonalInfoField () {
+    public APIRequestGetCrosspostSharedPages requestPersonalInfoField () {
       return this.requestPersonalInfoField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPersonalInfoField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPersonalInfoField (boolean value) {
       this.requestField("personal_info", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPersonalInterestsField () {
+    public APIRequestGetCrosspostSharedPages requestPersonalInterestsField () {
       return this.requestPersonalInterestsField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPersonalInterestsField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPersonalInterestsField (boolean value) {
       this.requestField("personal_interests", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPharmaSafetyInfoField () {
+    public APIRequestGetCrosspostSharedPages requestPharmaSafetyInfoField () {
       return this.requestPharmaSafetyInfoField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPharmaSafetyInfoField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPharmaSafetyInfoField (boolean value) {
       this.requestField("pharma_safety_info", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPhoneField () {
+    public APIRequestGetCrosspostSharedPages requestPhoneField () {
       return this.requestPhoneField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPhoneField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPhoneField (boolean value) {
       this.requestField("phone", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPlaceTypeField () {
+    public APIRequestGetCrosspostSharedPages requestPlaceTypeField () {
       return this.requestPlaceTypeField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPlaceTypeField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPlaceTypeField (boolean value) {
       this.requestField("place_type", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPlotOutlineField () {
+    public APIRequestGetCrosspostSharedPages requestPlotOutlineField () {
       return this.requestPlotOutlineField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPlotOutlineField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPlotOutlineField (boolean value) {
       this.requestField("plot_outline", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPreferredAudienceField () {
+    public APIRequestGetCrosspostSharedPages requestPreferredAudienceField () {
       return this.requestPreferredAudienceField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPreferredAudienceField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPreferredAudienceField (boolean value) {
       this.requestField("preferred_audience", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPressContactField () {
+    public APIRequestGetCrosspostSharedPages requestPressContactField () {
       return this.requestPressContactField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPressContactField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPressContactField (boolean value) {
       this.requestField("press_contact", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPriceRangeField () {
+    public APIRequestGetCrosspostSharedPages requestPriceRangeField () {
       return this.requestPriceRangeField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPriceRangeField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPriceRangeField (boolean value) {
       this.requestField("price_range", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPrivacyInfoUrlField () {
+    public APIRequestGetCrosspostSharedPages requestPrivacyInfoUrlField () {
       return this.requestPrivacyInfoUrlField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPrivacyInfoUrlField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPrivacyInfoUrlField (boolean value) {
       this.requestField("privacy_info_url", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestProducedByField () {
+    public APIRequestGetCrosspostSharedPages requestProducedByField () {
       return this.requestProducedByField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestProducedByField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestProducedByField (boolean value) {
       this.requestField("produced_by", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestProductsField () {
+    public APIRequestGetCrosspostSharedPages requestProductsField () {
       return this.requestProductsField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestProductsField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestProductsField (boolean value) {
       this.requestField("products", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPromotionEligibleField () {
+    public APIRequestGetCrosspostSharedPages requestPromotionEligibleField () {
       return this.requestPromotionEligibleField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPromotionEligibleField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPromotionEligibleField (boolean value) {
       this.requestField("promotion_eligible", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPromotionIneligibleReasonField () {
+    public APIRequestGetCrosspostSharedPages requestPromotionIneligibleReasonField () {
       return this.requestPromotionIneligibleReasonField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPromotionIneligibleReasonField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPromotionIneligibleReasonField (boolean value) {
       this.requestField("promotion_ineligible_reason", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestPublicTransitField () {
+    public APIRequestGetCrosspostSharedPages requestPublicTransitField () {
       return this.requestPublicTransitField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestPublicTransitField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestPublicTransitField (boolean value) {
       this.requestField("public_transit", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestRatingCountField () {
+    public APIRequestGetCrosspostSharedPages requestRatingCountField () {
       return this.requestRatingCountField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestRatingCountField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestRatingCountField (boolean value) {
       this.requestField("rating_count", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestRecipientField () {
+    public APIRequestGetCrosspostSharedPages requestRecipientField () {
       return this.requestRecipientField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestRecipientField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestRecipientField (boolean value) {
       this.requestField("recipient", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestRecordLabelField () {
+    public APIRequestGetCrosspostSharedPages requestRecordLabelField () {
       return this.requestRecordLabelField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestRecordLabelField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestRecordLabelField (boolean value) {
       this.requestField("record_label", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestReleaseDateField () {
+    public APIRequestGetCrosspostSharedPages requestReleaseDateField () {
       return this.requestReleaseDateField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestReleaseDateField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestReleaseDateField (boolean value) {
       this.requestField("release_date", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestRestaurantServicesField () {
+    public APIRequestGetCrosspostSharedPages requestRestaurantServicesField () {
       return this.requestRestaurantServicesField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestRestaurantServicesField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestRestaurantServicesField (boolean value) {
       this.requestField("restaurant_services", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestRestaurantSpecialtiesField () {
+    public APIRequestGetCrosspostSharedPages requestRestaurantSpecialtiesField () {
       return this.requestRestaurantSpecialtiesField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestRestaurantSpecialtiesField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestRestaurantSpecialtiesField (boolean value) {
       this.requestField("restaurant_specialties", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestScheduleField () {
+    public APIRequestGetCrosspostSharedPages requestScheduleField () {
       return this.requestScheduleField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestScheduleField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestScheduleField (boolean value) {
       this.requestField("schedule", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestScreenplayByField () {
+    public APIRequestGetCrosspostSharedPages requestScreenplayByField () {
       return this.requestScreenplayByField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestScreenplayByField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestScreenplayByField (boolean value) {
       this.requestField("screenplay_by", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestSeasonField () {
+    public APIRequestGetCrosspostSharedPages requestSeasonField () {
       return this.requestSeasonField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestSeasonField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestSeasonField (boolean value) {
       this.requestField("season", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestSingleLineAddressField () {
+    public APIRequestGetCrosspostSharedPages requestSingleLineAddressField () {
       return this.requestSingleLineAddressField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestSingleLineAddressField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestSingleLineAddressField (boolean value) {
       this.requestField("single_line_address", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestStarringField () {
+    public APIRequestGetCrosspostSharedPages requestStarringField () {
       return this.requestStarringField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestStarringField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestStarringField (boolean value) {
       this.requestField("starring", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestStartInfoField () {
+    public APIRequestGetCrosspostSharedPages requestStartInfoField () {
       return this.requestStartInfoField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestStartInfoField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestStartInfoField (boolean value) {
       this.requestField("start_info", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestStoreCodeField () {
+    public APIRequestGetCrosspostSharedPages requestStoreCodeField () {
       return this.requestStoreCodeField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestStoreCodeField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestStoreCodeField (boolean value) {
       this.requestField("store_code", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestStoreLocationDescriptorField () {
+    public APIRequestGetCrosspostSharedPages requestStoreLocationDescriptorField () {
       return this.requestStoreLocationDescriptorField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestStoreLocationDescriptorField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestStoreLocationDescriptorField (boolean value) {
       this.requestField("store_location_descriptor", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestStoreNumberField () {
+    public APIRequestGetCrosspostSharedPages requestStoreNumberField () {
       return this.requestStoreNumberField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestStoreNumberField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestStoreNumberField (boolean value) {
       this.requestField("store_number", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestStudioField () {
+    public APIRequestGetCrosspostSharedPages requestStudioField () {
       return this.requestStudioField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestStudioField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestStudioField (boolean value) {
       this.requestField("studio", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestSupportsInstantArticlesField () {
+    public APIRequestGetCrosspostSharedPages requestSupportsInstantArticlesField () {
       return this.requestSupportsInstantArticlesField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestSupportsInstantArticlesField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestSupportsInstantArticlesField (boolean value) {
       this.requestField("supports_instant_articles", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestTalkingAboutCountField () {
+    public APIRequestGetCrosspostSharedPages requestTalkingAboutCountField () {
       return this.requestTalkingAboutCountField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestTalkingAboutCountField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestTalkingAboutCountField (boolean value) {
       this.requestField("talking_about_count", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestUnreadMessageCountField () {
+    public APIRequestGetCrosspostSharedPages requestUnreadMessageCountField () {
       return this.requestUnreadMessageCountField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestUnreadMessageCountField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestUnreadMessageCountField (boolean value) {
       this.requestField("unread_message_count", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestUnreadNotifCountField () {
+    public APIRequestGetCrosspostSharedPages requestUnreadNotifCountField () {
       return this.requestUnreadNotifCountField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestUnreadNotifCountField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestUnreadNotifCountField (boolean value) {
       this.requestField("unread_notif_count", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestUnseenMessageCountField () {
+    public APIRequestGetCrosspostSharedPages requestUnseenMessageCountField () {
       return this.requestUnseenMessageCountField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestUnseenMessageCountField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestUsernameField () {
+    public APIRequestGetCrosspostSharedPages requestUsernameField () {
       return this.requestUsernameField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestUsernameField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestUsernameField (boolean value) {
       this.requestField("username", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestVerificationStatusField () {
+    public APIRequestGetCrosspostSharedPages requestVerificationStatusField () {
       return this.requestVerificationStatusField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestVerificationStatusField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestVerificationStatusField (boolean value) {
       this.requestField("verification_status", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestVoipInfoField () {
+    public APIRequestGetCrosspostSharedPages requestVoipInfoField () {
       return this.requestVoipInfoField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestVoipInfoField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestVoipInfoField (boolean value) {
       this.requestField("voip_info", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestWebsiteField () {
+    public APIRequestGetCrosspostSharedPages requestWebsiteField () {
       return this.requestWebsiteField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestWebsiteField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestWebsiteField (boolean value) {
       this.requestField("website", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestWereHereCountField () {
+    public APIRequestGetCrosspostSharedPages requestWereHereCountField () {
       return this.requestWereHereCountField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestWereHereCountField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestWereHereCountField (boolean value) {
       this.requestField("were_here_count", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestWhatsappNumberField () {
+    public APIRequestGetCrosspostSharedPages requestWhatsappNumberField () {
       return this.requestWhatsappNumberField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestWhatsappNumberField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestWhatsappNumberField (boolean value) {
       this.requestField("whatsapp_number", value);
       return this;
     }
-    public APIRequestGetCrosspostShareDPages requestWrittenByField () {
+    public APIRequestGetCrosspostSharedPages requestWrittenByField () {
       return this.requestWrittenByField(true);
     }
-    public APIRequestGetCrosspostShareDPages requestWrittenByField (boolean value) {
+    public APIRequestGetCrosspostSharedPages requestWrittenByField (boolean value) {
       this.requestField("written_by", value);
       return this;
     }
@@ -2698,10 +2698,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<APINodeList<LiveVideo>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<LiveVideo>>() {
-           public APINodeList<LiveVideo> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<LiveVideo>>() {
+           public APINodeList<LiveVideo> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetCrosspostedBroadcasts.this.parseResponse(result, null);
+               return APIRequestGetCrosspostedBroadcasts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2989,10 +2989,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<APINodeList<LiveVideoError>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<LiveVideoError>>() {
-           public APINodeList<LiveVideoError> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<LiveVideoError>>() {
+           public APINodeList<LiveVideoError> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetErrors.this.parseResponse(result, null);
+               return APIRequestGetErrors.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3133,10 +3133,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<APINodeList<VideoGameShow>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<VideoGameShow>>() {
-           public APINodeList<VideoGameShow> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<VideoGameShow>>() {
+           public APINodeList<VideoGameShow> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetGameShows.this.parseResponse(result, null);
+               return APIRequestGetGameShows.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3276,10 +3276,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<APINodeList<LiveWithGuestSession>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<LiveWithGuestSession>>() {
-           public APINodeList<LiveWithGuestSession> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<LiveWithGuestSession>>() {
+           public APINodeList<LiveWithGuestSession> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetGuestSessions.this.parseResponse(result, null);
+               return APIRequestGetGuestSessions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3408,10 +3408,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<LiveWithGuestSession> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, LiveWithGuestSession>() {
-           public LiveWithGuestSession apply(String result) {
+        new Function<ResponseWrapper, LiveWithGuestSession>() {
+           public LiveWithGuestSession apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateGuestSession.this.parseResponse(result, null);
+               return APIRequestCreateGuestSession.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3512,10 +3512,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, LiveVideo>() {
-           public LiveVideo apply(String result) {
+        new Function<ResponseWrapper, LiveVideo>() {
+           public LiveVideo apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateInputStream.this.parseResponse(result, null);
+               return APIRequestCreateInputStream.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3627,10 +3627,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Profile>>() {
-           public APINodeList<Profile> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Profile>>() {
+           public APINodeList<Profile> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetLikes.this.parseResponse(result, null);
+               return APIRequestGetLikes.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3815,10 +3815,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<APINodeList<VideoPoll>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<VideoPoll>>() {
-           public APINodeList<VideoPoll> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<VideoPoll>>() {
+           public APINodeList<VideoPoll> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPolls.this.parseResponse(result, null);
+               return APIRequestGetPolls.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3975,10 +3975,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<VideoPoll> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, VideoPoll>() {
-           public VideoPoll apply(String result) {
+        new Function<ResponseWrapper, VideoPoll>() {
+           public VideoPoll apply(ResponseWrapper result) {
              try {
-               return APIRequestCreatePoll.this.parseResponse(result, null);
+               return APIRequestCreatePoll.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4150,10 +4150,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Profile>>() {
-           public APINodeList<Profile> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Profile>>() {
+           public APINodeList<Profile> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetReactions.this.parseResponse(result, null);
+               return APIRequestGetReactions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4340,10 +4340,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4471,10 +4471,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, LiveVideo>() {
-           public LiveVideo apply(String result) {
+        new Function<ResponseWrapper, LiveVideo>() {
+           public LiveVideo apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4800,10 +4800,10 @@ public class LiveVideo extends APINode {
     public ListenableFuture<LiveVideo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, LiveVideo>() {
-           public LiveVideo apply(String result) {
+        new Function<ResponseWrapper, LiveVideo>() {
+           public LiveVideo apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5364,6 +5364,8 @@ public class LiveVideo extends APINode {
       VALUE_DISCUSSION("DISCUSSION"),
       @SerializedName("RESTRICTED")
       VALUE_RESTRICTED("RESTRICTED"),
+      @SerializedName("PROTECTED_MODE")
+      VALUE_PROTECTED_MODE("PROTECTED_MODE"),
       NULL(null);
 
       private String value;

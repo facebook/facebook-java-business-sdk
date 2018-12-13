@@ -361,10 +361,10 @@ public class ProductFeedUploadError extends APINode {
     public ListenableFuture<APINodeList<ProductFeedUploadErrorSample>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ProductFeedUploadErrorSample>>() {
-           public APINodeList<ProductFeedUploadErrorSample> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ProductFeedUploadErrorSample>>() {
+           public APINodeList<ProductFeedUploadErrorSample> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetSamples.this.parseResponse(result, null);
+               return APIRequestGetSamples.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -490,10 +490,10 @@ public class ProductFeedUploadError extends APINode {
     public ListenableFuture<APINodeList<ProductFeedRuleSuggestion>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ProductFeedRuleSuggestion>>() {
-           public APINodeList<ProductFeedRuleSuggestion> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ProductFeedRuleSuggestion>>() {
+           public APINodeList<ProductFeedRuleSuggestion> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetSuggestedRules.this.parseResponse(result, null);
+               return APIRequestGetSuggestedRules.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -629,10 +629,10 @@ public class ProductFeedUploadError extends APINode {
     public ListenableFuture<ProductFeedUploadError> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ProductFeedUploadError>() {
-           public ProductFeedUploadError apply(String result) {
+        new Function<ResponseWrapper, ProductFeedUploadError>() {
+           public ProductFeedUploadError apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

@@ -354,10 +354,10 @@ public class PageSavedFilter extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -465,10 +465,10 @@ public class PageSavedFilter extends APINode {
     public ListenableFuture<PageSavedFilter> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, PageSavedFilter>() {
-           public PageSavedFilter apply(String result) {
+        new Function<ResponseWrapper, PageSavedFilter>() {
+           public PageSavedFilter apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -640,6 +640,8 @@ public class PageSavedFilter extends APINode {
       VALUE_LEAD_ADS_CRM_SETUP("LEAD_ADS_CRM_SETUP"),
       @SerializedName("LEAD_ADS_CUSTOM_CRM_SETUP")
       VALUE_LEAD_ADS_CUSTOM_CRM_SETUP("LEAD_ADS_CUSTOM_CRM_SETUP"),
+      @SerializedName("STORY_ARCHIVE")
+      VALUE_STORY_ARCHIVE("STORY_ARCHIVE"),
       @SerializedName("POST_IDEAS")
       VALUE_POST_IDEAS("POST_IDEAS"),
       @SerializedName("PUBLISHED_POSTS")
@@ -782,6 +784,30 @@ public class PageSavedFilter extends APINode {
       VALUE_REGISTRATIONS("REGISTRATIONS"),
       @SerializedName("IA_REGIWALL_SETTINGS")
       VALUE_IA_REGIWALL_SETTINGS("IA_REGIWALL_SETTINGS"),
+      @SerializedName("CREATOR_STUDIO_TRACKED")
+      VALUE_CREATOR_STUDIO_TRACKED("CREATOR_STUDIO_TRACKED"),
+      @SerializedName("CREATOR_STUDIO_BLOCKED")
+      VALUE_CREATOR_STUDIO_BLOCKED("CREATOR_STUDIO_BLOCKED"),
+      @SerializedName("CREATOR_STUDIO_TAKEDOWNS")
+      VALUE_CREATOR_STUDIO_TAKEDOWNS("CREATOR_STUDIO_TAKEDOWNS"),
+      @SerializedName("CREATOR_STUDIO_DISPUTES")
+      VALUE_CREATOR_STUDIO_DISPUTES("CREATOR_STUDIO_DISPUTES"),
+      @SerializedName("CREATOR_STUDIO_ALL_REFERENCE_FILES")
+      VALUE_CREATOR_STUDIO_ALL_REFERENCE_FILES("CREATOR_STUDIO_ALL_REFERENCE_FILES"),
+      @SerializedName("CREATOR_STUDIO_REFERENCE_CONFLICTS")
+      VALUE_CREATOR_STUDIO_REFERENCE_CONFLICTS("CREATOR_STUDIO_REFERENCE_CONFLICTS"),
+      @SerializedName("CREATOR_STUDIO_REFERENCE_RESOLUTIONS")
+      VALUE_CREATOR_STUDIO_REFERENCE_RESOLUTIONS("CREATOR_STUDIO_REFERENCE_RESOLUTIONS"),
+      @SerializedName("CREATOR_STUDIO_REFERENCE_POSSIBLE_CONFLICTS")
+      VALUE_CREATOR_STUDIO_REFERENCE_POSSIBLE_CONFLICTS("CREATOR_STUDIO_REFERENCE_POSSIBLE_CONFLICTS"),
+      @SerializedName("CREATOR_STUDIO_PUBLISHED_TRACKED")
+      VALUE_CREATOR_STUDIO_PUBLISHED_TRACKED("CREATOR_STUDIO_PUBLISHED_TRACKED"),
+      @SerializedName("CREATOR_STUDIO_PUBLISHED_BLOCKED")
+      VALUE_CREATOR_STUDIO_PUBLISHED_BLOCKED("CREATOR_STUDIO_PUBLISHED_BLOCKED"),
+      @SerializedName("CREATOR_STUDIO_PUBLISHED_DISPUTES")
+      VALUE_CREATOR_STUDIO_PUBLISHED_DISPUTES("CREATOR_STUDIO_PUBLISHED_DISPUTES"),
+      @SerializedName("CREATOR_STUDIO_PUBLISHED_ALL_REFERENCE_FILES")
+      VALUE_CREATOR_STUDIO_PUBLISHED_ALL_REFERENCE_FILES("CREATOR_STUDIO_PUBLISHED_ALL_REFERENCE_FILES"),
       NULL(null);
 
       private String value;

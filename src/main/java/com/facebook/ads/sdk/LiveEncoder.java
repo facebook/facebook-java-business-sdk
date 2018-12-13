@@ -391,10 +391,10 @@ public class LiveEncoder extends APINode {
     public ListenableFuture<LiveEncoder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, LiveEncoder>() {
-           public LiveEncoder apply(String result) {
+        new Function<ResponseWrapper, LiveEncoder>() {
+           public LiveEncoder apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

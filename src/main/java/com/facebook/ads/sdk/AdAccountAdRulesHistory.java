@@ -375,6 +375,25 @@ public class AdAccountAdRulesHistory extends APINode {
       }
   }
 
+  public static enum EnumEvaluationType {
+      @SerializedName("SCHEDULE")
+      VALUE_SCHEDULE("SCHEDULE"),
+      @SerializedName("TRIGGER")
+      VALUE_TRIGGER("TRIGGER"),
+      NULL(null);
+
+      private String value;
+
+      private EnumEvaluationType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

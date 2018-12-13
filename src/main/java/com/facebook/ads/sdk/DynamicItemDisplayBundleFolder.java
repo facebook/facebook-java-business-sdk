@@ -371,10 +371,10 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteBundles.this.parseResponse(result, null);
+               return APIRequestDeleteBundles.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -487,10 +487,10 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     public ListenableFuture<APINodeList<DynamicItemDisplayBundle>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<DynamicItemDisplayBundle>>() {
-           public APINodeList<DynamicItemDisplayBundle> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<DynamicItemDisplayBundle>>() {
+           public APINodeList<DynamicItemDisplayBundle> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetBundles.this.parseResponse(result, null);
+               return APIRequestGetBundles.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -641,10 +641,10 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, DynamicItemDisplayBundleFolder>() {
-           public DynamicItemDisplayBundleFolder apply(String result) {
+        new Function<ResponseWrapper, DynamicItemDisplayBundleFolder>() {
+           public DynamicItemDisplayBundleFolder apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateBundle.this.parseResponse(result, null);
+               return APIRequestCreateBundle.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -750,10 +750,10 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -860,10 +860,10 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, DynamicItemDisplayBundleFolder>() {
-           public DynamicItemDisplayBundleFolder apply(String result) {
+        new Function<ResponseWrapper, DynamicItemDisplayBundleFolder>() {
+           public DynamicItemDisplayBundleFolder apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1008,10 +1008,10 @@ public class DynamicItemDisplayBundleFolder extends APINode {
     public ListenableFuture<DynamicItemDisplayBundleFolder> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, DynamicItemDisplayBundleFolder>() {
-           public DynamicItemDisplayBundleFolder apply(String result) {
+        new Function<ResponseWrapper, DynamicItemDisplayBundleFolder>() {
+           public DynamicItemDisplayBundleFolder apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

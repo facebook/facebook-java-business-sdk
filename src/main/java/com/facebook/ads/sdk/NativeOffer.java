@@ -481,10 +481,10 @@ public class NativeOffer extends APINode {
     public ListenableFuture<NativeOffer> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, NativeOffer>() {
-           public NativeOffer apply(String result) {
+        new Function<ResponseWrapper, NativeOffer>() {
+           public NativeOffer apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateCode.this.parseResponse(result, null);
+               return APIRequestCreateCode.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -617,10 +617,10 @@ public class NativeOffer extends APINode {
     public ListenableFuture<NativeOffer> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, NativeOffer>() {
-           public NativeOffer apply(String result) {
+        new Function<ResponseWrapper, NativeOffer>() {
+           public NativeOffer apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateNativeOfferView.this.parseResponse(result, null);
+               return APIRequestCreateNativeOfferView.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -842,10 +842,10 @@ public class NativeOffer extends APINode {
     public ListenableFuture<APINodeList<NativeOfferView>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<NativeOfferView>>() {
-           public APINodeList<NativeOfferView> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<NativeOfferView>>() {
+           public APINodeList<NativeOfferView> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetViews.this.parseResponse(result, null);
+               return APIRequestGetViews.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -993,10 +993,10 @@ public class NativeOffer extends APINode {
     public ListenableFuture<NativeOffer> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, NativeOffer>() {
-           public NativeOffer apply(String result) {
+        new Function<ResponseWrapper, NativeOffer>() {
+           public NativeOffer apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

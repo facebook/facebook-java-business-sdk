@@ -523,10 +523,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetActivities.this.parseResponse(result, null);
+               return APIRequestGetActivities.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -653,10 +653,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAdAccounts.this.parseResponse(result, null);
+               return APIRequestDeleteAdAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -828,10 +828,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccount>>() {
-           public APINodeList<AdAccount> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccount>>() {
+           public APINodeList<AdAccount> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdAccounts.this.parseResponse(result, null);
+               return APIRequestGetAdAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1360,10 +1360,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OfflineConversionDataSet>() {
-           public OfflineConversionDataSet apply(String result) {
+        new Function<ResponseWrapper, OfflineConversionDataSet>() {
+           public OfflineConversionDataSet apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdAccount.this.parseResponse(result, null);
+               return APIRequestCreateAdAccount.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1484,10 +1484,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAgencies.this.parseResponse(result, null);
+               return APIRequestDeleteAgencies.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1611,10 +1611,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Business>>() {
-           public APINodeList<Business> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Business>>() {
+           public APINodeList<Business> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAgencies.this.parseResponse(result, null);
+               return APIRequestGetAgencies.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1845,10 +1845,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OfflineConversionDataSet>() {
-           public OfflineConversionDataSet apply(String result) {
+        new Function<ResponseWrapper, OfflineConversionDataSet>() {
+           public OfflineConversionDataSet apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAgency.this.parseResponse(result, null);
+               return APIRequestCreateAgency.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2015,10 +2015,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINodeList<CustomAudience>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<CustomAudience>>() {
-           public APINodeList<CustomAudience> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<CustomAudience>>() {
+           public APINodeList<CustomAudience> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAudiences.this.parseResponse(result, null);
+               return APIRequestGetAudiences.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2402,10 +2402,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINodeList<CustomConversion>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<CustomConversion>>() {
-           public APINodeList<CustomConversion> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<CustomConversion>>() {
+           public APINodeList<CustomConversion> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetCustomConversions.this.parseResponse(result, null);
+               return APIRequestGetCustomConversions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2645,10 +2645,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINodeList<DACheck>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<DACheck>>() {
-           public APINodeList<DACheck> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<DACheck>>() {
+           public APINodeList<DACheck> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetDaChecks.this.parseResponse(result, null);
+               return APIRequestGetDaChecks.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2813,10 +2813,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateEvent.this.parseResponse(result, null);
+               return APIRequestCreateEvent.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2961,10 +2961,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetStats.this.parseResponse(result, null);
+               return APIRequestGetStats.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3124,10 +3124,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetUploads.this.parseResponse(result, null);
+               return APIRequestGetUploads.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3270,10 +3270,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateUpload.this.parseResponse(result, null);
+               return APIRequestCreateUpload.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3382,10 +3382,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteUserPermissions.this.parseResponse(result, null);
+               return APIRequestDeleteUserPermissions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3510,10 +3510,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetUserPermissions.this.parseResponse(result, null);
+               return APIRequestGetUserPermissions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3626,10 +3626,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OfflineConversionDataSet>() {
-           public OfflineConversionDataSet apply(String result) {
+        new Function<ResponseWrapper, OfflineConversionDataSet>() {
+           public OfflineConversionDataSet apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateUserPermission.this.parseResponse(result, null);
+               return APIRequestCreateUserPermission.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3758,10 +3758,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteUsers.this.parseResponse(result, null);
+               return APIRequestDeleteUsers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3872,10 +3872,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OfflineConversionDataSet>() {
-           public OfflineConversionDataSet apply(String result) {
+        new Function<ResponseWrapper, OfflineConversionDataSet>() {
+           public OfflineConversionDataSet apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateUser.this.parseResponse(result, null);
+               return APIRequestCreateUser.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3987,10 +3987,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OfflineConversionDataSet>() {
-           public OfflineConversionDataSet apply(String result) {
+        new Function<ResponseWrapper, OfflineConversionDataSet>() {
+           public OfflineConversionDataSet apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateValidate.this.parseResponse(result, null);
+               return APIRequestCreateValidate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4105,10 +4105,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4229,10 +4229,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OfflineConversionDataSet>() {
-           public OfflineConversionDataSet apply(String result) {
+        new Function<ResponseWrapper, OfflineConversionDataSet>() {
+           public OfflineConversionDataSet apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4478,10 +4478,10 @@ public class OfflineConversionDataSet extends APINode {
     public ListenableFuture<OfflineConversionDataSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OfflineConversionDataSet>() {
-           public OfflineConversionDataSet apply(String result) {
+        new Function<ResponseWrapper, OfflineConversionDataSet>() {
+           public OfflineConversionDataSet apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

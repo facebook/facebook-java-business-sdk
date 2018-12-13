@@ -137,10 +137,10 @@ public class APIRequest<T extends APINode> {
   public ListenableFuture<APIResponse> executeAsyncBase(Map<String, Object> extraParams) throws APIException {
     return Futures.transform(
       executeAsyncInternal(extraParams),
-      new Function<String, APIResponse>() {
-         public APIResponse apply(String result) {
+      new Function<ResponseWrapper, APIResponse>() {
+         public APIResponse apply(ResponseWrapper result) {
            try {
-             return APIRequest.this.parseResponse(result, null);
+             return APIRequest.this.parseResponse(result.getBody(), result.getHeader());
            } catch (Exception e) {
              throw new RuntimeException(e);
            }
@@ -205,23 +205,23 @@ public class APIRequest<T extends APINode> {
     return response;
   }
 
-  protected ListenableFuture<String> executeAsyncInternal() throws APIException {
+  protected ListenableFuture<ResponseWrapper> executeAsyncInternal() throws APIException {
     return executeAsyncInternal(null);
   }
 
-  protected ListenableFuture<String> executeAsyncInternal(Map<String, Object> extraParams) throws APIException {
+  protected ListenableFuture<ResponseWrapper> executeAsyncInternal(Map<String, Object> extraParams) throws APIException {
     // extraParams are one-time params for this call,
     // so that the APIRequest can be reused later on.
-    ListenableFuture<String> response = null;
+    ListenableFuture<ResponseWrapper> response = null;
     try {
       context.log("========Start of Async API Call========");
       response = asyncExecutor.execute(method, getApiUrl(), getAllParams(extraParams), context);
       Futures.addCallback(
         response,
-        new FutureCallback<String>() {
-          public void onSuccess(String result) {
+        new FutureCallback<ResponseWrapper>() {
+          public void onSuccess(ResponseWrapper result) {
             context.log("Response:");
-            context.log(result);
+            context.log(result.getBody());
             context.log("========End of API Call========");
           }
           public void onFailure(Throwable t) {
@@ -402,10 +402,10 @@ public class APIRequest<T extends APINode> {
   }
 
   public static interface IAsyncRequestExecutor {
-    public ListenableFuture<String> execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
-    public ListenableFuture<String> sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
-    public ListenableFuture<String> sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
-    public ListenableFuture<String> sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
+    public ListenableFuture<ResponseWrapper> execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
+    public ListenableFuture<ResponseWrapper> sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
+    public ListenableFuture<ResponseWrapper> sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
+    public ListenableFuture<ResponseWrapper> sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException;
   }
 
   public static class RequestHelper {
@@ -483,8 +483,8 @@ public class APIRequest<T extends APINode> {
       return urlString.toString();
     }
 
-    public static ListenableFuture<String> invoke(okhttp3.OkHttpClient client, okhttp3.Request request) {
-      final SettableFuture<String> future = SettableFuture.create();
+    public static ListenableFuture<ResponseWrapper> invoke(okhttp3.OkHttpClient client, okhttp3.Request request) {
+      final SettableFuture<ResponseWrapper> future = SettableFuture.create();
       client.newCall(request).enqueue(
         new okhttp3.Callback() {
             @Override
@@ -496,7 +496,7 @@ public class APIRequest<T extends APINode> {
 
             @Override
             public void onResponse(okhttp3.Call call, final okhttp3.Response response) throws IOException {
-                future.set(response.body().string());
+                future.set(new ResponseWrapper(response.body().string(), convertToString(response.headers())));
             }
       });
       return future;
@@ -604,14 +604,14 @@ public class APIRequest<T extends APINode> {
       init();
     }
 
-    public ListenableFuture<String> execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
+    public ListenableFuture<ResponseWrapper> execute(String method, String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
       if ("GET".equals(method)) return sendGet(apiUrl, allParams, context);
       else if ("POST".equals(method)) return sendPost(apiUrl, allParams, context);
       else if ("DELETE".equals(method)) return sendDelete(apiUrl, allParams, context);
       else throw new IllegalArgumentException("Unsupported http method. Currently only GET, POST, and DELETE are supported");
     }
 
-    public ListenableFuture<String> sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
+    public ListenableFuture<ResponseWrapper> sendGet(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
       context.log("Request:");
       context.log("GET: " + apiUrl.toString());
       okhttp3.Request request = new okhttp3.Request.Builder()
@@ -624,7 +624,7 @@ public class APIRequest<T extends APINode> {
       return RequestHelper.invoke(client, request);
     }
 
-    public ListenableFuture<String> sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
+    public ListenableFuture<ResponseWrapper> sendPost(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
       String boundary = "--------------------------" + new Random().nextLong();
       okhttp3.MultipartBody.Builder builder = new okhttp3.MultipartBody.Builder(boundary)
           .setType(okhttp3.MultipartBody.FORM);
@@ -659,7 +659,7 @@ public class APIRequest<T extends APINode> {
       return RequestHelper.invoke(client, request);
     }
 
-    public ListenableFuture<String> sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
+    public ListenableFuture<ResponseWrapper> sendDelete(String apiUrl, Map<String, Object> allParams, APIContext context) throws APIException, IOException {
       URL url = new URL(RequestHelper.constructUrlString(apiUrl, allParams));
       context.log("Delete: " + url.toString());
       okhttp3.Request request = new okhttp3.Request.Builder()

@@ -61,8 +61,12 @@ public class LookalikeSpec extends APINode {
   private Boolean mIsFinancialService = null;
   @SerializedName("origin")
   private List<Object> mOrigin = null;
+  @SerializedName("origin_event_source_name")
+  private String mOriginEventSourceName = null;
   @SerializedName("origin_event_source_type")
   private String mOriginEventSourceType = null;
+  @SerializedName("product_set_name")
+  private String mProductSetName = null;
   @SerializedName("ratio")
   private Double mRatio = null;
   @SerializedName("starting_ratio")
@@ -251,12 +255,30 @@ public class LookalikeSpec extends APINode {
     return this;
   }
 
+  public String getFieldOriginEventSourceName() {
+    return mOriginEventSourceName;
+  }
+
+  public LookalikeSpec setFieldOriginEventSourceName(String value) {
+    this.mOriginEventSourceName = value;
+    return this;
+  }
+
   public String getFieldOriginEventSourceType() {
     return mOriginEventSourceType;
   }
 
   public LookalikeSpec setFieldOriginEventSourceType(String value) {
     this.mOriginEventSourceType = value;
+    return this;
+  }
+
+  public String getFieldProductSetName() {
+    return mProductSetName;
+  }
+
+  public LookalikeSpec setFieldProductSetName(String value) {
+    this.mProductSetName = value;
     return this;
   }
 
@@ -325,7 +347,9 @@ public class LookalikeSpec extends APINode {
     this.mCountry = instance.mCountry;
     this.mIsFinancialService = instance.mIsFinancialService;
     this.mOrigin = instance.mOrigin;
+    this.mOriginEventSourceName = instance.mOriginEventSourceName;
     this.mOriginEventSourceType = instance.mOriginEventSourceType;
+    this.mProductSetName = instance.mProductSetName;
     this.mRatio = instance.mRatio;
     this.mStartingRatio = instance.mStartingRatio;
     this.mTargetCountries = instance.mTargetCountries;

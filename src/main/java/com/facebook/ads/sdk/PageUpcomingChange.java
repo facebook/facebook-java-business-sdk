@@ -360,10 +360,10 @@ public class PageUpcomingChange extends APINode {
     public ListenableFuture<PageUpcomingChange> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, PageUpcomingChange>() {
-           public PageUpcomingChange apply(String result) {
+        new Function<ResponseWrapper, PageUpcomingChange>() {
+           public PageUpcomingChange apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -507,10 +507,10 @@ public class PageUpcomingChange extends APINode {
     public ListenableFuture<PageUpcomingChange> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, PageUpcomingChange>() {
-           public PageUpcomingChange apply(String result) {
+        new Function<ResponseWrapper, PageUpcomingChange>() {
+           public PageUpcomingChange apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

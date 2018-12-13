@@ -368,10 +368,10 @@ public class ProductGroup extends APINode {
     public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Comment>() {
-           public Comment apply(String result) {
+        new Function<ResponseWrapper, Comment>() {
+           public Comment apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateComment.this.parseResponse(result, null);
+               return APIRequestCreateComment.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -605,10 +605,10 @@ public class ProductGroup extends APINode {
     public ListenableFuture<APINodeList<ProductItem>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ProductItem>>() {
-           public APINodeList<ProductItem> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ProductItem>>() {
+           public APINodeList<ProductItem> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetProducts.this.parseResponse(result, null);
+               return APIRequestGetProducts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1130,10 +1130,10 @@ public class ProductGroup extends APINode {
     public ListenableFuture<ProductItem> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ProductItem>() {
-           public ProductItem apply(String result) {
+        new Function<ResponseWrapper, ProductItem>() {
+           public ProductItem apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateProduct.this.parseResponse(result, null);
+               return APIRequestCreateProduct.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1599,10 +1599,10 @@ public class ProductGroup extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1707,10 +1707,10 @@ public class ProductGroup extends APINode {
     public ListenableFuture<ProductGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ProductGroup>() {
-           public ProductGroup apply(String result) {
+        new Function<ResponseWrapper, ProductGroup>() {
+           public ProductGroup apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1841,10 +1841,10 @@ public class ProductGroup extends APINode {
     public ListenableFuture<ProductGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ProductGroup>() {
-           public ProductGroup apply(String result) {
+        new Function<ResponseWrapper, ProductGroup>() {
+           public ProductGroup apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

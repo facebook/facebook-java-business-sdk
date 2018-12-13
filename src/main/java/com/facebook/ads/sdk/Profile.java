@@ -392,10 +392,10 @@ public class Profile extends APINode {
     public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ProfilePictureSource>>() {
-           public APINodeList<ProfilePictureSource> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ProfilePictureSource>>() {
+           public APINodeList<ProfilePictureSource> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPicture.this.parseResponse(result, null);
+               return APIRequestGetPicture.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -613,10 +613,10 @@ public class Profile extends APINode {
     public ListenableFuture<Profile> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Profile>() {
-           public Profile apply(String result) {
+        new Function<ResponseWrapper, Profile>() {
+           public Profile apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

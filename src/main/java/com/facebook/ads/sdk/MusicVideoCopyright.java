@@ -402,10 +402,10 @@ public class MusicVideoCopyright extends APINode {
     public ListenableFuture<MusicVideoCopyright> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, MusicVideoCopyright>() {
-           public MusicVideoCopyright apply(String result) {
+        new Function<ResponseWrapper, MusicVideoCopyright>() {
+           public MusicVideoCopyright apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

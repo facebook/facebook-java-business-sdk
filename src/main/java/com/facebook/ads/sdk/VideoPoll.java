@@ -358,10 +358,10 @@ public class VideoPoll extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPollOptions.this.parseResponse(result, null);
+               return APIRequestGetPollOptions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -469,10 +469,10 @@ public class VideoPoll extends APINode {
     public ListenableFuture<VideoPoll> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, VideoPoll>() {
-           public VideoPoll apply(String result) {
+        new Function<ResponseWrapper, VideoPoll>() {
+           public VideoPoll apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -627,10 +627,10 @@ public class VideoPoll extends APINode {
     public ListenableFuture<VideoPoll> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, VideoPoll>() {
-           public VideoPoll apply(String result) {
+        new Function<ResponseWrapper, VideoPoll>() {
+           public VideoPoll apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

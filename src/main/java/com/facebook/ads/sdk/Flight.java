@@ -420,10 +420,10 @@ public class Flight extends APINode {
     public ListenableFuture<Flight> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Flight>() {
-           public Flight apply(String result) {
+        new Function<ResponseWrapper, Flight>() {
+           public Flight apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -636,10 +636,10 @@ public class Flight extends APINode {
     public ListenableFuture<Flight> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Flight>() {
-           public Flight apply(String result) {
+        new Function<ResponseWrapper, Flight>() {
+           public Flight apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

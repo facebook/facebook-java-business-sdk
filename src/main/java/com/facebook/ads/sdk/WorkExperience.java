@@ -390,10 +390,10 @@ public class WorkExperience extends APINode {
     public ListenableFuture<WorkExperience> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, WorkExperience>() {
-           public WorkExperience apply(String result) {
+        new Function<ResponseWrapper, WorkExperience>() {
+           public WorkExperience apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

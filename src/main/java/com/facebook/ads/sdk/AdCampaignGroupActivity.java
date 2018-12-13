@@ -469,10 +469,10 @@ public class AdCampaignGroupActivity extends APINode {
     public ListenableFuture<AdCampaignGroupActivity> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdCampaignGroupActivity>() {
-           public AdCampaignGroupActivity apply(String result) {
+        new Function<ResponseWrapper, AdCampaignGroupActivity>() {
+           public AdCampaignGroupActivity apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

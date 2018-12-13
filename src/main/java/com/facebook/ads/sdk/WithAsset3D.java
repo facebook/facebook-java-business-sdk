@@ -315,10 +315,10 @@ public class WithAsset3D extends APINode {
     public ListenableFuture<WithAsset3D> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, WithAsset3D>() {
-           public WithAsset3D apply(String result) {
+        new Function<ResponseWrapper, WithAsset3D>() {
+           public WithAsset3D apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

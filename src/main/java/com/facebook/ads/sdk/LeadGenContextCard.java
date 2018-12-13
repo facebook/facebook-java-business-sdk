@@ -377,10 +377,10 @@ public class LeadGenContextCard extends APINode {
     public ListenableFuture<LeadGenContextCard> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, LeadGenContextCard>() {
-           public LeadGenContextCard apply(String result) {
+        new Function<ResponseWrapper, LeadGenContextCard>() {
+           public LeadGenContextCard apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

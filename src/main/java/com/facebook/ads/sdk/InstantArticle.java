@@ -380,10 +380,10 @@ public class InstantArticle extends APINode {
     public ListenableFuture<APINodeList<InstantArticleInsightsQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<InstantArticleInsightsQueryResult>>() {
-           public APINodeList<InstantArticleInsightsQueryResult> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<InstantArticleInsightsQueryResult>>() {
+           public APINodeList<InstantArticleInsightsQueryResult> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetInsights.this.parseResponse(result, null);
+               return APIRequestGetInsights.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -556,10 +556,10 @@ public class InstantArticle extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -669,10 +669,10 @@ public class InstantArticle extends APINode {
     public ListenableFuture<InstantArticle> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, InstantArticle>() {
-           public InstantArticle apply(String result) {
+        new Function<ResponseWrapper, InstantArticle>() {
+           public InstantArticle apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

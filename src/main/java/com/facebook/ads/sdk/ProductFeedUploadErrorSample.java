@@ -329,10 +329,10 @@ public class ProductFeedUploadErrorSample extends APINode {
     public ListenableFuture<ProductFeedUploadErrorSample> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ProductFeedUploadErrorSample>() {
-           public ProductFeedUploadErrorSample apply(String result) {
+        new Function<ResponseWrapper, ProductFeedUploadErrorSample>() {
+           public ProductFeedUploadErrorSample apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

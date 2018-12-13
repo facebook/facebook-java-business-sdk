@@ -422,10 +422,10 @@ public class AsyncSession extends APINode {
     public ListenableFuture<AsyncSession> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AsyncSession>() {
-           public AsyncSession apply(String result) {
+        new Function<ResponseWrapper, AsyncSession>() {
+           public AsyncSession apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

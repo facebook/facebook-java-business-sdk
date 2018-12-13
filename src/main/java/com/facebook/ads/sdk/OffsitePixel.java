@@ -351,10 +351,10 @@ public class OffsitePixel extends APINode {
     public ListenableFuture<OffsitePixel> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OffsitePixel>() {
-           public OffsitePixel apply(String result) {
+        new Function<ResponseWrapper, OffsitePixel>() {
+           public OffsitePixel apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

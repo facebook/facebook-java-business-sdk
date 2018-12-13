@@ -338,3 +338,6 @@ Here are some hints on troubleshooting:
 * If you see in the debug message that the params sent to server don't match what you specified, it is possible that you didn't specify the param correctly, or SDK didn't assemble the request properly.
 * For temporary server issue, typically retry should work after a few seconds.
 * If server persistently responds with "Unknown error," then it is potentially server bug.
+
+## License
+Facebook Business SDK for Java is licensed under the LICENSE file in the root directory of this source tree.

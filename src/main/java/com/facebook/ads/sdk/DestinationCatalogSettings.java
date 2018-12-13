@@ -322,10 +322,10 @@ public class DestinationCatalogSettings extends APINode {
     public ListenableFuture<DestinationCatalogSettings> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, DestinationCatalogSettings>() {
-           public DestinationCatalogSettings apply(String result) {
+        new Function<ResponseWrapper, DestinationCatalogSettings>() {
+           public DestinationCatalogSettings apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

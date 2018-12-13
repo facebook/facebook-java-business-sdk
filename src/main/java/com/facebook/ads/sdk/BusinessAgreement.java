@@ -326,10 +326,10 @@ public class BusinessAgreement extends APINode {
     public ListenableFuture<BusinessAgreement> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, BusinessAgreement>() {
-           public BusinessAgreement apply(String result) {
+        new Function<ResponseWrapper, BusinessAgreement>() {
+           public BusinessAgreement apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -446,10 +446,10 @@ public class BusinessAgreement extends APINode {
     public ListenableFuture<BusinessAgreement> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, BusinessAgreement>() {
-           public BusinessAgreement apply(String result) {
+        new Function<ResponseWrapper, BusinessAgreement>() {
+           public BusinessAgreement apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

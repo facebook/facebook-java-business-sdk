@@ -403,10 +403,10 @@ public class InstagramUser extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAgencies.this.parseResponse(result, null);
+               return APIRequestDeleteAgencies.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -530,10 +530,10 @@ public class InstagramUser extends APINode {
     public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Business>>() {
-           public APINodeList<Business> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Business>>() {
+           public APINodeList<Business> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAgencies.this.parseResponse(result, null);
+               return APIRequestGetAgencies.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -761,10 +761,10 @@ public class InstagramUser extends APINode {
     public ListenableFuture<InstagramUser> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, InstagramUser>() {
-           public InstagramUser apply(String result) {
+        new Function<ResponseWrapper, InstagramUser>() {
+           public InstagramUser apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAgency.this.parseResponse(result, null);
+               return APIRequestCreateAgency.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -872,10 +872,10 @@ public class InstagramUser extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAssignedUsers.this.parseResponse(result, null);
+               return APIRequestDeleteAssignedUsers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -999,10 +999,10 @@ public class InstagramUser extends APINode {
     public ListenableFuture<APINodeList<AssignedUser>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AssignedUser>>() {
-           public APINodeList<AssignedUser> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AssignedUser>>() {
+           public APINodeList<AssignedUser> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAssignedUsers.this.parseResponse(result, null);
+               return APIRequestGetAssignedUsers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1143,10 +1143,10 @@ public class InstagramUser extends APINode {
     public ListenableFuture<InstagramUser> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, InstagramUser>() {
-           public InstagramUser apply(String result) {
+        new Function<ResponseWrapper, InstagramUser>() {
+           public InstagramUser apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAssignedUser.this.parseResponse(result, null);
+               return APIRequestCreateAssignedUser.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1276,10 +1276,10 @@ public class InstagramUser extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAuthorizedAdAccounts.this.parseResponse(result, null);
+               return APIRequestDeleteAuthorizedAdAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1451,10 +1451,10 @@ public class InstagramUser extends APINode {
     public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccount>>() {
-           public APINodeList<AdAccount> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccount>>() {
+           public APINodeList<AdAccount> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAuthorizedAdAccounts.this.parseResponse(result, null);
+               return APIRequestGetAuthorizedAdAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1982,10 +1982,10 @@ public class InstagramUser extends APINode {
     public ListenableFuture<InstagramUser> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, InstagramUser>() {
-           public InstagramUser apply(String result) {
+        new Function<ResponseWrapper, InstagramUser>() {
+           public InstagramUser apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAuthorizedAdAccount.this.parseResponse(result, null);
+               return APIRequestCreateAuthorizedAdAccount.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2099,10 +2099,10 @@ public class InstagramUser extends APINode {
     public ListenableFuture<InstagramUser> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, InstagramUser>() {
-           public InstagramUser apply(String result) {
+        new Function<ResponseWrapper, InstagramUser>() {
+           public InstagramUser apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateUserPermission.this.parseResponse(result, null);
+               return APIRequestCreateUserPermission.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2239,10 +2239,10 @@ public class InstagramUser extends APINode {
     public ListenableFuture<InstagramUser> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, InstagramUser>() {
-           public InstagramUser apply(String result) {
+        new Function<ResponseWrapper, InstagramUser>() {
+           public InstagramUser apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

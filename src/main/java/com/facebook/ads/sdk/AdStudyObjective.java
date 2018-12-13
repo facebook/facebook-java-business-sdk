@@ -278,6 +278,10 @@ public class AdStudyObjective extends APINode {
     return getGson().toJson(this);
   }
 
+  public APIRequestGetAdPlacePageSets getAdPlacePageSets() {
+    return new APIRequestGetAdPlacePageSets(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAdsPixels getAdsPixels() {
     return new APIRequestGetAdsPixels(this.getPrefixedId().toString(), context);
   }
@@ -341,6 +345,158 @@ public class AdStudyObjective extends APINode {
 
 
 
+  public static class APIRequestGetAdPlacePageSets extends APIRequest<AdPlacePageSet> {
+
+    APINodeList<AdPlacePageSet> lastResponse = null;
+    @Override
+    public APINodeList<AdPlacePageSet> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "account_id",
+      "id",
+      "location_types",
+      "name",
+      "pages_count",
+      "parent_page",
+    };
+
+    @Override
+    public APINodeList<AdPlacePageSet> parseResponse(String response, String header) throws APIException {
+      return AdPlacePageSet.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<AdPlacePageSet> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<AdPlacePageSet> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<AdPlacePageSet>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<AdPlacePageSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<AdPlacePageSet>>() {
+           public APINodeList<AdPlacePageSet> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAdPlacePageSets.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAdPlacePageSets(String nodeId, APIContext context) {
+      super(context, nodeId, "/ad_place_page_sets", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAdPlacePageSets setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlacePageSets setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAdPlacePageSets requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAdPlacePageSets requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlacePageSets requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAdPlacePageSets requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlacePageSets requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAdPlacePageSets requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetAdPlacePageSets requestAccountIdField () {
+      return this.requestAccountIdField(true);
+    }
+    public APIRequestGetAdPlacePageSets requestAccountIdField (boolean value) {
+      this.requestField("account_id", value);
+      return this;
+    }
+    public APIRequestGetAdPlacePageSets requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetAdPlacePageSets requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetAdPlacePageSets requestLocationTypesField () {
+      return this.requestLocationTypesField(true);
+    }
+    public APIRequestGetAdPlacePageSets requestLocationTypesField (boolean value) {
+      this.requestField("location_types", value);
+      return this;
+    }
+    public APIRequestGetAdPlacePageSets requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetAdPlacePageSets requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetAdPlacePageSets requestPagesCountField () {
+      return this.requestPagesCountField(true);
+    }
+    public APIRequestGetAdPlacePageSets requestPagesCountField (boolean value) {
+      this.requestField("pages_count", value);
+      return this;
+    }
+    public APIRequestGetAdPlacePageSets requestParentPageField () {
+      return this.requestParentPageField(true);
+    }
+    public APIRequestGetAdPlacePageSets requestParentPageField (boolean value) {
+      this.requestField("parent_page", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetAdsPixels extends APIRequest<AdsPixel> {
 
     APINodeList<AdsPixel> lastResponse = null;
@@ -392,10 +548,10 @@ public class AdStudyObjective extends APINode {
     public ListenableFuture<APINodeList<AdsPixel>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdsPixel>>() {
-           public APINodeList<AdsPixel> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdsPixel>>() {
+           public APINodeList<AdsPixel> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdsPixels.this.parseResponse(result, null);
+               return APIRequestGetAdsPixels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -591,7 +747,6 @@ public class AdStudyObjective extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
-      "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
       "canvas_url",
@@ -693,10 +848,10 @@ public class AdStudyObjective extends APINode {
     public ListenableFuture<APINodeList<Application>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Application>>() {
-           public APINodeList<Application> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Application>>() {
+           public APINodeList<Application> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetApplications.this.parseResponse(result, null);
+               return APIRequestGetApplications.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -917,13 +1072,6 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
-      return this;
-    }
-    public APIRequestGetApplications requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGetApplications requestBusinessField (boolean value) {
-      this.requestField("business", value);
       return this;
     }
     public APIRequestGetApplications requestCanvasFluidHeightField () {
@@ -1508,10 +1656,10 @@ public class AdStudyObjective extends APINode {
     public ListenableFuture<APINodeList<CustomConversion>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<CustomConversion>>() {
-           public APINodeList<CustomConversion> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<CustomConversion>>() {
+           public APINodeList<CustomConversion> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetCustomConversions.this.parseResponse(result, null);
+               return APIRequestGetCustomConversions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1758,10 +1906,10 @@ public class AdStudyObjective extends APINode {
     public ListenableFuture<APINodeList<OfflineConversionDataSet>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<OfflineConversionDataSet>>() {
-           public APINodeList<OfflineConversionDataSet> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<OfflineConversionDataSet>>() {
+           public APINodeList<OfflineConversionDataSet> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetOfflineConversionDataSets.this.parseResponse(result, null);
+               return APIRequestGetOfflineConversionDataSets.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2008,10 +2156,10 @@ public class AdStudyObjective extends APINode {
     public ListenableFuture<APINodeList<OffsitePixel>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<OffsitePixel>>() {
-           public APINodeList<OffsitePixel> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<OffsitePixel>>() {
+           public APINodeList<OffsitePixel> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetOffsitePixels.this.parseResponse(result, null);
+               return APIRequestGetOffsitePixels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2154,10 +2302,10 @@ public class AdStudyObjective extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2266,10 +2414,10 @@ public class AdStudyObjective extends APINode {
     public ListenableFuture<AdStudyObjective> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdStudyObjective>() {
-           public AdStudyObjective apply(String result) {
+        new Function<ResponseWrapper, AdStudyObjective>() {
+           public AdStudyObjective apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2436,10 +2584,10 @@ public class AdStudyObjective extends APINode {
     public ListenableFuture<AdStudyObjective> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdStudyObjective>() {
-           public AdStudyObjective apply(String result) {
+        new Function<ResponseWrapper, AdStudyObjective>() {
+           public AdStudyObjective apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

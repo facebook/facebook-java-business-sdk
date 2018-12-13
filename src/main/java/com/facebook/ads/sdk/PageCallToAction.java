@@ -439,10 +439,10 @@ public class PageCallToAction extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -562,10 +562,10 @@ public class PageCallToAction extends APINode {
     public ListenableFuture<PageCallToAction> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, PageCallToAction>() {
-           public PageCallToAction apply(String result) {
+        new Function<ResponseWrapper, PageCallToAction>() {
+           public PageCallToAction apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -813,10 +813,10 @@ public class PageCallToAction extends APINode {
     public ListenableFuture<PageCallToAction> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, PageCallToAction>() {
-           public PageCallToAction apply(String result) {
+        new Function<ResponseWrapper, PageCallToAction>() {
+           public PageCallToAction apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1089,6 +1089,8 @@ public class PageCallToAction extends APINode {
       VALUE_LOCAL_DEV_PLATFORM("LOCAL_DEV_PLATFORM"),
       @SerializedName("INTERESTED")
       VALUE_INTERESTED("INTERESTED"),
+      @SerializedName("WOODHENGE_SUPPORT")
+      VALUE_WOODHENGE_SUPPORT("WOODHENGE_SUPPORT"),
       NULL(null);
 
       private String value;
@@ -1114,6 +1116,8 @@ public class PageCallToAction extends APINode {
       VALUE_WEBSITE("WEBSITE"),
       @SerializedName("SHOP_ON_FACEBOOK")
       VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
+      @SerializedName("BECOME_SUPPORTER")
+      VALUE_BECOME_SUPPORTER("BECOME_SUPPORTER"),
       NULL(null);
 
       private String value;

@@ -427,10 +427,10 @@ public class OracleTransaction extends APINode {
     public ListenableFuture<APINodeList<InvoiceCampaign>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<InvoiceCampaign>>() {
-           public APINodeList<InvoiceCampaign> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<InvoiceCampaign>>() {
+           public APINodeList<InvoiceCampaign> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetCampaigns.this.parseResponse(result, null);
+               return APIRequestGetCampaigns.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -597,10 +597,10 @@ public class OracleTransaction extends APINode {
     public ListenableFuture<APINodeList<AtlasURL>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AtlasURL>>() {
-           public APINodeList<AtlasURL> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AtlasURL>>() {
+           public APINodeList<AtlasURL> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetData.this.parseResponse(result, null);
+               return APIRequestGetData.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -741,10 +741,10 @@ public class OracleTransaction extends APINode {
     public ListenableFuture<OracleTransaction> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OracleTransaction>() {
-           public OracleTransaction apply(String result) {
+        new Function<ResponseWrapper, OracleTransaction>() {
+           public OracleTransaction apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

@@ -344,10 +344,10 @@ public class LiveWithGuestSession extends APINode {
     public ListenableFuture<LiveWithGuestSession> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, LiveWithGuestSession>() {
-           public LiveWithGuestSession apply(String result) {
+        new Function<ResponseWrapper, LiveWithGuestSession>() {
+           public LiveWithGuestSession apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateHangup.this.parseResponse(result, null);
+               return APIRequestCreateHangup.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -449,10 +449,10 @@ public class LiveWithGuestSession extends APINode {
     public ListenableFuture<LiveWithGuestSession> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, LiveWithGuestSession>() {
-           public LiveWithGuestSession apply(String result) {
+        new Function<ResponseWrapper, LiveWithGuestSession>() {
+           public LiveWithGuestSession apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateJoin.this.parseResponse(result, null);
+               return APIRequestCreateJoin.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -559,10 +559,10 @@ public class LiveWithGuestSession extends APINode {
     public ListenableFuture<LiveWithGuestSession> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, LiveWithGuestSession>() {
-           public LiveWithGuestSession apply(String result) {
+        new Function<ResponseWrapper, LiveWithGuestSession>() {
+           public LiveWithGuestSession apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateRingUser.this.parseResponse(result, null);
+               return APIRequestCreateRingUser.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -676,10 +676,10 @@ public class LiveWithGuestSession extends APINode {
     public ListenableFuture<LiveWithGuestSession> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, LiveWithGuestSession>() {
-           public LiveWithGuestSession apply(String result) {
+        new Function<ResponseWrapper, LiveWithGuestSession>() {
+           public LiveWithGuestSession apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

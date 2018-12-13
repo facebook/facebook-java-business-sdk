@@ -493,10 +493,10 @@ public class AutomotiveModel extends APINode {
     public ListenableFuture<AutomotiveModel> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AutomotiveModel>() {
-           public AutomotiveModel apply(String result) {
+        new Function<ResponseWrapper, AutomotiveModel>() {
+           public AutomotiveModel apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

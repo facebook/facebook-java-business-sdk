@@ -365,10 +365,10 @@ public class PlaceTopic extends APINode {
     public ListenableFuture<PlaceTopic> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, PlaceTopic>() {
-           public PlaceTopic apply(String result) {
+        new Function<ResponseWrapper, PlaceTopic>() {
+           public PlaceTopic apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

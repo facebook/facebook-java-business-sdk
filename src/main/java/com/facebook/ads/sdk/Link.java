@@ -298,10 +298,6 @@ public class Link extends APINode {
     return new APIRequestCreateComment(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetLeads getLeads() {
-    return new APIRequestGetLeads(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestDeleteLikes deleteLikes() {
     return new APIRequestDeleteLikes(this.getPrefixedId().toString(), context);
   }
@@ -318,8 +314,8 @@ public class Link extends APINode {
     return new APIRequestGetReactions(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetShareDPosts getShareDPosts() {
-    return new APIRequestGetShareDPosts(this.getPrefixedId().toString(), context);
+  public APIRequestGetSharedPosts getSharedPosts() {
+    return new APIRequestGetSharedPosts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDelete delete() {
@@ -447,10 +443,10 @@ public class Link extends APINode {
     public ListenableFuture<APINodeList<Comment>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Comment>>() {
-           public APINodeList<Comment> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Comment>>() {
+           public APINodeList<Comment> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetComments.this.parseResponse(result, null);
+               return APIRequestGetComments.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -743,10 +739,10 @@ public class Link extends APINode {
     public ListenableFuture<Comment> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Comment>() {
-           public Comment apply(String result) {
+        new Function<ResponseWrapper, Comment>() {
+           public Comment apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateComment.this.parseResponse(result, null);
+               return APIRequestCreateComment.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -891,238 +887,6 @@ public class Link extends APINode {
 
   }
 
-  public static class APIRequestGetLeads extends APIRequest<Lead> {
-
-    APINodeList<Lead> lastResponse = null;
-    @Override
-    public APINodeList<Lead> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "ad_id",
-      "ad_name",
-      "adset_id",
-      "adset_name",
-      "campaign_id",
-      "campaign_name",
-      "created_time",
-      "custom_disclaimer_responses",
-      "field_data",
-      "form_id",
-      "id",
-      "is_organic",
-      "partner_name",
-      "platform",
-      "post",
-      "retailer_item_id",
-    };
-
-    @Override
-    public APINodeList<Lead> parseResponse(String response, String header) throws APIException {
-      return Lead.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<Lead> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<Lead> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<Lead>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<Lead>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Lead>>() {
-           public APINodeList<Lead> apply(String result) {
-             try {
-               return APIRequestGetLeads.this.parseResponse(result, null);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetLeads(String nodeId, APIContext context) {
-      super(context, nodeId, "/leads", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetLeads setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLeads setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetLeads requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetLeads requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLeads requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetLeads requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLeads requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetLeads requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetLeads requestAdIdField () {
-      return this.requestAdIdField(true);
-    }
-    public APIRequestGetLeads requestAdIdField (boolean value) {
-      this.requestField("ad_id", value);
-      return this;
-    }
-    public APIRequestGetLeads requestAdNameField () {
-      return this.requestAdNameField(true);
-    }
-    public APIRequestGetLeads requestAdNameField (boolean value) {
-      this.requestField("ad_name", value);
-      return this;
-    }
-    public APIRequestGetLeads requestAdsetIdField () {
-      return this.requestAdsetIdField(true);
-    }
-    public APIRequestGetLeads requestAdsetIdField (boolean value) {
-      this.requestField("adset_id", value);
-      return this;
-    }
-    public APIRequestGetLeads requestAdsetNameField () {
-      return this.requestAdsetNameField(true);
-    }
-    public APIRequestGetLeads requestAdsetNameField (boolean value) {
-      this.requestField("adset_name", value);
-      return this;
-    }
-    public APIRequestGetLeads requestCampaignIdField () {
-      return this.requestCampaignIdField(true);
-    }
-    public APIRequestGetLeads requestCampaignIdField (boolean value) {
-      this.requestField("campaign_id", value);
-      return this;
-    }
-    public APIRequestGetLeads requestCampaignNameField () {
-      return this.requestCampaignNameField(true);
-    }
-    public APIRequestGetLeads requestCampaignNameField (boolean value) {
-      this.requestField("campaign_name", value);
-      return this;
-    }
-    public APIRequestGetLeads requestCreatedTimeField () {
-      return this.requestCreatedTimeField(true);
-    }
-    public APIRequestGetLeads requestCreatedTimeField (boolean value) {
-      this.requestField("created_time", value);
-      return this;
-    }
-    public APIRequestGetLeads requestCustomDisclaimerResponsesField () {
-      return this.requestCustomDisclaimerResponsesField(true);
-    }
-    public APIRequestGetLeads requestCustomDisclaimerResponsesField (boolean value) {
-      this.requestField("custom_disclaimer_responses", value);
-      return this;
-    }
-    public APIRequestGetLeads requestFieldDataField () {
-      return this.requestFieldDataField(true);
-    }
-    public APIRequestGetLeads requestFieldDataField (boolean value) {
-      this.requestField("field_data", value);
-      return this;
-    }
-    public APIRequestGetLeads requestFormIdField () {
-      return this.requestFormIdField(true);
-    }
-    public APIRequestGetLeads requestFormIdField (boolean value) {
-      this.requestField("form_id", value);
-      return this;
-    }
-    public APIRequestGetLeads requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetLeads requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetLeads requestIsOrganicField () {
-      return this.requestIsOrganicField(true);
-    }
-    public APIRequestGetLeads requestIsOrganicField (boolean value) {
-      this.requestField("is_organic", value);
-      return this;
-    }
-    public APIRequestGetLeads requestPartnerNameField () {
-      return this.requestPartnerNameField(true);
-    }
-    public APIRequestGetLeads requestPartnerNameField (boolean value) {
-      this.requestField("partner_name", value);
-      return this;
-    }
-    public APIRequestGetLeads requestPlatformField () {
-      return this.requestPlatformField(true);
-    }
-    public APIRequestGetLeads requestPlatformField (boolean value) {
-      this.requestField("platform", value);
-      return this;
-    }
-    public APIRequestGetLeads requestPostField () {
-      return this.requestPostField(true);
-    }
-    public APIRequestGetLeads requestPostField (boolean value) {
-      this.requestField("post", value);
-      return this;
-    }
-    public APIRequestGetLeads requestRetailerItemIdField () {
-      return this.requestRetailerItemIdField(true);
-    }
-    public APIRequestGetLeads requestRetailerItemIdField (boolean value) {
-      this.requestField("retailer_item_id", value);
-      return this;
-    }
-  }
-
   public static class APIRequestDeleteLikes extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -1164,10 +928,10 @@ public class Link extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteLikes.this.parseResponse(result, null);
+               return APIRequestDeleteLikes.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1303,10 +1067,10 @@ public class Link extends APINode {
     public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Profile>>() {
-           public APINodeList<Profile> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Profile>>() {
+           public APINodeList<Profile> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetLikes.this.parseResponse(result, null);
+               return APIRequestGetLikes.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1488,10 +1252,10 @@ public class Link extends APINode {
     public ListenableFuture<Link> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Link>() {
-           public Link apply(String result) {
+        new Function<ResponseWrapper, Link>() {
+           public Link apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateLike.this.parseResponse(result, null);
+               return APIRequestCreateLike.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1628,10 +1392,10 @@ public class Link extends APINode {
     public ListenableFuture<APINodeList<Profile>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Profile>>() {
-           public APINodeList<Profile> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Profile>>() {
+           public APINodeList<Profile> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetReactions.this.parseResponse(result, null);
+               return APIRequestGetReactions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1781,7 +1545,7 @@ public class Link extends APINode {
     }
   }
 
-  public static class APIRequestGetShareDPosts extends APIRequest<Post> {
+  public static class APIRequestGetSharedPosts extends APIRequest<Post> {
 
     APINodeList<Post> lastResponse = null;
     @Override
@@ -1877,10 +1641,10 @@ public class Link extends APINode {
     public ListenableFuture<APINodeList<Post>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Post>>() {
-           public APINodeList<Post> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Post>>() {
+           public APINodeList<Post> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetShareDPosts.this.parseResponse(result, null);
+               return APIRequestGetSharedPosts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1889,28 +1653,28 @@ public class Link extends APINode {
       );
     };
 
-    public APIRequestGetShareDPosts(String nodeId, APIContext context) {
+    public APIRequestGetSharedPosts(String nodeId, APIContext context) {
       super(context, nodeId, "/sharedposts", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetShareDPosts setParam(String param, Object value) {
+    public APIRequestGetSharedPosts setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetShareDPosts setParams(Map<String, Object> params) {
+    public APIRequestGetSharedPosts setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetShareDPosts requestAllFields () {
+    public APIRequestGetSharedPosts requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetShareDPosts requestAllFields (boolean value) {
+    public APIRequestGetSharedPosts requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -1918,12 +1682,12 @@ public class Link extends APINode {
     }
 
     @Override
-    public APIRequestGetShareDPosts requestFields (List<String> fields) {
+    public APIRequestGetSharedPosts requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetShareDPosts requestFields (List<String> fields, boolean value) {
+    public APIRequestGetSharedPosts requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -1931,427 +1695,427 @@ public class Link extends APINode {
     }
 
     @Override
-    public APIRequestGetShareDPosts requestField (String field) {
+    public APIRequestGetSharedPosts requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetShareDPosts requestField (String field, boolean value) {
+    public APIRequestGetSharedPosts requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetShareDPosts requestActionsField () {
+    public APIRequestGetSharedPosts requestActionsField () {
       return this.requestActionsField(true);
     }
-    public APIRequestGetShareDPosts requestActionsField (boolean value) {
+    public APIRequestGetSharedPosts requestActionsField (boolean value) {
       this.requestField("actions", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestAdminCreatorField () {
+    public APIRequestGetSharedPosts requestAdminCreatorField () {
       return this.requestAdminCreatorField(true);
     }
-    public APIRequestGetShareDPosts requestAdminCreatorField (boolean value) {
+    public APIRequestGetSharedPosts requestAdminCreatorField (boolean value) {
       this.requestField("admin_creator", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestAllowedAdvertisingObjectivesField () {
+    public APIRequestGetSharedPosts requestAllowedAdvertisingObjectivesField () {
       return this.requestAllowedAdvertisingObjectivesField(true);
     }
-    public APIRequestGetShareDPosts requestAllowedAdvertisingObjectivesField (boolean value) {
+    public APIRequestGetSharedPosts requestAllowedAdvertisingObjectivesField (boolean value) {
       this.requestField("allowed_advertising_objectives", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestApplicationField () {
+    public APIRequestGetSharedPosts requestApplicationField () {
       return this.requestApplicationField(true);
     }
-    public APIRequestGetShareDPosts requestApplicationField (boolean value) {
+    public APIRequestGetSharedPosts requestApplicationField (boolean value) {
       this.requestField("application", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestBackdatedTimeField () {
+    public APIRequestGetSharedPosts requestBackdatedTimeField () {
       return this.requestBackdatedTimeField(true);
     }
-    public APIRequestGetShareDPosts requestBackdatedTimeField (boolean value) {
+    public APIRequestGetSharedPosts requestBackdatedTimeField (boolean value) {
       this.requestField("backdated_time", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestCallToActionField () {
+    public APIRequestGetSharedPosts requestCallToActionField () {
       return this.requestCallToActionField(true);
     }
-    public APIRequestGetShareDPosts requestCallToActionField (boolean value) {
+    public APIRequestGetSharedPosts requestCallToActionField (boolean value) {
       this.requestField("call_to_action", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestCaptionField () {
+    public APIRequestGetSharedPosts requestCaptionField () {
       return this.requestCaptionField(true);
     }
-    public APIRequestGetShareDPosts requestCaptionField (boolean value) {
+    public APIRequestGetSharedPosts requestCaptionField (boolean value) {
       this.requestField("caption", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestChildAttachmentsField () {
+    public APIRequestGetSharedPosts requestChildAttachmentsField () {
       return this.requestChildAttachmentsField(true);
     }
-    public APIRequestGetShareDPosts requestChildAttachmentsField (boolean value) {
+    public APIRequestGetSharedPosts requestChildAttachmentsField (boolean value) {
       this.requestField("child_attachments", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestCommentsMirroringDomainField () {
+    public APIRequestGetSharedPosts requestCommentsMirroringDomainField () {
       return this.requestCommentsMirroringDomainField(true);
     }
-    public APIRequestGetShareDPosts requestCommentsMirroringDomainField (boolean value) {
+    public APIRequestGetSharedPosts requestCommentsMirroringDomainField (boolean value) {
       this.requestField("comments_mirroring_domain", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestCoordinatesField () {
+    public APIRequestGetSharedPosts requestCoordinatesField () {
       return this.requestCoordinatesField(true);
     }
-    public APIRequestGetShareDPosts requestCoordinatesField (boolean value) {
+    public APIRequestGetSharedPosts requestCoordinatesField (boolean value) {
       this.requestField("coordinates", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestCreatedTimeField () {
+    public APIRequestGetSharedPosts requestCreatedTimeField () {
       return this.requestCreatedTimeField(true);
     }
-    public APIRequestGetShareDPosts requestCreatedTimeField (boolean value) {
+    public APIRequestGetSharedPosts requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestDescriptionField () {
+    public APIRequestGetSharedPosts requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
-    public APIRequestGetShareDPosts requestDescriptionField (boolean value) {
+    public APIRequestGetSharedPosts requestDescriptionField (boolean value) {
       this.requestField("description", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestEventField () {
+    public APIRequestGetSharedPosts requestEventField () {
       return this.requestEventField(true);
     }
-    public APIRequestGetShareDPosts requestEventField (boolean value) {
+    public APIRequestGetSharedPosts requestEventField (boolean value) {
       this.requestField("event", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestExpandedHeightField () {
+    public APIRequestGetSharedPosts requestExpandedHeightField () {
       return this.requestExpandedHeightField(true);
     }
-    public APIRequestGetShareDPosts requestExpandedHeightField (boolean value) {
+    public APIRequestGetSharedPosts requestExpandedHeightField (boolean value) {
       this.requestField("expanded_height", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestExpandedWidthField () {
+    public APIRequestGetSharedPosts requestExpandedWidthField () {
       return this.requestExpandedWidthField(true);
     }
-    public APIRequestGetShareDPosts requestExpandedWidthField (boolean value) {
+    public APIRequestGetSharedPosts requestExpandedWidthField (boolean value) {
       this.requestField("expanded_width", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestFeedTargetingField () {
+    public APIRequestGetSharedPosts requestFeedTargetingField () {
       return this.requestFeedTargetingField(true);
     }
-    public APIRequestGetShareDPosts requestFeedTargetingField (boolean value) {
+    public APIRequestGetSharedPosts requestFeedTargetingField (boolean value) {
       this.requestField("feed_targeting", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestFromField () {
+    public APIRequestGetSharedPosts requestFromField () {
       return this.requestFromField(true);
     }
-    public APIRequestGetShareDPosts requestFromField (boolean value) {
+    public APIRequestGetSharedPosts requestFromField (boolean value) {
       this.requestField("from", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestFullPictureField () {
+    public APIRequestGetSharedPosts requestFullPictureField () {
       return this.requestFullPictureField(true);
     }
-    public APIRequestGetShareDPosts requestFullPictureField (boolean value) {
+    public APIRequestGetSharedPosts requestFullPictureField (boolean value) {
       this.requestField("full_picture", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestHeightField () {
+    public APIRequestGetSharedPosts requestHeightField () {
       return this.requestHeightField(true);
     }
-    public APIRequestGetShareDPosts requestHeightField (boolean value) {
+    public APIRequestGetSharedPosts requestHeightField (boolean value) {
       this.requestField("height", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestIconField () {
+    public APIRequestGetSharedPosts requestIconField () {
       return this.requestIconField(true);
     }
-    public APIRequestGetShareDPosts requestIconField (boolean value) {
+    public APIRequestGetSharedPosts requestIconField (boolean value) {
       this.requestField("icon", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestIdField () {
+    public APIRequestGetSharedPosts requestIdField () {
       return this.requestIdField(true);
     }
-    public APIRequestGetShareDPosts requestIdField (boolean value) {
+    public APIRequestGetSharedPosts requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestInstagramEligibilityField () {
+    public APIRequestGetSharedPosts requestInstagramEligibilityField () {
       return this.requestInstagramEligibilityField(true);
     }
-    public APIRequestGetShareDPosts requestInstagramEligibilityField (boolean value) {
+    public APIRequestGetSharedPosts requestInstagramEligibilityField (boolean value) {
       this.requestField("instagram_eligibility", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestIsAppShareField () {
+    public APIRequestGetSharedPosts requestIsAppShareField () {
       return this.requestIsAppShareField(true);
     }
-    public APIRequestGetShareDPosts requestIsAppShareField (boolean value) {
+    public APIRequestGetSharedPosts requestIsAppShareField (boolean value) {
       this.requestField("is_app_share", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestIsExpiredField () {
+    public APIRequestGetSharedPosts requestIsExpiredField () {
       return this.requestIsExpiredField(true);
     }
-    public APIRequestGetShareDPosts requestIsExpiredField (boolean value) {
+    public APIRequestGetSharedPosts requestIsExpiredField (boolean value) {
       this.requestField("is_expired", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestIsHiddenField () {
+    public APIRequestGetSharedPosts requestIsHiddenField () {
       return this.requestIsHiddenField(true);
     }
-    public APIRequestGetShareDPosts requestIsHiddenField (boolean value) {
+    public APIRequestGetSharedPosts requestIsHiddenField (boolean value) {
       this.requestField("is_hidden", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestIsInstagramEligibleField () {
+    public APIRequestGetSharedPosts requestIsInstagramEligibleField () {
       return this.requestIsInstagramEligibleField(true);
     }
-    public APIRequestGetShareDPosts requestIsInstagramEligibleField (boolean value) {
+    public APIRequestGetSharedPosts requestIsInstagramEligibleField (boolean value) {
       this.requestField("is_instagram_eligible", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestIsPopularField () {
+    public APIRequestGetSharedPosts requestIsPopularField () {
       return this.requestIsPopularField(true);
     }
-    public APIRequestGetShareDPosts requestIsPopularField (boolean value) {
+    public APIRequestGetSharedPosts requestIsPopularField (boolean value) {
       this.requestField("is_popular", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestIsPublishedField () {
+    public APIRequestGetSharedPosts requestIsPublishedField () {
       return this.requestIsPublishedField(true);
     }
-    public APIRequestGetShareDPosts requestIsPublishedField (boolean value) {
+    public APIRequestGetSharedPosts requestIsPublishedField (boolean value) {
       this.requestField("is_published", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestIsSphericalField () {
+    public APIRequestGetSharedPosts requestIsSphericalField () {
       return this.requestIsSphericalField(true);
     }
-    public APIRequestGetShareDPosts requestIsSphericalField (boolean value) {
+    public APIRequestGetSharedPosts requestIsSphericalField (boolean value) {
       this.requestField("is_spherical", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestLinkField () {
+    public APIRequestGetSharedPosts requestLinkField () {
       return this.requestLinkField(true);
     }
-    public APIRequestGetShareDPosts requestLinkField (boolean value) {
+    public APIRequestGetSharedPosts requestLinkField (boolean value) {
       this.requestField("link", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestMessageField () {
+    public APIRequestGetSharedPosts requestMessageField () {
       return this.requestMessageField(true);
     }
-    public APIRequestGetShareDPosts requestMessageField (boolean value) {
+    public APIRequestGetSharedPosts requestMessageField (boolean value) {
       this.requestField("message", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestMessageTagsField () {
+    public APIRequestGetSharedPosts requestMessageTagsField () {
       return this.requestMessageTagsField(true);
     }
-    public APIRequestGetShareDPosts requestMessageTagsField (boolean value) {
+    public APIRequestGetSharedPosts requestMessageTagsField (boolean value) {
       this.requestField("message_tags", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestMultiShareEndCardField () {
+    public APIRequestGetSharedPosts requestMultiShareEndCardField () {
       return this.requestMultiShareEndCardField(true);
     }
-    public APIRequestGetShareDPosts requestMultiShareEndCardField (boolean value) {
+    public APIRequestGetSharedPosts requestMultiShareEndCardField (boolean value) {
       this.requestField("multi_share_end_card", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestMultiShareOptimizedField () {
+    public APIRequestGetSharedPosts requestMultiShareOptimizedField () {
       return this.requestMultiShareOptimizedField(true);
     }
-    public APIRequestGetShareDPosts requestMultiShareOptimizedField (boolean value) {
+    public APIRequestGetSharedPosts requestMultiShareOptimizedField (boolean value) {
       this.requestField("multi_share_optimized", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestNameField () {
+    public APIRequestGetSharedPosts requestNameField () {
       return this.requestNameField(true);
     }
-    public APIRequestGetShareDPosts requestNameField (boolean value) {
+    public APIRequestGetSharedPosts requestNameField (boolean value) {
       this.requestField("name", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestObjectIdField () {
+    public APIRequestGetSharedPosts requestObjectIdField () {
       return this.requestObjectIdField(true);
     }
-    public APIRequestGetShareDPosts requestObjectIdField (boolean value) {
+    public APIRequestGetSharedPosts requestObjectIdField (boolean value) {
       this.requestField("object_id", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestParentIdField () {
+    public APIRequestGetSharedPosts requestParentIdField () {
       return this.requestParentIdField(true);
     }
-    public APIRequestGetShareDPosts requestParentIdField (boolean value) {
+    public APIRequestGetSharedPosts requestParentIdField (boolean value) {
       this.requestField("parent_id", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestPermalinkUrlField () {
+    public APIRequestGetSharedPosts requestPermalinkUrlField () {
       return this.requestPermalinkUrlField(true);
     }
-    public APIRequestGetShareDPosts requestPermalinkUrlField (boolean value) {
+    public APIRequestGetSharedPosts requestPermalinkUrlField (boolean value) {
       this.requestField("permalink_url", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestPictureField () {
+    public APIRequestGetSharedPosts requestPictureField () {
       return this.requestPictureField(true);
     }
-    public APIRequestGetShareDPosts requestPictureField (boolean value) {
+    public APIRequestGetSharedPosts requestPictureField (boolean value) {
       this.requestField("picture", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestPlaceField () {
+    public APIRequestGetSharedPosts requestPlaceField () {
       return this.requestPlaceField(true);
     }
-    public APIRequestGetShareDPosts requestPlaceField (boolean value) {
+    public APIRequestGetSharedPosts requestPlaceField (boolean value) {
       this.requestField("place", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestPrivacyField () {
+    public APIRequestGetSharedPosts requestPrivacyField () {
       return this.requestPrivacyField(true);
     }
-    public APIRequestGetShareDPosts requestPrivacyField (boolean value) {
+    public APIRequestGetSharedPosts requestPrivacyField (boolean value) {
       this.requestField("privacy", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestPromotableIdField () {
+    public APIRequestGetSharedPosts requestPromotableIdField () {
       return this.requestPromotableIdField(true);
     }
-    public APIRequestGetShareDPosts requestPromotableIdField (boolean value) {
+    public APIRequestGetSharedPosts requestPromotableIdField (boolean value) {
       this.requestField("promotable_id", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestPromotionStatusField () {
+    public APIRequestGetSharedPosts requestPromotionStatusField () {
       return this.requestPromotionStatusField(true);
     }
-    public APIRequestGetShareDPosts requestPromotionStatusField (boolean value) {
+    public APIRequestGetSharedPosts requestPromotionStatusField (boolean value) {
       this.requestField("promotion_status", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestPropertiesField () {
+    public APIRequestGetSharedPosts requestPropertiesField () {
       return this.requestPropertiesField(true);
     }
-    public APIRequestGetShareDPosts requestPropertiesField (boolean value) {
+    public APIRequestGetSharedPosts requestPropertiesField (boolean value) {
       this.requestField("properties", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestScheduledPublishTimeField () {
+    public APIRequestGetSharedPosts requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
-    public APIRequestGetShareDPosts requestScheduledPublishTimeField (boolean value) {
+    public APIRequestGetSharedPosts requestScheduledPublishTimeField (boolean value) {
       this.requestField("scheduled_publish_time", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestSharesField () {
+    public APIRequestGetSharedPosts requestSharesField () {
       return this.requestSharesField(true);
     }
-    public APIRequestGetShareDPosts requestSharesField (boolean value) {
+    public APIRequestGetSharedPosts requestSharesField (boolean value) {
       this.requestField("shares", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestSourceField () {
+    public APIRequestGetSharedPosts requestSourceField () {
       return this.requestSourceField(true);
     }
-    public APIRequestGetShareDPosts requestSourceField (boolean value) {
+    public APIRequestGetSharedPosts requestSourceField (boolean value) {
       this.requestField("source", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestStatusTypeField () {
+    public APIRequestGetSharedPosts requestStatusTypeField () {
       return this.requestStatusTypeField(true);
     }
-    public APIRequestGetShareDPosts requestStatusTypeField (boolean value) {
+    public APIRequestGetSharedPosts requestStatusTypeField (boolean value) {
       this.requestField("status_type", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestStoryField () {
+    public APIRequestGetSharedPosts requestStoryField () {
       return this.requestStoryField(true);
     }
-    public APIRequestGetShareDPosts requestStoryField (boolean value) {
+    public APIRequestGetSharedPosts requestStoryField (boolean value) {
       this.requestField("story", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestStoryTagsField () {
+    public APIRequestGetSharedPosts requestStoryTagsField () {
       return this.requestStoryTagsField(true);
     }
-    public APIRequestGetShareDPosts requestStoryTagsField (boolean value) {
+    public APIRequestGetSharedPosts requestStoryTagsField (boolean value) {
       this.requestField("story_tags", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestSubscribedField () {
+    public APIRequestGetSharedPosts requestSubscribedField () {
       return this.requestSubscribedField(true);
     }
-    public APIRequestGetShareDPosts requestSubscribedField (boolean value) {
+    public APIRequestGetSharedPosts requestSubscribedField (boolean value) {
       this.requestField("subscribed", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestTargetField () {
+    public APIRequestGetSharedPosts requestTargetField () {
       return this.requestTargetField(true);
     }
-    public APIRequestGetShareDPosts requestTargetField (boolean value) {
+    public APIRequestGetSharedPosts requestTargetField (boolean value) {
       this.requestField("target", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestTargetingField () {
+    public APIRequestGetSharedPosts requestTargetingField () {
       return this.requestTargetingField(true);
     }
-    public APIRequestGetShareDPosts requestTargetingField (boolean value) {
+    public APIRequestGetSharedPosts requestTargetingField (boolean value) {
       this.requestField("targeting", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestTimelineVisibilityField () {
+    public APIRequestGetSharedPosts requestTimelineVisibilityField () {
       return this.requestTimelineVisibilityField(true);
     }
-    public APIRequestGetShareDPosts requestTimelineVisibilityField (boolean value) {
+    public APIRequestGetSharedPosts requestTimelineVisibilityField (boolean value) {
       this.requestField("timeline_visibility", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestTypeField () {
+    public APIRequestGetSharedPosts requestTypeField () {
       return this.requestTypeField(true);
     }
-    public APIRequestGetShareDPosts requestTypeField (boolean value) {
+    public APIRequestGetSharedPosts requestTypeField (boolean value) {
       this.requestField("type", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestUpdatedTimeField () {
+    public APIRequestGetSharedPosts requestUpdatedTimeField () {
       return this.requestUpdatedTimeField(true);
     }
-    public APIRequestGetShareDPosts requestUpdatedTimeField (boolean value) {
+    public APIRequestGetSharedPosts requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestViaField () {
+    public APIRequestGetSharedPosts requestViaField () {
       return this.requestViaField(true);
     }
-    public APIRequestGetShareDPosts requestViaField (boolean value) {
+    public APIRequestGetSharedPosts requestViaField (boolean value) {
       this.requestField("via", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestVideoBuyingEligibilityField () {
+    public APIRequestGetSharedPosts requestVideoBuyingEligibilityField () {
       return this.requestVideoBuyingEligibilityField(true);
     }
-    public APIRequestGetShareDPosts requestVideoBuyingEligibilityField (boolean value) {
+    public APIRequestGetSharedPosts requestVideoBuyingEligibilityField (boolean value) {
       this.requestField("video_buying_eligibility", value);
       return this;
     }
-    public APIRequestGetShareDPosts requestWidthField () {
+    public APIRequestGetSharedPosts requestWidthField () {
       return this.requestWidthField(true);
     }
-    public APIRequestGetShareDPosts requestWidthField (boolean value) {
+    public APIRequestGetSharedPosts requestWidthField (boolean value) {
       this.requestField("width", value);
       return this;
     }
@@ -2394,10 +2158,10 @@ public class Link extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2511,10 +2275,10 @@ public class Link extends APINode {
     public ListenableFuture<Link> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Link>() {
-           public Link apply(String result) {
+        new Function<ResponseWrapper, Link>() {
+           public Link apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

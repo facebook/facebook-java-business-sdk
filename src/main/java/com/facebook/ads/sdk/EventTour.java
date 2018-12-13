@@ -436,10 +436,10 @@ public class EventTour extends APINode {
     public ListenableFuture<APINodeList<Event>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Event>>() {
-           public APINodeList<Event> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Event>>() {
+           public APINodeList<Event> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetEvents.this.parseResponse(result, null);
+               return APIRequestGetEvents.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -892,10 +892,10 @@ public class EventTour extends APINode {
     public ListenableFuture<APINodeList<Page>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Page>>() {
-           public APINodeList<Page> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Page>>() {
+           public APINodeList<Page> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPages.this.parseResponse(result, null);
+               return APIRequestGetPages.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2004,10 +2004,10 @@ public class EventTour extends APINode {
     public ListenableFuture<EventTour> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, EventTour>() {
-           public EventTour apply(String result) {
+        new Function<ResponseWrapper, EventTour>() {
+           public EventTour apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

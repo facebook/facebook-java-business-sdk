@@ -436,10 +436,10 @@ public class ExtendedCredit extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetExtendedCreditEmails.this.parseResponse(result, null);
+               return APIRequestGetExtendedCreditEmails.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -546,10 +546,10 @@ public class ExtendedCredit extends APINode {
     public ListenableFuture<APINodeList<ExtendedCreditInvoiceGroup>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ExtendedCreditInvoiceGroup>>() {
-           public APINodeList<ExtendedCreditInvoiceGroup> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ExtendedCreditInvoiceGroup>>() {
+           public APINodeList<ExtendedCreditInvoiceGroup> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetExtendedCreditInvoiceGroups.this.parseResponse(result, null);
+               return APIRequestGetExtendedCreditInvoiceGroups.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -694,10 +694,10 @@ public class ExtendedCredit extends APINode {
     public ListenableFuture<ExtendedCreditInvoiceGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ExtendedCreditInvoiceGroup>() {
-           public ExtendedCreditInvoiceGroup apply(String result) {
+        new Function<ResponseWrapper, ExtendedCreditInvoiceGroup>() {
+           public ExtendedCreditInvoiceGroup apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateExtendedCreditInvoiceGroup.this.parseResponse(result, null);
+               return APIRequestCreateExtendedCreditInvoiceGroup.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -823,10 +823,10 @@ public class ExtendedCredit extends APINode {
     public ListenableFuture<APINodeList<ExtendedCreditAllocationConfig>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ExtendedCreditAllocationConfig>>() {
-           public APINodeList<ExtendedCreditAllocationConfig> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ExtendedCreditAllocationConfig>>() {
+           public APINodeList<ExtendedCreditAllocationConfig> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetOwningCreditAllocationConfigs.this.parseResponse(result, null);
+               return APIRequestGetOwningCreditAllocationConfigs.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1007,10 +1007,10 @@ public class ExtendedCredit extends APINode {
     public ListenableFuture<ExtendedCreditAllocationConfig> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ExtendedCreditAllocationConfig>() {
-           public ExtendedCreditAllocationConfig apply(String result) {
+        new Function<ResponseWrapper, ExtendedCreditAllocationConfig>() {
+           public ExtendedCreditAllocationConfig apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateOwningCreditAllocationConfig.this.parseResponse(result, null);
+               return APIRequestCreateOwningCreditAllocationConfig.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1169,10 +1169,10 @@ public class ExtendedCredit extends APINode {
     public ListenableFuture<ExtendedCredit> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, ExtendedCredit>() {
-           public ExtendedCredit apply(String result) {
+        new Function<ResponseWrapper, ExtendedCredit>() {
+           public ExtendedCredit apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

@@ -101,8 +101,6 @@ public class Application extends APINode {
   private List<Object> mAutoEventMappingIos = null;
   @SerializedName("auto_event_setup_enabled")
   private Boolean mAutoEventSetupEnabled = null;
-  @SerializedName("business")
-  private Business mBusiness = null;
   @SerializedName("canvas_fluid_height")
   private Boolean mCanvasFluidHeight = null;
   @SerializedName("canvas_fluid_width")
@@ -498,14 +496,6 @@ public class Application extends APINode {
     return new APIRequestGetAdNetworkAnalyticsResults(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetAdsAppInsights getAdsAppInsights() {
-    return new APIRequestGetAdsAppInsights(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetAdsAppInsightsDimensions getAdsAppInsightsDimensions() {
-    return new APIRequestGetAdsAppInsightsDimensions(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAgencies getAgencies() {
     return new APIRequestGetAgencies(this.getPrefixedId().toString(), context);
   }
@@ -734,20 +724,12 @@ public class Application extends APINode {
     return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetPixelHelperDebuggingInfo getPixelHelperDebuggingInfo() {
-    return new APIRequestGetPixelHelperDebuggingInfo(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetProducts getProducts() {
     return new APIRequestGetProducts(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPurchases getPurchases() {
     return new APIRequestGetPurchases(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetRecentDebuggings getRecentDebuggings() {
-    return new APIRequestGetRecentDebuggings(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteRoles deleteRoles() {
@@ -901,13 +883,6 @@ public class Application extends APINode {
 
   public Boolean getFieldAutoEventSetupEnabled() {
     return mAutoEventSetupEnabled;
-  }
-
-  public Business getFieldBusiness() {
-    if (mBusiness != null) {
-      mBusiness.context = getContext();
-    }
-    return mBusiness;
   }
 
   public Boolean getFieldCanvasFluidHeight() {
@@ -1250,10 +1225,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateLocalServiceBookingTest.this.parseResponse(result, null);
+               return APIRequestCreateLocalServiceBookingTest.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1365,10 +1340,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAccounts.this.parseResponse(result, null);
+               return APIRequestDeleteAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1488,10 +1463,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAccounts.this.parseResponse(result, null);
+               return APIRequestGetAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1608,10 +1583,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAccount.this.parseResponse(result, null);
+               return APIRequestCreateAccount.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -1790,10 +1765,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<OpenGraphObject>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<OpenGraphObject>>() {
-           public APINodeList<OpenGraphObject> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<OpenGraphObject>>() {
+           public APINodeList<OpenGraphObject> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAchievements.this.parseResponse(result, null);
+               return APIRequestGetAchievements.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2085,10 +2060,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateActivity.this.parseResponse(result, null);
+               return APIRequestCreateActivity.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2401,10 +2376,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<AdNetworkAnalyticsSyncQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdNetworkAnalyticsSyncQueryResult>>() {
-           public APINodeList<AdNetworkAnalyticsSyncQueryResult> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdNetworkAnalyticsSyncQueryResult>>() {
+           public APINodeList<AdNetworkAnalyticsSyncQueryResult> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdNetworkAnalytics.this.parseResponse(result, null);
+               return APIRequestGetAdNetworkAnalytics.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2616,10 +2591,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAdNetworkAnalytic.this.parseResponse(result, null);
+               return APIRequestCreateAdNetworkAnalytic.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2808,10 +2783,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<AdNetworkAnalyticsAsyncQueryResult>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdNetworkAnalyticsAsyncQueryResult>>() {
-           public APINodeList<AdNetworkAnalyticsAsyncQueryResult> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdNetworkAnalyticsAsyncQueryResult>>() {
+           public APINodeList<AdNetworkAnalyticsAsyncQueryResult> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAdNetworkAnalyticsResults.this.parseResponse(result, null);
+               return APIRequestGetAdNetworkAnalyticsResults.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -2926,328 +2901,6 @@ public class Application extends APINode {
     }
   }
 
-  public static class APIRequestGetAdsAppInsights extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "metric",
-      "since",
-      "until",
-      "details",
-      "filters",
-      "breakdowns",
-      "limit",
-      "timeseries",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
-             try {
-               return APIRequestGetAdsAppInsights.this.parseResponse(result, null);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAdsAppInsights(String nodeId, APIContext context) {
-      super(context, nodeId, "/ads_app_insights", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAdsAppInsights setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdsAppInsights setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAdsAppInsights setMetric (EnumMetric metric) {
-      this.setParam("metric", metric);
-      return this;
-    }
-    public APIRequestGetAdsAppInsights setMetric (String metric) {
-      this.setParam("metric", metric);
-      return this;
-    }
-
-    public APIRequestGetAdsAppInsights setSince (String since) {
-      this.setParam("since", since);
-      return this;
-    }
-
-    public APIRequestGetAdsAppInsights setUntil (String until) {
-      this.setParam("until", until);
-      return this;
-    }
-
-    public APIRequestGetAdsAppInsights setDetails (EnumDetails details) {
-      this.setParam("details", details);
-      return this;
-    }
-    public APIRequestGetAdsAppInsights setDetails (String details) {
-      this.setParam("details", details);
-      return this;
-    }
-
-    public APIRequestGetAdsAppInsights setFilters (Object filters) {
-      this.setParam("filters", filters);
-      return this;
-    }
-    public APIRequestGetAdsAppInsights setFilters (String filters) {
-      this.setParam("filters", filters);
-      return this;
-    }
-
-    public APIRequestGetAdsAppInsights setBreakdowns (List<EnumBreakdowns> breakdowns) {
-      this.setParam("breakdowns", breakdowns);
-      return this;
-    }
-    public APIRequestGetAdsAppInsights setBreakdowns (String breakdowns) {
-      this.setParam("breakdowns", breakdowns);
-      return this;
-    }
-
-    public APIRequestGetAdsAppInsights setLimit (Long limit) {
-      this.setParam("limit", limit);
-      return this;
-    }
-    public APIRequestGetAdsAppInsights setLimit (String limit) {
-      this.setParam("limit", limit);
-      return this;
-    }
-
-    public APIRequestGetAdsAppInsights setTimeseries (Boolean timeseries) {
-      this.setParam("timeseries", timeseries);
-      return this;
-    }
-    public APIRequestGetAdsAppInsights setTimeseries (String timeseries) {
-      this.setParam("timeseries", timeseries);
-      return this;
-    }
-
-    public APIRequestGetAdsAppInsights requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAdsAppInsights requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdsAppInsights requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAdsAppInsights requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdsAppInsights requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdsAppInsights requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestGetAdsAppInsightsDimensions extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "dimension",
-      "since",
-      "until",
-      "details",
-      "limit",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
-             try {
-               return APIRequestGetAdsAppInsightsDimensions.this.parseResponse(result, null);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAdsAppInsightsDimensions(String nodeId, APIContext context) {
-      super(context, nodeId, "/ads_app_insights_dimensions", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAdsAppInsightsDimensions setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdsAppInsightsDimensions setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAdsAppInsightsDimensions setDimension (EnumDimension dimension) {
-      this.setParam("dimension", dimension);
-      return this;
-    }
-    public APIRequestGetAdsAppInsightsDimensions setDimension (String dimension) {
-      this.setParam("dimension", dimension);
-      return this;
-    }
-
-    public APIRequestGetAdsAppInsightsDimensions setSince (String since) {
-      this.setParam("since", since);
-      return this;
-    }
-
-    public APIRequestGetAdsAppInsightsDimensions setUntil (String until) {
-      this.setParam("until", until);
-      return this;
-    }
-
-    public APIRequestGetAdsAppInsightsDimensions setDetails (EnumDetails details) {
-      this.setParam("details", details);
-      return this;
-    }
-    public APIRequestGetAdsAppInsightsDimensions setDetails (String details) {
-      this.setParam("details", details);
-      return this;
-    }
-
-    public APIRequestGetAdsAppInsightsDimensions setLimit (Long limit) {
-      this.setParam("limit", limit);
-      return this;
-    }
-    public APIRequestGetAdsAppInsightsDimensions setLimit (String limit) {
-      this.setParam("limit", limit);
-      return this;
-    }
-
-    public APIRequestGetAdsAppInsightsDimensions requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAdsAppInsightsDimensions requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdsAppInsightsDimensions requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAdsAppInsightsDimensions requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdsAppInsightsDimensions requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAdsAppInsightsDimensions requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetAgencies extends APIRequest<Business> {
 
     APINodeList<Business> lastResponse = null;
@@ -3303,10 +2956,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Business>>() {
-           public APINodeList<Business> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Business>>() {
+           public APINodeList<Business> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAgencies.this.parseResponse(result, null);
+               return APIRequestGetAgencies.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3533,10 +3186,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAndroidDialogConfigs.this.parseResponse(result, null);
+               return APIRequestGetAndroidDialogConfigs.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3637,10 +3290,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAppEventTypes.this.parseResponse(result, null);
+               return APIRequestGetAppEventTypes.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3747,10 +3400,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAppIndexing.this.parseResponse(result, null);
+               return APIRequestCreateAppIndexing.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -3895,10 +3548,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAppIndexingSession.this.parseResponse(result, null);
+               return APIRequestCreateAppIndexingSession.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4018,10 +3671,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAppInsights.this.parseResponse(result, null);
+               return APIRequestGetAppInsights.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4207,10 +3860,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<Group>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Group>>() {
-           public APINodeList<Group> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Group>>() {
+           public APINodeList<Group> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAppInstalledGroups.this.parseResponse(result, null);
+               return APIRequestGetAppInstalledGroups.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4462,10 +4115,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAppLinkHost.this.parseResponse(result, null);
+               return APIRequestCreateAppLinkHost.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4646,10 +4299,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAppPushDeviceToken.this.parseResponse(result, null);
+               return APIRequestCreateAppPushDeviceToken.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4769,10 +4422,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAppAssets.this.parseResponse(result, null);
+               return APIRequestGetAppAssets.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -4876,10 +4529,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAsset.this.parseResponse(result, null);
+               return APIRequestCreateAsset.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5037,10 +4690,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<CustomAudience>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<CustomAudience>>() {
-           public APINodeList<CustomAudience> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<CustomAudience>>() {
+           public APINodeList<CustomAudience> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAudiences.this.parseResponse(result, null);
+               return APIRequestGetAudiences.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5407,10 +5060,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteAuthorizedAdAccounts.this.parseResponse(result, null);
+               return APIRequestDeleteAuthorizedAdAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -5582,10 +5235,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<AdAccount>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<AdAccount>>() {
-           public APINodeList<AdAccount> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<AdAccount>>() {
+           public APINodeList<AdAccount> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetAuthorizedAdAccounts.this.parseResponse(result, null);
+               return APIRequestGetAuthorizedAdAccounts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6113,10 +5766,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateAuthorizedAdAccount.this.parseResponse(result, null);
+               return APIRequestCreateAuthorizedAdAccount.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6228,10 +5881,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteBanned.this.parseResponse(result, null);
+               return APIRequestDeleteBanned.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6402,10 +6055,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<User>>() {
-           public APINodeList<User> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<User>>() {
+           public APINodeList<User> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetBanned.this.parseResponse(result, null);
+               return APIRequestGetBanned.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -6936,10 +6589,10 @@ public class Application extends APINode {
     public ListenableFuture<User> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, User>() {
-           public User apply(String result) {
+        new Function<ResponseWrapper, User>() {
+           public User apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateBanned.this.parseResponse(result, null);
+               return APIRequestCreateBanned.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7050,10 +6703,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetButtonAutoDetectionDeviceSelection.this.parseResponse(result, null);
+               return APIRequestGetButtonAutoDetectionDeviceSelection.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7163,10 +6816,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateButtonIndexing.this.parseResponse(result, null);
+               return APIRequestCreateButtonIndexing.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7294,10 +6947,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateCodelessEventBinding.this.parseResponse(result, null);
+               return APIRequestCreateCodelessEventBinding.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7398,6 +7051,7 @@ public class Application extends APINode {
     public static final String[] PARAMS = {
       "mutation_method",
       "platform",
+      "post_method",
       "mappings",
     };
 
@@ -7428,10 +7082,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateCodelessEventMapping.this.parseResponse(result, null);
+               return APIRequestCreateCodelessEventMapping.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7472,6 +7126,15 @@ public class Application extends APINode {
     }
     public APIRequestCreateCodelessEventMapping setPlatform (String platform) {
       this.setParam("platform", platform);
+      return this;
+    }
+
+    public APIRequestCreateCodelessEventMapping setPostMethod (Application.EnumPostMethod postMethod) {
+      this.setParam("post_method", postMethod);
+      return this;
+    }
+    public APIRequestCreateCodelessEventMapping setPostMethod (String postMethod) {
+      this.setParam("post_method", postMethod);
       return this;
     }
 
@@ -7559,10 +7222,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetConnections.this.parseResponse(result, null);
+               return APIRequestGetConnections.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7665,10 +7328,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetCustomAudienceThirdPartyId.this.parseResponse(result, null);
+               return APIRequestGetCustomAudienceThirdPartyId.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7791,10 +7454,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<DACheck>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<DACheck>>() {
-           public APINodeList<DACheck> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<DACheck>>() {
+           public APINodeList<DACheck> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetDaChecks.this.parseResponse(result, null);
+               return APIRequestGetDaChecks.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -7977,10 +7640,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<DirectDeal>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<DirectDeal>>() {
-           public APINodeList<DirectDeal> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<DirectDeal>>() {
+           public APINodeList<DirectDeal> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetDirectDeals.this.parseResponse(result, null);
+               return APIRequestGetDirectDeals.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8281,10 +7944,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<Event>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<Event>>() {
-           public APINodeList<Event> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<Event>>() {
+           public APINodeList<Event> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetEvents.this.parseResponse(result, null);
+               return APIRequestGetEvents.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8614,10 +8277,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetFoodDrinkOrders.this.parseResponse(result, null);
+               return APIRequestGetFoodDrinkOrders.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8725,10 +8388,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateFoodDrinkOrder.this.parseResponse(result, null);
+               return APIRequestCreateFoodDrinkOrder.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8844,10 +8507,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetFullAppIndexingInfos.this.parseResponse(result, null);
+               return APIRequestGetFullAppIndexingInfos.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -8955,10 +8618,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateFullAppIndexingInfo.this.parseResponse(result, null);
+               return APIRequestCreateFullAppIndexingInfo.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9078,10 +8741,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetInsightsEventLabels.this.parseResponse(result, null);
+               return APIRequestGetInsightsEventLabels.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9219,10 +8882,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetIosDialogConfigs.this.parseResponse(result, null);
+               return APIRequestGetIosDialogConfigs.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9329,10 +8992,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateLeaderboardsCreate.this.parseResponse(result, null);
+               return APIRequestCreateLeaderboardsCreate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9477,10 +9140,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateLeaderboardsDeleteEntry.this.parseResponse(result, null);
+               return APIRequestCreateLeaderboardsDeleteEntry.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9597,10 +9260,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateLeaderboardsReset.this.parseResponse(result, null);
+               return APIRequestCreateLeaderboardsReset.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9719,10 +9382,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateLeaderboardsSetScore.this.parseResponse(result, null);
+               return APIRequestCreateLeaderboardsSetScore.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9851,10 +9514,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetLocalServiceBookingConfig.this.parseResponse(result, null);
+               return APIRequestGetLocalServiceBookingConfig.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -9956,10 +9619,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateLocalServiceBookingConfig.this.parseResponse(result, null);
+               return APIRequestCreateLocalServiceBookingConfig.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10069,10 +9732,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateMachine.this.parseResponse(result, null);
+               return APIRequestCreateMachine.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10186,10 +9849,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateMmpAuditing.this.parseResponse(result, null);
+               return APIRequestCreateMmpAuditing.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10386,10 +10049,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetMobileSdkGk.this.parseResponse(result, null);
+               return APIRequestGetMobileSdkGk.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10509,10 +10172,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetMoodsForApplication.this.parseResponse(result, null);
+               return APIRequestGetMoodsForApplication.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10613,10 +10276,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetObjectTypes.this.parseResponse(result, null);
+               return APIRequestGetObjectTypes.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -10740,10 +10403,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<OpenGraphObject>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<OpenGraphObject>>() {
-           public APINodeList<OpenGraphObject> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<OpenGraphObject>>() {
+           public APINodeList<OpenGraphObject> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetObjects.this.parseResponse(result, null);
+               return APIRequestGetObjects.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11009,10 +10672,10 @@ public class Application extends APINode {
     public ListenableFuture<OpenGraphObject> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, OpenGraphObject>() {
-           public OpenGraphObject apply(String result) {
+        new Function<ResponseWrapper, OpenGraphObject>() {
+           public OpenGraphObject apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateObject.this.parseResponse(result, null);
+               return APIRequestCreateObject.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11129,10 +10792,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateOccludesPopup.this.parseResponse(result, null);
+               return APIRequestCreateOccludesPopup.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11251,10 +10914,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetOzoneRelease.this.parseResponse(result, null);
+               return APIRequestGetOzoneRelease.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11360,10 +11023,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateOzoneRelease.this.parseResponse(result, null);
+               return APIRequestCreateOzoneRelease.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11502,10 +11165,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeletePaymentCurrencies.this.parseResponse(result, null);
+               return APIRequestDeletePaymentCurrencies.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11612,10 +11275,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreatePaymentCurrency.this.parseResponse(result, null);
+               return APIRequestCreatePaymentCurrency.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11722,10 +11385,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeletePaymentsTestUsers.this.parseResponse(result, null);
+               return APIRequestDeletePaymentsTestUsers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -11895,10 +11558,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<User>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<User>>() {
-           public APINodeList<User> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<User>>() {
+           public APINodeList<User> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPaymentsTestUsers.this.parseResponse(result, null);
+               return APIRequestGetPaymentsTestUsers.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -12420,10 +12083,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreatePaymentsTestUser.this.parseResponse(result, null);
+               return APIRequestCreatePaymentsTestUser.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -12538,10 +12201,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPermissions.this.parseResponse(result, null);
+               return APIRequestGetPermissions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -12730,10 +12393,10 @@ public class Application extends APINode {
     public ListenableFuture<Photo> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Photo>() {
-           public Photo apply(String result) {
+        new Function<ResponseWrapper, Photo>() {
+           public Photo apply(ResponseWrapper result) {
              try {
-               return APIRequestCreatePhoto.this.parseResponse(result, null);
+               return APIRequestCreatePhoto.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13229,10 +12892,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<ProfilePictureSource>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ProfilePictureSource>>() {
-           public APINodeList<ProfilePictureSource> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<ProfilePictureSource>>() {
+           public APINodeList<ProfilePictureSource> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPicture.this.parseResponse(result, null);
+               return APIRequestGetPicture.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13384,142 +13047,6 @@ public class Application extends APINode {
     }
   }
 
-  public static class APIRequestGetPixelHelperDebuggingInfo extends APIRequest<ExternalEventSourcePixelHelperDebuggingInfo> {
-
-    APINodeList<ExternalEventSourcePixelHelperDebuggingInfo> lastResponse = null;
-    @Override
-    public APINodeList<ExternalEventSourcePixelHelperDebuggingInfo> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "counts",
-      "diagnostic",
-      "event_name",
-      "id",
-    };
-
-    @Override
-    public APINodeList<ExternalEventSourcePixelHelperDebuggingInfo> parseResponse(String response, String header) throws APIException {
-      return ExternalEventSourcePixelHelperDebuggingInfo.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<ExternalEventSourcePixelHelperDebuggingInfo> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<ExternalEventSourcePixelHelperDebuggingInfo> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<ExternalEventSourcePixelHelperDebuggingInfo>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<ExternalEventSourcePixelHelperDebuggingInfo>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ExternalEventSourcePixelHelperDebuggingInfo>>() {
-           public APINodeList<ExternalEventSourcePixelHelperDebuggingInfo> apply(String result) {
-             try {
-               return APIRequestGetPixelHelperDebuggingInfo.this.parseResponse(result, null);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetPixelHelperDebuggingInfo(String nodeId, APIContext context) {
-      super(context, nodeId, "/pixel_helper_debugging_info", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetPixelHelperDebuggingInfo setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPixelHelperDebuggingInfo setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetPixelHelperDebuggingInfo requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetPixelHelperDebuggingInfo requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPixelHelperDebuggingInfo requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetPixelHelperDebuggingInfo requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPixelHelperDebuggingInfo requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetPixelHelperDebuggingInfo requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetPixelHelperDebuggingInfo requestCountsField () {
-      return this.requestCountsField(true);
-    }
-    public APIRequestGetPixelHelperDebuggingInfo requestCountsField (boolean value) {
-      this.requestField("counts", value);
-      return this;
-    }
-    public APIRequestGetPixelHelperDebuggingInfo requestDiagnosticField () {
-      return this.requestDiagnosticField(true);
-    }
-    public APIRequestGetPixelHelperDebuggingInfo requestDiagnosticField (boolean value) {
-      this.requestField("diagnostic", value);
-      return this;
-    }
-    public APIRequestGetPixelHelperDebuggingInfo requestEventNameField () {
-      return this.requestEventNameField(true);
-    }
-    public APIRequestGetPixelHelperDebuggingInfo requestEventNameField (boolean value) {
-      this.requestField("event_name", value);
-      return this;
-    }
-    public APIRequestGetPixelHelperDebuggingInfo requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetPixelHelperDebuggingInfo requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-  }
-
   public static class APIRequestGetProducts extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -13558,10 +13085,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetProducts.this.parseResponse(result, null);
+               return APIRequestGetProducts.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13672,10 +13199,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPurchases.this.parseResponse(result, null);
+               return APIRequestGetPurchases.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -13748,194 +13275,6 @@ public class Application extends APINode {
 
   }
 
-  public static class APIRequestGetRecentDebuggings extends APIRequest<ExternalEventSourceDebugging> {
-
-    APINodeList<ExternalEventSourceDebugging> lastResponse = null;
-    @Override
-    public APINodeList<ExternalEventSourceDebugging> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "event_name",
-      "diagnostic",
-    };
-
-    public static final String[] FIELDS = {
-      "app_version",
-      "content_url",
-      "device_os",
-      "diagnostic",
-      "event_name",
-      "event_time",
-      "missing_ids",
-      "severity",
-      "id",
-    };
-
-    @Override
-    public APINodeList<ExternalEventSourceDebugging> parseResponse(String response, String header) throws APIException {
-      return ExternalEventSourceDebugging.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<ExternalEventSourceDebugging> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<ExternalEventSourceDebugging> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<ExternalEventSourceDebugging>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<ExternalEventSourceDebugging>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<ExternalEventSourceDebugging>>() {
-           public APINodeList<ExternalEventSourceDebugging> apply(String result) {
-             try {
-               return APIRequestGetRecentDebuggings.this.parseResponse(result, null);
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetRecentDebuggings(String nodeId, APIContext context) {
-      super(context, nodeId, "/recent_debuggings", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetRecentDebuggings setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetRecentDebuggings setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetRecentDebuggings setEventName (String eventName) {
-      this.setParam("event_name", eventName);
-      return this;
-    }
-
-    public APIRequestGetRecentDebuggings setDiagnostic (String diagnostic) {
-      this.setParam("diagnostic", diagnostic);
-      return this;
-    }
-
-    public APIRequestGetRecentDebuggings requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetRecentDebuggings requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetRecentDebuggings requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetRecentDebuggings requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetRecentDebuggings requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetRecentDebuggings requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetRecentDebuggings requestAppVersionField () {
-      return this.requestAppVersionField(true);
-    }
-    public APIRequestGetRecentDebuggings requestAppVersionField (boolean value) {
-      this.requestField("app_version", value);
-      return this;
-    }
-    public APIRequestGetRecentDebuggings requestContentUrlField () {
-      return this.requestContentUrlField(true);
-    }
-    public APIRequestGetRecentDebuggings requestContentUrlField (boolean value) {
-      this.requestField("content_url", value);
-      return this;
-    }
-    public APIRequestGetRecentDebuggings requestDeviceOsField () {
-      return this.requestDeviceOsField(true);
-    }
-    public APIRequestGetRecentDebuggings requestDeviceOsField (boolean value) {
-      this.requestField("device_os", value);
-      return this;
-    }
-    public APIRequestGetRecentDebuggings requestDiagnosticField () {
-      return this.requestDiagnosticField(true);
-    }
-    public APIRequestGetRecentDebuggings requestDiagnosticField (boolean value) {
-      this.requestField("diagnostic", value);
-      return this;
-    }
-    public APIRequestGetRecentDebuggings requestEventNameField () {
-      return this.requestEventNameField(true);
-    }
-    public APIRequestGetRecentDebuggings requestEventNameField (boolean value) {
-      this.requestField("event_name", value);
-      return this;
-    }
-    public APIRequestGetRecentDebuggings requestEventTimeField () {
-      return this.requestEventTimeField(true);
-    }
-    public APIRequestGetRecentDebuggings requestEventTimeField (boolean value) {
-      this.requestField("event_time", value);
-      return this;
-    }
-    public APIRequestGetRecentDebuggings requestMissingIdsField () {
-      return this.requestMissingIdsField(true);
-    }
-    public APIRequestGetRecentDebuggings requestMissingIdsField (boolean value) {
-      this.requestField("missing_ids", value);
-      return this;
-    }
-    public APIRequestGetRecentDebuggings requestSeverityField () {
-      return this.requestSeverityField(true);
-    }
-    public APIRequestGetRecentDebuggings requestSeverityField (boolean value) {
-      this.requestField("severity", value);
-      return this;
-    }
-    public APIRequestGetRecentDebuggings requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetRecentDebuggings requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-  }
-
   public static class APIRequestDeleteRoles extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -13974,10 +13313,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteRoles.this.parseResponse(result, null);
+               return APIRequestDeleteRoles.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14087,10 +13426,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetRoles.this.parseResponse(result, null);
+               return APIRequestGetRoles.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14193,10 +13532,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateRole.this.parseResponse(result, null);
+               return APIRequestCreateRole.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14316,10 +13655,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateStagingResource.this.parseResponse(result, null);
+               return APIRequestCreateStagingResource.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14429,10 +13768,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetSubscribedDomains.this.parseResponse(result, null);
+               return APIRequestGetSubscribedDomains.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14535,10 +13874,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateSubscribedDomain.this.parseResponse(result, null);
+               return APIRequestCreateSubscribedDomain.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14657,10 +13996,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetSubscribedDomainsPhishing.this.parseResponse(result, null);
+               return APIRequestGetSubscribedDomainsPhishing.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14763,10 +14102,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateSubscribedDomainsPhishing.this.parseResponse(result, null);
+               return APIRequestCreateSubscribedDomainsPhishing.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -14887,10 +14226,10 @@ public class Application extends APINode {
     public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
              try {
-               return APIRequestDeleteSubscriptions.this.parseResponse(result, null);
+               return APIRequestDeleteSubscriptions.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15010,10 +14349,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateSubscription.this.parseResponse(result, null);
+               return APIRequestCreateSubscription.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15156,10 +14495,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateSubscriptionsSample.this.parseResponse(result, null);
+               return APIRequestCreateSubscriptionsSample.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15293,10 +14632,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateUpload.this.parseResponse(result, null);
+               return APIRequestCreateUpload.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15426,10 +14765,10 @@ public class Application extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestCreateUserProperty.this.parseResponse(result, null);
+               return APIRequestCreateUserProperty.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15537,7 +14876,6 @@ public class Application extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
-      "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
       "canvas_url",
@@ -15639,10 +14977,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15868,13 +15206,6 @@ public class Application extends APINode {
     }
     public APIRequestGet requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
-      return this;
-    }
-    public APIRequestGet requestBusinessField () {
-      return this.requestBusinessField(true);
-    }
-    public APIRequestGet requestBusinessField (boolean value) {
-      this.requestField("business", value);
       return this;
     }
     public APIRequestGet requestCanvasFluidHeightField () {
@@ -16489,10 +15820,10 @@ public class Application extends APINode {
     public ListenableFuture<Application> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, Application>() {
-           public Application apply(String result) {
+        new Function<ResponseWrapper, Application>() {
+           public Application apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -17178,6 +16509,25 @@ public class Application extends APINode {
       }
   }
 
+  public static enum EnumPostMethod {
+      @SerializedName("EYMT")
+      VALUE_EYMT("EYMT"),
+      @SerializedName("CODELESS")
+      VALUE_CODELESS("CODELESS"),
+      NULL(null);
+
+      private String value;
+
+      private EnumPostMethod(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumScoreType {
       @SerializedName("CUSTOM")
       VALUE_CUSTOM("CUSTOM"),
@@ -17304,67 +16654,6 @@ public class Application extends APINode {
       private String value;
 
       private EnumUserIdType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumMetric {
-      @SerializedName("ads_api_call")
-      VALUE_ADS_API_CALL("ads_api_call"),
-      @SerializedName("ads_api_error")
-      VALUE_ADS_API_ERROR("ads_api_error"),
-      @SerializedName("ads_api_error_rate")
-      VALUE_ADS_API_ERROR_RATE("ads_api_error_rate"),
-      NULL(null);
-
-      private String value;
-
-      private EnumMetric(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumDetails {
-      @SerializedName("daily")
-      VALUE_DAILY("daily"),
-      @SerializedName("hourly")
-      VALUE_HOURLY("hourly"),
-      NULL(null);
-
-      private String value;
-
-      private EnumDetails(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumDimension {
-      @SerializedName("ad_account_id")
-      VALUE_AD_ACCOUNT_ID("ad_account_id"),
-      @SerializedName("method")
-      VALUE_METHOD("method"),
-      @SerializedName("version")
-      VALUE_VERSION("version"),
-      NULL(null);
-
-      private String value;
-
-      private EnumDimension(String value) {
         this.value = value;
       }
 
@@ -17589,7 +16878,6 @@ public class Application extends APINode {
     this.mAutoEventMappingAndroid = instance.mAutoEventMappingAndroid;
     this.mAutoEventMappingIos = instance.mAutoEventMappingIos;
     this.mAutoEventSetupEnabled = instance.mAutoEventSetupEnabled;
-    this.mBusiness = instance.mBusiness;
     this.mCanvasFluidHeight = instance.mCanvasFluidHeight;
     this.mCanvasFluidWidth = instance.mCanvasFluidWidth;
     this.mCanvasUrl = instance.mCanvasUrl;

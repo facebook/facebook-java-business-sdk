@@ -393,10 +393,10 @@ public class HotelRoom extends APINode {
     public ListenableFuture<APINodeList<DynamicPriceConfigByDate>> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINodeList<DynamicPriceConfigByDate>>() {
-           public APINodeList<DynamicPriceConfigByDate> apply(String result) {
+        new Function<ResponseWrapper, APINodeList<DynamicPriceConfigByDate>>() {
+           public APINodeList<DynamicPriceConfigByDate> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetPricingVariables.this.parseResponse(result, null);
+               return APIRequestGetPricingVariables.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -525,10 +525,10 @@ public class HotelRoom extends APINode {
     public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, APINode>() {
-           public APINode apply(String result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
-               return APIRequestDelete.this.parseResponse(result, null);
+               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -640,10 +640,10 @@ public class HotelRoom extends APINode {
     public ListenableFuture<HotelRoom> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, HotelRoom>() {
-           public HotelRoom apply(String result) {
+        new Function<ResponseWrapper, HotelRoom>() {
+           public HotelRoom apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -831,10 +831,10 @@ public class HotelRoom extends APINode {
     public ListenableFuture<HotelRoom> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, HotelRoom>() {
-           public HotelRoom apply(String result) {
+        new Function<ResponseWrapper, HotelRoom>() {
+           public HotelRoom apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }

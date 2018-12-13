@@ -357,10 +357,10 @@ public class AdPlacePageSet extends APINode {
     public ListenableFuture<AdPlacePageSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdPlacePageSet>() {
-           public AdPlacePageSet apply(String result) {
+        new Function<ResponseWrapper, AdPlacePageSet>() {
+           public AdPlacePageSet apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -504,10 +504,10 @@ public class AdPlacePageSet extends APINode {
     public ListenableFuture<AdPlacePageSet> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, AdPlacePageSet>() {
-           public AdPlacePageSet apply(String result) {
+        new Function<ResponseWrapper, AdPlacePageSet>() {
+           public AdPlacePageSet apply(ResponseWrapper result) {
              try {
-               return APIRequestUpdate.this.parseResponse(result, null);
+               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -574,6 +574,46 @@ public class AdPlacePageSet extends APINode {
       return this;
     }
 
+  }
+
+  public static enum EnumLocationTypes {
+      @SerializedName("recent")
+      VALUE_RECENT("recent"),
+      @SerializedName("home")
+      VALUE_HOME("home"),
+      NULL(null);
+
+      private String value;
+
+      private EnumLocationTypes(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumTargetedAreaType {
+      @SerializedName("CUSTOM_RADIUS")
+      VALUE_CUSTOM_RADIUS("CUSTOM_RADIUS"),
+      @SerializedName("MARKETING_AREA")
+      VALUE_MARKETING_AREA("MARKETING_AREA"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumTargetedAreaType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
   }
 
 

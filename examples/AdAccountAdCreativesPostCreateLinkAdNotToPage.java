@@ -38,7 +38,7 @@ public class AdAccountAdCreativesPostCreateLinkAdNotToPage {
       .setName("Sample Creative")
       .setTitle("My title")
       .setBody("My body")
-      .setParam("object_url", "<url>")
+      .setObjectUrl("<url>")
       .setLinkUrl("<url>")
       .setImageHash("<imageHash>")
       .execute();

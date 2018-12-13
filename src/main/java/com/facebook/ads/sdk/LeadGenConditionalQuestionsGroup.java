@@ -329,10 +329,10 @@ public class LeadGenConditionalQuestionsGroup extends APINode {
     public ListenableFuture<LeadGenConditionalQuestionsGroup> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<String, LeadGenConditionalQuestionsGroup>() {
-           public LeadGenConditionalQuestionsGroup apply(String result) {
+        new Function<ResponseWrapper, LeadGenConditionalQuestionsGroup>() {
+           public LeadGenConditionalQuestionsGroup apply(ResponseWrapper result) {
              try {
-               return APIRequestGet.this.parseResponse(result, null);
+               return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
