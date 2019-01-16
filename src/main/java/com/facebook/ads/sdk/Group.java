@@ -7572,6 +7572,7 @@ public class Group extends APINode {
       "privacy",
       "archive",
       "group_type",
+      "purpose",
       "join_setting",
       "post_permissions",
       "post_requires_admin_approval",
@@ -7683,6 +7684,15 @@ public class Group extends APINode {
     }
     public APIRequestUpdate setGroupType (String groupType) {
       this.setParam("group_type", groupType);
+      return this;
+    }
+
+    public APIRequestUpdate setPurpose (Group.EnumPurpose purpose) {
+      this.setParam("purpose", purpose);
+      return this;
+    }
+    public APIRequestUpdate setPurpose (String purpose) {
+      this.setParam("purpose", purpose);
       return this;
     }
 
@@ -7929,6 +7939,105 @@ public class Group extends APINode {
       private String value;
 
       private EnumPostPermissions(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumPurpose {
+      @SerializedName("FAMILY")
+      VALUE_FAMILY("FAMILY"),
+      @SerializedName("CLOSE_FRIENDS")
+      VALUE_CLOSE_FRIENDS("CLOSE_FRIENDS"),
+      @SerializedName("NEIGHBORS")
+      VALUE_NEIGHBORS("NEIGHBORS"),
+      @SerializedName("TEAMMATES")
+      VALUE_TEAMMATES("TEAMMATES"),
+      @SerializedName("FOR_SALE")
+      VALUE_FOR_SALE("FOR_SALE"),
+      @SerializedName("EVENT_PLANNING")
+      VALUE_EVENT_PLANNING("EVENT_PLANNING"),
+      @SerializedName("SUPPORT")
+      VALUE_SUPPORT("SUPPORT"),
+      @SerializedName("CLUB")
+      VALUE_CLUB("CLUB"),
+      @SerializedName("PROJECT")
+      VALUE_PROJECT("PROJECT"),
+      @SerializedName("SORORITY")
+      VALUE_SORORITY("SORORITY"),
+      @SerializedName("FRATERNITY")
+      VALUE_FRATERNITY("FRATERNITY"),
+      @SerializedName("STUDY_GROUP")
+      VALUE_STUDY_GROUP("STUDY_GROUP"),
+      @SerializedName("SCHOOL_CLASS")
+      VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
+      @SerializedName("LEARNING")
+      VALUE_LEARNING("LEARNING"),
+      @SerializedName("MEME")
+      VALUE_MEME("MEME"),
+      @SerializedName("TRAVEL_PLANNING")
+      VALUE_TRAVEL_PLANNING("TRAVEL_PLANNING"),
+      @SerializedName("COUPLE")
+      VALUE_COUPLE("COUPLE"),
+      @SerializedName("PARENTS")
+      VALUE_PARENTS("PARENTS"),
+      @SerializedName("CUSTOM")
+      VALUE_CUSTOM("CUSTOM"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("WORK_TEAM")
+      VALUE_WORK_TEAM("WORK_TEAM"),
+      @SerializedName("WORK_TEAMWORK")
+      VALUE_WORK_TEAMWORK("WORK_TEAMWORK"),
+      @SerializedName("WORK_FEEDBACK")
+      VALUE_WORK_FEEDBACK("WORK_FEEDBACK"),
+      @SerializedName("WORK_ANNOUNCEMENT")
+      VALUE_WORK_ANNOUNCEMENT("WORK_ANNOUNCEMENT"),
+      @SerializedName("WORK_DEMO_GROUP")
+      VALUE_WORK_DEMO_GROUP("WORK_DEMO_GROUP"),
+      @SerializedName("WORK_SOCIAL")
+      VALUE_WORK_SOCIAL("WORK_SOCIAL"),
+      @SerializedName("WORK_DISCUSSION")
+      VALUE_WORK_DISCUSSION("WORK_DISCUSSION"),
+      @SerializedName("WORK_MULTI_COMPANY")
+      VALUE_WORK_MULTI_COMPANY("WORK_MULTI_COMPANY"),
+      @SerializedName("WORK_FOR_SALE")
+      VALUE_WORK_FOR_SALE("WORK_FOR_SALE"),
+      @SerializedName("WORK_LEARNING")
+      VALUE_WORK_LEARNING("WORK_LEARNING"),
+      @SerializedName("FITNESS")
+      VALUE_FITNESS("FITNESS"),
+      @SerializedName("REAL_WORLD")
+      VALUE_REAL_WORLD("REAL_WORLD"),
+      @SerializedName("CASUAL")
+      VALUE_CASUAL("CASUAL"),
+      @SerializedName("GAME")
+      VALUE_GAME("GAME"),
+      @SerializedName("HIGH_SCHOOL_FORUM")
+      VALUE_HIGH_SCHOOL_FORUM("HIGH_SCHOOL_FORUM"),
+      @SerializedName("JOBS")
+      VALUE_JOBS("JOBS"),
+      @SerializedName("REAL_WORLD_AT_WORK")
+      VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
+      @SerializedName("FOR_WORK")
+      VALUE_FOR_WORK("FOR_WORK"),
+      @SerializedName("MENTORSHIP")
+      VALUE_MENTORSHIP("MENTORSHIP"),
+      @SerializedName("WORK_MENTORSHIP")
+      VALUE_WORK_MENTORSHIP("WORK_MENTORSHIP"),
+      @SerializedName("EPHEMERAL")
+      VALUE_EPHEMERAL("EPHEMERAL"),
+      @SerializedName("WORK_EPHEMERAL")
+      VALUE_WORK_EPHEMERAL("WORK_EPHEMERAL"),
+      NULL(null);
+
+      private String value;
+
+      private EnumPurpose(String value) {
         this.value = value;
       }
 

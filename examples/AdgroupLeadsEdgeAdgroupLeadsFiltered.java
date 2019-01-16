@@ -31,11 +31,11 @@ public class AdgroupLeadsEdgeAdgroupLeadsFiltered {
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<ID>";
+    String id = "<AD_GROUP_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new Ad(id, context).getLeads()
-      .setParam("filtering", "[{\"field\":\"time_created\",\"operator\":\"GREATER_THAN\",\"value\":\"2018-11-25T17:47:55-0800\"}]")
+      .setParam("filtering", "[{\"field\":\"time_created\",\"operator\":\"GREATER_THAN\",\"value\":1546549613}]")
       .execute();
 
   }

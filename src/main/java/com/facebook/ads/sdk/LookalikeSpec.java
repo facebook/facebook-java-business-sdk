@@ -61,6 +61,8 @@ public class LookalikeSpec extends APINode {
   private Boolean mIsFinancialService = null;
   @SerializedName("origin")
   private List<Object> mOrigin = null;
+  @SerializedName("origin_event_name")
+  private String mOriginEventName = null;
   @SerializedName("origin_event_source_name")
   private String mOriginEventSourceName = null;
   @SerializedName("origin_event_source_type")
@@ -73,6 +75,8 @@ public class LookalikeSpec extends APINode {
   private Double mStartingRatio = null;
   @SerializedName("target_countries")
   private List<String> mTargetCountries = null;
+  @SerializedName("target_country_names")
+  private JsonArray mTargetCountryNames = null;
   @SerializedName("type")
   private String mType = null;
   @SerializedName("id")
@@ -255,6 +259,15 @@ public class LookalikeSpec extends APINode {
     return this;
   }
 
+  public String getFieldOriginEventName() {
+    return mOriginEventName;
+  }
+
+  public LookalikeSpec setFieldOriginEventName(String value) {
+    this.mOriginEventName = value;
+    return this;
+  }
+
   public String getFieldOriginEventSourceName() {
     return mOriginEventSourceName;
   }
@@ -309,6 +322,15 @@ public class LookalikeSpec extends APINode {
     return this;
   }
 
+  public JsonArray getFieldTargetCountryNames() {
+    return mTargetCountryNames;
+  }
+
+  public LookalikeSpec setFieldTargetCountryNames(JsonArray value) {
+    this.mTargetCountryNames = value;
+    return this;
+  }
+
   public String getFieldType() {
     return mType;
   }
@@ -347,12 +369,14 @@ public class LookalikeSpec extends APINode {
     this.mCountry = instance.mCountry;
     this.mIsFinancialService = instance.mIsFinancialService;
     this.mOrigin = instance.mOrigin;
+    this.mOriginEventName = instance.mOriginEventName;
     this.mOriginEventSourceName = instance.mOriginEventSourceName;
     this.mOriginEventSourceType = instance.mOriginEventSourceType;
     this.mProductSetName = instance.mProductSetName;
     this.mRatio = instance.mRatio;
     this.mStartingRatio = instance.mStartingRatio;
     this.mTargetCountries = instance.mTargetCountries;
+    this.mTargetCountryNames = instance.mTargetCountryNames;
     this.mType = instance.mType;
     this.mId = instance.mId;
     this.context = instance.context;

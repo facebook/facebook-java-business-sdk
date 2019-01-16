@@ -25,17 +25,34 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdCreativeNode {
+public class AdAccountAdSetsPostAdSetCreateCpaAppEvents {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<AD_CREATIVE_ID>";
+    String id = "<AD_ACCOUNT_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdCreative(id, context).get()
-      .requestAssetFeedSpecField()
+    new AdAccount(id, context).createAdSet()
+      .setName("A CPA Ad Set optimized for App Events")
+      .setCampaignId("<adCampaignAppInstallsID>")
+      .setDailyBudget(300L)
+      .setStartTime("2019-01-09T21:41:08-0800")
+      .setEndTime("2019-01-16T21:41:08-0800")
+      .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
+      .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_OFFSITE_CONVERSIONS)
+      .setBidAmount(100L)
+      .setStatus(AdSet.EnumStatus.VALUE_PAUSED)
+      .setPromotedObject("{\"application_id\":\"<appID>\",\"object_store_url\":\"<appLink>\",\"custom_event_type\":\"PURCHASE\"}")
+      .setTargeting(
+          new Targeting()
+            .setFieldGeoLocations(
+              new TargetingGeoLocation()
+                .setFieldCountries(Arrays.asList("US"))
+            )
+            .setFieldUserOs(Arrays.asList("iOS"))
+        )
       .execute();
 
   }

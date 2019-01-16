@@ -31,15 +31,15 @@ public class AdAccountAdSetsPostAdSetCreateCpa {
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<ID>";
+    String id = "<AD_ACCOUNT_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createAdSet()
       .setName("A CPA Ad Set")
       .setCampaignId("<adCampaignLinkClicksID>")
       .setDailyBudget(5000L)
-      .setStartTime("2018-12-06T17:37:49-0800")
-      .setEndTime("2018-12-13T17:37:49-0800")
+      .setStartTime("2019-01-09T21:31:19-0800")
+      .setEndTime("2019-01-16T21:31:19-0800")
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_IMPRESSIONS)
       .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_REACH)
       .setBidAmount(1000L)

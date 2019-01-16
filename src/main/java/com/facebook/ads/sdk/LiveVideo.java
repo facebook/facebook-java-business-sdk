@@ -1501,6 +1501,7 @@ public class LiveVideo extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -2302,6 +2303,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestPageTokenField () {
@@ -5366,6 +5374,8 @@ public class LiveVideo extends APINode {
       VALUE_RESTRICTED("RESTRICTED"),
       @SerializedName("PROTECTED_MODE")
       VALUE_PROTECTED_MODE("PROTECTED_MODE"),
+      @SerializedName("SUPPORTER")
+      VALUE_SUPPORTER("SUPPORTER"),
       NULL(null);
 
       private String value;

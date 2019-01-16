@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdCampaignGroupMetricsMetadata extends APINode {
   @SerializedName("budget_optimization")
   private List<String> mBudgetOptimization = null;
+  @SerializedName("duplication_flow_tips")
+  private List<String> mDuplicationFlowTips = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
@@ -219,6 +221,15 @@ public class AdCampaignGroupMetricsMetadata extends APINode {
     return this;
   }
 
+  public List<String> getFieldDuplicationFlowTips() {
+    return mDuplicationFlowTips;
+  }
+
+  public AdCampaignGroupMetricsMetadata setFieldDuplicationFlowTips(List<String> value) {
+    this.mDuplicationFlowTips = value;
+    return this;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -246,6 +257,7 @@ public class AdCampaignGroupMetricsMetadata extends APINode {
 
   public AdCampaignGroupMetricsMetadata copyFrom(AdCampaignGroupMetricsMetadata instance) {
     this.mBudgetOptimization = instance.mBudgetOptimization;
+    this.mDuplicationFlowTips = instance.mDuplicationFlowTips;
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

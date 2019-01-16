@@ -2061,7 +2061,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestDeleteAdLabels setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
+    public APIRequestDeleteAdLabels setExecutionOptions (List<AdSet.EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -2185,7 +2185,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdLabel setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
+    public APIRequestCreateAdLabel setExecutionOptions (List<AdSet.EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -5963,6 +5963,8 @@ public class AdSet extends APINode {
       VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       @SerializedName("APP_DOWNLOADS")
       VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
+      @SerializedName("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS")
+      VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
       @SerializedName("LANDING_PAGE_VIEWS")
       VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
       @SerializedName("VALUE")

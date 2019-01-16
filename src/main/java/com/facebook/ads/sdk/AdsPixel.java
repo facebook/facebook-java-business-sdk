@@ -3192,6 +3192,7 @@ public class AdsPixel extends APINode {
       "end_time",
       "aggregation",
       "event",
+      "event_source",
     };
 
     public static final String[] FIELDS = {
@@ -3283,6 +3284,11 @@ public class AdsPixel extends APINode {
 
     public APIRequestGetStats setEvent (String event) {
       this.setParam("event", event);
+      return this;
+    }
+
+    public APIRequestGetStats setEventSource (String eventSource) {
+      this.setParam("event_source", eventSource);
       return this;
     }
 

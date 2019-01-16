@@ -31,14 +31,14 @@ public class AdAccountAdSetsPostOfferClaim {
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<ID>";
+    String id = "<AD_ACCOUNT_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createAdSet()
       .setName("My Offer Claim AdSet")
       .setLifetimeBudget(56000L)
-      .setStartTime("2018-11-29T17:40:53-0800")
-      .setEndTime("2018-12-06T17:40:53-0800")
+      .setStartTime("2019-01-02T21:34:39-0800")
+      .setEndTime("2019-01-09T21:34:39-0800")
       .setCampaignId("<adCampaignLinkClicksID>")
       .setBillingEvent(AdSet.EnumBillingEvent.VALUE_LINK_CLICKS)
       .setOptimizationGoal(AdSet.EnumOptimizationGoal.VALUE_LINK_CLICKS)

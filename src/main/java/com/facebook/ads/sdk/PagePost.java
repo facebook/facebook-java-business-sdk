@@ -3925,6 +3925,7 @@ public class PagePost extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -4726,6 +4727,13 @@ public class PagePost extends APINode {
     }
     public APIRequestGetSponsorTags requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetSponsorTags requestPageTokenField () {
@@ -6753,6 +6761,8 @@ public class PagePost extends APINode {
       VALUE_EVENT_CUSTOM_AUDIENCES("EVENT_CUSTOM_AUDIENCES"),
       @SerializedName("AUTO_PAGE_LOOKALIKE")
       VALUE_AUTO_PAGE_LOOKALIKE("AUTO_PAGE_LOOKALIKE"),
+      @SerializedName("AUTO_TARGETING")
+      VALUE_AUTO_TARGETING("AUTO_TARGETING"),
       NULL(null);
 
       private String value;

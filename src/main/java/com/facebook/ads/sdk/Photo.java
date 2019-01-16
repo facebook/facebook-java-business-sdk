@@ -3225,6 +3225,7 @@ public class Photo extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -4026,6 +4027,13 @@ public class Photo extends APINode {
     }
     public APIRequestGetSponsorTags requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetSponsorTags requestPageTokenField () {

@@ -73,8 +73,6 @@ public class IterativeSplitTestConfig extends APINode {
   private List<Long> mSplits = null;
   @SerializedName("start_time")
   private String mStartTime = null;
-  @SerializedName("test_end_metrics_snapshot")
-  private Object mTestEndMetricsSnapshot = null;
   protected static Gson gson = null;
 
   IterativeSplitTestConfig() {
@@ -325,10 +323,6 @@ public class IterativeSplitTestConfig extends APINode {
     return mStartTime;
   }
 
-  public Object getFieldTestEndMetricsSnapshot() {
-    return mTestEndMetricsSnapshot;
-  }
-
 
 
   public static class APIRequestGet extends APIRequest<IterativeSplitTestConfig> {
@@ -351,7 +345,6 @@ public class IterativeSplitTestConfig extends APINode {
       "results_window",
       "splits",
       "start_time",
-      "test_end_metrics_snapshot",
     };
 
     @Override
@@ -506,13 +499,6 @@ public class IterativeSplitTestConfig extends APINode {
       this.requestField("start_time", value);
       return this;
     }
-    public APIRequestGet requestTestEndMetricsSnapshotField () {
-      return this.requestTestEndMetricsSnapshotField(true);
-    }
-    public APIRequestGet requestTestEndMetricsSnapshotField (boolean value) {
-      this.requestField("test_end_metrics_snapshot", value);
-      return this;
-    }
   }
 
 
@@ -539,7 +525,6 @@ public class IterativeSplitTestConfig extends APINode {
     this.mResultsWindow = instance.mResultsWindow;
     this.mSplits = instance.mSplits;
     this.mStartTime = instance.mStartTime;
-    this.mTestEndMetricsSnapshot = instance.mTestEndMetricsSnapshot;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

@@ -387,6 +387,7 @@ public class UserContext extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1188,6 +1189,13 @@ public class UserContext extends APINode {
     }
     public APIRequestGetMutualLikes requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetMutualLikes requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetMutualLikes requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetMutualLikes requestPageTokenField () {

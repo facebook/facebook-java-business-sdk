@@ -25,17 +25,18 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdCreativeNode {
+public class PageFeedPostFeedImageDeepLink {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<AD_CREATIVE_ID>";
+    String id = "<PAGE_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdCreative(id, context).get()
-      .requestAssetFeedSpecField()
+    new Page(id, context).createFeed()
+      .setMessage("This is a test message")
+      .setCallToAction("{\"type\":\"BUY_NOW\",\"value\":{\"link\":\"<appLink>\",\"app_link\":\"<deepLinkURL>\"}}")
       .execute();
 
   }

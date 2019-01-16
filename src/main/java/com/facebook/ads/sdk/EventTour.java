@@ -819,6 +819,7 @@ public class EventTour extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1620,6 +1621,13 @@ public class EventTour extends APINode {
     }
     public APIRequestGetPages requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetPages requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetPages requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetPages requestPageTokenField () {

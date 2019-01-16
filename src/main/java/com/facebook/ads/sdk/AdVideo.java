@@ -1903,6 +1903,7 @@ public class AdVideo extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -2704,6 +2705,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestPageTokenField () {
@@ -4707,6 +4715,7 @@ public class AdVideo extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -5508,6 +5517,13 @@ public class AdVideo extends APINode {
     }
     public APIRequestGetSponsorTags requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetSponsorTags requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetSponsorTags requestPageTokenField () {
@@ -7742,6 +7758,8 @@ public class AdVideo extends APINode {
       VALUE_DCO_AUTOGEN_VIDEO("DCO_AUTOGEN_VIDEO"),
       @SerializedName("SOTTO_CONTENT")
       VALUE_SOTTO_CONTENT("SOTTO_CONTENT"),
+      @SerializedName("OCULUS_VENUES_BROADCAST")
+      VALUE_OCULUS_VENUES_BROADCAST("OCULUS_VENUES_BROADCAST"),
       NULL(null);
 
       private String value;

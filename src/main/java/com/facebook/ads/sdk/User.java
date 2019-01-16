@@ -1495,6 +1495,7 @@ public class User extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -2328,6 +2329,13 @@ public class User extends APINode {
     }
     public APIRequestGetAccounts requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetAccounts requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetAccounts requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetAccounts requestPageTokenField () {
@@ -6783,6 +6791,7 @@ public class User extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -7586,6 +7595,13 @@ public class User extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
+    public APIRequestGetAssignedPages requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetAssignedPages requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
+      return this;
+    }
     public APIRequestGetAssignedPages requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -8216,6 +8232,7 @@ public class User extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -9022,6 +9039,13 @@ public class User extends APINode {
     }
     public APIRequestGetBooks requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetBooks requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetBooks requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetBooks requestPageTokenField () {
@@ -14780,6 +14804,7 @@ public class User extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -15586,6 +15611,13 @@ public class User extends APINode {
     }
     public APIRequestGetGames requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetGames requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetGames requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetGames requestPageTokenField () {
@@ -17784,6 +17816,7 @@ public class User extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -18590,6 +18623,13 @@ public class User extends APINode {
     }
     public APIRequestGetLikes requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetLikes requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetLikes requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetLikes requestPageTokenField () {
@@ -21086,6 +21126,7 @@ public class User extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -21894,6 +21935,13 @@ public class User extends APINode {
       this.requestField("overall_star_rating", value);
       return this;
     }
+    public APIRequestGetMovies requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetMovies requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
+      return this;
+    }
     public APIRequestGetMovies requestPageTokenField () {
       return this.requestPageTokenField(true);
     }
@@ -22332,6 +22380,7 @@ public class User extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -23138,6 +23187,13 @@ public class User extends APINode {
     }
     public APIRequestGetMusic requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetMusic requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetMusic requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetMusic requestPageTokenField () {
@@ -28980,6 +29036,7 @@ public class User extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -29786,6 +29843,13 @@ public class User extends APINode {
     }
     public APIRequestGetTelevision requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetTelevision requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetTelevision requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetTelevision requestPageTokenField () {
@@ -32662,6 +32726,8 @@ public class User extends APINode {
       VALUE_MODERATE("MODERATE"),
       @SerializedName("MODERATE_COMMUNITY")
       VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
+      @SerializedName("MANAGE_JOBS")
+      VALUE_MANAGE_JOBS("MANAGE_JOBS"),
       @SerializedName("ADVERTISE")
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")

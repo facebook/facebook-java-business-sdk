@@ -770,6 +770,10 @@ public class AdAccount extends APINode {
     return new APIRequestGetOffsitePixels(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetOnBehalfRequests getOnBehalfRequests() {
+    return new APIRequestGetOnBehalfRequests(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetPartnerIntegrations getPartnerIntegrations() {
     return new APIRequestGetPartnerIntegrations(this.getPrefixedId().toString(), context);
   }
@@ -5403,6 +5407,7 @@ public class AdAccount extends APINode {
       "name",
       "source",
       "source_url",
+      "source_zip",
     };
 
     public static final String[] FIELDS = {
@@ -5477,6 +5482,15 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdPlayable setSourceUrl (String sourceUrl) {
       this.setParam("source_url", sourceUrl);
+      return this;
+    }
+
+    public APIRequestCreateAdPlayable setSourceZip (File sourceZip) {
+      this.setParam("source_zip", sourceZip);
+      return this;
+    }
+    public APIRequestCreateAdPlayable setSourceZip (String sourceZip) {
+      this.setParam("source_zip", sourceZip);
       return this;
     }
 
@@ -24336,6 +24350,160 @@ public class AdAccount extends APINode {
     }
   }
 
+  public static class APIRequestGetOnBehalfRequests extends APIRequest<BusinessOwnedObjectOnBehalfOfRequest> {
+
+    APINodeList<BusinessOwnedObjectOnBehalfOfRequest> lastResponse = null;
+    @Override
+    public APINodeList<BusinessOwnedObjectOnBehalfOfRequest> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "status",
+    };
+
+    public static final String[] FIELDS = {
+      "business_owned_object",
+      "id",
+      "receiving_business",
+      "requesting_business",
+      "status",
+    };
+
+    @Override
+    public APINodeList<BusinessOwnedObjectOnBehalfOfRequest> parseResponse(String response, String header) throws APIException {
+      return BusinessOwnedObjectOnBehalfOfRequest.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BusinessOwnedObjectOnBehalfOfRequest> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BusinessOwnedObjectOnBehalfOfRequest> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BusinessOwnedObjectOnBehalfOfRequest>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BusinessOwnedObjectOnBehalfOfRequest>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BusinessOwnedObjectOnBehalfOfRequest>>() {
+           public APINodeList<BusinessOwnedObjectOnBehalfOfRequest> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetOnBehalfRequests.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetOnBehalfRequests(String nodeId, APIContext context) {
+      super(context, nodeId, "/onbehalf_requests", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetOnBehalfRequests setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOnBehalfRequests setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetOnBehalfRequests setStatus (BusinessOwnedObjectOnBehalfOfRequest.EnumStatus status) {
+      this.setParam("status", status);
+      return this;
+    }
+    public APIRequestGetOnBehalfRequests setStatus (String status) {
+      this.setParam("status", status);
+      return this;
+    }
+
+    public APIRequestGetOnBehalfRequests requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetOnBehalfRequests requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOnBehalfRequests requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetOnBehalfRequests requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOnBehalfRequests requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetOnBehalfRequests requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetOnBehalfRequests requestBusinessOwnedObjectField () {
+      return this.requestBusinessOwnedObjectField(true);
+    }
+    public APIRequestGetOnBehalfRequests requestBusinessOwnedObjectField (boolean value) {
+      this.requestField("business_owned_object", value);
+      return this;
+    }
+    public APIRequestGetOnBehalfRequests requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetOnBehalfRequests requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOnBehalfRequests requestReceivingBusinessField () {
+      return this.requestReceivingBusinessField(true);
+    }
+    public APIRequestGetOnBehalfRequests requestReceivingBusinessField (boolean value) {
+      this.requestField("receiving_business", value);
+      return this;
+    }
+    public APIRequestGetOnBehalfRequests requestRequestingBusinessField () {
+      return this.requestRequestingBusinessField(true);
+    }
+    public APIRequestGetOnBehalfRequests requestRequestingBusinessField (boolean value) {
+      this.requestField("requesting_business", value);
+      return this;
+    }
+    public APIRequestGetOnBehalfRequests requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetOnBehalfRequests requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+  }
+
   public static class APIRequestGetPartnerIntegrations extends APIRequest<PartnerIntegrationLinked> {
 
     APINodeList<PartnerIntegrationLinked> lastResponse = null;
@@ -25776,6 +25944,7 @@ public class AdAccount extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -26577,6 +26746,13 @@ public class AdAccount extends APINode {
     }
     public APIRequestGetPromotePages requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetPromotePages requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetPromotePages requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetPromotePages requestPageTokenField () {

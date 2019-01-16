@@ -69,6 +69,8 @@ public class Targeting extends APINode {
   private List<String> mAudienceNetworkPositions = null;
   @SerializedName("behaviors")
   private List<IDName> mBehaviors = null;
+  @SerializedName("brand_safety_content_filter_levels")
+  private List<String> mBrandSafetyContentFilterLevels = null;
   @SerializedName("brand_safety_content_severity_levels")
   private List<String> mBrandSafetyContentSeverityLevels = null;
   @SerializedName("catalog_based_targeting")
@@ -454,6 +456,15 @@ public class Targeting extends APINode {
     this.mBehaviors = IDName.getGson().fromJson(value, type);
     return this;
   }
+  public List<String> getFieldBrandSafetyContentFilterLevels() {
+    return mBrandSafetyContentFilterLevels;
+  }
+
+  public Targeting setFieldBrandSafetyContentFilterLevels(List<String> value) {
+    this.mBrandSafetyContentFilterLevels = value;
+    return this;
+  }
+
   public List<String> getFieldBrandSafetyContentSeverityLevels() {
     return mBrandSafetyContentSeverityLevels;
   }
@@ -1457,6 +1468,7 @@ public class Targeting extends APINode {
     this.mAppInstallState = instance.mAppInstallState;
     this.mAudienceNetworkPositions = instance.mAudienceNetworkPositions;
     this.mBehaviors = instance.mBehaviors;
+    this.mBrandSafetyContentFilterLevels = instance.mBrandSafetyContentFilterLevels;
     this.mBrandSafetyContentSeverityLevels = instance.mBrandSafetyContentSeverityLevels;
     this.mCatalogBasedTargeting = instance.mCatalogBasedTargeting;
     this.mCities = instance.mCities;

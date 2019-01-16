@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdCreativeNode {
+public class AdCreativePreviewsEdgePreviewDynamicAdsWithCustomizations {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -34,8 +34,10 @@ public class AdCreativeNode {
     String id = "<AD_CREATIVE_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdCreative(id, context).get()
-      .requestAssetFeedSpecField()
+    new AdCreative(id, context).getPreviews()
+      .setAdFormat(AdPreview.EnumAdFormat.VALUE_DESKTOP_FEED_STANDARD)
+      .setProductItemIds("[\"<productItemID>\"]")
+      .setParam("dynamic_customization", "{\"language\":\"fr_XX\",\"country\":\"FR\"}")
       .execute();
 
   }

@@ -671,6 +671,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_BRAND_SAFETY_CONTENT_SEVERITY_LEVELS("brand_safety_content_severity_levels"),
       @SerializedName("catalog_based_targeting")
       VALUE_CATALOG_BASED_TARGETING("catalog_based_targeting"),
+      @SerializedName("brand_safety_content_filter_levels")
+      VALUE_BRAND_SAFETY_CONTENT_FILTER_LEVELS("brand_safety_content_filter_levels"),
       NULL(null);
 
       private String value;
@@ -906,6 +908,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_BRAND_SAFETY_CONTENT_SEVERITY_LEVELS("brand_safety_content_severity_levels"),
       @SerializedName("catalog_based_targeting")
       VALUE_CATALOG_BASED_TARGETING("catalog_based_targeting"),
+      @SerializedName("brand_safety_content_filter_levels")
+      VALUE_BRAND_SAFETY_CONTENT_FILTER_LEVELS("brand_safety_content_filter_levels"),
       NULL(null);
 
       private String value;
