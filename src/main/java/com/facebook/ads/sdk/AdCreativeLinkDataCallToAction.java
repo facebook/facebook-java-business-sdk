@@ -261,6 +261,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_USE_APP("USE_APP"),
       @SerializedName("CALL")
       VALUE_CALL("CALL"),
+      @SerializedName("CALL_NOW")
+      VALUE_CALL_NOW("CALL_NOW"),
       @SerializedName("CALL_ME")
       VALUE_CALL_ME("CALL_ME"),
       @SerializedName("INSTALL_MOBILE_APP")
