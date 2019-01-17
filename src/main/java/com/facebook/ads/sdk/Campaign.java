@@ -89,8 +89,6 @@ public class Campaign extends APINode {
   private String mLastBudgetTogglingTime = null;
   @SerializedName("lifetime_budget")
   private String mLifetimeBudget = null;
-  @SerializedName("metrics_metadata")
-  private AdCampaignGroupMetricsMetadata mMetricsMetadata = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("objective")
@@ -447,9 +445,6 @@ public class Campaign extends APINode {
     return mLifetimeBudget;
   }
 
-  public AdCampaignGroupMetricsMetadata getFieldMetricsMetadata() {
-    return mMetricsMetadata;
-  }
 
   public String getFieldName() {
     return mName;
@@ -2188,7 +2183,6 @@ public class Campaign extends APINode {
       "id",
       "last_budget_toggling_time",
       "lifetime_budget",
-      "metrics_metadata",
       "name",
       "objective",
       "pacing_type",
@@ -2446,13 +2440,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGetCopies requestMetricsMetadataField () {
-      return this.requestMetricsMetadataField(true);
-    }
-    public APIRequestGetCopies requestMetricsMetadataField (boolean value) {
-      this.requestField("metrics_metadata", value);
       return this;
     }
     public APIRequestGetCopies requestNameField () {
@@ -3414,7 +3401,6 @@ public class Campaign extends APINode {
       "id",
       "last_budget_toggling_time",
       "lifetime_budget",
-      "metrics_metadata",
       "name",
       "objective",
       "pacing_type",
@@ -3672,13 +3658,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGet requestMetricsMetadataField () {
-      return this.requestMetricsMetadataField(true);
-    }
-    public APIRequestGet requestMetricsMetadataField (boolean value) {
-      this.requestField("metrics_metadata", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -4361,7 +4340,6 @@ public class Campaign extends APINode {
     this.mId = instance.mId;
     this.mLastBudgetTogglingTime = instance.mLastBudgetTogglingTime;
     this.mLifetimeBudget = instance.mLifetimeBudget;
-    this.mMetricsMetadata = instance.mMetricsMetadata;
     this.mName = instance.mName;
     this.mObjective = instance.mObjective;
     this.mPacingType = instance.mPacingType;
