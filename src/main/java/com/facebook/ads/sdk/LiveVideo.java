@@ -4846,10 +4846,6 @@ public class LiveVideo extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestUpdate setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -5335,25 +5331,6 @@ public class LiveVideo extends APINode {
       private String value;
 
       private EnumStreamType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumType {
-      @SerializedName("tagged")
-      VALUE_TAGGED("tagged"),
-      @SerializedName("uploaded")
-      VALUE_UPLOADED("uploaded"),
-      NULL(null);
-
-      private String value;
-
-      private EnumType(String value) {
         this.value = value;
       }
 

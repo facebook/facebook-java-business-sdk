@@ -58,7 +58,7 @@ public class CanvasAdSettings extends APINode {
   @SerializedName("is_canvas_collection_eligible")
   private Boolean mIsCanvasCollectionEligible = null;
   @SerializedName("lead_form_created_time")
-  private Object mLeadFormCreatedTime = null;
+  private Long mLeadFormCreatedTime = null;
   @SerializedName("lead_form_name")
   private String mLeadFormName = null;
   @SerializedName("lead_gen_form_id")
@@ -231,11 +231,11 @@ public class CanvasAdSettings extends APINode {
     return this;
   }
 
-  public Object getFieldLeadFormCreatedTime() {
+  public Long getFieldLeadFormCreatedTime() {
     return mLeadFormCreatedTime;
   }
 
-  public CanvasAdSettings setFieldLeadFormCreatedTime(Object value) {
+  public CanvasAdSettings setFieldLeadFormCreatedTime(Long value) {
     this.mLeadFormCreatedTime = value;
     return this;
   }

@@ -459,19 +459,11 @@ public class ShadowIGUser extends APINode {
     }
 
 
-    public APIRequestCreateMention setMediaId (Object mediaId) {
-      this.setParam("media_id", mediaId);
-      return this;
-    }
     public APIRequestCreateMention setMediaId (String mediaId) {
       this.setParam("media_id", mediaId);
       return this;
     }
 
-    public APIRequestCreateMention setCommentId (Object commentId) {
-      this.setParam("comment_id", commentId);
-      return this;
-    }
     public APIRequestCreateMention setCommentId (String commentId) {
       this.setParam("comment_id", commentId);
       return this;

@@ -344,10 +344,6 @@ public class AdsPixel extends APINode {
     return new APIRequestGetSharedAgencies(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateSharedAgency createSharedAgency() {
-    return new APIRequestCreateSharedAgency(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetStats getStats() {
     return new APIRequestGetStats(this.getPrefixedId().toString(), context);
   }
@@ -3048,138 +3044,6 @@ public class AdsPixel extends APINode {
     }
   }
 
-  public static class APIRequestCreateSharedAgency extends APIRequest<AdsPixel> {
-
-    AdsPixel lastResponse = null;
-    @Override
-    public AdsPixel getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "agency_id",
-      "business",
-      "relationship_type",
-      "other_relationship",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public AdsPixel parseResponse(String response, String header) throws APIException {
-      return AdsPixel.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public AdsPixel execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public AdsPixel execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<AdsPixel> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<AdsPixel> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, AdsPixel>() {
-           public AdsPixel apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateSharedAgency.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateSharedAgency(String nodeId, APIContext context) {
-      super(context, nodeId, "/shared_agencies", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateSharedAgency setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSharedAgency setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateSharedAgency setAgencyId (String agencyId) {
-      this.setParam("agency_id", agencyId);
-      return this;
-    }
-
-    public APIRequestCreateSharedAgency setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
-
-    public APIRequestCreateSharedAgency setRelationshipType (List<AdsPixel.EnumRelationshipType> relationshipType) {
-      this.setParam("relationship_type", relationshipType);
-      return this;
-    }
-    public APIRequestCreateSharedAgency setRelationshipType (String relationshipType) {
-      this.setParam("relationship_type", relationshipType);
-      return this;
-    }
-
-    public APIRequestCreateSharedAgency setOtherRelationship (String otherRelationship) {
-      this.setParam("other_relationship", otherRelationship);
-      return this;
-    }
-
-    public APIRequestCreateSharedAgency requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateSharedAgency requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSharedAgency requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateSharedAgency requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSharedAgency requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateSharedAgency requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetStats extends APIRequest<AdsPixelStatsResult> {
 
     APINodeList<AdsPixelStatsResult> lastResponse = null;
@@ -3255,19 +3119,11 @@ public class AdsPixel extends APINode {
     }
 
 
-    public APIRequestGetStats setStartTime (Object startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
     public APIRequestGetStats setStartTime (String startTime) {
       this.setParam("start_time", startTime);
       return this;
     }
 
-    public APIRequestGetStats setEndTime (Object endTime) {
-      this.setParam("end_time", endTime);
-      return this;
-    }
     public APIRequestGetStats setEndTime (String endTime) {
       this.setParam("end_time", endTime);
       return this;
@@ -3845,29 +3701,6 @@ public class AdsPixel extends APINode {
       private String value;
 
       private EnumType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumRelationshipType {
-      @SerializedName("AD_MANAGER")
-      VALUE_AD_MANAGER("AD_MANAGER"),
-      @SerializedName("AUDIENCE_MANAGER")
-      VALUE_AUDIENCE_MANAGER("AUDIENCE_MANAGER"),
-      @SerializedName("AGENCY")
-      VALUE_AGENCY("AGENCY"),
-      @SerializedName("OTHER")
-      VALUE_OTHER("OTHER"),
-      NULL(null);
-
-      private String value;
-
-      private EnumRelationshipType(String value) {
         this.value = value;
       }
 

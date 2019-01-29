@@ -1147,7 +1147,6 @@ public class Photo extends APINode {
       "until",
       "metric",
       "period",
-      "show_permission_error",
       "date_preset",
     };
 
@@ -1239,15 +1238,6 @@ public class Photo extends APINode {
     }
     public APIRequestGetInsights setPeriod (String period) {
       this.setParam("period", period);
-      return this;
-    }
-
-    public APIRequestGetInsights setShowPermissionError (Boolean showPermissionError) {
-      this.setParam("show_permission_error", showPermissionError);
-      return this;
-    }
-    public APIRequestGetInsights setShowPermissionError (String showPermissionError) {
-      this.setParam("show_permission_error", showPermissionError);
       return this;
     }
 
@@ -1817,7 +1807,6 @@ public class Photo extends APINode {
       "uid",
       "profile_id",
       "target_id",
-      "checkin_id",
       "vault_image_id",
       "tags",
       "place",
@@ -1962,15 +1951,6 @@ public class Photo extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setCheckinId (Object checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-    public APIRequestCreatePhoto setCheckinId (String checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-
     public APIRequestCreatePhoto setVaultImageId (String vaultImageId) {
       this.setParam("vault_image_id", vaultImageId);
       return this;
@@ -2046,10 +2026,6 @@ public class Photo extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreatePhoto setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -5241,10 +5217,6 @@ public class Photo extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestUpdate setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;

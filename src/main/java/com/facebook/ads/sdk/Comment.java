@@ -76,7 +76,7 @@ public class Comment extends APINode {
   @SerializedName("from")
   private Object mFrom = null;
   @SerializedName("id")
-  private Object mId = null;
+  private String mId = null;
   @SerializedName("is_hidden")
   private Boolean mIsHidden = null;
   @SerializedName("is_private")
@@ -385,7 +385,7 @@ public class Comment extends APINode {
     return mFrom;
   }
 
-  public Object getFieldId() {
+  public String getFieldId() {
     return mId;
   }
 

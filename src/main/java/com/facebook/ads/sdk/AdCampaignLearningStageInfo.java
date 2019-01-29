@@ -58,7 +58,7 @@ public class AdCampaignLearningStageInfo extends APINode {
   @SerializedName("attribution_windows")
   private List<String> mAttributionWindows = null;
   @SerializedName("conversions")
-  private Object mConversions = null;
+  private Long mConversions = null;
   @SerializedName("exit_reason")
   private String mExitReason = null;
   @SerializedName("last_sig_edit_ts")
@@ -229,11 +229,11 @@ public class AdCampaignLearningStageInfo extends APINode {
     return this;
   }
 
-  public Object getFieldConversions() {
+  public Long getFieldConversions() {
     return mConversions;
   }
 
-  public AdCampaignLearningStageInfo setFieldConversions(Object value) {
+  public AdCampaignLearningStageInfo setFieldConversions(Long value) {
     this.mConversions = value;
     return this;
   }

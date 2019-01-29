@@ -687,7 +687,7 @@ public class MediaFingerprint extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setMetadata (Object metadata) {
+    public APIRequestUpdate setMetadata (JsonArray metadata) {
       this.setParam("metadata", metadata);
       return this;
     }

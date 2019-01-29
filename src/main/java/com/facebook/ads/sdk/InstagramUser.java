@@ -901,10 +901,6 @@ public class InstagramUser extends APINode {
     }
 
 
-    public APIRequestDeleteAssignedUsers setBusiness (Object business) {
-      this.setParam("business", business);
-      return this;
-    }
     public APIRequestDeleteAssignedUsers setBusiness (String business) {
       this.setParam("business", business);
       return this;
@@ -1028,10 +1024,6 @@ public class InstagramUser extends APINode {
     }
 
 
-    public APIRequestGetAssignedUsers setBusiness (Object business) {
-      this.setParam("business", business);
-      return this;
-    }
     public APIRequestGetAssignedUsers setBusiness (String business) {
       this.setParam("business", business);
       return this;
@@ -1172,10 +1164,6 @@ public class InstagramUser extends APINode {
     }
 
 
-    public APIRequestCreateAssignedUser setBusiness (Object business) {
-      this.setParam("business", business);
-      return this;
-    }
     public APIRequestCreateAssignedUser setBusiness (String business) {
       this.setParam("business", business);
       return this;
@@ -2128,10 +2116,6 @@ public class InstagramUser extends APINode {
     }
 
 
-    public APIRequestCreateUserPermission setBusiness (Object business) {
-      this.setParam("business", business);
-      return this;
-    }
     public APIRequestCreateUserPermission setBusiness (String business) {
       this.setParam("business", business);
       return this;

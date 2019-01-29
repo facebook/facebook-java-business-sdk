@@ -58,7 +58,7 @@ public class AdSet extends APINode {
   @SerializedName("account_id")
   private String mAccountId = null;
   @SerializedName("ad_keywords")
-  private String mAdKeywords = null;
+  private AdKeywords mAdKeywords = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
   @SerializedName("adset_schedule")
@@ -446,15 +446,20 @@ public class AdSet extends APINode {
     return this;
   }
 
-  public String getFieldAdKeywords() {
+  public AdKeywords getFieldAdKeywords() {
     return mAdKeywords;
   }
 
-  public AdSet setFieldAdKeywords(String value) {
+  public AdSet setFieldAdKeywords(AdKeywords value) {
     this.mAdKeywords = value;
     return this;
   }
 
+  public AdSet setFieldAdKeywords(String value) {
+    Type type = new TypeToken<AdKeywords>(){}.getType();
+    this.mAdKeywords = AdKeywords.getGson().fromJson(value, type);
+    return this;
+  }
   public List<AdLabel> getFieldAdlabels() {
     return mAdlabels;
   }
@@ -2061,7 +2066,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestDeleteAdLabels setExecutionOptions (List<AdSet.EnumExecutionOptions> executionOptions) {
+    public APIRequestDeleteAdLabels setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -2185,7 +2190,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdLabel setExecutionOptions (List<AdSet.EnumExecutionOptions> executionOptions) {
+    public APIRequestCreateAdLabel setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -4862,7 +4867,7 @@ public class AdSet extends APINode {
     }
 
 
-    public APIRequestGet setAmCallTags (Object amCallTags) {
+    public APIRequestGet setAmCallTags (Map<String, String> amCallTags) {
       this.setParam("am_call_tags", amCallTags);
       return this;
     }
@@ -5328,12 +5333,7 @@ public class AdSet extends APINode {
       "destination_type",
       "end_time",
       "execution_options",
-      "frequency_cap",
-      "frequency_cap_reset_period",
-      "is_autobid",
-      "is_average_price_pacing",
       "lifetime_budget",
-      "lifetime_frequency_cap",
       "lifetime_imps",
       "lifetime_min_spend_target",
       "lifetime_spend_cap",
@@ -5451,7 +5451,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setBidConstraints (Object bidConstraints) {
+    public APIRequestUpdate setBidConstraints (Map<String, Object> bidConstraints) {
       this.setParam("bid_constraints", bidConstraints);
       return this;
     }
@@ -5578,57 +5578,12 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setFrequencyCap (Long frequencyCap) {
-      this.setParam("frequency_cap", frequencyCap);
-      return this;
-    }
-    public APIRequestUpdate setFrequencyCap (String frequencyCap) {
-      this.setParam("frequency_cap", frequencyCap);
-      return this;
-    }
-
-    public APIRequestUpdate setFrequencyCapResetPeriod (Long frequencyCapResetPeriod) {
-      this.setParam("frequency_cap_reset_period", frequencyCapResetPeriod);
-      return this;
-    }
-    public APIRequestUpdate setFrequencyCapResetPeriod (String frequencyCapResetPeriod) {
-      this.setParam("frequency_cap_reset_period", frequencyCapResetPeriod);
-      return this;
-    }
-
-    public APIRequestUpdate setIsAutobid (Boolean isAutobid) {
-      this.setParam("is_autobid", isAutobid);
-      return this;
-    }
-    public APIRequestUpdate setIsAutobid (String isAutobid) {
-      this.setParam("is_autobid", isAutobid);
-      return this;
-    }
-
-    public APIRequestUpdate setIsAveragePricePacing (Boolean isAveragePricePacing) {
-      this.setParam("is_average_price_pacing", isAveragePricePacing);
-      return this;
-    }
-    public APIRequestUpdate setIsAveragePricePacing (String isAveragePricePacing) {
-      this.setParam("is_average_price_pacing", isAveragePricePacing);
-      return this;
-    }
-
     public APIRequestUpdate setLifetimeBudget (Long lifetimeBudget) {
       this.setParam("lifetime_budget", lifetimeBudget);
       return this;
     }
     public APIRequestUpdate setLifetimeBudget (String lifetimeBudget) {
       this.setParam("lifetime_budget", lifetimeBudget);
-      return this;
-    }
-
-    public APIRequestUpdate setLifetimeFrequencyCap (Long lifetimeFrequencyCap) {
-      this.setParam("lifetime_frequency_cap", lifetimeFrequencyCap);
-      return this;
-    }
-    public APIRequestUpdate setLifetimeFrequencyCap (String lifetimeFrequencyCap) {
-      this.setParam("lifetime_frequency_cap", lifetimeFrequencyCap);
       return this;
     }
 

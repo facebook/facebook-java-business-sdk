@@ -56,7 +56,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class CustomConversionActivities extends APINode {
   @SerializedName("app_id")
-  private Object mAppId = null;
+  private Long mAppId = null;
   @SerializedName("data")
   private String mData = null;
   @SerializedName("event_type")
@@ -216,11 +216,11 @@ public class CustomConversionActivities extends APINode {
   }
 
 
-  public Object getFieldAppId() {
+  public Long getFieldAppId() {
     return mAppId;
   }
 
-  public CustomConversionActivities setFieldAppId(Object value) {
+  public CustomConversionActivities setFieldAppId(Long value) {
     this.mAppId = value;
     return this;
   }

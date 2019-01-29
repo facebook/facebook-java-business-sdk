@@ -1147,6 +1147,7 @@ public class AdCreative extends APINode {
     public static final String[] PARAMS = {
       "ad_format",
       "dynamic_creative_spec",
+      "dynamic_customization",
       "dynamic_asset_label",
       "interactive",
       "post",
@@ -1233,6 +1234,15 @@ public class AdCreative extends APINode {
     }
     public APIRequestGetPreviews setDynamicCreativeSpec (String dynamicCreativeSpec) {
       this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
+      return this;
+    }
+
+    public APIRequestGetPreviews setDynamicCustomization (Object dynamicCustomization) {
+      this.setParam("dynamic_customization", dynamicCustomization);
+      return this;
+    }
+    public APIRequestGetPreviews setDynamicCustomization (String dynamicCustomization) {
+      this.setParam("dynamic_customization", dynamicCustomization);
       return this;
     }
 

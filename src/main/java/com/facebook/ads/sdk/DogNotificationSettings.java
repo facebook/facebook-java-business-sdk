@@ -488,7 +488,7 @@ public class DogNotificationSettings extends APINode {
     }
 
 
-    public APIRequestUpdate setSubscriptionStatusPerChannel (Object subscriptionStatusPerChannel) {
+    public APIRequestUpdate setSubscriptionStatusPerChannel (Map<String, String> subscriptionStatusPerChannel) {
       this.setParam("subscription_status_per_channel", subscriptionStatusPerChannel);
       return this;
     }

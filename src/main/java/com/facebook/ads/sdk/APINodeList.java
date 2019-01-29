@@ -221,6 +221,9 @@ public class APINodeList<T extends APINode> extends ArrayList<T> implements APIR
             } else {
               try {
                 this.list = list.nextPage();
+                if (this.list == null) {
+                  return false;
+                }
                 this.it = list.getCurrentListIterator();
               } catch (APIException e) {
                 throw new RuntimeException(e);

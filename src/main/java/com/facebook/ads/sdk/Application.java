@@ -524,10 +524,6 @@ public class Application extends APINode {
     return new APIRequestGetAppInstalledGroups(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateAppLinkHost createAppLinkHost() {
-    return new APIRequestCreateAppLinkHost(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateAppPushDeviceToken createAppPushDeviceToken() {
     return new APIRequestCreateAppPushDeviceToken(this.getPrefixedId().toString(), context);
   }
@@ -1635,7 +1631,7 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreateAccount setPermissions (Object permissions) {
+    public APIRequestCreateAccount setPermissions (List<Permission> permissions) {
       this.setParam("permissions", permissions);
       return this;
     }
@@ -2468,19 +2464,11 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setSince (Object since) {
-      this.setParam("since", since);
-      return this;
-    }
     public APIRequestGetAdNetworkAnalytics setSince (String since) {
       this.setParam("since", since);
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setUntil (Object until) {
-      this.setParam("until", until);
-      return this;
-    }
     public APIRequestGetAdNetworkAnalytics setUntil (String until) {
       this.setParam("until", until);
       return this;
@@ -2683,19 +2671,11 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setSince (Object since) {
-      this.setParam("since", since);
-      return this;
-    }
     public APIRequestCreateAdNetworkAnalytic setSince (String since) {
       this.setParam("since", since);
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setUntil (Object until) {
-      this.setParam("until", until);
-      return this;
-    }
     public APIRequestCreateAdNetworkAnalytic setUntil (String until) {
       this.setParam("until", until);
       return this;
@@ -3889,10 +3869,6 @@ public class Application extends APINode {
     }
 
 
-    public APIRequestGetAppInstalledGroups setGroupId (Object groupId) {
-      this.setParam("group_id", groupId);
-      return this;
-    }
     public APIRequestGetAppInstalledGroups setGroupId (String groupId) {
       this.setParam("group_id", groupId);
       return this;
@@ -4067,196 +4043,6 @@ public class Application extends APINode {
       this.requestField("venue", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateAppLinkHost extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "android",
-      "ios",
-      "ipad",
-      "iphone",
-      "web",
-      "windows_phone",
-      "windows",
-      "windows_universal",
-      "name",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateAppLinkHost.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateAppLinkHost(String nodeId, APIContext context) {
-      super(context, nodeId, "/app_link_hosts", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateAppLinkHost setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAppLinkHost setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateAppLinkHost setAndroid (Object android) {
-      this.setParam("android", android);
-      return this;
-    }
-    public APIRequestCreateAppLinkHost setAndroid (String android) {
-      this.setParam("android", android);
-      return this;
-    }
-
-    public APIRequestCreateAppLinkHost setIos (Object ios) {
-      this.setParam("ios", ios);
-      return this;
-    }
-    public APIRequestCreateAppLinkHost setIos (String ios) {
-      this.setParam("ios", ios);
-      return this;
-    }
-
-    public APIRequestCreateAppLinkHost setIpad (Object ipad) {
-      this.setParam("ipad", ipad);
-      return this;
-    }
-    public APIRequestCreateAppLinkHost setIpad (String ipad) {
-      this.setParam("ipad", ipad);
-      return this;
-    }
-
-    public APIRequestCreateAppLinkHost setIphone (Object iphone) {
-      this.setParam("iphone", iphone);
-      return this;
-    }
-    public APIRequestCreateAppLinkHost setIphone (String iphone) {
-      this.setParam("iphone", iphone);
-      return this;
-    }
-
-    public APIRequestCreateAppLinkHost setWeb (Object web) {
-      this.setParam("web", web);
-      return this;
-    }
-    public APIRequestCreateAppLinkHost setWeb (String web) {
-      this.setParam("web", web);
-      return this;
-    }
-
-    public APIRequestCreateAppLinkHost setWindowsPhone (Object windowsPhone) {
-      this.setParam("windows_phone", windowsPhone);
-      return this;
-    }
-    public APIRequestCreateAppLinkHost setWindowsPhone (String windowsPhone) {
-      this.setParam("windows_phone", windowsPhone);
-      return this;
-    }
-
-    public APIRequestCreateAppLinkHost setWindows (Object windows) {
-      this.setParam("windows", windows);
-      return this;
-    }
-    public APIRequestCreateAppLinkHost setWindows (String windows) {
-      this.setParam("windows", windows);
-      return this;
-    }
-
-    public APIRequestCreateAppLinkHost setWindowsUniversal (Object windowsUniversal) {
-      this.setParam("windows_universal", windowsUniversal);
-      return this;
-    }
-    public APIRequestCreateAppLinkHost setWindowsUniversal (String windowsUniversal) {
-      this.setParam("windows_universal", windowsUniversal);
-      return this;
-    }
-
-    public APIRequestCreateAppLinkHost setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateAppLinkHost requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateAppLinkHost requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAppLinkHost requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateAppLinkHost requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAppLinkHost requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateAppLinkHost requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestCreateAppPushDeviceToken extends APIRequest<Application> {
@@ -9174,10 +8960,6 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreateLeaderboardsDeleteEntry setPlayerId (Object playerId) {
-      this.setParam("player_id", playerId);
-      return this;
-    }
     public APIRequestCreateLeaderboardsDeleteEntry setPlayerId (String playerId) {
       this.setParam("player_id", playerId);
       return this;
@@ -9294,10 +9076,6 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreateLeaderboardsReset setResetTime (Object resetTime) {
-      this.setParam("reset_time", resetTime);
-      return this;
-    }
     public APIRequestCreateLeaderboardsReset setResetTime (String resetTime) {
       this.setParam("reset_time", resetTime);
       return this;
@@ -9425,10 +9203,6 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreateLeaderboardsSetScore setPlayerId (Object playerId) {
-      this.setParam("player_id", playerId);
-      return this;
-    }
     public APIRequestCreateLeaderboardsSetScore setPlayerId (String playerId) {
       this.setParam("player_id", playerId);
       return this;
@@ -9648,10 +9422,6 @@ public class Application extends APINode {
     }
 
 
-    public APIRequestCreateLocalServiceBookingConfig setBaseUrl (Object baseUrl) {
-      this.setParam("base_url", baseUrl);
-      return this;
-    }
     public APIRequestCreateLocalServiceBookingConfig setBaseUrl (String baseUrl) {
       this.setParam("base_url", baseUrl);
       return this;
@@ -12230,7 +12000,7 @@ public class Application extends APINode {
     }
 
 
-    public APIRequestGetPermissions setPermission (Object permission) {
+    public APIRequestGetPermissions setPermission (List<Permission> permission) {
       this.setParam("permission", permission);
       return this;
     }
@@ -12319,7 +12089,6 @@ public class Application extends APINode {
       "uid",
       "profile_id",
       "target_id",
-      "checkin_id",
       "vault_image_id",
       "tags",
       "place",
@@ -12464,15 +12233,6 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setCheckinId (Object checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-    public APIRequestCreatePhoto setCheckinId (String checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-
     public APIRequestCreatePhoto setVaultImageId (String vaultImageId) {
       this.setParam("vault_image_id", vaultImageId);
       return this;
@@ -12548,10 +12308,6 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreatePhoto setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -14392,10 +14148,6 @@ public class Application extends APINode {
       return this;
     }
 
-    public APIRequestCreateSubscription setCallbackUrl (Object callbackUrl) {
-      this.setParam("callback_url", callbackUrl);
-      return this;
-    }
     public APIRequestCreateSubscription setCallbackUrl (String callbackUrl) {
       this.setParam("callback_url", callbackUrl);
       return this;

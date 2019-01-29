@@ -526,6 +526,7 @@ public class UnifiedThread extends APINode {
       "montage_overlays",
       "montage_supported_features",
       "montage_mentions",
+      "montage_targets",
       "montage_reply_data",
       "object_attachment",
       "offline_threading_id",
@@ -796,7 +797,7 @@ public class UnifiedThread extends APINode {
       return this;
     }
 
-    public APIRequestCreateMessage setLogInfo (Object logInfo) {
+    public APIRequestCreateMessage setLogInfo (Map<String, String> logInfo) {
       this.setParam("log_info", logInfo);
       return this;
     }
@@ -877,6 +878,15 @@ public class UnifiedThread extends APINode {
       return this;
     }
 
+    public APIRequestCreateMessage setMontageTargets (List<String> montageTargets) {
+      this.setParam("montage_targets", montageTargets);
+      return this;
+    }
+    public APIRequestCreateMessage setMontageTargets (String montageTargets) {
+      this.setParam("montage_targets", montageTargets);
+      return this;
+    }
+
     public APIRequestCreateMessage setMontageReplyData (Object montageReplyData) {
       this.setParam("montage_reply_data", montageReplyData);
       return this;
@@ -901,7 +911,7 @@ public class UnifiedThread extends APINode {
       return this;
     }
 
-    public APIRequestCreateMessage setPrng (Object prng) {
+    public APIRequestCreateMessage setPrng (JsonArray prng) {
       this.setParam("prng", prng);
       return this;
     }
@@ -915,7 +925,7 @@ public class UnifiedThread extends APINode {
       return this;
     }
 
-    public APIRequestCreateMessage setRecipients (Object recipients) {
+    public APIRequestCreateMessage setRecipients (List<Object> recipients) {
       this.setParam("recipients", recipients);
       return this;
     }

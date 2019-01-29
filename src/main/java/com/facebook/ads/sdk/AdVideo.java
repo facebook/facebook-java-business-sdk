@@ -6606,19 +6606,11 @@ public class AdVideo extends APINode {
       return this;
     }
 
-    public APIRequestGetVideoInsights setSince (Object since) {
-      this.setParam("since", since);
-      return this;
-    }
     public APIRequestGetVideoInsights setSince (String since) {
       this.setParam("since", since);
       return this;
     }
 
-    public APIRequestGetVideoInsights setUntil (Object until) {
-      this.setParam("until", until);
-      return this;
-    }
     public APIRequestGetVideoInsights setUntil (String until) {
       this.setParam("until", until);
       return this;
@@ -7230,7 +7222,6 @@ public class AdVideo extends APINode {
       "name",
       "description",
       "tags",
-      "place",
       "preferred_thumbnail_id",
       "ad_breaks",
       "backdated_time",
@@ -7310,10 +7301,6 @@ public class AdVideo extends APINode {
     }
 
 
-    public APIRequestUpdate setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestUpdate setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -7361,21 +7348,12 @@ public class AdVideo extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setPlace (Object place) {
-      this.setParam("place", place);
-      return this;
-    }
-    public APIRequestUpdate setPlace (String place) {
-      this.setParam("place", place);
-      return this;
-    }
-
     public APIRequestUpdate setPreferredThumbnailId (String preferredThumbnailId) {
       this.setParam("preferred_thumbnail_id", preferredThumbnailId);
       return this;
     }
 
-    public APIRequestUpdate setAdBreaks (Object adBreaks) {
+    public APIRequestUpdate setAdBreaks (JsonArray adBreaks) {
       this.setParam("ad_breaks", adBreaks);
       return this;
     }
@@ -7732,8 +7710,6 @@ public class AdVideo extends APINode {
       VALUE_PRIVATE_GALLERY_VIDEO("PRIVATE_GALLERY_VIDEO"),
       @SerializedName("FISTBUMP")
       VALUE_FISTBUMP("FISTBUMP"),
-      @SerializedName("STORY_HIGHLIGHT_VIDEO")
-      VALUE_STORY_HIGHLIGHT_VIDEO("STORY_HIGHLIGHT_VIDEO"),
       @SerializedName("PROFILE_TO_PAGE_UPLOADED_VIDEO")
       VALUE_PROFILE_TO_PAGE_UPLOADED_VIDEO("PROFILE_TO_PAGE_UPLOADED_VIDEO"),
       @SerializedName("KOTOTORO")
@@ -7760,6 +7736,8 @@ public class AdVideo extends APINode {
       VALUE_SOTTO_CONTENT("SOTTO_CONTENT"),
       @SerializedName("OCULUS_VENUES_BROADCAST")
       VALUE_OCULUS_VENUES_BROADCAST("OCULUS_VENUES_BROADCAST"),
+      @SerializedName("AGE_UP")
+      VALUE_AGE_UP("AGE_UP"),
       NULL(null);
 
       private String value;

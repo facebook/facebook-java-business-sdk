@@ -257,14 +257,14 @@ We have a plan to improve this by adding more details and providing a convenient
 
 ### Customization and Debugging
 
-####Enable debugging
+#### Enable debugging
 You can enable the debug output by setting the APIContext to debug mode:
 
     public static final APIContext context = new APIContext(ACCESS_TOKEN, APP_SECRET).enableDebug(true).setLogger(System.out);
 
 This will print out the network requests and responses. By default it prints on STDOUT, but you can customize by calling .setLogger(PrintSteam)
 
-####Customize Network
+#### Customize Network
 In v0.2.0, we added APIRequest.changeRequestExecutor(IRequestExecutor), which can be used to set your own network request executor. This makes it possible to add proxy settings, automatic retry, or better network traffic management. See ``/example/NetworkCustomizationExample.java``.
 
 Currently this is a static method because it is likely to be a global setting. If you do think object-level Customization is needed, we'll add that functionality.

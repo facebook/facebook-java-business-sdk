@@ -3145,8 +3145,6 @@ public class BusinessUser extends APINode {
       VALUE_ADMIN("ADMIN"),
       @SerializedName("EMPLOYEE")
       VALUE_EMPLOYEE("EMPLOYEE"),
-      @SerializedName("FB_EMPLOYEE_SALES_REP")
-      VALUE_FB_EMPLOYEE_SALES_REP("FB_EMPLOYEE_SALES_REP"),
       NULL(null);
 
       private String value;

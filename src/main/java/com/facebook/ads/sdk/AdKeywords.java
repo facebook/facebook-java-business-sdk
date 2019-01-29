@@ -54,31 +54,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCampaignIssuesInfo extends APINode {
-  @SerializedName("error_code")
-  private Long mErrorCode = null;
-  @SerializedName("error_message")
-  private String mErrorMessage = null;
-  @SerializedName("error_summary")
-  private String mErrorSummary = null;
-  @SerializedName("level")
-  private String mLevel = null;
+public class AdKeywords extends APINode {
+  @SerializedName("brands")
+  private List<String> mBrands = null;
+  @SerializedName("product_categories")
+  private List<String> mProductCategories = null;
+  @SerializedName("product_names")
+  private List<String> mProductNames = null;
+  @SerializedName("search_terms")
+  private List<String> mSearchTerms = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
 
-  public AdCampaignIssuesInfo() {
+  public AdKeywords() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCampaignIssuesInfo loadJSON(String json, APIContext context, String header) {
-    AdCampaignIssuesInfo adCampaignIssuesInfo = getGson().fromJson(json, AdCampaignIssuesInfo.class);
+  public static AdKeywords loadJSON(String json, APIContext context, String header) {
+    AdKeywords adKeywords = getGson().fromJson(json, AdKeywords.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCampaignIssuesInfo.toString());
+      JsonElement o2 = parser.parse(adKeywords.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -88,14 +88,14 @@ public class AdCampaignIssuesInfo extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adCampaignIssuesInfo.context = context;
-    adCampaignIssuesInfo.rawValue = json;
-    adCampaignIssuesInfo.header = header;
-    return adCampaignIssuesInfo;
+    adKeywords.context = context;
+    adKeywords.rawValue = json;
+    adKeywords.header = header;
+    return adKeywords;
   }
 
-  public static APINodeList<AdCampaignIssuesInfo> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCampaignIssuesInfo> adCampaignIssuesInfos = new APINodeList<AdCampaignIssuesInfo>(request, json, header);
+  public static APINodeList<AdKeywords> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdKeywords> adKeywordss = new APINodeList<AdKeywords>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -106,9 +106,9 @@ public class AdCampaignIssuesInfo extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCampaignIssuesInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adKeywordss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCampaignIssuesInfos;
+        return adKeywordss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -118,20 +118,20 @@ public class AdCampaignIssuesInfo extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCampaignIssuesInfos.setCursors(before, after);
+                adKeywordss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCampaignIssuesInfos.setPaging(previous, next);
+            adKeywordss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCampaignIssuesInfos.setAppSecret(context.getAppSecretProof());
+              adKeywordss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCampaignIssuesInfos.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adKeywordss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -142,23 +142,23 @@ public class AdCampaignIssuesInfo extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCampaignIssuesInfos.add(loadJSON(entry.getValue().toString(), context, header));
+                  adKeywordss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCampaignIssuesInfos.add(loadJSON(obj.toString(), context, header));
+              adKeywordss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCampaignIssuesInfos;
+          return adKeywordss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCampaignIssuesInfos.add(loadJSON(entry.getValue().toString(), context, header));
+              adKeywordss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCampaignIssuesInfos;
+          return adKeywordss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -175,20 +175,20 @@ public class AdCampaignIssuesInfo extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCampaignIssuesInfos.add(loadJSON(value.toString(), context, header));
+              adKeywordss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCampaignIssuesInfos;
+            return adKeywordss;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCampaignIssuesInfos.clear();
-          adCampaignIssuesInfos.add(loadJSON(json, context, header));
-          return adCampaignIssuesInfos;
+          adKeywordss.clear();
+          adKeywordss.add(loadJSON(json, context, header));
+          return adKeywordss;
         }
       }
     } catch (Exception e) {
@@ -216,39 +216,39 @@ public class AdCampaignIssuesInfo extends APINode {
   }
 
 
-  public Long getFieldErrorCode() {
-    return mErrorCode;
+  public List<String> getFieldBrands() {
+    return mBrands;
   }
 
-  public AdCampaignIssuesInfo setFieldErrorCode(Long value) {
-    this.mErrorCode = value;
+  public AdKeywords setFieldBrands(List<String> value) {
+    this.mBrands = value;
     return this;
   }
 
-  public String getFieldErrorMessage() {
-    return mErrorMessage;
+  public List<String> getFieldProductCategories() {
+    return mProductCategories;
   }
 
-  public AdCampaignIssuesInfo setFieldErrorMessage(String value) {
-    this.mErrorMessage = value;
+  public AdKeywords setFieldProductCategories(List<String> value) {
+    this.mProductCategories = value;
     return this;
   }
 
-  public String getFieldErrorSummary() {
-    return mErrorSummary;
+  public List<String> getFieldProductNames() {
+    return mProductNames;
   }
 
-  public AdCampaignIssuesInfo setFieldErrorSummary(String value) {
-    this.mErrorSummary = value;
+  public AdKeywords setFieldProductNames(List<String> value) {
+    this.mProductNames = value;
     return this;
   }
 
-  public String getFieldLevel() {
-    return mLevel;
+  public List<String> getFieldSearchTerms() {
+    return mSearchTerms;
   }
 
-  public AdCampaignIssuesInfo setFieldLevel(String value) {
-    this.mLevel = value;
+  public AdKeywords setFieldSearchTerms(List<String> value) {
+    this.mSearchTerms = value;
     return this;
   }
 
@@ -256,7 +256,7 @@ public class AdCampaignIssuesInfo extends APINode {
     return mId;
   }
 
-  public AdCampaignIssuesInfo setFieldId(String value) {
+  public AdKeywords setFieldId(String value) {
     this.mId = value;
     return this;
   }
@@ -277,21 +277,21 @@ public class AdCampaignIssuesInfo extends APINode {
     return gson;
   }
 
-  public AdCampaignIssuesInfo copyFrom(AdCampaignIssuesInfo instance) {
-    this.mErrorCode = instance.mErrorCode;
-    this.mErrorMessage = instance.mErrorMessage;
-    this.mErrorSummary = instance.mErrorSummary;
-    this.mLevel = instance.mLevel;
+  public AdKeywords copyFrom(AdKeywords instance) {
+    this.mBrands = instance.mBrands;
+    this.mProductCategories = instance.mProductCategories;
+    this.mProductNames = instance.mProductNames;
+    this.mSearchTerms = instance.mSearchTerms;
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCampaignIssuesInfo> getParser() {
-    return new APIRequest.ResponseParser<AdCampaignIssuesInfo>() {
-      public APINodeList<AdCampaignIssuesInfo> parseResponse(String response, APIContext context, APIRequest<AdCampaignIssuesInfo> request, String header) throws MalformedResponseException {
-        return AdCampaignIssuesInfo.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdKeywords> getParser() {
+    return new APIRequest.ResponseParser<AdKeywords>() {
+      public APINodeList<AdKeywords> parseResponse(String response, APIContext context, APIRequest<AdKeywords> request, String header) throws MalformedResponseException {
+        return AdKeywords.parseResponse(response, context, request, header);
       }
     };
   }

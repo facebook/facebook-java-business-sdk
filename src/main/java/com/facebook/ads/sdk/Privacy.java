@@ -56,9 +56,9 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class Privacy extends APINode {
   @SerializedName("allow")
-  private Object mAllow = null;
+  private String mAllow = null;
   @SerializedName("deny")
-  private Object mDeny = null;
+  private String mDeny = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("friends")
@@ -220,20 +220,20 @@ public class Privacy extends APINode {
   }
 
 
-  public Object getFieldAllow() {
+  public String getFieldAllow() {
     return mAllow;
   }
 
-  public Privacy setFieldAllow(Object value) {
+  public Privacy setFieldAllow(String value) {
     this.mAllow = value;
     return this;
   }
 
-  public Object getFieldDeny() {
+  public String getFieldDeny() {
     return mDeny;
   }
 
-  public Privacy setFieldDeny(Object value) {
+  public Privacy setFieldDeny(String value) {
     this.mDeny = value;
     return this;
   }

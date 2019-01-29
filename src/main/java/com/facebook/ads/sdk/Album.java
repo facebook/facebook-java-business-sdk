@@ -1738,7 +1738,6 @@ public class Album extends APINode {
       "uid",
       "profile_id",
       "target_id",
-      "checkin_id",
       "vault_image_id",
       "tags",
       "place",
@@ -1883,15 +1882,6 @@ public class Album extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setCheckinId (Object checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-    public APIRequestCreatePhoto setCheckinId (String checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-
     public APIRequestCreatePhoto setVaultImageId (String vaultImageId) {
       this.setParam("vault_image_id", vaultImageId);
       return this;
@@ -1967,10 +1957,6 @@ public class Album extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreatePhoto setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;

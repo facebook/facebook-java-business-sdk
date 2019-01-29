@@ -66,7 +66,7 @@ public class AppRequest extends APINode {
   @SerializedName("from")
   private User mFrom = null;
   @SerializedName("id")
-  private Object mId = null;
+  private String mId = null;
   @SerializedName("message")
   private String mMessage = null;
   @SerializedName("object")
@@ -317,7 +317,7 @@ public class AppRequest extends APINode {
     return mFrom;
   }
 
-  public Object getFieldId() {
+  public String getFieldId() {
     return mId;
   }
 

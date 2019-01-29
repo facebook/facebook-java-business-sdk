@@ -496,10 +496,6 @@ public class User extends APINode {
     return new APIRequestGetBusinesses(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateCheckin createCheckin() {
-    return new APIRequestCreateCheckin(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetConversations getConversations() {
     return new APIRequestGetConversations(this.getPrefixedId().toString(), context);
   }
@@ -514,10 +510,6 @@ public class User extends APINode {
 
   public APIRequestGetEvents getEvents() {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateEvent createEvent() {
-    return new APIRequestCreateEvent(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetFamily getFamily() {
@@ -538,10 +530,6 @@ public class User extends APINode {
 
   public APIRequestGetFriendLists getFriendLists() {
     return new APIRequestGetFriendLists(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateFriendList createFriendList() {
-    return new APIRequestCreateFriendList(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetFriends getFriends() {
@@ -604,10 +592,6 @@ public class User extends APINode {
     return new APIRequestCreateLike(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateLink createLink() {
-    return new APIRequestCreateLink(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetLiveEncoders getLiveEncoders() {
     return new APIRequestGetLiveEncoders(this.getPrefixedId().toString(), context);
   }
@@ -654,10 +638,6 @@ public class User extends APINode {
 
   public APIRequestGetMusic getMusic() {
     return new APIRequestGetMusic(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateNote createNote() {
-    return new APIRequestCreateNote(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestCreateNotification createNotification() {
@@ -1234,7 +1214,7 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateAccessToken setScope (Object scope) {
+    public APIRequestCreateAccessToken setScope (List<Permission> scope) {
       this.setParam("scope", scope);
       return this;
     }
@@ -2799,10 +2779,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateAccount setCityId (Object cityId) {
-      this.setParam("city_id", cityId);
-      return this;
-    }
     public APIRequestCreateAccount setCityId (String cityId) {
       this.setParam("city_id", cityId);
       return this;
@@ -3298,10 +3274,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateAchievement setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateAchievement setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -5253,10 +5225,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateAlbum setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateAlbum setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -5924,10 +5892,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateAsset3D setFileUrl (Object fileUrl) {
-      this.setParam("file_url", fileUrl);
-      return this;
-    }
     public APIRequestCreateAsset3D setFileUrl (String fileUrl) {
       this.setParam("file_url", fileUrl);
       return this;
@@ -5942,10 +5906,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateAsset3D setFallbackImageUrl (Object fallbackImageUrl) {
-      this.setParam("fallback_image_url", fallbackImageUrl);
-      return this;
-    }
     public APIRequestCreateAsset3D setFallbackImageUrl (String fallbackImageUrl) {
       this.setParam("fallback_image_url", fallbackImageUrl);
       return this;
@@ -10329,328 +10289,6 @@ public class User extends APINode {
     }
   }
 
-  public static class APIRequestCreateCheckin extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "picture",
-      "name",
-      "link",
-      "caption",
-      "description",
-      "quote",
-      "source",
-      "properties",
-      "object_attachment",
-      "height",
-      "width",
-      "expanded_height",
-      "expanded_width",
-      "referral_id",
-      "thumbnail",
-      "image_crops",
-      "call_to_action",
-      "place",
-      "coordinates",
-      "message",
-      "tags",
-      "privacy",
-      "group",
-      "nectar_module",
-      "manual_privacy",
-      "audience_exp",
-      "composer_session_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateCheckin.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateCheckin(String nodeId, APIContext context) {
-      super(context, nodeId, "/checkins", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateCheckin setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCheckin setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateCheckin setPicture (String picture) {
-      this.setParam("picture", picture);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setLink (String link) {
-      this.setParam("link", link);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setCaption (String caption) {
-      this.setParam("caption", caption);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setQuote (String quote) {
-      this.setParam("quote", quote);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setSource (String source) {
-      this.setParam("source", source);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setProperties (Object properties) {
-      this.setParam("properties", properties);
-      return this;
-    }
-    public APIRequestCreateCheckin setProperties (String properties) {
-      this.setParam("properties", properties);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setObjectAttachment (String objectAttachment) {
-      this.setParam("object_attachment", objectAttachment);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setHeight (Long height) {
-      this.setParam("height", height);
-      return this;
-    }
-    public APIRequestCreateCheckin setHeight (String height) {
-      this.setParam("height", height);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setWidth (Long width) {
-      this.setParam("width", width);
-      return this;
-    }
-    public APIRequestCreateCheckin setWidth (String width) {
-      this.setParam("width", width);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setExpandedHeight (Long expandedHeight) {
-      this.setParam("expanded_height", expandedHeight);
-      return this;
-    }
-    public APIRequestCreateCheckin setExpandedHeight (String expandedHeight) {
-      this.setParam("expanded_height", expandedHeight);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setExpandedWidth (Long expandedWidth) {
-      this.setParam("expanded_width", expandedWidth);
-      return this;
-    }
-    public APIRequestCreateCheckin setExpandedWidth (String expandedWidth) {
-      this.setParam("expanded_width", expandedWidth);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setReferralId (String referralId) {
-      this.setParam("referral_id", referralId);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setThumbnail (File thumbnail) {
-      this.setParam("thumbnail", thumbnail);
-      return this;
-    }
-    public APIRequestCreateCheckin setThumbnail (String thumbnail) {
-      this.setParam("thumbnail", thumbnail);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setImageCrops (Map<String, String> imageCrops) {
-      this.setParam("image_crops", imageCrops);
-      return this;
-    }
-    public APIRequestCreateCheckin setImageCrops (String imageCrops) {
-      this.setParam("image_crops", imageCrops);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setCallToAction (Object callToAction) {
-      this.setParam("call_to_action", callToAction);
-      return this;
-    }
-    public APIRequestCreateCheckin setCallToAction (String callToAction) {
-      this.setParam("call_to_action", callToAction);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setPlace (Object place) {
-      this.setParam("place", place);
-      return this;
-    }
-    public APIRequestCreateCheckin setPlace (String place) {
-      this.setParam("place", place);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setCoordinates (Object coordinates) {
-      this.setParam("coordinates", coordinates);
-      return this;
-    }
-    public APIRequestCreateCheckin setCoordinates (String coordinates) {
-      this.setParam("coordinates", coordinates);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setTags (List<Long> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestCreateCheckin setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-    public APIRequestCreateCheckin setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setGroup (String group) {
-      this.setParam("group", group);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setNectarModule (String nectarModule) {
-      this.setParam("nectar_module", nectarModule);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setManualPrivacy (Boolean manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-    public APIRequestCreateCheckin setManualPrivacy (String manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setAudienceExp (Boolean audienceExp) {
-      this.setParam("audience_exp", audienceExp);
-      return this;
-    }
-    public APIRequestCreateCheckin setAudienceExp (String audienceExp) {
-      this.setParam("audience_exp", audienceExp);
-      return this;
-    }
-
-    public APIRequestCreateCheckin setComposerSessionId (String composerSessionId) {
-      this.setParam("composer_session_id", composerSessionId);
-      return this;
-    }
-
-    public APIRequestCreateCheckin requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateCheckin requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCheckin requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateCheckin requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCheckin requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateCheckin requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetConversations extends APIRequest<UnifiedThread> {
 
     APINodeList<UnifiedThread> lastResponse = null;
@@ -11507,140 +11145,6 @@ public class User extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateEvent extends APIRequest<Event> {
-
-    Event lastResponse = null;
-    @Override
-    public Event getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "event_info",
-      "action_context",
-      "app_context",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Event parseResponse(String response, String header) throws APIException {
-      return Event.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Event execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Event execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Event> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Event> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Event>() {
-           public Event apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateEvent.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateEvent(String nodeId, APIContext context) {
-      super(context, nodeId, "/events", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateEvent setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateEvent setEventInfo (Object eventInfo) {
-      this.setParam("event_info", eventInfo);
-      return this;
-    }
-    public APIRequestCreateEvent setEventInfo (String eventInfo) {
-      this.setParam("event_info", eventInfo);
-      return this;
-    }
-
-    public APIRequestCreateEvent setActionContext (Object actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-    public APIRequestCreateEvent setActionContext (String actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-
-    public APIRequestCreateEvent setAppContext (Object appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-    public APIRequestCreateEvent setAppContext (String appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-
-    public APIRequestCreateEvent requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateEvent requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateEvent requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetFamily extends APIRequest<User> {
@@ -12860,10 +12364,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateFeed setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -13314,7 +12814,7 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPlaceListData (Object placeListData) {
+    public APIRequestCreateFeed setPlaceListData (JsonArray placeListData) {
       this.setParam("place_list_data", placeListData);
       return this;
     }
@@ -13697,136 +13197,6 @@ public class User extends APINode {
       this.requestField("owner", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateFriendList extends APIRequest<FriendList> {
-
-    FriendList lastResponse = null;
-    @Override
-    public FriendList getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "name",
-      "uid",
-      "list_type",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public FriendList parseResponse(String response, String header) throws APIException {
-      return FriendList.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public FriendList execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public FriendList execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<FriendList> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<FriendList> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, FriendList>() {
-           public FriendList apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateFriendList.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateFriendList(String nodeId, APIContext context) {
-      super(context, nodeId, "/friendlists", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateFriendList setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFriendList setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateFriendList setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateFriendList setUid (Long uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-    public APIRequestCreateFriendList setUid (String uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
-
-    public APIRequestCreateFriendList setListType (FriendList.EnumListType listType) {
-      this.setParam("list_type", listType);
-      return this;
-    }
-    public APIRequestCreateFriendList setListType (String listType) {
-      this.setParam("list_type", listType);
-      return this;
-    }
-
-    public APIRequestCreateFriendList requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateFriendList requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFriendList requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateFriendList requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFriendList requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFriendList requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetFriends extends APIRequest<User> {
@@ -14504,19 +13874,11 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateGameItem setItemId (Object itemId) {
-      this.setParam("item_id", itemId);
-      return this;
-    }
     public APIRequestCreateGameItem setItemId (String itemId) {
       this.setParam("item_id", itemId);
       return this;
     }
 
-    public APIRequestCreateGameItem setDropTableId (Object dropTableId) {
-      this.setParam("drop_table_id", dropTableId);
-      return this;
-    }
     public APIRequestCreateGameItem setDropTableId (String dropTableId) {
       this.setParam("drop_table_id", dropTableId);
       return this;
@@ -14536,10 +13898,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateGameItem setAppId (Object appId) {
-      this.setParam("app_id", appId);
-      return this;
-    }
     public APIRequestCreateGameItem setAppId (String appId) {
       this.setParam("app_id", appId);
       return this;
@@ -16352,10 +15710,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateGamesAchieve setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateGamesAchieve setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -16698,10 +16052,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateGamesPlay setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateGamesPlay setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -19091,214 +18441,6 @@ public class User extends APINode {
 
   }
 
-  public static class APIRequestCreateLink extends APIRequest<Link> {
-
-    Link lastResponse = null;
-    @Override
-    public Link getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "link",
-      "message",
-      "image",
-      "tags",
-      "place",
-      "published",
-      "scheduled_publish_time",
-      "unpublished_content_type",
-      "targeting",
-      "privacy",
-      "application_id",
-      "is_explicit_share",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Link parseResponse(String response, String header) throws APIException {
-      return Link.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Link execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Link execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Link> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Link> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Link>() {
-           public Link apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateLink.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateLink(String nodeId, APIContext context) {
-      super(context, nodeId, "/links", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateLink setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLink setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateLink setLink (String link) {
-      this.setParam("link", link);
-      return this;
-    }
-
-    public APIRequestCreateLink setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestCreateLink setImage (String image) {
-      this.setParam("image", image);
-      return this;
-    }
-
-    public APIRequestCreateLink setTags (List<Long> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestCreateLink setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
-    public APIRequestCreateLink setPlace (Object place) {
-      this.setParam("place", place);
-      return this;
-    }
-    public APIRequestCreateLink setPlace (String place) {
-      this.setParam("place", place);
-      return this;
-    }
-
-    public APIRequestCreateLink setPublished (Boolean published) {
-      this.setParam("published", published);
-      return this;
-    }
-    public APIRequestCreateLink setPublished (String published) {
-      this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestCreateLink setScheduledPublishTime (Long scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-    public APIRequestCreateLink setScheduledPublishTime (String scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-
-    public APIRequestCreateLink setUnpublishedContentType (Link.EnumUnpublishedContentType unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-    public APIRequestCreateLink setUnpublishedContentType (String unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-
-    public APIRequestCreateLink setTargeting (Object targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-    public APIRequestCreateLink setTargeting (String targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-
-    public APIRequestCreateLink setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-    public APIRequestCreateLink setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-
-    public APIRequestCreateLink setApplicationId (String applicationId) {
-      this.setParam("application_id", applicationId);
-      return this;
-    }
-
-    public APIRequestCreateLink setIsExplicitShare (Boolean isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-    public APIRequestCreateLink setIsExplicitShare (String isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-
-    public APIRequestCreateLink requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateLink requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLink requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateLink requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLink requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLink requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetLiveEncoders extends APIRequest<LiveEncoder> {
 
     APINodeList<LiveEncoder> lastResponse = null;
@@ -19633,7 +18775,6 @@ public class User extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "type",
       "source",
       "broadcast_status",
     };
@@ -19719,15 +18860,6 @@ public class User extends APINode {
       return this;
     }
 
-
-    public APIRequestGetLiveVideos setType (LiveVideo.EnumType type) {
-      this.setParam("type", type);
-      return this;
-    }
-    public APIRequestGetLiveVideos setType (String type) {
-      this.setParam("type", type);
-      return this;
-    }
 
     public APIRequestGetLiveVideos setSource (LiveVideo.EnumSource source) {
       this.setParam("source", source);
@@ -20092,10 +19224,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateLiveVideo setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -23527,132 +22655,6 @@ public class User extends APINode {
     }
   }
 
-  public static class APIRequestCreateNote extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "message",
-      "subject",
-      "privacy",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateNote.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateNote(String nodeId, APIContext context) {
-      super(context, nodeId, "/notes", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateNote setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateNote setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateNote setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestCreateNote setSubject (String subject) {
-      this.setParam("subject", subject);
-      return this;
-    }
-
-    public APIRequestCreateNote setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-    public APIRequestCreateNote setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-
-    public APIRequestCreateNote requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateNote requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateNote requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateNote requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateNote requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateNote requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestCreateNotification extends APIRequest<User> {
 
     User lastResponse = null;
@@ -24219,10 +23221,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateObject setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateObject setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -24552,10 +23550,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateOpenGraphActionFeed setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateOpenGraphActionFeed setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -26059,7 +25053,6 @@ public class User extends APINode {
       "uid",
       "profile_id",
       "target_id",
-      "checkin_id",
       "vault_image_id",
       "tags",
       "place",
@@ -26204,15 +25197,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setCheckinId (Object checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-    public APIRequestCreatePhoto setCheckinId (String checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-
     public APIRequestCreatePhoto setVaultImageId (String vaultImageId) {
       this.setParam("vault_image_id", vaultImageId);
       return this;
@@ -26288,10 +25272,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreatePhoto setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -26962,10 +25942,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreatePlace setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreatePlace setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -28596,10 +27572,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateSubscription setCallbackUrl (Object callbackUrl) {
-      this.setParam("callback_url", callbackUrl);
-      return this;
-    }
     public APIRequestCreateSubscription setCallbackUrl (String callbackUrl) {
       this.setParam("callback_url", callbackUrl);
       return this;
@@ -31791,10 +30763,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateVideo setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -33187,6 +32155,10 @@ public class User extends APINode {
       VALUE_IAP_FAN_FUNDING("IAP_FAN_FUNDING"),
       @SerializedName("IAP_GROUP_SUBSCRIPTION")
       VALUE_IAP_GROUP_SUBSCRIPTION("IAP_GROUP_SUBSCRIPTION"),
+      @SerializedName("IAP_SOTTO")
+      VALUE_IAP_SOTTO("IAP_SOTTO"),
+      @SerializedName("FB_BROWSER_PAYMENT")
+      VALUE_FB_BROWSER_PAYMENT("FB_BROWSER_PAYMENT"),
       @SerializedName("MOR_NONE")
       VALUE_MOR_NONE("MOR_NONE"),
       @SerializedName("MOR_ADS_CONSENT")
@@ -33243,6 +32215,8 @@ public class User extends APINode {
       VALUE_MOR_BLUEBIRD("MOR_BLUEBIRD"),
       @SerializedName("MOR_GROUP_SUBSCRIPTION")
       VALUE_MOR_GROUP_SUBSCRIPTION("MOR_GROUP_SUBSCRIPTION"),
+      @SerializedName("MOR_SOTTO")
+      VALUE_MOR_SOTTO("MOR_SOTTO"),
       @SerializedName("NMOR_UNKNOWN")
       VALUE_NMOR_UNKNOWN("NMOR_UNKNOWN"),
       @SerializedName("NMOR_NONE")
@@ -33263,8 +32237,6 @@ public class User extends APINode {
       VALUE_NMOR_MESSENGER_PLATFORM("NMOR_MESSENGER_PLATFORM"),
       @SerializedName("NMOR_MESSENGER_OMNIM")
       VALUE_NMOR_MESSENGER_OMNIM("NMOR_MESSENGER_OMNIM"),
-      @SerializedName("NMOR_BILLING_ENGINE")
-      VALUE_NMOR_BILLING_ENGINE("NMOR_BILLING_ENGINE"),
       @SerializedName("NMOR_TIP_JAR")
       VALUE_NMOR_TIP_JAR("NMOR_TIP_JAR"),
       @SerializedName("NMOR_INSTANT_EXPERIENCES")
@@ -33273,8 +32245,6 @@ public class User extends APINode {
       VALUE_NMOR_CHECKOUT_EXPERIENCES("NMOR_CHECKOUT_EXPERIENCES"),
       @SerializedName("NMOR_BUY_ON_FACEBOOK")
       VALUE_NMOR_BUY_ON_FACEBOOK("NMOR_BUY_ON_FACEBOOK"),
-      @SerializedName("NMOR_PAYMENT_APP")
-      VALUE_NMOR_PAYMENT_APP("NMOR_PAYMENT_APP"),
       @SerializedName("NMOR_DONATION_P4P")
       VALUE_NMOR_DONATION_P4P("NMOR_DONATION_P4P"),
       @SerializedName("NMOR_WHATSAPP_P2P")
@@ -33307,6 +32277,8 @@ public class User extends APINode {
       VALUE_NMOR_MOVIE_TICKETING("NMOR_MOVIE_TICKETING"),
       @SerializedName("IG_NMOR_P2B")
       VALUE_IG_NMOR_P2B("IG_NMOR_P2B"),
+      @SerializedName("IG_MOR_DONATIONS")
+      VALUE_IG_MOR_DONATIONS("IG_MOR_DONATIONS"),
       @SerializedName("NMOR_INSTAGRAM_P2B")
       VALUE_NMOR_INSTAGRAM_P2B("NMOR_INSTAGRAM_P2B"),
       NULL(null);

@@ -56,7 +56,7 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  */
 public class CustomAudienceSharingStatus extends APINode {
   @SerializedName("sharing_relationship_id")
-  private Object mSharingRelationshipId = null;
+  private Long mSharingRelationshipId = null;
   @SerializedName("status")
   private String mStatus = null;
   @SerializedName("id")
@@ -212,11 +212,11 @@ public class CustomAudienceSharingStatus extends APINode {
   }
 
 
-  public Object getFieldSharingRelationshipId() {
+  public Long getFieldSharingRelationshipId() {
     return mSharingRelationshipId;
   }
 
-  public CustomAudienceSharingStatus setFieldSharingRelationshipId(Object value) {
+  public CustomAudienceSharingStatus setFieldSharingRelationshipId(Long value) {
     this.mSharingRelationshipId = value;
     return this;
   }

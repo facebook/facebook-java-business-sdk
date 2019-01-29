@@ -412,16 +412,8 @@ public class Event extends APINode {
     return new APIRequestCreateVideo(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDelete delete() {
-    return new APIRequestDelete(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGet get() {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
   }
 
 
@@ -2956,10 +2948,6 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateFeed setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -3410,7 +3398,7 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPlaceListData (Object placeListData) {
+    public APIRequestCreateFeed setPlaceListData (JsonArray placeListData) {
       this.setParam("place_list_data", placeListData);
       return this;
     }
@@ -4490,10 +4478,6 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateLiveVideo setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -6133,7 +6117,6 @@ public class Event extends APINode {
       "uid",
       "profile_id",
       "target_id",
-      "checkin_id",
       "vault_image_id",
       "tags",
       "place",
@@ -6278,15 +6261,6 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setCheckinId (Object checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-    public APIRequestCreatePhoto setCheckinId (String checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-
     public APIRequestCreatePhoto setVaultImageId (String vaultImageId) {
       this.setParam("vault_image_id", vaultImageId);
       return this;
@@ -6362,10 +6336,6 @@ public class Event extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreatePhoto setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -7859,142 +7829,6 @@ public class Event extends APINode {
 
   }
 
-  public static class APIRequestDelete extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "eid",
-      "cancel_message",
-      "action_context",
-      "app_context",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestDelete.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDelete(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDelete setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDelete setEid (String eid) {
-      this.setParam("eid", eid);
-      return this;
-    }
-
-    public APIRequestDelete setCancelMessage (String cancelMessage) {
-      this.setParam("cancel_message", cancelMessage);
-      return this;
-    }
-
-    public APIRequestDelete setActionContext (Object actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-    public APIRequestDelete setActionContext (String actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-
-    public APIRequestDelete setAppContext (Object appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-    public APIRequestDelete setAppContext (String appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-
-    public APIRequestDelete requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDelete requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDelete requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDelete requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGet extends APIRequest<Event> {
 
     Event lastResponse = null;
@@ -8337,146 +8171,6 @@ public class Event extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-  }
-
-  public static class APIRequestUpdate extends APIRequest<Event> {
-
-    Event lastResponse = null;
-    @Override
-    public Event getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "eid",
-      "event_info",
-      "action_context",
-      "app_context",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Event parseResponse(String response, String header) throws APIException {
-      return Event.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Event execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Event execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Event> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Event> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Event>() {
-           public Event apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setEid (String eid) {
-      this.setParam("eid", eid);
-      return this;
-    }
-
-    public APIRequestUpdate setEventInfo (Object eventInfo) {
-      this.setParam("event_info", eventInfo);
-      return this;
-    }
-    public APIRequestUpdate setEventInfo (String eventInfo) {
-      this.setParam("event_info", eventInfo);
-      return this;
-    }
-
-    public APIRequestUpdate setActionContext (Object actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-    public APIRequestUpdate setActionContext (String actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-
-    public APIRequestUpdate setAppContext (Object appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-    public APIRequestUpdate setAppContext (String appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static enum EnumType {

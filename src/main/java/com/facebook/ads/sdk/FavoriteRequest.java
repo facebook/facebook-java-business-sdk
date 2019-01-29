@@ -653,8 +653,8 @@ public class FavoriteRequest extends APINode {
       VALUE_V3_1("v3.1"),
       @SerializedName("v3.2")
       VALUE_V3_2("v3.2"),
-      @SerializedName("v4.0")
-      VALUE_V4_0("v4.0"),
+      @SerializedName("v3.3")
+      VALUE_V3_3("v3.3"),
       NULL(null);
 
       private String value;

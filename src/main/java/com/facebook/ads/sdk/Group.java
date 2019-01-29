@@ -1121,10 +1121,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreateAlbum setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateAlbum setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -2064,10 +2060,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateFeed setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -2518,7 +2510,7 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPlaceListData (Object placeListData) {
+    public APIRequestCreateFeed setPlaceListData (JsonArray placeListData) {
       this.setParam("place_list_data", placeListData);
       return this;
     }
@@ -3369,7 +3361,6 @@ public class Group extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "type",
       "source",
       "broadcast_status",
     };
@@ -3455,15 +3446,6 @@ public class Group extends APINode {
       return this;
     }
 
-
-    public APIRequestGetLiveVideos setType (LiveVideo.EnumType type) {
-      this.setParam("type", type);
-      return this;
-    }
-    public APIRequestGetLiveVideos setType (String type) {
-      this.setParam("type", type);
-      return this;
-    }
 
     public APIRequestGetLiveVideos setSource (LiveVideo.EnumSource source) {
       this.setParam("source", source);
@@ -3828,10 +3810,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateLiveVideo setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -4776,10 +4754,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreateOpenGraphActionFeed setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateOpenGraphActionFeed setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -5449,7 +5423,6 @@ public class Group extends APINode {
       "uid",
       "profile_id",
       "target_id",
-      "checkin_id",
       "vault_image_id",
       "tags",
       "place",
@@ -5594,15 +5567,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setCheckinId (Object checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-    public APIRequestCreatePhoto setCheckinId (String checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-
     public APIRequestCreatePhoto setVaultImageId (String vaultImageId) {
       this.setParam("vault_image_id", vaultImageId);
       return this;
@@ -5678,10 +5642,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreatePhoto setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;

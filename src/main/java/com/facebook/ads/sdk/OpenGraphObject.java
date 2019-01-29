@@ -1278,7 +1278,6 @@ public class OpenGraphObject extends APINode {
       "uid",
       "profile_id",
       "target_id",
-      "checkin_id",
       "vault_image_id",
       "tags",
       "place",
@@ -1423,15 +1422,6 @@ public class OpenGraphObject extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setCheckinId (Object checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-    public APIRequestCreatePhoto setCheckinId (String checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-
     public APIRequestCreatePhoto setVaultImageId (String vaultImageId) {
       this.setParam("vault_image_id", vaultImageId);
       return this;
@@ -1507,10 +1497,6 @@ public class OpenGraphObject extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreatePhoto setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -2557,7 +2543,7 @@ public class OpenGraphObject extends APINode {
     }
 
 
-    public APIRequestUpdate setLocale (Object locale) {
+    public APIRequestUpdate setLocale (JsonArray locale) {
       this.setParam("locale", locale);
       return this;
     }

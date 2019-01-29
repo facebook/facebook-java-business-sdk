@@ -673,7 +673,7 @@ public class PageAboutStory extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setCoverPhoto (Object coverPhoto) {
+    public APIRequestUpdate setCoverPhoto (Map<String, String> coverPhoto) {
       this.setParam("cover_photo", coverPhoto);
       return this;
     }

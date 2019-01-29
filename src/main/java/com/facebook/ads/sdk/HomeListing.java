@@ -74,7 +74,7 @@ public class HomeListing extends APINode {
   @SerializedName("applinks")
   private AppLinks mApplinks = null;
   @SerializedName("area_size")
-  private Object mAreaSize = null;
+  private Long mAreaSize = null;
   @SerializedName("area_unit")
   private String mAreaUnit = null;
   @SerializedName("availability")
@@ -84,7 +84,7 @@ public class HomeListing extends APINode {
   @SerializedName("currency")
   private String mCurrency = null;
   @SerializedName("days_on_market")
-  private Object mDaysOnMarket = null;
+  private Long mDaysOnMarket = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("energy_rating_eu")
@@ -122,7 +122,7 @@ public class HomeListing extends APINode {
   @SerializedName("num_rooms")
   private Double mNumRooms = null;
   @SerializedName("num_units")
-  private Object mNumUnits = null;
+  private Long mNumUnits = null;
   @SerializedName("parking_type")
   private String mParkingType = null;
   @SerializedName("partner_verification")
@@ -403,7 +403,7 @@ public class HomeListing extends APINode {
     return mApplinks;
   }
 
-  public Object getFieldAreaSize() {
+  public Long getFieldAreaSize() {
     return mAreaSize;
   }
 
@@ -423,7 +423,7 @@ public class HomeListing extends APINode {
     return mCurrency;
   }
 
-  public Object getFieldDaysOnMarket() {
+  public Long getFieldDaysOnMarket() {
     return mDaysOnMarket;
   }
 
@@ -499,7 +499,7 @@ public class HomeListing extends APINode {
     return mNumRooms;
   }
 
-  public Object getFieldNumUnits() {
+  public Long getFieldNumUnits() {
     return mNumUnits;
   }
 

@@ -531,6 +531,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_TIMEZONES("timezones"),
       @SerializedName("place_page_set_ids")
       VALUE_PLACE_PAGE_SET_IDS("place_page_set_ids"),
+      @SerializedName("location_expansion")
+      VALUE_LOCATION_EXPANSION("location_expansion"),
       @SerializedName("page_types")
       VALUE_PAGE_TYPES("page_types"),
       @SerializedName("publisher_platforms")
@@ -768,6 +770,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_TIMEZONES("timezones"),
       @SerializedName("place_page_set_ids")
       VALUE_PLACE_PAGE_SET_IDS("place_page_set_ids"),
+      @SerializedName("location_expansion")
+      VALUE_LOCATION_EXPANSION("location_expansion"),
       @SerializedName("page_types")
       VALUE_PAGE_TYPES("page_types"),
       @SerializedName("publisher_platforms")

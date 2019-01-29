@@ -2433,31 +2433,6 @@ public class Link extends APINode {
     }
   }
 
-  public static enum EnumUnpublishedContentType {
-      @SerializedName("SCHEDULED")
-      VALUE_SCHEDULED("SCHEDULED"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      @SerializedName("ADS_POST")
-      VALUE_ADS_POST("ADS_POST"),
-      @SerializedName("INLINE_CREATED")
-      VALUE_INLINE_CREATED("INLINE_CREATED"),
-      @SerializedName("PUBLISHED")
-      VALUE_PUBLISHED("PUBLISHED"),
-      NULL(null);
-
-      private String value;
-
-      private EnumUnpublishedContentType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

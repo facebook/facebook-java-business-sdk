@@ -751,19 +751,11 @@ public class PartnerIntegrationLinked extends APINode {
     }
 
 
-    public APIRequestUpdate setAdsPixelId (Object adsPixelId) {
-      this.setParam("ads_pixel_id", adsPixelId);
-      return this;
-    }
     public APIRequestUpdate setAdsPixelId (String adsPixelId) {
       this.setParam("ads_pixel_id", adsPixelId);
       return this;
     }
 
-    public APIRequestUpdate setApplicationId (Object applicationId) {
-      this.setParam("application_id", applicationId);
-      return this;
-    }
     public APIRequestUpdate setApplicationId (String applicationId) {
       this.setParam("application_id", applicationId);
       return this;
@@ -783,28 +775,16 @@ public class PartnerIntegrationLinked extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setOauthPartnerIntegrationId (Object oauthPartnerIntegrationId) {
-      this.setParam("oauth_partner_integration_id", oauthPartnerIntegrationId);
-      return this;
-    }
     public APIRequestUpdate setOauthPartnerIntegrationId (String oauthPartnerIntegrationId) {
       this.setParam("oauth_partner_integration_id", oauthPartnerIntegrationId);
       return this;
     }
 
-    public APIRequestUpdate setOfflineConversionDataSetId (Object offlineConversionDataSetId) {
-      this.setParam("offline_conversion_data_set_id", offlineConversionDataSetId);
-      return this;
-    }
     public APIRequestUpdate setOfflineConversionDataSetId (String offlineConversionDataSetId) {
       this.setParam("offline_conversion_data_set_id", offlineConversionDataSetId);
       return this;
     }
 
-    public APIRequestUpdate setProductCatalogId (Object productCatalogId) {
-      this.setParam("product_catalog_id", productCatalogId);
-      return this;
-    }
     public APIRequestUpdate setProductCatalogId (String productCatalogId) {
       this.setParam("product_catalog_id", productCatalogId);
       return this;
@@ -866,6 +846,8 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_AVANA("avana"),
       @SerializedName("backer_founder")
       VALUE_BACKER_FOUNDER("backer_founder"),
+      @SerializedName("bandzoogle")
+      VALUE_BANDZOOGLE("bandzoogle"),
       @SerializedName("big_commerce")
       VALUE_BIG_COMMERCE("big_commerce"),
       @SerializedName("cart_3d")
@@ -876,6 +858,8 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_DRUPAL("drupal"),
       @SerializedName("ec_cube3")
       VALUE_EC_CUBE3("ec_cube3"),
+      @SerializedName("ecwid")
+      VALUE_ECWID("ecwid"),
       @SerializedName("eventbrite")
       VALUE_EVENTBRITE("eventbrite"),
       @SerializedName("feedonomics")
@@ -886,6 +870,8 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_GOOGLE_TAG_MANAGER("google_tag_manager"),
       @SerializedName("haravan")
       VALUE_HARAVAN("haravan"),
+      @SerializedName("hubspot")
+      VALUE_HUBSPOT("hubspot"),
       @SerializedName("infusionsoft_zap")
       VALUE_INFUSIONSOFT_ZAP("infusionsoft_zap"),
       @SerializedName("intern")
@@ -898,6 +884,8 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_JOOMLA("joomla"),
       @SerializedName("jumpseller")
       VALUE_JUMPSELLER("jumpseller"),
+      @SerializedName("kajabi")
+      VALUE_KAJABI("kajabi"),
       @SerializedName("kraftly")
       VALUE_KRAFTLY("kraftly"),
       @SerializedName("magento")
@@ -922,6 +910,8 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_RUBY_ON_RAILS("ruby_on_rails"),
       @SerializedName("riversoft")
       VALUE_RIVERSOFT("riversoft"),
+      @SerializedName("salesforce")
+      VALUE_SALESFORCE("salesforce"),
       @SerializedName("salesforce_zap")
       VALUE_SALESFORCE_ZAP("salesforce_zap"),
       @SerializedName("segment")
@@ -946,6 +936,8 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_VERIFONE("verifone"),
       @SerializedName("waca")
       VALUE_WACA("waca"),
+      @SerializedName("webflow")
+      VALUE_WEBFLOW("webflow"),
       @SerializedName("weebly")
       VALUE_WEEBLY("weebly"),
       @SerializedName("wix")

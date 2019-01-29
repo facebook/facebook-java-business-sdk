@@ -1613,7 +1613,6 @@ public class PagePost extends APINode {
       "until",
       "metric",
       "period",
-      "show_permission_error",
       "date_preset",
     };
 
@@ -1705,15 +1704,6 @@ public class PagePost extends APINode {
     }
     public APIRequestGetInsights setPeriod (String period) {
       this.setParam("period", period);
-      return this;
-    }
-
-    public APIRequestGetInsights setShowPermissionError (Boolean showPermissionError) {
-      this.setParam("show_permission_error", showPermissionError);
-      return this;
-    }
-    public APIRequestGetInsights setShowPermissionError (String showPermissionError) {
-      this.setParam("show_permission_error", showPermissionError);
       return this;
     }
 
@@ -6235,10 +6225,6 @@ public class PagePost extends APINode {
     }
 
 
-    public APIRequestUpdate setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestUpdate setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;

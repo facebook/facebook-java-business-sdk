@@ -430,19 +430,11 @@ public class AdMonetizationProperty extends APINode {
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setSince (Object since) {
-      this.setParam("since", since);
-      return this;
-    }
     public APIRequestGetAdNetworkAnalytics setSince (String since) {
       this.setParam("since", since);
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setUntil (Object until) {
-      this.setParam("until", until);
-      return this;
-    }
     public APIRequestGetAdNetworkAnalytics setUntil (String until) {
       this.setParam("until", until);
       return this;
@@ -645,19 +637,11 @@ public class AdMonetizationProperty extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setSince (Object since) {
-      this.setParam("since", since);
-      return this;
-    }
     public APIRequestCreateAdNetworkAnalytic setSince (String since) {
       this.setParam("since", since);
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setUntil (Object until) {
-      this.setParam("until", until);
-      return this;
-    }
     public APIRequestCreateAdNetworkAnalytic setUntil (String until) {
       this.setParam("until", until);
       return this;

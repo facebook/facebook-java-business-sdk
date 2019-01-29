@@ -4039,7 +4039,7 @@ public class CustomAudience extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setStudySpec (Object studySpec) {
+    public APIRequestUpdate setStudySpec (Map<String, String> studySpec) {
       this.setParam("study_spec", studySpec);
       return this;
     }
@@ -4089,6 +4089,8 @@ public class CustomAudience extends APINode {
   public static enum EnumClaimObjective {
       @SerializedName("AUTOMOTIVE_MODEL")
       VALUE_AUTOMOTIVE_MODEL("AUTOMOTIVE_MODEL"),
+      @SerializedName("COLLABORATIVE_ADS")
+      VALUE_COLLABORATIVE_ADS("COLLABORATIVE_ADS"),
       @SerializedName("HOME_LISTING")
       VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("MEDIA_TITLE")

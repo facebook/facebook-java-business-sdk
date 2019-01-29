@@ -3263,6 +3263,7 @@ public class Ad extends APINode {
     public static final String[] PARAMS = {
       "ad_format",
       "dynamic_creative_spec",
+      "dynamic_customization",
       "dynamic_asset_label",
       "interactive",
       "post",
@@ -3349,6 +3350,15 @@ public class Ad extends APINode {
     }
     public APIRequestGetPreviews setDynamicCreativeSpec (String dynamicCreativeSpec) {
       this.setParam("dynamic_creative_spec", dynamicCreativeSpec);
+      return this;
+    }
+
+    public APIRequestGetPreviews setDynamicCustomization (Object dynamicCustomization) {
+      this.setParam("dynamic_customization", dynamicCustomization);
+      return this;
+    }
+    public APIRequestGetPreviews setDynamicCustomization (String dynamicCustomization) {
+      this.setParam("dynamic_customization", dynamicCustomization);
       return this;
     }
 
@@ -4046,7 +4056,7 @@ public class Ad extends APINode {
     }
 
 
-    public APIRequestGet setAmCallTags (Object amCallTags) {
+    public APIRequestGet setAmCallTags (Map<String, String> amCallTags) {
       this.setParam("am_call_tags", amCallTags);
       return this;
     }

@@ -771,7 +771,7 @@ public class LeadGenDataDraft extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setTrackingParameters (Object trackingParameters) {
+    public APIRequestUpdate setTrackingParameters (Map<String, String> trackingParameters) {
       this.setParam("tracking_parameters", trackingParameters);
       return this;
     }

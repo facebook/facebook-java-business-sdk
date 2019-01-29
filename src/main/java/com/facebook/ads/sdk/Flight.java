@@ -680,10 +680,6 @@ public class Flight extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setUrl (Object url) {
-      this.setParam("url", url);
-      return this;
-    }
     public APIRequestUpdate setUrl (String url) {
       this.setParam("url", url);
       return this;

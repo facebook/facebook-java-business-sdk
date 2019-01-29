@@ -526,8 +526,8 @@ public class Business extends APINode {
     return new APIRequestCreateOfflineConversionDataSet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetOfFLineTermsOfService getOfFLineTermsOfService() {
-    return new APIRequestGetOfFLineTermsOfService(this.getPrefixedId().toString(), context);
+  public APIRequestGetOfflineTermsOfService getOfflineTermsOfService() {
+    return new APIRequestGetOfflineTermsOfService(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetOwnedAdAccounts getOwnedAdAccounts() {
@@ -598,10 +598,6 @@ public class Business extends APINode {
     return new APIRequestDeletePages(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreatePage createPage() {
-    return new APIRequestCreatePage(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetPartnerIntegrations getPartnerIntegrations() {
     return new APIRequestGetPartnerIntegrations(this.getPrefixedId().toString(), context);
   }
@@ -652,10 +648,6 @@ public class Business extends APINode {
 
   public APIRequestGetPicture getPicture() {
     return new APIRequestGetPicture(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateProductCatalog createProductCatalog() {
-    return new APIRequestCreateProductCatalog(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetReceivedAudiencePermissions getReceivedAudiencePermissions() {
@@ -884,16 +876,12 @@ public class Business extends APINode {
     }
 
 
-    public APIRequestCreateAccessToken setAppId (Object appId) {
-      this.setParam("app_id", appId);
-      return this;
-    }
     public APIRequestCreateAccessToken setAppId (String appId) {
       this.setParam("app_id", appId);
       return this;
     }
 
-    public APIRequestCreateAccessToken setScope (Object scope) {
+    public APIRequestCreateAccessToken setScope (List<Permission> scope) {
       this.setParam("scope", scope);
       return this;
     }
@@ -1532,37 +1520,21 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdAccount setBillingAddressId (Object billingAddressId) {
-      this.setParam("billing_address_id", billingAddressId);
-      return this;
-    }
     public APIRequestCreateAdAccount setBillingAddressId (String billingAddressId) {
       this.setParam("billing_address_id", billingAddressId);
       return this;
     }
 
-    public APIRequestCreateAdAccount setSoldToAddressId (Object soldToAddressId) {
-      this.setParam("sold_to_address_id", soldToAddressId);
-      return this;
-    }
     public APIRequestCreateAdAccount setSoldToAddressId (String soldToAddressId) {
       this.setParam("sold_to_address_id", soldToAddressId);
       return this;
     }
 
-    public APIRequestCreateAdAccount setLiableAddressId (Object liableAddressId) {
-      this.setParam("liable_address_id", liableAddressId);
-      return this;
-    }
     public APIRequestCreateAdAccount setLiableAddressId (String liableAddressId) {
       this.setParam("liable_address_id", liableAddressId);
       return this;
     }
 
-    public APIRequestCreateAdAccount setInvoiceGroupId (Object invoiceGroupId) {
-      this.setParam("invoice_group_id", invoiceGroupId);
-      return this;
-    }
     public APIRequestCreateAdAccount setInvoiceGroupId (String invoiceGroupId) {
       this.setParam("invoice_group_id", invoiceGroupId);
       return this;
@@ -1640,6 +1612,7 @@ public class Business extends APINode {
       "is_test",
       "is_under_authorization",
       "legal_entity_name_in_local_language",
+      "oe_request_id",
       "official_website_url",
       "planning_agency_business",
       "planning_agency_business_id",
@@ -1905,6 +1878,13 @@ public class Business extends APINode {
       this.requestField("legal_entity_name_in_local_language", value);
       return this;
     }
+    public APIRequestGetAdAccountCreationRequests requestOeRequestIdField () {
+      return this.requestOeRequestIdField(true);
+    }
+    public APIRequestGetAdAccountCreationRequests requestOeRequestIdField (boolean value) {
+      this.requestField("oe_request_id", value);
+      return this;
+    }
     public APIRequestGetAdAccountCreationRequests requestOfficialWebsiteUrlField () {
       return this.requestOfficialWebsiteUrlField(true);
     }
@@ -2073,10 +2053,6 @@ public class Business extends APINode {
     }
 
 
-    public APIRequestCreateAdAccountCreationRequest setExtendedCreditId (Object extendedCreditId) {
-      this.setParam("extended_credit_id", extendedCreditId);
-      return this;
-    }
     public APIRequestCreateAdAccountCreationRequest setExtendedCreditId (String extendedCreditId) {
       this.setParam("extended_credit_id", extendedCreditId);
       return this;
@@ -2139,10 +2115,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdAccountCreationRequest setOfficialWebsiteUrl (Object officialWebsiteUrl) {
-      this.setParam("official_website_url", officialWebsiteUrl);
-      return this;
-    }
     public APIRequestCreateAdAccountCreationRequest setOfficialWebsiteUrl (String officialWebsiteUrl) {
       this.setParam("official_website_url", officialWebsiteUrl);
       return this;
@@ -2171,7 +2143,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdAccountCreationRequest setPromotablePageUrls (List<Object> promotablePageUrls) {
+    public APIRequestCreateAdAccountCreationRequest setPromotablePageUrls (List<String> promotablePageUrls) {
       this.setParam("promotable_page_urls", promotablePageUrls);
       return this;
     }
@@ -2198,7 +2170,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdAccountCreationRequest setPromotableUrls (List<Object> promotableUrls) {
+    public APIRequestCreateAdAccountCreationRequest setPromotableUrls (List<String> promotableUrls) {
       this.setParam("promotable_urls", promotableUrls);
       return this;
     }
@@ -2533,19 +2505,11 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setSince (Object since) {
-      this.setParam("since", since);
-      return this;
-    }
     public APIRequestGetAdNetworkAnalytics setSince (String since) {
       this.setParam("since", since);
       return this;
     }
 
-    public APIRequestGetAdNetworkAnalytics setUntil (Object until) {
-      this.setParam("until", until);
-      return this;
-    }
     public APIRequestGetAdNetworkAnalytics setUntil (String until) {
       this.setParam("until", until);
       return this;
@@ -2748,19 +2712,11 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setSince (Object since) {
-      this.setParam("since", since);
-      return this;
-    }
     public APIRequestCreateAdNetworkAnalytic setSince (String since) {
       this.setParam("since", since);
       return this;
     }
 
-    public APIRequestCreateAdNetworkAnalytic setUntil (Object until) {
-      this.setParam("until", until);
-      return this;
-    }
     public APIRequestCreateAdNetworkAnalytic setUntil (String until) {
       this.setParam("until", until);
       return this;
@@ -14599,10 +14555,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateManagedBusiness setExistingClientBusinessId (Object existingClientBusinessId) {
-      this.setParam("existing_client_business_id", existingClientBusinessId);
-      return this;
-    }
     public APIRequestCreateManagedBusiness setExistingClientBusinessId (String existingClientBusinessId) {
       this.setParam("existing_client_business_id", existingClientBusinessId);
       return this;
@@ -15152,7 +15104,6 @@ public class Business extends APINode {
       "business",
       "config",
       "creation_time",
-      "data_origin",
       "description",
       "duplicate_entries",
       "enable_auto_assign_to_accounts",
@@ -15281,13 +15232,6 @@ public class Business extends APINode {
       this.requestField("creation_time", value);
       return this;
     }
-    public APIRequestGetOfflineConversionDataSets requestDataOriginField () {
-      return this.requestDataOriginField(true);
-    }
-    public APIRequestGetOfflineConversionDataSets requestDataOriginField (boolean value) {
-      this.requestField("data_origin", value);
-      return this;
-    }
     public APIRequestGetOfflineConversionDataSets requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -15412,7 +15356,6 @@ public class Business extends APINode {
     public static final String[] PARAMS = {
       "name",
       "description",
-      "data_origin",
       "enable_auto_assign_to_accounts",
       "is_mta_use",
       "auto_assign_to_new_accounts_only",
@@ -15484,15 +15427,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateOfflineConversionDataSet setDataOrigin (OfflineConversionDataSet.EnumDataOrigin dataOrigin) {
-      this.setParam("data_origin", dataOrigin);
-      return this;
-    }
-    public APIRequestCreateOfflineConversionDataSet setDataOrigin (String dataOrigin) {
-      this.setParam("data_origin", dataOrigin);
-      return this;
-    }
-
     public APIRequestCreateOfflineConversionDataSet setEnableAutoAssignToAccounts (Boolean enableAutoAssignToAccounts) {
       this.setParam("enable_auto_assign_to_accounts", enableAutoAssignToAccounts);
       return this;
@@ -15558,7 +15492,7 @@ public class Business extends APINode {
 
   }
 
-  public static class APIRequestGetOfFLineTermsOfService extends APIRequest<OfflineTermsOfService> {
+  public static class APIRequestGetOfflineTermsOfService extends APIRequest<OfflineTermsOfService> {
 
     APINodeList<OfflineTermsOfService> lastResponse = null;
     @Override
@@ -15601,7 +15535,7 @@ public class Business extends APINode {
         new Function<ResponseWrapper, APINodeList<OfflineTermsOfService>>() {
            public APINodeList<OfflineTermsOfService> apply(ResponseWrapper result) {
              try {
-               return APIRequestGetOfFLineTermsOfService.this.parseResponse(result.getBody(), result.getHeader());
+               return APIRequestGetOfflineTermsOfService.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
                throw new RuntimeException(e);
              }
@@ -15610,28 +15544,28 @@ public class Business extends APINode {
       );
     };
 
-    public APIRequestGetOfFLineTermsOfService(String nodeId, APIContext context) {
+    public APIRequestGetOfflineTermsOfService(String nodeId, APIContext context) {
       super(context, nodeId, "/offline_terms_of_service", "GET", Arrays.asList(PARAMS));
     }
 
     @Override
-    public APIRequestGetOfFLineTermsOfService setParam(String param, Object value) {
+    public APIRequestGetOfflineTermsOfService setParam(String param, Object value) {
       setParamInternal(param, value);
       return this;
     }
 
     @Override
-    public APIRequestGetOfFLineTermsOfService setParams(Map<String, Object> params) {
+    public APIRequestGetOfflineTermsOfService setParams(Map<String, Object> params) {
       setParamsInternal(params);
       return this;
     }
 
 
-    public APIRequestGetOfFLineTermsOfService requestAllFields () {
+    public APIRequestGetOfflineTermsOfService requestAllFields () {
       return this.requestAllFields(true);
     }
 
-    public APIRequestGetOfFLineTermsOfService requestAllFields (boolean value) {
+    public APIRequestGetOfflineTermsOfService requestAllFields (boolean value) {
       for (String field : FIELDS) {
         this.requestField(field, value);
       }
@@ -15639,12 +15573,12 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestGetOfFLineTermsOfService requestFields (List<String> fields) {
+    public APIRequestGetOfflineTermsOfService requestFields (List<String> fields) {
       return this.requestFields(fields, true);
     }
 
     @Override
-    public APIRequestGetOfFLineTermsOfService requestFields (List<String> fields, boolean value) {
+    public APIRequestGetOfflineTermsOfService requestFields (List<String> fields, boolean value) {
       for (String field : fields) {
         this.requestField(field, value);
       }
@@ -15652,35 +15586,35 @@ public class Business extends APINode {
     }
 
     @Override
-    public APIRequestGetOfFLineTermsOfService requestField (String field) {
+    public APIRequestGetOfflineTermsOfService requestField (String field) {
       this.requestField(field, true);
       return this;
     }
 
     @Override
-    public APIRequestGetOfFLineTermsOfService requestField (String field, boolean value) {
+    public APIRequestGetOfflineTermsOfService requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
 
-    public APIRequestGetOfFLineTermsOfService requestAcceptTimeField () {
+    public APIRequestGetOfflineTermsOfService requestAcceptTimeField () {
       return this.requestAcceptTimeField(true);
     }
-    public APIRequestGetOfFLineTermsOfService requestAcceptTimeField (boolean value) {
+    public APIRequestGetOfflineTermsOfService requestAcceptTimeField (boolean value) {
       this.requestField("accept_time", value);
       return this;
     }
-    public APIRequestGetOfFLineTermsOfService requestIdField () {
+    public APIRequestGetOfflineTermsOfService requestIdField () {
       return this.requestIdField(true);
     }
-    public APIRequestGetOfFLineTermsOfService requestIdField (boolean value) {
+    public APIRequestGetOfflineTermsOfService requestIdField (boolean value) {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetOfFLineTermsOfService requestSignedByUserField () {
+    public APIRequestGetOfflineTermsOfService requestSignedByUserField () {
       return this.requestSignedByUserField(true);
     }
-    public APIRequestGetOfFLineTermsOfService requestSignedByUserField (boolean value) {
+    public APIRequestGetOfflineTermsOfService requestSignedByUserField (boolean value) {
       this.requestField("signed_by_user", value);
       return this;
     }
@@ -17449,10 +17383,6 @@ public class Business extends APINode {
     }
 
 
-    public APIRequestDeleteOwnedBusinesses setClientId (Object clientId) {
-      this.setParam("client_id", clientId);
-      return this;
-    }
     public APIRequestDeleteOwnedBusinesses setClientId (String clientId) {
       this.setParam("client_id", clientId);
       return this;
@@ -17884,10 +17814,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateOwnedBusiness setSharedPageId (Object sharedPageId) {
-      this.setParam("shared_page_id", sharedPageId);
-      return this;
-    }
     public APIRequestCreateOwnedBusiness setSharedPageId (String sharedPageId) {
       this.setParam("shared_page_id", sharedPageId);
       return this;
@@ -20634,140 +20560,6 @@ public class Business extends APINode {
 
   }
 
-  public static class APIRequestCreatePage extends APIRequest<Business> {
-
-    Business lastResponse = null;
-    @Override
-    public Business getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "page_id",
-      "access_type",
-      "permitted_roles",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Business parseResponse(String response, String header) throws APIException {
-      return Business.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Business execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Business execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Business> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Business> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Business>() {
-           public Business apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreatePage.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreatePage(String nodeId, APIContext context) {
-      super(context, nodeId, "/pages", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePage setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePage setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePage setPageId (Long pageId) {
-      this.setParam("page_id", pageId);
-      return this;
-    }
-    public APIRequestCreatePage setPageId (String pageId) {
-      this.setParam("page_id", pageId);
-      return this;
-    }
-
-    public APIRequestCreatePage setAccessType (Business.EnumAccessType accessType) {
-      this.setParam("access_type", accessType);
-      return this;
-    }
-    public APIRequestCreatePage setAccessType (String accessType) {
-      this.setParam("access_type", accessType);
-      return this;
-    }
-
-    public APIRequestCreatePage setPermittedRoles (List<Business.EnumPermittedRoles> permittedRoles) {
-      this.setParam("permitted_roles", permittedRoles);
-      return this;
-    }
-    public APIRequestCreatePage setPermittedRoles (String permittedRoles) {
-      this.setParam("permitted_roles", permittedRoles);
-      return this;
-    }
-
-    public APIRequestCreatePage requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePage requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePage requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePage requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePage requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePage requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetPartnerIntegrations extends APIRequest<PartnerIntegrationLinked> {
 
     APINodeList<PartnerIntegrationLinked> lastResponse = null;
@@ -21262,37 +21054,21 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreatePartnerAdAccount setBillingAddressId (Object billingAddressId) {
-      this.setParam("billing_address_id", billingAddressId);
-      return this;
-    }
     public APIRequestCreatePartnerAdAccount setBillingAddressId (String billingAddressId) {
       this.setParam("billing_address_id", billingAddressId);
       return this;
     }
 
-    public APIRequestCreatePartnerAdAccount setSoldToAddressId (Object soldToAddressId) {
-      this.setParam("sold_to_address_id", soldToAddressId);
-      return this;
-    }
     public APIRequestCreatePartnerAdAccount setSoldToAddressId (String soldToAddressId) {
       this.setParam("sold_to_address_id", soldToAddressId);
       return this;
     }
 
-    public APIRequestCreatePartnerAdAccount setLiableAddressId (Object liableAddressId) {
-      this.setParam("liable_address_id", liableAddressId);
-      return this;
-    }
     public APIRequestCreatePartnerAdAccount setLiableAddressId (String liableAddressId) {
       this.setParam("liable_address_id", liableAddressId);
       return this;
     }
 
-    public APIRequestCreatePartnerAdAccount setInvoiceGroupId (Object invoiceGroupId) {
-      this.setParam("invoice_group_id", invoiceGroupId);
-      return this;
-    }
     public APIRequestCreatePartnerAdAccount setInvoiceGroupId (String invoiceGroupId) {
       this.setParam("invoice_group_id", invoiceGroupId);
       return this;
@@ -21958,7 +21734,6 @@ public class Business extends APINode {
       "business",
       "config",
       "creation_time",
-      "data_origin",
       "description",
       "duplicate_entries",
       "enable_auto_assign_to_accounts",
@@ -22085,13 +21860,6 @@ public class Business extends APINode {
     }
     public APIRequestGetPendingOfflineConversionDataSets requestCreationTimeField (boolean value) {
       this.requestField("creation_time", value);
-      return this;
-    }
-    public APIRequestGetPendingOfflineConversionDataSets requestDataOriginField () {
-      return this.requestDataOriginField(true);
-    }
-    public APIRequestGetPendingOfflineConversionDataSets requestDataOriginField (boolean value) {
-      this.requestField("data_origin", value);
       return this;
     }
     public APIRequestGetPendingOfflineConversionDataSets requestDescriptionField () {
@@ -23116,156 +22884,6 @@ public class Business extends APINode {
       this.requestField("id", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateProductCatalog extends APIRequest<ProductCatalog> {
-
-    ProductCatalog lastResponse = null;
-    @Override
-    public ProductCatalog getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "name",
-      "vertical",
-      "flight_catalog_settings",
-      "destination_catalog_settings",
-      "da_display_settings",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public ProductCatalog parseResponse(String response, String header) throws APIException {
-      return ProductCatalog.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public ProductCatalog execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public ProductCatalog execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<ProductCatalog> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<ProductCatalog> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, ProductCatalog>() {
-           public ProductCatalog apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateProductCatalog.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateProductCatalog(String nodeId, APIContext context) {
-      super(context, nodeId, "/product_catalogs", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateProductCatalog setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateProductCatalog setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateProductCatalog setName (String name) {
-      this.setParam("name", name);
-      return this;
-    }
-
-    public APIRequestCreateProductCatalog setVertical (ProductCatalog.EnumVertical vertical) {
-      this.setParam("vertical", vertical);
-      return this;
-    }
-    public APIRequestCreateProductCatalog setVertical (String vertical) {
-      this.setParam("vertical", vertical);
-      return this;
-    }
-
-    public APIRequestCreateProductCatalog setFlightCatalogSettings (Map<String, String> flightCatalogSettings) {
-      this.setParam("flight_catalog_settings", flightCatalogSettings);
-      return this;
-    }
-    public APIRequestCreateProductCatalog setFlightCatalogSettings (String flightCatalogSettings) {
-      this.setParam("flight_catalog_settings", flightCatalogSettings);
-      return this;
-    }
-
-    public APIRequestCreateProductCatalog setDestinationCatalogSettings (Map<String, String> destinationCatalogSettings) {
-      this.setParam("destination_catalog_settings", destinationCatalogSettings);
-      return this;
-    }
-    public APIRequestCreateProductCatalog setDestinationCatalogSettings (String destinationCatalogSettings) {
-      this.setParam("destination_catalog_settings", destinationCatalogSettings);
-      return this;
-    }
-
-    public APIRequestCreateProductCatalog setDaDisplaySettings (Object daDisplaySettings) {
-      this.setParam("da_display_settings", daDisplaySettings);
-      return this;
-    }
-    public APIRequestCreateProductCatalog setDaDisplaySettings (String daDisplaySettings) {
-      this.setParam("da_display_settings", daDisplaySettings);
-      return this;
-    }
-
-    public APIRequestCreateProductCatalog requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateProductCatalog requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateProductCatalog requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateProductCatalog requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateProductCatalog requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateProductCatalog requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetReceivedAudiencePermissions extends APIRequest<AudiencePermission> {
@@ -24327,7 +23945,7 @@ public class Business extends APINode {
     }
 
 
-    public APIRequestCreateSpacoDataSetCollection setSpacoDataCollections (List<Object> spacoDataCollections) {
+    public APIRequestCreateSpacoDataSetCollection setSpacoDataCollections (List<String> spacoDataCollections) {
       this.setParam("spaco_data_collections", spacoDataCollections);
       return this;
     }
@@ -24896,19 +24514,11 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateUploadEvent setUploadEndTime (Object uploadEndTime) {
-      this.setParam("upload_end_time", uploadEndTime);
-      return this;
-    }
     public APIRequestCreateUploadEvent setUploadEndTime (String uploadEndTime) {
       this.setParam("upload_end_time", uploadEndTime);
       return this;
     }
 
-    public APIRequestCreateUploadEvent setUploadStartTime (Object uploadStartTime) {
-      this.setParam("upload_start_time", uploadStartTime);
-      return this;
-    }
     public APIRequestCreateUploadEvent setUploadStartTime (String uploadStartTime) {
       this.setParam("upload_start_time", uploadStartTime);
       return this;
@@ -25657,19 +25267,11 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnamAdAccountCreationRequest setCreditCardId (Object creditCardId) {
-      this.setParam("credit_card_id", creditCardId);
-      return this;
-    }
     public APIRequestCreateVietnamAdAccountCreationRequest setCreditCardId (String creditCardId) {
       this.setParam("credit_card_id", creditCardId);
       return this;
     }
 
-    public APIRequestCreateVietnamAdAccountCreationRequest setExtendedCreditId (Object extendedCreditId) {
-      this.setParam("extended_credit_id", extendedCreditId);
-      return this;
-    }
     public APIRequestCreateVietnamAdAccountCreationRequest setExtendedCreditId (String extendedCreditId) {
       this.setParam("extended_credit_id", extendedCreditId);
       return this;
@@ -25698,10 +25300,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnamAdAccountCreationRequest setPlanningAgencyBusinessId (Object planningAgencyBusinessId) {
-      this.setParam("planning_agency_business_id", planningAgencyBusinessId);
-      return this;
-    }
     public APIRequestCreateVietnamAdAccountCreationRequest setPlanningAgencyBusinessId (String planningAgencyBusinessId) {
       this.setParam("planning_agency_business_id", planningAgencyBusinessId);
       return this;
@@ -25721,10 +25319,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnamAdAccountCreationRequest setOfficialWebsiteUrl (Object officialWebsiteUrl) {
-      this.setParam("official_website_url", officialWebsiteUrl);
-      return this;
-    }
     public APIRequestCreateVietnamAdAccountCreationRequest setOfficialWebsiteUrl (String officialWebsiteUrl) {
       this.setParam("official_website_url", officialWebsiteUrl);
       return this;
@@ -25753,7 +25347,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnamAdAccountCreationRequest setPromotablePageUrls (List<Object> promotablePageUrls) {
+    public APIRequestCreateVietnamAdAccountCreationRequest setPromotablePageUrls (List<String> promotablePageUrls) {
       this.setParam("promotable_page_urls", promotablePageUrls);
       return this;
     }
@@ -25771,7 +25365,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnamAdAccountCreationRequest setPromotableAppIds (List<Object> promotableAppIds) {
+    public APIRequestCreateVietnamAdAccountCreationRequest setPromotableAppIds (List<String> promotableAppIds) {
       this.setParam("promotable_app_ids", promotableAppIds);
       return this;
     }
@@ -25780,7 +25374,7 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnamAdAccountCreationRequest setPromotableUrls (List<Object> promotableUrls) {
+    public APIRequestCreateVietnamAdAccountCreationRequest setPromotableUrls (List<String> promotableUrls) {
       this.setParam("promotable_urls", promotableUrls);
       return this;
     }
@@ -25821,10 +25415,6 @@ public class Business extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnamAdAccountCreationRequest setAdvertiserBusinessId (Object advertiserBusinessId) {
-      this.setParam("advertiser_business_id", advertiserBusinessId);
-      return this;
-    }
     public APIRequestCreateVietnamAdAccountCreationRequest setAdvertiserBusinessId (String advertiserBusinessId) {
       this.setParam("advertiser_business_id", advertiserBusinessId);
       return this;
@@ -26615,31 +26205,6 @@ public class Business extends APINode {
       }
   }
 
-  public static enum EnumPermittedRoles {
-      @SerializedName("MANAGER")
-      VALUE_MANAGER("MANAGER"),
-      @SerializedName("CONTENT_CREATOR")
-      VALUE_CONTENT_CREATOR("CONTENT_CREATOR"),
-      @SerializedName("MODERATOR")
-      VALUE_MODERATOR("MODERATOR"),
-      @SerializedName("ADVERTISER")
-      VALUE_ADVERTISER("ADVERTISER"),
-      @SerializedName("INSIGHTS_ANALYST")
-      VALUE_INSIGHTS_ANALYST("INSIGHTS_ANALYST"),
-      NULL(null);
-
-      private String value;
-
-      private EnumPermittedRoles(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumRole {
       @SerializedName("FINANCE_EDITOR")
       VALUE_FINANCE_EDITOR("FINANCE_EDITOR"),
@@ -26651,8 +26216,6 @@ public class Business extends APINode {
       VALUE_ADMIN("ADMIN"),
       @SerializedName("EMPLOYEE")
       VALUE_EMPLOYEE("EMPLOYEE"),
-      @SerializedName("FB_EMPLOYEE_SALES_REP")
-      VALUE_FB_EMPLOYEE_SALES_REP("FB_EMPLOYEE_SALES_REP"),
       NULL(null);
 
       private String value;

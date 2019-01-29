@@ -1360,6 +1360,7 @@ public class ProductCatalog extends APINode {
     }
     public static final String[] PARAMS = {
       "requests",
+      "allow_upsert",
     };
 
     public static final String[] FIELDS = {
@@ -1424,6 +1425,15 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateBatch setRequests (String requests) {
       this.setParam("requests", requests);
+      return this;
+    }
+
+    public APIRequestCreateBatch setAllowUpsert (Boolean allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
+      return this;
+    }
+    public APIRequestCreateBatch setAllowUpsert (String allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
       return this;
     }
 
@@ -2999,10 +3009,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateDestination setUrl (Object url) {
-      this.setParam("url", url);
-      return this;
-    }
     public APIRequestCreateDestination setUrl (String url) {
       this.setParam("url", url);
       return this;
@@ -3986,10 +3992,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateFlight setUrl (Object url) {
-      this.setParam("url", url);
-      return this;
-    }
     public APIRequestCreateFlight setUrl (String url) {
       this.setParam("url", url);
       return this;
@@ -5058,6 +5060,7 @@ public class ProductCatalog extends APINode {
       "margin_level",
       "name",
       "phone",
+      "sale_price",
       "sanitized_images",
       "star_rating",
       "url",
@@ -5266,6 +5269,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetHotels requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetHotels requestSalePriceField () {
+      return this.requestSalePriceField(true);
+    }
+    public APIRequestGetHotels requestSalePriceField (boolean value) {
+      this.requestField("sale_price", value);
       return this;
     }
     public APIRequestGetHotels requestSanitizedImagesField () {
@@ -5507,6 +5517,7 @@ public class ProductCatalog extends APINode {
     public static final String[] PARAMS = {
       "requests",
       "item_type",
+      "allow_upsert",
     };
 
     public static final String[] FIELDS = {
@@ -5580,6 +5591,15 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestCreateItemsBatch setItemType (String itemType) {
       this.setParam("item_type", itemType);
+      return this;
+    }
+
+    public APIRequestCreateItemsBatch setAllowUpsert (Boolean allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
+      return this;
+    }
+    public APIRequestCreateItemsBatch setAllowUpsert (String allowUpsert) {
+      this.setParam("allow_upsert", allowUpsert);
       return this;
     }
 
@@ -6174,7 +6194,6 @@ public class ProductCatalog extends APINode {
       "deletion_enabled",
       "feed_type",
       "file_name",
-      "quoted_fields",
       "rules",
     };
 
@@ -6306,15 +6325,6 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateProductFeed setFileName (String fileName) {
       this.setParam("file_name", fileName);
-      return this;
-    }
-
-    public APIRequestCreateProductFeed setQuotedFields (Boolean quotedFields) {
-      this.setParam("quoted_fields", quotedFields);
-      return this;
-    }
-    public APIRequestCreateProductFeed setQuotedFields (String quotedFields) {
-      this.setParam("quoted_fields", quotedFields);
       return this;
     }
 
@@ -7935,10 +7945,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateProduct setImageUrl (Object imageUrl) {
-      this.setParam("image_url", imageUrl);
-      return this;
-    }
     public APIRequestCreateProduct setImageUrl (String imageUrl) {
       this.setParam("image_url", imageUrl);
       return this;
@@ -7963,10 +7969,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateProduct setUrl (Object url) {
-      this.setParam("url", url);
-      return this;
-    }
     public APIRequestCreateProduct setUrl (String url) {
       this.setParam("url", url);
       return this;
@@ -7990,7 +7992,7 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateProduct setAdditionalVariantAttributes (Object additionalVariantAttributes) {
+    public APIRequestCreateProduct setAdditionalVariantAttributes (Map<String, String> additionalVariantAttributes) {
       this.setParam("additional_variant_attributes", additionalVariantAttributes);
       return this;
     }
@@ -8086,10 +8088,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateProduct setMobileLink (Object mobileLink) {
-      this.setParam("mobile_link", mobileLink);
-      return this;
-    }
     public APIRequestCreateProduct setMobileLink (String mobileLink) {
       this.setParam("mobile_link", mobileLink);
       return this;
@@ -8109,19 +8107,11 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateProduct setOfferPriceEndDate (Object offerPriceEndDate) {
-      this.setParam("offer_price_end_date", offerPriceEndDate);
-      return this;
-    }
     public APIRequestCreateProduct setOfferPriceEndDate (String offerPriceEndDate) {
       this.setParam("offer_price_end_date", offerPriceEndDate);
       return this;
     }
 
-    public APIRequestCreateProduct setOfferPriceStartDate (Object offerPriceStartDate) {
-      this.setParam("offer_price_start_date", offerPriceStartDate);
-      return this;
-    }
     public APIRequestCreateProduct setOfferPriceStartDate (String offerPriceStartDate) {
       this.setParam("offer_price_start_date", offerPriceStartDate);
       return this;
@@ -8509,10 +8499,6 @@ public class ProductCatalog extends APINode {
     }
 
 
-    public APIRequestGetUserPermissions setBusiness (Object business) {
-      this.setParam("business", business);
-      return this;
-    }
     public APIRequestGetUserPermissions setBusiness (String business) {
       this.setParam("business", business);
       return this;

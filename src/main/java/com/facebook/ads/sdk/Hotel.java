@@ -83,6 +83,8 @@ public class Hotel extends APINode {
   private String mName = null;
   @SerializedName("phone")
   private String mPhone = null;
+  @SerializedName("sale_price")
+  private String mSalePrice = null;
   @SerializedName("sanitized_images")
   private List<String> mSanitizedImages = null;
   @SerializedName("star_rating")
@@ -376,6 +378,10 @@ public class Hotel extends APINode {
 
   public String getFieldPhone() {
     return mPhone;
+  }
+
+  public String getFieldSalePrice() {
+    return mSalePrice;
   }
 
   public List<String> getFieldSanitizedImages() {
@@ -907,6 +913,7 @@ public class Hotel extends APINode {
       "margin_level",
       "name",
       "phone",
+      "sale_price",
       "sanitized_images",
       "star_rating",
       "url",
@@ -1097,6 +1104,13 @@ public class Hotel extends APINode {
     }
     public APIRequestGet requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGet requestSalePriceField () {
+      return this.requestSalePriceField(true);
+    }
+    public APIRequestGet requestSalePriceField (boolean value) {
+      this.requestField("sale_price", value);
       return this;
     }
     public APIRequestGet requestSanitizedImagesField () {
@@ -1351,6 +1365,7 @@ public class Hotel extends APINode {
     this.mMarginLevel = instance.mMarginLevel;
     this.mName = instance.mName;
     this.mPhone = instance.mPhone;
+    this.mSalePrice = instance.mSalePrice;
     this.mSanitizedImages = instance.mSanitizedImages;
     this.mStarRating = instance.mStarRating;
     this.mUrl = instance.mUrl;

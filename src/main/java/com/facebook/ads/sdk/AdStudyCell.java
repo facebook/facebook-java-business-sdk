@@ -1451,9 +1451,9 @@ public class AdStudyCell extends APINode {
       "daily_budget",
       "effective_status",
       "id",
+      "issues_info",
       "last_budget_toggling_time",
       "lifetime_budget",
-      "metrics_metadata",
       "name",
       "objective",
       "pacing_type",
@@ -1663,6 +1663,13 @@ public class AdStudyCell extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetCampaigns requestIssuesInfoField () {
+      return this.requestIssuesInfoField(true);
+    }
+    public APIRequestGetCampaigns requestIssuesInfoField (boolean value) {
+      this.requestField("issues_info", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestLastBudgetTogglingTimeField () {
       return this.requestLastBudgetTogglingTimeField(true);
     }
@@ -1675,13 +1682,6 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetCampaigns requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestMetricsMetadataField () {
-      return this.requestMetricsMetadataField(true);
-    }
-    public APIRequestGetCampaigns requestMetricsMetadataField (boolean value) {
-      this.requestField("metrics_metadata", value);
       return this;
     }
     public APIRequestGetCampaigns requestNameField () {

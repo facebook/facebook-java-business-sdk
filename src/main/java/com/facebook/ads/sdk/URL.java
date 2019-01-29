@@ -555,7 +555,7 @@ public class URL extends APINode {
     }
 
 
-    public APIRequestUpdate setLocale (Object locale) {
+    public APIRequestUpdate setLocale (JsonArray locale) {
       this.setParam("locale", locale);
       return this;
     }
@@ -569,10 +569,6 @@ public class URL extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setTs (Object ts) {
-      this.setParam("ts", ts);
-      return this;
-    }
     public APIRequestUpdate setTs (String ts) {
       this.setParam("ts", ts);
       return this;

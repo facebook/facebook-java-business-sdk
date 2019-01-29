@@ -1766,10 +1766,6 @@ public class ProductItem extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setImageUrl (Object imageUrl) {
-      this.setParam("image_url", imageUrl);
-      return this;
-    }
     public APIRequestUpdate setImageUrl (String imageUrl) {
       this.setParam("image_url", imageUrl);
       return this;
@@ -1794,10 +1790,6 @@ public class ProductItem extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setUrl (Object url) {
-      this.setParam("url", url);
-      return this;
-    }
     public APIRequestUpdate setUrl (String url) {
       this.setParam("url", url);
       return this;
@@ -1821,7 +1813,7 @@ public class ProductItem extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setAdditionalVariantAttributes (Object additionalVariantAttributes) {
+    public APIRequestUpdate setAdditionalVariantAttributes (Map<String, String> additionalVariantAttributes) {
       this.setParam("additional_variant_attributes", additionalVariantAttributes);
       return this;
     }
@@ -1907,10 +1899,6 @@ public class ProductItem extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setMobileLink (Object mobileLink) {
-      this.setParam("mobile_link", mobileLink);
-      return this;
-    }
     public APIRequestUpdate setMobileLink (String mobileLink) {
       this.setParam("mobile_link", mobileLink);
       return this;
@@ -1930,19 +1918,11 @@ public class ProductItem extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setOfferPriceEndDate (Object offerPriceEndDate) {
-      this.setParam("offer_price_end_date", offerPriceEndDate);
-      return this;
-    }
     public APIRequestUpdate setOfferPriceEndDate (String offerPriceEndDate) {
       this.setParam("offer_price_end_date", offerPriceEndDate);
       return this;
     }
 
-    public APIRequestUpdate setOfferPriceStartDate (Object offerPriceStartDate) {
-      this.setParam("offer_price_start_date", offerPriceStartDate);
-      return this;
-    }
     public APIRequestUpdate setOfferPriceStartDate (String offerPriceStartDate) {
       this.setParam("offer_price_start_date", offerPriceStartDate);
       return this;

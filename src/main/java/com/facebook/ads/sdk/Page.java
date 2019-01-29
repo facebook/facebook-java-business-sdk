@@ -602,10 +602,6 @@ public class Page extends APINode {
     return new APIRequestGetAsset3Ds(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteAssignedUsers deleteAssignedUsers() {
-    return new APIRequestDeleteAssignedUsers(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetAssignedUsers getAssignedUsers() {
     return new APIRequestGetAssignedUsers(this.getPrefixedId().toString(), context);
   }
@@ -742,10 +738,6 @@ public class Page extends APINode {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateEvent createEvent() {
-    return new APIRequestCreateEvent(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetExpiredPosts getExpiredPosts() {
     return new APIRequestGetExpiredPosts(this.getPrefixedId().toString(), context);
   }
@@ -870,10 +862,6 @@ public class Page extends APINode {
     return new APIRequestGetLikes(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateLink createLink() {
-    return new APIRequestCreateLink(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetLiveEncoders getLiveEncoders() {
     return new APIRequestGetLiveEncoders(this.getPrefixedId().toString(), context);
   }
@@ -970,10 +958,6 @@ public class Page extends APINode {
     return new APIRequestCreateNlpConfig(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateNote createNote() {
-    return new APIRequestCreateNote(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateNotification createNotification() {
     return new APIRequestCreateNotification(this.getPrefixedId().toString(), context);
   }
@@ -1040,10 +1024,6 @@ public class Page extends APINode {
 
   public APIRequestGetPublishedPosts getPublishedPosts() {
     return new APIRequestGetPublishedPosts(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateQuestion createQuestion() {
-    return new APIRequestCreateQuestion(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetRatings getRatings() {
@@ -1174,14 +1154,6 @@ public class Page extends APINode {
     return new APIRequestCreateUnlinkAccount(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteUserPermissions deleteUserPermissions() {
-    return new APIRequestDeleteUserPermissions(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateUserPermission createUserPermission() {
-    return new APIRequestCreateUserPermission(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetVideoBroadcasts getVideoBroadcasts() {
     return new APIRequestGetVideoBroadcasts(this.getPrefixedId().toString(), context);
   }
@@ -1232,10 +1204,6 @@ public class Page extends APINode {
 
   public APIRequestGetVisitorPosts getVisitorPosts() {
     return new APIRequestGetVisitorPosts(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestGetWorkFlows getWorkFlows() {
-    return new APIRequestGetWorkFlows(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGet get() {
@@ -1960,10 +1928,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateActivity setAppId (Object appId) {
-      this.setParam("app_id", appId);
-      return this;
-    }
     public APIRequestCreateActivity setAppId (String appId) {
       this.setParam("app_id", appId);
       return this;
@@ -3687,10 +3651,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateAlbum setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateAlbum setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -3867,120 +3827,6 @@ public class Page extends APINode {
       this.requestField("id", value);
       return this;
     }
-  }
-
-  public static class APIRequestDeleteAssignedUsers extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "user",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteAssignedUsers.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteAssignedUsers(String nodeId, APIContext context) {
-      super(context, nodeId, "/assigned_users", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteAssignedUsers setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAssignedUsers setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteAssignedUsers setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestDeleteAssignedUsers setUser (String user) {
-      this.setParam("user", user);
-      return this;
-    }
-
-    public APIRequestDeleteAssignedUsers requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteAssignedUsers requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAssignedUsers requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteAssignedUsers requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAssignedUsers requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteAssignedUsers requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetAssignedUsers extends APIRequest<AssignedUser> {
@@ -4882,7 +4728,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateBlocked setAsid (Object asid) {
+    public APIRequestCreateBlocked setAsid (JsonArray asid) {
       this.setParam("asid", asid);
       return this;
     }
@@ -5181,10 +5027,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateBroadcastMessage setScheduleTime (Object scheduleTime) {
-      this.setParam("schedule_time", scheduleTime);
-      return this;
-    }
     public APIRequestCreateBroadcastMessage setScheduleTime (String scheduleTime) {
       this.setParam("schedule_time", scheduleTime);
       return this;
@@ -5809,10 +5651,6 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestGetBusinessProjects setBusiness (Object business) {
-      this.setParam("business", business);
-      return this;
-    }
     public APIRequestGetBusinessProjects setBusiness (String business) {
       this.setParam("business", business);
       return this;
@@ -8273,7 +8111,7 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestDeleteCopyrightWhitelistedPartners setPartnerIds (List<Object> partnerIds) {
+    public APIRequestDeleteCopyrightWhitelistedPartners setPartnerIds (List<String> partnerIds) {
       this.setParam("partner_ids", partnerIds);
       return this;
     }
@@ -8589,7 +8427,7 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestCreateCopyrightWhitelistedPartner setPartnerIds (List<Object> partnerIds) {
+    public APIRequestCreateCopyrightWhitelistedPartner setPartnerIds (List<String> partnerIds) {
       this.setParam("partner_ids", partnerIds);
       return this;
     }
@@ -11755,140 +11593,6 @@ public class Page extends APINode {
     }
   }
 
-  public static class APIRequestCreateEvent extends APIRequest<Event> {
-
-    Event lastResponse = null;
-    @Override
-    public Event getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "event_info",
-      "action_context",
-      "app_context",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Event parseResponse(String response, String header) throws APIException {
-      return Event.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Event execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Event execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Event> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Event> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Event>() {
-           public Event apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateEvent.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateEvent(String nodeId, APIContext context) {
-      super(context, nodeId, "/events", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateEvent setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateEvent setEventInfo (Object eventInfo) {
-      this.setParam("event_info", eventInfo);
-      return this;
-    }
-    public APIRequestCreateEvent setEventInfo (String eventInfo) {
-      this.setParam("event_info", eventInfo);
-      return this;
-    }
-
-    public APIRequestCreateEvent setActionContext (Object actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-    public APIRequestCreateEvent setActionContext (String actionContext) {
-      this.setParam("action_context", actionContext);
-      return this;
-    }
-
-    public APIRequestCreateEvent setAppContext (Object appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-    public APIRequestCreateEvent setAppContext (String appContext) {
-      this.setParam("app_context", appContext);
-      return this;
-    }
-
-    public APIRequestCreateEvent requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateEvent requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateEvent requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetExpiredPosts extends APIRequest<ExpirablePost> {
 
     APINodeList<ExpirablePost> lastResponse = null;
@@ -13725,10 +13429,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateFeed setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -14179,7 +13879,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateFeed setPlaceListData (Object placeListData) {
+    public APIRequestCreateFeed setPlaceListData (JsonArray placeListData) {
       this.setParam("place_list_data", placeListData);
       return this;
     }
@@ -18740,7 +18440,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateLeadGenDraftForm setTrackingParameters (Object trackingParameters) {
+    public APIRequestCreateLeadGenDraftForm setTrackingParameters (Map<String, String> trackingParameters) {
       this.setParam("tracking_parameters", trackingParameters);
       return this;
     }
@@ -19261,37 +18961,21 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateLeadGenForm setFollowUpActionUrl (Object followUpActionUrl) {
-      this.setParam("follow_up_action_url", followUpActionUrl);
-      return this;
-    }
     public APIRequestCreateLeadGenForm setFollowUpActionUrl (String followUpActionUrl) {
       this.setParam("follow_up_action_url", followUpActionUrl);
       return this;
     }
 
-    public APIRequestCreateLeadGenForm setLegalContentId (Object legalContentId) {
-      this.setParam("legal_content_id", legalContentId);
-      return this;
-    }
     public APIRequestCreateLeadGenForm setLegalContentId (String legalContentId) {
       this.setParam("legal_content_id", legalContentId);
       return this;
     }
 
-    public APIRequestCreateLeadGenForm setContextCardId (Object contextCardId) {
-      this.setParam("context_card_id", contextCardId);
-      return this;
-    }
     public APIRequestCreateLeadGenForm setContextCardId (String contextCardId) {
       this.setParam("context_card_id", contextCardId);
       return this;
     }
 
-    public APIRequestCreateLeadGenForm setThankYouPageId (Object thankYouPageId) {
-      this.setParam("thank_you_page_id", thankYouPageId);
-      return this;
-    }
     public APIRequestCreateLeadGenForm setThankYouPageId (String thankYouPageId) {
       this.setParam("thank_you_page_id", thankYouPageId);
       return this;
@@ -19342,7 +19026,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateLeadGenForm setTrackingParameters (Object trackingParameters) {
+    public APIRequestCreateLeadGenForm setTrackingParameters (Map<String, String> trackingParameters) {
       this.setParam("tracking_parameters", trackingParameters);
       return this;
     }
@@ -21755,214 +21439,6 @@ public class Page extends APINode {
     }
   }
 
-  public static class APIRequestCreateLink extends APIRequest<Link> {
-
-    Link lastResponse = null;
-    @Override
-    public Link getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "link",
-      "message",
-      "image",
-      "tags",
-      "place",
-      "published",
-      "scheduled_publish_time",
-      "unpublished_content_type",
-      "targeting",
-      "privacy",
-      "application_id",
-      "is_explicit_share",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Link parseResponse(String response, String header) throws APIException {
-      return Link.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Link execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Link execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Link> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Link> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Link>() {
-           public Link apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateLink.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateLink(String nodeId, APIContext context) {
-      super(context, nodeId, "/links", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateLink setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLink setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateLink setLink (String link) {
-      this.setParam("link", link);
-      return this;
-    }
-
-    public APIRequestCreateLink setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestCreateLink setImage (String image) {
-      this.setParam("image", image);
-      return this;
-    }
-
-    public APIRequestCreateLink setTags (List<Long> tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-    public APIRequestCreateLink setTags (String tags) {
-      this.setParam("tags", tags);
-      return this;
-    }
-
-    public APIRequestCreateLink setPlace (Object place) {
-      this.setParam("place", place);
-      return this;
-    }
-    public APIRequestCreateLink setPlace (String place) {
-      this.setParam("place", place);
-      return this;
-    }
-
-    public APIRequestCreateLink setPublished (Boolean published) {
-      this.setParam("published", published);
-      return this;
-    }
-    public APIRequestCreateLink setPublished (String published) {
-      this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestCreateLink setScheduledPublishTime (Long scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-    public APIRequestCreateLink setScheduledPublishTime (String scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-
-    public APIRequestCreateLink setUnpublishedContentType (Link.EnumUnpublishedContentType unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-    public APIRequestCreateLink setUnpublishedContentType (String unpublishedContentType) {
-      this.setParam("unpublished_content_type", unpublishedContentType);
-      return this;
-    }
-
-    public APIRequestCreateLink setTargeting (Object targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-    public APIRequestCreateLink setTargeting (String targeting) {
-      this.setParam("targeting", targeting);
-      return this;
-    }
-
-    public APIRequestCreateLink setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-    public APIRequestCreateLink setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-
-    public APIRequestCreateLink setApplicationId (String applicationId) {
-      this.setParam("application_id", applicationId);
-      return this;
-    }
-
-    public APIRequestCreateLink setIsExplicitShare (Boolean isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-    public APIRequestCreateLink setIsExplicitShare (String isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-
-    public APIRequestCreateLink requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateLink requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLink requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateLink requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLink requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateLink requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetLiveEncoders extends APIRequest<LiveEncoder> {
 
     APINodeList<LiveEncoder> lastResponse = null;
@@ -22297,7 +21773,6 @@ public class Page extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "type",
       "source",
       "broadcast_status",
     };
@@ -22383,15 +21858,6 @@ public class Page extends APINode {
       return this;
     }
 
-
-    public APIRequestGetLiveVideos setType (LiveVideo.EnumType type) {
-      this.setParam("type", type);
-      return this;
-    }
-    public APIRequestGetLiveVideos setType (String type) {
-      this.setParam("type", type);
-      return this;
-    }
 
     public APIRequestGetLiveVideos setSource (LiveVideo.EnumSource source) {
       this.setParam("source", source);
@@ -22761,10 +22227,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateLiveVideo setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreateLiveVideo setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -23057,10 +22519,6 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestDeleteLocations setLocationPageId (Object locationPageId) {
-      this.setParam("location_page_id", locationPageId);
-      return this;
-    }
     public APIRequestDeleteLocations setLocationPageId (String locationPageId) {
       this.setParam("location_page_id", locationPageId);
       return this;
@@ -24522,10 +23980,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateLocation setLocationPageId (Object locationPageId) {
-      this.setParam("location_page_id", locationPageId);
-      return this;
-    }
     public APIRequestCreateLocation setLocationPageId (String locationPageId) {
       this.setParam("location_page_id", locationPageId);
       return this;
@@ -24540,10 +23994,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateLocation setWebsite (Object website) {
-      this.setParam("website", website);
-      return this;
-    }
     public APIRequestCreateLocation setWebsite (String website) {
       this.setParam("website", website);
       return this;
@@ -24878,7 +24328,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateMediaFingerprint setMetadata (Object metadata) {
+    public APIRequestCreateMediaFingerprint setMetadata (JsonArray metadata) {
       this.setParam("metadata", metadata);
       return this;
     }
@@ -25290,10 +24740,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateMessage setPersonaId (Object personaId) {
-      this.setParam("persona_id", personaId);
-      return this;
-    }
     public APIRequestCreateMessage setPersonaId (String personaId) {
       this.setParam("persona_id", personaId);
       return this;
@@ -27451,132 +26897,6 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestCreateNote extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "message",
-      "subject",
-      "privacy",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateNote.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateNote(String nodeId, APIContext context) {
-      super(context, nodeId, "/notes", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateNote setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateNote setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateNote setMessage (String message) {
-      this.setParam("message", message);
-      return this;
-    }
-
-    public APIRequestCreateNote setSubject (String subject) {
-      this.setParam("subject", subject);
-      return this;
-    }
-
-    public APIRequestCreateNote setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-    public APIRequestCreateNote setPrivacy (String privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
-
-    public APIRequestCreateNote requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateNote requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateNote requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateNote requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateNote requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateNote requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestCreateNotification extends APIRequest<Page> {
 
     Page lastResponse = null;
@@ -27842,7 +27162,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreatePageAboutStory setCoverPhoto (Object coverPhoto) {
+    public APIRequestCreatePageAboutStory setCoverPhoto (Map<String, String> coverPhoto) {
       this.setParam("cover_photo", coverPhoto);
       return this;
     }
@@ -28518,10 +27838,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreatePersona setProfilePictureUrl (Object profilePictureUrl) {
-      this.setParam("profile_picture_url", profilePictureUrl);
-      return this;
-    }
     public APIRequestCreatePersona setProfilePictureUrl (String profilePictureUrl) {
       this.setParam("profile_picture_url", profilePictureUrl);
       return this;
@@ -28909,7 +28225,6 @@ public class Page extends APINode {
       "uid",
       "profile_id",
       "target_id",
-      "checkin_id",
       "vault_image_id",
       "tags",
       "place",
@@ -29057,15 +28372,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setCheckinId (Object checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-    public APIRequestCreatePhoto setCheckinId (String checkinId) {
-      this.setParam("checkin_id", checkinId);
-      return this;
-    }
-
     public APIRequestCreatePhoto setVaultImageId (String vaultImageId) {
       this.setParam("vault_image_id", vaultImageId);
       return this;
@@ -29141,10 +28447,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreatePhoto setPrivacy (Object privacy) {
-      this.setParam("privacy", privacy);
-      return this;
-    }
     public APIRequestCreatePhoto setPrivacy (String privacy) {
       this.setParam("privacy", privacy);
       return this;
@@ -31879,19 +31181,11 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestGetPublishedPosts setSince (Object since) {
-      this.setParam("since", since);
-      return this;
-    }
     public APIRequestGetPublishedPosts setSince (String since) {
       this.setParam("since", since);
       return this;
     }
 
-    public APIRequestGetPublishedPosts setUntil (Object until) {
-      this.setParam("until", until);
-      return this;
-    }
     public APIRequestGetPublishedPosts setUntil (String until) {
       this.setParam("until", until);
       return this;
@@ -32353,176 +31647,6 @@ public class Page extends APINode {
       this.requestField("width", value);
       return this;
     }
-  }
-
-  public static class APIRequestCreateQuestion extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "question",
-      "options",
-      "allow_new_options",
-      "choose_multiple_options",
-      "ranked_poll",
-      "published",
-      "scheduled_publish_time",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateQuestion.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateQuestion(String nodeId, APIContext context) {
-      super(context, nodeId, "/questions", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateQuestion setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateQuestion setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateQuestion setQuestion (String question) {
-      this.setParam("question", question);
-      return this;
-    }
-
-    public APIRequestCreateQuestion setOptions (List<String> options) {
-      this.setParam("options", options);
-      return this;
-    }
-    public APIRequestCreateQuestion setOptions (String options) {
-      this.setParam("options", options);
-      return this;
-    }
-
-    public APIRequestCreateQuestion setAllowNewOptions (Boolean allowNewOptions) {
-      this.setParam("allow_new_options", allowNewOptions);
-      return this;
-    }
-    public APIRequestCreateQuestion setAllowNewOptions (String allowNewOptions) {
-      this.setParam("allow_new_options", allowNewOptions);
-      return this;
-    }
-
-    public APIRequestCreateQuestion setChooseMultipleOptions (Boolean chooseMultipleOptions) {
-      this.setParam("choose_multiple_options", chooseMultipleOptions);
-      return this;
-    }
-    public APIRequestCreateQuestion setChooseMultipleOptions (String chooseMultipleOptions) {
-      this.setParam("choose_multiple_options", chooseMultipleOptions);
-      return this;
-    }
-
-    public APIRequestCreateQuestion setRankedPoll (Boolean rankedPoll) {
-      this.setParam("ranked_poll", rankedPoll);
-      return this;
-    }
-    public APIRequestCreateQuestion setRankedPoll (String rankedPoll) {
-      this.setParam("ranked_poll", rankedPoll);
-      return this;
-    }
-
-    public APIRequestCreateQuestion setPublished (Boolean published) {
-      this.setParam("published", published);
-      return this;
-    }
-    public APIRequestCreateQuestion setPublished (String published) {
-      this.setParam("published", published);
-      return this;
-    }
-
-    public APIRequestCreateQuestion setScheduledPublishTime (Long scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-    public APIRequestCreateQuestion setScheduledPublishTime (String scheduledPublishTime) {
-      this.setParam("scheduled_publish_time", scheduledPublishTime);
-      return this;
-    }
-
-    public APIRequestCreateQuestion requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateQuestion requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateQuestion requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateQuestion requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateQuestion requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateQuestion requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetRatings extends APIRequest<Recommendation> {
@@ -36307,8 +35431,6 @@ public class Page extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
-      "setting",
-      "value",
       "option",
     };
 
@@ -36367,24 +35489,6 @@ public class Page extends APINode {
       return this;
     }
 
-
-    public APIRequestCreateSetting setSetting (Page.EnumSetting setting) {
-      this.setParam("setting", setting);
-      return this;
-    }
-    public APIRequestCreateSetting setSetting (String setting) {
-      this.setParam("setting", setting);
-      return this;
-    }
-
-    public APIRequestCreateSetting setValue (Boolean value) {
-      this.setParam("value", value);
-      return this;
-    }
-    public APIRequestCreateSetting setValue (String value) {
-      this.setParam("value", value);
-      return this;
-    }
 
     public APIRequestCreateSetting setOption (Object option) {
       this.setParam("option", option);
@@ -37800,10 +36904,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateSubscription setCallbackUrl (Object callbackUrl) {
-      this.setParam("callback_url", callbackUrl);
-      return this;
-    }
     public APIRequestCreateSubscription setCallbackUrl (String callbackUrl) {
       this.setParam("callback_url", callbackUrl);
       return this;
@@ -39090,10 +38190,6 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestGetThreadOwner setRecipient (Object recipient) {
-      this.setParam("recipient", recipient);
-      return this;
-    }
     public APIRequestGetThreadOwner setRecipient (String recipient) {
       this.setParam("recipient", recipient);
       return this;
@@ -40171,268 +39267,6 @@ public class Page extends APINode {
 
     @Override
     public APIRequestCreateUnlinkAccount requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestDeleteUserPermissions extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "user",
-      "email",
-      "business",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteUserPermissions.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteUserPermissions(String nodeId, APIContext context) {
-      super(context, nodeId, "/userpermissions", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteUserPermissions setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteUserPermissions setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteUserPermissions setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestDeleteUserPermissions setUser (String user) {
-      this.setParam("user", user);
-      return this;
-    }
-
-    public APIRequestDeleteUserPermissions setEmail (String email) {
-      this.setParam("email", email);
-      return this;
-    }
-
-    public APIRequestDeleteUserPermissions setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
-
-    public APIRequestDeleteUserPermissions requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteUserPermissions requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteUserPermissions requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteUserPermissions requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteUserPermissions requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteUserPermissions requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateUserPermission extends APIRequest<Page> {
-
-    Page lastResponse = null;
-    @Override
-    public Page getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "user",
-      "email",
-      "business",
-      "tasks",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public Page parseResponse(String response, String header) throws APIException {
-      return Page.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public Page execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<Page> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Page>() {
-           public Page apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateUserPermission.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateUserPermission(String nodeId, APIContext context) {
-      super(context, nodeId, "/userpermissions", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateUserPermission setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUserPermission setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateUserPermission setUser (Long user) {
-      this.setParam("user", user);
-      return this;
-    }
-    public APIRequestCreateUserPermission setUser (String user) {
-      this.setParam("user", user);
-      return this;
-    }
-
-    public APIRequestCreateUserPermission setEmail (String email) {
-      this.setParam("email", email);
-      return this;
-    }
-
-    public APIRequestCreateUserPermission setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
-
-    public APIRequestCreateUserPermission setTasks (List<Page.EnumTasks> tasks) {
-      this.setParam("tasks", tasks);
-      return this;
-    }
-    public APIRequestCreateUserPermission setTasks (String tasks) {
-      this.setParam("tasks", tasks);
-      return this;
-    }
-
-    public APIRequestCreateUserPermission requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateUserPermission requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUserPermission requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateUserPermission requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUserPermission requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateUserPermission requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -42605,8 +41439,6 @@ public class Page extends APINode {
       "replace_video_id",
       "swap_mode",
       "ad_breaks",
-      "backdated_time",
-      "backdated_time_granularity",
       "backdated_post",
       "custom_labels",
       "call_to_action",
@@ -43185,7 +42017,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setAdBreaks (Object adBreaks) {
+    public APIRequestCreateVideo setAdBreaks (JsonArray adBreaks) {
       this.setParam("ad_breaks", adBreaks);
       return this;
     }
@@ -43194,21 +42026,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setBackdatedTime (String backdatedTime) {
-      this.setParam("backdated_time", backdatedTime);
-      return this;
-    }
-
-    public APIRequestCreateVideo setBackdatedTimeGranularity (AdVideo.EnumBackdatedTimeGranularity backdatedTimeGranularity) {
-      this.setParam("backdated_time_granularity", backdatedTimeGranularity);
-      return this;
-    }
-    public APIRequestCreateVideo setBackdatedTimeGranularity (String backdatedTimeGranularity) {
-      this.setParam("backdated_time_granularity", backdatedTimeGranularity);
-      return this;
-    }
-
-    public APIRequestCreateVideo setBackdatedPost (Object backdatedPost) {
+    public APIRequestCreateVideo setBackdatedPost (JsonArray backdatedPost) {
       this.setParam("backdated_post", backdatedPost);
       return this;
     }
@@ -44133,142 +42951,6 @@ public class Page extends APINode {
     }
     public APIRequestGetVisitorPosts requestWidthField (boolean value) {
       this.requestField("width", value);
-      return this;
-    }
-  }
-
-  public static class APIRequestGetWorkFlows extends APIRequest<PagesPlatformComponentFlowServiceConfig> {
-
-    APINodeList<PagesPlatformComponentFlowServiceConfig> lastResponse = null;
-    @Override
-    public APINodeList<PagesPlatformComponentFlowServiceConfig> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-      "deeplink",
-      "flow_category",
-      "id",
-      "label",
-    };
-
-    @Override
-    public APINodeList<PagesPlatformComponentFlowServiceConfig> parseResponse(String response, String header) throws APIException {
-      return PagesPlatformComponentFlowServiceConfig.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<PagesPlatformComponentFlowServiceConfig> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<PagesPlatformComponentFlowServiceConfig> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<PagesPlatformComponentFlowServiceConfig>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<PagesPlatformComponentFlowServiceConfig>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<PagesPlatformComponentFlowServiceConfig>>() {
-           public APINodeList<PagesPlatformComponentFlowServiceConfig> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetWorkFlows.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetWorkFlows(String nodeId, APIContext context) {
-      super(context, nodeId, "/workflows", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetWorkFlows setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetWorkFlows setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetWorkFlows requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetWorkFlows requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetWorkFlows requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetWorkFlows requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetWorkFlows requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetWorkFlows requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-    public APIRequestGetWorkFlows requestDeeplinkField () {
-      return this.requestDeeplinkField(true);
-    }
-    public APIRequestGetWorkFlows requestDeeplinkField (boolean value) {
-      this.requestField("deeplink", value);
-      return this;
-    }
-    public APIRequestGetWorkFlows requestFlowCategoryField () {
-      return this.requestFlowCategoryField(true);
-    }
-    public APIRequestGetWorkFlows requestFlowCategoryField (boolean value) {
-      this.requestField("flow_category", value);
-      return this;
-    }
-    public APIRequestGetWorkFlows requestIdField () {
-      return this.requestIdField(true);
-    }
-    public APIRequestGetWorkFlows requestIdField (boolean value) {
-      this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGetWorkFlows requestLabelField () {
-      return this.requestLabelField(true);
-    }
-    public APIRequestGetWorkFlows requestLabelField (boolean value) {
-      this.requestField("label", value);
       return this;
     }
   }
@@ -45581,7 +44263,6 @@ public class Page extends APINode {
       "instant_articles_submit_for_review",
       "is_permanently_closed",
       "ignore_coordinate_warnings",
-      "crossposting_pages",
       "begin_crossposting_handshake",
       "accept_crossposting_handshake",
       "displayed_message_response_time",
@@ -45989,15 +44670,6 @@ public class Page extends APINode {
     }
     public APIRequestUpdate setIgnoreCoordinateWarnings (String ignoreCoordinateWarnings) {
       this.setParam("ignore_coordinate_warnings", ignoreCoordinateWarnings);
-      return this;
-    }
-
-    public APIRequestUpdate setCrosspostingPages (List<Object> crosspostingPages) {
-      this.setParam("crossposting_pages", crosspostingPages);
-      return this;
-    }
-    public APIRequestUpdate setCrosspostingPages (String crosspostingPages) {
-      this.setParam("crossposting_pages", crosspostingPages);
       return this;
     }
 

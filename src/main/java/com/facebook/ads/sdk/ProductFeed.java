@@ -1713,6 +1713,7 @@ public class ProductFeed extends APINode {
       "margin_level",
       "name",
       "phone",
+      "sale_price",
       "sanitized_images",
       "star_rating",
       "url",
@@ -1921,6 +1922,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetHotels requestPhoneField (boolean value) {
       this.requestField("phone", value);
+      return this;
+    }
+    public APIRequestGetHotels requestSalePriceField () {
+      return this.requestSalePriceField(true);
+    }
+    public APIRequestGetHotels requestSalePriceField (boolean value) {
+      this.requestField("sale_price", value);
       return this;
     }
     public APIRequestGetHotels requestSanitizedImagesField () {
@@ -3929,7 +3937,6 @@ public class ProductFeed extends APINode {
       "quoted_fields_mode",
       "schedule",
       "update_schedule",
-      "quoted_fields",
       "deletion_enabled",
     };
 
@@ -4033,15 +4040,6 @@ public class ProductFeed extends APINode {
 
     public APIRequestUpdate setUpdateSchedule (String updateSchedule) {
       this.setParam("update_schedule", updateSchedule);
-      return this;
-    }
-
-    public APIRequestUpdate setQuotedFields (Boolean quotedFields) {
-      this.setParam("quoted_fields", quotedFields);
-      return this;
-    }
-    public APIRequestUpdate setQuotedFields (String quotedFields) {
-      this.setParam("quoted_fields", quotedFields);
       return this;
     }
 

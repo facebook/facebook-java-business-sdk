@@ -54,27 +54,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdCampaignGroupMetricsMetadata extends APINode {
-  @SerializedName("budget_optimization")
-  private List<String> mBudgetOptimization = null;
-  @SerializedName("duplication_flow_tips")
-  private List<String> mDuplicationFlowTips = null;
+public class AdCreativeInteractiveComponentsSpec extends APINode {
+  @SerializedName("components")
+  private List<Object> mComponents = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
 
-  public AdCampaignGroupMetricsMetadata() {
+  public AdCreativeInteractiveComponentsSpec() {
   }
 
   public String getId() {
     return getFieldId().toString();
   }
-  public static AdCampaignGroupMetricsMetadata loadJSON(String json, APIContext context, String header) {
-    AdCampaignGroupMetricsMetadata adCampaignGroupMetricsMetadata = getGson().fromJson(json, AdCampaignGroupMetricsMetadata.class);
+  public static AdCreativeInteractiveComponentsSpec loadJSON(String json, APIContext context, String header) {
+    AdCreativeInteractiveComponentsSpec adCreativeInteractiveComponentsSpec = getGson().fromJson(json, AdCreativeInteractiveComponentsSpec.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adCampaignGroupMetricsMetadata.toString());
+      JsonElement o2 = parser.parse(adCreativeInteractiveComponentsSpec.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,14 +82,14 @@ public class AdCampaignGroupMetricsMetadata extends APINode {
         context.log("[Object]" + o2);
       };
     }
-    adCampaignGroupMetricsMetadata.context = context;
-    adCampaignGroupMetricsMetadata.rawValue = json;
-    adCampaignGroupMetricsMetadata.header = header;
-    return adCampaignGroupMetricsMetadata;
+    adCreativeInteractiveComponentsSpec.context = context;
+    adCreativeInteractiveComponentsSpec.rawValue = json;
+    adCreativeInteractiveComponentsSpec.header = header;
+    return adCreativeInteractiveComponentsSpec;
   }
 
-  public static APINodeList<AdCampaignGroupMetricsMetadata> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdCampaignGroupMetricsMetadata> adCampaignGroupMetricsMetadatas = new APINodeList<AdCampaignGroupMetricsMetadata>(request, json, header);
+  public static APINodeList<AdCreativeInteractiveComponentsSpec> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdCreativeInteractiveComponentsSpec> adCreativeInteractiveComponentsSpecs = new APINodeList<AdCreativeInteractiveComponentsSpec>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -102,9 +100,9 @@ public class AdCampaignGroupMetricsMetadata extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adCampaignGroupMetricsMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adCreativeInteractiveComponentsSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adCampaignGroupMetricsMetadatas;
+        return adCreativeInteractiveComponentsSpecs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -114,20 +112,20 @@ public class AdCampaignGroupMetricsMetadata extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adCampaignGroupMetricsMetadatas.setCursors(before, after);
+                adCreativeInteractiveComponentsSpecs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adCampaignGroupMetricsMetadatas.setPaging(previous, next);
+            adCreativeInteractiveComponentsSpecs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adCampaignGroupMetricsMetadatas.setAppSecret(context.getAppSecretProof());
+              adCreativeInteractiveComponentsSpecs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adCampaignGroupMetricsMetadatas.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adCreativeInteractiveComponentsSpecs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -138,23 +136,23 @@ public class AdCampaignGroupMetricsMetadata extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adCampaignGroupMetricsMetadatas.add(loadJSON(entry.getValue().toString(), context, header));
+                  adCreativeInteractiveComponentsSpecs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adCampaignGroupMetricsMetadatas.add(loadJSON(obj.toString(), context, header));
+              adCreativeInteractiveComponentsSpecs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adCampaignGroupMetricsMetadatas;
+          return adCreativeInteractiveComponentsSpecs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adCampaignGroupMetricsMetadatas.add(loadJSON(entry.getValue().toString(), context, header));
+              adCreativeInteractiveComponentsSpecs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adCampaignGroupMetricsMetadatas;
+          return adCreativeInteractiveComponentsSpecs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -171,20 +169,20 @@ public class AdCampaignGroupMetricsMetadata extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adCampaignGroupMetricsMetadatas.add(loadJSON(value.toString(), context, header));
+              adCreativeInteractiveComponentsSpecs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adCampaignGroupMetricsMetadatas;
+            return adCreativeInteractiveComponentsSpecs;
           }
 
           // Sixth, check if it's pure JsonObject
-          adCampaignGroupMetricsMetadatas.clear();
-          adCampaignGroupMetricsMetadatas.add(loadJSON(json, context, header));
-          return adCampaignGroupMetricsMetadatas;
+          adCreativeInteractiveComponentsSpecs.clear();
+          adCreativeInteractiveComponentsSpecs.add(loadJSON(json, context, header));
+          return adCreativeInteractiveComponentsSpecs;
         }
       }
     } catch (Exception e) {
@@ -212,21 +210,12 @@ public class AdCampaignGroupMetricsMetadata extends APINode {
   }
 
 
-  public List<String> getFieldBudgetOptimization() {
-    return mBudgetOptimization;
+  public List<Object> getFieldComponents() {
+    return mComponents;
   }
 
-  public AdCampaignGroupMetricsMetadata setFieldBudgetOptimization(List<String> value) {
-    this.mBudgetOptimization = value;
-    return this;
-  }
-
-  public List<String> getFieldDuplicationFlowTips() {
-    return mDuplicationFlowTips;
-  }
-
-  public AdCampaignGroupMetricsMetadata setFieldDuplicationFlowTips(List<String> value) {
-    this.mDuplicationFlowTips = value;
+  public AdCreativeInteractiveComponentsSpec setFieldComponents(List<Object> value) {
+    this.mComponents = value;
     return this;
   }
 
@@ -234,7 +223,7 @@ public class AdCampaignGroupMetricsMetadata extends APINode {
     return mId;
   }
 
-  public AdCampaignGroupMetricsMetadata setFieldId(String value) {
+  public AdCreativeInteractiveComponentsSpec setFieldId(String value) {
     this.mId = value;
     return this;
   }
@@ -255,19 +244,18 @@ public class AdCampaignGroupMetricsMetadata extends APINode {
     return gson;
   }
 
-  public AdCampaignGroupMetricsMetadata copyFrom(AdCampaignGroupMetricsMetadata instance) {
-    this.mBudgetOptimization = instance.mBudgetOptimization;
-    this.mDuplicationFlowTips = instance.mDuplicationFlowTips;
+  public AdCreativeInteractiveComponentsSpec copyFrom(AdCreativeInteractiveComponentsSpec instance) {
+    this.mComponents = instance.mComponents;
     this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdCampaignGroupMetricsMetadata> getParser() {
-    return new APIRequest.ResponseParser<AdCampaignGroupMetricsMetadata>() {
-      public APINodeList<AdCampaignGroupMetricsMetadata> parseResponse(String response, APIContext context, APIRequest<AdCampaignGroupMetricsMetadata> request, String header) throws MalformedResponseException {
-        return AdCampaignGroupMetricsMetadata.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdCreativeInteractiveComponentsSpec> getParser() {
+    return new APIRequest.ResponseParser<AdCreativeInteractiveComponentsSpec>() {
+      public APINodeList<AdCreativeInteractiveComponentsSpec> parseResponse(String response, APIContext context, APIRequest<AdCreativeInteractiveComponentsSpec> request, String header) throws MalformedResponseException {
+        return AdCreativeInteractiveComponentsSpec.parseResponse(response, context, request, header);
       }
     };
   }

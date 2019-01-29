@@ -85,12 +85,12 @@ public class Campaign extends APINode {
   private EnumEffectiveStatus mEffectiveStatus = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("issues_info")
+  private List<AdCampaignIssuesInfo> mIssuesInfo = null;
   @SerializedName("last_budget_toggling_time")
   private String mLastBudgetTogglingTime = null;
   @SerializedName("lifetime_budget")
   private String mLifetimeBudget = null;
-  @SerializedName("metrics_metadata")
-  private AdCampaignGroupMetricsMetadata mMetricsMetadata = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("objective")
@@ -439,16 +439,16 @@ public class Campaign extends APINode {
     return mId;
   }
 
+  public List<AdCampaignIssuesInfo> getFieldIssuesInfo() {
+    return mIssuesInfo;
+  }
+
   public String getFieldLastBudgetTogglingTime() {
     return mLastBudgetTogglingTime;
   }
 
   public String getFieldLifetimeBudget() {
     return mLifetimeBudget;
-  }
-
-  public AdCampaignGroupMetricsMetadata getFieldMetricsMetadata() {
-    return mMetricsMetadata;
   }
 
   public String getFieldName() {
@@ -809,7 +809,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestDeleteAdLabels setExecutionOptions (List<Campaign.EnumExecutionOptions> executionOptions) {
+    public APIRequestDeleteAdLabels setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -933,7 +933,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestCreateAdLabel setExecutionOptions (List<Campaign.EnumExecutionOptions> executionOptions) {
+    public APIRequestCreateAdLabel setExecutionOptions (List<EnumExecutionOptions> executionOptions) {
       this.setParam("execution_options", executionOptions);
       return this;
     }
@@ -2186,9 +2186,9 @@ public class Campaign extends APINode {
       "daily_budget",
       "effective_status",
       "id",
+      "issues_info",
       "last_budget_toggling_time",
       "lifetime_budget",
-      "metrics_metadata",
       "name",
       "objective",
       "pacing_type",
@@ -2434,6 +2434,13 @@ public class Campaign extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGetCopies requestIssuesInfoField () {
+      return this.requestIssuesInfoField(true);
+    }
+    public APIRequestGetCopies requestIssuesInfoField (boolean value) {
+      this.requestField("issues_info", value);
+      return this;
+    }
     public APIRequestGetCopies requestLastBudgetTogglingTimeField () {
       return this.requestLastBudgetTogglingTimeField(true);
     }
@@ -2446,13 +2453,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGetCopies requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGetCopies requestMetricsMetadataField () {
-      return this.requestMetricsMetadataField(true);
-    }
-    public APIRequestGetCopies requestMetricsMetadataField (boolean value) {
-      this.requestField("metrics_metadata", value);
       return this;
     }
     public APIRequestGetCopies requestNameField () {
@@ -3412,9 +3412,9 @@ public class Campaign extends APINode {
       "daily_budget",
       "effective_status",
       "id",
+      "issues_info",
       "last_budget_toggling_time",
       "lifetime_budget",
-      "metrics_metadata",
       "name",
       "objective",
       "pacing_type",
@@ -3483,7 +3483,7 @@ public class Campaign extends APINode {
     }
 
 
-    public APIRequestGet setAmCallTags (Object amCallTags) {
+    public APIRequestGet setAmCallTags (Map<String, String> amCallTags) {
       this.setParam("am_call_tags", amCallTags);
       return this;
     }
@@ -3660,6 +3660,13 @@ public class Campaign extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIssuesInfoField () {
+      return this.requestIssuesInfoField(true);
+    }
+    public APIRequestGet requestIssuesInfoField (boolean value) {
+      this.requestField("issues_info", value);
+      return this;
+    }
     public APIRequestGet requestLastBudgetTogglingTimeField () {
       return this.requestLastBudgetTogglingTimeField(true);
     }
@@ -3672,13 +3679,6 @@ public class Campaign extends APINode {
     }
     public APIRequestGet requestLifetimeBudgetField (boolean value) {
       this.requestField("lifetime_budget", value);
-      return this;
-    }
-    public APIRequestGet requestMetricsMetadataField () {
-      return this.requestMetricsMetadataField(true);
-    }
-    public APIRequestGet requestMetricsMetadataField (boolean value) {
-      this.requestField("metrics_metadata", value);
       return this;
     }
     public APIRequestGet requestNameField () {
@@ -3796,10 +3796,6 @@ public class Campaign extends APINode {
       "upstream_events",
       "adlabels",
       "iterative_split_test_configs",
-      "kpi_custom_conversion_id",
-      "kpi_type",
-      "is_autobid",
-      "is_average_price_pacing",
       "adset_bid_amounts",
       "adset_budgets",
     };
@@ -3982,39 +3978,7 @@ public class Campaign extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setKpiCustomConversionId (String kpiCustomConversionId) {
-      this.setParam("kpi_custom_conversion_id", kpiCustomConversionId);
-      return this;
-    }
-
-    public APIRequestUpdate setKpiType (Object kpiType) {
-      this.setParam("kpi_type", kpiType);
-      return this;
-    }
-    public APIRequestUpdate setKpiType (String kpiType) {
-      this.setParam("kpi_type", kpiType);
-      return this;
-    }
-
-    public APIRequestUpdate setIsAutobid (Boolean isAutobid) {
-      this.setParam("is_autobid", isAutobid);
-      return this;
-    }
-    public APIRequestUpdate setIsAutobid (String isAutobid) {
-      this.setParam("is_autobid", isAutobid);
-      return this;
-    }
-
-    public APIRequestUpdate setIsAveragePricePacing (Boolean isAveragePricePacing) {
-      this.setParam("is_average_price_pacing", isAveragePricePacing);
-      return this;
-    }
-    public APIRequestUpdate setIsAveragePricePacing (String isAveragePricePacing) {
-      this.setParam("is_average_price_pacing", isAveragePricePacing);
-      return this;
-    }
-
-    public APIRequestUpdate setAdsetBidAmounts (Object adsetBidAmounts) {
+    public APIRequestUpdate setAdsetBidAmounts (Map<String, String> adsetBidAmounts) {
       this.setParam("adset_bid_amounts", adsetBidAmounts);
       return this;
     }
@@ -4359,9 +4323,9 @@ public class Campaign extends APINode {
     this.mDailyBudget = instance.mDailyBudget;
     this.mEffectiveStatus = instance.mEffectiveStatus;
     this.mId = instance.mId;
+    this.mIssuesInfo = instance.mIssuesInfo;
     this.mLastBudgetTogglingTime = instance.mLastBudgetTogglingTime;
     this.mLifetimeBudget = instance.mLifetimeBudget;
-    this.mMetricsMetadata = instance.mMetricsMetadata;
     this.mName = instance.mName;
     this.mObjective = instance.mObjective;
     this.mPacingType = instance.mPacingType;

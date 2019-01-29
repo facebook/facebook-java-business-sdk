@@ -826,7 +826,7 @@ public class AdReportSpec extends APINode {
     }
 
 
-    public APIRequestUpdate setTimeRanges (Object timeRanges) {
+    public APIRequestUpdate setTimeRanges (JsonArray timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }

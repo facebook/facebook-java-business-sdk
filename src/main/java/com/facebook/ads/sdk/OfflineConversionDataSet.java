@@ -61,8 +61,6 @@ public class OfflineConversionDataSet extends APINode {
   private String mConfig = null;
   @SerializedName("creation_time")
   private String mCreationTime = null;
-  @SerializedName("data_origin")
-  private String mDataOrigin = null;
   @SerializedName("description")
   private String mDescription = null;
   @SerializedName("duplicate_entries")
@@ -410,10 +408,6 @@ public class OfflineConversionDataSet extends APINode {
 
   public String getFieldCreationTime() {
     return mCreationTime;
-  }
-
-  public String getFieldDataOrigin() {
-    return mDataOrigin;
   }
 
   public String getFieldDescription() {
@@ -3158,19 +3152,11 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestGetUploads setStartTime (Object startTime) {
-      this.setParam("start_time", startTime);
-      return this;
-    }
     public APIRequestGetUploads setStartTime (String startTime) {
       this.setParam("start_time", startTime);
       return this;
     }
 
-    public APIRequestGetUploads setEndTime (Object endTime) {
-      this.setParam("end_time", endTime);
-      return this;
-    }
     public APIRequestGetUploads setEndTime (String endTime) {
       this.setParam("end_time", endTime);
       return this;
@@ -3425,10 +3411,6 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestDeleteUserPermissions setBusiness (Object business) {
-      this.setParam("business", business);
-      return this;
-    }
     public APIRequestDeleteUserPermissions setBusiness (String business) {
       this.setParam("business", business);
       return this;
@@ -3539,10 +3521,6 @@ public class OfflineConversionDataSet extends APINode {
     }
 
 
-    public APIRequestGetUserPermissions setBusiness (Object business) {
-      this.setParam("business", business);
-      return this;
-    }
     public APIRequestGetUserPermissions setBusiness (String business) {
       this.setParam("business", business);
       return this;
@@ -3673,10 +3651,6 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestCreateUserPermission setBusiness (Object business) {
-      this.setParam("business", business);
-      return this;
-    }
     public APIRequestCreateUserPermission setBusiness (String business) {
       this.setParam("business", business);
       return this;
@@ -4186,7 +4160,6 @@ public class OfflineConversionDataSet extends APINode {
       "business",
       "config",
       "creation_time",
-      "data_origin",
       "description",
       "duplicate_entries",
       "enable_auto_assign_to_accounts",
@@ -4315,13 +4288,6 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("creation_time", value);
       return this;
     }
-    public APIRequestGet requestDataOriginField () {
-      return this.requestDataOriginField(true);
-    }
-    public APIRequestGet requestDataOriginField (boolean value) {
-      this.requestField("data_origin", value);
-      return this;
-    }
     public APIRequestGet requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
@@ -4446,7 +4412,6 @@ public class OfflineConversionDataSet extends APINode {
     public static final String[] PARAMS = {
       "name",
       "description",
-      "data_origin",
       "enable_auto_assign_to_accounts",
       "auto_assign_to_new_accounts_only",
     };
@@ -4517,15 +4482,6 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setDataOrigin (OfflineConversionDataSet.EnumDataOrigin dataOrigin) {
-      this.setParam("data_origin", dataOrigin);
-      return this;
-    }
-    public APIRequestUpdate setDataOrigin (String dataOrigin) {
-      this.setParam("data_origin", dataOrigin);
-      return this;
-    }
-
     public APIRequestUpdate setEnableAutoAssignToAccounts (Boolean enableAutoAssignToAccounts) {
       this.setParam("enable_auto_assign_to_accounts", enableAutoAssignToAccounts);
       return this;
@@ -4580,29 +4536,6 @@ public class OfflineConversionDataSet extends APINode {
       return this;
     }
 
-  }
-
-  public static enum EnumDataOrigin {
-      @SerializedName("DIRECTLY_FROM_PEOPLE")
-      VALUE_DIRECTLY_FROM_PEOPLE("DIRECTLY_FROM_PEOPLE"),
-      @SerializedName("PEOPLE_AND_PARTNERS")
-      VALUE_PEOPLE_AND_PARTNERS("PEOPLE_AND_PARTNERS"),
-      @SerializedName("DIRECTLY_FROM_PARTNERS")
-      VALUE_DIRECTLY_FROM_PARTNERS("DIRECTLY_FROM_PARTNERS"),
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
-      NULL(null);
-
-      private String value;
-
-      private EnumDataOrigin(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
   public static enum EnumPermittedRoles {
@@ -4817,7 +4750,6 @@ public class OfflineConversionDataSet extends APINode {
     this.mBusiness = instance.mBusiness;
     this.mConfig = instance.mConfig;
     this.mCreationTime = instance.mCreationTime;
-    this.mDataOrigin = instance.mDataOrigin;
     this.mDescription = instance.mDescription;
     this.mDuplicateEntries = instance.mDuplicateEntries;
     this.mEnableAutoAssignToAccounts = instance.mEnableAutoAssignToAccounts;

@@ -99,6 +99,8 @@ public class AdAccountCreationRequest extends APINode {
   private Boolean mIsUnderAuthorization = null;
   @SerializedName("legal_entity_name_in_local_language")
   private String mLegalEntityNameInLocalLanguage = null;
+  @SerializedName("oe_request_id")
+  private String mOeRequestId = null;
   @SerializedName("official_website_url")
   private String mOfficialWebsiteUrl = null;
   @SerializedName("planning_agency_business")
@@ -446,6 +448,10 @@ public class AdAccountCreationRequest extends APINode {
 
   public String getFieldLegalEntityNameInLocalLanguage() {
     return mLegalEntityNameInLocalLanguage;
+  }
+
+  public String getFieldOeRequestId() {
+    return mOeRequestId;
   }
 
   public String getFieldOfficialWebsiteUrl() {
@@ -1183,10 +1189,6 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnam setPlanningAgencyBusinessId (Object planningAgencyBusinessId) {
-      this.setParam("planning_agency_business_id", planningAgencyBusinessId);
-      return this;
-    }
     public APIRequestCreateVietnam setPlanningAgencyBusinessId (String planningAgencyBusinessId) {
       this.setParam("planning_agency_business_id", planningAgencyBusinessId);
       return this;
@@ -1206,10 +1208,6 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnam setOfficialWebsiteUrl (Object officialWebsiteUrl) {
-      this.setParam("official_website_url", officialWebsiteUrl);
-      return this;
-    }
     public APIRequestCreateVietnam setOfficialWebsiteUrl (String officialWebsiteUrl) {
       this.setParam("official_website_url", officialWebsiteUrl);
       return this;
@@ -1238,7 +1236,7 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnam setPromotablePageUrls (List<Object> promotablePageUrls) {
+    public APIRequestCreateVietnam setPromotablePageUrls (List<String> promotablePageUrls) {
       this.setParam("promotable_page_urls", promotablePageUrls);
       return this;
     }
@@ -1256,7 +1254,7 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnam setPromotableAppIds (List<Object> promotableAppIds) {
+    public APIRequestCreateVietnam setPromotableAppIds (List<String> promotableAppIds) {
       this.setParam("promotable_app_ids", promotableAppIds);
       return this;
     }
@@ -1265,7 +1263,7 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnam setPromotableUrls (List<Object> promotableUrls) {
+    public APIRequestCreateVietnam setPromotableUrls (List<String> promotableUrls) {
       this.setParam("promotable_urls", promotableUrls);
       return this;
     }
@@ -1288,10 +1286,6 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestCreateVietnam setAdvertiserBusinessId (Object advertiserBusinessId) {
-      this.setParam("advertiser_business_id", advertiserBusinessId);
-      return this;
-    }
     public APIRequestCreateVietnam setAdvertiserBusinessId (String advertiserBusinessId) {
       this.setParam("advertiser_business_id", advertiserBusinessId);
       return this;
@@ -1482,6 +1476,7 @@ public class AdAccountCreationRequest extends APINode {
       "is_test",
       "is_under_authorization",
       "legal_entity_name_in_local_language",
+      "oe_request_id",
       "official_website_url",
       "planning_agency_business",
       "planning_agency_business_id",
@@ -1738,6 +1733,13 @@ public class AdAccountCreationRequest extends APINode {
       this.requestField("legal_entity_name_in_local_language", value);
       return this;
     }
+    public APIRequestGet requestOeRequestIdField () {
+      return this.requestOeRequestIdField(true);
+    }
+    public APIRequestGet requestOeRequestIdField (boolean value) {
+      this.requestField("oe_request_id", value);
+      return this;
+    }
     public APIRequestGet requestOfficialWebsiteUrlField () {
       return this.requestOfficialWebsiteUrlField(true);
     }
@@ -1968,10 +1970,6 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setOfficialWebsiteUrl (Object officialWebsiteUrl) {
-      this.setParam("official_website_url", officialWebsiteUrl);
-      return this;
-    }
     public APIRequestUpdate setOfficialWebsiteUrl (String officialWebsiteUrl) {
       this.setParam("official_website_url", officialWebsiteUrl);
       return this;
@@ -2000,7 +1998,7 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setPromotablePageUrls (List<Object> promotablePageUrls) {
+    public APIRequestUpdate setPromotablePageUrls (List<String> promotablePageUrls) {
       this.setParam("promotable_page_urls", promotablePageUrls);
       return this;
     }
@@ -2027,7 +2025,7 @@ public class AdAccountCreationRequest extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setPromotableUrls (List<Object> promotableUrls) {
+    public APIRequestUpdate setPromotableUrls (List<String> promotableUrls) {
       this.setParam("promotable_urls", promotableUrls);
       return this;
     }
@@ -2493,6 +2491,7 @@ public class AdAccountCreationRequest extends APINode {
     this.mIsTest = instance.mIsTest;
     this.mIsUnderAuthorization = instance.mIsUnderAuthorization;
     this.mLegalEntityNameInLocalLanguage = instance.mLegalEntityNameInLocalLanguage;
+    this.mOeRequestId = instance.mOeRequestId;
     this.mOfficialWebsiteUrl = instance.mOfficialWebsiteUrl;
     this.mPlanningAgencyBusiness = instance.mPlanningAgencyBusiness;
     this.mPlanningAgencyBusinessId = instance.mPlanningAgencyBusinessId;

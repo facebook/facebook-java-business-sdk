@@ -769,10 +769,6 @@ public class Referral extends APINode {
       return this;
     }
 
-    public APIRequestUpdate setReferralLinkUri (Object referralLinkUri) {
-      this.setParam("referral_link_uri", referralLinkUri);
-      return this;
-    }
     public APIRequestUpdate setReferralLinkUri (String referralLinkUri) {
       this.setParam("referral_link_uri", referralLinkUri);
       return this;
