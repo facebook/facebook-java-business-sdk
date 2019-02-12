@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ProductCatalogUserPermissions extends APINode {
   @SerializedName("business")
   private Business mBusiness = null;
+  @SerializedName("business_persona")
+  private Object mBusinessPersona = null;
   @SerializedName("created_by")
   private User mCreatedBy = null;
   @SerializedName("created_time")
@@ -243,6 +245,15 @@ public class ProductCatalogUserPermissions extends APINode {
     this.mBusiness = Business.getGson().fromJson(value, type);
     return this;
   }
+  public Object getFieldBusinessPersona() {
+    return mBusinessPersona;
+  }
+
+  public ProductCatalogUserPermissions setFieldBusinessPersona(Object value) {
+    this.mBusinessPersona = value;
+    return this;
+  }
+
   public User getFieldCreatedBy() {
     if (mCreatedBy != null) {
       mCreatedBy.context = getContext();
@@ -366,6 +377,7 @@ public class ProductCatalogUserPermissions extends APINode {
 
   public ProductCatalogUserPermissions copyFrom(ProductCatalogUserPermissions instance) {
     this.mBusiness = instance.mBusiness;
+    this.mBusinessPersona = instance.mBusinessPersona;
     this.mCreatedBy = instance.mCreatedBy;
     this.mCreatedTime = instance.mCreatedTime;
     this.mEmail = instance.mEmail;

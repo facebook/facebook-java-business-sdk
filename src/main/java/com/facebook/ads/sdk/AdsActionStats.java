@@ -101,6 +101,10 @@ public class AdsActionStats extends APINode {
   private String mActionVideoType = null;
   @SerializedName("inline")
   private String mInline = null;
+  @SerializedName("interactive_component_sticker_id")
+  private String mInteractiveComponentStickerId = null;
+  @SerializedName("interactive_component_sticker_response")
+  private String mInteractiveComponentStickerResponse = null;
   @SerializedName("value")
   private String mValue = null;
   @SerializedName("id")
@@ -463,6 +467,24 @@ public class AdsActionStats extends APINode {
     return this;
   }
 
+  public String getFieldInteractiveComponentStickerId() {
+    return mInteractiveComponentStickerId;
+  }
+
+  public AdsActionStats setFieldInteractiveComponentStickerId(String value) {
+    this.mInteractiveComponentStickerId = value;
+    return this;
+  }
+
+  public String getFieldInteractiveComponentStickerResponse() {
+    return mInteractiveComponentStickerResponse;
+  }
+
+  public AdsActionStats setFieldInteractiveComponentStickerResponse(String value) {
+    this.mInteractiveComponentStickerResponse = value;
+    return this;
+  }
+
   public String getFieldValue() {
     return mValue;
   }
@@ -521,6 +543,8 @@ public class AdsActionStats extends APINode {
     this.mActionVideoSound = instance.mActionVideoSound;
     this.mActionVideoType = instance.mActionVideoType;
     this.mInline = instance.mInline;
+    this.mInteractiveComponentStickerId = instance.mInteractiveComponentStickerId;
+    this.mInteractiveComponentStickerResponse = instance.mInteractiveComponentStickerResponse;
     this.mValue = instance.mValue;
     this.mId = instance.mId;
     this.context = instance.context;

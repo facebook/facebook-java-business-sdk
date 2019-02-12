@@ -57,6 +57,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class ProductCatalog extends APINode {
   @SerializedName("business")
   private Business mBusiness = null;
+  @SerializedName("cpas_parent_catalog_settings")
+  private CPASParentCatalogSettings mCpasParentCatalogSettings = null;
   @SerializedName("da_display_settings")
   private ProductCatalogImageSettings mDaDisplaySettings = null;
   @SerializedName("default_image_url")
@@ -484,6 +486,13 @@ public class ProductCatalog extends APINode {
       mBusiness.context = getContext();
     }
     return mBusiness;
+  }
+
+  public CPASParentCatalogSettings getFieldCpasParentCatalogSettings() {
+    if (mCpasParentCatalogSettings != null) {
+      mCpasParentCatalogSettings.context = getContext();
+    }
+    return mCpasParentCatalogSettings;
   }
 
   public ProductCatalogImageSettings getFieldDaDisplaySettings() {
@@ -2366,7 +2375,7 @@ public class ProductCatalog extends APINode {
     }
     public static final String[] PARAMS = {
       "handle",
-      "load_all_errors",
+      "load_ids_of_invalid_requests",
     };
 
     public static final String[] FIELDS = {
@@ -2436,12 +2445,12 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestGetCheckBatchRequestStatus setLoadAllErrors (Boolean loadAllErrors) {
-      this.setParam("load_all_errors", loadAllErrors);
+    public APIRequestGetCheckBatchRequestStatus setLoadIdsOfInvalidRequests (Boolean loadIdsOfInvalidRequests) {
+      this.setParam("load_ids_of_invalid_requests", loadIdsOfInvalidRequests);
       return this;
     }
-    public APIRequestGetCheckBatchRequestStatus setLoadAllErrors (String loadAllErrors) {
-      this.setParam("load_all_errors", loadAllErrors);
+    public APIRequestGetCheckBatchRequestStatus setLoadIdsOfInvalidRequests (String loadIdsOfInvalidRequests) {
+      this.setParam("load_ids_of_invalid_requests", loadIdsOfInvalidRequests);
       return this;
     }
 
@@ -8435,6 +8444,7 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "business_persona",
       "created_by",
       "created_time",
       "email",
@@ -8504,7 +8514,7 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestGetUserPermissions setUser (Object user) {
+    public APIRequestGetUserPermissions setUser (Long user) {
       this.setParam("user", user);
       return this;
     }
@@ -8554,6 +8564,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetUserPermissions requestBusinessField (boolean value) {
       this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetUserPermissions requestBusinessPersonaField () {
+      return this.requestBusinessPersonaField(true);
+    }
+    public APIRequestGetUserPermissions requestBusinessPersonaField (boolean value) {
+      this.requestField("business_persona", value);
       return this;
     }
     public APIRequestGetUserPermissions requestCreatedByField () {
@@ -9253,8 +9270,6 @@ public class ProductCatalog extends APINode {
       "og_phrase",
       "og_icon_id",
       "og_suggestion_mechanism",
-      "manual_privacy",
-      "is_explicit_share",
       "thumb",
       "spherical",
       "original_projection_type",
@@ -9267,6 +9282,8 @@ public class ProductCatalog extends APINode {
       "guide_enabled",
       "guide",
       "audio_story_wave_animation_handle",
+      "manual_privacy",
+      "is_explicit_share",
       "adaptive_type",
       "animated_effect_id",
       "asked_fun_fact_prompt_id",
@@ -9438,24 +9455,6 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setManualPrivacy (Boolean manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-    public APIRequestCreateVideo setManualPrivacy (String manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-
-    public APIRequestCreateVideo setIsExplicitShare (Boolean isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-    public APIRequestCreateVideo setIsExplicitShare (String isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-
     public APIRequestCreateVideo setThumb (File thumb) {
       this.setParam("thumb", thumb);
       return this;
@@ -9557,6 +9556,24 @@ public class ProductCatalog extends APINode {
 
     public APIRequestCreateVideo setAudioStoryWaveAnimationHandle (String audioStoryWaveAnimationHandle) {
       this.setParam("audio_story_wave_animation_handle", audioStoryWaveAnimationHandle);
+      return this;
+    }
+
+    public APIRequestCreateVideo setManualPrivacy (Boolean manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
+      return this;
+    }
+    public APIRequestCreateVideo setManualPrivacy (String manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
+      return this;
+    }
+
+    public APIRequestCreateVideo setIsExplicitShare (Boolean isExplicitShare) {
+      this.setParam("is_explicit_share", isExplicitShare);
+      return this;
+    }
+    public APIRequestCreateVideo setIsExplicitShare (String isExplicitShare) {
+      this.setParam("is_explicit_share", isExplicitShare);
       return this;
     }
 
@@ -10023,6 +10040,7 @@ public class ProductCatalog extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "cpas_parent_catalog_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -10129,6 +10147,13 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGet requestBusinessField (boolean value) {
       this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGet requestCpasParentCatalogSettingsField () {
+      return this.requestCpasParentCatalogSettingsField(true);
+    }
+    public APIRequestGet requestCpasParentCatalogSettingsField (boolean value) {
+      this.requestField("cpas_parent_catalog_settings", value);
       return this;
     }
     public APIRequestGet requestDaDisplaySettingsField () {
@@ -10525,6 +10550,7 @@ public class ProductCatalog extends APINode {
 
   public ProductCatalog copyFrom(ProductCatalog instance) {
     this.mBusiness = instance.mBusiness;
+    this.mCpasParentCatalogSettings = instance.mCpasParentCatalogSettings;
     this.mDaDisplaySettings = instance.mDaDisplaySettings;
     this.mDefaultImageUrl = instance.mDefaultImageUrl;
     this.mFallbackImageUrl = instance.mFallbackImageUrl;

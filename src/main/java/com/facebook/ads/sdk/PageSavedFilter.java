@@ -776,8 +776,6 @@ public class PageSavedFilter extends APINode {
       VALUE_MONETIZED_VIDEOS("MONETIZED_VIDEOS"),
       @SerializedName("AUDIO_RELEASES")
       VALUE_AUDIO_RELEASES("AUDIO_RELEASES"),
-      @SerializedName("NEWS_STORYLINES")
-      VALUE_NEWS_STORYLINES("NEWS_STORYLINES"),
       @SerializedName("REGISTRATIONS")
       VALUE_REGISTRATIONS("REGISTRATIONS"),
       @SerializedName("IA_REGIWALL_SETTINGS")

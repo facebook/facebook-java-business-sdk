@@ -4098,6 +4098,7 @@ public class BusinessProject extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "cpas_parent_catalog_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -4204,6 +4205,13 @@ public class BusinessProject extends APINode {
     }
     public APIRequestGetProductCatalogs requestBusinessField (boolean value) {
       this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestCpasParentCatalogSettingsField () {
+      return this.requestCpasParentCatalogSettingsField(true);
+    }
+    public APIRequestGetProductCatalogs requestCpasParentCatalogSettingsField (boolean value) {
+      this.requestField("cpas_parent_catalog_settings", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestDaDisplaySettingsField () {

@@ -414,6 +414,8 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_CUSTOM("custom"),
       @SerializedName("from_price")
       VALUE_FROM_PRICE("from_price"),
+      @SerializedName("disclaimer")
+      VALUE_DISCLAIMER("disclaimer"),
       NULL(null);
 
       private String value;

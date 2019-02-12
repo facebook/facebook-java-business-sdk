@@ -4940,6 +4940,7 @@ public class AdAccount extends APINode {
       "source",
       "source_url",
       "source_zip",
+      "app_id",
     };
 
     public static final String[] FIELDS = {
@@ -5023,6 +5024,11 @@ public class AdAccount extends APINode {
     }
     public APIRequestCreateAdPlayable setSourceZip (String sourceZip) {
       this.setParam("source_zip", sourceZip);
+      return this;
+    }
+
+    public APIRequestCreateAdPlayable setAppId (String appId) {
+      this.setParam("app_id", appId);
       return this;
     }
 
@@ -11985,8 +11991,6 @@ public class AdAccount extends APINode {
       "og_phrase",
       "og_icon_id",
       "og_suggestion_mechanism",
-      "manual_privacy",
-      "is_explicit_share",
       "thumb",
       "spherical",
       "original_projection_type",
@@ -12175,24 +12179,6 @@ public class AdAccount extends APINode {
 
     public APIRequestCreateAdVideo setOgSuggestionMechanism (String ogSuggestionMechanism) {
       this.setParam("og_suggestion_mechanism", ogSuggestionMechanism);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setManualPrivacy (Boolean manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-    public APIRequestCreateAdVideo setManualPrivacy (String manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-
-    public APIRequestCreateAdVideo setIsExplicitShare (Boolean isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-    public APIRequestCreateAdVideo setIsExplicitShare (String isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
       return this;
     }
 
@@ -32963,6 +32949,10 @@ public class AdAccount extends APINode {
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
       @SerializedName("action_converted_product_id")
       VALUE_ACTION_CONVERTED_PRODUCT_ID("action_converted_product_id"),
+      @SerializedName("interactive_component_sticker_id")
+      VALUE_INTERACTIVE_COMPONENT_STICKER_ID("interactive_component_sticker_id"),
+      @SerializedName("interactive_component_sticker_response")
+      VALUE_INTERACTIVE_COMPONENT_STICKER_RESPONSE("interactive_component_sticker_response"),
       NULL(null);
 
       private String value;

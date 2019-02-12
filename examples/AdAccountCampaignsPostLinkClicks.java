@@ -25,7 +25,7 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountCampaignsPostPostEngagement {
+public class AdAccountCampaignsPostLinkClicks {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
@@ -35,8 +35,8 @@ public class AdAccountCampaignsPostPostEngagement {
     APIContext context = new APIContext(access_token).enableDebug(true);
 
     new AdAccount(id, context).createCampaign()
-      .setName("My First Campaign")
-      .setObjective(Campaign.EnumObjective.VALUE_POST_ENGAGEMENT)
+      .setName("My campaign")
+      .setObjective(Campaign.EnumObjective.VALUE_LINK_CLICKS)
       .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
       .execute();
 

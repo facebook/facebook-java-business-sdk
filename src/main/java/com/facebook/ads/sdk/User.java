@@ -7905,6 +7905,7 @@ public class User extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "cpas_parent_catalog_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -8011,6 +8012,13 @@ public class User extends APINode {
     }
     public APIRequestGetAssignedProductCatalogs requestBusinessField (boolean value) {
       this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetAssignedProductCatalogs requestCpasParentCatalogSettingsField () {
+      return this.requestCpasParentCatalogSettingsField(true);
+    }
+    public APIRequestGetAssignedProductCatalogs requestCpasParentCatalogSettingsField (boolean value) {
+      this.requestField("cpas_parent_catalog_settings", value);
       return this;
     }
     public APIRequestGetAssignedProductCatalogs requestDaDisplaySettingsField () {
@@ -30143,8 +30151,6 @@ public class User extends APINode {
       "og_phrase",
       "og_icon_id",
       "og_suggestion_mechanism",
-      "manual_privacy",
-      "is_explicit_share",
       "thumb",
       "spherical",
       "original_projection_type",
@@ -30157,6 +30163,8 @@ public class User extends APINode {
       "guide_enabled",
       "guide",
       "audio_story_wave_animation_handle",
+      "manual_privacy",
+      "is_explicit_share",
       "adaptive_type",
       "animated_effect_id",
       "asked_fun_fact_prompt_id",
@@ -30332,24 +30340,6 @@ public class User extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setManualPrivacy (Boolean manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-    public APIRequestCreateVideo setManualPrivacy (String manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-
-    public APIRequestCreateVideo setIsExplicitShare (Boolean isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-    public APIRequestCreateVideo setIsExplicitShare (String isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-
     public APIRequestCreateVideo setThumb (File thumb) {
       this.setParam("thumb", thumb);
       return this;
@@ -30451,6 +30441,24 @@ public class User extends APINode {
 
     public APIRequestCreateVideo setAudioStoryWaveAnimationHandle (String audioStoryWaveAnimationHandle) {
       this.setParam("audio_story_wave_animation_handle", audioStoryWaveAnimationHandle);
+      return this;
+    }
+
+    public APIRequestCreateVideo setManualPrivacy (Boolean manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
+      return this;
+    }
+    public APIRequestCreateVideo setManualPrivacy (String manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
+      return this;
+    }
+
+    public APIRequestCreateVideo setIsExplicitShare (Boolean isExplicitShare) {
+      this.setParam("is_explicit_share", isExplicitShare);
+      return this;
+    }
+    public APIRequestCreateVideo setIsExplicitShare (String isExplicitShare) {
+      this.setParam("is_explicit_share", isExplicitShare);
       return this;
     }
 
@@ -31929,6 +31937,8 @@ public class User extends APINode {
       VALUE_CONNECTIONS("CONNECTIONS"),
       @SerializedName("GROWTH_CONTACT_IMPORTER")
       VALUE_GROWTH_CONTACT_IMPORTER("GROWTH_CONTACT_IMPORTER"),
+      @SerializedName("CONTACTSAPP")
+      VALUE_CONTACTSAPP("CONTACTSAPP"),
       NULL(null);
 
       private String value;
@@ -32243,6 +32253,8 @@ public class User extends APINode {
       VALUE_NMOR_INSTANT_EXPERIENCES("NMOR_INSTANT_EXPERIENCES"),
       @SerializedName("NMOR_CHECKOUT_EXPERIENCES")
       VALUE_NMOR_CHECKOUT_EXPERIENCES("NMOR_CHECKOUT_EXPERIENCES"),
+      @SerializedName("NMOR_C2C_CHECKOUT_EXPERIENCES")
+      VALUE_NMOR_C2C_CHECKOUT_EXPERIENCES("NMOR_C2C_CHECKOUT_EXPERIENCES"),
       @SerializedName("NMOR_BUY_ON_FACEBOOK")
       VALUE_NMOR_BUY_ON_FACEBOOK("NMOR_BUY_ON_FACEBOOK"),
       @SerializedName("NMOR_DONATION_P4P")
@@ -32277,6 +32289,8 @@ public class User extends APINode {
       VALUE_NMOR_MOVIE_TICKETING("NMOR_MOVIE_TICKETING"),
       @SerializedName("IG_NMOR_P2B")
       VALUE_IG_NMOR_P2B("IG_NMOR_P2B"),
+      @SerializedName("IG_NMOR_SHOPPING")
+      VALUE_IG_NMOR_SHOPPING("IG_NMOR_SHOPPING"),
       @SerializedName("IG_MOR_DONATIONS")
       VALUE_IG_MOR_DONATIONS("IG_MOR_DONATIONS"),
       @SerializedName("NMOR_INSTAGRAM_P2B")

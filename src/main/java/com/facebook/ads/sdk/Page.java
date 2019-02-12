@@ -30071,6 +30071,7 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "business",
+      "cpas_parent_catalog_settings",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
@@ -30177,6 +30178,13 @@ public class Page extends APINode {
     }
     public APIRequestGetProductCatalogs requestBusinessField (boolean value) {
       this.requestField("business", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestCpasParentCatalogSettingsField () {
+      return this.requestCpasParentCatalogSettingsField(true);
+    }
+    public APIRequestGetProductCatalogs requestCpasParentCatalogSettingsField (boolean value) {
+      this.requestField("cpas_parent_catalog_settings", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestDaDisplaySettingsField () {
@@ -38315,7 +38323,7 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestDeleteThreadSettings setSettingType (Page.EnumSettingType settingType) {
+    public APIRequestDeleteThreadSettings setSettingType (EnumSettingType settingType) {
       this.setParam("setting_type", settingType);
       return this;
     }
@@ -38324,7 +38332,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestDeleteThreadSettings setThreadState (Page.EnumThreadState threadState) {
+    public APIRequestDeleteThreadSettings setThreadState (EnumThreadState threadState) {
       this.setParam("thread_state", threadState);
       return this;
     }
@@ -38576,7 +38584,7 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestCreateThreadSetting setSettingType (Page.EnumSettingType settingType) {
+    public APIRequestCreateThreadSetting setSettingType (EnumSettingType settingType) {
       this.setParam("setting_type", settingType);
       return this;
     }
@@ -38585,7 +38593,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateThreadSetting setThreadState (Page.EnumThreadState threadState) {
+    public APIRequestCreateThreadSetting setThreadState (EnumThreadState threadState) {
       this.setParam("thread_state", threadState);
       return this;
     }
@@ -41379,8 +41387,6 @@ public class Page extends APINode {
       "og_phrase",
       "og_icon_id",
       "og_suggestion_mechanism",
-      "manual_privacy",
-      "is_explicit_share",
       "thumb",
       "spherical",
       "original_projection_type",
@@ -41393,6 +41399,8 @@ public class Page extends APINode {
       "guide_enabled",
       "guide",
       "audio_story_wave_animation_handle",
+      "manual_privacy",
+      "is_explicit_share",
       "adaptive_type",
       "animated_effect_id",
       "asked_fun_fact_prompt_id",
@@ -41586,24 +41594,6 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setManualPrivacy (Boolean manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-    public APIRequestCreateVideo setManualPrivacy (String manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-
-    public APIRequestCreateVideo setIsExplicitShare (Boolean isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-    public APIRequestCreateVideo setIsExplicitShare (String isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-
     public APIRequestCreateVideo setThumb (File thumb) {
       this.setParam("thumb", thumb);
       return this;
@@ -41705,6 +41695,24 @@ public class Page extends APINode {
 
     public APIRequestCreateVideo setAudioStoryWaveAnimationHandle (String audioStoryWaveAnimationHandle) {
       this.setParam("audio_story_wave_animation_handle", audioStoryWaveAnimationHandle);
+      return this;
+    }
+
+    public APIRequestCreateVideo setManualPrivacy (Boolean manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
+      return this;
+    }
+    public APIRequestCreateVideo setManualPrivacy (String manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
+      return this;
+    }
+
+    public APIRequestCreateVideo setIsExplicitShare (Boolean isExplicitShare) {
+      this.setParam("is_explicit_share", isExplicitShare);
+      return this;
+    }
+    public APIRequestCreateVideo setIsExplicitShare (String isExplicitShare) {
+      this.setParam("is_explicit_share", isExplicitShare);
       return this;
     }
 
@@ -45395,50 +45403,6 @@ public class Page extends APINode {
       }
   }
 
-  public static enum EnumSettingType {
-      @SerializedName("ACCOUNT_LINKING")
-      VALUE_ACCOUNT_LINKING("ACCOUNT_LINKING"),
-      @SerializedName("CALL_TO_ACTIONS")
-      VALUE_CALL_TO_ACTIONS("CALL_TO_ACTIONS"),
-      @SerializedName("GREETING")
-      VALUE_GREETING("GREETING"),
-      @SerializedName("DOMAIN_WHITELISTING")
-      VALUE_DOMAIN_WHITELISTING("DOMAIN_WHITELISTING"),
-      @SerializedName("PAYMENT")
-      VALUE_PAYMENT("PAYMENT"),
-      NULL(null);
-
-      private String value;
-
-      private EnumSettingType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumThreadState {
-      @SerializedName("NEW_THREAD")
-      VALUE_NEW_THREAD("NEW_THREAD"),
-      @SerializedName("EXISTING_THREAD")
-      VALUE_EXISTING_THREAD("EXISTING_THREAD"),
-      NULL(null);
-
-      private String value;
-
-      private EnumThreadState(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumMatchContentType {
       @SerializedName("VIDEO_AND_AUDIO")
       VALUE_VIDEO_AND_AUDIO("VIDEO_AND_AUDIO"),
@@ -45536,6 +45500,50 @@ public class Page extends APINode {
       private String value;
 
       private EnumFields(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumSettingType {
+      @SerializedName("ACCOUNT_LINKING")
+      VALUE_ACCOUNT_LINKING("ACCOUNT_LINKING"),
+      @SerializedName("CALL_TO_ACTIONS")
+      VALUE_CALL_TO_ACTIONS("CALL_TO_ACTIONS"),
+      @SerializedName("GREETING")
+      VALUE_GREETING("GREETING"),
+      @SerializedName("DOMAIN_WHITELISTING")
+      VALUE_DOMAIN_WHITELISTING("DOMAIN_WHITELISTING"),
+      @SerializedName("PAYMENT")
+      VALUE_PAYMENT("PAYMENT"),
+      NULL(null);
+
+      private String value;
+
+      private EnumSettingType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumThreadState {
+      @SerializedName("NEW_THREAD")
+      VALUE_NEW_THREAD("NEW_THREAD"),
+      @SerializedName("EXISTING_THREAD")
+      VALUE_EXISTING_THREAD("EXISTING_THREAD"),
+      NULL(null);
+
+      private String value;
+
+      private EnumThreadState(String value) {
         this.value = value;
       }
 

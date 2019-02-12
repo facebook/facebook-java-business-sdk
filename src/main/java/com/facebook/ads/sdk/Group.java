@@ -6587,8 +6587,6 @@ public class Group extends APINode {
       "og_phrase",
       "og_icon_id",
       "og_suggestion_mechanism",
-      "manual_privacy",
-      "is_explicit_share",
       "thumb",
       "spherical",
       "original_projection_type",
@@ -6601,6 +6599,8 @@ public class Group extends APINode {
       "guide_enabled",
       "guide",
       "audio_story_wave_animation_handle",
+      "manual_privacy",
+      "is_explicit_share",
       "adaptive_type",
       "animated_effect_id",
       "asked_fun_fact_prompt_id",
@@ -6773,24 +6773,6 @@ public class Group extends APINode {
       return this;
     }
 
-    public APIRequestCreateVideo setManualPrivacy (Boolean manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-    public APIRequestCreateVideo setManualPrivacy (String manualPrivacy) {
-      this.setParam("manual_privacy", manualPrivacy);
-      return this;
-    }
-
-    public APIRequestCreateVideo setIsExplicitShare (Boolean isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-    public APIRequestCreateVideo setIsExplicitShare (String isExplicitShare) {
-      this.setParam("is_explicit_share", isExplicitShare);
-      return this;
-    }
-
     public APIRequestCreateVideo setThumb (File thumb) {
       this.setParam("thumb", thumb);
       return this;
@@ -6892,6 +6874,24 @@ public class Group extends APINode {
 
     public APIRequestCreateVideo setAudioStoryWaveAnimationHandle (String audioStoryWaveAnimationHandle) {
       this.setParam("audio_story_wave_animation_handle", audioStoryWaveAnimationHandle);
+      return this;
+    }
+
+    public APIRequestCreateVideo setManualPrivacy (Boolean manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
+      return this;
+    }
+    public APIRequestCreateVideo setManualPrivacy (String manualPrivacy) {
+      this.setParam("manual_privacy", manualPrivacy);
+      return this;
+    }
+
+    public APIRequestCreateVideo setIsExplicitShare (Boolean isExplicitShare) {
+      this.setParam("is_explicit_share", isExplicitShare);
+      return this;
+    }
+    public APIRequestCreateVideo setIsExplicitShare (String isExplicitShare) {
+      this.setParam("is_explicit_share", isExplicitShare);
       return this;
     }
 

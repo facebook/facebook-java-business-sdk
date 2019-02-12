@@ -25,19 +25,18 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class AdAccountCampaignsPostPostEngagement {
+public class AdsPixelSharedAccountsPost {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<AD_ACCOUNT_ID>";
+    String id = "<PIXEL_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new AdAccount(id, context).createCampaign()
-      .setName("My First Campaign")
-      .setObjective(Campaign.EnumObjective.VALUE_POST_ENGAGEMENT)
-      .setStatus(Campaign.EnumStatus.VALUE_PAUSED)
+    new AdsPixel(id, context).createShareDAccount()
+      .setAccountId("<adAccountID>")
+      .setBusiness("<businessID>")
       .execute();
 
   }

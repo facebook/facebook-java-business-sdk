@@ -1050,6 +1050,10 @@ public class AdReportSpec extends APINode {
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
       @SerializedName("action_converted_product_id")
       VALUE_ACTION_CONVERTED_PRODUCT_ID("action_converted_product_id"),
+      @SerializedName("interactive_component_sticker_id")
+      VALUE_INTERACTIVE_COMPONENT_STICKER_ID("interactive_component_sticker_id"),
+      @SerializedName("interactive_component_sticker_response")
+      VALUE_INTERACTIVE_COMPONENT_STICKER_RESPONSE("interactive_component_sticker_response"),
       NULL(null);
 
       private String value;
