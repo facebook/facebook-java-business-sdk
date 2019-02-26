@@ -602,6 +602,10 @@ public class Page extends APINode {
     return new APIRequestGetAsset3Ds(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteAssignedUsers deleteAssignedUsers() {
+    return new APIRequestDeleteAssignedUsers(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAssignedUsers getAssignedUsers() {
     return new APIRequestGetAssignedUsers(this.getPrefixedId().toString(), context);
   }
@@ -3827,6 +3831,120 @@ public class Page extends APINode {
       this.requestField("id", value);
       return this;
     }
+  }
+
+  public static class APIRequestDeleteAssignedUsers extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "user",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteAssignedUsers.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteAssignedUsers(String nodeId, APIContext context) {
+      super(context, nodeId, "/assigned_users", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteAssignedUsers setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestDeleteAssignedUsers setUser (String user) {
+      this.setParam("user", user);
+      return this;
+    }
+
+    public APIRequestDeleteAssignedUsers requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteAssignedUsers requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetAssignedUsers extends APIRequest<AssignedUser> {
@@ -13972,6 +14090,10 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreateFeed setFunFactPromptId (Long funFactPromptId) {
+      this.setParam("fun_fact_prompt_id", funFactPromptId);
+      return this;
+    }
     public APIRequestCreateFeed setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -14033,6 +14155,10 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreateFeed setOfferLikePostId (Long offerLikePostId) {
+      this.setParam("offer_like_post_id", offerLikePostId);
+      return this;
+    }
     public APIRequestCreateFeed setOfferLikePostId (String offerLikePostId) {
       this.setParam("offer_like_post_id", offerLikePostId);
       return this;
@@ -38323,7 +38449,7 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestDeleteThreadSettings setSettingType (EnumSettingType settingType) {
+    public APIRequestDeleteThreadSettings setSettingType (Page.EnumSettingType settingType) {
       this.setParam("setting_type", settingType);
       return this;
     }
@@ -38332,7 +38458,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestDeleteThreadSettings setThreadState (EnumThreadState threadState) {
+    public APIRequestDeleteThreadSettings setThreadState (Page.EnumThreadState threadState) {
       this.setParam("thread_state", threadState);
       return this;
     }
@@ -38584,7 +38710,7 @@ public class Page extends APINode {
     }
 
 
-    public APIRequestCreateThreadSetting setSettingType (EnumSettingType settingType) {
+    public APIRequestCreateThreadSetting setSettingType (Page.EnumSettingType settingType) {
       this.setParam("setting_type", settingType);
       return this;
     }
@@ -38593,7 +38719,7 @@ public class Page extends APINode {
       return this;
     }
 
-    public APIRequestCreateThreadSetting setThreadState (EnumThreadState threadState) {
+    public APIRequestCreateThreadSetting setThreadState (Page.EnumThreadState threadState) {
       this.setParam("thread_state", threadState);
       return this;
     }
@@ -41782,6 +41908,10 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setFunFactPromptId (Long funFactPromptId) {
+      this.setParam("fun_fact_prompt_id", funFactPromptId);
+      return this;
+    }
     public APIRequestCreateVideo setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -41843,6 +41973,10 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setOfferLikePostId (Long offerLikePostId) {
+      this.setParam("offer_like_post_id", offerLikePostId);
+      return this;
+    }
     public APIRequestCreateVideo setOfferLikePostId (String offerLikePostId) {
       this.setParam("offer_like_post_id", offerLikePostId);
       return this;
@@ -44758,12 +44892,12 @@ public class Page extends APINode {
   }
 
   public static enum EnumAttire {
-      @SerializedName("Unspecified")
-      VALUE_UNSPECIFIED("Unspecified"),
       @SerializedName("Casual")
       VALUE_CASUAL("Casual"),
       @SerializedName("Dressy")
       VALUE_DRESSY("Dressy"),
+      @SerializedName("Unspecified")
+      VALUE_UNSPECIFIED("Unspecified"),
       NULL(null);
 
       private String value;
@@ -44908,12 +45042,12 @@ public class Page extends APINode {
   }
 
   public static enum EnumSetting {
-      @SerializedName("POST_AS_SELF")
-      VALUE_POST_AS_SELF("POST_AS_SELF"),
       @SerializedName("EMAIL_NOTIF")
       VALUE_EMAIL_NOTIF("EMAIL_NOTIF"),
       @SerializedName("MOBILE_NOTIF")
       VALUE_MOBILE_NOTIF("MOBILE_NOTIF"),
+      @SerializedName("POST_AS_SELF")
+      VALUE_POST_AS_SELF("POST_AS_SELF"),
       NULL(null);
 
       private String value;
@@ -44929,40 +45063,40 @@ public class Page extends APINode {
   }
 
   public static enum EnumAudience {
-      @SerializedName("GROUPER")
-      VALUE_GROUPER("GROUPER"),
-      @SerializedName("NCPP")
-      VALUE_NCPP("NCPP"),
-      @SerializedName("CUSTOM_AUDIENCE")
-      VALUE_CUSTOM_AUDIENCE("CUSTOM_AUDIENCE"),
-      @SerializedName("LOOKALIKE")
-      VALUE_LOOKALIKE("LOOKALIKE"),
-      @SerializedName("FANS")
-      VALUE_FANS("FANS"),
-      @SerializedName("LOCAL")
-      VALUE_LOCAL("LOCAL"),
-      @SerializedName("IG_PROMOTED_POST_AUTO")
-      VALUE_IG_PROMOTED_POST_AUTO("IG_PROMOTED_POST_AUTO"),
-      @SerializedName("SAVED_AUDIENCE")
-      VALUE_SAVED_AUDIENCE("SAVED_AUDIENCE"),
-      @SerializedName("EVENT_ENGAGEMENT")
-      VALUE_EVENT_ENGAGEMENT("EVENT_ENGAGEMENT"),
-      @SerializedName("DISTRICT")
-      VALUE_DISTRICT("DISTRICT"),
-      @SerializedName("SMART_AUDIENCE")
-      VALUE_SMART_AUDIENCE("SMART_AUDIENCE"),
-      @SerializedName("CREATE_NEW")
-      VALUE_CREATE_NEW("CREATE_NEW"),
       @SerializedName("AUTO_LOOKALIKE")
       VALUE_AUTO_LOOKALIKE("AUTO_LOOKALIKE"),
-      @SerializedName("MULT_CUSTOM_AUDIENCES")
-      VALUE_MULT_CUSTOM_AUDIENCES("MULT_CUSTOM_AUDIENCES"),
-      @SerializedName("EVENT_CUSTOM_AUDIENCES")
-      VALUE_EVENT_CUSTOM_AUDIENCES("EVENT_CUSTOM_AUDIENCES"),
       @SerializedName("AUTO_PAGE_LOOKALIKE")
       VALUE_AUTO_PAGE_LOOKALIKE("AUTO_PAGE_LOOKALIKE"),
       @SerializedName("AUTO_TARGETING")
       VALUE_AUTO_TARGETING("AUTO_TARGETING"),
+      @SerializedName("CREATE_NEW")
+      VALUE_CREATE_NEW("CREATE_NEW"),
+      @SerializedName("CUSTOM_AUDIENCE")
+      VALUE_CUSTOM_AUDIENCE("CUSTOM_AUDIENCE"),
+      @SerializedName("DISTRICT")
+      VALUE_DISTRICT("DISTRICT"),
+      @SerializedName("EVENT_CUSTOM_AUDIENCES")
+      VALUE_EVENT_CUSTOM_AUDIENCES("EVENT_CUSTOM_AUDIENCES"),
+      @SerializedName("EVENT_ENGAGEMENT")
+      VALUE_EVENT_ENGAGEMENT("EVENT_ENGAGEMENT"),
+      @SerializedName("FANS")
+      VALUE_FANS("FANS"),
+      @SerializedName("GROUPER")
+      VALUE_GROUPER("GROUPER"),
+      @SerializedName("IG_PROMOTED_POST_AUTO")
+      VALUE_IG_PROMOTED_POST_AUTO("IG_PROMOTED_POST_AUTO"),
+      @SerializedName("LOCAL")
+      VALUE_LOCAL("LOCAL"),
+      @SerializedName("LOOKALIKE")
+      VALUE_LOOKALIKE("LOOKALIKE"),
+      @SerializedName("MULT_CUSTOM_AUDIENCES")
+      VALUE_MULT_CUSTOM_AUDIENCES("MULT_CUSTOM_AUDIENCES"),
+      @SerializedName("NCPP")
+      VALUE_NCPP("NCPP"),
+      @SerializedName("SAVED_AUDIENCE")
+      VALUE_SAVED_AUDIENCE("SAVED_AUDIENCE"),
+      @SerializedName("SMART_AUDIENCE")
+      VALUE_SMART_AUDIENCE("SMART_AUDIENCE"),
       NULL(null);
 
       private String value;
@@ -44978,20 +45112,20 @@ public class Page extends APINode {
   }
 
   public static enum EnumPermittedTasks {
-      @SerializedName("MANAGE")
-      VALUE_MANAGE("MANAGE"),
-      @SerializedName("CREATE_CONTENT")
-      VALUE_CREATE_CONTENT("CREATE_CONTENT"),
-      @SerializedName("MODERATE")
-      VALUE_MODERATE("MODERATE"),
-      @SerializedName("MODERATE_COMMUNITY")
-      VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
-      @SerializedName("MANAGE_JOBS")
-      VALUE_MANAGE_JOBS("MANAGE_JOBS"),
       @SerializedName("ADVERTISE")
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("CREATE_CONTENT")
+      VALUE_CREATE_CONTENT("CREATE_CONTENT"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
+      @SerializedName("MANAGE_JOBS")
+      VALUE_MANAGE_JOBS("MANAGE_JOBS"),
+      @SerializedName("MODERATE")
+      VALUE_MODERATE("MODERATE"),
+      @SerializedName("MODERATE_COMMUNITY")
+      VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
       NULL(null);
 
       private String value;
@@ -45007,20 +45141,20 @@ public class Page extends APINode {
   }
 
   public static enum EnumTasks {
-      @SerializedName("MANAGE")
-      VALUE_MANAGE("MANAGE"),
-      @SerializedName("CREATE_CONTENT")
-      VALUE_CREATE_CONTENT("CREATE_CONTENT"),
-      @SerializedName("MODERATE")
-      VALUE_MODERATE("MODERATE"),
-      @SerializedName("MODERATE_COMMUNITY")
-      VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
-      @SerializedName("MANAGE_JOBS")
-      VALUE_MANAGE_JOBS("MANAGE_JOBS"),
       @SerializedName("ADVERTISE")
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("CREATE_CONTENT")
+      VALUE_CREATE_CONTENT("CREATE_CONTENT"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
+      @SerializedName("MANAGE_JOBS")
+      VALUE_MANAGE_JOBS("MANAGE_JOBS"),
+      @SerializedName("MODERATE")
+      VALUE_MODERATE("MODERATE"),
+      @SerializedName("MODERATE_COMMUNITY")
+      VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
       NULL(null);
 
       private String value;
@@ -45036,12 +45170,12 @@ public class Page extends APINode {
   }
 
   public static enum EnumMessagingType {
+      @SerializedName("MESSAGE_TAG")
+      VALUE_MESSAGE_TAG("MESSAGE_TAG"),
       @SerializedName("RESPONSE")
       VALUE_RESPONSE("RESPONSE"),
       @SerializedName("UPDATE")
       VALUE_UPDATE("UPDATE"),
-      @SerializedName("MESSAGE_TAG")
-      VALUE_MESSAGE_TAG("MESSAGE_TAG"),
       NULL(null);
 
       private String value;
@@ -45057,12 +45191,12 @@ public class Page extends APINode {
   }
 
   public static enum EnumNotificationType {
+      @SerializedName("NO_PUSH")
+      VALUE_NO_PUSH("NO_PUSH"),
       @SerializedName("REGULAR")
       VALUE_REGULAR("REGULAR"),
       @SerializedName("SILENT_PUSH")
       VALUE_SILENT_PUSH("SILENT_PUSH"),
-      @SerializedName("NO_PUSH")
-      VALUE_NO_PUSH("NO_PUSH"),
       NULL(null);
 
       private String value;
@@ -45099,10 +45233,10 @@ public class Page extends APINode {
   public static enum EnumSenderAction {
       @SerializedName("MARK_SEEN")
       VALUE_MARK_SEEN("MARK_SEEN"),
-      @SerializedName("TYPING_ON")
-      VALUE_TYPING_ON("TYPING_ON"),
       @SerializedName("TYPING_OFF")
       VALUE_TYPING_OFF("TYPING_OFF"),
+      @SerializedName("TYPING_ON")
+      VALUE_TYPING_ON("TYPING_ON"),
       NULL(null);
 
       private String value;
@@ -45118,10 +45252,10 @@ public class Page extends APINode {
   }
 
   public static enum EnumType {
-      @SerializedName("STANDARD")
-      VALUE_STANDARD("STANDARD"),
       @SerializedName("REF")
       VALUE_REF("REF"),
+      @SerializedName("STANDARD")
+      VALUE_STANDARD("STANDARD"),
       NULL(null);
 
       private String value;
@@ -45198,12 +45332,12 @@ public class Page extends APINode {
   }
 
   public static enum EnumFiltering {
+      @SerializedName("ema")
+      VALUE_EMA("ema"),
       @SerializedName("groups")
       VALUE_GROUPS("groups"),
       @SerializedName("groups_social")
       VALUE_GROUPS_SOCIAL("groups_social"),
-      @SerializedName("ema")
-      VALUE_EMA("ema"),
       NULL(null);
 
       private String value;
@@ -45219,138 +45353,138 @@ public class Page extends APINode {
   }
 
   public static enum EnumSubscribedFields {
-      @SerializedName("feed")
-      VALUE_FEED("feed"),
-      @SerializedName("mention")
-      VALUE_MENTION("mention"),
-      @SerializedName("name")
-      VALUE_NAME("name"),
-      @SerializedName("picture")
-      VALUE_PICTURE("picture"),
-      @SerializedName("category")
-      VALUE_CATEGORY("category"),
-      @SerializedName("description")
-      VALUE_DESCRIPTION("description"),
-      @SerializedName("conversations")
-      VALUE_CONVERSATIONS("conversations"),
+      @SerializedName("affiliation")
+      VALUE_AFFILIATION("affiliation"),
+      @SerializedName("attire")
+      VALUE_ATTIRE("attire"),
+      @SerializedName("awards")
+      VALUE_AWARDS("awards"),
+      @SerializedName("bio")
+      VALUE_BIO("bio"),
+      @SerializedName("birthday")
+      VALUE_BIRTHDAY("birthday"),
       @SerializedName("branded_camera")
       VALUE_BRANDED_CAMERA("branded_camera"),
-      @SerializedName("feature_access_list")
-      VALUE_FEATURE_ACCESS_LIST("feature_access_list"),
-      @SerializedName("standby")
-      VALUE_STANDBY("standby"),
-      @SerializedName("messages")
-      VALUE_MESSAGES("messages"),
-      @SerializedName("messaging_account_linking")
-      VALUE_MESSAGING_ACCOUNT_LINKING("messaging_account_linking"),
-      @SerializedName("messaging_checkout_updates")
-      VALUE_MESSAGING_CHECKOUT_UPDATES("messaging_checkout_updates"),
-      @SerializedName("message_echoes")
-      VALUE_MESSAGE_ECHOES("message_echoes"),
-      @SerializedName("message_deliveries")
-      VALUE_MESSAGE_DELIVERIES("message_deliveries"),
-      @SerializedName("messaging_game_plays")
-      VALUE_MESSAGING_GAME_PLAYS("messaging_game_plays"),
-      @SerializedName("messaging_optins")
-      VALUE_MESSAGING_OPTINS("messaging_optins"),
-      @SerializedName("messaging_optouts")
-      VALUE_MESSAGING_OPTOUTS("messaging_optouts"),
-      @SerializedName("messaging_payments")
-      VALUE_MESSAGING_PAYMENTS("messaging_payments"),
-      @SerializedName("messaging_postbacks")
-      VALUE_MESSAGING_POSTBACKS("messaging_postbacks"),
-      @SerializedName("messaging_pre_checkouts")
-      VALUE_MESSAGING_PRE_CHECKOUTS("messaging_pre_checkouts"),
-      @SerializedName("message_reads")
-      VALUE_MESSAGE_READS("message_reads"),
-      @SerializedName("messaging_referrals")
-      VALUE_MESSAGING_REFERRALS("messaging_referrals"),
-      @SerializedName("messaging_handovers")
-      VALUE_MESSAGING_HANDOVERS("messaging_handovers"),
-      @SerializedName("messaging_policy_enforcement")
-      VALUE_MESSAGING_POLICY_ENFORCEMENT("messaging_policy_enforcement"),
-      @SerializedName("messaging_page_feedback")
-      VALUE_MESSAGING_PAGE_FEEDBACK("messaging_page_feedback"),
-      @SerializedName("messaging_appointments")
-      VALUE_MESSAGING_APPOINTMENTS("messaging_appointments"),
-      @SerializedName("founded")
-      VALUE_FOUNDED("founded"),
+      @SerializedName("category")
+      VALUE_CATEGORY("category"),
+      @SerializedName("checkins")
+      VALUE_CHECKINS("checkins"),
       @SerializedName("company_overview")
       VALUE_COMPANY_OVERVIEW("company_overview"),
-      @SerializedName("mission")
-      VALUE_MISSION("mission"),
-      @SerializedName("products")
-      VALUE_PRODUCTS("products"),
+      @SerializedName("conversations")
+      VALUE_CONVERSATIONS("conversations"),
+      @SerializedName("culinary_team")
+      VALUE_CULINARY_TEAM("culinary_team"),
+      @SerializedName("current_location")
+      VALUE_CURRENT_LOCATION("current_location"),
+      @SerializedName("description")
+      VALUE_DESCRIPTION("description"),
+      @SerializedName("email")
+      VALUE_EMAIL("email"),
+      @SerializedName("feature_access_list")
+      VALUE_FEATURE_ACCESS_LIST("feature_access_list"),
+      @SerializedName("feed")
+      VALUE_FEED("feed"),
+      @SerializedName("founded")
+      VALUE_FOUNDED("founded"),
       @SerializedName("general_info")
       VALUE_GENERAL_INFO("general_info"),
+      @SerializedName("general_manager")
+      VALUE_GENERAL_MANAGER("general_manager"),
+      @SerializedName("hometown")
+      VALUE_HOMETOWN("hometown"),
+      @SerializedName("hours")
+      VALUE_HOURS("hours"),
       @SerializedName("leadgen")
       VALUE_LEADGEN("leadgen"),
       @SerializedName("leadgen_fat")
       VALUE_LEADGEN_FAT("leadgen_fat"),
+      @SerializedName("live_videos")
+      VALUE_LIVE_VIDEOS("live_videos"),
       @SerializedName("location")
       VALUE_LOCATION("location"),
-      @SerializedName("hours")
-      VALUE_HOURS("hours"),
-      @SerializedName("parking")
-      VALUE_PARKING("parking"),
-      @SerializedName("public_transit")
-      VALUE_PUBLIC_TRANSIT("public_transit"),
+      @SerializedName("members")
+      VALUE_MEMBERS("members"),
+      @SerializedName("mention")
+      VALUE_MENTION("mention"),
+      @SerializedName("merchant_review")
+      VALUE_MERCHANT_REVIEW("merchant_review"),
+      @SerializedName("message_deliveries")
+      VALUE_MESSAGE_DELIVERIES("message_deliveries"),
+      @SerializedName("message_echoes")
+      VALUE_MESSAGE_ECHOES("message_echoes"),
+      @SerializedName("message_reads")
+      VALUE_MESSAGE_READS("message_reads"),
+      @SerializedName("messages")
+      VALUE_MESSAGES("messages"),
+      @SerializedName("messaging_account_linking")
+      VALUE_MESSAGING_ACCOUNT_LINKING("messaging_account_linking"),
+      @SerializedName("messaging_appointments")
+      VALUE_MESSAGING_APPOINTMENTS("messaging_appointments"),
+      @SerializedName("messaging_checkout_updates")
+      VALUE_MESSAGING_CHECKOUT_UPDATES("messaging_checkout_updates"),
+      @SerializedName("messaging_game_plays")
+      VALUE_MESSAGING_GAME_PLAYS("messaging_game_plays"),
+      @SerializedName("messaging_handovers")
+      VALUE_MESSAGING_HANDOVERS("messaging_handovers"),
+      @SerializedName("messaging_optins")
+      VALUE_MESSAGING_OPTINS("messaging_optins"),
+      @SerializedName("messaging_optouts")
+      VALUE_MESSAGING_OPTOUTS("messaging_optouts"),
+      @SerializedName("messaging_page_feedback")
+      VALUE_MESSAGING_PAGE_FEEDBACK("messaging_page_feedback"),
+      @SerializedName("messaging_payments")
+      VALUE_MESSAGING_PAYMENTS("messaging_payments"),
+      @SerializedName("messaging_policy_enforcement")
+      VALUE_MESSAGING_POLICY_ENFORCEMENT("messaging_policy_enforcement"),
+      @SerializedName("messaging_postbacks")
+      VALUE_MESSAGING_POSTBACKS("messaging_postbacks"),
+      @SerializedName("messaging_pre_checkouts")
+      VALUE_MESSAGING_PRE_CHECKOUTS("messaging_pre_checkouts"),
+      @SerializedName("messaging_referrals")
+      VALUE_MESSAGING_REFERRALS("messaging_referrals"),
+      @SerializedName("mission")
+      VALUE_MISSION("mission"),
+      @SerializedName("name")
+      VALUE_NAME("name"),
       @SerializedName("page_about_story")
       VALUE_PAGE_ABOUT_STORY("page_about_story"),
-      @SerializedName("phone")
-      VALUE_PHONE("phone"),
-      @SerializedName("email")
-      VALUE_EMAIL("email"),
-      @SerializedName("website")
-      VALUE_WEBSITE("website"),
-      @SerializedName("ratings")
-      VALUE_RATINGS("ratings"),
-      @SerializedName("attire")
-      VALUE_ATTIRE("attire"),
+      @SerializedName("page_change_proposal")
+      VALUE_PAGE_CHANGE_PROPOSAL("page_change_proposal"),
+      @SerializedName("page_upcoming_change")
+      VALUE_PAGE_UPCOMING_CHANGE("page_upcoming_change"),
+      @SerializedName("parking")
+      VALUE_PARKING("parking"),
       @SerializedName("payment_options")
       VALUE_PAYMENT_OPTIONS("payment_options"),
-      @SerializedName("culinary_team")
-      VALUE_CULINARY_TEAM("culinary_team"),
-      @SerializedName("general_manager")
-      VALUE_GENERAL_MANAGER("general_manager"),
-      @SerializedName("price_range")
-      VALUE_PRICE_RANGE("price_range"),
-      @SerializedName("awards")
-      VALUE_AWARDS("awards"),
-      @SerializedName("hometown")
-      VALUE_HOMETOWN("hometown"),
-      @SerializedName("current_location")
-      VALUE_CURRENT_LOCATION("current_location"),
-      @SerializedName("bio")
-      VALUE_BIO("bio"),
-      @SerializedName("affiliation")
-      VALUE_AFFILIATION("affiliation"),
-      @SerializedName("birthday")
-      VALUE_BIRTHDAY("birthday"),
       @SerializedName("personal_info")
       VALUE_PERSONAL_INFO("personal_info"),
       @SerializedName("personal_interests")
       VALUE_PERSONAL_INTERESTS("personal_interests"),
-      @SerializedName("publisher_subscriptions")
-      VALUE_PUBLISHER_SUBSCRIPTIONS("publisher_subscriptions"),
-      @SerializedName("members")
-      VALUE_MEMBERS("members"),
-      @SerializedName("checkins")
-      VALUE_CHECKINS("checkins"),
-      @SerializedName("page_upcoming_change")
-      VALUE_PAGE_UPCOMING_CHANGE("page_upcoming_change"),
-      @SerializedName("page_change_proposal")
-      VALUE_PAGE_CHANGE_PROPOSAL("page_change_proposal"),
-      @SerializedName("merchant_review")
-      VALUE_MERCHANT_REVIEW("merchant_review"),
+      @SerializedName("phone")
+      VALUE_PHONE("phone"),
+      @SerializedName("picture")
+      VALUE_PICTURE("picture"),
+      @SerializedName("price_range")
+      VALUE_PRICE_RANGE("price_range"),
       @SerializedName("product_review")
       VALUE_PRODUCT_REVIEW("product_review"),
-      @SerializedName("videos")
-      VALUE_VIDEOS("videos"),
-      @SerializedName("live_videos")
-      VALUE_LIVE_VIDEOS("live_videos"),
+      @SerializedName("products")
+      VALUE_PRODUCTS("products"),
+      @SerializedName("public_transit")
+      VALUE_PUBLIC_TRANSIT("public_transit"),
+      @SerializedName("publisher_subscriptions")
+      VALUE_PUBLISHER_SUBSCRIPTIONS("publisher_subscriptions"),
+      @SerializedName("ratings")
+      VALUE_RATINGS("ratings"),
       @SerializedName("registration")
       VALUE_REGISTRATION("registration"),
+      @SerializedName("standby")
+      VALUE_STANDBY("standby"),
+      @SerializedName("videos")
+      VALUE_VIDEOS("videos"),
+      @SerializedName("website")
+      VALUE_WEBSITE("website"),
       NULL(null);
 
       private String value;
@@ -45403,121 +45537,15 @@ public class Page extends APINode {
       }
   }
 
-  public static enum EnumMatchContentType {
-      @SerializedName("VIDEO_AND_AUDIO")
-      VALUE_VIDEO_AND_AUDIO("VIDEO_AND_AUDIO"),
-      @SerializedName("VIDEO_ONLY")
-      VALUE_VIDEO_ONLY("VIDEO_ONLY"),
-      @SerializedName("AUDIO_ONLY")
-      VALUE_AUDIO_ONLY("AUDIO_ONLY"),
-      NULL(null);
-
-      private String value;
-
-      private EnumMatchContentType(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumAction {
-      @SerializedName("MANUAL_REVIEW")
-      VALUE_MANUAL_REVIEW("MANUAL_REVIEW"),
-      @SerializedName("MONITOR")
-      VALUE_MONITOR("MONITOR"),
-      @SerializedName("BLOCK")
-      VALUE_BLOCK("BLOCK"),
-      @SerializedName("CLAIM_AD_EARNINGS")
-      VALUE_CLAIM_AD_EARNINGS("CLAIM_AD_EARNINGS"),
-      @SerializedName("REQUEST_TAKEDOWN")
-      VALUE_REQUEST_TAKEDOWN("REQUEST_TAKEDOWN"),
-      NULL(null);
-
-      private String value;
-
-      private EnumAction(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumActionReason {
-      @SerializedName("UNAUTHORIZED_COMMERCIAL_USE")
-      VALUE_UNAUTHORIZED_COMMERCIAL_USE("UNAUTHORIZED_COMMERCIAL_USE"),
-      @SerializedName("RESTRICTED_CONTENT")
-      VALUE_RESTRICTED_CONTENT("RESTRICTED_CONTENT"),
-      @SerializedName("OBJECTIONABLE_CONTENT")
-      VALUE_OBJECTIONABLE_CONTENT("OBJECTIONABLE_CONTENT"),
-      @SerializedName("ARTIST_OBJECTION")
-      VALUE_ARTIST_OBJECTION("ARTIST_OBJECTION"),
-      @SerializedName("PRERELEASE_CONTENT")
-      VALUE_PRERELEASE_CONTENT("PRERELEASE_CONTENT"),
-      @SerializedName("PRODUCT_PARAMETERS")
-      VALUE_PRODUCT_PARAMETERS("PRODUCT_PARAMETERS"),
-      @SerializedName("PREMIUM_MUSIC_VIDEO")
-      VALUE_PREMIUM_MUSIC_VIDEO("PREMIUM_MUSIC_VIDEO"),
-      NULL(null);
-
-      private String value;
-
-      private EnumActionReason(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumFields {
-      @SerializedName("GET_STARTED")
-      VALUE_GET_STARTED("GET_STARTED"),
-      @SerializedName("PERSISTENT_MENU")
-      VALUE_PERSISTENT_MENU("PERSISTENT_MENU"),
-      @SerializedName("TARGET_AUDIENCE")
-      VALUE_TARGET_AUDIENCE("TARGET_AUDIENCE"),
-      @SerializedName("WHITELISTED_DOMAINS")
-      VALUE_WHITELISTED_DOMAINS("WHITELISTED_DOMAINS"),
-      @SerializedName("GREETING")
-      VALUE_GREETING("GREETING"),
-      @SerializedName("ACCOUNT_LINKING_URL")
-      VALUE_ACCOUNT_LINKING_URL("ACCOUNT_LINKING_URL"),
-      @SerializedName("PAYMENT_SETTINGS")
-      VALUE_PAYMENT_SETTINGS("PAYMENT_SETTINGS"),
-      @SerializedName("HOME_URL")
-      VALUE_HOME_URL("HOME_URL"),
-      NULL(null);
-
-      private String value;
-
-      private EnumFields(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumSettingType {
       @SerializedName("ACCOUNT_LINKING")
       VALUE_ACCOUNT_LINKING("ACCOUNT_LINKING"),
       @SerializedName("CALL_TO_ACTIONS")
       VALUE_CALL_TO_ACTIONS("CALL_TO_ACTIONS"),
-      @SerializedName("GREETING")
-      VALUE_GREETING("GREETING"),
       @SerializedName("DOMAIN_WHITELISTING")
       VALUE_DOMAIN_WHITELISTING("DOMAIN_WHITELISTING"),
+      @SerializedName("GREETING")
+      VALUE_GREETING("GREETING"),
       @SerializedName("PAYMENT")
       VALUE_PAYMENT("PAYMENT"),
       NULL(null);
@@ -45535,15 +45563,121 @@ public class Page extends APINode {
   }
 
   public static enum EnumThreadState {
-      @SerializedName("NEW_THREAD")
-      VALUE_NEW_THREAD("NEW_THREAD"),
       @SerializedName("EXISTING_THREAD")
       VALUE_EXISTING_THREAD("EXISTING_THREAD"),
+      @SerializedName("NEW_THREAD")
+      VALUE_NEW_THREAD("NEW_THREAD"),
       NULL(null);
 
       private String value;
 
       private EnumThreadState(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMatchContentType {
+      @SerializedName("AUDIO_ONLY")
+      VALUE_AUDIO_ONLY("AUDIO_ONLY"),
+      @SerializedName("VIDEO_AND_AUDIO")
+      VALUE_VIDEO_AND_AUDIO("VIDEO_AND_AUDIO"),
+      @SerializedName("VIDEO_ONLY")
+      VALUE_VIDEO_ONLY("VIDEO_ONLY"),
+      NULL(null);
+
+      private String value;
+
+      private EnumMatchContentType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumAction {
+      @SerializedName("BLOCK")
+      VALUE_BLOCK("BLOCK"),
+      @SerializedName("CLAIM_AD_EARNINGS")
+      VALUE_CLAIM_AD_EARNINGS("CLAIM_AD_EARNINGS"),
+      @SerializedName("MANUAL_REVIEW")
+      VALUE_MANUAL_REVIEW("MANUAL_REVIEW"),
+      @SerializedName("MONITOR")
+      VALUE_MONITOR("MONITOR"),
+      @SerializedName("REQUEST_TAKEDOWN")
+      VALUE_REQUEST_TAKEDOWN("REQUEST_TAKEDOWN"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAction(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumActionReason {
+      @SerializedName("ARTIST_OBJECTION")
+      VALUE_ARTIST_OBJECTION("ARTIST_OBJECTION"),
+      @SerializedName("OBJECTIONABLE_CONTENT")
+      VALUE_OBJECTIONABLE_CONTENT("OBJECTIONABLE_CONTENT"),
+      @SerializedName("PREMIUM_MUSIC_VIDEO")
+      VALUE_PREMIUM_MUSIC_VIDEO("PREMIUM_MUSIC_VIDEO"),
+      @SerializedName("PRERELEASE_CONTENT")
+      VALUE_PRERELEASE_CONTENT("PRERELEASE_CONTENT"),
+      @SerializedName("PRODUCT_PARAMETERS")
+      VALUE_PRODUCT_PARAMETERS("PRODUCT_PARAMETERS"),
+      @SerializedName("RESTRICTED_CONTENT")
+      VALUE_RESTRICTED_CONTENT("RESTRICTED_CONTENT"),
+      @SerializedName("UNAUTHORIZED_COMMERCIAL_USE")
+      VALUE_UNAUTHORIZED_COMMERCIAL_USE("UNAUTHORIZED_COMMERCIAL_USE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumActionReason(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumFields {
+      @SerializedName("ACCOUNT_LINKING_URL")
+      VALUE_ACCOUNT_LINKING_URL("ACCOUNT_LINKING_URL"),
+      @SerializedName("GET_STARTED")
+      VALUE_GET_STARTED("GET_STARTED"),
+      @SerializedName("GREETING")
+      VALUE_GREETING("GREETING"),
+      @SerializedName("HOME_URL")
+      VALUE_HOME_URL("HOME_URL"),
+      @SerializedName("PAYMENT_SETTINGS")
+      VALUE_PAYMENT_SETTINGS("PAYMENT_SETTINGS"),
+      @SerializedName("PERSISTENT_MENU")
+      VALUE_PERSISTENT_MENU("PERSISTENT_MENU"),
+      @SerializedName("TARGET_AUDIENCE")
+      VALUE_TARGET_AUDIENCE("TARGET_AUDIENCE"),
+      @SerializedName("WHITELISTED_DOMAINS")
+      VALUE_WHITELISTED_DOMAINS("WHITELISTED_DOMAINS"),
+      NULL(null);
+
+      private String value;
+
+      private EnumFields(String value) {
         this.value = value;
       }
 

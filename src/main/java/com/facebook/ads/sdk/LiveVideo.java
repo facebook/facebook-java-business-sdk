@@ -5186,24 +5186,24 @@ public class LiveVideo extends APINode {
   }
 
   public static enum EnumBroadcastStatus {
-      @SerializedName("UNPUBLISHED")
-      VALUE_UNPUBLISHED("UNPUBLISHED"),
       @SerializedName("LIVE")
       VALUE_LIVE("LIVE"),
       @SerializedName("LIVE_STOPPED")
       VALUE_LIVE_STOPPED("LIVE_STOPPED"),
       @SerializedName("PROCESSING")
       VALUE_PROCESSING("PROCESSING"),
-      @SerializedName("VOD")
-      VALUE_VOD("VOD"),
-      @SerializedName("SCHEDULED_UNPUBLISHED")
-      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
-      @SerializedName("SCHEDULED_LIVE")
-      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
-      @SerializedName("SCHEDULED_EXPIRED")
-      VALUE_SCHEDULED_EXPIRED("SCHEDULED_EXPIRED"),
       @SerializedName("SCHEDULED_CANCELED")
       VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
+      @SerializedName("SCHEDULED_EXPIRED")
+      VALUE_SCHEDULED_EXPIRED("SCHEDULED_EXPIRED"),
+      @SerializedName("SCHEDULED_LIVE")
+      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
+      @SerializedName("SCHEDULED_UNPUBLISHED")
+      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
+      @SerializedName("UNPUBLISHED")
+      VALUE_UNPUBLISHED("UNPUBLISHED"),
+      @SerializedName("VOD")
+      VALUE_VOD("VOD"),
       NULL(null);
 
       private String value;
@@ -5219,10 +5219,10 @@ public class LiveVideo extends APINode {
   }
 
   public static enum EnumProjection {
-      @SerializedName("EQUIRECTANGULAR")
-      VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
       @SerializedName("CUBEMAP")
       VALUE_CUBEMAP("CUBEMAP"),
+      @SerializedName("EQUIRECTANGULAR")
+      VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
       @SerializedName("HALF_EQUIRECTANGULAR")
       VALUE_HALF_EQUIRECTANGULAR("HALF_EQUIRECTANGULAR"),
       NULL(null);
@@ -5240,10 +5240,10 @@ public class LiveVideo extends APINode {
   }
 
   public static enum EnumSource {
-      @SerializedName("target")
-      VALUE_TARGET("target"),
       @SerializedName("owner")
       VALUE_OWNER("owner"),
+      @SerializedName("target")
+      VALUE_TARGET("target"),
       NULL(null);
 
       private String value;
@@ -5276,16 +5276,16 @@ public class LiveVideo extends APINode {
   }
 
   public static enum EnumStatus {
-      @SerializedName("UNPUBLISHED")
-      VALUE_UNPUBLISHED("UNPUBLISHED"),
       @SerializedName("LIVE_NOW")
       VALUE_LIVE_NOW("LIVE_NOW"),
-      @SerializedName("SCHEDULED_UNPUBLISHED")
-      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
-      @SerializedName("SCHEDULED_LIVE")
-      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
       @SerializedName("SCHEDULED_CANCELED")
       VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
+      @SerializedName("SCHEDULED_LIVE")
+      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
+      @SerializedName("SCHEDULED_UNPUBLISHED")
+      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
+      @SerializedName("UNPUBLISHED")
+      VALUE_UNPUBLISHED("UNPUBLISHED"),
       NULL(null);
 
       private String value;
@@ -5301,10 +5301,10 @@ public class LiveVideo extends APINode {
   }
 
   public static enum EnumStereoscopicMode {
-      @SerializedName("MONO")
-      VALUE_MONO("MONO"),
       @SerializedName("LEFT_RIGHT")
       VALUE_LEFT_RIGHT("LEFT_RIGHT"),
+      @SerializedName("MONO")
+      VALUE_MONO("MONO"),
       @SerializedName("TOP_BOTTOM")
       VALUE_TOP_BOTTOM("TOP_BOTTOM"),
       NULL(null);
@@ -5322,10 +5322,10 @@ public class LiveVideo extends APINode {
   }
 
   public static enum EnumStreamType {
-      @SerializedName("REGULAR")
-      VALUE_REGULAR("REGULAR"),
       @SerializedName("AMBIENT")
       VALUE_AMBIENT("AMBIENT"),
+      @SerializedName("REGULAR")
+      VALUE_REGULAR("REGULAR"),
       NULL(null);
 
       private String value;
@@ -5341,16 +5341,16 @@ public class LiveVideo extends APINode {
   }
 
   public static enum EnumLiveCommentModerationSetting {
-      @SerializedName("FOLLOWER")
-      VALUE_FOLLOWER("FOLLOWER"),
-      @SerializedName("SLOW")
-      VALUE_SLOW("SLOW"),
       @SerializedName("DISCUSSION")
       VALUE_DISCUSSION("DISCUSSION"),
-      @SerializedName("RESTRICTED")
-      VALUE_RESTRICTED("RESTRICTED"),
+      @SerializedName("FOLLOWER")
+      VALUE_FOLLOWER("FOLLOWER"),
       @SerializedName("PROTECTED_MODE")
       VALUE_PROTECTED_MODE("PROTECTED_MODE"),
+      @SerializedName("RESTRICTED")
+      VALUE_RESTRICTED("RESTRICTED"),
+      @SerializedName("SLOW")
+      VALUE_SLOW("SLOW"),
       @SerializedName("SUPPORTER")
       VALUE_SUPPORTER("SUPPORTER"),
       NULL(null);

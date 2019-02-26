@@ -4151,12 +4151,12 @@ public class CustomAudience extends APINode {
   }
 
   public static enum EnumCustomerFileSource {
-      @SerializedName("USER_PROVIDED_ONLY")
-      VALUE_USER_PROVIDED_ONLY("USER_PROVIDED_ONLY"),
-      @SerializedName("PARTNER_PROVIDED_ONLY")
-      VALUE_PARTNER_PROVIDED_ONLY("PARTNER_PROVIDED_ONLY"),
       @SerializedName("BOTH_USER_AND_PARTNER_PROVIDED")
       VALUE_BOTH_USER_AND_PARTNER_PROVIDED("BOTH_USER_AND_PARTNER_PROVIDED"),
+      @SerializedName("PARTNER_PROVIDED_ONLY")
+      VALUE_PARTNER_PROVIDED_ONLY("PARTNER_PROVIDED_ONLY"),
+      @SerializedName("USER_PROVIDED_ONLY")
+      VALUE_USER_PROVIDED_ONLY("USER_PROVIDED_ONLY"),
       NULL(null);
 
       private String value;
@@ -4172,32 +4172,32 @@ public class CustomAudience extends APINode {
   }
 
   public static enum EnumSubtype {
-      @SerializedName("CUSTOM")
-      VALUE_CUSTOM("CUSTOM"),
-      @SerializedName("WEBSITE")
-      VALUE_WEBSITE("WEBSITE"),
       @SerializedName("APP")
       VALUE_APP("APP"),
-      @SerializedName("OFFLINE_CONVERSION")
-      VALUE_OFFLINE_CONVERSION("OFFLINE_CONVERSION"),
-      @SerializedName("CLAIM")
-      VALUE_CLAIM("CLAIM"),
-      @SerializedName("PARTNER")
-      VALUE_PARTNER("PARTNER"),
-      @SerializedName("MANAGED")
-      VALUE_MANAGED("MANAGED"),
-      @SerializedName("VIDEO")
-      VALUE_VIDEO("VIDEO"),
-      @SerializedName("LOOKALIKE")
-      VALUE_LOOKALIKE("LOOKALIKE"),
-      @SerializedName("ENGAGEMENT")
-      VALUE_ENGAGEMENT("ENGAGEMENT"),
       @SerializedName("BAG_OF_ACCOUNTS")
       VALUE_BAG_OF_ACCOUNTS("BAG_OF_ACCOUNTS"),
-      @SerializedName("STUDY_RULE_AUDIENCE")
-      VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
+      @SerializedName("CLAIM")
+      VALUE_CLAIM("CLAIM"),
+      @SerializedName("CUSTOM")
+      VALUE_CUSTOM("CUSTOM"),
+      @SerializedName("ENGAGEMENT")
+      VALUE_ENGAGEMENT("ENGAGEMENT"),
       @SerializedName("FOX")
       VALUE_FOX("FOX"),
+      @SerializedName("LOOKALIKE")
+      VALUE_LOOKALIKE("LOOKALIKE"),
+      @SerializedName("MANAGED")
+      VALUE_MANAGED("MANAGED"),
+      @SerializedName("OFFLINE_CONVERSION")
+      VALUE_OFFLINE_CONVERSION("OFFLINE_CONVERSION"),
+      @SerializedName("PARTNER")
+      VALUE_PARTNER("PARTNER"),
+      @SerializedName("STUDY_RULE_AUDIENCE")
+      VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
+      @SerializedName("VIDEO")
+      VALUE_VIDEO("VIDEO"),
+      @SerializedName("WEBSITE")
+      VALUE_WEBSITE("WEBSITE"),
       NULL(null);
 
       private String value;
@@ -4215,12 +4215,12 @@ public class CustomAudience extends APINode {
   public static enum EnumActionType {
       @SerializedName("add")
       VALUE_ADD("add"),
-      @SerializedName("remove")
-      VALUE_REMOVE("remove"),
       @SerializedName("match")
       VALUE_MATCH("match"),
       @SerializedName("optout")
       VALUE_OPTOUT("optout"),
+      @SerializedName("remove")
+      VALUE_REMOVE("remove"),
       NULL(null);
 
       private String value;
@@ -4238,10 +4238,10 @@ public class CustomAudience extends APINode {
   public static enum EnumEncoding {
       @SerializedName("md5")
       VALUE_MD5("md5"),
-      @SerializedName("sha256")
-      VALUE_SHA256("sha256"),
       @SerializedName("plain")
       VALUE_PLAIN("plain"),
+      @SerializedName("sha256")
+      VALUE_SHA256("sha256"),
       NULL(null);
 
       private String value;

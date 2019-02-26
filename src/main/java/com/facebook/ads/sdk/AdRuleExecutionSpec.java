@@ -247,18 +247,18 @@ public class AdRuleExecutionSpec extends APINode {
 
 
   public static enum EnumExecutionType {
-      @SerializedName("PING_ENDPOINT")
-      VALUE_PING_ENDPOINT("PING_ENDPOINT"),
+      @SerializedName("CHANGE_BID")
+      VALUE_CHANGE_BID("CHANGE_BID"),
+      @SerializedName("CHANGE_BUDGET")
+      VALUE_CHANGE_BUDGET("CHANGE_BUDGET"),
       @SerializedName("NOTIFICATION")
       VALUE_NOTIFICATION("NOTIFICATION"),
       @SerializedName("PAUSE")
       VALUE_PAUSE("PAUSE"),
+      @SerializedName("PING_ENDPOINT")
+      VALUE_PING_ENDPOINT("PING_ENDPOINT"),
       @SerializedName("REBALANCE_BUDGET")
       VALUE_REBALANCE_BUDGET("REBALANCE_BUDGET"),
-      @SerializedName("CHANGE_BUDGET")
-      VALUE_CHANGE_BUDGET("CHANGE_BUDGET"),
-      @SerializedName("CHANGE_BID")
-      VALUE_CHANGE_BID("CHANGE_BID"),
       @SerializedName("ROTATE")
       VALUE_ROTATE("ROTATE"),
       @SerializedName("UNPAUSE")

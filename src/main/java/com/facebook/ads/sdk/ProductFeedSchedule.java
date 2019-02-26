@@ -319,20 +319,20 @@ public class ProductFeedSchedule extends APINode {
 
 
   public static enum EnumDayOfWeek {
-      @SerializedName("SUNDAY")
-      VALUE_SUNDAY("SUNDAY"),
+      @SerializedName("FRIDAY")
+      VALUE_FRIDAY("FRIDAY"),
       @SerializedName("MONDAY")
       VALUE_MONDAY("MONDAY"),
+      @SerializedName("SATURDAY")
+      VALUE_SATURDAY("SATURDAY"),
+      @SerializedName("SUNDAY")
+      VALUE_SUNDAY("SUNDAY"),
+      @SerializedName("THURSDAY")
+      VALUE_THURSDAY("THURSDAY"),
       @SerializedName("TUESDAY")
       VALUE_TUESDAY("TUESDAY"),
       @SerializedName("WEDNESDAY")
       VALUE_WEDNESDAY("WEDNESDAY"),
-      @SerializedName("THURSDAY")
-      VALUE_THURSDAY("THURSDAY"),
-      @SerializedName("FRIDAY")
-      VALUE_FRIDAY("FRIDAY"),
-      @SerializedName("SATURDAY")
-      VALUE_SATURDAY("SATURDAY"),
       NULL(null);
 
       private String value;
@@ -348,14 +348,14 @@ public class ProductFeedSchedule extends APINode {
   }
 
   public static enum EnumInterval {
-      @SerializedName("HOURLY")
-      VALUE_HOURLY("HOURLY"),
       @SerializedName("DAILY")
       VALUE_DAILY("DAILY"),
-      @SerializedName("WEEKLY")
-      VALUE_WEEKLY("WEEKLY"),
+      @SerializedName("HOURLY")
+      VALUE_HOURLY("HOURLY"),
       @SerializedName("MONTHLY")
       VALUE_MONTHLY("MONTHLY"),
+      @SerializedName("WEEKLY")
+      VALUE_WEEKLY("WEEKLY"),
       NULL(null);
 
       private String value;

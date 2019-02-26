@@ -268,6 +268,14 @@ public class AdsPixelStatsResult extends APINode {
       VALUE_DEVICE_TYPE("device_type"),
       @SerializedName("event")
       VALUE_EVENT("event"),
+      @SerializedName("event_detection_method")
+      VALUE_EVENT_DETECTION_METHOD("event_detection_method"),
+      @SerializedName("event_source")
+      VALUE_EVENT_SOURCE("event_source"),
+      @SerializedName("event_total_counts")
+      VALUE_EVENT_TOTAL_COUNTS("event_total_counts"),
+      @SerializedName("event_value_count")
+      VALUE_EVENT_VALUE_COUNT("event_value_count"),
       @SerializedName("host")
       VALUE_HOST("host"),
       @SerializedName("people_reached")
@@ -278,18 +286,10 @@ public class AdsPixelStatsResult extends APINode {
       VALUE_PII_LIFT("pii_lift"),
       @SerializedName("pixel_fire")
       VALUE_PIXEL_FIRE("pixel_fire"),
-      @SerializedName("event_detection_method")
-      VALUE_EVENT_DETECTION_METHOD("event_detection_method"),
       @SerializedName("url")
       VALUE_URL("url"),
-      @SerializedName("event_value_count")
-      VALUE_EVENT_VALUE_COUNT("event_value_count"),
       @SerializedName("url_by_rule")
       VALUE_URL_BY_RULE("url_by_rule"),
-      @SerializedName("event_total_counts")
-      VALUE_EVENT_TOTAL_COUNTS("event_total_counts"),
-      @SerializedName("event_source")
-      VALUE_EVENT_SOURCE("event_source"),
       NULL(null);
 
       private String value;

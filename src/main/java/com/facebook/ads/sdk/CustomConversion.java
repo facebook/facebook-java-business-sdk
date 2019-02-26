@@ -2049,36 +2049,36 @@ public class CustomConversion extends APINode {
       VALUE_ADD_TO_WISHLIST("ADD_TO_WISHLIST"),
       @SerializedName("COMPLETE_REGISTRATION")
       VALUE_COMPLETE_REGISTRATION("COMPLETE_REGISTRATION"),
-      @SerializedName("CONTENT_VIEW")
-      VALUE_CONTENT_VIEW("CONTENT_VIEW"),
-      @SerializedName("INITIATED_CHECKOUT")
-      VALUE_INITIATED_CHECKOUT("INITIATED_CHECKOUT"),
-      @SerializedName("LEAD")
-      VALUE_LEAD("LEAD"),
-      @SerializedName("PURCHASE")
-      VALUE_PURCHASE("PURCHASE"),
-      @SerializedName("SEARCH")
-      VALUE_SEARCH("SEARCH"),
       @SerializedName("CONTACT")
       VALUE_CONTACT("CONTACT"),
+      @SerializedName("CONTENT_VIEW")
+      VALUE_CONTENT_VIEW("CONTENT_VIEW"),
       @SerializedName("CUSTOMIZE_PRODUCT")
       VALUE_CUSTOMIZE_PRODUCT("CUSTOMIZE_PRODUCT"),
       @SerializedName("DONATE")
       VALUE_DONATE("DONATE"),
       @SerializedName("FIND_LOCATION")
       VALUE_FIND_LOCATION("FIND_LOCATION"),
+      @SerializedName("INITIATED_CHECKOUT")
+      VALUE_INITIATED_CHECKOUT("INITIATED_CHECKOUT"),
+      @SerializedName("LEAD")
+      VALUE_LEAD("LEAD"),
+      @SerializedName("LISTING_INTERACTION")
+      VALUE_LISTING_INTERACTION("LISTING_INTERACTION"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      @SerializedName("PURCHASE")
+      VALUE_PURCHASE("PURCHASE"),
       @SerializedName("SCHEDULE")
       VALUE_SCHEDULE("SCHEDULE"),
+      @SerializedName("SEARCH")
+      VALUE_SEARCH("SEARCH"),
       @SerializedName("START_TRIAL")
       VALUE_START_TRIAL("START_TRIAL"),
       @SerializedName("SUBMIT_APPLICATION")
       VALUE_SUBMIT_APPLICATION("SUBMIT_APPLICATION"),
       @SerializedName("SUBSCRIBE")
       VALUE_SUBSCRIBE("SUBSCRIBE"),
-      @SerializedName("LISTING_INTERACTION")
-      VALUE_LISTING_INTERACTION("LISTING_INTERACTION"),
-      @SerializedName("OTHER")
-      VALUE_OTHER("OTHER"),
       NULL(null);
 
       private String value;

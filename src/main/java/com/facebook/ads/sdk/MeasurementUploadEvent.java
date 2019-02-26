@@ -55,10 +55,22 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  *
  */
 public class MeasurementUploadEvent extends APINode {
+  @SerializedName("aggregation_level")
+  private String mAggregationLevel = null;
+  @SerializedName("conversion_end_date")
+  private String mConversionEndDate = null;
+  @SerializedName("conversion_start_date")
+  private String mConversionStartDate = null;
+  @SerializedName("event_status")
+  private String mEventStatus = null;
   @SerializedName("group")
   private String mGroup = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("lookback_window")
+  private String mLookbackWindow = null;
+  @SerializedName("match_universe")
+  private String mMatchUniverse = null;
   @SerializedName("partner")
   private Business mPartner = null;
   @SerializedName("upload_end_time")
@@ -283,12 +295,36 @@ public class MeasurementUploadEvent extends APINode {
   }
 
 
+  public String getFieldAggregationLevel() {
+    return mAggregationLevel;
+  }
+
+  public String getFieldConversionEndDate() {
+    return mConversionEndDate;
+  }
+
+  public String getFieldConversionStartDate() {
+    return mConversionStartDate;
+  }
+
+  public String getFieldEventStatus() {
+    return mEventStatus;
+  }
+
   public String getFieldGroup() {
     return mGroup;
   }
 
   public String getFieldId() {
     return mId;
+  }
+
+  public String getFieldLookbackWindow() {
+    return mLookbackWindow;
+  }
+
+  public String getFieldMatchUniverse() {
+    return mMatchUniverse;
   }
 
   public Business getFieldPartner() {
@@ -327,8 +363,14 @@ public class MeasurementUploadEvent extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "aggregation_level",
+      "conversion_end_date",
+      "conversion_start_date",
+      "event_status",
       "group",
       "id",
+      "lookback_window",
+      "match_universe",
       "partner",
       "upload_end_time",
       "upload_start_time",
@@ -425,6 +467,34 @@ public class MeasurementUploadEvent extends APINode {
       return this;
     }
 
+    public APIRequestGet requestAggregationLevelField () {
+      return this.requestAggregationLevelField(true);
+    }
+    public APIRequestGet requestAggregationLevelField (boolean value) {
+      this.requestField("aggregation_level", value);
+      return this;
+    }
+    public APIRequestGet requestConversionEndDateField () {
+      return this.requestConversionEndDateField(true);
+    }
+    public APIRequestGet requestConversionEndDateField (boolean value) {
+      this.requestField("conversion_end_date", value);
+      return this;
+    }
+    public APIRequestGet requestConversionStartDateField () {
+      return this.requestConversionStartDateField(true);
+    }
+    public APIRequestGet requestConversionStartDateField (boolean value) {
+      this.requestField("conversion_start_date", value);
+      return this;
+    }
+    public APIRequestGet requestEventStatusField () {
+      return this.requestEventStatusField(true);
+    }
+    public APIRequestGet requestEventStatusField (boolean value) {
+      this.requestField("event_status", value);
+      return this;
+    }
     public APIRequestGet requestGroupField () {
       return this.requestGroupField(true);
     }
@@ -437,6 +507,20 @@ public class MeasurementUploadEvent extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGet requestLookbackWindowField () {
+      return this.requestLookbackWindowField(true);
+    }
+    public APIRequestGet requestLookbackWindowField (boolean value) {
+      this.requestField("lookback_window", value);
+      return this;
+    }
+    public APIRequestGet requestMatchUniverseField () {
+      return this.requestMatchUniverseField(true);
+    }
+    public APIRequestGet requestMatchUniverseField (boolean value) {
+      this.requestField("match_universe", value);
       return this;
     }
     public APIRequestGet requestPartnerField () {
@@ -476,11 +560,59 @@ public class MeasurementUploadEvent extends APINode {
     }
   }
 
+  public static enum EnumAggregationLevel {
+      @SerializedName("DAILY")
+      VALUE_DAILY("DAILY"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("WEEKLY")
+      VALUE_WEEKLY("WEEKLY"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAggregationLevel(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumEventStatus {
+      @SerializedName("CANCELCOMPLETED")
+      VALUE_CANCELCOMPLETED("CANCELCOMPLETED"),
+      @SerializedName("CANCELED")
+      VALUE_CANCELED("CANCELED"),
+      @SerializedName("COMPLETED")
+      VALUE_COMPLETED("COMPLETED"),
+      @SerializedName("FAILED")
+      VALUE_FAILED("FAILED"),
+      @SerializedName("STARTED")
+      VALUE_STARTED("STARTED"),
+      @SerializedName("UPLOADED")
+      VALUE_UPLOADED("UPLOADED"),
+      NULL(null);
+
+      private String value;
+
+      private EnumEventStatus(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumGroup {
-      @SerializedName("SUNDAY")
-      VALUE_SUNDAY("SUNDAY"),
       @SerializedName("MONDAY")
       VALUE_MONDAY("MONDAY"),
+      @SerializedName("SUNDAY")
+      VALUE_SUNDAY("SUNDAY"),
       NULL(null);
 
       private String value;
@@ -495,11 +627,55 @@ public class MeasurementUploadEvent extends APINode {
       }
   }
 
+  public static enum EnumLookbackWindow {
+      @SerializedName("DAYS30")
+      VALUE_DAYS30("DAYS30"),
+      @SerializedName("DAYS45")
+      VALUE_DAYS45("DAYS45"),
+      @SerializedName("DAYS60")
+      VALUE_DAYS60("DAYS60"),
+      @SerializedName("DAYS90")
+      VALUE_DAYS90("DAYS90"),
+      NULL(null);
+
+      private String value;
+
+      private EnumLookbackWindow(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMatchUniverse {
+      @SerializedName("FULL")
+      VALUE_FULL("FULL"),
+      @SerializedName("PII")
+      VALUE_PII("PII"),
+      @SerializedName("PIXEL")
+      VALUE_PIXEL("PIXEL"),
+      NULL(null);
+
+      private String value;
+
+      private EnumMatchUniverse(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumVersion {
-      @SerializedName("WEEKLY")
-      VALUE_WEEKLY("WEEKLY"),
       @SerializedName("EVALUATION")
       VALUE_EVALUATION("EVALUATION"),
+      @SerializedName("WEEKLY")
+      VALUE_WEEKLY("WEEKLY"),
       NULL(null);
 
       private String value;
@@ -529,8 +705,14 @@ public class MeasurementUploadEvent extends APINode {
   }
 
   public MeasurementUploadEvent copyFrom(MeasurementUploadEvent instance) {
+    this.mAggregationLevel = instance.mAggregationLevel;
+    this.mConversionEndDate = instance.mConversionEndDate;
+    this.mConversionStartDate = instance.mConversionStartDate;
+    this.mEventStatus = instance.mEventStatus;
     this.mGroup = instance.mGroup;
     this.mId = instance.mId;
+    this.mLookbackWindow = instance.mLookbackWindow;
+    this.mMatchUniverse = instance.mMatchUniverse;
     this.mPartner = instance.mPartner;
     this.mUploadEndTime = instance.mUploadEndTime;
     this.mUploadStartTime = instance.mUploadStartTime;

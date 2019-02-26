@@ -283,16 +283,16 @@ public class EntityAtTextRange extends APINode {
 
 
   public static enum EnumType {
-      @SerializedName("user")
-      VALUE_USER("user"),
-      @SerializedName("page")
-      VALUE_PAGE("page"),
+      @SerializedName("application")
+      VALUE_APPLICATION("application"),
       @SerializedName("event")
       VALUE_EVENT("event"),
       @SerializedName("group")
       VALUE_GROUP("group"),
-      @SerializedName("application")
-      VALUE_APPLICATION("application"),
+      @SerializedName("page")
+      VALUE_PAGE("page"),
+      @SerializedName("user")
+      VALUE_USER("user"),
       NULL(null);
 
       private String value;

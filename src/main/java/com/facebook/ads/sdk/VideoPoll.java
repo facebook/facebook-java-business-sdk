@@ -744,12 +744,12 @@ public class VideoPoll extends APINode {
       VALUE_ATTACH_TO_VIDEO("ATTACH_TO_VIDEO"),
       @SerializedName("CLOSE")
       VALUE_CLOSE("CLOSE"),
-      @SerializedName("SHOW_VOTING")
-      VALUE_SHOW_VOTING("SHOW_VOTING"),
-      @SerializedName("SHOW_RESULTS")
-      VALUE_SHOW_RESULTS("SHOW_RESULTS"),
       @SerializedName("DELETE_POLL")
       VALUE_DELETE_POLL("DELETE_POLL"),
+      @SerializedName("SHOW_RESULTS")
+      VALUE_SHOW_RESULTS("SHOW_RESULTS"),
+      @SerializedName("SHOW_VOTING")
+      VALUE_SHOW_VOTING("SHOW_VOTING"),
       NULL(null);
 
       private String value;

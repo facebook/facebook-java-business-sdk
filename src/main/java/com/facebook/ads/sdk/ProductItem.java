@@ -2141,18 +2141,18 @@ public class ProductItem extends APINode {
   }
 
   public static enum EnumAvailability {
-      @SerializedName("in stock")
-      VALUE_IN_STOCK("in stock"),
-      @SerializedName("out of stock")
-      VALUE_OUT_OF_STOCK("out of stock"),
-      @SerializedName("preorder")
-      VALUE_PREORDER("preorder"),
       @SerializedName("available for order")
       VALUE_AVAILABLE_FOR_ORDER("available for order"),
       @SerializedName("discontinued")
       VALUE_DISCONTINUED("discontinued"),
+      @SerializedName("in stock")
+      VALUE_IN_STOCK("in stock"),
+      @SerializedName("out of stock")
+      VALUE_OUT_OF_STOCK("out of stock"),
       @SerializedName("pending")
       VALUE_PENDING("pending"),
+      @SerializedName("preorder")
+      VALUE_PREORDER("preorder"),
       NULL(null);
 
       private String value;
@@ -2168,16 +2168,16 @@ public class ProductItem extends APINode {
   }
 
   public static enum EnumCondition {
+      @SerializedName("cpo")
+      VALUE_CPO("cpo"),
       @SerializedName("new")
       VALUE_NEW("new"),
+      @SerializedName("open_box_new")
+      VALUE_OPEN_BOX_NEW("open_box_new"),
       @SerializedName("refurbished")
       VALUE_REFURBISHED("refurbished"),
       @SerializedName("used")
       VALUE_USED("used"),
-      @SerializedName("cpo")
-      VALUE_CPO("cpo"),
-      @SerializedName("open_box_new")
-      VALUE_OPEN_BOX_NEW("open_box_new"),
       NULL(null);
 
       private String value;
@@ -2214,14 +2214,14 @@ public class ProductItem extends APINode {
   }
 
   public static enum EnumReviewStatus {
-      @SerializedName("pending")
-      VALUE_PENDING("pending"),
-      @SerializedName("rejected")
-      VALUE_REJECTED("rejected"),
       @SerializedName("approved")
       VALUE_APPROVED("approved"),
       @SerializedName("outdated")
       VALUE_OUTDATED("outdated"),
+      @SerializedName("pending")
+      VALUE_PENDING("pending"),
+      @SerializedName("rejected")
+      VALUE_REJECTED("rejected"),
       NULL(null);
 
       private String value;
@@ -2241,10 +2241,10 @@ public class ProductItem extends APINode {
       VALUE_G("g"),
       @SerializedName("kg")
       VALUE_KG("kg"),
-      @SerializedName("oz")
-      VALUE_OZ("oz"),
       @SerializedName("lb")
       VALUE_LB("lb"),
+      @SerializedName("oz")
+      VALUE_OZ("oz"),
       NULL(null);
 
       private String value;
@@ -2260,10 +2260,10 @@ public class ProductItem extends APINode {
   }
 
   public static enum EnumVisibility {
-      @SerializedName("staging")
-      VALUE_STAGING("staging"),
       @SerializedName("published")
       VALUE_PUBLISHED("published"),
+      @SerializedName("staging")
+      VALUE_STAGING("staging"),
       NULL(null);
 
       private String value;

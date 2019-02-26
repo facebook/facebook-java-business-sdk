@@ -997,6 +997,228 @@ public class Vehicle extends APINode {
     }
   }
 
+  public static enum EnumAvailability {
+      @SerializedName("AVAILABLE")
+      VALUE_AVAILABLE("AVAILABLE"),
+      @SerializedName("NOT_AVAILABLE")
+      VALUE_NOT_AVAILABLE("NOT_AVAILABLE"),
+      NULL(null);
+
+      private String value;
+
+      private EnumAvailability(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumBodyStyle {
+      @SerializedName("CONVERTIBLE")
+      VALUE_CONVERTIBLE("CONVERTIBLE"),
+      @SerializedName("COUPE")
+      VALUE_COUPE("COUPE"),
+      @SerializedName("CROSSOVER")
+      VALUE_CROSSOVER("CROSSOVER"),
+      @SerializedName("HATCHBACK")
+      VALUE_HATCHBACK("HATCHBACK"),
+      @SerializedName("MINIVAN")
+      VALUE_MINIVAN("MINIVAN"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      @SerializedName("SEDAN")
+      VALUE_SEDAN("SEDAN"),
+      @SerializedName("SUV")
+      VALUE_SUV("SUV"),
+      @SerializedName("TRUCK")
+      VALUE_TRUCK("TRUCK"),
+      @SerializedName("VAN")
+      VALUE_VAN("VAN"),
+      @SerializedName("WAGON")
+      VALUE_WAGON("WAGON"),
+      NULL(null);
+
+      private String value;
+
+      private EnumBodyStyle(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumCondition {
+      @SerializedName("EXCELLENT")
+      VALUE_EXCELLENT("EXCELLENT"),
+      @SerializedName("FAIR")
+      VALUE_FAIR("FAIR"),
+      @SerializedName("GOOD")
+      VALUE_GOOD("GOOD"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      @SerializedName("POOR")
+      VALUE_POOR("POOR"),
+      NULL(null);
+
+      private String value;
+
+      private EnumCondition(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumDrivetrain {
+      @SerializedName("AWD")
+      VALUE_AWD("AWD"),
+      @SerializedName("FOUR_WD")
+      VALUE_FOUR_WD("FOUR_WD"),
+      @SerializedName("FWD")
+      VALUE_FWD("FWD"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      @SerializedName("RWD")
+      VALUE_RWD("RWD"),
+      @SerializedName("TWO_WD")
+      VALUE_TWO_WD("TWO_WD"),
+      NULL(null);
+
+      private String value;
+
+      private EnumDrivetrain(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumFuelType {
+      @SerializedName("DIESEL")
+      VALUE_DIESEL("DIESEL"),
+      @SerializedName("ELECTRIC")
+      VALUE_ELECTRIC("ELECTRIC"),
+      @SerializedName("FLEX")
+      VALUE_FLEX("FLEX"),
+      @SerializedName("GASOLINE")
+      VALUE_GASOLINE("GASOLINE"),
+      @SerializedName("HYBRID")
+      VALUE_HYBRID("HYBRID"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      @SerializedName("PETROL")
+      VALUE_PETROL("PETROL"),
+      @SerializedName("PLUGIN_HYBRID")
+      VALUE_PLUGIN_HYBRID("PLUGIN_HYBRID"),
+      NULL(null);
+
+      private String value;
+
+      private EnumFuelType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumStateOfVehicle {
+      @SerializedName("CPO")
+      VALUE_CPO("CPO"),
+      @SerializedName("NEW")
+      VALUE_NEW("NEW"),
+      @SerializedName("USED")
+      VALUE_USED("USED"),
+      NULL(null);
+
+      private String value;
+
+      private EnumStateOfVehicle(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumTransmission {
+      @SerializedName("AUTOMATIC")
+      VALUE_AUTOMATIC("AUTOMATIC"),
+      @SerializedName("MANUAL")
+      VALUE_MANUAL("MANUAL"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      NULL(null);
+
+      private String value;
+
+      private EnumTransmission(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumVehicleType {
+      @SerializedName("BOAT")
+      VALUE_BOAT("BOAT"),
+      @SerializedName("CAR_TRUCK")
+      VALUE_CAR_TRUCK("CAR_TRUCK"),
+      @SerializedName("COMMERCIAL")
+      VALUE_COMMERCIAL("COMMERCIAL"),
+      @SerializedName("MOTORCYCLE")
+      VALUE_MOTORCYCLE("MOTORCYCLE"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      @SerializedName("POWERSPORT")
+      VALUE_POWERSPORT("POWERSPORT"),
+      @SerializedName("RV_CAMPER")
+      VALUE_RV_CAMPER("RV_CAMPER"),
+      @SerializedName("TRAILER")
+      VALUE_TRAILER("TRAILER"),
+      NULL(null);
+
+      private String value;
+
+      private EnumVehicleType(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
 
   synchronized /*package*/ static Gson getGson() {
     if (gson != null) {

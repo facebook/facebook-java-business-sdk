@@ -656,14 +656,6 @@ public class User extends APINode {
     return new APIRequestCreateOpenGraphActionFeed(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreatePaymentAccountEmail createPaymentAccountEmail() {
-    return new APIRequestCreatePaymentAccountEmail(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreatePaymentAccountPhone createPaymentAccountPhone() {
-    return new APIRequestCreatePaymentAccountPhone(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestDeletePermissions deletePermissions() {
     return new APIRequestDeletePermissions(this.getPrefixedId().toString(), context);
   }
@@ -12915,6 +12907,10 @@ public class User extends APINode {
       return this;
     }
 
+    public APIRequestCreateFeed setFunFactPromptId (Long funFactPromptId) {
+      this.setParam("fun_fact_prompt_id", funFactPromptId);
+      return this;
+    }
     public APIRequestCreateFeed setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -12976,6 +12972,10 @@ public class User extends APINode {
       return this;
     }
 
+    public APIRequestCreateFeed setOfferLikePostId (Long offerLikePostId) {
+      this.setParam("offer_like_post_id", offerLikePostId);
+      return this;
+    }
     public APIRequestCreateFeed setOfferLikePostId (String offerLikePostId) {
       this.setParam("offer_like_post_id", offerLikePostId);
       return this;
@@ -23629,272 +23629,6 @@ public class User extends APINode {
 
   }
 
-  public static class APIRequestCreatePaymentAccountEmail extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "user_input_email",
-      "default",
-      "payment_type",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreatePaymentAccountEmail.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreatePaymentAccountEmail(String nodeId, APIContext context) {
-      super(context, nodeId, "/payment_account_emails", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePaymentAccountEmail setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentAccountEmail setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePaymentAccountEmail setUserInputEmail (String userInputEmail) {
-      this.setParam("user_input_email", userInputEmail);
-      return this;
-    }
-
-    public APIRequestCreatePaymentAccountEmail setDefault (Boolean _default) {
-      this.setParam("default", _default);
-      return this;
-    }
-    public APIRequestCreatePaymentAccountEmail setDefault (String _default) {
-      this.setParam("default", _default);
-      return this;
-    }
-
-    public APIRequestCreatePaymentAccountEmail setPaymentType (EnumPaymentType paymentType) {
-      this.setParam("payment_type", paymentType);
-      return this;
-    }
-    public APIRequestCreatePaymentAccountEmail setPaymentType (String paymentType) {
-      this.setParam("payment_type", paymentType);
-      return this;
-    }
-
-    public APIRequestCreatePaymentAccountEmail requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePaymentAccountEmail requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentAccountEmail requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePaymentAccountEmail requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentAccountEmail requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentAccountEmail requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreatePaymentAccountPhone extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "raw_input",
-      "country_code",
-      "default",
-      "payment_type",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreatePaymentAccountPhone.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreatePaymentAccountPhone(String nodeId, APIContext context) {
-      super(context, nodeId, "/payment_account_phones", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreatePaymentAccountPhone setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentAccountPhone setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreatePaymentAccountPhone setRawInput (String rawInput) {
-      this.setParam("raw_input", rawInput);
-      return this;
-    }
-
-    public APIRequestCreatePaymentAccountPhone setCountryCode (String countryCode) {
-      this.setParam("country_code", countryCode);
-      return this;
-    }
-
-    public APIRequestCreatePaymentAccountPhone setDefault (Boolean _default) {
-      this.setParam("default", _default);
-      return this;
-    }
-    public APIRequestCreatePaymentAccountPhone setDefault (String _default) {
-      this.setParam("default", _default);
-      return this;
-    }
-
-    public APIRequestCreatePaymentAccountPhone setPaymentType (EnumPaymentType paymentType) {
-      this.setParam("payment_type", paymentType);
-      return this;
-    }
-    public APIRequestCreatePaymentAccountPhone setPaymentType (String paymentType) {
-      this.setParam("payment_type", paymentType);
-      return this;
-    }
-
-    public APIRequestCreatePaymentAccountPhone requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreatePaymentAccountPhone requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentAccountPhone requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreatePaymentAccountPhone requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentAccountPhone requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreatePaymentAccountPhone requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestDeletePermissions extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -30528,6 +30262,10 @@ public class User extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setFunFactPromptId (Long funFactPromptId) {
+      this.setParam("fun_fact_prompt_id", funFactPromptId);
+      return this;
+    }
     public APIRequestCreateVideo setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -30589,6 +30327,10 @@ public class User extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setOfferLikePostId (Long offerLikePostId) {
+      this.setParam("offer_like_post_id", offerLikePostId);
+      return this;
+    }
     public APIRequestCreateVideo setOfferLikePostId (String offerLikePostId) {
       this.setParam("offer_like_post_id", offerLikePostId);
       return this;
@@ -31694,20 +31436,20 @@ public class User extends APINode {
   }
 
   public static enum EnumTasks {
-      @SerializedName("MANAGE")
-      VALUE_MANAGE("MANAGE"),
-      @SerializedName("CREATE_CONTENT")
-      VALUE_CREATE_CONTENT("CREATE_CONTENT"),
-      @SerializedName("MODERATE")
-      VALUE_MODERATE("MODERATE"),
-      @SerializedName("MODERATE_COMMUNITY")
-      VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
-      @SerializedName("MANAGE_JOBS")
-      VALUE_MANAGE_JOBS("MANAGE_JOBS"),
       @SerializedName("ADVERTISE")
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("CREATE_CONTENT")
+      VALUE_CREATE_CONTENT("CREATE_CONTENT"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
+      @SerializedName("MANAGE_JOBS")
+      VALUE_MANAGE_JOBS("MANAGE_JOBS"),
+      @SerializedName("MODERATE")
+      VALUE_MODERATE("MODERATE"),
+      @SerializedName("MODERATE_COMMUNITY")
+      VALUE_MODERATE_COMMUNITY("MODERATE_COMMUNITY"),
       NULL(null);
 
       private String value;
@@ -31723,10 +31465,10 @@ public class User extends APINode {
   }
 
   public static enum EnumLocalNewsMegaphoneDismissStatus {
-      @SerializedName("YES")
-      VALUE_YES("YES"),
       @SerializedName("NO")
       VALUE_NO("NO"),
+      @SerializedName("YES")
+      VALUE_YES("YES"),
       NULL(null);
 
       private String value;
@@ -31742,10 +31484,10 @@ public class User extends APINode {
   }
 
   public static enum EnumLocalNewsSubscriptionStatus {
-      @SerializedName("STATUS_ON")
-      VALUE_STATUS_ON("STATUS_ON"),
       @SerializedName("STATUS_OFF")
       VALUE_STATUS_OFF("STATUS_OFF"),
+      @SerializedName("STATUS_ON")
+      VALUE_STATUS_ON("STATUS_ON"),
       NULL(null);
 
       private String value;
@@ -31780,12 +31522,12 @@ public class User extends APINode {
   }
 
   public static enum EnumFiltering {
+      @SerializedName("ema")
+      VALUE_EMA("ema"),
       @SerializedName("groups")
       VALUE_GROUPS("groups"),
       @SerializedName("groups_social")
       VALUE_GROUPS_SOCIAL("groups_social"),
-      @SerializedName("ema")
-      VALUE_EMA("ema"),
       NULL(null);
 
       private String value;
@@ -31801,10 +31543,10 @@ public class User extends APINode {
   }
 
   public static enum EnumType {
-      @SerializedName("generic")
-      VALUE_GENERIC("generic"),
       @SerializedName("content_update")
       VALUE_CONTENT_UPDATE("content_update"),
+      @SerializedName("generic")
+      VALUE_GENERIC("generic"),
       NULL(null);
 
       private String value;
@@ -31822,98 +31564,98 @@ public class User extends APINode {
   public static enum EnumServiceType {
       @SerializedName("AIM")
       VALUE_AIM("AIM"),
-      @SerializedName("GADU")
-      VALUE_GADU("GADU"),
-      @SerializedName("ICQ")
-      VALUE_ICQ("ICQ"),
-      @SerializedName("GTALK")
-      VALUE_GTALK("GTALK"),
-      @SerializedName("MSN")
-      VALUE_MSN("MSN"),
-      @SerializedName("SKYPE")
-      VALUE_SKYPE("SKYPE"),
-      @SerializedName("YAHOO")
-      VALUE_YAHOO("YAHOO"),
-      @SerializedName("YAHOO_JP")
-      VALUE_YAHOO_JP("YAHOO_JP"),
-      @SerializedName("QQ")
-      VALUE_QQ("QQ"),
-      @SerializedName("NATEON")
-      VALUE_NATEON("NATEON"),
-      @SerializedName("TWITTER")
-      VALUE_TWITTER("TWITTER"),
-      @SerializedName("HYVES")
-      VALUE_HYVES("HYVES"),
-      @SerializedName("ORKUT")
-      VALUE_ORKUT("ORKUT"),
-      @SerializedName("MYSPACE")
-      VALUE_MYSPACE("MYSPACE"),
-      @SerializedName("GROUPWISE")
-      VALUE_GROUPWISE("GROUPWISE"),
-      @SerializedName("CYWORLD")
-      VALUE_CYWORLD("CYWORLD"),
-      @SerializedName("MIXI")
-      VALUE_MIXI("MIXI"),
-      @SerializedName("QIP")
-      VALUE_QIP("QIP"),
-      @SerializedName("REDIFF_BOL")
-      VALUE_REDIFF_BOL("REDIFF_BOL"),
-      @SerializedName("VKONTAKTE")
-      VALUE_VKONTAKTE("VKONTAKTE"),
-      @SerializedName("EBUDDY")
-      VALUE_EBUDDY("EBUDDY"),
-      @SerializedName("MAILRU")
-      VALUE_MAILRU("MAILRU"),
-      @SerializedName("JABBER")
-      VALUE_JABBER("JABBER"),
-      @SerializedName("ICLOUD")
-      VALUE_ICLOUD("ICLOUD"),
+      @SerializedName("ASK_FM")
+      VALUE_ASK_FM("ASK_FM"),
       @SerializedName("BBM")
       VALUE_BBM("BBM"),
       @SerializedName("BBM_PPID")
       VALUE_BBM_PPID("BBM_PPID"),
-      @SerializedName("INSTAGRAM")
-      VALUE_INSTAGRAM("INSTAGRAM"),
-      @SerializedName("LINE")
-      VALUE_LINE("LINE"),
-      @SerializedName("WECHAT")
-      VALUE_WECHAT("WECHAT"),
-      @SerializedName("KAKAOTALK")
-      VALUE_KAKAOTALK("KAKAOTALK"),
-      @SerializedName("OTHERS")
-      VALUE_OTHERS("OTHERS"),
-      @SerializedName("SNAPCHAT")
-      VALUE_SNAPCHAT("SNAPCHAT"),
-      @SerializedName("TUMBLR")
-      VALUE_TUMBLR("TUMBLR"),
-      @SerializedName("SOUND_CLOUD")
-      VALUE_SOUND_CLOUD("SOUND_CLOUD"),
-      @SerializedName("LINKED_IN")
-      VALUE_LINKED_IN("LINKED_IN"),
-      @SerializedName("PINTEREST")
-      VALUE_PINTEREST("PINTEREST"),
-      @SerializedName("YOU_TUBE")
-      VALUE_YOU_TUBE("YOU_TUBE"),
-      @SerializedName("MEDIUM")
-      VALUE_MEDIUM("MEDIUM"),
+      @SerializedName("CYWORLD")
+      VALUE_CYWORLD("CYWORLD"),
+      @SerializedName("EBUDDY")
+      VALUE_EBUDDY("EBUDDY"),
       @SerializedName("FOURSQUARE")
       VALUE_FOURSQUARE("FOURSQUARE"),
-      @SerializedName("SPOTIFY")
-      VALUE_SPOTIFY("SPOTIFY"),
-      @SerializedName("VIMEO")
-      VALUE_VIMEO("VIMEO"),
-      @SerializedName("KIK")
-      VALUE_KIK("KIK"),
-      @SerializedName("ASK_FM")
-      VALUE_ASK_FM("ASK_FM"),
-      @SerializedName("OK")
-      VALUE_OK("OK"),
+      @SerializedName("GADU")
+      VALUE_GADU("GADU"),
       @SerializedName("GITHUB")
       VALUE_GITHUB("GITHUB"),
+      @SerializedName("GROUPWISE")
+      VALUE_GROUPWISE("GROUPWISE"),
+      @SerializedName("GTALK")
+      VALUE_GTALK("GTALK"),
+      @SerializedName("HYVES")
+      VALUE_HYVES("HYVES"),
+      @SerializedName("ICLOUD")
+      VALUE_ICLOUD("ICLOUD"),
+      @SerializedName("ICQ")
+      VALUE_ICQ("ICQ"),
+      @SerializedName("INSTAGRAM")
+      VALUE_INSTAGRAM("INSTAGRAM"),
+      @SerializedName("JABBER")
+      VALUE_JABBER("JABBER"),
+      @SerializedName("KAKAOTALK")
+      VALUE_KAKAOTALK("KAKAOTALK"),
+      @SerializedName("KIK")
+      VALUE_KIK("KIK"),
+      @SerializedName("LINE")
+      VALUE_LINE("LINE"),
+      @SerializedName("LINKED_IN")
+      VALUE_LINKED_IN("LINKED_IN"),
+      @SerializedName("MAILRU")
+      VALUE_MAILRU("MAILRU"),
+      @SerializedName("MEDIUM")
+      VALUE_MEDIUM("MEDIUM"),
+      @SerializedName("MIXI")
+      VALUE_MIXI("MIXI"),
+      @SerializedName("MSN")
+      VALUE_MSN("MSN"),
+      @SerializedName("MYSPACE")
+      VALUE_MYSPACE("MYSPACE"),
+      @SerializedName("NATEON")
+      VALUE_NATEON("NATEON"),
+      @SerializedName("OK")
+      VALUE_OK("OK"),
+      @SerializedName("ORKUT")
+      VALUE_ORKUT("ORKUT"),
+      @SerializedName("OTHERS")
+      VALUE_OTHERS("OTHERS"),
+      @SerializedName("PINTEREST")
+      VALUE_PINTEREST("PINTEREST"),
+      @SerializedName("QIP")
+      VALUE_QIP("QIP"),
+      @SerializedName("QQ")
+      VALUE_QQ("QQ"),
+      @SerializedName("REDIFF_BOL")
+      VALUE_REDIFF_BOL("REDIFF_BOL"),
+      @SerializedName("SKYPE")
+      VALUE_SKYPE("SKYPE"),
+      @SerializedName("SNAPCHAT")
+      VALUE_SNAPCHAT("SNAPCHAT"),
+      @SerializedName("SOUND_CLOUD")
+      VALUE_SOUND_CLOUD("SOUND_CLOUD"),
+      @SerializedName("SPOTIFY")
+      VALUE_SPOTIFY("SPOTIFY"),
+      @SerializedName("TUMBLR")
+      VALUE_TUMBLR("TUMBLR"),
       @SerializedName("TWITCH")
       VALUE_TWITCH("TWITCH"),
+      @SerializedName("TWITTER")
+      VALUE_TWITTER("TWITTER"),
+      @SerializedName("VIMEO")
+      VALUE_VIMEO("VIMEO"),
+      @SerializedName("VKONTAKTE")
+      VALUE_VKONTAKTE("VKONTAKTE"),
+      @SerializedName("WECHAT")
+      VALUE_WECHAT("WECHAT"),
       @SerializedName("WHATSAPP")
       VALUE_WHATSAPP("WHATSAPP"),
+      @SerializedName("YAHOO")
+      VALUE_YAHOO("YAHOO"),
+      @SerializedName("YAHOO_JP")
+      VALUE_YAHOO_JP("YAHOO_JP"),
+      @SerializedName("YOU_TUBE")
+      VALUE_YOU_TUBE("YOU_TUBE"),
       NULL(null);
 
       private String value;
@@ -31929,16 +31671,16 @@ public class User extends APINode {
   }
 
   public static enum EnumContactSurface {
-      @SerializedName("ORIGINAL")
-      VALUE_ORIGINAL("ORIGINAL"),
-      @SerializedName("MESSENGER")
-      VALUE_MESSENGER("MESSENGER"),
       @SerializedName("CONNECTIONS")
       VALUE_CONNECTIONS("CONNECTIONS"),
-      @SerializedName("GROWTH_CONTACT_IMPORTER")
-      VALUE_GROWTH_CONTACT_IMPORTER("GROWTH_CONTACT_IMPORTER"),
       @SerializedName("CONTACTSAPP")
       VALUE_CONTACTSAPP("CONTACTSAPP"),
+      @SerializedName("GROWTH_CONTACT_IMPORTER")
+      VALUE_GROWTH_CONTACT_IMPORTER("GROWTH_CONTACT_IMPORTER"),
+      @SerializedName("MESSENGER")
+      VALUE_MESSENGER("MESSENGER"),
+      @SerializedName("ORIGINAL")
+      VALUE_ORIGINAL("ORIGINAL"),
       NULL(null);
 
       private String value;
@@ -31954,18 +31696,18 @@ public class User extends APINode {
   }
 
   public static enum EnumBackdatedTimeGranularity {
-      @SerializedName("year")
-      VALUE_YEAR("year"),
-      @SerializedName("month")
-      VALUE_MONTH("month"),
       @SerializedName("day")
       VALUE_DAY("day"),
       @SerializedName("hour")
       VALUE_HOUR("hour"),
       @SerializedName("min")
       VALUE_MIN("min"),
+      @SerializedName("month")
+      VALUE_MONTH("month"),
       @SerializedName("none")
       VALUE_NONE("none"),
+      @SerializedName("year")
+      VALUE_YEAR("year"),
       NULL(null);
 
       private String value;
@@ -31981,16 +31723,16 @@ public class User extends APINode {
   }
 
   public static enum EnumUnpublishedContentType {
-      @SerializedName("SCHEDULED")
-      VALUE_SCHEDULED("SCHEDULED"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
       @SerializedName("ADS_POST")
       VALUE_ADS_POST("ADS_POST"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
       @SerializedName("INLINE_CREATED")
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("SCHEDULED")
+      VALUE_SCHEDULED("SCHEDULED"),
       NULL(null);
 
       private String value;
@@ -32006,10 +31748,10 @@ public class User extends APINode {
   }
 
   public static enum EnumPostingToRedspace {
-      @SerializedName("enabled")
-      VALUE_ENABLED("enabled"),
       @SerializedName("disabled")
       VALUE_DISABLED("disabled"),
+      @SerializedName("enabled")
+      VALUE_ENABLED("enabled"),
       NULL(null);
 
       private String value;
@@ -32046,12 +31788,12 @@ public class User extends APINode {
   public static enum EnumCheckinEntryPoint {
       @SerializedName("BRANDING_CHECKIN")
       VALUE_BRANDING_CHECKIN("BRANDING_CHECKIN"),
-      @SerializedName("BRANDING_STATUS")
-      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      @SerializedName("BRANDING_PHOTO")
-      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
       @SerializedName("BRANDING_OTHER")
       VALUE_BRANDING_OTHER("BRANDING_OTHER"),
+      @SerializedName("BRANDING_PHOTO")
+      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
+      @SerializedName("BRANDING_STATUS")
+      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
       NULL(null);
 
       private String value;
@@ -32092,10 +31834,10 @@ public class User extends APINode {
   }
 
   public static enum EnumFormatting {
-      @SerializedName("PLAINTEXT")
-      VALUE_PLAINTEXT("PLAINTEXT"),
       @SerializedName("MARKDOWN")
       VALUE_MARKDOWN("MARKDOWN"),
+      @SerializedName("PLAINTEXT")
+      VALUE_PLAINTEXT("PLAINTEXT"),
       NULL(null);
 
       private String value;
@@ -32130,176 +31872,17 @@ public class User extends APINode {
   }
 
   public static enum EnumAction {
-      @SerializedName("MARK")
-      VALUE_MARK("MARK"),
       @SerializedName("CONSUME")
       VALUE_CONSUME("CONSUME"),
       @SerializedName("DROP")
       VALUE_DROP("DROP"),
+      @SerializedName("MARK")
+      VALUE_MARK("MARK"),
       NULL(null);
 
       private String value;
 
       private EnumAction(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
-  public static enum EnumPaymentType {
-      @SerializedName("PAYMENT_SETTINGS")
-      VALUE_PAYMENT_SETTINGS("PAYMENT_SETTINGS"),
-      @SerializedName("IG_PAYMENT_SETTINGS")
-      VALUE_IG_PAYMENT_SETTINGS("IG_PAYMENT_SETTINGS"),
-      @SerializedName("UNKNOWN")
-      VALUE_UNKNOWN("UNKNOWN"),
-      @SerializedName("MP_PAYMENT_SETTINGS")
-      VALUE_MP_PAYMENT_SETTINGS("MP_PAYMENT_SETTINGS"),
-      @SerializedName("IAP_INSTANT_GAME")
-      VALUE_IAP_INSTANT_GAME("IAP_INSTANT_GAME"),
-      @SerializedName("IAP_FAN_FUNDING")
-      VALUE_IAP_FAN_FUNDING("IAP_FAN_FUNDING"),
-      @SerializedName("IAP_GROUP_SUBSCRIPTION")
-      VALUE_IAP_GROUP_SUBSCRIPTION("IAP_GROUP_SUBSCRIPTION"),
-      @SerializedName("IAP_SOTTO")
-      VALUE_IAP_SOTTO("IAP_SOTTO"),
-      @SerializedName("FB_BROWSER_PAYMENT")
-      VALUE_FB_BROWSER_PAYMENT("FB_BROWSER_PAYMENT"),
-      @SerializedName("MOR_NONE")
-      VALUE_MOR_NONE("MOR_NONE"),
-      @SerializedName("MOR_ADS_CONSENT")
-      VALUE_MOR_ADS_CONSENT("MOR_ADS_CONSENT"),
-      @SerializedName("MOR_ADS_INVOICE")
-      VALUE_MOR_ADS_INVOICE("MOR_ADS_INVOICE"),
-      @SerializedName("MOR_DONATIONS")
-      VALUE_MOR_DONATIONS("MOR_DONATIONS"),
-      @SerializedName("MOR_DONATIONS_MATCHING_CONFIRMATION")
-      VALUE_MOR_DONATIONS_MATCHING_CONFIRMATION("MOR_DONATIONS_MATCHING_CONFIRMATION"),
-      @SerializedName("MOR_DONATIONS_MATCHING_PLEDGE")
-      VALUE_MOR_DONATIONS_MATCHING_PLEDGE("MOR_DONATIONS_MATCHING_PLEDGE"),
-      @SerializedName("MOR_OCULUS_CV1")
-      VALUE_MOR_OCULUS_CV1("MOR_OCULUS_CV1"),
-      @SerializedName("MOR_OCULUS_LAUNCH_V1")
-      VALUE_MOR_OCULUS_LAUNCH_V1("MOR_OCULUS_LAUNCH_V1"),
-      @SerializedName("MOR_OCULUS_LAUNCH_V2")
-      VALUE_MOR_OCULUS_LAUNCH_V2("MOR_OCULUS_LAUNCH_V2"),
-      @SerializedName("MOR_OZONE")
-      VALUE_MOR_OZONE("MOR_OZONE"),
-      @SerializedName("MOR_OPEN_GRAPH_PRODUCT")
-      VALUE_MOR_OPEN_GRAPH_PRODUCT("MOR_OPEN_GRAPH_PRODUCT"),
-      @SerializedName("MOR_MESSENGER_COMMERCE")
-      VALUE_MOR_MESSENGER_COMMERCE("MOR_MESSENGER_COMMERCE"),
-      @SerializedName("MOR_P2P_TRANSFER")
-      VALUE_MOR_P2P_TRANSFER("MOR_P2P_TRANSFER"),
-      @SerializedName("MOR_DUMMY_FIRST_PARTY")
-      VALUE_MOR_DUMMY_FIRST_PARTY("MOR_DUMMY_FIRST_PARTY"),
-      @SerializedName("MOR_DUMMY_THIRD_PARTY")
-      VALUE_MOR_DUMMY_THIRD_PARTY("MOR_DUMMY_THIRD_PARTY"),
-      @SerializedName("MOR_GIFTS")
-      VALUE_MOR_GIFTS("MOR_GIFTS"),
-      @SerializedName("MOR_BILL")
-      VALUE_MOR_BILL("MOR_BILL"),
-      @SerializedName("MOR_AIRMAIL")
-      VALUE_MOR_AIRMAIL("MOR_AIRMAIL"),
-      @SerializedName("MOR_EVENT_TICKETING")
-      VALUE_MOR_EVENT_TICKETING("MOR_EVENT_TICKETING"),
-      @SerializedName("MOR_PAYMENT_LITE")
-      VALUE_MOR_PAYMENT_LITE("MOR_PAYMENT_LITE"),
-      @SerializedName("MOR_MESSENGER_API_FEE")
-      VALUE_MOR_MESSENGER_API_FEE("MOR_MESSENGER_API_FEE"),
-      @SerializedName("MOR_WORKPLACE_USAGE")
-      VALUE_MOR_WORKPLACE_USAGE("MOR_WORKPLACE_USAGE"),
-      @SerializedName("MOR_FACEBOOK_SHOP")
-      VALUE_MOR_FACEBOOK_SHOP("MOR_FACEBOOK_SHOP"),
-      @SerializedName("MOR_FAN_FUNDING")
-      VALUE_MOR_FAN_FUNDING("MOR_FAN_FUNDING"),
-      @SerializedName("MOR_GAME_TIPPING_TOKEN")
-      VALUE_MOR_GAME_TIPPING_TOKEN("MOR_GAME_TIPPING_TOKEN"),
-      @SerializedName("MOR_INSTANT_GAMES")
-      VALUE_MOR_INSTANT_GAMES("MOR_INSTANT_GAMES"),
-      @SerializedName("MOR_BLUEBIRD")
-      VALUE_MOR_BLUEBIRD("MOR_BLUEBIRD"),
-      @SerializedName("MOR_GROUP_SUBSCRIPTION")
-      VALUE_MOR_GROUP_SUBSCRIPTION("MOR_GROUP_SUBSCRIPTION"),
-      @SerializedName("MOR_SOTTO")
-      VALUE_MOR_SOTTO("MOR_SOTTO"),
-      @SerializedName("NMOR_UNKNOWN")
-      VALUE_NMOR_UNKNOWN("NMOR_UNKNOWN"),
-      @SerializedName("NMOR_NONE")
-      VALUE_NMOR_NONE("NMOR_NONE"),
-      @SerializedName("NMOR_PAGES_COMMERCE")
-      VALUE_NMOR_PAGES_COMMERCE("NMOR_PAGES_COMMERCE"),
-      @SerializedName("NMOR_COMPONENT_FLOW")
-      VALUE_NMOR_COMPONENT_FLOW("NMOR_COMPONENT_FLOW"),
-      @SerializedName("NMOR_BUSINESS_PLATFORM_COMMERCE")
-      VALUE_NMOR_BUSINESS_PLATFORM_COMMERCE("NMOR_BUSINESS_PLATFORM_COMMERCE"),
-      @SerializedName("NMOR_SYNCHRONOUS_COMPONENT_FLOW")
-      VALUE_NMOR_SYNCHRONOUS_COMPONENT_FLOW("NMOR_SYNCHRONOUS_COMPONENT_FLOW"),
-      @SerializedName("NMOR_EVENT_TICKETING")
-      VALUE_NMOR_EVENT_TICKETING("NMOR_EVENT_TICKETING"),
-      @SerializedName("NMOR_PLATFORM_SELF_SERVE")
-      VALUE_NMOR_PLATFORM_SELF_SERVE("NMOR_PLATFORM_SELF_SERVE"),
-      @SerializedName("NMOR_MESSENGER_PLATFORM")
-      VALUE_NMOR_MESSENGER_PLATFORM("NMOR_MESSENGER_PLATFORM"),
-      @SerializedName("NMOR_MESSENGER_OMNIM")
-      VALUE_NMOR_MESSENGER_OMNIM("NMOR_MESSENGER_OMNIM"),
-      @SerializedName("NMOR_TIP_JAR")
-      VALUE_NMOR_TIP_JAR("NMOR_TIP_JAR"),
-      @SerializedName("NMOR_INSTANT_EXPERIENCES")
-      VALUE_NMOR_INSTANT_EXPERIENCES("NMOR_INSTANT_EXPERIENCES"),
-      @SerializedName("NMOR_CHECKOUT_EXPERIENCES")
-      VALUE_NMOR_CHECKOUT_EXPERIENCES("NMOR_CHECKOUT_EXPERIENCES"),
-      @SerializedName("NMOR_C2C_CHECKOUT_EXPERIENCES")
-      VALUE_NMOR_C2C_CHECKOUT_EXPERIENCES("NMOR_C2C_CHECKOUT_EXPERIENCES"),
-      @SerializedName("NMOR_BUY_ON_FACEBOOK")
-      VALUE_NMOR_BUY_ON_FACEBOOK("NMOR_BUY_ON_FACEBOOK"),
-      @SerializedName("NMOR_DONATION_P4P")
-      VALUE_NMOR_DONATION_P4P("NMOR_DONATION_P4P"),
-      @SerializedName("NMOR_WHATSAPP_P2P")
-      VALUE_NMOR_WHATSAPP_P2P("NMOR_WHATSAPP_P2P"),
-      @SerializedName("NMOR_P2P")
-      VALUE_NMOR_P2P("NMOR_P2P"),
-      @SerializedName("NMOR_MOBILE_TOP_UP")
-      VALUE_NMOR_MOBILE_TOP_UP("NMOR_MOBILE_TOP_UP"),
-      @SerializedName("NMOR_MFS")
-      VALUE_NMOR_MFS("NMOR_MFS"),
-      @SerializedName("NMOR_SHIPPING_LABEL")
-      VALUE_NMOR_SHIPPING_LABEL("NMOR_SHIPPING_LABEL"),
-      @SerializedName("NMOR_MARKETPLACE_DROPOFF")
-      VALUE_NMOR_MARKETPLACE_DROPOFF("NMOR_MARKETPLACE_DROPOFF"),
-      @SerializedName("NMOR_PAGES_SOLUTION")
-      VALUE_NMOR_PAGES_SOLUTION("NMOR_PAGES_SOLUTION"),
-      @SerializedName("NMOR_BLACKBAUD_RWR_DONATION")
-      VALUE_NMOR_BLACKBAUD_RWR_DONATION("NMOR_BLACKBAUD_RWR_DONATION"),
-      @SerializedName("NMOR_MARKETPLACE_SHIPPING")
-      VALUE_NMOR_MARKETPLACE_SHIPPING("NMOR_MARKETPLACE_SHIPPING"),
-      @SerializedName("NMOR_DUMMY")
-      VALUE_NMOR_DUMMY("NMOR_DUMMY"),
-      @SerializedName("NMOR_PPGF_DONATION")
-      VALUE_NMOR_PPGF_DONATION("NMOR_PPGF_DONATION"),
-      @SerializedName("NMOR_ADVERTISER_SUBSCRIPTION")
-      VALUE_NMOR_ADVERTISER_SUBSCRIPTION("NMOR_ADVERTISER_SUBSCRIPTION"),
-      @SerializedName("NMOR_WHATSAPP_P2M")
-      VALUE_NMOR_WHATSAPP_P2M("NMOR_WHATSAPP_P2M"),
-      @SerializedName("NMOR_MOVIE_TICKETING")
-      VALUE_NMOR_MOVIE_TICKETING("NMOR_MOVIE_TICKETING"),
-      @SerializedName("IG_NMOR_P2B")
-      VALUE_IG_NMOR_P2B("IG_NMOR_P2B"),
-      @SerializedName("IG_NMOR_SHOPPING")
-      VALUE_IG_NMOR_SHOPPING("IG_NMOR_SHOPPING"),
-      @SerializedName("IG_MOR_DONATIONS")
-      VALUE_IG_MOR_DONATIONS("IG_MOR_DONATIONS"),
-      @SerializedName("NMOR_INSTAGRAM_P2B")
-      VALUE_NMOR_INSTAGRAM_P2B("NMOR_INSTAGRAM_P2B"),
-      NULL(null);
-
-      private String value;
-
-      private EnumPaymentType(String value) {
         this.value = value;
       }
 

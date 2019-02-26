@@ -272,20 +272,20 @@ public class ProductDaEventSamplesBatch extends APINode {
   }
 
   public static enum EnumEvent {
-      @SerializedName("ViewContent")
-      VALUE_VIEWCONTENT("ViewContent"),
       @SerializedName("AddToCart")
       VALUE_ADDTOCART("AddToCart"),
-      @SerializedName("Purchase")
-      VALUE_PURCHASE("Purchase"),
-      @SerializedName("InitiateCheckout")
-      VALUE_INITIATECHECKOUT("InitiateCheckout"),
-      @SerializedName("Search")
-      VALUE_SEARCH("Search"),
-      @SerializedName("Lead")
-      VALUE_LEAD("Lead"),
       @SerializedName("AddToWishlist")
       VALUE_ADDTOWISHLIST("AddToWishlist"),
+      @SerializedName("InitiateCheckout")
+      VALUE_INITIATECHECKOUT("InitiateCheckout"),
+      @SerializedName("Lead")
+      VALUE_LEAD("Lead"),
+      @SerializedName("Purchase")
+      VALUE_PURCHASE("Purchase"),
+      @SerializedName("Search")
+      VALUE_SEARCH("Search"),
+      @SerializedName("ViewContent")
+      VALUE_VIEWCONTENT("ViewContent"),
       NULL(null);
 
       private String value;

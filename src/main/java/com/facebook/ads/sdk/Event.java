@@ -3491,6 +3491,10 @@ public class Event extends APINode {
       return this;
     }
 
+    public APIRequestCreateFeed setFunFactPromptId (Long funFactPromptId) {
+      this.setParam("fun_fact_prompt_id", funFactPromptId);
+      return this;
+    }
     public APIRequestCreateFeed setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -3552,6 +3556,10 @@ public class Event extends APINode {
       return this;
     }
 
+    public APIRequestCreateFeed setOfferLikePostId (Long offerLikePostId) {
+      this.setParam("offer_like_post_id", offerLikePostId);
+      return this;
+    }
     public APIRequestCreateFeed setOfferLikePostId (String offerLikePostId) {
       this.setParam("offer_like_post_id", offerLikePostId);
       return this;
@@ -7548,6 +7556,10 @@ public class Event extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setFunFactPromptId (Long funFactPromptId) {
+      this.setParam("fun_fact_prompt_id", funFactPromptId);
+      return this;
+    }
     public APIRequestCreateVideo setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -7609,6 +7621,10 @@ public class Event extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setOfferLikePostId (Long offerLikePostId) {
+      this.setParam("offer_like_post_id", offerLikePostId);
+      return this;
+    }
     public APIRequestCreateVideo setOfferLikePostId (String offerLikePostId) {
       this.setParam("offer_like_post_id", offerLikePostId);
       return this;
@@ -8174,14 +8190,14 @@ public class Event extends APINode {
   }
 
   public static enum EnumType {
+      @SerializedName("community")
+      VALUE_COMMUNITY("community"),
+      @SerializedName("group")
+      VALUE_GROUP("group"),
       @SerializedName("private")
       VALUE_PRIVATE("private"),
       @SerializedName("public")
       VALUE_PUBLIC("public"),
-      @SerializedName("group")
-      VALUE_GROUP("group"),
-      @SerializedName("community")
-      VALUE_COMMUNITY("community"),
       NULL(null);
 
       private String value;
@@ -8197,10 +8213,10 @@ public class Event extends APINode {
   }
 
   public static enum EnumProjection {
-      @SerializedName("EQUIRECTANGULAR")
-      VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
       @SerializedName("CUBEMAP")
       VALUE_CUBEMAP("CUBEMAP"),
+      @SerializedName("EQUIRECTANGULAR")
+      VALUE_EQUIRECTANGULAR("EQUIRECTANGULAR"),
       @SerializedName("HALF_EQUIRECTANGULAR")
       VALUE_HALF_EQUIRECTANGULAR("HALF_EQUIRECTANGULAR"),
       NULL(null);
@@ -8235,16 +8251,16 @@ public class Event extends APINode {
   }
 
   public static enum EnumStatus {
-      @SerializedName("UNPUBLISHED")
-      VALUE_UNPUBLISHED("UNPUBLISHED"),
       @SerializedName("LIVE_NOW")
       VALUE_LIVE_NOW("LIVE_NOW"),
-      @SerializedName("SCHEDULED_UNPUBLISHED")
-      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
-      @SerializedName("SCHEDULED_LIVE")
-      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
       @SerializedName("SCHEDULED_CANCELED")
       VALUE_SCHEDULED_CANCELED("SCHEDULED_CANCELED"),
+      @SerializedName("SCHEDULED_LIVE")
+      VALUE_SCHEDULED_LIVE("SCHEDULED_LIVE"),
+      @SerializedName("SCHEDULED_UNPUBLISHED")
+      VALUE_SCHEDULED_UNPUBLISHED("SCHEDULED_UNPUBLISHED"),
+      @SerializedName("UNPUBLISHED")
+      VALUE_UNPUBLISHED("UNPUBLISHED"),
       NULL(null);
 
       private String value;
@@ -8260,10 +8276,10 @@ public class Event extends APINode {
   }
 
   public static enum EnumStereoscopicMode {
-      @SerializedName("MONO")
-      VALUE_MONO("MONO"),
       @SerializedName("LEFT_RIGHT")
       VALUE_LEFT_RIGHT("LEFT_RIGHT"),
+      @SerializedName("MONO")
+      VALUE_MONO("MONO"),
       @SerializedName("TOP_BOTTOM")
       VALUE_TOP_BOTTOM("TOP_BOTTOM"),
       NULL(null);
@@ -8281,10 +8297,10 @@ public class Event extends APINode {
   }
 
   public static enum EnumStreamType {
-      @SerializedName("REGULAR")
-      VALUE_REGULAR("REGULAR"),
       @SerializedName("AMBIENT")
       VALUE_AMBIENT("AMBIENT"),
+      @SerializedName("REGULAR")
+      VALUE_REGULAR("REGULAR"),
       NULL(null);
 
       private String value;
@@ -8304,10 +8320,10 @@ public class Event extends APINode {
       VALUE_CANCELED("canceled"),
       @SerializedName("draft")
       VALUE_DRAFT("draft"),
-      @SerializedName("scheduled_draft_for_publication")
-      VALUE_SCHEDULED_DRAFT_FOR_PUBLICATION("scheduled_draft_for_publication"),
       @SerializedName("published")
       VALUE_PUBLISHED("published"),
+      @SerializedName("scheduled_draft_for_publication")
+      VALUE_SCHEDULED_DRAFT_FOR_PUBLICATION("scheduled_draft_for_publication"),
       NULL(null);
 
       private String value;
@@ -8323,10 +8339,10 @@ public class Event extends APINode {
   }
 
   public static enum EnumTimeFilter {
-      @SerializedName("upcoming")
-      VALUE_UPCOMING("upcoming"),
       @SerializedName("past")
       VALUE_PAST("past"),
+      @SerializedName("upcoming")
+      VALUE_UPCOMING("upcoming"),
       NULL(null);
 
       private String value;
@@ -8363,18 +8379,18 @@ public class Event extends APINode {
   }
 
   public static enum EnumBackdatedTimeGranularity {
-      @SerializedName("year")
-      VALUE_YEAR("year"),
-      @SerializedName("month")
-      VALUE_MONTH("month"),
       @SerializedName("day")
       VALUE_DAY("day"),
       @SerializedName("hour")
       VALUE_HOUR("hour"),
       @SerializedName("min")
       VALUE_MIN("min"),
+      @SerializedName("month")
+      VALUE_MONTH("month"),
       @SerializedName("none")
       VALUE_NONE("none"),
+      @SerializedName("year")
+      VALUE_YEAR("year"),
       NULL(null);
 
       private String value;
@@ -8390,16 +8406,16 @@ public class Event extends APINode {
   }
 
   public static enum EnumUnpublishedContentType {
-      @SerializedName("SCHEDULED")
-      VALUE_SCHEDULED("SCHEDULED"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
       @SerializedName("ADS_POST")
       VALUE_ADS_POST("ADS_POST"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
       @SerializedName("INLINE_CREATED")
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("SCHEDULED")
+      VALUE_SCHEDULED("SCHEDULED"),
       NULL(null);
 
       private String value;
@@ -8415,10 +8431,10 @@ public class Event extends APINode {
   }
 
   public static enum EnumPostingToRedspace {
-      @SerializedName("enabled")
-      VALUE_ENABLED("enabled"),
       @SerializedName("disabled")
       VALUE_DISABLED("disabled"),
+      @SerializedName("enabled")
+      VALUE_ENABLED("enabled"),
       NULL(null);
 
       private String value;
@@ -8455,12 +8471,12 @@ public class Event extends APINode {
   public static enum EnumCheckinEntryPoint {
       @SerializedName("BRANDING_CHECKIN")
       VALUE_BRANDING_CHECKIN("BRANDING_CHECKIN"),
-      @SerializedName("BRANDING_STATUS")
-      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      @SerializedName("BRANDING_PHOTO")
-      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
       @SerializedName("BRANDING_OTHER")
       VALUE_BRANDING_OTHER("BRANDING_OTHER"),
+      @SerializedName("BRANDING_PHOTO")
+      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
+      @SerializedName("BRANDING_STATUS")
+      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
       NULL(null);
 
       private String value;
@@ -8501,10 +8517,10 @@ public class Event extends APINode {
   }
 
   public static enum EnumFormatting {
-      @SerializedName("PLAINTEXT")
-      VALUE_PLAINTEXT("PLAINTEXT"),
       @SerializedName("MARKDOWN")
       VALUE_MARKDOWN("MARKDOWN"),
+      @SerializedName("PLAINTEXT")
+      VALUE_PLAINTEXT("PLAINTEXT"),
       NULL(null);
 
       private String value;

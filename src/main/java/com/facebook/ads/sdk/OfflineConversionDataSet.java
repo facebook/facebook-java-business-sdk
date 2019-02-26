@@ -4541,10 +4541,10 @@ public class OfflineConversionDataSet extends APINode {
   public static enum EnumPermittedRoles {
       @SerializedName("ADMIN")
       VALUE_ADMIN("ADMIN"),
-      @SerializedName("UPLOADER")
-      VALUE_UPLOADER("UPLOADER"),
       @SerializedName("ADVERTISER")
       VALUE_ADVERTISER("ADVERTISER"),
+      @SerializedName("UPLOADER")
+      VALUE_UPLOADER("UPLOADER"),
       NULL(null);
 
       private String value;
@@ -4562,10 +4562,10 @@ public class OfflineConversionDataSet extends APINode {
   public static enum EnumRelationshipType {
       @SerializedName("AD_MANAGER")
       VALUE_AD_MANAGER("AD_MANAGER"),
-      @SerializedName("AUDIENCE_MANAGER")
-      VALUE_AUDIENCE_MANAGER("AUDIENCE_MANAGER"),
       @SerializedName("AGENCY")
       VALUE_AGENCY("AGENCY"),
+      @SerializedName("AUDIENCE_MANAGER")
+      VALUE_AUDIENCE_MANAGER("AUDIENCE_MANAGER"),
       @SerializedName("OTHER")
       VALUE_OTHER("OTHER"),
       NULL(null);
@@ -4585,10 +4585,10 @@ public class OfflineConversionDataSet extends APINode {
   public static enum EnumRole {
       @SerializedName("ADMIN")
       VALUE_ADMIN("ADMIN"),
-      @SerializedName("UPLOADER")
-      VALUE_UPLOADER("UPLOADER"),
       @SerializedName("ADVERTISER")
       VALUE_ADVERTISER("ADVERTISER"),
+      @SerializedName("UPLOADER")
+      VALUE_UPLOADER("UPLOADER"),
       NULL(null);
 
       private String value;
@@ -4604,6 +4604,14 @@ public class OfflineConversionDataSet extends APINode {
   }
 
   public static enum EnumEventType {
+      @SerializedName("add_dataset_to_business")
+      VALUE_ADD_DATASET_TO_BUSINESS("add_dataset_to_business"),
+      @SerializedName("add_user_to_dataset")
+      VALUE_ADD_USER_TO_DATASET("add_user_to_dataset"),
+      @SerializedName("create_custom_audience")
+      VALUE_CREATE_CUSTOM_AUDIENCE("create_custom_audience"),
+      @SerializedName("create_custom_conversion")
+      VALUE_CREATE_CUSTOM_CONVERSION("create_custom_conversion"),
       @SerializedName("dataset_assign_to_adacct")
       VALUE_DATASET_ASSIGN_TO_ADACCT("dataset_assign_to_adacct"),
       @SerializedName("dataset_autotrack_on_adacct")
@@ -4612,24 +4620,16 @@ public class OfflineConversionDataSet extends APINode {
       VALUE_DATASET_DISABLE_AUTOTRACK_ON_ADACCT("dataset_disable_autotrack_on_adacct"),
       @SerializedName("dataset_unassign_from_adacct")
       VALUE_DATASET_UNASSIGN_FROM_ADACCT("dataset_unassign_from_adacct"),
-      @SerializedName("add_dataset_to_business")
-      VALUE_ADD_DATASET_TO_BUSINESS("add_dataset_to_business"),
-      @SerializedName("add_user_to_dataset")
-      VALUE_ADD_USER_TO_DATASET("add_user_to_dataset"),
       @SerializedName("remove_user_from_dataset")
       VALUE_REMOVE_USER_FROM_DATASET("remove_user_from_dataset"),
-      @SerializedName("update_user_role_on_dataset")
-      VALUE_UPDATE_USER_ROLE_ON_DATASET("update_user_role_on_dataset"),
-      @SerializedName("create_custom_conversion")
-      VALUE_CREATE_CUSTOM_CONVERSION("create_custom_conversion"),
-      @SerializedName("update_custom_conversion")
-      VALUE_UPDATE_CUSTOM_CONVERSION("update_custom_conversion"),
-      @SerializedName("create_custom_audience")
-      VALUE_CREATE_CUSTOM_AUDIENCE("create_custom_audience"),
       @SerializedName("share_custom_audience")
       VALUE_SHARE_CUSTOM_AUDIENCE("share_custom_audience"),
       @SerializedName("unshare_custom_audience")
       VALUE_UNSHARE_CUSTOM_AUDIENCE("unshare_custom_audience"),
+      @SerializedName("update_custom_conversion")
+      VALUE_UPDATE_CUSTOM_CONVERSION("update_custom_conversion"),
+      @SerializedName("update_user_role_on_dataset")
+      VALUE_UPDATE_USER_ROLE_ON_DATASET("update_user_role_on_dataset"),
       NULL(null);
 
       private String value;
@@ -4645,10 +4645,10 @@ public class OfflineConversionDataSet extends APINode {
   }
 
   public static enum EnumAggrTime {
-      @SerializedName("upload_time")
-      VALUE_UPLOAD_TIME("upload_time"),
       @SerializedName("event_time")
       VALUE_EVENT_TIME("event_time"),
+      @SerializedName("upload_time")
+      VALUE_UPLOAD_TIME("upload_time"),
       NULL(null);
 
       private String value;
@@ -4685,20 +4685,20 @@ public class OfflineConversionDataSet extends APINode {
   }
 
   public static enum EnumSortBy {
-      @SerializedName("CREATION_TIME")
-      VALUE_CREATION_TIME("CREATION_TIME"),
-      @SerializedName("FIRST_UPLOAD_TIME")
-      VALUE_FIRST_UPLOAD_TIME("FIRST_UPLOAD_TIME"),
-      @SerializedName("LAST_UPLOAD_TIME")
-      VALUE_LAST_UPLOAD_TIME("LAST_UPLOAD_TIME"),
       @SerializedName("API_CALLS")
       VALUE_API_CALLS("API_CALLS"),
-      @SerializedName("EVENT_TIME_MIN")
-      VALUE_EVENT_TIME_MIN("EVENT_TIME_MIN"),
+      @SerializedName("CREATION_TIME")
+      VALUE_CREATION_TIME("CREATION_TIME"),
       @SerializedName("EVENT_TIME_MAX")
       VALUE_EVENT_TIME_MAX("EVENT_TIME_MAX"),
+      @SerializedName("EVENT_TIME_MIN")
+      VALUE_EVENT_TIME_MIN("EVENT_TIME_MIN"),
+      @SerializedName("FIRST_UPLOAD_TIME")
+      VALUE_FIRST_UPLOAD_TIME("FIRST_UPLOAD_TIME"),
       @SerializedName("IS_EXCLUDED_FOR_LIFT")
       VALUE_IS_EXCLUDED_FOR_LIFT("IS_EXCLUDED_FOR_LIFT"),
+      @SerializedName("LAST_UPLOAD_TIME")
+      VALUE_LAST_UPLOAD_TIME("LAST_UPLOAD_TIME"),
       NULL(null);
 
       private String value;

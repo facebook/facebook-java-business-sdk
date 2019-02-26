@@ -1594,12 +1594,12 @@ public class ReachFrequencyPrediction extends APINode {
   }
 
   public static enum EnumAction {
+      @SerializedName("cancel")
+      VALUE_CANCEL("cancel"),
       @SerializedName("quote")
       VALUE_QUOTE("quote"),
       @SerializedName("reserve")
       VALUE_RESERVE("reserve"),
-      @SerializedName("cancel")
-      VALUE_CANCEL("cancel"),
       NULL(null);
 
       private String value;
@@ -1617,18 +1617,18 @@ public class ReachFrequencyPrediction extends APINode {
   public static enum EnumBuyingType {
       @SerializedName("AUCTION")
       VALUE_AUCTION("AUCTION"),
-      @SerializedName("FIXED_CPM")
-      VALUE_FIXED_CPM("FIXED_CPM"),
-      @SerializedName("RESERVED")
-      VALUE_RESERVED("RESERVED"),
-      @SerializedName("REACHBLOCK")
-      VALUE_REACHBLOCK("REACHBLOCK"),
       @SerializedName("DEPRECATED_REACH_BLOCK")
       VALUE_DEPRECATED_REACH_BLOCK("DEPRECATED_REACH_BLOCK"),
-      @SerializedName("RESEARCH_POLL")
-      VALUE_RESEARCH_POLL("RESEARCH_POLL"),
+      @SerializedName("FIXED_CPM")
+      VALUE_FIXED_CPM("FIXED_CPM"),
       @SerializedName("MIXED")
       VALUE_MIXED("MIXED"),
+      @SerializedName("REACHBLOCK")
+      VALUE_REACHBLOCK("REACHBLOCK"),
+      @SerializedName("RESEARCH_POLL")
+      VALUE_RESEARCH_POLL("RESEARCH_POLL"),
+      @SerializedName("RESERVED")
+      VALUE_RESERVED("RESERVED"),
       NULL(null);
 
       private String value;
@@ -1644,16 +1644,16 @@ public class ReachFrequencyPrediction extends APINode {
   }
 
   public static enum EnumInstreamPackages {
+      @SerializedName("BEAUTY")
+      VALUE_BEAUTY("BEAUTY"),
+      @SerializedName("ENTERTAINMENT")
+      VALUE_ENTERTAINMENT("ENTERTAINMENT"),
+      @SerializedName("FOOD")
+      VALUE_FOOD("FOOD"),
       @SerializedName("NORMAL")
       VALUE_NORMAL("NORMAL"),
       @SerializedName("PREMIUM")
       VALUE_PREMIUM("PREMIUM"),
-      @SerializedName("SPORTS")
-      VALUE_SPORTS("SPORTS"),
-      @SerializedName("ENTERTAINMENT")
-      VALUE_ENTERTAINMENT("ENTERTAINMENT"),
-      @SerializedName("BEAUTY")
-      VALUE_BEAUTY("BEAUTY"),
       @SerializedName("REGULAR_ANIMALS_PETS")
       VALUE_REGULAR_ANIMALS_PETS("REGULAR_ANIMALS_PETS"),
       @SerializedName("REGULAR_FOOD")
@@ -1668,6 +1668,8 @@ public class ReachFrequencyPrediction extends APINode {
       VALUE_REGULAR_STYLE("REGULAR_STYLE"),
       @SerializedName("REGULAR_TV_MOVIES")
       VALUE_REGULAR_TV_MOVIES("REGULAR_TV_MOVIES"),
+      @SerializedName("SPORTS")
+      VALUE_SPORTS("SPORTS"),
       NULL(null);
 
       private String value;
@@ -1683,16 +1685,16 @@ public class ReachFrequencyPrediction extends APINode {
   }
 
   public static enum EnumStatus {
-      @SerializedName("EXPIRED")
-      VALUE_EXPIRED("EXPIRED"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
-      @SerializedName("PENDING")
-      VALUE_PENDING("PENDING"),
       @SerializedName("ACTIVE")
       VALUE_ACTIVE("ACTIVE"),
       @SerializedName("COMPLETED")
       VALUE_COMPLETED("COMPLETED"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
+      @SerializedName("EXPIRED")
+      VALUE_EXPIRED("EXPIRED"),
+      @SerializedName("PENDING")
+      VALUE_PENDING("PENDING"),
       NULL(null);
 
       private String value;

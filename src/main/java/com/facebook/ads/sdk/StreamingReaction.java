@@ -242,24 +242,24 @@ public class StreamingReaction extends APINode {
 
 
   public static enum EnumReactionType {
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
+      @SerializedName("ANGRY")
+      VALUE_ANGRY("ANGRY"),
+      @SerializedName("HAHA")
+      VALUE_HAHA("HAHA"),
       @SerializedName("LIKE")
       VALUE_LIKE("LIKE"),
       @SerializedName("LOVE")
       VALUE_LOVE("LOVE"),
-      @SerializedName("WOW")
-      VALUE_WOW("WOW"),
-      @SerializedName("HAHA")
-      VALUE_HAHA("HAHA"),
-      @SerializedName("SAD")
-      VALUE_SAD("SAD"),
-      @SerializedName("ANGRY")
-      VALUE_ANGRY("ANGRY"),
-      @SerializedName("THANKFUL")
-      VALUE_THANKFUL("THANKFUL"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
       @SerializedName("PRIDE")
       VALUE_PRIDE("PRIDE"),
+      @SerializedName("SAD")
+      VALUE_SAD("SAD"),
+      @SerializedName("THANKFUL")
+      VALUE_THANKFUL("THANKFUL"),
+      @SerializedName("WOW")
+      VALUE_WOW("WOW"),
       NULL(null);
 
       private String value;

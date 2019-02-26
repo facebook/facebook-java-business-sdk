@@ -636,12 +636,12 @@ public class ExtendedCreditAllocationConfig extends APINode {
   }
 
   public static enum EnumLiabilityType {
+      @SerializedName("MSA")
+      VALUE_MSA("MSA"),
       @SerializedName("Normal")
       VALUE_NORMAL("Normal"),
       @SerializedName("Sequential")
       VALUE_SEQUENTIAL("Sequential"),
-      @SerializedName("MSA")
-      VALUE_MSA("MSA"),
       NULL(null);
 
       private String value;
@@ -657,10 +657,10 @@ public class ExtendedCreditAllocationConfig extends APINode {
   }
 
   public static enum EnumPartitionType {
-      @SerializedName("FIXED")
-      VALUE_FIXED("FIXED"),
       @SerializedName("AUTH")
       VALUE_AUTH("AUTH"),
+      @SerializedName("FIXED")
+      VALUE_FIXED("FIXED"),
       NULL(null);
 
       private String value;
@@ -676,10 +676,10 @@ public class ExtendedCreditAllocationConfig extends APINode {
   }
 
   public static enum EnumSendBillTo {
-      @SerializedName("Agency")
-      VALUE_AGENCY("Agency"),
       @SerializedName("Advertiser")
       VALUE_ADVERTISER("Advertiser"),
+      @SerializedName("Agency")
+      VALUE_AGENCY("Agency"),
       NULL(null);
 
       private String value;

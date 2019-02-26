@@ -1243,20 +1243,20 @@ public class NativeOffer extends APINode {
   }
 
   public static enum EnumUniqueCodesFileCodeType {
-      @SerializedName("discount_codes")
-      VALUE_DISCOUNT_CODES("discount_codes"),
       @SerializedName("barcodes")
       VALUE_BARCODES("barcodes"),
-      @SerializedName("online_discount_codes")
-      VALUE_ONLINE_DISCOUNT_CODES("online_discount_codes"),
-      @SerializedName("instore_discount_codes")
-      VALUE_INSTORE_DISCOUNT_CODES("instore_discount_codes"),
-      @SerializedName("instore_barcodes")
-      VALUE_INSTORE_BARCODES("instore_barcodes"),
       @SerializedName("discount_and_barcodes")
       VALUE_DISCOUNT_AND_BARCODES("discount_and_barcodes"),
       @SerializedName("discount_and_discount")
       VALUE_DISCOUNT_AND_DISCOUNT("discount_and_discount"),
+      @SerializedName("discount_codes")
+      VALUE_DISCOUNT_CODES("discount_codes"),
+      @SerializedName("instore_barcodes")
+      VALUE_INSTORE_BARCODES("instore_barcodes"),
+      @SerializedName("instore_discount_codes")
+      VALUE_INSTORE_DISCOUNT_CODES("instore_discount_codes"),
+      @SerializedName("online_discount_codes")
+      VALUE_ONLINE_DISCOUNT_CODES("online_discount_codes"),
       NULL(null);
 
       private String value;
@@ -1313,12 +1313,12 @@ public class NativeOffer extends APINode {
   }
 
   public static enum EnumLocationType {
-      @SerializedName("online")
-      VALUE_ONLINE("online"),
-      @SerializedName("offline")
-      VALUE_OFFLINE("offline"),
       @SerializedName("both")
       VALUE_BOTH("both"),
+      @SerializedName("offline")
+      VALUE_OFFLINE("offline"),
+      @SerializedName("online")
+      VALUE_ONLINE("online"),
       NULL(null);
 
       private String value;

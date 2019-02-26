@@ -832,10 +832,10 @@ public class ProductFeedUpload extends APINode {
   public static enum EnumInputMethod {
       @SerializedName("Manual Upload")
       VALUE_MANUAL_UPLOAD("Manual Upload"),
-      @SerializedName("Server Fetch")
-      VALUE_SERVER_FETCH("Server Fetch"),
       @SerializedName("Reupload Last File")
       VALUE_REUPLOAD_LAST_FILE("Reupload Last File"),
+      @SerializedName("Server Fetch")
+      VALUE_SERVER_FETCH("Server Fetch"),
       @SerializedName("User initiated server fetch")
       VALUE_USER_INITIATED_SERVER_FETCH("User initiated server fetch"),
       NULL(null);

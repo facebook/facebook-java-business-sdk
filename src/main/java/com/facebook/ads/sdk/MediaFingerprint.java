@@ -740,16 +740,16 @@ public class MediaFingerprint extends APINode {
   }
 
   public static enum EnumFingerprintContentType {
-      @SerializedName("SONGTRACK")
-      VALUE_SONGTRACK("SONGTRACK"),
-      @SerializedName("EPISODE")
-      VALUE_EPISODE("EPISODE"),
-      @SerializedName("OTHER")
-      VALUE_OTHER("OTHER"),
-      @SerializedName("MOVIE")
-      VALUE_MOVIE("MOVIE"),
       @SerializedName("AM_SONGTRACK")
       VALUE_AM_SONGTRACK("AM_SONGTRACK"),
+      @SerializedName("EPISODE")
+      VALUE_EPISODE("EPISODE"),
+      @SerializedName("MOVIE")
+      VALUE_MOVIE("MOVIE"),
+      @SerializedName("OTHER")
+      VALUE_OTHER("OTHER"),
+      @SerializedName("SONGTRACK")
+      VALUE_SONGTRACK("SONGTRACK"),
       NULL(null);
 
       private String value;
@@ -765,12 +765,12 @@ public class MediaFingerprint extends APINode {
   }
 
   public static enum EnumFingerprintValidity {
-      @SerializedName("VALID")
-      VALUE_VALID("VALID"),
-      @SerializedName("EXPIRING")
-      VALUE_EXPIRING("EXPIRING"),
       @SerializedName("EXPIRED")
       VALUE_EXPIRED("EXPIRED"),
+      @SerializedName("EXPIRING")
+      VALUE_EXPIRING("EXPIRING"),
+      @SerializedName("VALID")
+      VALUE_VALID("VALID"),
       NULL(null);
 
       private String value;

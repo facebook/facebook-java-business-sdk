@@ -242,10 +242,10 @@ public class Permission extends APINode {
 
 
   public static enum EnumStatus {
-      @SerializedName("granted")
-      VALUE_GRANTED("granted"),
       @SerializedName("declined")
       VALUE_DECLINED("declined"),
+      @SerializedName("granted")
+      VALUE_GRANTED("granted"),
       NULL(null);
 
       private String value;

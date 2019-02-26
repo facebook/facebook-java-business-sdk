@@ -1392,12 +1392,12 @@ public class UnifiedThread extends APINode {
   public static enum EnumVideoType {
       @SerializedName("FILE_ATTACHMENT")
       VALUE_FILE_ATTACHMENT("FILE_ATTACHMENT"),
+      @SerializedName("RECORDED_STICKER")
+      VALUE_RECORDED_STICKER("RECORDED_STICKER"),
       @SerializedName("RECORDED_VIDEO")
       VALUE_RECORDED_VIDEO("RECORDED_VIDEO"),
       @SerializedName("SPEAKING_STICKER")
       VALUE_SPEAKING_STICKER("SPEAKING_STICKER"),
-      @SerializedName("RECORDED_STICKER")
-      VALUE_RECORDED_STICKER("RECORDED_STICKER"),
       @SerializedName("VIDEO_MAIL")
       VALUE_VIDEO_MAIL("VIDEO_MAIL"),
       NULL(null);

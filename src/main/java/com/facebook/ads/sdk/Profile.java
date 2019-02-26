@@ -758,16 +758,16 @@ public class Profile extends APINode {
   }
 
   public static enum EnumProfileType {
-      @SerializedName("user")
-      VALUE_USER("user"),
-      @SerializedName("page")
-      VALUE_PAGE("page"),
+      @SerializedName("application")
+      VALUE_APPLICATION("application"),
       @SerializedName("event")
       VALUE_EVENT("event"),
       @SerializedName("group")
       VALUE_GROUP("group"),
-      @SerializedName("application")
-      VALUE_APPLICATION("application"),
+      @SerializedName("page")
+      VALUE_PAGE("page"),
+      @SerializedName("user")
+      VALUE_USER("user"),
       NULL(null);
 
       private String value;
@@ -783,24 +783,24 @@ public class Profile extends APINode {
   }
 
   public static enum EnumType {
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
+      @SerializedName("ANGRY")
+      VALUE_ANGRY("ANGRY"),
+      @SerializedName("HAHA")
+      VALUE_HAHA("HAHA"),
       @SerializedName("LIKE")
       VALUE_LIKE("LIKE"),
       @SerializedName("LOVE")
       VALUE_LOVE("LOVE"),
-      @SerializedName("WOW")
-      VALUE_WOW("WOW"),
-      @SerializedName("HAHA")
-      VALUE_HAHA("HAHA"),
-      @SerializedName("SAD")
-      VALUE_SAD("SAD"),
-      @SerializedName("ANGRY")
-      VALUE_ANGRY("ANGRY"),
-      @SerializedName("THANKFUL")
-      VALUE_THANKFUL("THANKFUL"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
       @SerializedName("PRIDE")
       VALUE_PRIDE("PRIDE"),
+      @SerializedName("SAD")
+      VALUE_SAD("SAD"),
+      @SerializedName("THANKFUL")
+      VALUE_THANKFUL("THANKFUL"),
+      @SerializedName("WOW")
+      VALUE_WOW("WOW"),
       NULL(null);
 
       private String value;

@@ -536,10 +536,10 @@ public class BusinessAgreement extends APINode {
       VALUE_APPROVE("APPROVE"),
       @SerializedName("DECLINE")
       VALUE_DECLINE("DECLINE"),
-      @SerializedName("IN_PROGRESS")
-      VALUE_IN_PROGRESS("IN_PROGRESS"),
       @SerializedName("EXPIRED")
       VALUE_EXPIRED("EXPIRED"),
+      @SerializedName("IN_PROGRESS")
+      VALUE_IN_PROGRESS("IN_PROGRESS"),
       NULL(null);
 
       private String value;

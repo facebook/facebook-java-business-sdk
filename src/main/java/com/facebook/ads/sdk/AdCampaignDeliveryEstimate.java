@@ -269,26 +269,32 @@ public class AdCampaignDeliveryEstimate extends APINode {
 
 
   public static enum EnumOptimizationGoal {
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
+      @SerializedName("AD_RECALL_LIFT")
+      VALUE_AD_RECALL_LIFT("AD_RECALL_LIFT"),
+      @SerializedName("APP_DOWNLOADS")
+      VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
       @SerializedName("APP_INSTALLS")
       VALUE_APP_INSTALLS("APP_INSTALLS"),
       @SerializedName("BRAND_AWARENESS")
       VALUE_BRAND_AWARENESS("BRAND_AWARENESS"),
-      @SerializedName("AD_RECALL_LIFT")
-      VALUE_AD_RECALL_LIFT("AD_RECALL_LIFT"),
       @SerializedName("CLICKS")
       VALUE_CLICKS("CLICKS"),
+      @SerializedName("DERIVED_EVENTS")
+      VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
       @SerializedName("ENGAGED_USERS")
       VALUE_ENGAGED_USERS("ENGAGED_USERS"),
       @SerializedName("EVENT_RESPONSES")
       VALUE_EVENT_RESPONSES("EVENT_RESPONSES"),
       @SerializedName("IMPRESSIONS")
       VALUE_IMPRESSIONS("IMPRESSIONS"),
+      @SerializedName("LANDING_PAGE_VIEWS")
+      VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
       @SerializedName("LEAD_GENERATION")
       VALUE_LEAD_GENERATION("LEAD_GENERATION"),
       @SerializedName("LINK_CLICKS")
       VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
       @SerializedName("OFFER_CLAIMS")
       VALUE_OFFER_CLAIMS("OFFER_CLAIMS"),
       @SerializedName("OFFSITE_CONVERSIONS")
@@ -301,24 +307,18 @@ public class AdCampaignDeliveryEstimate extends APINode {
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
       @SerializedName("REACH")
       VALUE_REACH("REACH"),
-      @SerializedName("SOCIAL_IMPRESSIONS")
-      VALUE_SOCIAL_IMPRESSIONS("SOCIAL_IMPRESSIONS"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      @SerializedName("APP_DOWNLOADS")
-      VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
-      @SerializedName("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS")
-      VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
-      @SerializedName("LANDING_PAGE_VIEWS")
-      VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
-      @SerializedName("VALUE")
-      VALUE_VALUE("VALUE"),
-      @SerializedName("THRUPLAY")
-      VALUE_THRUPLAY("THRUPLAY"),
       @SerializedName("REPLIES")
       VALUE_REPLIES("REPLIES"),
-      @SerializedName("DERIVED_EVENTS")
-      VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
+      @SerializedName("SOCIAL_IMPRESSIONS")
+      VALUE_SOCIAL_IMPRESSIONS("SOCIAL_IMPRESSIONS"),
+      @SerializedName("THRUPLAY")
+      VALUE_THRUPLAY("THRUPLAY"),
+      @SerializedName("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS")
+      VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
+      @SerializedName("VALUE")
+      VALUE_VALUE("VALUE"),
+      @SerializedName("VIDEO_VIEWS")
+      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       NULL(null);
 
       private String value;

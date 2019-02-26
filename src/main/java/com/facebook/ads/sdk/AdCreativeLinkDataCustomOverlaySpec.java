@@ -308,24 +308,24 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
 
 
   public static enum EnumBackgroundColor {
-      @SerializedName("background_ffffff")
-      VALUE_BACKGROUND_FFFFFF("background_ffffff"),
-      @SerializedName("background_e50900")
-      VALUE_BACKGROUND_E50900("background_e50900"),
-      @SerializedName("background_f78400")
-      VALUE_BACKGROUND_F78400("background_f78400"),
-      @SerializedName("background_00af4c")
-      VALUE_BACKGROUND_00AF4C("background_00af4c"),
-      @SerializedName("background_0090ff")
-      VALUE_BACKGROUND_0090FF("background_0090ff"),
-      @SerializedName("background_755dde")
-      VALUE_BACKGROUND_755DDE("background_755dde"),
-      @SerializedName("background_f23474")
-      VALUE_BACKGROUND_F23474("background_f23474"),
-      @SerializedName("background_595959")
-      VALUE_BACKGROUND_595959("background_595959"),
       @SerializedName("background_000000")
       VALUE_BACKGROUND_000000("background_000000"),
+      @SerializedName("background_0090ff")
+      VALUE_BACKGROUND_0090FF("background_0090ff"),
+      @SerializedName("background_00af4c")
+      VALUE_BACKGROUND_00AF4C("background_00af4c"),
+      @SerializedName("background_595959")
+      VALUE_BACKGROUND_595959("background_595959"),
+      @SerializedName("background_755dde")
+      VALUE_BACKGROUND_755DDE("background_755dde"),
+      @SerializedName("background_e50900")
+      VALUE_BACKGROUND_E50900("background_e50900"),
+      @SerializedName("background_f23474")
+      VALUE_BACKGROUND_F23474("background_f23474"),
+      @SerializedName("background_f78400")
+      VALUE_BACKGROUND_F78400("background_f78400"),
+      @SerializedName("background_ffffff")
+      VALUE_BACKGROUND_FFFFFF("background_ffffff"),
       NULL(null);
 
       private String value;
@@ -345,18 +345,18 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
       VALUE_DROID_SERIF_REGULAR("droid_serif_regular"),
       @SerializedName("lato_regular")
       VALUE_LATO_REGULAR("lato_regular"),
+      @SerializedName("noto_sans_regular")
+      VALUE_NOTO_SANS_REGULAR("noto_sans_regular"),
       @SerializedName("nunito_sans_bold")
       VALUE_NUNITO_SANS_BOLD("nunito_sans_bold"),
       @SerializedName("open_sans_bold")
       VALUE_OPEN_SANS_BOLD("open_sans_bold"),
       @SerializedName("pt_serif_bold")
       VALUE_PT_SERIF_BOLD("pt_serif_bold"),
-      @SerializedName("roboto_medium")
-      VALUE_ROBOTO_MEDIUM("roboto_medium"),
       @SerializedName("roboto_condensed_regular")
       VALUE_ROBOTO_CONDENSED_REGULAR("roboto_condensed_regular"),
-      @SerializedName("noto_sans_regular")
-      VALUE_NOTO_SANS_REGULAR("noto_sans_regular"),
+      @SerializedName("roboto_medium")
+      VALUE_ROBOTO_MEDIUM("roboto_medium"),
       NULL(null);
 
       private String value;
@@ -376,22 +376,22 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
       VALUE_BANK_TRANSFER("bank_transfer"),
       @SerializedName("boleto")
       VALUE_BOLETO("boleto"),
-      @SerializedName("discount_with_boleto")
-      VALUE_DISCOUNT_WITH_BOLETO("discount_with_boleto"),
       @SerializedName("cash_on_delivery")
       VALUE_CASH_ON_DELIVERY("cash_on_delivery"),
-      @SerializedName("home_delivery")
-      VALUE_HOME_DELIVERY("home_delivery"),
-      @SerializedName("free_shipping")
-      VALUE_FREE_SHIPPING("free_shipping"),
-      @SerializedName("inventory")
-      VALUE_INVENTORY("inventory"),
-      @SerializedName("pay_on_arrival")
-      VALUE_PAY_ON_ARRIVAL("pay_on_arrival"),
-      @SerializedName("pay_at_hotel")
-      VALUE_PAY_AT_HOTEL("pay_at_hotel"),
+      @SerializedName("discount_with_boleto")
+      VALUE_DISCOUNT_WITH_BOLETO("discount_with_boleto"),
       @SerializedName("fast_delivery")
       VALUE_FAST_DELIVERY("fast_delivery"),
+      @SerializedName("free_shipping")
+      VALUE_FREE_SHIPPING("free_shipping"),
+      @SerializedName("home_delivery")
+      VALUE_HOME_DELIVERY("home_delivery"),
+      @SerializedName("inventory")
+      VALUE_INVENTORY("inventory"),
+      @SerializedName("pay_at_hotel")
+      VALUE_PAY_AT_HOTEL("pay_at_hotel"),
+      @SerializedName("pay_on_arrival")
+      VALUE_PAY_ON_ARRIVAL("pay_on_arrival"),
       NULL(null);
 
       private String value;
@@ -407,14 +407,14 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
   }
 
   public static enum EnumPosition {
-      @SerializedName("top_left")
-      VALUE_TOP_LEFT("top_left"),
-      @SerializedName("top_right")
-      VALUE_TOP_RIGHT("top_right"),
       @SerializedName("bottom_left")
       VALUE_BOTTOM_LEFT("bottom_left"),
       @SerializedName("bottom_right")
       VALUE_BOTTOM_RIGHT("bottom_right"),
+      @SerializedName("top_left")
+      VALUE_TOP_LEFT("top_left"),
+      @SerializedName("top_right")
+      VALUE_TOP_RIGHT("top_right"),
       NULL(null);
 
       private String value;
@@ -447,24 +447,24 @@ public class AdCreativeLinkDataCustomOverlaySpec extends APINode {
   }
 
   public static enum EnumTextColor {
-      @SerializedName("text_ffffff")
-      VALUE_TEXT_FFFFFF("text_ffffff"),
-      @SerializedName("text_c91b00")
-      VALUE_TEXT_C91B00("text_c91b00"),
-      @SerializedName("text_f78400")
-      VALUE_TEXT_F78400("text_f78400"),
-      @SerializedName("text_009c2a")
-      VALUE_TEXT_009C2A("text_009c2a"),
-      @SerializedName("text_007ad0")
-      VALUE_TEXT_007AD0("text_007ad0"),
-      @SerializedName("text_755dde")
-      VALUE_TEXT_755DDE("text_755dde"),
-      @SerializedName("text_f23474")
-      VALUE_TEXT_F23474("text_f23474"),
-      @SerializedName("text_646464")
-      VALUE_TEXT_646464("text_646464"),
       @SerializedName("text_000000")
       VALUE_TEXT_000000("text_000000"),
+      @SerializedName("text_007ad0")
+      VALUE_TEXT_007AD0("text_007ad0"),
+      @SerializedName("text_009c2a")
+      VALUE_TEXT_009C2A("text_009c2a"),
+      @SerializedName("text_646464")
+      VALUE_TEXT_646464("text_646464"),
+      @SerializedName("text_755dde")
+      VALUE_TEXT_755DDE("text_755dde"),
+      @SerializedName("text_c91b00")
+      VALUE_TEXT_C91B00("text_c91b00"),
+      @SerializedName("text_f23474")
+      VALUE_TEXT_F23474("text_f23474"),
+      @SerializedName("text_f78400")
+      VALUE_TEXT_F78400("text_f78400"),
+      @SerializedName("text_ffffff")
+      VALUE_TEXT_FFFFFF("text_ffffff"),
       NULL(null);
 
       private String value;

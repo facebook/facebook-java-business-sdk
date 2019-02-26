@@ -596,12 +596,12 @@ public class FavoriteRequest extends APINode {
   }
 
   public static enum EnumHttpMethod {
+      @SerializedName("DELETE")
+      VALUE_DELETE("DELETE"),
       @SerializedName("GET")
       VALUE_GET("GET"),
       @SerializedName("POST")
       VALUE_POST("POST"),
-      @SerializedName("DELETE")
-      VALUE_DELETE("DELETE"),
       NULL(null);
 
       private String value;
@@ -625,6 +625,12 @@ public class FavoriteRequest extends APINode {
       VALUE_V2_0("v2.0"),
       @SerializedName("v2.1")
       VALUE_V2_1("v2.1"),
+      @SerializedName("v2.10")
+      VALUE_V2_10("v2.10"),
+      @SerializedName("v2.11")
+      VALUE_V2_11("v2.11"),
+      @SerializedName("v2.12")
+      VALUE_V2_12("v2.12"),
       @SerializedName("v2.2")
       VALUE_V2_2("v2.2"),
       @SerializedName("v2.3")
@@ -641,12 +647,6 @@ public class FavoriteRequest extends APINode {
       VALUE_V2_8("v2.8"),
       @SerializedName("v2.9")
       VALUE_V2_9("v2.9"),
-      @SerializedName("v2.10")
-      VALUE_V2_10("v2.10"),
-      @SerializedName("v2.11")
-      VALUE_V2_11("v2.11"),
-      @SerializedName("v2.12")
-      VALUE_V2_12("v2.12"),
       @SerializedName("v3.0")
       VALUE_V3_0("v3.0"),
       @SerializedName("v3.1")

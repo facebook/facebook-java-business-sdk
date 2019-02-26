@@ -888,6 +888,8 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_KAJABI("kajabi"),
       @SerializedName("kraftly")
       VALUE_KRAFTLY("kraftly"),
+      @SerializedName("m_particle")
+      VALUE_M_PARTICLE("m_particle"),
       @SerializedName("magento")
       VALUE_MAGENTO("magento"),
       @SerializedName("magento_2")
@@ -896,8 +898,6 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_MARKETO("marketo"),
       @SerializedName("meesho")
       VALUE_MEESHO("meesho"),
-      @SerializedName("m_particle")
-      VALUE_M_PARTICLE("m_particle"),
       @SerializedName("now_floats")
       VALUE_NOW_FLOATS("now_floats"),
       @SerializedName("opencart")
@@ -906,24 +906,24 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_PRESTASHOP("prestashop"),
       @SerializedName("productsup")
       VALUE_PRODUCTSUP("productsup"),
-      @SerializedName("ruby_on_rails")
-      VALUE_RUBY_ON_RAILS("ruby_on_rails"),
       @SerializedName("riversoft")
       VALUE_RIVERSOFT("riversoft"),
+      @SerializedName("ruby_on_rails")
+      VALUE_RUBY_ON_RAILS("ruby_on_rails"),
       @SerializedName("salesforce")
       VALUE_SALESFORCE("salesforce"),
       @SerializedName("salesforce_zap")
       VALUE_SALESFORCE_ZAP("salesforce_zap"),
       @SerializedName("segment")
       VALUE_SEGMENT("segment"),
+      @SerializedName("shop_up")
+      VALUE_SHOP_UP("shop_up"),
       @SerializedName("shopify")
       VALUE_SHOPIFY("shopify"),
       @SerializedName("shopify_online")
       VALUE_SHOPIFY_ONLINE("shopify_online"),
       @SerializedName("shopline")
       VALUE_SHOPLINE("shopline"),
-      @SerializedName("shop_up")
-      VALUE_SHOP_UP("shop_up"),
       @SerializedName("sirclo")
       VALUE_SIRCLO("sirclo"),
       @SerializedName("squarespace")
@@ -932,6 +932,8 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_STOREDEN("storeden"),
       @SerializedName("test")
       VALUE_TEST("test"),
+      @SerializedName("ticketmaster")
+      VALUE_TICKETMASTER("ticketmaster"),
       @SerializedName("verifone")
       VALUE_VERIFONE("verifone"),
       @SerializedName("waca")
@@ -948,8 +950,6 @@ public class PartnerIntegrationLinked extends APINode {
       VALUE_WORDPRESS("wordpress"),
       @SerializedName("zoho_zap")
       VALUE_ZOHO_ZAP("zoho_zap"),
-      @SerializedName("ticketmaster")
-      VALUE_TICKETMASTER("ticketmaster"),
       NULL(null);
 
       private String value;
@@ -988,10 +988,10 @@ public class PartnerIntegrationLinked extends APINode {
   }
 
   public static enum EnumSetupStatus {
-      @SerializedName("START")
-      VALUE_START("START"),
       @SerializedName("COMPLETE")
       VALUE_COMPLETE("COMPLETE"),
+      @SerializedName("START")
+      VALUE_START("START"),
       NULL(null);
 
       private String value;

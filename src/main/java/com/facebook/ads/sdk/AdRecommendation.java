@@ -304,10 +304,10 @@ public class AdRecommendation extends APINode {
   public static enum EnumConfidence {
       @SerializedName("HIGH")
       VALUE_HIGH("HIGH"),
-      @SerializedName("MEDIUM")
-      VALUE_MEDIUM("MEDIUM"),
       @SerializedName("LOW")
       VALUE_LOW("LOW"),
+      @SerializedName("MEDIUM")
+      VALUE_MEDIUM("MEDIUM"),
       NULL(null);
 
       private String value;
@@ -325,10 +325,10 @@ public class AdRecommendation extends APINode {
   public static enum EnumImportance {
       @SerializedName("HIGH")
       VALUE_HIGH("HIGH"),
-      @SerializedName("MEDIUM")
-      VALUE_MEDIUM("MEDIUM"),
       @SerializedName("LOW")
       VALUE_LOW("LOW"),
+      @SerializedName("MEDIUM")
+      VALUE_MEDIUM("MEDIUM"),
       NULL(null);
 
       private String value;

@@ -536,20 +536,20 @@ public class CPASParentCatalogSettings extends APINode {
   }
 
   public static enum EnumAttributionWindows {
-      @SerializedName("X1D_VIEW")
-      VALUE_X1D_VIEW("X1D_VIEW"),
-      @SerializedName("X7D_VIEW")
-      VALUE_X7D_VIEW("X7D_VIEW"),
-      @SerializedName("X28D_VIEW")
-      VALUE_X28D_VIEW("X28D_VIEW"),
-      @SerializedName("X1D_CLICK")
-      VALUE_X1D_CLICK("X1D_CLICK"),
-      @SerializedName("X7D_CLICK")
-      VALUE_X7D_CLICK("X7D_CLICK"),
-      @SerializedName("X28D_CLICK")
-      VALUE_X28D_CLICK("X28D_CLICK"),
       @SerializedName("DEFAULT")
       VALUE_DEFAULT("DEFAULT"),
+      @SerializedName("X1D_CLICK")
+      VALUE_X1D_CLICK("X1D_CLICK"),
+      @SerializedName("X1D_VIEW")
+      VALUE_X1D_VIEW("X1D_VIEW"),
+      @SerializedName("X28D_CLICK")
+      VALUE_X28D_CLICK("X28D_CLICK"),
+      @SerializedName("X28D_VIEW")
+      VALUE_X28D_VIEW("X28D_VIEW"),
+      @SerializedName("X7D_CLICK")
+      VALUE_X7D_CLICK("X7D_CLICK"),
+      @SerializedName("X7D_VIEW")
+      VALUE_X7D_VIEW("X7D_VIEW"),
       NULL(null);
 
       private String value;

@@ -264,24 +264,24 @@ public class InstantArticleInsightsQueryResult extends APINode {
 
 
   public static enum EnumBreakdown {
-      @SerializedName("no_breakdown")
-      VALUE_NO_BREAKDOWN("no_breakdown"),
-      @SerializedName("platform")
-      VALUE_PLATFORM("platform"),
       @SerializedName("age")
       VALUE_AGE("age"),
-      @SerializedName("region")
-      VALUE_REGION("region"),
       @SerializedName("country")
       VALUE_COUNTRY("country"),
-      @SerializedName("is_shared_by_ia_owner")
-      VALUE_IS_SHARED_BY_IA_OWNER("is_shared_by_ia_owner"),
       @SerializedName("gender")
       VALUE_GENDER("gender"),
       @SerializedName("gender_and_age")
       VALUE_GENDER_AND_AGE("gender_and_age"),
       @SerializedName("is_organic")
       VALUE_IS_ORGANIC("is_organic"),
+      @SerializedName("is_shared_by_ia_owner")
+      VALUE_IS_SHARED_BY_IA_OWNER("is_shared_by_ia_owner"),
+      @SerializedName("no_breakdown")
+      VALUE_NO_BREAKDOWN("no_breakdown"),
+      @SerializedName("platform")
+      VALUE_PLATFORM("platform"),
+      @SerializedName("region")
+      VALUE_REGION("region"),
       NULL(null);
 
       private String value;
@@ -299,14 +299,14 @@ public class InstantArticleInsightsQueryResult extends APINode {
   public static enum EnumPeriod {
       @SerializedName("day")
       VALUE_DAY("day"),
-      @SerializedName("week")
-      VALUE_WEEK("week"),
       @SerializedName("days_28")
       VALUE_DAYS_28("days_28"),
-      @SerializedName("month")
-      VALUE_MONTH("month"),
       @SerializedName("lifetime")
       VALUE_LIFETIME("lifetime"),
+      @SerializedName("month")
+      VALUE_MONTH("month"),
+      @SerializedName("week")
+      VALUE_WEEK("week"),
       NULL(null);
 
       private String value;

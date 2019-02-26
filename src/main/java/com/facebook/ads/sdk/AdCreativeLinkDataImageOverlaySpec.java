@@ -325,10 +325,10 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   }
 
   public static enum EnumOverlayTemplate {
-      @SerializedName("pill_with_text")
-      VALUE_PILL_WITH_TEXT("pill_with_text"),
       @SerializedName("circle_with_text")
       VALUE_CIRCLE_WITH_TEXT("circle_with_text"),
+      @SerializedName("pill_with_text")
+      VALUE_PILL_WITH_TEXT("pill_with_text"),
       @SerializedName("triangle_with_text")
       VALUE_TRIANGLE_WITH_TEXT("triangle_with_text"),
       NULL(null);
@@ -346,14 +346,14 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   }
 
   public static enum EnumPosition {
-      @SerializedName("top_left")
-      VALUE_TOP_LEFT("top_left"),
-      @SerializedName("top_right")
-      VALUE_TOP_RIGHT("top_right"),
       @SerializedName("bottom_left")
       VALUE_BOTTOM_LEFT("bottom_left"),
       @SerializedName("bottom_right")
       VALUE_BOTTOM_RIGHT("bottom_right"),
+      @SerializedName("top_left")
+      VALUE_TOP_LEFT("top_left"),
+      @SerializedName("top_right")
+      VALUE_TOP_RIGHT("top_right"),
       NULL(null);
 
       private String value;
@@ -371,8 +371,12 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   public static enum EnumTextFont {
       @SerializedName("droid_serif_regular")
       VALUE_DROID_SERIF_REGULAR("droid_serif_regular"),
+      @SerializedName("dynads_hybrid_bold")
+      VALUE_DYNADS_HYBRID_BOLD("dynads_hybrid_bold"),
       @SerializedName("lato_regular")
       VALUE_LATO_REGULAR("lato_regular"),
+      @SerializedName("noto_sans_regular")
+      VALUE_NOTO_SANS_REGULAR("noto_sans_regular"),
       @SerializedName("nunito_sans_bold")
       VALUE_NUNITO_SANS_BOLD("nunito_sans_bold"),
       @SerializedName("open_sans_bold")
@@ -381,14 +385,10 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
       VALUE_OPEN_SANS_CONDENSED_BOLD("open_sans_condensed_bold"),
       @SerializedName("pt_serif_bold")
       VALUE_PT_SERIF_BOLD("pt_serif_bold"),
-      @SerializedName("roboto_medium")
-      VALUE_ROBOTO_MEDIUM("roboto_medium"),
       @SerializedName("roboto_condensed_regular")
       VALUE_ROBOTO_CONDENSED_REGULAR("roboto_condensed_regular"),
-      @SerializedName("noto_sans_regular")
-      VALUE_NOTO_SANS_REGULAR("noto_sans_regular"),
-      @SerializedName("dynads_hybrid_bold")
-      VALUE_DYNADS_HYBRID_BOLD("dynads_hybrid_bold"),
+      @SerializedName("roboto_medium")
+      VALUE_ROBOTO_MEDIUM("roboto_medium"),
       NULL(null);
 
       private String value;
@@ -404,18 +404,18 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   }
 
   public static enum EnumTextType {
+      @SerializedName("custom")
+      VALUE_CUSTOM("custom"),
+      @SerializedName("disclaimer")
+      VALUE_DISCLAIMER("disclaimer"),
+      @SerializedName("from_price")
+      VALUE_FROM_PRICE("from_price"),
+      @SerializedName("percentage_off")
+      VALUE_PERCENTAGE_OFF("percentage_off"),
       @SerializedName("price")
       VALUE_PRICE("price"),
       @SerializedName("strikethrough_price")
       VALUE_STRIKETHROUGH_PRICE("strikethrough_price"),
-      @SerializedName("percentage_off")
-      VALUE_PERCENTAGE_OFF("percentage_off"),
-      @SerializedName("custom")
-      VALUE_CUSTOM("custom"),
-      @SerializedName("from_price")
-      VALUE_FROM_PRICE("from_price"),
-      @SerializedName("disclaimer")
-      VALUE_DISCLAIMER("disclaimer"),
       NULL(null);
 
       private String value;
@@ -431,38 +431,38 @@ public class AdCreativeLinkDataImageOverlaySpec extends APINode {
   }
 
   public static enum EnumThemeColor {
-      @SerializedName("background_e50900_text_ffffff")
-      VALUE_BACKGROUND_E50900_TEXT_FFFFFF("background_e50900_text_ffffff"),
-      @SerializedName("background_f78400_text_ffffff")
-      VALUE_BACKGROUND_F78400_TEXT_FFFFFF("background_f78400_text_ffffff"),
-      @SerializedName("background_00af4c_text_ffffff")
-      VALUE_BACKGROUND_00AF4C_TEXT_FFFFFF("background_00af4c_text_ffffff"),
-      @SerializedName("background_0090ff_text_ffffff")
-      VALUE_BACKGROUND_0090FF_TEXT_FFFFFF("background_0090ff_text_ffffff"),
-      @SerializedName("background_755dde_text_ffffff")
-      VALUE_BACKGROUND_755DDE_TEXT_FFFFFF("background_755dde_text_ffffff"),
-      @SerializedName("background_f23474_text_ffffff")
-      VALUE_BACKGROUND_F23474_TEXT_FFFFFF("background_f23474_text_ffffff"),
-      @SerializedName("background_595959_text_ffffff")
-      VALUE_BACKGROUND_595959_TEXT_FFFFFF("background_595959_text_ffffff"),
       @SerializedName("background_000000_text_ffffff")
       VALUE_BACKGROUND_000000_TEXT_FFFFFF("background_000000_text_ffffff"),
-      @SerializedName("background_ffffff_text_c91b00")
-      VALUE_BACKGROUND_FFFFFF_TEXT_C91B00("background_ffffff_text_c91b00"),
-      @SerializedName("background_ffffff_text_f78400")
-      VALUE_BACKGROUND_FFFFFF_TEXT_F78400("background_ffffff_text_f78400"),
-      @SerializedName("background_ffffff_text_009c2a")
-      VALUE_BACKGROUND_FFFFFF_TEXT_009C2A("background_ffffff_text_009c2a"),
-      @SerializedName("background_ffffff_text_007ad0")
-      VALUE_BACKGROUND_FFFFFF_TEXT_007AD0("background_ffffff_text_007ad0"),
-      @SerializedName("background_ffffff_text_755dde")
-      VALUE_BACKGROUND_FFFFFF_TEXT_755DDE("background_ffffff_text_755dde"),
-      @SerializedName("background_ffffff_text_f23474")
-      VALUE_BACKGROUND_FFFFFF_TEXT_F23474("background_ffffff_text_f23474"),
-      @SerializedName("background_ffffff_text_646464")
-      VALUE_BACKGROUND_FFFFFF_TEXT_646464("background_ffffff_text_646464"),
+      @SerializedName("background_0090ff_text_ffffff")
+      VALUE_BACKGROUND_0090FF_TEXT_FFFFFF("background_0090ff_text_ffffff"),
+      @SerializedName("background_00af4c_text_ffffff")
+      VALUE_BACKGROUND_00AF4C_TEXT_FFFFFF("background_00af4c_text_ffffff"),
+      @SerializedName("background_595959_text_ffffff")
+      VALUE_BACKGROUND_595959_TEXT_FFFFFF("background_595959_text_ffffff"),
+      @SerializedName("background_755dde_text_ffffff")
+      VALUE_BACKGROUND_755DDE_TEXT_FFFFFF("background_755dde_text_ffffff"),
+      @SerializedName("background_e50900_text_ffffff")
+      VALUE_BACKGROUND_E50900_TEXT_FFFFFF("background_e50900_text_ffffff"),
+      @SerializedName("background_f23474_text_ffffff")
+      VALUE_BACKGROUND_F23474_TEXT_FFFFFF("background_f23474_text_ffffff"),
+      @SerializedName("background_f78400_text_ffffff")
+      VALUE_BACKGROUND_F78400_TEXT_FFFFFF("background_f78400_text_ffffff"),
       @SerializedName("background_ffffff_text_000000")
       VALUE_BACKGROUND_FFFFFF_TEXT_000000("background_ffffff_text_000000"),
+      @SerializedName("background_ffffff_text_007ad0")
+      VALUE_BACKGROUND_FFFFFF_TEXT_007AD0("background_ffffff_text_007ad0"),
+      @SerializedName("background_ffffff_text_009c2a")
+      VALUE_BACKGROUND_FFFFFF_TEXT_009C2A("background_ffffff_text_009c2a"),
+      @SerializedName("background_ffffff_text_646464")
+      VALUE_BACKGROUND_FFFFFF_TEXT_646464("background_ffffff_text_646464"),
+      @SerializedName("background_ffffff_text_755dde")
+      VALUE_BACKGROUND_FFFFFF_TEXT_755DDE("background_ffffff_text_755dde"),
+      @SerializedName("background_ffffff_text_c91b00")
+      VALUE_BACKGROUND_FFFFFF_TEXT_C91B00("background_ffffff_text_c91b00"),
+      @SerializedName("background_ffffff_text_f23474")
+      VALUE_BACKGROUND_FFFFFF_TEXT_F23474("background_ffffff_text_f23474"),
+      @SerializedName("background_ffffff_text_f78400")
+      VALUE_BACKGROUND_FFFFFF_TEXT_F78400("background_ffffff_text_f78400"),
       NULL(null);
 
       private String value;

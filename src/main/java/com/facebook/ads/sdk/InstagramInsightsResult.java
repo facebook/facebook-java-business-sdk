@@ -280,32 +280,32 @@ public class InstagramInsightsResult extends APINode {
 
 
   public static enum EnumMetric {
-      @SerializedName("impressions")
-      VALUE_IMPRESSIONS("impressions"),
-      @SerializedName("reach")
-      VALUE_REACH("reach"),
+      @SerializedName("carousel_album_engagement")
+      VALUE_CAROUSEL_ALBUM_ENGAGEMENT("carousel_album_engagement"),
       @SerializedName("carousel_album_impressions")
       VALUE_CAROUSEL_ALBUM_IMPRESSIONS("carousel_album_impressions"),
       @SerializedName("carousel_album_reach")
       VALUE_CAROUSEL_ALBUM_REACH("carousel_album_reach"),
-      @SerializedName("carousel_album_engagement")
-      VALUE_CAROUSEL_ALBUM_ENGAGEMENT("carousel_album_engagement"),
       @SerializedName("carousel_album_saved")
       VALUE_CAROUSEL_ALBUM_SAVED("carousel_album_saved"),
       @SerializedName("carousel_album_video_views")
       VALUE_CAROUSEL_ALBUM_VIDEO_VIEWS("carousel_album_video_views"),
-      @SerializedName("taps_forward")
-      VALUE_TAPS_FORWARD("taps_forward"),
-      @SerializedName("taps_back")
-      VALUE_TAPS_BACK("taps_back"),
-      @SerializedName("exits")
-      VALUE_EXITS("exits"),
-      @SerializedName("replies")
-      VALUE_REPLIES("replies"),
       @SerializedName("engagement")
       VALUE_ENGAGEMENT("engagement"),
+      @SerializedName("exits")
+      VALUE_EXITS("exits"),
+      @SerializedName("impressions")
+      VALUE_IMPRESSIONS("impressions"),
+      @SerializedName("reach")
+      VALUE_REACH("reach"),
+      @SerializedName("replies")
+      VALUE_REPLIES("replies"),
       @SerializedName("saved")
       VALUE_SAVED("saved"),
+      @SerializedName("taps_back")
+      VALUE_TAPS_BACK("taps_back"),
+      @SerializedName("taps_forward")
+      VALUE_TAPS_FORWARD("taps_forward"),
       @SerializedName("video_views")
       VALUE_VIDEO_VIEWS("video_views"),
       NULL(null);
@@ -325,14 +325,14 @@ public class InstagramInsightsResult extends APINode {
   public static enum EnumPeriod {
       @SerializedName("day")
       VALUE_DAY("day"),
-      @SerializedName("week")
-      VALUE_WEEK("week"),
       @SerializedName("days_28")
       VALUE_DAYS_28("days_28"),
-      @SerializedName("month")
-      VALUE_MONTH("month"),
       @SerializedName("lifetime")
       VALUE_LIFETIME("lifetime"),
+      @SerializedName("month")
+      VALUE_MONTH("month"),
+      @SerializedName("week")
+      VALUE_WEEK("week"),
       NULL(null);
 
       private String value;

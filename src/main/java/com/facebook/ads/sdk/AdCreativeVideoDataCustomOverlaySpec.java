@@ -330,10 +330,10 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
 
 
   public static enum EnumBackgroundOpacity {
-      @SerializedName("solid")
-      VALUE_SOLID("solid"),
       @SerializedName("half")
       VALUE_HALF("half"),
+      @SerializedName("solid")
+      VALUE_SOLID("solid"),
       NULL(null);
 
       private String value;
@@ -353,22 +353,22 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
       VALUE_BANK_TRANSFER("bank_transfer"),
       @SerializedName("boleto")
       VALUE_BOLETO("boleto"),
-      @SerializedName("discount_with_boleto")
-      VALUE_DISCOUNT_WITH_BOLETO("discount_with_boleto"),
       @SerializedName("cash_on_delivery")
       VALUE_CASH_ON_DELIVERY("cash_on_delivery"),
-      @SerializedName("home_delivery")
-      VALUE_HOME_DELIVERY("home_delivery"),
-      @SerializedName("free_shipping")
-      VALUE_FREE_SHIPPING("free_shipping"),
-      @SerializedName("inventory")
-      VALUE_INVENTORY("inventory"),
-      @SerializedName("pay_on_arrival")
-      VALUE_PAY_ON_ARRIVAL("pay_on_arrival"),
-      @SerializedName("pay_at_hotel")
-      VALUE_PAY_AT_HOTEL("pay_at_hotel"),
+      @SerializedName("discount_with_boleto")
+      VALUE_DISCOUNT_WITH_BOLETO("discount_with_boleto"),
       @SerializedName("fast_delivery")
       VALUE_FAST_DELIVERY("fast_delivery"),
+      @SerializedName("free_shipping")
+      VALUE_FREE_SHIPPING("free_shipping"),
+      @SerializedName("home_delivery")
+      VALUE_HOME_DELIVERY("home_delivery"),
+      @SerializedName("inventory")
+      VALUE_INVENTORY("inventory"),
+      @SerializedName("pay_at_hotel")
+      VALUE_PAY_AT_HOTEL("pay_at_hotel"),
+      @SerializedName("pay_on_arrival")
+      VALUE_PAY_ON_ARRIVAL("pay_on_arrival"),
       NULL(null);
 
       private String value;
@@ -384,18 +384,18 @@ public class AdCreativeVideoDataCustomOverlaySpec extends APINode {
   }
 
   public static enum EnumPosition {
-      @SerializedName("top_left")
-      VALUE_TOP_LEFT("top_left"),
-      @SerializedName("top_center")
-      VALUE_TOP_CENTER("top_center"),
-      @SerializedName("top_right")
-      VALUE_TOP_RIGHT("top_right"),
-      @SerializedName("middle_left")
-      VALUE_MIDDLE_LEFT("middle_left"),
       @SerializedName("middle_center")
       VALUE_MIDDLE_CENTER("middle_center"),
+      @SerializedName("middle_left")
+      VALUE_MIDDLE_LEFT("middle_left"),
       @SerializedName("middle_right")
       VALUE_MIDDLE_RIGHT("middle_right"),
+      @SerializedName("top_center")
+      VALUE_TOP_CENTER("top_center"),
+      @SerializedName("top_left")
+      VALUE_TOP_LEFT("top_left"),
+      @SerializedName("top_right")
+      VALUE_TOP_RIGHT("top_right"),
       NULL(null);
 
       private String value;

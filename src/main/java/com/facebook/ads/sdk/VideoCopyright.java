@@ -928,12 +928,12 @@ public class VideoCopyright extends APINode {
   }
 
   public static enum EnumMonitoringType {
+      @SerializedName("AUDIO_ONLY")
+      VALUE_AUDIO_ONLY("AUDIO_ONLY"),
       @SerializedName("VIDEO_AND_AUDIO")
       VALUE_VIDEO_AND_AUDIO("VIDEO_AND_AUDIO"),
       @SerializedName("VIDEO_ONLY")
       VALUE_VIDEO_ONLY("VIDEO_ONLY"),
-      @SerializedName("AUDIO_ONLY")
-      VALUE_AUDIO_ONLY("AUDIO_ONLY"),
       NULL(null);
 
       private String value;

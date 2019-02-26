@@ -2354,8 +2354,6 @@ public class InstagramUser extends APINode {
   }
 
   public static enum EnumRole {
-      @SerializedName("MANAGER")
-      VALUE_MANAGER("MANAGER"),
       @SerializedName("ANALYST")
       VALUE_ANALYST("ANALYST"),
       NULL(null);

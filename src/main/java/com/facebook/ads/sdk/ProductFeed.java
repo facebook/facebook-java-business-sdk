@@ -4097,12 +4097,12 @@ public class ProductFeed extends APINode {
       VALUE_BAR("BAR"),
       @SerializedName("COMMA")
       VALUE_COMMA("COMMA"),
+      @SerializedName("SEMICOLON")
+      VALUE_SEMICOLON("SEMICOLON"),
       @SerializedName("TAB")
       VALUE_TAB("TAB"),
       @SerializedName("TILDE")
       VALUE_TILDE("TILDE"),
-      @SerializedName("SEMICOLON")
-      VALUE_SEMICOLON("SEMICOLON"),
       NULL(null);
 
       private String value;
@@ -4120,10 +4120,10 @@ public class ProductFeed extends APINode {
   public static enum EnumQuotedFieldsMode {
       @SerializedName("AUTODETECT")
       VALUE_AUTODETECT("AUTODETECT"),
-      @SerializedName("ON")
-      VALUE_ON("ON"),
       @SerializedName("OFF")
       VALUE_OFF("OFF"),
+      @SerializedName("ON")
+      VALUE_ON("ON"),
       NULL(null);
 
       private String value;
@@ -4143,16 +4143,16 @@ public class ProductFeed extends APINode {
       VALUE_AUTODETECT("AUTODETECT"),
       @SerializedName("LATIN1")
       VALUE_LATIN1("LATIN1"),
-      @SerializedName("UTF8")
-      VALUE_UTF8("UTF8"),
-      @SerializedName("UTF16LE")
-      VALUE_UTF16LE("UTF16LE"),
       @SerializedName("UTF16BE")
       VALUE_UTF16BE("UTF16BE"),
-      @SerializedName("UTF32LE")
-      VALUE_UTF32LE("UTF32LE"),
+      @SerializedName("UTF16LE")
+      VALUE_UTF16LE("UTF16LE"),
       @SerializedName("UTF32BE")
       VALUE_UTF32BE("UTF32BE"),
+      @SerializedName("UTF32LE")
+      VALUE_UTF32LE("UTF32LE"),
+      @SerializedName("UTF8")
+      VALUE_UTF8("UTF8"),
       NULL(null);
 
       private String value;
@@ -4188,10 +4188,10 @@ public class ProductFeed extends APINode {
       VALUE_MEDIA_TITLE("MEDIA_TITLE"),
       @SerializedName("PRODUCTS")
       VALUE_PRODUCTS("PRODUCTS"),
-      @SerializedName("VEHICLE_OFFER")
-      VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
       @SerializedName("VEHICLES")
       VALUE_VEHICLES("VEHICLES"),
+      @SerializedName("VEHICLE_OFFER")
+      VALUE_VEHICLE_OFFER("VEHICLE_OFFER"),
       NULL(null);
 
       private String value;

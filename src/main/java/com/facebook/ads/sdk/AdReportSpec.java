@@ -1034,6 +1034,8 @@ public class AdReportSpec extends APINode {
       VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
       @SerializedName("action_carousel_card_name")
       VALUE_ACTION_CAROUSEL_CARD_NAME("action_carousel_card_name"),
+      @SerializedName("action_converted_product_id")
+      VALUE_ACTION_CONVERTED_PRODUCT_ID("action_converted_product_id"),
       @SerializedName("action_destination")
       VALUE_ACTION_DESTINATION("action_destination"),
       @SerializedName("action_device")
@@ -1048,8 +1050,6 @@ public class AdReportSpec extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-      @SerializedName("action_converted_product_id")
-      VALUE_ACTION_CONVERTED_PRODUCT_ID("action_converted_product_id"),
       @SerializedName("interactive_component_sticker_id")
       VALUE_INTERACTIVE_COMPONENT_STICKER_ID("interactive_component_sticker_id"),
       @SerializedName("interactive_component_sticker_response")
@@ -1069,12 +1069,12 @@ public class AdReportSpec extends APINode {
   }
 
   public static enum EnumCreationSource {
+      @SerializedName("adsExcelAddin")
+      VALUE_ADSEXCELADDIN("adsExcelAddin"),
       @SerializedName("adsManagerReporting")
       VALUE_ADSMANAGERREPORTING("adsManagerReporting"),
       @SerializedName("newAdsManager")
       VALUE_NEWADSMANAGER("newAdsManager"),
-      @SerializedName("adsExcelAddin")
-      VALUE_ADSEXCELADDIN("adsExcelAddin"),
       NULL(null);
 
       private String value;
@@ -1090,44 +1090,44 @@ public class AdReportSpec extends APINode {
   }
 
   public static enum EnumDatePreset {
-      @SerializedName("today")
-      VALUE_TODAY("today"),
-      @SerializedName("yesterday")
-      VALUE_YESTERDAY("yesterday"),
-      @SerializedName("this_month")
-      VALUE_THIS_MONTH("this_month"),
-      @SerializedName("last_month")
-      VALUE_LAST_MONTH("last_month"),
-      @SerializedName("this_quarter")
-      VALUE_THIS_QUARTER("this_quarter"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
-      @SerializedName("last_3d")
-      VALUE_LAST_3D("last_3d"),
-      @SerializedName("last_7d")
-      VALUE_LAST_7D("last_7d"),
       @SerializedName("last_14d")
       VALUE_LAST_14D("last_14d"),
       @SerializedName("last_28d")
       VALUE_LAST_28D("last_28d"),
       @SerializedName("last_30d")
       VALUE_LAST_30D("last_30d"),
+      @SerializedName("last_3d")
+      VALUE_LAST_3D("last_3d"),
+      @SerializedName("last_7d")
+      VALUE_LAST_7D("last_7d"),
       @SerializedName("last_90d")
       VALUE_LAST_90D("last_90d"),
+      @SerializedName("last_month")
+      VALUE_LAST_MONTH("last_month"),
+      @SerializedName("last_quarter")
+      VALUE_LAST_QUARTER("last_quarter"),
       @SerializedName("last_week_mon_sun")
       VALUE_LAST_WEEK_MON_SUN("last_week_mon_sun"),
       @SerializedName("last_week_sun_sat")
       VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
-      @SerializedName("last_quarter")
-      VALUE_LAST_QUARTER("last_quarter"),
       @SerializedName("last_year")
       VALUE_LAST_YEAR("last_year"),
+      @SerializedName("lifetime")
+      VALUE_LIFETIME("lifetime"),
+      @SerializedName("this_month")
+      VALUE_THIS_MONTH("this_month"),
+      @SerializedName("this_quarter")
+      VALUE_THIS_QUARTER("this_quarter"),
       @SerializedName("this_week_mon_today")
       VALUE_THIS_WEEK_MON_TODAY("this_week_mon_today"),
       @SerializedName("this_week_sun_today")
       VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
       @SerializedName("this_year")
       VALUE_THIS_YEAR("this_year"),
+      @SerializedName("today")
+      VALUE_TODAY("today"),
+      @SerializedName("yesterday")
+      VALUE_YESTERDAY("yesterday"),
       NULL(null);
 
       private String value;
@@ -1143,10 +1143,10 @@ public class AdReportSpec extends APINode {
   }
 
   public static enum EnumFormat {
-      @SerializedName("JSON")
-      VALUE_JSON("JSON"),
       @SerializedName("CSV")
       VALUE_CSV("CSV"),
+      @SerializedName("JSON")
+      VALUE_JSON("JSON"),
       @SerializedName("XLS")
       VALUE_XLS("XLS"),
       @SerializedName("XLSX")

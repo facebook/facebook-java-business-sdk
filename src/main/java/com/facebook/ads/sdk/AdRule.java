@@ -1203,12 +1203,12 @@ public class AdRule extends APINode {
   }
 
   public static enum EnumStatus {
-      @SerializedName("ENABLED")
-      VALUE_ENABLED("ENABLED"),
-      @SerializedName("DISABLED")
-      VALUE_DISABLED("DISABLED"),
       @SerializedName("DELETED")
       VALUE_DELETED("DELETED"),
+      @SerializedName("DISABLED")
+      VALUE_DISABLED("DISABLED"),
+      @SerializedName("ENABLED")
+      VALUE_ENABLED("ENABLED"),
       NULL(null);
 
       private String value;

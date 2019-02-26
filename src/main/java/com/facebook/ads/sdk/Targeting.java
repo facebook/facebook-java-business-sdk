@@ -1405,12 +1405,12 @@ public class Targeting extends APINode {
 
 
   public static enum EnumDevicePlatforms {
-      @SerializedName("mobile")
-      VALUE_MOBILE("mobile"),
-      @SerializedName("desktop")
-      VALUE_DESKTOP("desktop"),
       @SerializedName("connected_tv")
       VALUE_CONNECTED_TV("connected_tv"),
+      @SerializedName("desktop")
+      VALUE_DESKTOP("desktop"),
+      @SerializedName("mobile")
+      VALUE_MOBILE("mobile"),
       NULL(null);
 
       private String value;
@@ -1426,12 +1426,12 @@ public class Targeting extends APINode {
   }
 
   public static enum EnumEffectiveDevicePlatforms {
-      @SerializedName("mobile")
-      VALUE_MOBILE("mobile"),
-      @SerializedName("desktop")
-      VALUE_DESKTOP("desktop"),
       @SerializedName("connected_tv")
       VALUE_CONNECTED_TV("connected_tv"),
+      @SerializedName("desktop")
+      VALUE_DESKTOP("desktop"),
+      @SerializedName("mobile")
+      VALUE_MOBILE("mobile"),
       NULL(null);
 
       private String value;

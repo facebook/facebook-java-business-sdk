@@ -1783,36 +1783,26 @@ public class LeadgenForm extends APINode {
   }
 
   public static enum EnumLocale {
-      @SerializedName("EN_US")
-      VALUE_EN_US("EN_US"),
-      @SerializedName("IT_IT")
-      VALUE_IT_IT("IT_IT"),
-      @SerializedName("FR_FR")
-      VALUE_FR_FR("FR_FR"),
-      @SerializedName("ES_ES")
-      VALUE_ES_ES("ES_ES"),
-      @SerializedName("ES_LA")
-      VALUE_ES_LA("ES_LA"),
-      @SerializedName("DE_DE")
-      VALUE_DE_DE("DE_DE"),
-      @SerializedName("EN_GB")
-      VALUE_EN_GB("EN_GB"),
-      @SerializedName("PT_BR")
-      VALUE_PT_BR("PT_BR"),
-      @SerializedName("ZH_TW")
-      VALUE_ZH_TW("ZH_TW"),
-      @SerializedName("ZH_HK")
-      VALUE_ZH_HK("ZH_HK"),
-      @SerializedName("TR_TR")
-      VALUE_TR_TR("TR_TR"),
       @SerializedName("AR_AR")
       VALUE_AR_AR("AR_AR"),
       @SerializedName("CS_CZ")
       VALUE_CS_CZ("CS_CZ"),
       @SerializedName("DA_DK")
       VALUE_DA_DK("DA_DK"),
+      @SerializedName("DE_DE")
+      VALUE_DE_DE("DE_DE"),
+      @SerializedName("EN_GB")
+      VALUE_EN_GB("EN_GB"),
+      @SerializedName("EN_US")
+      VALUE_EN_US("EN_US"),
+      @SerializedName("ES_ES")
+      VALUE_ES_ES("ES_ES"),
+      @SerializedName("ES_LA")
+      VALUE_ES_LA("ES_LA"),
       @SerializedName("FI_FI")
       VALUE_FI_FI("FI_FI"),
+      @SerializedName("FR_FR")
+      VALUE_FR_FR("FR_FR"),
       @SerializedName("HE_IL")
       VALUE_HE_IL("HE_IL"),
       @SerializedName("HI_IN")
@@ -1821,6 +1811,8 @@ public class LeadgenForm extends APINode {
       VALUE_HU_HU("HU_HU"),
       @SerializedName("ID_ID")
       VALUE_ID_ID("ID_ID"),
+      @SerializedName("IT_IT")
+      VALUE_IT_IT("IT_IT"),
       @SerializedName("JA_JP")
       VALUE_JA_JP("JA_JP"),
       @SerializedName("KO_KR")
@@ -1831,6 +1823,8 @@ public class LeadgenForm extends APINode {
       VALUE_NL_NL("NL_NL"),
       @SerializedName("PL_PL")
       VALUE_PL_PL("PL_PL"),
+      @SerializedName("PT_BR")
+      VALUE_PT_BR("PT_BR"),
       @SerializedName("PT_PT")
       VALUE_PT_PT("PT_PT"),
       @SerializedName("RO_RO")
@@ -1841,10 +1835,16 @@ public class LeadgenForm extends APINode {
       VALUE_SV_SE("SV_SE"),
       @SerializedName("TH_TH")
       VALUE_TH_TH("TH_TH"),
+      @SerializedName("TR_TR")
+      VALUE_TR_TR("TR_TR"),
       @SerializedName("VI_VN")
       VALUE_VI_VN("VI_VN"),
       @SerializedName("ZH_CN")
       VALUE_ZH_CN("ZH_CN"),
+      @SerializedName("ZH_HK")
+      VALUE_ZH_HK("ZH_HK"),
+      @SerializedName("ZH_TW")
+      VALUE_ZH_TW("ZH_TW"),
       NULL(null);
 
       private String value;

@@ -297,12 +297,12 @@ public class RequestHistory extends APINode {
 
 
   public static enum EnumHttpMethod {
+      @SerializedName("DELETE")
+      VALUE_DELETE("DELETE"),
       @SerializedName("GET")
       VALUE_GET("GET"),
       @SerializedName("POST")
       VALUE_POST("POST"),
-      @SerializedName("DELETE")
-      VALUE_DELETE("DELETE"),
       NULL(null);
 
       private String value;

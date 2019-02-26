@@ -3211,16 +3211,16 @@ public class SystemUser extends APINode {
   }
 
   public static enum EnumRole {
-      @SerializedName("FINANCE_EDITOR")
-      VALUE_FINANCE_EDITOR("FINANCE_EDITOR"),
-      @SerializedName("FINANCE_ANALYST")
-      VALUE_FINANCE_ANALYST("FINANCE_ANALYST"),
-      @SerializedName("ADS_RIGHTS_REVIEWER")
-      VALUE_ADS_RIGHTS_REVIEWER("ADS_RIGHTS_REVIEWER"),
       @SerializedName("ADMIN")
       VALUE_ADMIN("ADMIN"),
+      @SerializedName("ADS_RIGHTS_REVIEWER")
+      VALUE_ADS_RIGHTS_REVIEWER("ADS_RIGHTS_REVIEWER"),
       @SerializedName("EMPLOYEE")
       VALUE_EMPLOYEE("EMPLOYEE"),
+      @SerializedName("FINANCE_ANALYST")
+      VALUE_FINANCE_ANALYST("FINANCE_ANALYST"),
+      @SerializedName("FINANCE_EDITOR")
+      VALUE_FINANCE_EDITOR("FINANCE_EDITOR"),
       NULL(null);
 
       private String value;

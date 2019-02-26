@@ -2603,6 +2603,10 @@ public class Group extends APINode {
       return this;
     }
 
+    public APIRequestCreateFeed setFunFactPromptId (Long funFactPromptId) {
+      this.setParam("fun_fact_prompt_id", funFactPromptId);
+      return this;
+    }
     public APIRequestCreateFeed setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -2664,6 +2668,10 @@ public class Group extends APINode {
       return this;
     }
 
+    public APIRequestCreateFeed setOfferLikePostId (Long offerLikePostId) {
+      this.setParam("offer_like_post_id", offerLikePostId);
+      return this;
+    }
     public APIRequestCreateFeed setOfferLikePostId (String offerLikePostId) {
       this.setParam("offer_like_post_id", offerLikePostId);
       return this;
@@ -6961,6 +6969,10 @@ public class Group extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setFunFactPromptId (Long funFactPromptId) {
+      this.setParam("fun_fact_prompt_id", funFactPromptId);
+      return this;
+    }
     public APIRequestCreateVideo setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -7022,6 +7034,10 @@ public class Group extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setOfferLikePostId (Long offerLikePostId) {
+      this.setParam("offer_like_post_id", offerLikePostId);
+      return this;
+    }
     public APIRequestCreateVideo setOfferLikePostId (String offerLikePostId) {
       this.setParam("offer_like_post_id", offerLikePostId);
       return this;
@@ -7768,90 +7784,90 @@ public class Group extends APINode {
   }
 
   public static enum EnumGroupType {
-      @SerializedName("FAMILY")
-      VALUE_FAMILY("FAMILY"),
-      @SerializedName("CLOSE_FRIENDS")
-      VALUE_CLOSE_FRIENDS("CLOSE_FRIENDS"),
-      @SerializedName("NEIGHBORS")
-      VALUE_NEIGHBORS("NEIGHBORS"),
-      @SerializedName("TEAMMATES")
-      VALUE_TEAMMATES("TEAMMATES"),
-      @SerializedName("FOR_SALE")
-      VALUE_FOR_SALE("FOR_SALE"),
-      @SerializedName("EVENT_PLANNING")
-      VALUE_EVENT_PLANNING("EVENT_PLANNING"),
-      @SerializedName("SUPPORT")
-      VALUE_SUPPORT("SUPPORT"),
-      @SerializedName("CLUB")
-      VALUE_CLUB("CLUB"),
-      @SerializedName("PROJECT")
-      VALUE_PROJECT("PROJECT"),
-      @SerializedName("SORORITY")
-      VALUE_SORORITY("SORORITY"),
-      @SerializedName("FRATERNITY")
-      VALUE_FRATERNITY("FRATERNITY"),
-      @SerializedName("STUDY_GROUP")
-      VALUE_STUDY_GROUP("STUDY_GROUP"),
-      @SerializedName("SCHOOL_CLASS")
-      VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
-      @SerializedName("LEARNING")
-      VALUE_LEARNING("LEARNING"),
-      @SerializedName("MEME")
-      VALUE_MEME("MEME"),
-      @SerializedName("TRAVEL_PLANNING")
-      VALUE_TRAVEL_PLANNING("TRAVEL_PLANNING"),
-      @SerializedName("COUPLE")
-      VALUE_COUPLE("COUPLE"),
-      @SerializedName("PARENTS")
-      VALUE_PARENTS("PARENTS"),
-      @SerializedName("CUSTOM")
-      VALUE_CUSTOM("CUSTOM"),
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
-      @SerializedName("WORK_TEAM")
-      VALUE_WORK_TEAM("WORK_TEAM"),
-      @SerializedName("WORK_TEAMWORK")
-      VALUE_WORK_TEAMWORK("WORK_TEAMWORK"),
-      @SerializedName("WORK_FEEDBACK")
-      VALUE_WORK_FEEDBACK("WORK_FEEDBACK"),
-      @SerializedName("WORK_ANNOUNCEMENT")
-      VALUE_WORK_ANNOUNCEMENT("WORK_ANNOUNCEMENT"),
-      @SerializedName("WORK_DEMO_GROUP")
-      VALUE_WORK_DEMO_GROUP("WORK_DEMO_GROUP"),
-      @SerializedName("WORK_SOCIAL")
-      VALUE_WORK_SOCIAL("WORK_SOCIAL"),
-      @SerializedName("WORK_DISCUSSION")
-      VALUE_WORK_DISCUSSION("WORK_DISCUSSION"),
-      @SerializedName("WORK_MULTI_COMPANY")
-      VALUE_WORK_MULTI_COMPANY("WORK_MULTI_COMPANY"),
-      @SerializedName("WORK_FOR_SALE")
-      VALUE_WORK_FOR_SALE("WORK_FOR_SALE"),
-      @SerializedName("WORK_LEARNING")
-      VALUE_WORK_LEARNING("WORK_LEARNING"),
-      @SerializedName("FITNESS")
-      VALUE_FITNESS("FITNESS"),
-      @SerializedName("REAL_WORLD")
-      VALUE_REAL_WORLD("REAL_WORLD"),
       @SerializedName("CASUAL")
       VALUE_CASUAL("CASUAL"),
+      @SerializedName("CLOSE_FRIENDS")
+      VALUE_CLOSE_FRIENDS("CLOSE_FRIENDS"),
+      @SerializedName("CLUB")
+      VALUE_CLUB("CLUB"),
+      @SerializedName("COUPLE")
+      VALUE_COUPLE("COUPLE"),
+      @SerializedName("CUSTOM")
+      VALUE_CUSTOM("CUSTOM"),
+      @SerializedName("EPHEMERAL")
+      VALUE_EPHEMERAL("EPHEMERAL"),
+      @SerializedName("EVENT_PLANNING")
+      VALUE_EVENT_PLANNING("EVENT_PLANNING"),
+      @SerializedName("FAMILY")
+      VALUE_FAMILY("FAMILY"),
+      @SerializedName("FITNESS")
+      VALUE_FITNESS("FITNESS"),
+      @SerializedName("FOR_SALE")
+      VALUE_FOR_SALE("FOR_SALE"),
+      @SerializedName("FOR_WORK")
+      VALUE_FOR_WORK("FOR_WORK"),
+      @SerializedName("FRATERNITY")
+      VALUE_FRATERNITY("FRATERNITY"),
       @SerializedName("GAME")
       VALUE_GAME("GAME"),
       @SerializedName("HIGH_SCHOOL_FORUM")
       VALUE_HIGH_SCHOOL_FORUM("HIGH_SCHOOL_FORUM"),
       @SerializedName("JOBS")
       VALUE_JOBS("JOBS"),
-      @SerializedName("REAL_WORLD_AT_WORK")
-      VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
-      @SerializedName("FOR_WORK")
-      VALUE_FOR_WORK("FOR_WORK"),
+      @SerializedName("LEARNING")
+      VALUE_LEARNING("LEARNING"),
+      @SerializedName("MEME")
+      VALUE_MEME("MEME"),
       @SerializedName("MENTORSHIP")
       VALUE_MENTORSHIP("MENTORSHIP"),
-      @SerializedName("WORK_MENTORSHIP")
-      VALUE_WORK_MENTORSHIP("WORK_MENTORSHIP"),
-      @SerializedName("EPHEMERAL")
-      VALUE_EPHEMERAL("EPHEMERAL"),
+      @SerializedName("NEIGHBORS")
+      VALUE_NEIGHBORS("NEIGHBORS"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("PARENTS")
+      VALUE_PARENTS("PARENTS"),
+      @SerializedName("PROJECT")
+      VALUE_PROJECT("PROJECT"),
+      @SerializedName("REAL_WORLD")
+      VALUE_REAL_WORLD("REAL_WORLD"),
+      @SerializedName("REAL_WORLD_AT_WORK")
+      VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
+      @SerializedName("SCHOOL_CLASS")
+      VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
+      @SerializedName("SORORITY")
+      VALUE_SORORITY("SORORITY"),
+      @SerializedName("STUDY_GROUP")
+      VALUE_STUDY_GROUP("STUDY_GROUP"),
+      @SerializedName("SUPPORT")
+      VALUE_SUPPORT("SUPPORT"),
+      @SerializedName("TEAMMATES")
+      VALUE_TEAMMATES("TEAMMATES"),
+      @SerializedName("TRAVEL_PLANNING")
+      VALUE_TRAVEL_PLANNING("TRAVEL_PLANNING"),
+      @SerializedName("WORK_ANNOUNCEMENT")
+      VALUE_WORK_ANNOUNCEMENT("WORK_ANNOUNCEMENT"),
+      @SerializedName("WORK_DEMO_GROUP")
+      VALUE_WORK_DEMO_GROUP("WORK_DEMO_GROUP"),
+      @SerializedName("WORK_DISCUSSION")
+      VALUE_WORK_DISCUSSION("WORK_DISCUSSION"),
       @SerializedName("WORK_EPHEMERAL")
       VALUE_WORK_EPHEMERAL("WORK_EPHEMERAL"),
+      @SerializedName("WORK_FEEDBACK")
+      VALUE_WORK_FEEDBACK("WORK_FEEDBACK"),
+      @SerializedName("WORK_FOR_SALE")
+      VALUE_WORK_FOR_SALE("WORK_FOR_SALE"),
+      @SerializedName("WORK_LEARNING")
+      VALUE_WORK_LEARNING("WORK_LEARNING"),
+      @SerializedName("WORK_MENTORSHIP")
+      VALUE_WORK_MENTORSHIP("WORK_MENTORSHIP"),
+      @SerializedName("WORK_MULTI_COMPANY")
+      VALUE_WORK_MULTI_COMPANY("WORK_MULTI_COMPANY"),
+      @SerializedName("WORK_SOCIAL")
+      VALUE_WORK_SOCIAL("WORK_SOCIAL"),
+      @SerializedName("WORK_TEAM")
+      VALUE_WORK_TEAM("WORK_TEAM"),
+      @SerializedName("WORK_TEAMWORK")
+      VALUE_WORK_TEAMWORK("WORK_TEAMWORK"),
       NULL(null);
 
       private String value;
@@ -7867,12 +7883,12 @@ public class Group extends APINode {
   }
 
   public static enum EnumJoinSetting {
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
-      @SerializedName("ANYONE")
-      VALUE_ANYONE("ANYONE"),
       @SerializedName("ADMIN_ONLY")
       VALUE_ADMIN_ONLY("ADMIN_ONLY"),
+      @SerializedName("ANYONE")
+      VALUE_ANYONE("ANYONE"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
       NULL(null);
 
       private String value;
@@ -7888,12 +7904,12 @@ public class Group extends APINode {
   }
 
   public static enum EnumPostPermissions {
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
       @SerializedName("ADMIN_ONLY")
       VALUE_ADMIN_ONLY("ADMIN_ONLY"),
       @SerializedName("ANYONE")
       VALUE_ANYONE("ANYONE"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
       NULL(null);
 
       private String value;
@@ -7909,90 +7925,90 @@ public class Group extends APINode {
   }
 
   public static enum EnumPurpose {
-      @SerializedName("FAMILY")
-      VALUE_FAMILY("FAMILY"),
-      @SerializedName("CLOSE_FRIENDS")
-      VALUE_CLOSE_FRIENDS("CLOSE_FRIENDS"),
-      @SerializedName("NEIGHBORS")
-      VALUE_NEIGHBORS("NEIGHBORS"),
-      @SerializedName("TEAMMATES")
-      VALUE_TEAMMATES("TEAMMATES"),
-      @SerializedName("FOR_SALE")
-      VALUE_FOR_SALE("FOR_SALE"),
-      @SerializedName("EVENT_PLANNING")
-      VALUE_EVENT_PLANNING("EVENT_PLANNING"),
-      @SerializedName("SUPPORT")
-      VALUE_SUPPORT("SUPPORT"),
-      @SerializedName("CLUB")
-      VALUE_CLUB("CLUB"),
-      @SerializedName("PROJECT")
-      VALUE_PROJECT("PROJECT"),
-      @SerializedName("SORORITY")
-      VALUE_SORORITY("SORORITY"),
-      @SerializedName("FRATERNITY")
-      VALUE_FRATERNITY("FRATERNITY"),
-      @SerializedName("STUDY_GROUP")
-      VALUE_STUDY_GROUP("STUDY_GROUP"),
-      @SerializedName("SCHOOL_CLASS")
-      VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
-      @SerializedName("LEARNING")
-      VALUE_LEARNING("LEARNING"),
-      @SerializedName("MEME")
-      VALUE_MEME("MEME"),
-      @SerializedName("TRAVEL_PLANNING")
-      VALUE_TRAVEL_PLANNING("TRAVEL_PLANNING"),
-      @SerializedName("COUPLE")
-      VALUE_COUPLE("COUPLE"),
-      @SerializedName("PARENTS")
-      VALUE_PARENTS("PARENTS"),
-      @SerializedName("CUSTOM")
-      VALUE_CUSTOM("CUSTOM"),
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
-      @SerializedName("WORK_TEAM")
-      VALUE_WORK_TEAM("WORK_TEAM"),
-      @SerializedName("WORK_TEAMWORK")
-      VALUE_WORK_TEAMWORK("WORK_TEAMWORK"),
-      @SerializedName("WORK_FEEDBACK")
-      VALUE_WORK_FEEDBACK("WORK_FEEDBACK"),
-      @SerializedName("WORK_ANNOUNCEMENT")
-      VALUE_WORK_ANNOUNCEMENT("WORK_ANNOUNCEMENT"),
-      @SerializedName("WORK_DEMO_GROUP")
-      VALUE_WORK_DEMO_GROUP("WORK_DEMO_GROUP"),
-      @SerializedName("WORK_SOCIAL")
-      VALUE_WORK_SOCIAL("WORK_SOCIAL"),
-      @SerializedName("WORK_DISCUSSION")
-      VALUE_WORK_DISCUSSION("WORK_DISCUSSION"),
-      @SerializedName("WORK_MULTI_COMPANY")
-      VALUE_WORK_MULTI_COMPANY("WORK_MULTI_COMPANY"),
-      @SerializedName("WORK_FOR_SALE")
-      VALUE_WORK_FOR_SALE("WORK_FOR_SALE"),
-      @SerializedName("WORK_LEARNING")
-      VALUE_WORK_LEARNING("WORK_LEARNING"),
-      @SerializedName("FITNESS")
-      VALUE_FITNESS("FITNESS"),
-      @SerializedName("REAL_WORLD")
-      VALUE_REAL_WORLD("REAL_WORLD"),
       @SerializedName("CASUAL")
       VALUE_CASUAL("CASUAL"),
+      @SerializedName("CLOSE_FRIENDS")
+      VALUE_CLOSE_FRIENDS("CLOSE_FRIENDS"),
+      @SerializedName("CLUB")
+      VALUE_CLUB("CLUB"),
+      @SerializedName("COUPLE")
+      VALUE_COUPLE("COUPLE"),
+      @SerializedName("CUSTOM")
+      VALUE_CUSTOM("CUSTOM"),
+      @SerializedName("EPHEMERAL")
+      VALUE_EPHEMERAL("EPHEMERAL"),
+      @SerializedName("EVENT_PLANNING")
+      VALUE_EVENT_PLANNING("EVENT_PLANNING"),
+      @SerializedName("FAMILY")
+      VALUE_FAMILY("FAMILY"),
+      @SerializedName("FITNESS")
+      VALUE_FITNESS("FITNESS"),
+      @SerializedName("FOR_SALE")
+      VALUE_FOR_SALE("FOR_SALE"),
+      @SerializedName("FOR_WORK")
+      VALUE_FOR_WORK("FOR_WORK"),
+      @SerializedName("FRATERNITY")
+      VALUE_FRATERNITY("FRATERNITY"),
       @SerializedName("GAME")
       VALUE_GAME("GAME"),
       @SerializedName("HIGH_SCHOOL_FORUM")
       VALUE_HIGH_SCHOOL_FORUM("HIGH_SCHOOL_FORUM"),
       @SerializedName("JOBS")
       VALUE_JOBS("JOBS"),
-      @SerializedName("REAL_WORLD_AT_WORK")
-      VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
-      @SerializedName("FOR_WORK")
-      VALUE_FOR_WORK("FOR_WORK"),
+      @SerializedName("LEARNING")
+      VALUE_LEARNING("LEARNING"),
+      @SerializedName("MEME")
+      VALUE_MEME("MEME"),
       @SerializedName("MENTORSHIP")
       VALUE_MENTORSHIP("MENTORSHIP"),
-      @SerializedName("WORK_MENTORSHIP")
-      VALUE_WORK_MENTORSHIP("WORK_MENTORSHIP"),
-      @SerializedName("EPHEMERAL")
-      VALUE_EPHEMERAL("EPHEMERAL"),
+      @SerializedName("NEIGHBORS")
+      VALUE_NEIGHBORS("NEIGHBORS"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      @SerializedName("PARENTS")
+      VALUE_PARENTS("PARENTS"),
+      @SerializedName("PROJECT")
+      VALUE_PROJECT("PROJECT"),
+      @SerializedName("REAL_WORLD")
+      VALUE_REAL_WORLD("REAL_WORLD"),
+      @SerializedName("REAL_WORLD_AT_WORK")
+      VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
+      @SerializedName("SCHOOL_CLASS")
+      VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
+      @SerializedName("SORORITY")
+      VALUE_SORORITY("SORORITY"),
+      @SerializedName("STUDY_GROUP")
+      VALUE_STUDY_GROUP("STUDY_GROUP"),
+      @SerializedName("SUPPORT")
+      VALUE_SUPPORT("SUPPORT"),
+      @SerializedName("TEAMMATES")
+      VALUE_TEAMMATES("TEAMMATES"),
+      @SerializedName("TRAVEL_PLANNING")
+      VALUE_TRAVEL_PLANNING("TRAVEL_PLANNING"),
+      @SerializedName("WORK_ANNOUNCEMENT")
+      VALUE_WORK_ANNOUNCEMENT("WORK_ANNOUNCEMENT"),
+      @SerializedName("WORK_DEMO_GROUP")
+      VALUE_WORK_DEMO_GROUP("WORK_DEMO_GROUP"),
+      @SerializedName("WORK_DISCUSSION")
+      VALUE_WORK_DISCUSSION("WORK_DISCUSSION"),
       @SerializedName("WORK_EPHEMERAL")
       VALUE_WORK_EPHEMERAL("WORK_EPHEMERAL"),
+      @SerializedName("WORK_FEEDBACK")
+      VALUE_WORK_FEEDBACK("WORK_FEEDBACK"),
+      @SerializedName("WORK_FOR_SALE")
+      VALUE_WORK_FOR_SALE("WORK_FOR_SALE"),
+      @SerializedName("WORK_LEARNING")
+      VALUE_WORK_LEARNING("WORK_LEARNING"),
+      @SerializedName("WORK_MENTORSHIP")
+      VALUE_WORK_MENTORSHIP("WORK_MENTORSHIP"),
+      @SerializedName("WORK_MULTI_COMPANY")
+      VALUE_WORK_MULTI_COMPANY("WORK_MULTI_COMPANY"),
+      @SerializedName("WORK_SOCIAL")
+      VALUE_WORK_SOCIAL("WORK_SOCIAL"),
+      @SerializedName("WORK_TEAM")
+      VALUE_WORK_TEAM("WORK_TEAM"),
+      @SerializedName("WORK_TEAMWORK")
+      VALUE_WORK_TEAMWORK("WORK_TEAMWORK"),
       NULL(null);
 
       private String value;
@@ -8008,46 +8024,46 @@ public class Group extends APINode {
   }
 
   public static enum EnumSuggestionCategory {
-      @SerializedName("FAMILY")
-      VALUE_FAMILY("FAMILY"),
-      @SerializedName("LIFE_EVENT")
-      VALUE_LIFE_EVENT("LIFE_EVENT"),
-      @SerializedName("TOP_PAGE")
-      VALUE_TOP_PAGE("TOP_PAGE"),
-      @SerializedName("WORK")
-      VALUE_WORK("WORK"),
-      @SerializedName("WORK_GENERIC")
-      VALUE_WORK_GENERIC("WORK_GENERIC"),
-      @SerializedName("SCHOOL")
-      VALUE_SCHOOL("SCHOOL"),
-      @SerializedName("SCHOOL_GENERIC")
-      VALUE_SCHOOL_GENERIC("SCHOOL_GENERIC"),
-      @SerializedName("MESSENGER")
-      VALUE_MESSENGER("MESSENGER"),
-      @SerializedName("MESSENGER_THREAD")
-      VALUE_MESSENGER_THREAD("MESSENGER_THREAD"),
-      @SerializedName("PAGE_ADMIN")
-      VALUE_PAGE_ADMIN("PAGE_ADMIN"),
-      @SerializedName("FRIEND_LIST")
-      VALUE_FRIEND_LIST("FRIEND_LIST"),
-      @SerializedName("GAMES")
-      VALUE_GAMES("GAMES"),
-      @SerializedName("EVENT")
-      VALUE_EVENT("EVENT"),
       @SerializedName("CLOSE_FRIENDS")
       VALUE_CLOSE_FRIENDS("CLOSE_FRIENDS"),
       @SerializedName("CLOSE_FRIENDS_GENERIC")
       VALUE_CLOSE_FRIENDS_GENERIC("CLOSE_FRIENDS_GENERIC"),
-      @SerializedName("NEARBY_FRIENDS")
-      VALUE_NEARBY_FRIENDS("NEARBY_FRIENDS"),
       @SerializedName("CURRENT_CITY")
       VALUE_CURRENT_CITY("CURRENT_CITY"),
+      @SerializedName("EVENT")
+      VALUE_EVENT("EVENT"),
+      @SerializedName("FAMILY")
+      VALUE_FAMILY("FAMILY"),
+      @SerializedName("FRIEND_LIST")
+      VALUE_FRIEND_LIST("FRIEND_LIST"),
+      @SerializedName("GAMES")
+      VALUE_GAMES("GAMES"),
+      @SerializedName("LIFE_EVENT")
+      VALUE_LIFE_EVENT("LIFE_EVENT"),
+      @SerializedName("MESSENGER")
+      VALUE_MESSENGER("MESSENGER"),
+      @SerializedName("MESSENGER_THREAD")
+      VALUE_MESSENGER_THREAD("MESSENGER_THREAD"),
+      @SerializedName("NEARBY_FRIENDS")
+      VALUE_NEARBY_FRIENDS("NEARBY_FRIENDS"),
+      @SerializedName("PAGE_ADMIN")
+      VALUE_PAGE_ADMIN("PAGE_ADMIN"),
+      @SerializedName("SCHOOL")
+      VALUE_SCHOOL("SCHOOL"),
+      @SerializedName("SCHOOL_GENERIC")
+      VALUE_SCHOOL_GENERIC("SCHOOL_GENERIC"),
+      @SerializedName("TOP_PAGE")
+      VALUE_TOP_PAGE("TOP_PAGE"),
+      @SerializedName("WORK")
+      VALUE_WORK("WORK"),
+      @SerializedName("WORKPLACE")
+      VALUE_WORKPLACE("WORKPLACE"),
       @SerializedName("WORKPLACE_1_1")
       VALUE_WORKPLACE_1_1("WORKPLACE_1_1"),
       @SerializedName("WORKPLACE_MANAGER")
       VALUE_WORKPLACE_MANAGER("WORKPLACE_MANAGER"),
-      @SerializedName("WORKPLACE")
-      VALUE_WORKPLACE("WORKPLACE"),
+      @SerializedName("WORK_GENERIC")
+      VALUE_WORK_GENERIC("WORK_GENERIC"),
       NULL(null);
 
       private String value;
@@ -8063,18 +8079,18 @@ public class Group extends APINode {
   }
 
   public static enum EnumBackdatedTimeGranularity {
-      @SerializedName("year")
-      VALUE_YEAR("year"),
-      @SerializedName("month")
-      VALUE_MONTH("month"),
       @SerializedName("day")
       VALUE_DAY("day"),
       @SerializedName("hour")
       VALUE_HOUR("hour"),
       @SerializedName("min")
       VALUE_MIN("min"),
+      @SerializedName("month")
+      VALUE_MONTH("month"),
       @SerializedName("none")
       VALUE_NONE("none"),
+      @SerializedName("year")
+      VALUE_YEAR("year"),
       NULL(null);
 
       private String value;
@@ -8090,16 +8106,16 @@ public class Group extends APINode {
   }
 
   public static enum EnumUnpublishedContentType {
-      @SerializedName("SCHEDULED")
-      VALUE_SCHEDULED("SCHEDULED"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
       @SerializedName("ADS_POST")
       VALUE_ADS_POST("ADS_POST"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
       @SerializedName("INLINE_CREATED")
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("SCHEDULED")
+      VALUE_SCHEDULED("SCHEDULED"),
       NULL(null);
 
       private String value;
@@ -8115,10 +8131,10 @@ public class Group extends APINode {
   }
 
   public static enum EnumPostingToRedspace {
-      @SerializedName("enabled")
-      VALUE_ENABLED("enabled"),
       @SerializedName("disabled")
       VALUE_DISABLED("disabled"),
+      @SerializedName("enabled")
+      VALUE_ENABLED("enabled"),
       NULL(null);
 
       private String value;
@@ -8155,12 +8171,12 @@ public class Group extends APINode {
   public static enum EnumCheckinEntryPoint {
       @SerializedName("BRANDING_CHECKIN")
       VALUE_BRANDING_CHECKIN("BRANDING_CHECKIN"),
-      @SerializedName("BRANDING_STATUS")
-      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      @SerializedName("BRANDING_PHOTO")
-      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
       @SerializedName("BRANDING_OTHER")
       VALUE_BRANDING_OTHER("BRANDING_OTHER"),
+      @SerializedName("BRANDING_PHOTO")
+      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
+      @SerializedName("BRANDING_STATUS")
+      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
       NULL(null);
 
       private String value;
@@ -8201,10 +8217,10 @@ public class Group extends APINode {
   }
 
   public static enum EnumFormatting {
-      @SerializedName("PLAINTEXT")
-      VALUE_PLAINTEXT("PLAINTEXT"),
       @SerializedName("MARKDOWN")
       VALUE_MARKDOWN("MARKDOWN"),
+      @SerializedName("PLAINTEXT")
+      VALUE_PLAINTEXT("PLAINTEXT"),
       NULL(null);
 
       private String value;

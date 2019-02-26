@@ -574,6 +574,10 @@ public class AdAccount extends APINode {
     return new APIRequestGetApplications(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestDeleteAssignedUsers deleteAssignedUsers() {
+    return new APIRequestDeleteAssignedUsers(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetAssignedUsers getAssignedUsers() {
     return new APIRequestGetAssignedUsers(this.getPrefixedId().toString(), context);
   }
@@ -12352,6 +12356,10 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdVideo setFunFactPromptId (Long funFactPromptId) {
+      this.setParam("fun_fact_prompt_id", funFactPromptId);
+      return this;
+    }
     public APIRequestCreateAdVideo setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -12413,6 +12421,10 @@ public class AdAccount extends APINode {
       return this;
     }
 
+    public APIRequestCreateAdVideo setOfferLikePostId (Long offerLikePostId) {
+      this.setParam("offer_like_post_id", offerLikePostId);
+      return this;
+    }
     public APIRequestCreateAdVideo setOfferLikePostId (String offerLikePostId) {
       this.setParam("offer_like_post_id", offerLikePostId);
       return this;
@@ -14536,6 +14548,120 @@ public class AdAccount extends APINode {
       this.requestField("weekly_active_users", value);
       return this;
     }
+  }
+
+  public static class APIRequestDeleteAssignedUsers extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "user",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestDeleteAssignedUsers.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestDeleteAssignedUsers(String nodeId, APIContext context) {
+      super(context, nodeId, "/assigned_users", "DELETE", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestDeleteAssignedUsers setUser (Long user) {
+      this.setParam("user", user);
+      return this;
+    }
+    public APIRequestDeleteAssignedUsers setUser (String user) {
+      this.setParam("user", user);
+      return this;
+    }
+
+    public APIRequestDeleteAssignedUsers requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestDeleteAssignedUsers requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestDeleteAssignedUsers requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetAssignedUsers extends APIRequest<AssignedUser> {
@@ -32630,12 +32756,12 @@ public class AdAccount extends APINode {
   }
 
   public static enum EnumPermittedTasks {
-      @SerializedName("MANAGE")
-      VALUE_MANAGE("MANAGE"),
       @SerializedName("ADVERTISE")
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
       NULL(null);
 
       private String value;
@@ -32651,12 +32777,12 @@ public class AdAccount extends APINode {
   }
 
   public static enum EnumTasks {
-      @SerializedName("MANAGE")
-      VALUE_MANAGE("MANAGE"),
       @SerializedName("ADVERTISE")
       VALUE_ADVERTISE("ADVERTISE"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("MANAGE")
+      VALUE_MANAGE("MANAGE"),
       NULL(null);
 
       private String value;
@@ -32736,32 +32862,32 @@ public class AdAccount extends APINode {
   }
 
   public static enum EnumSubtype {
-      @SerializedName("CUSTOM")
-      VALUE_CUSTOM("CUSTOM"),
-      @SerializedName("WEBSITE")
-      VALUE_WEBSITE("WEBSITE"),
       @SerializedName("APP")
       VALUE_APP("APP"),
-      @SerializedName("OFFLINE_CONVERSION")
-      VALUE_OFFLINE_CONVERSION("OFFLINE_CONVERSION"),
-      @SerializedName("CLAIM")
-      VALUE_CLAIM("CLAIM"),
-      @SerializedName("PARTNER")
-      VALUE_PARTNER("PARTNER"),
-      @SerializedName("MANAGED")
-      VALUE_MANAGED("MANAGED"),
-      @SerializedName("VIDEO")
-      VALUE_VIDEO("VIDEO"),
-      @SerializedName("LOOKALIKE")
-      VALUE_LOOKALIKE("LOOKALIKE"),
-      @SerializedName("ENGAGEMENT")
-      VALUE_ENGAGEMENT("ENGAGEMENT"),
       @SerializedName("BAG_OF_ACCOUNTS")
       VALUE_BAG_OF_ACCOUNTS("BAG_OF_ACCOUNTS"),
-      @SerializedName("STUDY_RULE_AUDIENCE")
-      VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
+      @SerializedName("CLAIM")
+      VALUE_CLAIM("CLAIM"),
+      @SerializedName("CUSTOM")
+      VALUE_CUSTOM("CUSTOM"),
+      @SerializedName("ENGAGEMENT")
+      VALUE_ENGAGEMENT("ENGAGEMENT"),
       @SerializedName("FOX")
       VALUE_FOX("FOX"),
+      @SerializedName("LOOKALIKE")
+      VALUE_LOOKALIKE("LOOKALIKE"),
+      @SerializedName("MANAGED")
+      VALUE_MANAGED("MANAGED"),
+      @SerializedName("OFFLINE_CONVERSION")
+      VALUE_OFFLINE_CONVERSION("OFFLINE_CONVERSION"),
+      @SerializedName("PARTNER")
+      VALUE_PARTNER("PARTNER"),
+      @SerializedName("STUDY_RULE_AUDIENCE")
+      VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
+      @SerializedName("VIDEO")
+      VALUE_VIDEO("VIDEO"),
+      @SerializedName("WEBSITE")
+      VALUE_WEBSITE("WEBSITE"),
       NULL(null);
 
       private String value;
@@ -32805,10 +32931,10 @@ public class AdAccount extends APINode {
       VALUE_PERFORMANCE_LEGACY("PERFORMANCE_LEGACY"),
       @SerializedName("TARGETING_AND_CREATIVE")
       VALUE_TARGETING_AND_CREATIVE("TARGETING_AND_CREATIVE"),
-      @SerializedName("VIDEO_ENGAGEMENT")
-      VALUE_VIDEO_ENGAGEMENT("VIDEO_ENGAGEMENT"),
       @SerializedName("VALIDATION_VIEW")
       VALUE_VALIDATION_VIEW("VALIDATION_VIEW"),
+      @SerializedName("VIDEO_ENGAGEMENT")
+      VALUE_VIDEO_ENGAGEMENT("VIDEO_ENGAGEMENT"),
       NULL(null);
 
       private String value;
@@ -32824,8 +32950,8 @@ public class AdAccount extends APINode {
   }
 
   public static enum EnumLevel {
-      @SerializedName("politicalad")
-      VALUE_POLITICALAD("politicalad"),
+      @SerializedName("account")
+      VALUE_ACCOUNT("account"),
       @SerializedName("ad")
       VALUE_AD("ad"),
       @SerializedName("adgroup")
@@ -32834,8 +32960,8 @@ public class AdAccount extends APINode {
       VALUE_CAMPAIGN("campaign"),
       @SerializedName("campaign_group")
       VALUE_CAMPAIGN_GROUP("campaign_group"),
-      @SerializedName("account")
-      VALUE_ACCOUNT("account"),
+      @SerializedName("politicalad")
+      VALUE_POLITICALAD("politicalad"),
       NULL(null);
 
       private String value;
@@ -32851,44 +32977,44 @@ public class AdAccount extends APINode {
   }
 
   public static enum EnumDatePreset {
-      @SerializedName("today")
-      VALUE_TODAY("today"),
-      @SerializedName("yesterday")
-      VALUE_YESTERDAY("yesterday"),
-      @SerializedName("this_month")
-      VALUE_THIS_MONTH("this_month"),
-      @SerializedName("last_month")
-      VALUE_LAST_MONTH("last_month"),
-      @SerializedName("this_quarter")
-      VALUE_THIS_QUARTER("this_quarter"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
-      @SerializedName("last_3d")
-      VALUE_LAST_3D("last_3d"),
-      @SerializedName("last_7d")
-      VALUE_LAST_7D("last_7d"),
       @SerializedName("last_14d")
       VALUE_LAST_14D("last_14d"),
       @SerializedName("last_28d")
       VALUE_LAST_28D("last_28d"),
       @SerializedName("last_30d")
       VALUE_LAST_30D("last_30d"),
+      @SerializedName("last_3d")
+      VALUE_LAST_3D("last_3d"),
+      @SerializedName("last_7d")
+      VALUE_LAST_7D("last_7d"),
       @SerializedName("last_90d")
       VALUE_LAST_90D("last_90d"),
+      @SerializedName("last_month")
+      VALUE_LAST_MONTH("last_month"),
+      @SerializedName("last_quarter")
+      VALUE_LAST_QUARTER("last_quarter"),
       @SerializedName("last_week_mon_sun")
       VALUE_LAST_WEEK_MON_SUN("last_week_mon_sun"),
       @SerializedName("last_week_sun_sat")
       VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
-      @SerializedName("last_quarter")
-      VALUE_LAST_QUARTER("last_quarter"),
       @SerializedName("last_year")
       VALUE_LAST_YEAR("last_year"),
+      @SerializedName("lifetime")
+      VALUE_LIFETIME("lifetime"),
+      @SerializedName("this_month")
+      VALUE_THIS_MONTH("this_month"),
+      @SerializedName("this_quarter")
+      VALUE_THIS_QUARTER("this_quarter"),
       @SerializedName("this_week_mon_today")
       VALUE_THIS_WEEK_MON_TODAY("this_week_mon_today"),
       @SerializedName("this_week_sun_today")
       VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
       @SerializedName("this_year")
       VALUE_THIS_YEAR("this_year"),
+      @SerializedName("today")
+      VALUE_TODAY("today"),
+      @SerializedName("yesterday")
+      VALUE_YESTERDAY("yesterday"),
       NULL(null);
 
       private String value;
@@ -32904,12 +33030,12 @@ public class AdAccount extends APINode {
   }
 
   public static enum EnumCreationSource {
+      @SerializedName("adsExcelAddin")
+      VALUE_ADSEXCELADDIN("adsExcelAddin"),
       @SerializedName("adsManagerReporting")
       VALUE_ADSMANAGERREPORTING("adsManagerReporting"),
       @SerializedName("newAdsManager")
       VALUE_NEWADSMANAGER("newAdsManager"),
-      @SerializedName("adsExcelAddin")
-      VALUE_ADSEXCELADDIN("adsExcelAddin"),
       NULL(null);
 
       private String value;
@@ -32933,6 +33059,8 @@ public class AdAccount extends APINode {
       VALUE_ACTION_CAROUSEL_CARD_ID("action_carousel_card_id"),
       @SerializedName("action_carousel_card_name")
       VALUE_ACTION_CAROUSEL_CARD_NAME("action_carousel_card_name"),
+      @SerializedName("action_converted_product_id")
+      VALUE_ACTION_CONVERTED_PRODUCT_ID("action_converted_product_id"),
       @SerializedName("action_destination")
       VALUE_ACTION_DESTINATION("action_destination"),
       @SerializedName("action_device")
@@ -32947,8 +33075,6 @@ public class AdAccount extends APINode {
       VALUE_ACTION_VIDEO_SOUND("action_video_sound"),
       @SerializedName("action_video_type")
       VALUE_ACTION_VIDEO_TYPE("action_video_type"),
-      @SerializedName("action_converted_product_id")
-      VALUE_ACTION_CONVERTED_PRODUCT_ID("action_converted_product_id"),
       @SerializedName("interactive_component_sticker_id")
       VALUE_INTERACTIVE_COMPONENT_STICKER_ID("interactive_component_sticker_id"),
       @SerializedName("interactive_component_sticker_response")
@@ -32970,10 +33096,10 @@ public class AdAccount extends APINode {
   public static enum EnumScheduleFrequency {
       @SerializedName("daily")
       VALUE_DAILY("daily"),
-      @SerializedName("weekly")
-      VALUE_WEEKLY("weekly"),
       @SerializedName("monthly")
       VALUE_MONTHLY("monthly"),
+      @SerializedName("weekly")
+      VALUE_WEEKLY("weekly"),
       NULL(null);
 
       private String value;
@@ -32991,10 +33117,10 @@ public class AdAccount extends APINode {
   public static enum EnumStatus {
       @SerializedName("Active")
       VALUE_ACTIVE("Active"),
-      @SerializedName("Paused")
-      VALUE_PAUSED("Paused"),
       @SerializedName("Deleted")
       VALUE_DELETED("Deleted"),
+      @SerializedName("Paused")
+      VALUE_PAUSED("Paused"),
       NULL(null);
 
       private String value;
@@ -33012,10 +33138,10 @@ public class AdAccount extends APINode {
   public static enum EnumDeleteStrategy {
       @SerializedName("DELETE_ANY")
       VALUE_DELETE_ANY("DELETE_ANY"),
-      @SerializedName("DELETE_OLDEST")
-      VALUE_DELETE_OLDEST("DELETE_OLDEST"),
       @SerializedName("DELETE_ARCHIVED_BEFORE")
       VALUE_DELETE_ARCHIVED_BEFORE("DELETE_ARCHIVED_BEFORE"),
+      @SerializedName("DELETE_OLDEST")
+      VALUE_DELETE_OLDEST("DELETE_OLDEST"),
       NULL(null);
 
       private String value;

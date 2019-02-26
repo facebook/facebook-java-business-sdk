@@ -5608,6 +5608,10 @@ public class Photo extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setFunFactPromptId (Long funFactPromptId) {
+      this.setParam("fun_fact_prompt_id", funFactPromptId);
+      return this;
+    }
     public APIRequestUpdate setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -5664,6 +5668,10 @@ public class Photo extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setOfferLikePostId (Long offerLikePostId) {
+      this.setParam("offer_like_post_id", offerLikePostId);
+      return this;
+    }
     public APIRequestUpdate setOfferLikePostId (String offerLikePostId) {
       this.setParam("offer_like_post_id", offerLikePostId);
       return this;
@@ -5760,18 +5768,18 @@ public class Photo extends APINode {
   }
 
   public static enum EnumBackdatedTimeGranularity {
-      @SerializedName("year")
-      VALUE_YEAR("year"),
-      @SerializedName("month")
-      VALUE_MONTH("month"),
       @SerializedName("day")
       VALUE_DAY("day"),
       @SerializedName("hour")
       VALUE_HOUR("hour"),
       @SerializedName("min")
       VALUE_MIN("min"),
+      @SerializedName("month")
+      VALUE_MONTH("month"),
       @SerializedName("none")
       VALUE_NONE("none"),
+      @SerializedName("year")
+      VALUE_YEAR("year"),
       NULL(null);
 
       private String value;
@@ -5787,16 +5795,16 @@ public class Photo extends APINode {
   }
 
   public static enum EnumUnpublishedContentType {
-      @SerializedName("SCHEDULED")
-      VALUE_SCHEDULED("SCHEDULED"),
-      @SerializedName("DRAFT")
-      VALUE_DRAFT("DRAFT"),
       @SerializedName("ADS_POST")
       VALUE_ADS_POST("ADS_POST"),
+      @SerializedName("DRAFT")
+      VALUE_DRAFT("DRAFT"),
       @SerializedName("INLINE_CREATED")
       VALUE_INLINE_CREATED("INLINE_CREATED"),
       @SerializedName("PUBLISHED")
       VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("SCHEDULED")
+      VALUE_SCHEDULED("SCHEDULED"),
       NULL(null);
 
       private String value;
@@ -5835,12 +5843,12 @@ public class Photo extends APINode {
   public static enum EnumCheckinEntryPoint {
       @SerializedName("BRANDING_CHECKIN")
       VALUE_BRANDING_CHECKIN("BRANDING_CHECKIN"),
-      @SerializedName("BRANDING_STATUS")
-      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
-      @SerializedName("BRANDING_PHOTO")
-      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
       @SerializedName("BRANDING_OTHER")
       VALUE_BRANDING_OTHER("BRANDING_OTHER"),
+      @SerializedName("BRANDING_PHOTO")
+      VALUE_BRANDING_PHOTO("BRANDING_PHOTO"),
+      @SerializedName("BRANDING_STATUS")
+      VALUE_BRANDING_STATUS("BRANDING_STATUS"),
       NULL(null);
 
       private String value;
@@ -5856,10 +5864,10 @@ public class Photo extends APINode {
   }
 
   public static enum EnumFormatting {
-      @SerializedName("PLAINTEXT")
-      VALUE_PLAINTEXT("PLAINTEXT"),
       @SerializedName("MARKDOWN")
       VALUE_MARKDOWN("MARKDOWN"),
+      @SerializedName("PLAINTEXT")
+      VALUE_PLAINTEXT("PLAINTEXT"),
       NULL(null);
 
       private String value;

@@ -613,24 +613,24 @@ public class AdAsyncRequest extends APINode {
   }
 
   public static enum EnumStatus {
+      @SerializedName("CANCELED")
+      VALUE_CANCELED("CANCELED"),
+      @SerializedName("CANCELED_DEPENDENCY")
+      VALUE_CANCELED_DEPENDENCY("CANCELED_DEPENDENCY"),
+      @SerializedName("ERROR")
+      VALUE_ERROR("ERROR"),
+      @SerializedName("ERROR_CONFLICTS")
+      VALUE_ERROR_CONFLICTS("ERROR_CONFLICTS"),
+      @SerializedName("ERROR_DEPENDENCY")
+      VALUE_ERROR_DEPENDENCY("ERROR_DEPENDENCY"),
       @SerializedName("INITIAL")
       VALUE_INITIAL("INITIAL"),
       @SerializedName("IN_PROGRESS")
       VALUE_IN_PROGRESS("IN_PROGRESS"),
-      @SerializedName("SUCCESS")
-      VALUE_SUCCESS("SUCCESS"),
-      @SerializedName("ERROR")
-      VALUE_ERROR("ERROR"),
-      @SerializedName("CANCELED")
-      VALUE_CANCELED("CANCELED"),
       @SerializedName("PENDING_DEPENDENCY")
       VALUE_PENDING_DEPENDENCY("PENDING_DEPENDENCY"),
-      @SerializedName("CANCELED_DEPENDENCY")
-      VALUE_CANCELED_DEPENDENCY("CANCELED_DEPENDENCY"),
-      @SerializedName("ERROR_DEPENDENCY")
-      VALUE_ERROR_DEPENDENCY("ERROR_DEPENDENCY"),
-      @SerializedName("ERROR_CONFLICTS")
-      VALUE_ERROR_CONFLICTS("ERROR_CONFLICTS"),
+      @SerializedName("SUCCESS")
+      VALUE_SUCCESS("SUCCESS"),
       NULL(null);
 
       private String value;
@@ -646,24 +646,24 @@ public class AdAsyncRequest extends APINode {
   }
 
   public static enum EnumStatuses {
+      @SerializedName("CANCELED")
+      VALUE_CANCELED("CANCELED"),
+      @SerializedName("CANCELED_DEPENDENCY")
+      VALUE_CANCELED_DEPENDENCY("CANCELED_DEPENDENCY"),
+      @SerializedName("ERROR")
+      VALUE_ERROR("ERROR"),
+      @SerializedName("ERROR_CONFLICTS")
+      VALUE_ERROR_CONFLICTS("ERROR_CONFLICTS"),
+      @SerializedName("ERROR_DEPENDENCY")
+      VALUE_ERROR_DEPENDENCY("ERROR_DEPENDENCY"),
       @SerializedName("INITIAL")
       VALUE_INITIAL("INITIAL"),
       @SerializedName("IN_PROGRESS")
       VALUE_IN_PROGRESS("IN_PROGRESS"),
-      @SerializedName("SUCCESS")
-      VALUE_SUCCESS("SUCCESS"),
-      @SerializedName("ERROR")
-      VALUE_ERROR("ERROR"),
-      @SerializedName("CANCELED")
-      VALUE_CANCELED("CANCELED"),
       @SerializedName("PENDING_DEPENDENCY")
       VALUE_PENDING_DEPENDENCY("PENDING_DEPENDENCY"),
-      @SerializedName("CANCELED_DEPENDENCY")
-      VALUE_CANCELED_DEPENDENCY("CANCELED_DEPENDENCY"),
-      @SerializedName("ERROR_DEPENDENCY")
-      VALUE_ERROR_DEPENDENCY("ERROR_DEPENDENCY"),
-      @SerializedName("ERROR_CONFLICTS")
-      VALUE_ERROR_CONFLICTS("ERROR_CONFLICTS"),
+      @SerializedName("SUCCESS")
+      VALUE_SUCCESS("SUCCESS"),
       NULL(null);
 
       private String value;

@@ -577,10 +577,10 @@ public class AdPlacePageSet extends APINode {
   }
 
   public static enum EnumLocationTypes {
-      @SerializedName("recent")
-      VALUE_RECENT("recent"),
       @SerializedName("home")
       VALUE_HOME("home"),
+      @SerializedName("recent")
+      VALUE_RECENT("recent"),
       NULL(null);
 
       private String value;

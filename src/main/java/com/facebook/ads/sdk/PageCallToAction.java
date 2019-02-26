@@ -975,22 +975,22 @@ public class PageCallToAction extends APINode {
   }
 
   public static enum EnumAndroidDestinationType {
-      @SerializedName("WEBSITE")
-      VALUE_WEBSITE("WEBSITE"),
       @SerializedName("APP_DEEPLINK")
       VALUE_APP_DEEPLINK("APP_DEEPLINK"),
-      @SerializedName("FACEBOOK_APP")
-      VALUE_FACEBOOK_APP("FACEBOOK_APP"),
-      @SerializedName("PHONE_CALL")
-      VALUE_PHONE_CALL("PHONE_CALL"),
-      @SerializedName("MESSENGER")
-      VALUE_MESSENGER("MESSENGER"),
       @SerializedName("EMAIL")
       VALUE_EMAIL("EMAIL"),
-      @SerializedName("SHOP_ON_FACEBOOK")
-      VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
+      @SerializedName("FACEBOOK_APP")
+      VALUE_FACEBOOK_APP("FACEBOOK_APP"),
+      @SerializedName("MESSENGER")
+      VALUE_MESSENGER("MESSENGER"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
+      @SerializedName("PHONE_CALL")
+      VALUE_PHONE_CALL("PHONE_CALL"),
+      @SerializedName("SHOP_ON_FACEBOOK")
+      VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
+      @SerializedName("WEBSITE")
+      VALUE_WEBSITE("WEBSITE"),
       NULL(null);
 
       private String value;
@@ -1006,22 +1006,22 @@ public class PageCallToAction extends APINode {
   }
 
   public static enum EnumIphoneDestinationType {
-      @SerializedName("WEBSITE")
-      VALUE_WEBSITE("WEBSITE"),
       @SerializedName("APP_DEEPLINK")
       VALUE_APP_DEEPLINK("APP_DEEPLINK"),
-      @SerializedName("FACEBOOK_APP")
-      VALUE_FACEBOOK_APP("FACEBOOK_APP"),
-      @SerializedName("PHONE_CALL")
-      VALUE_PHONE_CALL("PHONE_CALL"),
-      @SerializedName("MESSENGER")
-      VALUE_MESSENGER("MESSENGER"),
       @SerializedName("EMAIL")
       VALUE_EMAIL("EMAIL"),
-      @SerializedName("SHOP_ON_FACEBOOK")
-      VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
+      @SerializedName("FACEBOOK_APP")
+      VALUE_FACEBOOK_APP("FACEBOOK_APP"),
+      @SerializedName("MESSENGER")
+      VALUE_MESSENGER("MESSENGER"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
+      @SerializedName("PHONE_CALL")
+      VALUE_PHONE_CALL("PHONE_CALL"),
+      @SerializedName("SHOP_ON_FACEBOOK")
+      VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
+      @SerializedName("WEBSITE")
+      VALUE_WEBSITE("WEBSITE"),
       NULL(null);
 
       private String value;
@@ -1037,8 +1037,12 @@ public class PageCallToAction extends APINode {
   }
 
   public static enum EnumType {
+      @SerializedName("BOOK_APPOINTMENT")
+      VALUE_BOOK_APPOINTMENT("BOOK_APPOINTMENT"),
       @SerializedName("BOOK_NOW")
       VALUE_BOOK_NOW("BOOK_NOW"),
+      @SerializedName("BUY_TICKETS")
+      VALUE_BUY_TICKETS("BUY_TICKETS"),
       @SerializedName("CALL_NOW")
       VALUE_CALL_NOW("CALL_NOW"),
       @SerializedName("CHARITY_DONATE")
@@ -1047,48 +1051,44 @@ public class PageCallToAction extends APINode {
       VALUE_CONTACT_US("CONTACT_US"),
       @SerializedName("DONATE_NOW")
       VALUE_DONATE_NOW("DONATE_NOW"),
-      @SerializedName("MESSAGE")
-      VALUE_MESSAGE("MESSAGE"),
-      @SerializedName("OPEN_APP")
-      VALUE_OPEN_APP("OPEN_APP"),
-      @SerializedName("PLAY_NOW")
-      VALUE_PLAY_NOW("PLAY_NOW"),
-      @SerializedName("SHOP_NOW")
-      VALUE_SHOP_NOW("SHOP_NOW"),
-      @SerializedName("SIGN_UP")
-      VALUE_SIGN_UP("SIGN_UP"),
-      @SerializedName("WATCH_NOW")
-      VALUE_WATCH_NOW("WATCH_NOW"),
+      @SerializedName("EMAIL")
+      VALUE_EMAIL("EMAIL"),
+      @SerializedName("GET_DIRECTIONS")
+      VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
       @SerializedName("GET_OFFER")
       VALUE_GET_OFFER("GET_OFFER"),
       @SerializedName("GET_OFFER_VIEW")
       VALUE_GET_OFFER_VIEW("GET_OFFER_VIEW"),
-      @SerializedName("REQUEST_QUOTE")
-      VALUE_REQUEST_QUOTE("REQUEST_QUOTE"),
-      @SerializedName("BOOK_APPOINTMENT")
-      VALUE_BOOK_APPOINTMENT("BOOK_APPOINTMENT"),
-      @SerializedName("LISTEN")
-      VALUE_LISTEN("LISTEN"),
-      @SerializedName("EMAIL")
-      VALUE_EMAIL("EMAIL"),
-      @SerializedName("LEARN_MORE")
-      VALUE_LEARN_MORE("LEARN_MORE"),
-      @SerializedName("REQUEST_APPOINTMENT")
-      VALUE_REQUEST_APPOINTMENT("REQUEST_APPOINTMENT"),
-      @SerializedName("GET_DIRECTIONS")
-      VALUE_GET_DIRECTIONS("GET_DIRECTIONS"),
-      @SerializedName("BUY_TICKETS")
-      VALUE_BUY_TICKETS("BUY_TICKETS"),
-      @SerializedName("PLAY_MUSIC")
-      VALUE_PLAY_MUSIC("PLAY_MUSIC"),
-      @SerializedName("VISIT_GROUP")
-      VALUE_VISIT_GROUP("VISIT_GROUP"),
-      @SerializedName("SHOP_ON_FACEBOOK")
-      VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
-      @SerializedName("LOCAL_DEV_PLATFORM")
-      VALUE_LOCAL_DEV_PLATFORM("LOCAL_DEV_PLATFORM"),
       @SerializedName("INTERESTED")
       VALUE_INTERESTED("INTERESTED"),
+      @SerializedName("LEARN_MORE")
+      VALUE_LEARN_MORE("LEARN_MORE"),
+      @SerializedName("LISTEN")
+      VALUE_LISTEN("LISTEN"),
+      @SerializedName("LOCAL_DEV_PLATFORM")
+      VALUE_LOCAL_DEV_PLATFORM("LOCAL_DEV_PLATFORM"),
+      @SerializedName("MESSAGE")
+      VALUE_MESSAGE("MESSAGE"),
+      @SerializedName("OPEN_APP")
+      VALUE_OPEN_APP("OPEN_APP"),
+      @SerializedName("PLAY_MUSIC")
+      VALUE_PLAY_MUSIC("PLAY_MUSIC"),
+      @SerializedName("PLAY_NOW")
+      VALUE_PLAY_NOW("PLAY_NOW"),
+      @SerializedName("REQUEST_APPOINTMENT")
+      VALUE_REQUEST_APPOINTMENT("REQUEST_APPOINTMENT"),
+      @SerializedName("REQUEST_QUOTE")
+      VALUE_REQUEST_QUOTE("REQUEST_QUOTE"),
+      @SerializedName("SHOP_NOW")
+      VALUE_SHOP_NOW("SHOP_NOW"),
+      @SerializedName("SHOP_ON_FACEBOOK")
+      VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
+      @SerializedName("SIGN_UP")
+      VALUE_SIGN_UP("SIGN_UP"),
+      @SerializedName("VISIT_GROUP")
+      VALUE_VISIT_GROUP("VISIT_GROUP"),
+      @SerializedName("WATCH_NOW")
+      VALUE_WATCH_NOW("WATCH_NOW"),
       @SerializedName("WOODHENGE_SUPPORT")
       VALUE_WOODHENGE_SUPPORT("WOODHENGE_SUPPORT"),
       NULL(null);
@@ -1106,18 +1106,18 @@ public class PageCallToAction extends APINode {
   }
 
   public static enum EnumWebDestinationType {
+      @SerializedName("BECOME_SUPPORTER")
+      VALUE_BECOME_SUPPORTER("BECOME_SUPPORTER"),
       @SerializedName("EMAIL")
       VALUE_EMAIL("EMAIL"),
       @SerializedName("MESSENGER")
       VALUE_MESSENGER("MESSENGER"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      @SerializedName("WEBSITE")
-      VALUE_WEBSITE("WEBSITE"),
       @SerializedName("SHOP_ON_FACEBOOK")
       VALUE_SHOP_ON_FACEBOOK("SHOP_ON_FACEBOOK"),
-      @SerializedName("BECOME_SUPPORTER")
-      VALUE_BECOME_SUPPORTER("BECOME_SUPPORTER"),
+      @SerializedName("WEBSITE")
+      VALUE_WEBSITE("WEBSITE"),
       NULL(null);
 
       private String value;

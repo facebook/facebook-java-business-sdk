@@ -702,18 +702,18 @@ public class MeasurementReport extends APINode {
   }
 
   public static enum EnumReportType {
-      @SerializedName("multi_channel_report")
-      VALUE_MULTI_CHANNEL_REPORT("multi_channel_report"),
-      @SerializedName("video_metrics_report")
-      VALUE_VIDEO_METRICS_REPORT("video_metrics_report"),
       @SerializedName("fruit_rollup_report")
       VALUE_FRUIT_ROLLUP_REPORT("fruit_rollup_report"),
-      @SerializedName("third_party_mta_report")
-      VALUE_THIRD_PARTY_MTA_REPORT("third_party_mta_report"),
-      @SerializedName("partner_lift_study_report")
-      VALUE_PARTNER_LIFT_STUDY_REPORT("partner_lift_study_report"),
       @SerializedName("mmm_report")
       VALUE_MMM_REPORT("mmm_report"),
+      @SerializedName("multi_channel_report")
+      VALUE_MULTI_CHANNEL_REPORT("multi_channel_report"),
+      @SerializedName("partner_lift_study_report")
+      VALUE_PARTNER_LIFT_STUDY_REPORT("partner_lift_study_report"),
+      @SerializedName("third_party_mta_report")
+      VALUE_THIRD_PARTY_MTA_REPORT("third_party_mta_report"),
+      @SerializedName("video_metrics_report")
+      VALUE_VIDEO_METRICS_REPORT("video_metrics_report"),
       NULL(null);
 
       private String value;

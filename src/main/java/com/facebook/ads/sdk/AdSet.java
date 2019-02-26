@@ -5801,10 +5801,10 @@ public class AdSet extends APINode {
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
+      @SerializedName("VIDEO_VIEWS")
+      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       NULL(null);
 
       private String value;
@@ -5822,12 +5822,12 @@ public class AdSet extends APINode {
   public static enum EnumConfiguredStatus {
       @SerializedName("ACTIVE")
       VALUE_ACTIVE("ACTIVE"),
-      @SerializedName("PAUSED")
-      VALUE_PAUSED("PAUSED"),
-      @SerializedName("DELETED")
-      VALUE_DELETED("DELETED"),
       @SerializedName("ARCHIVED")
       VALUE_ARCHIVED("ARCHIVED"),
+      @SerializedName("DELETED")
+      VALUE_DELETED("DELETED"),
+      @SerializedName("PAUSED")
+      VALUE_PAUSED("PAUSED"),
       NULL(null);
 
       private String value;
@@ -5845,24 +5845,24 @@ public class AdSet extends APINode {
   public static enum EnumEffectiveStatus {
       @SerializedName("ACTIVE")
       VALUE_ACTIVE("ACTIVE"),
-      @SerializedName("PAUSED")
-      VALUE_PAUSED("PAUSED"),
-      @SerializedName("DELETED")
-      VALUE_DELETED("DELETED"),
-      @SerializedName("PENDING_REVIEW")
-      VALUE_PENDING_REVIEW("PENDING_REVIEW"),
-      @SerializedName("DISAPPROVED")
-      VALUE_DISAPPROVED("DISAPPROVED"),
-      @SerializedName("PREAPPROVED")
-      VALUE_PREAPPROVED("PREAPPROVED"),
-      @SerializedName("PENDING_BILLING_INFO")
-      VALUE_PENDING_BILLING_INFO("PENDING_BILLING_INFO"),
-      @SerializedName("CAMPAIGN_PAUSED")
-      VALUE_CAMPAIGN_PAUSED("CAMPAIGN_PAUSED"),
-      @SerializedName("ARCHIVED")
-      VALUE_ARCHIVED("ARCHIVED"),
       @SerializedName("ADSET_PAUSED")
       VALUE_ADSET_PAUSED("ADSET_PAUSED"),
+      @SerializedName("ARCHIVED")
+      VALUE_ARCHIVED("ARCHIVED"),
+      @SerializedName("CAMPAIGN_PAUSED")
+      VALUE_CAMPAIGN_PAUSED("CAMPAIGN_PAUSED"),
+      @SerializedName("DELETED")
+      VALUE_DELETED("DELETED"),
+      @SerializedName("DISAPPROVED")
+      VALUE_DISAPPROVED("DISAPPROVED"),
+      @SerializedName("PAUSED")
+      VALUE_PAUSED("PAUSED"),
+      @SerializedName("PENDING_BILLING_INFO")
+      VALUE_PENDING_BILLING_INFO("PENDING_BILLING_INFO"),
+      @SerializedName("PENDING_REVIEW")
+      VALUE_PENDING_REVIEW("PENDING_REVIEW"),
+      @SerializedName("PREAPPROVED")
+      VALUE_PREAPPROVED("PREAPPROVED"),
       @SerializedName("WITH_ISSUES")
       VALUE_WITH_ISSUES("WITH_ISSUES"),
       NULL(null);
@@ -5880,26 +5880,32 @@ public class AdSet extends APINode {
   }
 
   public static enum EnumOptimizationGoal {
-      @SerializedName("NONE")
-      VALUE_NONE("NONE"),
+      @SerializedName("AD_RECALL_LIFT")
+      VALUE_AD_RECALL_LIFT("AD_RECALL_LIFT"),
+      @SerializedName("APP_DOWNLOADS")
+      VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
       @SerializedName("APP_INSTALLS")
       VALUE_APP_INSTALLS("APP_INSTALLS"),
       @SerializedName("BRAND_AWARENESS")
       VALUE_BRAND_AWARENESS("BRAND_AWARENESS"),
-      @SerializedName("AD_RECALL_LIFT")
-      VALUE_AD_RECALL_LIFT("AD_RECALL_LIFT"),
       @SerializedName("CLICKS")
       VALUE_CLICKS("CLICKS"),
+      @SerializedName("DERIVED_EVENTS")
+      VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
       @SerializedName("ENGAGED_USERS")
       VALUE_ENGAGED_USERS("ENGAGED_USERS"),
       @SerializedName("EVENT_RESPONSES")
       VALUE_EVENT_RESPONSES("EVENT_RESPONSES"),
       @SerializedName("IMPRESSIONS")
       VALUE_IMPRESSIONS("IMPRESSIONS"),
+      @SerializedName("LANDING_PAGE_VIEWS")
+      VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
       @SerializedName("LEAD_GENERATION")
       VALUE_LEAD_GENERATION("LEAD_GENERATION"),
       @SerializedName("LINK_CLICKS")
       VALUE_LINK_CLICKS("LINK_CLICKS"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
       @SerializedName("OFFER_CLAIMS")
       VALUE_OFFER_CLAIMS("OFFER_CLAIMS"),
       @SerializedName("OFFSITE_CONVERSIONS")
@@ -5912,24 +5918,18 @@ public class AdSet extends APINode {
       VALUE_POST_ENGAGEMENT("POST_ENGAGEMENT"),
       @SerializedName("REACH")
       VALUE_REACH("REACH"),
-      @SerializedName("SOCIAL_IMPRESSIONS")
-      VALUE_SOCIAL_IMPRESSIONS("SOCIAL_IMPRESSIONS"),
-      @SerializedName("VIDEO_VIEWS")
-      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
-      @SerializedName("APP_DOWNLOADS")
-      VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
-      @SerializedName("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS")
-      VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
-      @SerializedName("LANDING_PAGE_VIEWS")
-      VALUE_LANDING_PAGE_VIEWS("LANDING_PAGE_VIEWS"),
-      @SerializedName("VALUE")
-      VALUE_VALUE("VALUE"),
-      @SerializedName("THRUPLAY")
-      VALUE_THRUPLAY("THRUPLAY"),
       @SerializedName("REPLIES")
       VALUE_REPLIES("REPLIES"),
-      @SerializedName("DERIVED_EVENTS")
-      VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
+      @SerializedName("SOCIAL_IMPRESSIONS")
+      VALUE_SOCIAL_IMPRESSIONS("SOCIAL_IMPRESSIONS"),
+      @SerializedName("THRUPLAY")
+      VALUE_THRUPLAY("THRUPLAY"),
+      @SerializedName("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS")
+      VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
+      @SerializedName("VALUE")
+      VALUE_VALUE("VALUE"),
+      @SerializedName("VIDEO_VIEWS")
+      VALUE_VIDEO_VIEWS("VIDEO_VIEWS"),
       NULL(null);
 
       private String value;
@@ -5947,12 +5947,12 @@ public class AdSet extends APINode {
   public static enum EnumStatus {
       @SerializedName("ACTIVE")
       VALUE_ACTIVE("ACTIVE"),
-      @SerializedName("PAUSED")
-      VALUE_PAUSED("PAUSED"),
-      @SerializedName("DELETED")
-      VALUE_DELETED("DELETED"),
       @SerializedName("ARCHIVED")
       VALUE_ARCHIVED("ARCHIVED"),
+      @SerializedName("DELETED")
+      VALUE_DELETED("DELETED"),
+      @SerializedName("PAUSED")
+      VALUE_PAUSED("PAUSED"),
       NULL(null);
 
       private String value;
@@ -5968,44 +5968,44 @@ public class AdSet extends APINode {
   }
 
   public static enum EnumDatePreset {
-      @SerializedName("today")
-      VALUE_TODAY("today"),
-      @SerializedName("yesterday")
-      VALUE_YESTERDAY("yesterday"),
-      @SerializedName("this_month")
-      VALUE_THIS_MONTH("this_month"),
-      @SerializedName("last_month")
-      VALUE_LAST_MONTH("last_month"),
-      @SerializedName("this_quarter")
-      VALUE_THIS_QUARTER("this_quarter"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
-      @SerializedName("last_3d")
-      VALUE_LAST_3D("last_3d"),
-      @SerializedName("last_7d")
-      VALUE_LAST_7D("last_7d"),
       @SerializedName("last_14d")
       VALUE_LAST_14D("last_14d"),
       @SerializedName("last_28d")
       VALUE_LAST_28D("last_28d"),
       @SerializedName("last_30d")
       VALUE_LAST_30D("last_30d"),
+      @SerializedName("last_3d")
+      VALUE_LAST_3D("last_3d"),
+      @SerializedName("last_7d")
+      VALUE_LAST_7D("last_7d"),
       @SerializedName("last_90d")
       VALUE_LAST_90D("last_90d"),
+      @SerializedName("last_month")
+      VALUE_LAST_MONTH("last_month"),
+      @SerializedName("last_quarter")
+      VALUE_LAST_QUARTER("last_quarter"),
       @SerializedName("last_week_mon_sun")
       VALUE_LAST_WEEK_MON_SUN("last_week_mon_sun"),
       @SerializedName("last_week_sun_sat")
       VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
-      @SerializedName("last_quarter")
-      VALUE_LAST_QUARTER("last_quarter"),
       @SerializedName("last_year")
       VALUE_LAST_YEAR("last_year"),
+      @SerializedName("lifetime")
+      VALUE_LIFETIME("lifetime"),
+      @SerializedName("this_month")
+      VALUE_THIS_MONTH("this_month"),
+      @SerializedName("this_quarter")
+      VALUE_THIS_QUARTER("this_quarter"),
       @SerializedName("this_week_mon_today")
       VALUE_THIS_WEEK_MON_TODAY("this_week_mon_today"),
       @SerializedName("this_week_sun_today")
       VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
       @SerializedName("this_year")
       VALUE_THIS_YEAR("this_year"),
+      @SerializedName("today")
+      VALUE_TODAY("today"),
+      @SerializedName("yesterday")
+      VALUE_YESTERDAY("yesterday"),
       NULL(null);
 
       private String value;
@@ -6021,16 +6021,16 @@ public class AdSet extends APINode {
   }
 
   public static enum EnumDestinationType {
+      @SerializedName("APP")
+      VALUE_APP("APP"),
+      @SerializedName("APPLINKS_AUTOMATIC")
+      VALUE_APPLINKS_AUTOMATIC("APPLINKS_AUTOMATIC"),
+      @SerializedName("MESSENGER")
+      VALUE_MESSENGER("MESSENGER"),
       @SerializedName("UNDEFINED")
       VALUE_UNDEFINED("UNDEFINED"),
       @SerializedName("WEBSITE")
       VALUE_WEBSITE("WEBSITE"),
-      @SerializedName("APP")
-      VALUE_APP("APP"),
-      @SerializedName("MESSENGER")
-      VALUE_MESSENGER("MESSENGER"),
-      @SerializedName("APPLINKS_AUTOMATIC")
-      VALUE_APPLINKS_AUTOMATIC("APPLINKS_AUTOMATIC"),
       NULL(null);
 
       private String value;
@@ -6046,10 +6046,10 @@ public class AdSet extends APINode {
   }
 
   public static enum EnumExecutionOptions {
-      @SerializedName("validate_only")
-      VALUE_VALIDATE_ONLY("validate_only"),
       @SerializedName("include_recommendations")
       VALUE_INCLUDE_RECOMMENDATIONS("include_recommendations"),
+      @SerializedName("validate_only")
+      VALUE_VALIDATE_ONLY("validate_only"),
       NULL(null);
 
       private String value;
@@ -6065,12 +6065,12 @@ public class AdSet extends APINode {
   }
 
   public static enum EnumFullFunnelExplorationMode {
-      @SerializedName("NONE_EXPLORATION")
-      VALUE_NONE_EXPLORATION("NONE_EXPLORATION"),
-      @SerializedName("LIMITED_EXPLORATION")
-      VALUE_LIMITED_EXPLORATION("LIMITED_EXPLORATION"),
       @SerializedName("EXTENDED_EXPLORATION")
       VALUE_EXTENDED_EXPLORATION("EXTENDED_EXPLORATION"),
+      @SerializedName("LIMITED_EXPLORATION")
+      VALUE_LIMITED_EXPLORATION("LIMITED_EXPLORATION"),
+      @SerializedName("NONE_EXPLORATION")
+      VALUE_NONE_EXPLORATION("NONE_EXPLORATION"),
       NULL(null);
 
       private String value;
@@ -6107,10 +6107,10 @@ public class AdSet extends APINode {
   public static enum EnumStatusOption {
       @SerializedName("ACTIVE")
       VALUE_ACTIVE("ACTIVE"),
-      @SerializedName("PAUSED")
-      VALUE_PAUSED("PAUSED"),
       @SerializedName("INHERITED_FROM_SOURCE")
       VALUE_INHERITED_FROM_SOURCE("INHERITED_FROM_SOURCE"),
+      @SerializedName("PAUSED")
+      VALUE_PAUSED("PAUSED"),
       NULL(null);
 
       private String value;

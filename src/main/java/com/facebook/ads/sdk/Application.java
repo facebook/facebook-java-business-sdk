@@ -15952,28 +15952,28 @@ public class Application extends APINode {
   }
 
   public static enum EnumSupportedPlatforms {
-      @SerializedName("WEB")
-      VALUE_WEB("WEB"),
-      @SerializedName("CANVAS")
-      VALUE_CANVAS("CANVAS"),
-      @SerializedName("MOBILE_WEB")
-      VALUE_MOBILE_WEB("MOBILE_WEB"),
-      @SerializedName("IPHONE")
-      VALUE_IPHONE("IPHONE"),
-      @SerializedName("IPAD")
-      VALUE_IPAD("IPAD"),
-      @SerializedName("ANDROID")
-      VALUE_ANDROID("ANDROID"),
-      @SerializedName("WINDOWS")
-      VALUE_WINDOWS("WINDOWS"),
       @SerializedName("AMAZON")
       VALUE_AMAZON("AMAZON"),
-      @SerializedName("SUPPLEMENTARY_IMAGES")
-      VALUE_SUPPLEMENTARY_IMAGES("SUPPLEMENTARY_IMAGES"),
+      @SerializedName("ANDROID")
+      VALUE_ANDROID("ANDROID"),
+      @SerializedName("CANVAS")
+      VALUE_CANVAS("CANVAS"),
       @SerializedName("GAMEROOM")
       VALUE_GAMEROOM("GAMEROOM"),
       @SerializedName("INSTANT_GAME")
       VALUE_INSTANT_GAME("INSTANT_GAME"),
+      @SerializedName("IPAD")
+      VALUE_IPAD("IPAD"),
+      @SerializedName("IPHONE")
+      VALUE_IPHONE("IPHONE"),
+      @SerializedName("MOBILE_WEB")
+      VALUE_MOBILE_WEB("MOBILE_WEB"),
+      @SerializedName("SUPPLEMENTARY_IMAGES")
+      VALUE_SUPPLEMENTARY_IMAGES("SUPPLEMENTARY_IMAGES"),
+      @SerializedName("WEB")
+      VALUE_WEB("WEB"),
+      @SerializedName("WINDOWS")
+      VALUE_WINDOWS("WINDOWS"),
       NULL(null);
 
       private String value;
@@ -15989,16 +15989,16 @@ public class Application extends APINode {
   }
 
   public static enum EnumAnPlatforms {
-      @SerializedName("IOS")
-      VALUE_IOS("IOS"),
       @SerializedName("ANDROID")
       VALUE_ANDROID("ANDROID"),
-      @SerializedName("MOBILE_WEB")
-      VALUE_MOBILE_WEB("MOBILE_WEB"),
       @SerializedName("DESKTOP")
       VALUE_DESKTOP("DESKTOP"),
       @SerializedName("INSTANT_ARTICLES")
       VALUE_INSTANT_ARTICLES("INSTANT_ARTICLES"),
+      @SerializedName("IOS")
+      VALUE_IOS("IOS"),
+      @SerializedName("MOBILE_WEB")
+      VALUE_MOBILE_WEB("MOBILE_WEB"),
       @SerializedName("UNKNOWN")
       VALUE_UNKNOWN("UNKNOWN"),
       NULL(null);
@@ -16016,10 +16016,10 @@ public class Application extends APINode {
   }
 
   public static enum EnumAggregationPeriod {
-      @SerializedName("HOUR")
-      VALUE_HOUR("HOUR"),
       @SerializedName("DAY")
       VALUE_DAY("DAY"),
+      @SerializedName("HOUR")
+      VALUE_HOUR("HOUR"),
       @SerializedName("TOTAL")
       VALUE_TOTAL("TOTAL"),
       NULL(null);
@@ -16041,18 +16041,22 @@ public class Application extends APINode {
       VALUE_AGE("AGE"),
       @SerializedName("APP")
       VALUE_APP("APP"),
+      @SerializedName("CLICKED_VIEW_TAG")
+      VALUE_CLICKED_VIEW_TAG("CLICKED_VIEW_TAG"),
       @SerializedName("COUNTRY")
       VALUE_COUNTRY("COUNTRY"),
-      @SerializedName("DELIVERY_METHOD")
-      VALUE_DELIVERY_METHOD("DELIVERY_METHOD"),
-      @SerializedName("DISPLAY_FORMAT")
-      VALUE_DISPLAY_FORMAT("DISPLAY_FORMAT"),
       @SerializedName("DEAL")
       VALUE_DEAL("DEAL"),
       @SerializedName("DEAL_AD")
       VALUE_DEAL_AD("DEAL_AD"),
       @SerializedName("DEAL_PAGE")
       VALUE_DEAL_PAGE("DEAL_PAGE"),
+      @SerializedName("DELIVERY_METHOD")
+      VALUE_DELIVERY_METHOD("DELIVERY_METHOD"),
+      @SerializedName("DISPLAY_FORMAT")
+      VALUE_DISPLAY_FORMAT("DISPLAY_FORMAT"),
+      @SerializedName("FAIL_REASON")
+      VALUE_FAIL_REASON("FAIL_REASON"),
       @SerializedName("GENDER")
       VALUE_GENDER("GENDER"),
       @SerializedName("PLACEMENT")
@@ -16061,10 +16065,8 @@ public class Application extends APINode {
       VALUE_PLATFORM("PLATFORM"),
       @SerializedName("PROPERTY")
       VALUE_PROPERTY("PROPERTY"),
-      @SerializedName("CLICKED_VIEW_TAG")
-      VALUE_CLICKED_VIEW_TAG("CLICKED_VIEW_TAG"),
-      @SerializedName("FAIL_REASON")
-      VALUE_FAIL_REASON("FAIL_REASON"),
+      @SerializedName("SDK_VERSION")
+      VALUE_SDK_VERSION("SDK_VERSION"),
       NULL(null);
 
       private String value;
@@ -16080,72 +16082,72 @@ public class Application extends APINode {
   }
 
   public static enum EnumMetrics {
+      @SerializedName("FB_AD_NETWORK_BIDDING_BID_RATE")
+      VALUE_FB_AD_NETWORK_BIDDING_BID_RATE("FB_AD_NETWORK_BIDDING_BID_RATE"),
       @SerializedName("FB_AD_NETWORK_BIDDING_REQUEST")
       VALUE_FB_AD_NETWORK_BIDDING_REQUEST("FB_AD_NETWORK_BIDDING_REQUEST"),
       @SerializedName("FB_AD_NETWORK_BIDDING_RESPONSE")
       VALUE_FB_AD_NETWORK_BIDDING_RESPONSE("FB_AD_NETWORK_BIDDING_RESPONSE"),
-      @SerializedName("FB_AD_NETWORK_BIDDING_BID_RATE")
-      VALUE_FB_AD_NETWORK_BIDDING_BID_RATE("FB_AD_NETWORK_BIDDING_BID_RATE"),
+      @SerializedName("FB_AD_NETWORK_BIDDING_REVENUE")
+      VALUE_FB_AD_NETWORK_BIDDING_REVENUE("FB_AD_NETWORK_BIDDING_REVENUE"),
       @SerializedName("FB_AD_NETWORK_BIDDING_WIN_RATE")
       VALUE_FB_AD_NETWORK_BIDDING_WIN_RATE("FB_AD_NETWORK_BIDDING_WIN_RATE"),
-      @SerializedName("FB_AD_NETWORK_REQUEST")
-      VALUE_FB_AD_NETWORK_REQUEST("FB_AD_NETWORK_REQUEST"),
+      @SerializedName("FB_AD_NETWORK_CLICK")
+      VALUE_FB_AD_NETWORK_CLICK("FB_AD_NETWORK_CLICK"),
+      @SerializedName("FB_AD_NETWORK_CLICK_VALUE_SCORE")
+      VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE("FB_AD_NETWORK_CLICK_VALUE_SCORE"),
+      @SerializedName("FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR")
+      VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR("FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR"),
+      @SerializedName("FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR")
+      VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR("FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR"),
+      @SerializedName("FB_AD_NETWORK_CPM")
+      VALUE_FB_AD_NETWORK_CPM("FB_AD_NETWORK_CPM"),
+      @SerializedName("FB_AD_NETWORK_CTR")
+      VALUE_FB_AD_NETWORK_CTR("FB_AD_NETWORK_CTR"),
+      @SerializedName("FB_AD_NETWORK_DIRECT_PUBLISHER_BILL")
+      VALUE_FB_AD_NETWORK_DIRECT_PUBLISHER_BILL("FB_AD_NETWORK_DIRECT_PUBLISHER_BILL"),
+      @SerializedName("FB_AD_NETWORK_DIRECT_TOTAL_REVENUE")
+      VALUE_FB_AD_NETWORK_DIRECT_TOTAL_REVENUE("FB_AD_NETWORK_DIRECT_TOTAL_REVENUE"),
+      @SerializedName("FB_AD_NETWORK_FAST_CLICK_DENOMINATOR")
+      VALUE_FB_AD_NETWORK_FAST_CLICK_DENOMINATOR("FB_AD_NETWORK_FAST_CLICK_DENOMINATOR"),
+      @SerializedName("FB_AD_NETWORK_FAST_CLICK_NUMERATOR")
+      VALUE_FB_AD_NETWORK_FAST_CLICK_NUMERATOR("FB_AD_NETWORK_FAST_CLICK_NUMERATOR"),
+      @SerializedName("FB_AD_NETWORK_FAST_CLICK_RATE")
+      VALUE_FB_AD_NETWORK_FAST_CLICK_RATE("FB_AD_NETWORK_FAST_CLICK_RATE"),
+      @SerializedName("FB_AD_NETWORK_FAST_RETURN_DENOMINATOR")
+      VALUE_FB_AD_NETWORK_FAST_RETURN_DENOMINATOR("FB_AD_NETWORK_FAST_RETURN_DENOMINATOR"),
+      @SerializedName("FB_AD_NETWORK_FAST_RETURN_NUMERATOR")
+      VALUE_FB_AD_NETWORK_FAST_RETURN_NUMERATOR("FB_AD_NETWORK_FAST_RETURN_NUMERATOR"),
+      @SerializedName("FB_AD_NETWORK_FAST_RETURN_RATE")
+      VALUE_FB_AD_NETWORK_FAST_RETURN_RATE("FB_AD_NETWORK_FAST_RETURN_RATE"),
       @SerializedName("FB_AD_NETWORK_FILLED_REQUEST")
       VALUE_FB_AD_NETWORK_FILLED_REQUEST("FB_AD_NETWORK_FILLED_REQUEST"),
       @SerializedName("FB_AD_NETWORK_FILL_RATE")
       VALUE_FB_AD_NETWORK_FILL_RATE("FB_AD_NETWORK_FILL_RATE"),
       @SerializedName("FB_AD_NETWORK_IMP")
       VALUE_FB_AD_NETWORK_IMP("FB_AD_NETWORK_IMP"),
-      @SerializedName("FB_AD_NETWORK_SHOW_RATE")
-      VALUE_FB_AD_NETWORK_SHOW_RATE("FB_AD_NETWORK_SHOW_RATE"),
-      @SerializedName("FB_AD_NETWORK_CLICK")
-      VALUE_FB_AD_NETWORK_CLICK("FB_AD_NETWORK_CLICK"),
-      @SerializedName("FB_AD_NETWORK_CTR")
-      VALUE_FB_AD_NETWORK_CTR("FB_AD_NETWORK_CTR"),
-      @SerializedName("FB_AD_NETWORK_BIDDING_REVENUE")
-      VALUE_FB_AD_NETWORK_BIDDING_REVENUE("FB_AD_NETWORK_BIDDING_REVENUE"),
+      @SerializedName("FB_AD_NETWORK_NO_BID")
+      VALUE_FB_AD_NETWORK_NO_BID("FB_AD_NETWORK_NO_BID"),
+      @SerializedName("FB_AD_NETWORK_NO_FILL")
+      VALUE_FB_AD_NETWORK_NO_FILL("FB_AD_NETWORK_NO_FILL"),
+      @SerializedName("FB_AD_NETWORK_REQUEST")
+      VALUE_FB_AD_NETWORK_REQUEST("FB_AD_NETWORK_REQUEST"),
       @SerializedName("FB_AD_NETWORK_REVENUE")
       VALUE_FB_AD_NETWORK_REVENUE("FB_AD_NETWORK_REVENUE"),
-      @SerializedName("FB_AD_NETWORK_CPM")
-      VALUE_FB_AD_NETWORK_CPM("FB_AD_NETWORK_CPM"),
+      @SerializedName("FB_AD_NETWORK_SHOW_RATE")
+      VALUE_FB_AD_NETWORK_SHOW_RATE("FB_AD_NETWORK_SHOW_RATE"),
       @SerializedName("FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE")
       VALUE_FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE("FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE"),
-      @SerializedName("FB_AD_NETWORK_VIDEO_VIEW")
-      VALUE_FB_AD_NETWORK_VIDEO_VIEW("FB_AD_NETWORK_VIDEO_VIEW"),
-      @SerializedName("FB_AD_NETWORK_VIDEO_VIEW_RATE")
-      VALUE_FB_AD_NETWORK_VIDEO_VIEW_RATE("FB_AD_NETWORK_VIDEO_VIEW_RATE"),
       @SerializedName("FB_AD_NETWORK_VIDEO_MRC")
       VALUE_FB_AD_NETWORK_VIDEO_MRC("FB_AD_NETWORK_VIDEO_MRC"),
       @SerializedName("FB_AD_NETWORK_VIDEO_MRC_RATE")
       VALUE_FB_AD_NETWORK_VIDEO_MRC_RATE("FB_AD_NETWORK_VIDEO_MRC_RATE"),
+      @SerializedName("FB_AD_NETWORK_VIDEO_VIEW")
+      VALUE_FB_AD_NETWORK_VIDEO_VIEW("FB_AD_NETWORK_VIDEO_VIEW"),
+      @SerializedName("FB_AD_NETWORK_VIDEO_VIEW_RATE")
+      VALUE_FB_AD_NETWORK_VIDEO_VIEW_RATE("FB_AD_NETWORK_VIDEO_VIEW_RATE"),
       @SerializedName("FB_AD_NETWORK_WIN_RATE")
       VALUE_FB_AD_NETWORK_WIN_RATE("FB_AD_NETWORK_WIN_RATE"),
-      @SerializedName("FB_AD_NETWORK_DIRECT_TOTAL_REVENUE")
-      VALUE_FB_AD_NETWORK_DIRECT_TOTAL_REVENUE("FB_AD_NETWORK_DIRECT_TOTAL_REVENUE"),
-      @SerializedName("FB_AD_NETWORK_DIRECT_PUBLISHER_BILL")
-      VALUE_FB_AD_NETWORK_DIRECT_PUBLISHER_BILL("FB_AD_NETWORK_DIRECT_PUBLISHER_BILL"),
-      @SerializedName("FB_AD_NETWORK_FAST_CLICK_RATE")
-      VALUE_FB_AD_NETWORK_FAST_CLICK_RATE("FB_AD_NETWORK_FAST_CLICK_RATE"),
-      @SerializedName("FB_AD_NETWORK_FAST_RETURN_RATE")
-      VALUE_FB_AD_NETWORK_FAST_RETURN_RATE("FB_AD_NETWORK_FAST_RETURN_RATE"),
-      @SerializedName("FB_AD_NETWORK_CLICK_VALUE_SCORE")
-      VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE("FB_AD_NETWORK_CLICK_VALUE_SCORE"),
-      @SerializedName("FB_AD_NETWORK_FAST_CLICK_NUMERATOR")
-      VALUE_FB_AD_NETWORK_FAST_CLICK_NUMERATOR("FB_AD_NETWORK_FAST_CLICK_NUMERATOR"),
-      @SerializedName("FB_AD_NETWORK_FAST_CLICK_DENOMINATOR")
-      VALUE_FB_AD_NETWORK_FAST_CLICK_DENOMINATOR("FB_AD_NETWORK_FAST_CLICK_DENOMINATOR"),
-      @SerializedName("FB_AD_NETWORK_FAST_RETURN_NUMERATOR")
-      VALUE_FB_AD_NETWORK_FAST_RETURN_NUMERATOR("FB_AD_NETWORK_FAST_RETURN_NUMERATOR"),
-      @SerializedName("FB_AD_NETWORK_FAST_RETURN_DENOMINATOR")
-      VALUE_FB_AD_NETWORK_FAST_RETURN_DENOMINATOR("FB_AD_NETWORK_FAST_RETURN_DENOMINATOR"),
-      @SerializedName("FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR")
-      VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR("FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR"),
-      @SerializedName("FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR")
-      VALUE_FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR("FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR"),
-      @SerializedName("FB_AD_NETWORK_NO_FILL")
-      VALUE_FB_AD_NETWORK_NO_FILL("FB_AD_NETWORK_NO_FILL"),
-      @SerializedName("FB_AD_NETWORK_NO_BID")
-      VALUE_FB_AD_NETWORK_NO_BID("FB_AD_NETWORK_NO_BID"),
       NULL(null);
 
       private String value;
@@ -16161,12 +16163,12 @@ public class Application extends APINode {
   }
 
   public static enum EnumOrderingColumn {
+      @SerializedName("METRIC")
+      VALUE_METRIC("METRIC"),
       @SerializedName("TIME")
       VALUE_TIME("TIME"),
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
-      @SerializedName("METRIC")
-      VALUE_METRIC("METRIC"),
       NULL(null);
 
       private String value;
@@ -16222,10 +16224,10 @@ public class Application extends APINode {
   public static enum EnumRequestType {
       @SerializedName("APP_INDEXING")
       VALUE_APP_INDEXING("APP_INDEXING"),
-      @SerializedName("PLUGIN")
-      VALUE_PLUGIN("PLUGIN"),
       @SerializedName("BUTTON_SAMPLING")
       VALUE_BUTTON_SAMPLING("BUTTON_SAMPLING"),
+      @SerializedName("PLUGIN")
+      VALUE_PLUGIN("PLUGIN"),
       NULL(null);
 
       private String value;
@@ -16241,12 +16243,12 @@ public class Application extends APINode {
   }
 
   public static enum EnumMutationMethod {
-      @SerializedName("REPLACE")
-      VALUE_REPLACE("REPLACE"),
       @SerializedName("ADD")
       VALUE_ADD("ADD"),
       @SerializedName("DELETE")
       VALUE_DELETE("DELETE"),
+      @SerializedName("REPLACE")
+      VALUE_REPLACE("REPLACE"),
       NULL(null);
 
       private String value;
@@ -16262,10 +16264,10 @@ public class Application extends APINode {
   }
 
   public static enum EnumPostMethod {
-      @SerializedName("EYMT")
-      VALUE_EYMT("EYMT"),
       @SerializedName("CODELESS")
       VALUE_CODELESS("CODELESS"),
+      @SerializedName("EYMT")
+      VALUE_EYMT("EYMT"),
       NULL(null);
 
       private String value;
@@ -16325,10 +16327,10 @@ public class Application extends APINode {
       VALUE_ADMINISTRATORS("administrators"),
       @SerializedName("developers")
       VALUE_DEVELOPERS("developers"),
-      @SerializedName("testers")
-      VALUE_TESTERS("testers"),
       @SerializedName("insights users")
       VALUE_INSIGHTS_USERS("insights users"),
+      @SerializedName("testers")
+      VALUE_TESTERS("testers"),
       NULL(null);
 
       private String value;
@@ -16378,12 +16380,12 @@ public class Application extends APINode {
   }
 
   public static enum EnumEvent {
-      @SerializedName("MOBILE_APP_INSTALL")
-      VALUE_MOBILE_APP_INSTALL("MOBILE_APP_INSTALL"),
       @SerializedName("CUSTOM_APP_EVENTS")
       VALUE_CUSTOM_APP_EVENTS("CUSTOM_APP_EVENTS"),
       @SerializedName("DEFERRED_APP_LINK")
       VALUE_DEFERRED_APP_LINK("DEFERRED_APP_LINK"),
+      @SerializedName("MOBILE_APP_INSTALL")
+      VALUE_MOBILE_APP_INSTALL("MOBILE_APP_INSTALL"),
       NULL(null);
 
       private String value;
@@ -16416,22 +16418,22 @@ public class Application extends APINode {
   }
 
   public static enum EnumPeriod {
-      @SerializedName("mins_15")
-      VALUE_MINS_15("mins_15"),
-      @SerializedName("hourly")
-      VALUE_HOURLY("hourly"),
       @SerializedName("daily")
       VALUE_DAILY("daily"),
-      @SerializedName("weekly")
-      VALUE_WEEKLY("weekly"),
-      @SerializedName("monthly")
-      VALUE_MONTHLY("monthly"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
       @SerializedName("days_28")
       VALUE_DAYS_28("days_28"),
+      @SerializedName("hourly")
+      VALUE_HOURLY("hourly"),
+      @SerializedName("lifetime")
+      VALUE_LIFETIME("lifetime"),
+      @SerializedName("mins_15")
+      VALUE_MINS_15("mins_15"),
+      @SerializedName("monthly")
+      VALUE_MONTHLY("monthly"),
       @SerializedName("range")
       VALUE_RANGE("range"),
+      @SerializedName("weekly")
+      VALUE_WEEKLY("weekly"),
       NULL(null);
 
       private String value;
@@ -16447,74 +16449,74 @@ public class Application extends APINode {
   }
 
   public static enum EnumAggregateby {
+      @SerializedName("AVERAGE_JOURNEY_LENGTH")
+      VALUE_AVERAGE_JOURNEY_LENGTH("AVERAGE_JOURNEY_LENGTH"),
+      @SerializedName("CONVERTED_JOURNEY_PERCENT")
+      VALUE_CONVERTED_JOURNEY_PERCENT("CONVERTED_JOURNEY_PERCENT"),
       @SerializedName("COUNT")
       VALUE_COUNT("COUNT"),
       @SerializedName("COUNT_IDENTIFIED_USERS")
       VALUE_COUNT_IDENTIFIED_USERS("COUNT_IDENTIFIED_USERS"),
-      @SerializedName("USERS")
-      VALUE_USERS("USERS"),
-      @SerializedName("TOPK")
-      VALUE_TOPK("TOPK"),
-      @SerializedName("SUM")
-      VALUE_SUM("SUM"),
-      @SerializedName("SUM_PER_EVENT")
-      VALUE_SUM_PER_EVENT("SUM_PER_EVENT"),
-      @SerializedName("SUM_IDENTIFIED_USERS")
-      VALUE_SUM_IDENTIFIED_USERS("SUM_IDENTIFIED_USERS"),
-      @SerializedName("USD_SUM")
-      VALUE_USD_SUM("USD_SUM"),
-      @SerializedName("USD_SUM_PER_EVENT")
-      VALUE_USD_SUM_PER_EVENT("USD_SUM_PER_EVENT"),
-      @SerializedName("USD_SUM_IDENTIFIED_USERS")
-      VALUE_USD_SUM_IDENTIFIED_USERS("USD_SUM_IDENTIFIED_USERS"),
-      @SerializedName("USD_SUM_PER_USER")
-      VALUE_USD_SUM_PER_USER("USD_SUM_PER_USER"),
-      @SerializedName("UNKNOWN_USERS")
-      VALUE_UNKNOWN_USERS("UNKNOWN_USERS"),
-      @SerializedName("SCORE")
-      VALUE_SCORE("SCORE"),
+      @SerializedName("COUNT_PER_USER")
+      VALUE_COUNT_PER_USER("COUNT_PER_USER"),
+      @SerializedName("DAU")
+      VALUE_DAU("DAU"),
+      @SerializedName("EVENT_SOURCE_IDS")
+      VALUE_EVENT_SOURCE_IDS("EVENT_SOURCE_IDS"),
+      @SerializedName("JOURNEY_CHANNEL_INCLUSION")
+      VALUE_JOURNEY_CHANNEL_INCLUSION("JOURNEY_CHANNEL_INCLUSION"),
+      @SerializedName("JOURNEY_INCLUSION")
+      VALUE_JOURNEY_INCLUSION("JOURNEY_INCLUSION"),
+      @SerializedName("MAU")
+      VALUE_MAU("MAU"),
+      @SerializedName("MEDIAN_JOURNEY_LENGTH")
+      VALUE_MEDIAN_JOURNEY_LENGTH("MEDIAN_JOURNEY_LENGTH"),
       @SerializedName("MEDIAN_VALUE")
       VALUE_MEDIAN_VALUE("MEDIAN_VALUE"),
       @SerializedName("MEDIAN_VALUE_PER_USER")
       VALUE_MEDIAN_VALUE_PER_USER("MEDIAN_VALUE_PER_USER"),
-      @SerializedName("DAU")
-      VALUE_DAU("DAU"),
-      @SerializedName("WAU")
-      VALUE_WAU("WAU"),
-      @SerializedName("MAU")
-      VALUE_MAU("MAU"),
-      @SerializedName("PERCENTILES_COUNT")
-      VALUE_PERCENTILES_COUNT("PERCENTILES_COUNT"),
-      @SerializedName("PERCENTILES_VALUE")
-      VALUE_PERCENTILES_VALUE("PERCENTILES_VALUE"),
-      @SerializedName("PERCENTILES_USD_VALUE")
-      VALUE_PERCENTILES_USD_VALUE("PERCENTILES_USD_VALUE"),
       @SerializedName("OVERLAP")
       VALUE_OVERLAP("OVERLAP"),
-      @SerializedName("COUNT_PER_USER")
-      VALUE_COUNT_PER_USER("COUNT_PER_USER"),
-      @SerializedName("VALUE_PER_USER")
-      VALUE_VALUE_PER_USER("VALUE_PER_USER"),
-      @SerializedName("USD_VALUE_PER_USER")
-      VALUE_USD_VALUE_PER_USER("USD_VALUE_PER_USER"),
+      @SerializedName("PERCENTILES_COUNT")
+      VALUE_PERCENTILES_COUNT("PERCENTILES_COUNT"),
+      @SerializedName("PERCENTILES_USD_VALUE")
+      VALUE_PERCENTILES_USD_VALUE("PERCENTILES_USD_VALUE"),
+      @SerializedName("PERCENTILES_VALUE")
+      VALUE_PERCENTILES_VALUE("PERCENTILES_VALUE"),
+      @SerializedName("SCORE")
+      VALUE_SCORE("SCORE"),
       @SerializedName("SESSIONS_PER_JOURNEY")
       VALUE_SESSIONS_PER_JOURNEY("SESSIONS_PER_JOURNEY"),
-      @SerializedName("CONVERTED_JOURNEY_PERCENT")
-      VALUE_CONVERTED_JOURNEY_PERCENT("CONVERTED_JOURNEY_PERCENT"),
-      @SerializedName("MEDIAN_JOURNEY_LENGTH")
-      VALUE_MEDIAN_JOURNEY_LENGTH("MEDIAN_JOURNEY_LENGTH"),
-      @SerializedName("AVERAGE_JOURNEY_LENGTH")
-      VALUE_AVERAGE_JOURNEY_LENGTH("AVERAGE_JOURNEY_LENGTH"),
-      @SerializedName("JOURNEY_CHANNEL_INCLUSION")
-      VALUE_JOURNEY_CHANNEL_INCLUSION("JOURNEY_CHANNEL_INCLUSION"),
-      @SerializedName("EVENT_SOURCE_IDS")
-      VALUE_EVENT_SOURCE_IDS("EVENT_SOURCE_IDS"),
       @SerializedName("SESSION_BOUNCE_RATE")
       VALUE_SESSION_BOUNCE_RATE("SESSION_BOUNCE_RATE"),
-      @SerializedName("JOURNEY_INCLUSION")
-      VALUE_JOURNEY_INCLUSION("JOURNEY_INCLUSION"),
+      @SerializedName("SUM")
+      VALUE_SUM("SUM"),
+      @SerializedName("SUM_IDENTIFIED_USERS")
+      VALUE_SUM_IDENTIFIED_USERS("SUM_IDENTIFIED_USERS"),
+      @SerializedName("SUM_PER_EVENT")
+      VALUE_SUM_PER_EVENT("SUM_PER_EVENT"),
+      @SerializedName("TOPK")
+      VALUE_TOPK("TOPK"),
+      @SerializedName("UNKNOWN_USERS")
+      VALUE_UNKNOWN_USERS("UNKNOWN_USERS"),
+      @SerializedName("USD_SUM")
+      VALUE_USD_SUM("USD_SUM"),
+      @SerializedName("USD_SUM_IDENTIFIED_USERS")
+      VALUE_USD_SUM_IDENTIFIED_USERS("USD_SUM_IDENTIFIED_USERS"),
+      @SerializedName("USD_SUM_PER_EVENT")
+      VALUE_USD_SUM_PER_EVENT("USD_SUM_PER_EVENT"),
+      @SerializedName("USD_SUM_PER_USER")
+      VALUE_USD_SUM_PER_USER("USD_SUM_PER_USER"),
+      @SerializedName("USD_VALUE_PER_USER")
+      VALUE_USD_VALUE_PER_USER("USD_VALUE_PER_USER"),
+      @SerializedName("USERS")
+      VALUE_USERS("USERS"),
       @SerializedName("USER_PROPERTY_USER_COUNT")
       VALUE_USER_PROPERTY_USER_COUNT("USER_PROPERTY_USER_COUNT"),
+      @SerializedName("VALUE_PER_USER")
+      VALUE_VALUE_PER_USER("VALUE_PER_USER"),
+      @SerializedName("WAU")
+      VALUE_WAU("WAU"),
       NULL(null);
 
       private String value;
@@ -16549,18 +16551,18 @@ public class Application extends APINode {
   }
 
   public static enum EnumStatus {
-      @SerializedName("CREATED")
-      VALUE_CREATED("CREATED"),
-      @SerializedName("CONFIRMED")
-      VALUE_CONFIRMED("CONFIRMED"),
       @SerializedName("CANCELLED")
       VALUE_CANCELLED("CANCELLED"),
+      @SerializedName("CONFIRMED")
+      VALUE_CONFIRMED("CONFIRMED"),
+      @SerializedName("CREATED")
+      VALUE_CREATED("CREATED"),
       @SerializedName("DELIVERED")
       VALUE_DELIVERED("DELIVERED"),
-      @SerializedName("READY_FOR_PICKUP")
-      VALUE_READY_FOR_PICKUP("READY_FOR_PICKUP"),
       @SerializedName("OUT_FOR_DELIVERY")
       VALUE_OUT_FOR_DELIVERY("OUT_FOR_DELIVERY"),
+      @SerializedName("READY_FOR_PICKUP")
+      VALUE_READY_FOR_PICKUP("READY_FOR_PICKUP"),
       NULL(null);
 
       private String value;

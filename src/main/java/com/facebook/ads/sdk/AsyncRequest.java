@@ -253,14 +253,14 @@ public class AsyncRequest extends APINode {
 
 
   public static enum EnumStatus {
-      @SerializedName("INITIALIZED")
-      VALUE_INITIALIZED("INITIALIZED"),
+      @SerializedName("ERROR")
+      VALUE_ERROR("ERROR"),
       @SerializedName("EXECUTING")
       VALUE_EXECUTING("EXECUTING"),
       @SerializedName("FINISHED")
       VALUE_FINISHED("FINISHED"),
-      @SerializedName("ERROR")
-      VALUE_ERROR("ERROR"),
+      @SerializedName("INITIALIZED")
+      VALUE_INITIALIZED("INITIALIZED"),
       NULL(null);
 
       private String value;
@@ -276,12 +276,12 @@ public class AsyncRequest extends APINode {
   }
 
   public static enum EnumType {
-      @SerializedName("DRAFTS")
-      VALUE_DRAFTS("DRAFTS"),
-      @SerializedName("BATCH_API")
-      VALUE_BATCH_API("BATCH_API"),
       @SerializedName("ASYNC_ADGROUP_CREATION")
       VALUE_ASYNC_ADGROUP_CREATION("ASYNC_ADGROUP_CREATION"),
+      @SerializedName("BATCH_API")
+      VALUE_BATCH_API("BATCH_API"),
+      @SerializedName("DRAFTS")
+      VALUE_DRAFTS("DRAFTS"),
       NULL(null);
 
       private String value;

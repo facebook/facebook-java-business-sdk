@@ -1957,18 +1957,18 @@ public class AdsInsights extends APINode {
 
 
   public static enum EnumActionAttributionWindows {
-      @SerializedName("1d_view")
-      VALUE_1D_VIEW("1d_view"),
-      @SerializedName("7d_view")
-      VALUE_7D_VIEW("7d_view"),
-      @SerializedName("28d_view")
-      VALUE_28D_VIEW("28d_view"),
       @SerializedName("1d_click")
       VALUE_1D_CLICK("1d_click"),
-      @SerializedName("7d_click")
-      VALUE_7D_CLICK("7d_click"),
+      @SerializedName("1d_view")
+      VALUE_1D_VIEW("1d_view"),
       @SerializedName("28d_click")
       VALUE_28D_CLICK("28d_click"),
+      @SerializedName("28d_view")
+      VALUE_28D_VIEW("28d_view"),
+      @SerializedName("7d_click")
+      VALUE_7D_CLICK("7d_click"),
+      @SerializedName("7d_view")
+      VALUE_7D_VIEW("7d_view"),
       @SerializedName("default")
       VALUE_DEFAULT("default"),
       NULL(null);
@@ -1996,8 +1996,6 @@ public class AdsInsights extends APINode {
       VALUE_ACTION_DESTINATION("action_destination"),
       @SerializedName("action_device")
       VALUE_ACTION_DEVICE("action_device"),
-      @SerializedName("action_link_click_destination")
-      VALUE_ACTION_LINK_CLICK_DESTINATION("action_link_click_destination"),
       @SerializedName("action_reaction")
       VALUE_ACTION_REACTION("action_reaction"),
       @SerializedName("action_target_id")
@@ -2023,10 +2021,10 @@ public class AdsInsights extends APINode {
   }
 
   public static enum EnumActionReportTime {
-      @SerializedName("impression")
-      VALUE_IMPRESSION("impression"),
       @SerializedName("conversion")
       VALUE_CONVERSION("conversion"),
+      @SerializedName("impression")
+      VALUE_IMPRESSION("impression"),
       NULL(null);
 
       private String value;
@@ -2042,46 +2040,46 @@ public class AdsInsights extends APINode {
   }
 
   public static enum EnumBreakdowns {
-      @SerializedName("age")
-      VALUE_AGE("age"),
-      @SerializedName("country")
-      VALUE_COUNTRY("country"),
-      @SerializedName("dma")
-      VALUE_DMA("dma"),
-      @SerializedName("gender")
-      VALUE_GENDER("gender"),
-      @SerializedName("frequency_value")
-      VALUE_FREQUENCY_VALUE("frequency_value"),
-      @SerializedName("hourly_stats_aggregated_by_advertiser_time_zone")
-      VALUE_HOURLY_STATS_AGGREGATED_BY_ADVERTISER_TIME_ZONE("hourly_stats_aggregated_by_advertiser_time_zone"),
-      @SerializedName("hourly_stats_aggregated_by_audience_time_zone")
-      VALUE_HOURLY_STATS_AGGREGATED_BY_AUDIENCE_TIME_ZONE("hourly_stats_aggregated_by_audience_time_zone"),
-      @SerializedName("impression_device")
-      VALUE_IMPRESSION_DEVICE("impression_device"),
-      @SerializedName("place_page_id")
-      VALUE_PLACE_PAGE_ID("place_page_id"),
-      @SerializedName("publisher_platform")
-      VALUE_PUBLISHER_PLATFORM("publisher_platform"),
-      @SerializedName("platform_position")
-      VALUE_PLATFORM_POSITION("platform_position"),
-      @SerializedName("device_platform")
-      VALUE_DEVICE_PLATFORM("device_platform"),
-      @SerializedName("product_id")
-      VALUE_PRODUCT_ID("product_id"),
-      @SerializedName("region")
-      VALUE_REGION("region"),
       @SerializedName("ad_format_asset")
       VALUE_AD_FORMAT_ASSET("ad_format_asset"),
+      @SerializedName("age")
+      VALUE_AGE("age"),
       @SerializedName("body_asset")
       VALUE_BODY_ASSET("body_asset"),
       @SerializedName("call_to_action_asset")
       VALUE_CALL_TO_ACTION_ASSET("call_to_action_asset"),
+      @SerializedName("country")
+      VALUE_COUNTRY("country"),
       @SerializedName("description_asset")
       VALUE_DESCRIPTION_ASSET("description_asset"),
+      @SerializedName("device_platform")
+      VALUE_DEVICE_PLATFORM("device_platform"),
+      @SerializedName("dma")
+      VALUE_DMA("dma"),
+      @SerializedName("frequency_value")
+      VALUE_FREQUENCY_VALUE("frequency_value"),
+      @SerializedName("gender")
+      VALUE_GENDER("gender"),
+      @SerializedName("hourly_stats_aggregated_by_advertiser_time_zone")
+      VALUE_HOURLY_STATS_AGGREGATED_BY_ADVERTISER_TIME_ZONE("hourly_stats_aggregated_by_advertiser_time_zone"),
+      @SerializedName("hourly_stats_aggregated_by_audience_time_zone")
+      VALUE_HOURLY_STATS_AGGREGATED_BY_AUDIENCE_TIME_ZONE("hourly_stats_aggregated_by_audience_time_zone"),
       @SerializedName("image_asset")
       VALUE_IMAGE_ASSET("image_asset"),
+      @SerializedName("impression_device")
+      VALUE_IMPRESSION_DEVICE("impression_device"),
       @SerializedName("link_url_asset")
       VALUE_LINK_URL_ASSET("link_url_asset"),
+      @SerializedName("place_page_id")
+      VALUE_PLACE_PAGE_ID("place_page_id"),
+      @SerializedName("platform_position")
+      VALUE_PLATFORM_POSITION("platform_position"),
+      @SerializedName("product_id")
+      VALUE_PRODUCT_ID("product_id"),
+      @SerializedName("publisher_platform")
+      VALUE_PUBLISHER_PLATFORM("publisher_platform"),
+      @SerializedName("region")
+      VALUE_REGION("region"),
       @SerializedName("title_asset")
       VALUE_TITLE_ASSET("title_asset"),
       @SerializedName("video_asset")
@@ -2101,44 +2099,44 @@ public class AdsInsights extends APINode {
   }
 
   public static enum EnumDatePreset {
-      @SerializedName("today")
-      VALUE_TODAY("today"),
-      @SerializedName("yesterday")
-      VALUE_YESTERDAY("yesterday"),
-      @SerializedName("this_month")
-      VALUE_THIS_MONTH("this_month"),
-      @SerializedName("last_month")
-      VALUE_LAST_MONTH("last_month"),
-      @SerializedName("this_quarter")
-      VALUE_THIS_QUARTER("this_quarter"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
-      @SerializedName("last_3d")
-      VALUE_LAST_3D("last_3d"),
-      @SerializedName("last_7d")
-      VALUE_LAST_7D("last_7d"),
       @SerializedName("last_14d")
       VALUE_LAST_14D("last_14d"),
       @SerializedName("last_28d")
       VALUE_LAST_28D("last_28d"),
       @SerializedName("last_30d")
       VALUE_LAST_30D("last_30d"),
+      @SerializedName("last_3d")
+      VALUE_LAST_3D("last_3d"),
+      @SerializedName("last_7d")
+      VALUE_LAST_7D("last_7d"),
       @SerializedName("last_90d")
       VALUE_LAST_90D("last_90d"),
+      @SerializedName("last_month")
+      VALUE_LAST_MONTH("last_month"),
+      @SerializedName("last_quarter")
+      VALUE_LAST_QUARTER("last_quarter"),
       @SerializedName("last_week_mon_sun")
       VALUE_LAST_WEEK_MON_SUN("last_week_mon_sun"),
       @SerializedName("last_week_sun_sat")
       VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
-      @SerializedName("last_quarter")
-      VALUE_LAST_QUARTER("last_quarter"),
       @SerializedName("last_year")
       VALUE_LAST_YEAR("last_year"),
+      @SerializedName("lifetime")
+      VALUE_LIFETIME("lifetime"),
+      @SerializedName("this_month")
+      VALUE_THIS_MONTH("this_month"),
+      @SerializedName("this_quarter")
+      VALUE_THIS_QUARTER("this_quarter"),
       @SerializedName("this_week_mon_today")
       VALUE_THIS_WEEK_MON_TODAY("this_week_mon_today"),
       @SerializedName("this_week_sun_today")
       VALUE_THIS_WEEK_SUN_TODAY("this_week_sun_today"),
       @SerializedName("this_year")
       VALUE_THIS_YEAR("this_year"),
+      @SerializedName("today")
+      VALUE_TODAY("today"),
+      @SerializedName("yesterday")
+      VALUE_YESTERDAY("yesterday"),
       NULL(null);
 
       private String value;
@@ -2154,14 +2152,14 @@ public class AdsInsights extends APINode {
   }
 
   public static enum EnumLevel {
+      @SerializedName("account")
+      VALUE_ACCOUNT("account"),
       @SerializedName("ad")
       VALUE_AD("ad"),
       @SerializedName("adset")
       VALUE_ADSET("adset"),
       @SerializedName("campaign")
       VALUE_CAMPAIGN("campaign"),
-      @SerializedName("account")
-      VALUE_ACCOUNT("account"),
       NULL(null);
 
       private String value;
@@ -2187,8 +2185,6 @@ public class AdsInsights extends APINode {
       VALUE_ACTION_DESTINATION("action_destination"),
       @SerializedName("action_device")
       VALUE_ACTION_DEVICE("action_device"),
-      @SerializedName("action_link_click_destination")
-      VALUE_ACTION_LINK_CLICK_DESTINATION("action_link_click_destination"),
       @SerializedName("action_reaction")
       VALUE_ACTION_REACTION("action_reaction"),
       @SerializedName("action_target_id")

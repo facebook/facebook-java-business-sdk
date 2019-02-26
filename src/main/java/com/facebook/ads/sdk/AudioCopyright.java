@@ -721,10 +721,10 @@ public class AudioCopyright extends APINode {
   }
 
   public static enum EnumUpdateSource {
-      @SerializedName("edit_reference_dialog")
-      VALUE_EDIT_REFERENCE_DIALOG("edit_reference_dialog"),
       @SerializedName("ddex")
       VALUE_DDEX("ddex"),
+      @SerializedName("edit_reference_dialog")
+      VALUE_EDIT_REFERENCE_DIALOG("edit_reference_dialog"),
       @SerializedName("reference_conflict_dialog")
       VALUE_REFERENCE_CONFLICT_DIALOG("reference_conflict_dialog"),
       NULL(null);

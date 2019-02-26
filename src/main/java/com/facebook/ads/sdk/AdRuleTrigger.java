@@ -264,32 +264,32 @@ public class AdRuleTrigger extends APINode {
 
 
   public static enum EnumOperator {
-      @SerializedName("GREATER_THAN")
-      VALUE_GREATER_THAN("GREATER_THAN"),
-      @SerializedName("LESS_THAN")
-      VALUE_LESS_THAN("LESS_THAN"),
-      @SerializedName("EQUAL")
-      VALUE_EQUAL("EQUAL"),
-      @SerializedName("NOT_EQUAL")
-      VALUE_NOT_EQUAL("NOT_EQUAL"),
-      @SerializedName("IN_RANGE")
-      VALUE_IN_RANGE("IN_RANGE"),
-      @SerializedName("NOT_IN_RANGE")
-      VALUE_NOT_IN_RANGE("NOT_IN_RANGE"),
-      @SerializedName("IN")
-      VALUE_IN("IN"),
-      @SerializedName("NOT_IN")
-      VALUE_NOT_IN("NOT_IN"),
-      @SerializedName("CONTAIN")
-      VALUE_CONTAIN("CONTAIN"),
-      @SerializedName("NOT_CONTAIN")
-      VALUE_NOT_CONTAIN("NOT_CONTAIN"),
-      @SerializedName("ANY")
-      VALUE_ANY("ANY"),
       @SerializedName("ALL")
       VALUE_ALL("ALL"),
+      @SerializedName("ANY")
+      VALUE_ANY("ANY"),
+      @SerializedName("CONTAIN")
+      VALUE_CONTAIN("CONTAIN"),
+      @SerializedName("EQUAL")
+      VALUE_EQUAL("EQUAL"),
+      @SerializedName("GREATER_THAN")
+      VALUE_GREATER_THAN("GREATER_THAN"),
+      @SerializedName("IN")
+      VALUE_IN("IN"),
+      @SerializedName("IN_RANGE")
+      VALUE_IN_RANGE("IN_RANGE"),
+      @SerializedName("LESS_THAN")
+      VALUE_LESS_THAN("LESS_THAN"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
+      @SerializedName("NOT_CONTAIN")
+      VALUE_NOT_CONTAIN("NOT_CONTAIN"),
+      @SerializedName("NOT_EQUAL")
+      VALUE_NOT_EQUAL("NOT_EQUAL"),
+      @SerializedName("NOT_IN")
+      VALUE_NOT_IN("NOT_IN"),
+      @SerializedName("NOT_IN_RANGE")
+      VALUE_NOT_IN_RANGE("NOT_IN_RANGE"),
       NULL(null);
 
       private String value;
@@ -305,16 +305,16 @@ public class AdRuleTrigger extends APINode {
   }
 
   public static enum EnumType {
+      @SerializedName("DELIVERY_INSIGHTS_CHANGE")
+      VALUE_DELIVERY_INSIGHTS_CHANGE("DELIVERY_INSIGHTS_CHANGE"),
       @SerializedName("METADATA_CREATION")
       VALUE_METADATA_CREATION("METADATA_CREATION"),
       @SerializedName("METADATA_UPDATE")
       VALUE_METADATA_UPDATE("METADATA_UPDATE"),
-      @SerializedName("STATS_MILESTONE")
-      VALUE_STATS_MILESTONE("STATS_MILESTONE"),
       @SerializedName("STATS_CHANGE")
       VALUE_STATS_CHANGE("STATS_CHANGE"),
-      @SerializedName("DELIVERY_INSIGHTS_CHANGE")
-      VALUE_DELIVERY_INSIGHTS_CHANGE("DELIVERY_INSIGHTS_CHANGE"),
+      @SerializedName("STATS_MILESTONE")
+      VALUE_STATS_MILESTONE("STATS_MILESTONE"),
       NULL(null);
 
       private String value;

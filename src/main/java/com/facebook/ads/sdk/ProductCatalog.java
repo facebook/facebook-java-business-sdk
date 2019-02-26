@@ -464,6 +464,10 @@ public class ProductCatalog extends APINode {
     return new APIRequestGetVehicles(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateVehicle createVehicle() {
+    return new APIRequestCreateVehicle(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestCreateVideo createVideo() {
     return new APIRequestCreateVideo(this.getPrefixedId().toString(), context);
   }
@@ -2384,6 +2388,8 @@ public class ProductCatalog extends APINode {
       "handle",
       "invalid_item_ids",
       "status",
+      "warnings",
+      "warnings_total_count",
       "id",
     };
 
@@ -2523,6 +2529,20 @@ public class ProductCatalog extends APINode {
     }
     public APIRequestGetCheckBatchRequestStatus requestStatusField (boolean value) {
       this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetCheckBatchRequestStatus requestWarningsField () {
+      return this.requestWarningsField(true);
+    }
+    public APIRequestGetCheckBatchRequestStatus requestWarningsField (boolean value) {
+      this.requestField("warnings", value);
+      return this;
+    }
+    public APIRequestGetCheckBatchRequestStatus requestWarningsTotalCountField () {
+      return this.requestWarningsTotalCountField(true);
+    }
+    public APIRequestGetCheckBatchRequestStatus requestWarningsTotalCountField (boolean value) {
+      this.requestField("warnings_total_count", value);
       return this;
     }
     public APIRequestGetCheckBatchRequestStatus requestIdField () {
@@ -9250,6 +9270,340 @@ public class ProductCatalog extends APINode {
     }
   }
 
+  public static class APIRequestCreateVehicle extends APIRequest<Vehicle> {
+
+    Vehicle lastResponse = null;
+    @Override
+    public Vehicle getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "applinks",
+      "body_style",
+      "description",
+      "exterior_color",
+      "make",
+      "mileage",
+      "model",
+      "state_of_vehicle",
+      "vin",
+      "url",
+      "vehicle_id",
+      "year",
+      "images",
+      "address",
+      "currency",
+      "price",
+      "title",
+      "transmission",
+      "drivetrain",
+      "fuel_type",
+      "trim",
+      "interior_color",
+      "condition",
+      "date_first_on_lot",
+      "availability",
+      "dealer_id",
+      "dealer_name",
+      "dealer_phone",
+      "vehicle_type",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Vehicle parseResponse(String response, String header) throws APIException {
+      return Vehicle.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Vehicle execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Vehicle execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Vehicle> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Vehicle> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Vehicle>() {
+           public Vehicle apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateVehicle.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateVehicle(String nodeId, APIContext context) {
+      super(context, nodeId, "/vehicles", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateVehicle setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVehicle setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateVehicle setApplinks (Object applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+    public APIRequestCreateVehicle setApplinks (String applinks) {
+      this.setParam("applinks", applinks);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setBodyStyle (Vehicle.EnumBodyStyle bodyStyle) {
+      this.setParam("body_style", bodyStyle);
+      return this;
+    }
+    public APIRequestCreateVehicle setBodyStyle (String bodyStyle) {
+      this.setParam("body_style", bodyStyle);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setDescription (String description) {
+      this.setParam("description", description);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setExteriorColor (String exteriorColor) {
+      this.setParam("exterior_color", exteriorColor);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setMake (String make) {
+      this.setParam("make", make);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setMileage (Map<String, String> mileage) {
+      this.setParam("mileage", mileage);
+      return this;
+    }
+    public APIRequestCreateVehicle setMileage (String mileage) {
+      this.setParam("mileage", mileage);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setModel (String model) {
+      this.setParam("model", model);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setStateOfVehicle (Vehicle.EnumStateOfVehicle stateOfVehicle) {
+      this.setParam("state_of_vehicle", stateOfVehicle);
+      return this;
+    }
+    public APIRequestCreateVehicle setStateOfVehicle (String stateOfVehicle) {
+      this.setParam("state_of_vehicle", stateOfVehicle);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setVin (String vin) {
+      this.setParam("vin", vin);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setUrl (String url) {
+      this.setParam("url", url);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setVehicleId (String vehicleId) {
+      this.setParam("vehicle_id", vehicleId);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setYear (Long year) {
+      this.setParam("year", year);
+      return this;
+    }
+    public APIRequestCreateVehicle setYear (String year) {
+      this.setParam("year", year);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setImages (List<Object> images) {
+      this.setParam("images", images);
+      return this;
+    }
+    public APIRequestCreateVehicle setImages (String images) {
+      this.setParam("images", images);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setAddress (Map<String, String> address) {
+      this.setParam("address", address);
+      return this;
+    }
+    public APIRequestCreateVehicle setAddress (String address) {
+      this.setParam("address", address);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setCurrency (String currency) {
+      this.setParam("currency", currency);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setPrice (Long price) {
+      this.setParam("price", price);
+      return this;
+    }
+    public APIRequestCreateVehicle setPrice (String price) {
+      this.setParam("price", price);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setTitle (String title) {
+      this.setParam("title", title);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setTransmission (Vehicle.EnumTransmission transmission) {
+      this.setParam("transmission", transmission);
+      return this;
+    }
+    public APIRequestCreateVehicle setTransmission (String transmission) {
+      this.setParam("transmission", transmission);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setDrivetrain (Vehicle.EnumDrivetrain drivetrain) {
+      this.setParam("drivetrain", drivetrain);
+      return this;
+    }
+    public APIRequestCreateVehicle setDrivetrain (String drivetrain) {
+      this.setParam("drivetrain", drivetrain);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setFuelType (Vehicle.EnumFuelType fuelType) {
+      this.setParam("fuel_type", fuelType);
+      return this;
+    }
+    public APIRequestCreateVehicle setFuelType (String fuelType) {
+      this.setParam("fuel_type", fuelType);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setTrim (String trim) {
+      this.setParam("trim", trim);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setInteriorColor (String interiorColor) {
+      this.setParam("interior_color", interiorColor);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setCondition (Vehicle.EnumCondition condition) {
+      this.setParam("condition", condition);
+      return this;
+    }
+    public APIRequestCreateVehicle setCondition (String condition) {
+      this.setParam("condition", condition);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setDateFirstOnLot (String dateFirstOnLot) {
+      this.setParam("date_first_on_lot", dateFirstOnLot);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setAvailability (Vehicle.EnumAvailability availability) {
+      this.setParam("availability", availability);
+      return this;
+    }
+    public APIRequestCreateVehicle setAvailability (String availability) {
+      this.setParam("availability", availability);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setDealerId (String dealerId) {
+      this.setParam("dealer_id", dealerId);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setDealerName (String dealerName) {
+      this.setParam("dealer_name", dealerName);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setDealerPhone (String dealerPhone) {
+      this.setParam("dealer_phone", dealerPhone);
+      return this;
+    }
+
+    public APIRequestCreateVehicle setVehicleType (Vehicle.EnumVehicleType vehicleType) {
+      this.setParam("vehicle_type", vehicleType);
+      return this;
+    }
+    public APIRequestCreateVehicle setVehicleType (String vehicleType) {
+      this.setParam("vehicle_type", vehicleType);
+      return this;
+    }
+
+    public APIRequestCreateVehicle requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateVehicle requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVehicle requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateVehicle requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVehicle requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateVehicle requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestCreateVideo extends APIRequest<AdVideo> {
 
     AdVideo lastResponse = null;
@@ -9643,6 +9997,10 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setFunFactPromptId (Long funFactPromptId) {
+      this.setParam("fun_fact_prompt_id", funFactPromptId);
+      return this;
+    }
     public APIRequestCreateVideo setFunFactPromptId (String funFactPromptId) {
       this.setParam("fun_fact_prompt_id", funFactPromptId);
       return this;
@@ -9704,6 +10062,10 @@ public class ProductCatalog extends APINode {
       return this;
     }
 
+    public APIRequestCreateVideo setOfferLikePostId (Long offerLikePostId) {
+      this.setParam("offer_like_post_id", offerLikePostId);
+      return this;
+    }
     public APIRequestCreateVideo setOfferLikePostId (String offerLikePostId) {
       this.setParam("offer_like_post_id", offerLikePostId);
       return this;
@@ -10465,10 +10827,10 @@ public class ProductCatalog extends APINode {
   public static enum EnumItemType {
       @SerializedName("AUTO")
       VALUE_AUTO("AUTO"),
-      @SerializedName("AUTO_MARKET")
-      VALUE_AUTO_MARKET("AUTO_MARKET"),
       @SerializedName("AUTOMOTIVE_MODEL")
       VALUE_AUTOMOTIVE_MODEL("AUTOMOTIVE_MODEL"),
+      @SerializedName("AUTO_MARKET")
+      VALUE_AUTO_MARKET("AUTO_MARKET"),
       @SerializedName("DESTINATION")
       VALUE_DESTINATION("DESTINATION"),
       @SerializedName("FLIGHT")

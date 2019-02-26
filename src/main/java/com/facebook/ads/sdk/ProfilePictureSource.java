@@ -319,12 +319,12 @@ public class ProfilePictureSource extends APINode {
 
 
   public static enum EnumType {
-      @SerializedName("thumbnail")
-      VALUE_THUMBNAIL("thumbnail"),
-      @SerializedName("small")
-      VALUE_SMALL("small"),
       @SerializedName("album")
       VALUE_ALBUM("album"),
+      @SerializedName("small")
+      VALUE_SMALL("small"),
+      @SerializedName("thumbnail")
+      VALUE_THUMBNAIL("thumbnail"),
       NULL(null);
 
       private String value;

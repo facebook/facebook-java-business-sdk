@@ -844,22 +844,20 @@ public class SavedMessageResponse extends APINode {
   }
 
   public static enum EnumCategory {
-      @SerializedName("STANDARD")
-      VALUE_STANDARD("STANDARD"),
-      @SerializedName("INSTANT_REPLY")
-      VALUE_INSTANT_REPLY("INSTANT_REPLY"),
+      @SerializedName("APPOINTMENT_REMINDER")
+      VALUE_APPOINTMENT_REMINDER("APPOINTMENT_REMINDER"),
       @SerializedName("AWAY_MESSAGE")
       VALUE_AWAY_MESSAGE("AWAY_MESSAGE"),
-      @SerializedName("WELCOME_MESSAGE")
-      VALUE_WELCOME_MESSAGE("WELCOME_MESSAGE"),
       @SerializedName("FOLLOW_UP")
       VALUE_FOLLOW_UP("FOLLOW_UP"),
+      @SerializedName("INSTANT_REPLY")
+      VALUE_INSTANT_REPLY("INSTANT_REPLY"),
+      @SerializedName("JOB_APPLICATION")
+      VALUE_JOB_APPLICATION("JOB_APPLICATION"),
       @SerializedName("MESSENGER_CODE")
       VALUE_MESSENGER_CODE("MESSENGER_CODE"),
       @SerializedName("REFERRAL")
       VALUE_REFERRAL("REFERRAL"),
-      @SerializedName("APPOINTMENT_REMINDER")
-      VALUE_APPOINTMENT_REMINDER("APPOINTMENT_REMINDER"),
       @SerializedName("SMART_REPLY_CONTACT")
       VALUE_SMART_REPLY_CONTACT("SMART_REPLY_CONTACT"),
       @SerializedName("SMART_REPLY_HOURS")
@@ -870,8 +868,10 @@ public class SavedMessageResponse extends APINode {
       VALUE_SMART_REPLY_NEGATIVE_FEEDBACK("SMART_REPLY_NEGATIVE_FEEDBACK"),
       @SerializedName("SMART_REPLY_POSITIVE_FEEDBACK")
       VALUE_SMART_REPLY_POSITIVE_FEEDBACK("SMART_REPLY_POSITIVE_FEEDBACK"),
-      @SerializedName("JOB_APPLICATION")
-      VALUE_JOB_APPLICATION("JOB_APPLICATION"),
+      @SerializedName("STANDARD")
+      VALUE_STANDARD("STANDARD"),
+      @SerializedName("WELCOME_MESSAGE")
+      VALUE_WELCOME_MESSAGE("WELCOME_MESSAGE"),
       NULL(null);
 
       private String value;

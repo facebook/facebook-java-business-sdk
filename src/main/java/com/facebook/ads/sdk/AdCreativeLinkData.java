@@ -665,10 +665,10 @@ public class AdCreativeLinkData extends APINode {
 
 
   public static enum EnumAttachmentStyle {
-      @SerializedName("link")
-      VALUE_LINK("link"),
       @SerializedName("default")
       VALUE_DEFAULT("default"),
+      @SerializedName("link")
+      VALUE_LINK("link"),
       NULL(null);
 
       private String value;

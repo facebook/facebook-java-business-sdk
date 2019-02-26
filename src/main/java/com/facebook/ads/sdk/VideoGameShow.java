@@ -806,10 +806,10 @@ public class VideoGameShow extends APINode {
   }
 
   public static enum EnumAction {
-      @SerializedName("START_GAME")
-      VALUE_START_GAME("START_GAME"),
       @SerializedName("END_GAME")
       VALUE_END_GAME("END_GAME"),
+      @SerializedName("START_GAME")
+      VALUE_START_GAME("START_GAME"),
       NULL(null);
 
       private String value;

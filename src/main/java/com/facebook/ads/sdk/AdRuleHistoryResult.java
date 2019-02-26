@@ -258,12 +258,12 @@ public class AdRuleHistoryResult extends APINode {
 
 
   public static enum EnumObjectType {
-      @SerializedName("CAMPAIGN")
-      VALUE_CAMPAIGN("CAMPAIGN"),
-      @SerializedName("ADSET")
-      VALUE_ADSET("ADSET"),
       @SerializedName("AD")
       VALUE_AD("AD"),
+      @SerializedName("ADSET")
+      VALUE_ADSET("ADSET"),
+      @SerializedName("CAMPAIGN")
+      VALUE_CAMPAIGN("CAMPAIGN"),
       NULL(null);
 
       private String value;

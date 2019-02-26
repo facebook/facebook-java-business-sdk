@@ -352,26 +352,10 @@ public class AdActivity extends APINode {
 
 
   public static enum EnumEventType {
-      @SerializedName("ad_account_update_spend_limit")
-      VALUE_AD_ACCOUNT_UPDATE_SPEND_LIMIT("ad_account_update_spend_limit"),
-      @SerializedName("ad_account_reset_spend_limit")
-      VALUE_AD_ACCOUNT_RESET_SPEND_LIMIT("ad_account_reset_spend_limit"),
-      @SerializedName("ad_account_remove_spend_limit")
-      VALUE_AD_ACCOUNT_REMOVE_SPEND_LIMIT("ad_account_remove_spend_limit"),
-      @SerializedName("ad_account_set_business_information")
-      VALUE_AD_ACCOUNT_SET_BUSINESS_INFORMATION("ad_account_set_business_information"),
-      @SerializedName("ad_account_update_status")
-      VALUE_AD_ACCOUNT_UPDATE_STATUS("ad_account_update_status"),
+      @SerializedName("account_spending_limit_reached")
+      VALUE_ACCOUNT_SPENDING_LIMIT_REACHED("account_spending_limit_reached"),
       @SerializedName("ad_account_add_user_to_role")
       VALUE_AD_ACCOUNT_ADD_USER_TO_ROLE("ad_account_add_user_to_role"),
-      @SerializedName("ad_account_remove_user_from_role")
-      VALUE_AD_ACCOUNT_REMOVE_USER_FROM_ROLE("ad_account_remove_user_from_role"),
-      @SerializedName("add_images")
-      VALUE_ADD_IMAGES("add_images"),
-      @SerializedName("edit_images")
-      VALUE_EDIT_IMAGES("edit_images"),
-      @SerializedName("delete_images")
-      VALUE_DELETE_IMAGES("delete_images"),
       @SerializedName("ad_account_billing_charge")
       VALUE_AD_ACCOUNT_BILLING_CHARGE("ad_account_billing_charge"),
       @SerializedName("ad_account_billing_charge_failed")
@@ -384,104 +368,120 @@ public class AdActivity extends APINode {
       VALUE_AD_ACCOUNT_BILLING_DECLINE("ad_account_billing_decline"),
       @SerializedName("ad_account_billing_refund")
       VALUE_AD_ACCOUNT_BILLING_REFUND("ad_account_billing_refund"),
-      @SerializedName("billing_event")
-      VALUE_BILLING_EVENT("billing_event"),
-      @SerializedName("add_funding_source")
-      VALUE_ADD_FUNDING_SOURCE("add_funding_source"),
-      @SerializedName("remove_funding_source")
-      VALUE_REMOVE_FUNDING_SOURCE("remove_funding_source"),
-      @SerializedName("create_campaign_group")
-      VALUE_CREATE_CAMPAIGN_GROUP("create_campaign_group"),
-      @SerializedName("update_campaign_name")
-      VALUE_UPDATE_CAMPAIGN_NAME("update_campaign_name"),
-      @SerializedName("update_campaign_run_status")
-      VALUE_UPDATE_CAMPAIGN_RUN_STATUS("update_campaign_run_status"),
-      @SerializedName("update_campaign_group_spend_cap")
-      VALUE_UPDATE_CAMPAIGN_GROUP_SPEND_CAP("update_campaign_group_spend_cap"),
-      @SerializedName("create_campaign_legacy")
-      VALUE_CREATE_CAMPAIGN_LEGACY("create_campaign_legacy"),
-      @SerializedName("update_campaign_budget")
-      VALUE_UPDATE_CAMPAIGN_BUDGET("update_campaign_budget"),
-      @SerializedName("update_campaign_duration")
-      VALUE_UPDATE_CAMPAIGN_DURATION("update_campaign_duration"),
-      @SerializedName("campaign_ended")
-      VALUE_CAMPAIGN_ENDED("campaign_ended"),
-      @SerializedName("create_ad_set")
-      VALUE_CREATE_AD_SET("create_ad_set"),
-      @SerializedName("update_ad_set_bidding")
-      VALUE_UPDATE_AD_SET_BIDDING("update_ad_set_bidding"),
-      @SerializedName("update_ad_set_bid_strategy")
-      VALUE_UPDATE_AD_SET_BID_STRATEGY("update_ad_set_bid_strategy"),
-      @SerializedName("update_ad_set_budget")
-      VALUE_UPDATE_AD_SET_BUDGET("update_ad_set_budget"),
-      @SerializedName("update_ad_set_duration")
-      VALUE_UPDATE_AD_SET_DURATION("update_ad_set_duration"),
-      @SerializedName("update_ad_set_run_status")
-      VALUE_UPDATE_AD_SET_RUN_STATUS("update_ad_set_run_status"),
-      @SerializedName("update_ad_set_name")
-      VALUE_UPDATE_AD_SET_NAME("update_ad_set_name"),
-      @SerializedName("update_ad_set_optimization_goal")
-      VALUE_UPDATE_AD_SET_OPTIMIZATION_GOAL("update_ad_set_optimization_goal"),
-      @SerializedName("update_ad_set_target_spec")
-      VALUE_UPDATE_AD_SET_TARGET_SPEC("update_ad_set_target_spec"),
-      @SerializedName("update_ad_set_bid_adjustments")
-      VALUE_UPDATE_AD_SET_BID_ADJUSTMENTS("update_ad_set_bid_adjustments"),
-      @SerializedName("create_ad")
-      VALUE_CREATE_AD("create_ad"),
+      @SerializedName("ad_account_remove_spend_limit")
+      VALUE_AD_ACCOUNT_REMOVE_SPEND_LIMIT("ad_account_remove_spend_limit"),
+      @SerializedName("ad_account_remove_user_from_role")
+      VALUE_AD_ACCOUNT_REMOVE_USER_FROM_ROLE("ad_account_remove_user_from_role"),
+      @SerializedName("ad_account_reset_spend_limit")
+      VALUE_AD_ACCOUNT_RESET_SPEND_LIMIT("ad_account_reset_spend_limit"),
+      @SerializedName("ad_account_set_business_information")
+      VALUE_AD_ACCOUNT_SET_BUSINESS_INFORMATION("ad_account_set_business_information"),
+      @SerializedName("ad_account_update_spend_limit")
+      VALUE_AD_ACCOUNT_UPDATE_SPEND_LIMIT("ad_account_update_spend_limit"),
+      @SerializedName("ad_account_update_status")
+      VALUE_AD_ACCOUNT_UPDATE_STATUS("ad_account_update_status"),
       @SerializedName("ad_review_approved")
       VALUE_AD_REVIEW_APPROVED("ad_review_approved"),
       @SerializedName("ad_review_declined")
       VALUE_AD_REVIEW_DECLINED("ad_review_declined"),
-      @SerializedName("update_ad_creative")
-      VALUE_UPDATE_AD_CREATIVE("update_ad_creative"),
-      @SerializedName("edit_and_update_ad_creative")
-      VALUE_EDIT_AND_UPDATE_AD_CREATIVE("edit_and_update_ad_creative"),
-      @SerializedName("update_ad_bid_info")
-      VALUE_UPDATE_AD_BID_INFO("update_ad_bid_info"),
-      @SerializedName("update_ad_bid_type")
-      VALUE_UPDATE_AD_BID_TYPE("update_ad_bid_type"),
-      @SerializedName("update_ad_run_status")
-      VALUE_UPDATE_AD_RUN_STATUS("update_ad_run_status"),
-      @SerializedName("update_ad_run_status_to_be_set_after_review")
-      VALUE_UPDATE_AD_RUN_STATUS_TO_BE_SET_AFTER_REVIEW("update_ad_run_status_to_be_set_after_review"),
-      @SerializedName("update_ad_friendly_name")
-      VALUE_UPDATE_AD_FRIENDLY_NAME("update_ad_friendly_name"),
-      @SerializedName("update_ad_targets_spec")
-      VALUE_UPDATE_AD_TARGETS_SPEC("update_ad_targets_spec"),
-      @SerializedName("update_adgroup_stop_delivery")
-      VALUE_UPDATE_ADGROUP_STOP_DELIVERY("update_adgroup_stop_delivery"),
-      @SerializedName("first_delivery_event")
-      VALUE_FIRST_DELIVERY_EVENT("first_delivery_event"),
-      @SerializedName("create_audience")
-      VALUE_CREATE_AUDIENCE("create_audience"),
-      @SerializedName("update_audience")
-      VALUE_UPDATE_AUDIENCE("update_audience"),
-      @SerializedName("delete_audience")
-      VALUE_DELETE_AUDIENCE("delete_audience"),
-      @SerializedName("share_audience")
-      VALUE_SHARE_AUDIENCE("share_audience"),
-      @SerializedName("receive_audience")
-      VALUE_RECEIVE_AUDIENCE("receive_audience"),
-      @SerializedName("unshare_audience")
-      VALUE_UNSHARE_AUDIENCE("unshare_audience"),
-      @SerializedName("remove_shared_audience")
-      VALUE_REMOVE_SHARED_AUDIENCE("remove_shared_audience"),
-      @SerializedName("unknown")
-      VALUE_UNKNOWN("unknown"),
-      @SerializedName("account_spending_limit_reached")
-      VALUE_ACCOUNT_SPENDING_LIMIT_REACHED("account_spending_limit_reached"),
+      @SerializedName("add_funding_source")
+      VALUE_ADD_FUNDING_SOURCE("add_funding_source"),
+      @SerializedName("add_images")
+      VALUE_ADD_IMAGES("add_images"),
+      @SerializedName("billing_event")
+      VALUE_BILLING_EVENT("billing_event"),
+      @SerializedName("campaign_ended")
+      VALUE_CAMPAIGN_ENDED("campaign_ended"),
       @SerializedName("campaign_spending_limit_reached")
       VALUE_CAMPAIGN_SPENDING_LIMIT_REACHED("campaign_spending_limit_reached"),
-      @SerializedName("lifetime_budget_spent")
-      VALUE_LIFETIME_BUDGET_SPENT("lifetime_budget_spent"),
+      @SerializedName("create_ad")
+      VALUE_CREATE_AD("create_ad"),
+      @SerializedName("create_ad_set")
+      VALUE_CREATE_AD_SET("create_ad_set"),
+      @SerializedName("create_audience")
+      VALUE_CREATE_AUDIENCE("create_audience"),
+      @SerializedName("create_campaign_group")
+      VALUE_CREATE_CAMPAIGN_GROUP("create_campaign_group"),
+      @SerializedName("create_campaign_legacy")
+      VALUE_CREATE_CAMPAIGN_LEGACY("create_campaign_legacy"),
+      @SerializedName("delete_audience")
+      VALUE_DELETE_AUDIENCE("delete_audience"),
+      @SerializedName("delete_images")
+      VALUE_DELETE_IMAGES("delete_images"),
+      @SerializedName("di_ad_set_learning_stage_exit")
+      VALUE_DI_AD_SET_LEARNING_STAGE_EXIT("di_ad_set_learning_stage_exit"),
+      @SerializedName("edit_and_update_ad_creative")
+      VALUE_EDIT_AND_UPDATE_AD_CREATIVE("edit_and_update_ad_creative"),
+      @SerializedName("edit_images")
+      VALUE_EDIT_IMAGES("edit_images"),
+      @SerializedName("first_delivery_event")
+      VALUE_FIRST_DELIVERY_EVENT("first_delivery_event"),
       @SerializedName("funding_event_initiated")
       VALUE_FUNDING_EVENT_INITIATED("funding_event_initiated"),
       @SerializedName("funding_event_successful")
       VALUE_FUNDING_EVENT_SUCCESSFUL("funding_event_successful"),
+      @SerializedName("lifetime_budget_spent")
+      VALUE_LIFETIME_BUDGET_SPENT("lifetime_budget_spent"),
+      @SerializedName("receive_audience")
+      VALUE_RECEIVE_AUDIENCE("receive_audience"),
+      @SerializedName("remove_funding_source")
+      VALUE_REMOVE_FUNDING_SOURCE("remove_funding_source"),
+      @SerializedName("remove_shared_audience")
+      VALUE_REMOVE_SHARED_AUDIENCE("remove_shared_audience"),
+      @SerializedName("share_audience")
+      VALUE_SHARE_AUDIENCE("share_audience"),
+      @SerializedName("unknown")
+      VALUE_UNKNOWN("unknown"),
+      @SerializedName("unshare_audience")
+      VALUE_UNSHARE_AUDIENCE("unshare_audience"),
+      @SerializedName("update_ad_bid_info")
+      VALUE_UPDATE_AD_BID_INFO("update_ad_bid_info"),
+      @SerializedName("update_ad_bid_type")
+      VALUE_UPDATE_AD_BID_TYPE("update_ad_bid_type"),
+      @SerializedName("update_ad_creative")
+      VALUE_UPDATE_AD_CREATIVE("update_ad_creative"),
+      @SerializedName("update_ad_friendly_name")
+      VALUE_UPDATE_AD_FRIENDLY_NAME("update_ad_friendly_name"),
       @SerializedName("update_ad_labels")
       VALUE_UPDATE_AD_LABELS("update_ad_labels"),
-      @SerializedName("di_ad_set_learning_stage_exit")
-      VALUE_DI_AD_SET_LEARNING_STAGE_EXIT("di_ad_set_learning_stage_exit"),
+      @SerializedName("update_ad_run_status")
+      VALUE_UPDATE_AD_RUN_STATUS("update_ad_run_status"),
+      @SerializedName("update_ad_run_status_to_be_set_after_review")
+      VALUE_UPDATE_AD_RUN_STATUS_TO_BE_SET_AFTER_REVIEW("update_ad_run_status_to_be_set_after_review"),
+      @SerializedName("update_ad_set_bid_adjustments")
+      VALUE_UPDATE_AD_SET_BID_ADJUSTMENTS("update_ad_set_bid_adjustments"),
+      @SerializedName("update_ad_set_bid_strategy")
+      VALUE_UPDATE_AD_SET_BID_STRATEGY("update_ad_set_bid_strategy"),
+      @SerializedName("update_ad_set_bidding")
+      VALUE_UPDATE_AD_SET_BIDDING("update_ad_set_bidding"),
+      @SerializedName("update_ad_set_budget")
+      VALUE_UPDATE_AD_SET_BUDGET("update_ad_set_budget"),
+      @SerializedName("update_ad_set_duration")
+      VALUE_UPDATE_AD_SET_DURATION("update_ad_set_duration"),
+      @SerializedName("update_ad_set_name")
+      VALUE_UPDATE_AD_SET_NAME("update_ad_set_name"),
+      @SerializedName("update_ad_set_optimization_goal")
+      VALUE_UPDATE_AD_SET_OPTIMIZATION_GOAL("update_ad_set_optimization_goal"),
+      @SerializedName("update_ad_set_run_status")
+      VALUE_UPDATE_AD_SET_RUN_STATUS("update_ad_set_run_status"),
+      @SerializedName("update_ad_set_target_spec")
+      VALUE_UPDATE_AD_SET_TARGET_SPEC("update_ad_set_target_spec"),
+      @SerializedName("update_ad_targets_spec")
+      VALUE_UPDATE_AD_TARGETS_SPEC("update_ad_targets_spec"),
+      @SerializedName("update_adgroup_stop_delivery")
+      VALUE_UPDATE_ADGROUP_STOP_DELIVERY("update_adgroup_stop_delivery"),
+      @SerializedName("update_audience")
+      VALUE_UPDATE_AUDIENCE("update_audience"),
+      @SerializedName("update_campaign_budget")
+      VALUE_UPDATE_CAMPAIGN_BUDGET("update_campaign_budget"),
+      @SerializedName("update_campaign_duration")
+      VALUE_UPDATE_CAMPAIGN_DURATION("update_campaign_duration"),
+      @SerializedName("update_campaign_group_spend_cap")
+      VALUE_UPDATE_CAMPAIGN_GROUP_SPEND_CAP("update_campaign_group_spend_cap"),
+      @SerializedName("update_campaign_name")
+      VALUE_UPDATE_CAMPAIGN_NAME("update_campaign_name"),
+      @SerializedName("update_campaign_run_status")
+      VALUE_UPDATE_CAMPAIGN_RUN_STATUS("update_campaign_run_status"),
       NULL(null);
 
       private String value;

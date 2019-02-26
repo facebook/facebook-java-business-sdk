@@ -3600,22 +3600,22 @@ public class AdsPixel extends APINode {
   }
 
   public static enum EnumAutomaticMatchingFields {
+      @SerializedName("ct")
+      VALUE_CT("ct"),
       @SerializedName("em")
       VALUE_EM("em"),
       @SerializedName("fn")
       VALUE_FN("fn"),
+      @SerializedName("ge")
+      VALUE_GE("ge"),
       @SerializedName("ln")
       VALUE_LN("ln"),
       @SerializedName("ph")
       VALUE_PH("ph"),
-      @SerializedName("ge")
-      VALUE_GE("ge"),
-      @SerializedName("zp")
-      VALUE_ZP("zp"),
-      @SerializedName("ct")
-      VALUE_CT("ct"),
       @SerializedName("st")
       VALUE_ST("st"),
+      @SerializedName("zp")
+      VALUE_ZP("zp"),
       NULL(null);
 
       private String value;
@@ -3631,12 +3631,12 @@ public class AdsPixel extends APINode {
   }
 
   public static enum EnumDataUseSetting {
-      @SerializedName("EMPTY")
-      VALUE_EMPTY("EMPTY"),
       @SerializedName("ADVERTISING_AND_ANALYTICS")
       VALUE_ADVERTISING_AND_ANALYTICS("ADVERTISING_AND_ANALYTICS"),
       @SerializedName("ANALYTICS_ONLY")
       VALUE_ANALYTICS_ONLY("ANALYTICS_ONLY"),
+      @SerializedName("EMPTY")
+      VALUE_EMPTY("EMPTY"),
       NULL(null);
 
       private String value;
@@ -3654,10 +3654,10 @@ public class AdsPixel extends APINode {
   public static enum EnumFirstPartyCookieStatus {
       @SerializedName("EMPTY")
       VALUE_EMPTY("EMPTY"),
-      @SerializedName("FIRST_PARTY_COOKIE_ENABLED")
-      VALUE_FIRST_PARTY_COOKIE_ENABLED("FIRST_PARTY_COOKIE_ENABLED"),
       @SerializedName("FIRST_PARTY_COOKIE_DISABLED")
       VALUE_FIRST_PARTY_COOKIE_DISABLED("FIRST_PARTY_COOKIE_DISABLED"),
+      @SerializedName("FIRST_PARTY_COOKIE_ENABLED")
+      VALUE_FIRST_PARTY_COOKIE_ENABLED("FIRST_PARTY_COOKIE_ENABLED"),
       NULL(null);
 
       private String value;
@@ -3673,10 +3673,10 @@ public class AdsPixel extends APINode {
   }
 
   public static enum EnumTasks {
-      @SerializedName("EDIT")
-      VALUE_EDIT("EDIT"),
       @SerializedName("ANALYZE")
       VALUE_ANALYZE("ANALYZE"),
+      @SerializedName("EDIT")
+      VALUE_EDIT("EDIT"),
       NULL(null);
 
       private String value;

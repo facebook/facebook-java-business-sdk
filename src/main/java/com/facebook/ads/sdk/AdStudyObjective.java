@@ -2712,24 +2712,24 @@ public class AdStudyObjective extends APINode {
   }
 
   public static enum EnumType {
-      @SerializedName("SALES")
-      VALUE_SALES("SALES"),
-      @SerializedName("NONSALES")
-      VALUE_NONSALES("NONSALES"),
-      @SerializedName("MAE")
-      VALUE_MAE("MAE"),
-      @SerializedName("TELCO")
-      VALUE_TELCO("TELCO"),
-      @SerializedName("FTL")
-      VALUE_FTL("FTL"),
-      @SerializedName("MAI")
-      VALUE_MAI("MAI"),
-      @SerializedName("PARTNER")
-      VALUE_PARTNER("PARTNER"),
-      @SerializedName("BRANDLIFT")
-      VALUE_BRANDLIFT("BRANDLIFT"),
       @SerializedName("BRAND")
       VALUE_BRAND("BRAND"),
+      @SerializedName("BRANDLIFT")
+      VALUE_BRANDLIFT("BRANDLIFT"),
+      @SerializedName("FTL")
+      VALUE_FTL("FTL"),
+      @SerializedName("MAE")
+      VALUE_MAE("MAE"),
+      @SerializedName("MAI")
+      VALUE_MAI("MAI"),
+      @SerializedName("NONSALES")
+      VALUE_NONSALES("NONSALES"),
+      @SerializedName("PARTNER")
+      VALUE_PARTNER("PARTNER"),
+      @SerializedName("SALES")
+      VALUE_SALES("SALES"),
+      @SerializedName("TELCO")
+      VALUE_TELCO("TELCO"),
       NULL(null);
 
       private String value;
@@ -2749,10 +2749,10 @@ public class AdStudyObjective extends APINode {
       VALUE_AGE("age"),
       @SerializedName("cell_id")
       VALUE_CELL_ID("cell_id"),
-      @SerializedName("gender")
-      VALUE_GENDER("gender"),
       @SerializedName("country")
       VALUE_COUNTRY("country"),
+      @SerializedName("gender")
+      VALUE_GENDER("gender"),
       NULL(null);
 
       private String value;
